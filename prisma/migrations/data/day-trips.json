@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "arusha-city-day-trip",
+    "title": "Arusha City Day Trip",
+    "metaTitle": "Arusha City Tour | Day Trip from Moshi",
+    "metaDescription": "Explore Arusha city with cultural sites, markets, and local experiences. Full-day guided tour.",
+    "destination": "Arusha",
+    "description": "Discover the vibrant city of Arusha, the gateway to Tanzania's Northern Circuit safaris. Visit local markets, cultural centers, and experience the bustling Tanzanian city life.",
+    "highlights": ["Central Market", "Cultural Heritage Centre", "Clock Tower", "Local Cuisine", "Shopping"],
+    "inclusions": ["Hotel pickup & dropoff", "Professional guide", "Entrance fees", "Lunch", "Bottled water"],
+    "exclusions": ["Personal shopping", "Tips", "Additional meals"],
+    "featuredImage": "/images/day-trips/arusha-city.jpg",
+    "priceFrom": 95,
+    "isActive": true
+  },
+  {
+    "slug": "ngorongoro-crater-day-trip",
+    "title": "Ngorongoro Crater Day Trip",
+    "metaTitle": "Ngorongoro Crater Day Safari | From Arusha",
+    "metaDescription": "Full-day crater safari from Arusha. See the Big Five in the world's largest intact volcanic caldera.",
+    "destination": "Ngorongoro Crater",
+    "description": "Experience the Ngorongoro Crater, the world's largest intact volcanic caldera, on a full-day safari from Arusha. Descend to the crater floor for incredible wildlife viewing.",
+    "highlights": ["Crater Floor Game Drive", "Big Five Chance", "UNESCO Site", "Crater Views", "Wildlife Photography"],
+    "inclusions": ["Hotel pickup & dropoff", "4x4 safari vehicle", "Professional guide", "All park fees", "Crater service fee", "Packed lunch", "Bottled water"],
+    "exclusions": ["Tips", "Personal expenses", "Additional drinks"],
+    "featuredImage": "/images/day-trips/ngorongoro.jpg",
+    "priceFrom": 350,
+    "isActive": true
+  },
+  {
+    "slug": "tarangire-national-park-day-trip",
+    "title": "Tarangire National Park Day Trip",
+    "metaTitle": "Tarangire Day Safari | Elephant Herds",
+    "metaDescription": "Full-day safari to Tarangire National Park. Famous for elephant herds and baobab trees.",
+    "destination": "Tarangire National Park",
+    "description": "Explore Tarangire National Park, famous for its large elephant herds and iconic baobab trees. A perfect day safari from Arusha with excellent wildlife viewing.",
+    "highlights": ["Elephant Herds", "Baobab Trees", "Lions", "Bird Watching", "Riverside Game Drives"],
+    "inclusions": ["Hotel pickup & dropoff", "4x4 safari vehicle", "Professional guide", "Park fees", "Packed lunch", "Bottled water"],
+    "exclusions": ["Tips", "Personal expenses"],
+    "featuredImage": "/images/day-trips/tarangire.jpg",
+    "priceFrom": 280,
+    "isActive": true
+  },
+  {
+    "slug": "lake-manyara-day-trip",
+    "title": "Lake Manyara Day Trip",
+    "metaTitle": "Lake Manyara Day Safari | Tree-climbing Lions",
+    "metaDescription": "Day safari to Lake Manyara National Park. See tree-climbing lions, flamingos, and diverse birdlife.",
+    "destination": "Lake Manyara National Park",
+    "description": "Discover Lake Manyara National Park, known for its tree-climbing lions and vast flocks of flamingos. A compact but diverse park perfect for a day trip.",
+    "highlights": ["Tree-climbing Lions", "Flamingos", "Rift Valley Views", "Bird Paradise", "Hippo Pool"],
+    "inclusions": ["Hotel pickup & dropoff", "4x4 vehicle", "Guide", "Park fees", "Lunch", "Water"],
+    "exclusions": ["Tips", "Personal expenses"],
+    "featuredImage": "/images/day-trips/lake-manyara.jpg",
+    "priceFrom": 250,
+    "isActive": true
+  },
+  {
+    "slug": "arusha-national-park-day-trip",
+    "title": "Arusha National Park Day Trip",
+    "metaTitle": "Arusha National Park Day Safari",
+    "metaDescription": "Day trip to Arusha National Park with game drives and walking safari. Mount Meru views.",
+    "destination": "Arusha National Park",
+    "description": "Experience Arusha National Park with game drives and optional walking safari. See Mount Meru, Momella Lakes, and diverse wildlife just 45 minutes from Arusha city.",
+    "highlights": ["Walking Safari Option", "Mount Meru Views", "Momella Lakes", "Colobus Monkeys", "Giraffe"],
+    "inclusions": ["Hotel pickup & dropoff", "4x4 vehicle", "Guide", "Park fees", "Lunch", "Water"],
+    "exclusions": ["Tips", "Walking safari (optional extra)"],
+    "featuredImage": "/images/day-trips/arusha-np.jpg",
+    "priceFrom": 180,
+    "isActive": true
+  }
+]

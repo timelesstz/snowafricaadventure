@@ -1,0 +1,754 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model TrekkingRoute {
+  id              String           @id @default(cuid())
+  slug            String           @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  duration        String
+  durationDays    Int              @default(7)
+  maxPeople       Int?
+  startPoint      String?
+  endPoint        String?
+  ageRange        String?
+  physicalRating  String?
+  successRate     Int?
+  overview        String
+  highlights      String[]
+  itinerary       Json?
+  routeMapImage   String?
+  inclusions      String[]
+  exclusions      String[]
+  faqs            Json?
+  featuredImage   String?
+  gallery         String[]
+  isActive        Boolean          @default(true)
+  categoryId      String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  departures      GroupDeparture[]
+  category        Category?        @relation(fields: [categoryId], references: [id])
+
+  @@index([slug])
+  @@index([isActive])
+}
+
+model SafariPackage {
+  id              String              @id @default(cuid())
+  slug            String              @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  duration        String
+  durationDays    Int                 @default(1)
+  type            String
+  overview        String
+  highlights      String[]
+  itinerary       Json?
+  inclusions      String[]
+  exclusions      String[]
+  featuredImage   String?
+  gallery         String[]
+  priceFrom       Decimal?            @db.Decimal(10, 2)
+  isActive        Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  gameDrives      Int                 @default(6)
+  parksCount      Int                 @default(3)
+  rating          Decimal             @default(4.9) @db.Decimal(2, 1)
+  destinations    SafariDestination[]
+
+  @@index([slug])
+  @@index([type])
+  @@index([isActive])
+}
+
+model Destination {
+  id              String              @id @default(cuid())
+  slug            String              @unique
+  name            String
+  metaTitle       String?
+  metaDescription String?
+  circuit         String
+  description     String
+  highlights      String[]
+  wildlife        String[]
+  bestTime        String?
+  featuredImage   String?
+  gallery         String[]
+  isActive        Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  safaris         SafariDestination[]
+
+  @@index([slug])
+  @@index([circuit])
+  @@index([isActive])
+}
+
+model SafariDestination {
+  id            String        @id @default(cuid())
+  safariId      String
+  destinationId String
+  order         Int           @default(0)
+  destination   Destination   @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  safari        SafariPackage @relation(fields: [safariId], references: [id], onDelete: Cascade)
+
+  @@unique([safariId, destinationId])
+}
+
+model BlogPost {
+  id              String         @id @default(cuid())
+  slug            String         @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  excerpt         String?
+  content         String
+  featuredImage   String?
+  author          String?
+  isPublished     Boolean        @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  categories      PostCategory[]
+  tags            PostTag[]
+
+  @@index([slug])
+  @@index([isPublished])
+  @@index([publishedAt])
+}
+
+model Category {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  name        String
+  description String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  posts       PostCategory[]
+  routes      TrekkingRoute[]
+
+  @@index([slug])
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  posts     PostTag[]
+
+  @@index([slug])
+}
+
+model PostCategory {
+  id         String   @id @default(cuid())
+  postId     String
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  post       BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, categoryId])
+}
+
+model PostTag {
+  id     String   @id @default(cuid())
+  postId String
+  tagId  String
+  post   BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, tagId])
+}
+
+model GroupDeparture {
+  id                  String          @id @default(cuid())
+  routeId             String
+  arrivalDate         DateTime
+  startDate           DateTime
+  summitDate          DateTime
+  endDate             DateTime
+  price               Decimal         @db.Decimal(10, 2)
+  currency            String          @default("USD")
+  earlyBirdPrice      Decimal?        @db.Decimal(10, 2)
+  earlyBirdUntil      DateTime?
+  minParticipants     Int             @default(2)
+  maxParticipants     Int             @default(10)
+  isFullMoon          Boolean         @default(false)
+  isGuaranteed        Boolean         @default(false)
+  isFeatured          Boolean         @default(false)
+  status              DepartureStatus @default(OPEN)
+  internalNotes       String?
+  publicNotes         String?
+  year                Int
+  month               Int
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  excludeFromRotation Boolean         @default(false)
+  isManuallyFeatured  Boolean         @default(false)
+  bookings            Booking[]
+  inviteLinks         InviteLink[]
+  route               TrekkingRoute   @relation(fields: [routeId], references: [id])
+
+  @@index([year, month])
+  @@index([status])
+  @@index([routeId])
+  @@index([arrivalDate])
+  @@index([endDate, status])
+  @@index([isFeatured])
+}
+
+model InviteLink {
+  id            String          @id @default(cuid())
+  code          String          @unique
+  departureId   String?
+  creatorEmail  String
+  creatorName   String
+  inviteeEmails String[]
+  clickCount    Int             @default(0)
+  bookingCount  Int             @default(0)
+  expiresAt     DateTime?
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  departure     GroupDeparture? @relation(fields: [departureId], references: [id])
+
+  @@index([code])
+  @@index([departureId])
+  @@index([creatorEmail])
+}
+
+model AutoRotationConfig {
+  id                 String       @id @default(cuid())
+  isEnabled          Boolean      @default(true)
+  mode               RotationMode @default(NEXT_UPCOMING)
+  skipWithinDays     Int          @default(3)
+  prioritizeFullMoon Boolean      @default(false)
+  lastRotationAt     DateTime?
+  lastRotationResult Json?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+model Booking {
+  id              String         @id @default(cuid())
+  departureId     String
+  leadName        String
+  leadEmail       String
+  leadPhone       String?
+  leadNationality String?
+  totalClimbers   Int            @default(1)
+  climberDetails  Json?
+  pricePerPerson  Decimal        @db.Decimal(10, 2)
+  totalPrice      Decimal        @db.Decimal(10, 2)
+  depositAmount   Decimal?       @db.Decimal(10, 2)
+  depositPaid     Boolean        @default(false)
+  depositPaidAt   DateTime?
+  balancePaid     Boolean        @default(false)
+  balancePaidAt   DateTime?
+  status          BookingStatus  @default(INQUIRY)
+  notes           String?
+  source          String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  confirmedAt     DateTime?
+  cancelledAt     DateTime?
+  gaClientId      String?
+  utmCampaign     String?
+  utmMedium       String?
+  utmSource       String?
+  departure       GroupDeparture @relation(fields: [departureId], references: [id])
+  commission      Commission?
+
+  @@index([departureId])
+  @@index([status])
+  @@index([leadEmail])
+  @@index([source])
+}
+
+model PricingRule {
+  id              String          @id @default(cuid())
+  name            String
+  type            PricingRuleType
+  routeId         String?
+  startDate       DateTime?
+  endDate         DateTime?
+  minDaysOut      Int?
+  maxDaysOut      Int?
+  adjustmentType  String          @default("fixed")
+  adjustmentValue Decimal         @db.Decimal(10, 2)
+  isActive        Boolean         @default(true)
+  priority        Int             @default(0)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([isActive])
+  @@index([type])
+}
+
+model DayTrip {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  destination     String
+  description     String
+  highlights      String[]
+  inclusions      String[]
+  exclusions      String[]
+  featuredImage   String?
+  gallery         String[]
+  priceFrom       Decimal? @db.Decimal(10, 2)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+}
+
+model Inquiry {
+  id             String    @id @default(cuid())
+  type           String
+  fullName       String
+  email          String
+  phone          String?
+  phonePrefix    String?
+  nationality    String?
+  tripType       String?
+  numAdults      Int?
+  numChildren    Int?
+  arrivalDate    DateTime?
+  additionalInfo String?
+  relatedTo      String?
+  status         String    @default("new")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([email])
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  source      String
+  authorName  String
+  authorImage String?
+  rating      Int
+  title       String?
+  content     String
+  tripType    String?
+  verified    Boolean  @default(false)
+  isFeatured  Boolean  @default(false)
+  publishedAt DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([source])
+  @@index([isFeatured])
+  @@index([rating])
+}
+
+model Page {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  metaTitle       String?
+  metaDescription String?
+  content         String
+  template        String?
+  isPublished     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isPublished])
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+model ThemeSetting {
+  id              String   @id @default(cuid())
+  name            String   @default("Modern Adventure")
+  description     String   @default("Clean slate grays with warm amber accents")
+  primaryColor    String   @default("#334155")
+  primaryDark     String   @default("#1e293b")
+  primaryLight    String   @default("#475569")
+  secondaryColor  String   @default("#F59E0B")
+  secondaryDark   String   @default("#D97706")
+  secondaryLight  String   @default("#FBBF24")
+  accentColor     String   @default("#06b6d4")
+  accentLight     String   @default("#22d3ee")
+  backgroundColor String   @default("#ffffff")
+  foregroundColor String   @default("#0f172a")
+  surfaceColor    String   @default("#f8fafc")
+  mutedColor      String   @default("#f1f5f9")
+  borderColor     String   @default("#e2e8f0")
+  textColor       String   @default("#0f172a")
+  textMuted       String   @default("#64748b")
+  textLight       String   @default("#94a3b8")
+  headingFont     String   @default("Outfit")
+  bodyFont        String   @default("Sora")
+  borderRadius    String   @default("0.75rem")
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastLoginAt  DateTime?
+  role         AdminRole @default(ADMIN)
+
+  @@index([email])
+}
+
+model Partner {
+  id                String                  @id @default(cuid())
+  name              String
+  type              PartnerType
+  contactName       String?
+  contactEmail      String?
+  contactPhone      String?
+  agreementDate     DateTime?
+  agreementExpiry   DateTime?
+  agreementDocument String?
+  payoutFrequency   PayoutFrequency         @default(MONTHLY)
+  payoutMethod      String?
+  payoutDetails     Json?
+  isActive          Boolean                 @default(true)
+  notes             String?
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+  commissions       Commission[]
+  commissionRates   PartnerCommissionRate[]
+
+  @@index([type])
+  @@index([isActive])
+}
+
+model PartnerCommissionRate {
+  id             String   @id @default(cuid())
+  partnerId      String
+  tripType       String
+  commissionRate Decimal  @db.Decimal(5, 2)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  partner        Partner  @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@unique([partnerId, tripType])
+  @@index([partnerId])
+  @@index([tripType])
+}
+
+model Commission {
+  id               String           @id @default(cuid())
+  partnerId        String
+  bookingId        String           @unique
+  bookingAmount    Decimal          @db.Decimal(10, 2)
+  commissionRate   Decimal          @db.Decimal(5, 2)
+  commissionAmount Decimal          @db.Decimal(10, 2)
+  currency         String           @default("USD")
+  status           CommissionStatus @default(PENDING)
+  paidAt           DateTime?
+  paymentReference String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  tripType         String?
+  booking          Booking          @relation(fields: [bookingId], references: [id])
+  partner          Partner          @relation(fields: [partnerId], references: [id])
+
+  @@index([partnerId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([tripType])
+}
+
+model CommissionPayout {
+  id               String       @id @default(cuid())
+  partnerId        String
+  periodStart      DateTime
+  periodEnd        DateTime
+  totalCommissions Int
+  totalAmount      Decimal      @db.Decimal(10, 2)
+  currency         String       @default("USD")
+  status           PayoutStatus @default(PENDING)
+  paymentReference String?
+  paidAt           DateTime?
+  notes            String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([partnerId])
+  @@index([status])
+  @@index([periodStart, periodEnd])
+}
+
+model Media {
+  id             String   @id @default(cuid())
+  filename       String
+  key            String   @unique
+  url            String
+  thumbnailUrl   String?
+  mimeType       String
+  size           Int
+  width          Int?
+  height         Int?
+  alt            String?
+  title          String?
+  folder         String   @default("general")
+  originalSize   Int?
+  compressionPct Int?
+  usageCount     Int      @default(0)
+  uploadedBy     String?
+  uploadedById   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([folder])
+  @@index([mimeType])
+  @@index([createdAt])
+  @@index([usageCount])
+}
+
+model HomepageContent {
+  id        String   @id @default(cuid())
+  section   String   @unique
+  content   Json
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([section])
+}
+
+model NotFoundUrl {
+  id            String         @id @default(cuid())
+  url           String         @unique
+  hitCount      Int            @default(1)
+  botHitCount   Int            @default(0)
+  humanHitCount Int            @default(0)
+  lastHitAt     DateTime       @default(now())
+  firstHitAt    DateTime       @default(now())
+  lastReferer   String?
+  lastUserAgent String?
+  status        NotFoundStatus @default(ACTIVE)
+  redirectId    String?        @unique
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  redirect      Redirect?      @relation(fields: [redirectId], references: [id])
+
+  @@index([hitCount])
+  @@index([lastHitAt])
+  @@index([status])
+}
+
+model NotFoundHit {
+  id        String   @id @default(cuid())
+  url       String
+  userAgent String?
+  referer   String?
+  isBot     Boolean  @default(false)
+  botName   String?
+  createdAt DateTime @default(now())
+
+  @@index([url])
+  @@index([createdAt])
+  @@index([isBot])
+}
+
+model Redirect {
+  id             String       @id @default(cuid())
+  sourceUrl      String       @unique
+  destinationUrl String
+  type           RedirectType @default(PERMANENT)
+  isActive       Boolean      @default(true)
+  hitCount       Int          @default(0)
+  lastHitAt      DateTime?
+  notes          String?
+  createdBy      String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  notFoundUrl    NotFoundUrl?
+
+  @@index([sourceUrl])
+  @@index([isActive])
+}
+
+enum DepartureStatus {
+  DRAFT
+  OPEN
+  LIMITED
+  FULL
+  GUARANTEED
+  CANCELLED
+  COMPLETED
+}
+
+enum RotationMode {
+  NEXT_UPCOMING
+  MANUAL_ONLY
+}
+
+enum BookingStatus {
+  INQUIRY
+  PENDING
+  DEPOSIT_PAID
+  CONFIRMED
+  CANCELLED
+  REFUNDED
+  NO_SHOW
+  COMPLETED
+}
+
+enum PricingRuleType {
+  EARLY_BIRD
+  LAST_MINUTE
+  PEAK_SEASON
+  GROUP_DISCOUNT
+  REPEAT_CUSTOMER
+  FULL_MOON
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum PartnerType {
+  DEVELOPER
+  MARKETING
+  AFFILIATE
+  AGENT
+}
+
+enum PayoutFrequency {
+  WEEKLY
+  BIWEEKLY
+  MONTHLY
+  QUARTERLY
+}
+
+enum CommissionStatus {
+  PENDING
+  ELIGIBLE
+  PAID
+  VOIDED
+}
+
+enum PayoutStatus {
+  PENDING
+  APPROVED
+  PAID
+  CANCELLED
+}
+
+enum NotFoundStatus {
+  ACTIVE
+  IGNORED
+  REDIRECTED
+}
+
+enum RedirectType {
+  PERMANENT
+  TEMPORARY
+}
+
+// ============================================
+// NOTIFICATION SYSTEM
+// ============================================
+
+model Notification {
+  id          String             @id @default(cuid())
+  type        NotificationType
+  title       String
+  message     String
+  data        Json?
+  isRead      Boolean            @default(false)
+  readAt      DateTime?
+  priority    NotificationPriority @default(NORMAL)
+  expiresAt   DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([type])
+  @@index([isRead])
+  @@index([createdAt])
+  @@index([priority])
+}
+
+model EmailLog {
+  id          String      @id @default(cuid())
+  recipient   String
+  subject     String
+  type        String
+  status      EmailStatus @default(PENDING)
+  messageId   String?
+  error       String?
+  metadata    Json?
+  sentAt      DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([recipient])
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum NotificationType {
+  BOOKING_NEW
+  BOOKING_UPDATED
+  BOOKING_CANCELLED
+  INQUIRY_NEW
+  INQUIRY_RESPONDED
+  PAYMENT_RECEIVED
+  PAYMENT_REMINDER
+  DEPARTURE_UPCOMING
+  DEPARTURE_FULL
+  COMMISSION_EARNED
+  SYSTEM_ALERT
+  LOW_AVAILABILITY
+}
+
+enum NotificationPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+  BOUNCED
+}

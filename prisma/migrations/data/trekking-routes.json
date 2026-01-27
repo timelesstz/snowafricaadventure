@@ -1,0 +1,393 @@
+[
+  {
+    "slug": "7-days-machame-route",
+    "title": "7 Days Machame Route",
+    "metaTitle": "7 Days Machame Route | Kilimanjaro Climb | Snow Africa Adventure",
+    "metaDescription": "Climb Kilimanjaro via the scenic 7-day Machame Route. Known as the 'Whiskey Route' with 90% success rate. Expert guides, all-inclusive packages.",
+    "duration": "7 Days",
+    "durationDays": 7,
+    "maxPeople": 12,
+    "startPoint": "Machame Gate (1,800m)",
+    "endPoint": "Mweka Gate (1,640m)",
+    "ageRange": "12 - 70+",
+    "physicalRating": "Challenging",
+    "successRate": 90,
+    "overview": "The Machame Route, also known as the 'Whiskey Route', is one of the most scenic and popular routes on Kilimanjaro. This 7-day itinerary provides excellent acclimatization through a 'climb high, sleep low' profile, giving you the best chance of reaching Uhuru Peak at 5,895m.",
+    "highlights": [
+      "Most scenic route on Kilimanjaro",
+      "High success rate (90%)",
+      "Excellent acclimatization profile",
+      "Diverse landscapes and vegetation zones",
+      "Stunning views of Kibo and Mawenzi peaks",
+      "Barranco Wall climb experience"
+    ],
+    "inclusions": [
+      "Park entrance fees",
+      "Professional KINAPA-licensed mountain guides",
+      "Porters and cook (ratio 3:1)",
+      "All meals on the mountain",
+      "Quality camping equipment",
+      "Emergency oxygen cylinder",
+      "Pulse oximeter for health monitoring",
+      "Airport transfers",
+      "2 nights hotel in Moshi (pre and post trek)",
+      "Certificate of completion"
+    ],
+    "exclusions": [
+      "International flights",
+      "Tanzania visa fees",
+      "Travel insurance (mandatory)",
+      "Personal climbing gear",
+      "Tips for crew (recommended $200-300)",
+      "Personal expenses",
+      "Sleeping bag (rental available)"
+    ],
+    "featuredImage": "/images/routes/machame-7-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "8-days-lemosho-route",
+    "title": "8 Days Lemosho Route",
+    "metaTitle": "8 Days Lemosho Route | Kilimanjaro | Snow Africa Adventure",
+    "metaDescription": "The Lemosho Route offers the highest success rate on Kilimanjaro. 8-day trek through pristine wilderness with excellent acclimatization.",
+    "duration": "8 Days",
+    "durationDays": 8,
+    "maxPeople": 10,
+    "startPoint": "Londorossi Gate (2,100m)",
+    "endPoint": "Mweka Gate (1,640m)",
+    "ageRange": "12 - 70+",
+    "physicalRating": "Moderate-Challenging",
+    "successRate": 95,
+    "overview": "The Lemosho Route is widely considered the most beautiful and remote route on Kilimanjaro. Starting from the western Londorossi Gate, you'll traverse the entire mountain through pristine wilderness before reaching Uhuru Peak.",
+    "highlights": [
+      "Highest success rate on Kilimanjaro (95%)",
+      "Most scenic wilderness route",
+      "Excellent acclimatization over 8 days",
+      "Less crowded first 2 days",
+      "Diverse wildlife sightings possible",
+      "Traverse across Shira Plateau"
+    ],
+    "inclusions": [
+      "Park entrance fees",
+      "Professional mountain guides",
+      "Porters and cook",
+      "All meals on the mountain",
+      "Quality camping equipment",
+      "Emergency oxygen",
+      "Airport transfers",
+      "2 nights hotel (pre and post trek)"
+    ],
+    "exclusions": [
+      "International flights",
+      "Travel insurance",
+      "Personal climbing gear",
+      "Tips for crew",
+      "Visa fees"
+    ],
+    "featuredImage": "/images/routes/lemosho-8-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "6-days-marangu-route",
+    "title": "6 Days Marangu Route",
+    "metaTitle": "6 Days Marangu Route | Kilimanjaro | Snow Africa Adventure",
+    "metaDescription": "The classic 'Coca-Cola Route' with hut accommodation. 6-day Kilimanjaro trek suitable for beginners.",
+    "duration": "6 Days",
+    "durationDays": 6,
+    "maxPeople": 12,
+    "startPoint": "Marangu Gate (1,860m)",
+    "endPoint": "Marangu Gate (1,860m)",
+    "ageRange": "12 - 70+",
+    "physicalRating": "Moderate",
+    "successRate": 80,
+    "overview": "The Marangu Route, nicknamed the 'Coca-Cola Route', is the oldest and most established route on Kilimanjaro. It's the only route offering hut accommodation with beds, making it popular for those who prefer more comfort.",
+    "highlights": [
+      "Hut accommodation (beds provided)",
+      "Same ascent and descent route",
+      "Most gradual slopes",
+      "Good for beginners",
+      "Well-maintained trail",
+      "Oldest route on the mountain"
+    ],
+    "inclusions": [
+      "Park entrance fees",
+      "Professional mountain guides",
+      "Porters and cook",
+      "All meals on the mountain",
+      "Hut accommodation",
+      "Emergency oxygen",
+      "Airport transfers"
+    ],
+    "exclusions": [
+      "International flights",
+      "Travel insurance",
+      "Personal gear",
+      "Tips for crew",
+      "Sleeping bag"
+    ],
+    "featuredImage": "/images/routes/marangu-6-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "5-days-marangu-route",
+    "title": "5 Days Marangu Route",
+    "metaTitle": "5 Days Marangu Route | Quick Kilimanjaro Climb",
+    "metaDescription": "Shortest route to Kilimanjaro summit. 5-day Marangu trek with hut accommodation. For fit and experienced trekkers.",
+    "duration": "5 Days",
+    "durationDays": 5,
+    "maxPeople": 12,
+    "startPoint": "Marangu Gate (1,860m)",
+    "endPoint": "Marangu Gate (1,860m)",
+    "ageRange": "18 - 60",
+    "physicalRating": "Challenging",
+    "successRate": 65,
+    "overview": "The 5-day Marangu Route is the shortest option for climbing Kilimanjaro. Due to limited acclimatization time, this route is only recommended for very fit and experienced trekkers.",
+    "highlights": [
+      "Shortest Kilimanjaro climb",
+      "Hut accommodation",
+      "Same ascent and descent",
+      "Budget-friendly option"
+    ],
+    "inclusions": [
+      "Park entrance fees",
+      "Professional guides",
+      "Porters and cook",
+      "All meals",
+      "Hut accommodation",
+      "Airport transfers"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/marangu-5-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "6-days-rongai-route",
+    "title": "6 Days Rongai Route",
+    "metaTitle": "6 Days Rongai Route | Kilimanjaro North | Snow Africa",
+    "metaDescription": "Climb Kilimanjaro from the quiet northern side. 6-day Rongai Route offers less crowds and unique perspectives.",
+    "duration": "6 Days",
+    "durationDays": 6,
+    "maxPeople": 10,
+    "startPoint": "Rongai Gate (1,950m)",
+    "endPoint": "Marangu Gate (1,860m)",
+    "ageRange": "12 - 70+",
+    "physicalRating": "Moderate",
+    "successRate": 85,
+    "overview": "The Rongai Route approaches Kilimanjaro from the north, near the Kenyan border. This less-traveled route offers a wilderness experience with fewer crowds and unique views of the mountain.",
+    "highlights": [
+      "Less crowded northern approach",
+      "Views towards Kenya",
+      "Gentle gradient",
+      "Good for rainy season",
+      "Wilderness experience"
+    ],
+    "inclusions": [
+      "Park fees",
+      "Guides and porters",
+      "All meals",
+      "Camping equipment",
+      "Emergency oxygen",
+      "Transfers"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/rongai-6-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "7-days-rongai-route",
+    "title": "7 Days Rongai Route",
+    "metaTitle": "7 Days Rongai Route | Extended Kilimanjaro Trek",
+    "metaDescription": "Extended 7-day Rongai Route for better acclimatization. Approach from the quiet northern side of Kilimanjaro.",
+    "duration": "7 Days",
+    "durationDays": 7,
+    "maxPeople": 10,
+    "startPoint": "Rongai Gate (1,950m)",
+    "endPoint": "Marangu Gate (1,860m)",
+    "ageRange": "12 - 70+",
+    "physicalRating": "Moderate",
+    "successRate": 90,
+    "overview": "The 7-day Rongai Route adds an extra acclimatization day compared to the standard 6-day version, significantly improving your chances of summit success.",
+    "highlights": [
+      "Higher success rate with extra day",
+      "Northern wilderness approach",
+      "Less crowded",
+      "Better acclimatization",
+      "Kenya border views"
+    ],
+    "inclusions": [
+      "Park fees",
+      "Guides and porters",
+      "All meals",
+      "Camping equipment",
+      "Emergency oxygen",
+      "Hotel and transfers"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/rongai-7-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "6-days-machame-route",
+    "title": "6 Days Machame Route",
+    "metaTitle": "6 Days Machame Route | Quick Whiskey Route",
+    "metaDescription": "Shorter 6-day version of the popular Machame Route. Scenic climb for experienced trekkers.",
+    "duration": "6 Days",
+    "durationDays": 6,
+    "maxPeople": 12,
+    "startPoint": "Machame Gate (1,800m)",
+    "endPoint": "Mweka Gate (1,640m)",
+    "ageRange": "18 - 65",
+    "physicalRating": "Challenging",
+    "successRate": 80,
+    "overview": "The 6-day Machame Route is a shorter version of the popular 'Whiskey Route'. This condensed itinerary is best suited for fit trekkers with previous high-altitude experience.",
+    "highlights": [
+      "Scenic Machame scenery",
+      "Barranco Wall climb",
+      "Shorter timeframe",
+      "Diverse ecosystems"
+    ],
+    "inclusions": [
+      "Park fees",
+      "Guides and porters",
+      "All meals",
+      "Camping equipment",
+      "Transfers"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/machame-6-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "6-days-umbwe-route",
+    "title": "6 Days Umbwe Route",
+    "metaTitle": "6 Days Umbwe Route | Most Challenging Kilimanjaro Route",
+    "metaDescription": "The Umbwe Route is the most direct and challenging path to Kilimanjaro summit. For experienced high-altitude trekkers only.",
+    "duration": "6 Days",
+    "durationDays": 6,
+    "maxPeople": 8,
+    "startPoint": "Umbwe Gate (1,600m)",
+    "endPoint": "Mweka Gate (1,640m)",
+    "ageRange": "18 - 55",
+    "physicalRating": "Very Challenging",
+    "successRate": 70,
+    "overview": "The Umbwe Route is the most challenging and direct route on Kilimanjaro. It's steep, demanding, and offers minimal acclimatization time. Only recommended for experienced high-altitude trekkers.",
+    "highlights": [
+      "Most direct route",
+      "Least crowded",
+      "Technical challenge",
+      "Pristine forest section",
+      "Adventure for experts"
+    ],
+    "inclusions": [
+      "Park fees",
+      "Expert guides",
+      "Porters and cook",
+      "All meals",
+      "Camping equipment",
+      "Emergency oxygen"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/umbwe-6-days.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "4-days-mount-meru-climbing",
+    "title": "4 Days Mount Meru Climbing",
+    "metaTitle": "Mount Meru Climb 4 Days | Tanzania's Second Highest Peak",
+    "metaDescription": "Climb Mount Meru (4,566m) in 4 days. Perfect acclimatization for Kilimanjaro or standalone adventure.",
+    "duration": "4 Days",
+    "durationDays": 4,
+    "maxPeople": 10,
+    "startPoint": "Momella Gate",
+    "endPoint": "Momella Gate",
+    "ageRange": "12 - 65",
+    "physicalRating": "Moderate-Challenging",
+    "successRate": 95,
+    "overview": "Mount Meru is Tanzania's second-highest peak at 4,566m and offers excellent preparation for Kilimanjaro. Located in Arusha National Park, the climb features stunning views and wildlife encounters.",
+    "highlights": [
+      "Tanzania's second-highest peak",
+      "Wildlife in Arusha National Park",
+      "Excellent Kilimanjaro views",
+      "Perfect acclimatization",
+      "Armed ranger escort"
+    ],
+    "inclusions": [
+      "Park fees",
+      "Mountain guides",
+      "Armed ranger",
+      "Hut accommodation",
+      "All meals",
+      "Transfers"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/mount-meru.jpg",
+    "isActive": true
+  },
+  {
+    "slug": "3-days-2-nights-oldoinyo-lengai-climbing",
+    "title": "3 Days 2 Nights Ol Doinyo Lengai Climbing",
+    "metaTitle": "Ol Doinyo Lengai Climb | Mountain of God | Snow Africa",
+    "metaDescription": "Climb Ol Doinyo Lengai, the only active volcano in Tanzania. 3-day adventure to the 'Mountain of God'.",
+    "duration": "3 Days",
+    "durationDays": 3,
+    "maxPeople": 8,
+    "startPoint": "Engare Sero Village",
+    "endPoint": "Engare Sero Village",
+    "ageRange": "18 - 55",
+    "physicalRating": "Very Challenging",
+    "successRate": 85,
+    "overview": "Ol Doinyo Lengai, meaning 'Mountain of God' in Maasai, is Tanzania's only active volcano. This challenging night climb rewards you with sunrise views from the crater rim at 2,962m.",
+    "highlights": [
+      "Only active volcano in Tanzania",
+      "Night climb for sunrise",
+      "Unique carbonite lava",
+      "Maasai cultural experience",
+      "Lake Natron views"
+    ],
+    "inclusions": [
+      "Local guides",
+      "Camping equipment",
+      "All meals",
+      "Park fees",
+      "Transfers from Arusha"
+    ],
+    "exclusions": [
+      "Flights",
+      "Insurance",
+      "Personal gear",
+      "Tips"
+    ],
+    "featuredImage": "/images/routes/oldoinyo-lengai.jpg",
+    "isActive": true
+  }
+]

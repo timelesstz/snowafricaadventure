@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "blog",
+    "name": "Blog",
+    "description": "General blog posts about Tanzania travel and adventures"
+  },
+  {
+    "slug": "safari-tours",
+    "name": "Safari Tours",
+    "description": "Safari tour guides, tips, and itineraries for Tanzania"
+  },
+  {
+    "slug": "mount-kilimanjaro",
+    "name": "Mount Kilimanjaro",
+    "description": "Everything about climbing Africa's highest peak"
+  },
+  {
+    "slug": "tanzania-destinations",
+    "name": "Tanzania Destinations",
+    "description": "Explore Tanzania's national parks and attractions"
+  },
+  {
+    "slug": "day-trip",
+    "name": "Day Trips",
+    "description": "Day excursions and short trips around Tanzania"
+  },
+  {
+    "slug": "kilimanjaro-climbing-guide",
+    "name": "Kilimanjaro Climbing Guide",
+    "description": "Expert guides and tips for climbing Kilimanjaro"
+  }
+]
