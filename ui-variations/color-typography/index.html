@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color & Typography Variations | Snow Africa</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .viewer-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
+      z-index: 100;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .viewer-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #888;
+    }
+
+    .viewer-title span {
+      color: #fff;
+    }
+
+    /* Tabs */
+    .viewer-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .viewer-tab {
+      padding: 0.5rem 1rem;
+      background: #2a2a2a;
+      color: #999;
+      border: 1px solid #333;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .viewer-tab:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    .viewer-tab.active {
+      background: #0066ff;
+      border-color: #0066ff;
+      color: #fff;
+    }
+
+    /* Viewport Controls */
+    .viewport-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .viewport-toggle {
+      display: flex;
+      gap: 0.25rem;
+      background: #2a2a2a;
+      padding: 0.25rem;
+      border-radius: 0.375rem;
+    }
+
+    .viewport-btn {
+      padding: 0.375rem 0.625rem;
+      background: transparent;
+      color: #888;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .viewport-btn:hover {
+      color: #fff;
+    }
+
+    .viewport-btn.active {
+      background: #444;
+      color: #fff;
+    }
+
+    .select-btn {
+      padding: 0.5rem 1rem;
+      background: #22c55e;
+      color: #fff;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .select-btn:hover {
+      background: #16a34a;
+      transform: translateY(-1px);
+    }
+
+    /* Preview Area */
+    .preview-container {
+      padding-top: 60px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-frame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #fff;
+      margin: 0 auto;
+      transition: width 0.3s ease;
+    }
+
+    .preview-frame.mobile {
+      width: 375px;
+      box-shadow: 0 0 0 1px #333;
+    }
+
+    .preview-frame.tablet {
+      width: 768px;
+      box-shadow: 0 0 0 1px #333;
+    }
+
+    .preview-frame.desktop {
+      width: 100%;
+    }
+
+    /* Variation Info Bar */
+    .variation-info {
+      background: #1a1a1a;
+      border-top: 1px solid #333;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .variation-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .meta-label {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+    }
+
+    .meta-value {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .color-preview {
+      display: flex;
+      gap: 0.375rem;
+    }
+
+    .color-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 0.25rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Compare Mode */
+    .compare-container {
+      display: none;
+      flex: 1;
+      padding-top: 60px;
+    }
+
+    .compare-container.active {
+      display: flex;
+    }
+
+    .compare-pane {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #333;
+    }
+
+    .compare-pane:last-child {
+      border-right: none;
+    }
+
+    .compare-label {
+      background: #1a1a1a;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #888;
+      border-bottom: 1px solid #333;
+      text-align: center;
+    }
+
+    .compare-frame {
+      flex: 1;
+      border: none;
+      background: #fff;
+    }
+
+    /* Mode Toggle */
+    .mode-toggle {
+      display: flex;
+      gap: 0.25rem;
+      background: #2a2a2a;
+      padding: 0.25rem;
+      border-radius: 0.375rem;
+    }
+
+    .mode-btn {
+      padding: 0.375rem 0.75rem;
+      background: transparent;
+      color: #888;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .mode-btn:hover {
+      color: #fff;
+    }
+
+    .mode-btn.active {
+      background: #444;
+      color: #fff;
+    }
+
+    /* Hidden elements */
+    .preview-container.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="viewer-header">
+    <div class="viewer-title">UI Variations / <span>Color & Typography</span></div>
+
+    <div class="viewer-tabs">
+      <button class="viewer-tab active" data-variation="v1">V1: Warm Safari</button>
+      <button class="viewer-tab" data-variation="v2">V2: Luxury Wilderness</button>
+      <button class="viewer-tab" data-variation="v3">V3: Modern Adventure</button>
+    </div>
+
+    <div class="viewport-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" data-mode="single">Single</button>
+        <button class="mode-btn" data-mode="compare">Compare</button>
+      </div>
+
+      <div class="viewport-toggle">
+        <button class="viewport-btn" data-width="375">Mobile</button>
+        <button class="viewport-btn" data-width="768">Tablet</button>
+        <button class="viewport-btn active" data-width="100%">Desktop</button>
+      </div>
+
+      <button class="select-btn" id="selectBtn">✓ Select This One</button>
+    </div>
+  </header>
+
+  <!-- Single View -->
+  <div class="preview-container" id="singleView">
+    <iframe class="preview-frame desktop" id="previewFrame" src="v1-warm-safari.html"></iframe>
+    <div class="variation-info" id="variationInfo">
+      <div class="variation-meta">
+        <div class="meta-item">
+          <span class="meta-label">Style</span>
+          <span class="meta-value" id="styleName">Warm Safari</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Heading Font</span>
+          <span class="meta-value" id="headingFont">Cormorant Garamond</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Body Font</span>
+          <span class="meta-value" id="bodyFont">Source Sans 3</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Colors</span>
+          <div class="color-preview" id="colorPreview">
+            <div class="color-dot" style="background: #a0522d;"></div>
+            <div class="color-dot" style="background: #daa520;"></div>
+            <div class="color-dot" style="background: #2f4f4f;"></div>
+            <div class="color-dot" style="background: #faf8f5;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compare View -->
+  <div class="compare-container" id="compareView">
+    <div class="compare-pane">
+      <div class="compare-label">V1: Warm Safari</div>
+      <iframe class="compare-frame" src="v1-warm-safari.html"></iframe>
+    </div>
+    <div class="compare-pane">
+      <div class="compare-label">V2: Luxury Wilderness</div>
+      <iframe class="compare-frame" src="v2-luxury-wilderness.html"></iframe>
+    </div>
+    <div class="compare-pane">
+      <div class="compare-label">V3: Modern Adventure</div>
+      <iframe class="compare-frame" src="v3-modern-adventure.html"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Variation data
+    const variations = {
+      v1: {
+        file: 'v1-warm-safari.html',
+        name: 'Warm Safari',
+        headingFont: 'Cormorant Garamond',
+        bodyFont: 'Source Sans 3',
+        colors: ['#a0522d', '#daa520', '#2f4f4f', '#faf8f5']
+      },
+      v2: {
+        file: 'v2-luxury-wilderness.html',
+        name: 'Luxury Wilderness',
+        headingFont: 'Fraunces',
+        bodyFont: 'DM Sans',
+        colors: ['#1a4d3e', '#c9a227', '#8b4513', '#fdfcfa']
+      },
+      v3: {
+        file: 'v3-modern-adventure.html',
+        name: 'Modern Adventure',
+        headingFont: 'Outfit',
+        bodyFont: 'Sora',
+        colors: ['#334155', '#F59E0B', '#06b6d4', '#f8fafc']
+      }
+    };
+
+    let currentVariation = 'v1';
+
+    // Tab switching
+    document.querySelectorAll('.viewer-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.viewer-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        currentVariation = tab.dataset.variation;
+        const data = variations[currentVariation];
+
+        document.getElementById('previewFrame').src = data.file;
+        document.getElementById('styleName').textContent = data.name;
+        document.getElementById('headingFont').textContent = data.headingFont;
+        document.getElementById('bodyFont').textContent = data.bodyFont;
+
+        const colorPreview = document.getElementById('colorPreview');
+        colorPreview.innerHTML = data.colors.map(c =>
+          `<div class="color-dot" style="background: ${c};"></div>`
+        ).join('');
+      });
+    });
+
+    // Viewport switching
+    document.querySelectorAll('.viewport-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.viewport-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const frame = document.getElementById('previewFrame');
+        const width = btn.dataset.width;
+
+        frame.classList.remove('mobile', 'tablet', 'desktop');
+        if (width === '375') frame.classList.add('mobile');
+        else if (width === '768') frame.classList.add('tablet');
+        else frame.classList.add('desktop');
+      });
+    });
+
+    // Mode switching (Single/Compare)
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const mode = btn.dataset.mode;
+        const singleView = document.getElementById('singleView');
+        const compareView = document.getElementById('compareView');
+
+        if (mode === 'compare') {
+          singleView.classList.add('hidden');
+          compareView.classList.add('active');
+        } else {
+          singleView.classList.remove('hidden');
+          compareView.classList.remove('active');
+        }
+      });
+    });
+
+    // Select button
+    document.getElementById('selectBtn').addEventListener('click', () => {
+      const data = variations[currentVariation];
+      alert(`Selected: ${data.name}\n\nTo apply this variation, tell me:\n"use ${currentVariation}" or "apply ${data.name}"`);
+    });
+  </script>
+</body>
+</html>

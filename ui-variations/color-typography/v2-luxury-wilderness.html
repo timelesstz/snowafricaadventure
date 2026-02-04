@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variation 2: Luxury Wilderness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <style>
+    :root {
+      /* Luxury Wilderness Palette */
+      --primary: #1a4d3e;           /* Deep forest green */
+      --primary-dark: #0f3028;      /* Darker green */
+      --primary-light: #2d7a62;     /* Lighter green */
+      --secondary: #c9a227;         /* Rich gold */
+      --secondary-light: #e6c65a;   /* Bright gold */
+      --accent: #8b4513;            /* Leather brown */
+
+      --background: #fdfcfa;        /* Off-white cream */
+      --surface: #f7f5f0;           /* Warm white */
+      --surface-elevated: #efebe3;
+
+      --text: #1a1a1a;              /* Near black */
+      --text-muted: #5a5a5a;        /* Dark gray */
+      --text-light: #8a8a8a;
+
+      --border: #e5e0d5;
+
+      /* Typography */
+      --font-heading: 'Fraunces', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--text);
+    }
+
+    /* ===== SAMPLE COMPONENTS ===== */
+
+    .showcase {
+      padding: 3rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .palette-name {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .palette-description {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    /* Color Swatches */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .swatch {
+      aspect-ratio: 1;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .swatch-primary { background: var(--primary); color: white; }
+    .swatch-primary-dark { background: var(--primary-dark); color: white; }
+    .swatch-primary-light { background: var(--primary-light); color: white; }
+    .swatch-secondary { background: var(--secondary); color: var(--text); }
+    .swatch-accent { background: var(--accent); color: white; }
+    .swatch-surface { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+
+    /* Typography Showcase */
+    .typography-section {
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .heading-showcase h1 {
+      font-family: var(--font-heading);
+      font-size: 4rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .heading-showcase h2 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .heading-showcase h3 {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .body-text {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 65ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .body-text-small {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+
+    /* Button Styles */
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 77, 62, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Card Example */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      border-color: var(--primary-light);
+    }
+
+    .card-image {
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      position: relative;
+    }
+
+    .card-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(26, 77, 62, 0.4), transparent);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.875rem;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+      color: var(--text);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card-text {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-price {
+      font-family: var(--font-heading);
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-price span {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--text-light);
+    }
+
+    /* Hero Section Example */
+    .hero-example {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      padding: 5rem 3rem;
+      border-radius: 1rem;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero-example::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+      opacity: 0.5;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 0.25rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 500;
+      color: white;
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      position: relative;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 500px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .hero-example .btn-secondary {
+      background: var(--secondary);
+      color: var(--primary-dark);
+      position: relative;
+    }
+
+    /* Font Info */
+    .font-info {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-top: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .font-info h4 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .font-specimen {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .font-sample {
+      padding: 1.5rem;
+      background: white;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+    }
+
+    .font-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .font-display-heading {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .font-display-body {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      color: var(--text);
+    }
+
+    .font-weights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .weight-tag {
+      font-size: 0.6875rem;
+      padding: 0.25rem 0.5rem;
+      background: var(--surface);
+      border-radius: 0.25rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="showcase">
+    <h1 class="palette-name">Luxury Wilderness</h1>
+    <p class="palette-description">
+      Deep forest greens paired with rich gold accents. Premium and sophisticated —
+      perfect for high-end safari lodges and exclusive expedition experiences.
+    </p>
+
+    <!-- Color Swatches -->
+    <div class="section-label">Color Palette</div>
+    <div class="color-grid">
+      <div class="swatch swatch-primary">Primary<br>#1a4d3e</div>
+      <div class="swatch swatch-primary-dark">Dark<br>#0f3028</div>
+      <div class="swatch swatch-primary-light">Light<br>#2d7a62</div>
+      <div class="swatch swatch-secondary">Secondary<br>#c9a227</div>
+      <div class="swatch swatch-accent">Accent<br>#8b4513</div>
+      <div class="swatch swatch-surface">Surface<br>#f7f5f0</div>
+    </div>
+
+    <!-- Typography -->
+    <div class="typography-section">
+      <div class="section-label">Typography</div>
+      <div class="heading-showcase">
+        <h1>The Art of African Exploration</h1>
+        <h2>Curated Journeys Beyond the Ordinary</h2>
+        <h3>Where luxury meets untamed wilderness</h3>
+      </div>
+      <p class="body-text">
+        Our bespoke safari experiences transcend the conventional, offering discerning travelers
+        intimate encounters with Africa's most magnificent landscapes and wildlife. Each journey
+        is meticulously crafted to deliver moments of profound wonder.
+      </p>
+      <p class="body-text-small">
+        From private mobile camps following the Great Migration to exclusive sundowners
+        overlooking the Ngorongoro Crater, we orchestrate experiences that define a lifetime.
+      </p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="section-label">Buttons</div>
+    <div class="button-row">
+      <button class="btn btn-primary">Reserve Your Journey</button>
+      <button class="btn btn-secondary">View Experiences</button>
+      <button class="btn btn-outline">Speak With Us</button>
+    </div>
+
+    <!-- Hero Example -->
+    <div class="section-label">Hero Section</div>
+    <div class="hero-example">
+      <div class="hero-tagline">★ Exclusive Safari Collection</div>
+      <h1 class="hero-title">Extraordinary Moments in Untouched Wilderness</h1>
+      <p class="hero-subtitle">
+        Discover the refined art of safari travel with private guides, luxury camps,
+        and access to Tanzania's most exclusive wildlife territories.
+      </p>
+      <button class="btn btn-secondary">Explore Collections</button>
+    </div>
+
+    <!-- Cards -->
+    <div class="section-label">Safari Cards</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-image">Safari Image</div>
+        <div class="card-content">
+          <span class="card-badge">★ Signature</span>
+          <h3 class="card-title">Private Serengeti Experience</h3>
+          <p class="card-text">
+            An exclusive journey through the Serengeti's remote regions with your
+            personal guide and luxury mobile camp.
+          </p>
+          <div class="card-price">$8,500 <span>per person</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">Lodge Image</div>
+        <div class="card-content">
+          <span class="card-badge">★ Premium</span>
+          <h3 class="card-title">Crater Highland Retreat</h3>
+          <p class="card-text">
+            Five nights in an award-winning crater-rim lodge with daily game drives
+            and Maasai cultural immersion.
+          </p>
+          <div class="card-price">$6,200 <span>per person</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Font Info -->
+    <div class="font-info">
+      <h4>Font Pairing</h4>
+      <div class="font-specimen">
+        <div class="font-sample">
+          <div class="font-name">Headings</div>
+          <div class="font-display-heading">Fraunces</div>
+          <div class="font-weights">
+            <span class="weight-tag">400 Regular</span>
+            <span class="weight-tag">500 Medium</span>
+            <span class="weight-tag">600 SemiBold</span>
+            <span class="weight-tag">700 Bold</span>
+          </div>
+        </div>
+        <div class="font-sample">
+          <div class="font-name">Body</div>
+          <div class="font-display-body">DM Sans</div>
+          <div class="font-weights">
+            <span class="weight-tag">400 Regular</span>
+            <span class="weight-tag">500 Medium</span>
+            <span class="weight-tag">600 SemiBold</span>
+            <span class="weight-tag">700 Bold</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

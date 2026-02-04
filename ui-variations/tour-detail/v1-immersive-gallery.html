@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V1: Immersive Gallery - 7-Day Machame Route</title>
+  <link rel="stylesheet" href="../base.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* V1: Immersive Gallery Hero with Floating Card */
+
+    .hero-immersive {
+      position: relative;
+      height: 85vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1621414050946-1b936a78571b?w=1920') center/cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0.1) 40%,
+        rgba(0,0,0,0.6) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-3xl);
+      color: white;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+      opacity: 0.8;
+      margin-bottom: var(--space-lg);
+    }
+
+    .breadcrumb a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-md);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* Floating Info Card */
+    .floating-card {
+      position: absolute;
+      right: var(--space-3xl);
+      bottom: var(--space-3xl);
+      width: 380px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .floating-card-header {
+      padding: var(--space-xl);
+      background: var(--primary-dark);
+      color: white;
+      text-align: center;
+    }
+
+    .price-tag {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      margin-bottom: var(--space-xs);
+    }
+
+    .price-value {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .price-unit {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .floating-card-body {
+      padding: var(--space-xl);
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .quick-fact {
+      text-align: center;
+      padding: var(--space-md);
+      background: var(--surface);
+      border-radius: var(--radius-md);
+    }
+
+    .quick-fact-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .quick-fact-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .cta-buttons .btn {
+      width: 100%;
+    }
+
+    /* Gallery Thumbnails */
+    .gallery-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 400px;
+      display: flex;
+      gap: var(--space-sm);
+      padding: var(--space-xl) var(--space-3xl);
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    }
+
+    .gallery-thumb {
+      width: 80px;
+      height: 60px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+
+    .gallery-thumb:hover,
+    .gallery-thumb.active {
+      opacity: 1;
+      border-color: var(--secondary);
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Content Sections */
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-3xl);
+      padding: var(--space-4xl) var(--space-3xl);
+    }
+
+    .main-content {
+      max-width: 800px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: var(--space-xl);
+      height: fit-content;
+    }
+
+    .section {
+      margin-bottom: var(--space-4xl);
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--secondary);
+      display: inline-block;
+    }
+
+    .overview-text {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    /* Highlights Grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--secondary);
+    }
+
+    .highlight-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--secondary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .highlight-text {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Itinerary Timeline */
+    .itinerary-timeline {
+      position: relative;
+      padding-left: var(--space-3xl);
+    }
+
+    .itinerary-timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--secondary), var(--primary));
+    }
+
+    .itinerary-day {
+      position: relative;
+      margin-bottom: var(--space-xl);
+      padding: var(--space-xl);
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+
+    .itinerary-day::before {
+      content: '';
+      position: absolute;
+      left: calc(-1 * var(--space-3xl) + 6px);
+      top: var(--space-xl);
+      width: 14px;
+      height: 14px;
+      background: var(--secondary);
+      border: 3px solid white;
+      border-radius: 50%;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-md);
+    }
+
+    .day-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--secondary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .day-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: var(--space-xs);
+    }
+
+    .day-meta {
+      display: flex;
+      gap: var(--space-md);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .day-description {
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Sidebar Sticky Card */
+    .sidebar-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .sidebar-card-header {
+      padding: var(--space-xl);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .sidebar-card-body {
+      padding: var(--space-xl);
+    }
+
+    .next-departure {
+      padding: var(--space-lg);
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .next-departure-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .next-departure-date {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .spots-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+      color: var(--success);
+      margin-top: var(--space-sm);
+    }
+
+    /* Inclusions Section */
+    .inclusions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .inclusions-list,
+    .exclusions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .inclusions-list li,
+    .exclusions-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .inclusions-list li::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .exclusions-list li::before {
+      content: '✕';
+      color: var(--error);
+      font-weight: 700;
+    }
+
+    /* Trust Badges */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      padding: var(--space-3xl);
+      background: var(--surface);
+      margin-top: var(--space-4xl);
+    }
+
+    .trust-badge {
+      text-align: center;
+    }
+
+    .trust-badge-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto var(--space-md);
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .trust-badge-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .trust-badge-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .floating-card {
+        display: none;
+      }
+
+      .gallery-strip {
+        right: 0;
+      }
+
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        padding: var(--space-xl);
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-immersive {
+        height: 70vh;
+      }
+
+      .hero-content {
+        padding: var(--space-xl);
+      }
+
+      .highlights-grid,
+      .inclusions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-strip {
+        display: none;
+      }
+
+      .trust-badges {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Immersive Hero -->
+  <section class="hero-immersive">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/trekking">Kilimanjaro Treks</a>
+        <span>/</span>
+        <span>Machame Route</span>
+      </nav>
+
+      <h1 class="hero-title">7-Day Machame Route</h1>
+      <p class="hero-subtitle">
+        The "Whiskey Route" - Kilimanjaro's most scenic path with 93% summit success rate
+      </p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">🏔️ 7 Days</span>
+        <span class="hero-badge">⭐ 93% Success Rate</span>
+        <span class="hero-badge">💪 Challenging</span>
+        <span class="hero-badge">🌍 5,895m Summit</span>
+      </div>
+    </div>
+
+    <!-- Floating Card -->
+    <div class="floating-card">
+      <div class="floating-card-header">
+        <div class="price-tag">Starting from</div>
+        <div class="price-value">$2,195 <span class="price-unit">/ person</span></div>
+      </div>
+      <div class="floating-card-body">
+        <div class="quick-facts">
+          <div class="quick-fact">
+            <div class="quick-fact-value">7</div>
+            <div class="quick-fact-label">Days</div>
+          </div>
+          <div class="quick-fact">
+            <div class="quick-fact-value">93%</div>
+            <div class="quick-fact-label">Success</div>
+          </div>
+          <div class="quick-fact">
+            <div class="quick-fact-value">5,895m</div>
+            <div class="quick-fact-label">Summit</div>
+          </div>
+          <div class="quick-fact">
+            <div class="quick-fact-value">3:1</div>
+            <div class="quick-fact-label">Guide Ratio</div>
+          </div>
+        </div>
+        <div class="cta-buttons">
+          <a href="#book" class="btn btn-primary">Book This Trek</a>
+          <a href="#departures" class="btn btn-secondary">View Departures</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Strip -->
+    <div class="gallery-strip">
+      <div class="gallery-thumb active">
+        <img src="https://images.unsplash.com/photo-1621414050946-1b936a78571b?w=200" alt="Kilimanjaro">
+      </div>
+      <div class="gallery-thumb">
+        <img src="https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=200" alt="Trekking">
+      </div>
+      <div class="gallery-thumb">
+        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=200" alt="Summit">
+      </div>
+      <div class="gallery-thumb">
+        <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=200" alt="Camping">
+      </div>
+      <div class="gallery-thumb">
+        <img src="https://images.unsplash.com/photo-1517697471339-4aa32003c11a?w=200" alt="Views">
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <main class="main-content">
+      <!-- Overview -->
+      <section class="section">
+        <h2 class="section-title">Overview</h2>
+        <p class="overview-text">
+          The Machame Route, affectionately known as the "Whiskey Route", is Kilimanjaro's most popular
+          climbing path. This 7-day itinerary offers excellent acclimatization through the proven "climb
+          high, sleep low" approach, giving you the best chance of reaching Uhuru Peak.
+        </p>
+        <p class="overview-text" style="margin-top: var(--space-lg);">
+          You'll traverse diverse ecosystems from lush rainforest to alpine desert, experience the
+          famous Barranco Wall scramble, and witness breathtaking views of both Kibo and Mawenzi peaks.
+          Our professional guides have led thousands of successful summits on this route.
+        </p>
+      </section>
+
+      <!-- Highlights -->
+      <section class="section">
+        <h2 class="section-title">Highlights</h2>
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <div class="highlight-icon">🏔️</div>
+            <div class="highlight-text">Most scenic route on Kilimanjaro with diverse landscapes</div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">📈</div>
+            <div class="highlight-text">93% summit success rate with proper acclimatization</div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🧗</div>
+            <div class="highlight-text">Experience the exciting Barranco Wall scramble</div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">🌅</div>
+            <div class="highlight-text">Spectacular sunrise summit at Uhuru Peak</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Itinerary -->
+      <section class="section">
+        <h2 class="section-title">Day-by-Day Itinerary</h2>
+        <div class="itinerary-timeline">
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 1</div>
+                <div class="day-title">Arrival in Arusha</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 1,400m</span>
+              </div>
+            </div>
+            <p class="day-description">
+              Arrive at Kilimanjaro International Airport where our team will meet you. Transfer to
+              your hotel in Arusha or Moshi for briefing, gear check, and preparation for your climb.
+            </p>
+          </div>
+
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 2</div>
+                <div class="day-title">Machame Gate to Machame Camp</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 1,800m → 3,000m</span>
+                <span>📏 11km</span>
+              </div>
+            </div>
+            <p class="day-description">
+              After breakfast, drive to Machame Gate. Begin your trek through the montane rainforest,
+              home to colobus monkeys and exotic birds. Arrive at Machame Camp for dinner and overnight.
+            </p>
+          </div>
+
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 3</div>
+                <div class="day-title">Machame Camp to Shira Camp</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 3,000m → 3,840m</span>
+                <span>📏 5km</span>
+              </div>
+            </div>
+            <p class="day-description">
+              Leave the forest behind as you ascend through moorland. The landscape opens up with
+              stunning views of the Shira Plateau, one of Kilimanjaro's volcanic cones.
+            </p>
+          </div>
+
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 4</div>
+                <div class="day-title">Shira Camp to Barranco Camp</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 3,840m → 4,600m → 3,950m</span>
+                <span>📏 10km</span>
+              </div>
+            </div>
+            <p class="day-description">
+              Today follows the "climb high, sleep low" principle. Ascend to Lava Tower (4,600m) for
+              acclimatization before descending to Barranco Camp through the Senecio forest.
+            </p>
+          </div>
+
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 5</div>
+                <div class="day-title">Barranco Camp to Karanga Camp</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 3,950m → 4,200m</span>
+                <span>📏 5km</span>
+              </div>
+            </div>
+            <p class="day-description">
+              Conquer the famous Barranco Wall - an exciting scramble that looks more challenging
+              than it is. Continue through alpine desert to Karanga Camp with views of the summit.
+            </p>
+          </div>
+
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 6</div>
+                <div class="day-title">Karanga Camp to Barafu Camp</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 4,200m → 4,673m</span>
+                <span>📏 4km</span>
+              </div>
+            </div>
+            <p class="day-description">
+              Short trek to Barafu (base camp). Rest, eat, and hydrate well. Your guides will brief
+              you on summit night. Early dinner and sleep before the midnight start.
+            </p>
+          </div>
+
+          <div class="itinerary-day">
+            <div class="day-header">
+              <div>
+                <div class="day-number">Day 7</div>
+                <div class="day-title">Summit Day - Uhuru Peak!</div>
+              </div>
+              <div class="day-meta">
+                <span>📍 4,673m → 5,895m → 3,100m</span>
+                <span>📏 17km</span>
+              </div>
+            </div>
+            <p class="day-description">
+              Begin your summit push at midnight. Reach Stella Point at sunrise and push on to
+              Uhuru Peak - the Roof of Africa! Descend to Mweka Camp for celebration and rest.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inclusions -->
+      <section class="section">
+        <h2 class="section-title">What's Included</h2>
+        <div class="inclusions-grid">
+          <div>
+            <h3 style="color: var(--success); margin-bottom: var(--space-md);">Inclusions</h3>
+            <ul class="inclusions-list">
+              <li>All park entrance and rescue fees</li>
+              <li>Professional English-speaking mountain guide</li>
+              <li>Assistant guides and porters (3:1 ratio)</li>
+              <li>Quality 4-season camping equipment</li>
+              <li>All meals on the mountain (3 per day)</li>
+              <li>Emergency oxygen and first aid kit</li>
+              <li>Airport transfers</li>
+              <li>1 night hotel in Moshi (pre-trek)</li>
+              <li>Climbing certificate on success</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: var(--error); margin-bottom: var(--space-md);">Exclusions</h3>
+            <ul class="exclusions-list">
+              <li>International flights</li>
+              <li>Travel insurance (required)</li>
+              <li>Tanzania visa fees</li>
+              <li>Tips for guides and porters</li>
+              <li>Personal hiking gear and clothing</li>
+              <li>Items of personal nature</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <div class="price-tag">Starting from</div>
+          <div class="price-value">$2,195</div>
+          <div class="price-unit">per person</div>
+        </div>
+        <div class="sidebar-card-body">
+          <div class="next-departure">
+            <div class="next-departure-label">Next Available Departure</div>
+            <div class="next-departure-date">February 15, 2026</div>
+            <div class="spots-indicator">
+              <span>●</span> 6 spots remaining
+            </div>
+          </div>
+          <div class="cta-buttons">
+            <a href="#book" class="btn btn-primary">Book This Trek</a>
+            <a href="#departures" class="btn btn-secondary">All Departures</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Trust Badges -->
+  <section class="trust-badges">
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🏆</div>
+      <div class="trust-badge-value">15+ Years</div>
+      <div class="trust-badge-label">Experience</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">👥</div>
+      <div class="trust-badge-value">5,000+</div>
+      <div class="trust-badge-label">Happy Climbers</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">⭐</div>
+      <div class="trust-badge-value">4.9/5</div>
+      <div class="trust-badge-label">TripAdvisor Rating</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">✓</div>
+      <div class="trust-badge-value">93%</div>
+      <div class="trust-badge-label">Summit Success</div>
+    </div>
+  </section>
+</body>
+</html>

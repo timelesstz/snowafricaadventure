@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7-Day Serengeti & Ngorongoro Safari | Snow Africa Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Modern Adventure Palette */
+      --primary: #334155;
+      --primary-dark: #1e293b;
+      --primary-light: #475569;
+      --secondary: #F59E0B;
+      --secondary-dark: #D97706;
+      --secondary-light: #FBBF24;
+      --accent: #06b6d4;
+      --accent-light: #22d3ee;
+
+      --background: #ffffff;
+      --surface: #f8fafc;
+      --surface-elevated: #f1f5f9;
+
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+
+      --border: #e2e8f0;
+      --success: #22c55e;
+
+      /* Typography */
+      --font-heading: 'Outfit', system-ui, sans-serif;
+      --font-body: 'Sora', system-ui, sans-serif;
+
+      /* Spacing */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+
+      /* Radius */
+      --radius-sm: 0.375rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-full: 9999px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ========================================
+       HERO - Full Width Background Image
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(30, 41, 59, 0.92) 0%,
+        rgba(51, 65, 85, 0.85) 50%,
+        rgba(30, 41, 59, 0.75) 100%
+      );
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      color: white;
+    }
+
+    .hero-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero-breadcrumb a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-breadcrumb a:hover {
+      color: var(--secondary);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-heading);
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .badge-success {
+      background: rgba(34, 197, 94, 0.2);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .badge-primary {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--secondary-light);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-accent {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--accent-light);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-title .highlight {
+      color: var(--secondary);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+      max-width: 550px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+      padding: var(--space-xl) 0;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: var(--space-xl);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--secondary);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: var(--space-xs);
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .trust-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+    }
+
+    /* Booking Card */
+    .booking-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+    }
+
+    .booking-card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
+    }
+
+    .booking-header {
+      text-align: center;
+      padding: var(--space-xl);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+
+    .price-from {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .price-amount {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .price-person {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+
+    .booking-urgency {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: rgba(245, 158, 11, 0.1);
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem;
+      color: var(--secondary-dark);
+      font-weight: 500;
+    }
+
+    .booking-body {
+      padding: var(--space-xl);
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .form-label {
+      font-family: var(--font-heading);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-input,
+    .form-select {
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--text);
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-xl);
+      font-family: var(--font-heading);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25);
+    }
+
+    .btn-secondary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: var(--surface);
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: var(--space-md) var(--space-xl);
+      margin-top: var(--space-sm);
+    }
+
+    .booking-features {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .booking-feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .booking-feature svg {
+      width: 16px;
+      height: 16px;
+      color: var(--success);
+    }
+
+    .group-dates-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: var(--space-md);
+      transition: all 0.2s;
+    }
+
+    .group-dates-link:hover {
+      background: var(--surface-elevated);
+      color: var(--primary-dark);
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ========================================
+       QUICK NAVIGATION
+       ======================================== */
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .quick-nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-xl);
+    }
+
+    .quick-nav-links {
+      display: flex;
+      gap: var(--space-xl);
+    }
+
+    .quick-nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: var(--space-md) 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .quick-nav-links a:hover,
+    .quick-nav-links a.active {
+      color: var(--text);
+      border-color: var(--secondary);
+    }
+
+    /* ========================================
+       EDITORIAL CONTENT
+       ======================================== */
+    .editorial-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--space-4xl) var(--space-xl);
+    }
+
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-4xl);
+    }
+
+    .editorial-main {
+      max-width: 720px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--secondary);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: var(--space-xl);
+      letter-spacing: -0.02em;
+    }
+
+    .lead-text {
+      font-family: var(--font-body);
+      font-size: 1.375rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: var(--space-xl);
+    }
+
+    .body-text {
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Pull Quote */
+    .pull-quote {
+      position: relative;
+      padding: var(--space-2xl) 0;
+      margin: var(--space-3xl) 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pull-quote blockquote {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text);
+      margin: 0;
+      padding-left: var(--space-xl);
+      border-left: 4px solid var(--secondary);
+      letter-spacing: -0.02em;
+    }
+
+    /* CTA Banner */
+    .editorial-cta {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      margin: var(--space-3xl) 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-xl);
+    }
+
+    .editorial-cta-content {
+      color: white;
+    }
+
+    .editorial-cta-content h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.02em;
+    }
+
+    .editorial-cta-content p {
+      opacity: 0.85;
+      font-size: 0.9375rem;
+    }
+
+    /* Sidebar */
+    .editorial-sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .sidebar-card {
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      border: 1px solid var(--border);
+    }
+
+    .sidebar-card h4 {
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      color: var(--text);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--secondary);
+    }
+
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-list li {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-sm) 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar-list li span:last-child {
+      color: var(--text);
+    }
+
+    .sidebar-list .icon {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .sidebar-list .icon svg {
+      stroke: var(--secondary);
+    }
+
+    /* ========================================
+       HIGHLIGHTS STRIP
+       ======================================== */
+    .highlights-strip {
+      background: var(--primary-dark);
+      color: white;
+      padding: var(--space-4xl) 0;
+    }
+
+    .highlights-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    .highlights-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .highlights-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.02em;
+    }
+
+    .highlights-header p {
+      opacity: 0.6;
+      font-size: 1rem;
+    }
+
+    .highlights-grid {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3xl);
+      flex-wrap: wrap;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .highlight-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(245, 158, 11, 0.15);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .highlight-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--secondary);
+    }
+
+    .highlight-title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      letter-spacing: -0.01em;
+    }
+
+    .highlights-cta {
+      text-align: center;
+      margin-top: var(--space-3xl);
+    }
+
+    /* ========================================
+       DAY BY DAY - RICH EDITORIAL STYLE
+       ======================================== */
+    .itinerary-section {
+      background: var(--primary-dark);
+      padding: var(--space-4xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .itinerary-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 300px;
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .itinerary-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-4xl);
+      padding: 0 var(--space-xl);
+      position: relative;
+    }
+
+    .itinerary-header .section-label {
+      color: var(--secondary);
+      border-bottom-color: rgba(255,255,255,0.2);
+      margin-bottom: var(--space-lg);
+    }
+
+    .itinerary-header .section-title {
+      color: white;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: var(--space-lg);
+      letter-spacing: -0.03em;
+    }
+
+    .itinerary-header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.125rem;
+      line-height: 1.7;
+    }
+
+    /* Timeline Container */
+    .day-cards {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+      position: relative;
+    }
+
+    /* Vertical Timeline Line */
+    .day-cards::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--secondary) 0%, rgba(245, 158, 11, 0.3) 100%);
+      transform: translateX(-50%);
+    }
+
+    /* Day Card */
+    .day-card {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      align-items: center;
+      margin-bottom: var(--space-3xl);
+      position: relative;
+    }
+
+    .day-card:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Timeline Node */
+    .day-node {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .day-num {
+      width: 48px;
+      height: 48px;
+      background: var(--secondary);
+      color: white;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.125rem;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+      border: 3px solid var(--primary-dark);
+    }
+
+    /* Day Image */
+    .day-card-image {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .day-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .day-card:hover .day-card-image img {
+      transform: scale(1.05);
+    }
+
+    .day-card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .day-label {
+      position: absolute;
+      bottom: var(--space-md);
+      left: var(--space-md);
+      font-family: var(--font-heading);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-sm);
+      z-index: 1;
+    }
+
+    /* Day Content */
+    .day-card-content {
+      padding: var(--space-xl);
+      background: white;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    /* Arrow pointing to timeline */
+    .day-card:nth-child(odd) .day-card-content::before {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 8px solid transparent;
+      border-left-color: white;
+    }
+
+    .day-card:nth-child(even) .day-card-content::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 8px solid transparent;
+      border-right-color: white;
+    }
+
+    .day-card-content h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.02em;
+    }
+
+    .day-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .day-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .day-meta-item svg {
+      width: 12px;
+      height: 12px;
+      color: var(--secondary);
+    }
+
+    .day-card-content p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .day-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .day-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--secondary-dark);
+      background: rgba(245, 158, 11, 0.1);
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .day-highlight::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 50%;
+    }
+
+    /* Alternating Layout */
+    .day-card:nth-child(odd) {
+      grid-template-areas: "image node content";
+    }
+
+    .day-card:nth-child(even) {
+      grid-template-areas: "content node image";
+    }
+
+    .day-card:nth-child(odd) .day-card-image { grid-area: image; }
+    .day-card:nth-child(odd) .day-node { grid-area: node; }
+    .day-card:nth-child(odd) .day-card-content { grid-area: content; }
+
+    .day-card:nth-child(even) .day-card-image { grid-area: image; }
+    .day-card:nth-child(even) .day-node { grid-area: node; }
+    .day-card:nth-child(even) .day-card-content { grid-area: content; }
+
+    /* Featured Day */
+    .day-card.featured .day-num {
+      width: 56px;
+      height: 56px;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 25px rgba(245, 158, 11, 0.6);
+    }
+
+    .day-card.featured .day-card-content {
+      border: 2px solid var(--secondary);
+    }
+
+    .day-card.featured .day-card-content::after {
+      content: 'Safari Highlight';
+      position: absolute;
+      top: -12px;
+      left: var(--space-lg);
+      font-family: var(--font-heading);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: white;
+      background: var(--secondary);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Itinerary CTA */
+    .itinerary-cta {
+      text-align: center;
+      margin-top: var(--space-4xl);
+      padding: var(--space-3xl) var(--space-2xl);
+      background: white;
+      border-radius: var(--radius-sm);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    .itinerary-cta h3 {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.02em;
+    }
+
+    .itinerary-cta p {
+      color: var(--text-muted);
+      margin-bottom: var(--space-xl);
+      font-size: 1rem;
+    }
+
+    .itinerary-cta-buttons {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ========================================
+       INCLUSIONS
+       ======================================== */
+    .inclusions-section {
+      padding: var(--space-4xl) var(--space-xl);
+      background: white;
+    }
+
+    .inclusions-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .inclusions-split {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .inclusions-col {
+      padding: var(--space-2xl);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .inclusions-col.included {
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .inclusions-col.excluded {
+      background: var(--surface);
+    }
+
+    .inclusions-col h3 {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      letter-spacing: -0.01em;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .inclusions-col.included h3 {
+      color: var(--success);
+    }
+
+    .inclusions-col.excluded h3 {
+      color: var(--text-muted);
+    }
+
+    .inclusions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .inclusions-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-sm) 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .inclusions-col.included .inclusions-list li {
+      color: var(--text);
+    }
+
+    .inclusions-list svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .inclusions-list .check {
+      color: var(--success);
+    }
+
+    .inclusions-list .x {
+      color: var(--text-light);
+    }
+
+    /* ========================================
+       FINAL CTA
+       ======================================== */
+    .final-cta {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      padding: var(--space-4xl) var(--space-xl);
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: var(--secondary);
+      opacity: 0.1;
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+
+    .final-cta-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: var(--space-lg);
+      letter-spacing: -0.03em;
+    }
+
+    .final-cta p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: var(--space-2xl);
+      line-height: 1.7;
+    }
+
+    .final-cta-buttons {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .final-cta .btn-primary {
+      padding: var(--space-lg) var(--space-3xl);
+      font-size: 1rem;
+    }
+
+    .final-cta .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: var(--space-lg) var(--space-3xl);
+      font-size: 1rem;
+    }
+
+    .final-cta .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+        padding: 5rem 1.5rem 3rem;
+      }
+
+      .booking-card {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .editorial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .editorial-sidebar {
+        position: static;
+      }
+
+      .highlights-grid {
+        gap: var(--space-xl);
+      }
+
+      /* Timeline stacks vertically on tablet */
+      .day-cards::before {
+        left: 30px;
+        transform: none;
+      }
+
+      .day-card {
+        grid-template-columns: 60px 1fr;
+        grid-template-areas:
+          "node image"
+          "node content";
+        gap: var(--space-md);
+      }
+
+      .day-card:nth-child(even) {
+        grid-template-areas:
+          "node image"
+          "node content";
+      }
+
+      .day-node {
+        grid-area: node;
+        align-self: start;
+        padding-top: var(--space-lg);
+      }
+
+      .day-card-image {
+        grid-area: image;
+        height: 200px;
+      }
+
+      .day-card-content {
+        grid-area: content;
+      }
+
+      .day-card-content::before {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .quick-nav-links {
+        display: none;
+      }
+
+      .highlights-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+
+      .inclusions-split {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+
+      .editorial-cta {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .final-cta h2 {
+        font-size: 2rem;
+      }
+
+      /* Mobile timeline */
+      .day-cards::before {
+        display: none;
+      }
+
+      .day-card {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "image"
+          "node"
+          "content";
+        gap: 0;
+      }
+
+      .day-card:nth-child(even) {
+        grid-template-areas:
+          "image"
+          "node"
+          "content";
+      }
+
+      .day-node {
+        padding: var(--space-md) 0;
+        justify-content: flex-start;
+      }
+
+      .day-num {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .day-card-image {
+        height: 180px;
+      }
+
+      .itinerary-header .section-title {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .trust-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920&q=80" alt="Serengeti Safari at Sunset">
+    </div>
+
+    <div class="hero-container">
+      <div class="hero-content">
+        <nav class="hero-breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/safaris">Tanzania Safaris</a>
+          <span>/</span>
+          <span>Serengeti & Ngorongoro</span>
+        </nav>
+
+        <div class="hero-badges">
+          <span class="badge badge-success">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Big Five Guaranteed
+          </span>
+          <span class="badge badge-primary">Best Seller</span>
+          <span class="badge badge-accent">Luxury Lodges</span>
+        </div>
+
+        <h1 class="hero-title">
+          7-Day <span class="highlight">Serengeti</span> &<br>
+          Ngorongoro Safari
+        </h1>
+
+        <p class="hero-subtitle">
+          The ultimate Tanzania safari experience. Witness the Great Migration, explore the Ngorongoro Crater, and encounter Africa's iconic wildlife in their natural habitat.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Days</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Parks</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Game Drives</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">4.9</div>
+            <div class="stat-label">Rating</div>
+          </div>
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Expert safari guides
+          </div>
+          <div class="trust-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            4x4 Land Cruisers
+          </div>
+          <div class="trust-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Full board included
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-price-row">
+            <span class="price-from">From</span>
+            <span class="price-amount">$3,495</span>
+            <span class="price-person">/ person</span>
+          </div>
+          <div class="booking-urgency">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            Only 3 spots left for February 2025
+          </div>
+        </div>
+
+        <div class="booking-body">
+          <form class="booking-form">
+            <div class="form-group">
+              <label class="form-label">Preferred Start Date</label>
+              <input type="date" class="form-input" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Travelers</label>
+                <select class="form-select">
+                  <option>1 Person</option>
+                  <option selected>2 People</option>
+                  <option>3 People</option>
+                  <option>4 People</option>
+                  <option>5+ People</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Safari Type</label>
+                <select class="form-select">
+                  <option>Private Safari</option>
+                  <option>Join Group</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Your Email</label>
+              <input type="email" class="form-input" placeholder="you@example.com" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-book">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Check Availability
+            </button>
+          </form>
+
+          <div class="booking-features">
+            <div class="booking-feature">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Free cancellation up to 30 days before
+            </div>
+            <div class="booking-feature">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              No hidden fees - price is all-inclusive
+            </div>
+            <div class="booking-feature">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Secure payment with instant confirmation
+            </div>
+          </div>
+
+          <a href="/safari-group-departures/" class="group-dates-link">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            View Fixed Group Departure Dates
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+  <!-- QUICK NAVIGATION -->
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <div class="quick-nav-links">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#itinerary">Day by Day</a>
+        <a href="#inclusions">Inclusions</a>
+      </div>
+      <div class="quick-nav-cta">
+        <a href="#book" class="btn btn-primary">Book This Safari</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- EDITORIAL CONTENT -->
+  <section id="overview" class="editorial-section">
+    <div class="editorial-grid">
+      <div class="editorial-main">
+        <span class="section-label">About This Safari</span>
+        <h2 class="section-title">The Ultimate Tanzania Experience</h2>
+
+        <p class="lead-text">
+          This carefully crafted 7-day journey takes you through Tanzania's most spectacular
+          wildlife destinations. From the endless plains of the Serengeti to the breathtaking
+          Ngorongoro Crater, every day brings new adventures and unforgettable encounters.
+        </p>
+
+        <p class="body-text">
+          Travel in comfort in our custom 4x4 Land Cruisers with pop-up roofs for 360-degree
+          game viewing. Your expert safari guide knows exactly where to find the action -
+          from lion prides on the hunt to the Great Migration river crossings.
+        </p>
+
+        <div class="pull-quote">
+          <blockquote>
+            "Watching a leopard descend from an acacia tree at sunset, with the Serengeti
+            stretching endlessly behind - that's a moment that stays with you forever."
+          </blockquote>
+        </div>
+
+        <p class="body-text">
+          Stay in hand-picked lodges and luxury tented camps that blend seamlessly with the
+          wilderness. Wake up to the sounds of the bush, enjoy sundowners overlooking the
+          savanna, and fall asleep to the distant calls of hyenas.
+        </p>
+
+        <div class="editorial-cta">
+          <div class="editorial-cta-content">
+            <h3>Ready to Go Wild?</h3>
+            <p>Secure your spot with just a 20% deposit</p>
+          </div>
+          <a href="#book" class="btn btn-primary">Book Now</a>
+        </div>
+      </div>
+
+      <aside class="editorial-sidebar">
+        <div class="sidebar-card">
+          <h4>Safari Highlights</h4>
+          <ul class="sidebar-list">
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+              </span>
+              <span>Big Five guaranteed</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0M5 17H3v-6l2-4h8l4 4h3v6h-2m-8 0h4"/></svg>
+              </span>
+              <span>Private 4x4 Land Cruiser</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
+              </span>
+              <span>Luxury lodges & tented camps</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M3 11v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/></svg>
+              </span>
+              <span>Full board included</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              </span>
+              <span>Photography-friendly vehicles</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1M12 15l5 6H7l5-6z"/></svg>
+              </span>
+              <span>Airport transfers included</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Best Time to Visit</h4>
+          <ul class="sidebar-list">
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+              <span><strong>Jun-Oct:</strong> Migration in Serengeti</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg>
+              </span>
+              <span><strong>Jan-Mar:</strong> Calving season</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 16l2-6 6-2-2 6-6 2z"/><circle cx="12" cy="12" r="10"/></svg>
+              </span>
+              <span><strong>Year-round:</strong> Ngorongoro Crater</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section id="highlights" class="highlights-strip">
+    <div class="highlights-inner">
+      <div class="highlights-header">
+        <h2>Why Choose This Safari?</h2>
+        <p>Discover what makes this our most popular Tanzania adventure</p>
+      </div>
+      <div class="highlights-grid">
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+          </div>
+          <div class="highlight-title">Big Five Territory</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="highlight-title">Great Migration</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 3v4l-4 2 4 2v4M16 3v4l4 2-4 2v4M12 3v18"/></svg>
+          </div>
+          <div class="highlight-title">Ngorongoro Crater</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 21h18L12 3 3 21zM12 3v18"/></svg>
+          </div>
+          <div class="highlight-title">Luxury Camps</div>
+        </div>
+      </div>
+      <div class="highlights-cta">
+        <a href="#book" class="btn btn-primary">Start Planning Your Safari</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY BY DAY -->
+  <section id="itinerary" class="itinerary-section">
+    <div class="itinerary-header">
+      <span class="section-label">Day by Day</span>
+      <h2 class="section-title">Your Safari Journey</h2>
+      <p>From Arusha to the Serengeti - seven days of unforgettable wildlife encounters</p>
+    </div>
+
+    <div class="day-cards">
+      <!-- Day 1 -->
+      <div class="day-card">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=80" alt="Arusha Town">
+          <span class="day-label">Day One</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">1</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Arrival in Arusha</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+              Arusha
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+              Gran Melia Arusha
+            </span>
+          </div>
+          <p>
+            Welcome to Tanzania! You'll be met at Kilimanjaro International Airport and transferred to your luxury hotel. Meet your safari guide for a briefing over dinner.
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Airport pickup</span>
+            <span class="day-highlight">Safari briefing</span>
+            <span class="day-highlight">Welcome dinner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-card">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1547970810-dc1eac37d174?w=800&q=80" alt="Tarangire Elephants">
+          <span class="day-label">Day Two</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">2</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Tarangire National Park</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Full day game drive
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+              Tarangire Safari Lodge
+            </span>
+          </div>
+          <p>
+            Drive to Tarangire, famous for massive elephant herds and iconic baobab trees. Watch for lions lounging in trees - a rare sight unique to this region.
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Elephant herds</span>
+            <span class="day-highlight">Baobab trees</span>
+            <span class="day-highlight">Tree-climbing lions</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-card">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?w=800&q=80" alt="Ngorongoro Crater">
+          <span class="day-label">Day Three</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">3</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Ngorongoro Crater</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Crater floor game drive
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+              Ngorongoro Serena Lodge
+            </span>
+          </div>
+          <p>
+            Descend into the world's largest intact volcanic caldera. Home to the Big Five, including the critically endangered black rhino. Picnic lunch by the hippo pool.
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Black rhino</span>
+            <span class="day-highlight">Hippo pool</span>
+            <span class="day-highlight">Flamingos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 4 - Featured -->
+      <div class="day-card featured">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80" alt="Serengeti Lions">
+          <span class="day-label">Day Four</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">4</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Serengeti National Park</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Afternoon game drive
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+              Serengeti Serena Lodge
+            </span>
+          </div>
+          <p>
+            Drive to the legendary Serengeti - "the endless plains" in Maasai. This UNESCO World Heritage Site is home to Africa's largest lion population.
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Lion prides</span>
+            <span class="day-highlight">Endless plains</span>
+            <span class="day-highlight">Sundowner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="day-card">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=800&q=80" alt="Great Migration">
+          <span class="day-label">Day Five</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">5</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Serengeti - Full Day Safari</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Dawn to dusk game drives
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+              Serengeti Serena Lodge
+            </span>
+          </div>
+          <p>
+            Full day exploring diverse ecosystems. Visit kopjes where leopards and cheetahs rest. Witness thousands of wildebeest and zebra on the move.
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Migration herds</span>
+            <span class="day-highlight">Leopard spotting</span>
+            <span class="day-highlight">Cheetah</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="day-card">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1549366021-9f761d450615?w=800&q=80" alt="Lake Manyara">
+          <span class="day-label">Day Six</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">6</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Lake Manyara National Park</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Morning game drive
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+              Lake Manyara Serena Lodge
+            </span>
+          </div>
+          <p>
+            Drive through the Great Rift Valley to Lake Manyara. Famous for tree-climbing lions and vast flocks of flamingos. Final sundowner overlooking the lake.
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Flamingos</span>
+            <span class="day-highlight">Rift Valley views</span>
+            <span class="day-highlight">Final sundowner</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 7 -->
+      <div class="day-card">
+        <div class="day-card-image">
+          <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800&q=80" alt="Safari Goodbye">
+          <span class="day-label">Day Seven</span>
+        </div>
+        <div class="day-node">
+          <div class="day-num">7</div>
+        </div>
+        <div class="day-card-content">
+          <h3>Departure Day</h3>
+          <div class="day-meta">
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Breakfast & transfer
+            </span>
+            <span class="day-meta-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              Airport drop-off
+            </span>
+          </div>
+          <p>
+            After breakfast, transfer to Kilimanjaro or Arusha airport. Take home memories of incredible wildlife encounters and the warmth of Tanzanian hospitality. Safari njema!
+          </p>
+          <div class="day-highlights">
+            <span class="day-highlight">Breakfast</span>
+            <span class="day-highlight">Airport transfer</span>
+            <span class="day-highlight">Karibu tena!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itinerary-cta">
+      <h3>Ready for Your Safari Adventure?</h3>
+      <p>Join hundreds of travelers who've experienced Tanzania with Snow Africa</p>
+      <div class="itinerary-cta-buttons">
+        <a href="#book" class="btn btn-primary">Check Availability</a>
+        <a href="/contact" class="btn btn-outline">Ask a Question</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUSIONS -->
+  <section id="inclusions" class="inclusions-section">
+    <div class="inclusions-header">
+      <span class="section-label">What's Included</span>
+      <h2 class="section-title">Everything You Need</h2>
+    </div>
+
+    <div class="inclusions-split">
+      <div class="inclusions-col included">
+        <h3>
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          Included
+        </h3>
+        <ul class="inclusions-list">
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            All national park entrance fees
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Professional English-speaking safari guide
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Private 4x4 Land Cruiser with pop-up roof
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            6 nights luxury lodge accommodation
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            All meals (full board)
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Unlimited bottled water during drives
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Airport transfers (JRO/ARK)
+          </li>
+          <li>
+            <svg class="check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Flying Doctor emergency evacuation
+          </li>
+        </ul>
+      </div>
+      <div class="inclusions-col excluded">
+        <h3>
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          Not Included
+        </h3>
+        <ul class="inclusions-list">
+          <li>
+            <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            International flights
+          </li>
+          <li>
+            <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            Travel insurance (required)
+          </li>
+          <li>
+            <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            Tanzania visa fees ($50 USD)
+          </li>
+          <li>
+            <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            Tips for guide and lodge staff
+          </li>
+          <li>
+            <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            Alcoholic beverages
+          </li>
+          <li>
+            <svg class="x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            Items of personal nature
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2>Your Tanzania Adventure Awaits</h2>
+      <p>
+        Join thousands of travelers who've experienced the magic of Tanzania with Snow Africa.
+        Expert guides, luxury lodges, and memories that last a lifetime.
+      </p>
+      <div class="final-cta-buttons">
+        <a href="#book" class="btn btn-primary">Book Your Safari</a>
+        <a href="/contact" class="btn btn-outline">Talk to an Expert</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

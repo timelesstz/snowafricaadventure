@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machame Route - Kilimanjaro Trekking | Snow Africa Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* V3: Modern Adventure Palette */
+      --primary: #334155;
+      --primary-dark: #1e293b;
+      --primary-light: #475569;
+      --secondary: #F59E0B;
+      --secondary-dark: #D97706;
+      --secondary-light: #FBBF24;
+      --accent: #06b6d4;
+      --accent-light: #22d3ee;
+
+      --background: #ffffff;
+      --surface: #f8fafc;
+      --surface-elevated: #f1f5f9;
+      --muted: #f1f5f9;
+
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+
+      --border: #e2e8f0;
+      --success: #22c55e;
+      --warning: #f59e0b;
+
+      --font-heading: 'Outfit', system-ui, sans-serif;
+      --font-body: 'Sora', system-ui, sans-serif;
+      --radius: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       HERO SECTION - Full Width with Booking
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, #374151 100%);
+      overflow: hidden;
+    }
+
+    /* Mountain silhouette background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 600'%3E%3Cpath fill='%231e293b' d='M0,600 L0,400 Q200,200 400,350 Q600,100 720,280 Q900,50 1100,200 Q1250,100 1440,300 L1440,600 Z'/%3E%3Cpath fill='%23334155' opacity='0.6' d='M0,600 L0,450 Q150,300 350,420 Q550,200 700,380 Q850,250 1050,350 Q1200,200 1440,380 L1440,600 Z'/%3E%3C/svg%3E") center bottom/cover no-repeat;
+      opacity: 0.4;
+    }
+
+    /* Snow cap effect */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 40%;
+      background: radial-gradient(ellipse at top right, rgba(255,255,255,0.15) 0%, transparent 60%);
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    /* Left Content */
+    .hero-content {
+      color: white;
+    }
+
+    .hero-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-breadcrumb a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-breadcrumb a:hover {
+      color: var(--secondary);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-family: var(--font-heading);
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .badge-success {
+      background: rgba(34, 197, 94, 0.2);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .badge-warning {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--secondary-light);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-info {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--accent-light);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title .highlight {
+      color: var(--secondary);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 550px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    /* Quick Stats Row */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 0.5rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .stat-value {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Trust Indicators */
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .trust-icon {
+      color: var(--success);
+    }
+
+    /* ========================================
+       BOOKING FORM CARD
+       ======================================== */
+    .booking-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
+    }
+
+    .booking-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-price {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .price-from {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .price-amount {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .price-person {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+
+    .booking-urgency {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border-radius: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--secondary-dark);
+      font-weight: 500;
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+
+    .form-label {
+      font-family: var(--font-heading);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-input,
+    .form-select {
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--text);
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-book:hover {
+      background: var(--secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-book svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .booking-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .booking-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .booking-feature svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    /* Group Dates Link */
+    .group-dates-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: all 0.2s;
+    }
+
+    .group-dates-link:hover {
+      background: var(--muted);
+      color: var(--primary-dark);
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        padding: 5rem 1.5rem 3rem;
+        gap: 2.5rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .booking-card {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-container {
+        padding: 4rem 1rem 2rem;
+      }
+
+      .hero-badges {
+        gap: 0.5rem;
+      }
+
+      .badge {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .stat-value {
+        font-size: 1.25rem;
+      }
+
+      .trust-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .booking-card {
+        padding: 1.5rem;
+        border-radius: 1rem;
+      }
+
+      .price-amount {
+        font-size: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========================================
+       SCROLL INDICATOR
+       ======================================== */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ========================================
+       CONTENT SECTIONS BELOW HERO
+       ======================================== */
+    .section {
+      padding: 5rem 2rem;
+    }
+
+    .section-alt {
+      background: var(--surface);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Highlights Grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .highlight-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      border-color: transparent;
+    }
+
+    .highlight-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--surface);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .highlight-title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-text {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Social Proof Bar */
+    .social-proof {
+      background: var(--primary-dark);
+      color: white;
+      padding: 1.5rem 2rem;
+    }
+
+    .social-proof-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .proof-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .proof-text {
+      font-size: 0.875rem;
+    }
+
+    .proof-text strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    /* Sticky Mobile Booking Bar */
+    .mobile-booking-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .mobile-booking-bar .bar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .bar-price {
+      font-family: var(--font-heading);
+    }
+
+    .bar-price .amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .bar-price .label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .bar-btn {
+      flex: 1;
+      max-width: 200px;
+      padding: 0.875rem 1.5rem;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-heading);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-booking-bar {
+        display: block;
+      }
+
+      body {
+        padding-bottom: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-container">
+      <!-- Left: Route Info -->
+      <div class="hero-content">
+        <nav class="hero-breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/trekking/">Kilimanjaro Routes</a>
+          <span>/</span>
+          <span>Machame Route</span>
+        </nav>
+
+        <div class="hero-badges">
+          <span class="badge badge-success">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            90% Success Rate
+          </span>
+          <span class="badge badge-warning">Challenging</span>
+          <span class="badge badge-info">Most Popular</span>
+        </div>
+
+        <h1 class="hero-title">
+          Machame Route<br>
+          <span class="highlight">7 Days to the Summit</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Known as the "Whiskey Route" for its steep, challenging terrain. The most scenic path to Uhuru Peak with diverse ecosystems and breathtaking views of the Shira Plateau.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-icon">📅</div>
+            <div class="stat-value">7 Days</div>
+            <div class="stat-label">Duration</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">📍</div>
+            <div class="stat-value">5,895m</div>
+            <div class="stat-label">Summit Height</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value">2-12</div>
+            <div class="stat-label">Group Size</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-value">4.9</div>
+            <div class="stat-label">Rating</div>
+          </div>
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            Expert certified guides
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            All permits included
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">✓</span>
+            Quality camping gear
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Booking Card -->
+      <div class="booking-card">
+        <div class="booking-header">
+          <div class="booking-price">
+            <span class="price-from">From</span>
+            <span class="price-amount">$2,150</span>
+            <span class="price-person">/ person</span>
+          </div>
+          <div class="booking-urgency">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+            Only 4 spots left for March 2025
+          </div>
+        </div>
+
+        <form class="booking-form">
+          <div class="form-group">
+            <label class="form-label">Preferred Date</label>
+            <input type="date" class="form-input" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Adults</label>
+              <select class="form-select">
+                <option>1 Adult</option>
+                <option selected>2 Adults</option>
+                <option>3 Adults</option>
+                <option>4 Adults</option>
+                <option>5+ Adults</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trip Type</label>
+              <select class="form-select">
+                <option>Private Trip</option>
+                <option>Join Group</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Email</label>
+            <input type="email" class="form-input" placeholder="you@example.com" required>
+          </div>
+
+          <button type="submit" class="btn-book">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Check Availability & Book
+          </button>
+        </form>
+
+        <div class="booking-footer">
+          <div class="booking-feature">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Free cancellation up to 30 days before
+          </div>
+          <div class="booking-feature">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            No hidden fees - price is all-inclusive
+          </div>
+          <div class="booking-feature">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Secure payment with instant confirmation
+          </div>
+        </div>
+
+        <a href="/kilimanjaro-join-group-departures/" class="group-dates-link">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          View Fixed Group Departure Dates
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF BAR -->
+  <div class="social-proof">
+    <div class="social-proof-container">
+      <div class="proof-item">
+        <div class="proof-icon">⭐</div>
+        <div class="proof-text">
+          <strong>4.9/5</strong>
+          500+ Reviews
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">🏆</div>
+        <div class="proof-text">
+          <strong>15+ Years</strong>
+          Expert Experience
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">👥</div>
+        <div class="proof-text">
+          <strong>10,000+</strong>
+          Successful Summits
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">🛡️</div>
+        <div class="proof-text">
+          <strong>KPAP</strong>
+          Certified Partner
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose the Machame Route?</h2>
+        <p class="section-subtitle">
+          The perfect blend of challenge and scenery for adventurers seeking the ultimate Kilimanjaro experience.
+        </p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-icon">🏔️</div>
+          <h3 class="highlight-title">Stunning Scenery</h3>
+          <p class="highlight-text">Trek through 5 distinct climate zones, from rainforest to arctic summit. Witness the famous Barranco Wall and Shira Plateau.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">📈</div>
+          <h3 class="highlight-title">High Success Rate</h3>
+          <p class="highlight-text">90% summit success rate thanks to excellent acclimatization profile with "climb high, sleep low" strategy.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">⛺</div>
+          <h3 class="highlight-title">Quality Camping</h3>
+          <p class="highlight-text">Premium 4-season tents, comfortable sleeping mats, and private toilet tents for your comfort at altitude.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">👨‍🍳</div>
+          <h3 class="highlight-title">Delicious Meals</h3>
+          <p class="highlight-text">Our mountain chefs prepare hot, nutritious meals. Special dietary requirements are always accommodated.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🩺</div>
+          <h3 class="highlight-title">Safety First</h3>
+          <p class="highlight-text">Emergency oxygen, first aid kit, and pulse oximeter on every climb. Guides trained in high-altitude rescue.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🎒</div>
+          <h3 class="highlight-title">All-Inclusive</h3>
+          <p class="highlight-text">Park fees, transfers, accommodation before and after, and all gear rental included. No hidden costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Sticky Booking Bar -->
+  <div class="mobile-booking-bar">
+    <div class="bar-content">
+      <div class="bar-price">
+        <span class="amount">$2,150</span>
+        <span class="label">per person</span>
+      </div>
+      <button class="bar-btn">Book Now</button>
+    </div>
+  </div>
+</body>
+</html>

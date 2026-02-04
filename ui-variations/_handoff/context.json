@@ -1,0 +1,76 @@
+{
+  "section": "tour-detail-page",
+  "chosen_variation": "v2-split-editorial-updated.html",
+  "user_feedback": "Rich timeline design for Day by Day, soft squares throughout, minimalistic highlights with Lucide icons, improved sidebar cards",
+  "style_direction": "Modern Adventure - Luxury Safari",
+  "typography": {
+    "heading": "Outfit",
+    "body": "Sora"
+  },
+  "colors": {
+    "primary": "#334155",
+    "primary_dark": "#1e293b",
+    "secondary": "#F59E0B",
+    "secondary_dark": "#D97706",
+    "accent": "#06b6d4"
+  },
+  "next_skill": "frontend-design",
+  "target_framework": "Next.js with Tailwind CSS",
+  "constraints": {
+    "must_keep": [
+      "Hero with full-width background image and floating booking card",
+      "Rich dark timeline for Day by Day itinerary",
+      "Alternating image/content layout on timeline",
+      "Featured day highlight styling",
+      "Minimalistic highlights strip with Lucide icons",
+      "Soft square corners (radius-sm) throughout",
+      "Sidebar cards with amber accent headers",
+      "Two-column inclusions layout"
+    ],
+    "enhance": [
+      "Convert to React/Next.js components",
+      "Add Tailwind CSS classes",
+      "Implement responsive behavior",
+      "Add proper TypeScript types",
+      "Connect to CMS/data layer",
+      "Add animations/transitions",
+      "Optimize images with next/image"
+    ],
+    "avoid": [
+      "Rounded corners (use soft squares)",
+      "Emoji icons (use Lucide)",
+      "Heavy shadows",
+      "Generic AI aesthetics"
+    ]
+  },
+  "components_to_create": [
+    "TourDetailHero",
+    "BookingCard",
+    "QuickNav",
+    "TourOverview",
+    "SidebarCard",
+    "HighlightsStrip",
+    "DayByDayTimeline",
+    "DayCard",
+    "InclusionsSection",
+    "FinalCTA"
+  ],
+  "data_structure": {
+    "tour": {
+      "title": "string",
+      "subtitle": "string",
+      "description": "string",
+      "duration": "number",
+      "parks": "number",
+      "gameDrives": "number",
+      "rating": "number",
+      "price": "number",
+      "badges": "string[]",
+      "heroImage": "string",
+      "highlights": "Highlight[]",
+      "itinerary": "Day[]",
+      "inclusions": "string[]",
+      "exclusions": "string[]"
+    }
+  }
+}

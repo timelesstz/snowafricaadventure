@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow Africa - V2 Immersive Fullscreen</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        /* V2: Immersive Fullscreen Layout
+           - Full-screen hero with video-like presence
+           - Scroll-triggered reveals
+           - Dramatic imagery
+           - Cinematic experience
+        */
+
+        /* Hero - Cinematic Fullscreen */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=1920&q=80') center/cover;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .hero-scroll svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--primary-dark);
+            padding: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.25rem;
+        }
+
+        /* Full Width Sections */
+        .fullwidth-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .fullwidth-section.dark {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .fullwidth-section.light {
+            background: var(--surface);
+        }
+
+        /* Kilimanjaro Section */
+        .kilimanjaro-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .kili-content {
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .kili-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .kili-content p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .route-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .route-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .route-list li:last-child {
+            border-bottom: none;
+        }
+
+        .route-name {
+            font-weight: 600;
+        }
+
+        .route-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .kili-images {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+        }
+
+        .kili-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kili-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .kili-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .kili-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .kili-image h4 {
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .kili-image span {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Safari Showcase */
+        .safari-showcase {
+            width: 100%;
+            padding: 6rem 0;
+        }
+
+        .safari-showcase-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .safari-showcase-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .safari-showcase-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .safari-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .safari-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .safari-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .safari-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .safari-card-content {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 40%, transparent 100%);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .safari-card-tag {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .safari-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .safari-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .safari-card-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .safari-price-value {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .safari-price-value span {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Group CTA */
+        .group-cta {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            padding: 4rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .group-cta h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .group-cta p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Why Us Grid */
+        .why-us-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .why-us-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .why-us-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .why-us-card {
+            padding: 3rem;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .why-us-card:hover {
+            background: var(--surface);
+        }
+
+        .why-us-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--secondary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .why-us-icon svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
+        .why-us-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-us-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Testimonials Cinematic */
+        .testimonials-section {
+            min-height: 100vh;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            padding: 6rem 0;
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .testimonial-featured {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-xl);
+            padding: 4rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            justify-content: center;
+            gap: 0.375rem;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-stars svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .testimonial-quote {
+            font-size: 1.75rem;
+            line-height: 1.6;
+            color: white;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-author-text {
+            text-align: left;
+        }
+
+        .testimonial-author-text strong {
+            display: block;
+            color: white;
+            font-size: 1.125rem;
+        }
+
+        .testimonial-author-text span {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--secondary);
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        /* Destinations Grid */
+        .destinations-section {
+            padding: 6rem 0;
+        }
+
+        .destinations-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .destinations-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .destination-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+
+        .destination-card h4 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .destination-card p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Contact Fullscreen */
+        .contact-section {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .contact-image {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&q=80') center/cover;
+        }
+
+        .contact-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            color: white;
+        }
+
+        .contact-image-overlay h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-image-overlay p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.125rem;
+            max-width: 400px;
+        }
+
+        .contact-form-side {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        .contact-form-side h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Blog Strip */
+        .blog-section {
+            padding: 6rem 0;
+            background: var(--surface);
+        }
+
+        .blog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .blog-header h2 {
+            font-size: 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .blog-card-image {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card h4 {
+            margin-bottom: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .blog-card:hover h4 {
+            color: var(--secondary);
+        }
+
+        .blog-card p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+        }
+
+        .footer-col h5 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .kilimanjaro-section {
+                grid-template-columns: 1fr;
+            }
+
+            .kili-images {
+                display: none;
+            }
+
+            .safari-cards,
+            .destinations-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-image {
+                min-height: 50vh;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .kili-content,
+            .contact-form-side {
+                padding: 2rem;
+            }
+
+            .kili-content h2 {
+                font-size: 2rem;
+            }
+
+            .testimonial-quote {
+                font-size: 1.25rem;
+            }
+
+            .testimonial-featured {
+                padding: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <span class="hero-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                Tanzania's Trusted Adventure Partner
+            </span>
+            <h1 class="hero-title">Experience Africa's<br>Greatest Adventure</h1>
+            <p class="hero-subtitle">
+                Summit Kilimanjaro. Witness the Great Migration. Relax in Zanzibar.
+                Your journey of a lifetime starts with Tanzania's most trusted local operator.
+            </p>
+            <div class="hero-ctas">
+                <a href="#" class="btn btn-primary">
+                    Plan Your Trek
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.5);">
+                    Explore Safaris
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll to explore</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5,000+</div>
+                    <div class="stat-label">Happy Travelers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">93%</div>
+                    <div class="stat-label">Summit Success Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">4.9</div>
+                    <div class="stat-label">TripAdvisor Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kilimanjaro Section -->
+    <section class="kilimanjaro-section">
+        <div class="kili-content">
+            <span class="section-label">Kilimanjaro Trekking</span>
+            <h2>Conquer Africa's Highest Peak</h2>
+            <p>Choose from 7 proven routes to the Roof of Africa. Our certified guides have summited over 500 times with an industry-leading 93% success rate.</p>
+
+            <ul class="route-list">
+                <li>
+                    <span class="route-name">Machame Route</span>
+                    <div class="route-meta">
+                        <span>7 Days</span>
+                        <span>Challenging</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="route-name">Lemosho Route</span>
+                    <div class="route-meta">
+                        <span>8 Days</span>
+                        <span>Moderate</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="route-name">Marangu Route</span>
+                    <div class="route-meta">
+                        <span>6 Days</span>
+                        <span>Moderate</span>
+                    </div>
+                </li>
+            </ul>
+
+            <div style="display: flex; gap: 1rem;">
+                <a href="#" class="btn btn-primary">View All Routes</a>
+                <a href="#" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">Group Departures</a>
+            </div>
+        </div>
+        <div class="kili-images">
+            <div class="kili-image">
+                <img src="https://images.unsplash.com/photo-1621414050946-1b936a78491f?w=800&q=80" alt="Machame Route">
+                <div class="kili-image-overlay">
+                    <h4>Machame Route</h4>
+                    <span>Most Popular</span>
+                </div>
+            </div>
+            <div class="kili-image">
+                <img src="https://images.unsplash.com/photo-1650668302197-7f556c34cb91?w=800&q=80" alt="Lemosho Route">
+                <div class="kili-image-overlay">
+                    <h4>Lemosho Route</h4>
+                    <span>Best Scenery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safari Showcase -->
+    <section class="fullwidth-section light">
+        <div class="safari-showcase">
+            <div class="safari-showcase-header">
+                <span class="section-label" style="color: var(--secondary);">Tanzania Safaris</span>
+                <h2>Witness Wildlife Like Never Before</h2>
+                <p>From budget-friendly adventures to luxury lodges, experience the Serengeti, Ngorongoro, and beyond with expert guides.</p>
+            </div>
+
+            <div class="safari-cards">
+                <div class="safari-card">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80" alt="Northern Circuit">
+                    <div class="safari-card-content">
+                        <span class="safari-card-tag">Best Seller</span>
+                        <h3>5-Day Northern Circuit</h3>
+                        <p>Serengeti, Ngorongoro & Tarangire in one epic journey.</p>
+                        <div class="safari-card-price">
+                            <span class="safari-price-value">$2,100 <span>/ person</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="safari-card">
+                    <img src="https://images.unsplash.com/photo-1534177616064-ef85a4029b5d?w=600&q=80" alt="Budget Safari">
+                    <div class="safari-card-content">
+                        <span class="safari-card-tag">Budget Friendly</span>
+                        <h3>3-Day Budget Safari</h3>
+                        <p>Lake Manyara & Ngorongoro Crater introduction.</p>
+                        <div class="safari-card-price">
+                            <span class="safari-price-value">$850 <span>/ person</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="safari-card">
+                    <img src="https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=600&q=80" alt="Migration Safari">
+                    <div class="safari-card-content">
+                        <span class="safari-card-tag">Luxury</span>
+                        <h3>7-Day Great Migration</h3>
+                        <p>Witness the world's greatest wildlife spectacle.</p>
+                        <div class="safari-card-price">
+                            <span class="safari-price-value">$3,200 <span>/ person</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-cta">
+                <h3>Join a Group Safari & Save</h3>
+                <p>Meet fellow travelers on our scheduled departures. Fixed dates, guaranteed departures.</p>
+                <a href="#" class="btn btn-secondary">View Safari Calendar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="why-us-section">
+        <div class="container">
+            <div class="why-us-header">
+                <h2>Why Snow Africa?</h2>
+                <p style="color: var(--text-muted);">What makes us Tanzania's most trusted adventure operator</p>
+            </div>
+
+            <div class="why-us-grid">
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>100% Locally Owned</h4>
+                        <p>Based in Arusha since 2010. Your money supports local families and communities directly.</p>
+                    </div>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Safety First Always</h4>
+                        <p>Certified guides, satellite phones, quality gear, and emergency protocols on every expedition.</p>
+                    </div>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="7"/>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>TATO & KPAP Certified</h4>
+                        <p>Licensed by Tanzania Tourist Board. Partner of Kilimanjaro Porters Assistance Project.</p>
+                    </div>
+                </div>
+                <div class="why-us-card">
+                    <div class="why-us-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>500+ Five Star Reviews</h4>
+                        <p>4.9 average on TripAdvisor and SafariBookings from verified travelers worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <span class="section-label">Traveler Stories</span>
+            <div class="testimonial-featured">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                </div>
+                <p class="testimonial-quote">"Summiting Kilimanjaro with Snow Africa was the experience of a lifetime. The guides were incredible, and the support team made sure we were safe and comfortable every step of the way."</p>
+                <div class="testimonial-author-info">
+                    <div class="testimonial-avatar">ML</div>
+                    <div class="testimonial-author-text">
+                        <strong>Michael & Lisa</strong>
+                        <span>USA • Lemosho Route</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <span class="testimonial-dot active"></span>
+                <span class="testimonial-dot"></span>
+                <span class="testimonial-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations -->
+    <section class="destinations-section">
+        <div class="destinations-header">
+            <h2>Explore More Adventures</h2>
+            <p style="color: var(--text-muted);">Beyond Kilimanjaro and safaris, Tanzania offers countless experiences</p>
+        </div>
+
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=600&q=80" alt="Zanzibar">
+                <div class="destination-card-overlay">
+                    <h4>Zanzibar Beach</h4>
+                    <p>Pristine beaches & Spice Island culture</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80" alt="Day Trips">
+                <div class="destination-card-overlay">
+                    <h4>Day Trips</h4>
+                    <p>Waterfalls, culture & coffee tours</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600&q=80" alt="Custom Safari">
+                <div class="destination-card-overlay">
+                    <h4>Tailor-Made Safari</h4>
+                    <p>Custom journeys designed for you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section">
+        <div class="contact-image">
+            <div class="contact-image-overlay">
+                <h2>Start Your Adventure</h2>
+                <p>Tell us about your dream trip. Our Tanzania experts will craft a personalized itinerary within 24 hours.</p>
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.875rem;">Prefer to talk?</p>
+                    <a href="tel:+255123456789" style="font-size: 1.5rem; font-weight: 700; color: white;">+255 123 456 789</a>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.875rem; margin-top: 0.25rem;">WhatsApp available</p>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form-side">
+            <h3>Get Your Free Quote</h3>
+            <form>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Interested In</label>
+                    <select>
+                        <option>Kilimanjaro Trekking</option>
+                        <option>Tanzania Safari</option>
+                        <option>Zanzibar Beach</option>
+                        <option>Combined Trip</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="4" placeholder="Tell us about your dream trip..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="blog-section">
+        <div class="blog-header">
+            <h2>From Our Blog</h2>
+            <a href="#" style="color: var(--secondary); font-weight: 600;">View All Posts →</a>
+        </div>
+
+        <div class="blog-grid">
+            <a href="#" class="blog-card">
+                <div class="blog-card-image">
+                    <img src="https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80" alt="Best Time">
+                </div>
+                <div class="blog-card-content">
+                    <h4>Best Time to Climb Kilimanjaro</h4>
+                    <p>A month-by-month guide to choosing the perfect time for your adventure.</p>
+                </div>
+            </a>
+            <a href="#" class="blog-card">
+                <div class="blog-card-image">
+                    <img src="https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=600&q=80" alt="Migration">
+                </div>
+                <div class="blog-card-content">
+                    <h4>Great Migration Guide 2025</h4>
+                    <p>Track the annual wildebeest migration through Tanzania.</p>
+                </div>
+            </a>
+            <a href="#" class="blog-card">
+                <div class="blog-card-image">
+                    <img src="https://images.unsplash.com/photo-1621414050946-1b936a78491f?w=600&q=80" alt="Routes">
+                </div>
+                <div class="blog-card-content">
+                    <h4>Machame vs Lemosho Route</h4>
+                    <p>Comparing two of Kilimanjaro's most popular routes.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Snow Africa Adventure</h3>
+                    <p>Tanzania's trusted adventure partner since 2010. Locally owned, globally recognized for exceptional Kilimanjaro treks and wildlife safaris.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Kilimanjaro</h5>
+                    <ul>
+                        <li><a href="#">All Routes</a></li>
+                        <li><a href="#">Machame Route</a></li>
+                        <li><a href="#">Lemosho Route</a></li>
+                        <li><a href="#">Group Departures</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Safaris</h5>
+                    <ul>
+                        <li><a href="#">All Safaris</a></li>
+                        <li><a href="#">Budget Safaris</a></li>
+                        <li><a href="#">Luxury Safaris</a></li>
+                        <li><a href="#">Great Migration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Snow Africa Adventure. All rights reserved.</p>
+                <p>TATO Licensed • KPAP Partner</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

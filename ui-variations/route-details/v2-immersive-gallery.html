@@ -1,0 +1,3428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V2: Immersive Gallery Hero - Machame Route | Snow Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* V3 Modern Adventure Theme */
+    :root {
+      --color-primary: #334155;
+      --color-primary-light: #475569;
+      --color-primary-dark: #1e293b;
+      --color-secondary: #F59E0B;
+      --color-secondary-light: #FBBF24;
+      --color-secondary-dark: #D97706;
+      --color-accent: #06b6d4;
+      --color-accent-light: #22d3ee;
+      --color-background: #ffffff;
+      --color-surface: #f8fafc;
+      --color-text: #334155;
+      --color-text-light: #64748b;
+      --color-text-inverse: #ffffff;
+      --color-border: #e2e8f0;
+      --color-success: #10b981;
+      --color-error: #ef4444;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Sora', sans-serif;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      background: var(--color-background);
+    }
+
+    /* ============================================
+       HERO - CINEMATIC STYLE
+       ============================================ */
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      overflow: hidden;
+    }
+
+    .hero-background {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(30, 41, 59, 0.9) 0%,
+        rgba(30, 41, 59, 0.7) 40%,
+        rgba(30, 41, 59, 0.4) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 60px;
+      z-index: 10;
+    }
+
+    .hero-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-breadcrumb a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-breadcrumb a:hover {
+      color: var(--color-secondary);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-secondary);
+    }
+
+    .stat-content {
+      color: white;
+    }
+
+    .stat-value {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Floating Booking Card */
+    .booking-float {
+      position: absolute;
+      bottom: 60px;
+      right: 60px;
+      width: 380px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .booking-header {
+      background: var(--color-primary);
+      color: white;
+      padding: 20px 24px;
+    }
+
+    .booking-price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .price-from {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .price-amount {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .price-unit {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .booking-availability {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+    }
+
+    .availability-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .booking-body {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 6px;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-book:hover {
+      background: var(--color-secondary-dark);
+      transform: translateY(-2px);
+    }
+
+    .booking-footer {
+      padding: 16px 24px;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .trust-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trust-icon {
+      color: var(--color-success);
+    }
+
+    /* ============================================
+       PRICE TABLE SECTION
+       ============================================ */
+    .pricing-section {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--color-surface) 0%, white 100%);
+    }
+
+    .pricing-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .pricing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--color-secondary-dark);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .pricing-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .pricing-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .price-table {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .price-table-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      background: var(--color-primary);
+      color: white;
+      padding: 20px 32px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
+
+    .price-table-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--color-border);
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .price-table-row:last-child {
+      border-bottom: none;
+    }
+
+    .price-table-row:hover {
+      background: var(--color-surface);
+    }
+
+    .price-table-row.featured {
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
+      position: relative;
+    }
+
+    .price-table-row.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: 50%;
+      right: 32px;
+      transform: translateY(-50%);
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .group-size {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .group-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+
+    .group-info h4 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 2px;
+    }
+
+    .group-info span {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+    }
+
+    .price-value {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .price-value span {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--color-text-light);
+    }
+
+    .savings-badge {
+      display: inline-block;
+      background: var(--color-success);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .price-table-footer {
+      background: var(--color-surface);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .price-includes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+    }
+
+    .price-includes span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .price-includes svg {
+      color: var(--color-success);
+    }
+
+    .btn-inquire {
+      padding: 14px 32px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-inquire:hover {
+      background: var(--color-secondary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       CTA SECTION
+       ============================================ */
+    .cta-section {
+      position: relative;
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .cta-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--color-secondary);
+    }
+
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .cta-text {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      padding: 16px 40px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-cta-primary:hover {
+      background: var(--color-secondary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-cta-secondary {
+      padding: 16px 40px;
+      background: transparent;
+      color: white;
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cta-trust {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+    }
+
+    .cta-trust-item svg {
+      color: var(--color-secondary);
+    }
+
+    /* ============================================
+       UPCOMING DEPARTURES - JOIN GROUP STYLE
+       ============================================ */
+    .departures-section {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .departures-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .departures-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .departures-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--color-accent);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .departures-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .departures-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-light);
+    }
+
+    .departures-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .departure-card {
+      background: white;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .departure-card:hover {
+      border-color: var(--color-secondary);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .departure-card.filling-fast {
+      border-color: var(--color-secondary);
+    }
+
+    .departure-card.filling-fast::after {
+      content: 'Filling Fast!';
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--color-error);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .departure-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .departure-date-block {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .departure-calendar-large {
+      width: 64px;
+      height: 64px;
+      background: var(--color-primary);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .calendar-month-large {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    .calendar-day-large {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+
+    .departure-date-info h4 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+
+    .departure-date-info span {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+    }
+
+    .departure-price-block {
+      text-align: right;
+    }
+
+    .departure-price-large {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .departure-price-note {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    .departure-card-details {
+      display: flex;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 16px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--color-text);
+    }
+
+    .detail-item svg {
+      color: var(--color-accent);
+    }
+
+    .departure-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .spots-available {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spots-indicator {
+      display: flex;
+      gap: 3px;
+    }
+
+    .spot-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+    }
+
+    .spot-dot.filled {
+      background: var(--color-success);
+    }
+
+    .spot-dot.taken {
+      background: var(--color-text-light);
+    }
+
+    .spots-text {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+    }
+
+    .spots-text strong {
+      color: var(--color-success);
+    }
+
+    .btn-join-group {
+      padding: 12px 24px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-join-group:hover {
+      background: var(--color-secondary-dark);
+      transform: translateY(-2px);
+    }
+
+    .departures-footer {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .btn-view-all-departures {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--color-primary);
+      color: white;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-view-all-departures:hover {
+      background: var(--color-primary-light);
+    }
+
+    /* ============================================
+       QUICK NAV TABS
+       ============================================ */
+    .quick-nav {
+      background: white;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .quick-nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0;
+    }
+
+    .nav-tab {
+      padding: 16px 24px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .nav-tab:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-tab.active {
+      color: var(--color-secondary-dark);
+      border-bottom-color: var(--color-secondary);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-price {
+      text-align: right;
+    }
+
+    .nav-price-label {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    .nav-price-value {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .btn-nav-book {
+      padding: 10px 20px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-nav-book:hover {
+      background: var(--color-secondary-dark);
+    }
+
+    /* ============================================
+       MAIN CONTENT
+       ============================================ */
+    .main-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 60px;
+    }
+
+    .content-primary {
+      min-width: 0;
+    }
+
+    .content-sidebar {
+      position: relative;
+    }
+
+    .sidebar-sticky {
+      position: sticky;
+      top: 80px;
+    }
+
+    /* Section Styles */
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-secondary);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    /* Overview Section */
+    .overview-text {
+      font-size: 1.0625rem;
+      color: var(--color-text);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .highlight-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .highlight-card {
+      background: var(--color-surface);
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .highlight-icon {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: var(--color-secondary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .highlight-title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+
+    .highlight-text {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+    }
+
+    /* Itinerary Section - Unique Visual Design */
+    .itinerary-intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .itinerary-intro p {
+      font-size: 1.0625rem;
+      color: var(--color-text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Elevation Profile Visualization */
+    .elevation-profile {
+      position: relative;
+      background: linear-gradient(180deg, var(--color-surface) 0%, white 100%);
+      border-radius: var(--radius-xl);
+      padding: 32px 24px 24px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .elevation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .elevation-title {
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .elevation-legend {
+      display: flex;
+      gap: 20px;
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.camp { background: var(--color-secondary); }
+    .legend-dot.summit { background: var(--color-accent); }
+
+    .elevation-chart {
+      position: relative;
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .elevation-path {
+      position: absolute;
+      bottom: 40px;
+      left: 20px;
+      right: 20px;
+      height: 120px;
+    }
+
+    .elevation-path svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .elevation-path .path-line {
+      fill: none;
+      stroke: url(#elevationGradient);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .elevation-path .path-area {
+      fill: url(#areaGradient);
+    }
+
+    .elevation-markers {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding-bottom: 8px;
+    }
+
+    .elevation-marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .elevation-marker:hover {
+      transform: translateY(-4px);
+    }
+
+    .elevation-marker.active .marker-dot {
+      transform: scale(1.3);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+    }
+
+    .marker-dot {
+      width: 16px;
+      height: 16px;
+      background: var(--color-secondary);
+      border: 3px solid white;
+      border-radius: 50%;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .marker-dot.summit {
+      background: var(--color-accent);
+      width: 20px;
+      height: 20px;
+    }
+
+    .marker-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--color-text-light);
+      text-align: center;
+      max-width: 60px;
+    }
+
+    .marker-elevation {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    /* Day Cards Grid */
+    .itinerary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .day-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .day-card:hover {
+      border-color: var(--color-secondary);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .day-card.summit-day {
+      grid-column: span 2;
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+      border: none;
+    }
+
+    .day-card.summit-day .day-card-content {
+      color: white;
+    }
+
+    .day-card.summit-day .day-number {
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+    }
+
+    .day-card.summit-day .day-card-title {
+      color: white;
+    }
+
+    .day-card.summit-day .day-card-description {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .day-card.summit-day .stat-value {
+      color: var(--color-secondary);
+    }
+
+    .day-card.summit-day .stat-label {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .day-card.summit-day .day-tag {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+
+    .day-card-image {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+    }
+
+    .day-card.summit-day .day-card-image {
+      height: 180px;
+    }
+
+    .day-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .day-card:hover .day-card-image img {
+      transform: scale(1.08);
+    }
+
+    .day-number {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 36px;
+      height: 36px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.875rem;
+      color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .day-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 20px;
+    }
+
+    .day-card-content {
+      padding: 20px;
+    }
+
+    .day-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .day-card-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      line-height: 1.3;
+    }
+
+    .day-card-elevation {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      background: var(--color-surface);
+      border-radius: var(--radius-sm);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--color-success);
+      white-space: nowrap;
+    }
+
+    .day-card.summit-day .day-card-elevation {
+      background: rgba(255,255,255,0.15);
+      color: var(--color-accent-light);
+    }
+
+    .day-card-description {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .day-card-stats {
+      display: flex;
+      gap: 20px;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+      margin-bottom: 12px;
+    }
+
+    .day-card.summit-day .day-card-stats {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+
+    .day-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-stat .stat-value {
+      font-family: var(--font-heading);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .day-stat .stat-label {
+      font-size: 0.6875rem;
+      color: var(--color-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-top: 2px;
+    }
+
+    .day-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .day-tag {
+      padding: 4px 10px;
+      background: var(--color-surface);
+      border-radius: 20px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+    }
+
+    /* Expanded Day Modal/Detail */
+    .day-card-expand {
+      display: none;
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--color-border);
+      margin-top: 12px;
+      padding-top: 16px;
+    }
+
+    .day-card.expanded .day-card-expand {
+      display: block;
+    }
+
+    .day-card.summit-day .day-card-expand {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+
+    .expand-content {
+      font-size: 0.875rem;
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+
+    .day-card.summit-day .expand-content {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .expand-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+      color: var(--color-text);
+    }
+
+    .day-card.summit-day .highlight-item {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .highlight-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--color-surface);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-secondary);
+    }
+
+    .day-card.summit-day .highlight-icon {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* View Full Itinerary Button */
+    .itinerary-footer {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .btn-full-itinerary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: white;
+      color: var(--color-primary);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-full-itinerary:hover {
+      border-color: var(--color-secondary);
+      color: var(--color-secondary-dark);
+      background: var(--color-surface);
+    }
+
+    @media (max-width: 768px) {
+      .itinerary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day-card.summit-day {
+        grid-column: span 1;
+      }
+
+      .elevation-chart {
+        height: 140px;
+      }
+
+      .elevation-markers {
+        overflow-x: auto;
+        padding-bottom: 16px;
+      }
+
+      .marker-label {
+        font-size: 0.625rem;
+      }
+    }
+
+    /* Inclusions Section */
+    .inclusions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .inclusions-column h4 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inclusions-column h4 .icon-included {
+      color: var(--color-success);
+    }
+
+    .inclusions-column h4 .icon-excluded {
+      color: var(--color-error);
+    }
+
+    .inclusions-list {
+      list-style: none;
+    }
+
+    .inclusions-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9375rem;
+    }
+
+    .inclusions-list li:last-child {
+      border-bottom: none;
+    }
+
+    .list-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .list-icon.included {
+      color: var(--color-success);
+    }
+
+    .list-icon.excluded {
+      color: var(--color-error);
+    }
+
+    /* FAQ Section */
+    .faq-list {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      background: white;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      transition: background 0.2s;
+    }
+
+    .faq-question:hover {
+      background: var(--color-surface);
+    }
+
+    .faq-icon {
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 0.9375rem;
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* ============================================
+       SIDEBAR WIDGETS
+       ============================================ */
+    .sidebar-card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-card-header {
+      padding: 16px 20px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .sidebar-card-title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--color-primary);
+    }
+
+    .sidebar-card-body {
+      padding: 20px;
+    }
+
+    /* Upcoming Departures */
+    .departure-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .departure-item:last-child {
+      border-bottom: none;
+    }
+
+    .departure-date {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .departure-calendar {
+      width: 48px;
+      height: 48px;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-month {
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+
+    .calendar-day {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--color-primary);
+    }
+
+    .departure-info {
+      font-size: 0.8125rem;
+    }
+
+    .departure-status {
+      color: var(--color-success);
+      font-weight: 500;
+    }
+
+    .departure-spots {
+      color: var(--color-text-light);
+    }
+
+    .departure-price {
+      text-align: right;
+    }
+
+    .departure-amount {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .departure-unit {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    /* Expert Card */
+    .expert-profile {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .expert-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 3px solid var(--color-secondary);
+    }
+
+    .expert-name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .expert-title {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+    }
+
+    .expert-quote {
+      font-style: italic;
+      color: var(--color-text);
+      font-size: 0.9375rem;
+      text-align: center;
+      padding: 16px;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+
+    .expert-quote::before {
+      content: '"';
+      font-size: 3rem;
+      color: var(--color-secondary);
+      opacity: 0.3;
+      position: absolute;
+      top: 0;
+      left: 12px;
+      font-family: Georgia, serif;
+    }
+
+    .btn-contact-expert {
+      width: 100%;
+      padding: 12px;
+      margin-top: 16px;
+      background: var(--color-primary);
+      color: white;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-contact-expert:hover {
+      background: var(--color-primary-light);
+    }
+
+    /* ============================================
+       RELATED ROUTES
+       ============================================ */
+    .related-section {
+      background: var(--color-surface);
+      padding: 60px 0;
+    }
+
+    .related-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .related-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .related-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .related-subtitle {
+      color: var(--color-text-light);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .route-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .route-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .route-card-image {
+      position: relative;
+      height: 200px;
+    }
+
+    .route-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .route-card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 20px;
+    }
+
+    .route-card-body {
+      padding: 20px;
+    }
+
+    .route-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .route-card-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin-bottom: 12px;
+    }
+
+    .route-card-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .route-price-value {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .route-price-label {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    .btn-view-route {
+      padding: 8px 16px;
+      background: var(--color-surface);
+      color: var(--color-primary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-view-route:hover {
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+    }
+
+    /* ============================================
+       MOBILE RESPONSIVE
+       ============================================ */
+    @media (max-width: 1024px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+      }
+
+      .content-sidebar {
+        display: none;
+      }
+
+      .highlight-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .inclusions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .departures-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-table-header,
+      .price-table-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .price-table-row.featured::before {
+        position: static;
+        transform: none;
+        display: inline-block;
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        min-height: 500px;
+      }
+
+      .hero-content {
+        padding: 30px 20px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .nav-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-tab {
+        padding: 12px 16px;
+        font-size: 0.875rem;
+        white-space: nowrap;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .itinerary-timeline {
+        padding-left: 30px;
+      }
+
+      .day-marker {
+        left: -30px;
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Mobile Sticky CTA */
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 16px 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .mobile-cta-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-price-info .mobile-price {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .mobile-price-info .mobile-label {
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+    }
+
+    .btn-mobile-book {
+      padding: 14px 32px;
+      background: var(--color-secondary);
+      color: var(--color-primary-dark);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-cta {
+        display: block;
+      }
+
+      body {
+        padding-bottom: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============================================
+       HERO - IMMERSIVE GALLERY
+       ============================================ -->
+  <section class="hero">
+    <div class="hero-background">
+      <img src="https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=1920" alt="Machame Route - Kilimanjaro">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <nav class="hero-breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/kilimanjaro">Kilimanjaro</a>
+        <span>/</span>
+        <span>Machame Route</span>
+      </nav>
+
+      <span class="hero-badge">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Most Popular Route
+      </span>
+
+      <h1 class="hero-title">Machame Route</h1>
+      <p class="hero-subtitle">Known as the "Whiskey Route" for its steep and challenging terrain. Experience diverse ecosystems from rainforest to arctic summit.</p>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">7 Days</div>
+            <div class="stat-label">Duration</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">Challenging</div>
+            <div class="stat-label">Difficulty</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">92%</div>
+            <div class="stat-label">Success Rate</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">5,895m</div>
+            <div class="stat-label">Summit</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       QUICK NAVIGATION
+       ============================================ -->
+  <nav class="quick-nav">
+    <div class="quick-nav-container">
+      <div class="nav-tabs">
+        <a href="#overview" class="nav-tab active">Overview</a>
+        <a href="#itinerary" class="nav-tab">Itinerary</a>
+        <a href="#inclusions" class="nav-tab">What's Included</a>
+        <a href="#pricing" class="nav-tab">Pricing</a>
+        <a href="#departures" class="nav-tab">Departures</a>
+        <a href="#faqs" class="nav-tab">FAQs</a>
+      </div>
+      <div class="nav-cta">
+        <div class="nav-price">
+          <div class="nav-price-label">From</div>
+          <div class="nav-price-value">$2,450/person</div>
+        </div>
+        <button class="btn-nav-book">Book Now</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main class="main-content">
+    <div class="content-primary">
+      <!-- Overview Section -->
+      <section id="overview" class="section">
+        <div class="section-header">
+          <div class="section-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <h2 class="section-title">Route Overview</h2>
+        </div>
+
+        <p class="overview-text">
+          The Machame Route, affectionately known as the "Whiskey Route," is considered one of the most scenic and successful routes to Uhuru Peak. Starting from the south, this route traverses the mountain before summiting from the south. The varied terrain takes you through five distinct ecological zones, from lush rainforest to alpine desert.
+        </p>
+        <p class="overview-text">
+          With a 92% success rate on our 7-day itinerary, Machame offers excellent acclimatization through its "climb high, sleep low" profile. This makes it ideal for trekkers seeking both adventure and a high probability of reaching Africa's highest point.
+        </p>
+
+        <div class="highlight-cards">
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h4 class="highlight-title">5 Ecosystems</h4>
+            <p class="highlight-text">Rainforest to Arctic Summit</p>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h4 class="highlight-title">92% Success</h4>
+            <p class="highlight-text">Industry-leading summit rate</p>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h4 class="highlight-title">Small Groups</h4>
+            <p class="highlight-text">Maximum 12 climbers</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Itinerary Section -->
+      <section id="itinerary" class="section">
+        <div class="section-header">
+          <div class="section-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h2 class="section-title">Your 7-Day Journey</h2>
+        </div>
+
+        <div class="itinerary-intro">
+          <p>From rainforest floor to Africa's rooftop - traverse 5 climate zones and experience the adventure of a lifetime.</p>
+        </div>
+
+        <!-- Elevation Profile Visualization -->
+        <div class="elevation-profile">
+          <div class="elevation-header">
+            <span class="elevation-title">Elevation Profile</span>
+            <div class="elevation-legend">
+              <span class="legend-item"><span class="legend-dot camp"></span> Camp</span>
+              <span class="legend-item"><span class="legend-dot summit"></span> Summit</span>
+            </div>
+          </div>
+
+          <div class="elevation-chart">
+            <!-- SVG Elevation Path -->
+            <div class="elevation-path">
+              <svg viewBox="0 0 700 120" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="elevationGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#10b981"/>
+                    <stop offset="50%" stop-color="#F59E0B"/>
+                    <stop offset="85%" stop-color="#06b6d4"/>
+                    <stop offset="100%" stop-color="#10b981"/>
+                  </linearGradient>
+                  <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(245, 158, 11, 0.2)"/>
+                    <stop offset="100%" stop-color="rgba(245, 158, 11, 0)"/>
+                  </linearGradient>
+                </defs>
+                <!-- Area fill -->
+                <path class="path-area" d="M0,100 L0,85 C50,85 70,70 100,65 C130,60 150,50 200,45 C250,40 280,55 300,50 C320,45 350,40 400,35 C450,30 480,25 500,10 C520,25 550,80 600,75 C650,72 680,90 700,95 L700,100 Z"/>
+                <!-- Line path -->
+                <path class="path-line" d="M0,85 C50,85 70,70 100,65 C130,60 150,50 200,45 C250,40 280,55 300,50 C320,45 350,40 400,35 C450,30 480,25 500,10 C520,25 550,80 600,75 C650,72 680,90 700,95"/>
+              </svg>
+            </div>
+
+            <!-- Elevation Markers -->
+            <div class="elevation-markers">
+              <div class="elevation-marker" data-day="1">
+                <div class="marker-dot"></div>
+                <span class="marker-elevation">2,990m</span>
+                <span class="marker-label">Machame Camp</span>
+              </div>
+              <div class="elevation-marker" data-day="2">
+                <div class="marker-dot"></div>
+                <span class="marker-elevation">3,880m</span>
+                <span class="marker-label">Shira Cave</span>
+              </div>
+              <div class="elevation-marker" data-day="3">
+                <div class="marker-dot"></div>
+                <span class="marker-elevation">3,950m</span>
+                <span class="marker-label">Barranco</span>
+              </div>
+              <div class="elevation-marker" data-day="4">
+                <div class="marker-dot"></div>
+                <span class="marker-elevation">4,200m</span>
+                <span class="marker-label">Karanga</span>
+              </div>
+              <div class="elevation-marker" data-day="5">
+                <div class="marker-dot"></div>
+                <span class="marker-elevation">4,640m</span>
+                <span class="marker-label">Barafu</span>
+              </div>
+              <div class="elevation-marker" data-day="6">
+                <div class="marker-dot summit"></div>
+                <span class="marker-elevation">5,895m</span>
+                <span class="marker-label">Uhuru Peak!</span>
+              </div>
+              <div class="elevation-marker" data-day="7">
+                <div class="marker-dot"></div>
+                <span class="marker-elevation">1,640m</span>
+                <span class="marker-label">Mweka Gate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day Cards Grid -->
+        <div class="itinerary-grid">
+          <!-- Day 1 -->
+          <div class="day-card" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=600" alt="Rainforest trek">
+              <span class="day-number">1</span>
+              <span class="day-badge">Start</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Machame Gate to Machame Camp</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                  +1,190m
+                </span>
+              </div>
+              <p class="day-card-description">Trek through pristine montane rainforest, home to blue monkeys and exotic birds as you begin your Kilimanjaro adventure.</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">11km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">5-7 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">2,990m</span>
+                  <span class="stat-label">Camp</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Rainforest</span>
+                <span class="day-tag">Wildlife</span>
+                <span class="day-tag">First Camp</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">Begin at Machame Gate (1,800m) after registration. The trail winds through ancient rainforest draped in moss and ferns. Keep your eyes peeled for Colobus monkeys swinging through the canopy and listen for the calls of exotic birds.</p>
+              <div class="expand-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Blue Monkey Sightings
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Ancient Forest Trail
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 2 -->
+          <div class="day-card" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1650668302197-7f556c34cb91?w=600" alt="Heathland views">
+              <span class="day-number">2</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Machame Camp to Shira Cave</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                  +890m
+                </span>
+              </div>
+              <p class="day-card-description">Exit the rainforest into stunning heathland with panoramic views of the Western Breach and Shira Plateau.</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">5km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">4-6 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">3,880m</span>
+                  <span class="stat-label">Camp</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Heathland</span>
+                <span class="day-tag">Shira Plateau</span>
+                <span class="day-tag">Cave Camp</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">Watch the landscape transform as you climb above the treeline into moorland dotted with giant lobelias and senecios. The Shira Plateau stretches before you - one of Kilimanjaro's three volcanic cones.</p>
+              <div class="expand-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Giant Lobelias
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Shira Caldera Views
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 3 -->
+          <div class="day-card" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1631646107067-e3f8fbe2a8dd?w=600" alt="Lava Tower">
+              <span class="day-number">3</span>
+              <span class="day-badge">Key Day</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Shira to Lava Tower to Barranco</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                  +680m/-680m
+                </span>
+              </div>
+              <p class="day-card-description">Critical acclimatization day! Climb to Lava Tower (4,630m) then descend - the key to summit success.</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">10km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">6-8 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">3,950m</span>
+                  <span class="stat-label">Camp</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Lava Tower</span>
+                <span class="day-tag">Acclimatization</span>
+                <span class="day-tag">Alpine Desert</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">This "climb high, sleep low" strategy is your secret weapon for summit success. Lunch at Lava Tower gives your body valuable time to adapt before descending to the beautiful Barranco Valley.</p>
+              <div class="expand-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  4,630m High Point
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Barranco Wall Views
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 4 -->
+          <div class="day-card" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=600" alt="Barranco Wall">
+              <span class="day-number">4</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Barranco to Karanga Camp</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                  +250m
+                </span>
+              </div>
+              <p class="day-card-description">Scale the famous Barranco Wall - an exciting scramble with incredible views and a sense of real achievement.</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">5km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">4-5 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">4,200m</span>
+                  <span class="stat-label">Camp</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Barranco Wall</span>
+                <span class="day-tag">Scrambling</span>
+                <span class="day-tag">Last Water</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">The Barranco Wall looks intimidating but is actually a fun scramble using hands and feet. Porters carry loads overhead - an incredible sight! Karanga is the last water point before the summit.</p>
+            </div>
+          </div>
+
+          <!-- Day 5 -->
+          <div class="day-card" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1574950578143-858c6fc58922?w=600" alt="Base Camp">
+              <span class="day-number">5</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Karanga to Barafu Base Camp</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                  +640m
+                </span>
+              </div>
+              <p class="day-card-description">Short but important day to conserve energy. Rest, hydrate, and prepare for the midnight summit attempt.</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">4km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">3-4 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">4,640m</span>
+                  <span class="stat-label">Camp</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Base Camp</span>
+                <span class="day-tag">Summit Prep</span>
+                <span class="day-tag">Early Rest</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">Arrive early to rest before the big push. Your guides will brief you on summit night procedures. Try to sleep early - you'll wake around 11pm for the final ascent under the stars.</p>
+            </div>
+          </div>
+
+          <!-- Day 6 - Summit Day (Full Width) -->
+          <div class="day-card summit-day" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1621414050946-1b936a78491d?w=1200" alt="Uhuru Peak Summit">
+              <span class="day-number">6</span>
+              <span class="day-badge">Summit!</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Summit Day! Barafu to Uhuru Peak to Mweka</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  5,895m
+                </span>
+              </div>
+              <p class="day-card-description">The moment you've been waiting for! Begin at midnight under a canopy of stars. Push through Stella Point to witness a spectacular sunrise from the Roof of Africa!</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">16km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">12-15 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">5,895m</span>
+                  <span class="stat-label">Summit</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">3,100m</span>
+                  <span class="stat-label">Camp</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Uhuru Peak</span>
+                <span class="day-tag">Sunrise Summit</span>
+                <span class="day-tag">Glaciers</span>
+                <span class="day-tag">Celebration</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">Headlamps illuminate the steep switchbacks as you climb through the night. At Stella Point (5,756m), the sun begins to rise over the clouds below. The final push to Uhuru Peak rewards you with views of the ancient glaciers and the curvature of the Earth. After photos at the famous summit sign, descend to Mweka Camp for a well-deserved celebration with your crew!</p>
+              <div class="expand-highlights">
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Sunrise at Stella Point
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Iconic Summit Sign Photo
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Glacier Views
+                </div>
+                <div class="highlight-item">
+                  <span class="highlight-icon"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+                  Crew Celebration
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 7 -->
+          <div class="day-card" onclick="toggleDayCard(this)">
+            <div class="day-card-image">
+              <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600" alt="Descent celebration">
+              <span class="day-number">7</span>
+              <span class="day-badge">Finish</span>
+            </div>
+            <div class="day-card-content">
+              <div class="day-card-header">
+                <h4 class="day-card-title">Mweka Camp to Mweka Gate</h4>
+                <span class="day-card-elevation">
+                  <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 6 10.5 15.5 15.5 10.5 23 18"/></svg>
+                  -1,540m
+                </span>
+              </div>
+              <p class="day-card-description">Final descent through the rainforest. Receive your summit certificate and celebrate your incredible achievement!</p>
+              <div class="day-card-stats">
+                <div class="day-stat">
+                  <span class="stat-value">10km</span>
+                  <span class="stat-label">Distance</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">3-4 hrs</span>
+                  <span class="stat-label">Duration</span>
+                </div>
+                <div class="day-stat">
+                  <span class="stat-value">1,640m</span>
+                  <span class="stat-label">Gate</span>
+                </div>
+              </div>
+              <div class="day-card-tags">
+                <span class="day-tag">Certificate</span>
+                <span class="day-tag">Farewell</span>
+                <span class="day-tag">Celebration</span>
+              </div>
+            </div>
+            <div class="day-card-expand">
+              <p class="expand-content">Descend through the lush rainforest one final time. At Mweka Gate, collect your summit certificate - proof of your incredible achievement! Tip your amazing crew and bid farewell before transferring to your hotel for a hot shower and celebration dinner.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="itinerary-footer">
+          <button class="btn-full-itinerary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Download Full Itinerary PDF
+          </button>
+        </div>
+      </section>
+
+      <!-- Inclusions Section -->
+      <section id="inclusions" class="section">
+        <div class="section-header">
+          <div class="section-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h2 class="section-title">What's Included</h2>
+        </div>
+
+        <div class="inclusions-grid">
+          <div class="inclusions-column">
+            <h4>
+              <svg class="icon-included" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              Included
+            </h4>
+            <ul class="inclusions-list">
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>All park fees and rescue fees</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>Professional English-speaking guide</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>Assistant guides (1:4 ratio)</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>Quality mountain tents (2-person)</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>All meals during the trek</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>Drinking water and snacks</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>First aid kit and oxygen</span>
+              </li>
+              <li>
+                <svg class="list-icon included" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>Airport transfers</span>
+              </li>
+            </ul>
+          </div>
+          <div class="inclusions-column">
+            <h4>
+              <svg class="icon-excluded" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+              Not Included
+            </h4>
+            <ul class="inclusions-list">
+              <li>
+                <svg class="list-icon excluded" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                <span>International flights</span>
+              </li>
+              <li>
+                <svg class="list-icon excluded" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                <span>Tanzania visa ($50)</span>
+              </li>
+              <li>
+                <svg class="list-icon excluded" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                <span>Travel insurance (required)</span>
+              </li>
+              <li>
+                <svg class="list-icon excluded" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                <span>Personal hiking gear</span>
+              </li>
+              <li>
+                <svg class="list-icon excluded" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                <span>Crew tips ($200-250 suggested)</span>
+              </li>
+              <li>
+                <svg class="list-icon excluded" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                <span>Alcoholic beverages</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faqs" class="section">
+        <div class="section-header">
+          <div class="section-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item active">
+            <button class="faq-question">
+              How difficult is the Machame Route?
+              <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              The Machame Route is rated as challenging due to steep sections and longer daily distances. However, with proper training and our experienced guides, climbers with good fitness levels consistently achieve success. We recommend at least 3 months of cardio training before your climb.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              What is the best time to climb?
+              <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              The best climbing seasons are January-March and June-October. These periods offer the most stable weather and clear summit views. January-March is slightly warmer, while June-October tends to be drier.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              Do I need previous climbing experience?
+              <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              No technical climbing experience is required. Kilimanjaro is a trekking peak. However, experience with multi-day hikes and high-altitude environments is beneficial. Physical fitness and mental determination are the most important factors.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              What about altitude sickness?
+              <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              Our 7-day itinerary is specifically designed to maximize acclimatization with a 92% success rate. Guides monitor all climbers twice daily. We carry emergency oxygen and have evacuation protocols. Diamox can be prescribed by your doctor as a preventive measure.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              What gear do I need to bring?
+              <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              You'll need layered clothing for temperatures from +30°C to -20°C, waterproof jacket and pants, sturdy hiking boots, warm sleeping bag (-15°C rated), headlamp, and trekking poles. We provide a detailed packing list upon booking.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="content-sidebar">
+      <div class="sidebar-sticky">
+        <!-- Quick Booking Card -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <h3 class="sidebar-card-title">Quick Inquiry</h3>
+          </div>
+          <div class="sidebar-card-body">
+            <p style="font-size: 0.9375rem; color: var(--color-text-light); margin-bottom: 16px;">Get a personalized quote for your group. We'll respond within 24 hours.</p>
+            <a href="#pricing" class="btn-book" style="display: block; text-align: center; text-decoration: none;">View Pricing</a>
+            <a href="#departures" style="display: block; text-align: center; margin-top: 12px; color: var(--color-primary); font-weight: 500; text-decoration: none;">See Departures →</a>
+          </div>
+        </div>
+
+        <!-- Expert Card -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <h3 class="sidebar-card-title">Your Expert Guide</h3>
+          </div>
+          <div class="sidebar-card-body">
+            <div class="expert-profile">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="Guide Joseph" class="expert-avatar">
+              <div class="expert-name">Joseph Mushi</div>
+              <div class="expert-title">Lead Guide • 15+ Years Experience</div>
+            </div>
+            <div class="expert-quote">
+              The mountain teaches patience and rewards determination. Every step is a story.
+            </div>
+            <button class="btn-contact-expert">Ask Joseph a Question</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ============================================
+       PRICING TABLE
+       ============================================ -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-container">
+      <div class="pricing-header">
+        <span class="pricing-badge">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+          Group Pricing
+        </span>
+        <h2 class="pricing-title">Machame Route Pricing</h2>
+        <p class="pricing-subtitle">Save more when you climb with friends. All prices include accommodation, meals, park fees, and expert guides.</p>
+      </div>
+
+      <div class="price-table">
+        <div class="price-table-header">
+          <div>Group Size</div>
+          <div>Price per Person</div>
+          <div>Savings</div>
+        </div>
+
+        <div class="price-table-row">
+          <div class="group-size">
+            <div class="group-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="group-info">
+              <h4>1 Person</h4>
+              <span>Private climb experience</span>
+            </div>
+          </div>
+          <div class="price-value">$3,250 <span>USD</span></div>
+          <div>—</div>
+        </div>
+
+        <div class="price-table-row featured">
+          <div class="group-size">
+            <div class="group-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="group-info">
+              <h4>2-4 People</h4>
+              <span>Small group adventure</span>
+            </div>
+          </div>
+          <div class="price-value">$2,450 <span>USD</span></div>
+          <div><span class="savings-badge">Save $800</span></div>
+        </div>
+
+        <div class="price-table-row">
+          <div class="group-size">
+            <div class="group-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="group-info">
+              <h4>5-7 People</h4>
+              <span>Medium group savings</span>
+            </div>
+          </div>
+          <div class="price-value">$2,250 <span>USD</span></div>
+          <div><span class="savings-badge">Save $1,000</span></div>
+        </div>
+
+        <div class="price-table-row">
+          <div class="group-size">
+            <div class="group-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="group-info">
+              <h4>8-10 People</h4>
+              <span>Large group discount</span>
+            </div>
+          </div>
+          <div class="price-value">$2,050 <span>USD</span></div>
+          <div><span class="savings-badge">Save $1,200</span></div>
+        </div>
+
+        <div class="price-table-row">
+          <div class="group-size">
+            <div class="group-icon">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="group-info">
+              <h4>11 & Above</h4>
+              <span>Best value for groups</span>
+            </div>
+          </div>
+          <div class="price-value">$1,950 <span>USD</span></div>
+          <div><span class="savings-badge">Save $1,300</span></div>
+        </div>
+
+        <div class="price-table-footer">
+          <div class="price-includes">
+            <span>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              Park fees included
+            </span>
+            <span>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              All meals
+            </span>
+            <span>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              Expert guides
+            </span>
+            <span>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+              Camping equipment
+            </span>
+          </div>
+          <button class="btn-inquire">Get Custom Quote</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       UPCOMING DEPARTURES - JOIN GROUP
+       ============================================ -->
+  <section class="departures-section" id="departures">
+    <div class="departures-container">
+      <div class="departures-header">
+        <span class="departures-badge">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Join Group Departures
+        </span>
+        <h2 class="departures-title">Upcoming Kilimanjaro Climbs</h2>
+        <p class="departures-subtitle">Join fellow adventurers on scheduled group departures and save up to 25%</p>
+      </div>
+
+      <div class="departures-grid">
+        <!-- Departure 1 - Filling Fast -->
+        <div class="departure-card filling-fast">
+          <div class="departure-card-header">
+            <div class="departure-date-block">
+              <div class="departure-calendar-large">
+                <span class="calendar-month-large">Mar</span>
+                <span class="calendar-day-large">15</span>
+              </div>
+              <div class="departure-date-info">
+                <h4>March 15-21, 2026</h4>
+                <span>7 Days • Machame Route</span>
+              </div>
+            </div>
+            <div class="departure-price-block">
+              <div class="departure-price-large">$2,450</div>
+              <div class="departure-price-note">per person</div>
+            </div>
+          </div>
+          <div class="departure-card-details">
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              7 Days
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Max 12 climbers
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              English guide
+            </div>
+          </div>
+          <div class="departure-card-footer">
+            <div class="spots-available">
+              <div class="spots-indicator">
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+              </div>
+              <span class="spots-text"><strong>4 spots</strong> left</span>
+            </div>
+            <button class="btn-join-group">Join This Group</button>
+          </div>
+        </div>
+
+        <!-- Departure 2 -->
+        <div class="departure-card">
+          <div class="departure-card-header">
+            <div class="departure-date-block">
+              <div class="departure-calendar-large">
+                <span class="calendar-month-large">Mar</span>
+                <span class="calendar-day-large">22</span>
+              </div>
+              <div class="departure-date-info">
+                <h4>March 22-28, 2026</h4>
+                <span>7 Days • Machame Route</span>
+              </div>
+            </div>
+            <div class="departure-price-block">
+              <div class="departure-price-large">$2,450</div>
+              <div class="departure-price-note">per person</div>
+            </div>
+          </div>
+          <div class="departure-card-details">
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              7 Days
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Max 12 climbers
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              English guide
+            </div>
+          </div>
+          <div class="departure-card-footer">
+            <div class="spots-available">
+              <div class="spots-indicator">
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+              </div>
+              <span class="spots-text"><strong>6 spots</strong> left</span>
+            </div>
+            <button class="btn-join-group">Join This Group</button>
+          </div>
+        </div>
+
+        <!-- Departure 3 -->
+        <div class="departure-card">
+          <div class="departure-card-header">
+            <div class="departure-date-block">
+              <div class="departure-calendar-large">
+                <span class="calendar-month-large">Apr</span>
+                <span class="calendar-day-large">05</span>
+              </div>
+              <div class="departure-date-info">
+                <h4>April 5-11, 2026</h4>
+                <span>7 Days • Machame Route</span>
+              </div>
+            </div>
+            <div class="departure-price-block">
+              <div class="departure-price-large">$2,350</div>
+              <div class="departure-price-note">per person</div>
+            </div>
+          </div>
+          <div class="departure-card-details">
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              7 Days
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Max 12 climbers
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              English guide
+            </div>
+          </div>
+          <div class="departure-card-footer">
+            <div class="spots-available">
+              <div class="spots-indicator">
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot taken"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+              </div>
+              <span class="spots-text"><strong>8 spots</strong> left</span>
+            </div>
+            <button class="btn-join-group">Join This Group</button>
+          </div>
+        </div>
+
+        <!-- Departure 4 -->
+        <div class="departure-card">
+          <div class="departure-card-header">
+            <div class="departure-date-block">
+              <div class="departure-calendar-large">
+                <span class="calendar-month-large">Apr</span>
+                <span class="calendar-day-large">19</span>
+              </div>
+              <div class="departure-date-info">
+                <h4>April 19-25, 2026</h4>
+                <span>7 Days • Machame Route</span>
+              </div>
+            </div>
+            <div class="departure-price-block">
+              <div class="departure-price-large">$2,350</div>
+              <div class="departure-price-note">per person</div>
+            </div>
+          </div>
+          <div class="departure-card-details">
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              7 Days
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Max 12 climbers
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              English guide
+            </div>
+          </div>
+          <div class="departure-card-footer">
+            <div class="spots-available">
+              <div class="spots-indicator">
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+                <span class="spot-dot filled"></span>
+              </div>
+              <span class="spots-text"><strong>12 spots</strong> available</span>
+            </div>
+            <button class="btn-join-group">Join This Group</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="departures-footer">
+        <button class="btn-view-all-departures">
+          View All Departures
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CALL TO ACTION
+       ============================================ -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-icon">
+        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h2 class="cta-title">Ready to Conquer Africa's Highest Peak?</h2>
+      <p class="cta-text">Start your Kilimanjaro adventure today. Our expert team will help you choose the perfect route, departure date, and ensure you're fully prepared for the climb of a lifetime.</p>
+
+      <div class="cta-buttons">
+        <button class="btn-cta-primary">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Your Climb
+        </button>
+        <button class="btn-cta-secondary">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Talk to an Expert
+        </button>
+      </div>
+
+      <div class="cta-trust">
+        <div class="cta-trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          4.9/5 Rating
+        </div>
+        <div class="cta-trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          2,500+ Climbers
+        </div>
+        <div class="cta-trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          92% Success Rate
+        </div>
+        <div class="cta-trust-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Licensed Operator
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       RELATED ROUTES
+       ============================================ -->
+  <section class="related-section">
+    <div class="related-container">
+      <div class="related-header">
+        <h2 class="related-title">Explore Other Routes</h2>
+        <p class="related-subtitle">Compare routes to find your perfect Kilimanjaro adventure</p>
+      </div>
+
+      <div class="related-grid">
+        <div class="route-card">
+          <div class="route-card-image">
+            <img src="https://images.unsplash.com/photo-1621414050946-1b936a78491d?w=600" alt="Lemosho Route">
+            <span class="route-card-badge">Most Scenic</span>
+          </div>
+          <div class="route-card-body">
+            <h3 class="route-card-title">Lemosho Route</h3>
+            <div class="route-card-meta">
+              <span>8 Days</span>
+              <span>Moderate</span>
+              <span>95% Success</span>
+            </div>
+            <div class="route-card-price">
+              <div>
+                <div class="route-price-value">$2,850</div>
+                <div class="route-price-label">per person</div>
+              </div>
+              <button class="btn-view-route">View Route</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="route-card">
+          <div class="route-card-image">
+            <img src="https://images.unsplash.com/photo-1650668302197-7f556c34cb91?w=600" alt="Marangu Route">
+            <span class="route-card-badge">Hut Accommodation</span>
+          </div>
+          <div class="route-card-body">
+            <h3 class="route-card-title">Marangu Route</h3>
+            <div class="route-card-meta">
+              <span>6 Days</span>
+              <span>Moderate</span>
+              <span>75% Success</span>
+            </div>
+            <div class="route-card-price">
+              <div>
+                <div class="route-price-value">$1,950</div>
+                <div class="route-price-label">per person</div>
+              </div>
+              <button class="btn-view-route">View Route</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="route-card">
+          <div class="route-card-image">
+            <img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=600" alt="Rongai Route">
+            <span class="route-card-badge">Remote & Quiet</span>
+          </div>
+          <div class="route-card-body">
+            <h3 class="route-card-title">Rongai Route</h3>
+            <div class="route-card-meta">
+              <span>7 Days</span>
+              <span>Moderate</span>
+              <span>85% Success</span>
+            </div>
+            <div class="route-card-price">
+              <div>
+                <div class="route-price-value">$2,350</div>
+                <div class="route-price-label">per person</div>
+              </div>
+              <button class="btn-view-route">View Route</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile CTA -->
+  <div class="mobile-cta">
+    <div class="mobile-cta-content">
+      <div class="mobile-price-info">
+        <div class="mobile-price">$2,450</div>
+        <div class="mobile-label">per person</div>
+      </div>
+      <button class="btn-mobile-book">Check Availability</button>
+    </div>
+  </div>
+
+  <script>
+    // Day Card Toggle for Itinerary
+    function toggleDayCard(card) {
+      const wasExpanded = card.classList.contains('expanded');
+
+      // Close all other cards
+      document.querySelectorAll('.day-card').forEach(c => {
+        c.classList.remove('expanded');
+      });
+
+      // Toggle clicked card
+      if (!wasExpanded) {
+        card.classList.add('expanded');
+        // Scroll card into view smoothly
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+        // Open clicked if wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scroll for nav tabs
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(tab.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Active nav tab on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navTabs = document.querySelectorAll('.nav-tab');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navTabs.forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.getAttribute('href') === `#${current}`) {
+          tab.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

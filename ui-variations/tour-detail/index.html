@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Variations: Tour Detail Page | Snow Africa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f0f0f;
+      --bg-card: #1a1a1a;
+      --bg-hover: #252525;
+      --text: #ffffff;
+      --text-muted: #888888;
+      --accent: #F59E0B;
+      --accent-hover: #D97706;
+      --success: #22c55e;
+      --border: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .viewer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .viewer-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .viewer-title span {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .viewer-badge {
+      background: var(--accent);
+      color: #000;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Tabs */
+    .viewer-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .viewer-tab {
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .viewer-tab:hover {
+      background: var(--bg-hover);
+      color: var(--text);
+    }
+
+    .viewer-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    /* Controls */
+    .viewer-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .viewport-toggle {
+      display: flex;
+      background: var(--bg-hover);
+      border-radius: 6px;
+      padding: 0.25rem;
+    }
+
+    .viewport-btn {
+      padding: 0.375rem 0.75rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .viewport-btn:hover {
+      color: var(--text);
+    }
+
+    .viewport-btn.active {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+
+    .select-btn {
+      padding: 0.5rem 1rem;
+      background: var(--success);
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .select-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Preview Area */
+    .preview-container {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      min-height: calc(100vh - 60px);
+      background: #252525;
+    }
+
+    .preview-frame {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transition: width 0.3s ease;
+      max-width: 100%;
+    }
+
+    .preview-frame.mobile {
+      width: 375px;
+    }
+
+    .preview-frame.tablet {
+      width: 768px;
+    }
+
+    .preview-frame.desktop {
+      width: 1280px;
+    }
+
+    .preview-frame iframe {
+      width: 100%;
+      height: calc(100vh - 120px);
+      border: none;
+      display: block;
+    }
+
+    /* Description Panel */
+    .desc-panel {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .desc-content h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .desc-content p {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    .desc-tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .desc-tag {
+      padding: 0.25rem 0.5rem;
+      background: var(--bg-hover);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Compare Mode */
+    .compare-mode {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .compare-mode .preview-frame {
+      width: 100%;
+    }
+
+    .compare-mode .preview-frame iframe {
+      height: calc(50vh - 80px);
+    }
+
+    .compare-label {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .compare-wrapper {
+      position: relative;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .viewer-header {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .viewer-tabs {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .compare-mode {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="viewer-header">
+    <div class="viewer-title">
+      <span class="viewer-badge">UI Variations</span>
+      Tour Detail Page
+      <span>3 variations</span>
+    </div>
+
+    <div class="viewer-tabs">
+      <button class="viewer-tab active" data-variation="v1">V1: Immersive Gallery</button>
+      <button class="viewer-tab" data-variation="v2">V2: Editorial (Updated)</button>
+      <button class="viewer-tab" data-variation="v3">V3: Card Sections</button>
+      <button class="viewer-tab" data-variation="compare">Compare</button>
+    </div>
+
+    <div class="viewer-controls">
+      <div class="viewport-toggle">
+        <button class="viewport-btn" data-width="mobile">375px</button>
+        <button class="viewport-btn" data-width="tablet">768px</button>
+        <button class="viewport-btn active" data-width="desktop">1280px</button>
+      </div>
+      <button class="select-btn" id="selectBtn">Select This One</button>
+    </div>
+  </header>
+
+  <div class="preview-container" id="previewContainer">
+    <div class="preview-frame desktop" id="previewFrame">
+      <iframe src="v1-immersive-gallery.html" id="previewIframe"></iframe>
+    </div>
+  </div>
+
+  <div class="desc-panel" id="descPanel">
+    <div class="desc-content">
+      <h3 id="variationTitle">V1: Immersive Gallery</h3>
+      <p id="variationDesc">Full-width hero with floating booking card and gallery thumbnail strip. Dramatic, visual-first approach.</p>
+    </div>
+    <div class="desc-tags" id="variationTags">
+      <span class="desc-tag">Full-bleed</span>
+      <span class="desc-tag">Floating card</span>
+      <span class="desc-tag">Timeline itinerary</span>
+    </div>
+  </div>
+
+  <script>
+    const variations = {
+      v1: {
+        src: 'v1-immersive-gallery.html',
+        title: 'V1: Immersive Gallery',
+        desc: 'Full-width hero with floating booking card and gallery thumbnail strip. Dramatic, visual-first approach.',
+        tags: ['Full-bleed', 'Floating card', 'Timeline itinerary']
+      },
+      v2: {
+        src: 'v2-split-editorial-updated.html',
+        title: 'V2: Split Editorial (Updated)',
+        desc: 'Featured image hero with booking card, magazine timeline itinerary, Snow Africa branding, multiple CTAs throughout.',
+        tags: ['Featured image', 'Magazine timeline', 'Brand colors', 'CTAs']
+      },
+      v3: {
+        src: 'v3-card-sections.html',
+        title: 'V3: Card Sections',
+        desc: 'Compact hero with stats bar. Content organized in clean, scannable card sections with tabbed itinerary.',
+        tags: ['Compact hero', 'Stats bar', 'Card-based']
+      }
+    };
+
+    let currentVariation = 'v1';
+    let currentWidth = 'desktop';
+
+    // Tab switching
+    document.querySelectorAll('.viewer-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const variation = tab.dataset.variation;
+
+        document.querySelectorAll('.viewer-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        if (variation === 'compare') {
+          showCompareMode();
+        } else {
+          currentVariation = variation;
+          showSingleMode(variation);
+        }
+      });
+    });
+
+    // Viewport toggle
+    document.querySelectorAll('.viewport-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentWidth = btn.dataset.width;
+        document.querySelectorAll('.viewport-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const frame = document.getElementById('previewFrame');
+        frame.className = `preview-frame ${currentWidth}`;
+      });
+    });
+
+    function showSingleMode(variation) {
+      const data = variations[variation];
+      const container = document.getElementById('previewContainer');
+
+      container.innerHTML = `
+        <div class="preview-frame ${currentWidth}" id="previewFrame">
+          <iframe src="${data.src}" id="previewIframe"></iframe>
+        </div>
+      `;
+
+      document.getElementById('variationTitle').textContent = data.title;
+      document.getElementById('variationDesc').textContent = data.desc;
+      document.getElementById('variationTags').innerHTML = data.tags.map(t => `<span class="desc-tag">${t}</span>`).join('');
+      document.getElementById('descPanel').style.display = 'flex';
+    }
+
+    function showCompareMode() {
+      const container = document.getElementById('previewContainer');
+
+      container.innerHTML = `
+        <div class="compare-mode">
+          <div class="compare-wrapper">
+            <span class="compare-label">V1: Immersive Gallery</span>
+            <div class="preview-frame">
+              <iframe src="v1-immersive-gallery.html"></iframe>
+            </div>
+          </div>
+          <div class="compare-wrapper">
+            <span class="compare-label">V2: Editorial (Updated)</span>
+            <div class="preview-frame">
+              <iframe src="v2-split-editorial-updated.html"></iframe>
+            </div>
+          </div>
+          <div class="compare-wrapper">
+            <span class="compare-label">V3: Card Sections</span>
+            <div class="preview-frame">
+              <iframe src="v3-card-sections.html"></iframe>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('descPanel').style.display = 'none';
+    }
+
+    // Select button
+    document.getElementById('selectBtn').addEventListener('click', () => {
+      if (currentVariation) {
+        const data = variations[currentVariation];
+        alert(`Selected: ${data.title}\n\nThis variation will be used for production.\nHandoff context will be saved to _handoff/ directory.`);
+      }
+    });
+  </script>
+</body>
+</html>
