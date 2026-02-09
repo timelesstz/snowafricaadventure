@@ -23,7 +23,7 @@ export function RouteHero({
   difficulty = "Challenging",
   successRate = 92,
   summitHeight = "5,895m",
-  image = "https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=1920",
+  image = "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
 }: RouteHeroProps) {
   return (
     <section className="relative h-[70vh] min-h-[500px] overflow-hidden">

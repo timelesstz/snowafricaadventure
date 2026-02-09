@@ -17,25 +17,25 @@ const beaches = [
     name: "Nungwi Beach",
     description:
       "Northern tip of Zanzibar with stunning sunsets and vibrant nightlife.",
-    image: "/images/zanzibar/nungwi.jpg",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/zan.png",
   },
   {
     name: "Kendwa Beach",
     description:
       "Calm waters perfect for swimming at any tide, with boutique resorts.",
-    image: "/images/zanzibar/kendwa.jpg",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
   },
   {
     name: "Paje Beach",
     description:
       "Kite surfing paradise on the east coast with laid-back atmosphere.",
-    image: "/images/zanzibar/paje.jpg",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/east-africa-safari-zanzibar.jpg",
   },
   {
     name: "Jambiani Beach",
     description:
       "Traditional fishing village feel with seaweed farming and local culture.",
-    image: "/images/zanzibar/jambiani.jpg",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/zan.png",
   },
 ];
 
@@ -107,7 +107,7 @@ export default function ZanzibarPage() {
       {/* Hero */}
       <section className="relative h-[60vh] min-h-[500px]">
         <Image
-          src="/images/zanzibar/hero.jpg"
+          src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg"
           alt="Zanzibar Beach"
           fill
           className="object-cover"
@@ -282,7 +282,7 @@ export default function ZanzibarPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
               <Image
-                src="/images/zanzibar/stone-town.jpg"
+                src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Zanzibar_Island_Stone_Town_02.jpg"
                 alt="Stone Town"
                 fill
                 className="object-cover"

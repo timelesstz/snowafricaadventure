@@ -365,7 +365,7 @@ export default async function RoutePage({ params }: PageProps) {
                   <div className="p-6">
                     <div className="text-center mb-4">
                       <img
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+                        src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg"
                         alt="Guide Joseph"
                         className="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-[var(--surface)]"
                       />

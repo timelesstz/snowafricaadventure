@@ -72,7 +72,7 @@ export function DayByDayTimeline({ itinerary }: DayByDayTimelineProps) {
                 <div className={`${isEven ? 'lg:order-3' : 'lg:order-1'}`}>
                   <div className="relative h-[200px] lg:h-[280px] overflow-hidden rounded-sm shadow-lg group">
                     <Image
-                      src={day.image || `https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80`}
+                      src={day.image || `https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg`}
                       alt={day.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"

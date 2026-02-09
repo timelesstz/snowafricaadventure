@@ -64,11 +64,11 @@ const placeholderDestinations: Record<string, {
       The park is home to all of the Big Five - lion, leopard, elephant, buffalo, and rhino -
       as well as cheetahs, hyenas, giraffes, and over 500 bird species.
     `,
-    heroImage: "/images/destinations/serengeti-hero.jpg",
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg",
     galleryImages: [
-      "/images/destinations/serengeti-1.jpg",
-      "/images/destinations/serengeti-2.jpg",
-      "/images/destinations/serengeti-3.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     ],
     highlights: [
       "Great Migration",
@@ -120,11 +120,11 @@ const placeholderDestinations: Record<string, {
       where wildlife and semi-nomadic Maasai pastoralists coexist, continuing their traditional
       way of life alongside the wild animals.
     `,
-    heroImage: "/images/destinations/ngorongoro-hero.jpg",
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-conservation-area.jpg",
     galleryImages: [
-      "/images/destinations/ngorongoro-1.jpg",
-      "/images/destinations/ngorongoro-2.jpg",
-      "/images/destinations/ngorongoro-3.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-conservation-area.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/Ngorongoro_Crater_Maasai_herding_mating_lion_couple-1.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/ngorongoro-crater-ngorongoro-conservation-area.jpg",
     ],
     highlights: [
       "UNESCO World Heritage Site",
@@ -174,11 +174,11 @@ const placeholderDestinations: Record<string, {
       The park's diverse habitats, from riverine forests to acacia woodlands, support a rich
       variety of wildlife and over 550 bird species - making it a paradise for bird enthusiasts.
     `,
-    heroImage: "/images/destinations/tarangire-hero.jpg",
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-National-Park.jpg",
     galleryImages: [
-      "/images/destinations/tarangire-1.jpg",
-      "/images/destinations/tarangire-2.jpg",
-      "/images/destinations/tarangire-3.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-National-Park.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/39339368385_20d92a678c_k.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     ],
     highlights: [
       "Large Elephant Herds",
@@ -420,7 +420,7 @@ export default async function DestinationDetailPage({ params }: Props) {
                   duration: "5 Days",
                   type: "Mid-Range",
                   priceFrom: 2100,
-                  featuredImage: "/images/safaris/northern-circuit.jpg",
+                  featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
                   overview: "Experience the best of Tanzania's northern parks.",
                 },
                 {
@@ -429,7 +429,7 @@ export default async function DestinationDetailPage({ params }: Props) {
                   duration: "7 Days",
                   type: "Mid-Range",
                   priceFrom: 3200,
-                  featuredImage: "/images/safaris/migration.jpg",
+                  featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
                   overview: "Witness the spectacular Great Migration in the Serengeti.",
                 },
                 {
@@ -438,7 +438,7 @@ export default async function DestinationDetailPage({ params }: Props) {
                   duration: "3 Days",
                   type: "Budget",
                   priceFrom: 850,
-                  featuredImage: "/images/safaris/budget.jpg",
+                  featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/3-Days-Tanzania-Budget-Camping-Safari.jpg",
                   overview: "Affordable safari experience for budget travelers.",
                 },
               ].map((safari, i) => (

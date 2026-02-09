@@ -60,7 +60,7 @@ const placeholderTrips: Record<string, {
     `,
     price: 180,
     duration: "Full Day (8-9 hours)",
-    heroImage: "/images/day-trips/arusha-np-hero.jpg",
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Arusha-National-Park-Day-trip.jpg",
     highlights: ["Walking Safari", "Game Drive", "Momella Lakes", "Mount Meru Views", "Colobus Monkeys"],
     groupSize: "2-6 people",
     inclusions: [
@@ -120,7 +120,7 @@ const placeholderTrips: Record<string, {
     `,
     price: 120,
     duration: "Half Day (5-6 hours)",
-    heroImage: "/images/day-trips/materuni-hero.jpg",
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Day-trips.jpg",
     highlights: ["80m Waterfall", "Coffee Farm", "Chagga Culture", "Swimming", "Local Lunch"],
     groupSize: "2-8 people",
     inclusions: [
@@ -177,7 +177,7 @@ const placeholderTrips: Record<string, {
     `,
     price: 350,
     duration: "Full Day (12-13 hours)",
-    heroImage: "/images/day-trips/ngorongoro-day-hero.jpg",
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-Crater-day-trip.jpg",
     highlights: ["Big Five", "UNESCO Site", "Crater Floor", "Rhino Spotting", "Lunch Included"],
     groupSize: "2-6 people",
     inclusions: [

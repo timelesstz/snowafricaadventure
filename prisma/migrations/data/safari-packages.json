@@ -11,7 +11,7 @@
     "highlights": ["Luxury Lodges & Tented Camps", "Tarangire Elephants", "Serengeti Game Drives", "Ngorongoro Crater", "Big Five"],
     "inclusions": ["Luxury 4x4 safari vehicle", "Professional guide", "All park fees", "Full board luxury accommodation", "All meals", "Bottled water", "Airport transfers"],
     "exclusions": ["International flights", "Visa", "Travel insurance", "Tips", "Personal expenses", "Optional activities"],
-    "featuredImage": "/images/safaris/6-day-luxury.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/Ngorongoro_Crater_Maasai_herding_mating_lion_couple-1.jpg",
     "priceFrom": 3200,
     "isActive": true
   },
@@ -27,7 +27,7 @@
     "highlights": ["Tarangire Elephants", "Lake Manyara Tree Lions", "Ngorongoro Crater", "Lodge Accommodation"],
     "inclusions": ["4x4 safari vehicle", "Professional guide", "Park fees", "Lodge accommodation", "All meals", "Water"],
     "exclusions": ["Flights", "Visa", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/3-day-lodge.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/39339368385_20d92a678c_k.jpg",
     "priceFrom": 1450,
     "isActive": true
   },
@@ -43,7 +43,7 @@
     "highlights": ["Budget-Friendly", "Four Parks", "Camping Experience", "All Wildlife Areas", "African Nights"],
     "inclusions": ["Safari vehicle", "Guide", "Park fees", "Camping equipment", "All meals", "Cook"],
     "exclusions": ["Flights", "Insurance", "Sleeping bag", "Tips"],
-    "featuredImage": "/images/safaris/6-day-camping.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5382086978_c0f124a067_k.jpg",
     "priceFrom": 1650,
     "isActive": true
   },
@@ -59,7 +59,7 @@
     "highlights": ["Week-Long Adventure", "Tented Camps", "All Major Parks", "Migration Viewing", "Crater Descent"],
     "inclusions": ["4x4 vehicle", "Guide", "Park fees", "Tented camp accommodation", "Full board", "Transfers"],
     "exclusions": ["Flights", "Visa", "Insurance", "Tips", "Drinks"],
-    "featuredImage": "/images/safaris/7-day-tented.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/39339368385_20d92a678c_k.jpg",
     "priceFrom": 2400,
     "isActive": true
   },
@@ -75,7 +75,7 @@
     "highlights": ["Premium Lodges", "Exclusive Game Drives", "Gourmet Dining", "Personalized Service"],
     "inclusions": ["Luxury 4x4", "Expert guide", "All fees", "Luxury lodges", "Full board", "Premium drinks", "Transfers"],
     "exclusions": ["International flights", "Visa", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/5-day-luxury.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/kubu-kubu-tented-lodge-accomodation-04.jpg",
     "priceFrom": 2800,
     "isActive": true
   },
@@ -91,7 +91,7 @@
     "highlights": ["Budget Friendly", "Camping Adventure", "Three Parks", "Wildlife"],
     "inclusions": ["Vehicle", "Guide", "Parks fees", "Camping gear", "Meals", "Cook"],
     "exclusions": ["Flights", "Insurance", "Sleeping bag", "Tips"],
-    "featuredImage": "/images/safaris/3-day-budget.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/3-Days-Tanzania-Budget-Camping-Safari.jpg",
     "priceFrom": 850,
     "isActive": true
   },
@@ -107,7 +107,7 @@
     "highlights": ["Central Serengeti", "North Serengeti", "Ngorongoro Crater", "Tarangire"],
     "inclusions": ["4x4 vehicle", "Guide", "Park fees", "Accommodation", "Full board", "Transfers"],
     "exclusions": ["Flights", "Visa", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/6-day-northern.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/Ngorongoro_Crater_Maasai_herding_mating_lion_couple-1.jpg",
     "priceFrom": 2100,
     "isActive": true
   },
@@ -123,7 +123,7 @@
     "highlights": ["Complete Experience", "All Major Parks", "Extended Serengeti", "Photography Focus"],
     "inclusions": ["4x4 vehicle", "Professional guide", "All fees", "Mixed accommodation", "Full board", "Transfers"],
     "exclusions": ["Flights", "Visa", "Insurance", "Tips", "Drinks"],
-    "featuredImage": "/images/safaris/8-day-wonders.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/tanzania-safari-africa.jpg",
     "priceFrom": 2800,
     "isActive": true
   },
@@ -139,7 +139,7 @@
     "highlights": ["Serengeti Plains", "Ngorongoro Crater", "Big Five", "Photography"],
     "inclusions": ["4x4 vehicle", "Guide", "Park fees", "Accommodation", "Meals"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/4-day-serengeti.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/Ngorongoro-crater.webp",
     "priceFrom": 1350,
     "isActive": true
   },
@@ -155,7 +155,7 @@
     "highlights": ["Adventure Focus", "Wildlife Action", "Northern Circuit", "Photography"],
     "inclusions": ["Safari vehicle", "Guide", "Parks", "Accommodation", "Meals"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/4-day-adventure.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/ngorongoro-crater-ngorongoro-conservation-area.jpg",
     "priceFrom": 1250,
     "isActive": true
   },
@@ -171,7 +171,7 @@
     "highlights": ["Extended Safari", "All Parks", "Wildlife Focus", "Photography Time"],
     "inclusions": ["4x4 vehicle", "Expert guide", "All fees", "Mixed accommodation", "Full board"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/9-day-wildlife.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/tanzania-safari-africa.jpg",
     "priceFrom": 3200,
     "isActive": true
   },
@@ -187,7 +187,7 @@
     "highlights": ["Migration Viewing", "Calving Season", "Ndutu Area", "Predator Action"],
     "inclusions": ["4x4 vehicle", "Migration specialist guide", "Park fees", "Accommodation", "Meals"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/6-day-migration.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
     "priceFrom": 2300,
     "isActive": true
   },
@@ -203,7 +203,7 @@
     "highlights": ["Quick Safari", "Lodge Comfort", "Wildlife Taster", "Flexible"],
     "inclusions": ["Vehicle", "Guide", "Park fees", "Lodge", "Meals"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/2-day-lodge.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/287437.jpg",
     "priceFrom": 650,
     "isActive": true
   },
@@ -219,7 +219,7 @@
     "highlights": ["Budget Friendly", "Camping Adventure", "Three Parks", "Full Experience"],
     "inclusions": ["Vehicle", "Guide", "Park fees", "Camping", "Meals", "Cook"],
     "exclusions": ["Flights", "Insurance", "Sleeping bag", "Tips"],
-    "featuredImage": "/images/safaris/5-day-camping.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32954454062_3c5e066dcb_k.jpg",
     "priceFrom": 1350,
     "isActive": true
   },
@@ -235,7 +235,7 @@
     "highlights": ["Walking Safari", "Crater Rim Trek", "Maasai Guides", "Cultural Experience"],
     "inclusions": ["Guide", "Maasai escort", "Permits", "Camping", "Meals"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/walking-ngorongoro.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/03/Ngorongoro-Walking-Safari-ways-african-safaris.jpg",
     "priceFrom": 950,
     "isActive": true
   },
@@ -251,7 +251,7 @@
     "highlights": ["Serval Focus", "Small Predators", "All Wildlife", "Photography"],
     "inclusions": ["4x4 vehicle", "Specialist guide", "Park fees", "Accommodation", "Full board"],
     "exclusions": ["Flights", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/7-day-serval.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/happy-mother-vnO0XVzC.jpg",
     "priceFrom": 2500,
     "isActive": true
   },
@@ -267,7 +267,7 @@
     "highlights": ["Safari & Beach", "Serengeti", "Zanzibar", "Stone Town", "Relaxation"],
     "inclusions": ["Safari vehicle", "Guide", "Park fees", "Safari accommodation", "Zanzibar hotel", "Meals", "Zanzibar transfers"],
     "exclusions": ["International flights", "Safari-Zanzibar flight", "Insurance", "Tips"],
-    "featuredImage": "/images/safaris/10-day-combo.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "priceFrom": 3500,
     "isActive": true
   }

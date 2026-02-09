@@ -48,7 +48,7 @@ const DEFAULT_HERO = {
   badge: "Tanzania's Trusted Adventure Partner",
   title: "Climb Kilimanjaro.\nSafari Tanzania.",
   subtitle: "Summit Africa's highest peak. Witness the Great Migration. Relax on Zanzibar beaches. Your adventure of a lifetime starts with Tanzania's most trusted local operator.",
-  image: "https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=1920&q=80",
+  image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
 };
 
 function getWhyUsItems(talaLicense: string) {
@@ -80,38 +80,38 @@ const destinations = [
   {
     title: "Zanzibar Beach Escapes",
     description: "Pristine beaches, spice tours & Stone Town heritage",
-    image: "https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
     href: "/zanzibar/",
     wide: true,
   },
   {
     title: "Cultural Tours",
     description: "Maasai villages & coffee farms",
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=80",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Arusha-City-Day-Trip.jpg",
     href: "/day-trips/",
   },
   {
     title: "Day Trips",
     description: "Waterfalls & wildlife in a day",
-    image: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=400&q=80",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Day-trips.jpg",
     href: "/day-trips/",
   },
   {
     title: "Serengeti",
     description: "Endless plains & Big Five",
-    image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&q=80",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg",
     href: "/tanzania-destinations/serengeti-national-park/",
   },
   {
     title: "Ngorongoro Crater",
     description: "World's largest caldera",
-    image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=400&q=80",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/ngorongoro-crater-ngorongoro-conservation-area.jpg",
     href: "/tanzania-destinations/ngorongoro-conservation-area/",
   },
   {
     title: "The Great Migration",
     description: "Witness the world's greatest wildlife spectacle",
-    image: "https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=800&q=80",
+    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
     href: "/great-wildebeest-migration/",
     wide: true,
   },
@@ -398,7 +398,7 @@ export default async function HomePage() {
             </div>
             <div className="about-intro-image">
               <Image
-                src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=80"
+                src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/39339368385_20d92a678c_k.jpg"
                 alt="Snow Africa Adventure Team"
                 fill
                 className="object-cover"
@@ -466,7 +466,7 @@ export default async function HomePage() {
               className={`route-card ${i === 0 ? 'featured' : ''}`}
             >
               <Image
-                src={route.featuredImage || `https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=${i === 0 ? 1000 : 600}&q=80`}
+                src={route.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg"}
                 alt={route.title}
                 fill
                 className="object-cover"
@@ -505,7 +505,7 @@ export default async function HomePage() {
             {featuredSafari && (
               <Link href={`/tanzania-safaris/${featuredSafari.slug}/`} className="safari-main">
                 <Image
-                  src={featuredSafari.featuredImage || "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1000&q=80"}
+                  src={featuredSafari.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg"}
                   alt={featuredSafari.title}
                   fill
                   className="object-cover"
@@ -528,7 +528,7 @@ export default async function HomePage() {
                 <Link key={safari.slug} href={`/tanzania-safaris/${safari.slug}/`} className="safari-item">
                   <div className="safari-item-image">
                     <Image
-                      src={safari.featuredImage || "https://images.unsplash.com/photo-1534177616064-ef85a4029b5d?w=300&q=80"}
+                      src={safari.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Rhino-Lodge_View-from-outside-towards-dining-area.jpg"}
                       alt={safari.title}
                       width={140}
                       height={110}
@@ -566,7 +566,7 @@ export default async function HomePage() {
       <section className="why-section">
         <div className="why-image">
           <Image
-            src="https://images.unsplash.com/photo-1574950578143-858c6fc58922?w=1000&q=80"
+            src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Banner-1920x768px5-2.webp"
             alt="Snow Africa Team"
             fill
             className="object-cover"
@@ -667,7 +667,7 @@ export default async function HomePage() {
       <section className="contact-section">
         <div className="contact-image">
           <Image
-            src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&q=80"
+            src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/28939626580_da4be2e4b1_k.jpg"
             alt="Safari landscape"
             fill
             className="object-cover"
@@ -746,7 +746,7 @@ export default async function HomePage() {
                 <Link key={post.slug} href={`/${post.slug}/`} className="blog-card-home">
                   <div className="blog-card-image">
                     <Image
-                      src={post.featuredImage || "https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80"}
+                      src={post.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg"}
                       alt={post.title}
                       fill
                       className="object-cover"
@@ -764,7 +764,7 @@ export default async function HomePage() {
                 <Link href="/best-time-to-climb-mount-kilimanjaro/" className="blog-card-home">
                   <div className="blog-card-image">
                     <Image
-                      src="https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=600&q=80"
+                      src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg"
                       alt="Best Time to Climb Kilimanjaro"
                       fill
                       className="object-cover"
@@ -778,7 +778,7 @@ export default async function HomePage() {
                 <Link href="/great-wildebeest-migration/" className="blog-card-home">
                   <div className="blog-card-image">
                     <Image
-                      src="https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=600&q=80"
+                      src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/safari-3242983_1280.jpg"
                       alt="Great Migration Guide"
                       fill
                       className="object-cover"
@@ -792,7 +792,7 @@ export default async function HomePage() {
                 <Link href="/climbing-kilimanjaro/" className="blog-card-home">
                   <div className="blog-card-image">
                     <Image
-                      src="https://images.unsplash.com/photo-1621414050946-1b936a78491f?w=600&q=80"
+                      src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/mount-kilimanjaro-278082_1280.jpg"
                       alt="Climbing Kilimanjaro"
                       fill
                       className="object-cover"

@@ -12,15 +12,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "pub-cf9450d27ca744f1825d1e08b392f592.r2.dev",
+      },
+      {
+        protocol: "https",
         hostname: "cdn.snowafricaadventure.com",
       },
       {
         protocol: "https",
         hostname: "snowafricaadventure.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
       },
     ],
   },
@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
       // Redirect old WordPress image paths to R2
       {
         source: "/wp-content/uploads/:path*",
-        destination: "https://cdn.snowafricaadventure.com/uploads/:path*",
+        destination: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/:path*",
         permanent: true,
       },
 

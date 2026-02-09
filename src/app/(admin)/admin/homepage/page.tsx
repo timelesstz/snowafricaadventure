@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
   "homepage.hero.badge": "Tanzania's Trusted Adventure Partner",
   "homepage.hero.title": "Climb Kilimanjaro.\nSafari Tanzania.",
   "homepage.hero.subtitle": "Summit Africa's highest peak. Witness the Great Migration. Relax on Zanzibar beaches. Your adventure of a lifetime starts with Tanzania's most trusted local operator.",
-  "homepage.hero.image": "https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=1920&q=80",
+  "homepage.hero.image": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
 
   // Stats
   "homepage.stats.experience": "15+",

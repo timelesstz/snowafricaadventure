@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, FolderOpen } from "lucide-react";
 import MediaUploader from "./MediaUploader";
+import R2BrowserModal from "./R2BrowserModal";
 import { clsx } from "clsx";
 
 interface ImageUploadFieldProps {
@@ -32,6 +33,7 @@ export default function ImageUploadField({
 }: ImageUploadFieldProps) {
   const [value, setValue] = useState(controlledValue ?? defaultValue ?? null);
   const [isUploading, setIsUploading] = useState(false);
+  const [showBrowser, setShowBrowser] = useState(false);
 
   // Sync with controlled value if provided
   useEffect(() => {
@@ -50,6 +52,12 @@ export default function ImageUploadField({
     setValue(media.url);
     onChange?.(media.url);
     setIsUploading(false);
+  };
+
+  const handleBrowseSelect = (url: string) => {
+    setValue(url);
+    onChange?.(url);
+    setShowBrowser(false);
   };
 
   const handleRemove = () => {
@@ -91,14 +99,22 @@ export default function ImageUploadField({
             </button>
           </div>
 
-          {/* Replace button */}
-          <div>
+          {/* Replace options */}
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={() => setIsUploading(true)}
               className="text-sm text-amber-600 hover:text-amber-700"
             >
-              Replace image
+              Upload new
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowBrowser(true)}
+              className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
+            >
+              <FolderOpen className="w-3.5 h-3.5" />
+              Browse R2
             </button>
           </div>
 
@@ -113,17 +129,37 @@ export default function ImageUploadField({
           )}
         </div>
       ) : (
-        <MediaUploader
-          onUpload={handleUpload}
-          folder={folder}
-          showPreview={false}
-          label={`Upload ${label.toLowerCase()}`}
-        />
+        <div className="space-y-3">
+          <MediaUploader
+            onUpload={handleUpload}
+            folder={folder}
+            showPreview={false}
+            label={`Upload ${label.toLowerCase()}`}
+          />
+          <div className="text-center">
+            <span className="text-xs text-slate-400">or</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowBrowser(true)}
+            className="w-full px-4 py-2.5 border-2 border-dashed border-blue-200 rounded-lg text-sm text-blue-600 hover:bg-blue-50 hover:border-blue-300 transition-colors flex items-center justify-center gap-2"
+          >
+            <FolderOpen className="w-4 h-4" />
+            Browse existing R2 images
+          </button>
+        </div>
       )}
 
       {helpText && (
         <p className="mt-1 text-sm text-slate-500">{helpText}</p>
       )}
+
+      {/* R2 Browser Modal */}
+      <R2BrowserModal
+        open={showBrowser}
+        onClose={() => setShowBrowser(false)}
+        onSelect={handleBrowseSelect}
+      />
     </div>
   );
 }

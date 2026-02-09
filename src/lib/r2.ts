@@ -3,6 +3,8 @@ import {
   PutObjectCommand,
   DeleteObjectCommand,
   GetObjectCommand,
+  ListObjectsV2Command,
+  HeadObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
@@ -87,6 +89,60 @@ export function generateFileKey(
   const sanitizedFilename = filename.replace(/[^a-zA-Z0-9.-]/g, "-");
 
   return `${category}/${year}/${month}/${timestamp}-${sanitizedFilename}`;
+}
+
+/**
+ * List objects in R2 bucket with pagination
+ */
+export async function listR2Objects(options: {
+  prefix?: string;
+  maxKeys?: number;
+  continuationToken?: string;
+} = {}): Promise<{
+  objects: { key: string; size: number; lastModified: Date | undefined }[];
+  nextToken: string | undefined;
+  isTruncated: boolean;
+}> {
+  const result = await R2.send(
+    new ListObjectsV2Command({
+      Bucket: BUCKET_NAME,
+      Prefix: options.prefix,
+      MaxKeys: options.maxKeys || 100,
+      ContinuationToken: options.continuationToken,
+    })
+  );
+
+  return {
+    objects: (result.Contents || []).map((obj) => ({
+      key: obj.Key!,
+      size: obj.Size || 0,
+      lastModified: obj.LastModified,
+    })),
+    nextToken: result.NextContinuationToken,
+    isTruncated: result.IsTruncated || false,
+  };
+}
+
+/**
+ * Get metadata for a single R2 object
+ */
+export async function getR2ObjectMeta(key: string): Promise<{
+  size: number;
+  contentType: string | undefined;
+  lastModified: Date | undefined;
+} | null> {
+  try {
+    const result = await R2.send(
+      new HeadObjectCommand({ Bucket: BUCKET_NAME, Key: key })
+    );
+    return {
+      size: result.ContentLength || 0,
+      contentType: result.ContentType,
+      lastModified: result.LastModified,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export default R2;

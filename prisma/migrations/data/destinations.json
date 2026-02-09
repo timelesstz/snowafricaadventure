@@ -9,7 +9,7 @@
     "highlights": ["Great Migration", "Big Five", "Endless Plains", "Hot Air Balloon Safaris", "Luxury Camps"],
     "wildlife": ["Lion", "Leopard", "Elephant", "Buffalo", "Rhino", "Cheetah", "Wildebeest", "Zebra", "Hippo", "Crocodile"],
     "bestTime": "June to October for dry season; December to March for calving season",
-    "featuredImage": "/images/destinations/serengeti.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg",
     "isActive": true
   },
   {
@@ -22,7 +22,7 @@
     "highlights": ["UNESCO World Heritage Site", "Big Five in One Day", "Crater Floor Game Drive", "Maasai Culture", "Olduvai Gorge"],
     "wildlife": ["Black Rhino", "Lion", "Elephant", "Buffalo", "Hippo", "Flamingo", "Hyena", "Wildebeest"],
     "bestTime": "Year-round, best June to September",
-    "featuredImage": "/images/destinations/ngorongoro.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-conservation-area.jpg",
     "isActive": true
   },
   {
@@ -35,7 +35,7 @@
     "highlights": ["Large Elephant Herds", "Ancient Baobab Trees", "Bird Paradise (550+ species)", "Night Safaris", "Walking Safaris"],
     "wildlife": ["Elephant", "Lion", "Leopard", "Python", "Oryx", "Eland", "Lesser Kudu", "Gerenuk"],
     "bestTime": "June to October for best wildlife concentration",
-    "featuredImage": "/images/destinations/tarangire.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-National-Park.jpg",
     "isActive": true
   },
   {
@@ -48,7 +48,7 @@
     "highlights": ["Tree-Climbing Lions", "Flamingos", "Rift Valley Views", "Hot Springs", "Canopy Walkway"],
     "wildlife": ["Lion", "Elephant", "Hippo", "Flamingo", "Baboon", "Blue Monkey", "Giraffe"],
     "bestTime": "July to October for wildlife; November to June for birds",
-    "featuredImage": "/images/destinations/lake-manyara.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Lake-manyara-national-park.jpg",
     "isActive": true
   },
   {
@@ -61,7 +61,7 @@
     "highlights": ["Mount Meru Views", "Walking Safaris", "Momella Lakes", "Colobus Monkeys", "Canoe Safari"],
     "wildlife": ["Giraffe", "Buffalo", "Black & White Colobus", "Blue Monkey", "Dik-dik", "Waterbuck"],
     "bestTime": "Year-round, June to February for climbing Mount Meru",
-    "featuredImage": "/images/destinations/arusha-np.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Arusha-National-Park.jpg",
     "isActive": true
   },
   {
@@ -74,7 +74,7 @@
     "highlights": ["Largest National Park", "High Lion Density", "Remote Wilderness", "Great Ruaha River", "Baobab Forests"],
     "wildlife": ["Lion", "Wild Dog", "Elephant", "Leopard", "Cheetah", "Hippo", "Crocodile", "Sable Antelope"],
     "bestTime": "June to November during dry season",
-    "featuredImage": "/images/destinations/ruaha.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -87,7 +87,7 @@
     "highlights": ["Boat Safaris", "Walking Safaris", "Wild Dogs", "Rufiji River", "UNESCO World Heritage"],
     "wildlife": ["Wild Dog", "Elephant", "Lion", "Hippo", "Crocodile", "Buffalo", "Sable Antelope"],
     "bestTime": "June to October for game viewing; January to March for birding",
-    "featuredImage": "/images/destinations/selous.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -100,7 +100,7 @@
     "highlights": ["Close to Dar es Salaam", "Mkata Floodplain", "Lion Sightings", "Affordable Safaris", "Road Access"],
     "wildlife": ["Lion", "Elephant", "Giraffe", "Zebra", "Wildebeest", "Buffalo", "Hippo"],
     "bestTime": "Year-round, best during dry season (May to November)",
-    "featuredImage": "/images/destinations/mikumi.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -113,7 +113,7 @@
     "highlights": ["Remote Wilderness", "Massive Hippo Pods", "Buffalo Herds", "Untouched Safari", "Dry Season Spectacle"],
     "wildlife": ["Hippo", "Crocodile", "Buffalo", "Lion", "Elephant", "Leopard", "Roan Antelope"],
     "bestTime": "July to October for best wildlife viewing",
-    "featuredImage": "/images/destinations/katavi.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -126,7 +126,7 @@
     "highlights": ["Chimpanzee Trekking", "Jane Goodall Research Site", "Lake Tanganyika", "Primate Research", "Forest Trails"],
     "wildlife": ["Chimpanzee", "Red Colobus", "Red-tailed Monkey", "Olive Baboon", "Bushpig"],
     "bestTime": "July to October (dry season), February for best photography",
-    "featuredImage": "/images/destinations/gombe.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -139,7 +139,7 @@
     "highlights": ["Wild Chimpanzees", "Mountain Forest", "Lake Tanganyika Beach", "No Roads", "Exclusive Experience"],
     "wildlife": ["Chimpanzee", "Red Colobus", "Bush Pig", "Giant Forest Squirrel", "African Fish Eagle"],
     "bestTime": "May to October for chimp trekking",
-    "featuredImage": "/images/destinations/mahale.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -152,7 +152,7 @@
     "highlights": ["Island Safari", "Wild Chimps", "Sport Fishing", "Sitatunga Antelope", "Lake Victoria"],
     "wildlife": ["Chimpanzee", "Sitatunga", "Spot-necked Otter", "Crocodile", "Hippo", "African Fish Eagle"],
     "bestTime": "November to February for birds; June to August for chimps",
-    "featuredImage": "/images/destinations/rubondo.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -165,7 +165,7 @@
     "highlights": ["Sanje Waterfalls", "Endemic Primates", "Hiking Paradise", "Biodiversity Hotspot", "No Vehicles"],
     "wildlife": ["Udzungwa Red Colobus", "Sanje Mangabey", "Elephant", "Buffalo", "Leopard"],
     "bestTime": "June to October for hiking; year-round for primates",
-    "featuredImage": "/images/destinations/udzungwa.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -178,7 +178,7 @@
     "highlights": ["Wildflower Displays", "Highland Plateau", "Orchid Species", "Birding", "Mountain Scenery"],
     "wildlife": ["Kipunji (rare primate)", "Mountain Reedbuck", "Eland", "Blue Swallow", "Denham's Bustard"],
     "bestTime": "November to April for wildflowers",
-    "featuredImage": "/images/destinations/kitulo.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   },
   {
@@ -191,7 +191,7 @@
     "highlights": ["Black Rhino Sanctuary", "Wild Dog Project", "Views of Kilimanjaro", "Less Crowded", "Walking Safaris"],
     "wildlife": ["Black Rhino", "Wild Dog", "Elephant", "Lion", "Cheetah", "Lesser Kudu", "Gerenuk"],
     "bestTime": "June to October for wildlife viewing",
-    "featuredImage": "/images/destinations/mkomazi.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
     "isActive": true
   }
 ]

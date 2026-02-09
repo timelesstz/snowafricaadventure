@@ -42,7 +42,7 @@
       "Personal expenses",
       "Sleeping bag (rental available)"
     ],
-    "featuredImage": "/images/routes/machame-7-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg",
     "isActive": true
   },
   {
@@ -84,7 +84,7 @@
       "Tips for crew",
       "Visa fees"
     ],
-    "featuredImage": "/images/routes/lemosho-8-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5317393539_b3ff8d1d93_k.jpg",
     "isActive": true
   },
   {
@@ -125,7 +125,7 @@
       "Tips for crew",
       "Sleeping bag"
     ],
-    "featuredImage": "/images/routes/marangu-6-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5-days-Marangu-route.jpg",
     "isActive": true
   },
   {
@@ -162,7 +162,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/marangu-5-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5-days-Marangu-route.jpg",
     "isActive": true
   },
   {
@@ -200,7 +200,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/rongai-6-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/DF19D924-6FDE-4FE3-AD70-A5DB1CF9FE00.jpg",
     "isActive": true
   },
   {
@@ -238,7 +238,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/rongai-7-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/DF19D924-6FDE-4FE3-AD70-A5DB1CF9FE00.jpg",
     "isActive": true
   },
   {
@@ -274,7 +274,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/machame-6-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg",
     "isActive": true
   },
   {
@@ -312,7 +312,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/umbwe-6-days.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/24832324111_bf15191b09_b.jpg",
     "isActive": true
   },
   {
@@ -350,7 +350,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/mount-meru.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/happy-mother-vnO0XVzC.jpg",
     "isActive": true
   },
   {
@@ -387,7 +387,7 @@
       "Personal gear",
       "Tips"
     ],
-    "featuredImage": "/images/routes/oldoinyo-lengai.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/7001549021_6bc1968982_k.jpg",
     "isActive": true
   }
 ]

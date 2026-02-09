@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, GripVertical, Plus } from "lucide-react";
+import { X, GripVertical, Plus, FolderOpen } from "lucide-react";
 import MediaUploader from "./MediaUploader";
+import R2BrowserModal from "./R2BrowserModal";
 import { clsx } from "clsx";
 
 interface GalleryUploadFieldProps {
@@ -30,6 +31,7 @@ export default function GalleryUploadField({
 }: GalleryUploadFieldProps) {
   const [value, setValue] = useState(controlledValue ?? defaultValue);
   const [showUploader, setShowUploader] = useState(false);
+  const [showBrowser, setShowBrowser] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
@@ -56,6 +58,12 @@ export default function GalleryUploadField({
     const combined = [...value, ...newUrls].slice(0, maxImages);
     updateValue(combined);
     setShowUploader(false);
+  };
+
+  const handleBrowseMultiSelect = (urls: string[]) => {
+    const combined = [...value, ...urls].slice(0, maxImages);
+    updateValue(combined);
+    setShowBrowser(false);
   };
 
   const handleRemove = (index: number) => {
@@ -146,16 +154,26 @@ export default function GalleryUploadField({
             </div>
           ))}
 
-          {/* Add More Button */}
+          {/* Add More Buttons */}
           {value.length < maxImages && (
-            <button
-              type="button"
-              onClick={() => setShowUploader(true)}
-              className="aspect-square rounded-lg border-2 border-dashed border-slate-300 hover:border-amber-400 hover:bg-amber-50 transition-colors flex flex-col items-center justify-center gap-1"
-            >
-              <Plus className="w-6 h-6 text-slate-400" />
-              <span className="text-xs text-slate-500">Add</span>
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => setShowUploader(true)}
+                className="aspect-square rounded-lg border-2 border-dashed border-slate-300 hover:border-amber-400 hover:bg-amber-50 transition-colors flex flex-col items-center justify-center gap-1"
+              >
+                <Plus className="w-6 h-6 text-slate-400" />
+                <span className="text-xs text-slate-500">Upload</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowBrowser(true)}
+                className="aspect-square rounded-lg border-2 border-dashed border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-colors flex flex-col items-center justify-center gap-1"
+              >
+                <FolderOpen className="w-6 h-6 text-blue-400" />
+                <span className="text-xs text-blue-500">Browse R2</span>
+              </button>
+            </>
           )}
         </div>
       )}
@@ -171,6 +189,21 @@ export default function GalleryUploadField({
             showPreview={false}
             label={`Upload gallery images (${maxImages - value.length} remaining)`}
           />
+          {value.length === 0 && (
+            <div className="mt-3">
+              <div className="text-center mb-2">
+                <span className="text-xs text-slate-400">or</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowBrowser(true)}
+                className="w-full px-4 py-2.5 border-2 border-dashed border-blue-200 rounded-lg text-sm text-blue-600 hover:bg-blue-50 hover:border-blue-300 transition-colors flex items-center justify-center gap-2"
+              >
+                <FolderOpen className="w-4 h-4" />
+                Browse existing R2 images
+              </button>
+            </div>
+          )}
           {showUploader && value.length > 0 && (
             <button
               type="button"
@@ -186,6 +219,20 @@ export default function GalleryUploadField({
       {helpText && (
         <p className="mt-2 text-sm text-slate-500">{helpText}</p>
       )}
+
+      {/* R2 Browser Modal */}
+      <R2BrowserModal
+        open={showBrowser}
+        onClose={() => setShowBrowser(false)}
+        onSelect={(url) => {
+          if (value.length < maxImages) {
+            updateValue([...value, url]);
+          }
+          setShowBrowser(false);
+        }}
+        multiple
+        onMultiSelect={handleBrowseMultiSelect}
+      />
     </div>
   );
 }

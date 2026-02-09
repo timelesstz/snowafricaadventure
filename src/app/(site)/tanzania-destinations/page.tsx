@@ -34,7 +34,7 @@ export default async function DestinationsPage() {
       slug: "serengeti-national-park",
       shortDescription:
         "The endless plains of Serengeti host the Great Migration and offer unparalleled wildlife viewing year-round.",
-      heroImage: "/images/destinations/serengeti.jpg",
+      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg",
       highlights: ["Great Migration", "Big Five", "Endless Plains"],
     },
     {
@@ -43,7 +43,7 @@ export default async function DestinationsPage() {
       slug: "ngorongoro-crater",
       shortDescription:
         "The world's largest intact volcanic caldera, home to an incredible concentration of wildlife.",
-      heroImage: "/images/destinations/ngorongoro.jpg",
+      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-conservation-area.jpg",
       highlights: ["UNESCO World Heritage", "Big Five", "Crater Floor"],
     },
     {
@@ -52,7 +52,7 @@ export default async function DestinationsPage() {
       slug: "tarangire-national-park",
       shortDescription:
         "Famous for its giant baobab trees and large elephant herds, especially during the dry season.",
-      heroImage: "/images/destinations/tarangire.jpg",
+      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-National-Park.jpg",
       highlights: ["Elephant Herds", "Baobab Trees", "Bird Watching"],
     },
     {
@@ -61,7 +61,7 @@ export default async function DestinationsPage() {
       slug: "lake-manyara-national-park",
       shortDescription:
         "A compact park known for tree-climbing lions, flamingos, and diverse ecosystems.",
-      heroImage: "/images/destinations/manyara.jpg",
+      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Lake-manyara-national-park.jpg",
       highlights: ["Tree-climbing Lions", "Flamingos", "Hot Springs"],
     },
     {
@@ -70,7 +70,7 @@ export default async function DestinationsPage() {
       slug: "mount-kilimanjaro",
       shortDescription:
         "Africa's highest peak and the world's tallest free-standing mountain at 5,895m.",
-      heroImage: "/images/destinations/kilimanjaro.jpg",
+      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
       highlights: ["Uhuru Peak", "Glaciers", "5 Climate Zones"],
     },
     {
@@ -79,7 +79,7 @@ export default async function DestinationsPage() {
       slug: "zanzibar-island",
       shortDescription:
         "The Spice Island offers pristine beaches, historic Stone Town, and rich Swahili culture.",
-      heroImage: "/images/destinations/zanzibar.jpg",
+      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
       highlights: ["Stone Town", "Spice Tours", "Beach Paradise"],
     },
   ];

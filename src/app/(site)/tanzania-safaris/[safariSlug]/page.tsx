@@ -130,7 +130,7 @@ export default async function SafariPage({ params }: PageProps) {
       <SafariDetailHero
         title={safari.title}
         subtitle={safari.overview.slice(0, 200)}
-        heroImage={safari.featuredImage || "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920&q=80"}
+        heroImage={safari.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg"}
         badges={badges}
         duration={durationDays}
         parks={parksCount}
@@ -195,13 +195,13 @@ function extractHighlights(description: string): string[] {
 // Helper function to get itinerary images
 function getItineraryImage(title: string, index: number): string {
   const images = [
-    'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=80', // Arusha
-    'https://images.unsplash.com/photo-1547970810-dc1eac37d174?w=800&q=80', // Tarangire
-    'https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?w=800&q=80', // Ngorongoro
-    'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80', // Serengeti
-    'https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=800&q=80', // Migration
-    'https://images.unsplash.com/photo-1549366021-9f761d450615?w=800&q=80', // Lake Manyara
-    'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800&q=80', // Departure
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/28939626580_da4be2e4b1_k.jpg', // Arusha
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/39339368385_20d92a678c_k.jpg', // Tarangire
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro_Crater_Maasai_herding_mating_lion_couple-1.jpg', // Ngorongoro
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg', // Serengeti
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg', // Migration
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Lake-manyara-national-park.jpg', // Lake Manyara
+    'https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-National-Park.jpg', // Departure
   ];
 
   return images[index % images.length];

@@ -9,7 +9,7 @@
     "highlights": ["Central Market", "Cultural Heritage Centre", "Clock Tower", "Local Cuisine", "Shopping"],
     "inclusions": ["Hotel pickup & dropoff", "Professional guide", "Entrance fees", "Lunch", "Bottled water"],
     "exclusions": ["Personal shopping", "Tips", "Additional meals"],
-    "featuredImage": "/images/day-trips/arusha-city.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Arusha-City-Day-Trip.jpg",
     "priceFrom": 95,
     "isActive": true
   },
@@ -23,7 +23,7 @@
     "highlights": ["Crater Floor Game Drive", "Big Five Chance", "UNESCO Site", "Crater Views", "Wildlife Photography"],
     "inclusions": ["Hotel pickup & dropoff", "4x4 safari vehicle", "Professional guide", "All park fees", "Crater service fee", "Packed lunch", "Bottled water"],
     "exclusions": ["Tips", "Personal expenses", "Additional drinks"],
-    "featuredImage": "/images/day-trips/ngorongoro.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-Crater-day-trip.jpg",
     "priceFrom": 350,
     "isActive": true
   },
@@ -37,7 +37,7 @@
     "highlights": ["Elephant Herds", "Baobab Trees", "Lions", "Bird Watching", "Riverside Game Drives"],
     "inclusions": ["Hotel pickup & dropoff", "4x4 safari vehicle", "Professional guide", "Park fees", "Packed lunch", "Bottled water"],
     "exclusions": ["Tips", "Personal expenses"],
-    "featuredImage": "/images/day-trips/tarangire.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-national-park-day-trip.jpg",
     "priceFrom": 280,
     "isActive": true
   },
@@ -51,7 +51,7 @@
     "highlights": ["Tree-climbing Lions", "Flamingos", "Rift Valley Views", "Bird Paradise", "Hippo Pool"],
     "inclusions": ["Hotel pickup & dropoff", "4x4 vehicle", "Guide", "Park fees", "Lunch", "Water"],
     "exclusions": ["Tips", "Personal expenses"],
-    "featuredImage": "/images/day-trips/lake-manyara.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Lake-manyara-day-trip.jpg",
     "priceFrom": 250,
     "isActive": true
   },
@@ -65,7 +65,7 @@
     "highlights": ["Walking Safari Option", "Mount Meru Views", "Momella Lakes", "Colobus Monkeys", "Giraffe"],
     "inclusions": ["Hotel pickup & dropoff", "4x4 vehicle", "Guide", "Park fees", "Lunch", "Water"],
     "exclusions": ["Tips", "Walking safari (optional extra)"],
-    "featuredImage": "/images/day-trips/arusha-np.jpg",
+    "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Arusha-National-Park-Day-trip.jpg",
     "priceFrom": 180,
     "isActive": true
   }

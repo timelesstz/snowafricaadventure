@@ -3,12 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   Search,
-  Filter,
   Grid,
   List,
   Trash2,
   RefreshCw,
-  Download,
   AlertTriangle,
   CheckCircle,
   Image as ImageIcon,
@@ -16,12 +14,12 @@ import {
   HardDrive,
   Link2,
   Link2Off,
-  FolderOpen,
   ChevronLeft,
   ChevronRight,
   X,
-  Info,
   Loader2,
+  CloudDownload,
+  Cloud,
 } from "lucide-react";
 import { clsx } from "clsx";
 import MediaUploader from "@/components/admin/MediaUploader";
@@ -52,6 +50,17 @@ interface Stats {
   folders: { name: string; count: number }[];
 }
 
+interface R2Item {
+  key: string;
+  url: string;
+  size: number;
+  lastModified: string;
+  isTracked: boolean;
+  usageCount: number;
+  filename: string;
+  folder: string;
+}
+
 interface MediaUsage {
   type: string;
   id: string;
@@ -60,8 +69,10 @@ interface MediaUsage {
 
 type ViewMode = "grid" | "list";
 type FilterMode = "all" | "orphaned" | "used";
+type TabMode = "database" | "r2";
 
 export default function MediaLibrary() {
+  // Database tab state
   const [media, setMedia] = useState<Media[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -80,6 +91,32 @@ export default function MediaLibrary() {
   const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
   const [mediaUsage, setMediaUsage] = useState<MediaUsage[]>([]);
 
+  // Tab state
+  const [activeTab, setActiveTab] = useState<TabMode>("database");
+
+  // R2 tab state
+  const [r2Items, setR2Items] = useState<R2Item[]>([]);
+  const [r2Loading, setR2Loading] = useState(false);
+  const [r2Search, setR2Search] = useState("");
+  const [r2Prefix, setR2Prefix] = useState("");
+  const [r2Filter, setR2Filter] = useState<"all" | "tracked" | "untracked">("all");
+  const [r2NextToken, setR2NextToken] = useState<string | undefined>();
+  const [r2HasMore, setR2HasMore] = useState(false);
+  const [r2SelectedKeys, setR2SelectedKeys] = useState<Set<string>>(new Set());
+  const [syncing, setSyncing] = useState(false);
+
+  const R2_PREFIXES = [
+    { label: "All", value: "" },
+    { label: "WP Uploads", value: "wp-content/uploads/" },
+    { label: "Routes", value: "routes/" },
+    { label: "Safaris", value: "safaris/" },
+    { label: "Destinations", value: "destinations/" },
+    { label: "Blog", value: "blog/" },
+    { label: "Uploads", value: "uploads/" },
+    { label: "Day Trips", value: "daytrips/" },
+  ];
+
+  // === Database tab functions ===
   const fetchMedia = useCallback(async () => {
     setLoading(true);
     try {
@@ -108,8 +145,10 @@ export default function MediaLibrary() {
   }, [page, filter, folder, search]);
 
   useEffect(() => {
-    fetchMedia();
-  }, [fetchMedia]);
+    if (activeTab === "database") {
+      fetchMedia();
+    }
+  }, [fetchMedia, activeTab]);
 
   const handleScanUsage = async () => {
     setScanning(true);
@@ -177,7 +216,6 @@ export default function MediaLibrary() {
 
   const handleSelectMedia = async (item: Media) => {
     setSelectedMedia(item);
-    // Fetch usage
     try {
       const res = await fetch(`/api/admin/media/${item.id}`);
       const data = await res.json();
@@ -206,6 +244,115 @@ export default function MediaLibrary() {
     }
   };
 
+  // === R2 tab functions ===
+  const fetchR2Items = useCallback(
+    async (append = false) => {
+      setR2Loading(true);
+      try {
+        const params = new URLSearchParams({ limit: "60" });
+        if (r2Prefix) params.set("prefix", r2Prefix);
+        if (r2Search) params.set("search", r2Search);
+        if (r2Filter !== "all") params.set("filter", r2Filter);
+        if (append && r2NextToken) params.set("token", r2NextToken);
+
+        const res = await fetch(`/api/admin/media/r2-browse?${params}`);
+        const data = await res.json();
+
+        if (append) {
+          setR2Items((prev) => [...prev, ...data.items]);
+        } else {
+          setR2Items(data.items);
+        }
+        setR2NextToken(data.nextToken);
+        setR2HasMore(data.hasMore);
+      } catch (error) {
+        console.error("Failed to browse R2:", error);
+      } finally {
+        setR2Loading(false);
+      }
+    },
+    [r2Prefix, r2Search, r2Filter, r2NextToken]
+  );
+
+  useEffect(() => {
+    if (activeTab === "r2") {
+      setR2Items([]);
+      setR2NextToken(undefined);
+      fetchR2Items();
+    }
+  }, [activeTab, r2Prefix, r2Filter]);
+
+  // Debounce R2 search
+  useEffect(() => {
+    if (activeTab !== "r2") return;
+    const timer = setTimeout(() => {
+      setR2NextToken(undefined);
+      fetchR2Items();
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [r2Search]);
+
+  const handleSyncR2 = async () => {
+    setSyncing(true);
+    try {
+      const res = await fetch("/api/admin/media/r2-browse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "sync" }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert(`Synced ${data.synced} new images from R2 to database`);
+        fetchR2Items();
+        fetchMedia();
+      }
+    } catch (error) {
+      console.error("Sync failed:", error);
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  const handleDeleteR2Selected = async () => {
+    if (r2SelectedKeys.size === 0) return;
+    if (!confirm(`Delete ${r2SelectedKeys.size} images from R2? This cannot be undone.`)) {
+      return;
+    }
+
+    setDeleting(true);
+    try {
+      const res = await fetch("/api/admin/media/r2-browse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "delete-r2",
+          keys: Array.from(r2SelectedKeys),
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert(`Deleted ${data.deleted} images from R2`);
+        setR2SelectedKeys(new Set());
+        fetchR2Items();
+      }
+    } catch (error) {
+      console.error("Delete failed:", error);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  const toggleR2Select = (key: string) => {
+    const newSet = new Set(r2SelectedKeys);
+    if (newSet.has(key)) {
+      newSet.delete(key);
+    } else {
+      newSet.add(key);
+    }
+    setR2SelectedKeys(newSet);
+  };
+
+  // === Shared helpers ===
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
     if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -279,379 +426,599 @@ export default function MediaLibrary() {
         </div>
       )}
 
-      {/* Toolbar */}
-      <div className="bg-white rounded-lg border p-4 space-y-4">
-        <div className="flex flex-wrap items-center gap-4">
-          {/* Search */}
-          <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search files..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(1);
-              }}
-              className="w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-            />
-          </div>
-
-          {/* Filter */}
-          <select
-            value={filter}
-            onChange={(e) => {
-              setFilter(e.target.value as FilterMode);
-              setPage(1);
-            }}
-            className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500"
-          >
-            <option value="all">All Images</option>
-            <option value="used">In Use</option>
-            <option value="orphaned">Orphaned</option>
-          </select>
-
-          {/* Folder */}
-          <select
-            value={folder}
-            onChange={(e) => {
-              setFolder(e.target.value);
-              setPage(1);
-            }}
-            className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500"
-          >
-            <option value="all">All Folders</option>
-            {stats?.folders.map((f) => (
-              <option key={f.name} value={f.name}>
-                {f.name} ({f.count})
-              </option>
-            ))}
-          </select>
-
-          {/* View Toggle */}
-          <div className="flex border rounded-lg overflow-hidden">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={clsx(
-                "p-2",
-                viewMode === "grid" ? "bg-slate-100" : "hover:bg-slate-50"
-              )}
-            >
-              <Grid className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={clsx(
-                "p-2",
-                viewMode === "list" ? "bg-slate-100" : "hover:bg-slate-50"
-              )}
-            >
-              <List className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Upload Button */}
+      {/* Tabs */}
+      <div className="bg-white rounded-lg border">
+        <div className="flex border-b">
           <button
-            onClick={() => setShowUploader(!showUploader)}
-            className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
-          >
-            Upload
-          </button>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 border-t">
-          <button
-            onClick={handleScanUsage}
-            disabled={scanning}
-            className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded-lg hover:bg-slate-50 disabled:opacity-50"
-          >
-            {scanning ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <RefreshCw className="w-4 h-4" />
+            onClick={() => setActiveTab("database")}
+            className={clsx(
+              "flex items-center gap-2 px-6 py-3 text-sm font-medium border-b-2 transition-colors",
+              activeTab === "database"
+                ? "border-amber-500 text-amber-700"
+                : "border-transparent text-slate-500 hover:text-slate-700"
             )}
-            Scan Usage
-          </button>
-
-          {stats && stats.orphanedCount > 0 && (
-            <button
-              onClick={handleDeleteOrphaned}
-              disabled={deleting}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm border border-amber-300 text-amber-700 rounded-lg hover:bg-amber-50 disabled:opacity-50"
-            >
-              <Trash2 className="w-4 h-4" />
-              Delete {stats.orphanedCount} Orphaned
-            </button>
-          )}
-
-          {selectedIds.size > 0 && (
-            <>
-              <span className="text-sm text-slate-500">
-                {selectedIds.size} selected
-              </span>
-              <button
-                onClick={handleDeleteSelected}
-                disabled={deleting}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-300 text-red-700 rounded-lg hover:bg-red-50 disabled:opacity-50"
-              >
-                <Trash2 className="w-4 h-4" />
-                Delete Selected
-              </button>
-              <button
-                onClick={() => setSelectedIds(new Set())}
-                className="text-sm text-slate-500 hover:text-slate-700"
-              >
-                Clear
-              </button>
-            </>
-          )}
-
-          <button
-            onClick={selectAll}
-            className="ml-auto text-sm text-slate-600 hover:text-slate-800"
           >
-            {selectedIds.size === media.length ? "Deselect All" : "Select All"}
+            <HardDrive className="w-4 h-4" />
+            Database Media
+          </button>
+          <button
+            onClick={() => setActiveTab("r2")}
+            className={clsx(
+              "flex items-center gap-2 px-6 py-3 text-sm font-medium border-b-2 transition-colors",
+              activeTab === "r2"
+                ? "border-blue-500 text-blue-700"
+                : "border-transparent text-slate-500 hover:text-slate-700"
+            )}
+          >
+            <Cloud className="w-4 h-4" />
+            R2 Bucket
           </button>
         </div>
-      </div>
 
-      {/* Uploader */}
-      {showUploader && (
-        <div className="bg-white rounded-lg border p-4">
-          <MediaUploader
-            onUpload={() => {
-              fetchMedia();
-            }}
-            onMultiUpload={() => {
-              fetchMedia();
-            }}
-            multiple
-            folder="uploads"
-          />
-        </div>
-      )}
+        {/* =================== DATABASE TAB =================== */}
+        {activeTab === "database" && (
+          <div className="p-4 space-y-4">
+            {/* Toolbar */}
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative flex-1 min-w-[200px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search files..."
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(1);
+                  }}
+                  className="w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                />
+              </div>
 
-      {/* Media Grid/List */}
-      {loading ? (
-        <div className="flex items-center justify-center h-64">
-          <Loader2 className="w-8 h-8 text-amber-600 animate-spin" />
-        </div>
-      ) : media.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-lg border">
-          <ImageIcon className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-          <p className="text-slate-500">No media found</p>
-        </div>
-      ) : viewMode === "grid" ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {media.map((item) => (
-            <div
-              key={item.id}
-              className={clsx(
-                "relative group bg-white rounded-lg border overflow-hidden cursor-pointer transition-all",
-                selectedIds.has(item.id)
-                  ? "ring-2 ring-amber-500"
-                  : "hover:shadow-md"
-              )}
-              onClick={() => handleSelectMedia(item)}
-            >
-              {/* Checkbox */}
-              <div
-                className="absolute top-2 left-2 z-10"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleSelect(item.id);
+              <select
+                value={filter}
+                onChange={(e) => {
+                  setFilter(e.target.value as FilterMode);
+                  setPage(1);
                 }}
+                className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500"
               >
-                <div
+                <option value="all">All Images</option>
+                <option value="used">In Use</option>
+                <option value="orphaned">Orphaned</option>
+              </select>
+
+              <select
+                value={folder}
+                onChange={(e) => {
+                  setFolder(e.target.value);
+                  setPage(1);
+                }}
+                className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500"
+              >
+                <option value="all">All Folders</option>
+                {stats?.folders.map((f) => (
+                  <option key={f.name} value={f.name}>
+                    {f.name} ({f.count})
+                  </option>
+                ))}
+              </select>
+
+              <div className="flex border rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setViewMode("grid")}
                   className={clsx(
-                    "w-5 h-5 rounded border-2 flex items-center justify-center transition-colors",
-                    selectedIds.has(item.id)
-                      ? "bg-amber-500 border-amber-500"
-                      : "bg-white/80 border-slate-300 group-hover:border-slate-400"
+                    "p-2",
+                    viewMode === "grid" ? "bg-slate-100" : "hover:bg-slate-50"
                   )}
                 >
-                  {selectedIds.has(item.id) && (
-                    <CheckCircle className="w-4 h-4 text-white" />
+                  <Grid className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode("list")}
+                  className={clsx(
+                    "p-2",
+                    viewMode === "list" ? "bg-slate-100" : "hover:bg-slate-50"
                   )}
-                </div>
+                >
+                  <List className="w-5 h-5" />
+                </button>
               </div>
 
-              {/* Usage Badge */}
-              <div
-                className={clsx(
-                  "absolute top-2 right-2 z-10 px-1.5 py-0.5 rounded text-xs font-medium",
-                  item.usageCount > 0
-                    ? "bg-green-100 text-green-700"
-                    : "bg-amber-100 text-amber-700"
-                )}
+              <button
+                onClick={() => setShowUploader(!showUploader)}
+                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
               >
-                {item.usageCount > 0 ? (
-                  <span className="flex items-center gap-1">
-                    <Link2 className="w-3 h-3" />
-                    {item.usageCount}
-                  </span>
-                ) : (
-                  <Link2Off className="w-3 h-3" />
-                )}
-              </div>
-
-              {/* Image */}
-              <div className="aspect-square bg-slate-100">
-                {item.mimeType.startsWith("image/") ? (
-                  <img
-                    src={item.thumbnailUrl || item.url}
-                    alt={item.alt || item.filename}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <FileText className="w-12 h-12 text-slate-300" />
-                  </div>
-                )}
-              </div>
-
-              {/* Info */}
-              <div className="p-2">
-                <p className="text-xs text-slate-700 truncate">{item.filename}</p>
-                <p className="text-xs text-slate-400">{formatSize(item.size)}</p>
-              </div>
+                Upload
+              </button>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="bg-white rounded-lg border overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-slate-50 border-b">
-              <tr>
-                <th className="w-8 px-4 py-3">
-                  <input
-                    type="checkbox"
-                    checked={selectedIds.size === media.length}
-                    onChange={selectAll}
-                    className="rounded"
-                  />
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
-                  Preview
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
-                  Filename
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
-                  Size
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
-                  Folder
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
-                  Usage
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
-                  Date
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {media.map((item) => (
-                <tr
-                  key={item.id}
-                  className="hover:bg-slate-50 cursor-pointer"
-                  onClick={() => handleSelectMedia(item)}
+
+            {/* Actions */}
+            <div className="flex flex-wrap items-center gap-3 pt-2 border-t">
+              <button
+                onClick={handleScanUsage}
+                disabled={scanning}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm border rounded-lg hover:bg-slate-50 disabled:opacity-50"
+              >
+                {scanning ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <RefreshCw className="w-4 h-4" />
+                )}
+                Scan Usage
+              </button>
+
+              <button
+                onClick={handleSyncR2}
+                disabled={syncing}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-50 disabled:opacity-50"
+              >
+                {syncing ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <CloudDownload className="w-4 h-4" />
+                )}
+                Sync from R2
+              </button>
+
+              {stats && stats.orphanedCount > 0 && (
+                <button
+                  onClick={handleDeleteOrphaned}
+                  disabled={deleting}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm border border-amber-300 text-amber-700 rounded-lg hover:bg-amber-50 disabled:opacity-50"
                 >
-                  <td className="px-4 py-3">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.has(item.id)}
-                      onChange={(e) => {
+                  <Trash2 className="w-4 h-4" />
+                  Delete {stats.orphanedCount} Orphaned
+                </button>
+              )}
+
+              {selectedIds.size > 0 && (
+                <>
+                  <span className="text-sm text-slate-500">
+                    {selectedIds.size} selected
+                  </span>
+                  <button
+                    onClick={handleDeleteSelected}
+                    disabled={deleting}
+                    className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-300 text-red-700 rounded-lg hover:bg-red-50 disabled:opacity-50"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Delete Selected
+                  </button>
+                  <button
+                    onClick={() => setSelectedIds(new Set())}
+                    className="text-sm text-slate-500 hover:text-slate-700"
+                  >
+                    Clear
+                  </button>
+                </>
+              )}
+
+              <button
+                onClick={selectAll}
+                className="ml-auto text-sm text-slate-600 hover:text-slate-800"
+              >
+                {selectedIds.size === media.length ? "Deselect All" : "Select All"}
+              </button>
+            </div>
+
+            {/* Uploader */}
+            {showUploader && (
+              <div className="bg-slate-50 rounded-lg border p-4">
+                <MediaUploader
+                  onUpload={() => fetchMedia()}
+                  onMultiUpload={() => fetchMedia()}
+                  multiple
+                  folder="uploads"
+                />
+              </div>
+            )}
+
+            {/* Media Grid/List */}
+            {loading ? (
+              <div className="flex items-center justify-center h-64">
+                <Loader2 className="w-8 h-8 text-amber-600 animate-spin" />
+              </div>
+            ) : media.length === 0 ? (
+              <div className="text-center py-12">
+                <ImageIcon className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                <p className="text-slate-500">No media found</p>
+                <p className="text-sm text-slate-400 mt-1">
+                  Try &quot;Sync from R2&quot; to import existing images
+                </p>
+              </div>
+            ) : viewMode === "grid" ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {media.map((item) => (
+                  <div
+                    key={item.id}
+                    className={clsx(
+                      "relative group bg-white rounded-lg border overflow-hidden cursor-pointer transition-all",
+                      selectedIds.has(item.id)
+                        ? "ring-2 ring-amber-500"
+                        : "hover:shadow-md"
+                    )}
+                    onClick={() => handleSelectMedia(item)}
+                  >
+                    <div
+                      className="absolute top-2 left-2 z-10"
+                      onClick={(e) => {
                         e.stopPropagation();
                         toggleSelect(item.id);
                       }}
-                      className="rounded"
-                    />
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="w-10 h-10 bg-slate-100 rounded overflow-hidden">
-                      {item.mimeType.startsWith("image/") ? (
-                        <img
-                          src={item.thumbnailUrl || item.url}
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <FileText className="w-5 h-5 m-auto text-slate-400" />
-                      )}
+                    >
+                      <div
+                        className={clsx(
+                          "w-5 h-5 rounded border-2 flex items-center justify-center transition-colors",
+                          selectedIds.has(item.id)
+                            ? "bg-amber-500 border-amber-500"
+                            : "bg-white/80 border-slate-300 group-hover:border-slate-400"
+                        )}
+                      >
+                        {selectedIds.has(item.id) && (
+                          <CheckCircle className="w-4 h-4 text-white" />
+                        )}
+                      </div>
                     </div>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-slate-700 max-w-xs truncate">
-                    {item.filename}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-slate-500">
-                    {formatSize(item.size)}
-                    {item.compressionPct && item.compressionPct > 0 && (
-                      <span className="text-green-600 ml-1">
-                        (-{item.compressionPct}%)
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-slate-500">
-                    {item.folder}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
+
+                    <div
                       className={clsx(
-                        "inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium",
+                        "absolute top-2 right-2 z-10 px-1.5 py-0.5 rounded text-xs font-medium",
                         item.usageCount > 0
                           ? "bg-green-100 text-green-700"
                           : "bg-amber-100 text-amber-700"
                       )}
                     >
                       {item.usageCount > 0 ? (
-                        <>
+                        <span className="flex items-center gap-1">
                           <Link2 className="w-3 h-3" />
-                          {item.usageCount} uses
-                        </>
+                          {item.usageCount}
+                        </span>
                       ) : (
-                        <>
-                          <Link2Off className="w-3 h-3" />
-                          Orphaned
-                        </>
+                        <Link2Off className="w-3 h-3" />
                       )}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-sm text-slate-500">
-                    {formatDate(item.createdAt)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+                    </div>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2">
-          <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            disabled={page === 1}
-            className="p-2 rounded-lg border hover:bg-slate-50 disabled:opacity-50"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <span className="text-sm text-slate-600">
-            Page {page} of {totalPages}
-          </span>
-          <button
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-            className="p-2 rounded-lg border hover:bg-slate-50 disabled:opacity-50"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-      )}
+                    <div className="aspect-square bg-slate-100">
+                      {item.mimeType.startsWith("image/") ? (
+                        <img
+                          src={item.thumbnailUrl || item.url}
+                          alt={item.alt || item.filename}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <FileText className="w-12 h-12 text-slate-300" />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="p-2">
+                      <p className="text-xs text-slate-700 truncate">{item.filename}</p>
+                      <p className="text-xs text-slate-400">{formatSize(item.size)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-lg border overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-slate-50 border-b">
+                    <tr>
+                      <th className="w-8 px-4 py-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.size === media.length && media.length > 0}
+                          onChange={selectAll}
+                          className="rounded"
+                        />
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
+                        Preview
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
+                        Filename
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
+                        Size
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
+                        Folder
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
+                        Usage
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-slate-500">
+                        Date
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {media.map((item) => (
+                      <tr
+                        key={item.id}
+                        className="hover:bg-slate-50 cursor-pointer"
+                        onClick={() => handleSelectMedia(item)}
+                      >
+                        <td className="px-4 py-3">
+                          <input
+                            type="checkbox"
+                            checked={selectedIds.has(item.id)}
+                            onChange={(e) => {
+                              e.stopPropagation();
+                              toggleSelect(item.id);
+                            }}
+                            className="rounded"
+                          />
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="w-10 h-10 bg-slate-100 rounded overflow-hidden">
+                            {item.mimeType.startsWith("image/") ? (
+                              <img
+                                src={item.thumbnailUrl || item.url}
+                                alt=""
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <FileText className="w-5 h-5 m-auto text-slate-400" />
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-sm text-slate-700 max-w-xs truncate">
+                          {item.filename}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-slate-500">
+                          {formatSize(item.size)}
+                          {item.compressionPct != null && item.compressionPct > 0 && (
+                            <span className="text-green-600 ml-1">
+                              (-{item.compressionPct}%)
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-slate-500">
+                          {item.folder}
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={clsx(
+                              "inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium",
+                              item.usageCount > 0
+                                ? "bg-green-100 text-green-700"
+                                : "bg-amber-100 text-amber-700"
+                            )}
+                          >
+                            {item.usageCount > 0 ? (
+                              <>
+                                <Link2 className="w-3 h-3" />
+                                {item.usageCount} uses
+                              </>
+                            ) : (
+                              <>
+                                <Link2Off className="w-3 h-3" />
+                                Orphaned
+                              </>
+                            )}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-sm text-slate-500">
+                          {formatDate(item.createdAt)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="p-2 rounded-lg border hover:bg-slate-50 disabled:opacity-50"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <span className="text-sm text-slate-600">
+                  Page {page} of {totalPages}
+                </span>
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="p-2 rounded-lg border hover:bg-slate-50 disabled:opacity-50"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* =================== R2 BUCKET TAB =================== */}
+        {activeTab === "r2" && (
+          <div className="p-4 space-y-4">
+            {/* Toolbar */}
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="relative flex-1 min-w-[200px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search R2 images by filename..."
+                  value={r2Search}
+                  onChange={(e) => setR2Search(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <select
+                value={r2Filter}
+                onChange={(e) => setR2Filter(e.target.value as "all" | "tracked" | "untracked")}
+                className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All R2 Images</option>
+                <option value="tracked">Tracked in DB</option>
+                <option value="untracked">Not in DB</option>
+              </select>
+
+              <button
+                onClick={handleSyncR2}
+                disabled={syncing}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              >
+                {syncing ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <CloudDownload className="w-4 h-4" />
+                )}
+                Sync All to DB
+              </button>
+            </div>
+
+            {/* Folder pills */}
+            <div className="flex flex-wrap gap-2">
+              {R2_PREFIXES.map((p) => (
+                <button
+                  key={p.value}
+                  onClick={() => {
+                    setR2Prefix(p.value);
+                    setR2NextToken(undefined);
+                  }}
+                  className={clsx(
+                    "px-3 py-1 text-sm rounded-full border transition-colors",
+                    r2Prefix === p.value
+                      ? "bg-blue-100 border-blue-300 text-blue-800"
+                      : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                  )}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+
+            {/* R2 Actions */}
+            {r2SelectedKeys.size > 0 && (
+              <div className="flex items-center gap-3 pt-2 border-t">
+                <span className="text-sm text-slate-500">
+                  {r2SelectedKeys.size} selected
+                </span>
+                <button
+                  onClick={handleDeleteR2Selected}
+                  disabled={deleting}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-300 text-red-700 rounded-lg hover:bg-red-50 disabled:opacity-50"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Delete from R2
+                </button>
+                <button
+                  onClick={() => setR2SelectedKeys(new Set())}
+                  className="text-sm text-slate-500 hover:text-slate-700"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
+
+            {/* R2 Grid */}
+            {r2Loading && r2Items.length === 0 ? (
+              <div className="flex items-center justify-center h-48">
+                <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+              </div>
+            ) : r2Items.length === 0 ? (
+              <div className="text-center py-12">
+                <Cloud className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                <p className="text-slate-500">No images found in R2</p>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                  {r2Items.map((item) => (
+                    <div
+                      key={item.key}
+                      className={clsx(
+                        "relative group rounded-lg border overflow-hidden cursor-pointer transition-all",
+                        r2SelectedKeys.has(item.key)
+                          ? "ring-2 ring-blue-500 border-blue-300"
+                          : "border-slate-200 hover:shadow-md"
+                      )}
+                      onClick={() => toggleR2Select(item.key)}
+                    >
+                      {/* Tracked badge */}
+                      <div
+                        className={clsx(
+                          "absolute top-1.5 right-1.5 z-10 px-1.5 py-0.5 rounded text-[10px] font-medium flex items-center gap-1",
+                          item.isTracked
+                            ? item.usageCount > 0
+                              ? "bg-green-100 text-green-700"
+                              : "bg-amber-100 text-amber-700"
+                            : "bg-slate-700 text-white"
+                        )}
+                      >
+                        {item.isTracked ? (
+                          item.usageCount > 0 ? (
+                            <>
+                              <Link2 className="w-3 h-3" />
+                              {item.usageCount}
+                            </>
+                          ) : (
+                            <>
+                              <Link2Off className="w-3 h-3" />
+                              Unused
+                            </>
+                          )
+                        ) : (
+                          "Untracked"
+                        )}
+                      </div>
+
+                      {/* Selected check */}
+                      {r2SelectedKeys.has(item.key) && (
+                        <div className="absolute top-1.5 left-1.5 z-10 p-0.5 bg-blue-500 rounded-full">
+                          <CheckCircle className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+
+                      <div className="aspect-square bg-slate-100">
+                        <img
+                          src={item.url}
+                          alt={item.filename}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+
+                      <div className="p-1.5">
+                        <p className="text-[11px] text-slate-700 truncate">
+                          {item.filename}
+                        </p>
+                        <p className="text-[10px] text-slate-400">
+                          {formatSize(item.size)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Load More */}
+                {r2HasMore && (
+                  <div className="text-center mt-4">
+                    <button
+                      onClick={() => fetchR2Items(true)}
+                      disabled={r2Loading}
+                      className="px-4 py-2 text-sm border rounded-lg hover:bg-slate-50 disabled:opacity-50"
+                    >
+                      {r2Loading ? (
+                        <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
+                      ) : null}
+                      Load More
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Detail Panel */}
       {selectedMedia && (
@@ -669,7 +1036,6 @@ export default function MediaLibrary() {
 
             <div className="p-4 overflow-y-auto max-h-[calc(90vh-120px)]">
               <div className="grid md:grid-cols-2 gap-6">
-                {/* Preview */}
                 <div>
                   {selectedMedia.mimeType.startsWith("image/") ? (
                     <img
@@ -684,7 +1050,6 @@ export default function MediaLibrary() {
                   )}
                 </div>
 
-                {/* Details */}
                 <div className="space-y-4">
                   <div>
                     <label className="text-xs text-slate-500">Filename</label>
@@ -695,7 +1060,7 @@ export default function MediaLibrary() {
                     <div>
                       <label className="text-xs text-slate-500">Size</label>
                       <p>{formatSize(selectedMedia.size)}</p>
-                      {selectedMedia.originalSize && selectedMedia.compressionPct && (
+                      {selectedMedia.originalSize && selectedMedia.compressionPct != null && (
                         <p className="text-xs text-green-600">
                           Saved {selectedMedia.compressionPct}% ({formatSize(selectedMedia.originalSize - selectedMedia.size)})
                         </p>
@@ -705,7 +1070,7 @@ export default function MediaLibrary() {
                       <label className="text-xs text-slate-500">Dimensions</label>
                       <p>
                         {selectedMedia.width && selectedMedia.height
-                          ? `${selectedMedia.width} × ${selectedMedia.height}`
+                          ? `${selectedMedia.width} x ${selectedMedia.height}`
                           : "N/A"}
                       </p>
                     </div>
@@ -734,7 +1099,6 @@ export default function MediaLibrary() {
                     </div>
                   </div>
 
-                  {/* Usage */}
                   <div>
                     <label className="text-xs text-slate-500 flex items-center gap-1">
                       <Link2 className="w-3 h-3" />

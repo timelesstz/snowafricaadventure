@@ -61,7 +61,7 @@ const placeholderCategories: Record<
         slug: "best-time-climb-kilimanjaro",
         excerpt:
           "Discover the optimal months for climbing Kilimanjaro based on weather patterns, crowd levels, and your personal preferences.",
-        featuredImage: "/images/blog/best-time-kili.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg",
         publishedAt: "2025-01-10",
         author: { name: "Joseph Moshi" },
       },
@@ -71,7 +71,7 @@ const placeholderCategories: Record<
         slug: "kilimanjaro-packing-list",
         excerpt:
           "A comprehensive packing list for your Kilimanjaro climb, from technical gear to personal items.",
-        featuredImage: "/images/blog/packing-list.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/safari-3242983_1280.jpg",
         publishedAt: "2025-01-05",
         author: { name: "Grace Kimaro" },
       },
@@ -81,7 +81,7 @@ const placeholderCategories: Record<
         slug: "machame-vs-lemosho-route-comparison",
         excerpt:
           "A detailed comparison of two of Kilimanjaro's most popular routes to help you decide.",
-        featuredImage: "/images/blog/route-comparison.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/mount-kilimanjaro-278082_1280.jpg",
         publishedAt: "2024-12-20",
         author: { name: "Joseph Moshi" },
       },
@@ -100,7 +100,7 @@ const placeholderCategories: Record<
         slug: "great-migration-guide",
         excerpt:
           "Track the annual wildebeest migration through Tanzania and Kenya with our month-by-month guide.",
-        featuredImage: "/images/blog/migration.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
         publishedAt: "2025-01-08",
         author: { name: "Emmanuel Ole" },
       },
@@ -110,7 +110,7 @@ const placeholderCategories: Record<
         slug: "safari-photography-tips",
         excerpt:
           "Essential tips for capturing stunning wildlife photos on your first safari adventure.",
-        featuredImage: "/images/blog/photography.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/safari-3242983_1280.jpg",
         publishedAt: "2024-12-15",
         author: { name: "Grace Kimaro" },
       },
@@ -129,7 +129,7 @@ const placeholderCategories: Record<
         slug: "tanzania-visa-requirements",
         excerpt:
           "Everything you need to know about getting a visa for Tanzania, including the new e-visa system.",
-        featuredImage: "/images/blog/visa.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg",
         publishedAt: "2025-01-12",
         author: { name: "Grace Kimaro" },
       },
@@ -139,7 +139,7 @@ const placeholderCategories: Record<
         slug: "best-time-visit-tanzania",
         excerpt:
           "A comprehensive guide to Tanzania's seasons and the best times for different activities.",
-        featuredImage: "/images/blog/tanzania-seasons.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
         publishedAt: "2024-12-28",
         author: { name: "Joseph Moshi" },
       },
@@ -158,7 +158,7 @@ const placeholderCategories: Record<
         slug: "things-to-do-zanzibar",
         excerpt:
           "From Stone Town to the beaches, discover the best experiences Zanzibar has to offer.",
-        featuredImage: "/images/blog/zanzibar-things.jpg",
+        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
         publishedAt: "2024-12-22",
         author: { name: "Grace Kimaro" },
       },
