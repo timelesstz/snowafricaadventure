@@ -83,6 +83,72 @@ html {
   color: var(--primary-foreground);
 }
 
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Content visibility for below-fold sections */
+.about-intro-section,
+.safari-section,
+.why-section,
+.testimonials-minimal,
+.destinations-section,
+.contact-section,
+.blog-section-home {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Prevent layout shifts from images */
+img {
+  content-visibility: auto;
+}
+
+/* Optimize paint for sections with background images */
+.hero-bg,
+.why-image,
+.contact-image {
+  will-change: auto;
+  contain: layout style paint;
+}
+
+/* TripAdvisor/Trustindex widget - prevent CLS */
+.tripadvisor-widget {
+  min-height: 320px;
+  contain: layout style;
+}
+
+.tripadvisor-widget-slider {
+  min-height: 280px;
+}
+
+.tripadvisor-widget-compact,
+.tripadvisor-widget-badge {
+  min-height: 120px;
+}
+
+/* Trustindex loaded content - force dimensions to prevent CLS */
+.trustindex-widget {
+  min-height: inherit;
+  contain: layout;
+}
+
+/* Force all Trustindex images to have explicit dimensions */
+.trustindex-widget img,
+[class*="trustindex"] img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Specifically target the Trustindex logo that causes CLS */
+.trustindex-widget img[src*="trustindex.io"] {
+  width: 100px;
+  height: 24px;
+  object-fit: contain;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

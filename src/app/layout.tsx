@@ -6,6 +6,7 @@ import { generateTourOperatorSchema, generateWebSiteSchema, generateLocalBusines
 import { ThemeProvider } from "@/components/theme-provider";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
+import TawkTo from "@/components/TawkTo";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -52,6 +53,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        {/* Preconnect to CDN for faster image loading */}
+        <link rel="preconnect" href="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev" />
+        <link rel="dns-prefetch" href="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev" />
+        {/* Preload hero image for LCP optimization */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp"
+          type="image/webp"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -77,6 +88,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <WebVitalsReporter endpoint="/api/analytics/vitals" />
+        <TawkTo />
       </body>
     </html>
   );

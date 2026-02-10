@@ -269,11 +269,51 @@ model Booking {
   utmSource       String?
   departure       GroupDeparture @relation(fields: [departureId], references: [id])
   commission      Commission?
+  climberTokens   ClimberToken[]
 
   @@index([departureId])
   @@index([status])
   @@index([leadEmail])
   @@index([source])
+}
+
+// ============================================
+// CLIMBER DETAILS COLLECTION SYSTEM
+// ============================================
+
+model ClimberToken {
+  id                  String    @id @default(cuid())
+  code                String    @unique // nanoid(10) token for URL
+  bookingId           String
+  climberIndex        Int       // 0 = lead, 1-9 = other climbers
+  climberName         String?   // Pre-filled name from booking
+  email               String?   // Email to send link to
+  isCompleted         Boolean   @default(false)
+  completedAt         DateTime?
+  expiresAt           DateTime  // 30 days from creation
+  reminderSentAt      DateTime? // First reminder (7 days before)
+  finalReminderSentAt DateTime? // Final reminder (3 days before)
+  createdAt           DateTime  @default(now())
+  booking             Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@index([code])
+  @@index([expiresAt])
+  @@index([isCompleted])
+}
+
+model NewsletterSubscription {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  name           String?
+  source         String?   // "booking", "climber_form", "website"
+  bookingId      String?   // Optional link to booking
+  isActive       Boolean   @default(true)
+  subscribedAt   DateTime  @default(now())
+  unsubscribedAt DateTime?
+
+  @@index([email])
+  @@index([isActive])
 }
 
 model PricingRule {
@@ -332,6 +372,7 @@ model Inquiry {
   arrivalDate    DateTime?
   additionalInfo String?
   relatedTo      String?
+  referralSource String?
   status         String    @default("new")
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
@@ -737,6 +778,8 @@ enum NotificationType {
   COMMISSION_EARNED
   SYSTEM_ALERT
   LOW_AVAILABILITY
+  CLIMBER_DETAILS_COMPLETED
+  CLIMBER_DETAILS_REMINDER
 }
 
 enum NotificationPriority {

@@ -54,6 +54,7 @@ const navItems: NavItem[] = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   // Content Management
   { href: "/admin/homepage", label: "Homepage", icon: Home, minRole: AdminRole.EDITOR },
+  { href: "/admin/about-us", label: "About Us", icon: Users, minRole: AdminRole.EDITOR },
   { href: "/admin/media", label: "Media Library", icon: Image, minRole: AdminRole.EDITOR },
   { href: "/admin/routes", label: "Trekking Routes", icon: Mountain, minRole: AdminRole.EDITOR },
   { href: "/admin/safaris", label: "Safari Packages", icon: Compass, minRole: AdminRole.EDITOR },

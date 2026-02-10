@@ -52,7 +52,7 @@ export default function NotFound() {
             Back to Home
           </Link>
           <Link
-            href="/contact-us"
+            href="/contact-us/"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium"
           >
             <Compass className="w-5 h-5" />
@@ -68,28 +68,28 @@ export default function NotFound() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Link
-              href="/trekking"
+              href="/trekking/"
               className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
             >
               <span className="font-medium text-slate-700">Kilimanjaro Treks</span>
               <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors" />
             </Link>
             <Link
-              href="/tanzania-safaris"
+              href="/tanzania-safaris/"
               className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
             >
               <span className="font-medium text-slate-700">Tanzania Safaris</span>
               <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors" />
             </Link>
             <Link
-              href="/kilimanjaro-join-group-departures"
+              href="/kilimanjaro-join-group-departures/"
               className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
             >
               <span className="font-medium text-slate-700">Group Departures</span>
               <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-500 transition-colors" />
             </Link>
             <Link
-              href="/tanzania-destinations"
+              href="/tanzania-destinations/"
               className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
             >
               <span className="font-medium text-slate-700">Safari Destinations</span>

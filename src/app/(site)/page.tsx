@@ -285,6 +285,9 @@ export default async function HomePage() {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
+            fetchPriority="high"
+            quality={85}
           />
           <div className="hero-overlay" />
         </div>
@@ -417,6 +420,8 @@ export default async function HomePage() {
                 alt="Snow Africa Adventure Team"
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
               />
               <div className="tripadvisor-badge">
                 <div className="tripadvisor-badge-inner">
@@ -485,6 +490,8 @@ export default async function HomePage() {
                 alt={route.title}
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                loading="lazy"
               />
               <div className="route-card-overlay">
                 <span className="route-card-tag">{i === 0 ? 'Most Popular' : route.physicalRating}</span>
@@ -524,6 +531,8 @@ export default async function HomePage() {
                   alt={featuredSafari.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                  loading="lazy"
                 />
                 <div className="safari-main-overlay">
                   <span className="badge badge-secondary">{featuredSafari.type}</span>
@@ -585,6 +594,8 @@ export default async function HomePage() {
             alt="Snow Africa Team"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
           />
         </div>
         <div className="why-content">
@@ -665,6 +676,8 @@ export default async function HomePage() {
                   alt={dest.title}
                   fill
                   className="object-cover"
+                  sizes={dest.wide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
+                  loading="lazy"
                 />
                 <div className="destination-overlay">
                   <h4>{dest.title}</h4>
@@ -686,6 +699,8 @@ export default async function HomePage() {
             alt="Safari landscape"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
           />
           <div className="contact-image-overlay">
             <span className="section-label">Start Planning</span>
@@ -765,6 +780,8 @@ export default async function HomePage() {
                       alt={post.title}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      loading="lazy"
                     />
                   </div>
                   <div className="blog-card-content">
@@ -783,6 +800,8 @@ export default async function HomePage() {
                       alt="Best Time to Climb Kilimanjaro"
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      loading="lazy"
                     />
                   </div>
                   <div className="blog-card-content">
@@ -797,6 +816,8 @@ export default async function HomePage() {
                       alt="Great Migration Guide"
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      loading="lazy"
                     />
                   </div>
                   <div className="blog-card-content">
@@ -811,6 +832,8 @@ export default async function HomePage() {
                       alt="Climbing Kilimanjaro"
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      loading="lazy"
                     />
                   </div>
                   <div className="blog-card-content">

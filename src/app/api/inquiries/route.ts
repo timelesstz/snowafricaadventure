@@ -12,12 +12,14 @@ const inquirySchema = z.object({
   phone: z.string().optional(),
   phonePrefix: z.string().optional(),
   nationality: z.string().optional(),
+  country: z.string().optional(),
   tripType: z.string().optional(),
   numAdults: z.coerce.number().optional(),
   numChildren: z.coerce.number().optional(),
   arrivalDate: z.string().optional(),
   additionalInfo: z.string().optional(),
   relatedTo: z.string().optional(),
+  referralSource: z.string().optional(),
   type: z.string().default("contact"),
 });
 
@@ -37,6 +39,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Use country as nationality if provided
+    const nationality = validatedData.country || validatedData.nationality || null;
+
     // Save to database
     const inquiry = await prisma.inquiry.create({
       data: {
@@ -44,13 +49,14 @@ export async function POST(request: NextRequest) {
         email: validatedData.email,
         phone: validatedData.phone || null,
         phonePrefix: validatedData.phonePrefix || null,
-        nationality: validatedData.nationality || null,
+        nationality,
         tripType: validatedData.tripType || null,
         numAdults: validatedData.numAdults || null,
         numChildren: validatedData.numChildren || null,
         arrivalDate,
         additionalInfo: validatedData.additionalInfo || null,
         relatedTo: validatedData.relatedTo || null,
+        referralSource: validatedData.referralSource || null,
         type: validatedData.type,
         status: "new",
       },

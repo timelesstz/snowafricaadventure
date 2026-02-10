@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { Users, Plus, X, Mail, User, ChevronDown, ChevronUp } from "lucide-react";
 
 export interface InviteFriend {
   name: string;
@@ -42,8 +43,10 @@ export function InviteFriendsSection({
     [friends, onChange]
   );
 
+  const filledCount = friends.filter((f) => f.name && f.email).length;
+
   return (
-    <div className="border border-[var(--border)] rounded-lg overflow-hidden">
+    <div className="rounded-xl border border-slate-200 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
       {/* Toggle Header */}
       <button
         type="button"
@@ -53,101 +56,88 @@ export function InviteFriendsSection({
             onChange([{ name: "", email: "" }]);
           }
         }}
-        className="w-full px-4 py-3 bg-[var(--surface)] hover:bg-[var(--muted)] flex items-center justify-between text-left transition-colors"
+        className="w-full px-5 py-4 flex items-center justify-between text-left transition-colors hover:bg-slate-100"
       >
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+            <Users className="w-5 h-5 text-amber-600" />
+          </div>
+          <div>
+            <span className="font-semibold text-slate-900 block">
+              Traveling with Friends or Family?
+            </span>
+            <span className="text-sm text-slate-500">
+              Invite them to join your adventure
+            </span>
+          </div>
+        </div>
         <div className="flex items-center gap-2">
-          <svg
-            className="w-5 h-5 text-[var(--primary)]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-            />
-          </svg>
-          <span className="font-medium text-[var(--text)]">
-            Invite Friends & Family
-          </span>
-          {friends.length > 0 && friends.some((f) => f.email) && (
-            <span className="text-xs bg-[var(--primary)] text-white px-2 py-0.5 rounded-full">
-              {friends.filter((f) => f.email).length}
+          {filledCount > 0 && (
+            <span className="text-xs bg-amber-500 text-white px-2.5 py-1 rounded-full font-medium">
+              {filledCount} invited
             </span>
           )}
+          {isExpanded ? (
+            <ChevronUp className="w-5 h-5 text-slate-400" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-slate-400" />
+          )}
         </div>
-        <svg
-          className={`w-5 h-5 text-[var(--text-muted)] transition-transform ${
-            isExpanded ? "rotate-180" : ""
-          }`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
       </button>
 
       {/* Expandable Content */}
       {isExpanded && (
-        <div className="p-4 border-t border-[var(--border)] space-y-4">
-          <p className="text-sm text-[var(--text-muted)]">
-            Planning to climb with friends? Add their details and we&apos;ll send them
-            an invitation email with all the trip information.
+        <div className="px-5 pb-5 pt-2 border-t border-slate-200 space-y-4">
+          <p className="text-sm text-slate-600 bg-amber-50 p-3 rounded-lg border border-amber-100">
+            Add your travel companions below. We&apos;ll send them an email invitation
+            with all the trip details so they can join the booking.
           </p>
 
           <div className="space-y-3">
             {friends.map((friend, index) => (
-              <div key={index} className="flex gap-2">
-                <div className="flex-1">
-                  <input
-                    type="text"
-                    name={`inviteName${index}`}
-                    value={friend.name}
-                    onChange={(e) => updateFriend(index, "name", e.target.value)}
-                    placeholder="Friend's name"
-                    className="w-full px-3 py-2 border border-[var(--border)] rounded-md focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] text-sm"
-                  />
-                </div>
-                <div className="flex-1">
-                  <input
-                    type="email"
-                    name={`inviteEmail${index}`}
-                    value={friend.email}
-                    onChange={(e) => updateFriend(index, "email", e.target.value)}
-                    placeholder="friend@email.com"
-                    className="w-full px-3 py-2 border border-[var(--border)] rounded-md focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] text-sm"
-                  />
-                </div>
-                {friends.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removeFriend(index)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"
-                    title="Remove"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+              <div
+                key={index}
+                className="relative bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                    Person {index + 1}
+                  </span>
+                  {friends.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeFriend(index)}
+                      className="ml-auto p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                      title="Remove person"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                )}
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="text"
+                      name={`inviteName${index}`}
+                      value={friend.name}
+                      onChange={(e) => updateFriend(index, "name", e.target.value)}
+                      placeholder="Full name"
+                      className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none"
+                    />
+                  </div>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="email"
+                      name={`inviteEmail${index}`}
+                      value={friend.email}
+                      onChange={(e) => updateFriend(index, "email", e.target.value)}
+                      placeholder="Email address"
+                      className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none"
+                    />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -156,27 +146,18 @@ export function InviteFriendsSection({
             <button
               type="button"
               onClick={addFriend}
-              className="text-sm text-[var(--primary)] hover:text-[var(--primary-dark)] font-medium flex items-center gap-1"
+              className="w-full py-3 border-2 border-dashed border-slate-300 rounded-lg text-slate-600 hover:border-amber-400 hover:text-amber-600 hover:bg-amber-50 transition-all flex items-center justify-center gap-2 font-medium"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              Add Another Friend ({friends.length}/{maxFriends})
+              <Plus className="w-5 h-5" />
+              Add Another Person
+              <span className="text-xs text-slate-400 font-normal">
+                ({friends.length}/{maxFriends})
+              </span>
             </button>
           )}
 
-          <p className="text-xs text-[var(--text-light)]">
-            Friends will receive an email invitation when you submit this form.
+          <p className="text-xs text-slate-400 text-center">
+            Friends will receive an invitation email when you submit this form
           </p>
         </div>
       )}
