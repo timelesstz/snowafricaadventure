@@ -13,9 +13,16 @@ import {
   adminNewBooking,
   adminNewInquiry,
   partnerNewCommission,
+  climberDetailsRequestToLead,
+  climberDetailsRequestIndividual,
+  climberDetailsCompleted,
+  climberDetailsReminder,
   BookingEmailData,
   InquiryEmailData,
   PartnerCommissionEmailData,
+  ClimberDetailsRequestData,
+  ClimberDetailsCompletedData,
+  ClimberDetailsReminderData,
 } from "./templates";
 
 // Partner CC email for commission notifications
@@ -159,5 +166,66 @@ export async function sendPartnerCommissionEmail(
   });
 }
 
-// Re-export for use in commission service
-export type { PartnerCommissionEmailData };
+// ============================================
+// CLIMBER DETAILS EMAILS
+// ============================================
+
+/**
+ * Send climber details request email (to lead or individual climber)
+ */
+export async function sendClimberDetailsRequestEmail(
+  data: ClimberDetailsRequestData
+): Promise<EmailResult> {
+  if (data.type === "lead" && data.leadEmail) {
+    return sendEmail({
+      to: data.leadEmail,
+      subject: `Collect Your Group's Details - ${data.routeName}`,
+      html: climberDetailsRequestToLead(data),
+    });
+  } else if (data.type === "individual" && data.recipientEmail) {
+    return sendEmail({
+      to: data.recipientEmail,
+      subject: `Complete Your Kilimanjaro Trek Details - ${data.routeName}`,
+      html: climberDetailsRequestIndividual(data),
+    });
+  }
+  return { success: false, error: "Invalid email type or missing recipient" };
+}
+
+/**
+ * Send climber details completed notification to admin
+ */
+export async function sendClimberDetailsCompletedEmail(
+  data: ClimberDetailsCompletedData
+): Promise<EmailResult> {
+  return sendAdminNotification(
+    `Climber Details Completed - ${data.bookingRef}`,
+    climberDetailsCompleted(data)
+  );
+}
+
+/**
+ * Send climber details reminder email
+ */
+export async function sendClimberDetailsReminderEmail(
+  recipientEmail: string,
+  data: ClimberDetailsReminderData
+): Promise<EmailResult> {
+  const subject = data.isUrgent
+    ? `Urgent: Complete Your Trek Details - ${data.daysRemaining} days left`
+    : `Reminder: Complete Your Kilimanjaro Trek Details`;
+
+  return sendEmail({
+    to: recipientEmail,
+    subject,
+    html: climberDetailsReminder(data),
+  });
+}
+
+// Re-export for use in other services
+export type {
+  PartnerCommissionEmailData,
+  ClimberDetailsRequestData,
+  ClimberDetailsCompletedData,
+  ClimberDetailsReminderData,
+};

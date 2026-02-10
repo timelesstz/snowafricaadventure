@@ -79,17 +79,13 @@ export function DeparturesBookingSection({
       {/* Booking Form */}
       <section id="booking-form" ref={bookingFormRef} className="py-12 bg-[var(--muted)]">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold text-center mb-8">
-              Book Your Spot
-            </h2>
-            <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-              <GroupBookingForm
-                departure={selectedDeparture}
-                onClearDeparture={handleClearDeparture}
-              />
-            </div>
-          </div>
+          <h2 className="font-heading text-3xl font-bold text-center mb-8">
+            Book Your Spot
+          </h2>
+          <GroupBookingForm
+            departure={selectedDeparture}
+            onClearDeparture={handleClearDeparture}
+          />
         </div>
       </section>
     </>

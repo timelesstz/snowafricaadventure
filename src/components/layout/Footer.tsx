@@ -215,7 +215,7 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <Link
-                href="/terms-conditions/"
+                href="/terms-and-conditions/"
                 className="hover:text-white transition-colors"
               >
                 Terms & Conditions

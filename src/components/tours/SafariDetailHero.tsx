@@ -62,7 +62,7 @@ export function SafariDetailHero({
             <nav className="flex items-center gap-2 text-[13px] font-medium text-white/70 mb-8">
               <Link href="/" className="hover:text-[var(--secondary)] transition-colors">Home</Link>
               <span>/</span>
-              <Link href="/tanzania-safaris" className="hover:text-[var(--secondary)] transition-colors">Tanzania Safaris</Link>
+              <Link href="/tanzania-safaris/" className="hover:text-[var(--secondary)] transition-colors">Tanzania Safaris</Link>
               <span>/</span>
               <span className="text-white/50">{title.split(' ').slice(0, 3).join(' ')}...</span>
             </nav>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp, Info } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PHONE_PREFIXES } from "@/lib/constants";
 import { AvailabilityBadge } from "@/components/ui/Badge";
@@ -25,11 +25,16 @@ interface GroupBookingFormProps {
   onClearDeparture: () => void;
 }
 
-interface ClimberDetail {
+interface LeadClimberDetail {
   name: string;
   nationality: string;
   dietaryRequirements: string;
   medicalConditions: string;
+}
+
+interface OtherClimberPlaceholder {
+  name: string;
+  email: string;
 }
 
 const NATIONALITIES = [
@@ -56,11 +61,17 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
   const [leadNationality, setLeadNationality] = useState("");
   const [totalClimbers, setTotalClimbers] = useState(1);
 
-  // Stage 2 fields
-  const [climbers, setClimbers] = useState<ClimberDetail[]>([
-    { name: "", nationality: "", dietaryRequirements: "", medicalConditions: "" },
-  ]);
+  // Stage 2 fields - Lead climber details
+  const [leadClimber, setLeadClimber] = useState<LeadClimberDetail>({
+    name: "",
+    nationality: "",
+    dietaryRequirements: "",
+    medicalConditions: "",
+  });
+  // Other climbers - just names/emails for sending links later
+  const [otherClimbers, setOtherClimbers] = useState<OtherClimberPlaceholder[]>([]);
   const [specialRequests, setSpecialRequests] = useState("");
+  const [subscribeNewsletter, setSubscribeNewsletter] = useState(false);
 
   // Success state
   const [bookingResult, setBookingResult] = useState<{
@@ -86,7 +97,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
 
   if (!departure) {
     return (
-      <div className="text-center py-16">
+      <div className="max-w-2xl mx-auto bg-white border border-[var(--border)] rounded-xl p-8 md:p-12 text-center">
         <div className="w-20 h-20 bg-[var(--surface)] rounded-full flex items-center justify-center mx-auto mb-6">
           <ChevronUp className="w-10 h-10 text-[var(--text-light)] animate-bounce" />
         </div>
@@ -111,29 +122,29 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     e.preventDefault();
     setError("");
 
-    // Initialize climber details array
-    const newClimbers: ClimberDetail[] = Array.from({ length: totalClimbers }, (_, i) => {
-      if (i === 0) {
-        return {
-          name: leadName,
-          nationality: leadNationality,
-          dietaryRequirements: "",
-          medicalConditions: "",
-        };
-      }
-      return climbers[i] || {
-        name: "",
-        nationality: "",
-        dietaryRequirements: "",
-        medicalConditions: "",
-      };
+    // Initialize lead climber details
+    setLeadClimber({
+      name: leadName,
+      nationality: leadNationality,
+      dietaryRequirements: "",
+      medicalConditions: "",
     });
-    setClimbers(newClimbers);
+
+    // Initialize other climber placeholders (for climbers 2+)
+    const otherCount = totalClimbers - 1;
+    const newOtherClimbers: OtherClimberPlaceholder[] = Array.from({ length: otherCount }, (_, i) => {
+      return otherClimbers[i] || { name: "", email: "" };
+    });
+    setOtherClimbers(newOtherClimbers);
     setStage(2);
   };
 
-  const updateClimber = (index: number, field: keyof ClimberDetail, value: string) => {
-    setClimbers((prev) => {
+  const updateLeadClimber = (field: keyof LeadClimberDetail, value: string) => {
+    setLeadClimber((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const updateOtherClimber = (index: number, field: keyof OtherClimberPlaceholder, value: string) => {
+    setOtherClimbers((prev) => {
       const updated = [...prev];
       updated[index] = { ...updated[index], [field]: value };
       return updated;
@@ -148,6 +159,22 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     try {
       const phone = leadPhone ? `${phonePrefix}${leadPhone}` : undefined;
 
+      // Build climbers array: lead climber is complete, others are placeholders
+      const allClimbers = [
+        {
+          name: leadClimber.name,
+          nationality: leadClimber.nationality || undefined,
+          dietaryRequirements: leadClimber.dietaryRequirements || undefined,
+          medicalConditions: leadClimber.medicalConditions || undefined,
+          isComplete: true,
+        },
+        ...otherClimbers.map((c) => ({
+          name: c.name || "",
+          email: c.email || undefined,
+          isComplete: false,
+        })),
+      ];
+
       const response = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -156,13 +183,9 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           leadName,
           leadEmail,
           leadPhone: phone,
-          climbers: climbers.map((c) => ({
-            name: c.name,
-            nationality: c.nationality || undefined,
-            dietaryRequirements: c.dietaryRequirements || undefined,
-            medicalConditions: c.medicalConditions || undefined,
-          })),
+          climbers: allClimbers,
           specialRequests: specialRequests || undefined,
+          subscribeNewsletter,
         }),
       });
 
@@ -188,7 +211,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
   // Success state
   if (stage === "success" && bookingResult) {
     return (
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto bg-white border border-[var(--border)] rounded-xl p-6 md:p-8">
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Check className="w-10 h-10 text-green-600" />
@@ -201,7 +224,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           </p>
         </div>
 
-        <div className="bg-[var(--surface)] rounded-lg p-6 mb-8">
+        <div className="bg-[var(--surface)] rounded-xl p-6 mb-8">
           <h4 className="font-heading font-semibold mb-4">Booking Summary</h4>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -227,7 +250,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           </div>
         </div>
 
-        <div className="bg-white border border-[var(--border)] rounded-lg p-6 mb-8">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 mb-8">
           <h4 className="font-heading font-semibold mb-4">What Happens Next?</h4>
           <ol className="space-y-4">
             <li className="flex gap-3">
@@ -246,8 +269,19 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
                 </p>
               </div>
             </li>
+            {bookingResult.summary.climbers > 1 && (
+              <li className="flex gap-3">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm">3</span>
+                <div>
+                  <p className="font-medium">Collect climber details</p>
+                  <p className="text-sm text-[var(--text-muted)]">
+                    After deposit confirmation, you&apos;ll receive links to share with your group so each climber can complete their details.
+                  </p>
+                </div>
+              </li>
+            )}
             <li className="flex gap-3">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm">3</span>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm">{bookingResult.summary.climbers > 1 ? 4 : 3}</span>
               <div>
                 <p className="font-medium">Balance due 60 days before departure</p>
                 <p className="text-sm text-[var(--text-muted)]">
@@ -269,11 +303,13 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
               setLeadPhone("");
               setLeadNationality("");
               setTotalClimbers(1);
-              setClimbers([{ name: "", nationality: "", dietaryRequirements: "", medicalConditions: "" }]);
+              setLeadClimber({ name: "", nationality: "", dietaryRequirements: "", medicalConditions: "" });
+              setOtherClimbers([]);
               setSpecialRequests("");
+              setSubscribeNewsletter(false);
               setBookingResult(null);
             }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white rounded-lg font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white rounded-xl font-medium transition-colors"
           >
             Book Another Departure
           </button>
@@ -352,251 +388,438 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     </div>
   );
 
+  // Route info card for left column
+  const routeInfoCard = (
+    <div className="bg-white border border-[var(--border)] rounded-xl p-5 sticky top-4">
+      <div className="space-y-4">
+        {/* Route Name */}
+        <div>
+          <h3 className="font-heading text-xl font-bold text-[var(--text)]">
+            {departure.route.name}
+          </h3>
+          {departure.isFullMoon && (
+            <span className="inline-flex items-center gap-1 mt-2 text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-medium">
+              {String.fromCodePoint(0x1F315)} Full Moon Summit
+            </span>
+          )}
+        </div>
+
+        {/* Date */}
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 rounded-full bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0">
+            <Calendar className="w-4 h-4 text-[var(--primary)]" />
+          </div>
+          <div>
+            <p className="text-sm text-[var(--text-muted)]">Dates</p>
+            <p className="font-medium text-[var(--text)]">
+              {format(new Date(departure.arrivalDate), "MMM d")} - {format(new Date(departure.endDate), "MMM d, yyyy")}
+            </p>
+          </div>
+        </div>
+
+        {/* Location */}
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 rounded-full bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0">
+            <MapPin className="w-4 h-4 text-[var(--primary)]" />
+          </div>
+          <div>
+            <p className="text-sm text-[var(--text-muted)]">Location</p>
+            <p className="font-medium text-[var(--text)]">Kilimanjaro, Tanzania</p>
+          </div>
+        </div>
+
+        {/* Availability */}
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 rounded-full bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0">
+            <Users className="w-4 h-4 text-[var(--primary)]" />
+          </div>
+          <div>
+            <p className="text-sm text-[var(--text-muted)]">Availability</p>
+            <div className="flex items-center gap-2">
+              <AvailabilityBadge available={availableSpots} total={departure.maxParticipants} />
+            </div>
+          </div>
+        </div>
+
+        {/* Price */}
+        <div className="pt-4 border-t border-[var(--border)]">
+          <p className="text-3xl font-bold text-[var(--primary-dark)]">{formatPrice(pricePerPerson)}</p>
+          <p className="text-sm text-[var(--text-muted)]">per person</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Enhanced price breakdown for right column
+  const priceBreakdownCard = (
+    <div className="bg-white border border-[var(--border)] rounded-xl p-5 sticky top-4">
+      <h4 className="font-heading font-bold text-lg mb-4">Price Breakdown</h4>
+
+      <div className="space-y-3">
+        {/* Line item */}
+        <div className="flex justify-between items-center text-sm">
+          <span className="text-[var(--text-muted)]">
+            {totalClimbers} climber{totalClimbers > 1 ? "s" : ""} × {formatPrice(pricePerPerson)}
+          </span>
+          <span className="font-semibold">{formatPrice(totalPrice)}</span>
+        </div>
+
+        <div className="border-t border-[var(--border)] pt-3 space-y-2">
+          {/* Deposit */}
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="font-medium text-[var(--primary-dark)]">10% Deposit</p>
+              <p className="text-xs text-[var(--text-muted)]">Due now to secure spot</p>
+            </div>
+            <span className="text-lg font-bold text-[var(--primary-dark)]">{formatPrice(depositAmount)}</span>
+          </div>
+
+          {/* Balance */}
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="font-medium text-[var(--text)]">Balance</p>
+              <p className="text-xs text-[var(--text-muted)]">Due 60 days before</p>
+            </div>
+            <span className="font-semibold text-[var(--text)]">{formatPrice(balanceAmount)}</span>
+          </div>
+        </div>
+
+        {/* Total */}
+        <div className="border-t border-[var(--border)] pt-3">
+          <div className="flex justify-between items-center">
+            <span className="font-heading font-bold text-lg">Total</span>
+            <span className="text-xl font-bold text-[var(--primary-dark)]">{formatPrice(totalPrice)}</span>
+          </div>
+        </div>
+
+        {/* Info */}
+        <div className="bg-[var(--surface)] rounded-lg p-3 mt-4">
+          <p className="text-xs text-[var(--text-muted)]">
+            <strong className="text-[var(--text)]">Secure your spot today!</strong> Pay just 10% now. Full balance due 60 days before departure.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="w-full">
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
           {error}
         </div>
       )}
 
-      {departureSummary}
+      {/* 3-Column Layout: Route Info | Form | Price Breakdown */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column - Route Info (25%) */}
+        <div className="lg:col-span-3">
+          {routeInfoCard}
+        </div>
 
-      {/* Stage 1: Lead contact + group size */}
-      {stage === 1 && (
-        <form onSubmit={handleStage1Submit} className="space-y-5">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="font-heading text-xl font-bold">Your Details</h3>
-            <span className="text-sm text-[var(--text-muted)]">Step 1 of 2</span>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Full Name */}
-            <div>
-              <label htmlFor="leadName" className="block text-sm font-medium text-[var(--text)] mb-1">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                id="leadName"
-                required
-                value={leadName}
-                onChange={(e) => setLeadName(e.target.value)}
-                className="w-full px-3 py-2.5 border border-[var(--border)] rounded-md text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-                placeholder="John Smith"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="leadEmail" className="block text-sm font-medium text-[var(--text)] mb-1">
-                Email Address *
-              </label>
-              <input
-                type="email"
-                id="leadEmail"
-                required
-                value={leadEmail}
-                onChange={(e) => setLeadEmail(e.target.value)}
-                className="w-full px-3 py-2.5 border border-[var(--border)] rounded-md text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-                placeholder="john@example.com"
-              />
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label htmlFor="leadPhone" className="block text-sm font-medium text-[var(--text)] mb-1">
-                Phone / WhatsApp
-              </label>
-              <div className="flex gap-2">
-                <select
-                  value={phonePrefix}
-                  onChange={(e) => setPhonePrefix(e.target.value)}
-                  className="w-24 px-2 py-2.5 border border-[var(--border)] rounded-md text-sm bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
-                >
-                  {PHONE_PREFIXES.map((p) => (
-                    <option key={p.code} value={p.code}>{p.code}</option>
-                  ))}
-                </select>
-                <input
-                  type="tel"
-                  id="leadPhone"
-                  value={leadPhone}
-                  onChange={(e) => setLeadPhone(e.target.value)}
-                  className="flex-1 px-3 py-2.5 border border-[var(--border)] rounded-md text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-                  placeholder="123 456 7890"
-                />
+        {/* Center Column - Form (50%) */}
+        <div className="lg:col-span-6">
+          {/* Stage 1: Lead contact + group size */}
+          {stage === 1 && (
+            <form onSubmit={handleStage1Submit} className="bg-white border border-[var(--border)] rounded-xl p-6 space-y-5">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-heading text-xl font-bold">Your Details</h3>
+                <span className="text-sm text-[var(--text-muted)] bg-[var(--surface)] px-3 py-1 rounded-full">Step 1 of 2</span>
               </div>
-            </div>
 
-            {/* Nationality */}
-            <div>
-              <label htmlFor="leadNationality" className="block text-sm font-medium text-[var(--text)] mb-1">
-                Nationality
-              </label>
-              <select
-                id="leadNationality"
-                value={leadNationality}
-                onChange={(e) => setLeadNationality(e.target.value)}
-                className="w-full px-3 py-2.5 border border-[var(--border)] rounded-md text-[var(--text)] bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-              >
-                <option value="">Select nationality</option>
-                {NATIONALITIES.map((n) => (
-                  <option key={n} value={n}>{n}</option>
-                ))}
-              </select>
-            </div>
-          </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {/* Full Name */}
+                <div>
+                  <label htmlFor="leadName" className="block text-sm font-medium text-[var(--text)] mb-1">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="leadName"
+                    required
+                    value={leadName}
+                    onChange={(e) => setLeadName(e.target.value)}
+                    className="w-full px-3 py-2.5 border border-[var(--border)] rounded-lg text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                    placeholder="John Smith"
+                  />
+                </div>
 
-          {/* Number of Climbers */}
-          <div>
-            <label htmlFor="totalClimbers" className="block text-sm font-medium text-[var(--text)] mb-1">
-              Number of Climbers *
-            </label>
-            <select
-              id="totalClimbers"
-              required
-              value={totalClimbers}
-              onChange={(e) => setTotalClimbers(parseInt(e.target.value))}
-              className="w-full md:w-48 px-3 py-2.5 border border-[var(--border)] rounded-md text-[var(--text)] bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-            >
-              {Array.from({ length: maxClimbers }, (_, i) => i + 1).map((n) => (
-                <option key={n} value={n}>
-                  {n} climber{n > 1 ? "s" : ""}
-                </option>
-              ))}
-            </select>
-            {availableSpots <= 3 && (
-              <p className="text-xs text-amber-600 mt-1">
-                Only {availableSpots} spot{availableSpots !== 1 ? "s" : ""} remaining!
-              </p>
-            )}
-          </div>
+                {/* Email */}
+                <div>
+                  <label htmlFor="leadEmail" className="block text-sm font-medium text-[var(--text)] mb-1">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="leadEmail"
+                    required
+                    value={leadEmail}
+                    onChange={(e) => setLeadEmail(e.target.value)}
+                    className="w-full px-3 py-2.5 border border-[var(--border)] rounded-lg text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                    placeholder="john@example.com"
+                  />
+                </div>
 
-          {priceBreakdown}
-
-          <button
-            type="submit"
-            className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors"
-          >
-            Continue to Climber Details
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </form>
-      )}
-
-      {/* Stage 2: Climber details + confirm */}
-      {stage === 2 && (
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="flex items-center justify-between mb-2">
-            <button
-              type="button"
-              onClick={() => setStage(1)}
-              className="flex items-center gap-1 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors text-sm"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </button>
-            <span className="text-sm text-[var(--text-muted)]">Step 2 of 2</span>
-          </div>
-
-          <h3 className="font-heading text-xl font-bold">Climber Details</h3>
-
-          <div className="space-y-4">
-            {climbers.map((climber, index) => (
-              <div key={index} className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
-                <h4 className="font-heading font-semibold text-sm mb-3">
-                  Climber {index + 1} {index === 0 ? "(Lead)" : ""}
-                </h4>
-                <div className="grid md:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={climber.name}
-                      onChange={(e) => updateClimber(index, "name", e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--border)] rounded-md text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-                      placeholder="Full name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
-                      Nationality
-                    </label>
+                {/* Phone */}
+                <div>
+                  <label htmlFor="leadPhone" className="block text-sm font-medium text-[var(--text)] mb-1">
+                    Phone / WhatsApp
+                  </label>
+                  <div className="flex gap-2">
                     <select
-                      value={climber.nationality}
-                      onChange={(e) => updateClimber(index, "nationality", e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--border)] rounded-md text-sm text-[var(--text)] bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                      value={phonePrefix}
+                      onChange={(e) => setPhonePrefix(e.target.value)}
+                      className="w-24 px-2 py-2.5 border border-[var(--border)] rounded-lg text-sm bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
                     >
-                      <option value="">Select</option>
-                      {NATIONALITIES.map((n) => (
-                        <option key={n} value={n}>{n}</option>
+                      {PHONE_PREFIXES.map((p) => (
+                        <option key={p.code} value={p.code}>{p.code}</option>
                       ))}
                     </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
-                      Dietary Requirements
-                    </label>
                     <input
-                      type="text"
-                      value={climber.dietaryRequirements}
-                      onChange={(e) => updateClimber(index, "dietaryRequirements", e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--border)] rounded-md text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-                      placeholder="e.g., Vegetarian, Halal"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
-                      Medical Conditions
-                    </label>
-                    <input
-                      type="text"
-                      value={climber.medicalConditions}
-                      onChange={(e) => updateClimber(index, "medicalConditions", e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--border)] rounded-md text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
-                      placeholder="e.g., Asthma, allergies"
+                      type="tel"
+                      id="leadPhone"
+                      value={leadPhone}
+                      onChange={(e) => setLeadPhone(e.target.value)}
+                      className="flex-1 px-3 py-2.5 border border-[var(--border)] rounded-lg text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                      placeholder="123 456 7890"
                     />
                   </div>
                 </div>
+
+                {/* Nationality */}
+                <div>
+                  <label htmlFor="leadNationality" className="block text-sm font-medium text-[var(--text)] mb-1">
+                    Nationality
+                  </label>
+                  <select
+                    id="leadNationality"
+                    value={leadNationality}
+                    onChange={(e) => setLeadNationality(e.target.value)}
+                    className="w-full px-3 py-2.5 border border-[var(--border)] rounded-lg text-[var(--text)] bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                  >
+                    <option value="">Select nationality</option>
+                    {NATIONALITIES.map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-            ))}
-          </div>
 
-          {/* Special Requests */}
-          <div>
-            <label htmlFor="specialRequests" className="block text-sm font-medium text-[var(--text)] mb-1">
-              Special Requests
-            </label>
-            <textarea
-              id="specialRequests"
-              rows={3}
-              value={specialRequests}
-              onChange={(e) => setSpecialRequests(e.target.value)}
-              className="w-full px-3 py-2.5 border border-[var(--border)] rounded-md text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors resize-none"
-              placeholder="Any special requirements or questions..."
-            />
-          </div>
+              {/* Number of Climbers */}
+              <div>
+                <label htmlFor="totalClimbers" className="block text-sm font-medium text-[var(--text)] mb-1">
+                  Number of Climbers *
+                </label>
+                <select
+                  id="totalClimbers"
+                  required
+                  value={totalClimbers}
+                  onChange={(e) => setTotalClimbers(parseInt(e.target.value))}
+                  className="w-full sm:w-48 px-3 py-2.5 border border-[var(--border)] rounded-lg text-[var(--text)] bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                >
+                  {Array.from({ length: maxClimbers }, (_, i) => i + 1).map((n) => (
+                    <option key={n} value={n}>
+                      {n} climber{n > 1 ? "s" : ""}
+                    </option>
+                  ))}
+                </select>
+                {availableSpots <= 3 && (
+                  <p className="text-xs text-amber-600 mt-1">
+                    Only {availableSpots} spot{availableSpots !== 1 ? "s" : ""} remaining!
+                  </p>
+                )}
+              </div>
 
-          {priceBreakdown}
+              {/* Mobile price summary */}
+              <div className="lg:hidden">{priceBreakdown}</div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-3 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? "Submitting..." : `Book Now — ${formatPrice(depositAmount)} deposit`}
-          </button>
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors"
+              >
+                Continue to Climber Details
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </form>
+          )}
 
-          <p className="text-xs text-center text-[var(--text-muted)]">
-            By booking you agree to our terms. A 10% deposit secures your spot.
-            Full balance is due 60 days before departure.
-          </p>
-        </form>
-      )}
+          {/* Stage 2: Lead climber details + other climbers (names only) + confirm */}
+          {stage === 2 && (
+            <form onSubmit={handleSubmit} className="bg-white border border-[var(--border)] rounded-xl p-6 space-y-5">
+              <div className="flex items-center justify-between mb-2">
+                <button
+                  type="button"
+                  onClick={() => setStage(1)}
+                  className="flex items-center gap-1 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors text-sm"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Back
+                </button>
+                <span className="text-sm text-[var(--text-muted)] bg-[var(--surface)] px-3 py-1 rounded-full">Step 2 of 2</span>
+              </div>
+
+              {/* Lead Climber Details (Required) */}
+              <div className="space-y-4">
+                <h3 className="font-heading text-xl font-bold">Your Details (Lead Climber)</h3>
+                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={leadClimber.name}
+                        onChange={(e) => updateLeadClimber("name", e.target.value)}
+                        className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                        placeholder="Your full name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
+                        Nationality
+                      </label>
+                      <select
+                        value={leadClimber.nationality}
+                        onChange={(e) => updateLeadClimber("nationality", e.target.value)}
+                        className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm text-[var(--text)] bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                      >
+                        <option value="">Select</option>
+                        {NATIONALITIES.map((n) => (
+                          <option key={n} value={n}>{n}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
+                        Dietary Requirements
+                      </label>
+                      <input
+                        type="text"
+                        value={leadClimber.dietaryRequirements}
+                        onChange={(e) => updateLeadClimber("dietaryRequirements", e.target.value)}
+                        className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                        placeholder="e.g., Vegetarian, Halal"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-[var(--text-muted)] mb-1">
+                        Medical Conditions
+                      </label>
+                      <input
+                        type="text"
+                        value={leadClimber.medicalConditions}
+                        onChange={(e) => updateLeadClimber("medicalConditions", e.target.value)}
+                        className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                        placeholder="e.g., Asthma, allergies"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Newsletter opt-in */}
+                  <div className="mt-4 pt-3 border-t border-[var(--border)]">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={subscribeNewsletter}
+                        onChange={(e) => setSubscribeNewsletter(e.target.checked)}
+                        className="w-4 h-4 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]"
+                      />
+                      <span className="text-sm text-[var(--text-muted)]">
+                        Subscribe to our newsletter for travel tips & exclusive offers
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {/* Other Climbers (Optional - they'll complete details later) */}
+              {totalClimbers > 1 && (
+                <div className="space-y-4">
+                  <div className="flex items-start gap-2">
+                    <h3 className="font-heading text-lg font-semibold">Other Climbers</h3>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Optional</span>
+                  </div>
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex gap-2">
+                    <Info className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-blue-700">
+                      After your deposit is confirmed, each climber will receive a personal link to complete their details. You can add their names/emails now or share links later.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {otherClimbers.map((climber, index) => (
+                      <div key={index} className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+                        <p className="text-xs font-medium text-[var(--text-muted)] mb-2">
+                          Climber {index + 2}
+                        </p>
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <input
+                              type="text"
+                              value={climber.name}
+                              onChange={(e) => updateOtherClimber(index, "name", e.target.value)}
+                              className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                              placeholder="Name (optional)"
+                            />
+                          </div>
+                          <div>
+                            <input
+                              type="email"
+                              value={climber.email}
+                              onChange={(e) => updateOtherClimber(index, "email", e.target.value)}
+                              className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors"
+                              placeholder="Email (optional)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Special Requests */}
+              <div>
+                <label htmlFor="specialRequests" className="block text-sm font-medium text-[var(--text)] mb-1">
+                  Special Requests
+                </label>
+                <textarea
+                  id="specialRequests"
+                  rows={3}
+                  value={specialRequests}
+                  onChange={(e) => setSpecialRequests(e.target.value)}
+                  className="w-full px-3 py-2.5 border border-[var(--border)] rounded-lg text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none transition-colors resize-none"
+                  placeholder="Any special requirements or questions..."
+                />
+              </div>
+
+              {/* Mobile price summary */}
+              <div className="lg:hidden">{priceBreakdown}</div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Submitting..." : `Book Now — ${formatPrice(depositAmount)} deposit`}
+              </button>
+
+              <p className="text-xs text-center text-[var(--text-muted)]">
+                By booking you agree to our terms. A 10% deposit secures your spot.
+                Full balance is due 60 days before departure.
+              </p>
+            </form>
+          )}
+        </div>
+
+        {/* Right Column - Price Breakdown (25%) */}
+        <div className="hidden lg:block lg:col-span-3">
+          {priceBreakdownCard}
+        </div>
+      </div>
     </div>
   );
 }

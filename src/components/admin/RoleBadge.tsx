@@ -1,7 +1,6 @@
 "use client";
 
-import { AdminRole } from "@prisma/client";
-import { getRoleName, getRoleColor } from "@/lib/auth-types";
+import { type AdminRole, getRoleName, getRoleColor } from "@/lib/auth-types-client";
 import { Shield, ShieldCheck, Edit, Eye } from "lucide-react";
 
 interface RoleBadgeProps {

@@ -55,7 +55,7 @@ export function RouteHero({
             Home
           </Link>
           <span>/</span>
-          <Link href="/trekking" className="hover:text-[var(--secondary)] transition-colors">
+          <Link href="/trekking/" className="hover:text-[var(--secondary)] transition-colors">
             Kilimanjaro
           </Link>
           <span>/</span>

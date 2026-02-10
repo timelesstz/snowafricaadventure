@@ -6,10 +6,11 @@ import { sendBookingInquiryEmails } from "@/lib/email/send";
 import { BookingEmailData } from "@/lib/email/templates";
 import { createCommission } from "@/lib/commission";
 import { BookingNotifications } from "@/lib/notifications";
+import { subscribeToNewsletter } from "@/lib/newsletter";
 
-// Climber schema
+// Climber schema - now supports partial data for non-lead climbers
 const climberSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(0), // Can be empty for non-lead climbers initially
   email: z.string().email().optional().or(z.literal("")),
   phone: z.string().optional(),
   nationality: z.string().optional(),
@@ -17,6 +18,7 @@ const climberSchema = z.object({
   dateOfBirth: z.string().optional(),
   dietaryRequirements: z.string().optional(),
   medicalConditions: z.string().optional(),
+  isComplete: z.boolean().optional(), // Tracks if climber details are complete
 });
 
 // Booking submission schema
@@ -28,6 +30,7 @@ const bookingSchema = z.object({
   climbers: z.array(climberSchema).min(1, "At least one climber is required"),
   specialRequests: z.string().optional(),
   partnerCode: z.string().optional(),
+  subscribeNewsletter: z.boolean().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -116,6 +119,18 @@ export async function POST(request: NextRequest) {
     }).catch((error) => {
       console.error("Failed to create commission:", error);
     });
+
+    // Subscribe lead to newsletter if opted in (non-blocking)
+    if (validatedData.subscribeNewsletter) {
+      subscribeToNewsletter({
+        email: validatedData.leadEmail,
+        name: validatedData.leadName,
+        source: "booking",
+        bookingId: booking.id,
+      }).catch((error) => {
+        console.error("Failed to subscribe to newsletter:", error);
+      });
+    }
 
     // Prepare email data
     const emailData: BookingEmailData = {

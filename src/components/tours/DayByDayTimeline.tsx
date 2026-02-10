@@ -242,7 +242,7 @@ export function DayByDayTimeline({ itinerary }: DayByDayTimelineProps) {
               Check Availability
             </Link>
             <Link
-              href="/contact-us"
+              href="/contact-us/"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-[var(--text)] font-heading font-semibold rounded-sm border-2 border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--surface)] transition-all"
             >
               Ask a Question

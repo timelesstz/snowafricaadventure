@@ -331,5 +331,42 @@ export const SystemNotifications = {
     }),
 };
 
+/**
+ * Create climber details notifications
+ */
+export const ClimberNotifications = {
+  detailsCompleted: (data: {
+    bookingId: string;
+    climberName: string;
+    climberIndex: number;
+    totalClimbers: number;
+    completedCount: number;
+  }) =>
+    createNotification({
+      type: NotificationType.CLIMBER_DETAILS_COMPLETED,
+      title: "Climber Details Completed",
+      message: `${data.climberName} completed their details (${data.completedCount}/${data.totalClimbers} climbers)`,
+      data,
+      priority:
+        data.completedCount === data.totalClimbers
+          ? NotificationPriority.HIGH
+          : NotificationPriority.NORMAL,
+    }),
+
+  detailsReminder: (data: {
+    bookingId: string;
+    climberName: string;
+    daysRemaining: number;
+    isUrgent: boolean;
+  }) =>
+    createNotification({
+      type: NotificationType.CLIMBER_DETAILS_REMINDER,
+      title: data.isUrgent ? "Urgent: Climber Details Pending" : "Climber Details Reminder",
+      message: `Reminder sent to ${data.climberName} (${data.daysRemaining} days remaining)`,
+      data,
+      priority: data.isUrgent ? NotificationPriority.HIGH : NotificationPriority.LOW,
+    }),
+};
+
 // Re-export types
 export { NotificationType, NotificationPriority };

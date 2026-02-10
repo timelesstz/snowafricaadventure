@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Save, Loader2, Trash2, AlertTriangle } from "lucide-react";
-import { AdminRole } from "@prisma/client";
 import { RoleBadge } from "@/components/admin/RoleBadge";
+import { type AdminRole } from "@/lib/auth-types-client";
 
 interface User {
   id: string;
@@ -177,10 +177,10 @@ export function EditUserForm({ user, isCurrentUser }: Props) {
               disabled={isCurrentUser}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent disabled:bg-slate-100"
             >
-              <option value={AdminRole.VIEWER}>Viewer - Read-only access</option>
-              <option value={AdminRole.EDITOR}>Editor - Can edit content</option>
-              <option value={AdminRole.ADMIN}>Admin - Full content access</option>
-              <option value={AdminRole.SUPER_ADMIN}>
+              <option value="VIEWER">Viewer - Read-only access</option>
+              <option value="EDITOR">Editor - Can edit content</option>
+              <option value="ADMIN">Admin - Full content access</option>
+              <option value="SUPER_ADMIN">
                 Super Admin - Full access including user management
               </option>
             </select>

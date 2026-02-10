@@ -2,6 +2,8 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { BookingStatus } from "@prisma/client";
+import { nanoid } from "nanoid";
+import { sendClimberDetailsRequestEmail } from "@/lib/email/send";
 
 // GET /api/admin/bookings/[id] - Get a single booking
 export async function GET(
@@ -113,9 +115,16 @@ export async function PUT(
     if (source !== undefined) updateData.source = source;
 
     // Handle deposit payment status change
+    // When deposit is marked as paid, generate climber tokens
+    let shouldGenerateTokens = false;
     if (depositPaid !== undefined && depositPaid !== currentBooking.depositPaid) {
       updateData.depositPaid = depositPaid;
       updateData.depositPaidAt = depositPaid ? new Date() : null;
+
+      // Only generate tokens when deposit is newly marked as paid
+      if (depositPaid && !currentBooking.depositPaid) {
+        shouldGenerateTokens = true;
+      }
     }
 
     // Handle balance payment status change
@@ -146,8 +155,94 @@ export async function PUT(
           },
         },
         commission: true,
+        climberTokens: true,
       },
     });
+
+    // Generate climber tokens if deposit was just paid and there are multiple climbers
+    if (shouldGenerateTokens && booking.totalClimbers > 1) {
+      const climberDetails = booking.climberDetails as Array<{
+        name?: string;
+        email?: string;
+        isComplete?: boolean;
+      }> | null;
+
+      // Generate tokens for climbers 2 through N (index 1+)
+      const tokensToCreate = [];
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 30); // 30 days expiration
+
+      for (let i = 1; i < booking.totalClimbers; i++) {
+        const climberData = climberDetails?.[i];
+        // Only create token if climber is not complete
+        if (!climberData?.isComplete) {
+          tokensToCreate.push({
+            code: nanoid(10),
+            bookingId: booking.id,
+            climberIndex: i,
+            climberName: climberData?.name || null,
+            email: climberData?.email || null,
+            expiresAt,
+          });
+        }
+      }
+
+      if (tokensToCreate.length > 0) {
+        await prisma.climberToken.createMany({
+          data: tokensToCreate,
+        });
+
+        // Fetch created tokens
+        const createdTokens = await prisma.climberToken.findMany({
+          where: { bookingId: booking.id },
+        });
+
+        // Send email to lead climber with all climber links
+        sendClimberDetailsRequestEmail({
+          type: "lead",
+          leadName: booking.leadName,
+          leadEmail: booking.leadEmail,
+          routeName: booking.departure.route.title,
+          departureDate: booking.departure.arrivalDate.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          }),
+          bookingRef: booking.id.slice(-8).toUpperCase(),
+          totalClimbers: booking.totalClimbers,
+          tokens: createdTokens.map((t) => ({
+            climberIndex: t.climberIndex,
+            climberName: t.climberName,
+            code: t.code,
+          })),
+        }).catch((error) => {
+          console.error("Failed to send climber details request email:", error);
+        });
+
+        // Also send individual emails to climbers with known emails
+        for (const token of createdTokens) {
+          if (token.email) {
+            sendClimberDetailsRequestEmail({
+              type: "individual",
+              recipientEmail: token.email,
+              recipientName: token.climberName,
+              leadName: booking.leadName,
+              routeName: booking.departure.route.title,
+              departureDate: booking.departure.arrivalDate.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              }),
+              token: token.code,
+            }).catch((error) => {
+              console.error("Failed to send individual climber email:", error);
+            });
+          }
+        }
+      }
+    }
 
     return NextResponse.json(booking);
   } catch (error) {

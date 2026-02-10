@@ -19,6 +19,10 @@ import {
   Check,
   X,
   Trash2,
+  Copy,
+  Send,
+  ExternalLink,
+  RefreshCw,
 } from "lucide-react";
 import { BookingStatusBadge } from "@/components/admin/bookings/BookingStatusBadge";
 import { PaymentStatus } from "@/components/admin/bookings/PaymentStatus";
@@ -62,6 +66,20 @@ interface Booking {
   };
 }
 
+interface ClimberTokenData {
+  index: number;
+  isLead: boolean;
+  name: string | null;
+  email: string | null;
+  isComplete: boolean;
+  token: {
+    id: string;
+    code: string;
+    expiresAt: string;
+    isCompleted: boolean;
+  } | null;
+}
+
 const BOOKING_STATUSES: { value: BookingStatus; label: string }[] = [
   { value: "INQUIRY", label: "Inquiry" },
   { value: "PENDING", label: "Pending Deposit" },
@@ -98,8 +116,16 @@ export default function BookingDetailPage() {
     notes: "",
   });
 
+  // Climber tokens state
+  const [climberTokens, setClimberTokens] = useState<ClimberTokenData[]>([]);
+  const [climberTokensLoading, setClimberTokensLoading] = useState(false);
+  const [climberEmails, setClimberEmails] = useState<Record<number, string>>({});
+  const [sendingEmail, setSendingEmail] = useState<number | null>(null);
+  const [copiedToken, setCopiedToken] = useState<string | null>(null);
+
   useEffect(() => {
     fetchBooking();
+    fetchClimberTokens();
   }, [id]);
 
   const fetchBooking = async () => {
@@ -126,6 +152,120 @@ export default function BookingDetailPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchClimberTokens = async () => {
+    setClimberTokensLoading(true);
+    try {
+      const response = await fetch(`/api/admin/bookings/${id}/climber-tokens`);
+      if (response.ok) {
+        const data = await response.json();
+        setClimberTokens(data.climbers || []);
+        // Pre-fill email inputs
+        const emails: Record<number, string> = {};
+        data.climbers?.forEach((c: ClimberTokenData) => {
+          if (c.email) emails[c.index] = c.email;
+        });
+        setClimberEmails(emails);
+      }
+    } catch (e) {
+      console.error("Failed to fetch climber tokens:", e);
+    } finally {
+      setClimberTokensLoading(false);
+    }
+  };
+
+  const handleGenerateTokens = async () => {
+    try {
+      const response = await fetch(`/api/admin/bookings/${id}/climber-tokens`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "generate" }),
+      });
+      if (response.ok) {
+        fetchClimberTokens();
+        setSuccess("Climber tokens generated");
+        setTimeout(() => setSuccess(""), 3000);
+      }
+    } catch (e) {
+      setError("Failed to generate tokens");
+    }
+  };
+
+  const handleSendLink = async (climberIndex: number) => {
+    const email = climberEmails[climberIndex];
+    if (!email) {
+      setError("Please enter an email address");
+      return;
+    }
+    setSendingEmail(climberIndex);
+    try {
+      const response = await fetch(`/api/admin/bookings/${id}/climber-tokens`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "resend", climberIndex, email }),
+      });
+      if (response.ok) {
+        setSuccess(`Email sent to ${email}`);
+        setTimeout(() => setSuccess(""), 3000);
+        fetchClimberTokens();
+      } else {
+        setError("Failed to send email");
+      }
+    } catch {
+      setError("Failed to send email");
+    } finally {
+      setSendingEmail(null);
+    }
+  };
+
+  const handleSendAllLinks = async () => {
+    const emails = Object.entries(climberEmails)
+      .filter(([_, email]) => email)
+      .map(([index, email]) => ({ climberIndex: parseInt(index), email }));
+
+    if (emails.length === 0) {
+      setError("No emails to send");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/admin/bookings/${id}/climber-tokens`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "send_all", emails }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setSuccess(`Sent ${data.emailsSent} emails`);
+        setTimeout(() => setSuccess(""), 3000);
+      }
+    } catch {
+      setError("Failed to send emails");
+    }
+  };
+
+  const handleSendToLead = async () => {
+    try {
+      const response = await fetch(`/api/admin/bookings/${id}/climber-tokens`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "send_to_lead" }),
+      });
+      if (response.ok) {
+        setSuccess("Email sent to lead climber");
+        setTimeout(() => setSuccess(""), 3000);
+      }
+    } catch {
+      setError("Failed to send email to lead");
+    }
+  };
+
+  const handleCopyLink = async (code: string) => {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    await navigator.clipboard.writeText(`${baseUrl}/complete-details/${code}`);
+    setCopiedToken(code);
+    setTimeout(() => setCopiedToken(null), 2000);
   };
 
   const handleSave = async () => {
@@ -424,6 +564,154 @@ export default function BookingDetailPage() {
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none resize-none"
             />
           </div>
+
+          {/* Climber Details Status */}
+          {formData.totalClimbers > 1 && (
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                  <Users className="w-5 h-5 text-slate-400" />
+                  Climber Details Status
+                </h2>
+                <button
+                  onClick={fetchClimberTokens}
+                  className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                  title="Refresh"
+                >
+                  <RefreshCw className={`w-4 h-4 text-slate-500 ${climberTokensLoading ? "animate-spin" : ""}`} />
+                </button>
+              </div>
+
+              {/* Progress bar */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-green-500 transition-all"
+                    style={{
+                      width: `${(climberTokens.filter((c) => c.isComplete).length / formData.totalClimbers) * 100}%`,
+                    }}
+                  />
+                </div>
+                <span className="text-sm font-medium text-slate-600">
+                  {climberTokens.filter((c) => c.isComplete).length}/{formData.totalClimbers} complete
+                </span>
+              </div>
+
+              {/* Climber list */}
+              <div className="space-y-3">
+                {climberTokens.map((climber) => (
+                  <div
+                    key={climber.index}
+                    className={`border rounded-lg p-3 ${
+                      climber.isComplete ? "border-green-200 bg-green-50" : "border-slate-200"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        {climber.isComplete ? (
+                          <Check className="w-5 h-5 text-green-600" />
+                        ) : (
+                          <div className="w-5 h-5 rounded-full border-2 border-slate-300" />
+                        )}
+                        <span className="font-medium text-slate-800">
+                          {climber.name || `Climber ${climber.index + 1}`}
+                          {climber.isLead && (
+                            <span className="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">
+                              Lead
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                      <span className={`text-sm ${climber.isComplete ? "text-green-600" : "text-slate-500"}`}>
+                        {climber.isComplete ? "Complete" : "Pending"}
+                      </span>
+                    </div>
+
+                    {/* Actions for non-lead, non-complete climbers */}
+                    {!climber.isLead && !climber.isComplete && climber.token && (
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <input
+                          type="email"
+                          value={climberEmails[climber.index] || ""}
+                          onChange={(e) =>
+                            setClimberEmails({ ...climberEmails, [climber.index]: e.target.value })
+                          }
+                          placeholder="Email address"
+                          className="flex-1 min-w-[200px] px-3 py-1.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                        />
+                        <button
+                          onClick={() => handleSendLink(climber.index)}
+                          disabled={sendingEmail === climber.index}
+                          className="flex items-center gap-1 px-3 py-1.5 text-sm bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors disabled:opacity-50"
+                        >
+                          {sendingEmail === climber.index ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <Send className="w-4 h-4" />
+                          )}
+                          Send Link
+                        </button>
+                        <button
+                          onClick={() => handleCopyLink(climber.token!.code)}
+                          className="flex items-center gap-1 px-3 py-1.5 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
+                        >
+                          {copiedToken === climber.token.code ? (
+                            <>
+                              <Check className="w-4 h-4 text-green-600" />
+                              Copied
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4" />
+                              Copy
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Show that token needs to be generated */}
+                    {!climber.isLead && !climber.isComplete && !climber.token && (
+                      <p className="mt-2 text-sm text-slate-500">
+                        Token not generated. Generate tokens to enable link sharing.
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Bulk actions */}
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-200">
+                {!formData.depositPaid && (
+                  <p className="text-sm text-amber-600 w-full">
+                    Note: Climber tokens are automatically generated when deposit is marked as paid.
+                  </p>
+                )}
+                {climberTokens.some((c) => !c.token && !c.isLead && !c.isComplete) && (
+                  <button
+                    onClick={handleGenerateTokens}
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors text-sm"
+                  >
+                    Generate Missing Tokens
+                  </button>
+                )}
+                <button
+                  onClick={handleSendAllLinks}
+                  className="flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors text-sm"
+                >
+                  <Send className="w-4 h-4" />
+                  Send All Pending Links
+                </button>
+                <button
+                  onClick={handleSendToLead}
+                  className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors text-sm"
+                >
+                  <Mail className="w-4 h-4" />
+                  Send Summary to Lead
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex justify-between">
