@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -9,9 +12,11 @@ import {
   Youtube,
 } from "lucide-react";
 import { SITE_CONFIG, FOOTER_NAV } from "@/lib/constants";
+import { useTheme } from "@/components/theme-provider";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { logo } = useTheme();
 
   return (
     <footer className="bg-[var(--primary-dark)] text-slate-300">
@@ -21,15 +26,27 @@ export function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-[var(--primary)] rounded-full flex items-center justify-center">
-                <span className="text-white font-bold">SA</span>
-              </div>
-              <div>
-                <div className="font-heading font-bold text-white">
-                  Snow Africa
-                </div>
-                <div className="text-xs text-slate-400 -mt-1">Adventure</div>
-              </div>
+              {(logo.logoDarkUrl || logo.logoUrl) ? (
+                <Image
+                  src={logo.logoDarkUrl || logo.logoUrl!}
+                  alt={SITE_CONFIG.name}
+                  width={140}
+                  height={40}
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <>
+                  <div className="w-10 h-10 bg-[var(--primary)] rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">SA</span>
+                  </div>
+                  <div>
+                    <div className="font-heading font-bold text-white">
+                      Snow Africa
+                    </div>
+                    <div className="text-xs text-slate-400 -mt-1">Adventure</div>
+                  </div>
+                </>
+              )}
             </div>
             <p className="text-sm mb-4">
               Experience the adventure of a lifetime with expert-led Kilimanjaro

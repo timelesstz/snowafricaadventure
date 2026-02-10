@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Trash2, Eye } from "lucide-react";
+import { ArrowLeft, Eye } from "lucide-react";
 import ImageUploadField from "@/components/admin/ImageUploadField";
+import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 
 async function getBlogPost(id: string) {
   if (id === "new") return null;
@@ -260,42 +261,30 @@ export default async function BlogEditPage({
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
-            {!isNew && (
-              <form action={deletePost}>
-                <input type="hidden" name="id" value={id} />
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg"
-                  onClick={(e) => {
-                    if (!confirm("Are you sure you want to delete this post?")) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Delete Post
-                </button>
-              </form>
-            )}
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admin/blog"
-              className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
-            >
-              Cancel
-            </Link>
-            <button
-              type="submit"
-              className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
-            >
-              {isNew ? "Create Post" : "Save Changes"}
-            </button>
-          </div>
+        <div className="flex items-center justify-end gap-3">
+          <Link
+            href="/admin/blog"
+            className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+          >
+            {isNew ? "Create Post" : "Save Changes"}
+          </button>
         </div>
       </form>
+
+      {!isNew && (
+        <div className="flex items-center justify-start">
+          <form action={deletePost}>
+            <input type="hidden" name="id" value={id} />
+            <ConfirmDeleteButton message="Are you sure you want to delete this post?" label="Delete Post" />
+          </form>
+        </div>
+      )}
     </div>
   );
 }

@@ -109,7 +109,7 @@ export function bookingInquiryReceived(data: BookingEmailData): string {
         </tr>
         <tr>
           <td class="info-label">Deposit Required:</td>
-          <td class="info-value">$${data.depositAmount.toLocaleString()} (30%)</td>
+          <td class="info-value">$${data.depositAmount.toLocaleString()} (10%)</td>
         </tr>
       </table>
     </div>

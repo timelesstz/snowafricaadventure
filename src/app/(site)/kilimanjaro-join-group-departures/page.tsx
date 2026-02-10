@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { DeparturesTable } from "@/components/departures/DeparturesTable";
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { DeparturesBookingSection } from "@/components/departures/DeparturesBookingSection";
 import { generateMetadata as genMeta, generateEventSchema, generateAggregateRatingSchema, generateFAQSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
@@ -10,13 +9,13 @@ import { ShareButtons } from "@/components/social/ShareButtons";
 
 export const metadata: Metadata = {
   ...genMeta({
-    title: "Kilimanjaro Join Group Departures 2025-2026",
+    title: "Kilimanjaro Join Group Departures 2026-2027",
     description:
       "Join our scheduled Kilimanjaro group climbs with fixed departure dates. Share the adventure with fellow climbers and save. Book your spot today!",
     url: "/kilimanjaro-join-group-departures/",
   }),
   openGraph: {
-    title: "Kilimanjaro Group Departures 2025-2026 | Snow Africa Adventure",
+    title: "Kilimanjaro Group Departures 2026-2027 | Snow Africa Adventure",
     description: "Join scheduled Kilimanjaro group climbs with expert local guides. 95%+ summit success rate, small groups (max 10), full moon climbs available.",
     url: `${SITE_CONFIG.url}/kilimanjaro-join-group-departures/`,
     siteName: SITE_CONFIG.name,
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kilimanjaro Group Departures 2025-2026",
+    title: "Kilimanjaro Group Departures 2026-2027",
     description: "Join scheduled Kilimanjaro group climbs. Expert guides, 95%+ success rate, full moon climbs available.",
     images: [`${SITE_CONFIG.url}/images/kilimanjaro-group-climb-og.jpg`],
   },
@@ -76,13 +75,10 @@ async function getDeparturesByYear(year: number) {
 
 export default async function GroupDeparturesPage() {
   // Fetch real data from database
-  const [departures2025, departures2026] = await Promise.all([
-    getDeparturesByYear(2025),
-    getDeparturesByYear(2026),
-  ]);
+  const departures2026 = await getDeparturesByYear(2026);
 
-  // Generate Event schemas for featured departures (first 5 from each year)
-  const allDepartures = [...departures2025, ...departures2026];
+  // Generate Event schemas for featured departures
+  const allDepartures = departures2026;
   const eventSchemas = allDepartures.slice(0, 10).map((dep) =>
     generateEventSchema({
       name: `${dep.route.name} - Kilimanjaro Group Climb`,
@@ -119,7 +115,7 @@ export default async function GroupDeparturesPage() {
     {
       question: "What is the deposit and payment schedule?",
       answer:
-        "A 30% deposit secures your spot. The remaining balance is due 60 days before your departure date.",
+        "A 10% deposit secures your spot. The remaining balance is due 60 days before your departure date.",
     },
     {
       question: "What happens if a departure doesn't reach minimum numbers?",
@@ -208,18 +204,6 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
-      {/* 2025 Departures */}
-      {departures2025.length > 0 && (
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <h2 className="font-heading text-3xl font-bold mb-8">
-              2025 Departures
-            </h2>
-            <DeparturesTable departures={departures2025} year={2025} />
-          </div>
-        </section>
-      )}
-
       {/* Reviews Section */}
       <section className="py-12 bg-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">
@@ -245,17 +229,29 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
-      {/* 2026 Departures */}
+      {/* 2026 Departures + Booking Form */}
       {departures2026.length > 0 && (
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <h2 className="font-heading text-3xl font-bold mb-8">
-              2026 Departures
-            </h2>
-            <DeparturesTable departures={departures2026} year={2026} />
-          </div>
-        </section>
+        <DeparturesBookingSection departures={departures2026} year={2026} />
       )}
+
+      {/* 2027 Departures - Coming Soon */}
+      <section className="py-12 bg-[var(--surface)]">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-heading text-3xl font-bold mb-4">
+            2027 Departures — Coming Soon!
+          </h2>
+          <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
+            We&apos;re finalizing our 2027 Kilimanjaro group climb schedule.
+            Contact us to express your interest and be the first to know when dates are released.
+          </p>
+          <Link
+            href="#booking-form"
+            className="inline-block bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-3 rounded-lg font-medium transition-colors"
+          >
+            Register Your Interest
+          </Link>
+        </div>
+      </section>
 
       {/* Route Comparison */}
       <section className="py-12 bg-[var(--surface)]">
@@ -379,20 +375,6 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
-      {/* Booking Form */}
-      <section id="booking-form" className="py-12 bg-[var(--muted)]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold text-center mb-8">
-              Book Your Spot
-            </h2>
-            <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-              <InquiryForm tripType="Kilimanjaro" variant="full" />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="py-12">
         <div className="container mx-auto px-4">
@@ -415,7 +397,7 @@ export default async function GroupDeparturesPage() {
                 What is the deposit and payment schedule?
               </summary>
               <div className="px-4 pb-4 text-[var(--text-muted)]">
-                A 30% deposit secures your spot. The remaining balance is due 60
+                A 10% deposit secures your spot. The remaining balance is due 60
                 days before your departure date.
               </div>
             </details>

@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Phone, Mail, Menu, X, Search } from "lucide-react";
 import { SITE_CONFIG, MAIN_NAV, TOP_NAV } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme-provider";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { logo } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -55,15 +58,28 @@ export function Header() {
           <div className="flex items-center justify-between py-3">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-12 h-12 bg-[var(--primary)] rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">SA</span>
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-heading font-bold text-lg text-[var(--text)]">
-                  Snow Africa
-                </div>
-                <div className="text-xs text-[var(--text-muted)] -mt-1">Adventure</div>
-              </div>
+              {logo.logoUrl ? (
+                <Image
+                  src={logo.logoUrl}
+                  alt={SITE_CONFIG.name}
+                  width={160}
+                  height={48}
+                  className="h-12 w-auto object-contain"
+                  priority
+                />
+              ) : (
+                <>
+                  <div className="w-12 h-12 bg-[var(--primary)] rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">SA</span>
+                  </div>
+                  <div className="hidden sm:block">
+                    <div className="font-heading font-bold text-lg text-[var(--text)]">
+                      Snow Africa
+                    </div>
+                    <div className="text-xs text-[var(--text-muted)] -mt-1">Adventure</div>
+                  </div>
+                </>
+              )}
             </Link>
 
             {/* Desktop Navigation */}

@@ -160,6 +160,21 @@ async function getHomepageSettings() {
   };
 }
 
+const ALLOWED_IMAGE_HOSTS = [
+  "pub-cf9450d27ca744f1825d1e08b392f592.r2.dev",
+  "cdn.snowafricaadventure.com",
+  "snowafricaadventure.com",
+];
+
+function safeImageUrl(url: string | null | undefined, fallback: string): string {
+  if (!url) return fallback;
+  try {
+    const hostname = new URL(url).hostname;
+    if (ALLOWED_IMAGE_HOSTS.some((h) => hostname === h || hostname.endsWith(".r2.cloudflarestorage.com"))) return url;
+  } catch {}
+  return fallback;
+}
+
 // Fetch data from database
 async function getHomePageData() {
   const [routes, safaris, blogPosts, featuredDeparture] = await Promise.all([
@@ -466,7 +481,7 @@ export default async function HomePage() {
               className={`route-card ${i === 0 ? 'featured' : ''}`}
             >
               <Image
-                src={route.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg"}
+                src={safeImageUrl(route.featuredImage, "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg")}
                 alt={route.title}
                 fill
                 className="object-cover"
@@ -505,7 +520,7 @@ export default async function HomePage() {
             {featuredSafari && (
               <Link href={`/tanzania-safaris/${featuredSafari.slug}/`} className="safari-main">
                 <Image
-                  src={featuredSafari.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg"}
+                  src={safeImageUrl(featuredSafari.featuredImage, "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg")}
                   alt={featuredSafari.title}
                   fill
                   className="object-cover"
@@ -528,7 +543,7 @@ export default async function HomePage() {
                 <Link key={safari.slug} href={`/tanzania-safaris/${safari.slug}/`} className="safari-item">
                   <div className="safari-item-image">
                     <Image
-                      src={safari.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Rhino-Lodge_View-from-outside-towards-dining-area.jpg"}
+                      src={safeImageUrl(safari.featuredImage, "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Rhino-Lodge_View-from-outside-towards-dining-area.jpg")}
                       alt={safari.title}
                       width={140}
                       height={110}
@@ -746,7 +761,7 @@ export default async function HomePage() {
                 <Link key={post.slug} href={`/${post.slug}/`} className="blog-card-home">
                   <div className="blog-card-image">
                     <Image
-                      src={post.featuredImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg"}
+                      src={safeImageUrl(post.featuredImage, "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg")}
                       alt={post.title}
                       fill
                       className="object-cover"

@@ -27,14 +27,21 @@ interface ThemeSettings {
   borderRadius: string;
 }
 
+interface LogoSettings {
+  logoUrl: string | null;
+  logoDarkUrl: string | null;
+}
+
 interface ThemeContextType {
   theme: ThemeSettings | null;
+  logo: LogoSettings;
   isLoading: boolean;
   refreshTheme: () => Promise<void>;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: null,
+  logo: { logoUrl: null, logoDarkUrl: null },
   isLoading: true,
   refreshTheme: async () => {},
 });
@@ -78,17 +85,23 @@ function applyThemeToDOM(theme: ThemeSettings) {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<ThemeSettings | null>(null);
+  const [logo, setLogo] = useState<LogoSettings>({ logoUrl: null, logoDarkUrl: null });
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchTheme = async () => {
     try {
-      const response = await fetch("/api/theme", {
-        cache: "no-store",
-      });
-      if (response.ok) {
-        const data = await response.json();
+      const [themeRes, logoRes] = await Promise.all([
+        fetch("/api/theme", { cache: "no-store" }),
+        fetch("/api/site-settings/logo", { cache: "no-store" }),
+      ]);
+      if (themeRes.ok) {
+        const data = await themeRes.json();
         setTheme(data);
         applyThemeToDOM(data);
+      }
+      if (logoRes.ok) {
+        const data = await logoRes.json();
+        setLogo(data);
       }
     } catch (error) {
       console.error("Failed to fetch theme:", error);
@@ -107,7 +120,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, isLoading, refreshTheme }}>
+    <ThemeContext.Provider value={{ theme, logo, isLoading, refreshTheme }}>
       {children}
     </ThemeContext.Provider>
   );

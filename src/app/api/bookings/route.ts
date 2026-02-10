@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     // Calculate pricing
     const pricePerPerson = Number(departure.price);
     const totalPrice = pricePerPerson * totalClimbers;
-    const depositAmount = Math.round(totalPrice * 0.3); // 30% deposit
+    const depositAmount = Math.round(totalPrice * 0.1); // 10% deposit
 
     // Create booking
     const booking = await prisma.booking.create({

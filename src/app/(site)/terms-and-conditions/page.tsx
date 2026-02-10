@@ -52,7 +52,7 @@ export default function TermsPage() {
               </li>
               <li>Day trips: Full payment required at booking</li>
               <li>
-                Group departures: 30% deposit to secure your spot, balance due
+                Group departures: 10% deposit to secure your spot, balance due
                 45 days before departure
               </li>
             </ul>

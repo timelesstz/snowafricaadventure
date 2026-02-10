@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useTheme } from "@/components/theme-provider";
+import { Upload, X, Loader2 } from "lucide-react";
 
 interface ThemeSettings {
   id: string;
@@ -83,15 +85,113 @@ function ColorInput({
   );
 }
 
+function LogoUploadInput({
+  label,
+  value,
+  onChange,
+  description,
+}: {
+  label: string;
+  value: string;
+  onChange: (url: string) => void;
+  description: string;
+}) {
+  const [isUploading, setIsUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleUpload = async (file: File) => {
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("folder", "branding");
+      formData.append("compress", "true");
+
+      const res = await fetch("/api/admin/media/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Upload failed");
+      const data = await res.json();
+      onChange(data.media.url);
+    } catch {
+      alert("Failed to upload logo");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-[var(--text)] mb-2">{label}</label>
+      <p className="text-xs text-[var(--text-muted)] mb-3">{description}</p>
+      <div className="flex items-start gap-4">
+        {/* Preview */}
+        <div className="w-40 h-20 border border-[var(--border)] rounded-lg flex items-center justify-center bg-white overflow-hidden shrink-0">
+          {value ? (
+            <Image src={value} alt={label} width={160} height={80} className="object-contain w-full h-full p-2" />
+          ) : (
+            <span className="text-xs text-[var(--text-muted)]">No logo</span>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/png,image/svg+xml,image/webp,image/jpeg"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) handleUpload(file);
+              if (fileRef.current) fileRef.current.value = "";
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            disabled={isUploading}
+            className="flex items-center gap-2 px-4 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-[var(--surface)] transition-colors disabled:opacity-50"
+          >
+            {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+            {isUploading ? "Uploading..." : "Upload"}
+          </button>
+          {value && (
+            <button
+              type="button"
+              onClick={() => onChange("")}
+              className="flex items-center gap-1 px-4 py-2 text-sm text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
+            >
+              <X className="w-4 h-4" />
+              Remove
+            </button>
+          )}
+          {/* Manual URL input */}
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="Or paste image URL..."
+            className="px-3 py-1.5 text-xs border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] w-64"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ThemeSettingsPage() {
   const { refreshTheme } = useTheme();
   const [theme, setTheme] = useState<ThemeSettings | null>(null);
+  const [logoUrl, setLogoUrl] = useState("");
+  const [logoDarkUrl, setLogoDarkUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
     fetchTheme();
+    fetchLogo();
   }, []);
 
   const fetchTheme = async () => {
@@ -108,6 +208,19 @@ export default function ThemeSettingsPage() {
     }
   };
 
+  const fetchLogo = async () => {
+    try {
+      const res = await fetch("/api/site-settings/logo");
+      if (res.ok) {
+        const data = await res.json();
+        setLogoUrl(data.logoUrl || "");
+        setLogoDarkUrl(data.logoDarkUrl || "");
+      }
+    } catch (error) {
+      console.error("Failed to fetch logo:", error);
+    }
+  };
+
   const handleSave = async () => {
     if (!theme) return;
 
@@ -115,17 +228,24 @@ export default function ThemeSettingsPage() {
     setMessage(null);
 
     try {
-      const response = await fetch("/api/theme", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(theme),
-      });
+      const [themeRes, logoRes] = await Promise.all([
+        fetch("/api/theme", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(theme),
+        }),
+        fetch("/api/site-settings/logo", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ logoUrl, logoDarkUrl }),
+        }),
+      ]);
 
-      if (response.ok) {
-        setMessage({ type: "success", text: "Theme saved successfully! Changes are now live." });
+      if (themeRes.ok && logoRes.ok) {
+        setMessage({ type: "success", text: "Theme and logo saved successfully! Changes are now live." });
         await refreshTheme();
       } else {
-        setMessage({ type: "error", text: "Failed to save theme settings." });
+        setMessage({ type: "error", text: "Failed to save some settings." });
       }
     } catch (error) {
       console.error("Failed to save theme:", error);
@@ -229,6 +349,44 @@ export default function ThemeSettingsPage() {
             />
           </div>
         </div>
+      </div>
+
+      {/* Logo Settings */}
+      <div className="bg-white rounded-xl p-6 border border-[var(--border)] mb-6">
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-1">Site Logo</h2>
+        <p className="text-sm text-[var(--text-muted)] mb-6">
+          Upload your logo images. Recommended: PNG or SVG with transparent background, at least 400px wide.
+        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <LogoUploadInput
+            label="Primary Logo"
+            description="Displayed in the header and footer on light backgrounds."
+            value={logoUrl}
+            onChange={setLogoUrl}
+          />
+          <LogoUploadInput
+            label="Dark Background Logo"
+            description="Used in the footer or dark sections. Leave empty to use the primary logo."
+            value={logoDarkUrl}
+            onChange={setLogoDarkUrl}
+          />
+        </div>
+        {/* Logo Preview */}
+        {logoUrl && (
+          <div className="mt-6 pt-6 border-t border-[var(--border)]">
+            <h3 className="text-sm font-medium text-[var(--text)] mb-3">Preview</h3>
+            <div className="flex gap-4">
+              <div className="flex items-center gap-3 px-4 py-3 bg-white border border-[var(--border)] rounded-lg">
+                <Image src={logoUrl} alt="Logo on light" width={120} height={40} className="object-contain h-10 w-auto" />
+                <span className="text-xs text-[var(--text-muted)]">Light bg</span>
+              </div>
+              <div className="flex items-center gap-3 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg">
+                <Image src={logoDarkUrl || logoUrl} alt="Logo on dark" width={120} height={40} className="object-contain h-10 w-auto" />
+                <span className="text-xs text-slate-400">Dark bg</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Color Sections */}

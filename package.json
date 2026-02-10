@@ -19,6 +19,7 @@
     "db:seed": "npx tsx prisma/seed.ts",
     "db:seed:production": "npx tsx prisma/seed-production.ts",
     "db:seed:admin": "npx tsx scripts/seed-admin.ts",
+    "db:seed:departures": "npx tsx scripts/seed-departures-2026.ts",
     "db:push": "npx prisma db push",
     "db:studio": "npx prisma studio",
     "migrate:wp": "npx tsx scripts/migration/migrate.ts",

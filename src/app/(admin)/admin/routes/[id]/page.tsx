@@ -1,9 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Trash2, Eye } from "lucide-react";
+import { ArrowLeft, Eye } from "lucide-react";
 import ImageUploadField from "@/components/admin/ImageUploadField";
 import GalleryUploadField from "@/components/admin/GalleryUploadField";
+import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
+import ItineraryEditor from "@/components/admin/ItineraryEditor";
+import FaqsEditor from "@/components/admin/FaqsEditor";
+import ListEditor from "@/components/admin/ListEditor";
 
 async function getRoute(id: string) {
   if (id === "new") return null;
@@ -345,18 +349,11 @@ export default async function RouteEditPage({
               <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
                 Highlights
               </h2>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  One highlight per line
-                </label>
-                <textarea
-                  name="highlights"
-                  rows={6}
-                  defaultValue={route?.highlights?.join("\n") || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
-                  placeholder="Best acclimatization profile&#10;Scenic western approach&#10;Low traffic route"
-                />
-              </div>
+              <ListEditor
+                name="highlights"
+                defaultValue={route?.highlights || []}
+                placeholder="Add a highlight and press Enter"
+              />
             </div>
 
             {/* Inclusions & Exclusions */}
@@ -367,28 +364,26 @@ export default async function RouteEditPage({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    What&apos;s Included (one per line)
+                  <label className="block text-sm font-medium text-slate-700 mb-3">
+                    What&apos;s Included
                   </label>
-                  <textarea
+                  <ListEditor
                     name="inclusions"
-                    rows={8}
-                    defaultValue={route?.inclusions?.join("\n") || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
-                    placeholder="Professional guides&#10;All park fees&#10;Quality camping equipment"
+                    defaultValue={route?.inclusions || []}
+                    placeholder="Add inclusion and press Enter"
+                    variant="success"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    What&apos;s Not Included (one per line)
+                  <label className="block text-sm font-medium text-slate-700 mb-3">
+                    What&apos;s Not Included
                   </label>
-                  <textarea
+                  <ListEditor
                     name="exclusions"
-                    rows={8}
-                    defaultValue={route?.exclusions?.join("\n") || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
-                    placeholder="International flights&#10;Travel insurance&#10;Tips for crew"
+                    defaultValue={route?.exclusions || []}
+                    placeholder="Add exclusion and press Enter"
+                    variant="danger"
                   />
                 </div>
               </div>
@@ -397,55 +392,23 @@ export default async function RouteEditPage({
             {/* Itinerary */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
               <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
-                Itinerary (JSON)
+                Itinerary
               </h2>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Enter itinerary as JSON array
-                </label>
-                <textarea
-                  name="itinerary"
-                  rows={12}
-                  defaultValue={route?.itinerary ? JSON.stringify(route.itinerary, null, 2) : ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
-                  placeholder={`[
-  {
-    "day": 1,
-    "title": "Arrival Day",
-    "description": "...",
-    "elevation": "1400m",
-    "distance": "N/A"
-  }
-]`}
-                />
-                <p className="text-xs text-slate-500 mt-1">
-                  Format: Array of objects with day, title, description, elevation, distance, etc.
-                </p>
-              </div>
+              <ItineraryEditor
+                name="itinerary"
+                defaultValue={route?.itinerary as any[] | null}
+              />
             </div>
 
             {/* FAQs */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
               <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
-                FAQs (JSON)
+                FAQs
               </h2>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Enter FAQs as JSON array
-                </label>
-                <textarea
-                  name="faqs"
-                  rows={8}
-                  defaultValue={route?.faqs ? JSON.stringify(route.faqs, null, 2) : ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
-                  placeholder={`[
-  {
-    "question": "How difficult is this route?",
-    "answer": "..."
-  }
-]`}
-                />
-              </div>
+              <FaqsEditor
+                name="faqs"
+                defaultValue={route?.faqs as { question: string; answer: string }[] | null}
+              />
             </div>
           </div>
 
@@ -527,42 +490,30 @@ export default async function RouteEditPage({
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
-            {!isNew && (
-              <form action={deleteRoute}>
-                <input type="hidden" name="id" value={id} />
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg"
-                  onClick={(e) => {
-                    if (!confirm("Are you sure you want to delete this route? This cannot be undone.")) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Delete Route
-                </button>
-              </form>
-            )}
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admin/routes"
-              className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
-            >
-              Cancel
-            </Link>
-            <button
-              type="submit"
-              className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
-            >
-              {isNew ? "Create Route" : "Save Changes"}
-            </button>
-          </div>
+        <div className="flex items-center justify-end gap-3">
+          <Link
+            href="/admin/routes"
+            className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+          >
+            {isNew ? "Create Route" : "Save Changes"}
+          </button>
         </div>
       </form>
+
+      {!isNew && (
+        <div className="flex items-center justify-start">
+          <form action={deleteRoute}>
+            <input type="hidden" name="id" value={id} />
+            <ConfirmDeleteButton message="Are you sure you want to delete this route? This cannot be undone." label="Delete Route" />
+          </form>
+        </div>
+      )}
     </div>
   );
 }

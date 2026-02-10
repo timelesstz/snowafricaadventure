@@ -162,6 +162,63 @@
       "Personal gear",
       "Tips"
     ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Marangu Gate to Mandara Hut",
+        "description": "After registration at Marangu Gate (1,860m), begin your trek through lush montane rainforest. The well-maintained trail passes through a canopy of giant heather and moss-draped trees. Listen for the calls of Hartlaub's turaco and look for blue monkeys in the treetops. Arrive at Mandara Hut, a comfortable wooden A-frame hut compound nestled in the forest.",
+        "elevation": "1,860m to 2,720m",
+        "distance": "8km",
+        "duration": "3-5 hours",
+        "camp": "Mandara Hut",
+        "meals": "Lunch, Dinner",
+        "tags": ["Rainforest", "Wildlife", "Hut Accommodation"]
+      },
+      {
+        "day": 2,
+        "title": "Mandara Hut to Horombo Hut",
+        "description": "Leave the rainforest behind and enter the moorland zone with stunning views of Kibo and Mawenzi peaks. The landscape opens up dramatically with giant lobelias and senecios dotting the hillside. Pass the optional Maundi Crater viewpoint for panoramic views. Arrive at Horombo Hut, a larger hut complex with spectacular sunset views over the clouds below.",
+        "elevation": "2,720m to 3,720m",
+        "distance": "12km",
+        "duration": "5-7 hours",
+        "camp": "Horombo Hut",
+        "meals": "Breakfast, Lunch, Dinner",
+        "tags": ["Moorland", "Giant Lobelias", "Scenic Views"]
+      },
+      {
+        "day": 3,
+        "title": "Horombo Hut to Kibo Hut",
+        "description": "Trek across the vast alpine desert known as 'the Saddle' between Kibo and Mawenzi peaks. The vegetation thins rapidly as you gain altitude across this lunar-like landscape. The air becomes noticeably thinner. Arrive at Kibo Hut (4,703m), the final camp before the summit attempt. Rest, hydrate well, and prepare your gear for the midnight summit push.",
+        "elevation": "3,720m to 4,703m",
+        "distance": "10km",
+        "duration": "5-7 hours",
+        "camp": "Kibo Hut",
+        "meals": "Breakfast, Lunch, Dinner",
+        "tags": ["Alpine Desert", "The Saddle", "Summit Preparation"]
+      },
+      {
+        "day": 4,
+        "title": "Summit Day — Uhuru Peak",
+        "description": "Begin the summit push around midnight, climbing by headlamp through scree and switchbacks toward Gilman's Point (5,681m) on the crater rim. Continue along the crater edge past Stella Point (5,756m) to Uhuru Peak (5,895m), the Roof of Africa. Watch the sunrise from the top of the continent. After celebrating at the summit, descend all the way back to Horombo Hut for the night.",
+        "elevation": "4,703m to 5,895m to 3,720m",
+        "distance": "21km",
+        "duration": "12-16 hours",
+        "camp": "Horombo Hut",
+        "meals": "Breakfast, Lunch, Dinner",
+        "tags": ["Summit", "Uhuru Peak", "Crater Rim", "Sunrise"]
+      },
+      {
+        "day": 5,
+        "title": "Descent to Marangu Gate",
+        "description": "Final descent from Horombo Hut back through the moorland and rainforest zones to Marangu Gate. The descent retraces the ascent route, offering a chance to appreciate the scenery you may have missed on the way up. At the gate, receive your summit certificate and celebrate your achievement. Transfer to your hotel in Moshi.",
+        "elevation": "3,720m to 1,860m",
+        "distance": "20km",
+        "duration": "5-7 hours",
+        "camp": "Marangu Gate",
+        "meals": "Breakfast, Lunch",
+        "tags": ["Descent", "Certificate Ceremony"]
+      }
+    ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5-days-Marangu-route.jpg",
     "isActive": true
   },
