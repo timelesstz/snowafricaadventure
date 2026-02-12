@@ -75,6 +75,9 @@ async function saveSafari(formData: FormData) {
   }
 
   const priceStr = formData.get("priceFrom") as string;
+  const gameDrivesStr = formData.get("gameDrives") as string;
+  const parksCountStr = formData.get("parksCount") as string;
+  const ratingStr = formData.get("rating") as string;
 
   const data = {
     slug,
@@ -92,6 +95,9 @@ async function saveSafari(formData: FormData) {
     featuredImage: formData.get("featuredImage") as string || null,
     gallery,
     priceFrom: priceStr ? parseFloat(priceStr) : null,
+    gameDrives: gameDrivesStr ? parseInt(gameDrivesStr) : 6,
+    parksCount: parksCountStr ? parseInt(parksCountStr) : 3,
+    rating: ratingStr ? parseFloat(ratingStr) : 4.9,
     isActive: formData.get("isActive") === "on",
   };
 
@@ -295,6 +301,53 @@ export default async function SafariEditPage({
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                     placeholder="e.g., 2500"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Game Drives
+                  </label>
+                  <input
+                    type="number"
+                    name="gameDrives"
+                    min="0"
+                    defaultValue={safari?.gameDrives ?? 6}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    placeholder="e.g., 6"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Number of game drives included</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Parks Count
+                  </label>
+                  <input
+                    type="number"
+                    name="parksCount"
+                    min="0"
+                    defaultValue={safari?.parksCount ?? 3}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    placeholder="e.g., 3"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Number of parks visited</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Rating
+                  </label>
+                  <input
+                    type="number"
+                    name="rating"
+                    min="1"
+                    max="5"
+                    step="0.1"
+                    defaultValue={safari?.rating ? Number(safari.rating) : 4.9}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    placeholder="e.g., 4.9"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Rating out of 5.0</p>
                 </div>
               </div>
 

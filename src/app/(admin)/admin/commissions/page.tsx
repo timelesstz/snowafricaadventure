@@ -1,28 +1,81 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { Download, HandCoins } from "lucide-react";
+import { Download, HandCoins, ChevronLeft, ChevronRight, Search, Filter } from "lucide-react";
 import CommissionStatusBadge from "@/components/admin/CommissionStatusBadge";
 import CommissionActions from "@/components/admin/CommissionActions";
 
-async function getCommissions() {
-  return prisma.commission.findMany({
-    include: {
-      partner: { select: { name: true, type: true } },
-      booking: {
-        select: {
-          leadName: true,
-          leadEmail: true,
-          departure: {
-            select: {
-              route: { select: { title: true } },
-              startDate: true,
+const ITEMS_PER_PAGE = 20;
+
+interface SearchParams {
+  page?: string;
+  status?: string;
+  partner?: string;
+  search?: string;
+}
+
+async function getCommissions(searchParams: SearchParams) {
+  const page = parseInt(searchParams.page || "1");
+  const status = searchParams.status;
+  const partnerId = searchParams.partner;
+  const search = searchParams.search;
+
+  const where: Record<string, unknown> = {};
+
+  if (status && status !== "all") {
+    where.status = status;
+  }
+
+  if (partnerId && partnerId !== "all") {
+    where.partnerId = partnerId;
+  }
+
+  if (search) {
+    where.OR = [
+      { booking: { leadName: { contains: search, mode: "insensitive" } } },
+      { booking: { leadEmail: { contains: search, mode: "insensitive" } } },
+      { partner: { name: { contains: search, mode: "insensitive" } } },
+    ];
+  }
+
+  const [commissions, total] = await Promise.all([
+    prisma.commission.findMany({
+      where,
+      include: {
+        partner: { select: { id: true, name: true, type: true } },
+        booking: {
+          select: {
+            leadName: true,
+            leadEmail: true,
+            departure: {
+              select: {
+                route: { select: { title: true } },
+                startDate: true,
+              },
             },
           },
         },
       },
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * ITEMS_PER_PAGE,
+      take: ITEMS_PER_PAGE,
+    }),
+    prisma.commission.count({ where }),
+  ]);
+
+  return {
+    commissions,
+    pagination: {
+      page,
+      total,
+      totalPages: Math.ceil(total / ITEMS_PER_PAGE),
     },
-    orderBy: { createdAt: "desc" },
-    take: 50,
+  };
+}
+
+async function getPartners() {
+  return prisma.partner.findMany({
+    select: { id: true, name: true },
+    orderBy: { name: "asc" },
   });
 }
 
@@ -52,11 +105,21 @@ async function getCommissionStats() {
   return { pending, eligible, paid, total };
 }
 
-export default async function CommissionsPage() {
-  const [commissions, stats] = await Promise.all([
-    getCommissions(),
+export default async function CommissionsPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = await searchParams;
+  const [{ commissions, pagination }, stats, partners] = await Promise.all([
+    getCommissions(params),
     getCommissionStats(),
+    getPartners(),
   ]);
+
+  const currentStatus = params.status || "all";
+  const currentPartner = params.partner || "all";
+  const currentSearch = params.search || "";
 
   return (
     <div className="space-y-6">
@@ -83,6 +146,64 @@ export default async function CommissionsPage() {
             Export CSV
           </a>
         </div>
+      </div>
+
+      {/* Filters */}
+      <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4">
+        <form className="flex flex-wrap items-center gap-4">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              name="search"
+              defaultValue={currentSearch}
+              placeholder="Search by customer or partner..."
+              className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            />
+          </div>
+
+          <select
+            name="status"
+            defaultValue={currentStatus}
+            className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+          >
+            <option value="all">All Statuses</option>
+            <option value="PENDING">Pending</option>
+            <option value="ELIGIBLE">Eligible</option>
+            <option value="PAID">Paid</option>
+            <option value="VOIDED">Voided</option>
+          </select>
+
+          <select
+            name="partner"
+            defaultValue={currentPartner}
+            className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+          >
+            <option value="all">All Partners</option>
+            {partners.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+
+          <button
+            type="submit"
+            className="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+          >
+            <Filter className="w-4 h-4" />
+            Apply
+          </button>
+
+          {(currentStatus !== "all" || currentPartner !== "all" || currentSearch) && (
+            <Link
+              href="/admin/commissions"
+              className="text-sm text-slate-600 hover:text-slate-800"
+            >
+              Clear filters
+            </Link>
+          )}
+        </form>
       </div>
 
       {/* Stats */}
@@ -126,95 +247,135 @@ export default async function CommissionsPage() {
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-slate-50 border-b border-slate-200">
-                <tr>
-                  <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                    Date
-                  </th>
-                  <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                    Partner
-                  </th>
-                  <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                    Customer
-                  </th>
-                  <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                    Trip
-                  </th>
-                  <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
-                    Booking
-                  </th>
-                  <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
-                    Rate
-                  </th>
-                  <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
-                    Commission
-                  </th>
-                  <th className="text-center px-6 py-3 text-sm font-medium text-slate-600">
-                    Status
-                  </th>
-                  <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200">
-                {commissions.map((commission) => (
-                  <tr key={commission.id} className="hover:bg-slate-50">
-                    <td className="px-6 py-4 text-sm text-slate-600">
-                      {commission.createdAt.toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="font-medium text-slate-900">
-                        {commission.partner.name}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div>
-                        <p className="text-slate-900">
-                          {commission.booking.leadName}
-                        </p>
-                        <p className="text-sm text-slate-500">
-                          {commission.booking.leadEmail}
-                        </p>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div>
-                        <p className="text-slate-900">
-                          {commission.booking.departure.route.title}
-                        </p>
-                        <p className="text-sm text-slate-500">
-                          {commission.booking.departure.startDate.toLocaleDateString()}
-                        </p>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-right text-slate-900">
-                      ${Number(commission.bookingAmount).toLocaleString()}
-                    </td>
-                    <td className="px-6 py-4 text-right text-slate-600">
-                      {Number(commission.commissionRate)}%
-                    </td>
-                    <td className="px-6 py-4 text-right font-semibold text-slate-900">
-                      ${Number(commission.commissionAmount).toLocaleString()}
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      <CommissionStatusBadge status={commission.status} />
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <CommissionActions
-                        id={commission.id}
-                        status={commission.status}
-                      />
-                    </td>
+        <>
+          <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-slate-50 border-b border-slate-200">
+                  <tr>
+                    <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
+                      Date
+                    </th>
+                    <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
+                      Partner
+                    </th>
+                    <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
+                      Customer
+                    </th>
+                    <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
+                      Trip
+                    </th>
+                    <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
+                      Booking
+                    </th>
+                    <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
+                      Rate
+                    </th>
+                    <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
+                      Commission
+                    </th>
+                    <th className="text-center px-6 py-3 text-sm font-medium text-slate-600">
+                      Status
+                    </th>
+                    <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-200">
+                  {commissions.map((commission) => (
+                    <tr key={commission.id} className="hover:bg-slate-50">
+                      <td className="px-6 py-4 text-sm text-slate-600">
+                        {commission.createdAt.toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4">
+                        <Link
+                          href={`/admin/partners/${commission.partner.id}`}
+                          className="font-medium text-amber-600 hover:text-amber-700"
+                        >
+                          {commission.partner.name}
+                        </Link>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="text-slate-900">
+                            {commission.booking.leadName}
+                          </p>
+                          <p className="text-sm text-slate-500">
+                            {commission.booking.leadEmail}
+                          </p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div>
+                          <p className="text-slate-900">
+                            {commission.booking.departure.route.title}
+                          </p>
+                          <p className="text-sm text-slate-500">
+                            {commission.booking.departure.startDate.toLocaleDateString()}
+                          </p>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-right text-slate-900">
+                        ${Number(commission.bookingAmount).toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-right text-slate-600">
+                        {Number(commission.commissionRate)}%
+                      </td>
+                      <td className="px-6 py-4 text-right font-semibold text-slate-900">
+                        ${Number(commission.commissionAmount).toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <CommissionStatusBadge status={commission.status} />
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <CommissionActions
+                          id={commission.id}
+                          status={commission.status}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+
+          {/* Pagination */}
+          {pagination.totalPages > 1 && (
+            <div className="flex items-center justify-between bg-white rounded-lg shadow-sm border border-slate-200 p-4">
+              <p className="text-sm text-slate-600">
+                Showing {(pagination.page - 1) * ITEMS_PER_PAGE + 1} to{" "}
+                {Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)} of{" "}
+                {pagination.total} commissions
+              </p>
+              <div className="flex gap-2">
+                <Link
+                  href={`/admin/commissions?page=${pagination.page - 1}${currentStatus !== "all" ? `&status=${currentStatus}` : ""}${currentPartner !== "all" ? `&partner=${currentPartner}` : ""}${currentSearch ? `&search=${currentSearch}` : ""}`}
+                  className={`flex items-center gap-1 px-4 py-2 border border-slate-300 rounded-lg transition-colors ${
+                    pagination.page === 1
+                      ? "opacity-50 pointer-events-none"
+                      : "hover:bg-slate-50"
+                  }`}
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </Link>
+                <Link
+                  href={`/admin/commissions?page=${pagination.page + 1}${currentStatus !== "all" ? `&status=${currentStatus}` : ""}${currentPartner !== "all" ? `&partner=${currentPartner}` : ""}${currentSearch ? `&search=${currentSearch}` : ""}`}
+                  className={`flex items-center gap-1 px-4 py-2 border border-slate-300 rounded-lg transition-colors ${
+                    pagination.page === pagination.totalPages
+                      ? "opacity-50 pointer-events-none"
+                      : "hover:bg-slate-50"
+                  }`}
+                >
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

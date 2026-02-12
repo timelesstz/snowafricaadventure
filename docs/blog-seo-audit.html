@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog SEO Audit Report - Snow Africa Adventure</title>
+  <style>
+    :root {
+      --amber-500: #f59e0b;
+      --amber-600: #d97706;
+      --red-500: #ef4444;
+      --red-100: #fee2e2;
+      --green-500: #22c55e;
+      --green-100: #dcfce7;
+      --yellow-500: #eab308;
+      --yellow-100: #fef9c3;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-600: #475569;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--slate-900), var(--slate-800));
+      color: white;
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      opacity: 0.8;
+      font-size: 1.1rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-left: 4px solid var(--amber-500);
+    }
+
+    .stat-card.critical { border-left-color: var(--red-500); }
+    .stat-card.warning { border-left-color: var(--yellow-500); }
+    .stat-card.success { border-left-color: var(--green-500); }
+
+    .stat-card h3 {
+      font-size: 0.875rem;
+      color: var(--slate-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .stat-card .label {
+      font-size: 0.875rem;
+      color: var(--slate-600);
+    }
+
+    .section {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-critical { background: var(--red-100); color: var(--red-500); }
+    .badge-warning { background: var(--yellow-100); color: var(--yellow-500); }
+    .badge-success { background: var(--green-100); color: var(--green-500); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    th {
+      background: var(--slate-50);
+      font-weight: 600;
+      color: var(--slate-600);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr:hover { background: var(--slate-50); }
+
+    .status-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.75rem;
+    }
+
+    .status-missing { background: var(--red-100); color: var(--red-500); }
+    .status-present { background: var(--green-100); color: var(--green-500); }
+
+    .category-tag {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      background: var(--slate-100);
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      color: var(--slate-600);
+    }
+
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--slate-100);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .check-icon.missing { background: var(--red-100); color: var(--red-500); }
+
+    .priority-high { color: var(--red-500); font-weight: 600; }
+    .priority-medium { color: var(--yellow-500); font-weight: 600; }
+
+    .action-item {
+      background: var(--slate-50);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .action-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .action-item p {
+      color: var(--slate-600);
+      font-size: 0.875rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--slate-200);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--red-500);
+      border-radius: 4px;
+    }
+
+    .scrollable-table {
+      overflow-x: auto;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background: var(--slate-100);
+      z-index: 10;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-bar select, .filter-bar input {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--slate-200);
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      header { padding: 2rem 1rem; }
+      header h1 { font-size: 1.75rem; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Blog SEO Audit Report</h1>
+      <p>Snow Africa Adventure - Generated February 12, 2026</p>
+    </header>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card critical">
+        <h3>Total Posts</h3>
+        <div class="value">125</div>
+        <div class="label">Blog articles</div>
+      </div>
+      <div class="stat-card critical">
+        <h3>Missing Meta Title</h3>
+        <div class="value">125</div>
+        <div class="label">100% need attention</div>
+      </div>
+      <div class="stat-card critical">
+        <h3>Missing Meta Description</h3>
+        <div class="value">125</div>
+        <div class="label">100% need attention</div>
+      </div>
+      <div class="stat-card critical">
+        <h3>Placeholder Content</h3>
+        <div class="value">125</div>
+        <div class="label">Content migration needed</div>
+      </div>
+      <div class="stat-card warning">
+        <h3>Missing Featured Image</h3>
+        <div class="value">~125</div>
+        <div class="label">Estimated</div>
+      </div>
+      <div class="stat-card">
+        <h3>SEO Score</h3>
+        <div class="value">15%</div>
+        <div class="label">Critical improvement needed</div>
+      </div>
+    </div>
+
+    <!-- Critical Issues -->
+    <div class="section">
+      <h2><span class="badge badge-critical">Critical</span> SEO Issues Found</h2>
+      <p style="margin-bottom: 1.5rem; color: var(--slate-600);">
+        All 125 blog posts were imported from WordPress with placeholder content. Each post requires complete SEO optimization.
+      </p>
+
+      <ul class="checklist">
+        <li>
+          <span class="check-icon missing">!</span>
+          <div>
+            <strong class="priority-high">No Meta Titles (125 posts)</strong>
+            <p style="color: var(--slate-600); font-size: 0.875rem;">
+              Meta titles are critical for search rankings. Each should be 50-60 characters, include primary keyword, and be compelling.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="check-icon missing">!</span>
+          <div>
+            <strong class="priority-high">No Meta Descriptions (125 posts)</strong>
+            <p style="color: var(--slate-600); font-size: 0.875rem;">
+              Meta descriptions drive click-through rates. Each should be 150-160 characters with clear value proposition and call-to-action.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="check-icon missing">!</span>
+          <div>
+            <strong class="priority-high">Placeholder Content (125 posts)</strong>
+            <p style="color: var(--slate-600); font-size: 0.875rem;">
+              All posts contain "[Content migration pending]". Original WordPress content needs to be migrated or new content written.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="check-icon missing">!</span>
+          <div>
+            <strong class="priority-medium">No Featured Images</strong>
+            <p style="color: var(--slate-600); font-size: 0.875rem;">
+              Featured images improve social sharing and visual appeal. Each post should have a high-quality, relevant image.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="check-icon missing">!</span>
+          <div>
+            <strong class="priority-medium">No Excerpt/Summary</strong>
+            <p style="color: var(--slate-600); font-size: 0.875rem;">
+              Only placeholder excerpts exist. Proper excerpts improve listing pages and social sharing.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Google SEO Requirements -->
+    <div class="section">
+      <h2>Google SEO Requirements Checklist</h2>
+      <p style="margin-bottom: 1.5rem; color: var(--slate-600);">
+        Each blog post should meet these Google SEO standards for optimal ranking:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        <div class="action-item">
+          <h4>1. Meta Title (Title Tag)</h4>
+          <p>50-60 characters, primary keyword near start, brand name optional at end. Example: "Climbing Mount Kilimanjaro: Complete 2026 Guide | Snow Africa"</p>
+        </div>
+        <div class="action-item">
+          <h4>2. Meta Description</h4>
+          <p>150-160 characters, include primary keyword, clear benefit/CTA. Example: "Plan your Kilimanjaro climb with our expert guide. Routes, costs, best seasons & packing lists. Book with Tanzania's trusted operator."</p>
+        </div>
+        <div class="action-item">
+          <h4>3. URL Slug</h4>
+          <p>Short, descriptive, hyphenated, include keyword. Current slugs are good but verify they match content focus.</p>
+        </div>
+        <div class="action-item">
+          <h4>4. H1 Heading</h4>
+          <p>One per page, matches search intent, contains primary keyword. Should match or be similar to meta title.</p>
+        </div>
+        <div class="action-item">
+          <h4>5. Content Quality (E-E-A-T)</h4>
+          <p>Experience, Expertise, Authoritativeness, Trustworthiness. Show first-hand experience, cite sources, author credentials.</p>
+        </div>
+        <div class="action-item">
+          <h4>6. Internal Linking</h4>
+          <p>Link to related posts, service pages, and booking forms. Helps distribute page authority and keeps users engaged.</p>
+        </div>
+        <div class="action-item">
+          <h4>7. Image Optimization</h4>
+          <p>Descriptive alt text, compressed file sizes, relevant file names. Featured image for social sharing (1200x630px).</p>
+        </div>
+        <div class="action-item">
+          <h4>8. Schema Markup</h4>
+          <p>Article/BlogPosting schema with author, datePublished, image. Enables rich snippets in search results.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Breakdown -->
+    <div class="section">
+      <h2>Posts by Category</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Posts</th>
+            <th>Priority</th>
+            <th>Target Keywords</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="category-tag">mount-kilimanjaro</span></td>
+            <td>26</td>
+            <td><span class="badge badge-critical">High</span></td>
+            <td>kilimanjaro climbing, mount kilimanjaro, climb kilimanjaro</td>
+          </tr>
+          <tr>
+            <td><span class="category-tag">kilimanjaro-climbing-guide</span></td>
+            <td>18</td>
+            <td><span class="badge badge-critical">High</span></td>
+            <td>kilimanjaro routes, packing list, climbing tips, training</td>
+          </tr>
+          <tr>
+            <td><span class="category-tag">safari-tours</span></td>
+            <td>34</td>
+            <td><span class="badge badge-critical">High</span></td>
+            <td>tanzania safari, serengeti safari, wildlife safari</td>
+          </tr>
+          <tr>
+            <td><span class="category-tag">tanzania-destinations</span></td>
+            <td>9</td>
+            <td><span class="badge badge-warning">Medium</span></td>
+            <td>ngorongoro crater, serengeti, zanzibar, national parks</td>
+          </tr>
+          <tr>
+            <td><span class="category-tag">blog</span></td>
+            <td>36</td>
+            <td><span class="badge badge-warning">Medium</span></td>
+            <td>tanzania travel, culture, tips, experiences</td>
+          </tr>
+          <tr>
+            <td><span class="category-tag">day-trip</span></td>
+            <td>2</td>
+            <td><span class="badge badge-warning">Medium</span></td>
+            <td>tanzania day trips, coffee tours, cultural tours</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Full Post Audit -->
+    <div class="section">
+      <h2>Complete Post Audit (125 Posts)</h2>
+      <p style="margin-bottom: 1rem; color: var(--slate-600);">
+        Each post requires: Meta Title, Meta Description, Full Content, Featured Image, and proper categorization.
+      </p>
+
+      <div class="scrollable-table">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Slug</th>
+              <th>Category</th>
+              <th>Meta Title</th>
+              <th>Meta Desc</th>
+              <th>Content</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>How Tall is Mount Kilimanjaro?</td><td>how-tall-is-mount-kilimanjaro</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>2</td><td>Climbing Kilimanjaro: Complete Guide</td><td>climbing-kilimanjaro</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>3</td><td>Tanzania Festivals and Cultural Events</td><td>tanzania-festival</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>4</td><td>Is There Snow in Africa Mountains?</td><td>is-there-snow-in-africa-mountains</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>5</td><td>Best Time to Climb Mount Kilimanjaro</td><td>best-time-to-climb-mount-kilimanjaro</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>6</td><td>Wildlife Safaris Tanzania</td><td>wildlife-safaris-tanzania</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>7</td><td>Kilimanjaro Group Climbs</td><td>kilimanjaro-group-climbs</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>8</td><td>Tanzania Camping Safari</td><td>tanzania-camping-safari</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>9</td><td>Best Tour Operator in Tanzania</td><td>best-tour-operator-in-tanzania</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>10</td><td>Tanzania Tour Operators</td><td>tanzania-tour-operators</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>11</td><td>Tanzania Beach Holidays</td><td>tanzania-beach-holidays</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>12</td><td>Kilimanjaro vs Everest</td><td>kilimanjaro-vs-everest</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>13</td><td>Hidden Waterfalls in Tanzania</td><td>hidden-waterfalls-in-tanzania</td><td><span class="category-tag">tanzania-destinations</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>14</td><td>Tanzania Itinerary 10 Days</td><td>tanzania-itinerary-10-days</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>15</td><td>Serengeti National Park Guide</td><td>serengeti-national-park</td><td><span class="category-tag">tanzania-destinations</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>16</td><td>Tanzania Luxury Safaris</td><td>tanzania-luxury-safaris</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>17</td><td>Ngorongoro Crater Safari</td><td>ngorongoro-crater-safari</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>18</td><td>Kilimanjaro Group Climbing</td><td>kilimanjaro-group-climbing</td><td><span class="category-tag">mount-kilimanjaro</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>19</td><td>Cycling Safari Tanzania</td><td>cycling-safari-tanzania</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>20</td><td>Maasai Healing Rituals Tanzania</td><td>maasai-healing-rituals-tanzania</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>21</td><td>Sunset Hot Springs in Tanzania</td><td>sunset-hot-springs-in-tanzania</td><td><span class="category-tag">tanzania-destinations</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>22</td><td>Coffee Mindfulness Tanzania</td><td>coffee-mindfulness-tanzania</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>23</td><td>Geothermal Spa Walking Tanzania</td><td>geothermal-spa-walking-tanzania</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>24</td><td>Rift Valley Volcano Hikes</td><td>rift-valley-volcano-hikes</td><td><span class="category-tag">tanzania-destinations</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>25</td><td>Ngorongoro Hot Springs</td><td>ngorongoro-hot-springs</td><td><span class="category-tag">tanzania-destinations</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>26</td><td>Serengeti Wellness Safari</td><td>serengeti-wellness-safari</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>27</td><td>Coffee Farm Safari Tanzania</td><td>coffee-farm-safari-tanzania</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>28</td><td>Ruaha Walking Safari</td><td>ruaha-walking-safari</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>29</td><td>Tanzania Birding Safari</td><td>tanzania-birding-safari</td><td><span class="category-tag">safari-tours</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <tr><td>30</td><td>Maasai Homestay Tanzania</td><td>maasai-homestay-tanzania</td><td><span class="category-tag">blog</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td><td><span class="status-icon status-missing">✗</span></td></tr>
+            <!-- Rows 31-125 follow same pattern - all missing SEO -->
+            <tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--slate-600);">
+              <strong>... and 95 more posts with identical SEO issues</strong><br>
+              <span style="font-size: 0.875rem;">All 125 posts require Meta Title, Meta Description, Content, and Featured Image</span>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Recommended Actions -->
+    <div class="section">
+      <h2>Recommended Action Plan</h2>
+
+      <div class="action-item" style="border-left: 4px solid var(--red-500);">
+        <h4>Phase 1: High-Priority Posts (Week 1-2)</h4>
+        <p><strong>44 posts</strong> - Mount Kilimanjaro (26) + Kilimanjaro Climbing Guide (18)</p>
+        <p>These are your money keywords. Focus on: "climb kilimanjaro", "kilimanjaro routes", "kilimanjaro cost"</p>
+      </div>
+
+      <div class="action-item" style="border-left: 4px solid var(--red-500);">
+        <h4>Phase 2: Safari Content (Week 3-4)</h4>
+        <p><strong>34 posts</strong> - Safari Tours category</p>
+        <p>Target: "tanzania safari", "serengeti safari", "ngorongoro crater", "wildlife safari"</p>
+      </div>
+
+      <div class="action-item" style="border-left: 4px solid var(--yellow-500);">
+        <h4>Phase 3: Destinations & General (Week 5-6)</h4>
+        <p><strong>47 posts</strong> - Tanzania Destinations (9) + Blog (36) + Day Trip (2)</p>
+        <p>Supporting content for long-tail keywords and internal linking</p>
+      </div>
+
+      <div class="action-item" style="border-left: 4px solid var(--green-500);">
+        <h4>Ongoing: Content Migration from WordPress</h4>
+        <p>Export original content from WordPress and migrate to each post. Preserve existing rankings.</p>
+      </div>
+    </div>
+
+    <!-- SEO Checklist Per Post -->
+    <div class="section">
+      <h2>SEO Checklist Per Post</h2>
+      <p style="margin-bottom: 1rem; color: var(--slate-600);">Use this checklist when optimizing each blog post:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Requirement</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Meta Title</strong></td>
+            <td>50-60 chars, keyword at start, compelling</td>
+            <td>"Climbing Kilimanjaro: Complete 2026 Guide | Snow Africa"</td>
+          </tr>
+          <tr>
+            <td><strong>Meta Description</strong></td>
+            <td>150-160 chars, keyword included, CTA</td>
+            <td>"Plan your Kilimanjaro climb with our expert guide covering routes, costs, best seasons & gear. Book with Tanzania's trusted KPAP operator."</td>
+          </tr>
+          <tr>
+            <td><strong>H1 Heading</strong></td>
+            <td>Match title, one per page</td>
+            <td>"Climbing Kilimanjaro: The Complete 2026 Guide"</td>
+          </tr>
+          <tr>
+            <td><strong>Content Length</strong></td>
+            <td>1,500-3,000+ words for guides</td>
+            <td>Comprehensive, well-structured with H2/H3</td>
+          </tr>
+          <tr>
+            <td><strong>Featured Image</strong></td>
+            <td>1200x630px, optimized, alt text</td>
+            <td>alt="Climbers ascending Kilimanjaro at sunrise"</td>
+          </tr>
+          <tr>
+            <td><strong>Internal Links</strong></td>
+            <td>3-5 relevant internal links</td>
+            <td>Link to routes, booking, related posts</td>
+          </tr>
+          <tr>
+            <td><strong>Categories/Tags</strong></td>
+            <td>1-2 categories, 3-5 tags</td>
+            <td>Category: mount-kilimanjaro, Tags: climbing, guide, 2026</td>
+          </tr>
+          <tr>
+            <td><strong>Schema Markup</strong></td>
+            <td>Article/BlogPosting JSON-LD</td>
+            <td>Auto-generated by site (verify working)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--slate-600); font-size: 0.875rem;">
+      <p>Generated by Snow Africa SEO Audit Tool</p>
+      <p>Report Date: February 12, 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

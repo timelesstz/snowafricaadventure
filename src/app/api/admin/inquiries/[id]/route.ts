@@ -36,7 +36,7 @@ export async function GET(
   }
 }
 
-// PUT /api/admin/inquiries/[id] - Update inquiry status
+// PUT /api/admin/inquiries/[id] - Update inquiry (all fields)
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -50,11 +50,42 @@ export async function PUT(
 
   try {
     const body = await request.json();
-    const { status } = body;
+    const {
+      status,
+      fullName,
+      email,
+      phone,
+      phonePrefix,
+      nationality,
+      tripType,
+      numAdults,
+      numChildren,
+      arrivalDate,
+      additionalInfo,
+      relatedTo,
+      referralSource,
+    } = body;
+
+    // Build update data - only include fields that are provided
+    const updateData: Record<string, unknown> = {};
+
+    if (status !== undefined) updateData.status = status;
+    if (fullName !== undefined) updateData.fullName = fullName;
+    if (email !== undefined) updateData.email = email;
+    if (phone !== undefined) updateData.phone = phone;
+    if (phonePrefix !== undefined) updateData.phonePrefix = phonePrefix;
+    if (nationality !== undefined) updateData.nationality = nationality;
+    if (tripType !== undefined) updateData.tripType = tripType;
+    if (numAdults !== undefined) updateData.numAdults = numAdults ? parseInt(numAdults) : null;
+    if (numChildren !== undefined) updateData.numChildren = numChildren ? parseInt(numChildren) : null;
+    if (arrivalDate !== undefined) updateData.arrivalDate = arrivalDate ? new Date(arrivalDate) : null;
+    if (additionalInfo !== undefined) updateData.additionalInfo = additionalInfo;
+    if (relatedTo !== undefined) updateData.relatedTo = relatedTo;
+    if (referralSource !== undefined) updateData.referralSource = referralSource;
 
     const inquiry = await prisma.inquiry.update({
       where: { id },
-      data: { status },
+      data: updateData,
     });
 
     return NextResponse.json(inquiry);

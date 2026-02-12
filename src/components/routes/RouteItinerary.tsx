@@ -99,8 +99,9 @@ function getElevationChange(elevation?: string): string | null {
   return null;
 }
 
-export function RouteItinerary({ days, routeTitle = "Route" }: RouteItineraryProps) {
+export function RouteItinerary({ days, routeTitle = "Route", routeSlug }: RouteItineraryProps) {
   const [expandedDay, setExpandedDay] = useState<number | null>(null);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   const elevationProfile = useMemo(() => extractElevationProfile(days), [days]);
 
@@ -121,6 +122,301 @@ export function RouteItinerary({ days, routeTitle = "Route" }: RouteItineraryPro
   const isSummitDay = (day: ItineraryDay) => {
     const titleLower = day.title.toLowerCase();
     return titleLower.includes("summit") || titleLower.includes("uhuru");
+  };
+
+  const handleDownloadPdf = () => {
+    setIsGeneratingPdf(true);
+
+    // Create a new window with print-friendly content
+    const printWindow = window.open("", "_blank", "width=800,height=600");
+    if (!printWindow) {
+      setIsGeneratingPdf(false);
+      alert("Please allow pop-ups to download the itinerary PDF");
+      return;
+    }
+
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${routeTitle} - Full Itinerary | Snow Africa Adventure</title>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600&display=swap');
+
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+
+          body {
+            font-family: 'Sora', sans-serif;
+            color: #1e3a5f;
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+          }
+
+          h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+
+          .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #F59E0B;
+          }
+
+          .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+          }
+
+          .logo span { color: #F59E0B; }
+
+          h1 {
+            font-size: 28px;
+            color: #1e3a5f;
+            margin-bottom: 8px;
+          }
+
+          .subtitle {
+            color: #64748b;
+            font-size: 14px;
+          }
+
+          .summary-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+          }
+
+          .summary-item strong {
+            display: block;
+            font-size: 20px;
+            color: #1e3a5f;
+            font-family: 'Outfit', sans-serif;
+          }
+
+          .summary-item span {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+
+          .day-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            page-break-inside: avoid;
+          }
+
+          .day-card.summit {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            border: none;
+          }
+
+          .day-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
+
+          .day-card.summit .day-header {
+            background: rgba(255,255,255,0.1);
+          }
+
+          .day-number {
+            width: 40px;
+            height: 40px;
+            background: #1e3a5f;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+          }
+
+          .day-card.summit .day-number {
+            background: #F59E0B;
+            color: #1e3a5f;
+          }
+
+          .day-title {
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          .day-badge {
+            background: #F59E0B;
+            color: #1e3a5f;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: auto;
+          }
+
+          .day-content {
+            padding: 20px;
+          }
+
+          .day-description {
+            margin-bottom: 15px;
+            color: #475569;
+            font-size: 14px;
+          }
+
+          .day-card.summit .day-description {
+            color: rgba(255,255,255,0.85);
+          }
+
+          .day-stats {
+            display: flex;
+            gap: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+          }
+
+          .day-card.summit .day-stats {
+            border-top-color: rgba(255,255,255,0.1);
+          }
+
+          .stat-item strong {
+            display: block;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+            color: #1e3a5f;
+          }
+
+          .day-card.summit .stat-item strong {
+            color: #F59E0B;
+          }
+
+          .stat-item span {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+          }
+
+          .day-card.summit .stat-item span {
+            color: rgba(255,255,255,0.6);
+          }
+
+          .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+          }
+
+          .footer a {
+            color: #F59E0B;
+            text-decoration: none;
+          }
+
+          .contact-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+          }
+
+          .contact-info p {
+            margin: 5px 0;
+            font-size: 13px;
+          }
+
+          @media print {
+            body { padding: 20px; }
+            .day-card { break-inside: avoid; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div class="logo">Snow<span>Africa</span> Adventure</div>
+          <h1>${routeTitle}</h1>
+          <p class="subtitle">${days.length}-Day Kilimanjaro Trekking Itinerary</p>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-item">
+            <strong>${days.length}</strong>
+            <span>Days</span>
+          </div>
+          <div class="summary-item">
+            <strong>${maxElevation.toLocaleString()}m</strong>
+            <span>Max Elevation</span>
+          </div>
+          <div class="summary-item">
+            <strong>5,895m</strong>
+            <span>Summit</span>
+          </div>
+        </div>
+
+        ${days.map((day, index) => {
+          const badge = getDayBadge(day, index, days.length);
+          const isSummit = day.title.toLowerCase().includes("summit") || day.title.toLowerCase().includes("uhuru");
+          return `
+            <div class="day-card${isSummit ? " summit" : ""}">
+              <div class="day-header">
+                <div class="day-number">${day.day}</div>
+                <div class="day-title">${day.title}</div>
+                ${badge ? `<div class="day-badge">${badge}</div>` : ""}
+              </div>
+              <div class="day-content">
+                <p class="day-description">${day.description}</p>
+                <div class="day-stats">
+                  ${day.elevation ? `<div class="stat-item"><strong>${day.elevation}</strong><span>Elevation</span></div>` : ""}
+                  ${day.distance ? `<div class="stat-item"><strong>${day.distance}</strong><span>Distance</span></div>` : ""}
+                  ${day.duration ? `<div class="stat-item"><strong>${day.duration}</strong><span>Duration</span></div>` : ""}
+                  ${day.camp ? `<div class="stat-item"><strong>${day.camp}</strong><span>Camp</span></div>` : ""}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+
+        <div class="contact-info">
+          <p><strong>Ready to climb Kilimanjaro?</strong></p>
+          <p>Email: info@snowafricaadventure.com</p>
+          <p>Website: www.snowafricaadventure.com</p>
+        </div>
+
+        <div class="footer">
+          <p>Generated from <a href="https://www.snowafricaadventure.com${routeSlug ? `/trekking/${routeSlug}/` : ""}">Snow Africa Adventure</a></p>
+          <p>© ${new Date().getFullYear()} Snow Africa Adventure. All rights reserved.</p>
+        </div>
+
+        <script>
+          window.onload = function() {
+            window.print();
+            window.onafterprint = function() {
+              window.close();
+            };
+          };
+        </script>
+      </body>
+      </html>
+    `;
+
+    printWindow.document.write(htmlContent);
+    printWindow.document.close();
+    setIsGeneratingPdf(false);
   };
 
   return (
@@ -381,15 +677,26 @@ export function RouteItinerary({ days, routeTitle = "Route" }: RouteItineraryPro
 
       {/* Download Button */}
       <div className="text-center mt-8">
-        <button className="inline-flex items-center gap-2 px-7 py-3.5 bg-white border-2 border-[var(--border)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:border-[var(--secondary)] hover:text-[var(--secondary-dark)] hover:bg-[var(--surface)] transition-all">
-          <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-          Download Full Itinerary PDF
+        <button
+          onClick={handleDownloadPdf}
+          disabled={isGeneratingPdf}
+          className="inline-flex items-center gap-2 px-7 py-3.5 bg-white border-2 border-[var(--border)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:border-[var(--secondary)] hover:text-[var(--secondary-dark)] hover:bg-[var(--surface)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isGeneratingPdf ? (
+            <svg className="animate-spin" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" strokeOpacity="0.25"/>
+              <path d="M12 2a10 10 0 0 1 10 10" strokeLinecap="round"/>
+            </svg>
+          ) : (
+            <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          )}
+          {isGeneratingPdf ? "Preparing..." : "Download Full Itinerary PDF"}
         </button>
       </div>
     </section>

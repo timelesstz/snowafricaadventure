@@ -17,6 +17,7 @@ import { InquiryStatusBadge } from "@/components/admin/inquiries/InquiryStatusBa
 import { InquiryTypeBadge } from "@/components/admin/inquiries/InquiryTypeBadge";
 import { InquiryActions } from "@/components/admin/inquiries/InquiryActions";
 import { InquiryEmailForm } from "@/components/admin/inquiries/InquiryEmailForm";
+import { InquiryEditForm } from "@/components/admin/inquiries/InquiryEditForm";
 
 async function getInquiry(id: string) {
   const inquiry = await prisma.inquiry.findUnique({
@@ -80,6 +81,7 @@ export default async function InquiryDetailPage({
           </div>
         </div>
         <div className="flex items-center gap-3">
+          <InquiryEditForm inquiry={inquiry} />
           <InquiryTypeBadge type={inquiry.type} />
           <InquiryStatusBadge status={inquiry.status} />
         </div>

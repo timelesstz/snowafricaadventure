@@ -3,7 +3,8 @@
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Plus, Trash2, Save } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Save, FileText, X } from "lucide-react";
+import MediaUploader from "@/components/admin/MediaUploader";
 
 const TRIP_TYPES = ["kilimanjaro", "safari", "daytrip", "zanzibar"];
 const PARTNER_TYPES = ["DEVELOPER", "MARKETING", "AFFILIATE", "AGENT"];
@@ -25,8 +26,10 @@ interface Partner {
   contactPhone: string | null;
   agreementDate: string | null;
   agreementExpiry: string | null;
+  agreementDocument: string | null;
   payoutFrequency: string;
   payoutMethod: string | null;
+  payoutDetails: Record<string, unknown> | null;
   notes: string | null;
   isActive: boolean;
   commissionRates: CommissionRate[];
@@ -52,8 +55,10 @@ export default function EditPartnerPage({
     contactPhone: "",
     agreementDate: "",
     agreementExpiry: "",
+    agreementDocument: "",
     payoutFrequency: "MONTHLY",
     payoutMethod: "",
+    payoutDetails: "",
     notes: "",
     isActive: true,
   });
@@ -75,8 +80,10 @@ export default function EditPartnerPage({
           contactPhone: data.contactPhone || "",
           agreementDate: data.agreementDate?.split("T")[0] || "",
           agreementExpiry: data.agreementExpiry?.split("T")[0] || "",
+          agreementDocument: data.agreementDocument || "",
           payoutFrequency: data.payoutFrequency,
           payoutMethod: data.payoutMethod || "",
+          payoutDetails: data.payoutDetails ? JSON.stringify(data.payoutDetails, null, 2) : "",
           notes: data.notes || "",
           isActive: data.isActive,
         });
@@ -101,11 +108,24 @@ export default function EditPartnerPage({
     setError("");
 
     try {
+      // Parse payoutDetails JSON if provided
+      let payoutDetails = null;
+      if (formData.payoutDetails) {
+        try {
+          payoutDetails = JSON.parse(formData.payoutDetails);
+        } catch {
+          setError("Invalid JSON format in Payout Details");
+          setSaving(false);
+          return;
+        }
+      }
+
       const response = await fetch(`/api/admin/partners/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          payoutDetails,
           commissionRates: commissionRates.filter((r) => r.commissionRate > 0),
         }),
       });
@@ -358,12 +378,39 @@ export default function EditPartnerPage({
               />
             </div>
           </div>
+
+          {/* Pesapal Payout Details */}
+          <div className="pt-4 border-t border-slate-200">
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Pesapal Payout Details
+            </label>
+            <textarea
+              value={formData.payoutDetails}
+              onChange={(e) =>
+                setFormData({ ...formData, payoutDetails: e.target.value })
+              }
+              rows={8}
+              placeholder={`{
+  "pesapalMerchantId": "",
+  "pesapalEmail": "partner@example.com",
+  "bankName": "CRDB Bank",
+  "accountNumber": "",
+  "accountName": "Partner Name",
+  "mobileMoneyProvider": "M-Pesa",
+  "mobileNumber": "+255..."
+}`}
+              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
+            />
+            <p className="text-xs text-slate-500 mt-1">
+              Pesapal payout configuration (merchant ID, bank details, or mobile money)
+            </p>
+          </div>
         </div>
 
         {/* Agreement Dates */}
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-slate-900">
-            Agreement Dates
+            Agreement Details
           </h2>
 
           <div className="grid grid-cols-2 gap-4">
@@ -394,6 +441,50 @@ export default function EditPartnerPage({
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
               />
             </div>
+          </div>
+
+          {/* Digital E-Agreement Upload */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Digital E-Agreement
+            </label>
+            {formData.agreementDocument ? (
+              <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                <FileText className="w-8 h-8 text-amber-600" />
+                <div className="flex-1 min-w-0">
+                  <a
+                    href={formData.agreementDocument}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-amber-600 hover:text-amber-700 hover:underline truncate block"
+                  >
+                    View E-Agreement
+                  </a>
+                  <p className="text-xs text-slate-500 truncate">
+                    {formData.agreementDocument.split("/").pop()}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({ ...formData, agreementDocument: "" })
+                  }
+                  className="p-1 text-red-500 hover:bg-red-50 rounded"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <MediaUploader
+                folder="partner-agreements"
+                onUpload={(media) =>
+                  setFormData({ ...formData, agreementDocument: media.url })
+                }
+                accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                label="Upload signed e-agreement (PDF, DOC, DOCX, or image)"
+                showPreview={false}
+              />
+            )}
           </div>
         </div>
 

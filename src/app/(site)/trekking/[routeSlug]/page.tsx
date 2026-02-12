@@ -259,7 +259,7 @@ export default async function RoutePage({ params }: PageProps) {
 
               {/* Itinerary */}
               {itinerary.length > 0 && (
-                <RouteItinerary days={itinerary} routeTitle={route.title} />
+                <RouteItinerary days={itinerary} routeTitle={route.title} routeSlug={route.slug} />
               )}
 
               {/* Inclusions/Exclusions */}
