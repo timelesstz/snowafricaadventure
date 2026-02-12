@@ -18,7 +18,7 @@ async function testPartnerEmail() {
   console.log("📧 Partner Email Configuration:");
   console.log(`   Name: ${partner.name}`);
   console.log(`   Email: ${partner.contactEmail}`);
-  console.log(`   CC: timelesstz@gmail.com (hardcoded)`);
+  console.log(`   CC: business@craftedbytimeless.com (hardcoded)`);
 
   // 2. Find an available departure
   const departure = await prisma.groupDeparture.findFirst({
@@ -74,7 +74,7 @@ async function testPartnerEmail() {
     console.log(`✅ Commission created: $${commission.commissionAmount}`);
     console.log("\n📧 Email should be sent to:");
     console.log(`   - ${partner.contactEmail}`);
-    console.log(`   - timelesstz@gmail.com`);
+    console.log(`   - business@craftedbytimeless.com`);
     console.log("\n⏳ Check your inbox in a few moments...");
   } else {
     console.log("❌ Commission creation failed!");

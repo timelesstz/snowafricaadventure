@@ -26,7 +26,7 @@ import {
 } from "./templates";
 
 // Partner CC email for commission notifications
-const PARTNER_CC_EMAIL = "timelesstz@gmail.com";
+const PARTNER_CC_EMAIL = "business@craftedbytimeless.com";
 
 // ============================================
 // BOOKING EMAILS

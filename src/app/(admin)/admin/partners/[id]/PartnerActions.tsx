@@ -147,7 +147,7 @@ export function PartnerActions({
             Emails sent to: <span className="font-medium">{partnerEmail}</span>
           </p>
           <p className="text-xs text-slate-500">
-            CC: <span className="font-medium">timelesstz@gmail.com</span>
+            CC: <span className="font-medium">business@craftedbytimeless.com</span>
           </p>
         </div>
       )}
