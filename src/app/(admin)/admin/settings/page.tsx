@@ -1,8 +1,20 @@
 import { auth } from "@/lib/auth";
 import { Settings, Key, Shield, Database } from "lucide-react";
+import { prisma } from "@/lib/prisma";
+import { PinSettings } from "@/components/admin/PinSettings";
 
 export default async function SettingsPage() {
   const session = await auth();
+
+  // Check if user has PIN set
+  const user = session?.user?.id
+    ? await prisma.adminUser.findUnique({
+        where: { id: session.user.id },
+        select: { pin: true },
+      })
+    : null;
+
+  const hasPin = !!user?.pin;
 
   return (
     <div className="space-y-6">
@@ -34,6 +46,11 @@ export default async function SettingsPage() {
           </div>
         </div>
       </div>
+
+      {/* PIN Settings - Only for ADMIN and SUPER_ADMIN */}
+      {(session?.user?.role === "ADMIN" || session?.user?.role === "SUPER_ADMIN") && (
+        <PinSettings hasPin={hasPin} />
+      )}
 
       {/* Environment Variables */}
       <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">

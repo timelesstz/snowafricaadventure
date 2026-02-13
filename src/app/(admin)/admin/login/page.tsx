@@ -3,11 +3,16 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+type LoginMethod = "password" | "pin";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [loginMethod, setLoginMethod] = useState<LoginMethod>("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [pin, setPin] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -17,14 +22,21 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+      const result = await signIn(
+        loginMethod === "password" ? "credentials" : "pin",
+        {
+          email,
+          ...(loginMethod === "password" ? { password } : { pin }),
+          redirect: false,
+        }
+      );
 
       if (result?.error) {
-        setError("Invalid email or password");
+        setError(
+          loginMethod === "password"
+            ? "Invalid email or password"
+            : "Invalid email or PIN"
+        );
       } else {
         router.push("/admin");
         router.refresh();
@@ -44,6 +56,38 @@ export default function LoginPage() {
             Snow Africa Admin
           </h1>
           <p className="text-slate-600 mt-2">Sign in to your account</p>
+        </div>
+
+        {/* Login Method Tabs */}
+        <div className="flex border-b border-slate-200 mb-6">
+          <button
+            type="button"
+            onClick={() => {
+              setLoginMethod("password");
+              setError("");
+            }}
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
+              loginMethod === "password"
+                ? "border-amber-500 text-amber-600"
+                : "border-transparent text-slate-500 hover:text-slate-700"
+            }`}
+          >
+            Password
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setLoginMethod("pin");
+              setError("");
+            }}
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
+              loginMethod === "pin"
+                ? "border-amber-500 text-amber-600"
+                : "border-transparent text-slate-500 hover:text-slate-700"
+            }`}
+          >
+            Quick PIN
+          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -71,23 +115,49 @@ export default function LoginPage() {
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-slate-700 mb-1"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
-              placeholder="Enter your password"
-            />
-          </div>
+          {loginMethod === "password" ? (
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-slate-700 mb-1"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors"
+                placeholder="Enter your password"
+              />
+            </div>
+          ) : (
+            <div>
+              <label
+                htmlFor="pin"
+                className="block text-sm font-medium text-slate-700 mb-1"
+              >
+                PIN (4-6 digits)
+              </label>
+              <input
+                id="pin"
+                type="password"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                value={pin}
+                onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
+                required
+                className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-colors text-center text-2xl tracking-widest"
+                placeholder="••••••"
+              />
+              <p className="mt-1 text-xs text-slate-500">
+                PIN login is only available for Admin users who have set up a PIN.
+              </p>
+            </div>
+          )}
 
           <button
             type="submit"
@@ -96,6 +166,24 @@ export default function LoginPage() {
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
+
+          <div className="text-center">
+            {loginMethod === "password" ? (
+              <Link
+                href="/admin/forgot-password"
+                className="text-sm text-amber-600 hover:text-amber-700 hover:underline"
+              >
+                Forgot your password?
+              </Link>
+            ) : (
+              <Link
+                href="/admin/reset-pin"
+                className="text-sm text-amber-600 hover:text-amber-700 hover:underline"
+              >
+                Forgot your PIN?
+              </Link>
+            )}
+          </div>
         </form>
       </div>
     </div>

@@ -460,13 +460,29 @@ model AdminUser {
   email        String    @unique
   passwordHash String
   name         String
+  pin          String?   // 4-6 digit PIN for quick login (hashed)
   isActive     Boolean   @default(true)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   lastLoginAt  DateTime?
   role         AdminRole @default(ADMIN)
+  resetTokens  PasswordResetToken[]
 
   @@index([email])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model Partner {

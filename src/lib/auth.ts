@@ -27,7 +27,9 @@ declare module "next-auth" {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
+    // Password login provider
     Credentials({
+      id: "credentials",
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -50,6 +52,52 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           credentials.password as string,
           user.passwordHash
         );
+
+        if (!isValid) {
+          return null;
+        }
+
+        // Update last login time
+        await prisma.adminUser.update({
+          where: { id: user.id },
+          data: { lastLoginAt: new Date() },
+        });
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        };
+      },
+    }),
+    // PIN login provider (admin only)
+    Credentials({
+      id: "pin",
+      name: "pin",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        pin: { label: "PIN", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.pin) {
+          return null;
+        }
+
+        const user = await prisma.adminUser.findUnique({
+          where: { email: credentials.email as string },
+        });
+
+        if (!user || !user.isActive || !user.pin) {
+          return null;
+        }
+
+        // Only allow PIN login for ADMIN and SUPER_ADMIN
+        if (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN") {
+          return null;
+        }
+
+        const isValid = await compare(credentials.pin as string, user.pin);
 
         if (!isValid) {
           return null;
