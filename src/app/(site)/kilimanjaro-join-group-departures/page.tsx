@@ -7,6 +7,9 @@ import prisma from "@/lib/prisma";
 import { SITE_CONFIG, PARTNER_INFO } from "@/lib/constants";
 import { ShareButtons } from "@/components/social/ShareButtons";
 
+// Revalidate every 60 seconds to fetch fresh departure data
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   ...genMeta({
     title: "Kilimanjaro Join Group Departures 2026-2027",
