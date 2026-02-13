@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Sun, Waves, Building, Compass } from "lucide-react";
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { ZanzibarInquiryForm } from "@/components/forms/ZanzibarInquiryForm";
 import { generateMetadata as genMeta } from "@/lib/seo";
 
 export const metadata: Metadata = genMeta({
@@ -354,18 +354,20 @@ export default function ZanzibarPage() {
       </section>
 
       {/* Inquiry Form */}
-      <section id="inquiry-form" className="py-12">
+      <section id="inquiry-form" className="py-12 bg-gradient-to-b from-white to-cyan-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold text-center mb-8">
-              Plan Your Zanzibar Getaway
-            </h2>
-            <div className="bg-[var(--surface)] rounded-lg p-6">
-              <InquiryForm
-                variant="full"
-                relatedTo="Zanzibar Beach Holiday"
-                tripType="zanzibar"
-              />
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="font-heading text-3xl font-bold mb-4">
+                Plan Your Zanzibar Getaway
+              </h2>
+              <p className="text-[var(--text-muted)]">
+                Tell us about your dream beach holiday and we&apos;ll create
+                the perfect Zanzibar experience for you.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm">
+              <ZanzibarInquiryForm />
             </div>
           </div>
         </div>

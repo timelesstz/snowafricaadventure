@@ -369,7 +369,16 @@ model Inquiry {
   tripType       String?
   numAdults      Int?
   numChildren    Int?
+  childrenAges   String?   // Comma-separated ages
   arrivalDate    DateTime?
+  departureDate  DateTime?
+  duration       Int?      // Number of days
+  flexibility    String?   // fixed, flexible, very_flexible
+  budget         String?   // budget, mid-range, luxury
+  destinations   String?   // Comma-separated destinations/parks
+  accommodation  String?   // lodge, tented_camp, camping, mixed
+  interests      String?   // Comma-separated special interests
+  experience     String?   // none, some, experienced
   additionalInfo String?
   relatedTo      String?
   referralSource String?

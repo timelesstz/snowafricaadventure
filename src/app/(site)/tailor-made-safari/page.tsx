@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Check, Users, Calendar, MapPin, Star } from "lucide-react";
-import { InquiryForm } from "@/components/forms/InquiryForm";
+import { TailorMadeForm } from "@/components/forms/TailorMadeForm";
 import { generateMetadata as genMeta } from "@/lib/seo";
 
 export const metadata: Metadata = genMeta({
@@ -299,22 +299,18 @@ export default function TailorMadeSafariPage() {
       {/* Inquiry Form */}
       <section id="inquiry-form" className="py-12 bg-[var(--muted)]">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="font-heading text-3xl font-bold mb-4">
                 Let&apos;s Plan Your Safari
               </h2>
               <p className="text-[var(--text-muted)]">
-                Tell us about your dream trip and we&apos;ll get back to you
-                within 24 hours with a custom proposal. No obligation, no spam.
+                The more details you share, the better we can tailor your
+                perfect Tanzania adventure. We&apos;ll respond within 24-48 hours.
               </p>
             </div>
-            <div className="bg-white rounded-lg p-8 shadow-sm">
-              <InquiryForm
-                variant="full"
-                relatedTo="Tailor-Made Safari"
-                tripType="safari"
-              />
+            <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm">
+              <TailorMadeForm />
             </div>
           </div>
         </div>

@@ -129,6 +129,114 @@ export const PHONE_PREFIXES = [
 ] as const;
 
 /**
+ * Safari destinations/parks
+ */
+export const SAFARI_DESTINATIONS = [
+  { value: "serengeti", label: "Serengeti National Park" },
+  { value: "ngorongoro", label: "Ngorongoro Crater" },
+  { value: "tarangire", label: "Tarangire National Park" },
+  { value: "lake_manyara", label: "Lake Manyara National Park" },
+  { value: "arusha", label: "Arusha National Park" },
+  { value: "selous", label: "Selous Game Reserve" },
+  { value: "ruaha", label: "Ruaha National Park" },
+  { value: "mikumi", label: "Mikumi National Park" },
+  { value: "katavi", label: "Katavi National Park" },
+  { value: "mahale", label: "Mahale Mountains" },
+  { value: "gombe", label: "Gombe Stream" },
+] as const;
+
+/**
+ * Budget levels
+ */
+export const BUDGET_LEVELS = [
+  { value: "budget", label: "Budget-Friendly", description: "Basic camping & budget lodges" },
+  { value: "mid-range", label: "Mid-Range", description: "Comfortable lodges & tented camps" },
+  { value: "luxury", label: "Luxury", description: "Premium lodges & exclusive camps" },
+] as const;
+
+/**
+ * Accommodation types
+ */
+export const ACCOMMODATION_TYPES = [
+  { value: "lodge", label: "Lodges Only", description: "Permanent structures with all amenities" },
+  { value: "tented_camp", label: "Tented Camps", description: "Luxury tents with en-suite facilities" },
+  { value: "camping", label: "Camping", description: "Basic camping for adventurous travelers" },
+  { value: "mixed", label: "Mix of All", description: "Combination based on location" },
+] as const;
+
+/**
+ * Safari interests
+ */
+export const SAFARI_INTERESTS = [
+  { value: "big_five", label: "Big Five" },
+  { value: "great_migration", label: "Great Migration" },
+  { value: "photography", label: "Photography Safari" },
+  { value: "birdwatching", label: "Birdwatching" },
+  { value: "walking_safari", label: "Walking Safaris" },
+  { value: "night_drive", label: "Night Game Drives" },
+  { value: "balloon_safari", label: "Hot Air Balloon Safari" },
+  { value: "cultural", label: "Cultural Experiences" },
+  { value: "chimpanzee", label: "Chimpanzee Trekking" },
+] as const;
+
+/**
+ * Date flexibility options
+ */
+export const DATE_FLEXIBILITY = [
+  { value: "fixed", label: "Fixed Dates", description: "I have specific travel dates" },
+  { value: "flexible", label: "Flexible (+/- 1 week)", description: "I can adjust by a few days" },
+  { value: "very_flexible", label: "Very Flexible", description: "I'm open to suggestions" },
+] as const;
+
+/**
+ * Safari experience levels
+ */
+export const SAFARI_EXPERIENCE = [
+  { value: "none", label: "First Safari", description: "This will be my first safari" },
+  { value: "some", label: "Some Experience", description: "I've been on 1-2 safaris before" },
+  { value: "experienced", label: "Experienced", description: "I've been on multiple safaris" },
+] as const;
+
+/**
+ * Zanzibar beach areas
+ */
+export const ZANZIBAR_BEACHES = [
+  { value: "nungwi", label: "Nungwi Beach", description: "Northern tip, stunning sunsets" },
+  { value: "kendwa", label: "Kendwa Beach", description: "Calm waters, boutique resorts" },
+  { value: "paje", label: "Paje Beach", description: "Kitesurfing paradise, laid-back" },
+  { value: "jambiani", label: "Jambiani Beach", description: "Traditional village atmosphere" },
+  { value: "matemwe", label: "Matemwe Beach", description: "Quiet, pristine, secluded" },
+  { value: "kiwengwa", label: "Kiwengwa Beach", description: "All-inclusive resorts" },
+  { value: "no_preference", label: "No Preference", description: "Help me choose" },
+] as const;
+
+/**
+ * Zanzibar activities
+ */
+export const ZANZIBAR_ACTIVITIES = [
+  { value: "stone_town", label: "Stone Town Tour" },
+  { value: "spice_tour", label: "Spice Tour" },
+  { value: "snorkeling", label: "Snorkeling" },
+  { value: "scuba_diving", label: "Scuba Diving" },
+  { value: "dhow_cruise", label: "Sunset Dhow Cruise" },
+  { value: "dolphin_tour", label: "Dolphin Tour" },
+  { value: "prison_island", label: "Prison Island" },
+  { value: "jozani_forest", label: "Jozani Forest" },
+  { value: "kitesurfing", label: "Kitesurfing" },
+  { value: "relaxation", label: "Just Relax on Beach" },
+] as const;
+
+/**
+ * Zanzibar duration options
+ */
+export const ZANZIBAR_DURATIONS = [
+  { value: "3", label: "3 Nights", description: "Quick beach escape" },
+  { value: "5", label: "5 Nights", description: "Ideal beach holiday" },
+  { value: "7", label: "7 Nights", description: "Ultimate relaxation" },
+  { value: "custom", label: "Custom Duration", description: "I have specific dates" },
+] as const;
+
+/**
  * Partner information for website attribution
  */
 export const PARTNER_INFO = {

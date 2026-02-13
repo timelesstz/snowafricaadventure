@@ -16,7 +16,16 @@ const inquirySchema = z.object({
   tripType: z.string().optional(),
   numAdults: z.coerce.number().optional(),
   numChildren: z.coerce.number().optional(),
+  childrenAges: z.string().optional(),
   arrivalDate: z.string().optional(),
+  departureDate: z.string().optional(),
+  duration: z.coerce.number().optional(),
+  flexibility: z.string().optional(),
+  budget: z.string().optional(),
+  destinations: z.string().optional(),
+  accommodation: z.string().optional(),
+  interests: z.string().optional(),
+  experience: z.string().optional(),
   additionalInfo: z.string().optional(),
   relatedTo: z.string().optional(),
   referralSource: z.string().optional(),
@@ -39,6 +48,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Parse departure date if provided
+    let departureDate: Date | null = null;
+    if (validatedData.departureDate) {
+      departureDate = new Date(validatedData.departureDate);
+      if (isNaN(departureDate.getTime())) {
+        departureDate = null;
+      }
+    }
+
     // Use country as nationality if provided
     const nationality = validatedData.country || validatedData.nationality || null;
 
@@ -53,7 +71,16 @@ export async function POST(request: NextRequest) {
         tripType: validatedData.tripType || null,
         numAdults: validatedData.numAdults || null,
         numChildren: validatedData.numChildren || null,
+        childrenAges: validatedData.childrenAges || null,
         arrivalDate,
+        departureDate,
+        duration: validatedData.duration || null,
+        flexibility: validatedData.flexibility || null,
+        budget: validatedData.budget || null,
+        destinations: validatedData.destinations || null,
+        accommodation: validatedData.accommodation || null,
+        interests: validatedData.interests || null,
+        experience: validatedData.experience || null,
         additionalInfo: validatedData.additionalInfo || null,
         relatedTo: validatedData.relatedTo || null,
         referralSource: validatedData.referralSource || null,
