@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
   PHONE_PREFIXES,
@@ -22,17 +23,55 @@ import {
   Star,
   Sparkles,
   CheckCircle2,
+  ChevronRight,
+  ChevronLeft,
+  User,
+  MessageSquare,
 } from "lucide-react";
 
+const STEPS = [
+  { id: 1, title: "About You", icon: User },
+  { id: 2, title: "Group Size", icon: Users },
+  { id: 3, title: "Travel Dates", icon: Calendar },
+  { id: 4, title: "Destinations", icon: MapPin },
+  { id: 5, title: "Budget & Style", icon: Wallet },
+  { id: 6, title: "Interests", icon: Sparkles },
+  { id: 7, title: "Final Details", icon: MessageSquare },
+];
+
 export function TailorMadeForm() {
+  const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showOtherReferral, setShowOtherReferral] = useState(false);
+
+  // Form data state
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    country: "",
+    phonePrefix: "+1",
+    phone: "",
+    numAdults: 2,
+    numChildren: 0,
+    childrenAges: [] as string[],
+    arrivalDate: "",
+    duration: "",
+    flexibility: "flexible",
+    budget: "",
+    accommodation: "",
+    experience: "",
+    additionalInfo: "",
+    referralSource: "",
+    referralOther: "",
+  });
+
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  const [numChildren, setNumChildren] = useState(0);
-  const [childrenAges, setChildrenAges] = useState<string[]>([]);
+
+  const updateFormData = (field: string, value: string | number | string[]) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const toggleDestination = (value: string) => {
     setSelectedDestinations((prev) =>
@@ -51,63 +90,105 @@ export function TailorMadeForm() {
   };
 
   const handleChildrenChange = (count: number) => {
-    setNumChildren(count);
-    setChildrenAges((prev) => {
-      if (count > prev.length) {
-        return [...prev, ...Array(count - prev.length).fill("")];
+    updateFormData("numChildren", count);
+    setFormData((prev) => {
+      const newAges = [...prev.childrenAges];
+      if (count > newAges.length) {
+        return { ...prev, numChildren: count, childrenAges: [...newAges, ...Array(count - newAges.length).fill("")] };
       }
-      return prev.slice(0, count);
+      return { ...prev, numChildren: count, childrenAges: newAges.slice(0, count) };
     });
   };
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setIsSubmitting(true);
+  const updateChildAge = (index: number, age: string) => {
+    setFormData((prev) => {
+      const newAges = [...prev.childrenAges];
+      newAges[index] = age;
+      return { ...prev, childrenAges: newAges };
+    });
+  };
+
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        return !!(formData.fullName && formData.email && formData.country);
+      case 2:
+        return formData.numAdults >= 1;
+      case 3:
+        return !!formData.arrivalDate;
+      case 4:
+        return true; // Destinations are optional
+      case 5:
+        return !!formData.budget;
+      case 6:
+        return true; // Interests are optional
+      case 7:
+        return true; // Additional info is optional
+      default:
+        return true;
+    }
+  };
+
+  const nextStep = () => {
+    if (validateStep(currentStep) && currentStep < STEPS.length) {
+      setCurrentStep(currentStep + 1);
       setError(null);
+    } else if (!validateStep(currentStep)) {
+      setError("Please fill in all required fields before continuing.");
+    }
+  };
 
-      const formData = new FormData(e.currentTarget);
-      const data = Object.fromEntries(formData.entries());
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+      setError(null);
+    }
+  };
 
-      // Handle referral source
-      let referralSource = data.referralSource as string;
-      if (referralSource === "other" && data.referralOther) {
-        referralSource = `Other: ${data.referralOther}`;
+  const handleSubmit = useCallback(async () => {
+    if (!validateStep(currentStep)) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError(null);
+
+    let referralSource = formData.referralSource;
+    if (referralSource === "other" && formData.referralOther) {
+      referralSource = `Other: ${formData.referralOther}`;
+    }
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          referralSource,
+          destinations: selectedDestinations.join(","),
+          interests: selectedInterests.join(","),
+          childrenAges: formData.childrenAges.filter((a) => a).join(","),
+          relatedTo: "Tailor-Made Safari",
+          type: "tailor-made",
+          tripType: "Customized",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setError(result.message || "Failed to submit inquiry. Please try again.");
       }
-
-      try {
-        const response = await fetch("/api/inquiries", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...data,
-            referralSource,
-            destinations: selectedDestinations.join(","),
-            interests: selectedInterests.join(","),
-            childrenAges: childrenAges.filter((a) => a).join(","),
-            numChildren,
-            relatedTo: "Tailor-Made Safari",
-            type: "tailor-made",
-            tripType: "Customized",
-          }),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          setSubmitted(true);
-        } else {
-          setError(result.message || "Failed to submit inquiry. Please try again.");
-        }
-      } catch (err) {
-        console.error("Error submitting form:", err);
-        setError("Network error. Please check your connection and try again.");
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    [selectedDestinations, selectedInterests, childrenAges, numChildren]
-  );
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData, selectedDestinations, selectedInterests, currentStep]);
 
   if (submitted) {
     return (
@@ -133,7 +214,64 @@ export function TailorMadeForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <div className="space-y-6">
+      {/* Progress Steps */}
+      <div className="relative">
+        <div className="flex justify-between items-center mb-2">
+          {STEPS.map((step, index) => {
+            const StepIcon = step.icon;
+            const isActive = currentStep === step.id;
+            const isCompleted = currentStep > step.id;
+
+            return (
+              <div
+                key={step.id}
+                className={`flex flex-col items-center relative z-10 ${
+                  index < STEPS.length - 1 ? "flex-1" : ""
+                }`}
+              >
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                    isCompleted
+                      ? "bg-green-500 text-white"
+                      : isActive
+                      ? "bg-[var(--primary)] text-white ring-4 ring-[var(--primary)]/20"
+                      : "bg-slate-200 text-slate-400"
+                  }`}
+                >
+                  {isCompleted ? (
+                    <CheckCircle2 className="w-5 h-5" />
+                  ) : (
+                    <StepIcon className="w-5 h-5" />
+                  )}
+                </div>
+                <span
+                  className={`text-xs mt-1 font-medium hidden sm:block ${
+                    isActive ? "text-[var(--primary)]" : "text-slate-400"
+                  }`}
+                >
+                  {step.title}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        {/* Progress Bar */}
+        <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200 -z-0">
+          <div
+            className="h-full bg-green-500 transition-all duration-300"
+            style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Step Counter */}
+      <div className="text-center">
+        <span className="text-sm text-slate-500">
+          Step {currentStep} of {STEPS.length}
+        </span>
+      </div>
+
       {/* Error Message */}
       {error && (
         <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
@@ -141,446 +279,493 @@ export function TailorMadeForm() {
         </div>
       )}
 
-      {/* Section 1: Contact Information */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <Users className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Contact Information</h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="fullName" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Full Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-              placeholder="John Smith"
-            />
+      {/* Step Content */}
+      <div className="min-h-[300px]">
+        {/* Step 1: Contact Information */}
+        {currentStep === 1 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h3 className="font-semibold text-lg flex items-center gap-2">
+              <User className="w-5 h-5 text-[var(--primary)]" />
+              Tell us about yourself
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={formData.fullName}
+                  onChange={(e) => updateFormData("fullName", e.target.value)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  placeholder="John Smith"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => updateFormData("email", e.target.value)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Country <span className="text-red-500">*</span>
+                </label>
+                <select
+                  value={formData.country}
+                  onChange={(e) => updateFormData("country", e.target.value)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white"
+                >
+                  <option value="">Select your country</option>
+                  {COUNTRIES.slice(0, 20).map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.flag} {country.name}
+                    </option>
+                  ))}
+                  <option disabled>──────────────</option>
+                  {COUNTRIES.slice(20).map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.flag} {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Phone / WhatsApp
+                </label>
+                <div className="flex gap-2">
+                  <select
+                    value={formData.phonePrefix}
+                    onChange={(e) => updateFormData("phonePrefix", e.target.value)}
+                    className="w-[100px] px-2 py-2.5 border border-slate-300 rounded-lg text-sm bg-white"
+                  >
+                    {PHONE_PREFIXES.map((prefix) => (
+                      <option key={prefix.code} value={prefix.code}>
+                        {prefix.code}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => updateFormData("phone", e.target.value)}
+                    className="flex-1 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    placeholder="123 456 7890"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+        )}
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Email Address <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-              placeholder="john@example.com"
-            />
+        {/* Step 2: Group Size */}
+        {currentStep === 2 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h3 className="font-semibold text-lg flex items-center gap-2">
+              <Users className="w-5 h-5 text-[var(--primary)]" />
+              How many travelers?
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Adults <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  max="20"
+                  value={formData.numAdults}
+                  onChange={(e) => updateFormData("numAdults", parseInt(e.target.value) || 1)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Children (under 16)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  max="10"
+                  value={formData.numChildren}
+                  onChange={(e) => handleChildrenChange(parseInt(e.target.value) || 0)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                />
+              </div>
+            </div>
+            {formData.numChildren > 0 && (
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Children&apos;s Ages
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {Array.from({ length: formData.numChildren }).map((_, i) => (
+                    <input
+                      key={i}
+                      type="number"
+                      min="0"
+                      max="15"
+                      placeholder={`Child ${i + 1}`}
+                      value={formData.childrenAges[i] || ""}
+                      onChange={(e) => updateChildAge(i, e.target.value)}
+                      className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
+                    />
+                  ))}
+                </div>
+                <p className="text-xs text-slate-500 mt-1">
+                  Ages help us recommend suitable activities
+                </p>
+              </div>
+            )}
           </div>
-        </div>
+        )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="country" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Country <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="country"
-              name="country"
-              required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
-            >
-              <option value="">Select your country</option>
-              {COUNTRIES.slice(0, 20).map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.flag} {country.name}
-                </option>
+        {/* Step 3: Travel Dates */}
+        {currentStep === 3 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h3 className="font-semibold text-lg flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-[var(--primary)]" />
+              When do you want to travel?
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Preferred Start Date <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  value={formData.arrivalDate}
+                  onChange={(e) => updateFormData("arrivalDate", e.target.value)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  Duration
+                </label>
+                <select
+                  value={formData.duration}
+                  onChange={(e) => updateFormData("duration", e.target.value)}
+                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white"
+                >
+                  <option value="">Select duration</option>
+                  <option value="3">3 Days</option>
+                  <option value="4">4 Days</option>
+                  <option value="5">5 Days</option>
+                  <option value="6">6 Days</option>
+                  <option value="7">7 Days (1 Week)</option>
+                  <option value="10">10 Days</option>
+                  <option value="14">14 Days (2 Weeks)</option>
+                  <option value="custom">Custom / Not Sure</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Date Flexibility
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {DATE_FLEXIBILITY.map((option) => (
+                  <label
+                    key={option.value}
+                    className={`relative flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
+                      formData.flexibility === option.value
+                        ? "border-[var(--primary)] bg-[var(--primary)]/5"
+                        : "border-slate-300 hover:border-[var(--primary)]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="flexibility"
+                      value={option.value}
+                      checked={formData.flexibility === option.value}
+                      onChange={(e) => updateFormData("flexibility", e.target.value)}
+                      className="absolute top-3 right-3 w-4 h-4"
+                    />
+                    <span className="font-medium text-slate-900">{option.label}</span>
+                    <span className="text-xs text-slate-500 mt-1">{option.description}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Step 4: Destinations */}
+        {currentStep === 4 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h3 className="font-semibold text-lg flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-[var(--primary)]" />
+              Where would you like to go?
+            </h3>
+            <p className="text-sm text-slate-500">
+              Select all parks you&apos;d like to visit (or leave blank for recommendations)
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {SAFARI_DESTINATIONS.map((dest) => (
+                <button
+                  key={dest.value}
+                  type="button"
+                  onClick={() => toggleDestination(dest.value)}
+                  className={`px-3 py-2.5 text-sm rounded-lg border transition-all text-left ${
+                    selectedDestinations.includes(dest.value)
+                      ? "bg-[var(--primary)] text-white border-[var(--primary)]"
+                      : "bg-white text-slate-700 border-slate-300 hover:border-[var(--primary)]"
+                  }`}
+                >
+                  {dest.label}
+                </button>
               ))}
-              <option disabled>──────────────</option>
-              {COUNTRIES.slice(20).map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.flag} {country.name}
-                </option>
-              ))}
-            </select>
+            </div>
+            {selectedDestinations.length > 0 && (
+              <p className="text-sm text-green-600">
+                ✓ {selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""} selected
+              </p>
+            )}
           </div>
+        )}
 
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Phone / WhatsApp
-            </label>
-            <div className="flex gap-2">
+        {/* Step 5: Budget & Accommodation */}
+        {currentStep === 5 && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            <div>
+              <h3 className="font-semibold text-lg flex items-center gap-2 mb-4">
+                <Wallet className="w-5 h-5 text-[var(--primary)]" />
+                What&apos;s your budget level? <span className="text-red-500">*</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {BUDGET_LEVELS.map((level) => (
+                  <label
+                    key={level.value}
+                    className={`relative flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
+                      formData.budget === level.value
+                        ? "border-[var(--primary)] bg-[var(--primary)]/5 ring-2 ring-[var(--primary)]"
+                        : "border-slate-300 hover:border-[var(--primary)]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="budget"
+                      value={level.value}
+                      checked={formData.budget === level.value}
+                      onChange={(e) => updateFormData("budget", e.target.value)}
+                      className="absolute top-3 right-3 w-4 h-4"
+                    />
+                    <span className="font-medium text-slate-900">{level.label}</span>
+                    <span className="text-xs text-slate-500 mt-1">{level.description}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg flex items-center gap-2 mb-4">
+                <Home className="w-5 h-5 text-[var(--primary)]" />
+                Preferred accommodation style
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {ACCOMMODATION_TYPES.map((type) => (
+                  <label
+                    key={type.value}
+                    className={`relative flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
+                      formData.accommodation === type.value
+                        ? "border-[var(--primary)] bg-[var(--primary)]/5"
+                        : "border-slate-300 hover:border-[var(--primary)]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="accommodation"
+                      value={type.value}
+                      checked={formData.accommodation === type.value}
+                      onChange={(e) => updateFormData("accommodation", e.target.value)}
+                      className="absolute top-3 right-3 w-4 h-4"
+                    />
+                    <span className="font-medium text-slate-900">{type.label}</span>
+                    <span className="text-xs text-slate-500">{type.description}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Step 6: Interests & Experience */}
+        {currentStep === 6 && (
+          <div className="space-y-6 animate-in fade-in duration-300">
+            <div>
+              <h3 className="font-semibold text-lg flex items-center gap-2 mb-2">
+                <Sparkles className="w-5 h-5 text-[var(--primary)]" />
+                What interests you most?
+              </h3>
+              <p className="text-sm text-slate-500 mb-4">
+                Select all that apply
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {SAFARI_INTERESTS.map((interest) => (
+                  <button
+                    key={interest.value}
+                    type="button"
+                    onClick={() => toggleInterest(interest.value)}
+                    className={`px-3 py-2.5 text-sm rounded-lg border transition-all ${
+                      selectedInterests.includes(interest.value)
+                        ? "bg-[var(--secondary)] text-[var(--primary-dark)] border-[var(--secondary)]"
+                        : "bg-white text-slate-700 border-slate-300 hover:border-[var(--secondary)]"
+                    }`}
+                  >
+                    {interest.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg flex items-center gap-2 mb-4">
+                <Star className="w-5 h-5 text-[var(--primary)]" />
+                Safari experience level
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {SAFARI_EXPERIENCE.map((exp) => (
+                  <label
+                    key={exp.value}
+                    className={`relative flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
+                      formData.experience === exp.value
+                        ? "border-[var(--primary)] bg-[var(--primary)]/5"
+                        : "border-slate-300 hover:border-[var(--primary)]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="experience"
+                      value={exp.value}
+                      checked={formData.experience === exp.value}
+                      onChange={(e) => updateFormData("experience", e.target.value)}
+                      className="absolute top-3 right-3 w-4 h-4"
+                    />
+                    <span className="font-medium text-slate-900">{exp.label}</span>
+                    <span className="text-xs text-slate-500 mt-1">{exp.description}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Step 7: Final Details */}
+        {currentStep === 7 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h3 className="font-semibold text-lg flex items-center gap-2">
+              <MessageSquare className="w-5 h-5 text-[var(--primary)]" />
+              Anything else we should know?
+            </h3>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Tell us more about your dream safari
+              </label>
+              <textarea
+                value={formData.additionalInfo}
+                onChange={(e) => updateFormData("additionalInfo", e.target.value)}
+                rows={4}
+                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 resize-none"
+                placeholder="Special occasions, specific wildlife, dietary requirements, accessibility needs..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                How did you hear about us?
+              </label>
               <select
-                name="phonePrefix"
-                className="w-[100px] px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
+                value={formData.referralSource}
+                onChange={(e) => updateFormData("referralSource", e.target.value)}
+                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white"
               >
-                {PHONE_PREFIXES.map((prefix) => (
-                  <option key={prefix.code} value={prefix.code}>
-                    {prefix.code}
+                <option value="">Please select...</option>
+                {REFERRAL_SOURCES.map((source) => (
+                  <option key={source.value} value={source.value}>
+                    {source.label}
                   </option>
                 ))}
               </select>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                className="flex-1 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-                placeholder="123 456 7890"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Section 2: Group Size */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <Users className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Group Size</h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="numAdults" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Number of Adults <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              id="numAdults"
-              name="numAdults"
-              min="1"
-              max="20"
-              defaultValue="2"
-              required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="numChildren" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Number of Children (under 16)
-            </label>
-            <input
-              type="number"
-              id="numChildren"
-              name="numChildren"
-              min="0"
-              max="10"
-              value={numChildren}
-              onChange={(e) => handleChildrenChange(parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            />
-          </div>
-        </div>
-
-        {/* Children Ages */}
-        {numChildren > 0 && (
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
-              Children&apos;s Ages
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {Array.from({ length: numChildren }).map((_, i) => (
+              {formData.referralSource === "other" && (
                 <input
-                  key={i}
-                  type="number"
-                  min="0"
-                  max="15"
-                  placeholder={`Child ${i + 1} age`}
-                  value={childrenAges[i] || ""}
-                  onChange={(e) => {
-                    const newAges = [...childrenAges];
-                    newAges[i] = e.target.value;
-                    setChildrenAges(newAges);
-                  }}
-                  className="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none text-sm"
+                  type="text"
+                  value={formData.referralOther}
+                  onChange={(e) => updateFormData("referralOther", e.target.value)}
+                  placeholder="Please specify..."
+                  className="w-full mt-2 px-4 py-2.5 border border-slate-300 rounded-lg"
                 />
-              ))}
+              )}
             </div>
-            <p className="text-xs text-slate-500 mt-1">
-              Children&apos;s ages help us recommend suitable activities and accommodations
-            </p>
+
+            {/* Summary */}
+            <div className="mt-6 p-4 bg-slate-50 rounded-lg">
+              <h4 className="font-semibold text-sm text-slate-700 mb-2">Your Safari Summary</h4>
+              <ul className="text-sm text-slate-600 space-y-1">
+                <li>👤 {formData.numAdults} adult{formData.numAdults > 1 ? "s" : ""}{formData.numChildren > 0 ? `, ${formData.numChildren} child${formData.numChildren > 1 ? "ren" : ""}` : ""}</li>
+                <li>📅 Starting {formData.arrivalDate || "TBD"}{formData.duration ? ` • ${formData.duration} days` : ""}</li>
+                <li>💰 {BUDGET_LEVELS.find(b => b.value === formData.budget)?.label || "Budget TBD"}</li>
+                {selectedDestinations.length > 0 && (
+                  <li>📍 {selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""}</li>
+                )}
+              </ul>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Section 3: Travel Dates */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <Calendar className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Travel Dates</h3>
-        </div>
+      {/* Navigation Buttons */}
+      <div className="flex justify-between pt-4 border-t border-slate-200">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={prevStep}
+          disabled={currentStep === 1}
+          className={currentStep === 1 ? "invisible" : ""}
+        >
+          <ChevronLeft className="w-4 h-4 mr-1" />
+          Back
+        </Button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label htmlFor="arrivalDate" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Preferred Start Date <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="date"
-              id="arrivalDate"
-              name="arrivalDate"
-              required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="duration" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Duration (days)
-            </label>
-            <select
-              id="duration"
-              name="duration"
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
-            >
-              <option value="">Select duration</option>
-              <option value="3">3 Days</option>
-              <option value="4">4 Days</option>
-              <option value="5">5 Days</option>
-              <option value="6">6 Days</option>
-              <option value="7">7 Days (1 Week)</option>
-              <option value="8">8 Days</option>
-              <option value="10">10 Days</option>
-              <option value="12">12 Days</option>
-              <option value="14">14 Days (2 Weeks)</option>
-              <option value="custom">Custom / Not Sure</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="flexibility" className="block text-sm font-medium text-slate-700 mb-1.5">
-              Date Flexibility
-            </label>
-            <select
-              id="flexibility"
-              name="flexibility"
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
-            >
-              {DATE_FLEXIBILITY.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Section 4: Destinations */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <MapPin className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Destinations of Interest</h3>
-        </div>
-        <p className="text-sm text-slate-500">
-          Select all parks/areas you&apos;d like to visit (or leave blank for recommendations)
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {SAFARI_DESTINATIONS.map((dest) => (
-            <button
-              key={dest.value}
-              type="button"
-              onClick={() => toggleDestination(dest.value)}
-              className={`px-3 py-2 text-sm rounded-lg border transition-all text-left ${
-                selectedDestinations.includes(dest.value)
-                  ? "bg-[var(--primary)] text-white border-[var(--primary)]"
-                  : "bg-white text-slate-700 border-slate-300 hover:border-[var(--primary)]"
-              }`}
-            >
-              {dest.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Section 5: Budget & Accommodation */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <Wallet className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Budget & Accommodation</h3>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">
-            Budget Level <span className="text-red-500">*</span>
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {BUDGET_LEVELS.map((level) => (
-              <label
-                key={level.value}
-                className="relative flex flex-col p-4 border rounded-lg cursor-pointer hover:border-[var(--primary)] transition-all"
-              >
-                <input
-                  type="radio"
-                  name="budget"
-                  value={level.value}
-                  required
-                  className="absolute top-3 right-3 w-4 h-4 text-[var(--primary)] focus:ring-amber-500"
-                />
-                <span className="font-medium text-slate-900">{level.label}</span>
-                <span className="text-xs text-slate-500 mt-1">{level.description}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">
-            Preferred Accommodation Style
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {ACCOMMODATION_TYPES.map((type) => (
-              <label
-                key={type.value}
-                className="relative flex flex-col p-4 border rounded-lg cursor-pointer hover:border-[var(--primary)] transition-all"
-              >
-                <input
-                  type="radio"
-                  name="accommodation"
-                  value={type.value}
-                  className="absolute top-3 right-3 w-4 h-4 text-[var(--primary)] focus:ring-amber-500"
-                />
-                <Home className="w-5 h-5 text-[var(--primary)] mb-1" />
-                <span className="font-medium text-slate-900">{type.label}</span>
-                <span className="text-xs text-slate-500">{type.description}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Section 6: Special Interests */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <Sparkles className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Special Interests</h3>
-        </div>
-        <p className="text-sm text-slate-500">
-          What experiences are most important to you? (Select all that apply)
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {SAFARI_INTERESTS.map((interest) => (
-            <button
-              key={interest.value}
-              type="button"
-              onClick={() => toggleInterest(interest.value)}
-              className={`px-3 py-2 text-sm rounded-lg border transition-all ${
-                selectedInterests.includes(interest.value)
-                  ? "bg-[var(--secondary)] text-[var(--primary-dark)] border-[var(--secondary)]"
-                  : "bg-white text-slate-700 border-slate-300 hover:border-[var(--secondary)]"
-              }`}
-            >
-              {interest.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Section 7: Experience Level */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-          <Star className="w-5 h-5 text-[var(--primary)]" />
-          <h3 className="font-semibold text-lg">Safari Experience</h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {SAFARI_EXPERIENCE.map((exp) => (
-            <label
-              key={exp.value}
-              className="relative flex flex-col p-4 border rounded-lg cursor-pointer hover:border-[var(--primary)] transition-all"
-            >
-              <input
-                type="radio"
-                name="experience"
-                value={exp.value}
-                className="absolute top-3 right-3 w-4 h-4 text-[var(--primary)] focus:ring-amber-500"
-              />
-              <span className="font-medium text-slate-900">{exp.label}</span>
-              <span className="text-xs text-slate-500 mt-1">{exp.description}</span>
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* Section 8: Additional Info */}
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="additionalInfo" className="block text-sm font-medium text-slate-700 mb-1.5">
-            Tell us more about your dream safari
-          </label>
-          <textarea
-            id="additionalInfo"
-            name="additionalInfo"
-            rows={4}
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none resize-none"
-            placeholder="Any special occasions (honeymoon, anniversary, birthday)? Specific wildlife you want to see? Medical or dietary requirements? Anything else we should know?"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="referralSource" className="block text-sm font-medium text-slate-700 mb-1.5">
-            How did you hear about us?
-          </label>
-          <select
-            id="referralSource"
-            name="referralSource"
-            onChange={(e) => setShowOtherReferral(e.target.value === "other")}
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-          >
-            <option value="">Please select...</option>
-            {REFERRAL_SOURCES.map((source) => (
-              <option key={source.value} value={source.value}>
-                {source.label}
-              </option>
-            ))}
-          </select>
-          {showOtherReferral && (
-            <input
-              type="text"
-              name="referralOther"
-              placeholder="Please specify..."
-              className="w-full mt-2 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            />
-          )}
-        </div>
-      </div>
-
-      {/* Submit */}
-      <Button
-        type="submit"
-        variant="secondary"
-        size="lg"
-        className="w-full !py-4 !text-base font-semibold"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? (
-          <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-                fill="none"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              />
-            </svg>
-            Creating Your Request...
-          </span>
+        {currentStep < STEPS.length ? (
+          <Button type="button" variant="secondary" onClick={nextStep}>
+            Next
+            <ChevronRight className="w-4 h-4 ml-1" />
+          </Button>
         ) : (
-          "Get My Custom Safari Proposal"
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            className="min-w-[180px]"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Submitting...
+              </span>
+            ) : (
+              "Get My Safari Proposal"
+            )}
+          </Button>
         )}
-      </Button>
+      </div>
 
       <p className="text-xs text-slate-500 text-center">
-        We&apos;ll send you a personalized itinerary within 24-48 hours. No obligation, no spam.
+        We&apos;ll send you a personalized itinerary within 24-48 hours.
       </p>
-    </form>
+    </div>
   );
 }
