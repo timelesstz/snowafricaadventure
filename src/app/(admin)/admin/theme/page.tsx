@@ -180,11 +180,108 @@ function LogoUploadInput({
   );
 }
 
+function FaviconUploadInput({
+  label,
+  value,
+  onChange,
+  description,
+}: {
+  label: string;
+  value: string;
+  onChange: (url: string) => void;
+  description: string;
+}) {
+  const [isUploading, setIsUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleUpload = async (file: File) => {
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("folder", "branding");
+      formData.append("compress", "false"); // Don't compress favicons
+
+      const res = await fetch("/api/admin/media/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Upload failed");
+      const data = await res.json();
+      onChange(data.media.url);
+    } catch {
+      alert("Failed to upload favicon");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-[var(--text)] mb-2">{label}</label>
+      <p className="text-xs text-[var(--text-muted)] mb-3">{description}</p>
+      <div className="flex items-start gap-4">
+        {/* Preview */}
+        <div className="w-16 h-16 border border-[var(--border)] rounded-lg flex items-center justify-center bg-white overflow-hidden shrink-0">
+          {value ? (
+            <Image src={value} alt={label} width={64} height={64} className="object-contain w-full h-full p-1" />
+          ) : (
+            <span className="text-xs text-[var(--text-muted)] text-center">No icon</span>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/png,image/x-icon,image/ico,image/svg+xml"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) handleUpload(file);
+              if (fileRef.current) fileRef.current.value = "";
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            disabled={isUploading}
+            className="flex items-center gap-2 px-4 py-2 text-sm border border-[var(--border)] rounded-lg hover:bg-[var(--surface)] transition-colors disabled:opacity-50"
+          >
+            {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+            {isUploading ? "Uploading..." : "Upload"}
+          </button>
+          {value && (
+            <button
+              type="button"
+              onClick={() => onChange("")}
+              className="flex items-center gap-1 px-4 py-2 text-sm text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
+            >
+              <X className="w-4 h-4" />
+              Remove
+            </button>
+          )}
+          {/* Manual URL input */}
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="Or paste image URL..."
+            className="px-3 py-1.5 text-xs border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] w-64"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ThemeSettingsPage() {
   const { refreshTheme } = useTheme();
   const [theme, setTheme] = useState<ThemeSettings | null>(null);
   const [logoUrl, setLogoUrl] = useState("");
   const [logoDarkUrl, setLogoDarkUrl] = useState("");
+  const [faviconUrl, setFaviconUrl] = useState("");
+  const [appleTouchIconUrl, setAppleTouchIconUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -192,6 +289,7 @@ export default function ThemeSettingsPage() {
   useEffect(() => {
     fetchTheme();
     fetchLogo();
+    fetchFavicon();
   }, []);
 
   const fetchTheme = async () => {
@@ -221,6 +319,19 @@ export default function ThemeSettingsPage() {
     }
   };
 
+  const fetchFavicon = async () => {
+    try {
+      const res = await fetch("/api/site-settings/favicon");
+      if (res.ok) {
+        const data = await res.json();
+        setFaviconUrl(data.faviconUrl || "");
+        setAppleTouchIconUrl(data.appleTouchIconUrl || "");
+      }
+    } catch (error) {
+      console.error("Failed to fetch favicon:", error);
+    }
+  };
+
   const handleSave = async () => {
     if (!theme) return;
 
@@ -228,7 +339,7 @@ export default function ThemeSettingsPage() {
     setMessage(null);
 
     try {
-      const [themeRes, logoRes] = await Promise.all([
+      const [themeRes, logoRes, faviconRes] = await Promise.all([
         fetch("/api/theme", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -239,10 +350,15 @@ export default function ThemeSettingsPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ logoUrl, logoDarkUrl }),
         }),
+        fetch("/api/site-settings/favicon", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ faviconUrl, appleTouchIconUrl }),
+        }),
       ]);
 
-      if (themeRes.ok && logoRes.ok) {
-        setMessage({ type: "success", text: "Theme and logo saved successfully! Changes are now live." });
+      if (themeRes.ok && logoRes.ok && faviconRes.ok) {
+        setMessage({ type: "success", text: "Theme, logo, and favicon saved successfully! Changes are now live." });
         await refreshTheme();
       } else {
         setMessage({ type: "error", text: "Failed to save some settings." });
@@ -384,6 +500,50 @@ export default function ThemeSettingsPage() {
                 <Image src={logoDarkUrl || logoUrl} alt="Logo on dark" width={120} height={40} className="object-contain h-10 w-auto" />
                 <span className="text-xs text-slate-400">Dark bg</span>
               </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Favicon Settings */}
+      <div className="bg-white rounded-xl p-6 border border-[var(--border)] mb-6">
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-1">Favicon</h2>
+        <p className="text-sm text-[var(--text-muted)] mb-6">
+          Upload your favicon (browser tab icon). Recommended: PNG or ICO, 32x32 pixels minimum. For Apple devices, use 180x180 pixels.
+        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <FaviconUploadInput
+            label="Favicon"
+            description="Displayed in browser tabs. Use 32x32 or 64x64 PNG/ICO."
+            value={faviconUrl}
+            onChange={setFaviconUrl}
+          />
+          <FaviconUploadInput
+            label="Apple Touch Icon"
+            description="For iOS home screen. Use 180x180 PNG."
+            value={appleTouchIconUrl}
+            onChange={setAppleTouchIconUrl}
+          />
+        </div>
+        {/* Favicon Preview */}
+        {faviconUrl && (
+          <div className="mt-6 pt-6 border-t border-[var(--border)]">
+            <h3 className="text-sm font-medium text-[var(--text)] mb-3">Preview</h3>
+            <div className="flex gap-6 items-center">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded border border-[var(--border)] flex items-center justify-center overflow-hidden bg-white">
+                  <Image src={faviconUrl} alt="Favicon" width={32} height={32} className="object-contain" />
+                </div>
+                <span className="text-xs text-[var(--text-muted)]">Browser tab</span>
+              </div>
+              {appleTouchIconUrl && (
+                <div className="flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-xl border border-[var(--border)] flex items-center justify-center overflow-hidden bg-white">
+                    <Image src={appleTouchIconUrl} alt="Apple Touch Icon" width={56} height={56} className="object-contain" />
+                  </div>
+                  <span className="text-xs text-[var(--text-muted)]">iOS icon</span>
+                </div>
+              )}
             </div>
           </div>
         )}
