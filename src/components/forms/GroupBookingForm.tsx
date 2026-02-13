@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { format } from "date-fns";
 import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp, Info } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PHONE_PREFIXES } from "@/lib/constants";
 import { AvailabilityBadge } from "@/components/ui/Badge";
+import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout, trackPurchase, trackSelectDeparture } from "@/lib/analytics";
 
 interface Departure {
   id: string;
@@ -85,15 +86,57 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     };
   } | null>(null);
 
-  // When departure changes, reset to stage 1
+  // Track form start
+  const formStartTracked = useRef(false);
+
+  // When departure changes, reset to stage 1 and track selection
   const prevDepIdRef = useState<string | null>(null);
   if (departure && departure.id !== prevDepIdRef[0]) {
     prevDepIdRef[0] = departure.id;
     if (stage === 0 || stage === "success") {
       setStage(1);
       setError("");
+      // Track departure selection
+      trackSelectDeparture({
+        departureId: departure.id,
+        routeName: departure.route.name,
+        departureDate: departure.arrivalDate,
+        price: departure.price,
+      });
+      // Track begin checkout
+      trackBeginCheckout({
+        itemId: departure.id,
+        itemName: `${departure.route.name} - ${format(new Date(departure.arrivalDate), "MMM d, yyyy")}`,
+        itemCategory: "kilimanjaro",
+        value: departure.price,
+      });
     }
   }
+
+  // Track form start on first interaction
+  useEffect(() => {
+    if (!departure) return;
+
+    const handleFirstInteraction = () => {
+      if (!formStartTracked.current) {
+        formStartTracked.current = true;
+        trackFormStart({
+          formName: "group_booking_form",
+          formId: departure.id,
+          formLocation: "departures-page",
+        });
+      }
+    };
+
+    const form = document.querySelector(`[data-form-id="group-booking-${departure.id}"]`);
+    if (form) {
+      form.addEventListener("focusin", handleFirstInteraction, { once: true });
+    }
+
+    return () => {
+      form?.removeEventListener("focusin", handleFirstInteraction);
+    };
+  }, [departure]);
 
   if (!departure) {
     return (
@@ -121,6 +164,14 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
   const handleStage1Submit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    // Track step 1 completion
+    trackFormStep({
+      formName: "group_booking_form",
+      stepNumber: 1,
+      stepName: "contact_info",
+      formId: departure?.id,
+    });
 
     // Initialize lead climber details
     setLeadClimber({
@@ -195,6 +246,35 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         setError(data.message || "Failed to submit booking. Please try again.");
         return;
       }
+
+      // Track step 2 completion
+      trackFormStep({
+        formName: "group_booking_form",
+        stepNumber: 2,
+        stepName: "climber_details",
+        formId: departure?.id,
+      });
+
+      // Track successful form submission (generate_lead)
+      trackFormSubmit({
+        formName: "group_booking_form",
+        formId: departure?.id,
+        tripType: "Kilimanjaro Group Departure",
+        numTravelers: totalClimbers,
+        value: totalPrice,
+        currency: "USD",
+        relatedItem: departure?.route.name,
+      });
+
+      // Track as purchase/booking
+      trackPurchase({
+        transactionId: data.bookingRef,
+        value: totalPrice,
+        currency: "USD",
+        itemId: departure?.id || "",
+        itemName: departure?.route.name || "Kilimanjaro Climb",
+        itemCategory: "kilimanjaro",
+      });
 
       setBookingResult({
         bookingRef: data.bookingRef,

@@ -6,6 +6,7 @@ import { Clock, MapPin, Users, Check, X, Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -267,6 +268,14 @@ export default async function DayTripDetailPage({ params }: Props) {
 
   return (
     <div>
+      {/* Analytics: Track item view */}
+      <ViewItemTracker
+        itemId={tripData.id || slug}
+        itemName={name}
+        itemCategory="daytrip"
+        price={price}
+      />
+
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px]">
         <Image

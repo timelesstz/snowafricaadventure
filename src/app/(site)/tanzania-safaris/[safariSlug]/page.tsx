@@ -12,6 +12,7 @@ import {
 import type { DayItinerary } from "@/components/tours/types";
 import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import prisma from "@/lib/prisma";
 
 interface PageProps {
@@ -125,6 +126,14 @@ export default async function SafariPage({ params }: PageProps) {
     <div>
       {/* Schema markup */}
       <MultiJsonLd schemas={[tripSchema, productSchema, breadcrumbSchema]} />
+
+      {/* Analytics: Track item view */}
+      <ViewItemTracker
+        itemId={safari.id}
+        itemName={safari.title}
+        itemCategory="safari"
+        price={priceFrom}
+      />
 
       {/* Hero */}
       <SafariDetailHero

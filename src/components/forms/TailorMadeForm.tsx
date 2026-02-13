@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
@@ -14,6 +14,7 @@ import {
 } from "@/lib/constants";
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
+import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
 import {
   MapPin,
   Users,
@@ -68,6 +69,30 @@ export function TailorMadeForm() {
 
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const formStartTracked = useRef(false);
+
+  // Track form start on first interaction
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!formStartTracked.current) {
+        formStartTracked.current = true;
+        trackFormStart({
+          formName: "tailor_made_safari_form",
+          formId: "tailor-made",
+          formLocation: "tailor-made-safari-page",
+        });
+      }
+    };
+
+    const form = document.querySelector('[data-form-id="tailor-made-safari"]');
+    if (form) {
+      form.addEventListener("focusin", handleFirstInteraction, { once: true });
+    }
+
+    return () => {
+      form?.removeEventListener("focusin", handleFirstInteraction);
+    };
+  }, []);
 
   const updateFormData = (field: string, value: string | number | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -131,6 +156,13 @@ export function TailorMadeForm() {
 
   const nextStep = () => {
     if (validateStep(currentStep) && currentStep < STEPS.length) {
+      // Track step completion
+      trackFormStep({
+        formName: "tailor_made_safari_form",
+        stepNumber: currentStep,
+        stepName: STEPS[currentStep - 1]?.title.toLowerCase().replace(" ", "_"),
+        formId: "tailor-made",
+      });
       setCurrentStep(currentStep + 1);
       setError(null);
     } else if (!validateStep(currentStep)) {
@@ -178,6 +210,14 @@ export function TailorMadeForm() {
       const result = await response.json();
 
       if (response.ok) {
+        // Track successful form submission
+        trackFormSubmit({
+          formName: "tailor_made_safari_form",
+          formId: "tailor-made",
+          tripType: "Tailor-Made Safari",
+          numTravelers: formData.numAdults + formData.numChildren,
+          relatedItem: selectedDestinations.join(", ") || "Custom Safari",
+        });
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");

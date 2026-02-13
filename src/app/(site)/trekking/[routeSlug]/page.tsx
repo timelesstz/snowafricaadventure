@@ -13,6 +13,7 @@ import { InquiryForm } from "@/components/forms/InquiryForm";
 import { RouteCard } from "@/components/cards/RouteCard";
 import { generateMetadata as genMeta, generateTripSchema, generateFAQSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
+import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import prisma from "@/lib/prisma";
 
 interface PageProps {
@@ -176,6 +177,14 @@ export default async function RoutePage({ params }: PageProps) {
     <div>
       {/* Schema markup */}
       <MultiJsonLd schemas={schemas} />
+
+      {/* Analytics: Track item view */}
+      <ViewItemTracker
+        itemId={route.id}
+        itemName={route.title}
+        itemCategory="kilimanjaro"
+        price={lowestPrice}
+      />
 
       {/* Hero Section */}
       <RouteHero

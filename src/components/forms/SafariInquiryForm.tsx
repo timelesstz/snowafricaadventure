@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, Search, ChevronDown } from "lucide-react";
 import { PHONE_PREFIXES } from "@/lib/constants";
+import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
 
 // ISO 3166-1 Country list with codes for flags
 const COUNTRIES = [
@@ -249,6 +250,9 @@ export function SafariInquiryForm({
     country.name.toLowerCase().includes(countrySearch.toLowerCase())
   );
 
+  // Track form start
+  const formStartTracked = useRef(false);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -262,6 +266,29 @@ export function SafariInquiryForm({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Track form start on first interaction
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!formStartTracked.current) {
+        formStartTracked.current = true;
+        trackFormStart({
+          formName: "safari_inquiry_form",
+          formId: safariSlug || "general",
+          formLocation: safariSlug || "safari-page",
+        });
+      }
+    };
+
+    const form = document.querySelector(`[data-form-id="safari-inquiry-${safariSlug || 'general'}"]`);
+    if (form) {
+      form.addEventListener("focusin", handleFirstInteraction, { once: true });
+    }
+
+    return () => {
+      form?.removeEventListener("focusin", handleFirstInteraction);
+    };
+  }, [safariSlug]);
 
   const handleCountrySelect = (country: { name: string; code: string }) => {
     setFormData((prev) => ({ ...prev, country: country.name, countryCode: country.code }));
@@ -278,6 +305,13 @@ export function SafariInquiryForm({
 
   const handleStage1Submit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Track step completion
+    trackFormStep({
+      formName: "safari_inquiry_form",
+      stepNumber: 1,
+      stepName: "contact_info",
+      formId: safariSlug || "general",
+    });
     setStage(2);
   };
 
@@ -297,6 +331,14 @@ export function SafariInquiryForm({
       });
 
       if (response.ok) {
+        // Track successful form submission
+        trackFormSubmit({
+          formName: "safari_inquiry_form",
+          formId: safariSlug || "general",
+          tripType: "Wildlife Safari",
+          numTravelers: parseInt(formData.numPax) || 1,
+          relatedItem: safariSlug,
+        });
         setSubmitted(true);
       }
     } catch (error) {
@@ -326,7 +368,7 @@ export function SafariInquiryForm({
   const isCard = variant === "card";
 
   return (
-    <div className={isCard ? "" : "bg-white p-6 rounded-lg"}>
+    <div className={isCard ? "" : "bg-white p-6 rounded-lg"} data-form-id={`safari-inquiry-${safariSlug || 'general'}`}>
       {/* Stage 1: Contact Info */}
       {stage === 1 && (
         <form onSubmit={handleStage1Submit} className="space-y-4">

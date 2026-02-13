@@ -21,24 +21,27 @@
 
 | Directory | Purpose |
 |-----------|---------|
-| `email/` | Resend (primary) + Nodemailer (fallback), typed templates |
+| `email/` | cPanel SMTP via Nodemailer, typed templates, email logging |
 | `notifications/` | In-app notification system |
 | `services/` | Business logic (departure rotation) |
 | `analytics/` | Analytics helpers |
 
 ## Email System (`email/`)
 
-- `index.ts` — Nodemailer SMTP transport, `sendEmail()`, `sendAdminNotification()`
-- `send.ts` — Resend API wrapper (primary provider)
+- `index.ts` — Nodemailer SMTP transport, `sendEmail()`, `sendAdminNotification()`, `verifySmtpConnection()`, `sendTestEmail()`
+- `send.ts` — High-level email functions (booking, inquiry, commission emails)
 - `templates.ts` — HTML email templates for all notification types
-- `logger.ts` — Email logging to database
+- `logger.ts` — Email logging to database (tracks pending/sent/failed)
 
-**Pattern**: Try Resend first, fall back to Nodemailer SMTP
+**SMTP Configuration** (cPanel):
+- Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` in env
+- TLS verification disabled for shared hosting SSL cert compatibility
+- Auto-prepends `mail.` to hostname if not present
 
 ## Dependencies
 
 - **Used by**: All API routes, server components, middleware
-- **Imports from**: `@prisma/client`, `next-auth`, `zod`, `resend`
+- **Imports from**: `@prisma/client`, `next-auth`, `zod`, `nodemailer`
 
 <!-- CUSTOM_NOTES_START -->
 <!-- CUSTOM_NOTES_END -->

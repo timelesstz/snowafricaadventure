@@ -57,7 +57,7 @@ NextAuth v5 (beta.30) with Credentials provider. Role hierarchy: `SUPER_ADMIN > 
 - `src/lib/auth.ts` — NextAuth config, session helpers, `requireRole()`
 - `src/lib/prisma.ts` — Prisma singleton
 - `src/lib/schemas.ts` — Zod validation (inquirySchema, contactSchema, groupBookingSchema, tailorMadeSchema)
-- `src/lib/email/` — Resend (primary) + Nodemailer (fallback), typed templates
+- `src/lib/email/` — cPanel SMTP via Nodemailer, typed templates, email logging
 - `src/lib/r2.ts` — Cloudflare R2 storage (S3-compatible) with pre-signed URLs
 - `src/lib/commission.ts` — Auto-creates commissions on booking creation
 - `src/lib/constants.ts` — SITE_CONFIG with site metadata
@@ -89,9 +89,26 @@ NextAuth v5 (beta.30) with Credentials provider. Role hierarchy: `SUPER_ADMIN > 
 
 ## Environment Variables
 
-**Required:** `DATABASE_URL_ACCELERATE`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `R2_ENDPOINT`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_PUBLIC_URL`, `RESEND_API_KEY`, `NOTIFICATION_EMAIL`, `CRON_SECRET`
+**Required:** `DATABASE_URL_ACCELERATE`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `R2_ENDPOINT`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_PUBLIC_URL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `NOTIFICATION_EMAIL`, `CRON_SECRET`
 
-**Optional:** `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_GA_ID`, `GOOGLE_SITE_VERIFICATION`, `NEXT_PUBLIC_TRUSTINDEX_WIDGET_ID`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`
+**Optional:** `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_GA_ID_SECONDARY`, `GOOGLE_SITE_VERIFICATION`, `NEXT_PUBLIC_TRUSTINDEX_WIDGET_ID`
+
+### Google Analytics (GA4)
+
+Dual-property tracking enabled with two Measurement IDs:
+- **Primary:** `G-56M3GQC18Q` via `NEXT_PUBLIC_GA_ID`
+- **Secondary:** `G-W0CEF6KK96` via `NEXT_PUBLIC_GA_ID_SECONDARY`
+
+All events are sent to both properties. Analytics files:
+- `src/components/analytics/GoogleAnalytics.tsx` — Script injection, page view tracking
+- `src/lib/analytics.ts` — Event tracking functions
+
+**Tracked Events:**
+- Form submissions: `generate_lead` (inquiry, booking, tailor-made, zanzibar)
+- Form engagement: `form_start`, `form_step`, `form_abandonment`
+- E-commerce: `view_item`, `add_to_cart`, `begin_checkout`, `purchase`, `select_departure`
+- Engagement: `contact_click`, `social_click`, `search`, `cta_click`, `scroll_depth`
+- Web Vitals: LCP, FID, CLS, TTFB, INP, FCP
 
 ## Deployment
 

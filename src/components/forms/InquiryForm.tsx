@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { TRIP_TYPES, PHONE_PREFIXES } from "@/lib/constants";
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { InviteFriendsSection, type InviteFriend } from "./InviteFriendsSection";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
+import { trackFormStart, trackFormSubmit } from "@/lib/analytics";
 
 interface InquiryFormProps {
   relatedTo?: string;
@@ -25,6 +26,30 @@ export function InquiryForm({
   const [error, setError] = useState<string | null>(null);
   const [inviteFriends, setInviteFriends] = useState<InviteFriend[]>([]);
   const [showOtherReferral, setShowOtherReferral] = useState(false);
+  const formStartTracked = useRef(false);
+
+  // Track form start on first interaction
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!formStartTracked.current) {
+        formStartTracked.current = true;
+        trackFormStart({
+          formName: "inquiry_form",
+          formId: `inquiry-${variant}`,
+          formLocation: relatedTo || tripType || "general",
+        });
+      }
+    };
+
+    const form = document.querySelector(`form[data-form-id="inquiry-${variant}"]`);
+    if (form) {
+      form.addEventListener("focusin", handleFirstInteraction, { once: true });
+    }
+
+    return () => {
+      form?.removeEventListener("focusin", handleFirstInteraction);
+    };
+  }, [variant, relatedTo, tripType]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,6 +86,16 @@ export function InquiryForm({
       const result = await response.json();
 
       if (response.ok) {
+        // Track successful form submission
+        const numAdults = parseInt(data.numAdults as string) || 1;
+        const numChildren = parseInt(data.numChildren as string) || 0;
+        trackFormSubmit({
+          formName: "inquiry_form",
+          formId: `inquiry-${variant}`,
+          tripType: tripType || (data.tripType as string) || "general",
+          numTravelers: numAdults + numChildren,
+          relatedItem: relatedTo,
+        });
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");
@@ -114,6 +149,7 @@ export function InquiryForm({
   return (
     <form
       onSubmit={handleSubmit}
+      data-form-id={`inquiry-${variant}`}
       className={`space-y-5 ${isHero ? "bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-xl" : ""}`}
     >
       {isHero && (

@@ -25,8 +25,11 @@ import {
   ClimberDetailsReminderData,
 } from "./templates";
 
-// Partner CC email for commission notifications
-const PARTNER_CC_EMAIL = "business@craftedbytimeless.com";
+// Partner CC emails for commission notifications
+const PARTNER_CC_EMAILS = [
+  "business@craftedbytimeless.com",
+  "timelesstz@gmail.com",
+];
 
 // ============================================
 // BOOKING EMAILS
@@ -156,8 +159,8 @@ export async function sendPartnerCommissionEmail(
   partnerEmail: string,
   data: PartnerCommissionEmailData
 ): Promise<EmailResult> {
-  // Send to partner with CC to backup email
-  const recipients = [partnerEmail, PARTNER_CC_EMAIL];
+  // Send to partner with CC to backup emails
+  const recipients = [partnerEmail, ...PARTNER_CC_EMAILS];
 
   return sendEmail({
     to: recipients,
