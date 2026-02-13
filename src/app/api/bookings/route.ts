@@ -57,18 +57,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check availability
-    const existingBookings = await prisma.booking.count({
+    // Check availability - sum total climbers from all active bookings
+    const existingBookings = await prisma.booking.findMany({
       where: {
         departureId: departure.id,
         status: {
           notIn: [BookingStatus.CANCELLED],
         },
       },
+      select: {
+        totalClimbers: true,
+      },
     });
 
     const totalClimbers = validatedData.climbers.length;
-    const bookedSpots = existingBookings;
+    const bookedSpots = existingBookings.reduce(
+      (sum, booking) => sum + booking.totalClimbers,
+      0
+    );
     const availableSpots = departure.maxParticipants - bookedSpots;
 
     if (totalClimbers > availableSpots) {

@@ -22,12 +22,14 @@ export function InquiryForm({
 }: InquiryFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [inviteFriends, setInviteFriends] = useState<InviteFriend[]>([]);
   const [showOtherReferral, setShowOtherReferral] = useState(false);
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
@@ -56,11 +58,16 @@ export function InquiryForm({
         }),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         setSubmitted(true);
+      } else {
+        setError(result.message || "Failed to submit inquiry. Please try again.");
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -115,55 +122,138 @@ export function InquiryForm({
         </h3>
       )}
 
-      <div className={isFull ? "grid md:grid-cols-2 gap-5" : "space-y-4"}>
-        {/* Name */}
-        <div>
-          <label
-            htmlFor="fullName"
-            className="block text-sm font-medium text-slate-700 mb-1.5"
-          >
-            Full Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            required
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            placeholder="John Smith"
-          />
+      {/* Error Message */}
+      {error && (
+        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+          {error}
+        </div>
+      )}
+
+      <div className="space-y-4">
+        {/* Row 1: Full Name + Email (side by side) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Name */}
+          <div>
+            <label
+              htmlFor="fullName"
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              Full Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              required
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
+              placeholder="John Smith"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              Email Address <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
+              placeholder="john@example.com"
+            />
+          </div>
         </div>
 
-        {/* Email */}
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-slate-700 mb-1.5"
-          >
-            Email Address <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            placeholder="john@example.com"
-          />
+        {/* Row 2: Country + Trip Type (side by side) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Country */}
+          <div>
+            <label
+              htmlFor="country"
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              Country <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="country"
+              name="country"
+              required
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
+            >
+              <option value="">Select your country</option>
+              {COUNTRIES.slice(0, 20).map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.flag} {country.name}
+                </option>
+              ))}
+              <option disabled>──────────────</option>
+              {COUNTRIES.slice(20).map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.flag} {country.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Trip Type (if not pre-set) */}
+          {!tripType ? (
+            <div>
+              <label
+                htmlFor="tripType"
+                className="block text-sm font-medium text-slate-700 mb-1.5"
+              >
+                Trip Type <span className="text-red-500">*</span>
+              </label>
+              <select
+                id="tripType"
+                name="tripType"
+                required
+                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
+              >
+                <option value="">Select trip type</option>
+                {TRIP_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            /* If tripType is preset, show Arrival Date here instead */
+            <div>
+              <label
+                htmlFor="arrivalDate"
+                className="block text-sm font-medium text-slate-700 mb-1.5"
+              >
+                Preferred Travel Date
+              </label>
+              <input
+                type="date"
+                id="arrivalDate"
+                name="arrivalDate"
+                className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
+              />
+            </div>
+          )}
         </div>
 
-        {/* Phone */}
+        {/* Row 3: Phone Number */}
         <div>
           <label
             htmlFor="phone"
             className="block text-sm font-medium text-slate-700 mb-1.5"
           >
-            Phone Number
+            Phone / WhatsApp
           </label>
           <div className="flex gap-2">
             <select
               name="phonePrefix"
-              className="w-[100px] px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none"
+              className="w-[100px] px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
             >
               {PHONE_PREFIXES.map((prefix) => (
                 <option key={prefix.code} value={prefix.code}>
@@ -181,62 +271,9 @@ export function InquiryForm({
           </div>
         </div>
 
-        {/* Country */}
-        <div>
-          <label
-            htmlFor="country"
-            className="block text-sm font-medium text-slate-700 mb-1.5"
-          >
-            Country <span className="text-red-500">*</span>
-          </label>
-          <select
-            id="country"
-            name="country"
-            required
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-          >
-            <option value="">Select your country</option>
-            {COUNTRIES.slice(0, 20).map((country) => (
-              <option key={country.code} value={country.code}>
-                {country.flag} {country.name}
-              </option>
-            ))}
-            <option disabled>──────────────</option>
-            {COUNTRIES.slice(20).map((country) => (
-              <option key={country.code} value={country.code}>
-                {country.flag} {country.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Trip Type (if not pre-set) */}
-        {!tripType && (
-          <div>
-            <label
-              htmlFor="tripType"
-              className="block text-sm font-medium text-slate-700 mb-1.5"
-            >
-              Trip Type <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="tripType"
-              name="tripType"
-              required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-            >
-              <option value="">Select trip type</option>
-              {TRIP_TYPES.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        {/* Number of Travelers */}
-        <div className={isFull ? "" : "grid grid-cols-2 gap-3"}>
+        {/* Row 4: Travelers + Arrival Date (side by side) */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Adults */}
           <div>
             <label
               htmlFor="numAdults"
@@ -253,40 +290,42 @@ export function InquiryForm({
               className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
             />
           </div>
-          {!isFull && (
+
+          {/* Children */}
+          <div>
+            <label
+              htmlFor="numChildren"
+              className="block text-sm font-medium text-slate-700 mb-1.5"
+            >
+              Children
+            </label>
+            <input
+              type="number"
+              id="numChildren"
+              name="numChildren"
+              min="0"
+              defaultValue="0"
+              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
+            />
+          </div>
+
+          {/* Arrival Date (only show here if tripType is NOT preset) */}
+          {!tripType && (
             <div>
               <label
-                htmlFor="numChildren"
+                htmlFor="arrivalDate"
                 className="block text-sm font-medium text-slate-700 mb-1.5"
               >
-                Children
+                Travel Date
               </label>
               <input
-                type="number"
-                id="numChildren"
-                name="numChildren"
-                min="0"
-                defaultValue="0"
+                type="date"
+                id="arrivalDate"
+                name="arrivalDate"
                 className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
               />
             </div>
           )}
-        </div>
-
-        {/* Arrival Date */}
-        <div>
-          <label
-            htmlFor="arrivalDate"
-            className="block text-sm font-medium text-slate-700 mb-1.5"
-          >
-            Preferred Travel Date
-          </label>
-          <input
-            type="date"
-            id="arrivalDate"
-            name="arrivalDate"
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
-          />
         </div>
       </div>
 

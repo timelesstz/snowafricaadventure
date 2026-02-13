@@ -33,8 +33,13 @@ export async function POST(request: NextRequest) {
             slug: true,
           },
         },
-        _count: {
-          select: { bookings: true },
+        bookings: {
+          where: {
+            status: { not: "CANCELLED" },
+          },
+          select: {
+            totalClimbers: true,
+          },
         },
       },
     });
@@ -61,8 +66,12 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Calculate available spots
-    const availableSpots = departure.maxParticipants - departure._count.bookings;
+    // Calculate available spots - sum total climbers from all active bookings
+    const bookedSpots = departure.bookings.reduce(
+      (sum, booking) => sum + booking.totalClimbers,
+      0
+    );
+    const availableSpots = departure.maxParticipants - bookedSpots;
 
     // Build invite URL
     const inviteUrl = `${SITE_CONFIG.url}/kilimanjaro-join-group-departures/?invite=${code}&departure=${departure.id}`;

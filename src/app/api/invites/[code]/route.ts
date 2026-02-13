@@ -23,8 +23,13 @@ export async function GET(
                 slug: true,
               },
             },
-            _count: {
-              select: { bookings: true },
+            bookings: {
+              where: {
+                status: { not: "CANCELLED" },
+              },
+              select: {
+                totalClimbers: true,
+              },
             },
           },
         },
@@ -64,6 +69,11 @@ export async function GET(
     let departureInfo = null;
     if (inviteLink.departure) {
       const dep = inviteLink.departure;
+      // Sum total climbers from all active bookings
+      const bookedSpots = dep.bookings.reduce(
+        (sum, booking) => sum + booking.totalClimbers,
+        0
+      );
       departureInfo = {
         id: dep.id,
         routeName: dep.route.title,
@@ -71,7 +81,7 @@ export async function GET(
         arrivalDate: dep.arrivalDate.toISOString(),
         endDate: dep.endDate.toISOString(),
         price: Number(dep.price),
-        availableSpots: dep.maxParticipants - dep._count.bookings,
+        availableSpots: dep.maxParticipants - bookedSpots,
         isFullMoon: dep.isFullMoon,
         status: dep.status,
       };

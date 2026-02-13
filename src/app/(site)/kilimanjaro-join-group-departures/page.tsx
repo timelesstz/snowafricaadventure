@@ -55,25 +55,37 @@ async function getDeparturesByYear(year: number) {
           slug: true,
         },
       },
-      _count: {
-        select: { bookings: true },
+      bookings: {
+        where: {
+          status: { not: "CANCELLED" },
+        },
+        select: {
+          totalClimbers: true,
+        },
       },
     },
     orderBy: { arrivalDate: "asc" },
   });
 
-  return departures.map((dep) => ({
-    id: dep.id,
-    route: { name: dep.route.title, slug: dep.route.slug },
-    arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
-    endDate: dep.endDate.toISOString().split("T")[0],
-    price: Number(dep.price),
-    maxParticipants: dep.maxParticipants,
-    bookedSpots: dep._count.bookings,
-    availableSpots: dep.maxParticipants - dep._count.bookings,
-    isFullMoon: dep.isFullMoon,
-    status: dep.status,
-  }));
+  return departures.map((dep) => {
+    // Sum total climbers from all active bookings (not just count of booking records)
+    const bookedSpots = dep.bookings.reduce(
+      (sum, booking) => sum + booking.totalClimbers,
+      0
+    );
+    return {
+      id: dep.id,
+      route: { name: dep.route.title, slug: dep.route.slug },
+      arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
+      endDate: dep.endDate.toISOString().split("T")[0],
+      price: Number(dep.price),
+      maxParticipants: dep.maxParticipants,
+      bookedSpots,
+      availableSpots: dep.maxParticipants - bookedSpots,
+      isFullMoon: dep.isFullMoon,
+      status: dep.status,
+    };
+  });
 }
 
 export default async function GroupDeparturesPage() {
