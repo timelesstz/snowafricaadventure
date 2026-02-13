@@ -62,23 +62,35 @@ async function getUpcomingDepartures(routeId: string) {
           duration: true,
         },
       },
-      _count: {
-        select: { bookings: true },
+      bookings: {
+        where: {
+          status: { not: "CANCELLED" },
+        },
+        select: {
+          totalClimbers: true,
+        },
       },
     },
   });
 
-  return departures.map((d) => ({
-    id: d.id,
-    startDate: d.startDate,
-    endDate: d.endDate,
-    price: Number(d.price),
-    spotsTotal: d.maxParticipants,
-    spotsTaken: d._count.bookings,
-    routeTitle: d.route.title,
-    duration: d.route.duration,
-    guideLanguage: "English",
-  }));
+  return departures.map((d) => {
+    // Sum total climbers from all active bookings
+    const spotsTaken = d.bookings.reduce(
+      (sum, booking) => sum + booking.totalClimbers,
+      0
+    );
+    return {
+      id: d.id,
+      startDate: d.startDate,
+      endDate: d.endDate,
+      price: Number(d.price),
+      spotsTotal: d.maxParticipants,
+      spotsTaken,
+      routeTitle: d.route.title,
+      duration: d.route.duration,
+      guideLanguage: "English",
+    };
+  });
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
