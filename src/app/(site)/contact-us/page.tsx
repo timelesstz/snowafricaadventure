@@ -194,7 +194,7 @@ export default function ContactPage() {
                         </svg>
                       </a>
                       <a
-                        href="https://www.tripadvisor.com/Attraction_Review-g297913-d17456764-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html"
+                        href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-amber-100 transition-colors"

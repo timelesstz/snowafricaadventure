@@ -37,7 +37,7 @@ const DEFAULT_SETTINGS = {
   // TripAdvisor
   "homepage.tripadvisor.rating": "5",
   "homepage.tripadvisor.reviews": "115",
-  "homepage.tripadvisor.url": "https://www.tripadvisor.com/Attraction_Review-g317084-d17523583-Reviews-Snow_Africa_Adventure-Arusha_Arusha_Region.html",
+  "homepage.tripadvisor.url": "https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html",
 };
 
 async function getHomepageSettings() {
