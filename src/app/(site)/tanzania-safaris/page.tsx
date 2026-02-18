@@ -14,7 +14,17 @@ import {
   Compass,
   ArrowRight,
   CheckCircle,
-  Binoculars
+  Binoculars,
+  Tent,
+  Hotel,
+  Crown,
+  Flame,
+  Bath,
+  UtensilsCrossed,
+  Waves,
+  Gem,
+  Car,
+  ConciergeBell
 } from "lucide-react";
 
 export const metadata: Metadata = genMeta({
@@ -245,91 +255,94 @@ export default async function SafarisPage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Budget */}
-            <div className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-blue-500 transition-all">
+            <div className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-sky-400 transition-all hover:shadow-lg">
               <div className="absolute -top-4 left-6">
-                <span className="px-4 py-1.5 bg-blue-500 text-white rounded-full text-sm font-bold">
+                <span className="px-4 py-1.5 bg-sky-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Budget
                 </span>
               </div>
-              <div className="text-5xl mb-4 mt-2">⛺</div>
+              <div className="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-sky-100 transition-colors">
+                <Tent className="w-7 h-7 text-sky-600" />
+              </div>
               <h3 className="font-heading text-xl font-bold mb-3">Camping Safari</h3>
-              <p className="text-[var(--text-muted)] mb-4">
-                Sleep under the stars in quality tents at public campsites. Perfect for
-                adventurers seeking an authentic bush experience.
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed">
+                Fall asleep to the sounds of the wild in quality tents at scenic public campsites — the most authentic bush experience.
               </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-blue-500" />
-                  <span>Public campsites</span>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-center gap-2.5">
+                  <Flame className="w-4 h-4 text-sky-500 shrink-0" />
+                  <span>Campfire evenings under African skies</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-blue-500" />
-                  <span>Dome tents provided</span>
+                <li className="flex items-center gap-2.5">
+                  <Tent className="w-4 h-4 text-sky-500 shrink-0" />
+                  <span>Quality dome tents provided</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-blue-500" />
-                  <span>Shared facilities</span>
+                <li className="flex items-center gap-2.5">
+                  <Users className="w-4 h-4 text-sky-500 shrink-0" />
+                  <span>Shared campsite facilities</span>
                 </li>
               </ul>
             </div>
 
             {/* Mid-Range - Featured */}
-            <div className="group relative bg-gradient-to-br from-emerald-50 to-white rounded-2xl p-8 border-2 border-emerald-500 shadow-xl transform md:-translate-y-4">
+            <div className="group relative bg-gradient-to-br from-teal-50 to-white rounded-2xl p-8 border-2 border-teal-500 shadow-xl transform md:-translate-y-4">
               <div className="absolute -top-4 left-6 flex items-center gap-2">
-                <span className="px-4 py-1.5 bg-emerald-500 text-white rounded-full text-sm font-bold">
+                <span className="px-4 py-1.5 bg-teal-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Mid-Range
                 </span>
-                <span className="px-3 py-1 bg-white text-emerald-600 rounded-full text-xs font-semibold border border-emerald-200">
+                <span className="px-3 py-1 bg-white text-teal-600 rounded-full text-xs font-semibold border border-teal-200 shadow-sm">
                   Most Popular
                 </span>
               </div>
-              <div className="text-5xl mb-4 mt-2">🏨</div>
+              <div className="w-14 h-14 rounded-xl bg-teal-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-teal-100 transition-colors">
+                <Hotel className="w-7 h-7 text-teal-600" />
+              </div>
               <h3 className="font-heading text-xl font-bold mb-3">Lodge Safari</h3>
-              <p className="text-[var(--text-muted)] mb-4">
-                Comfortable lodges and tented camps with en-suite facilities. The perfect
-                balance of comfort and value.
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed">
+                Enjoy comfortable lodges and tented camps with en-suite facilities — the ideal blend of comfort, nature, and value.
               </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500" />
-                  <span>En-suite bathrooms</span>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-center gap-2.5">
+                  <Bath className="w-4 h-4 text-teal-500 shrink-0" />
+                  <span>Private en-suite bathrooms</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500" />
-                  <span>Restaurant dining</span>
+                <li className="flex items-center gap-2.5">
+                  <UtensilsCrossed className="w-4 h-4 text-teal-500 shrink-0" />
+                  <span>Full-board restaurant dining</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-500" />
-                  <span>Swimming pools</span>
+                <li className="flex items-center gap-2.5">
+                  <Waves className="w-4 h-4 text-teal-500 shrink-0" />
+                  <span>Swimming pools &amp; lounges</span>
                 </li>
               </ul>
             </div>
 
             {/* Luxury */}
-            <div className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-amber-500 transition-all">
+            <div className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-amber-400 transition-all hover:shadow-lg">
               <div className="absolute -top-4 left-6">
-                <span className="px-4 py-1.5 bg-amber-500 text-white rounded-full text-sm font-bold">
+                <span className="px-4 py-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Luxury
                 </span>
               </div>
-              <div className="text-5xl mb-4 mt-2">✨</div>
+              <div className="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-amber-100 transition-colors">
+                <Crown className="w-7 h-7 text-amber-600" />
+              </div>
               <h3 className="font-heading text-xl font-bold mb-3">Luxury Safari</h3>
-              <p className="text-[var(--text-muted)] mb-4">
-                Premium lodges with world-class amenities, gourmet dining, and exclusive
-                experiences for discerning travelers.
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed">
+                Indulge in five-star lodges with world-class amenities, gourmet cuisine, and exclusive wildlife encounters.
               </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-amber-500" />
-                  <span>5-star lodges</span>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-center gap-2.5">
+                  <Gem className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>Five-star lodges &amp; villas</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-amber-500" />
+                <li className="flex items-center gap-2.5">
+                  <Car className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>Private game drives</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-amber-500" />
-                  <span>Butler service</span>
+                <li className="flex items-center gap-2.5">
+                  <ConciergeBell className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>Dedicated butler service</span>
                 </li>
               </ul>
             </div>
