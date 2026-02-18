@@ -92,6 +92,13 @@ export function InquiryForm({
       }
 
       if (response.ok) {
+        // Log email delivery status for debugging
+        if (result.emailStatus) {
+          console.log("[InquiryForm] Email status:", JSON.stringify(result.emailStatus));
+          if (result.emailStatus.error) {
+            console.warn("[InquiryForm] Email delivery issue:", result.emailStatus.error);
+          }
+        }
         // Track successful form submission
         const numAdults = parseInt(data.numAdults as string) || 1;
         const numChildren = parseInt(data.numChildren as string) || 0;

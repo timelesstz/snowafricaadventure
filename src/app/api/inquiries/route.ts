@@ -19,7 +19,14 @@ const inquirySchema = z.object({
   childrenAges: z.string().optional(),
   arrivalDate: z.string().optional(),
   departureDate: z.string().optional(),
-  duration: z.coerce.number().optional(),
+  duration: z.preprocess(
+    (val) => {
+      if (val === "" || val === undefined || val === null) return undefined;
+      const num = Number(val);
+      return isNaN(num) ? undefined : num;
+    },
+    z.number().optional()
+  ),
   flexibility: z.string().optional(),
   budget: z.string().optional(),
   destinations: z.string().optional(),
@@ -112,21 +119,37 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation emails and create notification
     // Must await to prevent Vercel serverless from terminating before completion
-    const [emailResult, notifResult] = await Promise.allSettled([
-      sendInquiryReceivedEmails(emailData),
-      InquiryNotifications.newInquiry({
+    console.log(`[Inquiry] Sending emails for inquiry ${inquiry.id}, type: ${inquiry.type}, email: ${inquiry.email}`);
+
+    let emailStatus = { customer: false, admin: false, error: "" };
+
+    try {
+      const emailResults = await sendInquiryReceivedEmails(emailData);
+      emailStatus.customer = emailResults.customer.success;
+      emailStatus.admin = emailResults.admin.success;
+      if (!emailResults.customer.success) {
+        emailStatus.error = `Customer: ${emailResults.customer.error}`;
+      }
+      if (!emailResults.admin.success) {
+        emailStatus.error += `${emailStatus.error ? "; " : ""}Admin: ${emailResults.admin.error}`;
+      }
+      console.log(`[Inquiry] Email results - customer: ${emailResults.customer.success}, admin: ${emailResults.admin.success}`);
+    } catch (emailError) {
+      const msg = emailError instanceof Error ? emailError.message : "Unknown email error";
+      emailStatus.error = msg;
+      console.error(`[Inquiry] Email sending threw:`, msg);
+    }
+
+    // Create in-app notification (separate from email)
+    try {
+      await InquiryNotifications.newInquiry({
         inquiryId: inquiry.id,
         fullName: inquiry.fullName,
         type: inquiry.type,
         tripType: inquiry.tripType || undefined,
-      }),
-    ]);
-
-    if (emailResult.status === "rejected") {
-      console.error("Failed to send inquiry emails:", emailResult.reason);
-    }
-    if (notifResult.status === "rejected") {
-      console.error("Failed to create inquiry notification:", notifResult.reason);
+      });
+    } catch (notifError) {
+      console.error("Failed to create inquiry notification:", notifError);
     }
 
     return NextResponse.json(
@@ -134,6 +157,7 @@ export async function POST(request: NextRequest) {
         success: true,
         message: "Inquiry received successfully. We'll be in touch soon!",
         inquiryId: inquiry.id,
+        emailStatus,
       },
       { status: 200 }
     );

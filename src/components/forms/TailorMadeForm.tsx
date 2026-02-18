@@ -210,6 +210,13 @@ export function TailorMadeForm() {
       const result = await response.json();
 
       if (response.ok) {
+        // Log email delivery status for debugging
+        if (result.emailStatus) {
+          console.log("[TailorMadeForm] Email status:", JSON.stringify(result.emailStatus));
+          if (result.emailStatus.error) {
+            console.warn("[TailorMadeForm] Email delivery issue:", result.emailStatus.error);
+          }
+        }
         // Track successful form submission
         trackFormSubmit({
           formName: "tailor_made_safari_form",

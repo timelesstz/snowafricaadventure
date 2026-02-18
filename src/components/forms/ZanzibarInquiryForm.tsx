@@ -196,6 +196,13 @@ export function ZanzibarInquiryForm() {
       const result = await response.json();
 
       if (response.ok) {
+        // Log email delivery status for debugging
+        if (result.emailStatus) {
+          console.log("[ZanzibarForm] Email status:", JSON.stringify(result.emailStatus));
+          if (result.emailStatus.error) {
+            console.warn("[ZanzibarForm] Email delivery issue:", result.emailStatus.error);
+          }
+        }
         // Track successful form submission
         trackFormSubmit({
           formName: "zanzibar_inquiry_form",

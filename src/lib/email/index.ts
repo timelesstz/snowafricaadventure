@@ -155,11 +155,15 @@ export async function sendAdminNotification(
   subject: string,
   html: string
 ): Promise<EmailResult> {
-  return sendEmail({
+  console.log(`[Email] Sending admin notification to: ${NOTIFICATION_EMAIL}`);
+  console.log(`[Email] Admin subject: [Snow Africa Admin] ${subject}`);
+  const result = await sendEmail({
     to: NOTIFICATION_EMAIL,
     subject: `[Snow Africa Admin] ${subject}`,
     html,
   });
+  console.log(`[Email] Admin notification result: success=${result.success}${result.error ? `, error=${result.error}` : ""}${result.id ? `, messageId=${result.id}` : ""}`);
+  return result;
 }
 
 /**
