@@ -2,6 +2,8 @@ import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { AdminRole } from "@prisma/client";
 import { checkRedirect, logRedirectHit } from "@/lib/redirect-cache";
+import { detectBot } from "@/lib/bot-detector";
+import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
 
 // Role hierarchy for comparison
 const ROLE_HIERARCHY: Record<AdminRole, number> = {
@@ -66,6 +68,38 @@ function getRequiredRole(pathname: string): AdminRole | null {
 
 export default auth(async (req) => {
   const pathname = req.nextUrl.pathname;
+
+  // --- Bot Protection (public routes only) ---
+  const isAdminOrApi =
+    pathname.startsWith("/admin") || pathname.startsWith("/api/");
+
+  if (!isAdminOrApi) {
+    const userAgent = req.headers.get("user-agent");
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+
+    const { isBot, category } = detectBot(userAgent);
+
+    // Block bad bots immediately
+    if (isBot && category === "bad") {
+      return new NextResponse("Forbidden", { status: 403 });
+    }
+
+    // Rate limiting for suspicious traffic
+    if (!userAgent || (isBot && category === "unknown")) {
+      if (isRateLimited(ip, RATE_LIMITS.suspicious)) {
+        return new NextResponse("Too Many Requests", { status: 429 });
+      }
+    } else if (!isBot) {
+      // Normal visitors — standard rate limit
+      if (isRateLimited(ip, RATE_LIMITS.normal)) {
+        return new NextResponse("Too Many Requests", { status: 429 });
+      }
+    }
+    // Good bots pass through freely
+  }
 
   // Skip redirect logic for admin routes, API routes, and static files
   const shouldCheckRedirects =
