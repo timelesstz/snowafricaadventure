@@ -41,17 +41,24 @@ const PARTNER_CC_EMAILS = [
 export async function sendBookingInquiryEmails(
   data: BookingEmailData
 ): Promise<{ customer: EmailResult; admin: EmailResult }> {
-  const [customerResult, adminResult] = await Promise.all([
-    sendEmail({
-      to: data.leadEmail,
-      subject: `Booking Inquiry Received - ${data.routeTitle}`,
-      html: bookingInquiryReceived(data),
-    }),
-    sendAdminNotification(
-      `New Booking: ${data.routeTitle} - ${data.leadName}`,
-      adminNewBooking(data)
-    ),
-  ]);
+  // Send sequentially — shared cPanel SMTP often fails on concurrent sends
+  const customerResult = await sendEmail({
+    to: data.leadEmail,
+    subject: `Booking Inquiry Received - ${data.routeTitle}`,
+    html: bookingInquiryReceived(data),
+  });
+
+  const adminResult = await sendAdminNotification(
+    `New Booking: ${data.routeTitle} - ${data.leadName}`,
+    adminNewBooking(data)
+  );
+
+  if (!customerResult.success) {
+    console.error("[Email] Customer booking email failed:", customerResult.error);
+  }
+  if (!adminResult.success) {
+    console.error("[Email] Admin booking notification failed:", adminResult.error);
+  }
 
   return { customer: customerResult, admin: adminResult };
 }
@@ -122,17 +129,24 @@ export async function sendInquiryReceivedEmails(
     "Wildlife Safari": "Safari",
   };
 
-  const [customerResult, adminResult] = await Promise.all([
-    sendEmail({
-      to: data.email,
-      subject: `Thank you for your ${typeLabels[data.type] || ""} inquiry`,
-      html: inquiryReceived(data),
-    }),
-    sendAdminNotification(
-      `New ${typeLabels[data.type] || ""} Inquiry from ${data.fullName}`,
-      adminNewInquiry(data)
-    ),
-  ]);
+  // Send sequentially — shared cPanel SMTP often fails on concurrent sends
+  const customerResult = await sendEmail({
+    to: data.email,
+    subject: `Thank you for your ${typeLabels[data.type] || ""} inquiry`,
+    html: inquiryReceived(data),
+  });
+
+  const adminResult = await sendAdminNotification(
+    `New ${typeLabels[data.type] || ""} Inquiry from ${data.fullName}`,
+    adminNewInquiry(data)
+  );
+
+  if (!customerResult.success) {
+    console.error("[Email] Customer inquiry email failed:", customerResult.error);
+  }
+  if (!adminResult.success) {
+    console.error("[Email] Admin inquiry notification failed:", adminResult.error);
+  }
 
   return { customer: customerResult, admin: adminResult };
 }
