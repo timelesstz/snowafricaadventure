@@ -19,7 +19,7 @@ const reservedSlugs = [
   "trekking",
   "tanzania-safaris",
   "tanzania-destinations",
-  "day-trips",
+  "tanzania-day-tours",
   "zanzibar",
   "kilimanjaro-join-group-departures",
   "tailor-made-safari",

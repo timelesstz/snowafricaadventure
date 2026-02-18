@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BlogCard } from "@/components/cards/BlogCard";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import prisma from "@/lib/prisma";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
   title: "Blog - Tanzania Travel Tips & Safari Stories",
@@ -60,17 +61,7 @@ export default async function BlogPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[var(--primary-dark)] to-[var(--text)] text-white py-12">
-        <div className="container mx-auto px-4">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Blog
-          </h1>
-          <p className="text-xl text-[var(--text-light)] max-w-2xl">
-            Travel tips, safari stories, and Kilimanjaro guides from our team of
-            local experts. {posts.length} articles to explore.
-          </p>
-        </div>
-      </section>
+      <PageHero pageSlug="blog" />
 
       {/* Blog Content */}
       <section className="py-12">

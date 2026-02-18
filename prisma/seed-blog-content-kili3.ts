@@ -524,7 +524,7 @@ const blogContentData: BlogContentData[] = [
 <li>Porters: $5-8 per porter per day</li>
 <li>Assistant guides: $8-10 per day</li>
 <li>Head guide: $15-20 per day</li>
-<li>Cook: $8-10 per day</li>
+<li>Cook: $15-20 per day</li>
 </ul>
 
 <p>Give tips directly to individuals, not in a lump sum to the guide for distribution.</p>

@@ -178,7 +178,7 @@ describe("Email Templates", () => {
     it("should generate inquiry confirmation", () => {
       const html = inquiryReceived(mockInquiryData);
 
-      expect(html).toContain("Thank You for Your Inquiry!");
+      expect(html).toContain(`Thank You, ${mockInquiryData.fullName}!`);
       expect(html).toContain(mockInquiryData.fullName);
       expect(html).toContain("Safari");
       expect(html).toContain("Wildlife Safari");
@@ -193,7 +193,7 @@ describe("Email Templates", () => {
     });
 
     it("should handle different inquiry types", () => {
-      const trekkingInquiry = { ...mockInquiryData, type: "trekking" };
+      const trekkingInquiry = { ...mockInquiryData, type: "trekking", tripType: "Kilimanjaro" };
       const html = inquiryReceived(trekkingInquiry);
 
       expect(html).toContain("Kilimanjaro Trekking");

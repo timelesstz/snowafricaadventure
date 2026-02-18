@@ -20,7 +20,7 @@ const CRITICAL_URLS = [
   "/trekking/",
   "/tanzania-safaris/",
   "/tanzania-destinations/",
-  "/day-trips/",
+  "/tanzania-day-tours/",
   "/zanzibar/",
   "/blog/",
 

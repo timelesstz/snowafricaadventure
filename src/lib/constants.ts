@@ -40,7 +40,7 @@ export const MAIN_NAV = [
  */
 export const TOP_NAV = [
   { label: "About Us", href: "/about-us/" },
-  { label: "Day Trips", href: "/day-trips/" },
+  { label: "Tanzania Day Tours", href: "/tanzania-day-tours/" },
   { label: "Tailor-Made Safaris", href: "/tailor-made-safari/" },
   { label: "Blog", href: "/blog/" },
 ] as const;
@@ -62,7 +62,7 @@ export const FOOTER_NAV = {
     links: [
       { label: "All Trekking Routes", href: "/trekking/" },
       { label: "Join Group Departures", href: "/kilimanjaro-join-group-departures/" },
-      { label: "Day Trips", href: "/day-trips/" },
+      { label: "Tanzania Day Tours", href: "/tanzania-day-tours/" },
     ],
   },
   company: {

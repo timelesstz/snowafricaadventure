@@ -117,7 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/day-trips/`,
+      url: `${baseUrl}/tanzania-day-tours/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -164,7 +164,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Day trips
   const dayTripUrls: MetadataRoute.Sitemap = dayTrips.map((trip) => ({
-    url: `${baseUrl}/day-trips/${trip.slug}/`,
+    url: `${baseUrl}/tanzania-day-tours/${trip.slug}/`,
     lastModified: trip.updatedAt,
     changeFrequency: "monthly",
     priority: 0.7,

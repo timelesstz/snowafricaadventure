@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 declare global {
   interface Window {
@@ -10,7 +11,12 @@ declare global {
 }
 
 export default function TawkTo() {
+  const pathname = usePathname();
+  const isAdmin = pathname?.startsWith("/admin");
+
   useEffect(() => {
+    if (isAdmin) return;
+
     // Initialize Tawk.to
     window.Tawk_API = window.Tawk_API || {};
     window.Tawk_LoadStart = new Date();
@@ -28,7 +34,7 @@ export default function TawkTo() {
       // Cleanup on unmount
       script.remove();
     };
-  }, []);
+  }, [isAdmin]);
 
   return null;
 }

@@ -226,7 +226,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         })),
       ];
 
-      const response = await fetch("/api/bookings", {
+      const response = await fetch("/api/bookings/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -75,17 +75,50 @@ async function saveSafari(formData: FormData) {
   }
 
   const priceStr = formData.get("priceFrom") as string;
-  const gameDrivesStr = formData.get("gameDrives") as string;
-  const parksCountStr = formData.get("parksCount") as string;
   const ratingStr = formData.get("rating") as string;
+
+  // Auto-compute stats from itinerary when available
+  let durationDays = parseInt(formData.get("durationDays") as string) || 1;
+  let duration = formData.get("duration") as string;
+  let parksCount = 3;
+  let gameDrives = 6;
+
+  if (itinerary && Array.isArray(itinerary) && itinerary.length > 0) {
+    durationDays = itinerary.length;
+    const nights = durationDays - 1;
+    duration = `${durationDays} Day${durationDays !== 1 ? "s" : ""} ${nights} Night${nights !== 1 ? "s" : ""}`;
+
+    // Count unique parks/locations from itinerary
+    const locations = new Set<string>();
+    for (const day of itinerary) {
+      if (day.location && typeof day.location === "string" && day.location.trim()) {
+        locations.add(day.location.trim());
+      }
+    }
+    if (locations.size > 0) {
+      parksCount = locations.size;
+    }
+
+    // Count game drives from itinerary day titles/descriptions
+    let driveCount = 0;
+    for (const day of itinerary) {
+      const text = `${day.title || ""} ${day.description || ""}`.toLowerCase();
+      if (text.includes("game drive") || text.includes("safari drive") || text.includes("morning drive") || text.includes("afternoon drive")) {
+        driveCount++;
+      }
+    }
+    if (driveCount > 0) {
+      gameDrives = driveCount;
+    }
+  }
 
   const data = {
     slug,
     title: formData.get("title") as string,
     metaTitle: formData.get("metaTitle") as string || null,
     metaDescription: formData.get("metaDescription") as string || null,
-    duration: formData.get("duration") as string,
-    durationDays: parseInt(formData.get("durationDays") as string) || 1,
+    duration,
+    durationDays,
     type: formData.get("type") as string,
     overview: formData.get("overview") as string,
     highlights,
@@ -95,8 +128,8 @@ async function saveSafari(formData: FormData) {
     featuredImage: formData.get("featuredImage") as string || null,
     gallery,
     priceFrom: priceStr ? parseFloat(priceStr) : null,
-    gameDrives: gameDrivesStr ? parseInt(gameDrivesStr) : 6,
-    parksCount: parksCountStr ? parseInt(parksCountStr) : 3,
+    gameDrives,
+    parksCount,
     rating: ratingStr ? parseFloat(ratingStr) : 4.9,
     isActive: formData.get("isActive") === "on",
   };
@@ -248,29 +281,31 @@ export default async function SafariEditPage({
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Duration *
+                    Duration
                   </label>
                   <input
                     type="text"
                     name="duration"
-                    required
                     defaultValue={safari?.duration || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                    placeholder="e.g., 6 Days 5 Nights"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                    placeholder="Auto-calculated from itinerary"
+                    readOnly
                   />
+                  <p className="text-xs text-slate-500 mt-1">Auto-calculated from itinerary days</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Duration (Days) *
+                    Duration (Days)
                   </label>
                   <input
                     type="number"
                     name="durationDays"
-                    required
                     defaultValue={safari?.durationDays || 1}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                    readOnly
                   />
+                  <p className="text-xs text-slate-500 mt-1">Auto-calculated from itinerary</p>
                 </div>
 
                 <div>
@@ -312,10 +347,11 @@ export default async function SafariEditPage({
                     name="gameDrives"
                     min="0"
                     defaultValue={safari?.gameDrives ?? 6}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                    placeholder="e.g., 6"
+                    placeholder="Auto-calculated"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                    readOnly
                   />
-                  <p className="text-xs text-slate-500 mt-1">Number of game drives included</p>
+                  <p className="text-xs text-slate-500 mt-1">Auto-counted from itinerary days mentioning &quot;game drive&quot;</p>
                 </div>
 
                 <div>
@@ -327,10 +363,11 @@ export default async function SafariEditPage({
                     name="parksCount"
                     min="0"
                     defaultValue={safari?.parksCount ?? 3}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                    placeholder="e.g., 3"
+                    placeholder="Auto-calculated"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                    readOnly
                   />
-                  <p className="text-xs text-slate-500 mt-1">Number of parks visited</p>
+                  <p className="text-xs text-slate-500 mt-1">Auto-counted from unique locations in itinerary</p>
                 </div>
 
                 <div>

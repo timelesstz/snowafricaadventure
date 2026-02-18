@@ -90,7 +90,7 @@ export function InviteFriendsModal({
     }
 
     try {
-      const response = await fetch("/api/invites", {
+      const response = await fetch("/api/invites/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

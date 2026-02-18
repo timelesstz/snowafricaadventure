@@ -110,7 +110,7 @@ export default async function SafarisPage() {
               </span>
               <div className="flex items-center gap-1 text-white/80">
                 <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                <span className="text-sm">4.9 Rating • 500+ Reviews</span>
+                <span className="text-sm">4.9 Rating • 115+ Reviews</span>
               </div>
             </div>
 

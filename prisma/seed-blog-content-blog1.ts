@@ -925,7 +925,7 @@ const blogContentData: BlogContentData[] = [
 
 <p>Mountain cooks produce remarkable meals under challenging conditions—preparing hot food at altitude, in cold temperatures, with limited equipment. This essential contribution deserves appropriate recognition.</p>
 
-<p>Recommended amounts: USD $10-15 per guest per day.</p>
+<p>Recommended amounts: USD $15-20 per guest per day.</p>
 
 <h3>Porters</h3>
 

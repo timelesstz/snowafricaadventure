@@ -52,6 +52,13 @@ const nextConfig: NextConfig = {
       // URL MIGRATION REDIRECTS (WordPress → Next.js)
       // =====================================================
 
+      // Blog posts live at root level (/{slug}/) not /blog/{slug}/
+      {
+        source: "/blog/:slug/",
+        destination: "/:slug/",
+        permanent: true,
+      },
+
       // Terms page URL difference
       {
         source: "/terms-conditions/",
@@ -129,6 +136,18 @@ const nextConfig: NextConfig = {
       {
         source: "/mount-kilimanjaro-trekking/",
         destination: "/trekking/",
+        permanent: true,
+      },
+
+      // Day Trips → Tanzania Day Tours (SEO rename)
+      {
+        source: "/day-trips/",
+        destination: "/tanzania-day-tours/",
+        permanent: true,
+      },
+      {
+        source: "/day-trips/:slug/",
+        destination: "/tanzania-day-tours/:slug/",
         permanent: true,
       },
 

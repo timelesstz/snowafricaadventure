@@ -236,7 +236,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return genMeta({
     title,
     description,
-    url: `/day-trips/${slug}/`,
+    url: `/tanzania-day-tours/${slug}/`,
   });
 }
 
@@ -293,8 +293,8 @@ export default async function DayTripDetailPage({ params }: Props) {
                 Home
               </Link>
               <span className="mx-2">/</span>
-              <Link href="/day-trips/" className="hover:text-white">
-                Day Trips
+              <Link href="/tanzania-day-tours/" className="hover:text-white">
+                Tanzania Day Tours
               </Link>
               <span className="mx-2">/</span>
               <span className="text-white">{name}</span>
@@ -506,7 +506,7 @@ export default async function DayTripDetailPage({ params }: Props) {
               .map((t) => (
                 <Link
                   key={t.id}
-                  href={`/day-trips/${t.slug}/`}
+                  href={`/tanzania-day-tours/${t.slug}/`}
                   className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
                 >
                   <div className="relative aspect-[16/10]">
@@ -529,10 +529,10 @@ export default async function DayTripDetailPage({ params }: Props) {
           </div>
           <div className="text-center mt-8">
             <Link
-              href="/day-trips/"
+              href="/tanzania-day-tours/"
               className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-semibold"
             >
-              View All Day Trips →
+              View All Day Tours →
             </Link>
           </div>
         </div>

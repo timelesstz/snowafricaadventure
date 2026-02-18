@@ -820,3 +820,62 @@ enum EmailStatus {
   FAILED
   BOUNCED
 }
+
+// ============================================
+// PAGE HERO MANAGEMENT
+// ============================================
+
+model PageHero {
+  id                  String   @id @default(cuid())
+  pageSlug            String   @unique
+  pageName            String
+  heroType            String   @default("image") // "image" | "gradient"
+  title               String
+  subtitle            String?
+  badgeText           String?
+  ctaPrimaryText      String?
+  ctaPrimaryUrl       String?
+  ctaSecondaryText    String?
+  ctaSecondaryUrl     String?
+  backgroundImage     String?
+  overlayGradient     String   @default("from-black/70 via-black/50 to-transparent")
+  overlayDirection    String   @default("to-r")
+  overlayOpacity      Int      @default(70)
+  gradientFrom        String?
+  gradientTo          String?
+  minHeight           String   @default("70vh")
+  textAlignment       String   @default("left")
+  textColor           String?
+  showScrollIndicator Boolean  @default(false)
+  isActive            Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([pageSlug])
+}
+
+// ============================================
+// CMS PAGE BUILDER
+// ============================================
+
+model CmsPage {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  description String?
+  puckData    Json
+  status      CmsPageStatus @default(DRAFT)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  publishedAt DateTime?
+  createdBy   String?
+
+  @@index([slug])
+  @@index([status])
+}
+
+enum CmsPageStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}

@@ -29,12 +29,15 @@
     "migrate:wp:safaris": "npx tsx scripts/migration/migrate.ts --type=safaris",
     "migrate:wp:destinations": "npx tsx scripts/migration/migrate.ts --type=destinations",
     "migrate:wp:daytrips": "npx tsx scripts/migration/migrate.ts --type=daytrips",
-    "migrate:wp:blog": "npx tsx scripts/migration/migrate.ts --type=blog"
+    "migrate:wp:blog": "npx tsx scripts/migration/migrate.ts --type=blog",
+    "db:seed:heroes": "npx tsx prisma/seed-heroes.ts",
+    "db:seed:cms": "npx tsx prisma/seed-cms-tailor-made.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
     "@aws-sdk/client-s3": "^3.970.0",
     "@aws-sdk/s3-request-presigner": "^3.970.0",
+    "@measured/puck": "^0.20.2",
     "@prisma/client": "^7.2.0",
     "bcryptjs": "^3.0.3",
     "cheerio": "^1.1.2",

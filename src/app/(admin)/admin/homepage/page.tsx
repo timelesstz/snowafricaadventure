@@ -31,12 +31,12 @@ const DEFAULT_SETTINGS = {
   "homepage.registration.incorporationNo": "90147",
   "homepage.registration.vatNo": "40311448-A",
   "homepage.registration.tinNo": "116-858-398",
-  "homepage.registration.talaLicense": "023178",
-  "homepage.registration.trekkingLicense": "022690",
+  "homepage.registration.talaLicense": "034263",
+  "homepage.registration.trekkingLicense": "035492",
 
   // TripAdvisor
   "homepage.tripadvisor.rating": "5",
-  "homepage.tripadvisor.reviews": "500",
+  "homepage.tripadvisor.reviews": "115",
   "homepage.tripadvisor.url": "https://www.tripadvisor.com/Attraction_Review-g317084-d17523583-Reviews-Snow_Africa_Adventure-Arusha_Arusha_Region.html",
 };
 

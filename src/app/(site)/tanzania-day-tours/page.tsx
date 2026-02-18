@@ -4,12 +4,13 @@ import Link from "next/link";
 import { Clock, MapPin, Users, DollarSign } from "lucide-react";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
-  title: "Day Trips from Arusha",
+  title: "Tanzania Day Tours from Arusha",
   description:
-    "Explore Tanzania's highlights in a single day. Day trips to Arusha National Park, Materuni Waterfalls, Maasai villages, coffee tours, and more.",
-  url: "/day-trips/",
+    "Explore Tanzania's highlights in a single day. Day tours to Arusha National Park, Materuni Waterfalls, Ngorongoro Crater, Maasai villages, coffee tours, and more.",
+  url: "/tanzania-day-tours/",
 });
 
 async function getDayTrips() {
@@ -131,17 +132,7 @@ export default async function DayTripsPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[var(--primary-dark)] to-[var(--text)] text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Day Trips from Arusha
-          </h1>
-          <p className="text-xl text-[var(--primary-light)] max-w-2xl">
-            Short on time? Experience Tanzania&apos;s highlights with our
-            expertly guided day trips and excursions.
-          </p>
-        </div>
-      </section>
+      <PageHero pageSlug="tanzania-day-tours" />
 
       {/* Intro */}
       <section className="py-12 bg-[var(--surface)]">
@@ -227,7 +218,7 @@ export default async function DayTripsPage() {
                   )}
 
                   <Link
-                    href={`/day-trips/${trip.slug}/`}
+                    href={`/tanzania-day-tours/${trip.slug}/`}
                     className="block text-center bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white py-2 rounded font-medium transition-colors"
                   >
                     View Details

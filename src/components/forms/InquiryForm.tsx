@@ -71,19 +71,25 @@ export function InquiryForm({
     );
 
     try {
-      const response = await fetch("/api/inquiries", {
+      const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
           referralSource,
           relatedTo,
-          type: tripType || data.tripType || "general",
+          type: tripType || "general",
           inviteFriends: validInvites.length > 0 ? validInvites : undefined,
         }),
       });
 
-      const result = await response.json();
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        setError("Something went wrong. Please try again.");
+        return;
+      }
 
       if (response.ok) {
         // Track successful form submission

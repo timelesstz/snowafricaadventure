@@ -26,13 +26,13 @@ const DEFAULT_COMPANY_INFO = {
     incorporationNo: "90147",
     vatNo: "40311448-A",
     tinNo: "116-858-398",
-    talaLicense: "023178",
-    trekkingLicense: "022690",
-    year: "2025",
+    talaLicense: "",
+    trekkingLicense: "",
+    year: "2026",
   },
   tripAdvisor: {
     rating: 5,
-    reviews: 500,
+    reviews: 115,
     url: "https://www.tripadvisor.com/Attraction_Review-g317084-d17523583-Reviews-Snow_Africa_Adventure-Arusha_Arusha_Region.html",
   },
 };
@@ -66,11 +66,13 @@ function getWhyUsItems(talaLicense: string) {
     {
       icon: Award,
       title: "TATO & KPAP Certified",
-      description: `Licensed member of Tanzania Association of Tour Operators (TALA No: ${talaLicense}). Proud partner of Kilimanjaro Porters Assistance Project.`,
+      description: talaLicense
+        ? `Licensed member of Tanzania Association of Tour Operators (TALA No: ${talaLicense}). Proud partner of Kilimanjaro Porters Assistance Project.`
+        : `Licensed member of Tanzania Association of Tour Operators. Proud partner of Kilimanjaro Porters Assistance Project.`,
     },
     {
       icon: Star,
-      title: "500+ Five-Star Reviews",
+      title: "115+ Five-Star Reviews",
       description: "4.9 average rating on TripAdvisor and SafariBookings from verified travelers worldwide. Excellence is our standard.",
     },
   ];
@@ -88,13 +90,13 @@ const destinations = [
     title: "Cultural Tours",
     description: "Maasai villages & coffee farms",
     image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Arusha-City-Day-Trip.jpg",
-    href: "/day-trips/",
+    href: "/tanzania-day-tours/",
   },
   {
-    title: "Day Trips",
+    title: "Day Tours",
     description: "Waterfalls & wildlife in a day",
     image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Day-trips.jpg",
-    href: "/day-trips/",
+    href: "/tanzania-day-tours/",
   },
   {
     title: "Serengeti",
@@ -149,8 +151,8 @@ async function getHomepageSettings() {
       incorporationNo: settingsMap["homepage.registration.incorporationNo"] || DEFAULT_COMPANY_INFO.registration.incorporationNo,
       vatNo: settingsMap["homepage.registration.vatNo"] || DEFAULT_COMPANY_INFO.registration.vatNo,
       tinNo: settingsMap["homepage.registration.tinNo"] || DEFAULT_COMPANY_INFO.registration.tinNo,
-      talaLicense: settingsMap["homepage.registration.talaLicense"] || DEFAULT_COMPANY_INFO.registration.talaLicense,
-      trekkingLicense: settingsMap["homepage.registration.trekkingLicense"] || DEFAULT_COMPANY_INFO.registration.trekkingLicense,
+      talaLicense: settingsMap["homepage.registration.talaLicense"] || "",
+      trekkingLicense: settingsMap["homepage.registration.trekkingLicense"] || "",
     },
     tripAdvisor: {
       rating: parseInt(settingsMap["homepage.tripadvisor.rating"]) || DEFAULT_COMPANY_INFO.tripAdvisor.rating,
@@ -359,7 +361,7 @@ export default async function HomePage() {
                 <Star className="w-6 h-6" fill="currentColor" />
               </div>
               <div className="trust-badge-content">
-                <span className="trust-badge-value">500+</span>
+                <span className="trust-badge-value">115+</span>
                 <span className="trust-badge-label">5-Star Reviews</span>
               </div>
             </div>
@@ -405,8 +407,8 @@ export default async function HomePage() {
                   <li><strong>Registration No:</strong> {registration.incorporationNo}</li>
                   <li><strong>VAT No:</strong> {registration.vatNo}</li>
                   <li><strong>TIN:</strong> {registration.tinNo}</li>
-                  <li><strong>Tour License (TALA):</strong> {registration.talaLicense}</li>
-                  <li><strong>Trekking License:</strong> {registration.trekkingLicense}</li>
+                  {registration.talaLicense && <li><strong>Tour Operator License:</strong> {registration.talaLicense}</li>}
+                  {registration.trekkingLicense && <li><strong>Trekking License:</strong> {registration.trekkingLicense}</li>}
                 </ul>
               </div>
               <Link href="/about-us/" className="btn btn-secondary">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Sun, Waves, Building, Compass } from "lucide-react";
 import { ZanzibarInquiryForm } from "@/components/forms/ZanzibarInquiryForm";
 import { generateMetadata as genMeta } from "@/lib/seo";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
   title: "Zanzibar Beach Holidays",
@@ -105,27 +106,7 @@ export default function ZanzibarPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative h-[60vh] min-h-[500px]">
-        <Image
-          src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg"
-          alt="Zanzibar Beach"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8">
-          <div className="container mx-auto">
-            <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-4">
-              Zanzibar Beach Holidays
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl">
-              The perfect ending to your Tanzania adventure. Pristine white
-              sand beaches, turquoise waters, and rich Swahili culture.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero pageSlug="zanzibar" />
 
       {/* Intro */}
       <section className="py-12">

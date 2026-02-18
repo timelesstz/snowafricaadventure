@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, Clock, MessageCircle, Globe, ArrowRight } from "lu
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { SITE_CONFIG } from "@/lib/constants";
 import { generateMetadata as genMeta } from "@/lib/seo";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
   title: "Contact Us",
@@ -82,8 +83,8 @@ const destinations = [
     image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Zanzibar-Beach-Holiday.webp",
   },
   {
-    href: "/day-trips/",
-    title: "Day Trips",
+    href: "/tanzania-day-tours/",
+    title: "Tanzania Day Tours",
     description: "Local adventures",
     image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/06/materuni-waterfalls-tour.webp",
   },
@@ -93,22 +94,7 @@ export default function ContactPage() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="relative py-16 md:py-20 bg-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
-            <span className="inline-block text-amber-500 font-semibold text-sm uppercase tracking-wider mb-4">
-              Get in Touch
-            </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-white">
-              Let&apos;s Plan Your Dream Adventure
-            </h1>
-            <p className="text-lg text-slate-300 leading-relaxed max-w-2xl">
-              Whether you&apos;re dreaming of conquering Kilimanjaro, witnessing the Great Migration,
-              or relaxing on Zanzibar&apos;s beaches, we&apos;re here to make it happen.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero pageSlug="contact-us" />
 
       {/* Quick Contact Methods */}
       <section className="py-8 border-b border-slate-200">

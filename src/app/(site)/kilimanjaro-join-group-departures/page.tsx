@@ -6,6 +6,7 @@ import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
 import { SITE_CONFIG, PARTNER_INFO } from "@/lib/constants";
 import { ShareButtons } from "@/components/social/ShareButtons";
+import { PageHero } from "@/components/layout/PageHero";
 
 // Revalidate every 60 seconds to fetch fresh departure data
 export const revalidate = 60;
@@ -152,34 +153,23 @@ export default async function GroupDeparturesPage() {
       <JsonLd data={faqSchema} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary-dark)] text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Kilimanjaro Join Group Departures
-          </h1>
-          <p className="text-xl text-[var(--primary-light)] max-w-2xl">
-            Join our scheduled group climbs with fixed departure dates. Share the
-            adventure with fellow climbers from around the world.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4">
-            <div className="bg-white/10 px-4 py-2 rounded">
-              <span className="text-[var(--primary-light)]">{String.fromCodePoint(0x1F315)}</span> Full Moon climbs
-              available
-            </div>
-            <div className="bg-white/10 px-4 py-2 rounded">
-              <span className="text-[var(--primary-light)]">{String.fromCodePoint(0x1F465)}</span> Small groups (max 10)
-            </div>
-            <div className="bg-white/10 px-4 py-2 rounded">
-              <span className="text-[var(--primary-light)]">{String.fromCodePoint(0x2713)}</span> Expert local guides
-            </div>
+      <PageHero pageSlug="kilimanjaro-join-group-departures">
+        <div className="mt-6 flex flex-wrap gap-4">
+          <div className="bg-white/10 px-4 py-2 rounded text-sm">
+            {String.fromCodePoint(0x1F315)} Full Moon climbs available
           </div>
-          {/* Share This Page */}
-          <div className="mt-6 flex items-center gap-3">
-            <span className="text-sm text-[var(--primary-light)]">Share this page:</span>
-            <ShareButtons variant="icons-only" size="sm" />
+          <div className="bg-white/10 px-4 py-2 rounded text-sm">
+            {String.fromCodePoint(0x1F465)} Small groups (max 10)
+          </div>
+          <div className="bg-white/10 px-4 py-2 rounded text-sm">
+            {String.fromCodePoint(0x2713)} Expert local guides
           </div>
         </div>
-      </section>
+        <div className="mt-6 flex items-center gap-3">
+          <span className="text-sm text-white/70">Share this page:</span>
+          <ShareButtons variant="icons-only" size="sm" />
+        </div>
+      </PageHero>
 
       {/* How It Works */}
       <section className="py-12 bg-[var(--surface)]">

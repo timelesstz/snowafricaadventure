@@ -28,6 +28,8 @@ import {
   Image,
   AlertTriangle,
   ArrowRightLeft,
+  PanelTop,
+  LayoutTemplate,
 } from "lucide-react";
 import { useState } from "react";
 import { clsx } from "clsx";
@@ -55,6 +57,8 @@ const navItems: NavItem[] = [
   // Content Management
   { href: "/admin/homepage", label: "Homepage", icon: Home, minRole: AdminRole.EDITOR },
   { href: "/admin/about-us", label: "About Us", icon: Users, minRole: AdminRole.EDITOR },
+  { href: "/admin/heroes", label: "Page Heroes", icon: PanelTop, minRole: AdminRole.EDITOR },
+  { href: "/admin/pages", label: "Page Builder", icon: LayoutTemplate, minRole: AdminRole.EDITOR },
   { href: "/admin/media", label: "Media Library", icon: Image, minRole: AdminRole.EDITOR },
   { href: "/admin/routes", label: "Trekking Routes", icon: Mountain, minRole: AdminRole.EDITOR },
   { href: "/admin/safaris", label: "Safari Packages", icon: Compass, minRole: AdminRole.EDITOR },

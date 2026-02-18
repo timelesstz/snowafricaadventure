@@ -120,7 +120,7 @@ export default async function DayTripEditPage({
         </div>
         {!isNew && dayTrip?.isActive && (
           <a
-            href={`/day-trips/${dayTrip.slug}/`}
+            href={`/tanzania-day-tours/${dayTrip.slug}/`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
@@ -162,7 +162,7 @@ export default async function DayTripEditPage({
                     URL Slug *
                   </label>
                   <div className="flex items-center gap-2">
-                    <span className="text-slate-500">/day-trips/</span>
+                    <span className="text-slate-500">/tanzania-day-tours/</span>
                     <input
                       type="text"
                       name="slug"

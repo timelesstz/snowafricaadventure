@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MessageCircle, ChevronDown } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 import { generateMetadata as genMeta } from "@/lib/seo";
+import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
   title: "Frequently Asked Questions",
@@ -83,7 +84,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: "What should I tip the crew?",
         answer:
-          "Tipping is customary and greatly appreciated. We recommend $20-25 per day for the lead guide, $15-20 for assistant guides, $10-15 for the cook, and $8-10 per porter per day. Tips are typically given at the end of the climb in an envelope.",
+          "Tipping is customary and greatly appreciated. We recommend $20-25 per day for the lead guide, $15-20 for assistant guides, $15-20 for the cook, and $8-10 per porter per day. Tips are typically given at the end of the climb in an envelope.",
       },
       {
         question: "What gear do I need to bring?",
@@ -192,22 +193,7 @@ export default function FAQPage() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="py-16 md:py-20 bg-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
-            <span className="inline-block text-amber-500 font-semibold text-sm uppercase tracking-wider mb-4">
-              Help Center
-            </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-white">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-lg text-slate-300 leading-relaxed">
-              Find answers to common questions about Kilimanjaro climbs, Tanzania safaris,
-              Zanzibar holidays, and planning your adventure.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero pageSlug="faq" />
 
       {/* FAQ Content */}
       <section className="py-16 md:py-20">

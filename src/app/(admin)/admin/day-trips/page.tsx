@@ -222,7 +222,7 @@ export default async function DayTripsPage({
                     <div className="flex items-center gap-2">
                       {trip.isActive && (
                         <a
-                          href={`/day-trips/${trip.slug}/`}
+                          href={`/tanzania-day-tours/${trip.slug}/`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-2 text-slate-400 hover:text-slate-600"

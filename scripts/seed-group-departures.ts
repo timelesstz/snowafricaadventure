@@ -43,6 +43,15 @@ const departures2026: DepartureData[] = [
   { route: "7-day Machame", arrivalDate: "2026-03-20", departureDate: "2026-03-28", price: 2440, maxParticipants: 9 },
   { route: "8-day Lemosho", arrivalDate: "2026-03-25", departureDate: "2026-04-03", price: 2680, maxParticipants: 8 },
 
+  // April 2026
+  { route: "8-day Lemosho", arrivalDate: "2026-04-08", departureDate: "2026-04-17", price: 2680, maxParticipants: 10 },
+  { route: "7-day Machame", arrivalDate: "2026-04-22", departureDate: "2026-04-30", price: 2440, maxParticipants: 10 },
+
+  // May 2026
+  { route: "8-day Lemosho", arrivalDate: "2026-05-05", departureDate: "2026-05-14", price: 2680, maxParticipants: 10 },
+  { route: "8-day Lemosho", arrivalDate: "2026-05-17", departureDate: "2026-05-26", price: 2680, maxParticipants: 10 },
+  { route: "7-day Machame", arrivalDate: "2026-05-26", departureDate: "2026-06-03", price: 2440, maxParticipants: 10 },
+
   // June 2026
   { route: "8-day Lemosho", arrivalDate: "2026-06-04", departureDate: "2026-06-13", price: 2680, maxParticipants: 10 },
   { route: "7-day Machame", arrivalDate: "2026-06-05", departureDate: "2026-06-13", price: 2440, maxParticipants: 10 },

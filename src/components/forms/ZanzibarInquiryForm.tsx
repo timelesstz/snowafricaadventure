@@ -177,7 +177,7 @@ export function ZanzibarInquiryForm() {
     }
 
     try {
-      const response = await fetch("/api/inquiries", {
+      const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
