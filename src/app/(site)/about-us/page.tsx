@@ -49,8 +49,8 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   "about.hosts.title": "Meet Your Hosts",
   "about.hosts.content":
     "As the founders of Snow Africa Adventure, Florent and Caroline are the driving force behind every journey we create. Their knowledge, experience, and genuine hospitality set the tone for our company culture, ensuring every traveler feels at home from the moment they arrive in Tanzania. They look forward to welcoming you, sharing their love for this spectacular land, and creating memories that will last a lifetime.",
-  "about.hosts.name1": "Florent",
-  "about.hosts.role1": "Co-Founder & Safari Expert",
+  "about.hosts.name1": "Florent Ipanga",
+  "about.hosts.role1": "Co-Founder & Safari & Trekking Expert",
   "about.hosts.image1": "",
   "about.hosts.name2": "Caroline",
   "about.hosts.role2": "Co-Founder & Operations",

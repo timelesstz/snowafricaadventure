@@ -24,6 +24,14 @@ model TrekkingRoute {
   highlights      String[]
   itinerary        Json?
   elevationProfile Json?
+  pricingTiers     Json?
+  summitHeight     String?
+  guideName        String?
+  guideTitle       String?
+  guideImage       String?
+  guideQuote       String?
+  ctaRating        String?
+  ctaClimberCount  String?
   routeMapImage    String?
   inclusions      String[]
   exclusions      String[]

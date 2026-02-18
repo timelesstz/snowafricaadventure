@@ -8,6 +8,7 @@ import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import ItineraryEditor from "@/components/admin/ItineraryEditor";
 import FaqsEditor from "@/components/admin/FaqsEditor";
 import ElevationProfileEditor from "@/components/admin/ElevationProfileEditor";
+import PricingTiersEditor from "@/components/admin/PricingTiersEditor";
 import ListEditor from "@/components/admin/ListEditor";
 
 async function getRoute(id: string) {
@@ -69,6 +70,17 @@ async function saveRoute(formData: FormData) {
     }
   }
 
+  // Parse pricing tiers JSON
+  const pricingTiersStr = formData.get("pricingTiers") as string;
+  let pricingTiers = null;
+  if (pricingTiersStr) {
+    try {
+      pricingTiers = JSON.parse(pricingTiersStr);
+    } catch {
+      pricingTiers = null;
+    }
+  }
+
   const successRateStr = formData.get("successRate") as string;
 
   // Parse gallery JSON
@@ -99,6 +111,14 @@ async function saveRoute(formData: FormData) {
     highlights,
     itinerary,
     elevationProfile,
+    pricingTiers,
+    summitHeight: formData.get("summitHeight") as string || null,
+    guideName: formData.get("guideName") as string || null,
+    guideTitle: formData.get("guideTitle") as string || null,
+    guideImage: formData.get("guideImage") as string || null,
+    guideQuote: formData.get("guideQuote") as string || null,
+    ctaRating: formData.get("ctaRating") as string || null,
+    ctaClimberCount: formData.get("ctaClimberCount") as string || null,
     routeMapImage: formData.get("routeMapImage") as string || null,
     inclusions,
     exclusions,
@@ -340,6 +360,20 @@ export default async function RouteEditPage({
                     placeholder="e.g., 12 - 80+"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Summit Height
+                  </label>
+                  <input
+                    type="text"
+                    name="summitHeight"
+                    defaultValue={route?.summitHeight || ""}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    placeholder="e.g., 5,895m"
+                  />
+                  <p className="text-xs text-slate-400 mt-1">Displayed in hero section</p>
+                </div>
               </div>
 
               <div>
@@ -422,6 +456,20 @@ export default async function RouteEditPage({
                 name="elevationProfile"
                 defaultValue={route?.elevationProfile as { day: number; elevation: number; camp: string; label?: string }[] | null}
                 itinerary={route?.itinerary as { day: number; title: string; description: string; elevation?: string; distance?: string; duration?: string; camp?: string; meals?: string; tags?: string[]; image?: string }[] | null}
+              />
+            </div>
+
+            {/* Pricing Tiers */}
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
+              <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
+                Pricing Tiers
+              </h2>
+              <p className="text-sm text-slate-500">
+                Define group pricing tiers. Leave empty to use default pricing on the frontend.
+              </p>
+              <PricingTiersEditor
+                name="pricingTiers"
+                defaultValue={route?.pricingTiers as { groupSize: string; description: string; price: number; savings?: number; featured?: boolean }[] | null}
               />
             </div>
 
@@ -509,6 +557,91 @@ export default async function RouteEditPage({
                   rows={3}
                   defaultValue={route?.metaDescription || ""}
                   className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Expert Guide */}
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
+              <h3 className="font-semibold text-slate-900">Expert Guide</h3>
+              <p className="text-xs text-slate-500">Shown in the sidebar &ldquo;Your Expert Guide&rdquo; card on the route page.</p>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Guide Name
+                </label>
+                <input
+                  type="text"
+                  name="guideName"
+                  defaultValue={route?.guideName || ""}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  placeholder="e.g., Florent Ipanga"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Guide Title
+                </label>
+                <input
+                  type="text"
+                  name="guideTitle"
+                  defaultValue={route?.guideTitle || ""}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  placeholder="e.g., Co-Founder & Trekking Expert"
+                />
+              </div>
+
+              <ImageUploadField
+                name="guideImage"
+                defaultValue={route?.guideImage}
+                folder="guides"
+                label="Guide Photo"
+                helpText="Square photo works best (e.g., 200x200)"
+              />
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Guide Quote
+                </label>
+                <textarea
+                  name="guideQuote"
+                  rows={3}
+                  defaultValue={route?.guideQuote || ""}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  placeholder="e.g., The mountain teaches patience and rewards determination."
+                />
+              </div>
+            </div>
+
+            {/* CTA Stats */}
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
+              <h3 className="font-semibold text-slate-900">CTA Trust Stats</h3>
+              <p className="text-xs text-slate-500">Trust badges shown in the CTA section. Leave empty for defaults.</p>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Rating
+                </label>
+                <input
+                  type="text"
+                  name="ctaRating"
+                  defaultValue={route?.ctaRating || ""}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  placeholder="e.g., 4.9/5"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Climber Count
+                </label>
+                <input
+                  type="text"
+                  name="ctaClimberCount"
+                  defaultValue={route?.ctaClimberCount || ""}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  placeholder="e.g., 2,500+"
                 />
               </div>
             </div>

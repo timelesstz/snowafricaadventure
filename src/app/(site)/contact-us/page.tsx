@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, Clock, MessageCircle, Globe, ArrowRight } from "lu
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { SITE_CONFIG } from "@/lib/constants";
 import { generateMetadata as genMeta } from "@/lib/seo";
+import { getExperienceYears } from "@/lib/settings";
 import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
@@ -90,7 +91,8 @@ const destinations = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const experienceYears = await getExperienceYears();
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -221,7 +223,7 @@ export default function ContactPage() {
                     <p className="text-xs text-slate-500">Summit Success</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-amber-600">10+</p>
+                    <p className="text-2xl font-bold text-amber-600">{experienceYears}</p>
                     <p className="text-xs text-slate-500">Years Experience</p>
                   </div>
                 </div>

@@ -198,7 +198,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-slate-700">
           <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-slate-400">
             <span className="font-semibold">Partners & Certifications:</span>
-            <span>TripAdvisor</span>
+            <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TripAdvisor</a>
             <span>SafariBookings</span>
             <span>TATO Member</span>
             <span>KPAP Partner</span>

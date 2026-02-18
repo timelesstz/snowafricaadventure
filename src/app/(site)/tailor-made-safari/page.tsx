@@ -5,6 +5,7 @@ import { Check, Users, Calendar, MapPin, Star, ChevronDown, Shield, Compass } fr
 import { TailorMadeForm } from "@/components/forms/TailorMadeForm";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
+import { getExperienceYears } from "@/lib/settings";
 import { CmsPageRenderer } from "@/app/(site)/p/[slug]/CmsPageRenderer";
 
 export const metadata: Metadata = genMeta({
@@ -111,6 +112,8 @@ const testimonials = [
 ];
 
 export default async function TailorMadeSafariPage() {
+  const experienceYears = await getExperienceYears();
+
   // Check if CMS version exists
   let cmsPage = null;
   try {
@@ -184,7 +187,7 @@ export default async function TailorMadeSafariPage() {
                   <Shield className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">15+</p>
+                  <p className="text-2xl font-bold">{experienceYears}</p>
                   <p className="text-sm text-white/70">Years Experience</p>
                 </div>
               </div>

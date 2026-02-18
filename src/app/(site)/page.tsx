@@ -356,15 +356,15 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="trust-badge-divider" />
-            <div className="trust-badge">
+            <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="trust-badge">
               <div className="trust-badge-icon">
                 <Star className="w-6 h-6" fill="currentColor" />
               </div>
               <div className="trust-badge-content">
-                <span className="trust-badge-value">115+</span>
+                <span className="trust-badge-value">{tripAdvisor.reviews}+</span>
                 <span className="trust-badge-label">5-Star Reviews</span>
               </div>
-            </div>
+            </a>
             <div className="trust-badge-divider" />
             <div className="trust-badge">
               <div className="trust-badge-icon">
@@ -425,7 +425,7 @@ export default async function HomePage() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 loading="lazy"
               />
-              <div className="tripadvisor-badge">
+              <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-badge">
                 <div className="tripadvisor-badge-inner">
                   <div className="tripadvisor-stars">
                     {[...Array(5)].map((_, i) => (
@@ -436,7 +436,7 @@ export default async function HomePage() {
                   <span className="tripadvisor-text">TripAdvisor</span>
                   <span className="tripadvisor-reviews">{tripAdvisor.reviews}+ Reviews</span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -635,7 +635,7 @@ export default async function HomePage() {
           <TripAdvisorWidget variant="slider" className="my-8" />
 
           <div className="testimonials-footer">
-            <div className="tripadvisor-inline">
+            <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-inline">
               <span className="tripadvisor-score">{tripAdvisor.rating}.0</span>
               <div>
                 <div className="tripadvisor-stars-inline">
@@ -645,7 +645,7 @@ export default async function HomePage() {
                 </div>
                 <span>{tripAdvisor.reviews}+ reviews on TripAdvisor</span>
               </div>
-            </div>
+            </a>
             <a
               href={tripAdvisor.url}
               target="_blank"

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import prisma from "@/lib/prisma";
+import { getExperienceYears } from "@/lib/settings";
 import { SafarisPageClient } from "./SafarisPageClient";
 import {
   MapPin,
@@ -90,7 +91,7 @@ async function getSafariTypes() {
 }
 
 export default async function SafarisPage() {
-  const [safaris, types] = await Promise.all([getSafaris(), getSafariTypes()]);
+  const [safaris, types, experienceYears] = await Promise.all([getSafaris(), getSafariTypes(), getExperienceYears()]);
 
   const featuredSafari = safaris.find((s) => s.type === "Mid-Range") || safaris[0];
 
@@ -160,7 +161,7 @@ export default async function SafarisPage() {
                   <Shield className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">15+</p>
+                  <p className="text-2xl font-bold">{experienceYears}</p>
                   <p className="text-sm text-white/70">Years Experience</p>
                 </div>
               </div>
@@ -209,7 +210,7 @@ export default async function SafarisPage() {
                 <p className="text-xs text-[var(--text-muted)]">Happy Travelers</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center">
                 <Star className="w-6 h-6 text-[var(--secondary)]" />
               </div>
@@ -217,7 +218,7 @@ export default async function SafarisPage() {
                 <p className="font-semibold">4.9/5</p>
                 <p className="text-xs text-[var(--text-muted)]">TripAdvisor</p>
               </div>
-            </div>
+            </a>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center">
                 <Binoculars className="w-6 h-6 text-[var(--secondary)]" />
@@ -394,7 +395,7 @@ export default async function SafarisPage() {
             <h3>Why Choose Snow Africa Adventure?</h3>
             <ul>
               <li>Locally owned and operated since 2010</li>
-              <li>Expert guides with 10+ years experience</li>
+              <li>Expert guides with {experienceYears} years experience</li>
               <li>Small group sizes for intimate experiences</li>
               <li>Customizable itineraries to match your preferences</li>
               <li>24/7 support during your safari</li>

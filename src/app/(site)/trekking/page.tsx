@@ -235,7 +235,7 @@ export default async function TrekkingPage() {
                 <p className="text-xs text-[var(--text-muted)]">Porter Welfare</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center">
                 <Star className="w-6 h-6 text-[var(--primary)]" />
               </div>
@@ -243,7 +243,7 @@ export default async function TrekkingPage() {
                 <p className="font-semibold">4.9/5 Rating</p>
                 <p className="text-xs text-[var(--text-muted)]">TripAdvisor</p>
               </div>
-            </div>
+            </a>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center">
                 <Thermometer className="w-6 h-6 text-[var(--primary)]" />

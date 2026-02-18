@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   RouteHero,
@@ -194,7 +195,8 @@ export default async function RoutePage({ params }: PageProps) {
         duration={route.duration}
         difficulty={route.physicalRating || "Challenging"}
         successRate={route.successRate || 92}
-        summitHeight="5,895m"
+        summitHeight={route.summitHeight || "5,895m"}
+        image={route.featuredImage || undefined}
       />
 
       {/* Quick Navigation */}
@@ -277,6 +279,42 @@ export default async function RoutePage({ params }: PageProps) {
                   </div>
                 )}
               </section>
+
+              {/* Photo Gallery */}
+              {route.gallery && route.gallery.length > 0 && (
+                <section id="gallery" className="section">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 bg-[var(--surface)] rounded-xl flex items-center justify-center text-[var(--secondary)]">
+                      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                    </div>
+                    <h2 className="font-heading text-2xl font-bold text-[var(--primary)]">
+                      Route Gallery
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {route.gallery.map((img, index) => (
+                      <div
+                        key={index}
+                        className={`relative overflow-hidden rounded-xl ${
+                          index === 0 ? "col-span-2 row-span-2 h-[300px] md:h-[400px]" : "h-[180px] md:h-[200px]"
+                        }`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${route.title} - Photo ${index + 1}`}
+                          fill
+                          className="object-cover hover:scale-105 transition-transform duration-500"
+                          sizes={index === 0 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               {/* Itinerary */}
               {itinerary.length > 0 && (
@@ -386,22 +424,22 @@ export default async function RoutePage({ params }: PageProps) {
                   <div className="p-6">
                     <div className="text-center mb-4">
                       <img
-                        src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg"
-                        alt="Guide Florent"
+                        src={route.guideImage || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg"}
+                        alt={`Guide ${route.guideName || "Florent"}`}
                         className="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-[var(--surface)]"
                       />
                       <div className="font-heading font-semibold text-[var(--primary)]">
-                        Florent Ipanga
+                        {route.guideName || "Florent Ipanga"}
                       </div>
                       <div className="text-sm text-[var(--text-muted)]">
-                        Co-Founder & Safari & Trekking Expert
+                        {route.guideTitle || "Co-Founder & Safari & Trekking Expert"}
                       </div>
                     </div>
                     <blockquote className="text-center text-[var(--text-muted)] italic text-sm mb-4 px-2 border-l-0">
-                      &ldquo;The mountain teaches patience and rewards determination. Every step is a story.&rdquo;
+                      &ldquo;{route.guideQuote || "The mountain teaches patience and rewards determination. Every step is a story."}&rdquo;
                     </blockquote>
                     <button className="w-full py-3 border-2 border-[var(--primary)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all">
-                      Ask Florent a Question
+                      Ask {(route.guideName || "Florent").split(" ")[0]} a Question
                     </button>
                   </div>
                 </div>
@@ -412,7 +450,11 @@ export default async function RoutePage({ params }: PageProps) {
       </main>
 
       {/* Pricing Section */}
-      <RoutePriceTable routeTitle={route.title} duration={route.duration} />
+      <RoutePriceTable
+        routeTitle={route.title}
+        duration={route.duration}
+        priceTiers={route.pricingTiers as { groupSize: string; description: string; price: number; savings?: number; featured?: boolean }[] | undefined}
+      />
 
       {/* Departures Section */}
       {departures.length > 0 && (
@@ -420,7 +462,15 @@ export default async function RoutePage({ params }: PageProps) {
       )}
 
       {/* CTA Section */}
-      <RouteCTA routeSlug={route.slug} />
+      <RouteCTA
+        routeSlug={route.slug}
+        stats={{
+          rating: route.ctaRating || "4.9/5",
+          climbers: route.ctaClimberCount || "2,500+",
+          successRate: route.successRate ? `${route.successRate}%` : "92%",
+          licensed: true,
+        }}
+      />
 
       {/* Inquiry Form Section */}
       <section id="inquiry-form" className="py-20 bg-white">

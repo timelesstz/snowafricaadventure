@@ -225,12 +225,12 @@ export default async function GroupDeparturesPage() {
               — Sarah M., United Kingdom (January 2025)
             </p>
           </div>
-          <div className="mt-8 flex items-center justify-center gap-1 text-[var(--secondary)] text-2xl">
+          <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="mt-8 flex items-center justify-center gap-1 text-[var(--secondary)] text-2xl hover:opacity-80 transition-opacity">
             ★★★★★
             <span className="text-white text-base ml-2">
               4.9/5 on TripAdvisor
             </span>
-          </div>
+          </a>
         </div>
       </section>
 

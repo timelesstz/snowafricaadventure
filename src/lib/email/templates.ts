@@ -504,7 +504,7 @@ export function inquiryReceived(data: InquiryEmailData): string {
                           <p style="margin: 4px 0 0; font-size: 12px; color: #64748b;">Summit Success</p>
                         </td>
                         <td width="33%" style="padding: 8px; text-align: center; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;">
-                          <p style="margin: 0; font-size: 24px; font-weight: 700; color: #f59e0b;">10+</p>
+                          <p style="margin: 0; font-size: 24px; font-weight: 700; color: #f59e0b;">15+</p>
                           <p style="margin: 4px 0 0; font-size: 12px; color: #64748b;">Years Experience</p>
                         </td>
                         <td width="33%" style="padding: 8px; text-align: center;">
@@ -865,7 +865,7 @@ export function emailShareTemplate(data: EmailShareTemplateData): string {
       <strong>Why Climb With Snow Africa Adventure?</strong>
       <ul style="margin: 8px 0 0; padding-left: 20px;">
         <li>95%+ Summit Success Rate</li>
-        <li>Expert Local Guides (10+ years experience)</li>
+        <li>Expert Local Guides (15+ years experience)</li>
         <li>Small Groups (max 10 climbers)</li>
         <li>All-Inclusive Packages</li>
       </ul>

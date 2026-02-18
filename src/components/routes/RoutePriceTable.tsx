@@ -140,12 +140,22 @@ export function RoutePriceTable({
                 Camping equipment
               </span>
             </div>
-            <button
-              onClick={onInquire}
-              className="px-8 py-3.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-bold rounded-lg hover:bg-[var(--secondary-dark)] transition-all hover:-translate-y-0.5"
-            >
-              Get Custom Quote
-            </button>
+            {onInquire ? (
+              <button
+                type="button"
+                onClick={onInquire}
+                className="px-8 py-3.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-bold rounded-lg hover:bg-[var(--secondary-dark)] transition-all hover:-translate-y-0.5"
+              >
+                Get Custom Quote
+              </button>
+            ) : (
+              <a
+                href="#inquiry-form"
+                className="inline-block px-8 py-3.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-bold rounded-lg hover:bg-[var(--secondary-dark)] transition-all hover:-translate-y-0.5"
+              >
+                Get Custom Quote
+              </a>
+            )}
           </div>
         </div>
       </div>
