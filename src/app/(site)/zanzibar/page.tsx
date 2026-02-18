@@ -75,13 +75,13 @@ const packages = [
   {
     name: "3-Day Beach Escape",
     nights: 3,
-    price: 450,
+    price: 850,
     highlights: ["Beach Resort", "Stone Town Tour", "Airport Transfers"],
   },
   {
     name: "5-Day Island Explorer",
     nights: 5,
-    price: 750,
+    price: 1100,
     highlights: [
       "Beach Resort",
       "Stone Town Tour",
@@ -92,7 +92,7 @@ const packages = [
   {
     name: "7-Day Ultimate Zanzibar",
     nights: 7,
-    price: 1100,
+    price: 1980,
     highlights: [
       "Premium Resort",
       "All Tours Included",
@@ -210,16 +210,23 @@ export default function ZanzibarPage() {
                 <h3 className="font-semibold text-xl mb-2">{pkg.name}</h3>
                 <p
                   className={`text-sm mb-4 ${
-                    index === 1 ? "text-[var(--text-muted)]" : "text-[var(--primary-light)]"
+                    index === 1 ? "text-[var(--text-muted)]" : "text-white/70"
                   }`}
                 >
                   {pkg.nights} Nights
                 </p>
                 <div className="mb-4">
-                  <span className="text-3xl font-bold">${pkg.price}</span>
                   <span
                     className={`text-sm ${
-                      index === 1 ? "text-[var(--text-muted)]" : "text-[var(--primary-light)]"
+                      index === 1 ? "text-[var(--text-muted)]" : "text-white/70"
+                    }`}
+                  >
+                    from{" "}
+                  </span>
+                  <span className="text-3xl font-bold">${pkg.price.toLocaleString()}</span>
+                  <span
+                    className={`text-sm ${
+                      index === 1 ? "text-[var(--text-muted)]" : "text-white/70"
                     }`}
                   >
                     /person
@@ -230,7 +237,7 @@ export default function ZanzibarPage() {
                     <li
                       key={i}
                       className={`text-sm flex items-center gap-2 ${
-                        index === 1 ? "text-[var(--text-muted)]" : "text-[var(--primary-light)]"
+                        index === 1 ? "text-[var(--text-muted)]" : "text-white/70"
                       }`}
                     >
                       <span className="text-[var(--secondary)]">✓</span> {highlight}
@@ -250,7 +257,7 @@ export default function ZanzibarPage() {
               </div>
             ))}
           </div>
-          <p className="text-center mt-8 text-[var(--primary-light)] text-sm">
+          <p className="text-center mt-8 text-white/70 text-sm">
             All packages can be customized. Prices based on double occupancy,
             mid-range accommodation.
           </p>
