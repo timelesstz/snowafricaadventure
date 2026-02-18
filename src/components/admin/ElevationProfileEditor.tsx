@@ -141,8 +141,23 @@ export default function ElevationProfileEditor({
   }
 
   function generateFromItinerary() {
-    if (!itinerary || itinerary.length === 0) return;
-    const extracted = extractFromItinerary(itinerary);
+    // Read live itinerary state from the form's hidden input (syncs with ItineraryEditor)
+    let source: ItineraryDay[] | null = null;
+    const hiddenInput = document.querySelector<HTMLInputElement>(
+      'input[type="hidden"][name="itinerary"]'
+    );
+    if (hiddenInput?.value) {
+      try {
+        source = JSON.parse(hiddenInput.value);
+      } catch {
+        source = null;
+      }
+    }
+    // Fall back to the server-provided prop
+    if (!source || source.length === 0) source = itinerary || null;
+    if (!source || source.length === 0) return;
+
+    const extracted = extractFromItinerary(source);
     if (extracted.length > 0) setPoints(extracted);
   }
 
@@ -257,18 +272,6 @@ export default function ElevationProfileEditor({
         </div>
       )}
 
-      {/* Auto-Generate Button */}
-      {itinerary && itinerary.length > 0 && points.length === 0 && (
-        <button
-          type="button"
-          onClick={generateFromItinerary}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 text-sm font-medium transition-colors"
-        >
-          <Sparkles className="w-4 h-4" />
-          Generate from Itinerary
-        </button>
-      )}
-
       {/* Points Table */}
       {points.length > 0 && (
         <div className="space-y-2">
@@ -381,16 +384,14 @@ export default function ElevationProfileEditor({
           Add Point
         </button>
 
-        {itinerary && itinerary.length > 0 && points.length > 0 && (
-          <button
-            type="button"
-            onClick={generateFromItinerary}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 text-sm font-medium transition-colors"
-          >
-            <Sparkles className="w-4 h-4" />
-            Regenerate from Itinerary
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={generateFromItinerary}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 text-sm font-medium transition-colors"
+        >
+          <Sparkles className="w-4 h-4" />
+          {points.length > 0 ? "Sync from Itinerary" : "Generate from Itinerary"}
+        </button>
 
         {points.length > 0 && (
           <span className="text-xs text-slate-500 ml-auto">
