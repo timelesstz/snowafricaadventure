@@ -2,7 +2,10 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { AdminSessionProvider } from "@/components/admin/AdminSessionProvider";
+import AdminPWA from "@/components/admin/AdminPWA";
 import { AdminRole } from "@prisma/client";
+
+import type { Viewport } from "next";
 
 export const metadata = {
   title: "Admin Dashboard",
@@ -10,6 +13,16 @@ export const metadata = {
     index: false,
     follow: false,
   },
+  manifest: "/admin/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent" as const,
+    title: "SA Admin",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1e293b",
 };
 
 export default async function AdminLayout({
@@ -38,6 +51,7 @@ export default async function AdminLayout({
         <main className="lg:pl-64 pt-16 lg:pt-0">
           <div className="p-6">{children}</div>
         </main>
+        <AdminPWA />
       </div>
     </AdminSessionProvider>
   );
