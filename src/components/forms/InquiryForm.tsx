@@ -78,7 +78,7 @@ export function InquiryForm({
           ...data,
           referralSource,
           relatedTo,
-          type: tripType || "general",
+          type: tripType || "contact",
           inviteFriends: validInvites.length > 0 ? validInvites : undefined,
         }),
       });

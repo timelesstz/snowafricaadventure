@@ -110,20 +110,24 @@ export async function POST(request: NextRequest) {
       nationality: inquiry.nationality || undefined,
     };
 
-    // Send confirmation emails (don't block response on email sending)
-    sendInquiryReceivedEmails(emailData).catch((error) => {
-      console.error("Failed to send inquiry emails:", error);
-    });
+    // Send confirmation emails and create notification
+    // Must await to prevent Vercel serverless from terminating before completion
+    const [emailResult, notifResult] = await Promise.allSettled([
+      sendInquiryReceivedEmails(emailData),
+      InquiryNotifications.newInquiry({
+        inquiryId: inquiry.id,
+        fullName: inquiry.fullName,
+        type: inquiry.type,
+        tripType: inquiry.tripType || undefined,
+      }),
+    ]);
 
-    // Create admin notification (don't block response)
-    InquiryNotifications.newInquiry({
-      inquiryId: inquiry.id,
-      fullName: inquiry.fullName,
-      type: inquiry.type,
-      tripType: inquiry.tripType || undefined,
-    }).catch((error) => {
-      console.error("Failed to create inquiry notification:", error);
-    });
+    if (emailResult.status === "rejected") {
+      console.error("Failed to send inquiry emails:", emailResult.reason);
+    }
+    if (notifResult.status === "rejected") {
+      console.error("Failed to create inquiry notification:", notifResult.reason);
+    }
 
     return NextResponse.json(
       {

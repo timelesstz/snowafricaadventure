@@ -166,20 +166,24 @@ export async function POST(request: NextRequest) {
       })),
     };
 
-    // Send confirmation emails (don't block response)
-    sendBookingInquiryEmails(emailData).catch((error) => {
-      console.error("Failed to send booking emails:", error);
-    });
+    // Send confirmation emails and create notification
+    // Must await to prevent Vercel serverless from terminating before completion
+    const [emailResult, notifResult] = await Promise.allSettled([
+      sendBookingInquiryEmails(emailData),
+      BookingNotifications.newBooking({
+        bookingId: booking.id,
+        leadName: booking.leadName,
+        routeTitle: departure.route.title,
+        totalPrice,
+      }),
+    ]);
 
-    // Create admin notification (don't block response)
-    BookingNotifications.newBooking({
-      bookingId: booking.id,
-      leadName: booking.leadName,
-      routeTitle: departure.route.title,
-      totalPrice,
-    }).catch((error) => {
-      console.error("Failed to create booking notification:", error);
-    });
+    if (emailResult.status === "rejected") {
+      console.error("Failed to send booking emails:", emailResult.reason);
+    }
+    if (notifResult.status === "rejected") {
+      console.error("Failed to create booking notification:", notifResult.reason);
+    }
 
     return NextResponse.json(
       {

@@ -8,15 +8,20 @@ const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "info@snowafricaadv
 
 // Lazy initialize SMTP transporter
 let transporter: nodemailer.Transporter | null = null;
+let smtpVerified = false;
+
+function resolveSmtpHost(raw: string): string {
+  // If already a full mail host (mail.xxx) or IP/port, use as-is
+  if (!raw || raw.startsWith("mail.") || raw.includes(":")) {
+    return raw;
+  }
+  // For cPanel, prepend 'mail.' to the domain
+  return `mail.${raw}`;
+}
 
 function getTransporter(): nodemailer.Transporter {
   if (!transporter) {
-    // For cPanel, prepend 'mail.' if not already present
-    let host = process.env.SMTP_HOST || "";
-    if (host && !host.startsWith("mail.") && !host.includes(":")) {
-      host = `mail.${host}`;
-    }
-
+    const host = resolveSmtpHost(process.env.SMTP_HOST || "");
     const port = parseInt(process.env.SMTP_PORT || "465");
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
@@ -88,13 +93,19 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
 
     const transport = getTransporter();
 
-    // Verify connection before sending (only in development)
-    if (process.env.NODE_ENV === "development") {
+    // Verify SMTP connection on first use (in all environments)
+    if (!smtpVerified) {
       try {
         await transport.verify();
+        smtpVerified = true;
         console.log("[Email] SMTP connection verified successfully");
       } catch (verifyError) {
-        console.error("[Email] SMTP verification failed:", verifyError);
+        // Reset transporter so next attempt creates a fresh connection
+        transporter = null;
+        smtpVerified = false;
+        const verifyMsg = verifyError instanceof Error ? verifyError.message : "Unknown verification error";
+        console.error("[Email] SMTP verification failed:", verifyMsg);
+        throw new Error(`SMTP connection failed: ${verifyMsg}`);
       }
     }
 
@@ -118,6 +129,12 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     console.error("[Email] Send failed:", errorMessage);
     console.error("[Email] Full error:", error);
+
+    // Reset transporter on connection errors so next attempt retries fresh
+    if (errorMessage.includes("ECONNREFUSED") || errorMessage.includes("ETIMEDOUT") || errorMessage.includes("ESOCKET") || errorMessage.includes("SMTP connection failed")) {
+      transporter = null;
+      smtpVerified = false;
+    }
 
     // Update log to failed
     if (logResult.logId) {
@@ -150,10 +167,7 @@ export async function sendAdminNotification(
  */
 export async function verifySmtpConnection(): Promise<{ success: boolean; error?: string; config?: object }> {
   try {
-    let host = process.env.SMTP_HOST || "";
-    if (host && !host.startsWith("mail.") && !host.includes(":")) {
-      host = `mail.${host}`;
-    }
+    const host = resolveSmtpHost(process.env.SMTP_HOST || "");
 
     const config = {
       host,

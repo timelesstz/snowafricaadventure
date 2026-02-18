@@ -116,6 +116,10 @@ export async function sendInquiryReceivedEmails(
     group: "Group Departure",
     custom: "Custom Trip",
     contact: "Contact",
+    general: "Contact",
+    "tailor-made": "Tailor-Made Safari",
+    zanzibar: "Zanzibar",
+    "Wildlife Safari": "Safari",
   };
 
   const [customerResult, adminResult] = await Promise.all([

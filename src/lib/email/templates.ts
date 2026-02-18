@@ -305,10 +305,17 @@ export function inquiryReceived(data: InquiryEmailData): string {
     group: "Group Departure",
     custom: "Custom Trip",
     contact: "General Inquiry",
+    general: "General Inquiry",
+    "tailor-made": "Tailor-Made Safari",
+    zanzibar: "Zanzibar Beach Holiday",
+    "Wildlife Safari": "Wildlife Safari",
     Kilimanjaro: "Kilimanjaro Trekking",
     Safari: "Safari Adventure",
     Zanzibar: "Zanzibar Beach Holiday",
     "Day Trip": "Day Trip Experience",
+    "Zanzibar Beach": "Zanzibar Beach Holiday",
+    "Wildlife Safari + Zanzibar Beach": "Safari & Zanzibar",
+    Customized: "Tailor-Made Safari",
   };
 
   const tripLabel = data.tripType ? typeLabels[data.tripType] || data.tripType : typeLabels[data.type] || data.type;
@@ -786,6 +793,10 @@ export function adminNewInquiry(data: InquiryEmailData): string {
     group: "Group Departure",
     custom: "Custom Trip",
     contact: "General Inquiry",
+    general: "General Inquiry",
+    "tailor-made": "Tailor-Made Safari",
+    zanzibar: "Zanzibar",
+    "Wildlife Safari": "Wildlife Safari",
   };
 
   return baseLayout(`
