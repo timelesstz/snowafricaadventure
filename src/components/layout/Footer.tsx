@@ -157,7 +157,7 @@ export function Footer() {
                   href={SITE_CONFIG.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-4 w-4" />
@@ -166,7 +166,7 @@ export function Footer() {
                   href={SITE_CONFIG.social.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
                   aria-label="Twitter"
                 >
                   <Twitter className="h-4 w-4" />
@@ -175,7 +175,7 @@ export function Footer() {
                   href={SITE_CONFIG.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-4 w-4" />
@@ -184,7 +184,7 @@ export function Footer() {
                   href={SITE_CONFIG.social.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
+                  className="w-11 h-11 bg-[var(--primary)] hover:bg-[var(--secondary)] rounded-full flex items-center justify-center transition-colors"
                   aria-label="YouTube"
                 >
                   <Youtube className="h-4 w-4" />
@@ -220,7 +220,7 @@ export function Footer() {
               >
                 Terms & Conditions
               </Link>
-              <span>|</span>
+              <span className="hidden md:inline">|</span>
               <Link href="/blog/" className="hover:text-white transition-colors">
                 Blog
               </Link>

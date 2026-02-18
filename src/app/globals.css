@@ -651,7 +651,7 @@ img {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--secondary);
+  color: #b45309;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
@@ -700,7 +700,7 @@ img {
   align-items: center;
   gap: 0.5rem;
   background: var(--secondary);
-  color: white;
+  color: #1e293b;
   padding: 0.5rem 1.25rem;
   border-radius: 9999px;
   font-size: 0.875rem;
@@ -736,6 +736,28 @@ img {
   flex-wrap: wrap;
 }
 
+.tripadvisor-coe {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.tripadvisor-coe .TA_certificateOfExcellence {
+  display: inline-block;
+}
+
+.tripadvisor-coe .TA_links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tripadvisor-coe .widCOEImg {
+  height: 100px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
 .hero-stats-bar {
   position: absolute;
   bottom: 0;
@@ -750,7 +772,8 @@ img {
 .hero-stats-grid {
   display: flex;
   justify-content: center;
-  gap: 4rem;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .hero-stat {
@@ -957,7 +980,7 @@ img {
   border: 1px solid var(--border);
 }
 
-.about-registration h4 {
+.about-registration h3 {
   font-family: var(--font-heading), system-ui, sans-serif;
   font-size: 1rem;
   color: var(--text);
@@ -1024,7 +1047,7 @@ img {
 
 .tripadvisor-text {
   font-size: 0.75rem;
-  color: #00af87;
+  color: #007f60;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1077,7 +1100,6 @@ img {
 .kili-section {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  min-height: 100vh;
 }
 
 .kili-content {
@@ -1391,7 +1413,7 @@ img {
   justify-content: center;
 }
 
-.safari-item h4 {
+.safari-item h3 {
   font-size: 1rem;
   margin-bottom: 0.25rem;
   color: var(--text);
@@ -1438,7 +1460,6 @@ img {
 .why-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 80vh;
 }
 
 .why-image {
@@ -1489,7 +1510,7 @@ img {
   color: white;
 }
 
-.why-item h4 {
+.why-item h3 {
   color: white;
   margin-bottom: 0.25rem;
 }
@@ -1616,8 +1637,8 @@ img {
 
 @media (max-width: 1024px) {
   .testimonials-list {
-    grid-template-columns: 1fr;
-    gap: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 
   .testimonial-minimal {
@@ -1631,6 +1652,11 @@ img {
 }
 
 @media (max-width: 768px) {
+  .testimonials-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
   .testimonials-minimal {
     padding: 3rem 0;
   }
@@ -1722,7 +1748,7 @@ img {
   padding: 1.5rem;
 }
 
-.destination-card h4 {
+.destination-card h3 {
   color: white;
   font-size: 1.25rem;
   margin-bottom: 0.25rem;
@@ -1739,11 +1765,12 @@ img {
 .contact-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
+  overflow: hidden;
 }
 
 .contact-image {
   position: relative;
+  overflow: hidden;
 }
 
 .contact-image-overlay {
@@ -1931,14 +1958,14 @@ img {
   padding: 1.5rem;
 }
 
-.blog-card-home h4 {
+.blog-card-home h3 {
   margin-bottom: 0.5rem;
   transition: color 0.2s ease;
   color: var(--text);
   font-size: 1.125rem;
 }
 
-.blog-card-home:hover h4 {
+.blog-card-home:hover h3 {
   color: var(--secondary);
 }
 
@@ -1959,7 +1986,14 @@ img {
   }
 
   .kili-cards {
-    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    max-height: 280px;
+    overflow: hidden;
+  }
+
+  .kili-cards .route-card.featured {
+    grid-column: span 1;
+    aspect-ratio: 4/3;
   }
 
   .kili-content {
@@ -1972,8 +2006,9 @@ img {
   }
 
   .testimonials-grid,
+  .testimonials-list,
   .blog-grid-home {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .destinations-bento {
@@ -1993,54 +2028,129 @@ img {
     text-align: center;
   }
 
+  .why-section {
+    min-height: auto;
+  }
+
   .why-image {
-    min-height: 50vh;
+    min-height: 40vh;
+  }
+
+  .contact-section {
+    min-height: auto;
   }
 
   .contact-image {
-    min-height: 50vh;
+    min-height: 40vh;
   }
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    height: 100svh;
+  }
+
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 0.375rem 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero-ctas {
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .hero-stats-bar {
+    padding: 1.25rem 0;
   }
 
   .hero-stats-grid {
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
+    justify-content: space-around;
   }
 
   .hero-stat-value {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  .hero-stat-label {
+    font-size: 0.625rem;
   }
 
   .hero-scroll {
     display: none;
   }
 
+  .kili-section {
+    min-height: auto;
+  }
+
+  .kili-cards {
+    display: none;
+  }
+
   .kili-content,
-  .why-content,
+  .why-content {
+    padding: 2rem 1.25rem;
+  }
+
   .contact-form-side,
   .contact-image-overlay {
-    padding: 2rem;
+    padding: 2rem 1.25rem;
   }
 
   .kili-content h2,
   .why-content h2,
   .contact-image-overlay h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  .why-section {
+    min-height: auto;
+  }
+
+  .why-image {
+    min-height: 30vh;
+  }
+
+  .why-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .why-us-list {
+    gap: 1.5rem;
   }
 
   .magazine-header {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .magazine-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .safari-section {
+    padding: 3rem 0;
   }
 
   .safari-item {
@@ -2049,7 +2159,21 @@ img {
 
   .safari-item-image {
     width: 100%;
-    height: 160px;
+    height: 140px;
+  }
+
+  .safari-cta-banner {
+    padding: 2rem 1.5rem;
+  }
+
+  .safari-cta-banner h3 {
+    font-size: 1.25rem;
+  }
+
+  .testimonials-grid,
+  .testimonials-list,
+  .blog-grid-home {
+    grid-template-columns: 1fr;
   }
 
   .testimonial-featured {
@@ -2060,8 +2184,17 @@ img {
     font-size: 1.125rem;
   }
 
+  .destinations-section {
+    padding: 3rem 0;
+  }
+
+  .destinations-header h2 {
+    font-size: 1.75rem;
+  }
+
   .destinations-bento {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .destination-card.wide {
@@ -2069,8 +2202,159 @@ img {
     aspect-ratio: 16/9;
   }
 
+  .destination-card {
+    aspect-ratio: 16/9;
+  }
+
   .btn {
     padding: 0.875rem 1.5rem;
     font-size: 0.9rem;
+  }
+
+  .contact-section {
+    min-height: auto;
+  }
+
+  .contact-image {
+    min-height: auto;
+  }
+
+  .contact-image-overlay {
+    position: relative;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .contact-form-side {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .contact-image-overlay h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-image-overlay > p {
+    max-width: 100%;
+    font-size: 0.9375rem;
+  }
+
+  .contact-steps {
+    margin-bottom: 2rem;
+  }
+
+  .contact-step {
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Blog content mobile */
+  .blog-content .pull-quote {
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    font-size: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content blockquote {
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    font-size: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content h2:not(.numbered-heading) {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .blog-content h3:not(.numbered-heading) {
+    font-size: 1.25rem;
+  }
+
+  /* About intro mobile */
+  .about-intro-section {
+    padding: 3rem 0;
+  }
+
+  .about-intro-content h2 {
+    font-size: 1.75rem;
+  }
+
+  .about-intro-lead {
+    font-size: 1rem;
+  }
+
+  .blog-section-home {
+    padding: 3rem 0;
+  }
+
+  .blog-section-home .magazine-header h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Route items mobile */
+  .route-item-meta {
+    gap: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .departures-cta {
+    padding: 1.5rem;
+  }
+
+  .departures-cta h3 {
+    font-size: 1.125rem;
+  }
+}
+
+/* ============================================
+   EXTRA SMALL SCREENS (< 480px)
+   ============================================ */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-content {
+    padding: 0 1rem;
+  }
+
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .hero-stat-value {
+    font-size: 1.5rem;
+  }
+
+  .trust-badges-grid {
+    gap: 0.5rem;
+  }
+
+  .trust-badge {
+    padding: 0.375rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .trust-badge-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .trust-badge-value {
+    font-size: 0.875rem;
+  }
+
+  .safari-main-overlay {
+    padding: 1.5rem;
+  }
+
+  .safari-main h3 {
+    font-size: 1.25rem;
+  }
+
+  .section-label {
+    font-size: 0.6875rem;
+    margin-bottom: 1rem;
   }
 }

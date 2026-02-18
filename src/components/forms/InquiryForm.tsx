@@ -302,7 +302,8 @@ export function InquiryForm({
           <div className="flex gap-2">
             <select
               name="phonePrefix"
-              className="w-[100px] px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
+              aria-label="Phone country code"
+              className="w-[90px] sm:w-[100px] px-1.5 sm:px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
             >
               {PHONE_PREFIXES.map((prefix) => (
                 <option key={prefix.code} value={prefix.code}>
@@ -321,7 +322,7 @@ export function InquiryForm({
         </div>
 
         {/* Row 4: Travelers + Arrival Date (side by side) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {/* Adults */}
           <div>
             <label

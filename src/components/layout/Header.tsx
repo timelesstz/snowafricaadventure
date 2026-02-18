@@ -22,17 +22,19 @@ export function Header() {
             <div className="flex items-center gap-4">
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-1 hover:text-[var(--secondary)] transition-colors"
+                className="flex items-center gap-1.5 hover:text-[var(--secondary)] transition-colors"
+                aria-label={`Call us: ${SITE_CONFIG.phone}`}
               >
-                <Phone className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">{SITE_CONFIG.phone}</span>
+                <Phone className="h-4 w-4" />
+                <span className="text-xs sm:text-sm">{SITE_CONFIG.phone}</span>
               </a>
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="flex items-center gap-1 hover:text-[var(--secondary)] transition-colors"
+                className="hidden sm:flex items-center gap-1.5 hover:text-[var(--secondary)] transition-colors"
+                aria-label={`Email us: ${SITE_CONFIG.email}`}
               >
-                <Mail className="h-3.5 w-3.5" />
-                <span className="hidden md:inline">{SITE_CONFIG.email}</span>
+                <Mail className="h-4 w-4" />
+                <span className="hidden md:inline text-sm">{SITE_CONFIG.email}</span>
               </a>
             </div>
 
@@ -115,7 +117,7 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[var(--text)]"
+              className="lg:hidden p-2.5 text-[var(--text)] -mr-2.5"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
