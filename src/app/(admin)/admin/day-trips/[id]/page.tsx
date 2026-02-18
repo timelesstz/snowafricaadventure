@@ -286,6 +286,7 @@ export default async function DayTripEditPage({
                 folder="daytrips"
                 label="Featured Image"
                 helpText="Main image shown in listings"
+                deleteFromR2
               />
 
               <GalleryUploadField
@@ -295,6 +296,7 @@ export default async function DayTripEditPage({
                 label="Photo Gallery"
                 helpText="Additional photos"
                 maxImages={10}
+                deleteFromR2
               />
             </div>
 

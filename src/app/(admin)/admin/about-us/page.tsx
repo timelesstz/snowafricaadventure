@@ -11,6 +11,8 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   "about.hero.title": "About Snow Africa Adventure",
   "about.hero.subtitle": "Snow Africa Adventure was founded by Florent and Caroline, a passionate husband-and-wife team who share a deep love for Tanzania's wildlife, culture, and natural wonders.",
   "about.hero.image": "",
+  "about.hero.imagePositionX": "50",
+  "about.hero.imagePositionY": "50",
 
   // Our Story
   "about.story.title": "Our Story",
@@ -191,15 +193,134 @@ export default function AboutUsSettingsPage() {
               </div>
             </div>
 
-            <ImageUploadField
-              name="about.hero.image"
-              value={settings["about.hero.image"]}
-              onChange={(url) => handleChange("about.hero.image", url)}
-              folder="about"
-              label="Hero Background Image"
-              helpText="Recommended: 1920x800px. Leave empty for gradient background."
-              previewSize="lg"
-            />
+            <div className="space-y-4">
+              <ImageUploadField
+                name="about.hero.image"
+                value={settings["about.hero.image"]}
+                onChange={(url) => handleChange("about.hero.image", url)}
+                folder="about"
+                label="Hero Background Image"
+                helpText="Recommended: 1920x800px. Leave empty for gradient background."
+                previewSize="lg"
+                deleteFromR2
+              />
+
+              {settings["about.hero.image"] && (
+                <>
+                  {/* Live Preview with focal point */}
+                  <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm">
+                    <div className="bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 border-b flex items-center justify-between">
+                      <span>Hero Preview</span>
+                      <span className="text-xs text-slate-400">
+                        Click image to set focal point ({settings["about.hero.imagePositionX"]}%, {settings["about.hero.imagePositionY"]}%)
+                      </span>
+                    </div>
+                    <div
+                      className="relative overflow-hidden cursor-crosshair"
+                      style={{ height: "200px" }}
+                      onClick={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+                        const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+                        handleChange("about.hero.imagePositionX", String(x));
+                        handleChange("about.hero.imagePositionY", String(y));
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={settings["about.hero.image"]}
+                        alt="Hero preview"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ objectPosition: `${settings["about.hero.imagePositionX"]}% ${settings["about.hero.imagePositionY"]}%` }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+                      {/* Focal point indicator */}
+                      <div
+                        className="absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20"
+                        style={{ left: `${settings["about.hero.imagePositionX"]}%`, top: `${settings["about.hero.imagePositionY"]}%` }}
+                      >
+                        <div className="absolute inset-0 rounded-full border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,0.3)]" />
+                        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white -translate-x-1/2 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
+                        <div className="absolute top-1/2 left-0 right-0 h-px bg-white -translate-y-1/2 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
+                      </div>
+                      {/* Preview text overlay */}
+                      <div className="absolute inset-0 flex items-center p-6 z-10 pointer-events-none">
+                        <div className="max-w-xs">
+                          <h3 className="text-lg font-bold text-white leading-tight">
+                            {settings["about.hero.title"] || "Hero Title"}
+                          </h3>
+                          {settings["about.hero.subtitle"] && (
+                            <p className="text-white/70 text-xs mt-1 line-clamp-2">
+                              {settings["about.hero.subtitle"]}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Focal Point Sliders */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <label className="block text-sm font-medium text-slate-700 mb-3">
+                      Image Focal Point
+                    </label>
+                    <p className="text-xs text-slate-500 mb-3">
+                      Click the preview above or drag the sliders to reposition the image.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1">
+                          Horizontal: {settings["about.hero.imagePositionX"]}%
+                        </label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={settings["about.hero.imagePositionX"]}
+                          onChange={(e) => handleChange("about.hero.imagePositionX", e.target.value)}
+                          title="Horizontal focal point position"
+                          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                        />
+                        <div className="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                          <span>Left</span>
+                          <span>Center</span>
+                          <span>Right</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1">
+                          Vertical: {settings["about.hero.imagePositionY"]}%
+                        </label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={settings["about.hero.imagePositionY"]}
+                          onChange={(e) => handleChange("about.hero.imagePositionY", e.target.value)}
+                          title="Vertical focal point position"
+                          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                        />
+                        <div className="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                          <span>Top</span>
+                          <span>Center</span>
+                          <span>Bottom</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleChange("about.hero.imagePositionX", "50");
+                        handleChange("about.hero.imagePositionY", "50");
+                      }}
+                      className="mt-3 text-xs text-amber-600 hover:text-amber-700 font-medium"
+                    >
+                      Reset to center
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -250,6 +371,7 @@ export default function AboutUsSettingsPage() {
               label="Story Section Image"
               helpText="Image shown alongside the story text. Recommended: 800x600px."
               previewSize="lg"
+              deleteFromR2
             />
           </div>
         </div>
@@ -301,6 +423,7 @@ export default function AboutUsSettingsPage() {
               label="Services Section Image"
               helpText="Featured image for this section. Recommended: 600x800px (portrait)."
               previewSize="lg"
+              deleteFromR2
             />
           </div>
 
@@ -377,6 +500,7 @@ export default function AboutUsSettingsPage() {
               label="Commitment Section Image"
               helpText="Image showing porters or community work. Recommended: 800x600px."
               previewSize="lg"
+              deleteFromR2
             />
           </div>
 
@@ -399,6 +523,7 @@ export default function AboutUsSettingsPage() {
                   label={`Logo ${i}`}
                   helpText="PNG with transparency recommended"
                   previewSize="sm"
+                  deleteFromR2
                 />
               ))}
             </div>
@@ -455,6 +580,7 @@ export default function AboutUsSettingsPage() {
                   label="Photo"
                   helpText="Square photo recommended (400x400px)"
                   previewSize="sm"
+                  deleteFromR2
                 />
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -491,6 +617,7 @@ export default function AboutUsSettingsPage() {
                   label="Photo"
                   helpText="Square photo recommended (400x400px)"
                   previewSize="sm"
+                  deleteFromR2
                 />
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">

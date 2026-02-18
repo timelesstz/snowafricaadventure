@@ -441,13 +441,12 @@ export default async function TrekkingPage() {
               <li>Emergency oxygen and first aid kit</li>
               <li>Airport transfers and hotel accommodation</li>
               <li>Pulse oximeters for altitude monitoring</li>
-              <li>Satellite phone for emergencies</li>
             </ul>
 
             <h3>Our Safety Standards</h3>
             <p>
               Safety is our top priority. All our guides are trained in wilderness first aid and
-              carry emergency oxygen, pulse oximeters, and satellite phones. We follow strict
+              carry emergency oxygen and pulse oximeters. We follow strict
               acclimatization protocols and maintain a guide-to-climber ratio that ensures
               personalized attention.
             </p>

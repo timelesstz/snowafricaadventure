@@ -60,7 +60,7 @@ const faqs = [
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept bank transfers, credit cards (Visa/Mastercard), and mobile money (M-Pesa). A 30% deposit secures your booking.",
+    answer: "We accept bank transfers, credit cards (Visa/Mastercard), and mobile money (M-Pesa). A 30% deposit secures your booking for all safaris and a 10% deposit secures your booking for all Kilimanjaro/trekking routes.",
   },
 ];
 

@@ -43,7 +43,7 @@ export default function TermsPage() {
             </p>
             <ul>
               <li>
-                Kilimanjaro climbs: 30% deposit required at booking, balance due
+                Kilimanjaro climbs: 10% deposit required at booking, balance due
                 30 days before departure
               </li>
               <li>

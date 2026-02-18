@@ -18,6 +18,8 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   "about.hero.subtitle":
     "Snow Africa Adventure was founded by Florent and Caroline, a passionate husband-and-wife team who share a deep love for Tanzania's wildlife, culture, and natural wonders.",
   "about.hero.image": "",
+  "about.hero.imagePositionX": "50",
+  "about.hero.imagePositionY": "50",
   "about.story.title": "Our Story",
   "about.story.content":
     "Snow Africa Adventure was founded by Florent and Caroline, a passionate husband-and-wife team who share a deep love for Tanzania's wildlife, culture, and natural wonders. Florent began his career working with established safari companies, gaining hands-on experience and in-depth knowledge of the land. Together, he and Caroline have nurtured Snow Africa Adventure into a leading specialist for safaris, mountain treks, and cultural encounters.",
@@ -135,6 +137,7 @@ export default async function AboutPage() {
               alt="About Snow Africa Adventure"
               fill
               className="object-cover"
+              style={{ objectPosition: `${s["about.hero.imagePositionX"] || "50"}% ${s["about.hero.imagePositionY"] || "50"}%` }}
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />

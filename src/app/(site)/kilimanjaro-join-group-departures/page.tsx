@@ -131,7 +131,7 @@ export default async function GroupDeparturesPage() {
     {
       question: "What is the deposit and payment schedule?",
       answer:
-        "A 10% deposit secures your spot. The remaining balance is due 60 days before your departure date.",
+        "A 10% deposit secures your spot. The remaining balance is due 2 weeks before your departure date.",
     },
     {
       question: "What happens if a departure doesn't reach minimum numbers?",
@@ -193,7 +193,7 @@ export default async function GroupDeparturesPage() {
               </div>
               <h3 className="font-semibold mb-2">Book Your Spot</h3>
               <p className="text-sm text-[var(--text-muted)]">
-                Secure your place with a deposit. Full payment due 60 days before
+                Secure your place with a deposit. Full payment due 2 weeks before arrival
               </p>
             </div>
             <div className="text-center">
@@ -217,7 +217,7 @@ export default async function GroupDeparturesPage() {
           </h2>
           <div className="max-w-2xl mx-auto">
             <blockquote className="text-xl italic mb-4">
-              &quot;An incredible experience! The group was amazing and our guides
+              &quot;An incredible experience! The Crew was amazing and our guides
               made sure everyone reached the summit safely. Highly recommend the
               Lemosho route.&quot;
             </blockquote>
@@ -265,19 +265,19 @@ export default async function GroupDeparturesPage() {
             Route Comparison
           </h2>
           <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-lg overflow-hidden shadow">
+            <table className="w-full bg-white rounded-lg overflow-hidden shadow text-sm">
               <thead>
                 <tr className="bg-[var(--primary-dark)] text-white">
-                  <th className="p-4 text-left">Route</th>
-                  <th className="p-4 text-left">Duration</th>
-                  <th className="p-4 text-left">Difficulty</th>
-                  <th className="p-4 text-left">Success Rate</th>
-                  <th className="p-4 text-left">Price (PP)</th>
+                  <th className="px-3 py-2 text-left">Route</th>
+                  <th className="px-3 py-2 text-left">Duration</th>
+                  <th className="px-3 py-2 text-left">Difficulty</th>
+                  <th className="px-3 py-2 text-left">Success Rate</th>
+                  <th className="px-3 py-2 text-left">Price (PP)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b">
-                  <td className="p-4 font-medium">
+                  <td className="px-3 py-2 font-medium">
                     <Link
                       href="/trekking/8-days-lemosho-route/"
                       className="text-[var(--primary)] hover:underline"
@@ -285,13 +285,13 @@ export default async function GroupDeparturesPage() {
                       8-Day Lemosho
                     </Link>
                   </td>
-                  <td className="p-4">8 Days</td>
-                  <td className="p-4">Moderate</td>
-                  <td className="p-4 text-[var(--primary)] font-semibold">95%</td>
-                  <td className="p-4 font-semibold">$2,680</td>
+                  <td className="px-3 py-2">8 Days</td>
+                  <td className="px-3 py-2">Moderate</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%</td>
+                  <td className="px-3 py-2 font-semibold">$2,680</td>
                 </tr>
                 <tr className="border-b bg-[var(--surface)]">
-                  <td className="p-4 font-medium">
+                  <td className="px-3 py-2 font-medium">
                     <Link
                       href="/trekking/7-days-machame-route/"
                       className="text-[var(--primary)] hover:underline"
@@ -299,13 +299,13 @@ export default async function GroupDeparturesPage() {
                       7-Day Machame
                     </Link>
                   </td>
-                  <td className="p-4">7 Days</td>
-                  <td className="p-4">Challenging</td>
-                  <td className="p-4 text-[var(--primary)] font-semibold">93%</td>
-                  <td className="p-4 font-semibold">$2,440</td>
+                  <td className="px-3 py-2">7 Days</td>
+                  <td className="px-3 py-2">Challenging</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">93%</td>
+                  <td className="px-3 py-2 font-semibold">$2,440</td>
                 </tr>
                 <tr>
-                  <td className="p-4 font-medium">
+                  <td className="px-3 py-2 font-medium">
                     <Link
                       href="/trekking/6-days-rongai-route/"
                       className="text-[var(--primary)] hover:underline"
@@ -313,10 +313,10 @@ export default async function GroupDeparturesPage() {
                       6-Day Rongai
                     </Link>
                   </td>
-                  <td className="p-4">6 Days</td>
-                  <td className="p-4">Moderate</td>
-                  <td className="p-4 text-[var(--primary)] font-semibold">90%</td>
-                  <td className="p-4 font-semibold">$2,390</td>
+                  <td className="px-3 py-2">6 Days</td>
+                  <td className="px-3 py-2">Moderate</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">90%</td>
+                  <td className="px-3 py-2 font-semibold">$2,390</td>
                 </tr>
               </tbody>
             </table>

@@ -83,7 +83,7 @@ export function TourOverview({
                   Ready to Go Wild?
                 </h3>
                 <p className="text-white/85 text-[15px]">
-                  Secure your spot with just a 20% deposit
+                  Secure your spot with just a 30% deposit
                 </p>
               </div>
               <Link

@@ -154,7 +154,7 @@ function InitialState() {
             <Link
               key={term}
               href={`/search?q=${encodeURIComponent(term)}`}
-              className="px-3 py-1.5 rounded-full bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--border)] transition-colors text-sm"
+              className="px-3 py-1.5 rounded-full bg-[var(--surface)] text-[var(--text)] hover:bg-border transition-colors text-sm"
             >
               {term}
             </Link>
@@ -318,7 +318,7 @@ export default function SearchPage() {
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                           !activeFilter
                             ? "bg-[var(--primary)] text-white"
-                            : "bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--border)]"
+                            : "bg-[var(--surface)] text-[var(--text)] hover:bg-border"
                         }`}
                       >
                         All ({results.totalResults})
@@ -333,7 +333,7 @@ export default function SearchPage() {
                             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                               activeFilter === type
                                 ? "bg-[var(--primary)] text-white"
-                                : "bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--border)]"
+                                : "bg-[var(--surface)] text-[var(--text)] hover:bg-border"
                             }`}
                           >
                             {config.label.split(" ")[0]} ({count})

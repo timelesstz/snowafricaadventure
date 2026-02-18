@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, Tag, ChevronRight, Mountain, MapPin, BookOpen } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { generateMetadata as genMeta, generateArticleSchema } from "@/lib/seo";
-import { formatDate } from "@/lib/utils";
+import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 import { processContent, generateTableOfContents } from "@/lib/content-processor";
 import { BlogContentClient } from "@/components/blog/BlogContentClient";
@@ -75,7 +75,7 @@ async function getPost(slug: string) {
     content: processedContent,
     rawContent: post.content,
     author: post.author || "Snow Africa Team",
-    featuredImage: post.featuredImage,
+    featuredImage: normalizeImageUrl(post.featuredImage),
     publishedAt: post.publishedAt?.toISOString().split("T")[0] || new Date().toISOString().split("T")[0],
     readingTime: calculateReadingTime(post.content),
     tableOfContents,
@@ -161,7 +161,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     excerpt: p.excerpt || "",
     author: p.author || "Snow Africa Team",
     publishedAt: p.publishedAt?.toISOString().split("T")[0] || "",
-    featuredImage: p.featuredImage,
+    featuredImage: normalizeImageUrl(p.featuredImage),
   }));
 
   return (
@@ -186,17 +186,13 @@ export default async function BlogPostPage({ params }: PageProps) {
       <section className="relative">
         {/* Featured Image Background */}
         <div className="relative h-[40vh] min-h-[400px] md:h-[50vh] lg:h-[60vh]">
-          {post.featuredImage ? (
-            <Image
-              src={post.featuredImage}
+          <Image
+              src={post.featuredImage || getCategoryFallbackImage(post.categories)}
               alt={post.title}
               fill
               className="object-cover"
               priority
             />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary-dark)] via-[var(--primary)] to-[var(--text)]" />
-          )}
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
@@ -288,7 +284,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {post.tags.map((tag) => (
                       <span
                         key={tag.slug}
-                        className="text-sm bg-[var(--muted)] text-[var(--text-muted)] px-4 py-2 rounded-full hover:bg-[var(--border)] transition-colors"
+                        className="text-sm bg-[var(--muted)] text-[var(--text-muted)] px-4 py-2 rounded-full hover:bg-border transition-colors"
                       >
                         #{tag.name}
                       </span>

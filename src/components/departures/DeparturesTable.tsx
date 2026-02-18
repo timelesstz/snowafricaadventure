@@ -224,7 +224,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   isSelected
                     ? "bg-[var(--secondary)] text-white shadow-sm"
-                    : "bg-[var(--surface)] text-[var(--text-muted)] hover:bg-[var(--border)] hover:text-[var(--text)]"
+                    : "bg-[var(--surface)] text-[var(--text-muted)] hover:bg-border hover:text-[var(--text)]"
                 }`}
               >
                 {MONTH_NAMES[month].slice(0, 3)}
@@ -248,7 +248,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
             aria-checked={fullMoonOnly ? "true" : "false"}
             onClick={() => setFullMoonOnly(!fullMoonOnly)}
             className={`relative w-10 h-5 rounded-full transition-colors ${
-              fullMoonOnly ? "bg-[var(--secondary)]" : "bg-[var(--border)]"
+              fullMoonOnly ? "bg-[var(--secondary)]" : "bg-border"
             }`}
           >
             <span
@@ -420,15 +420,15 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
 
           {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full text-sm">
               <thead>
                 <tr className="bg-[var(--primary-dark)] text-white">
-                  <th className="text-left p-4 font-semibold">Route</th>
-                  <th className="text-left p-4 font-semibold">Arrival Date</th>
-                  <th className="text-left p-4 font-semibold">End Date</th>
-                  <th className="text-left p-4 font-semibold">Price (USD)</th>
-                  <th className="text-left p-4 font-semibold">Availability</th>
-                  <th className="text-left p-4 font-semibold">Action</th>
+                  <th className="text-left px-3 py-2 font-semibold">Route</th>
+                  <th className="text-left px-3 py-2 font-semibold">Arrival</th>
+                  <th className="text-left px-3 py-2 font-semibold">End</th>
+                  <th className="text-left px-3 py-2 font-semibold">Price</th>
+                  <th className="text-left px-3 py-2 font-semibold">Availability</th>
+                  <th className="text-left px-3 py-2 font-semibold">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -439,7 +439,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                       index % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
                     }`}
                   >
-                    <td className="p-4">
+                    <td className="px-3 py-2">
                       <div className="font-medium">
                         {dep.isFullMoon && (
                           <span className="mr-1" title="Full Moon Climb">
@@ -454,17 +454,17 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                         </span>
                       )}
                     </td>
-                    <td className="p-4">
+                    <td className="px-3 py-2 whitespace-nowrap">
                       {format(new Date(dep.arrivalDate), "MMM d, yyyy")}
                     </td>
-                    <td className="p-4">
+                    <td className="px-3 py-2 whitespace-nowrap">
                       {format(new Date(dep.endDate), "MMM d, yyyy")}
                     </td>
-                    <td className="p-4 font-semibold text-[var(--primary-dark)]">
+                    <td className="px-3 py-2 font-semibold text-[var(--primary-dark)] whitespace-nowrap">
                       {formatPrice(dep.price)}
                     </td>
-                    <td className="p-4">
-                      <div className="flex items-center gap-2">
+                    <td className="px-3 py-2">
+                      <div className="flex items-center gap-1.5">
                         <AvailabilityBadge
                           available={dep.availableSpots}
                           total={dep.maxParticipants}
@@ -475,18 +475,18 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                         />
                       </div>
                     </td>
-                    <td className="p-4">
-                      <div className="flex items-center gap-2">
+                    <td className="px-3 py-2">
+                      <div className="flex items-center gap-1.5">
                         {dep.availableSpots > 0 ? (
                           <button
                             type="button"
                             onClick={() => onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id)}
-                            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-4 py-2 rounded font-medium text-sm transition-colors cursor-pointer"
+                            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-3 py-1.5 rounded font-medium text-xs transition-colors cursor-pointer"
                           >
                             JOIN NOW
                           </button>
                         ) : (
-                          <span className="text-[var(--text-light)] text-sm">Sold Out</span>
+                          <span className="text-[var(--text-light)] text-xs">Sold Out</span>
                         )}
                         <ShareButton
                           departure={departureToShareData(dep)}
@@ -503,27 +503,27 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
           </div>
 
           {/* Mobile Cards */}
-          <div className="md:hidden space-y-4">
+          <div className="md:hidden space-y-3">
             {filteredDepartures.map((dep) => (
               <div
                 key={dep.id}
-                className="bg-white border border-[var(--border)] rounded-lg p-4"
+                className="bg-white border border-[var(--border)] rounded-lg p-3"
               >
-                <div className="flex justify-between items-start mb-3">
+                <div className="flex justify-between items-start mb-2">
                   <div>
-                    <h3 className="font-semibold">
+                    <h3 className="font-semibold text-sm">
                       {dep.isFullMoon && (
                         <span className="mr-1">{String.fromCodePoint(0x1F315)}</span>
                       )}
                       {dep.route.name}
                     </h3>
                     {dep.isFullMoon && (
-                      <span className="text-xs text-[var(--secondary-dark)]">
+                      <span className="text-[10px] text-[var(--secondary-dark)]">
                         Full Moon Summit
                       </span>
                     )}
                   </div>
-                  <div className="flex flex-col items-end gap-1">
+                  <div className="flex flex-col items-end gap-0.5">
                     <AvailabilityBadge
                       available={dep.availableSpots}
                       total={dep.maxParticipants}
@@ -535,7 +535,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-sm text-[var(--text-muted)] mb-4">
+                <div className="grid grid-cols-2 gap-1 text-xs text-[var(--text-muted)] mb-3">
                   <div>
                     <span className="text-[var(--text-light)]">Arrival:</span>{" "}
                     {format(new Date(dep.arrivalDate), "MMM d, yyyy")}
@@ -547,20 +547,20 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-[var(--primary-dark)]">
+                  <span className="text-lg font-bold text-[var(--primary-dark)]">
                     {formatPrice(dep.price)}
                   </span>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     {dep.availableSpots > 0 ? (
                       <button
                         type="button"
                         onClick={() => onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id)}
-                        className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-4 py-2 rounded font-medium text-sm transition-colors cursor-pointer"
+                        className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-3 py-1.5 rounded font-medium text-xs transition-colors cursor-pointer"
                       >
                         JOIN NOW
                       </button>
                     ) : (
-                      <span className="text-[var(--text-light)]">Sold Out</span>
+                      <span className="text-[var(--text-light)] text-xs">Sold Out</span>
                     )}
                     <ShareButton
                       departure={departureToShareData(dep)}

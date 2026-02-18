@@ -16,6 +16,7 @@ interface GalleryUploadFieldProps {
   helpText?: string;
   maxImages?: number;
   className?: string;
+  deleteFromR2?: boolean; // When true, removing an image also deletes it from R2
 }
 
 export default function GalleryUploadField({
@@ -28,6 +29,7 @@ export default function GalleryUploadField({
   helpText,
   maxImages = 20,
   className,
+  deleteFromR2: shouldDeleteFromR2 = false,
 }: GalleryUploadFieldProps) {
   const [value, setValue] = useState(controlledValue ?? defaultValue);
   const [showUploader, setShowUploader] = useState(false);
@@ -66,8 +68,20 @@ export default function GalleryUploadField({
     setShowBrowser(false);
   };
 
-  const handleRemove = (index: number) => {
+  const handleRemove = async (index: number) => {
+    const removedUrl = value[index];
     updateValue(value.filter((_, i) => i !== index));
+    if (shouldDeleteFromR2 && removedUrl) {
+      try {
+        await fetch("/api/admin/media/delete-by-url", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: removedUrl }),
+        });
+      } catch (e) {
+        console.error("Failed to delete gallery image from R2:", e);
+      }
+    }
   };
 
   // Drag and drop reordering

@@ -455,9 +455,12 @@ export default async function TailorMadeSafariPage() {
                   How far in advance should I book?
                 </h3>
                 <p className="text-[var(--text-muted)]">
-                  We recommend 3-6 months for peak season (July-October,
+                  We recommend at least 1 month for peak season (July-October,
                   December-February) to secure the best lodges. Shorter notice
-                  is possible during shoulder seasons.
+                  is possible during shoulder seasons. We also welcome
+                  last-minute bookings — just keep in mind that accommodation
+                  options may be limited based on availability, so a degree of
+                  flexibility is recommended.
                 </p>
               </div>
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">

@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   // Experimental performance optimizations
   experimental: {
     optimizePackageImports: ["lucide-react"],
+    workerThreads: false,
   },
 
   images: {
@@ -148,6 +149,23 @@ const nextConfig: NextConfig = {
       {
         source: "/day-trips/:slug/",
         destination: "/tanzania-day-tours/:slug/",
+        permanent: true,
+      },
+
+      // Common alternate URLs → canonical routes
+      {
+        source: "/kilimanjaro-trekking/",
+        destination: "/trekking/",
+        permanent: true,
+      },
+      {
+        source: "/destinations/",
+        destination: "/tanzania-destinations/",
+        permanent: true,
+      },
+      {
+        source: "/contact/",
+        destination: "/contact-us/",
         permanent: true,
       },
 

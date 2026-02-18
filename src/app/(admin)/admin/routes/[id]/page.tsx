@@ -512,6 +512,7 @@ export default async function RouteEditPage({
                 folder="routes"
                 label="Featured Image"
                 helpText="Main image shown in listings and hero sections"
+                deleteFromR2
               />
 
               <ImageUploadField
@@ -520,6 +521,7 @@ export default async function RouteEditPage({
                 folder="routes"
                 label="Route Map Image"
                 helpText="Map showing the trekking route"
+                deleteFromR2
               />
 
               <GalleryUploadField
@@ -529,6 +531,7 @@ export default async function RouteEditPage({
                 label="Photo Gallery"
                 helpText="Additional photos for the route page"
                 maxImages={12}
+                deleteFromR2
               />
             </div>
 
@@ -598,6 +601,7 @@ export default async function RouteEditPage({
                 folder="guides"
                 label="Guide Photo"
                 helpText="Square photo works best (e.g., 200x200)"
+                deleteFromR2
               />
 
               <div>

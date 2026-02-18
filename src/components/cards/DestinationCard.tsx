@@ -26,7 +26,7 @@ export function DestinationCard({
       className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
     >
       {/* Image */}
-      <div className="relative aspect-[16/10] bg-[var(--border)]">
+      <div className="relative aspect-[16/10] bg-border">
         {featuredImage ? (
           <Image
             src={featuredImage}

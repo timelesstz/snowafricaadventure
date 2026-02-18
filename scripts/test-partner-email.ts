@@ -50,7 +50,7 @@ async function testPartnerEmail() {
       totalClimbers,
       pricePerPerson,
       totalPrice,
-      depositAmount: Math.round(totalPrice * 0.3),
+      depositAmount: Math.round(totalPrice * 0.1),
       status: "INQUIRY",
       climberDetails: [{ name: "Email Test User", nationality: "Test" }],
       source: "website",

@@ -357,6 +357,7 @@ export default async function BlogEditPage({
                 folder="blog"
                 label="Featured Image"
                 helpText="Main image shown in listings and at top of post"
+                deleteFromR2
               />
             </div>
 

@@ -373,7 +373,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
             <li className="flex gap-3">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm">{bookingResult.summary.climbers > 1 ? 4 : 3}</span>
               <div>
-                <p className="font-medium">Balance due 60 days before departure</p>
+                <p className="font-medium">Balance due 2 weeks before arrival</p>
                 <p className="text-sm text-[var(--text-muted)]">
                   Remaining {formatPrice(bookingResult.summary.totalPrice - bookingResult.summary.depositAmount)} due before your adventure begins.
                 </p>
@@ -464,7 +464,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
             <span className="font-bold">{formatPrice(depositAmount)}</span>
           </div>
           <div className="flex justify-between text-[var(--text-muted)]">
-            <span>Balance (due 60 days before)</span>
+            <span>Balance (due 2 weeks before)</span>
             <span>{formatPrice(balanceAmount)}</span>
           </div>
         </div>
@@ -568,7 +568,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           <div className="flex justify-between items-center">
             <div>
               <p className="font-medium text-[var(--text)]">Balance</p>
-              <p className="text-xs text-[var(--text-muted)]">Due 60 days before</p>
+              <p className="text-xs text-[var(--text-muted)]">Due 2 weeks before arrival</p>
             </div>
             <span className="font-semibold text-[var(--text)]">{formatPrice(balanceAmount)}</span>
           </div>
@@ -585,7 +585,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         {/* Info */}
         <div className="bg-[var(--surface)] rounded-lg p-3 mt-4">
           <p className="text-xs text-[var(--text-muted)]">
-            <strong className="text-[var(--text)]">Secure your spot today!</strong> Pay just 10% now. Full balance due 60 days before departure.
+            <strong className="text-[var(--text)]">Secure your spot today!</strong> Pay just 10% now. Full balance due 2 weeks before arrival.
           </p>
         </div>
       </div>
@@ -899,7 +899,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
 
               <p className="text-xs text-center text-[var(--text-muted)]">
                 By booking you agree to our terms. A 10% deposit secures your spot.
-                Full balance is due 60 days before departure.
+                Full balance is due 2 weeks before arrival.
               </p>
             </form>
           )}

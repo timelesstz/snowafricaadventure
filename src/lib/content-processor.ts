@@ -3,6 +3,8 @@
  * Transforms migrated WordPress HTML content into well-structured, styled content
  */
 
+const R2_BASE = "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev";
+
 /**
  * Decode HTML entities
  */
@@ -24,6 +26,26 @@ function decodeHtmlEntities(text: string): string {
 
 export function processContent(html: string): string {
   let content = html;
+
+  // Rewrite WordPress image URLs to R2 CDN
+  // Handles: src="/wp-content/uploads/..." and src="https://(www.)snowafricaadventure.com/wp-content/uploads/..."
+  content = content.replace(
+    /(<img[^>]+src=["'])\/wp-content\/uploads\//gi,
+    `$1${R2_BASE}/wp-content/uploads/`
+  );
+  content = content.replace(
+    /(<img[^>]+src=["'])https?:\/\/(?:www\.)?snowafricaadventure\.com\/wp-content\/uploads\//gi,
+    `$1${R2_BASE}/wp-content/uploads/`
+  );
+  // Also rewrite href on links wrapping images (e.g., <a href="/wp-content/uploads/...">)
+  content = content.replace(
+    /(<a[^>]+href=["'])\/wp-content\/uploads\//gi,
+    `$1${R2_BASE}/wp-content/uploads/`
+  );
+  content = content.replace(
+    /(<a[^>]+href=["'])https?:\/\/(?:www\.)?snowafricaadventure\.com\/wp-content\/uploads\//gi,
+    `$1${R2_BASE}/wp-content/uploads/`
+  );
 
   // Transform h3 tags that start with numbers into styled headings
   // e.g., <h3>1. The Exact Height</h3> -> <h3 class="numbered-heading">...</h3>

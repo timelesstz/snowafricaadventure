@@ -275,6 +275,7 @@ export default async function DestinationEditPage({
                 folder="destinations"
                 label="Featured Image"
                 helpText="Main image shown in listings"
+                deleteFromR2
               />
 
               <GalleryUploadField
@@ -284,6 +285,7 @@ export default async function DestinationEditPage({
                 label="Photo Gallery"
                 helpText="Additional photos"
                 maxImages={12}
+                deleteFromR2
               />
             </div>
 

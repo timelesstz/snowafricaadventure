@@ -9,6 +9,7 @@ import {
   TourInclusionsSection,
   FinalCTA,
 } from "@/components/tours";
+import { InquiryForm } from "@/components/forms/InquiryForm";
 import type { DayItinerary } from "@/components/tours/types";
 import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
@@ -171,6 +172,28 @@ export default async function SafariPage({ params }: PageProps) {
         inclusions={safari.inclusions || defaultInclusions}
         exclusions={safari.exclusions || defaultExclusions}
       />
+
+      {/* Inquiry Form Section */}
+      <section id="book" className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-3">
+              Book This Safari
+            </h2>
+            <p className="text-lg text-[var(--text-muted)] max-w-xl mx-auto">
+              Tell us about your group and preferred dates. We&apos;ll craft a
+              personalized itinerary and get back to you within 24 hours.
+            </p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-lg border border-[var(--border)] p-8">
+            <InquiryForm
+              variant="full"
+              relatedTo={safari.title}
+              tripType="Safari"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA */}
       <FinalCTA />

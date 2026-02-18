@@ -28,7 +28,7 @@ export function RouteCard({
       className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
     >
       {/* Image */}
-      <div className="relative aspect-[4/3] bg-[var(--border)]">
+      <div className="relative aspect-[4/3] bg-border">
         {featuredImage ? (
           <Image
             src={featuredImage}

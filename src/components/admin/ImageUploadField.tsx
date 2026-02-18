@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { X, FolderOpen } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { X, FolderOpen, Loader2 } from "lucide-react";
 import MediaUploader from "./MediaUploader";
 import R2BrowserModal from "./R2BrowserModal";
 import { clsx } from "clsx";
@@ -17,6 +17,19 @@ interface ImageUploadFieldProps {
   required?: boolean;
   className?: string;
   previewSize?: "sm" | "md" | "lg";
+  deleteFromR2?: boolean; // When true, removing/replacing deletes old image from R2
+}
+
+async function deleteImageFromR2(url: string): Promise<void> {
+  try {
+    await fetch("/api/admin/media/delete-by-url", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    });
+  } catch (e) {
+    console.error("Failed to delete image from R2:", e);
+  }
 }
 
 export default function ImageUploadField({
@@ -30,9 +43,11 @@ export default function ImageUploadField({
   required = false,
   className,
   previewSize = "md",
+  deleteFromR2: shouldDeleteFromR2 = false,
 }: ImageUploadFieldProps) {
   const [value, setValue] = useState(controlledValue ?? defaultValue ?? null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [showBrowser, setShowBrowser] = useState(false);
 
   // Sync with controlled value if provided
@@ -48,21 +63,34 @@ export default function ImageUploadField({
     lg: "w-48 h-48",
   };
 
-  const handleUpload = (media: { url: string }) => {
+  const deleteOldImage = useCallback(async (oldUrl: string | null) => {
+    if (!shouldDeleteFromR2 || !oldUrl) return;
+    setIsDeleting(true);
+    await deleteImageFromR2(oldUrl);
+    setIsDeleting(false);
+  }, [shouldDeleteFromR2]);
+
+  const handleUpload = async (media: { url: string }) => {
+    const oldUrl = value;
     setValue(media.url);
     onChange?.(media.url);
     setIsUploading(false);
+    await deleteOldImage(oldUrl);
   };
 
-  const handleBrowseSelect = (url: string) => {
+  const handleBrowseSelect = async (url: string) => {
+    const oldUrl = value;
     setValue(url);
     onChange?.(url);
     setShowBrowser(false);
+    await deleteOldImage(oldUrl);
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
+    const oldUrl = value;
     setValue(null);
     onChange?.(null);
+    await deleteOldImage(oldUrl);
   };
 
   return (
@@ -92,10 +120,15 @@ export default function ImageUploadField({
             <button
               type="button"
               onClick={handleRemove}
-              className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+              disabled={isDeleting}
+              className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors disabled:opacity-50"
               title="Remove image"
             >
-              <X className="w-4 h-4" />
+              {isDeleting ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <X className="w-4 h-4" />
+              )}
             </button>
           </div>
 

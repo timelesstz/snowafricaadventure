@@ -516,6 +516,7 @@ export default async function SafariEditPage({
                 folder="safaris"
                 label="Featured Image"
                 helpText="Main image shown in listings and hero sections"
+                deleteFromR2
               />
 
               <GalleryUploadField
@@ -525,6 +526,7 @@ export default async function SafariEditPage({
                 label="Photo Gallery"
                 helpText="Additional photos for the safari page"
                 maxImages={12}
+                deleteFromR2
               />
             </div>
 

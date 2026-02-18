@@ -37,7 +37,7 @@ async function createTestBooking() {
       totalClimbers,
       pricePerPerson,
       totalPrice,
-      depositAmount: Math.round(totalPrice * 0.3),
+      depositAmount: Math.round(totalPrice * 0.1),
       status: "INQUIRY",
       climberDetails: [
         { name: "Test Climber", nationality: "United States" },

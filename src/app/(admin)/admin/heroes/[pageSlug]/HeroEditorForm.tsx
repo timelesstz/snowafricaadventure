@@ -17,6 +17,8 @@ interface HeroData {
   ctaSecondaryText: string;
   ctaSecondaryUrl: string;
   backgroundImage: string;
+  imagePositionX: number;
+  imagePositionY: number;
   overlayGradient: string;
   overlayDirection: string;
   overlayOpacity: number;
@@ -57,6 +59,8 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
   const [subtitle, setSubtitle] = useState(hero.subtitle);
   const [badgeText, setBadgeText] = useState(hero.badgeText);
   const [bgImage, setBgImage] = useState(hero.backgroundImage);
+  const [posX, setPosX] = useState(hero.imagePositionX);
+  const [posY, setPosY] = useState(hero.imagePositionY);
   const [overlayGradient, setOverlayGradient] = useState(hero.overlayGradient);
   const [overlayDirection, setOverlayDirection] = useState(hero.overlayDirection);
   const [overlayOpacity, setOverlayOpacity] = useState(hero.overlayOpacity);
@@ -76,6 +80,8 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
       <input type="hidden" name="pageName" value={hero.pageName} />
       <input type="hidden" name="heroType" value={heroType} />
       <input type="hidden" name="backgroundImage" value={bgImage} />
+      <input type="hidden" name="imagePositionX" value={posX} />
+      <input type="hidden" name="imagePositionY" value={posY} />
       <input type="hidden" name="overlayGradient" value={overlayGradient} />
       <input type="hidden" name="overlayDirection" value={overlayDirection} />
       <input type="hidden" name="overlayOpacity" value={overlayOpacity} />
@@ -89,8 +95,11 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
 
       {/* Live Preview */}
       <div className="rounded-xl overflow-hidden border border-slate-200 shadow-sm">
-        <div className="bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 border-b">
-          Live Preview
+        <div className="bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 border-b flex items-center justify-between">
+          <span>Live Preview</span>
+          {isImage && bgImage && (
+            <span className="text-xs text-slate-400">Click image to set focal point ({posX}%, {posY}%)</span>
+          )}
         </div>
         <div className="relative overflow-hidden" style={{ height: isImage ? "280px" : "200px" }}>
           {isImage && bgImage ? (
@@ -100,9 +109,31 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
                 alt="Preview"
                 fill
                 className="object-cover"
+                style={{ objectPosition: `${posX}% ${posY}%` }}
                 sizes="100vw"
               />
               <div className={`absolute inset-0 bg-gradient-${overlayDirection} ${overlayGradient}`} />
+              {/* Focal point click area */}
+              <div
+                className="absolute inset-0 z-20 cursor-crosshair"
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+                  const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+                  setPosX(x);
+                  setPosY(y);
+                }}
+              >
+                {/* Focal point indicator */}
+                <div
+                  className="absolute w-6 h-6 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                  style={{ left: `${posX}%`, top: `${posY}%` }}
+                >
+                  <div className="absolute inset-0 rounded-full border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,0.3)]" />
+                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white -translate-x-1/2 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
+                  <div className="absolute top-1/2 left-0 right-0 h-px bg-white -translate-y-1/2 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
+                </div>
+              </div>
             </>
           ) : (
             <div
@@ -325,7 +356,66 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
               label="Background Image"
               helpText="Recommended: High-resolution landscape image (1920x1080+)"
               previewSize="lg"
+              deleteFromR2
             />
+
+            {bgImage && (
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <label className="block text-sm font-medium text-slate-700 mb-3">
+                  Image Focal Point
+                </label>
+                <p className="text-xs text-slate-500 mb-3">
+                  Click on the preview above to set the focal point, or adjust manually below.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">
+                      Horizontal: {posX}%
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={posX}
+                      onChange={(e) => setPosX(parseInt(e.target.value))}
+                      title="Horizontal focal point position"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    />
+                    <div className="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                      <span>Left</span>
+                      <span>Center</span>
+                      <span>Right</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">
+                      Vertical: {posY}%
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={posY}
+                      onChange={(e) => setPosY(parseInt(e.target.value))}
+                      title="Vertical focal point position"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    />
+                    <div className="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                      <span>Top</span>
+                      <span>Center</span>
+                      <span>Bottom</span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { setPosX(50); setPosY(50); }}
+                  className="mt-3 text-xs text-amber-600 hover:text-amber-700 font-medium"
+                >
+                  Reset to center
+                </button>
+              </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Overlay Preset</label>

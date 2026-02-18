@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, User, FileText } from "lucide-react";
-import { formatDate } from "@/lib/utils";
+import { Calendar, User } from "lucide-react";
+import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 
 export interface BlogCardProps {
   slug: string;
@@ -26,19 +26,14 @@ export function BlogCard({
     <article className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300">
       {/* Image */}
       <Link href={`/${slug}/`} className="block">
-        <div className="relative aspect-[16/9] bg-[var(--border)]">
-          {featuredImage ? (
-            <Image
-              src={featuredImage}
-              alt={title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--text-light)] to-[var(--text-muted)]">
-              <FileText className="w-16 h-16 text-white/50" />
-            </div>
-          )}
+        <div className="relative aspect-[16/9] bg-border">
+          <Image
+            src={normalizeImageUrl(featuredImage) || getCategoryFallbackImage(categories)}
+            alt={title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
       </Link>
 

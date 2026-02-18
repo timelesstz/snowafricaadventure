@@ -847,6 +847,8 @@ model PageHero {
   ctaSecondaryText    String?
   ctaSecondaryUrl     String?
   backgroundImage     String?
+  imagePositionX      Int      @default(50)
+  imagePositionY      Int      @default(50)
   overlayGradient     String   @default("from-black/70 via-black/50 to-transparent")
   overlayDirection    String   @default("to-r")
   overlayOpacity      Int      @default(70)

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { TripAdvisorWidget } from "@/components/reviews/TripAdvisorWidget";
+import { TripAdvisorCOE } from "@/components/reviews/TripAdvisorCOE";
 import { generateMetadata as genMeta, generateItemListSchema, generateAggregateRatingSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -61,7 +62,7 @@ function getWhyUsItems(talaLicense: string) {
     {
       icon: Shield,
       title: "Safety First Always",
-      description: "KINAPA-certified guides, satellite phones, pulse oximeters, quality gear, and strict emergency protocols on every expedition.",
+      description: "KINAPA-certified guides, pulse oximeters, quality gear, and strict emergency protocols on every expedition.",
     },
     {
       icon: Award,
@@ -319,6 +320,7 @@ export default async function HomePage() {
               View Safari Packages
             </Link>
           </div>
+          <TripAdvisorCOE className="mt-6" />
         </div>
 
         <div className="hero-scroll">
@@ -401,7 +403,7 @@ export default async function HomePage() {
               <p className="about-intro-lead">{company.description}</p>
               <p>{company.valueProposition}</p>
               <div className="about-registration">
-                <h4>Registered & Licensed</h4>
+                <h3>Registered & Licensed</h3>
                 <ul>
                   <li><strong>Company:</strong> {registration.name}</li>
                   <li><strong>Registration No:</strong> {registration.incorporationNo}</li>
@@ -562,7 +564,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="safari-item-content">
-                    <h4>{safari.title}</h4>
+                    <h3>{safari.title}</h3>
                     <div className="safari-item-meta">
                       <span>{safari.duration}</span>
                       <span>{safari.type}</span>
@@ -612,7 +614,7 @@ export default async function HomePage() {
                   <item.icon className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4>{item.title}</h4>
+                  <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
               </div>
@@ -682,7 +684,7 @@ export default async function HomePage() {
                   loading="lazy"
                 />
                 <div className="destination-overlay">
-                  <h4>{dest.title}</h4>
+                  <h3>{dest.title}</h3>
                   <p>{dest.description}</p>
                 </div>
               </Link>
@@ -787,7 +789,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="blog-card-content">
-                    <h4>{post.title}</h4>
+                    <h3>{post.title}</h3>
                     <p>{post.excerpt?.substring(0, 100) || "Read more about this topic..."}</p>
                   </div>
                 </Link>
@@ -807,7 +809,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="blog-card-content">
-                    <h4>Best Time to Climb Kilimanjaro</h4>
+                    <h3>Best Time to Climb Kilimanjaro</h3>
                     <p>A month-by-month guide to choosing the perfect time for your Kilimanjaro adventure.</p>
                   </div>
                 </Link>
@@ -823,7 +825,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="blog-card-content">
-                    <h4>Great Migration Guide 2025</h4>
+                    <h3>Great Migration Guide 2025</h3>
                     <p>Track the annual wildebeest migration through Tanzania.</p>
                   </div>
                 </Link>
@@ -839,7 +841,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="blog-card-content">
-                    <h4>Climbing Kilimanjaro: Complete Guide</h4>
+                    <h3>Climbing Kilimanjaro: Complete Guide</h3>
                     <p>Everything you need to know about climbing Africa&apos;s highest peak.</p>
                   </div>
                 </Link>

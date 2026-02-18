@@ -184,6 +184,8 @@ export interface PageHeroData {
   ctaSecondaryText?: string | null;
   ctaSecondaryUrl?: string | null;
   backgroundImage?: string | null;
+  imagePositionX?: number;
+  imagePositionY?: number;
   overlayGradient?: string;
   overlayDirection?: string;
   overlayOpacity?: number;
@@ -228,6 +230,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
   const isGradient = hero.heroType === "gradient";
   const isAutoHeight = hero.minHeight === "auto";
   const textAlign = hero.textAlignment || "left";
+  const imagePosition = `${hero.imagePositionX ?? 50}% ${hero.imagePositionY ?? 50}%`;
 
   // Build alignment classes
   const alignmentClasses = {
@@ -305,6 +308,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
             alt={hero.title}
             fill
             className="object-cover"
+            style={{ objectPosition: imagePosition }}
             priority
             sizes="100vw"
           />

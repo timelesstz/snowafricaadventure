@@ -27,36 +27,36 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full">
       {/* Top Bar */}
-      <div className="bg-[var(--primary-dark)] text-white text-sm">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-1.5 sm:py-2">
+      <div className="bg-[var(--primary-dark)] text-white">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="flex items-center justify-between py-1">
             {/* Contact Info */}
-            <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-1.5 hover:text-[var(--secondary)] transition-colors"
+                className="flex items-center gap-1 hover:text-[var(--secondary)] transition-colors"
                 aria-label={`Call us: ${SITE_CONFIG.phone}`}
               >
-                <Phone className="h-3.5 w-3.5" />
-                <span className="text-xs sm:text-sm">{SITE_CONFIG.phone}</span>
+                <Phone className="h-3 w-3" />
+                <span className="text-[10px] sm:text-xs">{SITE_CONFIG.phone}</span>
               </a>
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="hidden md:flex items-center gap-1.5 hover:text-[var(--secondary)] transition-colors"
+                className="hidden sm:flex items-center gap-1 hover:text-[var(--secondary)] transition-colors"
                 aria-label={`Email us: ${SITE_CONFIG.email}`}
               >
-                <Mail className="h-3.5 w-3.5" />
-                <span className="text-sm">{SITE_CONFIG.email}</span>
+                <Mail className="h-3 w-3" />
+                <span className="text-[10px] sm:text-xs">{SITE_CONFIG.email}</span>
               </a>
             </div>
 
             {/* Top Nav Links */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-0.5">
               {TOP_NAV.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="px-2.5 py-1 hover:text-[var(--secondary)] transition-colors rounded text-xs lg:text-sm"
+                  className="px-1.5 lg:px-2 py-0.5 hover:text-[var(--secondary)] transition-colors rounded text-[10px] sm:text-xs"
                 >
                   {item.label}
                 </Link>
@@ -69,28 +69,28 @@ export function Header() {
       {/* Main Navigation */}
       <div className="bg-white shadow-md">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0 py-2">
+            <Link href="/" className="flex items-center gap-1.5 shrink-0">
               {logo.logoUrl ? (
                 <Image
                   src={logo.logoUrl}
                   alt={SITE_CONFIG.name}
-                  width={180}
-                  height={56}
-                  className="h-10 sm:h-14 w-auto object-contain"
+                  width={140}
+                  height={40}
+                  className="h-7 sm:h-9 w-auto object-contain"
                   priority
                 />
               ) : (
                 <>
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[var(--primary)] rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm sm:text-base">SA</span>
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 bg-[var(--primary)] rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-xs sm:text-sm">SA</span>
                   </div>
                   <div>
-                    <div className="font-heading font-bold text-sm sm:text-base leading-tight text-[var(--text)]">
+                    <div className="font-heading font-bold text-xs sm:text-sm leading-tight text-[var(--text)]">
                       Snow Africa
                     </div>
-                    <div className="text-[10px] sm:text-xs text-[var(--text-muted)] -mt-0.5">Adventure</div>
+                    <div className="text-[9px] sm:text-[10px] text-[var(--text-muted)] -mt-0.5">Adventure</div>
                   </div>
                 </>
               )}
@@ -109,43 +109,32 @@ export function Header() {
               ))}
             </nav>
 
-            {/* Desktop: Search & CTA */}
-            <div className="hidden lg:flex items-center gap-2">
+            {/* Right side: CTA + Search + Menu */}
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Link
+                href="/tailor-made-safari/"
+                className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white px-2.5 py-1.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-md font-semibold transition-colors text-xs sm:text-sm"
+              >
+                Plan Your Trip
+              </Link>
               <Link
                 href="/search/"
                 className="p-2 text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)] rounded-md transition-colors"
                 aria-label="Search"
               >
-                <Search className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/tailor-made-safari/"
-                className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white px-4 py-2 rounded-md font-semibold transition-colors text-sm"
-              >
-                Plan Your Trip
-              </Link>
-            </div>
-
-            {/* Mobile/Tablet: Search + Menu */}
-            <div className="flex lg:hidden items-center gap-1">
-              <Link
-                href="/search/"
-                className="p-2.5 text-[var(--text-muted)] hover:text-[var(--primary)] rounded-md transition-colors"
-                aria-label="Search"
-              >
-                <Search className="h-5 w-5" />
+                <Search className="h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 text-[var(--text)] rounded-md hover:bg-[var(--surface)] transition-colors"
+                className="lg:hidden p-2 text-[var(--text)] rounded-md hover:bg-[var(--surface)] transition-colors"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen ? "true" : "false"}
               >
                 {mobileMenuOpen ? (
-                  <X className="h-6 w-6" />
+                  <X className="h-5 w-5 sm:h-6 sm:w-6" />
                 ) : (
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
                 )}
               </button>
             </div>

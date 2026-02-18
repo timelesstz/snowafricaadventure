@@ -1,11 +1,38 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+const R2_BASE = "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev";
+
 /**
  * Merge Tailwind CSS classes with clsx
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/**
+ * Normalize image URLs to use R2 CDN directly.
+ * Rewrites WordPress-era URLs (snowafricaadventure.com/wp-content/uploads/...)
+ * and relative paths (/wp-content/uploads/...) to the R2 public bucket URL.
+ * Returns null for empty/invalid URLs.
+ */
+export function normalizeImageUrl(url: string | null | undefined): string | null {
+  if (!url || !url.trim()) return null;
+
+  let normalized = url.trim();
+
+  // Relative /wp-content/uploads/ paths → R2
+  if (normalized.startsWith("/wp-content/uploads/")) {
+    return `${R2_BASE}${normalized}`;
+  }
+
+  // Rewrite snowafricaadventure.com (with or without www) wp-content paths → R2
+  normalized = normalized.replace(
+    /^https?:\/\/(?:www\.)?snowafricaadventure\.com\/wp-content\/uploads\//,
+    `${R2_BASE}/wp-content/uploads/`
+  );
+
+  return normalized;
 }
 
 /**
@@ -140,6 +167,32 @@ export function getFullMoonDates(startYear: number, endYear: number): Date[] {
   }
 
   return dates;
+}
+
+/**
+ * Get a category-based fallback image when no featured image is set.
+ * Uses existing R2 CDN assets that match the content topic.
+ */
+const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  "kilimanjaro-climbing-guide": `${R2_BASE}/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg`,
+  "mount-kilimanjaro": `${R2_BASE}/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg`,
+  "safari-tours": `${R2_BASE}/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg`,
+  "tanzania-destinations": `${R2_BASE}/wp-content/uploads/2023/03/Serengeri-National-Park.jpg`,
+  "day-trip": `${R2_BASE}/wp-content/uploads/2023/03/Day-trips.jpg`,
+  "blog": `${R2_BASE}/wp-content/uploads/2025/09/safari-3242983_1280.jpg`,
+};
+
+const DEFAULT_BLOG_IMAGE = `${R2_BASE}/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg`;
+
+export function getCategoryFallbackImage(categories?: { slug: string }[]): string {
+  if (categories && categories.length > 0) {
+    for (const cat of categories) {
+      if (CATEGORY_FALLBACK_IMAGES[cat.slug]) {
+        return CATEGORY_FALLBACK_IMAGES[cat.slug];
+      }
+    }
+  }
+  return DEFAULT_BLOG_IMAGE;
 }
 
 /**
