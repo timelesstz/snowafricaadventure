@@ -407,8 +407,8 @@ export default async function HomePage() {
                   <li><strong>Registration No:</strong> {registration.incorporationNo}</li>
                   <li><strong>VAT No:</strong> {registration.vatNo}</li>
                   <li><strong>TIN:</strong> {registration.tinNo}</li>
-                  {registration.talaLicense && <li><strong>Tour Operator License:</strong> {registration.talaLicense}</li>}
-                  {registration.trekkingLicense && <li><strong>Trekking License:</strong> {registration.trekkingLicense}</li>}
+                  {registration.talaLicense && <li><strong>2026 Tour Operator License:</strong> {registration.talaLicense}</li>}
+                  {registration.trekkingLicense && <li><strong>2026 Trekking License:</strong> {registration.trekkingLicense}</li>}
                 </ul>
               </div>
               <Link href="/about-us/" className="btn btn-secondary">
@@ -448,7 +448,7 @@ export default async function HomePage() {
       <section className="kili-section">
         <div className="kili-content">
           <span className="section-label">Kilimanjaro Trekking</span>
-          <h2>7 Routes to Africa&apos;s Highest Peak</h2>
+          <h2>6 Routes to Africa&apos;s Highest Peak</h2>
           <p>Choose from proven routes to the summit. Our certified guides have summited over 500 times with an industry-leading 93% success rate.</p>
 
           <ul className="routes-list">
