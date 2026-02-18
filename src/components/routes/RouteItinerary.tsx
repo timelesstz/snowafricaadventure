@@ -26,6 +26,7 @@ interface RouteItineraryProps {
   days: ItineraryDay[];
   routeTitle?: string;
   routeSlug?: string;
+  elevationProfileData?: ElevationPoint[] | null;
 }
 
 // Generate elevation profile from itinerary data
@@ -99,11 +100,16 @@ function getElevationChange(elevation?: string): string | null {
   return null;
 }
 
-export function RouteItinerary({ days, routeTitle = "Route", routeSlug }: RouteItineraryProps) {
+export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevationProfileData }: RouteItineraryProps) {
   const [expandedDay, setExpandedDay] = useState<number | null>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
-  const elevationProfile = useMemo(() => extractElevationProfile(days), [days]);
+  const elevationProfile = useMemo(() => {
+    if (elevationProfileData && elevationProfileData.length > 0) {
+      return elevationProfileData;
+    }
+    return extractElevationProfile(days);
+  }, [elevationProfileData, days]);
 
   const maxElevation = useMemo(() => {
     if (elevationProfile.length === 0) return 5895;

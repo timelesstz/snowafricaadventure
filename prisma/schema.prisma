@@ -22,8 +22,9 @@ model TrekkingRoute {
   successRate     Int?
   overview        String
   highlights      String[]
-  itinerary       Json?
-  routeMapImage   String?
+  itinerary        Json?
+  elevationProfile Json?
+  routeMapImage    String?
   inclusions      String[]
   exclusions      String[]
   faqs            Json?

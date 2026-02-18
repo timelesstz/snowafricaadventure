@@ -280,7 +280,7 @@ export default async function RoutePage({ params }: PageProps) {
 
               {/* Itinerary */}
               {itinerary.length > 0 && (
-                <RouteItinerary days={itinerary} routeTitle={route.title} routeSlug={route.slug} />
+                <RouteItinerary days={itinerary} routeTitle={route.title} routeSlug={route.slug} elevationProfileData={route.elevationProfile as { day: number; elevation: number; camp: string }[] | null} />
               )}
 
               {/* Inclusions/Exclusions */}
@@ -387,21 +387,21 @@ export default async function RoutePage({ params }: PageProps) {
                     <div className="text-center mb-4">
                       <img
                         src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg"
-                        alt="Guide Joseph"
+                        alt="Guide Florent"
                         className="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-[var(--surface)]"
                       />
                       <div className="font-heading font-semibold text-[var(--primary)]">
-                        Joseph Mushi
+                        Florent Ipanga
                       </div>
                       <div className="text-sm text-[var(--text-muted)]">
-                        Lead Guide • 15+ Years Experience
+                        Co-Founder & Safari & Trekking Expert
                       </div>
                     </div>
                     <blockquote className="text-center text-[var(--text-muted)] italic text-sm mb-4 px-2 border-l-0">
                       &ldquo;The mountain teaches patience and rewards determination. Every step is a story.&rdquo;
                     </blockquote>
                     <button className="w-full py-3 border-2 border-[var(--primary)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all">
-                      Ask Joseph a Question
+                      Ask Florent a Question
                     </button>
                   </div>
                 </div>
@@ -421,6 +421,29 @@ export default async function RoutePage({ params }: PageProps) {
 
       {/* CTA Section */}
       <RouteCTA routeSlug={route.slug} />
+
+      {/* Inquiry Form Section */}
+      <section id="inquiry-form" className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-3">
+              Get Custom Quote &amp; Book Your Climb
+            </h2>
+            <p className="text-lg text-[var(--text-muted)] max-w-xl mx-auto">
+              Tell us about your group and preferred dates. We&apos;ll craft a
+              personalized itinerary and get back to you within 24 hours.
+            </p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-lg border border-[var(--border)] p-8">
+            <InquiryForm
+              variant="full"
+              relatedTo={route.title}
+              tripType="Kilimanjaro"
+              showInviteSection
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Related Routes */}
       <section className="py-16 bg-[var(--surface)]">

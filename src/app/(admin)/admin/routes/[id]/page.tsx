@@ -7,6 +7,7 @@ import GalleryUploadField from "@/components/admin/GalleryUploadField";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import ItineraryEditor from "@/components/admin/ItineraryEditor";
 import FaqsEditor from "@/components/admin/FaqsEditor";
+import ElevationProfileEditor from "@/components/admin/ElevationProfileEditor";
 import ListEditor from "@/components/admin/ListEditor";
 
 async function getRoute(id: string) {
@@ -57,6 +58,17 @@ async function saveRoute(formData: FormData) {
     }
   }
 
+  // Parse elevation profile JSON
+  const elevationProfileStr = formData.get("elevationProfile") as string;
+  let elevationProfile = null;
+  if (elevationProfileStr) {
+    try {
+      elevationProfile = JSON.parse(elevationProfileStr);
+    } catch {
+      elevationProfile = null;
+    }
+  }
+
   const successRateStr = formData.get("successRate") as string;
 
   // Parse gallery JSON
@@ -86,6 +98,7 @@ async function saveRoute(formData: FormData) {
     overview: formData.get("overview") as string,
     highlights,
     itinerary,
+    elevationProfile,
     routeMapImage: formData.get("routeMapImage") as string || null,
     inclusions,
     exclusions,
@@ -397,6 +410,18 @@ export default async function RouteEditPage({
               <ItineraryEditor
                 name="itinerary"
                 defaultValue={route?.itinerary as any[] | null}
+              />
+            </div>
+
+            {/* Elevation Profile */}
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
+              <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
+                Elevation Profile
+              </h2>
+              <ElevationProfileEditor
+                name="elevationProfile"
+                defaultValue={route?.elevationProfile as { day: number; elevation: number; camp: string; label?: string }[] | null}
+                itinerary={route?.itinerary as { day: number; title: string; description: string; elevation?: string; distance?: string; duration?: string; camp?: string; meals?: string; tags?: string[]; image?: string }[] | null}
               />
             </div>
 
