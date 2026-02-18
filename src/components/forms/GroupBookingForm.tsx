@@ -86,6 +86,9 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     };
   } | null>(null);
 
+  // Refs
+  const formContainerRef = useRef<HTMLDivElement>(null);
+
   // Track form start
   const formStartTracked = useRef(false);
 
@@ -112,6 +115,13 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
       });
     }
   }
+
+  // Scroll to confirmation when booking succeeds
+  useEffect(() => {
+    if (stage === "success" && formContainerRef.current) {
+      formContainerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [stage]);
 
   // Track form start on first interaction
   useEffect(() => {
@@ -291,7 +301,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
   // Success state
   if (stage === "success" && bookingResult) {
     return (
-      <div className="max-w-2xl mx-auto bg-white border border-[var(--border)] rounded-xl p-6 md:p-8">
+      <div ref={formContainerRef} className="max-w-2xl mx-auto bg-white border border-[var(--border)] rounded-xl p-6 md:p-8">
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Check className="w-10 h-10 text-green-600" />
