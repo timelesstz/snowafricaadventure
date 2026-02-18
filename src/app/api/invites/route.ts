@@ -76,9 +76,9 @@ export async function POST(request: NextRequest) {
     // Build invite URL
     const inviteUrl = `${SITE_CONFIG.url}/kilimanjaro-join-group-departures/?invite=${code}&departure=${departure.id}`;
 
-    // Send invite emails to all invitees
-    const emailPromises = validatedData.invitees.map((invitee) =>
-      sendEmail({
+    // Send invite emails sequentially to avoid SMTP concurrency issues
+    for (const invitee of validatedData.invitees) {
+      await sendEmail({
         to: invitee.email,
         subject: `${validatedData.creatorName} invited you to climb Kilimanjaro!`,
         html: departureInvite({
@@ -101,10 +101,8 @@ export async function POST(request: NextRequest) {
           inviteUrl,
           personalMessage: validatedData.personalMessage,
         }),
-      })
-    );
-
-    await Promise.all(emailPromises);
+      });
+    }
 
     return NextResponse.json({
       success: true,

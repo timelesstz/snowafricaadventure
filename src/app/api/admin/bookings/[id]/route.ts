@@ -198,7 +198,8 @@ export async function PUT(
         });
 
         // Send email to lead climber with all climber links
-        sendClimberDetailsRequestEmail({
+        // Must await to prevent Vercel serverless from terminating before completion
+        await sendClimberDetailsRequestEmail({
           type: "lead",
           leadName: booking.leadName,
           leadEmail: booking.leadEmail,
@@ -216,14 +217,12 @@ export async function PUT(
             climberName: t.climberName,
             code: t.code,
           })),
-        }).catch((error) => {
-          console.error("Failed to send climber details request email:", error);
         });
 
-        // Also send individual emails to climbers with known emails
+        // Send individual emails sequentially to avoid SMTP concurrency issues
         for (const token of createdTokens) {
           if (token.email) {
-            sendClimberDetailsRequestEmail({
+            await sendClimberDetailsRequestEmail({
               type: "individual",
               recipientEmail: token.email,
               recipientName: token.climberName,
@@ -236,8 +235,6 @@ export async function PUT(
                 year: "numeric",
               }),
               token: token.code,
-            }).catch((error) => {
-              console.error("Failed to send individual climber email:", error);
             });
           }
         }

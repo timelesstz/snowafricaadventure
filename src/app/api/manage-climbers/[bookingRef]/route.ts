@@ -255,34 +255,38 @@ export async function PUT(
       (c) => (c as { isComplete?: boolean })?.isComplete
     ).length;
 
-    // Send notification to admin
-    sendClimberDetailsCompletedEmail({
-      bookingRef: booking.id.slice(-8).toUpperCase(),
-      climberName: validatedData.details.name,
-      climberIndex: validatedData.climberIndex,
-      routeName: booking.departure.route.title,
-      departureDate: booking.departure.arrivalDate.toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-        year: "numeric",
+    // Send notification to admin and create in-app notification
+    // Must await to prevent Vercel serverless from terminating before completion
+    const [emailRes, notifRes] = await Promise.allSettled([
+      sendClimberDetailsCompletedEmail({
+        bookingRef: booking.id.slice(-8).toUpperCase(),
+        climberName: validatedData.details.name,
+        climberIndex: validatedData.climberIndex,
+        routeName: booking.departure.route.title,
+        departureDate: booking.departure.arrivalDate.toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+        totalClimbers: booking.totalClimbers,
+        completedCount,
       }),
-      totalClimbers: booking.totalClimbers,
-      completedCount,
-    }).catch((error) => {
-      console.error("Failed to send completion email:", error);
-    });
+      ClimberNotifications.detailsCompleted({
+        bookingId: booking.id,
+        climberName: validatedData.details.name,
+        climberIndex: validatedData.climberIndex,
+        totalClimbers: booking.totalClimbers,
+        completedCount,
+      }),
+    ]);
 
-    // Create in-app notification
-    ClimberNotifications.detailsCompleted({
-      bookingId: booking.id,
-      climberName: validatedData.details.name,
-      climberIndex: validatedData.climberIndex,
-      totalClimbers: booking.totalClimbers,
-      completedCount,
-    }).catch((error) => {
-      console.error("Failed to create notification:", error);
-    });
+    if (emailRes.status === "rejected") {
+      console.error("Failed to send completion email:", emailRes.reason);
+    }
+    if (notifRes.status === "rejected") {
+      console.error("Failed to create notification:", notifRes.reason);
+    }
 
     return NextResponse.json({
       success: true,

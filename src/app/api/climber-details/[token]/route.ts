@@ -225,34 +225,38 @@ export async function PUT(
     const leadIsComplete = (currentClimberDetails[0] as { isComplete?: boolean })?.isComplete ? 1 : 0;
     const totalComplete = completedCount + leadIsComplete;
 
-    // Send notification to admin
-    sendClimberDetailsCompletedEmail({
-      bookingRef: climberToken.booking.id.slice(-8).toUpperCase(),
-      climberName: validatedData.name,
-      climberIndex: climberToken.climberIndex,
-      routeName: climberToken.booking.departure.route.title,
-      departureDate: climberToken.booking.departure.arrivalDate.toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-        year: "numeric",
+    // Send notification to admin and create in-app notification
+    // Must await to prevent Vercel serverless from terminating before completion
+    const [emailRes, notifRes] = await Promise.allSettled([
+      sendClimberDetailsCompletedEmail({
+        bookingRef: climberToken.booking.id.slice(-8).toUpperCase(),
+        climberName: validatedData.name,
+        climberIndex: climberToken.climberIndex,
+        routeName: climberToken.booking.departure.route.title,
+        departureDate: climberToken.booking.departure.arrivalDate.toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+        totalClimbers: climberToken.booking.totalClimbers,
+        completedCount: totalComplete,
       }),
-      totalClimbers: climberToken.booking.totalClimbers,
-      completedCount: totalComplete,
-    }).catch((error) => {
-      console.error("Failed to send completion email:", error);
-    });
+      ClimberNotifications.detailsCompleted({
+        bookingId: climberToken.bookingId,
+        climberName: validatedData.name,
+        climberIndex: climberToken.climberIndex,
+        totalClimbers: climberToken.booking.totalClimbers,
+        completedCount: totalComplete,
+      }),
+    ]);
 
-    // Create in-app notification
-    ClimberNotifications.detailsCompleted({
-      bookingId: climberToken.bookingId,
-      climberName: validatedData.name,
-      climberIndex: climberToken.climberIndex,
-      totalClimbers: climberToken.booking.totalClimbers,
-      completedCount: totalComplete,
-    }).catch((error) => {
-      console.error("Failed to create notification:", error);
-    });
+    if (emailRes.status === "rejected") {
+      console.error("Failed to send completion email:", emailRes.reason);
+    }
+    if (notifRes.status === "rejected") {
+      console.error("Failed to create notification:", notifRes.reason);
+    }
 
     return NextResponse.json({
       success: true,
