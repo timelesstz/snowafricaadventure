@@ -222,13 +222,41 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/ol-doinyo-lengai/",
-        destination: "/trekking/3-days-2-nights-oldoinyo-lengai-climbing/",
+        destination: "/trekking/3-days-oldoinyo-lengai-climbing/",
         permanent: true,
       },
       {
         source: "/mount-kenya/",
         destination: "/trekking/",
         permanent: false,
+      },
+
+      // =====================================================
+      // POORLY FORMATTED URL FIXES (slug cleanup → new canonical URLs)
+      // =====================================================
+      // Blog post: too long + "ofelephants" typo
+      {
+        source: "/go-next-door-ofelephants-big-cats-wildebeests-and-many-more-opt-for-tanzania-safari/",
+        destination: "/tanzania-safari-wildlife/",
+        permanent: true,
+      },
+      // Safari: 101-char slug with "safaritarangire" typo
+      {
+        source: "/tanzania-safaris/6-days-tanzania-lodge-and-luxury-tented-camp-safaritarangire-lake-manyara-serengeti-ngorongoro-crater/",
+        destination: "/tanzania-safaris/6-day-lodge-safari-northern-circuit/",
+        permanent: true,
+      },
+      // Blog post: 94-char stop-word-heavy slug
+      {
+        source: "/the-smartest-packing-list-for-kilimanjaro-climbing-increase-your-trekking-experience-up-to-100/",
+        destination: "/kilimanjaro-trekking-packing-list/",
+        permanent: true,
+      },
+      // Trekking route: verbose "3-days-2-nights" pattern
+      {
+        source: "/trekking/3-days-2-nights-oldoinyo-lengai-climbing/",
+        destination: "/trekking/3-days-oldoinyo-lengai-climbing/",
+        permanent: true,
       },
 
       // =====================================================
