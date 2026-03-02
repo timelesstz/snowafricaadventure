@@ -3,7 +3,7 @@ import Link from "next/link";
 import { generateMetadata as genMeta } from "@/lib/seo";
 
 export const metadata: Metadata = genMeta({
-  title: "Search",
+  title: "Search Kilimanjaro Treks & Tanzania Safaris",
   description:
     "Search for Kilimanjaro climbing routes, Tanzania safari packages, destinations, and travel guides. Find your perfect Tanzania adventure.",
   url: "/search/",

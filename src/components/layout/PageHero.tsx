@@ -120,7 +120,7 @@ const DEFAULT_HEROES: Record<string, PageHeroData> = {
     pageSlug: "kilimanjaro-join-group-departures",
     pageName: "Group Departures",
     heroType: "gradient",
-    title: "Kilimanjaro Join Group Departures",
+    title: "Kilimanjaro Group Departures 2026 & 2027",
     subtitle:
       "Join our scheduled group climbs with fixed departure dates. Share the adventure with fellow climbers from around the world.",
     gradientFrom: "var(--primary-dark)",
