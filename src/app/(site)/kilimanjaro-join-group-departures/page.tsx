@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: "/kilimanjaro-join-group-departures/",
   }),
   openGraph: {
-    title: "Kilimanjaro Group Departures 2026-2027 | Snow Africa Adventure",
+    title: "Kilimanjaro Group Departures 2026-2027",
     description: "Join scheduled Kilimanjaro group climbs with expert local guides. 95%+ summit success rate, small groups (max 10), full moon climbs available.",
     url: `${SITE_CONFIG.url}/kilimanjaro-join-group-departures/`,
     siteName: SITE_CONFIG.name,
@@ -170,6 +170,79 @@ export default async function GroupDeparturesPage() {
           <ShareButtons variant="icons-only" size="sm" />
         </div>
       </PageHero>
+
+      {/* Why Join a Group Climb — SEO Content */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-heading text-3xl font-bold mb-6">
+              Why Join a Kilimanjaro Group Climb?
+            </h2>
+            <div className="prose prose-slate prose-lg max-w-none space-y-4 text-[var(--text-muted)]">
+              <p>
+                Climbing Mount Kilimanjaro — Africa&apos;s highest peak at 5,895 metres above sea level — is one of the most transformative experiences a traveller can undertake. Whether you&apos;re a seasoned trekker or embarking on your first high-altitude adventure, joining one of Snow Africa Adventure&apos;s scheduled group departures offers an unbeatable combination of value, camaraderie, and expert support that makes your Kilimanjaro dream both achievable and unforgettable.
+              </p>
+              <p>
+                Group climbing is ideal for solo travellers, couples, and small groups of friends who want the full Kilimanjaro experience without the premium cost of a private expedition. By sharing logistics, guides, and camping equipment with a small group of like-minded adventurers, you dramatically reduce the per-person cost while gaining something money can&apos;t buy: the shared energy, motivation, and friendship that comes from tackling Africa&apos;s greatest challenge together.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                The Social Advantage of Group Climbing
+              </h3>
+              <p>
+                Many of our climbers arrive as strangers and leave as lifelong friends. There is something uniquely bonding about the shared experience of altitude sickness, pre-dawn summit pushes, and the indescribable emotion of standing at Uhuru Peak with the African continent spread out far below. Group departures create an instant community — a team of people who push each other forward on hard days and celebrate together on summit morning.
+              </p>
+              <p>
+                Solo travellers in particular benefit enormously from the group dynamic. Rather than facing the mountain&apos;s psychological challenges alone, you&apos;re embedded in a small team with your own guides, porters, and cook. The mountain becomes a shared project, and your fellow climbers become your support network for the days ahead. Past clients regularly tell us that the friendships made on Kilimanjaro became some of the most meaningful relationships of their travels.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Expert Guides with a 95%+ Summit Success Rate
+              </h3>
+              <p>
+                Every Snow Africa Adventure group departure is led by KINAPA-certified professional guides with a minimum of five years&apos; experience on Kilimanjaro. Our lead guides carry emergency oxygen, wilderness first aid certification, and comprehensive knowledge of every route&apos;s acclimatization profile. Our 95%+ summit success rate across all group departures is among the highest in the industry — a testament to our guides&apos; ability to manage pace, monitor altitude symptoms, and make smart decisions under pressure.
+              </p>
+              <p>
+                Our guide-to-climber ratio ensures individual attention throughout the climb. No one gets left behind or rushed ahead. Our guides adjust the pace each day to the needs of the group, following the core acclimatization principle of &quot;climb high, sleep low.&quot; We also carry pulse oximeters for every climber, monitoring oxygen saturation at each camp to catch any altitude-related issues early.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                What Is Included in Every Group Departure?
+              </h3>
+              <p>
+                Our group departure price is all-inclusive, covering everything you need from the moment you land in Arusha to the moment we drop you back at the airport. Included in every departure: two nights&apos; pre-climb accommodation in Arusha, all Kilimanjaro National Park fees (which have increased significantly in recent years), professional lead guides and assistant guides, a full portering team, a mountain cook preparing three hot meals per day plus snacks, all camping equipment (tents, sleeping mats, dining tent, toilet tent), emergency oxygen, and private airport transfers.
+              </p>
+              <p>
+                The only items not included are your personal trekking gear, flights, visa, travel insurance, and tips for the mountain crew. We provide a comprehensive pre-departure gear list and can advise on rental options in Arusha for items like trekking poles, sleeping bags, and gaiters if you prefer not to purchase.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Who Are Group Departures Ideal For?
+              </h3>
+              <p>
+                Group departures are perfectly suited for solo adventurers looking to share costs and connect with other climbers, couples wanting a structured adventure without the logistics of planning a private expedition, friends or colleagues in groups of two to four who want to join a larger team, and budget-conscious travellers who want a premium experience at a significantly lower price point than a private climb.
+              </p>
+              <p>
+                Our groups are deliberately small — a maximum of ten climbers per departure — ensuring an intimate experience that feels nothing like the large commercial groups sometimes seen on popular routes like Marangu. With a maximum of ten people, you get the benefits of group pricing while maintaining the personal attention and flexibility of a near-private experience.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Full Moon Climbs: Summit Under the Stars
+              </h3>
+              <p>
+                Among our most popular group departures are our Full Moon climbs, where the summit push coincides with a full or near-full moon. Reaching Stella Point and Uhuru Peak by moonlight — with the glaciers glowing silver and the curvature of the Earth visible on the horizon — is an experience that transcends description. We schedule several full moon departures each year across both the Lemosho and Machame routes. Check the departure calendar for upcoming full moon dates and book early, as these sell out months in advance.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Flexible Booking and Payment
+              </h3>
+              <p>
+                Securing your spot on a group departure requires only a 10% deposit, with the remaining balance due 60 days before your arrival date. This makes it easy to commit to your Kilimanjaro adventure well in advance while keeping your cash flow flexible. We accept international bank transfers, credit cards, and other secure payment methods. If you need to change your departure date after booking, we will do our best to accommodate you on another available departure, subject to availability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* How It Works */}
       <section className="py-12 bg-[var(--surface)]">

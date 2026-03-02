@@ -31,7 +31,8 @@
     "migrate:wp:daytrips": "npx tsx scripts/migration/migrate.ts --type=daytrips",
     "migrate:wp:blog": "npx tsx scripts/migration/migrate.ts --type=blog",
     "db:seed:heroes": "npx tsx prisma/seed-heroes.ts",
-    "db:seed:cms": "npx tsx prisma/seed-cms-tailor-made.ts"
+    "db:seed:cms": "npx tsx prisma/seed-cms-tailor-made.ts",
+    "db:seed:seo-content": "npx tsx scripts/seed-seo-content.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
