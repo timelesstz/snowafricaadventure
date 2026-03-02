@@ -232,6 +232,16 @@ const nextConfig: NextConfig = {
       },
 
       // =====================================================
+      // DUPLICATE CONTENT CONSOLIDATION
+      // =====================================================
+      // Year-specific "best time" post → canonical evergreen URL
+      {
+        source: "/2025-best-time-to-climb-mount-kilimanjaro/",
+        destination: "/best-time-to-climb-mount-kilimanjaro/",
+        permanent: true,
+      },
+
+      // =====================================================
       // POORLY FORMATTED URL FIXES (slug cleanup → new canonical URLs)
       // =====================================================
       // Blog post: too long + "ofelephants" typo
