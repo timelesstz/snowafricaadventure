@@ -1,7 +1,31 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/lib/constants";
 
-// Dynamic import to handle build-time when DB isn't available
+// Slugs that are static routes — blog posts with these slugs would shadow them
+const RESERVED_SLUGS = new Set([
+  "about-us",
+  "contact-us",
+  "blog",
+  "trekking",
+  "tanzania-safaris",
+  "tanzania-destinations",
+  "tanzania-day-tours",
+  "zanzibar",
+  "faq",
+  "search",
+  "kilimanjaro-join-group-departures",
+  "tailor-made-safari",
+  "terms-conditions",
+  "terms-and-conditions",
+  "privacy-policy",
+  "thank-you",
+  "admin",
+  "api",
+  "sitemap",
+  "robots",
+  "p",
+]);
+
 async function getContentFromDb() {
   try {
     const { prisma } = await import("@/lib/prisma");
@@ -28,14 +52,22 @@ async function getContentFromDb() {
           where: { isActive: true },
           select: { slug: true, updatedAt: true },
         }),
+        // Only categories that have at least one published post
         prisma.category.findMany({
+          where: {
+            posts: {
+              some: {
+                post: { isPublished: true },
+              },
+            },
+          },
           select: { slug: true, updatedAt: true },
         }),
       ]);
 
     return { routes, safaris, destinations, posts, dayTrips, categories };
-  } catch {
-    // Return empty arrays if database is not available (build time)
+  } catch (err) {
+    console.error("[sitemap] Database fetch failed:", err);
     return {
       routes: [],
       safaris: [],
@@ -50,35 +82,18 @@ async function getContentFromDb() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
 
-  // Fetch all content from database
   const { routes, safaris, destinations, posts, dayTrips, categories } =
     await getContentFromDb();
 
-  // Static pages
+  // Static pages with accurate lastModified dates.
+  // Listing pages (blog/, trekking/, etc.) use new Date() because they reflect
+  // the latest DB content on every render. Content-stable pages use fixed dates.
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
-    },
-    {
-      url: `${baseUrl}/about-us/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact-us/`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
     },
     {
       url: `${baseUrl}/trekking/`,
@@ -93,6 +108,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/kilimanjaro-join-group-departures/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/blog/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/tanzania-destinations/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -100,27 +127,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/zanzibar/`,
-      lastModified: new Date(),
+      lastModified: new Date("2025-10-01"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/tailor-made-safari/`,
+      lastModified: new Date("2025-10-01"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/about-us/`,
+      lastModified: new Date("2025-06-01"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/contact-us/`,
+      lastModified: new Date("2025-06-01"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/faq/`,
-      lastModified: new Date(),
+      lastModified: new Date("2025-10-01"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/kilimanjaro-join-group-departures/`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/tailor-made-safari/`,
-      lastModified: new Date(),
+      url: `${baseUrl}/search/`,
+      lastModified: new Date("2025-10-01"),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/tanzania-day-tours/`,
@@ -130,29 +169,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/terms-conditions/`,
-      lastModified: new Date(),
+      lastModified: new Date("2024-01-01"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
   ];
 
-  // Trekking routes
   const routeUrls: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${baseUrl}/trekking/${route.slug}/`,
     lastModified: route.updatedAt,
-    changeFrequency: "weekly",
+    changeFrequency: "monthly",
     priority: 0.9,
   }));
 
-  // Safari packages
   const safariUrls: MetadataRoute.Sitemap = safaris.map((safari) => ({
     url: `${baseUrl}/tanzania-safaris/${safari.slug}/`,
     lastModified: safari.updatedAt,
-    changeFrequency: "weekly",
+    changeFrequency: "monthly",
     priority: 0.9,
   }));
 
-  // Destinations
   const destUrls: MetadataRoute.Sitemap = destinations.map((dest) => ({
     url: `${baseUrl}/tanzania-destinations/${dest.slug}/`,
     lastModified: dest.updatedAt,
@@ -160,15 +196,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Blog posts - IMPORTANT: These live at ROOT level!
-  const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/${post.slug}/`,
-    lastModified: post.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  // Filter out any blog post whose slug collides with a static route
+  const postUrls: MetadataRoute.Sitemap = posts
+    .filter((post) => !RESERVED_SLUGS.has(post.slug))
+    .map((post) => ({
+      url: `${baseUrl}/${post.slug}/`,
+      lastModified: post.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }));
 
-  // Day trips
   const dayTripUrls: MetadataRoute.Sitemap = dayTrips.map((trip) => ({
     url: `${baseUrl}/tanzania-day-tours/${trip.slug}/`,
     lastModified: trip.updatedAt,
@@ -176,11 +213,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Categories
   const categoryUrls: MetadataRoute.Sitemap = categories.map((cat) => ({
     url: `${baseUrl}/category/${cat.slug}/`,
     lastModified: cat.updatedAt,
-    changeFrequency: "weekly",
+    changeFrequency: "monthly",
     priority: 0.6,
   }));
 
