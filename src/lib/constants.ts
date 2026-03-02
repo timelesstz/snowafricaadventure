@@ -237,6 +237,30 @@ export const ZANZIBAR_DURATIONS = [
 ] as const;
 
 /**
+ * Author profiles for blog E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)
+ */
+export const AUTHOR_PROFILES: Record<string, {
+  name: string;
+  role: string;
+  bio: string;
+  credentials: string[];
+  image?: string;
+}> = {
+  "Snow Africa Team": {
+    name: "Snow Africa Team",
+    role: "Safari & Trekking Experts",
+    bio: "The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.",
+    credentials: ["TATO Licensed Operator", "Kilimanjaro Certified Guides", "First Aid Wilderness Certified", "Based in Arusha, Tanzania"],
+  },
+  "Emmanuel Moshi": {
+    name: "Emmanuel Moshi",
+    role: "Founder & Lead Guide",
+    bio: "Emmanuel founded Snow Africa Adventure with a vision to share Tanzania's natural wonders with the world. A Kilimanjaro native with over 15 years of guiding experience, he has personally led more than 200 summit expeditions and countless safari trips across the Northern and Southern Circuits.",
+    credentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
+  },
+};
+
+/**
  * Partner information for website attribution
  */
 export const PARTNER_INFO = {

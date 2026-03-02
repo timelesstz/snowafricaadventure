@@ -4,7 +4,15 @@ import { logEmailPending, logEmailSent, logEmailFailed } from "./logger";
 // Email configuration
 const FROM_EMAIL = process.env.SMTP_FROM_EMAIL || "bookings@snowafricaadventure.com";
 const FROM_NAME = process.env.SMTP_FROM_NAME || "Snow Africa Adventure";
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "info@snowafricaadventure.com";
+
+// Support comma-separated notification emails for redundancy
+// e.g. "info@snowafricaadventure.com,backup@gmail.com"
+const NOTIFICATION_EMAIL_RAW = process.env.NOTIFICATION_EMAIL || "info@snowafricaadventure.com";
+export const NOTIFICATION_EMAILS: string[] = NOTIFICATION_EMAIL_RAW
+  .split(",")
+  .map((e) => e.trim())
+  .filter(Boolean);
+export const PRIMARY_NOTIFICATION_EMAIL = NOTIFICATION_EMAILS[0];
 
 // Lazy initialize SMTP transporter
 let transporter: nodemailer.Transporter | null = null;
@@ -62,6 +70,7 @@ export interface SendEmailOptions {
   subject: string;
   html: string;
   replyTo?: string;
+  bcc?: string | string[];
 }
 
 export interface EmailResult {
@@ -114,7 +123,8 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
       to: recipient,
       subject: options.subject,
       html: options.html,
-      replyTo: options.replyTo || NOTIFICATION_EMAIL,
+      replyTo: options.replyTo || PRIMARY_NOTIFICATION_EMAIL,
+      ...(options.bcc ? { bcc: Array.isArray(options.bcc) ? options.bcc.join(", ") : options.bcc } : {}),
     });
 
     console.log(`[Email] Sent successfully! Message ID: ${info.messageId}`);
@@ -149,21 +159,48 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
 }
 
 /**
- * Send notification email to admin
+ * Send notification email to admin (all configured notification addresses)
  */
 export async function sendAdminNotification(
   subject: string,
   html: string
 ): Promise<EmailResult> {
-  console.log(`[Email] Sending admin notification to: ${NOTIFICATION_EMAIL}`);
+  console.log(`[Email] Sending admin notification to: ${NOTIFICATION_EMAILS.join(", ")}`);
   console.log(`[Email] Admin subject: [Snow Africa Admin] ${subject}`);
   const result = await sendEmail({
-    to: NOTIFICATION_EMAIL,
+    to: NOTIFICATION_EMAILS,
     subject: `[Snow Africa Admin] ${subject}`,
     html,
   });
   console.log(`[Email] Admin notification result: success=${result.success}${result.error ? `, error=${result.error}` : ""}${result.id ? `, messageId=${result.id}` : ""}`);
   return result;
+}
+
+/**
+ * Send admin notification with a single retry on failure.
+ * Resets SMTP transporter between attempts to handle transient cPanel issues.
+ */
+export async function sendAdminNotificationWithRetry(
+  subject: string,
+  html: string
+): Promise<EmailResult> {
+  const result = await sendAdminNotification(subject, html);
+  if (result.success) return result;
+
+  console.warn(`[Email] Admin notification failed, retrying in 2s... Error: ${result.error}`);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  // Reset transporter for a fresh connection
+  transporter = null;
+  smtpVerified = false;
+
+  const retryResult = await sendAdminNotification(subject, html);
+  if (!retryResult.success) {
+    console.error(`[Email] Admin notification retry also failed: ${retryResult.error}`);
+  } else {
+    console.log(`[Email] Admin notification succeeded on retry`);
+  }
+  return retryResult;
 }
 
 /**
@@ -179,7 +216,7 @@ export async function verifySmtpConnection(): Promise<{ success: boolean; error?
       user: process.env.SMTP_USER,
       fromEmail: FROM_EMAIL,
       fromName: FROM_NAME,
-      notificationEmail: NOTIFICATION_EMAIL,
+      notificationEmails: NOTIFICATION_EMAILS.join(", "),
     };
 
     console.log("[Email] Verifying SMTP configuration:", config);

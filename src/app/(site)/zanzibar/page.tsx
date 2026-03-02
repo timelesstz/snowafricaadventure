@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Sun, Waves, Building, Compass } from "lucide-react";
 import { ZanzibarInquiryForm } from "@/components/forms/ZanzibarInquiryForm";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
-  title: "Zanzibar Beach Holidays",
+  title: "Zanzibar Beach Holidays Tanzania",
   description:
-    "Complete your Tanzania adventure with a Zanzibar beach extension. Pristine beaches, historic Stone Town, spice tours, and water activities await.",
+    "Book Zanzibar beach holidays from Nungwi, Kendwa & Paje. UNESCO Stone Town tours, snorkelling at Mnemba Atoll, spice tours & sunset dhow cruises. Perfect safari-beach combo.",
   url: "/zanzibar/",
 });
 
@@ -105,6 +106,13 @@ const packages = [
 export default function ZanzibarPage() {
   return (
     <div>
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Zanzibar", url: "/zanzibar/" },
+        ])}
+      />
+
       {/* Hero */}
       <PageHero pageSlug="zanzibar" />
 

@@ -9,7 +9,7 @@ import prisma from "@/lib/prisma";
 import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
-  title: "Blog - Tanzania Travel Tips & Safari Stories",
+  title: "Tanzania Safari Blog & Travel Tips",
   description:
     "Read our latest articles about climbing Kilimanjaro, Tanzania safaris, and travel tips for your African adventure.",
   url: "/blog/",

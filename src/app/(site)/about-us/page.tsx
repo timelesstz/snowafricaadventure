@@ -1,14 +1,16 @@
 import { Metadata } from "next";
 import { Mountain, Compass, Palmtree, Map, Shield, Heart, Users, Award } from "lucide-react";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateTourOperatorSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = genMeta({
-  title: "About Us",
+  title: "About Us - Tanzania Tour Operator",
   description:
-    "Snow Africa Adventure was founded by Florent and Caroline, a passionate husband-and-wife team. Learn about our story, services, and commitment to responsible tourism in Tanzania.",
+    "Meet the team behind Snow Africa Adventure. Founded by Florent & Caroline in Arusha, Tanzania. KPAP-certified, TATO-licensed safari and Kilimanjaro trekking operator with expert local guides.",
   url: "/about-us/",
 });
 
@@ -128,6 +130,18 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-white">
+      {/* Breadcrumbs + Schema */}
+      <div className="container mx-auto px-4">
+        <Breadcrumbs items={[{ label: "About Us" }]} />
+      </div>
+      <MultiJsonLd schemas={[
+        generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "About Us", url: "/about-us/" },
+        ]),
+        generateTourOperatorSchema(),
+      ]} />
+
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center">
         {s["about.hero.image"] ? (
@@ -399,11 +413,44 @@ export default async function AboutPage() {
               {s["about.cta.tagline"]}
             </p>
             <Link
-              href="/contact/"
+              href="/contact-us/"
               className="inline-block bg-white text-amber-600 font-bold px-10 py-4 rounded-full hover:bg-slate-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 text-lg"
             >
               Contact Us Today
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Internal Links Section */}
+      <section className="py-12 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-heading text-2xl font-bold text-center mb-8 text-slate-900">
+              Explore Our Adventures
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Link href="/trekking/" className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow border border-slate-100">
+                <Mountain className="w-8 h-8 text-amber-500 mx-auto mb-2" />
+                <h3 className="font-semibold text-sm text-slate-900">Kilimanjaro Trekking</h3>
+                <p className="text-xs text-slate-500 mt-1">7 routes to the summit</p>
+              </Link>
+              <Link href="/tanzania-safaris/" className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow border border-slate-100">
+                <Compass className="w-8 h-8 text-amber-500 mx-auto mb-2" />
+                <h3 className="font-semibold text-sm text-slate-900">Tanzania Safaris</h3>
+                <p className="text-xs text-slate-500 mt-1">Budget to luxury packages</p>
+              </Link>
+              <Link href="/zanzibar/" className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow border border-slate-100">
+                <Palmtree className="w-8 h-8 text-amber-500 mx-auto mb-2" />
+                <h3 className="font-semibold text-sm text-slate-900">Zanzibar Beaches</h3>
+                <p className="text-xs text-slate-500 mt-1">Beach holidays &amp; culture</p>
+              </Link>
+              <Link href="/kilimanjaro-join-group-departures/" className="bg-white rounded-xl p-4 text-center hover:shadow-md transition-shadow border border-slate-100">
+                <Users className="w-8 h-8 text-amber-500 mx-auto mb-2" />
+                <h3 className="font-semibold text-sm text-slate-900">Group Departures</h3>
+                <p className="text-xs text-slate-500 mt-1">Fixed dates, shared costs</p>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

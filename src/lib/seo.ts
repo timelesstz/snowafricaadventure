@@ -13,6 +13,14 @@ interface SEOProps {
   noIndex?: boolean;
 }
 
+// Max chars for page title so "title | Snow Africa Adventure" stays ≤60 chars total
+const TITLE_BUDGET = 36;
+
+function fitTitle(t: string): string {
+  if (t.length <= TITLE_BUDGET) return t;
+  return t.substring(0, TITLE_BUDGET).replace(/\s+\S*$/, "");
+}
+
 /**
  * Generate metadata for pages
  */
@@ -27,19 +35,20 @@ export function generateMetadata({
   author,
   noIndex = false,
 }: SEOProps): Metadata {
-  const siteTitle = title
-    ? `${title} | ${SITE_CONFIG.name}`
-    : SITE_CONFIG.name;
+  // pageTitle is raw — root layout template adds " | Snow Africa Adventure"
+  // brandedTitle is used for OG/Twitter where the template does NOT apply
+  const pageTitle = title ? fitTitle(title) : title;
+  const brandedTitle = pageTitle ? `${pageTitle} | ${SITE_CONFIG.name}` : SITE_CONFIG.name;
   const siteDescription = description || SITE_CONFIG.description;
   const siteUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
   const siteImage = image || `${SITE_CONFIG.url}/og-image.jpg`;
 
   return {
-    title: siteTitle,
+    title: pageTitle,
     description: siteDescription,
     ...(noIndex && { robots: { index: false, follow: false } }),
     openGraph: {
-      title: siteTitle,
+      title: brandedTitle,
       description: siteDescription,
       url: siteUrl,
       siteName: SITE_CONFIG.name,
@@ -48,7 +57,7 @@ export function generateMetadata({
           url: siteImage,
           width: 1200,
           height: 630,
-          alt: title || SITE_CONFIG.name,
+          alt: brandedTitle,
         },
       ],
       locale: "en_US",
@@ -61,7 +70,7 @@ export function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: siteTitle,
+      title: brandedTitle,
       description: siteDescription,
       images: [siteImage],
     },
@@ -163,6 +172,8 @@ export function generateArticleSchema(article: {
   publishedTime: string;
   modifiedTime?: string;
   author?: string;
+  authorRole?: string;
+  authorCredentials?: string[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -176,6 +187,13 @@ export function generateArticleSchema(article: {
     author: {
       "@type": "Person",
       name: article.author || SITE_CONFIG.name,
+      ...(article.authorRole && { jobTitle: article.authorRole }),
+      ...(article.authorCredentials && { knowsAbout: article.authorCredentials }),
+      worksFor: {
+        "@type": "Organization",
+        name: SITE_CONFIG.name,
+        url: SITE_CONFIG.url,
+      },
     },
     publisher: {
       "@type": "Organization",
@@ -440,6 +458,69 @@ export function generateLocalBusinessSchema() {
       SITE_CONFIG.social.instagram,
       SITE_CONFIG.social.youtube,
     ],
+  };
+}
+
+/**
+ * Generate HowTo schema for step-by-step guides
+ */
+export function generateHowToSchema(howTo: {
+  name: string;
+  description: string;
+  totalTime?: string;
+  estimatedCost?: { currency: string; value: number };
+  steps: { name: string; text: string; image?: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: howTo.name,
+    description: howTo.description,
+    ...(howTo.totalTime && { totalTime: howTo.totalTime }),
+    ...(howTo.estimatedCost && {
+      estimatedCost: {
+        "@type": "MonetaryAmount",
+        currency: howTo.estimatedCost.currency,
+        value: howTo.estimatedCost.value,
+      },
+    }),
+    step: howTo.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.image && { image: step.image }),
+    })),
+  };
+}
+
+/**
+ * Generate VideoObject schema for embedded videos
+ */
+export function generateVideoSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  contentUrl?: string;
+  embedUrl?: string;
+  duration?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    ...(video.contentUrl && { contentUrl: video.contentUrl }),
+    ...(video.embedUrl && { embedUrl: video.embedUrl }),
+    ...(video.duration && { duration: video.duration }),
+    publisher: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
   };
 }
 

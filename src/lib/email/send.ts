@@ -2,7 +2,7 @@
  * High-level email sending functions
  */
 
-import { sendEmail, sendAdminNotification, EmailResult } from "./index";
+import { sendEmail, sendAdminNotificationWithRetry, EmailResult, NOTIFICATION_EMAILS } from "./index";
 import {
   bookingInquiryReceived,
   bookingConfirmed,
@@ -42,13 +42,15 @@ export async function sendBookingInquiryEmails(
   data: BookingEmailData
 ): Promise<{ customer: EmailResult; admin: EmailResult }> {
   // Send sequentially — shared cPanel SMTP often fails on concurrent sends
+  // BCC admin on customer email as delivery fallback for cPanel same-domain routing issues
   const customerResult = await sendEmail({
     to: data.leadEmail,
     subject: `Booking Inquiry Received - ${data.routeTitle}`,
     html: bookingInquiryReceived(data),
+    bcc: NOTIFICATION_EMAILS,
   });
 
-  const adminResult = await sendAdminNotification(
+  const adminResult = await sendAdminNotificationWithRetry(
     `New Booking: ${data.routeTitle} - ${data.leadName}`,
     adminNewBooking(data)
   );
@@ -130,13 +132,15 @@ export async function sendInquiryReceivedEmails(
   };
 
   // Send sequentially — shared cPanel SMTP often fails on concurrent sends
+  // BCC admin on customer email as delivery fallback for cPanel same-domain routing issues
   const customerResult = await sendEmail({
     to: data.email,
     subject: `Thank you for your ${typeLabels[data.type] || ""} inquiry`,
     html: inquiryReceived(data),
+    bcc: NOTIFICATION_EMAILS,
   });
 
-  const adminResult = await sendAdminNotification(
+  const adminResult = await sendAdminNotificationWithRetry(
     `New ${typeLabels[data.type] || ""} Inquiry from ${data.fullName}`,
     adminNewInquiry(data)
   );
@@ -219,7 +223,7 @@ export async function sendClimberDetailsRequestEmail(
 export async function sendClimberDetailsCompletedEmail(
   data: ClimberDetailsCompletedData
 ): Promise<EmailResult> {
-  return sendAdminNotification(
+  return sendAdminNotificationWithRetry(
     `Climber Details Completed - ${data.bookingRef}`,
     climberDetailsCompleted(data)
   );

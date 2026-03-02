@@ -2,7 +2,9 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateFAQSchema, generateBreadcrumbSchema, generateVideoSchema, generateItemListSchema } from "@/lib/seo";
+import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import prisma from "@/lib/prisma";
 import { getExperienceYears } from "@/lib/settings";
 import { SafarisPageClient } from "./SafarisPageClient";
@@ -29,7 +31,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = genMeta({
-  title: "Tanzania Safari Packages | Wildlife Adventures 2025-2026",
+  title: "Tanzania Safari Packages 2026-2027",
   description:
     "Explore Tanzania's incredible wildlife with our safari packages. From budget camping to luxury lodges, experience the Serengeti, Ngorongoro Crater, Tarangire and more. Book your dream African safari today.",
   url: "/tanzania-safaris/",
@@ -97,6 +99,23 @@ export default async function SafarisPage() {
 
   return (
     <div className="min-h-screen bg-[var(--surface)]">
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4">
+        <Breadcrumbs items={[{ label: "Tanzania Safari Packages" }]} />
+      </div>
+      <MultiJsonLd schemas={[
+        generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Tanzania Safari Packages", url: "/tanzania-safaris/" },
+        ]),
+        generateItemListSchema(safaris.map((safari) => ({
+          name: safari.title,
+          url: `/tanzania-safaris/${safari.slug}/`,
+          description: safari.overview || undefined,
+          image: safari.featuredImage || undefined,
+        }))),
+      ]} />
+
       {/* Hero Section - Immersive */}
       <section className="relative min-h-[70vh] flex items-center overflow-hidden">
         {/* Background */}
@@ -117,7 +136,7 @@ export default async function SafarisPage() {
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
               <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
-                2025-2026 Season
+                2026-2027 Season
               </span>
               <div className="flex items-center gap-1 text-white/80">
                 <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
@@ -368,45 +387,195 @@ export default async function SafarisPage() {
         </div>
       </section>
 
-      {/* SEO Content */}
+      {/* SEO Content — Expanded for depth */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h2>Tanzania Safari Experience</h2>
             <p>
               Tanzania offers some of the world&apos;s most spectacular wildlife viewing opportunities.
-              Home to the legendary Serengeti, the stunning Ngorongoro Crater, and the elephant-rich
-              Tarangire, a Tanzania safari is the ultimate African adventure.
+              With 22 national parks, 33 game reserves, and 44 game-controlled areas covering nearly a
+              third of the country, Tanzania protects one of the highest concentrations of wildlife on
+              Earth. Home to the legendary Serengeti, the stunning Ngorongoro Crater, and the
+              elephant-rich Tarangire, a Tanzania safari is the ultimate African adventure.
             </p>
 
             <h3>The Great Migration</h3>
             <p>
-              Witness nature&apos;s greatest spectacle as millions of wildebeest and zebra traverse
-              the Serengeti plains. This annual migration offers unforgettable sightings and
-              dramatic river crossings.
+              Witness nature&apos;s greatest spectacle as over 1.5 million wildebeest, 400,000 zebra,
+              and 200,000 gazelle traverse the Serengeti-Mara ecosystem in a continuous clockwise cycle.
+              This annual migration covers approximately 800 kilometers and offers some of the most
+              dramatic wildlife encounters on the planet.
+            </p>
+            <p>
+              The migration follows a predictable pattern: <strong>January-March</strong> sees the
+              calving season in the southern Serengeti, where over 500,000 wildebeest calves are born
+              in just a few weeks, attracting predators for spectacular hunting action.{" "}
+              <strong>April-June</strong> sees the herds moving northwest through the western corridor
+              with dramatic Grumeti River crossings. <strong>July-October</strong> brings the famous
+              Mara River crossings in the northern Serengeti — arguably the most iconic wildlife event
+              on Earth. <strong>November-December</strong> sees the herds begin their return south.
             </p>
 
             <h3>The Big Five</h3>
             <p>
-              Tanzania is one of the best destinations to see all of the Big Five: lion, leopard,
-              elephant, buffalo, and rhinoceros. Our experienced guides know exactly where to find them.
+              Tanzania is one of the best destinations in Africa to see all of the Big Five: lion,
+              leopard, elephant, Cape buffalo, and rhinoceros. The Ngorongoro Crater is particularly
+              renowned — it&apos;s one of the few places where you have a realistic chance of seeing
+              all five in a single day. The crater&apos;s enclosed ecosystem supports approximately
+              25,000 large mammals in just 260 square kilometers.
+            </p>
+            <p>
+              The Serengeti is home to one of the largest lion populations in Africa (over 3,000) and
+              is the best place in East Africa to spot leopards, particularly in the Seronera area.
+              Tarangire National Park is famous for its enormous elephant herds — up to 300 elephants
+              gathering at the Tarangire River during the dry season.
             </p>
 
-            <h3>Why Choose Snow Africa Adventure?</h3>
+            <h3>Tanzania&apos;s Top Safari Parks</h3>
+            <p>
+              The Northern Circuit is Tanzania&apos;s most popular safari region, with all major parks
+              accessible within 3-4 hours of our base in Arusha:
+            </p>
             <ul>
-              <li>Locally owned and operated since 2010</li>
-              <li>Expert guides with {experienceYears} years experience</li>
-              <li>Small group sizes for intimate experiences</li>
-              <li>Customizable itineraries to match your preferences</li>
-              <li>24/7 support during your safari</li>
-              <li>Competitive pricing with no hidden fees</li>
+              <li><strong>Serengeti National Park</strong> — 14,763 km² of endless plains, home to the Great Migration, massive lion prides, and superb year-round game viewing.</li>
+              <li><strong>Ngorongoro Crater</strong> — a UNESCO World Heritage Site and the world&apos;s largest intact volcanic caldera, with incredible wildlife density including the endangered black rhino.</li>
+              <li><strong>Tarangire National Park</strong> — famous for ancient baobab trees, the largest elephant herds in northern Tanzania, and over 550 bird species.</li>
+              <li><strong>Lake Manyara National Park</strong> — compact and diverse, known for tree-climbing lions, flamingo-lined shores, and lush groundwater forests.</li>
+              <li><strong>Arusha National Park</strong> — often overlooked but excellent for walking safaris, canoeing, and views of Mount Meru. Perfect for a first-day safari.</li>
+            </ul>
+
+            <h3>Safari Pricing Guide</h3>
+            <p>
+              Tanzania safari costs vary based on accommodation type, season, group size, and parks visited.
+              Here&apos;s what to expect per person per day (all-inclusive with park fees, transport, meals,
+              and accommodation):
+            </p>
+            <ul>
+              <li><strong>Budget camping safari:</strong> $250-$350/day — quality tents at public campsites, campfire meals</li>
+              <li><strong>Mid-range lodge safari:</strong> $350-$500/day — comfortable lodges with en-suite bathrooms, restaurant dining</li>
+              <li><strong>Luxury safari:</strong> $500-$800+/day — exclusive tented camps and lodges with gourmet cuisine, private guides</li>
+            </ul>
+            <p>
+              Park fees make up a significant portion of the cost (approximately $70-$82 per person per day
+              for major parks). Longer safaris offer better value per day since transport costs are
+              amortized. Group departures and shared safaris offer savings of 15-25% compared to
+              private trips.
+            </p>
+
+            <h3>Best Time for a Tanzania Safari</h3>
+            <p>
+              Tanzania offers excellent game viewing year-round, but the experience varies by season:
+            </p>
+            <ul>
+              <li><strong>Peak dry season (July-October):</strong> Best overall wildlife viewing as animals concentrate around water sources. Excellent for the Great Migration river crossings. Higher prices and more visitors.</li>
+              <li><strong>Short dry season (January-February):</strong> Excellent for calving season, predator action, and bird watching. Fewer crowds than peak season.</li>
+              <li><strong>Green season (March-May):</strong> Lowest prices, fewest tourists, lush landscapes. Some remote areas may be harder to access. Excellent photography conditions.</li>
+              <li><strong>Short rains (November-December):</strong> Brief afternoon showers, green scenery, migratory birds arrive. Good value season with excellent game viewing.</li>
+            </ul>
+
+            <h3>Why Choose Snow Africa Adventure?</h3>
+            <p>
+              Since 2008, Snow Africa Adventure has been providing authentic, personalized safari
+              experiences across Tanzania. Here&apos;s what sets us apart:
+            </p>
+            <ul>
+              <li><strong>100% locally owned and operated</strong> — founded by Florent and Caroline, your money supports Tanzanian families and communities directly</li>
+              <li><strong>Expert guides with {experienceYears} years experience</strong> — our guides are TATO-certified, English-speaking naturalists who know every park intimately</li>
+              <li><strong>Small group sizes</strong> — maximum 6 per vehicle for intimate wildlife encounters and flexibility</li>
+              <li><strong>Fully customizable itineraries</strong> — every safari tailored to your interests, timeline, and budget</li>
+              <li><strong>24/7 support during your safari</strong> — our operations team is always reachable by phone</li>
+              <li><strong>Competitive pricing with no hidden fees</strong> — transparent quotes with all park fees, meals, and transfers included</li>
+              <li><strong>4.9/5 on TripAdvisor</strong> with 115+ verified reviews and a Travelers&apos; Choice award</li>
+              <li><strong>TATO licensed</strong> (Tanzania Association of Tour Operators) and KPAP partner ensuring ethical porter treatment</li>
             </ul>
           </div>
         </div>
       </section>
+      {/* FAQ Section */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="section-label justify-center">Common Questions</span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+                Tanzania Safari FAQ
+              </h2>
+            </div>
+
+            <div className="space-y-4">
+              {SAFARI_FAQS.map((faq, index) => (
+                <details key={index} className="bg-white rounded-xl border border-[var(--border)] group">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg hover:text-[var(--primary)] transition-colors">
+                    {faq.question}
+                    <ArrowRight className="w-5 h-5 text-[var(--text-muted)] group-open:rotate-90 transition-transform shrink-0 ml-4" />
+                  </summary>
+                  <div className="px-6 pb-6 text-[var(--text-muted)] leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <MultiJsonLd schemas={[
+          generateFAQSchema(SAFARI_FAQS),
+          generateVideoSchema({
+            name: "Tanzania Safari Experience - Serengeti & Ngorongoro Crater",
+            description: "Experience the magic of a Tanzania safari with Snow Africa Adventure. Watch the Great Migration in the Serengeti, explore the Ngorongoro Crater, and encounter the Big Five up close.",
+            thumbnailUrl: "https://cdn.snowafricaadventure.com/images/tanzania-safari-thumbnail.jpg",
+            uploadDate: "2025-08-20",
+            duration: "PT6M45S",
+          }),
+        ]} />
+      </section>
     </div>
   );
 }
+
+const SAFARI_FAQS = [
+  {
+    question: "How much does a Tanzania safari cost?",
+    answer: "Tanzania safari prices range from $250-$800 per person per day depending on accommodation level. A budget camping safari starts around $250/day, mid-range lodge safaris from $350-$500/day, and luxury safaris from $500-$800/day. A typical 5-day safari costs $1,500-$4,000 per person including park fees, transport, meals, and accommodation.",
+  },
+  {
+    question: "What is the best time to go on safari in Tanzania?",
+    answer: "The dry season (June-October) offers the best wildlife viewing as animals gather around water sources and vegetation is thinner. The Great Migration river crossings happen July-October. January-March is calving season in the Serengeti with excellent predator action. The green season (November-May) offers lower prices, fewer crowds, and lush landscapes.",
+  },
+  {
+    question: "Can I see the Big Five on a Tanzania safari?",
+    answer: "Yes, Tanzania is one of the best countries to see all Big Five animals: lion, leopard, elephant, buffalo, and rhinoceros. The Ngorongoro Crater offers the best chance of seeing all five in a single day. The Serengeti is renowned for its lion and leopard populations, while Tarangire is famous for its large elephant herds.",
+  },
+  {
+    question: "How many days do I need for a Tanzania safari?",
+    answer: "We recommend a minimum of 3 days, but 5-7 days allows you to visit multiple parks and have a richer experience. A classic 5-day itinerary covers the Serengeti and Ngorongoro Crater. For a comprehensive Northern Circuit experience including Tarangire and Lake Manyara, plan for 7 days. You can combine a safari with Kilimanjaro trekking or a Zanzibar beach holiday.",
+  },
+  {
+    question: "What is the difference between camping and lodge safaris?",
+    answer: "Camping safaris use quality dome tents at public campsites — more affordable and adventurous, with campfire evenings under the stars. Lodge safaris provide comfortable rooms with private bathrooms, restaurants, and often swimming pools. Luxury safaris offer exclusive tented camps or lodges with gourmet dining and personalized service. All options include the same game drives and parks.",
+  },
+  {
+    question: "Is Tanzania safe for safari tourists?",
+    answer: "Yes, Tanzania is one of the safest African countries for tourism. Safari areas and national parks are well-managed with ranger patrols. Our experienced guides ensure your safety at all times during game drives. As with any travel, we recommend standard precautions with valuables and following your guide's instructions around wildlife.",
+  },
+  {
+    question: "What should I pack for a Tanzania safari?",
+    answer: "Essential items include neutral-colored clothing (khaki, olive, beige), a warm jacket for early morning drives, comfortable closed-toe shoes, sunscreen, insect repellent, binoculars, a camera with a zoom lens, and a hat. We provide a detailed packing list after booking. Avoid bright colors and camouflage patterns (camouflage is restricted in Tanzania).",
+  },
+  {
+    question: "When is the Great Migration in the Serengeti?",
+    answer: "The Great Migration is a year-round cycle. January-March: calving season in the southern Serengeti with over 500,000 wildebeest born. April-June: herds move northwest through the western corridor. July-October: dramatic river crossings at the Mara River. November-December: herds return south. We can plan your safari to coincide with the most spectacular phase.",
+  },
+  {
+    question: "Can I combine a safari with other activities?",
+    answer: "Absolutely. Our most popular combinations are: Safari + Kilimanjaro climb (typically safari first as recovery), Safari + Zanzibar beach holiday (3-5 days on the coast after safari), and Safari + cultural visits to Maasai villages. We specialize in tailor-made itineraries that combine multiple experiences into one seamless trip.",
+  },
+  {
+    question: "Do I need vaccinations for Tanzania?",
+    answer: "Yellow fever vaccination is required if arriving from an endemic country and recommended for all visitors. Other recommended vaccinations include hepatitis A, typhoid, and routine boosters. Malaria prophylaxis is strongly recommended for safari areas. Consult your travel doctor 6-8 weeks before your trip for personalized medical advice.",
+  },
+];
 
 function SafarisSkeleton() {
   return (

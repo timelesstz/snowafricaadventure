@@ -11,7 +11,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = genMeta({
-  title: "Tanzania Safari & Kilimanjaro Trekking | Snow Africa Adventure",
+  title: "Tanzania Safaris & Kilimanjaro Treks",
   description:
     "Locally owned Tanzania tour operator offering Kilimanjaro treks, wildlife safaris, and Zanzibar beach holidays. Expert guides, competitive prices, and authentic experiences since 2010.",
   url: "/",
@@ -478,7 +478,7 @@ export default async function HomePage() {
                 : "Join climbers from around the world on our scheduled departures. Fixed dates, lower prices, shared adventure."
               }
             </p>
-            <Link href="/kilimanjaro-join-group-departures/" className="btn btn-secondary">View 2025-2026 Departures</Link>
+            <Link href="/kilimanjaro-join-group-departures/" className="btn btn-secondary">View 2026-2027 Departures</Link>
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle, ArrowRight, Mail, Phone, Clock, Calendar } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Thank You | Snow Africa Adventure",
+  title: "Thank You",
   description: "Thank you for your inquiry. Our team will respond within 24 hours.",
   robots: { index: false, follow: false },
 };

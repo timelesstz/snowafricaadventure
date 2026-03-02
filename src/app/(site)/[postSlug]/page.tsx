@@ -5,10 +5,12 @@ import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, Tag, ChevronRight, Mountain, MapPin, BookOpen } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { generateMetadata as genMeta, generateArticleSchema } from "@/lib/seo";
+import { AUTHOR_PROFILES } from "@/lib/constants";
 import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 import { processContent, generateTableOfContents } from "@/lib/content-processor";
 import { BlogContentClient } from "@/components/blog/BlogContentClient";
+import { AuthorBio } from "@/components/blog/AuthorBio";
 
 interface PageProps {
   params: Promise<{ postSlug: string }>;
@@ -177,6 +179,8 @@ export default async function BlogPostPage({ params }: PageProps) {
               url: `/${post.slug}/`,
               publishedTime: post.publishedAt,
               author: post.author,
+              authorRole: AUTHOR_PROFILES[post.author]?.role,
+              authorCredentials: AUTHOR_PROFILES[post.author]?.credentials,
             })
           ),
         }}
@@ -292,6 +296,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </div>
                 </div>
               )}
+
+              {/* Author Bio */}
+              <div className="mt-8">
+                <AuthorBio authorName={post.author} />
+              </div>
 
               {/* Navigation */}
               <div className="mt-8 flex justify-between items-center">

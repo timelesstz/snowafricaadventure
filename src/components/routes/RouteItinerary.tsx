@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
+import { useTheme } from "@/components/theme-provider";
 
 interface ItineraryDay {
   day: number;
@@ -27,6 +28,12 @@ interface RouteItineraryProps {
   routeTitle?: string;
   routeSlug?: string;
   elevationProfileData?: ElevationPoint[] | null;
+  overview?: string;
+  highlights?: string[];
+  inclusions?: string[];
+  exclusions?: string[];
+  difficulty?: string;
+  successRate?: number;
 }
 
 // Generate elevation profile from itinerary data
@@ -100,9 +107,10 @@ function getElevationChange(elevation?: string): string | null {
   return null;
 }
 
-export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevationProfileData }: RouteItineraryProps) {
+export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevationProfileData, overview, highlights, inclusions, exclusions, difficulty, successRate }: RouteItineraryProps) {
   const [expandedDay, setExpandedDay] = useState<number | null>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const { logo } = useTheme();
 
   const elevationProfile = useMemo(() => {
     if (elevationProfileData && elevationProfileData.length > 0) {
@@ -133,7 +141,6 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
   const handleDownloadPdf = () => {
     setIsGeneratingPdf(true);
 
-    // Create a new window with print-friendly content
     const printWindow = window.open("", "_blank", "width=800,height=600");
     if (!printWindow) {
       setIsGeneratingPdf(false);
@@ -141,284 +148,698 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
       return;
     }
 
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>${routeTitle} - Full Itinerary | Snow Africa Adventure</title>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@400;500;600&display=swap');
+    const logoUrl = logo.logoUrl || logo.logoDarkUrl;
+    const routeUrl = `https://www.snowafricaadventure.com${routeSlug ? `/trekking/${routeSlug}/` : ""}`;
+    const year = new Date().getFullYear();
 
-          * { margin: 0; padding: 0; box-sizing: border-box; }
+    const logoHtml = logoUrl
+      ? `<img src="${logoUrl}" alt="Snow Africa Adventure" class="logo-img" />`
+      : `<div class="logo-text">Snow<span>Africa</span> Adventure</div>`;
 
-          body {
-            font-family: 'Sora', sans-serif;
-            color: #1e3a5f;
-            line-height: 1.6;
-            padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-          }
-
-          h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-
-          .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #F59E0B;
-          }
-
-          .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1e3a5f;
-            margin-bottom: 10px;
-          }
-
-          .logo span { color: #F59E0B; }
-
-          h1 {
-            font-size: 28px;
-            color: #1e3a5f;
-            margin-bottom: 8px;
-          }
-
-          .subtitle {
-            color: #64748b;
-            font-size: 14px;
-          }
-
-          .summary-box {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-          }
-
-          .summary-item strong {
-            display: block;
-            font-size: 20px;
-            color: #1e3a5f;
-            font-family: 'Outfit', sans-serif;
-          }
-
-          .summary-item span {
-            font-size: 12px;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-          }
-
-          .day-card {
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            page-break-inside: avoid;
-          }
-
-          .day-card.summit {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            color: white;
-            border: none;
-          }
-
-          .day-header {
-            background: #f8fafc;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-          }
-
-          .day-card.summit .day-header {
-            background: rgba(255,255,255,0.1);
-          }
-
-          .day-number {
-            width: 40px;
-            height: 40px;
-            background: #1e3a5f;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-          }
-
-          .day-card.summit .day-number {
-            background: #F59E0B;
-            color: #1e3a5f;
-          }
-
-          .day-title {
-            font-size: 16px;
-            font-weight: 600;
-          }
-
-          .day-badge {
-            background: #F59E0B;
-            color: #1e3a5f;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-left: auto;
-          }
-
-          .day-content {
-            padding: 20px;
-          }
-
-          .day-description {
-            margin-bottom: 15px;
-            color: #475569;
-            font-size: 14px;
-          }
-
-          .day-card.summit .day-description {
-            color: rgba(255,255,255,0.85);
-          }
-
-          .day-stats {
-            display: flex;
-            gap: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #e2e8f0;
-          }
-
-          .day-card.summit .day-stats {
-            border-top-color: rgba(255,255,255,0.1);
-          }
-
-          .stat-item strong {
-            display: block;
-            font-size: 14px;
-            font-family: 'Outfit', sans-serif;
-            color: #1e3a5f;
-          }
-
-          .day-card.summit .stat-item strong {
-            color: #F59E0B;
-          }
-
-          .stat-item span {
-            font-size: 11px;
-            color: #64748b;
-            text-transform: uppercase;
-          }
-
-          .day-card.summit .stat-item span {
-            color: rgba(255,255,255,0.6);
-          }
-
-          .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
-            text-align: center;
-            color: #64748b;
-            font-size: 12px;
-          }
-
-          .footer a {
-            color: #F59E0B;
-            text-decoration: none;
-          }
-
-          .contact-info {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            text-align: center;
-          }
-
-          .contact-info p {
-            margin: 5px 0;
-            font-size: 13px;
-          }
-
-          @media print {
-            body { padding: 20px; }
-            .day-card { break-inside: avoid; }
-          }
-        </style>
-      </head>
-      <body>
-        <div class="header">
-          <div class="logo">Snow<span>Africa</span> Adventure</div>
-          <h1>${routeTitle}</h1>
-          <p class="subtitle">${days.length}-Day Kilimanjaro Trekking Itinerary</p>
-        </div>
-
-        <div class="summary-box">
-          <div class="summary-item">
-            <strong>${days.length}</strong>
-            <span>Days</span>
+    const highlightsHtml = highlights && highlights.length > 0
+      ? `<div class="highlights-section">
+          <h2 class="section-title">
+            <span class="section-icon">&#9733;</span>
+            Route Highlights
+          </h2>
+          <div class="highlights-grid">
+            ${highlights.map(h => `<div class="highlight-item"><span class="highlight-check">&#10003;</span>${h}</div>`).join("")}
           </div>
-          <div class="summary-item">
-            <strong>${maxElevation.toLocaleString()}m</strong>
-            <span>Max Elevation</span>
-          </div>
-          <div class="summary-item">
-            <strong>5,895m</strong>
-            <span>Summit</span>
-          </div>
-        </div>
+        </div>`
+      : "";
 
-        ${days.map((day, index) => {
-          const badge = getDayBadge(day, index, days.length);
-          const isSummit = day.title.toLowerCase().includes("summit") || day.title.toLowerCase().includes("uhuru");
-          return `
-            <div class="day-card${isSummit ? " summit" : ""}">
-              <div class="day-header">
-                <div class="day-number">${day.day}</div>
-                <div class="day-title">${day.title}</div>
-                ${badge ? `<div class="day-badge">${badge}</div>` : ""}
+    const inclusionsHtml = (inclusions && inclusions.length > 0) || (exclusions && exclusions.length > 0)
+      ? `<div class="inclusions-section" style="page-break-before: auto;">
+          <h2 class="section-title">
+            <span class="section-icon">&#9776;</span>
+            What&rsquo;s Included &amp; Excluded
+          </h2>
+          <div class="inclusions-grid">
+            ${inclusions && inclusions.length > 0 ? `
+              <div class="inclusions-col">
+                <h3 class="inc-heading inc-included">Included</h3>
+                <ul class="inc-list">
+                  ${inclusions.map(i => `<li><span class="inc-icon included">&#10003;</span>${i}</li>`).join("")}
+                </ul>
               </div>
-              <div class="day-content">
-                <p class="day-description">${day.description}</p>
-                <div class="day-stats">
-                  ${day.elevation ? `<div class="stat-item"><strong>${day.elevation}</strong><span>Elevation</span></div>` : ""}
-                  ${day.distance ? `<div class="stat-item"><strong>${day.distance}</strong><span>Distance</span></div>` : ""}
-                  ${day.duration ? `<div class="stat-item"><strong>${day.duration}</strong><span>Duration</span></div>` : ""}
-                  ${day.camp ? `<div class="stat-item"><strong>${day.camp}</strong><span>Camp</span></div>` : ""}
-                </div>
+            ` : ""}
+            ${exclusions && exclusions.length > 0 ? `
+              <div class="inclusions-col">
+                <h3 class="inc-heading inc-excluded">Not Included</h3>
+                <ul class="inc-list">
+                  ${exclusions.map(e => `<li><span class="inc-icon excluded">&#10007;</span>${e}</li>`).join("")}
+                </ul>
               </div>
-            </div>
-          `;
-        }).join("")}
+            ` : ""}
+          </div>
+        </div>`
+      : "";
 
-        <div class="contact-info">
-          <p><strong>Ready to climb Kilimanjaro?</strong></p>
-          <p>Email: info@snowafricaadventure.com</p>
-          <p>Website: www.snowafricaadventure.com</p>
+    const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+  <title>${routeTitle} - Full Itinerary | Snow Africa Adventure</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@300;400;500;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Sora', -apple-system, sans-serif;
+      color: #1e293b;
+      line-height: 1.65;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; line-height: 1.25; }
+
+    /* ===== COVER HEADER ===== */
+    .cover-header {
+      text-align: center;
+      padding: 48px 20px 36px;
+      position: relative;
+    }
+
+    .cover-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #F59E0B, transparent);
+    }
+
+    .logo-img {
+      height: 56px;
+      width: auto;
+      margin-bottom: 24px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span { color: #F59E0B; }
+
+    .cover-label {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #F59E0B;
+      margin-bottom: 12px;
+      padding: 5px 16px;
+      border: 1.5px solid #F59E0B;
+      border-radius: 20px;
+    }
+
+    .cover-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-subtitle {
+      font-size: 15px;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin: 32px 0;
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 4px;
+    }
+
+    .stat-box {
+      flex: 1;
+      text-align: center;
+      padding: 16px 8px;
+      border-radius: 12px;
+    }
+
+    .stat-box.featured {
+      background: #1e293b;
+    }
+
+    .stat-box .stat-value {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.2;
+    }
+
+    .stat-box.featured .stat-value {
+      color: #F59E0B;
+    }
+
+    .stat-box .stat-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .stat-box.featured .stat-label {
+      color: #94a3b8;
+    }
+
+    /* ===== INTRO SECTION ===== */
+    .intro-section {
+      margin-bottom: 36px;
+      padding: 28px 32px;
+      background: linear-gradient(135deg, #fefce8 0%, #fff7ed 100%);
+      border-radius: 14px;
+      border-left: 4px solid #F59E0B;
+    }
+
+    .intro-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 10px;
+    }
+
+    .intro-section p {
+      font-size: 13.5px;
+      color: #475569;
+      line-height: 1.75;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: #fef3c7;
+      color: #d97706;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    /* ===== HIGHLIGHTS ===== */
+    .highlights-section {
+      margin-bottom: 36px;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #334155;
+      font-weight: 500;
+    }
+
+    .highlight-check {
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ===== ITINERARY HEADER ===== */
+    .itinerary-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .itinerary-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* ===== DAY CARDS ===== */
+    .day-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .day-card.summit {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+      border: 2px solid #F59E0B;
+    }
+
+    .day-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .day-card.summit .day-header {
+      background: rgba(245,158,11,0.08);
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .day-number {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      background: #1e293b;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .day-card.summit .day-number {
+      background: #F59E0B;
+      color: #1e293b;
+    }
+
+    .day-title-group {
+      flex: 1;
+    }
+
+    .day-title {
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      line-height: 1.3;
+    }
+
+    .day-meals {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .day-card.summit .day-meals {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .day-badge {
+      background: #F59E0B;
+      color: #1e293b;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .day-card.summit .day-badge {
+      background: #F59E0B;
+      color: #1e293b;
+    }
+
+    .day-content {
+      padding: 18px 20px;
+    }
+
+    .day-description {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .day-card.summit .day-description {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .day-stats {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .day-card.summit .day-stats {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+
+    .day-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-stat-item strong {
+      font-size: 13px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.3;
+    }
+
+    .day-card.summit .day-stat-item strong {
+      color: #F59E0B;
+    }
+
+    .day-stat-item span {
+      font-size: 10px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .day-card.summit .day-stat-item span {
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ===== INCLUSIONS ===== */
+    .inclusions-section {
+      margin-top: 36px;
+      margin-bottom: 36px;
+    }
+
+    .inclusions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .inclusions-col {}
+
+    .inc-heading {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .inc-heading.inc-included { color: #16a34a; }
+    .inc-heading.inc-excluded { color: #dc2626; }
+
+    .inc-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .inc-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 12.5px;
+      color: #475569;
+      border-bottom: 1px solid #f1f5f9;
+      line-height: 1.5;
+    }
+
+    .inc-list li:last-child {
+      border-bottom: none;
+    }
+
+    .inc-icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .inc-icon.included {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .inc-icon.excluded {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      margin-top: 40px;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      color: white;
+      page-break-inside: avoid;
+    }
+
+    .cta-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .cta-section .cta-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .cta-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px 12px;
+    }
+
+    .cta-item .cta-icon {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .cta-item .cta-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cta-item .cta-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #F59E0B;
+      margin-top: 2px;
+    }
+
+    .cta-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+
+    .cta-website {
+      font-size: 13px;
+      color: #F59E0B;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 32px;
+      padding: 20px 0;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 11px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .footer a {
+      color: #F59E0B;
+      text-decoration: none;
+    }
+
+    .footer p {
+      margin: 3px 0;
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      body { padding: 0 24px; }
+      .day-card { break-inside: avoid; page-break-inside: avoid; }
+      .inclusions-section { break-inside: avoid; }
+      .cta-section { break-inside: avoid; }
+      .highlights-section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER HEADER -->
+  <div class="cover-header">
+    ${logoHtml}
+    <div class="cover-label">Full Itinerary</div>
+    <h1 class="cover-title">${routeTitle}</h1>
+    <p class="cover-subtitle">${days.length}-Day Kilimanjaro Trekking Adventure</p>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-box">
+      <span class="stat-value">${days.length}</span>
+      <span class="stat-label">Days</span>
+    </div>
+    <div class="stat-box featured">
+      <span class="stat-value">5,895m</span>
+      <span class="stat-label">Summit</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-value">${maxElevation.toLocaleString()}m</span>
+      <span class="stat-label">Max Elevation</span>
+    </div>
+    ${difficulty ? `<div class="stat-box"><span class="stat-value">${difficulty}</span><span class="stat-label">Difficulty</span></div>` : ""}
+    ${successRate ? `<div class="stat-box"><span class="stat-value">${successRate}%</span><span class="stat-label">Success Rate</span></div>` : ""}
+  </div>
+
+  <!-- INTRO / OVERVIEW -->
+  ${overview ? `
+  <div class="intro-section">
+    <h2>About This Route</h2>
+    <p>${overview}</p>
+  </div>` : ""}
+
+  <!-- HIGHLIGHTS -->
+  ${highlightsHtml}
+
+  <!-- DAY-BY-DAY ITINERARY -->
+  <div class="itinerary-header">
+    <span class="section-icon">&#128197;</span>
+    <h2>Day-by-Day Itinerary</h2>
+  </div>
+
+  ${days.map((day, index) => {
+    const badge = getDayBadge(day, index, days.length);
+    const isSummit = day.title.toLowerCase().includes("summit") || day.title.toLowerCase().includes("uhuru");
+    return `
+    <div class="day-card${isSummit ? " summit" : ""}">
+      <div class="day-header">
+        <div class="day-number">${day.day}</div>
+        <div class="day-title-group">
+          <div class="day-title">${day.title}</div>
+          ${day.meals ? `<div class="day-meals">&#127860; ${day.meals}</div>` : ""}
         </div>
-
-        <div class="footer">
-          <p>Generated from <a href="https://www.snowafricaadventure.com${routeSlug ? `/trekking/${routeSlug}/` : ""}">Snow Africa Adventure</a></p>
-          <p>© ${new Date().getFullYear()} Snow Africa Adventure. All rights reserved.</p>
+        ${badge ? `<div class="day-badge">${badge}</div>` : ""}
+      </div>
+      <div class="day-content">
+        <p class="day-description">${day.description}</p>
+        <div class="day-stats">
+          ${day.elevation ? `<div class="day-stat-item"><strong>${day.elevation}</strong><span>Elevation</span></div>` : ""}
+          ${day.distance ? `<div class="day-stat-item"><strong>${day.distance}</strong><span>Distance</span></div>` : ""}
+          ${day.duration ? `<div class="day-stat-item"><strong>${day.duration}</strong><span>Duration</span></div>` : ""}
+          ${day.camp ? `<div class="day-stat-item"><strong>${day.camp}</strong><span>Camp</span></div>` : ""}
         </div>
+      </div>
+    </div>`;
+  }).join("")}
 
-        <script>
-          window.onload = function() {
-            window.print();
-            window.onafterprint = function() {
-              window.close();
-            };
-          };
-        </script>
-      </body>
-      </html>
-    `;
+  <!-- INCLUSIONS / EXCLUSIONS -->
+  ${inclusionsHtml}
+
+  <!-- CONTACT CTA -->
+  <div class="cta-section">
+    <h2>Ready to Conquer Kilimanjaro?</h2>
+    <p class="cta-subtitle">Our expert team is ready to help you plan your adventure</p>
+    <div class="cta-grid">
+      <div class="cta-item">
+        <div class="cta-icon">&#9993;</div>
+        <div class="cta-label">Email</div>
+        <div class="cta-value">info@snowafricaadventure.com</div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon">&#9742;</div>
+        <div class="cta-label">Phone / WhatsApp</div>
+        <div class="cta-value">+255 766 657 854</div>
+      </div>
+      <div class="cta-item">
+        <div class="cta-icon">&#127758;</div>
+        <div class="cta-label">Website</div>
+        <div class="cta-value">snowafricaadventure.com</div>
+      </div>
+    </div>
+    <div class="cta-divider"></div>
+    <a href="${routeUrl}" class="cta-website">View this itinerary online &rarr;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>&copy; ${year} Snow Africa Adventure. All rights reserved.</p>
+    <p>MEC House, Plot no 161, Second floor, Mianzini Area, Arusha, Tanzania</p>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() { window.print(); }, 500);
+      window.onafterprint = function() { window.close(); };
+    };
+  </script>
+</body>
+</html>`;
 
     printWindow.document.write(htmlContent);
     printWindow.document.close();

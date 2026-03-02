@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, MapPin, Users, DollarSign } from "lucide-react";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { prisma } from "@/lib/prisma";
 import { PageHero } from "@/components/layout/PageHero";
 
@@ -131,6 +132,13 @@ export default async function DayTripsPage() {
 
   return (
     <div>
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Tanzania Day Tours", url: "/tanzania-day-tours/" },
+        ])}
+      />
+
       {/* Hero */}
       <PageHero pageSlug="tanzania-day-tours" />
 

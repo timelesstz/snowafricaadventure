@@ -4,14 +4,15 @@ import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Globe, ArrowRight } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { SITE_CONFIG } from "@/lib/constants";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { getExperienceYears } from "@/lib/settings";
 import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
-  title: "Contact Us",
+  title: "Contact Us - Get a Free Quote",
   description:
-    "Get in touch with Snow Africa Adventure. Contact us for Kilimanjaro treks, Tanzania safaris, and Zanzibar holidays. We respond within 24 hours.",
+    "Contact Snow Africa Adventure in Arusha, Tanzania. Free quotes for Kilimanjaro treks, wildlife safaris & Zanzibar holidays. Call +255 766 657 854 or email. We respond within 24 hours.",
   url: "/contact-us/",
 });
 
@@ -95,6 +96,16 @@ export default async function ContactPage() {
   const experienceYears = await getExperienceYears();
   return (
     <div className="bg-white">
+      <MultiJsonLd
+        schemas={[
+          generateBreadcrumbSchema([
+            { name: "Home", url: "/" },
+            { name: "Contact Us", url: "/contact-us/" },
+          ]),
+          generateFAQSchema(faqs),
+        ]}
+      />
+
       {/* Hero */}
       <PageHero pageSlug="contact-us" />
 

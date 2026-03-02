@@ -23,7 +23,34 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/admin/", "/api/", "/_next/"],
       },
-      // Bad bots — block everything
+      // AI search bots — allow for GEO/AEO visibility (citations in AI search results)
+      {
+        userAgent: [
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "Amazonbot",
+        ],
+        allow: "/",
+        disallow: ["/admin/", "/api/", "/_next/"],
+      },
+      // AI training-only bots — block (protect content from training)
+      {
+        userAgent: [
+          "GPTBot",
+          "ClaudeBot",
+          "CCBot",
+          "Google-Extended",
+          "anthropic-ai",
+          "Bytedance",
+          "ByteSpider",
+          "Meta-ExternalAgent",
+          "cohere-ai",
+          "Applebot-Extended",
+        ],
+        disallow: "/",
+      },
+      // SEO crawlers — block (saves bandwidth, use tools directly instead)
       {
         userAgent: [
           "AhrefsBot",
@@ -31,12 +58,6 @@ export default function robots(): MetadataRoute.Robots {
           "MJ12bot",
           "DotBot",
           "PetalBot",
-          "ByteSpider",
-          "GPTBot",
-          "CCBot",
-          "ClaudeBot",
-          "Google-Extended",
-          "Bytedance",
           "DataForSeoBot",
         ],
         disallow: "/",

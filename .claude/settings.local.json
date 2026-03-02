@@ -41,7 +41,21 @@
       "Bash(powershell -Command \"\\(Invoke-WebRequest -Uri ''http://localhost:3001/blog/'' -UseBasicParsing\\).Content\")",
       "Bash(powershell -Command \"try { $r = Invoke-WebRequest -Uri ''http://localhost:3001/blog/'' -UseBasicParsing; $r.Content.Substring\\(0, [Math]::Min\\(5000, $r.Content.Length\\)\\) } catch { Write-Host $_.Exception.Message }\")",
       "Bash(xxd:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "WebFetch(domain:snowafricaadventure.com)",
+      "WebFetch(domain:www.safaribookings.com)",
+      "WebFetch(domain:altezzatravel.com)",
+      "WebFetch(domain:www.zaratours.com)",
+      "WebFetch(domain:www.tripadvisor.com)",
+      "Bash(npx next lint --quiet)",
+      "Bash(npx next lint)",
+      "Bash(python -c \" import json, sys data = json.load\\(sys.stdin\\) for p in data: print\\(p.get\\(''slug'',''?''\\), ''|'', p.get\\(''title'',''?''\\)[:60]\\) \")",
+      "Bash(npm run db:seed:seo-content)",
+      "Bash(wc -l \"l:/snowafrica/src/app/\\(site\\)/tanzania-camping-safaris/page.tsx\" \"l:/snowafrica/src/app/\\(site\\)/tanzania-lodge-safaris/page.tsx\" \"l:/snowafrica/src/app/\\(site\\)/luxury-safaris-tanzania/page.tsx\" \"l:/snowafrica/src/app/\\(site\\)/wildlife-safaris-tanzania/page.tsx\")",
+      "Bash(wc -l /l/snowafrica/src/app/\\\\\\(site\\\\\\)/tanzania-beach-holidays/page.tsx /l/snowafrica/src/app/\\\\\\(site\\\\\\)/best-tanzania-tour-operator/page.tsx /l/snowafrica/src/app/\\\\\\(site\\\\\\)/climbing-kilimanjaro/page.tsx)",
+      "Bash(npx next lint --file src/app/\\\\\\(site\\\\\\)/mount-kilimanjaro-height/page.tsx --file src/app/\\\\\\(site\\\\\\)/best-time-to-climb-kilimanjaro/page.tsx --file src/app/\\\\\\(site\\\\\\)/kilimanjaro-climbing-gear/page.tsx --file src/app/\\\\\\(site\\\\\\)/kilimanjaro-prices/page.tsx --file src/app/\\\\\\(site\\\\\\)/kilimanjaro-climbing-companies/page.tsx --file src/app/\\\\\\(site\\\\\\)/african-safaris/page.tsx --file src/app/\\\\\\(site\\\\\\)/tanzania-camping-safaris/page.tsx --file src/app/\\\\\\(site\\\\\\)/tanzania-lodge-safaris/page.tsx --file src/app/\\\\\\(site\\\\\\)/luxury-safaris-tanzania/page.tsx --file src/app/\\\\\\(site\\\\\\)/wildlife-safaris-tanzania/page.tsx --file src/app/\\\\\\(site\\\\\\)/tanzania-beach-holidays/page.tsx --file src/app/\\\\\\(site\\\\\\)/best-tanzania-tour-operator/page.tsx --file src/app/\\\\\\(site\\\\\\)/climbing-kilimanjaro/page.tsx)",
+"Bash(gh auth status)",
+      "Bash(gh auth token)"
     ]
   }
 }

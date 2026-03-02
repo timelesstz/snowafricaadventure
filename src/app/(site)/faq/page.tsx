@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { MessageCircle, ChevronDown } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/layout/PageHero";
 
 export const metadata: Metadata = genMeta({
@@ -190,8 +191,21 @@ function FAQAccordion({ faq, index }: { faq: FAQItem; index: number }) {
 }
 
 export default function FAQPage() {
+  // Flatten all FAQs for schema
+  const allFaqs = faqCategories.flatMap((cat) => cat.faqs);
+
   return (
     <div className="bg-white">
+      <MultiJsonLd
+        schemas={[
+          generateBreadcrumbSchema([
+            { name: "Home", url: "/" },
+            { name: "FAQ", url: "/faq/" },
+          ]),
+          generateFAQSchema(allFaqs),
+        ]}
+      />
+
       {/* Hero */}
       <PageHero pageSlug="faq" />
 

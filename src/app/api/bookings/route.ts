@@ -178,7 +178,19 @@ export async function POST(request: NextRequest) {
       }),
     ]);
 
-    if (emailResult.status === "rejected") {
+    // Build email status for response (matches inquiry route pattern)
+    let emailStatus = { customer: false, admin: false, error: "" };
+    if (emailResult.status === "fulfilled") {
+      emailStatus.customer = emailResult.value.customer.success;
+      emailStatus.admin = emailResult.value.admin.success;
+      if (!emailResult.value.customer.success) {
+        emailStatus.error = `Customer: ${emailResult.value.customer.error}`;
+      }
+      if (!emailResult.value.admin.success) {
+        emailStatus.error += `${emailStatus.error ? "; " : ""}Admin: ${emailResult.value.admin.error}`;
+      }
+    } else {
+      emailStatus.error = `Email sending failed: ${emailResult.reason}`;
       console.error("Failed to send booking emails:", emailResult.reason);
     }
     if (notifResult.status === "rejected") {
@@ -198,6 +210,7 @@ export async function POST(request: NextRequest) {
           totalPrice,
           depositAmount,
         },
+        emailStatus,
       },
       { status: 201 }
     );

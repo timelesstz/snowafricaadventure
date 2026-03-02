@@ -152,6 +152,130 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // =====================================================
+      // TREKKING ROUTE CLEAN SLUG REDIRECTS
+      // Clean URLs → actual DB slugs (with duration prefix)
+      // =====================================================
+      {
+        source: "/trekking/lemosho-route/",
+        destination: "/trekking/8-days-lemosho-route/",
+        permanent: true,
+      },
+      {
+        source: "/trekking/machame-route/",
+        destination: "/trekking/7-days-machame-route/",
+        permanent: true,
+      },
+      {
+        source: "/trekking/marangu-route/",
+        destination: "/trekking/6-days-marangu-route/",
+        permanent: true,
+      },
+      {
+        source: "/trekking/rongai-route/",
+        destination: "/trekking/7-days-rongai-route/",
+        permanent: true,
+      },
+      {
+        source: "/trekking/umbwe-route/",
+        destination: "/trekking/6-days-umbwe-route/",
+        permanent: true,
+      },
+      // Northern Circuit & Western Breach have no dedicated pages yet
+      {
+        source: "/trekking/northern-circuit-route/",
+        destination: "/trekking/",
+        permanent: false,
+      },
+      {
+        source: "/trekking/western-breach-route/",
+        destination: "/trekking/8-days-lemosho-route/",
+        permanent: false,
+      },
+
+      // =====================================================
+      // SAFARI PACKAGE CLEAN SLUG REDIRECTS
+      // =====================================================
+      {
+        source: "/tanzania-safaris/3-day-budget-safari/",
+        destination: "/tanzania-safaris/3-days-tanzania-budget-camping-safari-tarangire-lake-manyara-and-ngorongoro-crater/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/5-day-northern-circuit-safari/",
+        destination: "/tanzania-safaris/5-days-tanzania-luxury-safarilake-manyara-serengeti-ngorongoro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/7-day-great-migration-safari/",
+        destination: "/tanzania-safaris/6-days-tanzania-migration-safari-ndutu-manyara-serengeti-ngorongoro-crater/",
+        permanent: true,
+      },
+
+      // =====================================================
+      // MOUNTAIN PAGES → DEDICATED TREKKING ROUTES
+      // =====================================================
+      {
+        source: "/mount-meru/",
+        destination: "/trekking/4-days-mount-meru-climbing/",
+        permanent: true,
+      },
+      {
+        source: "/ol-doinyo-lengai/",
+        destination: "/trekking/3-days-2-nights-oldoinyo-lengai-climbing/",
+        permanent: true,
+      },
+      {
+        source: "/mount-kenya/",
+        destination: "/trekking/",
+        permanent: false,
+      },
+
+      // =====================================================
+      // BLOG POSTS — redirected to equivalent existing posts
+      // (original slugs not in DB; content exists under different slugs)
+      // =====================================================
+      {
+        source: "/best-time-climb-kilimanjaro/",
+        destination: "/best-time-to-climb-mount-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/best-time-visit-tanzania/",
+        destination: "/best-time-to-visit-tanzania-for-safari/",
+        permanent: true,
+      },
+      {
+        source: "/great-migration-guide/",
+        destination: "/great-wildebeest-migration/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-packing-list/",
+        destination: "/mount-kilimanjaro-packing-list-2025/",
+        permanent: true,
+      },
+      {
+        source: "/machame-vs-lemosho-route-comparison/",
+        destination: "/trekking/",
+        permanent: true,
+      },
+      {
+        source: "/safari-photography-tips/",
+        destination: "/photography-safari-tanzania/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-visa-requirements/",
+        destination: "/contact-us/",
+        permanent: true,
+      },
+      {
+        source: "/things-to-do-zanzibar/",
+        destination: "/zanzibar-beach-escapes/",
+        permanent: true,
+      },
+
       // Common alternate URLs → canonical routes
       {
         source: "/kilimanjaro-trekking/",

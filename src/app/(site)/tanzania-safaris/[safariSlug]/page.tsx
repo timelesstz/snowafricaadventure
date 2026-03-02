@@ -164,7 +164,17 @@ export default async function SafariPage({ params }: PageProps) {
 
       {/* Day by Day Timeline */}
       {itinerary.length > 0 && (
-        <DayByDayTimeline itinerary={itinerary} />
+        <DayByDayTimeline
+          itinerary={itinerary}
+          safariTitle={safari.title}
+          safariSlug={safari.slug}
+          overview={safari.overview}
+          highlights={safari.highlights}
+          inclusions={safari.inclusions || defaultInclusions}
+          exclusions={safari.exclusions || defaultExclusions}
+          parks={parksCount}
+          gameDrives={gameDrives}
+        />
       )}
 
       {/* Inclusions */}

@@ -13,7 +13,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   ...genMeta({
-    title: "Kilimanjaro Join Group Departures 2026-2027",
+    title: "Kilimanjaro Group Departures 2026-2027",
     description:
       "Join our scheduled Kilimanjaro group climbs with fixed departure dates. Share the adventure with fellow climbers and save. Book your spot today!",
     url: "/kilimanjaro-join-group-departures/",

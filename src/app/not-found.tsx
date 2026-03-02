@@ -1,27 +1,17 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Mountain, Compass, Home, Search, ArrowRight } from "lucide-react";
-import { useEffect } from "react";
+import { NotFoundTracker } from "@/components/NotFoundTracker";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
-  // Track 404 hit
-  useEffect(() => {
-    fetch("/api/track-404", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        url: window.location.pathname + window.location.search,
-        userAgent: navigator.userAgent,
-        referer: document.referrer || null,
-      }),
-    }).catch(() => {
-      // Fire and forget - don't handle errors
-    });
-  }, []);
-
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-slate-50 to-white">
+      <NotFoundTracker />
       <div className="container mx-auto px-4 py-16 text-center">
         {/* 404 Illustration */}
         <div className="relative mb-8">

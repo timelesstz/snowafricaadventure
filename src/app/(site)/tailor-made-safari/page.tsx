@@ -3,15 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check, Users, Calendar, MapPin, Star, ChevronDown, Shield, Compass } from "lucide-react";
 import { TailorMadeForm } from "@/components/forms/TailorMadeForm";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { prisma } from "@/lib/prisma";
 import { getExperienceYears } from "@/lib/settings";
 import { CmsPageRenderer } from "@/app/(site)/p/[slug]/CmsPageRenderer";
 
 export const metadata: Metadata = genMeta({
-  title: "Tailor-Made Safari",
+  title: "Tailor-Made Tanzania Safari",
   description:
-    "Create your perfect Tanzania safari with our custom itinerary service. We design unique journeys based on your interests, budget, and travel style.",
+    "Design your perfect Tanzania safari. Custom itineraries for the Serengeti, Ngorongoro, Kilimanjaro & Zanzibar. Budget to luxury options. Expert local guides plan every detail.",
   url: "/tailor-made-safari/",
 });
 
@@ -133,9 +134,37 @@ export default async function TailorMadeSafariPage() {
     );
   }
 
+  const tailorFaqs = [
+    {
+      question: "How far in advance should I book?",
+      answer:
+        "We recommend at least 1 month for peak season (July-October, December-February) to secure the best lodges. Shorter notice is possible during shoulder seasons. We also welcome last-minute bookings — just keep in mind that accommodation options may be limited based on availability, so a degree of flexibility is recommended.",
+    },
+    {
+      question: "What's the minimum duration for a safari?",
+      answer:
+        "While we offer day trips, we recommend at least 3-4 days for a proper safari experience. 5-7 days allows you to explore multiple parks without rushing.",
+    },
+    {
+      question: "Can you accommodate special requirements?",
+      answer:
+        "Absolutely! Whether it's dietary restrictions, mobility considerations, or specific interests like bird watching or photography, we'll customize accordingly.",
+    },
+  ];
+
   // Fallback: hardcoded version
   return (
     <div>
+      <MultiJsonLd
+        schemas={[
+          generateBreadcrumbSchema([
+            { name: "Home", url: "/" },
+            { name: "Tailor-Made Safari", url: "/tailor-made-safari/" },
+          ]),
+          generateFAQSchema(tailorFaqs),
+        ]}
+      />
+
       {/* Hero */}
       <section className="relative min-h-[70vh]">
         <div className="absolute inset-0">

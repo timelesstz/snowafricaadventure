@@ -33,7 +33,7 @@ const DEFAULT_HEROES: Record<string, PageHeroData> = {
     title: "Tanzania Safari\nPackages",
     subtitle:
       "From the endless plains of the Serengeti to the wildlife-rich Ngorongoro Crater, experience Africa's most spectacular safari destinations with Tanzania's trusted local operator.",
-    badgeText: "2025-2026 Season",
+    badgeText: "2026-2027 Season",
     ctaPrimaryText: "Explore Safaris",
     ctaPrimaryUrl: "#safaris",
     ctaSecondaryText: "Design Your Own Safari",

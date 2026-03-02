@@ -318,7 +318,18 @@ export default async function RoutePage({ params }: PageProps) {
 
               {/* Itinerary */}
               {itinerary.length > 0 && (
-                <RouteItinerary days={itinerary} routeTitle={route.title} routeSlug={route.slug} elevationProfileData={route.elevationProfile as { day: number; elevation: number; camp: string }[] | null} />
+                <RouteItinerary
+                  days={itinerary}
+                  routeTitle={route.title}
+                  routeSlug={route.slug}
+                  elevationProfileData={route.elevationProfile as { day: number; elevation: number; camp: string }[] | null}
+                  overview={route.overview}
+                  highlights={route.highlights}
+                  inclusions={route.inclusions}
+                  exclusions={route.exclusions}
+                  difficulty={route.physicalRating || undefined}
+                  successRate={route.successRate || undefined}
+                />
               )}
 
               {/* Inclusions/Exclusions */}
