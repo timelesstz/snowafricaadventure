@@ -2,7 +2,7 @@
  * TEMPORARY API route to run blog post SEO updates.
  * Protected by CRON_SECRET. DELETE this file after use.
  *
- * Usage: POST /api/admin/run-update
+ * Usage: POST /api/cron/run-update
  * Header: Authorization: Bearer <CRON_SECRET>
  */
 
