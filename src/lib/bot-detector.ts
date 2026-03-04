@@ -24,6 +24,9 @@ const BOT_PATTERNS: BotPattern[] = [
   { pattern: /whatsapp/i, name: "WhatsApp Bot", category: "good" },
   { pattern: /telegrambot/i, name: "Telegram Bot", category: "good" },
 
+  // Good bots — AI Search (citations)
+  { pattern: /claudebot/i, name: "ClaudeBot", category: "good" },
+
   // Good bots — Monitoring & Uptime
   { pattern: /uptimerobot/i, name: "UptimeRobot", category: "good" },
   { pattern: /pingdom/i, name: "Pingdom", category: "good" },
@@ -40,10 +43,9 @@ const BOT_PATTERNS: BotPattern[] = [
   { pattern: /dataforseobot/i, name: "DataForSeoBot", category: "bad" },
   { pattern: /screaming frog/i, name: "Screaming Frog", category: "bad" },
 
-  // Bad bots — AI Scrapers
+  // Bad bots — AI Training Scrapers
   { pattern: /gptbot/i, name: "GPTBot", category: "bad" },
   { pattern: /ccbot/i, name: "CCBot", category: "bad" },
-  { pattern: /claudebot/i, name: "ClaudeBot", category: "bad" },
   { pattern: /google-extended/i, name: "Google-Extended", category: "bad" },
   { pattern: /bytedance/i, name: "Bytedance", category: "bad" },
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, Tag, ChevronRight, Mountain, MapPin, BookOpen } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { generateMetadata as genMeta, generateArticleSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { AUTHOR_PROFILES } from "@/lib/constants";
 import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
@@ -141,6 +141,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.metaTitle || post.title,
     description: post.metaDescription || post.excerpt,
     url: `/${post.slug}/`,
+    image: post.featuredImage || undefined,
     type: "article",
     publishedTime: post.publishedAt,
     author: post.author,
@@ -215,6 +216,18 @@ export default async function BlogPostPage({ params }: PageProps) {
               authorRole: AUTHOR_PROFILES[post.author]?.role,
               authorCredentials: AUTHOR_PROFILES[post.author]?.credentials,
             })
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateBreadcrumbSchema([
+              { name: "Home", url: "/" },
+              { name: "Blog", url: "/blog/" },
+              { name: post.title, url: `/${post.slug}/` },
+            ])
           ),
         }}
       />

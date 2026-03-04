@@ -28,6 +28,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: [
           "OAI-SearchBot",
           "ChatGPT-User",
+          "ClaudeBot",
           "PerplexityBot",
           "Amazonbot",
         ],
@@ -38,7 +39,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: [
           "GPTBot",
-          "ClaudeBot",
           "CCBot",
           "Google-Extended",
           "anthropic-ai",
