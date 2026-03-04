@@ -338,6 +338,126 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // =====================================================
+      // CASE-SENSITIVE & INCOMPLETE URL FIXES (GSC noindex)
+      // =====================================================
+      // Capital K variant
+      {
+        source: "/Kilimanjaro-join-group-departures/",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      {
+        source: "/Kilimanjaro-join-group-departures",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      // Incomplete URL fragments
+      {
+        source: "/kilimanjaro-join-/",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-join-",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      // Case-sensitive blog slug fix
+      {
+        source: "/50-reasons-to-visit-Tanzania/",
+        destination: "/50-reasons-to-visit-tanzania/",
+        permanent: true,
+      },
+
+      // =====================================================
+      // OLD STANDALONE PAGE URLS (no /trekking/ prefix)
+      // =====================================================
+      {
+        source: "/marangu-route/",
+        destination: "/trekking/6-days-marangu-route/",
+        permanent: true,
+      },
+      {
+        source: "/umbwe-route/",
+        destination: "/trekking/6-days-umbwe-route/",
+        permanent: true,
+      },
+      {
+        source: "/mount-kilimanjaro/",
+        destination: "/trekking/",
+        permanent: true,
+      },
+      {
+        source: "/4-days-mount-meru/",
+        destination: "/trekking/4-days-mount-meru-climbing/",
+        permanent: true,
+      },
+
+      // =====================================================
+      // DESTINATION PAGES WITHOUT PREFIX
+      // =====================================================
+      {
+        source: "/arusha-national-park/",
+        destination: "/tanzania-destinations/arusha-national-park/",
+        permanent: true,
+      },
+      {
+        source: "/tarangire-national-park/",
+        destination: "/tanzania-destinations/tarangire-national-park/",
+        permanent: true,
+      },
+
+      // =====================================================
+      // OLD WORDPRESS PAGES → RELEVANT CURRENT PAGES
+      // =====================================================
+      {
+        source: "/packing-guide/",
+        destination: "/kilimanjaro-trekking-packing-list/",
+        permanent: true,
+      },
+      {
+        source: "/faqs/",
+        destination: "/contact-us/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-travel-itineraries/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/term-conditions/",
+        destination: "/terms-and-conditions/",
+        permanent: true,
+      },
+      // Typo in crawled URL (missing trailing 't')
+      {
+        source: "/kilimanjaros-2025-wildlife-forecas/",
+        destination: "/kilimanjaros-2025-wildlife-forecast/",
+        permanent: true,
+      },
+      // Safari variant slug
+      {
+        source: "/tanzania-safaris/tanzania-luxury-safaris/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+
+      // =====================================================
+      // WORDPRESS ARTIFACTS
+      // =====================================================
+      {
+        source: "/author/:slug/",
+        destination: "/about-us/",
+        permanent: true,
+      },
+      {
+        source: "/sitemap_index.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+
       // Old WordPress sitemap URLs → Next.js sitemap
       {
         source: "/post-sitemap.xml",

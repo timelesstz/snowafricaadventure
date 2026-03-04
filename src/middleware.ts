@@ -113,6 +113,13 @@ export default auth(async (req) => {
     !pathname.startsWith("/favicon") &&
     !pathname.includes(".");
 
+  // Lowercase URL redirect — catch case-sensitivity issues (e.g., /Kilimanjaro-...)
+  if (shouldCheckRedirects && pathname !== pathname.toLowerCase()) {
+    const url = req.nextUrl.clone();
+    url.pathname = pathname.toLowerCase();
+    return NextResponse.redirect(url, 301);
+  }
+
   // Check for redirects on public routes
   if (shouldCheckRedirects) {
     try {
