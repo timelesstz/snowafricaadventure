@@ -2,15 +2,57 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { Phone, Mail, Menu, X, Search, ChevronRight } from "lucide-react";
-import { SITE_CONFIG, MAIN_NAV, TOP_NAV } from "@/lib/constants";
+import { useState, useEffect, useRef, useCallback } from "react";
+import {
+  Phone,
+  Mail,
+  Menu,
+  X,
+  Search,
+  ChevronRight,
+  ChevronDown,
+  Mountain,
+  Map,
+  Compass,
+  TreePalm,
+  Users,
+  Calendar,
+  DollarSign,
+  Clock,
+  Binoculars,
+  Palmtree,
+  Sun,
+} from "lucide-react";
+import {
+  SITE_CONFIG,
+  MEGA_NAV,
+  SIMPLE_NAV,
+  GROUP_CLIMB_NAV,
+  TOP_NAV,
+} from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/theme-provider";
 
+// Icons for mega menu items
+const MEGA_ICONS: Record<string, React.ElementType> = {
+  "/tanzania-safaris/": Binoculars,
+  "/tailor-made-safari/": Compass,
+  "/tanzania-destinations/": Map,
+  "/tanzania-day-tours/": Sun,
+  "/trekking/": Mountain,
+  "/best-route-to-climb-kilimanjaro/": Compass,
+  "/climbing-kilimanjaro/": Mountain,
+  "/kilimanjaro-prices/": DollarSign,
+  "/best-time-to-climb-kilimanjaro/": Clock,
+};
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMega, setOpenMega] = useState<string | null>(null);
+  const [openMobileSub, setOpenMobileSub] = useState<string | null>(null);
   const { logo } = useTheme();
+  const megaTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -23,6 +65,31 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
+
+  // Close mega menu on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenMega(null);
+      }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+
+  const handleMegaEnter = useCallback((label: string) => {
+    if (megaTimeoutRef.current) clearTimeout(megaTimeoutRef.current);
+    setOpenMega(label);
+  }, []);
+
+  const handleMegaLeave = useCallback(() => {
+    megaTimeoutRef.current = setTimeout(() => setOpenMega(null), 200);
+  }, []);
+
+  const closeMobile = useCallback(() => {
+    setMobileMenuOpen(false);
+    setOpenMobileSub(null);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -38,7 +105,9 @@ export function Header() {
                 aria-label={`Call us: ${SITE_CONFIG.phone}`}
               >
                 <Phone className="h-3 w-3" />
-                <span className="text-[10px] sm:text-xs">{SITE_CONFIG.phone}</span>
+                <span className="text-[10px] sm:text-xs">
+                  {SITE_CONFIG.phone}
+                </span>
               </a>
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
@@ -46,7 +115,9 @@ export function Header() {
                 aria-label={`Email us: ${SITE_CONFIG.email}`}
               >
                 <Mail className="h-3 w-3" />
-                <span className="text-[10px] sm:text-xs">{SITE_CONFIG.email}</span>
+                <span className="text-[10px] sm:text-xs">
+                  {SITE_CONFIG.email}
+                </span>
               </a>
             </div>
 
@@ -84,21 +155,116 @@ export function Header() {
               ) : (
                 <>
                   <div className="w-8 h-8 sm:w-9 sm:h-9 bg-[var(--primary)] rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-xs sm:text-sm">SA</span>
+                    <span className="text-white font-bold text-xs sm:text-sm">
+                      SA
+                    </span>
                   </div>
                   <div>
                     <div className="font-heading font-bold text-xs sm:text-sm leading-tight text-[var(--text)]">
                       Snow Africa
                     </div>
-                    <div className="text-[9px] sm:text-[10px] text-[var(--text-muted)] -mt-0.5">Adventure</div>
+                    <div className="text-[9px] sm:text-[10px] text-[var(--text-muted)] -mt-0.5">
+                      Adventure
+                    </div>
                   </div>
                 </>
               )}
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center">
-              {MAIN_NAV.map((item) => (
+            <nav
+              ref={navRef}
+              className="hidden lg:flex items-center"
+            >
+              {/* Home */}
+              <Link
+                href="/"
+                className="px-3 xl:px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)] rounded-md transition-colors font-medium"
+              >
+                Home
+              </Link>
+
+              {/* Mega Menu Items */}
+              {MEGA_NAV.map((item) => (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => handleMegaEnter(item.label)}
+                  onMouseLeave={handleMegaLeave}
+                >
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-1 px-3 xl:px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                      openMega === item.label
+                        ? "text-[var(--primary)] bg-[var(--surface)]"
+                        : "text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)]"
+                    )}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      className={cn(
+                        "h-3.5 w-3.5 transition-transform duration-200",
+                        openMega === item.label && "rotate-180"
+                      )}
+                    />
+                  </Link>
+
+                  {/* Mega Dropdown */}
+                  <div
+                    className={cn(
+                      "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
+                      openMega === item.label
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-1"
+                    )}
+                    onMouseEnter={() => handleMegaEnter(item.label)}
+                    onMouseLeave={handleMegaLeave}
+                  >
+                    <div className="bg-white rounded-xl shadow-xl border border-[var(--border)] p-4 min-w-[320px]">
+                      <div className="space-y-1">
+                        {item.children.map((child) => {
+                          const Icon = MEGA_ICONS[child.href] || ChevronRight;
+                          return (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--surface)] transition-colors group"
+                              onClick={() => setOpenMega(null)}
+                            >
+                              <div className="mt-0.5 p-1.5 rounded-md bg-[var(--surface)] group-hover:bg-[var(--primary-light)] transition-colors">
+                                <Icon className="h-4 w-4 text-[var(--primary)]" />
+                              </div>
+                              <div>
+                                <div className="text-sm font-medium text-[var(--text)] group-hover:text-[var(--primary)] transition-colors">
+                                  {child.label}
+                                </div>
+                                {child.description && (
+                                  <div className="text-xs text-[var(--text-muted)] mt-0.5">
+                                    {child.description}
+                                  </div>
+                                )}
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* Join Group Climb — Highlighted */}
+              <Link
+                href={GROUP_CLIMB_NAV.href}
+                className="flex items-center gap-1.5 mx-1 px-3 xl:px-4 py-1.5 text-sm font-semibold rounded-md transition-all bg-[var(--secondary)]/10 text-[var(--secondary-dark,#b8860b)] border border-[var(--secondary)]/30 hover:bg-[var(--secondary)] hover:text-white hover:border-[var(--secondary)]"
+              >
+                <Users className="h-3.5 w-3.5" />
+                {GROUP_CLIMB_NAV.label}
+              </Link>
+
+              {/* Simple Links */}
+              {SIMPLE_NAV.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -145,24 +311,100 @@ export function Header() {
         <div
           className={cn(
             "lg:hidden border-t border-[var(--border)] overflow-hidden transition-all duration-300 ease-in-out",
-            mobileMenuOpen ? "max-h-[calc(100dvh-8rem)] opacity-100" : "max-h-0 opacity-0"
+            mobileMenuOpen
+              ? "max-h-[calc(100dvh-8rem)] opacity-100"
+              : "max-h-0 opacity-0"
           )}
         >
           <nav className="container mx-auto px-4 py-3 overflow-y-auto max-h-[calc(100dvh-9rem)]">
-            {/* Main Navigation */}
-            <div className="space-y-0.5">
-              {MAIN_NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-3 text-[var(--text)] hover:bg-[var(--surface)] rounded-lg font-medium transition-colors"
+            {/* Home */}
+            <Link
+              href="/"
+              onClick={closeMobile}
+              className="flex items-center justify-between px-3 py-3 text-[var(--text)] hover:bg-[var(--surface)] rounded-lg font-medium transition-colors"
+            >
+              Home
+              <ChevronRight className="h-4 w-4 text-[var(--text-light)]" />
+            </Link>
+
+            {/* Mega Menu Sections — Accordion */}
+            {MEGA_NAV.map((section) => (
+              <div key={section.label}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenMobileSub(
+                      openMobileSub === section.label ? null : section.label
+                    )
+                  }
+                  className="flex items-center justify-between w-full px-3 py-3 text-[var(--text)] hover:bg-[var(--surface)] rounded-lg font-medium transition-colors"
                 >
-                  {item.label}
-                  <ChevronRight className="h-4 w-4 text-[var(--text-light)]" />
-                </Link>
-              ))}
-            </div>
+                  {section.label}
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 text-[var(--text-light)] transition-transform duration-200",
+                      openMobileSub === section.label && "rotate-180"
+                    )}
+                  />
+                </button>
+                <div
+                  className={cn(
+                    "overflow-hidden transition-all duration-200",
+                    openMobileSub === section.label
+                      ? "max-h-96 opacity-100"
+                      : "max-h-0 opacity-0"
+                  )}
+                >
+                  <div className="pl-4 pb-1 space-y-0.5">
+                    {section.children.map((child) => {
+                      const Icon = MEGA_ICONS[child.href] || ChevronRight;
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={closeMobile}
+                          className="flex items-center gap-3 px-3 py-2.5 text-sm text-[var(--text-muted)] hover:bg-[var(--surface)] hover:text-[var(--text)] rounded-lg transition-colors"
+                        >
+                          <Icon className="h-4 w-4 text-[var(--primary)] shrink-0" />
+                          <div>
+                            <div className="font-medium">{child.label}</div>
+                            {child.description && (
+                              <div className="text-xs text-[var(--text-light)]">
+                                {child.description}
+                              </div>
+                            )}
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Join Group Climb — Highlighted */}
+            <Link
+              href={GROUP_CLIMB_NAV.href}
+              onClick={closeMobile}
+              className="flex items-center gap-2 mx-1 mt-1 px-3 py-3 bg-[var(--secondary)]/10 text-[var(--secondary-dark,#b8860b)] hover:bg-[var(--secondary)]/20 rounded-lg font-semibold transition-colors border border-[var(--secondary)]/20"
+            >
+              <Users className="h-4 w-4" />
+              {GROUP_CLIMB_NAV.label}
+              <ChevronRight className="h-4 w-4 ml-auto" />
+            </Link>
+
+            {/* Simple Links */}
+            {SIMPLE_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMobile}
+                className="flex items-center justify-between px-3 py-3 text-[var(--text)] hover:bg-[var(--surface)] rounded-lg font-medium transition-colors"
+              >
+                {item.label}
+                <ChevronRight className="h-4 w-4 text-[var(--text-light)]" />
+              </Link>
+            ))}
 
             {/* Divider */}
             <div className="my-3 border-t border-[var(--border)]" />
@@ -173,7 +415,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={closeMobile}
                   className="flex items-center justify-between px-3 py-2.5 text-sm text-[var(--text-muted)] hover:bg-[var(--surface)] hover:text-[var(--text)] rounded-lg transition-colors"
                 >
                   {item.label}
@@ -186,7 +428,7 @@ export function Header() {
             <div className="mt-4">
               <Link
                 href="/tailor-made-safari/"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMobile}
                 className="block text-center bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white px-5 py-3 rounded-lg font-semibold transition-colors"
               >
                 Plan Your Trip

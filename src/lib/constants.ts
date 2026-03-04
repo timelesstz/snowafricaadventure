@@ -23,15 +23,59 @@ export const SITE_CONFIG = {
 } as const;
 
 /**
- * Main navigation items
+ * Mega menu navigation structure
+ */
+export type NavItem = { label: string; href: string; description?: string };
+export type MegaMenuItem = {
+  label: string;
+  href: string;
+  children: NavItem[];
+};
+
+export const MEGA_NAV: MegaMenuItem[] = [
+  {
+    label: "Safaris & Tours",
+    href: "/tanzania-safaris/",
+    children: [
+      { label: "All Safari Packages", href: "/tanzania-safaris/", description: "Browse curated Tanzania safaris" },
+      { label: "Tailor-Made Safaris", href: "/tailor-made-safari/", description: "Custom itineraries for your group" },
+      { label: "Destinations", href: "/tanzania-destinations/", description: "Serengeti, Ngorongoro & more" },
+      { label: "Day Tours", href: "/tanzania-day-tours/", description: "Single-day excursions from Arusha" },
+    ],
+  },
+  {
+    label: "Trekking",
+    href: "/trekking/",
+    children: [
+      { label: "All Trekking Routes", href: "/trekking/", description: "Compare all Kilimanjaro routes" },
+      { label: "Best Route to Climb", href: "/best-route-to-climb-kilimanjaro/", description: "Route comparison guide" },
+      { label: "Climbing Guide", href: "/climbing-kilimanjaro/", description: "Everything you need to know" },
+      { label: "Kilimanjaro Prices", href: "/kilimanjaro-prices/", description: "Full cost breakdown" },
+      { label: "Best Time to Climb", href: "/best-time-to-climb-kilimanjaro/", description: "Seasonal guide" },
+    ],
+  },
+];
+
+export const SIMPLE_NAV = [
+  { label: "Zanzibar", href: "/zanzibar/" },
+  { label: "Contact Us", href: "/contact-us/" },
+] as const;
+
+export const GROUP_CLIMB_NAV = {
+  label: "Join Group Climb",
+  href: "/kilimanjaro-join-group-departures/",
+} as const;
+
+/**
+ * Main navigation items (flat — used by mobile menu fallback)
  */
 export const MAIN_NAV = [
   { label: "Home", href: "/" },
   { label: "Safaris & Tours", href: "/tanzania-safaris/" },
   { label: "Trekking", href: "/trekking/" },
-  { label: "Kilimanjaro Join Group", href: "/kilimanjaro-join-group-departures/" },
-  { label: "Tanzania Destinations", href: "/tanzania-destinations/" },
-  { label: "Tanzania Day Tours", href: "/tanzania-day-tours/" },
+  { label: "Join Group Climb", href: "/kilimanjaro-join-group-departures/" },
+  { label: "Destinations", href: "/tanzania-destinations/" },
+  { label: "Day Tours", href: "/tanzania-day-tours/" },
   { label: "Zanzibar", href: "/zanzibar/" },
   { label: "Contact Us", href: "/contact-us/" },
 ] as const;
@@ -41,7 +85,6 @@ export const MAIN_NAV = [
  */
 export const TOP_NAV = [
   { label: "About Us", href: "/about-us/" },
-  { label: "Tanzania Day Tours", href: "/tanzania-day-tours/" },
   { label: "Tailor-Made Safaris", href: "/tailor-made-safari/" },
   { label: "Blog", href: "/blog/" },
 ] as const;
