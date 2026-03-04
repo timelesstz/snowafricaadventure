@@ -561,14 +561,19 @@ export default async function ClimbingKilimanjaroPage() {
             <h2 className="font-heading text-xl font-bold mb-6 text-center">
               Related Guides
             </h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <Link href="/kilimanjaro-group-climbs/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow">
+                <Users className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Group Climbs Guide</p>
+                <p className="text-xs text-[var(--text-muted)]">Cost, routes & how to join</p>
+              </Link>
               <Link href="/kilimanjaro-vs-everest/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow">
                 <Mountain className="w-6 h-6 text-[var(--secondary)] mb-2" />
                 <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
                 <p className="text-xs text-[var(--text-muted)]">Which mountain to climb first</p>
               </Link>
               <Link href="/can-beginners-climb-kilimanjaro/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow">
-                <Users className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <Shield className="w-6 h-6 text-[var(--secondary)] mb-2" />
                 <p className="font-semibold text-sm">Beginners Guide</p>
                 <p className="text-xs text-[var(--text-muted)]">Can beginners climb?</p>
               </Link>

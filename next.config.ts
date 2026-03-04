@@ -331,6 +331,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // Duplicate content consolidation — group climbing → group climbs
+      {
+        source: "/kilimanjaro-group-climbing/",
+        destination: "/kilimanjaro-group-climbs/",
+        permanent: true,
+      },
+
       // Old WordPress sitemap URLs → Next.js sitemap
       {
         source: "/post-sitemap.xml",

@@ -363,8 +363,8 @@ async function main() {
     // Additional popular posts
     {
       slug: "kilimanjaro-group-climbs",
-      title: "Kilimanjaro Group Climbs",
-      excerpt: "Join a group departure to climb Kilimanjaro with other adventurers.",
+      title: "Kilimanjaro Group Climbs: Cost, Routes & How to Join a Group Trek",
+      excerpt: "Everything you need to know about Kilimanjaro group climbs — pricing by route, what's included, private vs group comparison, and how to join a scheduled departure.",
       categorySlug: "mount-kilimanjaro",
     },
     {

@@ -45,9 +45,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-group-climbs",
-    metaTitle: "Kilimanjaro Group Climbs 2026 | Join Open Departures & Save",
-    metaDescription: "Join our scheduled Kilimanjaro group climbs and save up to 30%. Fixed departure dates, like-minded climbers, professional guides. Book your spot today.",
-    excerpt: "Join fellow adventurers on our scheduled Kilimanjaro group departures. Save money, make friends, and summit Africa's highest peak together."
+    metaTitle: "Kilimanjaro Group Climbs 2026: Cost, Routes & How to Join",
+    metaDescription: "Kilimanjaro group climbs from $1,850. Compare routes, group vs private costs, what's included, and tips for solo travelers. Join scheduled departures & save 15-30%.",
+    excerpt: "Everything you need to know about Kilimanjaro group climbs — pricing by route, what's included, private vs group comparison, and how to join a scheduled departure."
   },
   {
     slug: "kilimanjaro-vs-everest",
