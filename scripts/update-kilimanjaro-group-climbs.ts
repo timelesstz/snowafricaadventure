@@ -307,9 +307,9 @@ async function main() {
     where: { slug },
     data: {
       title: "Kilimanjaro Group Climbs: Cost, Routes & How to Join a Group Trek",
-      metaTitle: "Kilimanjaro Group Climbs 2026-2027: Cost, Routes & Dates",
+      metaTitle: "Kilimanjaro Group Climbs 2026-2027",
       metaDescription:
-        "Kilimanjaro group climbs from $1,850. Compare routes, group vs private costs, what's included, and tips for solo travelers. Join scheduled departures & save 15-30%.",
+        "Kilimanjaro group climbs from $1,850. Compare routes, costs, what's included, and tips for solo travelers. Join scheduled departures & save 15-30%.",
       excerpt:
         "Everything you need to know about Kilimanjaro group climbs — pricing by route, what's included, private vs group comparison, and how to join a scheduled departure.",
     },
