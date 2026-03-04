@@ -82,6 +82,17 @@ const notIncluded = [
   "Pre/post-climb hotel stays",
 ];
 
+const costBreakdown = [
+  { item: "KINAPA Park Fees", amount: "$848–$1,135", note: "Varies by route duration (5-9 days)" },
+  { item: "Camping Fees", amount: "$295–$530", note: "Per night on the mountain" },
+  { item: "Rescue Fees", amount: "$20", note: "Mandatory per climber" },
+  { item: "Guide & Porter Wages", amount: "$400–$700", note: "Based on crew size and route days" },
+  { item: "Mountain Meals", amount: "$150–$250", note: "3 meals + snacks daily, prepared by mountain cook" },
+  { item: "Equipment & Gear", amount: "$100–$300", note: "Tents, sleeping pads, dining tent, toilet tent" },
+  { item: "Airport Transfers", amount: "$50–$80", note: "Round-trip Kilimanjaro Airport to Moshi/Arusha" },
+  { item: "Company Operations", amount: "$200–$400", note: "Office, vehicles, safety equipment, insurance" },
+];
+
 const priceFactors = [
   {
     title: "Route & Duration",
@@ -318,6 +329,48 @@ export default function KilimanjaroPricesPage() {
         </div>
       </section>
 
+      {/* Cost Breakdown */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+            Where Your Money Goes
+          </span>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+            Kilimanjaro Cost Breakdown: What You&apos;re Actually Paying For
+          </h2>
+          <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+            Over 60% of the cost goes directly to park fees and crew wages. Here&apos;s exactly where your money goes when you climb Kilimanjaro.
+          </p>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white border border-[var(--border)] rounded-xl overflow-hidden shadow-sm">
+              {costBreakdown.map((row, i) => (
+                <div
+                  key={row.item}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-5 py-4 ${
+                    i % 2 === 0 ? "" : "bg-[var(--surface)]"
+                  } ${i < costBreakdown.length - 1 ? "border-b border-[var(--border)]" : ""}`}
+                >
+                  <div className="flex-1">
+                    <span className="font-medium text-[var(--text)]">{row.item}</span>
+                    <span className="block sm:inline sm:ml-2 text-xs text-[var(--text-muted)]">
+                      {row.note}
+                    </span>
+                  </div>
+                  <span className="font-bold text-[var(--secondary-dark)] whitespace-nowrap">{row.amount}</span>
+                </div>
+              ))}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-5 py-4 bg-[var(--primary-dark)] text-white">
+                <span className="flex-1 font-bold">Total Range</span>
+                <span className="font-bold text-[var(--secondary)] text-lg">$1,850 – $4,500+</span>
+              </div>
+            </div>
+            <p className="text-center text-sm text-[var(--text-muted)] mt-4">
+              Costs vary based on route, duration, group size, and package tier. <Link href="/contact-us/" className="text-[var(--secondary)] hover:underline">Get an exact quote</Link> for your climb.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* What's Included / Not Included */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -383,6 +436,40 @@ export default function KilimanjaroPricesPage() {
                 <p className="text-white/70 text-sm leading-relaxed">{factor.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Price Warning */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto bg-amber-50 border border-amber-200 rounded-xl p-6 md:p-8">
+            <h2 className="font-heading text-2xl font-bold mb-4 text-amber-900">
+              Warning: Why Very Cheap Kilimanjaro Climbs Are Risky
+            </h2>
+            <p className="text-amber-800 mb-4">
+              If you see Kilimanjaro packages below $1,500, proceed with caution. Park fees alone
+              cost $848+ for a 5-day climb. Operators offering rock-bottom prices typically cut costs by:
+            </p>
+            <ul className="space-y-2 mb-4">
+              {[
+                "Underpaying porters and guides (below minimum wage standards)",
+                "Skipping proper safety equipment like pulse oximeters and emergency oxygen",
+                "Using inadequate tents and sleeping gear for high-altitude conditions",
+                "Reducing food quality and quantity on the mountain",
+                "Employing unqualified guides without wilderness first aid certification",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-amber-800 text-sm">
+                  <X className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-amber-800 text-sm">
+              Snow Africa Adventure is a{" "}
+              <strong>KPAP-certified operator</strong> that ensures fair wages, proper equipment, and
+              safe climbing conditions. Our prices reflect ethical, sustainable tourism — not shortcuts.
+            </p>
           </div>
         </div>
       </section>

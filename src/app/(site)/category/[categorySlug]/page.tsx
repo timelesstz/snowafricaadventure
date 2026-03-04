@@ -125,7 +125,7 @@ const placeholderCategories: Record<
     posts: [
       {
         id: "6",
-        title: "Tanzania Visa Requirements 2025: Complete Guide",
+        title: "Tanzania Visa Requirements 2026: Complete Guide",
         slug: "tanzania-visa-requirements",
         excerpt:
           "Everything you need to know about getting a visa for Tanzania, including the new e-visa system.",

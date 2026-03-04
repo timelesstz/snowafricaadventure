@@ -168,22 +168,60 @@ export default async function BlogPostPage({ params }: PageProps) {
   let categories: { name: string; slug: string; count: number }[] = [];
 
   try {
+    // Get category slugs for current post to find related content
+    const postCategorySlugs = post.categories.map((c) => c.slug);
+
+    // First try to find posts in the same categories
+    let relatedQuery = prisma.blogPost.findMany({
+      where: {
+        slug: { not: post.slug },
+        isPublished: true,
+        ...(postCategorySlugs.length > 0
+          ? {
+              categories: {
+                some: {
+                  category: { slug: { in: postCategorySlugs } },
+                },
+              },
+            }
+          : {}),
+      },
+      take: 3,
+      orderBy: { publishedAt: "desc" },
+      select: {
+        slug: true,
+        title: true,
+        excerpt: true,
+        author: true,
+        publishedAt: true,
+        featuredImage: true,
+      },
+    });
+
     [relatedPostsData, categories] = await Promise.all([
-      prisma.blogPost.findMany({
-        where: {
-          slug: { not: post.slug },
-          isPublished: true,
-        },
-        take: 3,
-        orderBy: { publishedAt: "desc" },
-        select: {
-          slug: true,
-          title: true,
-          excerpt: true,
-          author: true,
-          publishedAt: true,
-          featuredImage: true,
-        },
+      relatedQuery.then(async (posts) => {
+        // If not enough category-matched posts, fill with recent posts
+        if (posts.length < 3) {
+          const existingSlugs = [post.slug, ...posts.map((p) => p.slug)];
+          const filler = await prisma.blogPost.findMany({
+            where: {
+              slug: { notIn: existingSlugs },
+              isPublished: true,
+            },
+            take: 3 - posts.length,
+            orderBy: { publishedAt: "desc" },
+            select: {
+              slug: true,
+              title: true,
+              excerpt: true,
+              author: true,
+              publishedAt: true,
+              featuredImage: true,
+            },
+          });
+          return [...posts, ...filler];
+        }
+        return posts;
       }),
       getCategories(),
     ]);

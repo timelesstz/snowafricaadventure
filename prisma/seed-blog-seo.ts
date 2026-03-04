@@ -63,15 +63,15 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "2025-best-time-to-climb-mount-kilimanjaro",
-    metaTitle: "Best Time to Climb Kilimanjaro 2025-2026 | Season Guide",
-    metaDescription: "Updated 2025-2026 Kilimanjaro climbing seasons. Dry seasons (Jan-Mar, Jun-Oct) offer 90%+ success rates. Weather data, crowd levels & booking tips.",
-    excerpt: "Plan your 2025-2026 Kilimanjaro climb with updated weather patterns, best months for clear skies, and insider tips on avoiding peak crowds."
+    metaTitle: "Best Time to Climb Kilimanjaro 2026-2027 | Season Guide",
+    metaDescription: "Updated 2026-2027 Kilimanjaro climbing seasons. Dry seasons (Jan-Mar, Jun-Oct) offer 90%+ success rates. Weather data, crowd levels & booking tips.",
+    excerpt: "Plan your 2026-2027 Kilimanjaro climb with updated weather patterns, best months for clear skies, and insider tips on avoiding peak crowds."
   },
   {
     slug: "kilimanjaro-climbing-2025",
-    metaTitle: "Kilimanjaro Climbing 2025 | New Routes, Prices & Regulations",
-    metaDescription: "2025 Kilimanjaro updates: new park fees, route changes, and booking requirements. Plan ahead with current prices and availability from $2,200.",
-    excerpt: "Stay informed about Kilimanjaro climbing in 2025 - updated park fees, route conditions, and what's new for climbers this year."
+    metaTitle: "Kilimanjaro Climbing 2026 | New Routes, Prices & Regulations",
+    metaDescription: "2026 Kilimanjaro updates: new park fees, route changes, and booking requirements. Plan ahead with current prices and availability from $2,200.",
+    excerpt: "Stay informed about Kilimanjaro climbing in 2026 - updated park fees, route conditions, and what's new for climbers this year."
   },
   {
     slug: "epic-kilimanjaro-sunrises-2025",
@@ -87,9 +87,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-climbing-predictions-2025",
-    metaTitle: "Kilimanjaro 2025-2026: Weather Forecasts & Climbing Trends",
-    metaDescription: "Expert predictions for Kilimanjaro climbing seasons 2025-2026. Weather patterns, glacier changes, and booking trends. Plan your climb strategically.",
-    excerpt: "Get ahead with Kilimanjaro predictions for 2025-2026 - weather forecasts, expected conditions, and emerging trends in climbing."
+    metaTitle: "Kilimanjaro 2026-2027: Weather Forecasts & Climbing Trends",
+    metaDescription: "Expert predictions for Kilimanjaro climbing seasons 2026-2027. Weather patterns, glacier changes, and booking trends. Plan your climb strategically.",
+    excerpt: "Get ahead with Kilimanjaro predictions for 2026-2027 - weather forecasts, expected conditions, and emerging trends in climbing."
   },
   {
     slug: "kilimanjaro-celebrations-2025",
