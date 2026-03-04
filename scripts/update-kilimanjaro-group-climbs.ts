@@ -28,6 +28,11 @@ const content = `
 <h3>Meet Climbers from Around the World</h3>
 <p>Kilimanjaro group climbs attract adventurers from every continent. Many climbers say the friendships formed on the mountain — sharing meals, encouraging each other through difficult sections, and celebrating together at Uhuru Peak — become as memorable as the summit itself.</p>
 
+<figure style="margin: 2rem 0;">
+<img src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp" alt="Group of Kilimanjaro climbers trekking together with guides on the mountain trail" loading="lazy" width="800" height="533" style="width:100%;height:auto;border-radius:8px;" />
+<figcaption style="text-align:center;font-size:0.9em;color:#666;margin-top:0.5rem;">A Snow Africa group ascending Kilimanjaro together — the camaraderie on group climbs is what many climbers remember most.</figcaption>
+</figure>
+
 <h2>How Much Do Kilimanjaro Group Climbs Cost?</h2>
 
 <p>Group climb pricing depends primarily on the route, duration, and service level. Here's what to expect in 2026:</p>
@@ -149,6 +154,11 @@ const content = `
 
 <p>The pace on group climbs is deliberately slow — "pole pole" (Swahili for "slowly, slowly"). This isn't just tradition; it's the single most effective strategy for preventing <a href="/kilimanjaro-altitude-sickness/">altitude sickness</a> and maximizing your summit chances.</p>
 
+<figure style="margin: 2rem 0;">
+<img src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg" alt="Kilimanjaro climbers at high-altitude camp with views of the summit zone" loading="lazy" width="800" height="533" style="width:100%;height:auto;border-radius:8px;" />
+<figcaption style="text-align:center;font-size:0.9em;color:#666;margin-top:0.5rem;">Climbers resting at a high-altitude camp on Kilimanjaro — daily health checks happen at every camp.</figcaption>
+</figure>
+
 <h3>Acclimatization on Group Climbs</h3>
 <p>Proper acclimatization is the #1 factor that determines whether you summit. On group climbs, the itinerary is designed around the "climb high, sleep low" principle — hiking to higher elevations during the day, then descending to a lower camp to sleep. This trains your body to produce more red blood cells and adapt to reduced oxygen levels.</p>
 <p>Group climbs actually help acclimatization because the pace is set to the group average, which is typically slower than experienced hikers would go alone. That slower pace gives everyone more time to adapt. Our guides also build in acclimatization rest stops and short hikes at camp in the afternoons to speed adaptation.</p>
@@ -158,10 +168,22 @@ const content = `
 <ul>
 <li><strong>Pulse oximetry:</strong> Blood oxygen saturation measured with a fingertip device — readings below 70% at altitude may require intervention</li>
 <li><strong>Heart rate monitoring:</strong> Resting heart rate tracked to identify early altitude stress</li>
-<li><strong>Lake Louise Score:</strong> Standardized questionnaire assessing headache, nausea, fatigue, and dizziness — the international standard for diagnosing acute mountain sickness (AMS)</li>
+<li><strong>Lake Louise Score:</strong> Standardized questionnaire assessing headache, nausea, fatigue, and dizziness — the <a href="https://wwwnc.cdc.gov/travel/yellowbook/2024/environmental-hazards-and-risks/high-elevation-travel-and-altitude-illness" target="_blank" rel="noopener">international standard for diagnosing acute mountain sickness</a> (AMS) as recommended by the CDC</li>
 <li><strong>Emergency oxygen:</strong> Supplemental oxygen carried on every climb in case of severe symptoms</li>
 </ul>
 <p>If any climber shows signs of serious altitude sickness, our guides have authority to descend that person immediately — no questions, no delays. Your safety always comes before summit goals. Learn more about <a href="/kilimanjaro-altitude-sickness/">altitude sickness prevention and symptoms</a>.</p>
+
+<h2>What Our Group Climbers Say</h2>
+
+<blockquote style="border-left:4px solid #2d6a4f;padding:1rem 1.5rem;margin:1.5rem 0;background:#f0fdf4;border-radius:0 8px 8px 0;">
+<p style="font-style:italic;margin-bottom:0.5rem;">"All 3 of us successfully summited Uhuru Peak. The guides were incredible — professional, encouraging, and genuinely cared about our safety. The group dynamic made summit night bearable when I wanted to quit at Stella Point."</p>
+<cite style="font-size:0.9em;color:#555;">— Alana, United States (8-day Lemosho group climb, rated 5/5 on SafariBookings)</cite>
+</blockquote>
+
+<blockquote style="border-left:4px solid #2d6a4f;padding:1rem 1.5rem;margin:1.5rem 0;background:#f0fdf4;border-radius:0 8px 8px 0;">
+<p style="font-style:italic;margin-bottom:0.5rem;">"Our family of 9 — ages 16 to 62 — all made it safely to the summit and back down. The guides knew exactly when to push us and when to slow down. We couldn't have done it without them."</p>
+<cite style="font-size:0.9em;color:#555;">— Nelson Laur, United States (family group climb, rated 5/5 on SafariBookings)</cite>
+</blockquote>
 
 <h2>Kilimanjaro Group Climb Dates 2026–2027</h2>
 
