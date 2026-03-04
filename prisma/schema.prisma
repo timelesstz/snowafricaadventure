@@ -890,3 +890,127 @@ enum CmsPageStatus {
   PUBLISHED
   ARCHIVED
 }
+
+// ============================================
+// SEO DASHBOARD
+// ============================================
+
+model SeoSyncLog {
+  id          String        @id @default(cuid())
+  source      SeoDataSource
+  status      SyncStatus    @default(RUNNING)
+  recordCount Int           @default(0)
+  error       String?
+  startedAt   DateTime      @default(now())
+  completedAt DateTime?
+  metadata    Json?
+
+  @@index([source])
+  @@index([startedAt])
+}
+
+model GscSearchQuery {
+  id          String   @id @default(cuid())
+  date        DateTime
+  query       String
+  page        String?
+  country     String?
+  device      String?
+  clicks      Int      @default(0)
+  impressions Int      @default(0)
+  ctr         Float    @default(0)
+  position    Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([date, query, page, country, device])
+  @@index([date])
+  @@index([query])
+  @@index([page])
+  @@index([clicks])
+  @@index([impressions])
+}
+
+model GscPageMetric {
+  id          String   @id @default(cuid())
+  date        DateTime
+  page        String
+  clicks      Int      @default(0)
+  impressions Int      @default(0)
+  ctr         Float    @default(0)
+  position    Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@unique([date, page])
+  @@index([date])
+  @@index([page])
+}
+
+model GaOrganicMetric {
+  id                 String   @id @default(cuid())
+  date               DateTime
+  landingPage        String?
+  sessions           Int      @default(0)
+  users              Int      @default(0)
+  newUsers           Int      @default(0)
+  bounceRate         Float    @default(0)
+  avgSessionDuration Float    @default(0)
+  conversions        Int      @default(0)
+  createdAt          DateTime @default(now())
+
+  @@unique([date, landingPage])
+  @@index([date])
+  @@index([landingPage])
+}
+
+model SeoPageAudit {
+  id               String   @id @default(cuid())
+  url              String
+  title            String?
+  titleLength      Int      @default(0)
+  metaDescription  String?
+  metaDescLength   Int      @default(0)
+  h1Count          Int      @default(0)
+  h1Text           String?
+  h2Count          Int      @default(0)
+  h3Count          Int      @default(0)
+  wordCount        Int      @default(0)
+  hasCanonical     Boolean  @default(false)
+  canonicalUrl     String?
+  hasSchema        Boolean  @default(false)
+  schemaTypes      String[]
+  internalLinks    Int      @default(0)
+  externalLinks    Int      @default(0)
+  imagesTotal      Int      @default(0)
+  imagesMissingAlt Int      @default(0)
+  score            Int      @default(0)
+  issues           Json?
+  createdAt        DateTime @default(now())
+
+  @@index([url])
+  @@index([score])
+  @@index([createdAt])
+}
+
+model SeoKeywordTracker {
+  id        String   @id @default(cuid())
+  keyword   String
+  targetUrl String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([keyword])
+  @@index([isActive])
+}
+
+enum SeoDataSource {
+  GSC
+  GA4
+  CRAWL
+}
+
+enum SyncStatus {
+  RUNNING
+  COMPLETED
+  FAILED
+}
