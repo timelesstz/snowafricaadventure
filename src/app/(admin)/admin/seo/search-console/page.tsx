@@ -15,6 +15,11 @@ import {
   Shield,
   AlertTriangle,
   Eye,
+  DollarSign,
+  Trophy,
+  FilePlus,
+  ShieldAlert,
+  Zap,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -29,6 +34,7 @@ import {
   analyzeQuery,
   generateTopInsights,
   type QueryAdvice,
+  type TopInsight,
 } from "@/lib/seo-dashboard/query-advisor";
 
 interface QueryRow {
@@ -56,19 +62,102 @@ interface SearchConsoleData {
 
 type SortField = "clicks" | "impressions" | "ctr" | "position";
 
-const INSIGHT_ICONS: Record<string, React.ReactNode> = {
-  "Fix These Titles": <AlertTriangle className="w-4 h-4 text-amber-500" />,
-  "Page 2 Queries": <TrendingUp className="w-4 h-4 text-violet-500" />,
-  "Wasted Impressions": <Eye className="w-4 h-4 text-red-500" />,
-  "Protect These": <Shield className="w-4 h-4 text-emerald-500" />,
+// ─── Icon mapping for insights ───────────────────────────────────────────────
+
+function InsightIcon({ icon }: { icon: string }) {
+  const cls = "w-4 h-4";
+  switch (icon) {
+    case "alert-triangle":
+      return <AlertTriangle className={`${cls} text-amber-500`} />;
+    case "trending-up":
+      return <TrendingUp className={`${cls} text-violet-500`} />;
+    case "eye":
+      return <Eye className={`${cls} text-red-500`} />;
+    case "shield-alert":
+      return <ShieldAlert className={`${cls} text-orange-500`} />;
+    case "dollar":
+      return <DollarSign className={`${cls} text-green-600`} />;
+    case "file-plus":
+      return <FilePlus className={`${cls} text-slate-500`} />;
+    case "trophy":
+      return <Trophy className={`${cls} text-emerald-500`} />;
+    default:
+      return <Target className={`${cls} text-indigo-500`} />;
+  }
+}
+
+const INSIGHT_BORDER_COLORS: Record<string, string> = {
+  amber: "border-l-amber-400",
+  violet: "border-l-violet-400",
+  red: "border-l-red-400",
+  orange: "border-l-orange-400",
+  green: "border-l-green-400",
+  slate: "border-l-slate-400",
+  emerald: "border-l-emerald-400",
 };
 
-function getInsightIcon(title: string) {
-  for (const [key, icon] of Object.entries(INSIGHT_ICONS)) {
-    if (title.includes(key)) return icon;
-  }
-  return <Target className="w-4 h-4 text-indigo-500" />;
+// ─── CTR Score Bar ───────────────────────────────────────────────────────────
+
+function CtrScoreBar({ score }: { score: number }) {
+  const color =
+    score >= 80
+      ? "bg-emerald-500"
+      : score >= 60
+        ? "bg-blue-500"
+        : score >= 40
+          ? "bg-amber-500"
+          : "bg-red-500";
+  return (
+    <div className="flex items-center gap-1.5">
+      <div className="w-12 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all ${color}`}
+          style={{ width: `${Math.min(100, score)}%` }}
+        />
+      </div>
+      <span className="text-[10px] text-slate-400 tabular-nums w-6">
+        {score}
+      </span>
+    </div>
+  );
 }
+
+// ─── Intent Badge ────────────────────────────────────────────────────────────
+
+const INTENT_STYLES: Record<
+  string,
+  { bg: string; text: string; label: string }
+> = {
+  transactional: {
+    bg: "bg-green-50",
+    text: "text-green-700",
+    label: "Transactional",
+  },
+  informational: {
+    bg: "bg-blue-50",
+    text: "text-blue-700",
+    label: "Informational",
+  },
+  navigational: {
+    bg: "bg-purple-50",
+    text: "text-purple-700",
+    label: "Navigational",
+  },
+  branded: { bg: "bg-amber-50", text: "text-amber-700", label: "Branded" },
+};
+
+function IntentBadge({ intent }: { intent: string }) {
+  const style = INTENT_STYLES[intent] || INTENT_STYLES.informational;
+  return (
+    <span
+      className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium ${style.bg} ${style.text}`}
+    >
+      {style.label}
+    </span>
+  );
+}
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function SearchConsolePage() {
   const [days, setDays] = useState(28);
@@ -112,13 +201,11 @@ export default function SearchConsolePage() {
     fetchData();
   }, [fetchData]);
 
-  // Generate AI insights from query data
   const insights = useMemo(() => {
     if (!data?.queries || data.queries.length === 0) return [];
     return generateTopInsights(data.queries);
   }, [data?.queries]);
 
-  // Pre-compute advice for each row
   const adviceMap = useMemo(() => {
     const map = new Map<number, QueryAdvice>();
     if (data?.queries) {
@@ -128,6 +215,22 @@ export default function SearchConsolePage() {
     }
     return map;
   }, [data?.queries]);
+
+  // Summary stats
+  const summaryStats = useMemo(() => {
+    if (!data?.queries) return null;
+    const totalPotential = Array.from(adviceMap.values()).reduce(
+      (sum, a) => sum + a.trafficPotential,
+      0
+    );
+    const quickWins = Array.from(adviceMap.values()).filter(
+      (a) => a.tag === "quick-win"
+    ).length;
+    const strongCount = Array.from(adviceMap.values()).filter(
+      (a) => a.tag === "strong" || a.tag === "defend"
+    ).length;
+    return { totalPotential, quickWins, strongCount };
+  }, [data?.queries, adviceMap]);
 
   const handleSort = (field: SortField) => {
     if (sort === field) {
@@ -200,6 +303,34 @@ export default function SearchConsolePage() {
         </div>
       </div>
 
+      {/* Quick Stats Bar */}
+      {tab === "queries" && summaryStats && summaryStats.totalPotential > 0 && (
+        <div className="flex gap-3 flex-wrap">
+          <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg">
+            <Zap className="w-3.5 h-3.5 text-amber-600" />
+            <span className="text-xs font-medium text-amber-800">
+              ~{summaryStats.totalPotential} untapped clicks
+            </span>
+          </div>
+          {summaryStats.quickWins > 0 && (
+            <div className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg">
+              <AlertTriangle className="w-3.5 h-3.5 text-red-500" />
+              <span className="text-xs font-medium text-red-700">
+                {summaryStats.quickWins} quick wins
+              </span>
+            </div>
+          )}
+          {summaryStats.strongCount > 0 && (
+            <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-lg">
+              <Shield className="w-3.5 h-3.5 text-emerald-500" />
+              <span className="text-xs font-medium text-emerald-700">
+                {summaryStats.strongCount} strong performers
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* AI Advisor Panel */}
       {tab === "queries" && insights.length > 0 && (
         <div className="bg-gradient-to-br from-amber-50 via-white to-indigo-50 rounded-xl border border-amber-200/60 overflow-hidden">
@@ -217,8 +348,9 @@ export default function SearchConsolePage() {
                   SEO Advisor
                 </h3>
                 <p className="text-xs text-slate-500">
-                  {insights.length} actionable insight
-                  {insights.length !== 1 ? "s" : ""} based on your data
+                  {insights.length} prioritized insight
+                  {insights.length !== 1 ? "s" : ""} &middot; Click to{" "}
+                  {showAdvisor ? "collapse" : "expand"}
                 </p>
               </div>
             </div>
@@ -234,16 +366,23 @@ export default function SearchConsolePage() {
               {insights.map((insight, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-lg border border-slate-100 p-4"
+                  className={`bg-white rounded-lg border border-slate-100 border-l-4 ${INSIGHT_BORDER_COLORS[insight.color] || "border-l-slate-400"} p-4`}
                 >
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 shrink-0">
-                      {getInsightIcon(insight.title)}
+                      <InsightIcon icon={insight.icon} />
                     </div>
-                    <div className="min-w-0">
-                      <h4 className="text-sm font-semibold text-slate-900">
-                        {insight.title}
-                      </h4>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <h4 className="text-sm font-semibold text-slate-900">
+                          {insight.title}
+                        </h4>
+                        {insight.estimatedGain > 0 && (
+                          <span className="shrink-0 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                            +{insight.estimatedGain} clicks
+                          </span>
+                        )}
+                      </div>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         {insight.description}
                       </p>
@@ -347,21 +486,26 @@ export default function SearchConsolePage() {
                     <SortHeader field="clicks" label="Clicks" />
                   </th>
                   <th className="text-right px-3 py-3">
-                    <SortHeader field="impressions" label="Impressions" />
+                    <SortHeader field="impressions" label="Impr." />
                   </th>
                   <th className="text-right px-3 py-3">
                     <SortHeader field="ctr" label="CTR" />
                   </th>
                   <th className="text-right px-3 py-3">
-                    <SortHeader field="position" label="Position" />
+                    <SortHeader field="position" label="Pos." />
                   </th>
                   {tab === "queries" && (
-                    <th className="text-center px-3 py-3 text-xs font-medium text-slate-500">
-                      <div className="flex items-center justify-center gap-1">
-                        <Lightbulb className="w-3 h-3" />
-                        Advice
-                      </div>
-                    </th>
+                    <>
+                      <th className="text-center px-2 py-3 text-xs font-medium text-slate-500">
+                        CTR Score
+                      </th>
+                      <th className="text-center px-3 py-3 text-xs font-medium text-slate-500">
+                        <div className="flex items-center justify-center gap-1">
+                          <Lightbulb className="w-3 h-3" />
+                          Advice
+                        </div>
+                      </th>
+                    </>
                   )}
                 </tr>
               </thead>
@@ -392,10 +536,9 @@ export default function SearchConsolePage() {
                   return (
                     <tr
                       key={i}
-                      className={`hover:bg-slate-25 ${isQuery ? "cursor-pointer" : ""} ${isExpanded ? "bg-slate-25" : ""}`}
+                      className={`transition-colors ${isQuery ? "cursor-pointer hover:bg-slate-50" : "hover:bg-slate-50"} ${isExpanded ? "bg-slate-50" : ""}`}
                       onClick={() => {
-                        if (isQuery)
-                          setExpandedRow(isExpanded ? null : i);
+                        if (isQuery) setExpandedRow(isExpanded ? null : i);
                       }}
                     >
                       <td className="px-5 py-3 max-w-sm">
@@ -404,6 +547,9 @@ export default function SearchConsolePage() {
                             <span className="truncate font-medium text-slate-900">
                               {label}
                             </span>
+                            {isQuery && advice && (
+                              <IntentBadge intent={advice.intent} />
+                            )}
                             {pageUrl && (
                               <a
                                 href={pageUrl}
@@ -429,40 +575,109 @@ export default function SearchConsolePage() {
                               })()}
                             </p>
                           )}
+
                           {/* Expanded advice panel */}
                           {isExpanded && advice && (
                             <div
-                              className={`mt-2.5 p-3 rounded-lg ${advice.color} border border-slate-100`}
+                              className={`mt-3 p-4 rounded-lg ${advice.color} border ${advice.borderColor}`}
                             >
+                              {/* Header with label + traffic potential */}
+                              <div className="flex items-center justify-between mb-2">
+                                <span
+                                  className={`text-xs font-bold ${advice.textColor} uppercase tracking-wide`}
+                                >
+                                  {advice.label}
+                                </span>
+                                {advice.trafficPotential > 0 && (
+                                  <span className="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                                    +{advice.trafficPotential} potential clicks
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Analysis summary */}
                               <p
-                                className={`text-xs leading-relaxed ${advice.textColor}`}
+                                className={`text-xs leading-relaxed ${advice.textColor} mb-3`}
                               >
                                 {advice.advice}
                               </p>
+
+                              {/* CTR benchmark comparison */}
+                              <div className="flex items-center gap-4 mb-3 text-xs text-slate-600">
+                                <span>
+                                  Your CTR:{" "}
+                                  <strong className={advice.textColor}>
+                                    {row.ctr}%
+                                  </strong>
+                                </span>
+                                <span>
+                                  Benchmark:{" "}
+                                  <strong>{advice.expectedCtr.toFixed(1)}%</strong>
+                                </span>
+                                <span>
+                                  Score:{" "}
+                                  <strong
+                                    className={
+                                      advice.ctrScore >= 70
+                                        ? "text-emerald-600"
+                                        : advice.ctrScore >= 40
+                                          ? "text-amber-600"
+                                          : "text-red-600"
+                                    }
+                                  >
+                                    {advice.ctrScore}/100
+                                  </strong>
+                                </span>
+                              </div>
+
+                              {/* Numbered action steps */}
+                              <div className="space-y-1.5">
+                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                                  Action Steps
+                                </p>
+                                {advice.actions.map((action, j) => (
+                                  <div
+                                    key={j}
+                                    className="flex items-start gap-2 text-xs text-slate-700"
+                                  >
+                                    <span className="shrink-0 w-4 h-4 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500 mt-0.5">
+                                      {j + 1}
+                                    </span>
+                                    <span className="leading-relaxed">
+                                      {action}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           )}
                         </div>
                       </td>
-                      <td className="text-right px-3 py-3 text-slate-700 font-medium">
+                      <td className="text-right px-3 py-3 text-slate-700 font-medium tabular-nums">
                         {row.clicks.toLocaleString()}
                       </td>
-                      <td className="text-right px-3 py-3 text-slate-500">
+                      <td className="text-right px-3 py-3 text-slate-500 tabular-nums">
                         {row.impressions.toLocaleString()}
                       </td>
-                      <td className="text-right px-3 py-3 text-slate-500">
+                      <td className="text-right px-3 py-3 text-slate-500 tabular-nums">
                         {row.ctr}%
                       </td>
-                      <td className="text-right px-3 py-3 text-slate-700 font-medium">
+                      <td className="text-right px-3 py-3 text-slate-700 font-medium tabular-nums">
                         {row.position > 0 ? `#${row.position}` : "-"}
                       </td>
                       {isQuery && advice && (
-                        <td className="text-center px-3 py-3">
-                          <span
-                            className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${advice.color} ${advice.textColor}`}
-                          >
-                            {advice.label}
-                          </span>
-                        </td>
+                        <>
+                          <td className="text-center px-2 py-3">
+                            <CtrScoreBar score={advice.ctrScore} />
+                          </td>
+                          <td className="text-center px-3 py-3">
+                            <span
+                              className={`inline-flex px-2 py-0.5 rounded-full text-[11px] font-medium ${advice.color} ${advice.textColor} border ${advice.borderColor}`}
+                            >
+                              {advice.label}
+                            </span>
+                          </td>
+                        </>
                       )}
                     </tr>
                   );
