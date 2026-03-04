@@ -1,11 +1,7 @@
 /**
- * Rewrites the kilimanjaro-group-climbs blog post with SEO-optimized content
- * Target keyword: "kilimanjaro group climbs" (30 vol, KD 12)
- * Current position: Not ranked → Target: Page 1
- *
- * Also handles:
- * - Updating meta title, description, excerpt
- * - Content rewrite with FAQ schema, pricing, internal links
+ * Updates the kilimanjaro-group-climbs blog post with expanded content
+ * Adds: departure dates section, acclimatization, medical monitoring, 4 new FAQs
+ * Fixes: meta title formatting
  *
  * Run with: npx tsx scripts/update-kilimanjaro-group-climbs.ts
  */
@@ -153,6 +149,42 @@ const content = `
 
 <p>The pace on group climbs is deliberately slow — "pole pole" (Swahili for "slowly, slowly"). This isn't just tradition; it's the single most effective strategy for preventing <a href="/kilimanjaro-altitude-sickness/">altitude sickness</a> and maximizing your summit chances.</p>
 
+<h3>Acclimatization on Group Climbs</h3>
+<p>Proper acclimatization is the #1 factor that determines whether you summit. On group climbs, the itinerary is designed around the "climb high, sleep low" principle — hiking to higher elevations during the day, then descending to a lower camp to sleep. This trains your body to produce more red blood cells and adapt to reduced oxygen levels.</p>
+<p>Group climbs actually help acclimatization because the pace is set to the group average, which is typically slower than experienced hikers would go alone. That slower pace gives everyone more time to adapt. Our guides also build in acclimatization rest stops and short hikes at camp in the afternoons to speed adaptation.</p>
+
+<h3>Medical Monitoring During Your Climb</h3>
+<p>Safety is non-negotiable on Kilimanjaro. On every Snow Africa group climb, guides perform twice-daily health checks at each camp:</p>
+<ul>
+<li><strong>Pulse oximetry:</strong> Blood oxygen saturation measured with a fingertip device — readings below 70% at altitude may require intervention</li>
+<li><strong>Heart rate monitoring:</strong> Resting heart rate tracked to identify early altitude stress</li>
+<li><strong>Lake Louise Score:</strong> Standardized questionnaire assessing headache, nausea, fatigue, and dizziness — the international standard for diagnosing acute mountain sickness (AMS)</li>
+<li><strong>Emergency oxygen:</strong> Supplemental oxygen carried on every climb in case of severe symptoms</li>
+</ul>
+<p>If any climber shows signs of serious altitude sickness, our guides have authority to descend that person immediately — no questions, no delays. Your safety always comes before summit goals. Learn more about <a href="/kilimanjaro-altitude-sickness/">altitude sickness prevention and symptoms</a>.</p>
+
+<h2>Kilimanjaro Group Climb Dates 2026–2027</h2>
+
+<p>We run scheduled group departures throughout the year on Kilimanjaro's most popular routes. Group climbs depart on fixed dates, and you can join as a solo traveler, couple, or small group. Even with just 2 bookings, the departure runs — your climb date is guaranteed.</p>
+
+<p><strong>Peak season departures (June–October & January–March)</strong> fill fastest — book 3–6 months ahead for the best availability. Green season departures (April–May, November) offer lower prices and fewer crowds, though conditions are wetter.</p>
+
+<table>
+<thead>
+<tr><th>Season</th><th>Months</th><th>Conditions</th><th>Availability</th><th>Price Level</th></tr>
+</thead>
+<tbody>
+<tr><td>Peak Dry</td><td>June–October</td><td>Clear skies, cold nights, busiest</td><td>Most departures, fills fast</td><td>Standard</td></tr>
+<tr><td>Warm Dry</td><td>January–March</td><td>Warmer, good visibility, fewer crowds</td><td>Regular departures</td><td>Standard</td></tr>
+<tr><td>Short Rains</td><td>November–December</td><td>Brief afternoon showers, green scenery</td><td>Limited departures</td><td>Lower</td></tr>
+<tr><td>Long Rains</td><td>April–May</td><td>Wettest period, fewest climbers</td><td>Few departures</td><td>Lowest</td></tr>
+</tbody>
+</table>
+
+<p><strong><a href="/kilimanjaro-join-group-departures/">View all 2026–2027 group departure dates and prices →</a></strong></p>
+
+<p>Can't find a date that works? <a href="/contact-us/">Contact us</a> — we can often open additional group departures or arrange a private climb on your preferred dates.</p>
+
 <h2>Tips for Solo Travelers Joining a Group Climb</h2>
 
 <p>About 40% of our group climbers are solo travelers. If that's you, here's what to know:</p>
@@ -211,21 +243,49 @@ const content = `
 </div>
 </div>
 
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+<h3 itemprop="name">What happens if the group climb doesn't fill up?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+<p itemprop="text">Our scheduled group departures run with as few as 2 climbers — your date is guaranteed regardless of final group size. If only 2–3 people book, you essentially get a semi-private experience at the group price. We never cancel a departure due to low numbers. If a departure date has strong bookings, we may open additional dates on the same route to keep group sizes comfortable.</p>
+</div>
 </div>
 
-<p>Ready to join a Kilimanjaro group climb? <a href="/kilimanjaro-join-group-departures/">Browse our 2026 group departure dates</a> or <a href="/contact-us/">contact us</a> to find the right climb for your schedule and budget.</p>
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+<h3 itemprop="name">Can I get a private tent on a group climb?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+<p itemprop="text">Yes. Solo travelers are normally paired with another solo climber of the same gender in a 2-person tent. If you prefer your own space, a private tent supplement is available for $100–$150 per climb. Couples and friends traveling together automatically share a tent. All tents are quality 4-season mountain tents rated for high-altitude conditions.</p>
+</div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+<h3 itemprop="name">What is the summit success rate for Kilimanjaro group climbs?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+<p itemprop="text">Summit success rates depend heavily on the route and duration. The 8-day Lemosho route has the highest rate at 90–95%, followed by the 7-day Rongai (85–90%) and 7-day Machame (80–90%). The 6-day Marangu has the lowest at 65–80% due to less acclimatization time. Our overall success rate across all group climbs is above 90%, as we recommend 7+ day routes and maintain strict acclimatization protocols with twice-daily health monitoring.</p>
+</div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+<h3 itemprop="name">Do I need to be physically fit to join a Kilimanjaro group climb?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+<p itemprop="text">You don't need to be an athlete, but reasonable fitness is important. You should be comfortable hiking 5–8 hours per day over uneven terrain. Most group climbers prepare with 8–12 weeks of training: regular hiking, cardio (running, cycling, swimming), and stair climbing. The pace on group climbs is deliberately slow ("pole pole"), which helps all fitness levels. Read our full <a href="/kilimanjaro-training-plan/">Kilimanjaro training plan</a> for a week-by-week preparation guide.</p>
+</div>
+</div>
+
+</div>
+
+<p>Ready to join a Kilimanjaro group climb? <a href="/kilimanjaro-join-group-departures/">Browse our 2026–2027 group departure dates</a> or <a href="/contact-us/">contact us</a> to find the right climb for your schedule and budget.</p>
 `.trim();
 
 async function main() {
   const slug = "kilimanjaro-group-climbs";
 
-  // Step 1: Update metadata first (small payload)
+  // Step 1: Update metadata
   console.log("Updating metadata...");
   await prisma.blogPost.update({
     where: { slug },
     data: {
       title: "Kilimanjaro Group Climbs: Cost, Routes & How to Join a Group Trek",
-      metaTitle: "Kilimanjaro Group Climbs 2026: Cost, Routes & How to Join",
+      metaTitle: "Kilimanjaro Group Climbs 2026-2027: Cost, Routes & Dates",
       metaDescription:
         "Kilimanjaro group climbs from $1,850. Compare routes, group vs private costs, what's included, and tips for solo travelers. Join scheduled departures & save 15-30%.",
       excerpt:
@@ -234,7 +294,7 @@ async function main() {
   });
   console.log("✓ Metadata updated");
 
-  // Step 2: Update content separately (large payload)
+  // Step 2: Update content
   console.log("Updating content...");
   const updated = await prisma.blogPost.update({
     where: { slug },
