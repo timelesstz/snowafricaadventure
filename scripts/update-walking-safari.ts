@@ -255,11 +255,11 @@ This concludes your extraordinary walking safari and Serengeti adventure. From t
 ];
 
 const metadata = {
-  title: "Walking Safari & Trekking on Ngorongoro",
+  title: "Walking Safari on Ngorongoro Highlands & Serengeti",
   metaTitle:
-    "11-Day Ngorongoro Walking Safari & Serengeti Game Drive | Tanzania Trekking Adventure",
+    "Walking Safari on Ngorongoro Highlands",
   metaDescription:
-    "Trek the Ngorongoro Highlands, explore Olmoti and Empakaai Craters, visit Lake Natron flamingos, and enjoy Serengeti game drives on this epic 11-day walking safari in Tanzania.",
+    "11-day walking safari on Ngorongoro Highlands with Serengeti game drives. Trek Olmoti & Empakaai Craters, visit Lake Natron, and spot the Big Five. From $950.",
   duration: "11 Days 10 Nights",
   durationDays: 11,
   type: "Adventure",

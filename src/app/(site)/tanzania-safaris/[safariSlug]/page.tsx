@@ -52,9 +52,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return genMeta({
-    title: safari.title,
-    description: safari.overview.slice(0, 160),
+    title: safari.metaTitle || safari.title,
+    description: safari.metaDescription || safari.overview.slice(0, 160),
     url: `/tanzania-safaris/${safari.slug}/`,
+    image: safari.featuredImage || undefined,
   });
 }
 
