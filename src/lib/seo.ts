@@ -13,8 +13,8 @@ interface SEOProps {
   noIndex?: boolean;
 }
 
-// Max chars for page title so "title | Snow Africa Adventure" stays ≤60 chars total
-const TITLE_BUDGET = 36;
+// Max chars for page title so "title | Snow Africa Adventure" stays ≤65 chars total
+const TITLE_BUDGET = 40;
 
 function fitTitle(t: string): string {
   if (t.length <= TITLE_BUDGET) return t;
