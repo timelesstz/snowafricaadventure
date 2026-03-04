@@ -171,6 +171,13 @@ img {
    Blog Content Styles
    ======================================== */
 
+/* Base blog content container */
+.blog-content {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 /* Numbered Headings (both h2 and h3) */
 .blog-content h2.numbered-heading,
 .blog-content h3.numbered-heading {
@@ -295,6 +302,35 @@ img {
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive tables — horizontal scroll on mobile */
+@media (max-width: 768px) {
+  .blog-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .blog-content table thead,
+  .blog-content table tbody {
+    display: table;
+    width: 100%;
+    min-width: 600px;
+  }
+
+  .blog-content table th,
+  .blog-content table td {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .blog-content table th:first-child,
+  .blog-content table td:first-child {
+    white-space: normal;
+    min-width: 120px;
+  }
 }
 
 .blog-content table thead,
