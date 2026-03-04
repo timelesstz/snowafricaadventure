@@ -10,25 +10,36 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const page = await prisma.cmsPage.findUnique({
-    where: { slug },
-    select: { title: true, description: true },
-  });
+  try {
+    const page = await prisma.cmsPage.findUnique({
+      where: { slug },
+      select: { title: true, description: true },
+    });
 
-  if (!page) return {};
+    if (!page) return {};
 
-  return {
-    title: page.title,
-    description: page.description || undefined,
-  };
+    return {
+      title: page.title,
+      description: page.description || undefined,
+    };
+  } catch (error) {
+    console.error("[CMS] Failed to fetch page metadata:", error);
+    return {};
+  }
 }
 
 export default async function CmsPage({ params }: Props) {
   const { slug } = await params;
 
-  const page = await prisma.cmsPage.findUnique({
-    where: { slug },
-  });
+  let page;
+  try {
+    page = await prisma.cmsPage.findUnique({
+      where: { slug },
+    });
+  } catch (error) {
+    console.error("[CMS] Failed to fetch page:", error);
+    notFound();
+  }
 
   if (!page || page.status !== "PUBLISHED") {
     notFound();

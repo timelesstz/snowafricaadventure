@@ -30,56 +30,71 @@ export const metadata: Metadata = genMeta({
 
 // Fetch routes from database with all relevant fields
 async function getRoutes() {
-  const routes = await prisma.trekkingRoute.findMany({
-    where: {
-      isActive: true,
-    },
-    select: {
-      slug: true,
-      title: true,
-      duration: true,
-      durationDays: true,
-      physicalRating: true,
-      maxPeople: true,
-      overview: true,
-      successRate: true,
-      featuredImage: true,
-      highlights: true,
-      startPoint: true,
-      endPoint: true,
-    },
-    orderBy: {
-      durationDays: "asc",
-    },
-  });
+  try {
+    const routes = await prisma.trekkingRoute.findMany({
+      where: {
+        isActive: true,
+      },
+      select: {
+        slug: true,
+        title: true,
+        duration: true,
+        durationDays: true,
+        physicalRating: true,
+        maxPeople: true,
+        overview: true,
+        successRate: true,
+        featuredImage: true,
+        highlights: true,
+        startPoint: true,
+        endPoint: true,
+      },
+      orderBy: {
+        durationDays: "asc",
+      },
+    });
 
-  return routes;
+    return routes;
+  } catch (error) {
+    console.error("[Trekking] Failed to fetch routes:", error);
+    return [];
+  }
 }
 
 // Get unique difficulty ratings
 async function getDifficulties() {
-  const difficulties = await prisma.trekkingRoute.findMany({
-    where: { isActive: true },
-    select: { physicalRating: true },
-    distinct: ["physicalRating"],
-  });
-  return difficulties.map((d) => d.physicalRating).filter(Boolean) as string[];
+  try {
+    const difficulties = await prisma.trekkingRoute.findMany({
+      where: { isActive: true },
+      select: { physicalRating: true },
+      distinct: ["physicalRating"],
+    });
+    return difficulties.map((d) => d.physicalRating).filter(Boolean) as string[];
+  } catch (error) {
+    console.error("[Trekking] Failed to fetch difficulties:", error);
+    return [];
+  }
 }
 
 // Get featured departure
 async function getFeaturedDeparture() {
-  const departure = await prisma.groupDeparture.findFirst({
-    where: {
-      status: "OPEN",
-      startDate: { gte: new Date() },
-      isFeatured: true,
-    },
-    include: {
-      route: { select: { title: true, slug: true } },
-    },
-    orderBy: { startDate: "asc" },
-  });
-  return departure;
+  try {
+    const departure = await prisma.groupDeparture.findFirst({
+      where: {
+        status: "OPEN",
+        startDate: { gte: new Date() },
+        isFeatured: true,
+      },
+      include: {
+        route: { select: { title: true, slug: true } },
+      },
+      orderBy: { startDate: "asc" },
+    });
+    return departure;
+  } catch (error) {
+    console.error("[Trekking] Failed to fetch featured departure:", error);
+    return null;
+  }
 }
 
 export default async function TrekkingPage() {

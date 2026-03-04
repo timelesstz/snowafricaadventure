@@ -22,20 +22,25 @@ interface PageProps {
 
 // Fetch safari from database
 async function getSafari(slug: string) {
-  const safari = await prisma.safariPackage.findUnique({
-    where: { slug },
-    include: {
-      destinations: {
-        include: {
-          destination: true,
-        },
-        orderBy: {
-          order: "asc",
+  try {
+    const safari = await prisma.safariPackage.findUnique({
+      where: { slug },
+      include: {
+        destinations: {
+          include: {
+            destination: true,
+          },
+          orderBy: {
+            order: "asc",
+          },
         },
       },
-    },
-  });
-  return safari;
+    });
+    return safari;
+  } catch (error) {
+    console.error("[Safari] Failed to fetch safari:", error);
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

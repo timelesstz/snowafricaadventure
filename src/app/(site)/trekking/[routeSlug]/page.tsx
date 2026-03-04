@@ -23,76 +23,91 @@ interface PageProps {
 
 // Fetch route from database
 async function getRoute(slug: string) {
-  const route = await prisma.trekkingRoute.findUnique({
-    where: { slug },
-  });
-  return route;
+  try {
+    const route = await prisma.trekkingRoute.findUnique({
+      where: { slug },
+    });
+    return route;
+  } catch (error) {
+    console.error("[Route] Failed to fetch route:", error);
+    return null;
+  }
 }
 
 // Get related routes (excluding current)
 async function getRelatedRoutes(currentSlug: string) {
-  const routes = await prisma.trekkingRoute.findMany({
-    where: {
-      slug: { not: currentSlug },
-      isActive: true,
-    },
-    take: 3,
-    select: {
-      slug: true,
-      title: true,
-      duration: true,
-      physicalRating: true,
-    },
-  });
-  return routes;
+  try {
+    const routes = await prisma.trekkingRoute.findMany({
+      where: {
+        slug: { not: currentSlug },
+        isActive: true,
+      },
+      take: 3,
+      select: {
+        slug: true,
+        title: true,
+        duration: true,
+        physicalRating: true,
+      },
+    });
+    return routes;
+  } catch (error) {
+    console.error("[Route] Failed to fetch related routes:", error);
+    return [];
+  }
 }
 
 // Get upcoming departures for this route
 async function getUpcomingDepartures(routeId: string) {
-  const departures = await prisma.groupDeparture.findMany({
-    where: {
-      routeId,
-      status: "OPEN",
-      startDate: { gte: new Date() },
-    },
-    take: 4,
-    orderBy: { startDate: "asc" },
-    include: {
-      route: {
-        select: {
-          title: true,
-          duration: true,
+  try {
+    const departures = await prisma.groupDeparture.findMany({
+      where: {
+        routeId,
+        status: "OPEN",
+        startDate: { gte: new Date() },
+      },
+      take: 4,
+      orderBy: { startDate: "asc" },
+      include: {
+        route: {
+          select: {
+            title: true,
+            duration: true,
+          },
+        },
+        bookings: {
+          where: {
+            status: { not: "CANCELLED" },
+          },
+          select: {
+            totalClimbers: true,
+          },
         },
       },
-      bookings: {
-        where: {
-          status: { not: "CANCELLED" },
-        },
-        select: {
-          totalClimbers: true,
-        },
-      },
-    },
-  });
+    });
 
-  return departures.map((d) => {
-    // Sum total climbers from all active bookings
-    const spotsTaken = d.bookings.reduce(
-      (sum, booking) => sum + booking.totalClimbers,
-      0
-    );
-    return {
-      id: d.id,
-      startDate: d.startDate,
-      endDate: d.endDate,
-      price: Number(d.price),
-      spotsTotal: d.maxParticipants,
-      spotsTaken,
-      routeTitle: d.route.title,
-      duration: d.route.duration,
-      guideLanguage: "English",
-    };
-  });
+    return departures.map((d) => {
+      // Sum total climbers from all active bookings
+      const spotsTaken = d.bookings.reduce(
+        (sum, booking) => sum + booking.totalClimbers,
+        0
+      );
+      return {
+        id: d.id,
+        startDate: d.startDate,
+        endDate: d.endDate,
+        price: Number(d.price),
+        spotsTotal: d.maxParticipants,
+        spotsTaken,
+        routeTitle: d.route.title,
+        duration: d.route.duration,
+        guideLanguage: "English",
+      };
+    });
+  } catch (error) {
+    console.error("[Route] Failed to fetch departures:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

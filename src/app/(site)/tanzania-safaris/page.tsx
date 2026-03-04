@@ -39,57 +39,67 @@ export const metadata: Metadata = genMeta({
 
 // Fetch safaris from database with all relevant fields
 async function getSafaris() {
-  const safaris = await prisma.safariPackage.findMany({
-    where: {
-      isActive: true,
-    },
-    select: {
-      slug: true,
-      title: true,
-      duration: true,
-      durationDays: true,
-      type: true,
-      overview: true,
-      priceFrom: true,
-      featuredImage: true,
-      gameDrives: true,
-      parksCount: true,
-      rating: true,
-      highlights: true,
-      destinations: {
-        select: {
-          destination: {
-            select: {
-              name: true,
+  try {
+    const safaris = await prisma.safariPackage.findMany({
+      where: {
+        isActive: true,
+      },
+      select: {
+        slug: true,
+        title: true,
+        duration: true,
+        durationDays: true,
+        type: true,
+        overview: true,
+        priceFrom: true,
+        featuredImage: true,
+        gameDrives: true,
+        parksCount: true,
+        rating: true,
+        highlights: true,
+        destinations: {
+          select: {
+            destination: {
+              select: {
+                name: true,
+              },
             },
           },
-        },
-        orderBy: {
-          order: "asc",
+          orderBy: {
+            order: "asc",
+          },
         },
       },
-    },
-    orderBy: {
-      durationDays: "asc",
-    },
-  });
+      orderBy: {
+        durationDays: "asc",
+      },
+    });
 
-  return safaris.map((safari) => ({
-    ...safari,
-    priceFrom: safari.priceFrom ? Number(safari.priceFrom) : null,
-    rating: safari.rating ? Number(safari.rating) : null,
-    destinations: safari.destinations.map((d) => d.destination.name),
-  }));
+    return safaris.map((safari) => ({
+      ...safari,
+      priceFrom: safari.priceFrom ? Number(safari.priceFrom) : null,
+      rating: safari.rating ? Number(safari.rating) : null,
+      destinations: safari.destinations.map((d) => d.destination.name),
+    }));
+  } catch (error) {
+    console.error("[Safaris] Failed to fetch safaris:", error);
+    return [];
+  }
 }
 
 // Get unique safari types
 async function getSafariTypes() {
-  const types = await prisma.safariPackage.findMany({
-    where: { isActive: true },
-    select: { type: true },
-    distinct: ["type"],
-  });
-  return types.map((t) => t.type);
+  try {
+    const types = await prisma.safariPackage.findMany({
+      where: { isActive: true },
+      select: { type: true },
+      distinct: ["type"],
+    });
+    return types.map((t) => t.type);
+  } catch (error) {
+    console.error("[Safaris] Failed to fetch safari types:", error);
+    return [];
+  }
 }
 
 export default async function SafarisPage() {

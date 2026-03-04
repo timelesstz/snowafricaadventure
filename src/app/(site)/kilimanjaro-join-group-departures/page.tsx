@@ -43,49 +43,54 @@ export const metadata: Metadata = {
 
 // Fetch departures from database
 async function getDeparturesByYear(year: number) {
-  const departures = await prisma.groupDeparture.findMany({
-    where: {
-      year,
-      status: { in: ["OPEN", "LIMITED", "GUARANTEED"] },
-    },
-    include: {
-      route: {
-        select: {
-          title: true,
-          slug: true,
+  try {
+    const departures = await prisma.groupDeparture.findMany({
+      where: {
+        year,
+        status: { in: ["OPEN", "LIMITED", "GUARANTEED"] },
+      },
+      include: {
+        route: {
+          select: {
+            title: true,
+            slug: true,
+          },
+        },
+        bookings: {
+          where: {
+            status: { not: "CANCELLED" },
+          },
+          select: {
+            totalClimbers: true,
+          },
         },
       },
-      bookings: {
-        where: {
-          status: { not: "CANCELLED" },
-        },
-        select: {
-          totalClimbers: true,
-        },
-      },
-    },
-    orderBy: { arrivalDate: "asc" },
-  });
+      orderBy: { arrivalDate: "asc" },
+    });
 
-  return departures.map((dep) => {
-    // Sum total climbers from all active bookings (not just count of booking records)
-    const bookedSpots = dep.bookings.reduce(
-      (sum, booking) => sum + booking.totalClimbers,
-      0
-    );
-    return {
-      id: dep.id,
-      route: { name: dep.route.title, slug: dep.route.slug },
-      arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
-      endDate: dep.endDate.toISOString().split("T")[0],
-      price: Number(dep.price),
-      maxParticipants: dep.maxParticipants,
-      bookedSpots,
-      availableSpots: dep.maxParticipants - bookedSpots,
-      isFullMoon: dep.isFullMoon,
-      status: dep.status,
-    };
-  });
+    return departures.map((dep) => {
+      // Sum total climbers from all active bookings (not just count of booking records)
+      const bookedSpots = dep.bookings.reduce(
+        (sum, booking) => sum + booking.totalClimbers,
+        0
+      );
+      return {
+        id: dep.id,
+        route: { name: dep.route.title, slug: dep.route.slug },
+        arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
+        endDate: dep.endDate.toISOString().split("T")[0],
+        price: Number(dep.price),
+        maxParticipants: dep.maxParticipants,
+        bookedSpots,
+        availableSpots: dep.maxParticipants - bookedSpots,
+        isFullMoon: dep.isFullMoon,
+        status: dep.status,
+      };
+    });
+  } catch (error) {
+    console.error("[GroupDepartures] Failed to fetch departures:", error);
+    return [];
+  }
 }
 
 export default async function GroupDeparturesPage() {

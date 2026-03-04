@@ -122,45 +122,56 @@ const destinations = [
 
 // Fetch homepage settings from database
 async function getHomepageSettings() {
-  const settings = await prisma.siteSetting.findMany({
-    where: { key: { startsWith: "homepage." } },
-  });
+  try {
+    const settings = await prisma.siteSetting.findMany({
+      where: { key: { startsWith: "homepage." } },
+    });
 
-  const settingsMap: Record<string, string> = {};
-  settings.forEach(s => { settingsMap[s.key] = s.value; });
+    const settingsMap: Record<string, string> = {};
+    settings.forEach(s => { settingsMap[s.key] = s.value; });
 
-  return {
-    hero: {
-      badge: settingsMap["homepage.hero.badge"] || DEFAULT_HERO.badge,
-      title: settingsMap["homepage.hero.title"] || DEFAULT_HERO.title,
-      subtitle: settingsMap["homepage.hero.subtitle"] || DEFAULT_HERO.subtitle,
-      image: settingsMap["homepage.hero.image"] || DEFAULT_HERO.image,
-    },
-    stats: [
-      { value: settingsMap["homepage.stats.experience"] || DEFAULT_STATS[0].value, label: settingsMap["homepage.stats.experienceLabel"] || DEFAULT_STATS[0].label },
-      { value: settingsMap["homepage.stats.travelers"] || DEFAULT_STATS[1].value, label: settingsMap["homepage.stats.travelersLabel"] || DEFAULT_STATS[1].label },
-      { value: settingsMap["homepage.stats.success"] || DEFAULT_STATS[2].value, label: settingsMap["homepage.stats.successLabel"] || DEFAULT_STATS[2].label },
-      { value: settingsMap["homepage.stats.rating"] || DEFAULT_STATS[3].value, label: settingsMap["homepage.stats.ratingLabel"] || DEFAULT_STATS[3].label },
-    ],
-    company: {
-      tagline: settingsMap["homepage.company.tagline"] || DEFAULT_COMPANY_INFO.tagline,
-      description: settingsMap["homepage.company.description"] || DEFAULT_COMPANY_INFO.description,
-      valueProposition: settingsMap["homepage.company.valueProposition"] || DEFAULT_COMPANY_INFO.valueProposition,
-    },
-    registration: {
-      name: settingsMap["homepage.registration.name"] || DEFAULT_COMPANY_INFO.registration.name,
-      incorporationNo: settingsMap["homepage.registration.incorporationNo"] || DEFAULT_COMPANY_INFO.registration.incorporationNo,
-      vatNo: settingsMap["homepage.registration.vatNo"] || DEFAULT_COMPANY_INFO.registration.vatNo,
-      tinNo: settingsMap["homepage.registration.tinNo"] || DEFAULT_COMPANY_INFO.registration.tinNo,
-      talaLicense: settingsMap["homepage.registration.talaLicense"] || "",
-      trekkingLicense: settingsMap["homepage.registration.trekkingLicense"] || "",
-    },
-    tripAdvisor: {
-      rating: parseInt(settingsMap["homepage.tripadvisor.rating"]) || DEFAULT_COMPANY_INFO.tripAdvisor.rating,
-      reviews: parseInt(settingsMap["homepage.tripadvisor.reviews"]) || DEFAULT_COMPANY_INFO.tripAdvisor.reviews,
-      url: settingsMap["homepage.tripadvisor.url"] || DEFAULT_COMPANY_INFO.tripAdvisor.url,
-    },
-  };
+    return {
+      hero: {
+        badge: settingsMap["homepage.hero.badge"] || DEFAULT_HERO.badge,
+        title: settingsMap["homepage.hero.title"] || DEFAULT_HERO.title,
+        subtitle: settingsMap["homepage.hero.subtitle"] || DEFAULT_HERO.subtitle,
+        image: settingsMap["homepage.hero.image"] || DEFAULT_HERO.image,
+      },
+      stats: [
+        { value: settingsMap["homepage.stats.experience"] || DEFAULT_STATS[0].value, label: settingsMap["homepage.stats.experienceLabel"] || DEFAULT_STATS[0].label },
+        { value: settingsMap["homepage.stats.travelers"] || DEFAULT_STATS[1].value, label: settingsMap["homepage.stats.travelersLabel"] || DEFAULT_STATS[1].label },
+        { value: settingsMap["homepage.stats.success"] || DEFAULT_STATS[2].value, label: settingsMap["homepage.stats.successLabel"] || DEFAULT_STATS[2].label },
+        { value: settingsMap["homepage.stats.rating"] || DEFAULT_STATS[3].value, label: settingsMap["homepage.stats.ratingLabel"] || DEFAULT_STATS[3].label },
+      ],
+      company: {
+        tagline: settingsMap["homepage.company.tagline"] || DEFAULT_COMPANY_INFO.tagline,
+        description: settingsMap["homepage.company.description"] || DEFAULT_COMPANY_INFO.description,
+        valueProposition: settingsMap["homepage.company.valueProposition"] || DEFAULT_COMPANY_INFO.valueProposition,
+      },
+      registration: {
+        name: settingsMap["homepage.registration.name"] || DEFAULT_COMPANY_INFO.registration.name,
+        incorporationNo: settingsMap["homepage.registration.incorporationNo"] || DEFAULT_COMPANY_INFO.registration.incorporationNo,
+        vatNo: settingsMap["homepage.registration.vatNo"] || DEFAULT_COMPANY_INFO.registration.vatNo,
+        tinNo: settingsMap["homepage.registration.tinNo"] || DEFAULT_COMPANY_INFO.registration.tinNo,
+        talaLicense: settingsMap["homepage.registration.talaLicense"] || "",
+        trekkingLicense: settingsMap["homepage.registration.trekkingLicense"] || "",
+      },
+      tripAdvisor: {
+        rating: parseInt(settingsMap["homepage.tripadvisor.rating"]) || DEFAULT_COMPANY_INFO.tripAdvisor.rating,
+        reviews: parseInt(settingsMap["homepage.tripadvisor.reviews"]) || DEFAULT_COMPANY_INFO.tripAdvisor.reviews,
+        url: settingsMap["homepage.tripadvisor.url"] || DEFAULT_COMPANY_INFO.tripAdvisor.url,
+      },
+    };
+  } catch (error) {
+    console.error("[Homepage] Failed to fetch settings:", error);
+    return {
+      hero: DEFAULT_HERO,
+      stats: DEFAULT_STATS,
+      company: DEFAULT_COMPANY_INFO,
+      registration: DEFAULT_COMPANY_INFO.registration,
+      tripAdvisor: DEFAULT_COMPANY_INFO.tripAdvisor,
+    };
+  }
 }
 
 const ALLOWED_IMAGE_HOSTS = [
@@ -180,64 +191,69 @@ function safeImageUrl(url: string | null | undefined, fallback: string): string 
 
 // Fetch data from database
 async function getHomePageData() {
-  const [routes, safaris, blogPosts, featuredDeparture] = await Promise.all([
-    // Get featured trekking routes
-    prisma.trekkingRoute.findMany({
-      where: { isActive: true },
-      select: {
-        slug: true,
-        title: true,
-        duration: true,
-        physicalRating: true,
-        successRate: true,
-        featuredImage: true,
-        overview: true,
-      },
-      orderBy: { createdAt: "asc" },
-      take: 6,
-    }),
-    // Get featured safaris
-    prisma.safariPackage.findMany({
-      where: { isActive: true },
-      select: {
-        slug: true,
-        title: true,
-        duration: true,
-        type: true,
-        priceFrom: true,
-        featuredImage: true,
-        overview: true,
-      },
-      orderBy: { createdAt: "asc" },
-      take: 5,
-    }),
-    // Get latest blog posts
-    prisma.blogPost.findMany({
-      where: { isPublished: true },
-      select: {
-        slug: true,
-        title: true,
-        excerpt: true,
-        featuredImage: true,
-      },
-      orderBy: { publishedAt: "desc" },
-      take: 3,
-    }),
-    // Get next featured departure
-    prisma.groupDeparture.findFirst({
-      where: {
-        status: "OPEN",
-        startDate: { gte: new Date() },
-        isFeatured: true,
-      },
-      include: {
-        route: { select: { title: true, slug: true } },
-      },
-      orderBy: { startDate: "asc" },
-    }),
-  ]);
+  try {
+    const [routes, safaris, blogPosts, featuredDeparture] = await Promise.all([
+      // Get featured trekking routes
+      prisma.trekkingRoute.findMany({
+        where: { isActive: true },
+        select: {
+          slug: true,
+          title: true,
+          duration: true,
+          physicalRating: true,
+          successRate: true,
+          featuredImage: true,
+          overview: true,
+        },
+        orderBy: { createdAt: "asc" },
+        take: 6,
+      }),
+      // Get featured safaris
+      prisma.safariPackage.findMany({
+        where: { isActive: true },
+        select: {
+          slug: true,
+          title: true,
+          duration: true,
+          type: true,
+          priceFrom: true,
+          featuredImage: true,
+          overview: true,
+        },
+        orderBy: { createdAt: "asc" },
+        take: 5,
+      }),
+      // Get latest blog posts
+      prisma.blogPost.findMany({
+        where: { isPublished: true },
+        select: {
+          slug: true,
+          title: true,
+          excerpt: true,
+          featuredImage: true,
+        },
+        orderBy: { publishedAt: "desc" },
+        take: 3,
+      }),
+      // Get next featured departure
+      prisma.groupDeparture.findFirst({
+        where: {
+          status: "OPEN",
+          startDate: { gte: new Date() },
+          isFeatured: true,
+        },
+        include: {
+          route: { select: { title: true, slug: true } },
+        },
+        orderBy: { startDate: "asc" },
+      }),
+    ]);
 
-  return { routes, safaris, blogPosts, featuredDeparture };
+    return { routes, safaris, blogPosts, featuredDeparture };
+  } catch (error) {
+    console.error("[Homepage] Failed to fetch data:", error);
+    return { routes: [], safaris: [], blogPosts: [], featuredDeparture: null };
+  }
 }
 
 export default async function HomePage() {
