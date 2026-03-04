@@ -33,9 +33,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-there-snow-in-africa-mountains",
-    metaTitle: "Is There Snow in Africa? Kilimanjaro's Glaciers & Snow Peaks",
-    metaDescription: "Yes, Africa has snow! Explore Kilimanjaro's shrinking glaciers, Mount Kenya's Lewis Glacier, and other African peaks with permanent snow. Photos & facts.",
-    excerpt: "Discover the surprising truth about snow in Africa - from Kilimanjaro's iconic glaciers to Mount Kenya and the Rwenzori Mountains."
+    metaTitle: "Does Africa Have Mountains with Snow? 8 Peaks with Snow & Ice",
+    metaDescription: "Africa has mountains with snow year-round — from Kilimanjaro's glaciers to Atlas ski resorts. Explore 8 snow-capped peaks across 10 countries.",
+    excerpt: "Yes, Africa has mountains with snow. Explore 8 snow-capped peaks — from Kilimanjaro's glaciers to the Atlas Mountains ski resorts — across 10 African countries."
   },
   {
     slug: "best-time-to-climb-mount-kilimanjaro",

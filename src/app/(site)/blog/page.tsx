@@ -16,46 +16,56 @@ export const metadata: Metadata = genMeta({
 });
 
 async function getPosts() {
-  const posts = await prisma.blogPost.findMany({
-    where: { isPublished: true },
-    orderBy: { publishedAt: "desc" },
-    take: 20,
-    include: {
-      categories: {
-        include: { category: true },
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { isPublished: true },
+      orderBy: { publishedAt: "desc" },
+      take: 20,
+      include: {
+        categories: {
+          include: { category: true },
+        },
       },
-    },
-  });
+    });
 
-  return posts.map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    excerpt: post.excerpt || "",
-    author: post.author || "Snow Africa Team",
-    publishedAt: post.publishedAt?.toISOString().split("T")[0] || "",
-    featuredImage: normalizeImageUrl(post.featuredImage),
-    categories: post.categories.map((c) => ({
-      name: c.category.name,
-      slug: c.category.slug,
-    })),
-  }));
+    return posts.map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt || "",
+      author: post.author || "Snow Africa Team",
+      publishedAt: post.publishedAt?.toISOString().split("T")[0] || "",
+      featuredImage: normalizeImageUrl(post.featuredImage),
+      categories: post.categories.map((c) => ({
+        name: c.category.name,
+        slug: c.category.slug,
+      })),
+    }));
+  } catch (error) {
+    console.error("[Blog] Failed to fetch posts:", error);
+    return [];
+  }
 }
 
 async function getCategories() {
-  const categories = await prisma.category.findMany({
-    include: {
-      _count: {
-        select: { posts: true },
+  try {
+    const categories = await prisma.category.findMany({
+      include: {
+        _count: {
+          select: { posts: true },
+        },
       },
-    },
-    orderBy: { name: "asc" },
-  });
+      orderBy: { name: "asc" },
+    });
 
-  return categories.map((cat) => ({
-    name: cat.name,
-    slug: cat.slug,
-    count: cat._count.posts,
-  })).filter((cat) => cat.count > 0);
+    return categories.map((cat) => ({
+      name: cat.name,
+      slug: cat.slug,
+      count: cat._count.posts,
+    })).filter((cat) => cat.count > 0);
+  } catch (error) {
+    console.error("[Blog] Failed to fetch categories:", error);
+    return [];
+  }
 }
 
 export default async function BlogPage() {

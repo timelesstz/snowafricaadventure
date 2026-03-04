@@ -52,6 +52,15 @@ NextAuth v5 (beta.30) with Credentials provider. Role hierarchy: `SUPER_ADMIN > 
 - **Must use** `DATABASE_URL_ACCELERATE` (not plain DATABASE_URL)
 - **30+ models** covering: content (TrekkingRoute, SafariPackage, Destination, DayTrip, BlogPost), bookings (GroupDeparture, Booking, Inquiry), commerce (Partner, Commission, CommissionPayout), and system (Media, Redirect, NotFoundUrl, Notification, EmailLog)
 
+### CRITICAL: Production Database Safety
+
+- **NEVER run `deleteMany()`, `delete()`, or any destructive operations on the production database.** The database contains live production data — real bookings, real content, real customer inquiries.
+- **NEVER run seed scripts that start with clearing data** (e.g., `seed-production.ts` uses `deleteMany()` on all tables — DO NOT run it against production).
+- **Database updates must be additive only:** use `upsert`, `update`, or `create` — never delete then recreate.
+- **Always use `where` clauses** to target specific records when updating.
+- **Test database scripts locally first** before running against production.
+- When writing seed or migration scripts, use `upsert` (create if not exists, update if exists) instead of delete-and-recreate patterns.
+
 ### Key Libraries
 
 - `src/lib/auth.ts` — NextAuth config, session helpers, `requireRole()`

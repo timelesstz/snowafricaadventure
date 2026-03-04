@@ -44,70 +44,89 @@ function calculateReadingTime(content: string): number {
   return Math.max(1, Math.ceil(wordCount / 200));
 }
 
-// Fetch post from database
+// Fetch post from database with retry for transient errors
 async function getPost(slug: string) {
   if (reservedSlugs.includes(slug)) {
     return null;
   }
 
-  const post = await prisma.blogPost.findUnique({
-    where: { slug, isPublished: true },
-    include: {
-      categories: {
-        include: { category: true },
-      },
-      tags: {
-        include: { tag: true },
-      },
-    },
-  });
+  // Retry once on transient database errors (e.g. Prisma Accelerate timeouts)
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const post = await prisma.blogPost.findUnique({
+        where: { slug, isPublished: true },
+        include: {
+          categories: {
+            include: { category: true },
+          },
+          tags: {
+            include: { tag: true },
+          },
+        },
+      });
 
-  if (!post) return null;
+      if (!post) return null;
 
-  // Process content for better formatting
-  const processedContent = processContent(post.content);
-  const tableOfContents = generateTableOfContents(processedContent);
+      // Process content for better formatting
+      const processedContent = processContent(post.content);
+      const tableOfContents = generateTableOfContents(processedContent);
 
-  return {
-    slug: post.slug,
-    title: post.title,
-    metaTitle: post.metaTitle,
-    metaDescription: post.metaDescription,
-    excerpt: post.excerpt || "",
-    content: processedContent,
-    rawContent: post.content,
-    author: post.author || "Snow Africa Team",
-    featuredImage: normalizeImageUrl(post.featuredImage),
-    publishedAt: post.publishedAt?.toISOString().split("T")[0] || new Date().toISOString().split("T")[0],
-    readingTime: calculateReadingTime(post.content),
-    tableOfContents,
-    categories: post.categories.map((c) => ({
-      name: c.category.name,
-      slug: c.category.slug,
-    })),
-    tags: post.tags.map((t) => ({
-      name: t.tag.name,
-      slug: t.tag.slug,
-    })),
-  };
+      return {
+        slug: post.slug,
+        title: post.title,
+        metaTitle: post.metaTitle,
+        metaDescription: post.metaDescription,
+        excerpt: post.excerpt || "",
+        content: processedContent,
+        rawContent: post.content,
+        author: post.author || "Snow Africa Team",
+        featuredImage: normalizeImageUrl(post.featuredImage),
+        publishedAt: post.publishedAt?.toISOString().split("T")[0] || new Date().toISOString().split("T")[0],
+        readingTime: calculateReadingTime(post.content),
+        tableOfContents,
+        categories: post.categories.map((c) => ({
+          name: c.category.name,
+          slug: c.category.slug,
+        })),
+        tags: post.tags.map((t) => ({
+          name: t.tag.name,
+          slug: t.tag.slug,
+        })),
+      };
+    } catch (error) {
+      if (attempt === 0) {
+        console.warn(`[getPost] Attempt 1 failed for slug "${slug}", retrying...`, error);
+        continue;
+      }
+      console.error(`[getPost] All attempts failed for slug "${slug}":`, error);
+      return null;
+    }
+  }
+
+  return null;
 }
 
 // Fetch categories with post counts
 async function getCategories() {
-  const categories = await prisma.category.findMany({
-    include: {
-      _count: { select: { posts: true } },
-    },
-    orderBy: { name: "asc" },
-  });
+  try {
+    const categories = await prisma.category.findMany({
+      include: {
+        _count: { select: { posts: true } },
+      },
+      orderBy: { name: "asc" },
+    });
 
-  return categories
-    .filter((cat) => cat._count.posts > 0)
-    .map((cat) => ({
-      name: cat.name,
-      slug: cat.slug,
-      count: cat._count.posts,
-    }));
+    return categories
+      .filter((cat) => cat._count.posts > 0)
+      .map((cat) => ({
+        name: cat.name,
+        slug: cat.slug,
+        count: cat._count.posts,
+      }));
+  } catch (error) {
+    console.error("[getCategories] Failed to fetch categories:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -137,25 +156,39 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   // Fetch related posts and categories in parallel
-  const [relatedPostsData, categories] = await Promise.all([
-    prisma.blogPost.findMany({
-      where: {
-        slug: { not: post.slug },
-        isPublished: true,
-      },
-      take: 3,
-      orderBy: { publishedAt: "desc" },
-      select: {
-        slug: true,
-        title: true,
-        excerpt: true,
-        author: true,
-        publishedAt: true,
-        featuredImage: true,
-      },
-    }),
-    getCategories(),
-  ]);
+  let relatedPostsData: {
+    slug: string;
+    title: string;
+    excerpt: string | null;
+    author: string | null;
+    publishedAt: Date | null;
+    featuredImage: string | null;
+  }[] = [];
+  let categories: { name: string; slug: string; count: number }[] = [];
+
+  try {
+    [relatedPostsData, categories] = await Promise.all([
+      prisma.blogPost.findMany({
+        where: {
+          slug: { not: post.slug },
+          isPublished: true,
+        },
+        take: 3,
+        orderBy: { publishedAt: "desc" },
+        select: {
+          slug: true,
+          title: true,
+          excerpt: true,
+          author: true,
+          publishedAt: true,
+          featuredImage: true,
+        },
+      }),
+      getCategories(),
+    ]);
+  } catch (error) {
+    console.error("[BlogPostPage] Failed to fetch related posts/categories:", error);
+  }
 
   const relatedPosts = relatedPostsData.map((p) => ({
     slug: p.slug,

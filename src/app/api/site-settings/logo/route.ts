@@ -23,10 +23,11 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Failed to fetch logo settings:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch logo settings" },
-      { status: 500 }
-    );
+    // Return null logos instead of 500 to prevent page render failures
+    return NextResponse.json({
+      logoUrl: null,
+      logoDarkUrl: null,
+    });
   }
 }
 
