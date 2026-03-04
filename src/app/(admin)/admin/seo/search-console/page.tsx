@@ -1,8 +1,21 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import DateRangePicker from "@/components/admin/seo/DateRangePicker";
-import { ExternalLink, ArrowUpDown, Search } from "lucide-react";
+import {
+  ExternalLink,
+  ArrowUpDown,
+  Search,
+  Lightbulb,
+  ChevronDown,
+  ChevronUp,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Shield,
+  AlertTriangle,
+  Eye,
+} from "lucide-react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -12,6 +25,11 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import {
+  analyzeQuery,
+  generateTopInsights,
+  type QueryAdvice,
+} from "@/lib/seo-dashboard/query-advisor";
 
 interface QueryRow {
   query: string;
@@ -19,6 +37,7 @@ interface QueryRow {
   impressions: number;
   ctr: number;
   position: number;
+  topPage?: string | null;
 }
 
 interface TimePoint {
@@ -37,6 +56,20 @@ interface SearchConsoleData {
 
 type SortField = "clicks" | "impressions" | "ctr" | "position";
 
+const INSIGHT_ICONS: Record<string, React.ReactNode> = {
+  "Fix These Titles": <AlertTriangle className="w-4 h-4 text-amber-500" />,
+  "Page 2 Queries": <TrendingUp className="w-4 h-4 text-violet-500" />,
+  "Wasted Impressions": <Eye className="w-4 h-4 text-red-500" />,
+  "Protect These": <Shield className="w-4 h-4 text-emerald-500" />,
+};
+
+function getInsightIcon(title: string) {
+  for (const [key, icon] of Object.entries(INSIGHT_ICONS)) {
+    if (title.includes(key)) return icon;
+  }
+  return <Target className="w-4 h-4 text-indigo-500" />;
+}
+
 export default function SearchConsolePage() {
   const [days, setDays] = useState(28);
   const [data, setData] = useState<SearchConsoleData | null>(null);
@@ -45,7 +78,12 @@ export default function SearchConsolePage() {
   const [sort, setSort] = useState<SortField>("clicks");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
   const [tab, setTab] = useState<"queries" | "pages">("queries");
-  const [pageData, setPageData] = useState<{ pages: QueryRow[]; total: number } | null>(null);
+  const [pageData, setPageData] = useState<{
+    pages: QueryRow[];
+    total: number;
+  } | null>(null);
+  const [expandedRow, setExpandedRow] = useState<number | null>(null);
+  const [showAdvisor, setShowAdvisor] = useState(true);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -60,7 +98,9 @@ export default function SearchConsolePage() {
       const res = await fetch(`/api/admin/seo/search-queries?${params}`);
       if (res.ok) setData(await res.json());
 
-      const pRes = await fetch(`/api/admin/seo/page-metrics?days=${days}&search=${search}&limit=100`);
+      const pRes = await fetch(
+        `/api/admin/seo/page-metrics?days=${days}&search=${search}&limit=100`
+      );
       if (pRes.ok) setPageData(await pRes.json());
     } catch (error) {
       console.error("Failed to fetch search console data:", error);
@@ -72,6 +112,23 @@ export default function SearchConsolePage() {
     fetchData();
   }, [fetchData]);
 
+  // Generate AI insights from query data
+  const insights = useMemo(() => {
+    if (!data?.queries || data.queries.length === 0) return [];
+    return generateTopInsights(data.queries);
+  }, [data?.queries]);
+
+  // Pre-compute advice for each row
+  const adviceMap = useMemo(() => {
+    const map = new Map<number, QueryAdvice>();
+    if (data?.queries) {
+      data.queries.forEach((q, i) => {
+        map.set(i, analyzeQuery(q));
+      });
+    }
+    return map;
+  }, [data?.queries]);
+
   const handleSort = (field: SortField) => {
     if (sort === field) {
       setOrder(order === "desc" ? "asc" : "desc");
@@ -81,7 +138,13 @@ export default function SearchConsolePage() {
     }
   };
 
-  const SortHeader = ({ field, label }: { field: SortField; label: string }) => (
+  const SortHeader = ({
+    field,
+    label,
+  }: {
+    field: SortField;
+    label: string;
+  }) => (
     <button
       type="button"
       onClick={() => handleSort(field)}
@@ -104,7 +167,9 @@ export default function SearchConsolePage() {
               type="button"
               onClick={() => setTab("queries")}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-                tab === "queries" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"
+                tab === "queries"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500"
               }`}
             >
               Queries
@@ -113,7 +178,9 @@ export default function SearchConsolePage() {
               type="button"
               onClick={() => setTab("pages")}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-                tab === "pages" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500"
+                tab === "pages"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500"
               }`}
             >
               Pages
@@ -133,6 +200,72 @@ export default function SearchConsolePage() {
         </div>
       </div>
 
+      {/* AI Advisor Panel */}
+      {tab === "queries" && insights.length > 0 && (
+        <div className="bg-gradient-to-br from-amber-50 via-white to-indigo-50 rounded-xl border border-amber-200/60 overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setShowAdvisor(!showAdvisor)}
+            className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-amber-50/50 transition-colors"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="p-1.5 bg-amber-100 rounded-lg">
+                <Sparkles className="w-4 h-4 text-amber-600" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-sm font-semibold text-slate-900">
+                  SEO Advisor
+                </h3>
+                <p className="text-xs text-slate-500">
+                  {insights.length} actionable insight
+                  {insights.length !== 1 ? "s" : ""} based on your data
+                </p>
+              </div>
+            </div>
+            {showAdvisor ? (
+              <ChevronUp className="w-4 h-4 text-slate-400" />
+            ) : (
+              <ChevronDown className="w-4 h-4 text-slate-400" />
+            )}
+          </button>
+
+          {showAdvisor && (
+            <div className="px-5 pb-5 space-y-3">
+              {insights.map((insight, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-lg border border-slate-100 p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 shrink-0">
+                      {getInsightIcon(insight.title)}
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-semibold text-slate-900">
+                        {insight.title}
+                      </h4>
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                        {insight.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 mt-2.5">
+                        {insight.queries.map((q, j) => (
+                          <span
+                            key={j}
+                            className="inline-flex px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-xs font-medium"
+                          >
+                            {q}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Time Series Chart */}
       {data?.timeSeries && data.timeSeries.length > 1 && (
         <div className="bg-white rounded-xl border border-slate-200 p-5">
@@ -146,10 +279,19 @@ export default function SearchConsolePage() {
                 <XAxis
                   dataKey="date"
                   tick={{ fontSize: 11 }}
-                  tickFormatter={(d) => new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                  tickFormatter={(d) =>
+                    new Date(d).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })
+                  }
                 />
                 <YAxis yAxisId="left" tick={{ fontSize: 11 }} />
-                <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11 }} />
+                <YAxis
+                  yAxisId="right"
+                  orientation="right"
+                  tick={{ fontSize: 11 }}
+                />
                 <Tooltip
                   labelFormatter={(d) =>
                     new Date(d).toLocaleDateString("en-US", {
@@ -210,44 +352,98 @@ export default function SearchConsolePage() {
                   <th className="text-right px-3 py-3">
                     <SortHeader field="ctr" label="CTR" />
                   </th>
-                  <th className="text-right px-5 py-3">
+                  <th className="text-right px-3 py-3">
                     <SortHeader field="position" label="Position" />
                   </th>
+                  {tab === "queries" && (
+                    <th className="text-center px-3 py-3 text-xs font-medium text-slate-500">
+                      <div className="flex items-center justify-center gap-1">
+                        <Lightbulb className="w-3 h-3" />
+                        Advice
+                      </div>
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {rows.map((row, i) => {
-                  const label =
-                    tab === "queries"
-                      ? row.query
-                      : (() => {
-                          try {
-                            return new URL(row.query || (row as unknown as { page: string }).page).pathname;
-                          } catch {
-                            return row.query || (row as unknown as { page: string }).page;
-                          }
-                        })();
-                  const pageUrl = tab === "pages" ? (row as unknown as { page: string }).page : null;
+                  const isQuery = tab === "queries";
+                  const label = isQuery
+                    ? row.query
+                    : (() => {
+                        try {
+                          return new URL(
+                            row.query ||
+                              (row as unknown as { page: string }).page
+                          ).pathname;
+                        } catch {
+                          return (
+                            row.query ||
+                            (row as unknown as { page: string }).page
+                          );
+                        }
+                      })();
+                  const pageUrl = isQuery
+                    ? row.topPage
+                    : (row as unknown as { page: string }).page;
+                  const advice = isQuery ? adviceMap.get(i) : null;
+                  const isExpanded = expandedRow === i && isQuery;
+
                   return (
-                    <tr key={i} className="hover:bg-slate-25">
-                      <td className="px-5 py-3 max-w-xs">
-                        <div className="flex items-center gap-2">
-                          <span className="truncate font-medium text-slate-900">
-                            {label}
-                          </span>
-                          {pageUrl && (
-                            <a
-                              href={pageUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-slate-400 hover:text-amber-600 shrink-0"
+                    <tr
+                      key={i}
+                      className={`hover:bg-slate-25 ${isQuery ? "cursor-pointer" : ""} ${isExpanded ? "bg-slate-25" : ""}`}
+                      onClick={() => {
+                        if (isQuery)
+                          setExpandedRow(isExpanded ? null : i);
+                      }}
+                    >
+                      <td className="px-5 py-3 max-w-sm">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="truncate font-medium text-slate-900">
+                              {label}
+                            </span>
+                            {pageUrl && (
+                              <a
+                                href={pageUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-slate-400 hover:text-amber-600 shrink-0"
+                                onClick={(e) => e.stopPropagation()}
+                                title="Open page"
+                                aria-label="Open page in new tab"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                          </div>
+                          {isQuery && pageUrl && (
+                            <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">
+                              {(() => {
+                                try {
+                                  return new URL(pageUrl).pathname;
+                                } catch {
+                                  return pageUrl;
+                                }
+                              })()}
+                            </p>
+                          )}
+                          {/* Expanded advice panel */}
+                          {isExpanded && advice && (
+                            <div
+                              className={`mt-2.5 p-3 rounded-lg ${advice.color} border border-slate-100`}
                             >
-                              <ExternalLink className="w-3.5 h-3.5" />
-                            </a>
+                              <p
+                                className={`text-xs leading-relaxed ${advice.textColor}`}
+                              >
+                                {advice.advice}
+                              </p>
+                            </div>
                           )}
                         </div>
                       </td>
-                      <td className="text-right px-3 py-3 text-slate-700">
+                      <td className="text-right px-3 py-3 text-slate-700 font-medium">
                         {row.clicks.toLocaleString()}
                       </td>
                       <td className="text-right px-3 py-3 text-slate-500">
@@ -256,9 +452,18 @@ export default function SearchConsolePage() {
                       <td className="text-right px-3 py-3 text-slate-500">
                         {row.ctr}%
                       </td>
-                      <td className="text-right px-5 py-3 text-slate-700 font-medium">
-                        {row.position}
+                      <td className="text-right px-3 py-3 text-slate-700 font-medium">
+                        {row.position > 0 ? `#${row.position}` : "-"}
                       </td>
+                      {isQuery && advice && (
+                        <td className="text-center px-3 py-3">
+                          <span
+                            className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${advice.color} ${advice.textColor}`}
+                          >
+                            {advice.label}
+                          </span>
+                        </td>
+                      )}
                     </tr>
                   );
                 })}

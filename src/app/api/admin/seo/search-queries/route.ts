@@ -42,6 +42,29 @@ export async function GET(request: NextRequest) {
       take: limit,
     });
 
+    // For each query, find the top page (most clicks)
+    const queryStrings = queries.map((q) => q.query);
+    const topPages = queryStrings.length > 0
+      ? await prisma.gscSearchQuery.groupBy({
+          by: ["query", "page"],
+          where: {
+            date: { gte: startDate },
+            query: { in: queryStrings },
+            page: { not: null },
+          },
+          _sum: { clicks: true },
+          orderBy: { _sum: { clicks: "desc" } },
+        })
+      : [];
+
+    // Build a map: query -> top page URL
+    const queryPageMap = new Map<string, string>();
+    for (const row of topPages) {
+      if (row.page && !queryPageMap.has(row.query)) {
+        queryPageMap.set(row.query, row.page);
+      }
+    }
+
     // Get total count for pagination
     const totalResult = await prisma.gscSearchQuery.groupBy({
       by: ["query"],
@@ -65,6 +88,7 @@ export async function GET(request: NextRequest) {
         impressions: q._sum.impressions || 0,
         ctr: Math.round((q._avg.ctr || 0) * 10000) / 100,
         position: Math.round((q._avg.position || 0) * 10) / 10,
+        topPage: queryPageMap.get(q.query) || null,
       })),
       total: totalResult.length,
       page,
