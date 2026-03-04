@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, Search, ChevronDown } from "lucide-react";
 import { PHONE_PREFIXES } from "@/lib/constants";
 import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
+import { collectClientTracking } from "@/lib/client-tracking";
 
 // ISO 3166-1 Country list with codes for flags
 const COUNTRIES = [
@@ -320,6 +321,8 @@ export function SafariInquiryForm({
     setIsSubmitting(true);
 
     try {
+      const tracking = await collectClientTracking();
+
       const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -327,6 +330,7 @@ export function SafariInquiryForm({
           ...formData,
           relatedTo: safariSlug,
           type: "Wildlife Safari",
+          ...tracking,
         }),
       });
 

@@ -276,6 +276,17 @@ model Booking {
   utmCampaign     String?
   utmMedium       String?
   utmSource       String?
+  // Visitor tracking
+  ipAddress       String?
+  country         String?
+  countryCode     String?
+  city            String?
+  region          String?
+  userAgent       String?
+  device          String?   // desktop | mobile | tablet
+  browser         String?
+  referrerUrl     String?
+  landingPage     String?
   departure       GroupDeparture @relation(fields: [departureId], references: [id])
   commission      Commission?
   climberTokens   ClimberToken[]
@@ -284,6 +295,8 @@ model Booking {
   @@index([status])
   @@index([leadEmail])
   @@index([source])
+  @@index([countryCode])
+  @@index([device])
 }
 
 // ============================================
@@ -394,10 +407,27 @@ model Inquiry {
   status         String    @default("new")
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  // Visitor tracking
+  ipAddress      String?
+  country        String?
+  countryCode    String?
+  city           String?
+  region         String?
+  userAgent      String?
+  device         String?   // desktop | mobile | tablet
+  browser        String?
+  referrerUrl    String?
+  landingPage    String?
+  gaClientId     String?
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
 
   @@index([type])
   @@index([status])
   @@index([email])
+  @@index([countryCode])
+  @@index([device])
 }
 
 model Review {

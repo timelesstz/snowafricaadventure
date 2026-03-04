@@ -13,6 +13,7 @@ import {
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
 import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
+import { collectClientTracking } from "@/lib/client-tracking";
 import {
   Users,
   Calendar,
@@ -177,6 +178,8 @@ export function ZanzibarInquiryForm() {
     }
 
     try {
+      const tracking = await collectClientTracking();
+
       const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -190,6 +193,7 @@ export function ZanzibarInquiryForm() {
           relatedTo: "Zanzibar Beach Holiday",
           type: "zanzibar",
           tripType: formData.combineWithSafari === "yes" ? "Wildlife Safari + Zanzibar Beach" : "Zanzibar Beach",
+          ...tracking,
         }),
       });
 

@@ -49,6 +49,15 @@ interface Booking {
   utmSource: string | null;
   utmMedium: string | null;
   utmCampaign: string | null;
+  ipAddress: string | null;
+  country: string | null;
+  countryCode: string | null;
+  city: string | null;
+  region: string | null;
+  device: string | null;
+  browser: string | null;
+  referrerUrl: string | null;
+  landingPage: string | null;
   createdAt: string;
   confirmedAt: string | null;
   cancelledAt: string | null;
@@ -823,11 +832,73 @@ export default function BookingDetailPage() {
                   <p className="text-slate-500">UTM Source</p>
                   <p className="font-medium text-slate-900">
                     {booking.utmSource}
+                    {booking.utmMedium && ` / ${booking.utmMedium}`}
+                    {booking.utmCampaign && ` / ${booking.utmCampaign}`}
                   </p>
                 </div>
               )}
             </div>
           </div>
+
+          {/* Visitor Tracking Section */}
+          {(booking.countryCode || booking.device || booking.ipAddress) && (
+            <div className="bg-slate-50 rounded-lg p-4 mt-4">
+              <h4 className="text-sm font-semibold text-slate-700 mb-3">
+                Visitor Tracking
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                {booking.country && (
+                  <div>
+                    <p className="text-slate-500">Country</p>
+                    <p className="font-medium text-slate-900">
+                      {booking.country}
+                      {booking.city && `, ${booking.city}`}
+                    </p>
+                  </div>
+                )}
+                {booking.device && (
+                  <div>
+                    <p className="text-slate-500">Device</p>
+                    <p className="font-medium text-slate-900 capitalize">
+                      {booking.device}
+                    </p>
+                  </div>
+                )}
+                {booking.browser && (
+                  <div>
+                    <p className="text-slate-500">Browser</p>
+                    <p className="font-medium text-slate-900">
+                      {booking.browser}
+                    </p>
+                  </div>
+                )}
+                {booking.ipAddress && (
+                  <div>
+                    <p className="text-slate-500">IP Address</p>
+                    <p className="font-medium text-slate-900 font-mono text-xs">
+                      {booking.ipAddress}
+                    </p>
+                  </div>
+                )}
+                {booking.referrerUrl && (
+                  <div className="col-span-2">
+                    <p className="text-slate-500">Referrer</p>
+                    <p className="font-medium text-slate-900 truncate">
+                      {booking.referrerUrl}
+                    </p>
+                  </div>
+                )}
+                {booking.landingPage && (
+                  <div className="col-span-2">
+                    <p className="text-slate-500">Landing Page</p>
+                    <p className="font-medium text-slate-900">
+                      {booking.landingPage}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

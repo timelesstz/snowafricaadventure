@@ -15,6 +15,7 @@ import {
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
 import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
+import { collectClientTracking } from "@/lib/client-tracking";
 import {
   MapPin,
   Users,
@@ -192,6 +193,8 @@ export function TailorMadeForm() {
     }
 
     try {
+      const tracking = await collectClientTracking();
+
       const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -204,6 +207,7 @@ export function TailorMadeForm() {
           relatedTo: "Tailor-Made Safari",
           type: "tailor-made",
           tripType: "Customized",
+          ...tracking,
         }),
       });
 

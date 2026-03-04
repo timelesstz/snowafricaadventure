@@ -18,7 +18,13 @@ import {
   Award,
   Heart,
   Thermometer,
-  Calendar
+  Calendar,
+  Utensils,
+  Plane,
+  Hotel,
+  Backpack,
+  Activity,
+  type LucideIcon,
 } from "lucide-react";
 
 export const metadata: Metadata = genMeta({
@@ -305,31 +311,21 @@ export default async function TrekkingPage() {
         </div>
       </section>
 
-      {/* Main Content with Client-Side Filtering */}
-      <section id="routes" className="py-12 md:py-16">
+      {/* Route Comparison Guide — Moved before routes to help users decide */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <Suspense fallback={<RoutesSkeleton />}>
-            <TrekkingPageClient routes={routes} difficulties={sortedDifficulties} />
-          </Suspense>
-        </div>
-      </section>
-
-      {/* Route Comparison Guide */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <span className="section-label justify-center">How To Choose</span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Choosing the Right Route
+              Which Route Is Right for You?
             </h2>
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
-              Each route has its own character. Here&apos;s what to consider when choosing your path.
+              Not sure where to start? Pick your climbing style and we&apos;ll point you to the best route.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {/* For Beginners */}
-            <div className="bg-emerald-50 rounded-2xl p-6 border-2 border-emerald-200">
+            <div className="bg-emerald-50 rounded-2xl p-6 border-2 border-emerald-200 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-white" />
               </div>
@@ -347,8 +343,7 @@ export default async function TrekkingPage() {
               </div>
             </div>
 
-            {/* Most Popular */}
-            <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-200">
+            <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-200 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center mb-4">
                 <Star className="w-6 h-6 text-white" />
               </div>
@@ -366,8 +361,7 @@ export default async function TrekkingPage() {
               </div>
             </div>
 
-            {/* Highest Success */}
-            <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200">
+            <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center mb-4">
                 <Target className="w-6 h-6 text-white" />
               </div>
@@ -385,8 +379,7 @@ export default async function TrekkingPage() {
               </div>
             </div>
 
-            {/* For Adventurers */}
-            <div className="bg-purple-50 rounded-2xl p-6 border-2 border-purple-200">
+            <div className="bg-purple-50 rounded-2xl p-6 border-2 border-purple-200 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center mb-4">
                 <Mountain className="w-6 h-6 text-white" />
               </div>
@@ -407,60 +400,189 @@ export default async function TrekkingPage() {
         </div>
       </section>
 
-      {/* Other Mountains */}
-      <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)]">
+      {/* Main Content with Client-Side Filtering */}
+      <section id="routes" className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="section-label justify-center text-[var(--secondary)]">Beyond Kilimanjaro</span>
+          <Suspense fallback={<RoutesSkeleton />}>
+            <TrekkingPageClient routes={routes} difficulties={sortedDifficulties} />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* CTA Section — Convert browsers into inquiries */}
+      <section className="py-16 bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/20 -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/10 translate-y-1/2 -translate-x-1/2" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
-              Other Mountains to Climb
+              Ready to Climb Kilimanjaro?
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              Looking for alternatives? We also guide treks on Tanzania&apos;s other peaks.
+            <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+              Tell us your preferred dates and route. We&apos;ll craft a personalized itinerary
+              with transparent pricing — no hidden fees.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Link href="/mount-meru/" className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/20 transition-all">
-              <div className="text-5xl mb-4">🏔️</div>
-              <h3 className="font-bold text-xl text-white mb-2">Mount Meru</h3>
-              <p className="text-white/70 mb-2">4,566m • 4 Days</p>
-              <p className="text-sm text-white/50">
-                Tanzania&apos;s second highest peak. Perfect acclimatization before Kilimanjaro.
-              </p>
-              <span className="inline-block mt-4 text-[var(--secondary)] font-medium group-hover:underline">
-                Learn More →
-              </span>
-            </Link>
-
-            <Link href="/ol-doinyo-lengai/" className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/20 transition-all">
-              <div className="text-5xl mb-4">🌋</div>
-              <h3 className="font-bold text-xl text-white mb-2">Ol Doinyo Lengai</h3>
-              <p className="text-white/70 mb-2">2,962m • 2 Days</p>
-              <p className="text-sm text-white/50">
-                Africa&apos;s only active natrocarbonatite volcano. Night summit experience.
-              </p>
-              <span className="inline-block mt-4 text-[var(--secondary)] font-medium group-hover:underline">
-                Learn More →
-              </span>
-            </Link>
-
-            <Link href="/mount-kenya/" className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/20 transition-all">
-              <div className="text-5xl mb-4">⛰️</div>
-              <h3 className="font-bold text-xl text-white mb-2">Mount Kenya</h3>
-              <p className="text-white/70 mb-2">5,199m • 5 Days</p>
-              <p className="text-sm text-white/50">
-                Africa&apos;s second highest peak. Technical climbing available.
-              </p>
-              <span className="inline-block mt-4 text-[var(--secondary)] font-medium group-hover:underline">
-                Learn More →
-              </span>
-            </Link>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/inquire/" className="btn btn-secondary">
+                Get a Free Quote
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link href="/kilimanjaro-join-group-departures/" className="btn btn-outline-white">
+                Join a Group Departure
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SEO Content — Expanded for depth */}
+      {/* What's Included — Visual cards instead of prose */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="section-label justify-center">All-Inclusive</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              What&apos;s Included in Every Trek
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Our packages cover everything so you can focus entirely on the climb.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {INCLUSIONS.map((item) => (
+              <div key={item.title} className="flex gap-4 p-5 rounded-xl bg-[var(--surface)] border border-[var(--border)]">
+                <div className="w-11 h-11 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-5 h-5 text-[var(--primary)]" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">{item.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How to Prepare — Numbered steps */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="section-label justify-center">Get Ready</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              How to Prepare for Kilimanjaro
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Start training 2-3 months before your climb. Here&apos;s your roadmap.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-6">
+            {PREPARATION_STEPS.map((step, index) => (
+              <div key={step.title} className="flex gap-5 items-start">
+                <div className="w-10 h-10 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold flex-shrink-0">
+                  {index + 1}
+                </div>
+                <div className="bg-white rounded-xl p-5 flex-1 border border-[var(--border)]">
+                  <h3 className="font-semibold mb-1">{step.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Route Comparison Table */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <span className="section-label justify-center">Compare</span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+                Kilimanjaro Route Comparison
+              </h2>
+            </div>
+            <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-[var(--primary)] text-white">
+                    <th className="text-left p-4 font-semibold">Route</th>
+                    <th className="text-left p-4 font-semibold">Days</th>
+                    <th className="text-left p-4 font-semibold">Difficulty</th>
+                    <th className="text-left p-4 font-semibold">Success Rate</th>
+                    <th className="text-left p-4 font-semibold">Traffic</th>
+                    <th className="text-left p-4 font-semibold">Best For</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Machame</td><td className="p-4">7</td><td className="p-4">Moderate-Hard</td><td className="p-4 text-emerald-600 font-semibold">90%+</td><td className="p-4">High</td><td className="p-4">Most climbers</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors bg-emerald-50/50"><td className="p-4 font-medium">Lemosho</td><td className="p-4">8</td><td className="p-4">Moderate</td><td className="p-4 text-emerald-600 font-semibold">95%+</td><td className="p-4">Low-Medium</td><td className="p-4">Best acclimatization</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Rongai</td><td className="p-4">7</td><td className="p-4">Moderate</td><td className="p-4 text-emerald-600 font-semibold">85%+</td><td className="p-4">Low</td><td className="p-4">Rainy season / beginners</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors bg-emerald-50/50"><td className="p-4 font-medium">Northern Circuit</td><td className="p-4">9</td><td className="p-4">Moderate</td><td className="p-4 text-emerald-600 font-semibold">95%+</td><td className="p-4">Very Low</td><td className="p-4">Ultimate experience</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Marangu</td><td className="p-4">5-6</td><td className="p-4">Moderate</td><td className="p-4">65%</td><td className="p-4">High</td><td className="p-4">Hut accommodation</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Umbwe</td><td className="p-4">6-7</td><td className="p-4">Hard</td><td className="p-4">70%</td><td className="p-4">Very Low</td><td className="p-4">Experienced trekkers</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Climate Zones + Best Time — Side by side cards */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Climate Zones */}
+            <div className="bg-white rounded-2xl p-8 border border-[var(--border)]">
+              <h3 className="font-heading text-2xl font-bold mb-6">Kilimanjaro Climate Zones</h3>
+              <p className="text-sm text-[var(--text-muted)] mb-6">
+                You&apos;ll pass through five distinct zones on your way to the summit:
+              </p>
+              <div className="space-y-4">
+                {CLIMATE_ZONES.map((zone) => (
+                  <div key={zone.name} className="flex items-start gap-3">
+                    <span className="text-lg flex-shrink-0">{zone.emoji}</span>
+                    <div>
+                      <p className="font-semibold text-sm">{zone.name} <span className="text-[var(--text-muted)] font-normal">({zone.altitude})</span></p>
+                      <p className="text-xs text-[var(--text-muted)]">{zone.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Best Time to Climb */}
+            <div className="bg-white rounded-2xl p-8 border border-[var(--border)]">
+              <h3 className="font-heading text-2xl font-bold mb-6">Best Time to Climb</h3>
+              <p className="text-sm text-[var(--text-muted)] mb-6">
+                Kilimanjaro can be climbed year-round, but dry seasons offer the best conditions.
+              </p>
+              <div className="space-y-4">
+                <div className="p-4 rounded-xl bg-amber-50 border border-amber-200">
+                  <p className="font-semibold text-amber-800 mb-1">January to mid-March</p>
+                  <p className="text-sm text-amber-700">Less crowded, warmer nights. Great visibility.</p>
+                </div>
+                <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
+                  <p className="font-semibold text-blue-800 mb-1">June to October</p>
+                  <p className="text-sm text-blue-700">Peak season. Clearest skies. Best weather overall.</p>
+                </div>
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                  <p className="font-semibold text-red-800 mb-1">Avoid: April &amp; November</p>
+                  <p className="text-sm text-red-700">Heavy rain months. Lower success rates.</p>
+                </div>
+              </div>
+              <p className="text-sm text-[var(--text-muted)] mt-6">
+                Full moon summit nights are magical — summit by moonlight without a headlamp.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SEO Prose — Concise version for search engines */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto prose prose-slate">
@@ -468,10 +590,9 @@ export default async function TrekkingPage() {
             <p>
               Mount Kilimanjaro stands at 5,895 meters (19,341 feet) as the highest peak in Africa
               and the tallest free-standing mountain in the world. Located in northeastern Tanzania near
-              the town of Moshi, Kilimanjaro is a dormant stratovolcano and one of the Seven Summits —
-              the highest peaks on each continent. Unlike most mountains of comparable height, Kilimanjaro
-              requires no technical climbing skills, making it accessible to determined trekkers with
-              proper preparation.
+              the town of Moshi, Kilimanjaro is a dormant stratovolcano and one of the Seven Summits.
+              Unlike most mountains of comparable height, Kilimanjaro requires no technical climbing
+              skills, making it accessible to determined trekkers with proper preparation.
             </p>
             <p>
               Our experienced guides have led thousands of successful summit attempts across all routes
@@ -479,137 +600,19 @@ export default async function TrekkingPage() {
               with Kilimanjaro National Park (KINAPA), ensure fair wages for all porters through our
               KPAP partnership, and provide the personalized attention that larger operators cannot match.
             </p>
-
-            <h3>Choosing the Right Route</h3>
-            <p>
-              Each Kilimanjaro route has its own character, scenery, and challenge level. Your choice
-              should depend on your fitness level, available time, and what kind of experience you want.
-            </p>
-            <p>
-              The <strong>Machame Route</strong> (7 days) is our most popular choice, nicknamed the
-              &quot;Whiskey Route&quot; for its challenging terrain. It offers stunning scenery through
-              five distinct climate zones — from rainforest to alpine desert — and has a high success
-              rate of 90%+ when done over 7 days.
-            </p>
-            <p>
-              The <strong>Lemosho Route</strong> (8 days) is widely considered the best route on
-              Kilimanjaro. It approaches from the remote western side through pristine rainforest,
-              offers the best acclimatization profile, and has our highest success rate at 95%+.
-              It&apos;s less crowded than Machame for the first few days, giving a more wilderness feel.
-            </p>
-            <p>
-              The <strong>Rongai Route</strong> (7 days) approaches from the north near the Kenyan
-              border. It&apos;s the driest route, making it a good choice during rainy seasons, and
-              sees fewer trekkers. The gradual ascent makes it suitable for beginners, though the
-              scenery is less varied than Machame or Lemosho.
-            </p>
-            <p>
-              The <strong>Northern Circuit Route</strong> (9 days) is the longest and newest route,
-              circumnavigating the entire mountain. It provides the best acclimatization of any route
-              and virtually guarantees solitude on the northern slopes. We recommend this for trekkers
-              who want the ultimate Kilimanjaro experience.
-            </p>
-            <p>
-              The <strong>Marangu Route</strong> (5-6 days) is the only route with hut accommodation
-              instead of camping. Known as the &quot;Coca-Cola Route,&quot; it&apos;s the most
-              straightforward but has a lower success rate due to its shorter duration.
-            </p>
-
-            <h3>Kilimanjaro Route Comparison</h3>
-            <div className="overflow-x-auto not-prose">
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr className="bg-[var(--surface)]">
-                    <th className="text-left p-3 font-semibold border border-[var(--border)]">Route</th>
-                    <th className="text-left p-3 font-semibold border border-[var(--border)]">Days</th>
-                    <th className="text-left p-3 font-semibold border border-[var(--border)]">Difficulty</th>
-                    <th className="text-left p-3 font-semibold border border-[var(--border)]">Success Rate</th>
-                    <th className="text-left p-3 font-semibold border border-[var(--border)]">Traffic</th>
-                    <th className="text-left p-3 font-semibold border border-[var(--border)]">Best For</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td className="p-3 border border-[var(--border)]">Machame</td><td className="p-3 border border-[var(--border)]">7</td><td className="p-3 border border-[var(--border)]">Moderate-Hard</td><td className="p-3 border border-[var(--border)]">90%+</td><td className="p-3 border border-[var(--border)]">High</td><td className="p-3 border border-[var(--border)]">Most climbers</td></tr>
-                  <tr><td className="p-3 border border-[var(--border)]">Lemosho</td><td className="p-3 border border-[var(--border)]">8</td><td className="p-3 border border-[var(--border)]">Moderate</td><td className="p-3 border border-[var(--border)]">95%+</td><td className="p-3 border border-[var(--border)]">Low-Medium</td><td className="p-3 border border-[var(--border)]">Best acclimatization</td></tr>
-                  <tr><td className="p-3 border border-[var(--border)]">Rongai</td><td className="p-3 border border-[var(--border)]">7</td><td className="p-3 border border-[var(--border)]">Moderate</td><td className="p-3 border border-[var(--border)]">85%+</td><td className="p-3 border border-[var(--border)]">Low</td><td className="p-3 border border-[var(--border)]">Rainy season / beginners</td></tr>
-                  <tr><td className="p-3 border border-[var(--border)]">Northern Circuit</td><td className="p-3 border border-[var(--border)]">9</td><td className="p-3 border border-[var(--border)]">Moderate</td><td className="p-3 border border-[var(--border)]">95%+</td><td className="p-3 border border-[var(--border)]">Very Low</td><td className="p-3 border border-[var(--border)]">Ultimate experience</td></tr>
-                  <tr><td className="p-3 border border-[var(--border)]">Marangu</td><td className="p-3 border border-[var(--border)]">5-6</td><td className="p-3 border border-[var(--border)]">Moderate</td><td className="p-3 border border-[var(--border)]">65%</td><td className="p-3 border border-[var(--border)]">High</td><td className="p-3 border border-[var(--border)]">Hut accommodation</td></tr>
-                  <tr><td className="p-3 border border-[var(--border)]">Umbwe</td><td className="p-3 border border-[var(--border)]">6-7</td><td className="p-3 border border-[var(--border)]">Hard</td><td className="p-3 border border-[var(--border)]">70%</td><td className="p-3 border border-[var(--border)]">Very Low</td><td className="p-3 border border-[var(--border)]">Experienced trekkers</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h3>What&apos;s Included in Every Trek</h3>
-            <p>
-              Every Kilimanjaro trek with Snow Africa Adventure is fully inclusive so you can focus
-              entirely on the climb. Our packages cover everything from the moment you arrive at
-              Kilimanjaro International Airport:
-            </p>
-            <ul>
-              <li><strong>Professional KINAPA-certified guides</strong> — experienced, English-speaking mountain guides trained in wilderness first aid</li>
-              <li><strong>All park fees and permits</strong> — Kilimanjaro National Park entry fees, camping/hut fees, rescue fees</li>
-              <li><strong>Quality camping equipment</strong> — 4-season tents, sleeping mats, dining tent with tables and chairs</li>
-              <li><strong>Nutritious meals</strong> — three hot meals daily plus trail snacks and hot beverages, prepared by our mountain chef</li>
-              <li><strong>Emergency oxygen and first aid</strong> — carried on every climb as standard equipment</li>
-              <li><strong>Airport transfers</strong> — pickup from Kilimanjaro Airport (JRO) and return</li>
-              <li><strong>Hotel accommodation</strong> — one night pre-climb and one night post-climb in Moshi or Arusha</li>
-              <li><strong>Pulse oximeters</strong> — for monitoring blood oxygen at altitude, checked twice daily</li>
-              <li><strong>Porters and cook</strong> — a full support team to carry equipment and prepare meals</li>
-            </ul>
-
-            <h3>How to Prepare for Kilimanjaro</h3>
-            <p>
-              Physical preparation significantly increases your chances of reaching the summit. We
-              recommend starting training 2-3 months before your climb:
-            </p>
-            <ol>
-              <li><strong>Build cardiovascular fitness</strong> — hike, run, cycle, or swim 3-4 times per week. Focus on sustained effort over 2-4 hours.</li>
-              <li><strong>Practice hiking with elevation</strong> — if possible, hike hills or stairs with a loaded daypack (8-10 kg).</li>
-              <li><strong>Strengthen your legs</strong> — squats, lunges, and step-ups help with the long descents.</li>
-              <li><strong>Build mental resilience</strong> — summit night is as much mental as physical. Practice pushing through discomfort during training.</li>
-              <li><strong>Get proper gear</strong> — we provide a comprehensive packing list after booking. Key items include layered clothing, quality boots (broken in), and a warm sleeping bag rated to -10°C.</li>
-            </ol>
-
             <h3>Our Safety Standards</h3>
             <p>
               Safety is our top priority. All our guides are KINAPA-certified and trained in wilderness
               first aid. They carry emergency oxygen, pulse oximeters, and comprehensive first aid kits
-              on every single climb.
-            </p>
-            <p>
-              We follow strict acclimatization protocols including the &quot;climb high, sleep low&quot;
+              on every single climb. We follow strict acclimatization protocols including the &quot;climb high, sleep low&quot;
               principle, mandatory health checks twice daily, and a guide-to-climber ratio that ensures
-              personalized attention. Our guides monitor every trekker&apos;s blood oxygen levels and
-              heart rate, and we maintain clear protocols for when to descend if altitude sickness
-              becomes concerning.
+              personalized attention.
             </p>
             <p>
               As a KPAP (Kilimanjaro Porters Assistance Project) partner, we ensure all porters receive
               fair wages, proper equipment, adequate food, and loads within the KINAPA weight limit.
               Ethical treatment of mountain crew isn&apos;t just the right thing to do — it means a
               happier, more motivated team supporting your climb.
-            </p>
-
-            <h3>Kilimanjaro Climate Zones</h3>
-            <p>
-              One of Kilimanjaro&apos;s most remarkable features is that you pass through five distinct
-              climate zones on your way to the summit:
-            </p>
-            <ol>
-              <li><strong>Cultivation Zone (800-1,800m)</strong> — farmland and banana plantations surrounding the mountain base.</li>
-              <li><strong>Rainforest Zone (1,800-2,800m)</strong> — dense tropical forest with colobus monkeys, exotic birds, and misty trails.</li>
-              <li><strong>Heath &amp; Moorland (2,800-4,000m)</strong> — giant heather, lobelia, and groundsel plants in an otherworldly landscape.</li>
-              <li><strong>Alpine Desert (4,000-5,000m)</strong> — barren, Mars-like terrain with extreme temperature swings between day and night.</li>
-              <li><strong>Arctic Zone (5,000-5,895m)</strong> — glaciers and ice fields at the summit. Temperatures drop to -20°C on summit night.</li>
-            </ol>
-
-            <h3>Best Time to Climb Kilimanjaro</h3>
-            <p>
-              Kilimanjaro can be climbed year-round, but the best conditions are during the dry seasons:
-              <strong> January to mid-March</strong> (less crowded, warmer nights) and{" "}
-              <strong>June to October</strong> (peak season, clearest skies). The full moon summit
-              nights are especially magical — you can often summit by moonlight without a headlamp.
-              We recommend avoiding the heavy rain months of April and November.
             </p>
           </div>
         </div>
@@ -653,9 +656,90 @@ export default async function TrekkingPage() {
           }),
         ]} />
       </section>
+
+      {/* Other Mountains — Bottom upsell */}
+      <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="section-label justify-center text-[var(--secondary)]">Beyond Kilimanjaro</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+              Other Mountains to Climb
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto">
+              Looking for alternatives? We also guide treks on Tanzania&apos;s other peaks.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <Link href="/mount-meru/" className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/20 transition-all">
+              <Mountain className="w-10 h-10 text-white/80 mx-auto mb-4" />
+              <h3 className="font-bold text-xl text-white mb-2">Mount Meru</h3>
+              <p className="text-white/70 mb-2">4,566m &bull; 4 Days</p>
+              <p className="text-sm text-white/50">
+                Tanzania&apos;s second highest peak. Perfect acclimatization before Kilimanjaro.
+              </p>
+              <span className="inline-block mt-4 text-[var(--secondary)] font-medium group-hover:underline">
+                Learn More →
+              </span>
+            </Link>
+
+            <Link href="/ol-doinyo-lengai/" className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/20 transition-all">
+              <Mountain className="w-10 h-10 text-white/80 mx-auto mb-4" />
+              <h3 className="font-bold text-xl text-white mb-2">Ol Doinyo Lengai</h3>
+              <p className="text-white/70 mb-2">2,962m &bull; 2 Days</p>
+              <p className="text-sm text-white/50">
+                Africa&apos;s only active natrocarbonatite volcano. Night summit experience.
+              </p>
+              <span className="inline-block mt-4 text-[var(--secondary)] font-medium group-hover:underline">
+                Learn More →
+              </span>
+            </Link>
+
+            <Link href="/mount-kenya/" className="group bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center hover:bg-white/20 transition-all">
+              <Mountain className="w-10 h-10 text-white/80 mx-auto mb-4" />
+              <h3 className="font-bold text-xl text-white mb-2">Mount Kenya</h3>
+              <p className="text-white/70 mb-2">5,199m &bull; 5 Days</p>
+              <p className="text-sm text-white/50">
+                Africa&apos;s second highest peak. Technical climbing available.
+              </p>
+              <span className="inline-block mt-4 text-[var(--secondary)] font-medium group-hover:underline">
+                Learn More →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
+const INCLUSIONS: { icon: LucideIcon; title: string; description: string }[] = [
+  { icon: Award, title: "KINAPA-Certified Guides", description: "Experienced, English-speaking mountain guides trained in wilderness first aid." },
+  { icon: Shield, title: "All Park Fees & Permits", description: "Kilimanjaro National Park entry, camping/hut fees, and rescue fees included." },
+  { icon: Backpack, title: "Quality Equipment", description: "4-season tents, sleeping mats, dining tent with tables and chairs." },
+  { icon: Utensils, title: "Nutritious Meals", description: "Three hot meals daily plus trail snacks and beverages, by our mountain chef." },
+  { icon: Activity, title: "Emergency Oxygen & First Aid", description: "Pulse oximeters and emergency oxygen carried on every single climb." },
+  { icon: Plane, title: "Airport Transfers", description: "Pickup from Kilimanjaro Airport (JRO) and return transfer." },
+  { icon: Hotel, title: "Hotel Accommodation", description: "One night pre-climb and one night post-climb in Moshi or Arusha." },
+  { icon: Users, title: "Porters & Cook", description: "Full support team to carry equipment and prepare meals on the mountain." },
+  { icon: Heart, title: "KPAP Partner", description: "Fair wages, proper equipment, and adequate food for all porters." },
+];
+
+const PREPARATION_STEPS = [
+  { title: "Build Cardiovascular Fitness", description: "Hike, run, cycle, or swim 3-4 times per week. Focus on sustained effort over 2-4 hours." },
+  { title: "Practice Hiking with Elevation", description: "Hike hills or stairs with a loaded daypack (8-10 kg) to simulate trail conditions." },
+  { title: "Strengthen Your Legs", description: "Squats, lunges, and step-ups help with the long descents. Focus on endurance over power." },
+  { title: "Build Mental Resilience", description: "Summit night is as much mental as physical. Practice pushing through discomfort during training." },
+  { title: "Get Proper Gear", description: "We provide a packing list after booking. Key items: layered clothing, broken-in boots, and a -10°C sleeping bag." },
+];
+
+const CLIMATE_ZONES = [
+  { emoji: "🌾", name: "Cultivation Zone", altitude: "800-1,800m", description: "Farmland and banana plantations at the mountain base." },
+  { emoji: "🌿", name: "Rainforest Zone", altitude: "1,800-2,800m", description: "Dense tropical forest with colobus monkeys and exotic birds." },
+  { emoji: "🌸", name: "Heath & Moorland", altitude: "2,800-4,000m", description: "Giant heather, lobelia, and groundsel in an otherworldly landscape." },
+  { emoji: "🏜️", name: "Alpine Desert", altitude: "4,000-5,000m", description: "Barren, Mars-like terrain with extreme temperature swings." },
+  { emoji: "🏔️", name: "Arctic Zone", altitude: "5,000-5,895m", description: "Glaciers and ice fields. Temperatures drop to -20°C on summit night." },
+];
 
 const KILIMANJARO_FAQS = [
   {

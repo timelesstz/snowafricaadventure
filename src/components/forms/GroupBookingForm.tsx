@@ -7,6 +7,7 @@ import { formatPrice } from "@/lib/utils";
 import { PHONE_PREFIXES } from "@/lib/constants";
 import { AvailabilityBadge } from "@/components/ui/Badge";
 import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout, trackPurchase, trackSelectDeparture } from "@/lib/analytics";
+import { collectClientTracking } from "@/lib/client-tracking";
 
 interface Departure {
   id: string;
@@ -236,6 +237,8 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         })),
       ];
 
+      const tracking = await collectClientTracking();
+
       const response = await fetch("/api/bookings/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -247,6 +250,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           climbers: allClimbers,
           specialRequests: specialRequests || undefined,
           subscribeNewsletter,
+          ...tracking,
         }),
       });
 

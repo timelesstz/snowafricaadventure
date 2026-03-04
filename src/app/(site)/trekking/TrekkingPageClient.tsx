@@ -249,29 +249,6 @@ export function TrekkingPageClient({ routes, difficulties }: TrekkingPageClientP
         </div>
       )}
 
-      {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-        <div className="bg-white rounded-xl p-4 text-center shadow-sm border border-[var(--border)]">
-          <p className="text-3xl font-bold text-[var(--primary)]">{routes.length}</p>
-          <p className="text-sm text-[var(--text-muted)]">Total Routes</p>
-        </div>
-        <div className="bg-white rounded-xl p-4 text-center shadow-sm border border-[var(--border)]">
-          <p className="text-3xl font-bold text-emerald-500">
-            {Math.max(...routes.map((r) => r.successRate || 0))}%
-          </p>
-          <p className="text-sm text-[var(--text-muted)]">Best Success Rate</p>
-        </div>
-        <div className="bg-white rounded-xl p-4 text-center shadow-sm border border-[var(--border)]">
-          <p className="text-3xl font-bold text-[var(--secondary)]">
-            {Math.min(...routes.map((r) => r.durationDays))}-{Math.max(...routes.map((r) => r.durationDays))}
-          </p>
-          <p className="text-sm text-[var(--text-muted)]">Days Range</p>
-        </div>
-        <div className="bg-white rounded-xl p-4 text-center shadow-sm border border-[var(--border)]">
-          <p className="text-3xl font-bold text-purple-500">5,895m</p>
-          <p className="text-sm text-[var(--text-muted)]">Summit Altitude</p>
-        </div>
-      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { sendInquiryReceivedEmails } from "@/lib/email/send";
 import { InquiryEmailData } from "@/lib/email/templates";
 import { InquiryNotifications } from "@/lib/notifications";
+import { extractVisitorData } from "@/lib/visitor-tracking";
 
 // Validation schema
 const inquirySchema = z.object({
@@ -37,6 +38,13 @@ const inquirySchema = z.object({
   relatedTo: z.string().optional(),
   referralSource: z.string().optional(),
   type: z.string().default("contact"),
+  // Client-side tracking fields
+  gaClientId: z.string().optional(),
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  referrerUrl: z.string().optional(),
+  landingPage: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -67,6 +75,9 @@ export async function POST(request: NextRequest) {
     // Use country as nationality if provided
     const nationality = validatedData.country || validatedData.nationality || null;
 
+    // Extract visitor tracking from request headers
+    const visitor = extractVisitorData(request);
+
     // Save to database
     const inquiry = await prisma.inquiry.create({
       data: {
@@ -93,6 +104,22 @@ export async function POST(request: NextRequest) {
         referralSource: validatedData.referralSource || null,
         type: validatedData.type,
         status: "new",
+        // Server-side tracking
+        ipAddress: visitor.ipAddress,
+        country: visitor.country,
+        countryCode: visitor.countryCode,
+        city: visitor.city,
+        region: visitor.region,
+        userAgent: visitor.userAgent,
+        device: visitor.device,
+        browser: visitor.browser,
+        // Client-side tracking
+        gaClientId: validatedData.gaClientId || null,
+        utmSource: validatedData.utmSource || null,
+        utmMedium: validatedData.utmMedium || null,
+        utmCampaign: validatedData.utmCampaign || null,
+        referrerUrl: validatedData.referrerUrl || null,
+        landingPage: validatedData.landingPage || null,
       },
     });
 

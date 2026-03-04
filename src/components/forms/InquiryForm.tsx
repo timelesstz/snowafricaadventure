@@ -7,6 +7,7 @@ import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { InviteFriendsSection, type InviteFriend } from "./InviteFriendsSection";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
 import { trackFormStart, trackFormSubmit } from "@/lib/analytics";
+import { collectClientTracking } from "@/lib/client-tracking";
 
 interface InquiryFormProps {
   relatedTo?: string;
@@ -71,6 +72,8 @@ export function InquiryForm({
     );
 
     try {
+      const tracking = await collectClientTracking();
+
       const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -80,6 +83,7 @@ export function InquiryForm({
           relatedTo,
           type: tripType || "contact",
           inviteFriends: validInvites.length > 0 ? validInvites : undefined,
+          ...tracking,
         }),
       });
 

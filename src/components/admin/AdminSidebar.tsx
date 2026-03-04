@@ -31,6 +31,7 @@ import {
   PanelTop,
   LayoutTemplate,
   Search,
+  Target,
 } from "lucide-react";
 import { useState } from "react";
 import { clsx } from "clsx";
@@ -75,6 +76,7 @@ const navItems: NavItem[] = [
   { href: "/admin/commissions", label: "Commissions", icon: HandCoins, minRole: AdminRole.EDITOR },
   { href: "/admin/commissions/payouts", label: "Payouts", icon: CreditCard, minRole: AdminRole.ADMIN },
   { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/admin/conversion-analytics", label: "Conversion Analytics", icon: Target },
   // SEO & Monitoring
   { href: "/admin/seo", label: "SEO Dashboard", icon: Search },
   { href: "/admin/404-monitor", label: "404 Monitor", icon: AlertTriangle, minRole: AdminRole.EDITOR },

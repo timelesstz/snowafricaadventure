@@ -39,6 +39,9 @@ const ROUTE_PERMISSIONS: Record<string, AdminRole> = {
   "/admin/seo": "VIEWER" as AdminRole,
   "/api/admin/seo": "VIEWER" as AdminRole,
 
+  // Conversion Analytics
+  "/admin/conversion-analytics": "VIEWER" as AdminRole,
+
   // Viewer+ routes (dashboard, analytics)
   "/admin": "VIEWER" as AdminRole,
   "/admin/analytics": "VIEWER" as AdminRole,

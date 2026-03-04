@@ -7,6 +7,7 @@ import { BookingEmailData } from "@/lib/email/templates";
 import { createCommission } from "@/lib/commission";
 import { BookingNotifications } from "@/lib/notifications";
 import { subscribeToNewsletter } from "@/lib/newsletter";
+import { extractVisitorData } from "@/lib/visitor-tracking";
 
 // Climber schema - now supports partial data for non-lead climbers
 const climberSchema = z.object({
@@ -31,6 +32,13 @@ const bookingSchema = z.object({
   specialRequests: z.string().optional(),
   partnerCode: z.string().optional(),
   subscribeNewsletter: z.boolean().optional(),
+  // Client-side tracking fields
+  gaClientId: z.string().optional(),
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  referrerUrl: z.string().optional(),
+  landingPage: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -92,6 +100,9 @@ export async function POST(request: NextRequest) {
     const totalPrice = pricePerPerson * totalClimbers;
     const depositAmount = Math.round(totalPrice * 0.1); // 10% deposit
 
+    // Extract visitor tracking from request headers
+    const visitor = extractVisitorData(request);
+
     // Create booking
     const booking = await prisma.booking.create({
       data: {
@@ -107,6 +118,22 @@ export async function POST(request: NextRequest) {
         climberDetails: validatedData.climbers,
         notes: validatedData.specialRequests || null,
         source: validatedData.partnerCode ? 'referral' : 'website',
+        // Server-side tracking
+        ipAddress: visitor.ipAddress,
+        country: visitor.country,
+        countryCode: visitor.countryCode,
+        city: visitor.city,
+        region: visitor.region,
+        userAgent: visitor.userAgent,
+        device: visitor.device,
+        browser: visitor.browser,
+        // Client-side tracking
+        gaClientId: validatedData.gaClientId || null,
+        utmSource: validatedData.utmSource || null,
+        utmMedium: validatedData.utmMedium || null,
+        utmCampaign: validatedData.utmCampaign || null,
+        referrerUrl: validatedData.referrerUrl || null,
+        landingPage: validatedData.landingPage || null,
       },
       include: {
         departure: {
