@@ -502,7 +502,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
           </div>
           <p className="text-center text-sm text-[var(--text-muted)] mt-4 max-w-2xl mx-auto">
             Prices are per person based on 2 people. Success rates are based on our own guiding data across 500+ summits.
-            Solo travellers and larger groups have different rates. <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline">See full pricing</Link>.
+            Solo travellers and larger groups have different rates. <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline">See full pricing</Link> or read our <Link href="/kilimanjaro-group-climbs/" className="text-[var(--primary)] hover:underline">group climbs guide</Link> to save 15–30%.
           </p>
         </div>
       </section>
@@ -788,10 +788,10 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 <p className="font-semibold text-sm">Best Time to Climb</p>
                 <p className="text-xs text-[var(--text-muted)] group-hover:text-white/60">Month-by-month guide</p>
               </Link>
-              <Link href="/kilimanjaro-climbing-gear/" className="bg-[var(--surface)] rounded-xl p-4 hover:bg-[var(--primary-dark)] hover:text-white transition-colors group">
-                <Shield className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Gear & Packing List</p>
-                <p className="text-xs text-[var(--text-muted)] group-hover:text-white/60">What to bring</p>
+              <Link href="/kilimanjaro-group-climbs/" className="bg-[var(--surface)] rounded-xl p-4 hover:bg-[var(--primary-dark)] hover:text-white transition-colors group">
+                <Users className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Group Climbs Guide</p>
+                <p className="text-xs text-[var(--text-muted)] group-hover:text-white/60">Save 15–30% on costs</p>
               </Link>
             </div>
           </div>

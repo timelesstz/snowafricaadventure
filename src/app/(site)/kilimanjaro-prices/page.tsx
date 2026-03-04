@@ -451,14 +451,22 @@ export default function KilimanjaroPricesPage() {
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto text-lg">
             Tell us your preferred route, travel dates, and group size and we&apos;ll send you a
-            detailed, no-obligation quote within 24 hours.
+            detailed, no-obligation quote within 24 hours. Or <Link href="/kilimanjaro-group-climbs/" className="text-white underline hover:text-[var(--secondary)]">join a group climb</Link> to save 15–30%.
           </p>
+          <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/contact-us/"
             className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
           >
             Request a Free Quote
           </Link>
+          <Link
+            href="/kilimanjaro-group-climbs/"
+            className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+          >
+            Group Climbs Guide
+          </Link>
+          </div>
         </div>
       </section>
     </div>

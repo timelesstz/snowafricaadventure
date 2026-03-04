@@ -818,6 +818,11 @@ export default function KilimanjaroAltitudeSicknessPage() {
                 <p className="font-semibold text-sm">Best Route Guide</p>
                 <p className="text-xs text-[var(--text-muted)]">Compare all 6 routes</p>
               </Link>
+              <Link href="/kilimanjaro-group-climbs/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
+                <Users className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Group Climbs</p>
+                <p className="text-xs text-[var(--text-muted)]">Safety in numbers</p>
+              </Link>
             </div>
           </div>
         </div>

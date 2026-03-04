@@ -356,6 +356,7 @@ export default function HowHardIsKilimanjaroPage() {
                 { title: "Climb with experienced guides", desc: "KINAPA-certified, Wilderness First Responder guides who monitor your health twice daily.", link: "/our-guides/" },
                 { title: "Hydrate constantly", desc: "Drink 3-4 litres per day. Dehydration worsens altitude sickness symptoms significantly." },
                 { title: "Go slow (pole pole)", desc: "The golden rule of Kilimanjaro. Walking slowly preserves energy and helps your body adapt to altitude." },
+                { title: "Join a group climb", desc: "Group climbs provide built-in motivation on summit night and save 15–30% vs private climbs.", link: "/kilimanjaro-group-climbs/" },
               ].map((tip) => (
                 <div key={tip.title} className="flex gap-4 bg-[var(--surface)] rounded-xl p-5">
                   <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-1">

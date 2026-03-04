@@ -330,6 +330,12 @@ const relatedGuides = [
     title: "Altitude Sickness Guide",
     subtitle: "Prevention & treatment",
   },
+  {
+    href: "/kilimanjaro-group-climbs/",
+    icon: Users,
+    title: "Group Climbs Guide",
+    subtitle: "Join a group & save 15–30%",
+  },
 ];
 
 export default function CanBeginnersClimbKilimanjaroPage() {
