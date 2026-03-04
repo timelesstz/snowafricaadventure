@@ -708,6 +708,69 @@ Udzungwa is typically combined with a visit to Mikumi National Park — just 60 
       "Photography",
     ],
   },
+  "gombe-stream-national-park": {
+    id: "13",
+    name: "Gombe Stream National Park",
+    slug: "gombe-stream-national-park",
+    shortDescription:
+      "Tanzania's smallest national park and birthplace of Jane Goodall's pioneering chimpanzee research. Home to habituated chimpanzee communities on the shores of Lake Tanganyika.",
+    description: `Gombe Stream National Park holds a place in scientific history that few wildlife reserves anywhere in the world can match. It was here, on the forested slopes above Lake Tanganyika in western Tanzania, that a young British researcher named Jane Goodall arrived in July 1960 to begin what would become the longest-running continuous study of wild chimpanzees ever undertaken. Her discoveries at Gombe — that chimpanzees fashion and use tools, that they hunt cooperatively, that they form complex social bonds marked by affection, rivalry, grief, and even warfare — fundamentally redefined the boundary between humans and the rest of the animal kingdom. More than six decades later, the research station she established continues to operate, and the chimpanzees she first observed have descendants that visitors can track through the same forests today.
+
+Gombe Stream sits on the eastern shore of Lake Tanganyika in the Kigoma Region of western Tanzania. At just 52 square kilometres, it is Tanzania's smallest national park — a narrow strip of mountainous terrain stretching roughly 16 kilometres along the lakeshore and reaching only about three kilometres inland. Despite its diminutive size, the park encompasses a remarkable diversity of habitats. Steep valleys carved by seasonal streams run from the ridgeline down to the lake, their slopes cloaked in thick gallery forest, open woodland, and grassland. The terrain is rugged and intimate in a way that larger, flatter parks simply cannot replicate: every trail leads through dense vegetation alive with the sounds of primates calling, birds singing, and streams tumbling over mossy rocks.
+
+The star attraction is, without question, the habituated Kasekela chimpanzee community — a group of approximately 100 individuals whose lineage has been documented by researchers since Goodall's earliest days. These are among the most studied wild animals on the planet, and their habituation to human presence allows visitors an extraordinary degree of proximity. Chimpanzee trekking at Gombe begins with a guided walk from the lakeshore into the forest, following trails that wind uphill through the trees. The guides — many of whom have spent decades working alongside researchers — listen for the distinctive pant-hoot calls that reveal the chimps' location, then lead visitors through the undergrowth to find them. Once the group is located, visitors are permitted to spend one hour observing the chimpanzees at close range.
+
+What makes this hour so memorable is the sheer range of behaviours on display. Visitors regularly witness tool use — chimpanzees stripping twigs to extract termites from mounds, exactly the behaviour that Goodall first documented in 1960 and that overturned the long-held belief that only humans used tools. Grooming sessions, in which individuals sit in pairs or small groups carefully picking through each other's fur, reveal the intricate social bonds that hold the community together. Mothers nurse and play with infants, adolescents roughhouse and test boundaries, and dominant males patrol their territory with dramatic displays of strength — charging through the undergrowth, drumming on tree buttresses, and hurling branches. Occasionally, visitors may witness a hunt, as the Kasekela chimpanzees are known to cooperatively pursue red colobus monkeys through the canopy, a behaviour that was first described scientifically at Gombe.
+
+Beyond the chimpanzees, Gombe supports a rich community of other primates that visitors encounter along the forest trails. Olive baboons are abundant throughout the park and are themselves the subject of long-term research at Gombe, with several troops habituated to human observers. Red-tailed monkeys, easily identified by their distinctive russet tails and white nose spots, forage in the mid-canopy and are frequently seen in mixed-species groups with blue monkeys. Red colobus monkeys — the chimpanzees' occasional prey — occupy the upper canopy in noisy troops, their acrobatic leaps between branches a constant spectacle overhead. Vervet monkeys are common along the lakeshore and around the park's simple accommodation. In total, Gombe supports more primate species per square kilometre than almost any comparable area in East Africa.
+
+Lake Tanganyika itself forms a spectacular backdrop to the entire Gombe experience. The world's longest freshwater lake — stretching nearly 700 kilometres from north to south — and the second deepest after Siberia's Lake Baikal, Tanganyika holds an estimated 17 per cent of the world's surface fresh water. At Gombe, its waters are remarkably clear, with visibility often exceeding 15 metres. Swimming in the lake after a morning of chimpanzee trekking is one of the great simple pleasures of East African travel, and snorkelling reveals a colourful underwater world of endemic cichlid fish — the lake harbours over 250 species found nowhere else on Earth. The sunsets over the lake, with the mountains of the Democratic Republic of Congo visible on the far shore, are among the most beautiful in all of Tanzania.
+
+The birdlife at Gombe is impressive, with over 200 species recorded within the park's compact boundaries. African fish eagles are a constant presence along the lakeshore, their piercing calls one of the defining sounds of Lake Tanganyika. Palm-nut vultures soar above the forest canopy, while the thick undergrowth shelters Peter's twinspot, Ross's turaco, and numerous species of sunbird and weaver. For dedicated birders, the combination of lakeshore, forest, and woodland habitats within such a small area makes Gombe remarkably productive.
+
+Reaching Gombe is itself part of the adventure and adds to the park's sense of remoteness and exclusivity. There is no road access — the park can only be reached by boat. Most visitors fly from Arusha, Dar es Salaam, or the Serengeti to Kigoma, the regional capital on Lake Tanganyika, and then take a motorboat along the lakeshore to the park — a journey of roughly 25 kilometres that takes between one and two hours depending on conditions. The boat ride, with forested hills rising steeply from the water and fishing villages dotting the shoreline, is a memorable experience in its own right and immediately establishes that Gombe is a place apart from the well-trodden northern safari circuit.
+
+The best time to visit Gombe is during the dry season from July to October, when forest trails are easier to navigate and visibility through the undergrowth is at its best, making chimpanzee tracking more straightforward. However, the chimpanzees are present and viewable year-round, and the wet season from November to May brings lush green forests and excellent birdwatching as migratory species arrive. The park's equatorial location means temperatures are warm throughout the year.
+
+Accommodation within the park is deliberately simple, reflecting Gombe's character as a research site rather than a luxury safari destination. The park operates basic bandas — simple shelters with beds and mosquito nets — and a small tented camp near the lakeshore. The simplicity of the accommodation is part of Gombe's charm: evenings are spent listening to the forest sounds, watching the stars over the lake, and absorbing the profound sense of place that comes from sleeping in the same landscape where some of the most important discoveries in primatology were made.
+
+The Jane Goodall research station continues to operate within the park, staffed by Tanzanian researchers who carry on the tradition of daily chimpanzee observation that has now accumulated over six decades of continuous data. Visitors can learn about the ongoing research, the challenges of chimpanzee conservation in a landscape under pressure from surrounding communities, and the broader work of the Jane Goodall Institute in protecting great apes across Africa. The educational dimension of a Gombe visit is significant: this is not simply a wildlife experience, but an encounter with the history and future of conservation science.
+
+Travellers often compare Gombe with Mahale Mountains National Park, Tanzania's other great chimpanzee trekking destination located further south on the same lake. Both parks offer extraordinary chimp encounters on the shores of Lake Tanganyika, but they differ in character. Mahale is larger, more remote, and served by exclusive luxury camps, while Gombe is more accessible from Kigoma and carries the unmatched historical connection to Jane Goodall and the birth of modern primatology. Many visitors who have the time and budget choose to visit both, but for those making a single choice, Gombe's combination of scientific heritage, intimate forest trekking, and the chance to observe the descendants of the very chimpanzees that changed our understanding of what it means to be human makes it one of the most profoundly rewarding wildlife experiences in Africa.`,
+    heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Gombe-Stream-National-Park.jpg",
+    galleryImages: [
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Gombe-Stream-National-Park.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Gombe-Stream-National-Park.jpg",
+      "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Gombe-Stream-National-Park.jpg",
+    ],
+    highlights: ["Chimpanzee Trekking", "Jane Goodall Legacy", "Lake Tanganyika", "Primate Research"],
+    bestTimeToVisit:
+      "July to October (dry season); chimps viewable year-round but trails are easier and visibility better during dry months",
+    location: "Western Tanzania, Kigoma Region",
+    wildlife: [
+      "Chimpanzees",
+      "Olive Baboons",
+      "Red Colobus Monkeys",
+      "Red-tailed Monkeys",
+      "Blue Monkeys",
+      "Bushbuck",
+      "Bush Pigs",
+      "African Fish Eagles",
+      "Palm-nut Vultures",
+      "Monitor Lizards",
+      "Vervet Monkeys",
+      "Forest Cobras",
+    ],
+    activities: [
+      "Chimpanzee Trekking",
+      "Lake Tanganyika Swimming",
+      "Snorkeling",
+      "Bird Watching",
+      "Forest Hiking",
+      "Photography",
+      "Research Station Visit",
+    ],
+  },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

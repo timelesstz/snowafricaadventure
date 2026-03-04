@@ -31,6 +31,7 @@ export const MAIN_NAV = [
   { label: "Trekking", href: "/trekking/" },
   { label: "Kilimanjaro Join Group", href: "/kilimanjaro-join-group-departures/" },
   { label: "Tanzania Destinations", href: "/tanzania-destinations/" },
+  { label: "Tanzania Day Tours", href: "/tanzania-day-tours/" },
   { label: "Zanzibar", href: "/zanzibar/" },
   { label: "Contact Us", href: "/contact-us/" },
 ] as const;
@@ -61,14 +62,18 @@ export const FOOTER_NAV = {
     title: "Kilimanjaro",
     links: [
       { label: "All Trekking Routes", href: "/trekking/" },
+      { label: "Best Route to Climb", href: "/best-route-to-climb-kilimanjaro/" },
+      { label: "Climbing Kilimanjaro Guide", href: "/climbing-kilimanjaro/" },
       { label: "Join Group Departures", href: "/kilimanjaro-join-group-departures/" },
-      { label: "Tanzania Day Tours", href: "/tanzania-day-tours/" },
+      { label: "Kilimanjaro Prices", href: "/kilimanjaro-prices/" },
+      { label: "Best Time to Climb", href: "/best-time-to-climb-kilimanjaro/" },
     ],
   },
   company: {
     title: "Company",
     links: [
       { label: "About Us", href: "/about-us/" },
+      { label: "Our Guides", href: "/our-guides/" },
       { label: "Contact Us", href: "/contact-us/" },
       { label: "Terms & Conditions", href: "/terms-and-conditions/" },
       { label: "Privacy Policy", href: "/privacy-policy/" },

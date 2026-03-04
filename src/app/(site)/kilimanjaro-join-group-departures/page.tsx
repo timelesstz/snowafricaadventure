@@ -6,7 +6,6 @@ import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
 import { SITE_CONFIG, PARTNER_INFO } from "@/lib/constants";
 import { ShareButtons } from "@/components/social/ShareButtons";
-import { PageHero } from "@/components/layout/PageHero";
 
 // Revalidate every 60 seconds to fetch fresh departure data
 export const revalidate = 60;
@@ -143,6 +142,36 @@ export default async function GroupDeparturesPage() {
       answer:
         "Yes! We offer private departures on any date for individuals, couples, or your own group. View our routes for private climb options.",
     },
+    {
+      question: "How fit do I need to be for a group climb?",
+      answer:
+        "You should be in reasonable cardiovascular fitness — able to hike 6-8 hours on varied terrain. We recommend starting a training programme at least 12 weeks before your departure. Most group climbers are regular hikers or gym-goers, not elite athletes. Our guides set a pace that the whole group can manage comfortably.",
+    },
+    {
+      question: "What is the summit success rate for group departures?",
+      answer:
+        "Our group departures achieve a 95%+ summit success rate across all routes. This is significantly higher than the industry average of 65-70%, thanks to our experienced guides, proper acclimatization schedules, and small group sizes that allow individual attention.",
+    },
+    {
+      question: "Can I join a group climb as a solo traveller?",
+      answer:
+        "Absolutely — roughly 40% of our group climbers are solo travellers. Group departures are one of the best ways to experience Kilimanjaro as a solo traveller, as you'll be embedded in a small team of like-minded adventurers with shared goals. Many of our solo climbers leave with lifelong friendships.",
+    },
+    {
+      question: "What happens on summit night?",
+      answer:
+        "Summit night typically begins at midnight from the high camp. You'll hike through the night with your headlamp, guided by your team. The ascent takes 6-8 hours to reach Uhuru Peak at 5,895m. You'll arrive for sunrise at the summit — one of the most rewarding moments of any climber's life. After summit photos, you descend to base camp the same day.",
+    },
+    {
+      question: "What altitude sickness precautions are taken?",
+      answer:
+        "Our guides carry pulse oximeters and monitor every climber twice daily. We follow strict acclimatization protocols including 'climb high, sleep low' profiles. Emergency oxygen is carried on every climb. If a climber shows signs of moderate or severe altitude sickness, our guides will initiate a safe descent immediately.",
+    },
+    {
+      question: "Do I need travel insurance?",
+      answer:
+        "Yes — comprehensive travel insurance with high-altitude trekking cover (minimum 6,000m) is mandatory for all climbers. The policy must include emergency helicopter evacuation and medical expenses. We can recommend trusted providers if needed.",
+    },
   ]);
 
   return (
@@ -153,23 +182,41 @@ export default async function GroupDeparturesPage() {
       <JsonLd data={faqSchema} />
 
       {/* Hero */}
-      <PageHero pageSlug="kilimanjaro-join-group-departures">
-        <div className="mt-6 flex flex-wrap gap-4">
-          <div className="bg-white/10 px-4 py-2 rounded text-sm">
-            {String.fromCodePoint(0x1F315)} Full Moon climbs available
-          </div>
-          <div className="bg-white/10 px-4 py-2 rounded text-sm">
-            {String.fromCodePoint(0x1F465)} Small groups (max 10)
-          </div>
-          <div className="bg-white/10 px-4 py-2 rounded text-sm">
-            {String.fromCodePoint(0x2713)} Expert local guides
+      <section
+        className="text-white py-16 md:py-20"
+        style={{
+          background: "linear-gradient(to bottom right, var(--primary-dark), var(--primary-dark))",
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="text-[var(--secondary)] text-sm font-semibold uppercase tracking-wider">
+              2026–2027 Season
+            </span>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold mt-2 mb-4">
+              Kilimanjaro Group Departures
+            </h1>
+            <p className="text-xl text-white/80 leading-relaxed">
+              Join our scheduled group climbs with fixed departure dates. Share the adventure with fellow climbers from around the world.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
+              <div className="bg-white/10 px-4 py-2 rounded text-sm">
+                {String.fromCodePoint(0x1F315)} Full Moon climbs available
+              </div>
+              <div className="bg-white/10 px-4 py-2 rounded text-sm">
+                {String.fromCodePoint(0x1F465)} Small groups (max 10)
+              </div>
+              <div className="bg-white/10 px-4 py-2 rounded text-sm">
+                {String.fromCodePoint(0x2713)} Expert local guides
+              </div>
+            </div>
+            <div className="mt-6 flex items-center justify-center gap-3">
+              <span className="text-sm text-white/70">Share this page:</span>
+              <ShareButtons variant="icons-only" size="sm" />
+            </div>
           </div>
         </div>
-        <div className="mt-6 flex items-center gap-3">
-          <span className="text-sm text-white/70">Share this page:</span>
-          <ShareButtons variant="icons-only" size="sm" />
-        </div>
-      </PageHero>
+      </section>
 
       {/* Why Join a Group Climb — SEO Content */}
       <section className="py-16">
@@ -244,6 +291,50 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
+      {/* Day-by-Day Overview */}
+      <section className="py-12 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-heading text-3xl font-bold mb-6">
+              What to Expect: Your Kilimanjaro Group Climb Journey
+            </h2>
+            <div className="prose prose-slate prose-lg max-w-none space-y-4 text-[var(--text-muted)]">
+              <p>
+                From the moment you arrive in Arusha to the day you descend from the mountain, every detail of your group climb is managed by our team. Here is what a typical group departure looks like:
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Arrival & Pre-Climb Briefing
+              </h3>
+              <p>
+                You arrive in Arusha and we transfer you to your hotel, where you meet your fellow climbers over dinner. The following morning, our lead guide conducts a thorough gear check and briefing, covering everything from altitude awareness to daily schedules and summit night expectations. This is your chance to ask questions, finalize any gear rentals, and get to know the team who will be by your side for the next week.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                On the Mountain: Daily Routine
+              </h3>
+              <p>
+                Each morning begins with a wake-up call, hot drinks, and breakfast in the dining tent. After packing, you hike for 5-8 hours at a gentle pace — &quot;pole pole&quot; (slowly slowly) in Swahili — with regular rest stops for water, snacks, and photography. Your porters move ahead to set up the next camp, so when you arrive you&apos;re welcomed with popcorn, tea, and hot wash water. Evenings are spent sharing stories, playing cards, and watching the stars at altitude before an early night.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Summit Night: The Final Push
+              </h3>
+              <p>
+                The summit attempt begins around midnight from the high camp. You&apos;ll climb through the darkness with your headlamp illuminating the trail, stopping frequently for hot drinks and rest. As dawn approaches, the sky begins to glow and the first rays of sunrise hit the glaciers — an unforgettable sight. By 6-8 AM, you reach Uhuru Peak at 5,895m. After celebrating, photographs, and soaking in the views, you begin the long descent to your base camp, arriving by late afternoon.
+              </p>
+
+              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
+                Post-Climb Celebration
+              </h3>
+              <p>
+                After descending to the final gate, you receive your official summit certificate and celebrate with your team — tipping ceremony, group photos, and the satisfaction of having conquered Africa&apos;s highest peak. We transfer you back to your Arusha hotel for a well-earned hot shower and celebration dinner.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="py-12 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
@@ -285,18 +376,34 @@ export default async function GroupDeparturesPage() {
       {/* Reviews Section */}
       <section className="py-12 bg-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold mb-6">
+          <h2 className="font-heading text-3xl font-bold mb-8">
             What Our Climbers Say
           </h2>
-          <div className="max-w-2xl mx-auto">
-            <blockquote className="text-xl italic mb-4">
-              &quot;An incredible experience! The Crew was amazing and our guides
-              made sure everyone reached the summit safely. Highly recommend the
-              Lemosho route.&quot;
-            </blockquote>
-            <p className="text-[var(--primary-light)]">
-              — Sarah M., United Kingdom (January 2025)
-            </p>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div>
+              <blockquote className="text-lg italic mb-3">
+                &quot;An incredible experience! The crew was amazing and our guides made sure everyone reached the summit safely. Highly recommend the Lemosho route.&quot;
+              </blockquote>
+              <p className="text-[var(--primary-light)] text-sm">
+                — Sarah M., United Kingdom (January 2025)
+              </p>
+            </div>
+            <div>
+              <blockquote className="text-lg italic mb-3">
+                &quot;I joined as a solo traveller and left with friends for life. The group dynamic was the highlight — we pushed each other through the tough moments and celebrated together at the summit.&quot;
+              </blockquote>
+              <p className="text-[var(--primary-light)] text-sm">
+                — Marcus K., Germany (March 2025)
+              </p>
+            </div>
+            <div>
+              <blockquote className="text-lg italic mb-3">
+                &quot;At 58, I wasn&apos;t sure I could do it. Emmanuel and the team believed in me when I didn&apos;t believe in myself. Standing on Uhuru Peak was the proudest moment of my life.&quot;
+              </blockquote>
+              <p className="text-[var(--primary-light)] text-sm">
+                — Linda T., Australia (July 2025)
+              </p>
+            </div>
           </div>
           <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="mt-8 flex items-center justify-center gap-1 text-[var(--secondary)] text-2xl hover:opacity-80 transition-opacity">
             ★★★★★
@@ -453,6 +560,64 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
+      {/* Packing Essentials */}
+      <section className="py-12 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <h2 className="font-heading text-3xl font-bold text-center mb-8">
+            What to Pack for Your Group Climb
+          </h2>
+          <div className="max-w-4xl mx-auto">
+            <p className="text-[var(--text-muted)] text-center mb-8">
+              We provide all camping and climbing equipment. You only need personal gear. Here are the essentials:
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Clothing column */}
+              <div className="bg-white border border-[var(--border)] rounded-lg p-6">
+                <h3 className="font-heading text-lg font-bold mb-4">Clothing Layers</h3>
+                <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                  <li>• Moisture-wicking base layers</li>
+                  <li>• Insulated mid-layer (fleece or down)</li>
+                  <li>• Waterproof outer shell jacket</li>
+                  <li>• Waterproof trousers</li>
+                  <li>• Warm summit gloves (2 pairs)</li>
+                  <li>• Thermal beanie and balaclava</li>
+                  <li>• Sunhat and sunglasses</li>
+                </ul>
+              </div>
+              {/* Footwear column */}
+              <div className="bg-white border border-[var(--border)] rounded-lg p-6">
+                <h3 className="font-heading text-lg font-bold mb-4">Footwear & Accessories</h3>
+                <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                  <li>• Broken-in hiking boots (waterproof)</li>
+                  <li>• Gaiters for scree and dust</li>
+                  <li>• Camp shoes or sandals</li>
+                  <li>• 3-4 pairs hiking socks (merino wool)</li>
+                  <li>• Trekking poles (recommended)</li>
+                  <li>• 30-40L daypack</li>
+                  <li>• Headlamp with spare batteries</li>
+                </ul>
+              </div>
+              {/* Health & Other column */}
+              <div className="bg-white border border-[var(--border)] rounded-lg p-6">
+                <h3 className="font-heading text-lg font-bold mb-4">Health & Essentials</h3>
+                <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                  <li>• SPF 50+ sunscreen</li>
+                  <li>• Lip balm with SPF</li>
+                  <li>• Personal first aid kit</li>
+                  <li>• Diamox (consult your doctor)</li>
+                  <li>• 2-3 litre water bottles/bladder</li>
+                  <li>• Snacks (energy bars, nuts, chocolate)</li>
+                  <li>• Portable phone charger</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-sm text-[var(--text-muted)] text-center mt-6">
+              We send a comprehensive packing list after booking. Gear rental available in Arusha for sleeping bags, trekking poles, and down jackets.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-12">
         <div className="container mx-auto px-4">
@@ -499,6 +664,54 @@ export default async function GroupDeparturesPage() {
                   View our routes
                 </Link>{" "}
                 for private climb options.
+              </div>
+            </details>
+            <details className="bg-[var(--surface)] rounded-lg group">
+              <summary className="p-4 cursor-pointer font-medium">
+                How fit do I need to be for a group climb?
+              </summary>
+              <div className="px-4 pb-4 text-[var(--text-muted)]">
+                You should be in reasonable cardiovascular fitness — able to hike 6-8 hours on varied terrain. We recommend starting a training programme at least 12 weeks before your departure. Most group climbers are regular hikers or gym-goers, not elite athletes. Our guides set a pace that the whole group can manage comfortably.
+              </div>
+            </details>
+            <details className="bg-[var(--surface)] rounded-lg group">
+              <summary className="p-4 cursor-pointer font-medium">
+                What is the summit success rate for group departures?
+              </summary>
+              <div className="px-4 pb-4 text-[var(--text-muted)]">
+                Our group departures achieve a 95%+ summit success rate across all routes. This is significantly higher than the industry average of 65-70%, thanks to our experienced guides, proper acclimatization schedules, and small group sizes that allow individual attention.
+              </div>
+            </details>
+            <details className="bg-[var(--surface)] rounded-lg group">
+              <summary className="p-4 cursor-pointer font-medium">
+                Can I join a group climb as a solo traveller?
+              </summary>
+              <div className="px-4 pb-4 text-[var(--text-muted)]">
+                Absolutely — roughly 40% of our group climbers are solo travellers. Group departures are one of the best ways to experience Kilimanjaro as a solo traveller, as you&apos;ll be embedded in a small team of like-minded adventurers with shared goals. Many of our solo climbers leave with lifelong friendships.
+              </div>
+            </details>
+            <details className="bg-[var(--surface)] rounded-lg group">
+              <summary className="p-4 cursor-pointer font-medium">
+                What happens on summit night?
+              </summary>
+              <div className="px-4 pb-4 text-[var(--text-muted)]">
+                Summit night typically begins at midnight from the high camp. You&apos;ll hike through the night with your headlamp, guided by your team. The ascent takes 6-8 hours to reach Uhuru Peak at 5,895m. You&apos;ll arrive for sunrise at the summit — one of the most rewarding moments of any climber&apos;s life. After summit photos, you descend to base camp the same day.
+              </div>
+            </details>
+            <details className="bg-[var(--surface)] rounded-lg group">
+              <summary className="p-4 cursor-pointer font-medium">
+                What altitude sickness precautions are taken?
+              </summary>
+              <div className="px-4 pb-4 text-[var(--text-muted)]">
+                Our guides carry pulse oximeters and monitor every climber twice daily. We follow strict acclimatization protocols including &quot;climb high, sleep low&quot; profiles. Emergency oxygen is carried on every climb. If a climber shows signs of moderate or severe altitude sickness, our guides will initiate a safe descent immediately.
+              </div>
+            </details>
+            <details className="bg-[var(--surface)] rounded-lg group">
+              <summary className="p-4 cursor-pointer font-medium">
+                Do I need travel insurance?
+              </summary>
+              <div className="px-4 pb-4 text-[var(--text-muted)]">
+                Yes — comprehensive travel insurance with high-altitude trekking cover (minimum 6,000m) is mandatory for all climbers. The policy must include emergency helicopter evacuation and medical expenses. We can recommend trusted providers if needed.
               </div>
             </details>
           </div>

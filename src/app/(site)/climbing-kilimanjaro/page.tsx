@@ -15,7 +15,7 @@ import {
   TrendingUp,
   Wind,
 } from "lucide-react";
-import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
@@ -61,12 +61,12 @@ const whyClimb = [
 ];
 
 const routes = [
-  { name: "Marangu", days: "5-6 days", difficulty: "Moderate", successRate: "65-80%", price: "From $1,850", notes: "Hut accommodation. Only route with dormitory-style huts. Called the 'Coca-Cola route'." },
-  { name: "Machame", days: "6-7 days", difficulty: "Challenging", successRate: "80-90%", price: "From $2,100", notes: "Most scenic route. 'Whiskey route.' Ridge walks and lava tower acclimatization.", featured: true },
-  { name: "Rongai", days: "6-7 days", difficulty: "Moderate", successRate: "85-90%", price: "From $2,200", notes: "Approaches from the north. Drier, quieter, good for the dry season." },
-  { name: "Lemosho", days: "7-8 days", difficulty: "Mod–Challenging", successRate: "90-95%", price: "From $2,500", notes: "Best acclimatization profile. Joins Machame high route. Recommended for most climbers.", featured: true },
-  { name: "Umbwe", days: "6-7 days", difficulty: "Very Challenging", successRate: "70-80%", price: "From $2,200", notes: "Steepest, shortest route. Very fast ascent — not recommended for first-timers." },
-  { name: "Northern Circuit", days: "9 days", difficulty: "Moderate", successRate: "90-95%", price: "From $3,200", notes: "Longest route, best acclimatization. Traverses the entire mountain. Most scenic." },
+  { name: "Marangu", slug: "6-days-marangu-route", days: "5-6 days", difficulty: "Moderate", successRate: "65-80%", price: "From $1,850", notes: "Hut accommodation. Only route with dormitory-style huts. Called the 'Coca-Cola route'." },
+  { name: "Machame", slug: "7-days-machame-route", days: "6-7 days", difficulty: "Challenging", successRate: "80-90%", price: "From $2,100", notes: "Most scenic route. 'Whiskey route.' Ridge walks and lava tower acclimatization.", featured: true },
+  { name: "Rongai", slug: "6-days-rongai-route", days: "6-7 days", difficulty: "Moderate", successRate: "85-90%", price: "From $2,200", notes: "Approaches from the north. Drier, quieter, good for the dry season." },
+  { name: "Lemosho", slug: "8-days-lemosho-route", days: "7-8 days", difficulty: "Mod–Challenging", successRate: "90-95%", price: "From $2,500", notes: "Best acclimatization profile. Joins Machame high route. Recommended for most climbers.", featured: true },
+  { name: "Umbwe", slug: "6-days-umbwe-route", days: "6-7 days", difficulty: "Very Challenging", successRate: "70-80%", price: "From $2,200", notes: "Steepest, shortest route. Very fast ascent — not recommended for first-timers." },
+  { name: "Northern Circuit", slug: "7-days-machame-route", days: "9 days", difficulty: "Moderate", successRate: "90-95%", price: "From $3,200", notes: "Longest route, best acclimatization. Traverses the entire mountain. Most scenic." },
 ];
 
 const dayByDay = [
@@ -83,7 +83,7 @@ const kilimanjaroFaqs = [
   {
     question: "Is climbing Kilimanjaro difficult?",
     answer:
-      "Kilimanjaro is a challenging high-altitude trek, but it is not technical climbing — there are no ropes, harnesses, or vertical ice faces. The main challenges are altitude sickness, cold temperatures (especially at summit night), and the mental determination required during the long summit push in the early hours. Most fit, healthy adults can attempt Kilimanjaro with proper preparation.",
+      "Kilimanjaro is a challenging high-altitude trek, but it is not technical climbing — there are no ropes, harnesses, or vertical ice faces. The main challenges are altitude sickness, cold temperatures (especially at summit night), and the mental determination required during the long summit push in the early hours. Most fit, healthy adults can attempt Kilimanjaro with proper preparation. Routes with more acclimatization days like the 8-day Lemosho Route have the highest success rates at 95%.",
   },
   {
     question: "Do you need special equipment to climb Kilimanjaro?",
@@ -110,6 +110,46 @@ const kilimanjaroFaqs = [
     answer:
       "Altitude sickness (Acute Mountain Sickness, AMS) affects many climbers on Kilimanjaro. Mild symptoms — headache, nausea, and fatigue — are very common above 3,500m. The best prevention is slow ascent with good acclimatization days built into your route. Our guides carry supplemental oxygen and a pulse oximeter on every climb and monitor each climber daily. Serious AMS requiring descent is rare on our longer routes.",
   },
+  {
+    question: "Which is the best route to climb Kilimanjaro?",
+    answer:
+      "The best route depends on your priorities. The Lemosho Route (8 days) offers the best balance of scenery, acclimatization, and success rate (95%). The Machame Route (7 days) is the most popular for its dramatic scenery. The Northern Circuit (9 days) has the highest success rate with the best acclimatization. For budget-conscious climbers, the Marangu Route (5-6 days) is the most affordable with hut accommodation.",
+  },
+  {
+    question: "How much does it cost to climb Kilimanjaro?",
+    answer:
+      "Kilimanjaro climbing costs range from $1,850 to $3,200+ per person depending on route, duration, and group size. This includes park fees ($70/day + $60 camping/night), guides, porters, all meals, camping equipment, emergency oxygen, and airport transfers. Solo travellers pay more than groups. The 8-day Lemosho Route starts at $2,500 per person for group climbs.",
+  },
+  {
+    question: "What is the best time of year to climb Kilimanjaro?",
+    answer:
+      "The best months are June to October (dry season, clearest skies, coldest nights) and January to mid-March (short dry season, less crowded, warmer). Avoid April-May (heavy rain) and November (short rains). Full moon summit nights in the dry season are especially magical — climbers can often summit by moonlight without headlamps.",
+  },
+  {
+    question: "Can beginners climb Kilimanjaro?",
+    answer:
+      "Yes. Kilimanjaro requires no technical climbing skills — no ropes, harnesses, or ice climbing. The biggest challenge is altitude, not technical difficulty. Beginners should choose a longer route (7-8 days) for better acclimatization, start a fitness training programme 2-3 months before the trek, and hire an experienced local operator with certified guides.",
+  },
+  {
+    question: "What should I pack for Kilimanjaro?",
+    answer:
+      "Essential items include waterproof hiking boots (broken in), layered clothing for -20°C to +30°C, a 4-season sleeping bag rated to -10°C, trekking poles, headlamp with spare batteries, sunscreen and sunglasses, a 3-litre water bladder or bottles, and altitude medication (Diamox) as prescribed by your doctor. We provide a detailed packing list when you book.",
+  },
+  {
+    question: "Do I need travel insurance for Kilimanjaro?",
+    answer:
+      "Yes, comprehensive travel insurance covering high-altitude trekking up to 6,000m is mandatory. Your policy should include emergency evacuation and repatriation, trip cancellation, medical expenses, and helicopter rescue coverage. Many standard travel insurance policies exclude altitude above 3,000m — you need a specialist adventure policy.",
+  },
+  {
+    question: "How do I get to Kilimanjaro?",
+    answer:
+      "Fly into Kilimanjaro International Airport (JRO), located between Arusha and Moshi. Major airlines connecting through Nairobi, Addis Ababa, or Dar es Salaam serve JRO. We arrange airport pickup and transfer to your pre-climb hotel in Arusha or Moshi, included in all our packages. A Tanzania tourist visa ($50 USD) can be obtained on arrival or online in advance.",
+  },
+  {
+    question: "What is the summit success rate for Snow Africa Adventure?",
+    answer:
+      "Our overall summit success rate is 93%, significantly above the mountain-wide average of approximately 65%. This higher rate is due to our experienced KINAPA-certified guides, strict acclimatization protocols, daily health monitoring with pulse oximeters, and our recommendation of 7+ day routes. The 8-day Lemosho and 9-day Northern Circuit routes achieve 95%+ success rates with our teams.",
+  },
 ];
 
 export default async function ClimbingKilimanjaroPage() {
@@ -123,6 +163,23 @@ export default async function ClimbingKilimanjaroPage() {
             { name: "Climbing Kilimanjaro", url: "/climbing-kilimanjaro/" },
           ]),
           generateFAQSchema(kilimanjaroFaqs),
+          generateArticleSchema({
+            title: "Climbing Kilimanjaro: Complete Guide to Routes, Costs & Training",
+            description: "Everything you need to know about climbing Kilimanjaro: 6 routes, training tips, gear requirements, best seasons, success rates, and costs.",
+            url: "/climbing-kilimanjaro/",
+            image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
+            publishedTime: "2024-07-15",
+            modifiedTime: "2026-03-01",
+            author: "Emmanuel Moshi",
+            authorRole: "Founder & Lead Guide",
+            authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
+          }),
+          generateItemListSchema(routes.map((route, i) => ({
+            name: route.name,
+            url: `/trekking/${route.slug}/`,
+            description: route.notes,
+            position: i + 1,
+          }))),
         ]}
       />
 
@@ -278,7 +335,9 @@ export default async function ClimbingKilimanjaroPage() {
                   >
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold">{route.name}</span>
+                        <Link href={`/trekking/${route.slug}/`} className="font-semibold text-[var(--primary)] hover:text-[var(--secondary-dark)] hover:underline transition-colors">
+                          {route.name}
+                        </Link>
                         {route.featured && (
                           <span className="px-2 py-0.5 bg-[var(--secondary)] text-white text-xs rounded-full font-semibold">
                             Recommended
