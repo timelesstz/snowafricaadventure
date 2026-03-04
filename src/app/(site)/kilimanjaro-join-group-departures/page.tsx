@@ -215,11 +215,80 @@ export default async function GroupDeparturesPage() {
                 {String.fromCodePoint(0x2713)} Expert local guides
               </div>
             </div>
-            <div className="mt-6 flex items-center justify-center gap-3">
+            <div className="mt-6">
+              <a
+                href="#departures"
+                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-3 rounded-lg font-bold text-lg transition-colors shadow-lg"
+              >
+                View Departure Dates & Prices
+              </a>
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-3">
               <span className="text-sm text-white/70">Share this page:</span>
               <ShareButtons variant="icons-only" size="sm" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* How It Works — Brief */}
+      <section className="py-8 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl font-bold">1</span>
+              </div>
+              <h3 className="font-semibold mb-1">Choose Your Date</h3>
+              <p className="text-sm text-[var(--text-muted)]">
+                Browse departures below and pick a date
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl font-bold">2</span>
+              </div>
+              <h3 className="font-semibold mb-1">Book Your Spot</h3>
+              <p className="text-sm text-[var(--text-muted)]">
+                Secure with 10% deposit. Balance due 60 days before
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl font-bold">3</span>
+              </div>
+              <h3 className="font-semibold mb-1">Join Your Group</h3>
+              <p className="text-sm text-[var(--text-muted)]">
+                Meet fellow climbers and summit together
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2026 Departures + Booking Form — PRIMARY CONTENT */}
+      <div id="departures">
+        {departures2026.length > 0 && (
+          <DeparturesBookingSection departures={departures2026} year={2026} />
+        )}
+      </div>
+
+      {/* 2027 Departures - Coming Soon */}
+      <section className="py-12 bg-[var(--surface)]">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-heading text-3xl font-bold mb-4">
+            2027 Departures — Coming Soon!
+          </h2>
+          <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
+            We&apos;re finalizing our 2027 Kilimanjaro group climb schedule.
+            Contact us to express your interest and be the first to know when dates are released.
+          </p>
+          <Link
+            href="#booking-form"
+            className="inline-block bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-3 rounded-lg font-medium transition-colors"
+          >
+            Register Your Interest
+          </Link>
         </div>
       </section>
 
@@ -340,44 +409,6 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-12 bg-[var(--surface)]">
-        <div className="container mx-auto px-4">
-          <h2 className="font-heading text-3xl font-bold text-center mb-8">
-            How Group Departures Work
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">1</span>
-              </div>
-              <h3 className="font-semibold mb-2">Choose Your Date</h3>
-              <p className="text-sm text-[var(--text-muted)]">
-                Browse our scheduled departures and pick a date that works for you
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">2</span>
-              </div>
-              <h3 className="font-semibold mb-2">Book Your Spot</h3>
-              <p className="text-sm text-[var(--text-muted)]">
-                Secure your place with a deposit. Full payment due 2 weeks before arrival
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">3</span>
-              </div>
-              <h3 className="font-semibold mb-2">Join Your Group</h3>
-              <p className="text-sm text-[var(--text-muted)]">
-                Meet fellow climbers and share the adventure to the summit
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Reviews Section */}
       <section className="py-12 bg-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">
@@ -416,30 +447,6 @@ export default async function GroupDeparturesPage() {
               4.9/5 on TripAdvisor
             </span>
           </a>
-        </div>
-      </section>
-
-      {/* 2026 Departures + Booking Form */}
-      {departures2026.length > 0 && (
-        <DeparturesBookingSection departures={departures2026} year={2026} />
-      )}
-
-      {/* 2027 Departures - Coming Soon */}
-      <section className="py-12 bg-[var(--surface)]">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold mb-4">
-            2027 Departures — Coming Soon!
-          </h2>
-          <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
-            We&apos;re finalizing our 2027 Kilimanjaro group climb schedule.
-            Contact us to express your interest and be the first to know when dates are released.
-          </p>
-          <Link
-            href="#booking-form"
-            className="inline-block bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-3 rounded-lg font-medium transition-colors"
-          >
-            Register Your Interest
-          </Link>
         </div>
       </section>
 

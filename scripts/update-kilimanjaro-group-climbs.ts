@@ -12,7 +12,19 @@ import prisma from "../src/lib/prisma";
 const content = `
 <p class="lead">Kilimanjaro group climbs are the most popular — and most affordable — way to reach the summit of Africa's highest peak. By joining a scheduled group departure, you share the cost of guides, porters, and equipment with fellow trekkers while gaining the motivation and camaraderie that comes from climbing together. This guide covers everything you need to know about joining a Kilimanjaro group climb: cost, routes, what's included, and how to pick the right departure for you.</p>
 
-<h2>Why Join a Kilimanjaro Group Climb?</h2>
+<nav style="margin:1.5rem 0 2rem;padding:1rem 1.25rem;background:linear-gradient(135deg,#f0fdf4,#e8f5e9);border:1px solid #c8e6c9;border-radius:12px;overflow:hidden;">
+<span style="display:block;font-weight:600;font-size:0.85em;color:#2d6a4f;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Jump to section</span>
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem;width:100%;">
+<a href="#departure-dates" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:#2d6a4f;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.95em;box-shadow:0 2px 4px rgba(0,0,0,0.15);white-space:nowrap;">Departure Dates 2026-2027</a>
+<a href="#cost" style="display:inline-flex;align-items:center;padding:0.45rem 0.9rem;background:#fff;color:#2d6a4f;border:1px solid #a5d6a7;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9em;white-space:nowrap;">Cost & Pricing</a>
+<a href="#routes" style="display:inline-flex;align-items:center;padding:0.45rem 0.9rem;background:#fff;color:#2d6a4f;border:1px solid #a5d6a7;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9em;white-space:nowrap;">Best Routes</a>
+<a href="#whats-included" style="display:inline-flex;align-items:center;padding:0.45rem 0.9rem;background:#fff;color:#2d6a4f;border:1px solid #a5d6a7;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9em;white-space:nowrap;">What's Included</a>
+<a href="#solo-travelers" style="display:inline-flex;align-items:center;padding:0.45rem 0.9rem;background:#fff;color:#2d6a4f;border:1px solid #a5d6a7;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9em;white-space:nowrap;">Solo Travelers</a>
+<a href="#faqs" style="display:inline-flex;align-items:center;padding:0.45rem 0.9rem;background:#fff;color:#2d6a4f;border:1px solid #a5d6a7;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9em;white-space:nowrap;">FAQs</a>
+</div>
+</nav>
+
+<h2 id="why-group">Why Join a Kilimanjaro Group Climb?</h2>
 
 <p>Over 60% of the 35,000+ climbers who attempt Kilimanjaro each year do so as part of a group. There are good reasons for this:</p>
 
@@ -33,7 +45,7 @@ const content = `
 <figcaption style="text-align:center;font-size:0.9em;color:#666;margin-top:0.5rem;">A Snow Africa group ascending Kilimanjaro together — the camaraderie on group climbs is what many climbers remember most.</figcaption>
 </figure>
 
-<h2>How Much Do Kilimanjaro Group Climbs Cost?</h2>
+<h2 id="cost">How Much Do Kilimanjaro Group Climbs Cost?</h2>
 
 <p>Group climb pricing depends primarily on the route, duration, and service level. Here's what to expect in 2026:</p>
 
@@ -62,7 +74,7 @@ const content = `
 
 <p>See our full <a href="/kilimanjaro-prices/">Kilimanjaro pricing breakdown</a> for a detailed cost guide.</p>
 
-<h2>Private vs Group Kilimanjaro Climb: Which Is Right for You?</h2>
+<h2 id="private-vs-group">Private vs Group Kilimanjaro Climb: Which Is Right for You?</h2>
 
 <p>This is one of the first decisions you'll make when planning your Kilimanjaro climb. Here's an honest comparison:</p>
 
@@ -83,7 +95,7 @@ const content = `
 
 <p><strong>Our recommendation:</strong> If you're a solo traveler, a couple, or climbing on a budget, a group climb is almost always the better choice. You get the same guides, same routes, same equipment, and the same chance of summiting — at a significantly lower price. Choose private only if you need date flexibility or have specific requirements (medical conditions, very slow pace, etc.).</p>
 
-<h2>Best Routes for Kilimanjaro Group Climbs</h2>
+<h2 id="routes">Best Routes for Kilimanjaro Group Climbs</h2>
 
 <p>Not all routes are equally suited to group climbing. Here are the most popular options, ranked by our recommendation:</p>
 
@@ -103,7 +115,7 @@ const content = `
 <p><strong>Summit success rate: 65–80%</strong></p>
 <p>The <a href="/trekking/6-days-marangu-route/">only route with hut accommodation</a> (no camping). The shortest and cheapest option, but the lower success rate makes it harder to recommend unless budget is the primary concern. We strongly suggest the 6-day version over the 5-day.</p>
 
-<h2>What's Included in a Kilimanjaro Group Climb?</h2>
+<h2 id="whats-included">What's Included in a Kilimanjaro Group Climb?</h2>
 
 <p>A reputable operator's group climb package should include all of the following:</p>
 
@@ -121,7 +133,7 @@ const content = `
 
 <p><strong>Red flags:</strong> If an operator doesn't include park fees, airport transfers, or pre/post accommodation, they're quoting a misleadingly low price. Always compare like-for-like when evaluating Kilimanjaro group climb costs.</p>
 
-<h2>How to Choose the Right Group Climb</h2>
+<h2 id="how-to-choose">How to Choose the Right Group Climb</h2>
 
 <h3>Pick the Right Route Length</h3>
 <p>This is the single biggest factor in your success. Routes of 7+ days have dramatically higher summit success rates because they allow proper acclimatization. Our <a href="/best-route-to-climb-kilimanjaro/">route comparison guide</a> breaks this down in detail.</p>
@@ -135,7 +147,7 @@ const content = `
 <h3>Consider Group Size</h3>
 <p>Smaller groups (4–8 climbers) offer more personal attention and flexibility. Larger groups (9–12) are typically cheaper but move slower. Most operators cap groups at 12 for quality reasons.</p>
 
-<h2>What to Expect on a Kilimanjaro Group Climb</h2>
+<h2 id="what-to-expect">What to Expect on a Kilimanjaro Group Climb</h2>
 
 <p>Here's what a typical day looks like on a group climb:</p>
 
@@ -173,7 +185,7 @@ const content = `
 </ul>
 <p>If any climber shows signs of serious altitude sickness, our guides have authority to descend that person immediately — no questions, no delays. Your safety always comes before summit goals. Learn more about <a href="/kilimanjaro-altitude-sickness/">altitude sickness prevention and symptoms</a>.</p>
 
-<h2>What Our Group Climbers Say</h2>
+<h2 id="reviews">What Our Group Climbers Say</h2>
 
 <blockquote style="border-left:4px solid #2d6a4f;padding:1rem 1.5rem;margin:1.5rem 0;background:#f0fdf4;border-radius:0 8px 8px 0;">
 <p style="font-style:italic;margin-bottom:0.5rem;">"All 3 of us successfully summited Uhuru Peak. The guides were incredible — professional, encouraging, and genuinely cared about our safety. The group dynamic made summit night bearable when I wanted to quit at Stella Point."</p>
@@ -185,7 +197,7 @@ const content = `
 <cite style="font-size:0.9em;color:#555;">— Nelson Laur, United States (family group climb, rated 5/5 on SafariBookings)</cite>
 </blockquote>
 
-<h2>Kilimanjaro Group Climb Dates 2026–2027</h2>
+<h2 id="departure-dates">Kilimanjaro Group Climb Dates 2026–2027</h2>
 
 <p>We run scheduled group departures throughout the year on Kilimanjaro's most popular routes. Group climbs depart on fixed dates, and you can join as a solo traveler, couple, or small group. Even with just 2 bookings, the departure runs — your climb date is guaranteed.</p>
 
@@ -207,7 +219,7 @@ const content = `
 
 <p>Can't find a date that works? <a href="/contact-us/">Contact us</a> — we can often open additional group departures or arrange a private climb on your preferred dates.</p>
 
-<h2>Tips for Solo Travelers Joining a Group Climb</h2>
+<h2 id="solo-travelers">Tips for Solo Travelers Joining a Group Climb</h2>
 
 <p>About 40% of our group climbers are solo travelers. If that's you, here's what to know:</p>
 
@@ -219,7 +231,7 @@ const content = `
 <li><strong>Stay connected:</strong> Exchange contact details with your group — many of our climbers meet up again for future adventures together.</li>
 </ul>
 
-<h2>Frequently Asked Questions</h2>
+<h2 id="faqs">Frequently Asked Questions</h2>
 
 <div class="faq-accordion" itemscope itemtype="https://schema.org/FAQPage">
 
