@@ -443,7 +443,9 @@ export default function CanBeginnersClimbKilimanjaroPage() {
             </h2>
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
               Unlike Everest, K2, or Denali, Kilimanjaro doesn&apos;t require any
-              mountaineering skills. Here&apos;s why it&apos;s the world&apos;s most
+              mountaineering skills. See our full{" "}
+              <Link href="/kilimanjaro-vs-everest/" className="text-[var(--secondary)] font-semibold hover:underline">Kilimanjaro vs Everest comparison</Link>{" "}
+              for a detailed breakdown. Here&apos;s why it&apos;s the world&apos;s most
               accessible high-altitude summit.
             </p>
           </div>

@@ -434,6 +434,9 @@ export default function HowHardIsKilimanjaroPage() {
                 </tbody>
               </table>
             </div>
+            <p className="mt-6 text-[var(--text-muted)] leading-relaxed">
+              The most common comparison is <Link href="/kilimanjaro-vs-everest/" className="text-[var(--secondary)] font-semibold hover:underline">Mount Kilimanjaro vs Mount Everest</Link>. While Kilimanjaro is actually higher than Everest Base Camp, the full Everest summit is in an entirely different league. Read our detailed comparison to understand the differences in cost, training, and difficulty.
+            </p>
           </div>
         </div>
       </section>

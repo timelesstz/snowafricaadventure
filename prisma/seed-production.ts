@@ -288,8 +288,8 @@ async function main() {
     },
     {
       slug: "kilimanjaro-vs-everest",
-      title: "Kilimanjaro vs Everest: Comparison",
-      excerpt: "How does climbing Kilimanjaro compare to climbing Everest?",
+      title: "Mount Kilimanjaro vs Mount Everest: Which Should You Climb First?",
+      excerpt: "Compare Mount Kilimanjaro vs Mount Everest — difficulty, cost, time, and experience required. Find which mountain suits your adventure goals.",
       categorySlug: "mount-kilimanjaro",
     },
     // Safari posts

@@ -331,6 +331,23 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // Old WordPress sitemap URLs → Next.js sitemap
+      {
+        source: "/post-sitemap.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+      {
+        source: "/page-sitemap.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+      {
+        source: "/category-sitemap.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+
       // WooCommerce pages → homepage
       {
         source: "/my-account/",

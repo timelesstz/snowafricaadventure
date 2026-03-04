@@ -51,9 +51,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-vs-everest",
-    metaTitle: "Kilimanjaro vs Everest: Which Mountain Should You Climb?",
-    metaDescription: "Compare Kilimanjaro (5,895m) vs Everest (8,849m): difficulty, cost, time needed, and experience required. Find which climb suits your adventure goals.",
-    excerpt: "A detailed comparison of climbing Kilimanjaro versus Everest - difficulty levels, costs, time requirements, and which is right for you."
+    metaTitle: "Mount Kilimanjaro vs Mount Everest: Difficulty, Cost & Which to Climb",
+    metaDescription: "Mount Kilimanjaro vs Mount Everest compared: difficulty, cost ($2K vs $30K+), duration, success rates, and which mountain to climb first. Expert guide from Tanzania.",
+    excerpt: "Compare Mount Kilimanjaro vs Mount Everest — difficulty, cost, time, and experience required. Find which mountain suits your adventure goals."
   },
   {
     slug: "kilimanjaro-group-climbing",
