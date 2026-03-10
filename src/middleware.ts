@@ -128,14 +128,19 @@ export default auth(async (req) => {
     try {
       const redirect = await checkRedirect(pathname);
       if (redirect) {
-        // Log hit asynchronously (don't wait)
-        logRedirectHit(redirect.id).catch(() => {});
+        // Prevent infinite redirect loops: skip if destination matches current path
+        const destPath = redirect.destinationUrl.replace(/\/+$/, "") || "/";
+        const currentPath = pathname.replace(/\/+$/, "") || "/";
+        if (destPath.toLowerCase() !== currentPath.toLowerCase()) {
+          // Log hit asynchronously (don't wait)
+          logRedirectHit(redirect.id).catch(() => {});
 
-        const statusCode = redirect.type === "PERMANENT" ? 301 : 302;
-        return NextResponse.redirect(
-          new URL(redirect.destinationUrl, req.url),
-          statusCode
-        );
+          const statusCode = redirect.type === "PERMANENT" ? 301 : 302;
+          return NextResponse.redirect(
+            new URL(redirect.destinationUrl, req.url),
+            statusCode
+          );
+        }
       }
     } catch (error) {
       // Log error but don't block the request

@@ -108,7 +108,8 @@
       "mcp__chrome-devtools__click",
       "Bash(npx vercel ls)",
       "Bash(wc -l /l/snowafrica/src/app/\\\\\\(admin\\\\\\)/admin/analytics/page.tsx)",
-      "Bash(npm ls googleapis recharts)"
+      "Bash(npm ls googleapis recharts)",
+      "Bash(wc -l \"l:\\\\snowafrica\\\\src\\\\app\\\\\\(admin\\)\\\\admin\\\\analytics\\\\page.tsx\")"
     ]
   }
 }

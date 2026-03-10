@@ -41,13 +41,13 @@ const inquirySchema = z.object({
   type: z.string().max(50).default("contact"),
   // Honeypot field — must be empty (bots fill hidden fields)
   website: z.string().max(0, "Bot detected").optional().or(z.literal("")),
-  // Client-side tracking fields
-  gaClientId: z.string().max(100).optional(),
-  utmSource: z.string().max(200).optional(),
-  utmMedium: z.string().max(200).optional(),
-  utmCampaign: z.string().max(200).optional(),
-  referrerUrl: z.string().max(2000).optional(),
-  landingPage: z.string().max(2000).optional(),
+  // Client-side tracking fields (nullish: client sends null when unavailable)
+  gaClientId: z.string().max(100).nullish(),
+  utmSource: z.string().max(200).nullish(),
+  utmMedium: z.string().max(200).nullish(),
+  utmCampaign: z.string().max(200).nullish(),
+  referrerUrl: z.string().max(2000).nullish(),
+  landingPage: z.string().max(2000).nullish(),
 });
 
 export async function POST(request: NextRequest) {

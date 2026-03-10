@@ -4,9 +4,12 @@ import "./globals.css";
 import { SITE_CONFIG } from "@/lib/constants";
 import { generateTourOperatorSchema, generateWebSiteSchema, generateLocalBusinessSchema } from "@/lib/seo";
 import { ThemeProvider } from "@/components/theme-provider";
+import { generateThemeCSS, DEFAULT_THEME } from "@/lib/theme";
+import type { ThemeSettings, LogoSettings } from "@/lib/theme";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
 import TawkTo from "@/components/TawkTo";
+import { prisma } from "@/lib/prisma";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -45,14 +48,51 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+async function getThemeAndLogo(): Promise<{ theme: ThemeSettings; logo: LogoSettings }> {
+  try {
+    const [dbTheme, logoSettings] = await Promise.all([
+      prisma.themeSetting.findFirst({ where: { isActive: true } }),
+      prisma.siteSetting.findMany({
+        where: { key: { in: ["site.logoUrl", "site.logoDarkUrl"] } },
+      }),
+    ]);
+
+    const theme: ThemeSettings = dbTheme
+      ? (dbTheme as unknown as ThemeSettings)
+      : DEFAULT_THEME;
+
+    const logoMap: Record<string, string> = {};
+    logoSettings.forEach((s) => { logoMap[s.key] = s.value; });
+
+    return {
+      theme,
+      logo: {
+        logoUrl: logoMap["site.logoUrl"] || null,
+        logoDarkUrl: logoMap["site.logoDarkUrl"] || null,
+      },
+    };
+  } catch (error) {
+    console.error("Failed to fetch theme server-side:", error);
+    return {
+      theme: DEFAULT_THEME,
+      logo: { logoUrl: null, logoDarkUrl: null },
+    };
+  }
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { theme, logo } = await getThemeAndLogo();
+  const themeCSS = generateThemeCSS(theme);
+
   return (
     <html lang="en" className={`${outfit.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        {/* Inject theme CSS variables server-side to prevent CLS */}
+        <style dangerouslySetInnerHTML={{ __html: themeCSS }} />
         {/* Preconnect to CDN for faster image loading */}
         <link rel="preconnect" href="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev" />
         <link rel="dns-prefetch" href="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev" />
@@ -84,7 +124,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <GoogleAnalytics />
-        <ThemeProvider>
+        <ThemeProvider initialTheme={theme} initialLogo={logo}>
           {children}
         </ThemeProvider>
         <WebVitalsReporter endpoint="/api/analytics/vitals" />

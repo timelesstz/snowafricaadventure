@@ -1,5 +1,15 @@
 {
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx next:*)",
+      "Bash(ls -la \"l:/snowafrica/src/app/\\(site\\)/\")",
+      "Bash(taskkill //F //IM \"node.exe\")",
+      "Bash(ls -la \"l:/snowafrica/src/app/\\(site\\)/kilimanjaro-join-group-departures/\")",
+      "Bash(npx tsc:*)",
+      "WebSearch"
+    ]
   }
 }

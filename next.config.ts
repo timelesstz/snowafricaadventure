@@ -341,34 +341,36 @@ const nextConfig: NextConfig = {
       // =====================================================
       // CASE-SENSITIVE & INCOMPLETE URL FIXES (GSC noindex)
       // =====================================================
-      // Capital K variant
-      {
-        source: "/Kilimanjaro-join-group-departures/",
-        destination: "/kilimanjaro-join-group-departures/",
-        permanent: true,
-      },
-      {
-        source: "/Kilimanjaro-join-group-departures",
-        destination: "/kilimanjaro-join-group-departures/",
-        permanent: true,
-      },
-      // Incomplete URL fragments
-      {
-        source: "/kilimanjaro-join-/",
-        destination: "/kilimanjaro-join-group-departures/",
-        permanent: true,
-      },
-      {
-        source: "/kilimanjaro-join-",
-        destination: "/kilimanjaro-join-group-departures/",
-        permanent: true,
-      },
-      // Case-sensitive blog slug fix
-      {
-        source: "/50-reasons-to-visit-Tanzania/",
-        destination: "/50-reasons-to-visit-tanzania/",
-        permanent: true,
-      },
+      // Capital K variant — handled by middleware lowercase redirect
+      // {
+      //   source: "/Kilimanjaro-join-group-departures/",
+      //   destination: "/kilimanjaro-join-group-departures/",
+      //   permanent: true,
+      // },
+      // {
+      //   source: "/Kilimanjaro-join-group-departures",
+      //   destination: "/kilimanjaro-join-group-departures/",
+      //   permanent: true,
+      // },
+      // Incomplete URL fragments — handled by middleware lowercase redirect instead
+      // These were causing redirect loops (matching /kilimanjaro-join-group-departures/ as prefix)
+      // {
+      //   source: "/kilimanjaro-join-/",
+      //   destination: "/kilimanjaro-join-group-departures/",
+      //   permanent: true,
+      // },
+      // {
+      //   source: "/kilimanjaro-join-",
+      //   destination: "/kilimanjaro-join-group-departures/",
+      //   permanent: true,
+      // },
+      // Case-sensitive blog slug fix — handled by middleware lowercase redirect
+      // Next.js matches redirects case-insensitively, causing infinite loops
+      // {
+      //   source: "/50-reasons-to-visit-Tanzania/",
+      //   destination: "/50-reasons-to-visit-tanzania/",
+      //   permanent: true,
+      // },
 
       // =====================================================
       // OLD STANDALONE PAGE URLS (no /trekking/ prefix)

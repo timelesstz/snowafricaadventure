@@ -1,36 +1,11 @@
 "use client";
 
 import { useEffect, useState, createContext, useContext, ReactNode } from "react";
+import type { ThemeSettings, LogoSettings } from "@/lib/theme";
 
-interface ThemeSettings {
-  id: string;
-  name: string;
-  description: string;
-  primaryColor: string;
-  primaryDark: string;
-  primaryLight: string;
-  secondaryColor: string;
-  secondaryDark: string;
-  secondaryLight: string;
-  accentColor: string;
-  accentLight: string;
-  backgroundColor: string;
-  foregroundColor: string;
-  surfaceColor: string;
-  mutedColor: string;
-  borderColor: string;
-  textColor: string;
-  textMuted: string;
-  textLight: string;
-  headingFont: string;
-  bodyFont: string;
-  borderRadius: string;
-}
-
-interface LogoSettings {
-  logoUrl: string | null;
-  logoDarkUrl: string | null;
-}
+// Re-export types for existing consumers
+export type { ThemeSettings, LogoSettings } from "@/lib/theme";
+export { generateThemeCSS } from "@/lib/theme";
 
 interface ThemeContextType {
   theme: ThemeSettings | null;
@@ -83,10 +58,16 @@ function applyThemeToDOM(theme: ThemeSettings) {
   root.style.setProperty("--radius", theme.borderRadius);
 }
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<ThemeSettings | null>(null);
-  const [logo, setLogo] = useState<LogoSettings>({ logoUrl: null, logoDarkUrl: null });
-  const [isLoading, setIsLoading] = useState(true);
+interface ThemeProviderProps {
+  children: ReactNode;
+  initialTheme?: ThemeSettings | null;
+  initialLogo?: LogoSettings | null;
+}
+
+export function ThemeProvider({ children, initialTheme, initialLogo }: ThemeProviderProps) {
+  const [theme, setTheme] = useState<ThemeSettings | null>(initialTheme || null);
+  const [logo, setLogo] = useState<LogoSettings>(initialLogo || { logoUrl: null, logoDarkUrl: null });
+  const [isLoading, setIsLoading] = useState(!initialTheme);
 
   const fetchTheme = async () => {
     try {
@@ -111,6 +92,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // Skip initial fetch if we have server-provided data
+    if (initialTheme) {
+      setIsLoading(false);
+      return;
+    }
     fetchTheme();
   }, []);
 
