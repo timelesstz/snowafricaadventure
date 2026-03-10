@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
-import { TRIP_TYPES, PHONE_PREFIXES } from "@/lib/constants";
+import { TRIP_TYPES, PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { InviteFriendsSection, type InviteFriend } from "./InviteFriendsSection";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
@@ -29,6 +29,16 @@ export function InquiryForm({
   const [showOtherReferral, setShowOtherReferral] = useState(false);
   const formStartTracked = useRef(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const phonePrefixRef = useRef<HTMLSelectElement>(null);
+
+  // Auto-match phone prefix when country changes
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const countryCode = e.target.value;
+    const matchedPrefix = COUNTRY_TO_PREFIX[countryCode];
+    if (matchedPrefix && phonePrefixRef.current) {
+      phonePrefixRef.current.value = matchedPrefix;
+    }
+  };
 
   // Track form start on first interaction
   useEffect(() => {
@@ -73,6 +83,17 @@ export function InquiryForm({
       (f) => f.name.trim() && f.email.trim() && emailRegex.test(f.email.trim())
     );
 
+    // Append invite friends info to additionalInfo (no DB column for inviteFriends)
+    let additionalInfo = (data.additionalInfo as string) || "";
+    if (validInvites.length > 0) {
+      const friendsList = validInvites
+        .map((f) => `${f.name.trim()} (${f.email.trim()})`)
+        .join(", ");
+      additionalInfo = additionalInfo
+        ? `${additionalInfo}\n\nFriends to invite: ${friendsList}`
+        : `Friends to invite: ${friendsList}`;
+    }
+
     try {
       const tracking = await collectClientTracking();
 
@@ -81,10 +102,10 @@ export function InquiryForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          additionalInfo: additionalInfo || undefined,
           referralSource,
           relatedTo,
           type: tripType || "contact",
-          inviteFriends: validInvites.length > 0 ? validInvites : undefined,
           website: honeypotRef.current?.value || "",
           ...tracking,
         }),
@@ -239,6 +260,7 @@ export function InquiryForm({
               id="country"
               name="country"
               required
+              onChange={handleCountryChange}
               className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
             >
               <option value="">Select your country</option>
@@ -310,6 +332,7 @@ export function InquiryForm({
           <div className="flex gap-2">
             <select
               name="phonePrefix"
+              ref={phonePrefixRef}
               aria-label="Phone country code"
               className="w-[90px] sm:w-[100px] px-1.5 sm:px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
             >
@@ -478,6 +501,8 @@ export function InquiryForm({
 
       <p className="text-xs text-slate-500 text-center">
         We typically respond within 24 hours. No spam, ever.
+        Your data is protected under our{" "}
+        <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
       </p>
     </form>
   );

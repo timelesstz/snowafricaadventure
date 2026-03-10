@@ -2,209 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, Search, ChevronDown } from "lucide-react";
-import { PHONE_PREFIXES } from "@/lib/constants";
+import { PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
+import { COUNTRIES as COUNTRIES_LIB } from "@/lib/countries";
 import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
 import { collectClientTracking } from "@/lib/client-tracking";
 
-// ISO 3166-1 Country list with codes for flags
-const COUNTRIES = [
-  { name: "Afghanistan", code: "AF" },
-  { name: "Albania", code: "AL" },
-  { name: "Algeria", code: "DZ" },
-  { name: "Andorra", code: "AD" },
-  { name: "Angola", code: "AO" },
-  { name: "Antigua and Barbuda", code: "AG" },
-  { name: "Argentina", code: "AR" },
-  { name: "Armenia", code: "AM" },
-  { name: "Australia", code: "AU" },
-  { name: "Austria", code: "AT" },
-  { name: "Azerbaijan", code: "AZ" },
-  { name: "Bahamas", code: "BS" },
-  { name: "Bahrain", code: "BH" },
-  { name: "Bangladesh", code: "BD" },
-  { name: "Barbados", code: "BB" },
-  { name: "Belarus", code: "BY" },
-  { name: "Belgium", code: "BE" },
-  { name: "Belize", code: "BZ" },
-  { name: "Benin", code: "BJ" },
-  { name: "Bhutan", code: "BT" },
-  { name: "Bolivia", code: "BO" },
-  { name: "Bosnia and Herzegovina", code: "BA" },
-  { name: "Botswana", code: "BW" },
-  { name: "Brazil", code: "BR" },
-  { name: "Brunei", code: "BN" },
-  { name: "Bulgaria", code: "BG" },
-  { name: "Burkina Faso", code: "BF" },
-  { name: "Burundi", code: "BI" },
-  { name: "Cabo Verde", code: "CV" },
-  { name: "Cambodia", code: "KH" },
-  { name: "Cameroon", code: "CM" },
-  { name: "Canada", code: "CA" },
-  { name: "Central African Republic", code: "CF" },
-  { name: "Chad", code: "TD" },
-  { name: "Chile", code: "CL" },
-  { name: "China", code: "CN" },
-  { name: "Colombia", code: "CO" },
-  { name: "Comoros", code: "KM" },
-  { name: "Congo (Congo-Brazzaville)", code: "CG" },
-  { name: "Costa Rica", code: "CR" },
-  { name: "Croatia", code: "HR" },
-  { name: "Cuba", code: "CU" },
-  { name: "Cyprus", code: "CY" },
-  { name: "Czechia", code: "CZ" },
-  { name: "Denmark", code: "DK" },
-  { name: "Djibouti", code: "DJ" },
-  { name: "Dominica", code: "DM" },
-  { name: "Dominican Republic", code: "DO" },
-  { name: "DR Congo", code: "CD" },
-  { name: "Ecuador", code: "EC" },
-  { name: "Egypt", code: "EG" },
-  { name: "El Salvador", code: "SV" },
-  { name: "Equatorial Guinea", code: "GQ" },
-  { name: "Eritrea", code: "ER" },
-  { name: "Estonia", code: "EE" },
-  { name: "Eswatini", code: "SZ" },
-  { name: "Ethiopia", code: "ET" },
-  { name: "Fiji", code: "FJ" },
-  { name: "Finland", code: "FI" },
-  { name: "France", code: "FR" },
-  { name: "Gabon", code: "GA" },
-  { name: "Gambia", code: "GM" },
-  { name: "Georgia", code: "GE" },
-  { name: "Germany", code: "DE" },
-  { name: "Ghana", code: "GH" },
-  { name: "Greece", code: "GR" },
-  { name: "Grenada", code: "GD" },
-  { name: "Guatemala", code: "GT" },
-  { name: "Guinea", code: "GN" },
-  { name: "Guinea-Bissau", code: "GW" },
-  { name: "Guyana", code: "GY" },
-  { name: "Haiti", code: "HT" },
-  { name: "Honduras", code: "HN" },
-  { name: "Hungary", code: "HU" },
-  { name: "Iceland", code: "IS" },
-  { name: "India", code: "IN" },
-  { name: "Indonesia", code: "ID" },
-  { name: "Iran", code: "IR" },
-  { name: "Iraq", code: "IQ" },
-  { name: "Ireland", code: "IE" },
-  { name: "Israel", code: "IL" },
-  { name: "Italy", code: "IT" },
-  { name: "Ivory Coast", code: "CI" },
-  { name: "Jamaica", code: "JM" },
-  { name: "Japan", code: "JP" },
-  { name: "Jordan", code: "JO" },
-  { name: "Kazakhstan", code: "KZ" },
-  { name: "Kenya", code: "KE" },
-  { name: "Kiribati", code: "KI" },
-  { name: "Kuwait", code: "KW" },
-  { name: "Kyrgyzstan", code: "KG" },
-  { name: "Laos", code: "LA" },
-  { name: "Latvia", code: "LV" },
-  { name: "Lebanon", code: "LB" },
-  { name: "Lesotho", code: "LS" },
-  { name: "Liberia", code: "LR" },
-  { name: "Libya", code: "LY" },
-  { name: "Liechtenstein", code: "LI" },
-  { name: "Lithuania", code: "LT" },
-  { name: "Luxembourg", code: "LU" },
-  { name: "Madagascar", code: "MG" },
-  { name: "Malawi", code: "MW" },
-  { name: "Malaysia", code: "MY" },
-  { name: "Maldives", code: "MV" },
-  { name: "Mali", code: "ML" },
-  { name: "Malta", code: "MT" },
-  { name: "Marshall Islands", code: "MH" },
-  { name: "Mauritania", code: "MR" },
-  { name: "Mauritius", code: "MU" },
-  { name: "Mexico", code: "MX" },
-  { name: "Micronesia", code: "FM" },
-  { name: "Moldova", code: "MD" },
-  { name: "Monaco", code: "MC" },
-  { name: "Mongolia", code: "MN" },
-  { name: "Montenegro", code: "ME" },
-  { name: "Morocco", code: "MA" },
-  { name: "Mozambique", code: "MZ" },
-  { name: "Myanmar", code: "MM" },
-  { name: "Namibia", code: "NA" },
-  { name: "Nauru", code: "NR" },
-  { name: "Nepal", code: "NP" },
-  { name: "Netherlands", code: "NL" },
-  { name: "New Zealand", code: "NZ" },
-  { name: "Nicaragua", code: "NI" },
-  { name: "Niger", code: "NE" },
-  { name: "Nigeria", code: "NG" },
-  { name: "North Korea", code: "KP" },
-  { name: "North Macedonia", code: "MK" },
-  { name: "Norway", code: "NO" },
-  { name: "Oman", code: "OM" },
-  { name: "Pakistan", code: "PK" },
-  { name: "Palau", code: "PW" },
-  { name: "Palestine", code: "PS" },
-  { name: "Panama", code: "PA" },
-  { name: "Papua New Guinea", code: "PG" },
-  { name: "Paraguay", code: "PY" },
-  { name: "Peru", code: "PE" },
-  { name: "Philippines", code: "PH" },
-  { name: "Poland", code: "PL" },
-  { name: "Portugal", code: "PT" },
-  { name: "Qatar", code: "QA" },
-  { name: "Romania", code: "RO" },
-  { name: "Russia", code: "RU" },
-  { name: "Rwanda", code: "RW" },
-  { name: "Saint Kitts and Nevis", code: "KN" },
-  { name: "Saint Lucia", code: "LC" },
-  { name: "Saint Vincent and the Grenadines", code: "VC" },
-  { name: "Samoa", code: "WS" },
-  { name: "San Marino", code: "SM" },
-  { name: "Sao Tome and Principe", code: "ST" },
-  { name: "Saudi Arabia", code: "SA" },
-  { name: "Senegal", code: "SN" },
-  { name: "Serbia", code: "RS" },
-  { name: "Seychelles", code: "SC" },
-  { name: "Sierra Leone", code: "SL" },
-  { name: "Singapore", code: "SG" },
-  { name: "Slovakia", code: "SK" },
-  { name: "Slovenia", code: "SI" },
-  { name: "Solomon Islands", code: "SB" },
-  { name: "Somalia", code: "SO" },
-  { name: "South Africa", code: "ZA" },
-  { name: "South Korea", code: "KR" },
-  { name: "South Sudan", code: "SS" },
-  { name: "Spain", code: "ES" },
-  { name: "Sri Lanka", code: "LK" },
-  { name: "Sudan", code: "SD" },
-  { name: "Suriname", code: "SR" },
-  { name: "Sweden", code: "SE" },
-  { name: "Switzerland", code: "CH" },
-  { name: "Syria", code: "SY" },
-  { name: "Taiwan", code: "TW" },
-  { name: "Tajikistan", code: "TJ" },
-  { name: "Tanzania", code: "TZ" },
-  { name: "Thailand", code: "TH" },
-  { name: "Timor-Leste", code: "TL" },
-  { name: "Togo", code: "TG" },
-  { name: "Tonga", code: "TO" },
-  { name: "Trinidad and Tobago", code: "TT" },
-  { name: "Tunisia", code: "TN" },
-  { name: "Turkey", code: "TR" },
-  { name: "Turkmenistan", code: "TM" },
-  { name: "Tuvalu", code: "TV" },
-  { name: "Uganda", code: "UG" },
-  { name: "Ukraine", code: "UA" },
-  { name: "United Arab Emirates", code: "AE" },
-  { name: "United Kingdom", code: "GB" },
-  { name: "United States", code: "US" },
-  { name: "Uruguay", code: "UY" },
-  { name: "Uzbekistan", code: "UZ" },
-  { name: "Vanuatu", code: "VU" },
-  { name: "Vatican City", code: "VA" },
-  { name: "Venezuela", code: "VE" },
-  { name: "Vietnam", code: "VN" },
-  { name: "Yemen", code: "YE" },
-  { name: "Zambia", code: "ZM" },
-  { name: "Zimbabwe", code: "ZW" },
-] as const;
+// Map shared country list to the format used by this component
+const COUNTRIES = COUNTRIES_LIB.map((c) => ({ name: c.name, code: c.code }));
 
 // Convert country code to flag emoji
 function getFlagEmoji(countryCode: string): string {
@@ -229,6 +33,8 @@ export function SafariInquiryForm({
   const [stage, setStage] = useState<1 | 2>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -292,7 +98,13 @@ export function SafariInquiryForm({
   }, [safariSlug]);
 
   const handleCountrySelect = (country: { name: string; code: string }) => {
-    setFormData((prev) => ({ ...prev, country: country.name, countryCode: country.code }));
+    const matchedPrefix = COUNTRY_TO_PREFIX[country.code];
+    setFormData((prev) => ({
+      ...prev,
+      country: country.name,
+      countryCode: country.code,
+      ...(matchedPrefix ? { phonePrefix: matchedPrefix } : {}),
+    }));
     setCountrySearch("");
     setIsCountryDropdownOpen(false);
   };
@@ -306,6 +118,18 @@ export function SafariInquiryForm({
 
   const handleStage1Submit = (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    if (!formData.fullName || formData.fullName.trim().length < 2) {
+      setError("Please enter your full name (at least 2 characters).");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email || !emailRegex.test(formData.email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     // Track step completion
     trackFormStep({
       formName: "safari_inquiry_form",
@@ -319,20 +143,45 @@ export function SafariInquiryForm({
   const handleStage2Submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
+
+    // Validate country selection
+    if (!formData.country) {
+      setError("Please select your country.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const tracking = await collectClientTracking();
+
+      // Convert "10+" to numeric 10 for server
+      const numPax = formData.numPax === "10+" ? 10 : parseInt(formData.numPax) || 1;
 
       const response = await fetch("/api/inquiries/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          country: formData.countryCode || formData.country,
+          numAdults: numPax,
+          additionalInfo: formData.numPax === "10+"
+            ? `Group of 10+ travelers. ${formData.specialInterest || ""}`.trim()
+            : formData.specialInterest || undefined,
           relatedTo: safariSlug,
           type: "Wildlife Safari",
+          website: honeypotRef.current?.value || "",
           ...tracking,
         }),
       });
+
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        setError("Something went wrong. Please try again.");
+        return;
+      }
 
       if (response.ok) {
         // Track successful form submission
@@ -340,13 +189,16 @@ export function SafariInquiryForm({
           formName: "safari_inquiry_form",
           formId: safariSlug || "general",
           tripType: "Wildlife Safari",
-          numTravelers: parseInt(formData.numPax) || 1,
+          numTravelers: numPax,
           relatedItem: safariSlug,
         });
         setSubmitted(true);
+      } else {
+        setError(result.message || "Failed to submit inquiry. Please try again.");
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -373,6 +225,13 @@ export function SafariInquiryForm({
 
   return (
     <div className={isCard ? "" : "bg-white p-6 rounded-lg"} data-form-id={`safari-inquiry-${safariSlug || 'general'}`}>
+      {/* Error Message */}
+      {error && (
+        <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm mb-4">
+          {error}
+        </div>
+      )}
+
       {/* Stage 1: Contact Info */}
       {stage === 1 && (
         <form onSubmit={handleStage1Submit} className="space-y-4">
@@ -613,6 +472,12 @@ export function SafariInquiryForm({
             />
           </div>
 
+          {/* Honeypot */}
+          <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+            <label htmlFor="website-safari">Website</label>
+            <input type="text" id="website-safari" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
+          </div>
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -621,6 +486,11 @@ export function SafariInquiryForm({
           >
             {isSubmitting ? "Sending..." : "Request Quote"}
           </button>
+          <p className="text-xs text-slate-500 text-center mt-3">
+            We typically respond within 24 hours. No spam, ever.
+            Your data is protected under our{" "}
+            <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
+          </p>
         </form>
       )}
     </div>

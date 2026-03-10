@@ -174,7 +174,48 @@ export const PHONE_PREFIXES = [
   { code: "+91", country: "India" },
   { code: "+86", country: "China" },
   { code: "+81", country: "Japan" },
+  { code: "+34", country: "Spain" },
+  { code: "+39", country: "Italy" },
+  { code: "+41", country: "Switzerland" },
+  { code: "+43", country: "Austria" },
+  { code: "+46", country: "Sweden" },
+  { code: "+47", country: "Norway" },
+  { code: "+45", country: "Denmark" },
+  { code: "+353", country: "Ireland" },
+  { code: "+64", country: "New Zealand" },
+  { code: "+32", country: "Belgium" },
+  { code: "+65", country: "Singapore" },
+  { code: "+55", country: "Brazil" },
+  { code: "+52", country: "Mexico" },
+  { code: "+48", country: "Poland" },
+  { code: "+7", country: "Russia" },
+  { code: "+971", country: "UAE" },
+  { code: "+966", country: "Saudi Arabia" },
+  { code: "+90", country: "Turkey" },
+  { code: "+62", country: "Indonesia" },
+  { code: "+60", country: "Malaysia" },
+  { code: "+66", country: "Thailand" },
+  { code: "+84", country: "Vietnam" },
+  { code: "+82", country: "South Korea" },
+  { code: "+234", country: "Nigeria" },
+  { code: "+20", country: "Egypt" },
+  { code: "+256", country: "Uganda" },
+  { code: "+250", country: "Rwanda" },
 ] as const;
+
+/**
+ * Map country code (ISO 3166-1 alpha-2) to phone prefix.
+ * Returns the best matching prefix or undefined.
+ */
+export const COUNTRY_TO_PREFIX: Record<string, string> = {
+  US: "+1", CA: "+1", GB: "+44", DE: "+49", FR: "+33", NL: "+31",
+  AU: "+61", TZ: "+255", KE: "+254", ZA: "+27", IN: "+91", CN: "+86",
+  JP: "+81", ES: "+34", IT: "+39", CH: "+41", AT: "+43", SE: "+46",
+  NO: "+47", DK: "+45", IE: "+353", NZ: "+64", BE: "+32", SG: "+65",
+  BR: "+55", MX: "+52", PL: "+48", RU: "+7", AE: "+971", SA: "+966",
+  TR: "+90", ID: "+62", MY: "+60", TH: "+66", VN: "+84", KR: "+82",
+  NG: "+234", EG: "+20", UG: "+256", RW: "+250",
+};
 
 /**
  * Safari destinations/parks

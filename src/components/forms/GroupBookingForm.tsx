@@ -89,14 +89,15 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
 
   // Refs
   const formContainerRef = useRef<HTMLDivElement>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   // Track form start
   const formStartTracked = useRef(false);
 
   // When departure changes, reset to stage 1 and track selection
-  const prevDepIdRef = useState<string | null>(null);
-  if (departure && departure.id !== prevDepIdRef[0]) {
-    prevDepIdRef[0] = departure.id;
+  const prevDepIdRef = useRef<string | null>(null);
+  if (departure && departure.id !== prevDepIdRef.current) {
+    prevDepIdRef.current = departure.id;
     if (stage === 0 || stage === "success") {
       setStage(1);
       setError("");
@@ -176,6 +177,21 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     e.preventDefault();
     setError("");
 
+    // Validate required fields
+    if (!leadName.trim() || leadName.trim().length < 2) {
+      setError("Please enter your full name (at least 2 characters).");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!leadEmail.trim() || !emailRegex.test(leadEmail.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (totalClimbers < 1 || totalClimbers > maxClimbers) {
+      setError(`Please select between 1 and ${maxClimbers} climbers.`);
+      return;
+    }
+
     // Track step 1 completion
     trackFormStep({
       formName: "group_booking_form",
@@ -250,6 +266,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           climbers: allClimbers,
           specialRequests: specialRequests || undefined,
           subscribeNewsletter,
+          website: honeypotRef.current?.value || "",
           ...tracking,
         }),
       });
@@ -893,6 +910,12 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
               {/* Mobile price summary */}
               <div className="lg:hidden">{priceBreakdown}</div>
 
+              {/* Honeypot */}
+              <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+                <label htmlFor="website-booking">Website</label>
+                <input type="text" id="website-booking" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
+              </div>
+
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -902,8 +925,11 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
               </button>
 
               <p className="text-xs text-center text-[var(--text-muted)]">
-                By booking you agree to our terms. A 10% deposit secures your spot.
-                Full balance is due 2 weeks before arrival.
+                By booking you agree to our{" "}
+                <a href="/terms-and-conditions/" className="underline hover:text-[var(--text)]">terms</a>.
+                A 10% deposit secures your spot. Full balance is due 2 weeks before arrival.
+                Your data is protected under our{" "}
+                <a href="/privacy-policy/" className="underline hover:text-[var(--text)]">privacy policy</a>.
               </p>
             </form>
           )}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
   PHONE_PREFIXES,
+  COUNTRY_TO_PREFIX,
   BUDGET_LEVELS,
   ZANZIBAR_BEACHES,
   ZANZIBAR_ACTIVITIES,
@@ -65,6 +66,34 @@ export function ZanzibarInquiryForm() {
 
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const formStartTracked = useRef(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const draftRestored = useRef(false);
+
+  // Restore draft from sessionStorage on mount
+  useEffect(() => {
+    if (draftRestored.current) return;
+    draftRestored.current = true;
+    try {
+      const saved = sessionStorage.getItem("zanzibarDraft");
+      if (saved) {
+        const draft = JSON.parse(saved);
+        if (draft.formData) setFormData((prev) => ({ ...prev, ...draft.formData }));
+        if (draft.step) setCurrentStep(draft.step);
+        if (draft.activities) setSelectedActivities(draft.activities);
+      }
+    } catch { /* ignore parse errors */ }
+  }, []);
+
+  // Save draft to sessionStorage on step change or form data change
+  useEffect(() => {
+    try {
+      sessionStorage.setItem("zanzibarDraft", JSON.stringify({
+        formData,
+        step: currentStep,
+        activities: selectedActivities,
+      }));
+    } catch { /* ignore quota errors */ }
+  }, [formData, currentStep, selectedActivities]);
 
   // Track form start on first interaction
   useEffect(() => {
@@ -90,7 +119,17 @@ export function ZanzibarInquiryForm() {
   }, []);
 
   const updateFormData = (field: string, value: string | number) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+      // Auto-match phone prefix when country changes
+      if (field === "country" && typeof value === "string") {
+        const matchedPrefix = COUNTRY_TO_PREFIX[value];
+        if (matchedPrefix) {
+          updated.phonePrefix = matchedPrefix;
+        }
+      }
+      return updated;
+    });
   };
 
   const toggleActivity = (value: string) => {
@@ -102,13 +141,34 @@ export function ZanzibarInquiryForm() {
   };
 
   const validateStep = (step: number): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     switch (step) {
       case 1:
-        return !!(formData.fullName && formData.email && formData.country);
+        if (!formData.fullName || formData.fullName.trim().length < 2) {
+          setError("Please enter your full name (at least 2 characters).");
+          return false;
+        }
+        if (!formData.email || !emailRegex.test(formData.email.trim())) {
+          setError("Please enter a valid email address.");
+          return false;
+        }
+        if (!formData.country) {
+          setError("Please select your country.");
+          return false;
+        }
+        return true;
       case 2:
-        return formData.numAdults >= 1;
+        if (formData.numAdults < 1) {
+          setError("Please select at least 1 adult traveler.");
+          return false;
+        }
+        return true;
       case 3:
-        return !!formData.arrivalDate;
+        if (!formData.arrivalDate) {
+          setError("Please select your preferred arrival date.");
+          return false;
+        }
+        return true;
       case 4:
         return true; // Beach area optional
       case 5:
@@ -131,8 +191,6 @@ export function ZanzibarInquiryForm() {
       });
       setCurrentStep(currentStep + 1);
       setError(null);
-    } else if (!validateStep(currentStep)) {
-      setError("Please fill in all required fields before continuing.");
     }
   };
 
@@ -193,6 +251,7 @@ export function ZanzibarInquiryForm() {
           relatedTo: "Zanzibar Beach Holiday",
           type: "zanzibar",
           tripType: formData.combineWithSafari === "yes" ? "Wildlife Safari + Zanzibar Beach" : "Zanzibar Beach",
+          website: honeypotRef.current?.value || "",
           ...tracking,
         }),
       });
@@ -215,6 +274,8 @@ export function ZanzibarInquiryForm() {
           numTravelers: formData.numAdults + formData.numChildren,
           relatedItem: formData.beachArea || "Zanzibar Holiday",
         });
+        // Clear draft on success
+        try { sessionStorage.removeItem("zanzibarDraft"); } catch { /* ignore */ }
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");
@@ -463,6 +524,7 @@ export function ZanzibarInquiryForm() {
                 <input
                   type="date"
                   value={formData.arrivalDate}
+                  min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => updateFormData("arrivalDate", e.target.value)}
                   className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
                 />
@@ -688,6 +750,12 @@ export function ZanzibarInquiryForm() {
         )}
       </div>
 
+      {/* Honeypot */}
+      <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+        <label htmlFor="website-zanzibar">Website</label>
+        <input type="text" id="website-zanzibar" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
+      </div>
+
       {/* Navigation Buttons */}
       <div className="flex justify-between pt-4 border-t border-slate-200">
         <Button
@@ -735,7 +803,9 @@ export function ZanzibarInquiryForm() {
       </div>
 
       <p className="text-xs text-slate-500 text-center">
-        We&apos;ll send you beach holiday options within 24 hours.
+        We&apos;ll send you beach holiday options within 24 hours. No spam, ever.
+        Your data is protected under our{" "}
+        <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
       </p>
     </div>
   );

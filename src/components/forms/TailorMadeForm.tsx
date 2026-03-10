@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
   PHONE_PREFIXES,
+  COUNTRY_TO_PREFIX,
   SAFARI_DESTINATIONS,
   BUDGET_LEVELS,
   ACCOMMODATION_TYPES,
@@ -71,6 +72,36 @@ export function TailorMadeForm() {
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const formStartTracked = useRef(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const draftRestored = useRef(false);
+
+  // Restore draft from sessionStorage on mount
+  useEffect(() => {
+    if (draftRestored.current) return;
+    draftRestored.current = true;
+    try {
+      const saved = sessionStorage.getItem("tailorMadeDraft");
+      if (saved) {
+        const draft = JSON.parse(saved);
+        if (draft.formData) setFormData((prev) => ({ ...prev, ...draft.formData }));
+        if (draft.step) setCurrentStep(draft.step);
+        if (draft.destinations) setSelectedDestinations(draft.destinations);
+        if (draft.interests) setSelectedInterests(draft.interests);
+      }
+    } catch { /* ignore parse errors */ }
+  }, []);
+
+  // Save draft to sessionStorage on step change or form data change
+  useEffect(() => {
+    try {
+      sessionStorage.setItem("tailorMadeDraft", JSON.stringify({
+        formData,
+        step: currentStep,
+        destinations: selectedDestinations,
+        interests: selectedInterests,
+      }));
+    } catch { /* ignore quota errors */ }
+  }, [formData, currentStep, selectedDestinations, selectedInterests]);
 
   // Track form start on first interaction
   useEffect(() => {
@@ -96,7 +127,17 @@ export function TailorMadeForm() {
   }, []);
 
   const updateFormData = (field: string, value: string | number | string[]) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+      // Auto-match phone prefix when country changes
+      if (field === "country" && typeof value === "string") {
+        const matchedPrefix = COUNTRY_TO_PREFIX[value];
+        if (matchedPrefix) {
+          updated.phonePrefix = matchedPrefix;
+        }
+      }
+      return updated;
+    });
   };
 
   const toggleDestination = (value: string) => {
@@ -135,17 +176,42 @@ export function TailorMadeForm() {
   };
 
   const validateStep = (step: number): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     switch (step) {
       case 1:
-        return !!(formData.fullName && formData.email && formData.country);
+        if (!formData.fullName || formData.fullName.trim().length < 2) {
+          setError("Please enter your full name (at least 2 characters).");
+          return false;
+        }
+        if (!formData.email || !emailRegex.test(formData.email.trim())) {
+          setError("Please enter a valid email address.");
+          return false;
+        }
+        if (!formData.country) {
+          setError("Please select your country.");
+          return false;
+        }
+        return true;
       case 2:
-        return formData.numAdults >= 1;
+        if (formData.numAdults < 1) {
+          setError("Please select at least 1 adult traveler.");
+          return false;
+        }
+        return true;
       case 3:
-        return !!formData.arrivalDate;
+        if (!formData.arrivalDate) {
+          setError("Please select your preferred arrival date.");
+          return false;
+        }
+        return true;
       case 4:
         return true; // Destinations are optional
       case 5:
-        return !!formData.budget;
+        if (!formData.budget) {
+          setError("Please select your budget level.");
+          return false;
+        }
+        return true;
       case 6:
         return true; // Interests are optional
       case 7:
@@ -166,8 +232,6 @@ export function TailorMadeForm() {
       });
       setCurrentStep(currentStep + 1);
       setError(null);
-    } else if (!validateStep(currentStep)) {
-      setError("Please fill in all required fields before continuing.");
     }
   };
 
@@ -207,6 +271,7 @@ export function TailorMadeForm() {
           relatedTo: "Tailor-Made Safari",
           type: "tailor-made",
           tripType: "Customized",
+          website: honeypotRef.current?.value || "",
           ...tracking,
         }),
       });
@@ -229,6 +294,8 @@ export function TailorMadeForm() {
           numTravelers: formData.numAdults + formData.numChildren,
           relatedItem: selectedDestinations.join(", ") || "Custom Safari",
         });
+        // Clear draft on success
+        try { sessionStorage.removeItem("tailorMadeDraft"); } catch { /* ignore */ }
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");
@@ -495,6 +562,7 @@ export function TailorMadeForm() {
                 <input
                   type="date"
                   value={formData.arrivalDate}
+                  min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => updateFormData("arrivalDate", e.target.value)}
                   className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 />
@@ -773,6 +841,12 @@ export function TailorMadeForm() {
         )}
       </div>
 
+      {/* Honeypot */}
+      <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+        <label htmlFor="website-tailor">Website</label>
+        <input type="text" id="website-tailor" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
+      </div>
+
       {/* Navigation Buttons */}
       <div className="flex justify-between pt-4 border-t border-slate-200">
         <Button
@@ -815,7 +889,9 @@ export function TailorMadeForm() {
       </div>
 
       <p className="text-xs text-slate-500 text-center">
-        We&apos;ll send you a personalized itinerary within 24-48 hours.
+        We&apos;ll send you a personalized itinerary within 24-48 hours. No spam, ever.
+        Your data is protected under our{" "}
+        <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
       </p>
     </div>
   );
