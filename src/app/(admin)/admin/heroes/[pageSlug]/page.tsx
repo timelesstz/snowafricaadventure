@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { getDefaultHeroes } from "@/components/layout/PageHero";
 import { HeroEditorForm } from "./HeroEditorForm";
 
@@ -54,6 +54,9 @@ export default async function EditHeroPage({ params }: Props) {
 
   async function saveHero(formData: FormData) {
     "use server";
+
+    const session = await auth();
+    if (!session) throw new Error("Unauthorized");
 
     const data = {
       pageSlug,

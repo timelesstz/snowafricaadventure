@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -11,7 +12,7 @@ interface Props {
   params: Promise<{ destSlug: string }>;
 }
 
-async function getDestination(slug: string) {
+const getDestination = cache(async function getDestination(slug: string) {
   try {
     const destination = await prisma.destination.findUnique({
       where: { slug },
@@ -27,7 +28,7 @@ async function getDestination(slug: string) {
   } catch {
     return null;
   }
-}
+});
 
 // Placeholder data for development (also used as fallback if DB record has no content)
 const placeholderDestinations: Record<string, {

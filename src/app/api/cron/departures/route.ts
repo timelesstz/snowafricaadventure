@@ -15,8 +15,16 @@ export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
 
-  // Allow bypass in development or if no secret is set
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  // Always require cron secret in production
+  if (!cronSecret) {
+    console.error("CRON_SECRET is not set — refusing to run unprotected cron");
+    return NextResponse.json(
+      { error: "CRON_SECRET not configured" },
+      { status: 500 }
+    );
+  }
+
+  if (authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json(
       { error: "Unauthorized" },
       { status: 401 }

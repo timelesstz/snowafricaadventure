@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -20,8 +21,8 @@ interface PageProps {
   params: Promise<{ safariSlug: string }>;
 }
 
-// Fetch safari from database
-async function getSafari(slug: string) {
+// Fetch safari from database (cached to deduplicate between generateMetadata and page)
+const getSafari = cache(async function getSafari(slug: string) {
   try {
     const safari = await prisma.safariPackage.findUnique({
       where: { slug },
@@ -41,7 +42,7 @@ async function getSafari(slug: string) {
     console.error("[Safari] Failed to fetch safari:", error);
     return null;
   }
-}
+});
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { safariSlug } = await params;

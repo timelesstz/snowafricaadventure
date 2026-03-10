@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
@@ -35,6 +36,9 @@ async function getDestinations() {
 
 async function saveSafari(formData: FormData) {
   "use server";
+
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
 
   const id = formData.get("id") as string | null;
   const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
@@ -141,20 +145,50 @@ async function saveSafari(formData: FormData) {
       data,
     });
 
-    // Update destinations - delete existing and recreate
-    await prisma.safariDestination.deleteMany({
-      where: { safariId: id },
-    });
-
-    if (destinationIds.length > 0) {
-      await prisma.safariDestination.createMany({
-        data: destinationIds.map((destId, index) => ({
-          safariId: id,
-          destinationId: destId,
-          order: index,
-        })),
+    // Update destinations safely using a transaction
+    await prisma.$transaction(async (tx) => {
+      // Get existing destinations
+      const existing = await tx.safariDestination.findMany({
+        where: { safariId: id },
+        select: { id: true, destinationId: true },
       });
-    }
+
+      const existingDestIds = new Set(existing.map((e) => e.destinationId));
+      const newDestIds = new Set(destinationIds);
+
+      // Delete destinations that are no longer selected
+      const toDelete = existing.filter((e) => !newDestIds.has(e.destinationId));
+      if (toDelete.length > 0) {
+        await tx.safariDestination.deleteMany({
+          where: { id: { in: toDelete.map((d) => d.id) } },
+        });
+      }
+
+      // Create new destinations that don't exist yet
+      const toCreate = destinationIds.filter((destId) => !existingDestIds.has(destId));
+      if (toCreate.length > 0) {
+        await tx.safariDestination.createMany({
+          data: toCreate.map((destId, index) => ({
+            safariId: id,
+            destinationId: destId,
+            order: destinationIds.indexOf(destId),
+          })),
+        });
+      }
+
+      // Update order for existing destinations that remain
+      for (const destId of destinationIds) {
+        if (existingDestIds.has(destId)) {
+          const record = existing.find((e) => e.destinationId === destId);
+          if (record) {
+            await tx.safariDestination.update({
+              where: { id: record.id },
+              data: { order: destinationIds.indexOf(destId) },
+            });
+          }
+        }
+      }
+    });
   } else {
     // Create safari
     const newSafari = await prisma.safariPackage.create({
@@ -178,6 +212,9 @@ async function saveSafari(formData: FormData) {
 
 async function deleteSafari(formData: FormData) {
   "use server";
+
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
 
   const id = formData.get("id") as string;
   await prisma.safariPackage.delete({ where: { id } });

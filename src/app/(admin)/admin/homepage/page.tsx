@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Save, Home, Info, BarChart3, Building2, Star } from "lucide-react";
@@ -58,6 +59,9 @@ async function getHomepageSettings() {
 
 async function saveHomepageSettings(formData: FormData) {
   "use server";
+
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
 
   const keys = Object.keys(DEFAULT_SETTINGS);
 

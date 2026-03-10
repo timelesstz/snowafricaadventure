@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
@@ -23,6 +24,9 @@ async function getRoute(id: string) {
 
 async function saveRoute(formData: FormData) {
   "use server";
+
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
 
   const id = formData.get("id") as string | null;
   const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
@@ -144,6 +148,9 @@ async function saveRoute(formData: FormData) {
 
 async function deleteRoute(formData: FormData) {
   "use server";
+
+  const session = await auth();
+  if (!session) throw new Error("Unauthorized");
 
   const id = formData.get("id") as string;
 

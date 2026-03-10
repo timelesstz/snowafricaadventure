@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -21,8 +22,8 @@ interface PageProps {
   params: Promise<{ routeSlug: string }>;
 }
 
-// Fetch route from database
-async function getRoute(slug: string) {
+// Fetch route from database (cached to deduplicate between generateMetadata and page)
+const getRoute = cache(async function getRoute(slug: string) {
   try {
     const route = await prisma.trekkingRoute.findUnique({
       where: { slug },
@@ -32,7 +33,7 @@ async function getRoute(slug: string) {
     console.error("[Route] Failed to fetch route:", error);
     return null;
   }
-}
+});
 
 // Get related routes (excluding current)
 async function getRelatedRoutes(currentSlug: string) {
@@ -63,7 +64,7 @@ async function getUpcomingDepartures(routeId: string) {
     const departures = await prisma.groupDeparture.findMany({
       where: {
         routeId,
-        status: "OPEN",
+        status: { in: ["OPEN", "GUARANTEED", "LIMITED"] },
         startDate: { gte: new Date() },
       },
       take: 4,

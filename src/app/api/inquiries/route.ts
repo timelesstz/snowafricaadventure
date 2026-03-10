@@ -5,51 +5,72 @@ import { sendInquiryReceivedEmails } from "@/lib/email/send";
 import { InquiryEmailData } from "@/lib/email/templates";
 import { InquiryNotifications } from "@/lib/notifications";
 import { extractVisitorData } from "@/lib/visitor-tracking";
+import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
 
-// Validation schema
+// Validation schema with max-length limits to prevent abuse
 const inquirySchema = z.object({
-  fullName: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  phonePrefix: z.string().optional(),
-  nationality: z.string().optional(),
-  country: z.string().optional(),
-  tripType: z.string().optional(),
-  numAdults: z.coerce.number().optional(),
-  numChildren: z.coerce.number().optional(),
-  childrenAges: z.string().optional(),
-  arrivalDate: z.string().optional(),
-  departureDate: z.string().optional(),
+  fullName: z.string().min(2, "Name must be at least 2 characters").max(200),
+  email: z.string().email("Invalid email address").max(320),
+  phone: z.string().max(30).optional(),
+  phonePrefix: z.string().max(10).optional(),
+  nationality: z.string().max(100).optional(),
+  country: z.string().max(100).optional(),
+  tripType: z.string().max(100).optional(),
+  numAdults: z.coerce.number().min(0).max(100).optional(),
+  numChildren: z.coerce.number().min(0).max(50).optional(),
+  childrenAges: z.string().max(200).optional(),
+  arrivalDate: z.string().max(30).optional(),
+  departureDate: z.string().max(30).optional(),
   duration: z.preprocess(
     (val) => {
       if (val === "" || val === undefined || val === null) return undefined;
       const num = Number(val);
       return isNaN(num) ? undefined : num;
     },
-    z.number().optional()
+    z.number().min(0).max(365).optional()
   ),
-  flexibility: z.string().optional(),
-  budget: z.string().optional(),
-  destinations: z.string().optional(),
-  accommodation: z.string().optional(),
-  interests: z.string().optional(),
-  experience: z.string().optional(),
-  additionalInfo: z.string().optional(),
-  relatedTo: z.string().optional(),
-  referralSource: z.string().optional(),
-  type: z.string().default("contact"),
+  flexibility: z.string().max(50).optional(),
+  budget: z.string().max(50).optional(),
+  destinations: z.string().max(1000).optional(),
+  accommodation: z.string().max(200).optional(),
+  interests: z.string().max(1000).optional(),
+  experience: z.string().max(200).optional(),
+  additionalInfo: z.string().max(5000).optional(),
+  relatedTo: z.string().max(500).optional(),
+  referralSource: z.string().max(300).optional(),
+  type: z.string().max(50).default("contact"),
+  // Honeypot field — must be empty (bots fill hidden fields)
+  website: z.string().max(0, "Bot detected").optional().or(z.literal("")),
   // Client-side tracking fields
-  gaClientId: z.string().optional(),
-  utmSource: z.string().optional(),
-  utmMedium: z.string().optional(),
-  utmCampaign: z.string().optional(),
-  referrerUrl: z.string().optional(),
-  landingPage: z.string().optional(),
+  gaClientId: z.string().max(100).optional(),
+  utmSource: z.string().max(200).optional(),
+  utmMedium: z.string().max(200).optional(),
+  utmCampaign: z.string().max(200).optional(),
+  referrerUrl: z.string().max(2000).optional(),
+  landingPage: z.string().max(2000).optional(),
 });
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit by IP
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (isRateLimited(`inquiry:${ip}`, RATE_LIMITS.formSubmission)) {
+      return NextResponse.json(
+        { success: false, message: "Too many submissions. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
+
+    // Honeypot check — reject if the hidden field is filled
+    if (body.website) {
+      // Silently accept but don't process (don't reveal bot detection)
+      return NextResponse.json(
+        { success: true, message: "Inquiry received successfully. We'll be in touch soon!", inquiryId: "ok" },
+        { status: 200 }
+      );
+    }
 
     // Validate input
     const validatedData = inquirySchema.parse(body);

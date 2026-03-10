@@ -28,6 +28,7 @@ export function InquiryForm({
   const [inviteFriends, setInviteFriends] = useState<InviteFriend[]>([]);
   const [showOtherReferral, setShowOtherReferral] = useState(false);
   const formStartTracked = useRef(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   // Track form start on first interaction
   useEffect(() => {
@@ -66,9 +67,10 @@ export function InquiryForm({
       referralSource = `Other: ${data.referralOther}`;
     }
 
-    // Filter out empty invite friends
+    // Filter out empty invite friends and validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const validInvites = inviteFriends.filter(
-      (f) => f.name.trim() && f.email.trim()
+      (f) => f.name.trim() && f.email.trim() && emailRegex.test(f.email.trim())
     );
 
     try {
@@ -83,6 +85,7 @@ export function InquiryForm({
           relatedTo,
           type: tripType || "contact",
           inviteFriends: validInvites.length > 0 ? validInvites : undefined,
+          website: honeypotRef.current?.value || "",
           ...tracking,
         }),
       });
@@ -289,6 +292,7 @@ export function InquiryForm({
                 type="date"
                 id="arrivalDate"
                 name="arrivalDate"
+                min={new Date().toISOString().split("T")[0]}
                 className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
               />
             </div>
@@ -376,6 +380,7 @@ export function InquiryForm({
                 type="date"
                 id="arrivalDate"
                 name="arrivalDate"
+                min={new Date().toISOString().split("T")[0]}
                 className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
               />
             </div>
@@ -443,6 +448,12 @@ export function InquiryForm({
           maxFriends={5}
         />
       )}
+
+      {/* Honeypot — hidden from real users, bots fill it */}
+      <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+        <label htmlFor={`website-${variant}`}>Website</label>
+        <input type="text" id={`website-${variant}`} name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
+      </div>
 
       {/* Submit */}
       <Button

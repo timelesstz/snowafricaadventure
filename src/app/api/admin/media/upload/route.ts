@@ -61,12 +61,16 @@ export async function POST(request: NextRequest) {
     let compressionPct: number | undefined;
     let mimeType = file.type;
 
-    // Process images (except GIFs to preserve animation)
-    if (isImage && compress) {
+    // Always validate image bytes regardless of compress flag (prevents fake MIME type uploads)
+    if (isImage || file.type === "image/gif") {
       const valid = await isValidImage(buffer);
       if (!valid) {
-        return NextResponse.json({ error: "Invalid image file" }, { status: 400 });
+        return NextResponse.json({ error: "Invalid image file — bytes do not match an image format" }, { status: 400 });
       }
+    }
+
+    // Process images (except GIFs to preserve animation)
+    if (isImage && compress) {
 
       const result = await compressImage(buffer, {
         maxWidth: 1920,

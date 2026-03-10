@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -9,7 +10,7 @@ interface Props {
   params: Promise<{ categorySlug: string }>;
 }
 
-async function getCategory(slug: string) {
+const getCategory = cache(async function getCategory(slug: string) {
   try {
     const category = await prisma.category.findUnique({
       where: { slug },
@@ -27,7 +28,7 @@ async function getCategory(slug: string) {
   } catch {
     return null;
   }
-}
+});
 
 // Placeholder categories for development
 const placeholderCategories: Record<

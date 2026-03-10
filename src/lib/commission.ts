@@ -273,11 +273,12 @@ export async function generatePayout(
   periodStart: Date,
   periodEnd: Date
 ) {
-  // Get eligible commissions in the period
+  // Get eligible commissions in the period that haven't been claimed by another payout
   const commissions = await prisma.commission.findMany({
     where: {
       partnerId,
       status: "ELIGIBLE",
+      paymentReference: null,
       createdAt: {
         gte: periodStart,
         lte: periodEnd,
@@ -294,16 +295,28 @@ export async function generatePayout(
     0
   );
 
-  // Create payout record
-  const payout = await prisma.commissionPayout.create({
-    data: {
-      partnerId,
-      periodStart,
-      periodEnd,
-      totalCommissions: commissions.length,
-      totalAmount,
-      status: "PENDING",
-    },
+  const commissionIds = commissions.map((c) => c.id);
+
+  // Create payout record and mark commissions as claimed in a single transaction
+  const payout = await prisma.$transaction(async (tx) => {
+    const newPayout = await tx.commissionPayout.create({
+      data: {
+        partnerId,
+        periodStart,
+        periodEnd,
+        totalCommissions: commissions.length,
+        totalAmount,
+        status: "PENDING",
+      },
+    });
+
+    // Link commissions to this payout via paymentReference to prevent double-counting
+    await tx.commission.updateMany({
+      where: { id: { in: commissionIds } },
+      data: { paymentReference: `payout:${newPayout.id}` },
+    });
+
+    return newPayout;
   });
 
   return payout;

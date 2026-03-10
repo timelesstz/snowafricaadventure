@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,8 +45,8 @@ function calculateReadingTime(content: string): number {
   return Math.max(1, Math.ceil(wordCount / 200));
 }
 
-// Fetch post from database with retry for transient errors
-async function getPost(slug: string) {
+// Fetch post from database with retry for transient errors (cached to deduplicate between generateMetadata and page)
+const getPost = cache(async function getPost(slug: string) {
   if (reservedSlugs.includes(slug)) {
     return null;
   }
@@ -104,7 +105,7 @@ async function getPost(slug: string) {
   }
 
   return null;
-}
+});
 
 // Fetch categories with post counts
 async function getCategories() {

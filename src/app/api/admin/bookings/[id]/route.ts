@@ -251,7 +251,7 @@ export async function PUT(
   }
 }
 
-// DELETE /api/admin/bookings/[id] - Delete a booking
+// DELETE /api/admin/bookings/[id] - Delete a booking (ADMIN+ only)
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -259,6 +259,12 @@ export async function DELETE(
   const session = await auth();
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Require ADMIN role for deletion
+  const roleHierarchy = { SUPER_ADMIN: 4, ADMIN: 3, EDITOR: 2, VIEWER: 1 };
+  if ((roleHierarchy[session.user.role] || 0) < roleHierarchy.ADMIN) {
+    return NextResponse.json({ error: "Insufficient permissions — ADMIN role required" }, { status: 403 });
   }
 
   const { id } = await params;

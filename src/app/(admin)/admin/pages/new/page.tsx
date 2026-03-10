@@ -2,13 +2,16 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { requireRole } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 
 export default async function NewCmsPage() {
   await requireRole("EDITOR");
 
   async function createPage(formData: FormData) {
     "use server";
+
+    const session = await auth();
+    if (!session) throw new Error("Unauthorized");
 
     const title = formData.get("title") as string;
     const slug = (formData.get("slug") as string)
