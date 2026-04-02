@@ -33,8 +33,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-there-snow-in-africa-mountains",
-    metaTitle: "Does Africa Have Mountains with Snow? 8 Peaks with Snow & Ice",
-    metaDescription: "Africa has mountains with snow year-round — from Kilimanjaro's glaciers to Atlas ski resorts. Explore 8 snow-capped peaks across 10 countries.",
+    metaTitle: "Snow in Africa: Yes! 8 Mountains with Year-Round Snow",
+    metaDescription: "Africa has 8 snow-capped mountains — including Kilimanjaro's disappearing glaciers and Atlas ski resorts. See all peaks with photos and maps.",
     excerpt: "Yes, Africa has mountains with snow. Explore 8 snow-capped peaks — from Kilimanjaro's glaciers to the Atlas Mountains ski resorts — across 10 African countries."
   },
   {
@@ -51,8 +51,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-vs-everest",
-    metaTitle: "Mount Kilimanjaro vs Mount Everest: Difficulty, Cost & Which to Climb",
-    metaDescription: "Mount Kilimanjaro vs Mount Everest compared: difficulty, cost ($2K vs $30K+), duration, success rates, and which mountain to climb first. Expert guide from Tanzania.",
+    metaTitle: "Kilimanjaro vs Everest: $2K vs $30K — Which to Climb First",
+    metaDescription: "Kilimanjaro: 65% success rate, no ropes, $2K. Everest: 4% summit rate, 2+ months, $30K+. Side-by-side comparison from a Tanzania-based climbing company.",
     excerpt: "Compare Mount Kilimanjaro vs Mount Everest — difficulty, cost, time, and experience required. Find which mountain suits your adventure goals."
   },
   {
@@ -117,8 +117,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "how-much-to-climb-kilimanjaro",
-    metaTitle: "Kilimanjaro Cost 2026: Complete Price Breakdown & Budget Tips",
-    metaDescription: "Kilimanjaro costs $2,000-$6,000+ depending on route and operator. Full breakdown: park fees, tips, gear, flights. Budget vs luxury options compared.",
+    metaTitle: "Kilimanjaro Cost 2026: Real Prices from $1,800 to $6,000+",
+    metaDescription: "Actual 2026 Kilimanjaro costs: park fees ($1,228), tips ($200+), gear, flights. Budget vs luxury breakdown from a local operator — avoid tourist markups.",
     excerpt: "Get a complete breakdown of Kilimanjaro climbing costs - from budget options to luxury experiences, plus hidden costs you should know about."
   },
   {
@@ -395,8 +395,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "hunting-strategy-of-the-lions",
-    metaTitle: "How Lions Hunt: Strategies, Teamwork & Predator Tactics",
-    metaDescription: "Discover lion hunting techniques: ambush strategies, pride coordination, and success rates. Fascinating insights into Africa's apex predator.",
+    metaTitle: "How Lions Hunt: 6 Tactics That Make Them Deadly",
+    metaDescription: "Lions succeed in only 25% of hunts — yet dominate Africa. Learn 6 coordinated tactics, the role of lionesses, and why they hunt at night.",
     excerpt: "Understand the sophisticated hunting strategies of lions - from coordinated pride attacks to solo ambush techniques and prey selection."
   },
   {
@@ -419,8 +419,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "a-complete-overview-about-aardvark",
-    metaTitle: "Aardvark Guide: Africa's Mysterious Night Creature",
-    metaDescription: "The elusive aardvark: nocturnal habits, termite diet, and unique adaptations. Where to spot Tanzania's strangest mammal on night game drives.",
+    metaTitle: "Aardvark: 15 Surprising Facts About Africa's Strangest Animal",
+    metaDescription: "Most safari-goers never see one. The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species. Where to spot one in Tanzania.",
     excerpt: "Discover the secretive aardvark - Africa's bizarre nocturnal anteater and one of the most sought-after sightings on night safaris."
   },
   {
@@ -449,8 +449,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-lion-hunting-legal-in-africa",
-    metaTitle: "Lion Hunting in Africa: Laws, Ethics & Conservation Impact",
-    metaDescription: "The complex truth about lion hunting in Africa. Legal status by country, conservation arguments, and the future of Africa's iconic predator.",
+    metaTitle: "Is Lion Hunting Legal in Africa? Country-by-Country Laws",
+    metaDescription: "Lion hunting is legal in 6 African countries but banned in 48. Country-by-country breakdown: costs ($35K-$75K), quotas, and the conservation debate.",
     excerpt: "Understanding lion hunting in Africa - the legal framework, ethical debates, and what it means for lion conservation across the continent."
   },
   {
@@ -745,8 +745,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "weather-in-tanzania",
-    metaTitle: "Tanzania Weather Guide: Climate, Seasons & Best Time to Visit",
-    metaDescription: "Tanzania climate by region: coast, highlands, and safari areas. Seasonal patterns, what to pack, and planning around the weather.",
+    metaTitle: "Tanzania Weather by Month: Best & Worst Times to Visit",
+    metaDescription: "Tanzania has 2 dry seasons (Jan-Feb, Jun-Oct) and 2 rainy. Month-by-month breakdown for Serengeti, Zanzibar, Kilimanjaro, and Ngorongoro.",
     excerpt: "Understand Tanzania's diverse climate - from the humid coast to cool highlands and safari country, with tips for packing and planning."
   },
   {

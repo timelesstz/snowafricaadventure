@@ -13,8 +13,9 @@ interface SEOProps {
   noIndex?: boolean;
 }
 
-// Max chars for page title so "title | Snow Africa Adventure" stays ≤65 chars total
-const TITLE_BUDGET = 40;
+// Max chars for page title — allows complete, compelling titles in SERPs
+// 55 + " | Snow Africa Adventure" (25) = 80 chars; Google shows ~55-60 of page part
+const TITLE_BUDGET = 55;
 
 function fitTitle(t: string): string {
   if (t.length <= TITLE_BUDGET) return t;

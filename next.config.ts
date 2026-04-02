@@ -314,6 +314,24 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // WordPress date archive URLs → blog index
+      {
+        source: "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/",
+        destination: "/blog/",
+        permanent: true,
+      },
+      // Old WordPress posts → matching content
+      {
+        source: "/10-reasons-why-you-should-go-for-tanzania-safari-to-see-the-great-migration/",
+        destination: "/great-wildebeest-migration/",
+        permanent: true,
+      },
+      {
+        source: "/how-high-is-kilimanjaro-mountain/",
+        destination: "/mount-kilimanjaro-height/",
+        permanent: true,
+      },
+
       // Common alternate URLs → canonical routes
       {
         source: "/kilimanjaro-trekking/",
