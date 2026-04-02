@@ -9,7 +9,20 @@
       "Bash(taskkill //F //IM \"node.exe\")",
       "Bash(ls -la \"l:/snowafrica/src/app/\\(site\\)/kilimanjaro-join-group-departures/\")",
       "Bash(npx tsc:*)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:climbing-kilimanjaro.com)",
+      "WebFetch(domain:www.tatotz.org)",
+      "WebFetch(domain:www.colemanconcierge.com)",
+      "WebFetch(domain:www.trustpilot.com)",
+      "WebFetch(domain:www.trustindex.io)",
+      "WebFetch(domain:xpatsinternational.com)",
+      "WebFetch(domain:www.yourafricansafari.com)",
+      "WebFetch(domain:www.travelstride.com)",
+      "Bash(wc -l /l/snowafrica/src/app/\\\\\\(site\\\\\\)/best-route-to-climb-kilimanjaro/page.tsx)",
+      "Bash(ls \"l:/snowafrica/src/app/\\(site\\)/\")",
+      "Bash(ls \"l:/snowafrica/src/app/\\(site\\)/kilimanjaro-success-rates\")",
+      "Bash(wc -l \"l:/snowafrica/src/app/\\(site\\)/best-kilimanjaro-tour-operators/page.tsx\")",
+      "Bash(wc -w \"l:/snowafrica/src/app/\\(site\\)/best-kilimanjaro-tour-operators/page.tsx\")"
     ]
   }
 }

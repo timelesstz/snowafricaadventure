@@ -9,7 +9,7 @@ interface BlogContentData {
 const blogContentData: BlogContentData[] = [
   {
     slug: "is-there-snow-in-africa-mountains",
-    content: `<p>Does Africa have mountains with snow? The answer surprises most people: yes, absolutely. From Kilimanjaro's iconic glaciers in Tanzania to the ski slopes of Morocco's Atlas Mountains, Africa is home to multiple snow-capped peaks — and several places where you can actually ski. Here's a complete guide to every African mountain with snow, where to find it, and why you should see it before it disappears.</p>
+    content: `<p>Does it snow in Africa? Yes — and it might surprise you how much. From Kilimanjaro's iconic glaciers in Tanzania to the ski slopes of Morocco's Atlas Mountains, Africa is home to 8 snow-capped peaks across 10 countries — and several places where you can actually ski. Here's a complete guide to every African mountain with snow, where to find it, and why you should see it before it disappears.</p>
 
 <h2>Which Mountains in Africa Have Snow?</h2>
 
@@ -137,6 +137,13 @@ const blogContentData: BlogContentData[] = [
 
 <section itemscope itemtype="https://schema.org/FAQPage">
 <h2>Frequently Asked Questions</h2>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+<h3 itemprop="name">Does it snow in Africa?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+<p itemprop="text">Yes, it snows in Africa. At least 10 African countries experience snowfall, including Tanzania, Kenya, Uganda, Morocco, South Africa, and Lesotho. Three mountains — Kilimanjaro, Mount Kenya, and the Rwenzori Mountains — have permanent glaciers and snow year-round, while the Atlas Mountains and Drakensberg receive heavy seasonal snow with operational ski resorts.</p>
+</div>
+</div>
 
 <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 <h3 itemprop="name">Does Africa have mountains with snow?</h3>

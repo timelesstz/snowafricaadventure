@@ -16,7 +16,7 @@ export const SITE_CONFIG = {
   social: {
     facebook: "https://facebook.com/snowafricaadventure",
     twitter: "https://twitter.com/snowafrica",
-    instagram: "https://instagram.com/snowafricaadventure",
+    instagram: "https://instagram.com/snow_africa_adventures",
     youtube: "https://youtube.com/snowafricaadventure",
     pinterest: "https://pinterest.com/snowafricaadventure",
   },

@@ -33,9 +33,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-there-snow-in-africa-mountains",
-    metaTitle: "Snow in Africa: Yes! 8 Mountains with Year-Round Snow",
-    metaDescription: "Africa has 8 snow-capped mountains — including Kilimanjaro's disappearing glaciers and Atlas ski resorts. See all peaks with photos and maps.",
-    excerpt: "Yes, Africa has mountains with snow. Explore 8 snow-capped peaks — from Kilimanjaro's glaciers to the Atlas Mountains ski resorts — across 10 African countries."
+    metaTitle: "Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow",
+    metaDescription: "Yes, it snows in Africa! From Kilimanjaro's glaciers to Morocco's ski resorts — 8 snow-capped peaks across 10 countries. Photos, maps & best months.",
+    excerpt: "Does it snow in Africa? Yes — 8 mountains across 10 countries have snow and ice year-round, from Kilimanjaro's glaciers to Morocco's ski resorts."
   },
   {
     slug: "best-time-to-climb-mount-kilimanjaro",

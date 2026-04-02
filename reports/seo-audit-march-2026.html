@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snow Africa Adventure — SEO Audit Report | March 2026</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface-2: #1a2236;
+    --surface-3: #243049;
+    --border: #2d3a52;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #f59e0b;
+    --accent-2: #fbbf24;
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.1);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.1);
+    --orange: #f97316;
+    --orange-bg: rgba(249,115,22,0.1);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.1);
+    --purple: #a855f7;
+    --purple-bg: rgba(168,85,247,0.1);
+    --cyan: #06b6d4;
+    --cyan-bg: rgba(6,182,212,0.1);
+    --pink: #ec4899;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1040 40%, #0f2027 100%);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(245,158,11,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(59,130,246,0.04) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite alternate;
+  }
+  @keyframes pulse {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, #e2e8f0 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 30px;
+    position: relative;
+  }
+
+  /* Score Cards Row */
+  .score-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1200px;
+    margin: -30px auto 40px;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .score-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .score-card .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .score-card .value {
+    font-size: 36px;
+    font-weight: 800;
+  }
+  .score-card .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .val-red { color: var(--red); }
+  .val-orange { color: var(--orange); }
+  .val-green { color: var(--green); }
+  .val-blue { color: var(--blue); }
+  .val-accent { color: var(--accent); }
+  .val-purple { color: var(--purple); }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .section-header .tag {
+    margin-left: auto;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .tag-critical { background: var(--red-bg); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .tag-warning { background: var(--orange-bg); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+  .tag-good { background: var(--green-bg); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .tag-info { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  thead th {
+    background: var(--surface-2);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(45,58,82,0.5);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(245,158,11,0.03); }
+
+  /* Status Pills */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pill-red { background: var(--red-bg); color: var(--red); }
+  .pill-green { background: var(--green-bg); color: var(--green); }
+  .pill-orange { background: var(--orange-bg); color: var(--orange); }
+  .pill-blue { background: var(--blue-bg); color: var(--blue); }
+  .pill-purple { background: var(--purple-bg); color: var(--purple); }
+
+  /* Cards Grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Two Column */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* Advantage Box */
+  .advantage-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .advantage-box h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--green);
+  }
+  .advantage-box p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Weakness Box */
+  .weakness-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--red);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .weakness-box h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--red);
+  }
+  .weakness-box p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--blue), var(--purple));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    background: var(--bg);
+  }
+  .timeline-item .week {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .timeline-item h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .timeline-item ul {
+    list-style: none;
+    padding: 0;
+  }
+  .timeline-item ul li {
+    font-size: 14px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+  .timeline-item ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* Competitor Bars */
+  .comp-bar-container {
+    margin-bottom: 16px;
+  }
+  .comp-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .comp-bar-label span:last-child {
+    color: var(--text-dim);
+  }
+  .comp-bar {
+    height: 28px;
+    background: var(--surface-3);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .comp-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    transition: width 1s ease;
+  }
+
+  /* Donut chart */
+  .donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+  .donut-svg { flex-shrink: 0; }
+  .donut-legend { flex: 1; }
+  .donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 14px;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Alert Box */
+  .alert {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .alert-critical {
+    background: var(--red-bg);
+    border: 1px solid rgba(239,68,68,0.3);
+  }
+  .alert-warning {
+    background: var(--orange-bg);
+    border: 1px solid rgba(249,115,22,0.3);
+  }
+  .alert-success {
+    background: var(--green-bg);
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .alert-icon { font-size: 24px; flex-shrink: 0; }
+  .alert h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .alert p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  .report-footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  /* Nav Tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 32px;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border: none;
+    background: none;
+  }
+  .nav-tab:hover { color: var(--text); background: var(--surface-2); }
+  .nav-tab.active { color: var(--accent); background: var(--surface-2); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 20px 30px; }
+    .hero h1 { font-size: 28px; }
+    .container { padding: 0 20px; }
+    .score-row { grid-template-columns: repeat(2, 1fr); padding: 0 20px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .nav-tabs { flex-wrap: nowrap; overflow-x: auto; }
+    .donut-wrap { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📊 Comprehensive SEO Audit</div>
+  <h1>Snow Africa Adventure</h1>
+  <p>Keyword Rankings, Competitor Analysis, Off-Page SEO, Local SEO & International Strategy</p>
+  <div style="font-size:13px;color:var(--text-dim);position:relative;">March 2026 &middot; snowafricaadventure.com</div>
+</div>
+
+<!-- SCORE CARDS -->
+<div class="score-row">
+  <div class="score-card">
+    <div class="label">Keywords in Top 10</div>
+    <div class="value val-red">1 / 30</div>
+    <div class="subtitle">Brand only</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Platform Presence</div>
+    <div class="value val-orange">3 / 12</div>
+    <div class="subtitle">Major aggregators missing</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Google Business</div>
+    <div class="value val-red">N/A</div>
+    <div class="subtitle">Not found</div>
+  </div>
+  <div class="score-card">
+    <div class="label">Review Score</div>
+    <div class="value val-green">4.9★</div>
+    <div class="subtitle">115+ reviews (TripAdvisor)</div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<div class="container">
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('rankings')">Keyword Rankings</button>
+    <button class="nav-tab" onclick="showTab('competitor')">Competitor X-Ray</button>
+    <button class="nav-tab" onclick="showTab('offpage')">Off-Page SEO</button>
+    <button class="nav-tab" onclick="showTab('local')">Local SEO</button>
+    <button class="nav-tab" onclick="showTab('international')">International</button>
+    <button class="nav-tab" onclick="showTab('action')">Action Plan</button>
+  </div>
+
+  <!-- ===================== TAB: RANKINGS ===================== -->
+  <div id="rankings" class="tab-content active">
+
+    <div class="alert alert-critical">
+      <div class="alert-icon">🚨</div>
+      <div>
+        <h3>Zero Non-Brand Visibility</h3>
+        <p>Of 30 high-value keywords checked, Snow Africa ranks in the top 10 for only 1 — the brand name. The site is invisible for all commercial and informational keywords where potential customers are searching.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--green-bg);color:var(--green);">✓</div>
+        <h2>Top 10 Rankings</h2>
+        <span class="tag tag-good">1 Keyword</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Keyword</th><th>Position</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>snow africa adventure</strong></td>
+            <td><span class="pill pill-green">#1</span></td>
+            <td>Brand dominates — multiple site pages + TripAdvisor in top 10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--red-bg);color:var(--red);">✗</div>
+        <h2>Kilimanjaro Keywords — All Outside Top 10</h2>
+        <span class="tag tag-critical">0 / 18</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Keyword</th><th>Position</th><th>Dominant Competitor</th><th>Featured Snippet?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>kilimanjaro trekking</td><td><span class="pill pill-red">Not ranked</span></td><td>kilimanjarotrekking.com</td><td>Knowledge panel</td></tr>
+          <tr><td>climb kilimanjaro</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — success rates</td></tr>
+          <tr><td>kilimanjaro routes</td><td><span class="pill pill-red">Not ranked</span></td><td>mountkilimanjaroguide.com</td><td>Route comparison box</td></tr>
+          <tr><td>kilimanjaro cost</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — cost ranges</td></tr>
+          <tr><td>kilimanjaro packing list</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — gear list</td></tr>
+          <tr><td>kilimanjaro success rate</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — percentages</td></tr>
+          <tr><td>kilimanjaro difficulty</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — overview</td></tr>
+          <tr><td>best time to climb kilimanjaro</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — month ranges</td></tr>
+          <tr><td>kilimanjaro lemosho route</td><td><span class="pill pill-red">Not ranked</span></td><td>lemosho.com</td><td>Success rate data</td></tr>
+          <tr><td>kilimanjaro machame route</td><td><span class="pill pill-red">Not ranked</span></td><td>machame.com / AllTrails</td><td>Trail stats</td></tr>
+          <tr><td>kilimanjaro marangu route</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Hut info</td></tr>
+          <tr><td>kilimanjaro northern circuit</td><td><span class="pill pill-red">Not ranked</span></td><td>kilimanjaro.company</td><td>No</td></tr>
+          <tr><td>kilimanjaro rongai route</td><td><span class="pill pill-red">Not ranked</span></td><td>tanzaniainsideandsafari.com</td><td>No</td></tr>
+          <tr><td>best kilimanjaro tour operator</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Listicle results</td></tr>
+          <tr><td>kilimanjaro group departures</td><td><span class="pill pill-red">Not ranked</span></td><td>altezzatravel.com</td><td>No</td></tr>
+          <tr><td>safari and kilimanjaro package</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>No</td></tr>
+          <tr><td>mount meru trek</td><td><span class="pill pill-red">Not ranked</span></td><td>climbing-kilimanjaro.com</td><td>Yes — trek overview</td></tr>
+          <tr><td>kilimanjaro training plan</td><td><span class="pill pill-red">Not ranked</span></td><td>—</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--red-bg);color:var(--red);">✗</div>
+        <h2>Safari & Destination Keywords — All Outside Top 10</h2>
+        <span class="tag tag-critical">0 / 12</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Keyword</th><th>Position</th><th>Dominant Competitor</th><th>Featured Snippet?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>tanzania safari packages</td><td><span class="pill pill-red">Not ranked</span></td><td>safaribookings.com</td><td>Pricing snippets</td></tr>
+          <tr><td>tanzania safari tours</td><td><span class="pill pill-red">Not ranked</span></td><td>safaribookings.com</td><td>Aggregator results</td></tr>
+          <tr><td>serengeti safari</td><td><span class="pill pill-red">Not ranked</span></td><td>Four Seasons / Serengeti.com</td><td>Mixed intent</td></tr>
+          <tr><td>ngorongoro crater safari</td><td><span class="pill pill-red">Not ranked</span></td><td>tanzaniaodyssey.com</td><td>Travel guide</td></tr>
+          <tr><td>zanzibar tours</td><td><span class="pill pill-red">Not ranked</span></td><td>viator.com</td><td>Price snippets</td></tr>
+          <tr><td>tanzania day trips</td><td><span class="pill pill-red">Not ranked</span></td><td>viator.com</td><td>Price snippets</td></tr>
+          <tr><td>arusha day trips</td><td><span class="pill pill-red">Not ranked</span></td><td>tripadvisor.com</td><td>Top activities</td></tr>
+          <tr><td>tarangire national park safari</td><td><span class="pill pill-red">Not ranked</span></td><td>tarangiretanzania.com</td><td>Knowledge panel</td></tr>
+          <tr><td>lake manyara safari</td><td><span class="pill pill-red">Not ranked</span></td><td>lakemanyara.net</td><td>Park overview</td></tr>
+          <tr><td>budget safari tanzania</td><td><span class="pill pill-red">Not ranked</span></td><td>budget-safari-tanzania.com</td><td>Pricing info</td></tr>
+          <tr><td>luxury safari tanzania</td><td><span class="pill pill-red">Not ranked</span></td><td>go2africa.com</td><td>No</td></tr>
+          <tr><td>tanzania honeymoon safari</td><td><span class="pill pill-red">Not ranked</span></td><td>go2africa.com</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Who Dominates -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--purple-bg);color:var(--purple);">👑</div>
+        <h2>Who Dominates Your Keywords</h2>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:30px;">
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>climbing-kilimanjaro.com</strong></span><span>8 keywords</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:80%;background:linear-gradient(90deg,var(--red),#dc2626);">8 / 10</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>safaribookings.com</strong></span><span>5 keywords</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:50%;background:linear-gradient(90deg,var(--orange),#ea580c);">5 / 10</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>iantaylortrekking.com</strong></span><span>5 keywords</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:50%;background:linear-gradient(90deg,var(--blue),#2563eb);">5 / 10</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>altezzatravel.com</strong></span><span>4 keywords</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:40%;background:linear-gradient(90deg,var(--purple),#7c3aed);">4 / 10</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>viator.com / tripadvisor.com</strong></span><span>3 keywords</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:30%;background:linear-gradient(90deg,var(--cyan),#0891b2);">3 / 10</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>go2africa.com</strong></span><span>2 keywords</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:20%;background:linear-gradient(90deg,var(--green),#16a34a);">2 / 10</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Root Cause -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--orange-bg);color:var(--orange);">🔍</div>
+        <h2>Root Cause Analysis</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <h3>🔗 No Backlinks</h3>
+          <p>Competitors like climbing-kilimanjaro.com have 17 years of accumulated backlinks. Snow Africa has minimal off-page authority to compete on any keyword.</p>
+        </div>
+        <div class="card">
+          <h3>🏢 Aggregators Block You</h3>
+          <p>SafariBookings, Viator, and TripAdvisor absorb most safari clicks. You need to be ON these platforms, not just competing against them organically.</p>
+        </div>
+        <div class="card">
+          <h3>📊 No Featured Snippets</h3>
+          <p>8 of 15 Kilimanjaro keywords show featured snippets. Snow Africa's content isn't structured to capture them despite having the information.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: COMPETITOR ===================== -->
+  <div id="competitor" class="tab-content">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--red-bg);color:var(--red);">⚔️</div>
+        <h2>Competitive Threat Ranking</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Competitor</th><th>Threat</th><th>Primary Advantage</th><th>Primary Vulnerability</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Altezza Travel</strong></td>
+            <td><span class="pill pill-red">HIGHEST</span></td>
+            <td>4,500+ climbers/yr, 2,358 reviews, B Corp, World Travel Awards</td>
+            <td>Premium pricing, corporate feel, Moshi-based</td>
+          </tr>
+          <tr>
+            <td><strong>climbing-kilimanjaro.com</strong></td>
+            <td><span class="pill pill-red">HIGH</span></td>
+            <td>Exact-match domain, 80-120+ pages, 646 reviews</td>
+            <td>Anonymous ownership, inflated claims, no verifiable licenses</td>
+          </tr>
+          <tr>
+            <td><strong>Ultimate Kilimanjaro</strong></td>
+            <td><span class="pill pill-orange">MEDIUM</span></td>
+            <td>US market reach, 15,000+ lifetime clients, celebrity endorsements</td>
+            <td>US-based markup, no local authenticity</td>
+          </tr>
+          <tr>
+            <td><strong>Ian Taylor Trekking</strong></td>
+            <td><span class="pill pill-blue">LOW</span></td>
+            <td>Named founder, multi-destination portfolio</td>
+            <td>Not Kilimanjaro-focused, US-based, premium pricing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- #1 Enemy Deep Dive -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--red-bg);color:var(--red);">🎯</div>
+        <h2>Enemy #1: climbing-kilimanjaro.com</h2>
+        <span class="tag tag-critical">Ranks for 8+ of your keywords</span>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3 style="color:var(--red);margin-bottom:12px;font-size:15px;">Their Strengths</h3>
+          <div class="weakness-box">
+            <h3>Exact-Match Domain</h3>
+            <p>"climbing-kilimanjaro.com" IS the keyword. Massive inherent SEO advantage for every Kilimanjaro query.</p>
+          </div>
+          <div class="weakness-box">
+            <h3>Content Volume</h3>
+            <p>80-120+ indexed pages with 40-70 internal links per page. Dense topical cluster that dominates information space.</p>
+          </div>
+          <div class="weakness-box">
+            <h3>Review Volume</h3>
+            <p>646 total reviews across TripAdvisor (415), Google (207), Facebook (14). Social proof at scale.</p>
+          </div>
+          <div class="weakness-box">
+            <h3>Listicle Presence</h3>
+            <p>Featured in multiple "Best Kilimanjaro Operator" roundup articles on travel blogs — editorial backlinks.</p>
+          </div>
+        </div>
+        <div>
+          <h3 style="color:var(--green);margin-bottom:12px;font-size:15px;">Their Weaknesses You Can Exploit</h3>
+          <div class="advantage-box">
+            <h3>Anonymous Ownership</h3>
+            <p>No named founder, no team bios, no photos. Possibly UK-owned (KILIMANJARO CLIMBING COMPANY LTD owned by Simon Ashton, Ainsdale, UK). No TATO license displayed.</p>
+          </div>
+          <div class="advantage-box">
+            <h3>Inflated Success Claims</h3>
+            <p>Claims 98.9% success rate — industry average is 60-80%. Even the best operators rarely exceed 95% verifiably. No methodology cited.</p>
+          </div>
+          <div class="advantage-box">
+            <h3>Affiliate Monetization</h3>
+            <p>Packing list page full of Amazon affiliate links. Reduces trust as an "impartial resource." Your version can be pure value.</p>
+          </div>
+          <div class="advantage-box">
+            <h3>Kilimanjaro-Only</h3>
+            <p>Cannot serve safari + Zanzibar combos. 70%+ of climbers also book a safari — they lose these customers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Strategic Advantages -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--green-bg);color:var(--green);">💎</div>
+        <h2>Snow Africa's 3 Strategic Advantages</h2>
+      </div>
+
+      <div class="advantage-box" style="border-left-color:var(--accent);">
+        <h3 style="color:var(--accent);">1. Authentic Local Operator Credibility</h3>
+        <p>Emmanuel Moshi — named founder-guide, based in Arusha. TATO/KPAP/KINAPA verified. In a scam-ridden industry, <strong>verifiable local authenticity is the #1 trust converter</strong>. Competitors literally cannot replicate this — climbing-kilimanjaro.com hides behind corporate anonymity.</p>
+      </div>
+      <div class="advantage-box" style="border-left-color:var(--blue);">
+        <h3 style="color:var(--blue);">2. Full Tanzania Package</h3>
+        <p>Kilimanjaro + safaris + Zanzibar + day trips — the complete journey. <strong>70%+ of Kilimanjaro climbers also book a safari or beach extension.</strong> Snow Africa captures entire customer lifetime value. Target "Kilimanjaro and safari package" keywords that single-mountain operators can't compete for.</p>
+      </div>
+      <div class="advantage-box" style="border-left-color:var(--purple);">
+        <h3 style="color:var(--purple);">3. Perfect Review Quality</h3>
+        <p>5.0/5 SafariBookings, 4.9/5 TripAdvisor, <strong>zero negative reviews</strong>. Competitor climbing-kilimanjaro.com has 3 one-star reviews and equipment complaints. For $2,000-$5,000 purchases, review quality matters more than quantity.</p>
+      </div>
+    </div>
+
+    <!-- Review Comparison -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--cyan-bg);color:var(--cyan);">⭐</div>
+        <h2>Review Comparison</h2>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:30px;">
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span>Altezza Travel</span><span>2,358 reviews &middot; 5.0★</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:100%;background:linear-gradient(90deg,#dc2626,#ef4444);">2,358</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span>climbing-kilimanjaro.com</span><span>646 reviews &middot; mixed</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:27%;background:linear-gradient(90deg,var(--orange),#ea580c);">646</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span>Good Earth Tours</span><span>563 reviews &middot; 5.0★</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:24%;background:linear-gradient(90deg,var(--blue),#2563eb);">563</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span>Ultimate Kilimanjaro</span><span>498 reviews &middot; 4.9★</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:21%;background:linear-gradient(90deg,var(--purple),#7c3aed);">498</div></div>
+        </div>
+        <div class="comp-bar-container">
+          <div class="comp-bar-label"><span><strong>Snow Africa Adventure</strong></span><span>115 reviews &middot; 4.9★</span></div>
+          <div class="comp-bar"><div class="comp-bar-fill" style="width:5%;background:linear-gradient(90deg,var(--accent),#d97706);">115</div></div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-dim);text-align:center;margin-top:8px;">You have the quality — now you need the volume. Target: 300+ reviews within 12 months.</p>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: OFF-PAGE ===================== -->
+  <div id="offpage" class="tab-content">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--red-bg);color:var(--red);">🔗</div>
+        <h2>Aggregator Platform Presence</h2>
+        <span class="tag tag-critical">3 of 12 platforms active</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>Platform</th><th>Status</th><th>Reviews</th><th>Tours Listed</th><th>Action Required</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>TripAdvisor</strong></td>
+            <td><span class="pill pill-green">Listed</span></td>
+            <td>115+ &middot; 4.9★</td>
+            <td>Yes</td>
+            <td>Grow reviews aggressively — target 200+</td>
+          </tr>
+          <tr>
+            <td><strong>SafariBookings</strong></td>
+            <td><span class="pill pill-orange">Partial</span></td>
+            <td>75 &middot; 5.0★</td>
+            <td style="color:var(--red);font-weight:700;">0 TOURS</td>
+            <td style="color:var(--red);font-weight:700;">List 5-8 tours NOW — 75 reviews but no bookable products!</td>
+          </tr>
+          <tr>
+            <td><strong>Facebook</strong></td>
+            <td><span class="pill pill-green">Listed</span></td>
+            <td>1,525 likes</td>
+            <td>—</td>
+            <td>Grow audience with paid + organic</td>
+          </tr>
+          <tr>
+            <td><strong>Instagram</strong></td>
+            <td><span class="pill pill-green">Listed</span></td>
+            <td>@snow_africa_adventures</td>
+            <td>—</td>
+            <td>Fix handle mismatch on website</td>
+          </tr>
+          <tr style="background:var(--red-bg);">
+            <td><strong>Google Business</strong></td>
+            <td><span class="pill pill-red">MISSING</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td style="font-weight:700;">Create & verify immediately</td>
+          </tr>
+          <tr style="background:var(--red-bg);">
+            <td><strong>Viator</strong></td>
+            <td><span class="pill pill-red">MISSING</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>Register as supplier — day trips first</td>
+          </tr>
+          <tr style="background:var(--red-bg);">
+            <td><strong>GetYourGuide</strong></td>
+            <td><span class="pill pill-red">MISSING</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>Register — strong European audience</td>
+          </tr>
+          <tr style="background:var(--red-bg);">
+            <td><strong>TourRadar</strong></td>
+            <td><span class="pill pill-red">MISSING</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>Register — adventure travel marketplace</td>
+          </tr>
+          <tr style="background:var(--red-bg);">
+            <td><strong>Trustpilot</strong></td>
+            <td><span class="pill pill-red">MISSING</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>Claim profile — European trust signal</td>
+          </tr>
+          <tr>
+            <td><strong>Travelstride</strong></td>
+            <td><span class="pill pill-orange">Dead</span></td>
+            <td>0 reviews</td>
+            <td>0 trips</td>
+            <td>Populate or remove</td>
+          </tr>
+          <tr>
+            <td><strong>YourAfricanSafari</strong></td>
+            <td><span class="pill pill-green">Listed</span></td>
+            <td>6 &middot; 5.0★</td>
+            <td>21 tours</td>
+            <td>Keep updated</td>
+          </tr>
+          <tr>
+            <td><strong>Bookmundi</strong></td>
+            <td><span class="pill pill-orange">Partial</span></td>
+            <td>—</td>
+            <td>Unconfirmed</td>
+            <td>Verify tours are bookable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Donut Chart: Platform Distribution -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--orange-bg);color:var(--orange);">📊</div>
+        <h2>Platform Coverage vs Competitors</h2>
+      </div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" width="180" height="180" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="var(--surface-3)" stroke-width="20"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="var(--red)" stroke-width="20"
+            stroke-dasharray="110 330" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+          <text x="90" y="85" text-anchor="middle" fill="var(--text)" font-size="28" font-weight="800">25%</text>
+          <text x="90" y="105" text-anchor="middle" fill="var(--text-dim)" font-size="12">coverage</text>
+        </svg>
+        <div class="donut-legend">
+          <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">Snow Africa is present on only 3 of 12 major travel platforms. Competitors like Altezza Travel are on 8+.</p>
+          <div class="donut-legend-item"><div class="legend-dot" style="background:var(--green);"></div> Active (TripAdvisor, Facebook, Instagram)</div>
+          <div class="donut-legend-item"><div class="legend-dot" style="background:var(--orange);"></div> Partial (SafariBookings — no tours, Travelstride — dead)</div>
+          <div class="donut-legend-item"><div class="legend-dot" style="background:var(--red);"></div> Missing (GBP, Viator, GetYourGuide, TourRadar, Trustpilot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link Building Strategy -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--blue-bg);color:var(--blue);">🏗️</div>
+        <h2>Off-Page Strategy</h2>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card" style="border-top:3px solid var(--red);">
+          <h3>🚨 Week 1-2: Foundations</h3>
+          <p><strong>1.</strong> Create Google Business Profile<br>
+          <strong>2.</strong> List tours on SafariBookings<br>
+          <strong>3.</strong> Claim Trustpilot profile<br>
+          <strong>4.</strong> Fix NAP consistency across all citations</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--orange);">
+          <h3>📋 Month 1-3: Distribution</h3>
+          <p><strong>5.</strong> Register on Viator, TourRadar, GetYourGuide<br>
+          <strong>6.</strong> Pitch to "Best Operator" listicle authors<br>
+          <strong>7.</strong> Guest post on 2 travel blogs/month<br>
+          <strong>8.</strong> Weekly HARO/Connectively expert pitches</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--blue);">
+          <h3>🔗 Month 3-6: Authority</h3>
+          <p><strong>9.</strong> Create 3 linkable assets (statistics, data pages)<br>
+          <strong>10.</strong> Build Emmanuel Moshi founder content<br>
+          <strong>11.</strong> YouTube channel with summit videos<br>
+          <strong>12.</strong> Target 300+ total reviews across platforms</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAP Consistency -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--orange-bg);color:var(--orange);">📍</div>
+        <h2>NAP Consistency Issues</h2>
+        <span class="tag tag-warning">6 Issues Found</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Details</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pill pill-orange">Name</span></td>
+            <td>"Snow Africa Adventure" vs "Snow Africa Adventures" vs "Snow Africa Adventures Limited"</td>
+            <td>Standardize to <strong>"Snow Africa Adventures"</strong> everywhere</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-orange">Year</span></td>
+            <td>SafariBookings says "2008", website says "since 2010"</td>
+            <td>Pick one and make consistent</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-red">Instagram</span></td>
+            <td>Website links to <code>@snowafricaadventure</code>, actual handle is <code>@snow_africa_adventures</code></td>
+            <td>Fix in <code>src/lib/constants.ts</code></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-red">Location</span></td>
+            <td>RocketReach shows "Moshi" instead of "Arusha"</td>
+            <td>Contact RocketReach to correct</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-orange">URL</span></td>
+            <td>Some platforms use <code>http://www.</code> instead of <code>https://</code></td>
+            <td>Update to HTTPS, no www</td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-orange">Phone</span></td>
+            <td>Format inconsistent: with/without spaces</td>
+            <td>Standardize to <code>+255 766 657 854</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: LOCAL SEO ===================== -->
+  <div id="local" class="tab-content">
+
+    <div class="alert alert-critical">
+      <div class="alert-icon">🚨</div>
+      <div>
+        <h3>Google Business Profile Not Found</h3>
+        <p>This is the single biggest local SEO problem. Every competitor has an active GBP. Snow Africa is invisible on Google Maps. Customers searching "kilimanjaro tour operator arusha" will never find you.</p>
+      </div>
+    </div>
+
+    <!-- GBP Competitor Comparison -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--red-bg);color:var(--red);">📍</div>
+        <h2>Google Business Profile — Competitor Comparison</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Metric</th><th style="color:var(--accent);">Snow Africa</th><th>Altezza Travel</th><th>Ultimate Kilimanjaro</th><th>Good Earth Tours</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Google Maps / GBP</td>
+            <td style="color:var(--red);font-weight:700;">NOT FOUND</td>
+            <td><span class="pill pill-green">Active</span></td>
+            <td><span class="pill pill-green">Active</span></td>
+            <td><span class="pill pill-green">Active</span></td>
+          </tr>
+          <tr>
+            <td>Google Reviews</td>
+            <td style="color:var(--red);">0</td>
+            <td>207+</td>
+            <td>Active</td>
+            <td>Active</td>
+          </tr>
+          <tr>
+            <td>TripAdvisor Reviews</td>
+            <td>115+ &middot; 4.9★</td>
+            <td style="font-weight:700;">2,100+ &middot; 5.0★</td>
+            <td>460+ &middot; ~5.0★</td>
+            <td>507 &middot; ~5.0★</td>
+          </tr>
+          <tr>
+            <td>SafariBookings Reviews</td>
+            <td>75 &middot; 5.0★</td>
+            <td>84 &middot; 5.0★</td>
+            <td>N/A</td>
+            <td>48</td>
+          </tr>
+          <tr>
+            <td>Trustpilot</td>
+            <td style="color:var(--red);">Missing</td>
+            <td>132 reviews</td>
+            <td>N/A</td>
+            <td>56 reviews</td>
+          </tr>
+          <tr>
+            <td>TripAdvisor Awards</td>
+            <td style="color:var(--red);">None</td>
+            <td>Travelers' Choice 2025</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>"Best Operator" Listicles</td>
+            <td style="color:var(--red);">Not featured</td>
+            <td>Multiple</td>
+            <td>Multiple</td>
+            <td>Some</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Local Keywords -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--orange-bg);color:var(--orange);">🔍</div>
+        <h2>Local Keyword Visibility</h2>
+        <span class="tag tag-critical">0 / 5 ranking</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Local Keyword</th><th>Snow Africa Position</th><th>Who Ranks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>kilimanjaro tour operator arusha</td><td><span class="pill pill-red">Not ranking</span></td><td>climbing-kilimanjaro.com, Altezza, Kiliwarrior</td></tr>
+          <tr><td>safari company arusha tanzania</td><td><span class="pill pill-red">Not ranking</span></td><td>Eddy Tours, Suricata Safaris, Safari Source</td></tr>
+          <tr><td>best tour operator arusha</td><td><span class="pill pill-red">Not ranking</span></td><td>Same competitors</td></tr>
+          <tr><td>climbing kilimanjaro tour operator</td><td><span class="pill pill-red">Not ranking</span></td><td>climbing-kilimanjaro.com, Thomson, Pristine Trails</td></tr>
+          <tr><td>arusha day trips</td><td><span class="pill pill-red">Not ranking</span></td><td>TripAdvisor, arushatrips.com, Viator</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GBP Setup Checklist -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--green-bg);color:var(--green);">✅</div>
+        <h2>Google Business Profile Setup Checklist</h2>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <h4 style="color:var(--accent);margin-bottom:12px;font-size:14px;">Profile Setup</h4>
+            <ul style="list-style:none;padding:0;">
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Create profile at business.google.com</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Verify via postcard/phone/video</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Name: "Snow Africa Adventures"</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Category: "Tour Operator" (primary)</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Secondary: "Safari Park", "Mountain Guide Service"</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Address: MEC House, Plot 161, Mianzini, Arusha</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Phone: +255 766 657 854</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color:var(--accent);margin-bottom:12px;font-size:14px;">Optimization</h4>
+            <ul style="list-style:none;padding:0;">
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Upload 50+ high-quality photos</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Write keyword-rich description</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Add all services as products</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Set business hours</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Add website URL</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Request reviews from past clients</li>
+              <li style="padding:6px 0;font-size:14px;color:var(--text-muted);">☐ Start weekly GBP posts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GBP Post Ideas -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--blue-bg);color:var(--blue);">📝</div>
+        <h2>10 GBP Post Ideas</h2>
+      </div>
+      <div class="cards-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="card"><h3>🏔️ Summit Success!</h3><p>Share a recent summit photo with date, route, and success rate. CTA: Book your group climb.</p></div>
+        <div class="card"><h3>👥 Porter Welfare</h3><p>Highlight KPAP membership and ethical porter treatment. Differentiator for conscious travelers.</p></div>
+        <div class="card"><h3>📅 Best Climbing Season</h3><p>Seasonal post for June-October peak. Link to /best-time-to-climb-kilimanjaro/.</p></div>
+        <div class="card"><h3>💰 Safari Offer</h3><p>"5-Day Serengeti & Ngorongoro from $X" — Use GBP Offer post type with specific pricing.</p></div>
+        <div class="card"><h3>🧑‍🤝‍🧑 Meet Our Guide</h3><p>Feature a senior guide with 200+ summits. Personal story builds E-E-A-T trust.</p></div>
+        <div class="card"><h3>🦁 Migration Alert</h3><p>Timely wildlife update during wildebeest crossing (July-October). Creates urgency.</p></div>
+        <div class="card"><h3>🎒 Free Packing Checklist</h3><p>Useful content driving website clicks. Link to gear guide blog post.</p></div>
+        <div class="card"><h3>📆 New Departure Dates</h3><p>Announce upcoming group climbing dates. Link to /kilimanjaro-join-group-departures/.</p></div>
+        <div class="card"><h3>☕ Arusha Day Trip</h3><p>Promote coffee farm tour + waterfall hike for travelers already in Arusha.</p></div>
+        <div class="card"><h3>⭐ Review Spotlight</h3><p>Repost a compelling TripAdvisor review with the guest's summit photo.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: INTERNATIONAL ===================== -->
+  <div id="international" class="tab-content">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--blue-bg);color:var(--blue);">🌍</div>
+        <h2>International SEO Assessment</h2>
+      </div>
+
+      <div class="alert alert-warning">
+        <div class="alert-icon">⚠️</div>
+        <div>
+          <h3>Don't Go Multi-Language Yet</h3>
+          <p>You're not ranking for English keywords. Multi-language multiplies maintenance burden. Fix English rankings first, then expand. Estimated timeline: 6+ months before multi-language makes sense.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;">
+          <h3 style="margin-bottom:16px;font-size:16px;">Current State</h3>
+          <ul style="list-style:none;padding:0;">
+            <li style="padding:8px 0;font-size:14px;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);">✗</span> No hreflang tags
+            </li>
+            <li style="padding:8px 0;font-size:14px;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);">✗</span> No multi-language support
+            </li>
+            <li style="padding:8px 0;font-size:14px;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--red);">✗</span> No geo-targeted content
+            </li>
+            <li style="padding:8px 0;font-size:14px;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--green);">✓</span> English content covers primary markets
+            </li>
+            <li style="padding:8px 0;font-size:14px;color:var(--text-muted);display:flex;gap:8px;">
+              <span style="color:var(--green);">✓</span> USD pricing displayed
+            </li>
+          </ul>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;">
+          <h3 style="margin-bottom:16px;font-size:16px;">Target Markets by Priority</h3>
+          <div class="comp-bar-container">
+            <div class="comp-bar-label"><span>🇺🇸 🇬🇧 US / UK</span><span>Primary</span></div>
+            <div class="comp-bar"><div class="comp-bar-fill" style="width:90%;background:var(--green);">Highest volume</div></div>
+          </div>
+          <div class="comp-bar-container">
+            <div class="comp-bar-label"><span>🇩🇪 Germany</span><span>High potential</span></div>
+            <div class="comp-bar"><div class="comp-bar-fill" style="width:70%;background:var(--blue);">Top Kili market</div></div>
+          </div>
+          <div class="comp-bar-container">
+            <div class="comp-bar-label"><span>🇫🇷 France</span><span>Growing</span></div>
+            <div class="comp-bar"><div class="comp-bar-fill" style="width:45%;background:var(--purple);">Safari market</div></div>
+          </div>
+          <div class="comp-bar-container">
+            <div class="comp-bar-label"><span>🇦🇺 🇨🇦 Aus / Canada</span><span>Secondary</span></div>
+            <div class="comp-bar"><div class="comp-bar-fill" style="width:35%;background:var(--orange);">Adventure travel</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What To Do Now -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--green-bg);color:var(--green);">📋</div>
+        <h2>Phased International Strategy</h2>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card" style="border-top:3px solid var(--green);">
+          <h3>Phase 1: Now</h3>
+          <p style="font-weight:600;color:var(--green);margin-bottom:8px;">Geo-targeted English content</p>
+          <p>Create pages like "Climb Kilimanjaro from USA", "Tanzania Safari for UK Travelers". Capture long-tail international intent without translation overhead. Include visa info, flight options, currency tips.</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--blue);">
+          <h3>Phase 2: Month 6+</h3>
+          <p style="font-weight:600;color:var(--blue);margin-bottom:8px;">German subdirectory /de/</p>
+          <p>Germans are among the top Kilimanjaro climbers. Translate key conversion pages first (routes, pricing, booking). Use subdirectory not subdomain. Implement hreflang properly.</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--purple);">
+          <h3>Phase 3: Month 12+</h3>
+          <p style="font-weight:600;color:var(--purple);margin-bottom:8px;">French subdirectory /fr/</p>
+          <p>Growing safari market. Translate key pages. Consider French-language Google Ads. Target French travel forums and blogs for backlinks.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Wins Without Translation -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--accent);background:rgba(245,158,11,0.1);color:var(--accent);">💡</div>
+        <h2>Quick Wins Without Translation</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Page to Create</th><th>Target Keyword</th><th>Content Focus</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>/climb-kilimanjaro-from-usa/</td><td>climb kilimanjaro from USA</td><td>Flights from US cities, visa for Americans, USD pricing, timezone-friendly booking</td></tr>
+          <tr><td>/tanzania-safari-from-uk/</td><td>tanzania safari from UK</td><td>Flights from London, GBP estimates, UK travel insurance, no visa required</td></tr>
+          <tr><td>/kilimanjaro-from-australia/</td><td>kilimanjaro from australia</td><td>Flight routes via Dubai/Nairobi, AUD estimates, best season to avoid Australian winter</td></tr>
+          <tr><td>/kilimanjaro-for-europeans/</td><td>kilimanjaro european travelers</td><td>Schengen-friendly info, EUR pricing, popular with German/French/Italian climbers</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== TAB: ACTION PLAN ===================== -->
+  <div id="action" class="tab-content">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--accent);background:rgba(245,158,11,0.1);color:var(--accent);">🎯</div>
+        <h2>Master Action Plan — Prioritized by Impact</h2>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-item" style="border-left:3px solid var(--red);">
+          <div class="week">🚨 WEEK 1 — EMERGENCY</div>
+          <h3>Stop the Bleeding</h3>
+          <ul>
+            <li><strong>Create & verify Google Business Profile</strong> — You're invisible on Google Maps while every competitor is there</li>
+            <li><strong>List 5-8 tours on SafariBookings</strong> — You have 75 five-star reviews generating ZERO bookings because no products are listed</li>
+            <li><strong>Fix Instagram handle</strong> in codebase — Currently pointing to wrong account</li>
+            <li><strong>Standardize business name</strong> to "Snow Africa Adventures" across all platforms</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item" style="border-left:3px solid var(--orange);">
+          <div class="week">📋 MONTH 1 — PLATFORM EXPANSION</div>
+          <h3>Get on the Platforms Where Customers Are</h3>
+          <ul>
+            <li><strong>Register on Viator</strong> as supplier — list day trips first (commission-based, no upfront cost)</li>
+            <li><strong>Register on TourRadar</strong> — list 5+ multi-day Kilimanjaro and safari tours</li>
+            <li><strong>Claim Trustpilot profile</strong> — critical for European travelers</li>
+            <li><strong>Launch TripAdvisor review campaign</strong> — email all past clients, add review link to post-trip WhatsApp</li>
+            <li><strong>Fix NAP inconsistencies</strong> — founding year, phone format, URL format across all platforms</li>
+            <li><strong>Start weekly GBP posts</strong> — summit photos, departure dates, seasonal offers</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item" style="border-left:3px solid var(--blue);">
+          <div class="week">🔗 MONTH 2-3 — AUTHORITY BUILDING</div>
+          <h3>Build the Backlinks That Drive Rankings</h3>
+          <ul>
+            <li><strong>Pitch to "Best Operator" listicle authors</strong> — Coleman Concierge, XPATS International, TourWithPipi. Send press kit with credentials + review scores</li>
+            <li><strong>Create 3 linkable assets</strong> — "Kilimanjaro Statistics 2026", "Kilimanjaro Cost Calculator", "Route Comparison Data"</li>
+            <li><strong>Build Emmanuel Moshi founder content</strong> — dedicated page, video, "day in the life" post. E-E-A-T signals competitors can't match</li>
+            <li><strong>Guest post on 2 travel blogs/month</strong> — target DR 40+ sites</li>
+            <li><strong>Start weekly HARO/Connectively pitches</strong> — earn DR 50+ backlinks as a Kilimanjaro expert</li>
+            <li><strong>Register on GetYourGuide</strong> — strong European audience</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item" style="border-left:3px solid var(--purple);">
+          <div class="week">🎯 MONTH 3-4 — CONTENT STRATEGY</div>
+          <h3>Create Content That Earns Featured Snippets</h3>
+          <ul>
+            <li><strong>Create geo-targeted pages</strong> — "Climb Kilimanjaro from USA/UK/Australia" (long-tail international intent)</li>
+            <li><strong>Build comparison pages</strong> — "Snow Africa vs Altezza Travel", "Snow Africa vs Ultimate Kilimanjaro"</li>
+            <li><strong>Optimize existing pages for featured snippets</strong> — answer-first format, tables, numbered lists</li>
+            <li><strong>Add FAQ schema to all major pages</strong> — competitor climbing-kilimanjaro.com doesn't use FAQ structured data</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item" style="border-left:3px solid var(--green);">
+          <div class="week">📈 MONTH 4-6 — SCALE</div>
+          <h3>Scale What Works</h3>
+          <ul>
+            <li><strong>Target 200+ TripAdvisor reviews</strong> — competitive parity with mid-tier operators</li>
+            <li><strong>YouTube channel</strong> — summit videos, guide introductions, camp walkthroughs</li>
+            <li><strong>Evaluate German language /de/ subdirectory</strong> — only if English rankings are improving</li>
+            <li><strong>Apply for TripAdvisor Travelers' Choice</strong> — requires consistent volume of excellent reviews</li>
+            <li><strong>Digital PR campaign</strong> — pitch Lonely Planet, Rough Guides, National Geographic Traveler</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expected Impact -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:var(--green-bg);color:var(--green);">📈</div>
+        <h2>Expected Impact</h2>
+      </div>
+      <div class="cards-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="card" style="text-align:center;border-top:3px solid var(--green);">
+          <div style="font-size:28px;font-weight:800;color:var(--green);">Immediate</div>
+          <p style="margin-top:8px;">SafariBookings tours + GBP = bookings within days</p>
+        </div>
+        <div class="card" style="text-align:center;border-top:3px solid var(--blue);">
+          <div style="font-size:28px;font-weight:800;color:var(--blue);">Month 3</div>
+          <p style="margin-top:8px;">Platform traffic from Viator, TourRadar, GetYourGuide</p>
+        </div>
+        <div class="card" style="text-align:center;border-top:3px solid var(--purple);">
+          <div style="font-size:28px;font-weight:800;color:var(--purple);">Month 6</div>
+          <p style="margin-top:8px;">First organic rankings for long-tail keywords</p>
+        </div>
+        <div class="card" style="text-align:center;border-top:3px solid var(--accent);">
+          <div style="font-size:28px;font-weight:800;color:var(--accent);">Month 12</div>
+          <p style="margin-top:8px;">Top 10 for 5-10 target keywords</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Line -->
+    <div class="section">
+      <div style="background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);border:1px solid var(--accent);border-radius:16px;padding:32px;text-align:center;">
+        <h2 style="font-size:24px;margin-bottom:16px;color:var(--accent);">The Honest Bottom Line</h2>
+        <p style="font-size:16px;color:var(--text-muted);max-width:700px;margin:0 auto 20px;line-height:1.8;">
+          Your <strong style="color:var(--green);">product is excellent</strong> — 5.0/5 SafariBookings, 4.9/5 TripAdvisor, zero complaints.<br>
+          But you're <strong style="color:var(--red);">fighting with one hand tied behind your back</strong>:
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:600px;margin:0 auto 24px;text-align:left;">
+          <div style="padding:12px;background:var(--red-bg);border-radius:8px;font-size:14px;color:var(--red);">No Google Business Profile</div>
+          <div style="padding:12px;background:var(--red-bg);border-radius:8px;font-size:14px;color:var(--red);">0 tours on SafariBookings</div>
+          <div style="padding:12px;background:var(--red-bg);border-radius:8px;font-size:14px;color:var(--red);">Missing from 5 major platforms</div>
+          <div style="padding:12px;background:var(--red-bg);border-radius:8px;font-size:14px;color:var(--red);">Zero backlinks from listicles</div>
+        </div>
+        <p style="font-size:16px;color:var(--accent);font-weight:700;">
+          Fastest path to revenue: Get listed on aggregator platforms this week.<br>
+          <span style="font-size:14px;color:var(--text-muted);font-weight:400;">SafariBookings alone could start generating bookings immediately — you already have 75 five-star reviews there.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="report-footer">
+  <p>Snow Africa Adventure — SEO Audit Report &middot; March 2026</p>
+  <p style="margin-top:8px;">Generated by Claude Code &middot; Off-Page SEO &middot; Local SEO &middot; International SEO &middot; Competitor Analysis</p>
+</div>
+
+<script>
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
