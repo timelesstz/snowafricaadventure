@@ -772,7 +772,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-heading text-xl font-bold mb-6 text-center">Related Kilimanjaro Guides</h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               <Link href="/climbing-kilimanjaro/" className="bg-[var(--surface)] rounded-xl p-4 hover:bg-[var(--primary-dark)] hover:text-white transition-colors group">
                 <Mountain className="w-6 h-6 text-[var(--secondary)] mb-2" />
                 <p className="font-semibold text-sm">Climbing Kilimanjaro</p>
@@ -792,6 +792,11 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 <Users className="w-6 h-6 text-[var(--secondary)] mb-2" />
                 <p className="font-semibold text-sm">Group Climbs Guide</p>
                 <p className="text-xs text-[var(--text-muted)] group-hover:text-white/60">Save 15–30% on costs</p>
+              </Link>
+              <Link href="/kilimanjaro-vs-everest/" className="bg-[var(--surface)] rounded-xl p-4 hover:bg-[var(--primary-dark)] hover:text-white transition-colors group">
+                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
+                <p className="text-xs text-[var(--text-muted)] group-hover:text-white/60">Which to climb first?</p>
               </Link>
             </div>
           </div>

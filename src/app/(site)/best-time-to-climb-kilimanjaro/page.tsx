@@ -521,6 +521,32 @@ export default function BestTimeToClimbKilimanjaroPage() {
         </div>
       </section>
 
+      {/* Related Guides */}
+      <section className="py-12 bg-white border-t border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-heading text-xl font-bold mb-6 text-center">Related Kilimanjaro Guides</h2>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <Link href="/best-route-to-climb-kilimanjaro/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
+                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Best Route Guide</p>
+                <p className="text-xs text-[var(--text-muted)]">Compare all 6 routes</p>
+              </Link>
+              <Link href="/kilimanjaro-prices/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
+                <Calendar className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Kilimanjaro Prices</p>
+                <p className="text-xs text-[var(--text-muted)]">Full cost breakdown</p>
+              </Link>
+              <Link href="/kilimanjaro-vs-everest/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
+                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
+                <p className="text-xs text-[var(--text-muted)]">Which to climb first?</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">

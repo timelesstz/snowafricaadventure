@@ -823,6 +823,11 @@ export default function KilimanjaroAltitudeSicknessPage() {
                 <p className="font-semibold text-sm">Group Climbs</p>
                 <p className="text-xs text-[var(--text-muted)]">Safety in numbers</p>
               </Link>
+              <Link href="/kilimanjaro-vs-everest/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
+                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
+                <p className="text-xs text-[var(--text-muted)]">Altitude & difficulty compared</p>
+              </Link>
             </div>
           </div>
         </div>

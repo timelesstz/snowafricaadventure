@@ -730,6 +730,26 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
+      {/* Related Reading */}
+      <section className="py-10 bg-white border-t border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-heading text-lg font-bold mb-4">Continue Reading</h2>
+            <div className="flex flex-wrap justify-center gap-3 text-sm">
+              <Link href="/kilimanjaro-vs-everest/" className="bg-[var(--surface)] px-4 py-2 rounded-full hover:bg-[var(--primary-dark)] hover:text-white transition-colors">
+                Kilimanjaro vs Everest
+              </Link>
+              <Link href="/best-route-to-climb-kilimanjaro/" className="bg-[var(--surface)] px-4 py-2 rounded-full hover:bg-[var(--primary-dark)] hover:text-white transition-colors">
+                Best Route Guide
+              </Link>
+              <Link href="/kilimanjaro-prices/" className="bg-[var(--surface)] px-4 py-2 rounded-full hover:bg-[var(--primary-dark)] hover:text-white transition-colors">
+                Kilimanjaro Prices
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Partner Attribution */}
       <div className="py-4 text-center border-t border-[var(--border)]">
         <p className="text-xs text-[var(--text-light)]">

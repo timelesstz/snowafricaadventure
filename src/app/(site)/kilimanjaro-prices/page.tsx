@@ -538,7 +538,7 @@ export default function KilimanjaroPricesPage() {
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto text-lg">
             Tell us your preferred route, travel dates, and group size and we&apos;ll send you a
-            detailed, no-obligation quote within 24 hours. Or <Link href="/kilimanjaro-group-climbs/" className="text-white underline hover:text-[var(--secondary)]">join a group climb</Link> to save 15–30%.
+            detailed, no-obligation quote within 24 hours. Or <Link href="/kilimanjaro-group-climbs/" className="text-white underline hover:text-[var(--secondary)]">join a group climb</Link> to save 15–30%. See how <Link href="/kilimanjaro-vs-everest/" className="text-white underline hover:text-[var(--secondary)]">Kilimanjaro costs compare to Everest</Link> — you might be surprised.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
           <Link
