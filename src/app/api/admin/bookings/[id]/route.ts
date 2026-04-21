@@ -36,7 +36,20 @@ export async function GET(
             },
           },
         },
-        commission: true,
+        commission: {
+          include: {
+            partner: {
+              select: {
+                id: true,
+                name: true,
+                contactEmail: true,
+              },
+            },
+          },
+        },
+        climberTokens: {
+          orderBy: { climberIndex: "asc" },
+        },
       },
     });
 
