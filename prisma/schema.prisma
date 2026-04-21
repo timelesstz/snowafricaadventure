@@ -6,6 +6,12 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Mountain {
+  KILIMANJARO
+  MERU
+  LENGAI
+}
+
 model TrekkingRoute {
   id              String           @id @default(cuid())
   slug            String           @unique
@@ -40,6 +46,7 @@ model TrekkingRoute {
   gallery         String[]
   galleryAlts     Json?
   isActive        Boolean          @default(true)
+  mountain        Mountain         @default(KILIMANJARO)
   categoryId      String?
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
@@ -48,6 +55,7 @@ model TrekkingRoute {
 
   @@index([slug])
   @@index([isActive])
+  @@index([mountain])
 }
 
 model SafariPackage {

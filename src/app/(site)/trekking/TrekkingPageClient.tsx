@@ -135,120 +135,125 @@ export function TrekkingPageClient({ routes, difficulties }: TrekkingPageClientP
   );
 
   return (
-    <div className="space-y-8">
-      {/* Filters */}
-      <TrekkingFilters
-        difficulties={difficulties}
-        durations={[]}
-        selectedDifficulty={selectedDifficulty}
-        selectedDuration={selectedDuration}
-        searchQuery={searchQuery}
-        sortBy={sortBy}
-        onDifficultyChange={setSelectedDifficulty}
-        onDurationChange={setSelectedDuration}
-        onSearchChange={setSearchQuery}
-        onSortChange={setSortBy}
-        onClearFilters={clearFilters}
-        totalResults={filteredAndSortedRoutes.length}
-      />
+    <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-8 lg:items-start">
+      {/* Left Sidebar / Mobile Accordion */}
+      <aside className="mb-6 lg:mb-0 lg:sticky lg:top-24">
+        <TrekkingFilters
+          variant="sidebar"
+          difficulties={difficulties}
+          durations={[]}
+          selectedDifficulty={selectedDifficulty}
+          selectedDuration={selectedDuration}
+          searchQuery={searchQuery}
+          sortBy={sortBy}
+          onDifficultyChange={setSelectedDifficulty}
+          onDurationChange={setSelectedDuration}
+          onSearchChange={setSearchQuery}
+          onSortChange={setSortBy}
+          onClearFilters={clearFilters}
+          totalResults={filteredAndSortedRoutes.length}
+        />
+      </aside>
 
-      {/* View Toggle */}
-      <div className="flex items-center justify-between">
-        <h2 className="font-heading text-2xl font-bold">
-          {selectedDifficulty ? `${selectedDifficulty} Routes` : "All Kilimanjaro Routes"}
-        </h2>
-        <div className="flex items-center gap-2 bg-white rounded-lg p-1 shadow-sm border border-[var(--border)]">
-          <button
-            onClick={() => setViewMode("grid")}
-            className={cn(
-              "p-2 rounded-md transition-colors",
-              viewMode === "grid"
-                ? "bg-[var(--primary)] text-white"
-                : "text-[var(--text-muted)] hover:text-[var(--text)]"
-            )}
-            aria-label="Grid view"
-          >
-            <LayoutGrid className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => setViewMode("list")}
-            className={cn(
-              "p-2 rounded-md transition-colors",
-              viewMode === "list"
-                ? "bg-[var(--primary)] text-white"
-                : "text-[var(--text-muted)] hover:text-[var(--text)]"
-            )}
-            aria-label="List view"
-          >
-            <List className="w-5 h-5" />
-          </button>
+      {/* Main Content */}
+      <div className="space-y-6 min-w-0">
+        {/* View Toggle */}
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="font-heading text-2xl font-bold">
+            {selectedDifficulty ? `${selectedDifficulty} Routes` : "All Kilimanjaro Routes"}
+          </h2>
+          <div className="flex items-center gap-2 bg-white rounded-lg p-1 shadow-sm border border-[var(--border)]">
+            <button
+              onClick={() => setViewMode("grid")}
+              className={cn(
+                "p-2 rounded-md transition-colors",
+                viewMode === "grid"
+                  ? "bg-[var(--primary)] text-white"
+                  : "text-[var(--text-muted)] hover:text-[var(--text)]"
+              )}
+              aria-label="Grid view"
+            >
+              <LayoutGrid className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setViewMode("list")}
+              className={cn(
+                "p-2 rounded-md transition-colors",
+                viewMode === "list"
+                  ? "bg-[var(--primary)] text-white"
+                  : "text-[var(--text-muted)] hover:text-[var(--text)]"
+              )}
+              aria-label="List view"
+            >
+              <List className="w-5 h-5" />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Results */}
-      {filteredAndSortedRoutes.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-2xl">
-          <div className="text-6xl mb-4">🏔️</div>
-          <h3 className="text-xl font-semibold mb-2">No routes found</h3>
-          <p className="text-[var(--text-muted)] mb-4">
-            Try adjusting your filters or search terms
-          </p>
-          <button
-            onClick={clearFilters}
-            className="text-[var(--primary)] font-medium hover:underline"
-          >
-            Clear all filters
-          </button>
-        </div>
-      ) : viewMode === "grid" ? (
-        <div className="space-y-8">
-          {/* Featured Route */}
-          {featuredRoute && filteredAndSortedRoutes.length > 1 && (
-            <RouteCardEnhanced
-              {...featuredRoute}
-              variant="featured"
-              className="hidden lg:block"
-            />
-          )}
-
-          {/* Routes Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* On smaller screens, show featured in grid */}
+        {/* Results */}
+        {filteredAndSortedRoutes.length === 0 ? (
+          <div className="text-center py-16 bg-white rounded-2xl">
+            <div className="text-6xl mb-4">🏔️</div>
+            <h3 className="text-xl font-semibold mb-2">No routes found</h3>
+            <p className="text-[var(--text-muted)] mb-4">
+              Try adjusting your filters or search terms
+            </p>
+            <button
+              onClick={clearFilters}
+              className="text-[var(--primary)] font-medium hover:underline"
+            >
+              Clear all filters
+            </button>
+          </div>
+        ) : viewMode === "grid" ? (
+          <div className="space-y-8">
+            {/* Featured Route */}
             {featuredRoute && filteredAndSortedRoutes.length > 1 && (
               <RouteCardEnhanced
                 {...featuredRoute}
-                variant="default"
-                className="lg:hidden"
+                variant="featured"
+                className="hidden xl:block"
               />
             )}
-            {/* If only one result, show it in grid */}
-            {filteredAndSortedRoutes.length === 1 && featuredRoute && (
-              <RouteCardEnhanced
-                {...featuredRoute}
-                variant="default"
-              />
-            )}
-            {remainingRoutes.map((route) => (
+
+            {/* Routes Grid */}
+            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              {/* On smaller screens, show featured in grid */}
+              {featuredRoute && filteredAndSortedRoutes.length > 1 && (
+                <RouteCardEnhanced
+                  {...featuredRoute}
+                  variant="default"
+                  className="xl:hidden"
+                />
+              )}
+              {/* If only one result, show it in grid */}
+              {filteredAndSortedRoutes.length === 1 && featuredRoute && (
+                <RouteCardEnhanced
+                  {...featuredRoute}
+                  variant="default"
+                />
+              )}
+              {remainingRoutes.map((route) => (
+                <RouteCardEnhanced
+                  key={route.slug}
+                  {...route}
+                  variant="default"
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {filteredAndSortedRoutes.map((route) => (
               <RouteCardEnhanced
                 key={route.slug}
                 {...route}
-                variant="default"
+                variant="horizontal"
               />
             ))}
           </div>
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {filteredAndSortedRoutes.map((route) => (
-            <RouteCardEnhanced
-              key={route.slug}
-              {...route}
-              variant="horizontal"
-            />
-          ))}
-        </div>
-      )}
-
+        )}
+      </div>
     </div>
   );
 }

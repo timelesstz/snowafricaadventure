@@ -43,7 +43,8 @@
       "Sleeping bag (rental available)"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "8-days-lemosho-route",
@@ -85,7 +86,8 @@
       "Visa fees"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5317393539_b3ff8d1d93_k.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "6-days-marangu-route",
@@ -126,7 +128,8 @@
       "Sleeping bag"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5-days-Marangu-route.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "5-days-marangu-route",
@@ -220,7 +223,8 @@
       }
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/5-days-Marangu-route.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "6-days-rongai-route",
@@ -258,7 +262,8 @@
       "Tips"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/DF19D924-6FDE-4FE3-AD70-A5DB1CF9FE00.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "7-days-rongai-route",
@@ -296,7 +301,8 @@
       "Tips"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/DF19D924-6FDE-4FE3-AD70-A5DB1CF9FE00.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "6-days-machame-route",
@@ -332,7 +338,8 @@
       "Tips"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/49c04fa0-2704-4624-aaf4-59db6de1f1f5.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "6-days-umbwe-route",
@@ -370,7 +377,8 @@
       "Tips"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/24832324111_bf15191b09_b.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "KILIMANJARO"
   },
   {
     "slug": "4-days-mount-meru-climbing",
@@ -408,7 +416,8 @@
       "Tips"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/happy-mother-vnO0XVzC.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "MERU"
   },
   {
     "slug": "3-days-2-nights-oldoinyo-lengai-climbing",
@@ -445,6 +454,7 @@
       "Tips"
     ],
     "featuredImage": "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/7001549021_6bc1968982_k.jpg",
-    "isActive": true
+    "isActive": true,
+    "mountain": "LENGAI"
   }
 ]

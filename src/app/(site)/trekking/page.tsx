@@ -40,6 +40,7 @@ async function getRoutes() {
     const routes = await prisma.trekkingRoute.findMany({
       where: {
         isActive: true,
+        mountain: "KILIMANJARO",
       },
       select: {
         slug: true,
@@ -71,7 +72,7 @@ async function getRoutes() {
 async function getDifficulties() {
   try {
     const difficulties = await prisma.trekkingRoute.findMany({
-      where: { isActive: true },
+      where: { isActive: true, mountain: "KILIMANJARO" },
       select: { physicalRating: true },
       distinct: ["physicalRating"],
     });
@@ -373,7 +374,7 @@ export default async function TrekkingPage() {
                 <Link href="/trekking/8-days-lemosho-route/" className="block text-blue-600 font-medium hover:underline">
                   Lemosho Route →
                 </Link>
-                <Link href="/trekking/" className="block text-blue-600 font-medium hover:underline">
+                <Link href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/" className="block text-blue-600 font-medium hover:underline">
                   Northern Circuit →
                 </Link>
               </div>
@@ -582,38 +583,87 @@ export default async function TrekkingPage() {
         </div>
       </section>
 
-      {/* SEO Prose — Concise version for search engines */}
-      <section className="py-16 bg-white">
+      {/* Climbing Mount Kilimanjaro — Visual, two-column intro + 4-card safety grid */}
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto prose prose-slate">
-            <h2>Climbing Mount Kilimanjaro with Snow Africa Adventure</h2>
-            <p>
-              Mount Kilimanjaro stands at 5,895 meters (19,341 feet) as the highest peak in Africa
-              and the tallest free-standing mountain in the world. Located in northeastern Tanzania near
-              the town of Moshi, Kilimanjaro is a dormant stratovolcano and one of the Seven Summits.
-              Unlike most mountains of comparable height, Kilimanjaro requires no technical climbing
-              skills, making it accessible to determined trekkers with proper preparation.
-            </p>
-            <p>
-              Our experienced guides have led thousands of successful summit attempts across all routes
-              since 2008. As a locally owned company based in Arusha, we maintain direct relationships
-              with Kilimanjaro National Park (KINAPA), ensure fair wages for all porters through our
-              KPAP partnership, and provide the personalized attention that larger operators cannot match.
-            </p>
-            <h3>Our Safety Standards</h3>
-            <p>
-              Safety is our top priority. All our guides are KINAPA-certified and trained in wilderness
-              first aid. They carry emergency oxygen, pulse oximeters, and comprehensive first aid kits
-              on every single climb. We follow strict acclimatization protocols including the &quot;climb high, sleep low&quot;
-              principle, mandatory health checks twice daily, and a guide-to-climber ratio that ensures
-              personalized attention.
-            </p>
-            <p>
-              As a KPAP (Kilimanjaro Porters Assistance Project) partner, we ensure all porters receive
-              fair wages, proper equipment, adequate food, and loads within the KINAPA weight limit.
-              Ethical treatment of mountain crew isn&apos;t just the right thing to do — it means a
-              happier, more motivated team supporting your climb.
-            </p>
+          <div className="max-w-6xl mx-auto">
+            {/* Intro: text + image */}
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center mb-14 md:mb-20">
+              <div>
+                <span className="section-label">About the Mountain</span>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold mt-3 mb-5">
+                  Climbing Mount Kilimanjaro with Snow Africa Adventure
+                </h2>
+                <p className="text-[var(--text-muted)] leading-relaxed mb-4">
+                  Mount Kilimanjaro stands at <strong className="text-[var(--text)]">5,895 m (19,341 ft)</strong> as
+                  the highest peak in Africa and the tallest free-standing mountain in the world. Located
+                  in northeastern Tanzania near the town of Moshi, it is a dormant stratovolcano and one
+                  of the Seven Summits. Unlike most peaks of comparable height, Kilimanjaro requires no
+                  technical climbing skills — making it accessible to determined trekkers with proper
+                  preparation.
+                </p>
+                <p className="text-[var(--text-muted)] leading-relaxed">
+                  Our experienced guides have led thousands of successful summit attempts across every
+                  route since <strong className="text-[var(--text)]">2008</strong>. As a locally owned
+                  company based in Arusha, we maintain direct relationships with Kilimanjaro National
+                  Park (KINAPA), ensure fair wages for all porters through our KPAP partnership, and
+                  provide the personalized attention that larger operators cannot match.
+                </p>
+              </div>
+
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-[5/6] shadow-xl">
+                <Image
+                  src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp"
+                  alt="Snow Africa Adventure Kilimanjaro guides and climbers"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="absolute left-4 right-4 bottom-4 flex flex-wrap gap-2">
+                  <span className="px-3 py-1.5 rounded-full bg-white/95 text-[var(--text)] text-xs font-semibold shadow">
+                    5,895 m Summit
+                  </span>
+                  <span className="px-3 py-1.5 rounded-full bg-white/95 text-[var(--text)] text-xs font-semibold shadow">
+                    Climbing Since 2008
+                  </span>
+                  <span className="px-3 py-1.5 rounded-full bg-emerald-500/95 text-white text-xs font-semibold shadow">
+                    93% Success Rate
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Safety Standards */}
+            <div>
+              <div className="text-center mb-10">
+                <span className="section-label justify-center">Safety First</span>
+                <h3 className="font-heading text-2xl md:text-3xl font-bold mt-3 mb-3">
+                  Our Safety Standards
+                </h3>
+                <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+                  Safety is our top priority on every climb. These four pillars keep our climbers — and
+                  our mountain crew — protected from gate to summit.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {SAFETY_STANDARDS.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl bg-[var(--surface)] border border-[var(--border)] p-6 hover:shadow-lg transition-shadow"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center mb-4">
+                      <item.icon className="w-6 h-6 text-[var(--primary)]" />
+                    </div>
+                    <h4 className="font-semibold text-base mb-2">{item.title}</h4>
+                    <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -731,6 +781,33 @@ const PREPARATION_STEPS = [
   { title: "Strengthen Your Legs", description: "Squats, lunges, and step-ups help with the long descents. Focus on endurance over power." },
   { title: "Build Mental Resilience", description: "Summit night is as much mental as physical. Practice pushing through discomfort during training." },
   { title: "Get Proper Gear", description: "We provide a packing list after booking. Key items: layered clothing, broken-in boots, and a -10°C sleeping bag." },
+];
+
+const SAFETY_STANDARDS: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Shield,
+    title: "KINAPA-Certified Guides",
+    description:
+      "All our guides are KINAPA-certified and trained in wilderness first aid — a guide-to-climber ratio that ensures personalized attention at altitude.",
+  },
+  {
+    icon: Activity,
+    title: "Pulse Oximeters & Oxygen",
+    description:
+      "Mandatory health checks twice daily with pulse oximeters, plus emergency oxygen and comprehensive first aid kits carried on every single climb.",
+  },
+  {
+    icon: Mountain,
+    title: "Climb High, Sleep Low",
+    description:
+      "Strict acclimatization protocols on every route, giving your body the time it needs to adjust safely before the final summit push.",
+  },
+  {
+    icon: Heart,
+    title: "KPAP Porter Welfare",
+    description:
+      "As a KPAP partner, every porter receives fair wages, proper equipment, adequate food, and loads within the KINAPA weight limit — a happier team supports a stronger climb.",
+  },
 ];
 
 const CLIMATE_ZONES = [
