@@ -1047,6 +1047,22 @@ model SeoKeywordTracker {
   @@index([isActive])
 }
 
+model SeoHealthSnapshot {
+  id                 String   @id @default(cuid())
+  date               DateTime @unique
+  healthScore        Int
+  contentHealthScore Int
+  ctrScore           Int
+  posScore           Int
+  errorScore         Int
+  auditScore         Int?
+  totalClicks        Int      @default(0)
+  totalImpressions   Int      @default(0)
+  createdAt          DateTime @default(now())
+
+  @@index([date])
+}
+
 enum SeoDataSource {
   GSC
   GA4

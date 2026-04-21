@@ -11,6 +11,10 @@
     {
       "path": "/api/cron/seo-sync",
       "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/cron/seo-snapshot",
+      "schedule": "0 5 * * *"
     }
   ]
 }

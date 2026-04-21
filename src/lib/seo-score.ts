@@ -36,6 +36,13 @@ export interface SeoScoreResult {
   failures: number;
 }
 
+/**
+ * Score boundaries used across the SEO admin (overview "issues" count,
+ * content-health backlog filter, etc.). Anything below this is treated as
+ * needs-attention. Aligns with the "good" band threshold below.
+ */
+export const BAD_SCORE_THRESHOLD = 65;
+
 export function bandFor(score: number): SeoBand {
   if (score >= 85) return "excellent";
   if (score >= 65) return "good";
