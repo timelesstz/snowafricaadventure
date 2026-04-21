@@ -332,6 +332,39 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // SEO playbook §3 — 404 recovery for high-traffic broken URLs
+      {
+        source: "/tanzania-safari-packing-list/",
+        destination: "/the-ultimate-kilimanjaro-packing-list/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-record/",
+        destination: "/kilimanjaro-statistics/",
+        permanent: true,
+      },
+      {
+        source: "/eco-safari-lodges-in-tanzania-sustainable-travel-insights/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/sustainability/",
+        destination: "/about-us/",
+        permanent: true,
+      },
+      {
+        source: "/arusha-national-park-day-tour/",
+        destination: "/tanzania-day-tours/",
+        permanent: true,
+      },
+      // Consolidate duplicate pricing intent into canonical page
+      {
+        source: "/how-much-to-climb-kilimanjaro/",
+        destination: "/kilimanjaro-prices/",
+        permanent: true,
+      },
+
       // Common alternate URLs → canonical routes
       {
         source: "/kilimanjaro-trekking/",
