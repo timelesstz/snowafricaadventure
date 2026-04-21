@@ -3,11 +3,15 @@ import { auth } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
-import ImageUploadField from "@/components/admin/ImageUploadField";
-import GalleryUploadField from "@/components/admin/GalleryUploadField";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import SafariItineraryEditor from "@/components/admin/SafariItineraryEditor";
 import ListEditor from "@/components/admin/ListEditor";
+import SlugTitleFields from "@/components/admin/SlugTitleFields";
+import MetaSeoFields from "@/components/admin/MetaSeoFields";
+import LinkedImageEditor from "@/components/admin/LinkedImageEditor";
+import PricingTiersEditor from "@/components/admin/PricingTiersEditor";
+import FormShell, { type FormShellState } from "@/components/admin/FormShell";
+import { disposeFormDeletions } from "@/lib/admin-media";
 
 async function getSafari(id: string) {
   if (id === "new") return null;
@@ -34,14 +38,16 @@ async function getDestinations() {
   });
 }
 
-async function saveSafari(formData: FormData) {
+async function saveSafari(_prev: FormShellState, formData: FormData): Promise<FormShellState> {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  let id: string | null = null;
+  try {
+    const session = await auth();
+    if (!session) return { error: "You are not signed in. Please log in and try again." };
 
-  const id = formData.get("id") as string | null;
-  const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+    id = formData.get("id") as string | null;
+    const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
 
   // Parse array fields
   const highlightsStr = formData.get("highlights") as string;
@@ -78,21 +84,51 @@ async function saveSafari(formData: FormData) {
     }
   }
 
+  // Parse pricing tiers JSON
+  const pricingTiersStr = formData.get("pricingTiers") as string;
+  let pricingTiers = null;
+  if (pricingTiersStr) {
+    try {
+      pricingTiers = JSON.parse(pricingTiersStr);
+    } catch {
+      pricingTiers = null;
+    }
+  }
+
+  // Parse gallery alts JSON
+  const galleryAltsStr = formData.get("galleryAlts") as string;
+  let galleryAlts = null;
+  if (galleryAltsStr) {
+    try {
+      const parsed = JSON.parse(galleryAltsStr);
+      if (parsed && typeof parsed === "object" && Object.keys(parsed).length > 0) {
+        galleryAlts = parsed;
+      }
+    } catch {
+      galleryAlts = null;
+    }
+  }
+
   const priceStr = formData.get("priceFrom") as string;
   const ratingStr = formData.get("rating") as string;
 
-  // Auto-compute stats from itinerary when available
-  let durationDays = parseInt(formData.get("durationDays") as string) || 1;
-  let duration = formData.get("duration") as string;
-  let parksCount = 3;
-  let gameDrives = 6;
+  const hasItinerary = Array.isArray(itinerary) && itinerary.length > 0;
 
-  if (itinerary && Array.isArray(itinerary) && itinerary.length > 0) {
+  const formDurationDays = parseInt(formData.get("durationDays") as string);
+  const formDuration = (formData.get("duration") as string) || "";
+  const formParksCount = parseInt(formData.get("parksCount") as string);
+  const formGameDrives = parseInt(formData.get("gameDrives") as string);
+
+  let durationDays = Number.isFinite(formDurationDays) && formDurationDays > 0 ? formDurationDays : 1;
+  let duration = formDuration;
+  let parksCount = Number.isFinite(formParksCount) && formParksCount >= 0 ? formParksCount : 0;
+  let gameDrives = Number.isFinite(formGameDrives) && formGameDrives >= 0 ? formGameDrives : 0;
+
+  if (hasItinerary) {
     durationDays = itinerary.length;
     const nights = durationDays - 1;
     duration = `${durationDays} Day${durationDays !== 1 ? "s" : ""} ${nights} Night${nights !== 1 ? "s" : ""}`;
 
-    // Count unique parks/locations from itinerary
     const locations = new Set<string>();
     for (const day of itinerary) {
       if (day.location && typeof day.location === "string" && day.location.trim()) {
@@ -103,7 +139,6 @@ async function saveSafari(formData: FormData) {
       parksCount = locations.size;
     }
 
-    // Count game drives from itinerary day titles/descriptions
     let driveCount = 0;
     for (const day of itinerary) {
       const text = `${day.title || ""} ${day.description || ""}`.toLowerCase();
@@ -131,7 +166,9 @@ async function saveSafari(formData: FormData) {
     exclusions,
     featuredImage: formData.get("featuredImage") as string || null,
     gallery,
+    galleryAlts,
     priceFrom: priceStr ? parseFloat(priceStr) : null,
+    pricingTiers,
     gameDrives,
     parksCount,
     rating: ratingStr ? parseFloat(ratingStr) : 4.9,
@@ -207,6 +244,17 @@ async function saveSafari(formData: FormData) {
     }
   }
 
+    await disposeFormDeletions(formData, ["featuredImage", "gallery"]);
+  } catch (e) {
+    console.error("Save safari failed:", e);
+    return {
+      error:
+        e instanceof Error
+          ? e.message
+          : "Save failed. Please check the form and try again.",
+    };
+  }
+
   redirect("/admin/safaris");
 }
 
@@ -238,6 +286,7 @@ export default async function SafariEditPage({
 
   const isNew = id === "new";
   const selectedDestinations = safari?.destinations.map(d => d.destinationId) || [];
+  const hasItinerary = Array.isArray(safari?.itinerary) && safari.itinerary.length > 0;
 
   return (
     <div className="space-y-6">
@@ -258,7 +307,7 @@ export default async function SafariEditPage({
             </p>
           </div>
         </div>
-        {!isNew && safari?.isActive && (
+        {!isNew && safari && (
           <a
             href={`/tanzania-safaris/${safari.slug}/`}
             target="_blank"
@@ -266,13 +315,31 @@ export default async function SafariEditPage({
             className="inline-flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
           >
             <Eye className="w-4 h-4" />
-            View Safari
+            {safari.isActive ? "View Safari" : "Preview Draft"}
           </a>
         )}
       </div>
 
-      <form action={saveSafari} className="space-y-6">
+      <FormShell action={saveSafari} className="space-y-6">
         <input type="hidden" name="id" value={id} />
+
+        {/* Images — full-width, promoted to the top of the form */}
+        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-6">
+          <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
+            Images
+          </h2>
+
+          <LinkedImageEditor
+            defaultFeatured={safari?.featuredImage}
+            defaultGallery={safari?.gallery || []}
+            defaultGalleryAlts={(safari?.galleryAlts as Record<string, { alt: string; caption?: string }> | null) ?? undefined}
+            galleryAltsName="galleryAlts"
+            folder="safaris"
+            featuredHelpText="Shown as the hero on the safari detail page and as the thumbnail in listings. 16:9 landscape recommended."
+            galleryHelpText="Additional photos for the safari page. Drag to reorder. Hover a thumbnail to set it as featured. Add alt text under each image for SEO + accessibility."
+            maxGalleryImages={12}
+          />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main Content */}
@@ -284,72 +351,57 @@ export default async function SafariEditPage({
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Safari Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="title"
-                    required
-                    defaultValue={safari?.title || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                    placeholder="e.g., 6 Days Serengeti & Ngorongoro Safari"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    URL Slug *
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-500">/tanzania-safaris/</span>
-                    <input
-                      type="text"
-                      name="slug"
-                      required
-                      defaultValue={safari?.slug || ""}
-                      className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                      placeholder="6-days-serengeti-ngorongoro"
-                    />
-                    <span className="text-slate-500">/</span>
-                  </div>
-                </div>
+                <SlugTitleFields
+                  defaultTitle={safari?.title || ""}
+                  defaultSlug={safari?.slug || ""}
+                  titleLabel="Safari Name"
+                  titlePlaceholder="e.g., 6 Days Serengeti & Ngorongoro Safari"
+                  slugPlaceholder="6-days-serengeti-ngorongoro"
+                  slugPrefix="/tanzania-safaris/"
+                />
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-duration" className="block text-sm font-medium text-slate-700 mb-2">
                     Duration
                   </label>
                   <input
+                    id="field-duration"
                     type="text"
                     name="duration"
                     defaultValue={safari?.duration || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
-                    placeholder="Auto-calculated from itinerary"
-                    readOnly
+                    className={`w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none ${hasItinerary ? "bg-slate-50" : ""}`}
+                    placeholder={hasItinerary ? "Auto-calculated from itinerary" : "e.g., 6 Days 5 Nights"}
+                    readOnly={hasItinerary}
                   />
-                  <p className="text-xs text-slate-500 mt-1">Auto-calculated from itinerary days</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {hasItinerary ? "Auto-calculated from itinerary days" : "Will be auto-calculated once you add itinerary days"}
+                  </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-durationDays" className="block text-sm font-medium text-slate-700 mb-2">
                     Duration (Days)
                   </label>
                   <input
+                    id="field-durationDays"
                     type="number"
                     name="durationDays"
                     defaultValue={safari?.durationDays || 1}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
-                    readOnly
+                    min="1"
+                    className={`w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none ${hasItinerary ? "bg-slate-50" : ""}`}
+                    readOnly={hasItinerary}
                   />
-                  <p className="text-xs text-slate-500 mt-1">Auto-calculated from itinerary</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {hasItinerary ? "Auto-calculated from itinerary" : "Will be auto-calculated once you add itinerary days"}
+                  </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-type" className="block text-sm font-medium text-slate-700 mb-2">
                     Safari Type *
                   </label>
                   <select
+                    id="field-type"
                     name="type"
                     required
                     defaultValue={safari?.type || "Mid-range"}
@@ -362,10 +414,11 @@ export default async function SafariEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-priceFrom" className="block text-sm font-medium text-slate-700 mb-2">
                     Price From (USD)
                   </label>
                   <input
+                    id="field-priceFrom"
                     type="number"
                     name="priceFrom"
                     step="0.01"
@@ -376,42 +429,49 @@ export default async function SafariEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-gameDrives" className="block text-sm font-medium text-slate-700 mb-2">
                     Game Drives
                   </label>
                   <input
+                    id="field-gameDrives"
                     type="number"
                     name="gameDrives"
                     min="0"
-                    defaultValue={safari?.gameDrives ?? 6}
-                    placeholder="Auto-calculated"
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
-                    readOnly
+                    defaultValue={safari?.gameDrives ?? (hasItinerary ? 6 : 0)}
+                    placeholder={hasItinerary ? "Auto-calculated" : "e.g., 6"}
+                    className={`w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none ${hasItinerary ? "bg-slate-50" : ""}`}
+                    readOnly={hasItinerary}
                   />
-                  <p className="text-xs text-slate-500 mt-1">Auto-counted from itinerary days mentioning &quot;game drive&quot;</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {hasItinerary ? "Auto-counted from itinerary days mentioning \"game drive\"" : "Will be auto-counted once you add itinerary days"}
+                  </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-parksCount" className="block text-sm font-medium text-slate-700 mb-2">
                     Parks Count
                   </label>
                   <input
+                    id="field-parksCount"
                     type="number"
                     name="parksCount"
                     min="0"
-                    defaultValue={safari?.parksCount ?? 3}
-                    placeholder="Auto-calculated"
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
-                    readOnly
+                    defaultValue={safari?.parksCount ?? (hasItinerary ? 3 : 0)}
+                    placeholder={hasItinerary ? "Auto-calculated" : "e.g., 3"}
+                    className={`w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none ${hasItinerary ? "bg-slate-50" : ""}`}
+                    readOnly={hasItinerary}
                   />
-                  <p className="text-xs text-slate-500 mt-1">Auto-counted from unique locations in itinerary</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {hasItinerary ? "Auto-counted from unique locations in itinerary" : "Will be auto-counted once you add itinerary days"}
+                  </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-rating" className="block text-sm font-medium text-slate-700 mb-2">
                     Rating
                   </label>
                   <input
+                    id="field-rating"
                     type="number"
                     name="rating"
                     min="1"
@@ -426,10 +486,11 @@ export default async function SafariEditPage({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-overview" className="block text-sm font-medium text-slate-700 mb-2">
                   Overview *
                 </label>
                 <textarea
+                  id="field-overview"
                   name="overview"
                   required
                   rows={5}
@@ -514,6 +575,27 @@ export default async function SafariEditPage({
               </div>
             </div>
 
+            {/* Pricing Tiers */}
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
+              <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
+                Group Pricing Tiers
+              </h2>
+              <p className="text-sm text-slate-500">
+                Per-person pricing by group size. Shown as the public pricing table on the safari page. Leave empty to fall back to the single &ldquo;Price From&rdquo; value.
+              </p>
+              <PricingTiersEditor
+                name="pricingTiers"
+                defaultValue={safari?.pricingTiers as { groupSize: string; description: string; price: number; savings?: number; featured?: boolean }[] | null}
+                defaultTiers={[
+                  { groupSize: "1 Person", description: "Private safari experience", price: 4500 },
+                  { groupSize: "2-4 People", description: "Small group adventure", price: 3500, savings: 1000, featured: true },
+                  { groupSize: "5-7 People", description: "Medium group savings", price: 3200, savings: 1300 },
+                  { groupSize: "8-10 People", description: "Large group discount", price: 2950, savings: 1550 },
+                  { groupSize: "11 & Above", description: "Best value for groups", price: 2750, savings: 1750 },
+                ]}
+              />
+            </div>
+
             {/* Itinerary */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
               <h2 className="text-lg font-semibold text-slate-900 pb-4 border-b border-slate-200">
@@ -543,57 +625,13 @@ export default async function SafariEditPage({
               </label>
             </div>
 
-            {/* Images */}
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-              <h3 className="font-semibold text-slate-900">Images</h3>
-
-              <ImageUploadField
-                name="featuredImage"
-                defaultValue={safari?.featuredImage}
-                folder="safaris"
-                label="Featured Image"
-                helpText="Main image shown in listings and hero sections"
-                deleteFromR2
-              />
-
-              <GalleryUploadField
-                name="gallery"
-                defaultValue={safari?.gallery || []}
-                folder="safaris"
-                label="Photo Gallery"
-                helpText="Additional photos for the safari page"
-                maxImages={12}
-                deleteFromR2
-              />
-            </div>
-
             {/* SEO */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
               <h3 className="font-semibold text-slate-900">SEO</h3>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Title
-                </label>
-                <input
-                  type="text"
-                  name="metaTitle"
-                  defaultValue={safari?.metaTitle || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Description
-                </label>
-                <textarea
-                  name="metaDescription"
-                  rows={3}
-                  defaultValue={safari?.metaDescription || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
+              <MetaSeoFields
+                defaultMetaTitle={safari?.metaTitle || ""}
+                defaultMetaDescription={safari?.metaDescription || ""}
+              />
             </div>
           </div>
         </div>
@@ -612,7 +650,7 @@ export default async function SafariEditPage({
             {isNew ? "Create Safari" : "Save Changes"}
           </button>
         </div>
-      </form>
+      </FormShell>
 
       {!isNew && (
         <div className="flex items-center justify-start">

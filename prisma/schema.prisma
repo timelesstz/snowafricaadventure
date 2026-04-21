@@ -38,6 +38,7 @@ model TrekkingRoute {
   faqs            Json?
   featuredImage   String?
   gallery         String[]
+  galleryAlts     Json?
   isActive        Boolean          @default(true)
   categoryId      String?
   createdAt       DateTime         @default(now())
@@ -65,7 +66,9 @@ model SafariPackage {
   exclusions      String[]
   featuredImage   String?
   gallery         String[]
+  galleryAlts     Json?
   priceFrom       Decimal?            @db.Decimal(10, 2)
+  pricingTiers    Json?
   isActive        Boolean             @default(true)
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
@@ -92,6 +95,7 @@ model Destination {
   bestTime        String?
   featuredImage   String?
   gallery         String[]
+  galleryAlts     Json?
   isActive        Boolean             @default(true)
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
@@ -371,6 +375,7 @@ model DayTrip {
   exclusions      String[]
   featuredImage   String?
   gallery         String[]
+  galleryAlts     Json?
   priceFrom       Decimal? @db.Decimal(10, 2)
   isActive        Boolean  @default(true)
   createdAt       DateTime @default(now())

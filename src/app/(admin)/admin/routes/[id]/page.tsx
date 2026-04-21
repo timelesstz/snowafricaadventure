@@ -11,6 +11,10 @@ import FaqsEditor from "@/components/admin/FaqsEditor";
 import ElevationProfileEditor from "@/components/admin/ElevationProfileEditor";
 import PricingTiersEditor from "@/components/admin/PricingTiersEditor";
 import ListEditor from "@/components/admin/ListEditor";
+import SlugTitleFields from "@/components/admin/SlugTitleFields";
+import MetaSeoFields from "@/components/admin/MetaSeoFields";
+import FormShell, { type FormShellState } from "@/components/admin/FormShell";
+import { disposeFormDeletions } from "@/lib/admin-media";
 
 async function getRoute(id: string) {
   if (id === "new") return null;
@@ -22,14 +26,15 @@ async function getRoute(id: string) {
   return route;
 }
 
-async function saveRoute(formData: FormData) {
+async function saveRoute(_prev: FormShellState, formData: FormData): Promise<FormShellState> {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  try {
+    const session = await auth();
+    if (!session) return { error: "You are not signed in. Please log in and try again." };
 
-  const id = formData.get("id") as string | null;
-  const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+    const id = formData.get("id") as string | null;
+    const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
 
   // Parse array fields
   const highlightsStr = formData.get("highlights") as string;
@@ -98,6 +103,20 @@ async function saveRoute(formData: FormData) {
     }
   }
 
+  // Parse gallery alts JSON
+  const galleryAltsStr = formData.get("galleryAlts") as string;
+  let galleryAlts = null;
+  if (galleryAltsStr) {
+    try {
+      const parsed = JSON.parse(galleryAltsStr);
+      if (parsed && typeof parsed === "object" && Object.keys(parsed).length > 0) {
+        galleryAlts = parsed;
+      }
+    } catch {
+      galleryAlts = null;
+    }
+  }
+
   const data = {
     slug,
     title: formData.get("title") as string,
@@ -129,6 +148,7 @@ async function saveRoute(formData: FormData) {
     faqs,
     featuredImage: formData.get("featuredImage") as string || null,
     gallery,
+    galleryAlts,
     isActive: formData.get("isActive") === "on",
   };
 
@@ -141,6 +161,17 @@ async function saveRoute(formData: FormData) {
     await prisma.trekkingRoute.create({
       data,
     });
+  }
+
+    await disposeFormDeletions(formData, ["featuredImage", "routeMapImage", "gallery"]);
+  } catch (e) {
+    console.error("Save route failed:", e);
+    return {
+      error:
+        e instanceof Error
+          ? e.message
+          : "Save failed. Please check the form and try again.",
+    };
   }
 
   redirect("/admin/routes");
@@ -213,7 +244,7 @@ export default async function RouteEditPage({
         )}
       </div>
 
-      <form action={saveRoute} className="space-y-6">
+      <FormShell action={saveRoute} className="space-y-6">
         <input type="hidden" name="id" value={id} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -226,43 +257,21 @@ export default async function RouteEditPage({
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Route Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="title"
-                    required
-                    defaultValue={route?.title || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                    placeholder="e.g., Lemosho Route"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    URL Slug *
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-500">/trekking/</span>
-                    <input
-                      type="text"
-                      name="slug"
-                      required
-                      defaultValue={route?.slug || ""}
-                      className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                      placeholder="lemosho-route"
-                    />
-                    <span className="text-slate-500">/</span>
-                  </div>
-                </div>
+                <SlugTitleFields
+                  defaultTitle={route?.title || ""}
+                  defaultSlug={route?.slug || ""}
+                  titleLabel="Route Name"
+                  titlePlaceholder="e.g., Lemosho Route"
+                  slugPlaceholder="lemosho-route"
+                  slugPrefix="/trekking/"
+                />
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-duration" className="block text-sm font-medium text-slate-700 mb-2">
                     Duration *
                   </label>
                   <input
+                    id="field-duration"
                     type="text"
                     name="duration"
                     required
@@ -273,10 +282,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-durationDays" className="block text-sm font-medium text-slate-700 mb-2">
                     Duration (Days) *
                   </label>
                   <input
+                    id="field-durationDays"
                     type="number"
                     name="durationDays"
                     required
@@ -286,10 +296,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-physicalRating" className="block text-sm font-medium text-slate-700 mb-2">
                     Physical Rating
                   </label>
                   <select
+                    id="field-physicalRating"
                     name="physicalRating"
                     defaultValue={route?.physicalRating || ""}
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
@@ -303,10 +314,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-successRate" className="block text-sm font-medium text-slate-700 mb-2">
                     Success Rate (%)
                   </label>
                   <input
+                    id="field-successRate"
                     type="number"
                     name="successRate"
                     min="0"
@@ -318,10 +330,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-startPoint" className="block text-sm font-medium text-slate-700 mb-2">
                     Start Point
                   </label>
                   <input
+                    id="field-startPoint"
                     type="text"
                     name="startPoint"
                     defaultValue={route?.startPoint || ""}
@@ -331,10 +344,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-endPoint" className="block text-sm font-medium text-slate-700 mb-2">
                     End Point
                   </label>
                   <input
+                    id="field-endPoint"
                     type="text"
                     name="endPoint"
                     defaultValue={route?.endPoint || ""}
@@ -344,10 +358,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-maxPeople" className="block text-sm font-medium text-slate-700 mb-2">
                     Max Group Size
                   </label>
                   <input
+                    id="field-maxPeople"
                     type="number"
                     name="maxPeople"
                     defaultValue={route?.maxPeople || ""}
@@ -356,10 +371,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-ageRange" className="block text-sm font-medium text-slate-700 mb-2">
                     Age Range
                   </label>
                   <input
+                    id="field-ageRange"
                     type="text"
                     name="ageRange"
                     defaultValue={route?.ageRange || ""}
@@ -369,10 +385,11 @@ export default async function RouteEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-summitHeight" className="block text-sm font-medium text-slate-700 mb-2">
                     Summit Height
                   </label>
                   <input
+                    id="field-summitHeight"
                     type="text"
                     name="summitHeight"
                     defaultValue={route?.summitHeight || ""}
@@ -384,10 +401,11 @@ export default async function RouteEditPage({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-overview" className="block text-sm font-medium text-slate-700 mb-2">
                   Overview *
                 </label>
                 <textarea
+                  id="field-overview"
                   name="overview"
                   required
                   rows={5}
@@ -520,6 +538,7 @@ export default async function RouteEditPage({
                 label="Featured Image"
                 helpText="Main image shown in listings and hero sections"
                 deleteFromR2
+                deferDeletion
               />
 
               <ImageUploadField
@@ -529,6 +548,7 @@ export default async function RouteEditPage({
                 label="Route Map Image"
                 helpText="Map showing the trekking route"
                 deleteFromR2
+                deferDeletion
               />
 
               <GalleryUploadField
@@ -536,39 +556,22 @@ export default async function RouteEditPage({
                 defaultValue={route?.gallery || []}
                 folder="routes"
                 label="Photo Gallery"
-                helpText="Additional photos for the route page"
+                helpText="Additional photos for the route page. Add alt text under each image for SEO + accessibility."
                 maxImages={12}
                 deleteFromR2
+                deferDeletion
+                altsName="galleryAlts"
+                defaultAlts={(route?.galleryAlts as Record<string, { alt: string; caption?: string }> | null) ?? undefined}
               />
             </div>
 
             {/* SEO */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
               <h3 className="font-semibold text-slate-900">SEO</h3>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Title
-                </label>
-                <input
-                  type="text"
-                  name="metaTitle"
-                  defaultValue={route?.metaTitle || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Description
-                </label>
-                <textarea
-                  name="metaDescription"
-                  rows={3}
-                  defaultValue={route?.metaDescription || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
+              <MetaSeoFields
+                defaultMetaTitle={route?.metaTitle || ""}
+                defaultMetaDescription={route?.metaDescription || ""}
+              />
             </div>
 
             {/* Expert Guide */}
@@ -577,10 +580,11 @@ export default async function RouteEditPage({
               <p className="text-xs text-slate-500">Shown in the sidebar &ldquo;Your Expert Guide&rdquo; card on the route page.</p>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-guideName" className="block text-sm font-medium text-slate-700 mb-2">
                   Guide Name
                 </label>
                 <input
+                  id="field-guideName"
                   type="text"
                   name="guideName"
                   defaultValue={route?.guideName || ""}
@@ -590,10 +594,11 @@ export default async function RouteEditPage({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-guideTitle" className="block text-sm font-medium text-slate-700 mb-2">
                   Guide Title
                 </label>
                 <input
+                  id="field-guideTitle"
                   type="text"
                   name="guideTitle"
                   defaultValue={route?.guideTitle || ""}
@@ -612,10 +617,11 @@ export default async function RouteEditPage({
               />
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-guideQuote" className="block text-sm font-medium text-slate-700 mb-2">
                   Guide Quote
                 </label>
                 <textarea
+                  id="field-guideQuote"
                   name="guideQuote"
                   rows={3}
                   defaultValue={route?.guideQuote || ""}
@@ -631,10 +637,11 @@ export default async function RouteEditPage({
               <p className="text-xs text-slate-500">Trust badges shown in the CTA section. Leave empty for defaults.</p>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-ctaRating" className="block text-sm font-medium text-slate-700 mb-2">
                   Rating
                 </label>
                 <input
+                  id="field-ctaRating"
                   type="text"
                   name="ctaRating"
                   defaultValue={route?.ctaRating || ""}
@@ -644,10 +651,11 @@ export default async function RouteEditPage({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-ctaClimberCount" className="block text-sm font-medium text-slate-700 mb-2">
                   Climber Count
                 </label>
                 <input
+                  id="field-ctaClimberCount"
                   type="text"
                   name="ctaClimberCount"
                   defaultValue={route?.ctaClimberCount || ""}
@@ -673,7 +681,7 @@ export default async function RouteEditPage({
             {isNew ? "Create Route" : "Save Changes"}
           </button>
         </div>
-      </form>
+      </FormShell>
 
       {!isNew && (
         <div className="flex items-center justify-start">

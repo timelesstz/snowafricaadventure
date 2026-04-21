@@ -7,6 +7,10 @@ import ImageUploadField from "@/components/admin/ImageUploadField";
 import GalleryUploadField from "@/components/admin/GalleryUploadField";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
 import ListEditor from "@/components/admin/ListEditor";
+import SlugTitleFields from "@/components/admin/SlugTitleFields";
+import MetaSeoFields from "@/components/admin/MetaSeoFields";
+import FormShell, { type FormShellState } from "@/components/admin/FormShell";
+import { disposeFormDeletions } from "@/lib/admin-media";
 
 async function getDayTrip(id: string) {
   if (id === "new") return null;
@@ -18,14 +22,15 @@ async function getDayTrip(id: string) {
   return dayTrip;
 }
 
-async function saveDayTrip(formData: FormData) {
+async function saveDayTrip(_prev: FormShellState, formData: FormData): Promise<FormShellState> {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  try {
+    const session = await auth();
+    if (!session) return { error: "You are not signed in. Please log in and try again." };
 
-  const id = formData.get("id") as string | null;
-  const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+    const id = formData.get("id") as string | null;
+    const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
 
   // Parse array fields
   const highlightsStr = formData.get("highlights") as string;
@@ -48,6 +53,20 @@ async function saveDayTrip(formData: FormData) {
     }
   }
 
+  // Parse gallery alts JSON
+  const galleryAltsStr = formData.get("galleryAlts") as string;
+  let galleryAlts = null;
+  if (galleryAltsStr) {
+    try {
+      const parsed = JSON.parse(galleryAltsStr);
+      if (parsed && typeof parsed === "object" && Object.keys(parsed).length > 0) {
+        galleryAlts = parsed;
+      }
+    } catch {
+      galleryAlts = null;
+    }
+  }
+
   const priceFromStr = formData.get("priceFrom") as string;
 
   const data = {
@@ -61,6 +80,7 @@ async function saveDayTrip(formData: FormData) {
     inclusions,
     exclusions,
     gallery,
+    galleryAlts,
     featuredImage: formData.get("featuredImage") as string || null,
     priceFrom: priceFromStr ? parseFloat(priceFromStr) : null,
     isActive: formData.get("isActive") === "on",
@@ -75,6 +95,17 @@ async function saveDayTrip(formData: FormData) {
     await prisma.dayTrip.create({
       data,
     });
+  }
+
+    await disposeFormDeletions(formData, ["featuredImage", "gallery"]);
+  } catch (e) {
+    console.error("Save day-trip failed:", e);
+    return {
+      error:
+        e instanceof Error
+          ? e.message
+          : "Save failed. Please check the form and try again.",
+    };
   }
 
   redirect("/admin/day-trips");
@@ -138,7 +169,7 @@ export default async function DayTripEditPage({
         )}
       </div>
 
-      <form action={saveDayTrip} className="space-y-6">
+      <FormShell action={saveDayTrip} className="space-y-6">
         <input type="hidden" name="id" value={id} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -150,43 +181,21 @@ export default async function DayTripEditPage({
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Title *
-                  </label>
-                  <input
-                    type="text"
-                    name="title"
-                    required
-                    defaultValue={dayTrip?.title || ""}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                    placeholder="e.g., Materuni Waterfalls & Coffee Tour"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
-                    URL Slug *
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-500">/tanzania-day-tours/</span>
-                    <input
-                      type="text"
-                      name="slug"
-                      required
-                      defaultValue={dayTrip?.slug || ""}
-                      className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                      placeholder="materuni-waterfalls-coffee-tour"
-                    />
-                    <span className="text-slate-500">/</span>
-                  </div>
-                </div>
+                <SlugTitleFields
+                  defaultTitle={dayTrip?.title || ""}
+                  defaultSlug={dayTrip?.slug || ""}
+                  titleLabel="Title"
+                  titlePlaceholder="e.g., Materuni Waterfalls & Coffee Tour"
+                  slugPlaceholder="materuni-waterfalls-coffee-tour"
+                  slugPrefix="/tanzania-day-tours/"
+                />
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-destination" className="block text-sm font-medium text-slate-700 mb-2">
                     Destination *
                   </label>
                   <input
+                    id="field-destination"
                     type="text"
                     name="destination"
                     required
@@ -197,10 +206,11 @@ export default async function DayTripEditPage({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="field-priceFrom" className="block text-sm font-medium text-slate-700 mb-2">
                     Price From (USD)
                   </label>
                   <input
+                    id="field-priceFrom"
                     type="number"
                     name="priceFrom"
                     step="0.01"
@@ -212,10 +222,11 @@ export default async function DayTripEditPage({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label htmlFor="field-description" className="block text-sm font-medium text-slate-700 mb-2">
                   Description *
                 </label>
                 <textarea
+                  id="field-description"
                   name="description"
                   required
                   rows={6}
@@ -294,6 +305,7 @@ export default async function DayTripEditPage({
                 label="Featured Image"
                 helpText="Main image shown in listings"
                 deleteFromR2
+                deferDeletion
               />
 
               <GalleryUploadField
@@ -301,39 +313,22 @@ export default async function DayTripEditPage({
                 defaultValue={dayTrip?.gallery || []}
                 folder="daytrips"
                 label="Photo Gallery"
-                helpText="Additional photos"
+                helpText="Additional photos. Add alt text under each image for SEO + accessibility."
                 maxImages={10}
                 deleteFromR2
+                deferDeletion
+                altsName="galleryAlts"
+                defaultAlts={(dayTrip?.galleryAlts as Record<string, { alt: string; caption?: string }> | null) ?? undefined}
               />
             </div>
 
             {/* SEO */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
               <h3 className="font-semibold text-slate-900">SEO</h3>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Title
-                </label>
-                <input
-                  type="text"
-                  name="metaTitle"
-                  defaultValue={dayTrip?.metaTitle || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Description
-                </label>
-                <textarea
-                  name="metaDescription"
-                  rows={3}
-                  defaultValue={dayTrip?.metaDescription || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                />
-              </div>
+              <MetaSeoFields
+                defaultMetaTitle={dayTrip?.metaTitle || ""}
+                defaultMetaDescription={dayTrip?.metaDescription || ""}
+              />
             </div>
           </div>
         </div>
@@ -352,7 +347,7 @@ export default async function DayTripEditPage({
             {isNew ? "Create Day Trip" : "Save Changes"}
           </button>
         </div>
-      </form>
+      </FormShell>
 
       {!isNew && (
         <div className="flex items-center justify-start">

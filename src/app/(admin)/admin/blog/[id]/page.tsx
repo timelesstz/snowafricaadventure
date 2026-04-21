@@ -12,6 +12,7 @@ import {
   FormSection,
   fieldControlClass,
 } from "@/components/admin/ui";
+import { disposeFormDeletions } from "@/lib/admin-media";
 
 async function getBlogPost(id: string) {
   if (id === "new") return null;
@@ -119,6 +120,8 @@ async function savePost(formData: FormData) {
       data: { postId, tagId: tag.id },
     });
   }
+
+  await disposeFormDeletions(formData, ["featuredImage"]);
 
   redirect("/admin/blog");
 }
@@ -361,6 +364,7 @@ export default async function BlogEditPage({
                 label="Featured Image"
                 helpText="Main image shown in listings and at top of post"
                 deleteFromR2
+                deferDeletion
               />
             </FormSection>
 

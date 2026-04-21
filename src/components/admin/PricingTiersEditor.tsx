@@ -18,7 +18,7 @@ interface PriceTier {
   featured?: boolean;
 }
 
-const DEFAULT_TIERS: PriceTier[] = [
+const CLIMB_DEFAULT_TIERS: PriceTier[] = [
   { groupSize: "1 Person", description: "Private climb experience", price: 3250 },
   { groupSize: "2-4 People", description: "Small group adventure", price: 2450, savings: 800, featured: true },
   { groupSize: "5-7 People", description: "Medium group savings", price: 2250, savings: 1000 },
@@ -29,9 +29,11 @@ const DEFAULT_TIERS: PriceTier[] = [
 export default function PricingTiersEditor({
   name,
   defaultValue,
+  defaultTiers = CLIMB_DEFAULT_TIERS,
 }: {
   name: string;
   defaultValue?: PriceTier[] | null;
+  defaultTiers?: PriceTier[];
 }) {
   const [tiers, setTiers] = useState<PriceTier[]>(() => {
     if (Array.isArray(defaultValue) && defaultValue.length > 0)
@@ -76,7 +78,7 @@ export default function PricingTiersEditor({
   }
 
   function loadDefaults() {
-    setTiers(DEFAULT_TIERS);
+    setTiers(defaultTiers);
   }
 
   return (
