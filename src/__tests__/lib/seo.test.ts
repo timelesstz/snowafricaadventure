@@ -16,8 +16,11 @@ describe("SEO utilities", () => {
         url: "/test/",
       });
 
-      expect(meta.title).toBe("Test Page | Snow Africa Adventure");
+      // `title` is raw so the root layout's template can append "| Snow Africa
+      // Adventure". The branded form is used on og:title / twitter:title only.
+      expect(meta.title).toBe("Test Page");
       expect(meta.description).toBe("Test description");
+      expect(meta.openGraph?.title).toBe("Test Page | Snow Africa Adventure");
     });
 
     it("should include OpenGraph data", () => {

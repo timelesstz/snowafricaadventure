@@ -6,6 +6,7 @@ import { clsx } from "clsx";
 
 const tabs = [
   { href: "/admin/seo", label: "Overview" },
+  { href: "/admin/seo/content-health", label: "Content Health" },
   { href: "/admin/seo/search-console", label: "Search Console" },
   { href: "/admin/seo/analytics", label: "Analytics" },
   { href: "/admin/seo/page-analyzer", label: "Page Analyzer" },

@@ -527,6 +527,7 @@ export function generateVideoSchema(video: {
 
 /**
  * Generate ItemList schema for collections (routes, safaris, etc.)
+ * Includes a schema.org Offer when `price` is present.
  */
 export function generateItemListSchema(items: {
   name: string;
@@ -534,6 +535,7 @@ export function generateItemListSchema(items: {
   description?: string;
   image?: string;
   position?: number;
+  price?: number;
 }[]) {
   return {
     "@context": "https://schema.org",
@@ -547,6 +549,15 @@ export function generateItemListSchema(items: {
         url: `${SITE_CONFIG.url}${item.url}`,
         ...(item.description && { description: item.description }),
         ...(item.image && { image: item.image }),
+        ...(item.price && {
+          offers: {
+            "@type": "Offer",
+            price: item.price,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: `${SITE_CONFIG.url}${item.url}`,
+          },
+        }),
       },
     })),
   };
