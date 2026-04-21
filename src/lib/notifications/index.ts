@@ -5,6 +5,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { NotificationType, NotificationPriority, Prisma } from "@prisma/client";
+import { sendPushToAllAdmins } from "@/lib/web-push";
+import { linkForNotification } from "@/lib/notifications/display";
 
 export interface CreateNotificationData {
   type: NotificationType;
@@ -40,6 +42,16 @@ export async function createNotification(
         expiresAt: data.expiresAt,
       },
     });
+
+    // Fire-and-forget browser push fan-out. Errors are swallowed inside.
+    void sendPushToAllAdmins({
+      title: data.title,
+      body: data.message,
+      tag: notification.id,
+      url:
+        linkForNotification({ type: data.type, data: data.data ?? null }) ??
+        "/admin/notifications",
+    }).catch((err) => console.error("Push fan-out failed:", err));
 
     return { success: true, id: notification.id };
   } catch (error) {

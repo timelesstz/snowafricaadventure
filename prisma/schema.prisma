@@ -515,6 +515,7 @@ model AdminUser {
   lastLoginAt  DateTime?
   role         AdminRole @default(ADMIN)
   resetTokens  PasswordResetToken[]
+  pushSubscriptions PushSubscription[]
 
   @@index([email])
 }
@@ -851,6 +852,19 @@ enum NotificationPriority {
   NORMAL
   HIGH
   URGENT
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userAgent String?
+  createdAt DateTime @default(now())
+  user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 enum EmailStatus {

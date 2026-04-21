@@ -1,12 +1,14 @@
 /**
  * Admin Notifications API
- * GET /api/admin/notifications - List notifications
- * POST /api/admin/notifications - Create notification (internal use)
+ * GET  /api/admin/notifications — list notifications
+ * POST /api/admin/notifications — create, or run bulk actions (markAllRead, markRead, delete)
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { auth, requireRole } from "@/lib/auth";
 import { AdminRole } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import {
   getNotifications,
   createNotification,
@@ -47,6 +49,19 @@ export async function GET(request: NextRequest) {
   }
 }
 
+const bulkIdsSchema = z.object({
+  ids: z.array(z.string().min(1)).min(1).max(500),
+});
+
+const createSchema = z.object({
+  type: z.nativeEnum(NotificationType),
+  title: z.string().min(1).max(200),
+  message: z.string().min(1).max(1000),
+  priority: z.nativeEnum(NotificationPriority).optional(),
+  expiresAt: z.string().datetime().optional(),
+  data: z.record(z.string(), z.unknown()).optional(),
+});
+
 export async function POST(request: NextRequest) {
   try {
     await requireRole(AdminRole.EDITOR);
@@ -58,31 +73,61 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { action, ...data } = body;
+    const { action } = body;
 
-    // Handle mark all as read action
     if (action === "markAllRead") {
       const result = await markAllAsRead();
       return NextResponse.json(result);
     }
 
-    // Create new notification
-    const { type, title, message, priority, expiresAt } = data;
+    if (action === "markRead") {
+      const parsed = bulkIdsSchema.safeParse(body);
+      if (!parsed.success) {
+        return NextResponse.json(
+          { error: "ids must be a non-empty string array" },
+          { status: 400 }
+        );
+      }
+      const result = await prisma.notification.updateMany({
+        where: { id: { in: parsed.data.ids } },
+        data: { isRead: true, readAt: new Date() },
+      });
+      return NextResponse.json({ success: true, count: result.count });
+    }
 
-    if (!type || !title || !message) {
+    if (action === "delete") {
+      const parsed = bulkIdsSchema.safeParse(body);
+      if (!parsed.success) {
+        return NextResponse.json(
+          { error: "ids must be a non-empty string array" },
+          { status: 400 }
+        );
+      }
+      const result = await prisma.notification.deleteMany({
+        where: { id: { in: parsed.data.ids } },
+      });
+      return NextResponse.json({ success: true, count: result.count });
+    }
+
+    // Default: create a new notification
+    const parsed = createSchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: "Missing required fields: type, title, message" },
+        {
+          error: "Invalid notification payload",
+          details: parsed.error.flatten(),
+        },
         { status: 400 }
       );
     }
 
     const result = await createNotification({
-      type,
-      title,
-      message,
-      priority,
-      expiresAt: expiresAt ? new Date(expiresAt) : undefined,
-      data: data.data,
+      type: parsed.data.type,
+      title: parsed.data.title,
+      message: parsed.data.message,
+      priority: parsed.data.priority,
+      expiresAt: parsed.data.expiresAt ? new Date(parsed.data.expiresAt) : undefined,
+      data: parsed.data.data,
     });
 
     if (!result.success) {

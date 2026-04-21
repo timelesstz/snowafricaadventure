@@ -74,3 +74,45 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
+// Browser push notifications
+self.addEventListener("push", (event) => {
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch {
+    payload = { title: "Snow Africa Admin", body: event.data ? event.data.text() : "" };
+  }
+
+  const title = payload.title || "Snow Africa Admin";
+  const options = {
+    body: payload.body || "",
+    icon: payload.icon || "/admin-icon-192.png",
+    badge: payload.badge || "/admin-icon-192.png",
+    tag: payload.tag,
+    data: { url: payload.url || "/admin/notifications" },
+    requireInteraction: false,
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Handle click on notification — focus existing admin tab or open a new one
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || "/admin/notifications";
+
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
+      for (const client of clients) {
+        const clientUrl = new URL(client.url);
+        if (clientUrl.pathname.startsWith("/admin") && "focus" in client) {
+          client.focus();
+          if ("navigate" in client) return client.navigate(target);
+          return;
+        }
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(target);
+    })
+  );
+});

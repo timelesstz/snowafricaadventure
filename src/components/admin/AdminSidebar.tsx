@@ -285,7 +285,7 @@ export default function AdminSidebar({ user }: { user: User }) {
             </p>
           </div>
           <div className="hidden lg:block">
-            <NotificationBell />
+            <NotificationBell variant="dark" />
           </div>
         </div>
       </div>
@@ -359,7 +359,7 @@ export default function AdminSidebar({ user }: { user: User }) {
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-slate-800 flex items-center justify-between px-4 z-50">
         <h1 className="text-lg font-bold text-white">Snow Africa Admin</h1>
         <div className="flex items-center gap-2">
-          <NotificationBell />
+          <NotificationBell variant="dark" />
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
