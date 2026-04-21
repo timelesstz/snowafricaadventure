@@ -24,11 +24,12 @@ export async function POST() {
 
     // Scan TrekkingRoutes
     const routes = await prisma.trekkingRoute.findMany({
-      select: { featuredImage: true, routeMapImage: true, gallery: true },
+      select: { featuredImage: true, routeMapImage: true, guideImage: true, gallery: true },
     });
     routes.forEach((r) => {
       if (r.featuredImage) incrementUsage(usageCounts, r.featuredImage);
       if (r.routeMapImage) incrementUsage(usageCounts, r.routeMapImage);
+      if (r.guideImage) incrementUsage(usageCounts, r.guideImage);
       r.gallery.forEach((url) => incrementUsage(usageCounts, url));
     });
 
@@ -87,6 +88,39 @@ export async function POST() {
     });
     homepageContent.forEach((h) => {
       const contentStr = JSON.stringify(h.content);
+      allMedia.forEach((m) => {
+        if (contentStr.includes(m.url)) {
+          incrementUsage(usageCounts, m.url);
+        }
+      });
+    });
+
+    // Scan PageHero background images
+    const heroes = await prisma.pageHero.findMany({
+      select: { backgroundImage: true },
+    });
+    heroes.forEach((h) => {
+      if (h.backgroundImage) incrementUsage(usageCounts, h.backgroundImage);
+    });
+
+    // Scan Page.content rich-text bodies
+    const pages = await prisma.page.findMany({
+      select: { content: true },
+    });
+    pages.forEach((p) => {
+      allMedia.forEach((m) => {
+        if (p.content.includes(m.url)) {
+          incrementUsage(usageCounts, m.url);
+        }
+      });
+    });
+
+    // Scan CmsPage puckData (Puck builder JSON)
+    const cmsPages = await prisma.cmsPage.findMany({
+      select: { puckData: true },
+    });
+    cmsPages.forEach((c) => {
+      const contentStr = JSON.stringify(c.puckData);
       allMedia.forEach((m) => {
         if (contentStr.includes(m.url)) {
           incrementUsage(usageCounts, m.url);

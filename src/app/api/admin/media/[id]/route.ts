@@ -5,6 +5,7 @@ import { AdminRole, Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 import { adminMediaUpdateSchema } from "@/lib/schemas";
 import { deleteFromR2 } from "@/lib/r2";
+import { buildUsage, type MediaUsage } from "@/lib/media-usage";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -126,69 +127,127 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-/**
- * Find where a media URL is being used across all content
- */
-async function findMediaUsage(url: string) {
-  const usage: Array<{ type: string; id: string; title: string }> = [];
+async function findMediaUsage(url: string): Promise<MediaUsage[]> {
+  const usage: MediaUsage[] = [];
 
-  // Check TrekkingRoutes
   const routes = await prisma.trekkingRoute.findMany({
     where: {
       OR: [
         { featuredImage: url },
         { routeMapImage: url },
+        { guideImage: url },
         { gallery: { has: url } },
       ],
     },
-    select: { id: true, title: true },
+    select: {
+      id: true,
+      slug: true,
+      title: true,
+      featuredImage: true,
+      routeMapImage: true,
+      guideImage: true,
+      gallery: true,
+    },
   });
-  routes.forEach((r) => usage.push({ type: "route", id: r.id, title: r.title }));
+  for (const r of routes) {
+    if (r.featuredImage === url) usage.push(buildUsage("route", r.id, r.title, "featuredImage", r.slug));
+    if (r.routeMapImage === url) usage.push(buildUsage("route", r.id, r.title, "routeMapImage", r.slug));
+    if (r.guideImage === url) usage.push(buildUsage("route", r.id, r.title, "guideImage", r.slug));
+    r.gallery.forEach((g, i) => {
+      if (g === url) usage.push(buildUsage("route", r.id, r.title, `gallery[${i}]`, r.slug));
+    });
+  }
 
-  // Check SafariPackages
   const safaris = await prisma.safariPackage.findMany({
-    where: {
-      OR: [{ featuredImage: url }, { gallery: { has: url } }],
-    },
-    select: { id: true, title: true },
+    where: { OR: [{ featuredImage: url }, { gallery: { has: url } }] },
+    select: { id: true, slug: true, title: true, featuredImage: true, gallery: true },
   });
-  safaris.forEach((s) => usage.push({ type: "safari", id: s.id, title: s.title }));
+  for (const s of safaris) {
+    if (s.featuredImage === url) usage.push(buildUsage("safari", s.id, s.title, "featuredImage", s.slug));
+    s.gallery.forEach((g, i) => {
+      if (g === url) usage.push(buildUsage("safari", s.id, s.title, `gallery[${i}]`, s.slug));
+    });
+  }
 
-  // Check Destinations
   const destinations = await prisma.destination.findMany({
-    where: {
-      OR: [{ featuredImage: url }, { gallery: { has: url } }],
-    },
-    select: { id: true, name: true },
+    where: { OR: [{ featuredImage: url }, { gallery: { has: url } }] },
+    select: { id: true, slug: true, name: true, featuredImage: true, gallery: true },
   });
-  destinations.forEach((d) =>
-    usage.push({ type: "destination", id: d.id, title: d.name })
+  for (const d of destinations) {
+    if (d.featuredImage === url) usage.push(buildUsage("destination", d.id, d.name, "featuredImage", d.slug));
+    d.gallery.forEach((g, i) => {
+      if (g === url) usage.push(buildUsage("destination", d.id, d.name, `gallery[${i}]`, d.slug));
+    });
+  }
+
+  const dayTrips = await prisma.dayTrip.findMany({
+    where: { OR: [{ featuredImage: url }, { gallery: { has: url } }] },
+    select: { id: true, slug: true, title: true, featuredImage: true, gallery: true },
+  });
+  for (const d of dayTrips) {
+    if (d.featuredImage === url) usage.push(buildUsage("daytrip", d.id, d.title, "featuredImage", d.slug));
+    d.gallery.forEach((g, i) => {
+      if (g === url) usage.push(buildUsage("daytrip", d.id, d.title, `gallery[${i}]`, d.slug));
+    });
+  }
+
+  const blogFeatured = await prisma.blogPost.findMany({
+    where: { featuredImage: url },
+    select: { id: true, slug: true, title: true },
+  });
+  blogFeatured.forEach((p) =>
+    usage.push(buildUsage("blog", p.id, p.title, "featuredImage", p.slug))
   );
 
-  // Check DayTrips
-  const dayTrips = await prisma.dayTrip.findMany({
-    where: {
-      OR: [{ featuredImage: url }, { gallery: { has: url } }],
-    },
-    select: { id: true, title: true },
+  const blogBody = await prisma.blogPost.findMany({
+    where: { content: { contains: url } },
+    select: { id: true, slug: true, title: true },
   });
-  dayTrips.forEach((d) => usage.push({ type: "daytrip", id: d.id, title: d.title }));
+  blogBody.forEach((p) =>
+    usage.push(buildUsage("blog", p.id, p.title, "content", p.slug))
+  );
 
-  // Check BlogPosts
-  const posts = await prisma.blogPost.findMany({
-    where: { featuredImage: url },
-    select: { id: true, title: true },
-  });
-  posts.forEach((p) => usage.push({ type: "blog", id: p.id, title: p.title }));
-
-  // Check Reviews
   const reviews = await prisma.review.findMany({
     where: { authorImage: url },
     select: { id: true, authorName: true },
   });
   reviews.forEach((r) =>
-    usage.push({ type: "review", id: r.id, title: r.authorName })
+    usage.push(buildUsage("review", r.id, r.authorName, "authorImage"))
   );
+
+  const heroes = await prisma.pageHero.findMany({
+    where: { backgroundImage: url },
+    select: { id: true, pageSlug: true, title: true },
+  });
+  heroes.forEach((h) =>
+    usage.push(buildUsage("pagehero", h.id, h.title, "backgroundImage", h.pageSlug))
+  );
+
+  const pages = await prisma.page.findMany({
+    where: { content: { contains: url } },
+    select: { id: true, slug: true, title: true },
+  });
+  pages.forEach((p) =>
+    usage.push(buildUsage("page", p.id, p.title, "content", p.slug))
+  );
+
+  const cms = await prisma.cmsPage.findMany({
+    select: { id: true, slug: true, title: true, puckData: true },
+  });
+  for (const c of cms) {
+    if (JSON.stringify(c.puckData).includes(url)) {
+      usage.push(buildUsage("cmspage", c.id, c.title, "puckData", c.slug));
+    }
+  }
+
+  const homepage = await prisma.homepageContent.findMany({
+    select: { id: true, section: true, content: true },
+  });
+  for (const h of homepage) {
+    if (JSON.stringify(h.content).includes(url)) {
+      usage.push(buildUsage("homepage", h.id, h.section, "content"));
+    }
+  }
 
   return usage;
 }

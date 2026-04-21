@@ -22,7 +22,9 @@ import {
   Cloud,
 } from "lucide-react";
 import { clsx } from "clsx";
+import Link from "next/link";
 import MediaUploader from "@/components/admin/MediaUploader";
+import type { MediaUsage } from "@/lib/media-usage";
 
 interface Media {
   id: string;
@@ -59,12 +61,6 @@ interface R2Item {
   usageCount: number;
   filename: string;
   folder: string;
-}
-
-interface MediaUsage {
-  type: string;
-  id: string;
-  title: string;
 }
 
 type ViewMode = "grid" | "list";
@@ -170,6 +166,8 @@ export default function MediaLibrary() {
   const [showUploader, setShowUploader] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
   const [mediaUsage, setMediaUsage] = useState<MediaUsage[]>([]);
+  const [forceDeleteSingle, setForceDeleteSingle] = useState(false);
+  const [forceDeleteBulk, setForceDeleteBulk] = useState(false);
 
   // Tab state
   const [activeTab, setActiveTab] = useState<TabMode>("database");
@@ -271,8 +269,15 @@ export default function MediaLibrary() {
     }
   };
 
+  // Counts how many of the currently-selected media items have usageCount > 0.
+  // Used to gate bulk-delete behind a force-override checkbox.
+  const inUseSelectedCount = media.filter(
+    (m) => selectedIds.has(m.id) && m.usageCount > 0
+  ).length;
+
   const handleDeleteSelected = async () => {
     if (selectedIds.size === 0) return;
+    if (inUseSelectedCount > 0 && !forceDeleteBulk) return;
     if (!confirm(`Delete ${selectedIds.size} selected images? This cannot be undone.`)) {
       return;
     }
@@ -287,6 +292,7 @@ export default function MediaLibrary() {
       const data = await res.json();
       if (data.success) {
         setSelectedIds(new Set());
+        setForceDeleteBulk(false);
         fetchMedia();
       }
     } catch (error) {
@@ -298,6 +304,7 @@ export default function MediaLibrary() {
 
   const handleSelectMedia = async (item: Media) => {
     setSelectedMedia(item);
+    setForceDeleteSingle(false);
     try {
       const res = await fetch(`/api/admin/media/${item.id}`);
       const data = await res.json();
@@ -659,17 +666,35 @@ export default function MediaLibrary() {
                 <>
                   <span className="text-sm text-slate-500">
                     {selectedIds.size} selected
+                    {inUseSelectedCount > 0 && (
+                      <span className="ml-1 text-red-600">
+                        ({inUseSelectedCount} in use)
+                      </span>
+                    )}
                   </span>
+                  {inUseSelectedCount > 0 && (
+                    <label className="flex items-center gap-1.5 text-xs text-red-700 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={forceDeleteBulk}
+                        onChange={(e) => setForceDeleteBulk(e.target.checked)}
+                      />
+                      Force delete in-use
+                    </label>
+                  )}
                   <button
                     onClick={handleDeleteSelected}
-                    disabled={deleting}
-                    className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-300 text-red-700 rounded-lg hover:bg-red-50 disabled:opacity-50"
+                    disabled={deleting || (inUseSelectedCount > 0 && !forceDeleteBulk)}
+                    className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-300 text-red-700 rounded-lg hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Trash2 className="w-4 h-4" />
                     Delete Selected
                   </button>
                   <button
-                    onClick={() => setSelectedIds(new Set())}
+                    onClick={() => {
+                      setSelectedIds(new Set());
+                      setForceDeleteBulk(false);
+                    }}
                     className="text-sm text-slate-500 hover:text-slate-700"
                   >
                     Clear
@@ -1202,16 +1227,35 @@ export default function MediaLibrary() {
                       Used In ({mediaUsage.length})
                     </label>
                     {mediaUsage.length > 0 ? (
-                      <ul className="mt-1 space-y-1">
+                      <ul className="mt-1 space-y-1.5">
                         {mediaUsage.map((u, i) => (
                           <li
                             key={i}
                             className="text-sm flex items-center gap-2"
                           >
-                            <span className="px-1.5 py-0.5 bg-slate-100 rounded text-xs">
+                            <span className="px-1.5 py-0.5 bg-slate-100 rounded text-xs font-mono">
                               {u.type}
                             </span>
-                            <span className="truncate">{u.title}</span>
+                            <span className="flex-1 min-w-0 truncate">{u.title}</span>
+                            <span className="text-xs text-slate-500 font-mono whitespace-nowrap">
+                              {u.field}
+                            </span>
+                            <Link
+                              href={u.adminUrl}
+                              className="text-xs text-blue-600 hover:underline whitespace-nowrap"
+                            >
+                              Edit
+                            </Link>
+                            {u.publicUrl && (
+                              <a
+                                href={u.publicUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-slate-600 hover:underline whitespace-nowrap"
+                              >
+                                View
+                              </a>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -1231,6 +1275,30 @@ export default function MediaLibrary() {
               </div>
             </div>
 
+            {mediaUsage.length > 0 && (
+              <div className="mx-4 mt-3 p-3 border border-red-200 bg-red-50 rounded-lg">
+                <div className="flex items-start gap-2 text-sm text-red-800">
+                  <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium">
+                      In use on {mediaUsage.length} page
+                      {mediaUsage.length === 1 ? "" : "s"}
+                    </div>
+                    <div className="text-xs mt-0.5">
+                      Deleting will leave broken images on the live site.
+                    </div>
+                  </div>
+                </div>
+                <label className="flex items-center gap-2 mt-2 text-sm text-red-800 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={forceDeleteSingle}
+                    onChange={(e) => setForceDeleteSingle(e.target.checked)}
+                  />
+                  I understand and want to delete anyway
+                </label>
+              </div>
+            )}
             <div className="flex justify-end gap-2 p-4 border-t bg-slate-50">
               <a
                 href={selectedMedia.url}
@@ -1241,6 +1309,8 @@ export default function MediaLibrary() {
                 Open Original
               </a>
               <button
+                type="button"
+                disabled={mediaUsage.length > 0 && !forceDeleteSingle}
                 onClick={async () => {
                   if (!confirm("Delete this image? This cannot be undone.")) return;
                   try {
@@ -1248,12 +1318,13 @@ export default function MediaLibrary() {
                       method: "DELETE",
                     });
                     setSelectedMedia(null);
+                    setForceDeleteSingle(false);
                     fetchMedia();
                   } catch (error) {
                     console.error("Delete failed:", error);
                   }
                 }}
-                className="px-4 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-4 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-slate-300 disabled:cursor-not-allowed"
               >
                 Delete
               </button>
