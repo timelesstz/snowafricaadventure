@@ -71,19 +71,33 @@ export default async function SafariPage({ params }: PageProps) {
   }
 
   // Parse JSON fields
-  const rawItinerary = (safari.itinerary as { day: number; title: string; description: string; accommodation?: string; meals?: string }[] | null) || [];
+  const rawItinerary = (safari.itinerary as {
+    day: number;
+    title: string;
+    description: string;
+    location?: string;
+    accommodation?: string;
+    meals?: string;
+    highlights?: string[];
+    image?: string;
+    isFeatured?: boolean;
+  }[] | null) || [];
   const priceFrom = safari.priceFrom ? Number(safari.priceFrom) : 0;
 
-  // Transform itinerary to our format
+  // Transform itinerary to our format. Prefer admin-supplied image / highlights /
+  // featured flag; fall back to the auto-derived values only when empty.
   const itinerary: DayItinerary[] = rawItinerary.map((day, index) => ({
     day: day.day,
     title: day.title,
     description: day.description,
     accommodation: day.accommodation,
     meals: day.meals,
-    highlights: extractHighlights(day.description),
-    isFeatured: index === 3, // Mark day 4 as featured (Serengeti arrival typically)
-    image: getItineraryImage(day.title, index),
+    highlights:
+      Array.isArray(day.highlights) && day.highlights.length > 0
+        ? day.highlights
+        : extractHighlights(day.description),
+    isFeatured: typeof day.isFeatured === "boolean" ? day.isFeatured : index === 3,
+    image: day.image && day.image.trim() ? day.image : getItineraryImage(day.title, index),
   }));
 
   // Use durationDays from database
