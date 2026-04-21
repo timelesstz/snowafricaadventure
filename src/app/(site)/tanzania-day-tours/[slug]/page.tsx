@@ -8,6 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
+import { PublicGallery } from "@/components/ui/PublicGallery";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -267,6 +268,9 @@ export default async function DayTripDetailPage({ params }: Props) {
   const itinerary = tripData.itinerary || [];
   const whatToBring = tripData.whatToBring || [];
 
+  const galleryImages: string[] = dbTrip?.gallery && dbTrip.gallery.length > 0 ? dbTrip.gallery : [];
+  const galleryAlts = (dbTrip?.galleryAlts as Record<string, { alt?: string; caption?: string }> | null) ?? null;
+
   return (
     <div>
       {/* Analytics: Track item view */}
@@ -493,6 +497,16 @@ export default async function DayTripDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Photo Gallery */}
+      {galleryImages.length > 0 && (
+        <PublicGallery
+          title={`${name} — Gallery`}
+          images={galleryImages}
+          alts={galleryAlts}
+          fallbackAltPrefix={name}
+        />
+      )}
 
       {/* Other Trips */}
       <section className="py-12 bg-[var(--muted)]">

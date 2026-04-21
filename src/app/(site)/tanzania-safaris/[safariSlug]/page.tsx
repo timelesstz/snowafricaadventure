@@ -8,8 +8,10 @@ import {
   HighlightsStrip,
   DayByDayTimeline,
   TourInclusionsSection,
+  SafariPriceTable,
   FinalCTA,
 } from "@/components/tours";
+import { PublicGallery } from "@/components/ui/PublicGallery";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import type { DayItinerary } from "@/components/tours/types";
 import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
@@ -188,6 +190,24 @@ export default async function SafariPage({ params }: PageProps) {
       <TourInclusionsSection
         inclusions={safari.inclusions || defaultInclusions}
         exclusions={safari.exclusions || defaultExclusions}
+      />
+
+      {/* Photo Gallery */}
+      {safari.gallery && safari.gallery.length > 0 && (
+        <PublicGallery
+          title={`${safari.title} — Gallery`}
+          subtitle="Photos from past departures"
+          images={safari.gallery}
+          alts={safari.galleryAlts as Record<string, { alt?: string; caption?: string }> | null}
+          fallbackAltPrefix={safari.title}
+        />
+      )}
+
+      {/* Group Pricing */}
+      <SafariPriceTable
+        safariTitle={safari.title}
+        duration={safari.duration}
+        priceTiers={safari.pricingTiers as { groupSize: string; description: string; price: number; savings?: number; featured?: boolean }[] | null}
       />
 
       {/* Inquiry Form Section */}

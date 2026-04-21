@@ -7,6 +7,7 @@ import { MapPin, Calendar, Clock, Camera, Star } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { SafariCard } from "@/components/cards/SafariCard";
+import { PublicGallery } from "@/components/ui/PublicGallery";
 
 interface Props {
   params: Promise<{ destSlug: string }>;
@@ -818,6 +819,12 @@ export default async function DestinationDetailPage({ params }: Props) {
   const activities = d.activities || ["Game Drives", "Photography"];
   const safaris = d.safaris || [];
 
+  const galleryImages: string[] =
+    (destination?.gallery && destination.gallery.length > 0)
+      ? destination.gallery
+      : (placeholder?.galleryImages ?? []);
+  const galleryAlts = (destination?.galleryAlts as Record<string, { alt?: string; caption?: string }> | null) ?? null;
+
   return (
     <div>
       {/* Hero */}
@@ -966,6 +973,17 @@ export default async function DestinationDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Photo Gallery */}
+      {galleryImages.length > 0 && (
+        <PublicGallery
+          title={`${name} — Gallery`}
+          images={galleryImages}
+          alts={galleryAlts}
+          fallbackAltPrefix={name}
+          className="bg-[var(--surface)]"
+        />
+      )}
 
       {/* Related Safaris */}
       {(safaris.length > 0 || true) && (

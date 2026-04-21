@@ -297,7 +297,9 @@ export default async function RoutePage({ params }: PageProps) {
               </section>
 
               {/* Photo Gallery */}
-              {route.gallery && route.gallery.length > 0 && (
+              {route.gallery && route.gallery.length > 0 && (() => {
+                const galleryAlts = (route.galleryAlts as Record<string, { alt?: string; caption?: string }> | null) ?? null;
+                return (
                 <section id="gallery" className="section">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-[var(--surface)] rounded-xl flex items-center justify-center text-[var(--secondary)]">
@@ -312,8 +314,12 @@ export default async function RoutePage({ params }: PageProps) {
                     </h2>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {route.gallery.map((img, index) => (
-                      <div
+                    {route.gallery.map((img, index) => {
+                      const meta = galleryAlts?.[img];
+                      const alt = meta?.alt || `${route.title} - Photo ${index + 1}`;
+                      const caption = meta?.caption;
+                      return (
+                      <figure
                         key={index}
                         className={`relative overflow-hidden rounded-xl ${
                           index === 0 ? "col-span-2 row-span-2 h-[300px] md:h-[400px]" : "h-[180px] md:h-[200px]"
@@ -321,16 +327,23 @@ export default async function RoutePage({ params }: PageProps) {
                       >
                         <Image
                           src={img}
-                          alt={`${route.title} - Photo ${index + 1}`}
+                          alt={alt}
                           fill
                           className="object-cover hover:scale-105 transition-transform duration-500"
                           sizes={index === 0 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
                         />
-                      </div>
-                    ))}
+                        {caption && (
+                          <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent text-white text-xs md:text-sm px-3 py-2">
+                            {caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                      );
+                    })}
                   </div>
                 </section>
-              )}
+                );
+              })()}
 
               {/* Itinerary */}
               {itinerary.length > 0 && (

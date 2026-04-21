@@ -7,4 +7,5 @@ export * from "./SidebarCard";
 export * from "./HighlightsStrip";
 export * from "./DayByDayTimeline";
 export * from "./TourInclusionsSection";
+export * from "./SafariPriceTable";
 export * from "./FinalCTA";
