@@ -356,6 +356,6 @@ export const PARTNER_INFO = {
   marketing: {
     name: "Timeless International Marketing & Development",
     shortName: "Timeless International",
-    website: "https://craftedbytimeless.com",
+    website: "https://www.craftedbytimeless.com",
   },
 } as const;
