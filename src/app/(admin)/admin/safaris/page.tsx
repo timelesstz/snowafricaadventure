@@ -7,11 +7,13 @@ import {
   Search,
   Edit,
   Eye,
-  EyeOff,
   Calendar,
   DollarSign,
   Filter,
 } from "lucide-react";
+import { scoreSafariSeo, aggregateSeoScores } from "@/lib/seo-score";
+import { SeoScoreBadge } from "@/components/admin/SeoScoreBadge";
+import { SeoSummaryCard } from "@/components/admin/SeoSummaryCard";
 
 async function getSafaris(params: {
   status?: string;
@@ -88,6 +90,26 @@ export default async function SafarisPage({
     getSafaris({ status, type, search, page }),
     getSafariStats(),
   ]);
+
+  // Score every safari on the current page so we can show both a per-card
+  // badge and an aggregate summary. Computed once, reused twice.
+  const seoResults = safaris.map((s) =>
+    scoreSafariSeo({
+      title: s.title,
+      metaTitle: s.metaTitle,
+      metaDescription: s.metaDescription,
+      overview: s.overview,
+      featuredImage: s.featuredImage,
+      gallery: s.gallery,
+      highlights: s.highlights,
+      inclusions: s.inclusions,
+      exclusions: s.exclusions,
+      itinerary: s.itinerary,
+      destinationCount: s.destinations.length,
+    })
+  );
+  const seoAggregate = aggregateSeoScores(seoResults);
+  const seoByIndex = new Map(safaris.map((s, i) => [s.id, seoResults[i]]));
 
   const statuses = [
     { value: "all", label: "All Status" },
@@ -228,6 +250,9 @@ export default async function SafarisPage({
         </form>
       </div>
 
+      {/* SEO aggregate summary */}
+      {safaris.length > 0 && <SeoSummaryCard aggregate={seoAggregate} />}
+
       {/* Safaris List */}
       {safaris.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">
@@ -249,88 +274,99 @@ export default async function SafarisPage({
       ) : (
         <>
           <div className="grid gap-4">
-            {safaris.map((safari) => (
-              <div
-                key={safari.id}
-                className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 hover:border-amber-300 transition-colors"
-              >
-                <div className="flex gap-4">
-                  {safari.featuredImage && (
-                    <div className="w-40 h-28 relative rounded-lg overflow-hidden flex-shrink-0">
-                      <Image
-                        src={safari.featuredImage}
-                        alt={safari.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">
-                          {safari.title}
-                        </h3>
-                        <p className="text-sm text-slate-500 line-clamp-2 mb-3">
-                          {safari.overview}
-                        </p>
-                        <div className="flex flex-wrap items-center gap-3 text-sm">
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Calendar className="w-4 h-4" />
-                            {safari.duration}
-                          </span>
-                          {safari.priceFrom && (
-                            <span className="flex items-center gap-1 text-slate-600">
-                              <DollarSign className="w-4 h-4" />
-                              From {formatPrice(Number(safari.priceFrom))}
-                            </span>
-                          )}
-                          <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
-                            safari.type === "Budget"
-                              ? "bg-blue-100 text-blue-700"
-                              : safari.type === "Mid-range"
-                              ? "bg-amber-100 text-amber-700"
-                              : "bg-purple-100 text-purple-700"
-                          }`}>
-                            {safari.type}
-                          </span>
-                          <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
-                            safari.isActive
-                              ? "bg-green-100 text-green-700"
-                              : "bg-yellow-100 text-yellow-700"
-                          }`}>
-                            {safari.isActive ? "Active" : "Inactive"}
-                          </span>
-                        </div>
-                        {safari.destinations.length > 0 && (
-                          <p className="text-sm text-slate-500 mt-2">
-                            Destinations: {safari.destinations.map(d => d.destination.name).join(", ")}
-                          </p>
-                        )}
+            {safaris.map((safari) => {
+              const seoResult = seoByIndex.get(safari.id)!;
+              return (
+                <div
+                  key={safari.id}
+                  className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 hover:border-amber-300 transition-colors"
+                >
+                  <div className="flex gap-4">
+                    {safari.featuredImage && (
+                      <div className="w-40 h-28 relative rounded-lg overflow-hidden flex-shrink-0">
+                        <Image
+                          src={safari.featuredImage}
+                          alt={safari.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                      <div className="flex items-center gap-2">
-                        {safari.isActive && (
-                          <a
-                            href={`/tanzania-safaris/${safari.slug}/`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-slate-400 hover:text-slate-600"
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="font-semibold text-slate-900 mb-1">
+                            {safari.title}
+                          </h3>
+                          <p className="text-sm text-slate-500 line-clamp-2 mb-3">
+                            {safari.overview}
+                          </p>
+                          <div className="flex flex-wrap items-center gap-3 text-sm">
+                            <span className="flex items-center gap-1 text-slate-600">
+                              <Calendar className="w-4 h-4" />
+                              {safari.duration}
+                            </span>
+                            {safari.priceFrom && (
+                              <span className="flex items-center gap-1 text-slate-600">
+                                <DollarSign className="w-4 h-4" />
+                                From {formatPrice(Number(safari.priceFrom))}
+                              </span>
+                            )}
+                            <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
+                              safari.type === "Budget"
+                                ? "bg-blue-100 text-blue-700"
+                                : safari.type === "Mid-range"
+                                ? "bg-amber-100 text-amber-700"
+                                : "bg-purple-100 text-purple-700"
+                            }`}>
+                              {safari.type}
+                            </span>
+                            <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
+                              safari.isActive
+                                ? "bg-green-100 text-green-700"
+                                : "bg-yellow-100 text-yellow-700"
+                            }`}>
+                              {safari.isActive ? "Active" : "Inactive"}
+                            </span>
+                          </div>
+                          {safari.destinations.length > 0 && (
+                            <p className="text-sm text-slate-500 mt-2">
+                              Destinations: {safari.destinations.map(d => d.destination.name).join(", ")}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {safari.isActive && (
+                            <a
+                              href={`/tanzania-safaris/${safari.slug}/`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title="View published safari"
+                              aria-label={`View ${safari.title} on public site`}
+                              className="p-2 text-slate-400 hover:text-slate-600"
+                            >
+                              <Eye className="w-4 h-4" aria-hidden="true" />
+                            </a>
+                          )}
+                          <Link
+                            href={`/admin/safaris/${safari.id}`}
+                            title="Edit safari"
+                            aria-label={`Edit ${safari.title}`}
+                            className="p-2 text-slate-400 hover:text-amber-600"
                           >
-                            <Eye className="w-4 h-4" />
-                          </a>
-                        )}
-                        <Link
-                          href={`/admin/safaris/${safari.id}`}
-                          className="p-2 text-slate-400 hover:text-amber-600"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Link>
+                            <Edit className="w-4 h-4" aria-hidden="true" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <SeoScoreBadge
+                    result={seoResult}
+                    editHref={`/admin/safaris/${safari.id}`}
+                  />
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination */}

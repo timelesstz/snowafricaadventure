@@ -12,6 +12,9 @@ import {
   Users,
   TrendingUp,
 } from "lucide-react";
+import { scoreRouteSeo, aggregateSeoScores } from "@/lib/seo-score";
+import { SeoScoreBadge } from "@/components/admin/SeoScoreBadge";
+import { SeoSummaryCard } from "@/components/admin/SeoSummaryCard";
 
 async function getRoutes(params: {
   status?: string;
@@ -75,6 +78,25 @@ export default async function RoutesPage({
     getRoutes({ status, search, page }),
     getRouteStats(),
   ]);
+
+  const seoResults = routes.map((r) =>
+    scoreRouteSeo({
+      title: r.title,
+      metaTitle: r.metaTitle,
+      metaDescription: r.metaDescription,
+      overview: r.overview,
+      featuredImage: r.featuredImage,
+      gallery: r.gallery,
+      highlights: r.highlights,
+      inclusions: r.inclusions,
+      exclusions: r.exclusions,
+      itinerary: r.itinerary,
+      faqs: r.faqs,
+      guideName: r.guideName,
+    })
+  );
+  const seoAggregate = aggregateSeoScores(seoResults);
+  const seoByRouteId = new Map(routes.map((r, i) => [r.id, seoResults[i]]));
 
   const statuses = [
     { value: "all", label: "All Routes" },
@@ -165,6 +187,7 @@ export default async function RoutesPage({
           </div>
           <select
             name="status"
+            aria-label="Filter by status"
             defaultValue={status || "all"}
             className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
           >
@@ -182,6 +205,9 @@ export default async function RoutesPage({
           </button>
         </form>
       </div>
+
+      {/* SEO aggregate summary */}
+      {routes.length > 0 && <SeoSummaryCard aggregate={seoAggregate} />}
 
       {/* Routes List */}
       {routes.length === 0 ? (
@@ -204,83 +230,94 @@ export default async function RoutesPage({
       ) : (
         <>
           <div className="grid gap-4">
-            {routes.map((route) => (
-              <div
-                key={route.id}
-                className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 hover:border-amber-300 transition-colors"
-              >
-                <div className="flex gap-4">
-                  {route.featuredImage && (
-                    <div className="w-40 h-28 relative rounded-lg overflow-hidden flex-shrink-0">
-                      <Image
-                        src={route.featuredImage}
-                        alt={route.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">
-                          {route.title}
-                        </h3>
-                        <p className="text-sm text-slate-500 line-clamp-2 mb-3">
-                          {route.overview}
-                        </p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm">
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Calendar className="w-4 h-4" />
-                            {route.duration}
-                          </span>
-                          {route.successRate && (
-                            <span className="flex items-center gap-1 text-slate-600">
-                              <TrendingUp className="w-4 h-4" />
-                              {route.successRate}% success
-                            </span>
-                          )}
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Users className="w-4 h-4" />
-                            {route._count.departures} departures
-                          </span>
-                          <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
-                            route.isActive
-                              ? "bg-green-100 text-green-700"
-                              : "bg-yellow-100 text-yellow-700"
-                          }`}>
-                            {route.isActive ? "Active" : "Inactive"}
-                          </span>
-                          {route.physicalRating && (
-                            <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
-                              {route.physicalRating}
-                            </span>
-                          )}
-                        </div>
+            {routes.map((route) => {
+              const seoResult = seoByRouteId.get(route.id)!;
+              return (
+                <div
+                  key={route.id}
+                  className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 hover:border-amber-300 transition-colors"
+                >
+                  <div className="flex gap-4">
+                    {route.featuredImage && (
+                      <div className="w-40 h-28 relative rounded-lg overflow-hidden flex-shrink-0">
+                        <Image
+                          src={route.featuredImage}
+                          alt={route.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                      <div className="flex items-center gap-2">
-                        {route.isActive && (
-                          <a
-                            href={`/trekking/${route.slug}/`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-slate-400 hover:text-slate-600"
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="font-semibold text-slate-900 mb-1">
+                            {route.title}
+                          </h3>
+                          <p className="text-sm text-slate-500 line-clamp-2 mb-3">
+                            {route.overview}
+                          </p>
+                          <div className="flex flex-wrap items-center gap-4 text-sm">
+                            <span className="flex items-center gap-1 text-slate-600">
+                              <Calendar className="w-4 h-4" />
+                              {route.duration}
+                            </span>
+                            {route.successRate && (
+                              <span className="flex items-center gap-1 text-slate-600">
+                                <TrendingUp className="w-4 h-4" />
+                                {route.successRate}% success
+                              </span>
+                            )}
+                            <span className="flex items-center gap-1 text-slate-600">
+                              <Users className="w-4 h-4" />
+                              {route._count.departures} departures
+                            </span>
+                            <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
+                              route.isActive
+                                ? "bg-green-100 text-green-700"
+                                : "bg-yellow-100 text-yellow-700"
+                            }`}>
+                              {route.isActive ? "Active" : "Inactive"}
+                            </span>
+                            {route.physicalRating && (
+                              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
+                                {route.physicalRating}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {route.isActive && (
+                            <a
+                              href={`/trekking/${route.slug}/`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title="View published route"
+                              aria-label={`View ${route.title} on public site`}
+                              className="p-2 text-slate-400 hover:text-slate-600"
+                            >
+                              <Eye className="w-4 h-4" aria-hidden="true" />
+                            </a>
+                          )}
+                          <Link
+                            href={`/admin/routes/${route.id}`}
+                            title="Edit route"
+                            aria-label={`Edit ${route.title}`}
+                            className="p-2 text-slate-400 hover:text-amber-600"
                           >
-                            <Eye className="w-4 h-4" />
-                          </a>
-                        )}
-                        <Link
-                          href={`/admin/routes/${route.id}`}
-                          className="p-2 text-slate-400 hover:text-amber-600"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Link>
+                            <Edit className="w-4 h-4" aria-hidden="true" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <SeoScoreBadge
+                    result={seoResult}
+                    editHref={`/admin/routes/${route.id}`}
+                  />
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination */}

@@ -9,6 +9,9 @@ import {
   Eye,
   DollarSign,
 } from "lucide-react";
+import { scoreDayTripSeo, aggregateSeoScores } from "@/lib/seo-score";
+import { SeoScoreBadge } from "@/components/admin/SeoScoreBadge";
+import { SeoSummaryCard } from "@/components/admin/SeoSummaryCard";
 
 async function getDayTrips(params: {
   status?: string;
@@ -71,6 +74,23 @@ export default async function DayTripsPage({
     getDayTrips({ status, search, page }),
     getDayTripStats(),
   ]);
+
+  const seoResults = dayTrips.map((t) =>
+    scoreDayTripSeo({
+      title: t.title,
+      metaTitle: t.metaTitle,
+      metaDescription: t.metaDescription,
+      description: t.description,
+      featuredImage: t.featuredImage,
+      gallery: t.gallery,
+      highlights: t.highlights,
+      inclusions: t.inclusions,
+      exclusions: t.exclusions,
+      destination: t.destination,
+    })
+  );
+  const seoAggregate = aggregateSeoScores(seoResults);
+  const seoByTripId = new Map(dayTrips.map((t, i) => [t.id, seoResults[i]]));
 
   const statuses = [
     { value: "all", label: "All Status" },
@@ -157,6 +177,9 @@ export default async function DayTripsPage({
         </form>
       </div>
 
+      {/* SEO aggregate summary */}
+      {dayTrips.length > 0 && <SeoSummaryCard aggregate={seoAggregate} />}
+
       {/* Day Trips Grid */}
       {dayTrips.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">
@@ -178,69 +201,80 @@ export default async function DayTripsPage({
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {dayTrips.map((trip) => (
-              <div
-                key={trip.id}
-                className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:border-amber-300 transition-colors"
-              >
-                {trip.featuredImage && (
-                  <div className="h-40 relative">
-                    <Image
-                      src={trip.featuredImage}
-                      alt={trip.title}
-                      fill
-                      className="object-cover"
+            {dayTrips.map((trip) => {
+              const seoResult = seoByTripId.get(trip.id)!;
+              return (
+                <div
+                  key={trip.id}
+                  className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:border-amber-300 transition-colors flex flex-col"
+                >
+                  {trip.featuredImage && (
+                    <div className="h-40 relative">
+                      <Image
+                        src={trip.featuredImage}
+                        alt={trip.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="font-semibold text-slate-900">{trip.title}</h3>
+                      <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
+                        trip.isActive
+                          ? "bg-green-100 text-green-700"
+                          : "bg-yellow-100 text-yellow-700"
+                      }`}>
+                        {trip.isActive ? "Active" : "Inactive"}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-500 line-clamp-2 mb-3">
+                      {trip.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
+                          {trip.destination}
+                        </span>
+                        {trip.priceFrom && (
+                          <span className="flex items-center gap-1 text-sm text-slate-600">
+                            <DollarSign className="w-3.5 h-3.5" />
+                            {formatPrice(Number(trip.priceFrom))}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {trip.isActive && (
+                          <a
+                            href={`/tanzania-day-tours/${trip.slug}/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="View published day trip"
+                            aria-label={`View ${trip.title} on public site`}
+                            className="p-2 text-slate-400 hover:text-slate-600"
+                          >
+                            <Eye className="w-4 h-4" aria-hidden="true" />
+                          </a>
+                        )}
+                        <Link
+                          href={`/admin/day-trips/${trip.id}`}
+                          title="Edit day trip"
+                          aria-label={`Edit ${trip.title}`}
+                          className="p-2 text-slate-400 hover:text-amber-600"
+                        >
+                          <Edit className="w-4 h-4" aria-hidden="true" />
+                        </Link>
+                      </div>
+                    </div>
+                    <SeoScoreBadge
+                      result={seoResult}
+                      editHref={`/admin/day-trips/${trip.id}`}
                     />
                   </div>
-                )}
-                <div className="p-4">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="font-semibold text-slate-900">{trip.title}</h3>
-                    <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
-                      trip.isActive
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}>
-                      {trip.isActive ? "Active" : "Inactive"}
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-500 line-clamp-2 mb-3">
-                    {trip.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
-                        {trip.destination}
-                      </span>
-                      {trip.priceFrom && (
-                        <span className="flex items-center gap-1 text-sm text-slate-600">
-                          <DollarSign className="w-3.5 h-3.5" />
-                          {formatPrice(Number(trip.priceFrom))}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {trip.isActive && (
-                        <a
-                          href={`/tanzania-day-tours/${trip.slug}/`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 text-slate-400 hover:text-slate-600"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </a>
-                      )}
-                      <Link
-                        href={`/admin/day-trips/${trip.id}`}
-                        className="p-2 text-slate-400 hover:text-amber-600"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination */}

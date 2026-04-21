@@ -7,8 +7,10 @@ import {
   Search,
   Edit,
   Eye,
-  EyeOff,
 } from "lucide-react";
+import { scoreDestinationSeo, aggregateSeoScores } from "@/lib/seo-score";
+import { SeoScoreBadge } from "@/components/admin/SeoScoreBadge";
+import { SeoSummaryCard } from "@/components/admin/SeoSummaryCard";
 
 async function getDestinations(params: {
   circuit?: string;
@@ -37,6 +39,9 @@ async function getDestinations(params: {
       orderBy: { name: "asc" },
       skip: (page - 1) * limit,
       take: limit,
+      include: {
+        _count: { select: { safaris: true } },
+      },
     }),
     prisma.destination.count({ where }),
   ]);
@@ -70,6 +75,23 @@ export default async function DestinationsPage({
     getDestinations({ circuit, status, search, page }),
     getDestinationStats(),
   ]);
+
+  const seoResults = destinations.map((d) =>
+    scoreDestinationSeo({
+      name: d.name,
+      metaTitle: d.metaTitle,
+      metaDescription: d.metaDescription,
+      description: d.description,
+      featuredImage: d.featuredImage,
+      gallery: d.gallery,
+      highlights: d.highlights,
+      wildlife: d.wildlife,
+      bestTime: d.bestTime,
+      safariCount: d._count.safaris,
+    })
+  );
+  const seoAggregate = aggregateSeoScores(seoResults);
+  const seoByDestId = new Map(destinations.map((d, i) => [d.id, seoResults[i]]));
 
   const circuits = [
     { value: "all", label: "All Circuits" },
@@ -196,6 +218,9 @@ export default async function DestinationsPage({
         </form>
       </div>
 
+      {/* SEO aggregate summary */}
+      {destinations.length > 0 && <SeoSummaryCard aggregate={seoAggregate} />}
+
       {/* Destinations Grid */}
       {destinations.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">
@@ -217,61 +242,72 @@ export default async function DestinationsPage({
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {destinations.map((dest) => (
-              <div
-                key={dest.id}
-                className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:border-amber-300 transition-colors"
-              >
-                {dest.featuredImage && (
-                  <div className="h-40 relative">
-                    <Image
-                      src={dest.featuredImage}
-                      alt={dest.name}
-                      fill
-                      className="object-cover"
+            {destinations.map((dest) => {
+              const seoResult = seoByDestId.get(dest.id)!;
+              return (
+                <div
+                  key={dest.id}
+                  className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden hover:border-amber-300 transition-colors flex flex-col"
+                >
+                  {dest.featuredImage && (
+                    <div className="h-40 relative">
+                      <Image
+                        src={dest.featuredImage}
+                        alt={dest.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="font-semibold text-slate-900">{dest.name}</h3>
+                      <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
+                        dest.isActive
+                          ? "bg-green-100 text-green-700"
+                          : "bg-yellow-100 text-yellow-700"
+                      }`}>
+                        {dest.isActive ? "Active" : "Inactive"}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-500 line-clamp-2 mb-3">
+                      {dest.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
+                        {dest.circuit} Circuit
+                      </span>
+                      <div className="flex items-center gap-2">
+                        {dest.isActive && (
+                          <a
+                            href={`/tanzania-destinations/${dest.slug}/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="View published destination"
+                            aria-label={`View ${dest.name} on public site`}
+                            className="p-2 text-slate-400 hover:text-slate-600"
+                          >
+                            <Eye className="w-4 h-4" aria-hidden="true" />
+                          </a>
+                        )}
+                        <Link
+                          href={`/admin/destinations/${dest.id}`}
+                          title="Edit destination"
+                          aria-label={`Edit ${dest.name}`}
+                          className="p-2 text-slate-400 hover:text-amber-600"
+                        >
+                          <Edit className="w-4 h-4" aria-hidden="true" />
+                        </Link>
+                      </div>
+                    </div>
+                    <SeoScoreBadge
+                      result={seoResult}
+                      editHref={`/admin/destinations/${dest.id}`}
                     />
                   </div>
-                )}
-                <div className="p-4">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="font-semibold text-slate-900">{dest.name}</h3>
-                    <span className={`inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full ${
-                      dest.isActive
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}>
-                      {dest.isActive ? "Active" : "Inactive"}
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-500 line-clamp-2 mb-3">
-                    {dest.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
-                      {dest.circuit} Circuit
-                    </span>
-                    <div className="flex items-center gap-2">
-                      {dest.isActive && (
-                        <a
-                          href={`/tanzania-destinations/${dest.slug}/`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 text-slate-400 hover:text-slate-600"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </a>
-                      )}
-                      <Link
-                        href={`/admin/destinations/${dest.id}`}
-                        className="p-2 text-slate-400 hover:text-amber-600"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination */}

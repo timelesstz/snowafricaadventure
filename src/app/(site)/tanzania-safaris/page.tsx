@@ -2,12 +2,21 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { generateMetadata as genMeta, generateFAQSchema, generateBreadcrumbSchema, generateVideoSchema, generateItemListSchema } from "@/lib/seo";
-import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
+import {
+  generateMetadata as genMeta,
+  generateFAQSchema,
+  generateBreadcrumbSchema,
+  generateVideoSchema,
+  generateItemListSchema,
+  generateAggregateRatingSchema,
+} from "@/lib/seo";
+import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import prisma from "@/lib/prisma";
 import { getExperienceYears } from "@/lib/settings";
+import { SITE_CONFIG } from "@/lib/constants";
 import { SafarisPageClient } from "./SafarisPageClient";
+import { SafariInquiryForm } from "@/components/forms/SafariInquiryForm";
 import {
   MapPin,
   Camera,
@@ -27,7 +36,12 @@ import {
   Waves,
   Gem,
   Car,
-  ConciergeBell
+  ConciergeBell,
+  Phone,
+  MessageCircle,
+  BookOpen,
+  Quote,
+  Sparkles,
 } from "lucide-react";
 
 export const metadata: Metadata = genMeta({
@@ -36,6 +50,83 @@ export const metadata: Metadata = genMeta({
     "Explore Tanzania's incredible wildlife with our safari packages. From budget camping to luxury lodges, experience the Serengeti, Ngorongoro Crater, Tarangire and more. Book your dream African safari today.",
   url: "/tanzania-safaris/",
 });
+
+const LAST_UPDATED = "April 2026";
+
+const TOC_ITEMS = [
+  { id: "packages", label: "Browse safari packages" },
+  { id: "styles", label: "Choose your safari style" },
+  { id: "parks", label: "Parks in focus" },
+  { id: "guide", label: "Planning guide" },
+  { id: "inquire", label: "Get a custom quote" },
+  { id: "faq", label: "Frequently asked questions" },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Our 7-day Serengeti and Ngorongoro safari was the trip of a lifetime. Our guide spotted everything from the Big Five to a rare serval cat in three days. Everything was handled — airport transfers, park fees, meals — nothing to worry about.",
+    author: "Sarah M.",
+    location: "United Kingdom",
+    trip: "7-day Northern Circuit",
+  },
+  {
+    quote:
+      "We combined a 5-day safari with our Kilimanjaro climb and it was perfectly balanced. The team at Snow Africa knew every park, every lodge, and every backroad. Communication before the trip was fast, detailed and honest.",
+    author: "Michael K.",
+    location: "Germany",
+    trip: "5-day Tarangire + Serengeti",
+  },
+  {
+    quote:
+      "Locally owned really shows. Our guide was born near the Serengeti and the stories he told made every sighting richer. Booking was transparent — no hidden fees — and the lodge choices exceeded what we expected for the price.",
+    author: "Jennifer & David L.",
+    location: "United States",
+    trip: "8-day Luxury Safari",
+  },
+];
+
+const PARKS_IN_FOCUS = [
+  {
+    name: "Serengeti National Park",
+    slug: "serengeti-national-park",
+    hook: "14,763 km² of endless plains, home to the Great Migration and massive lion prides. Year-round game viewing with legendary Mara River crossings July–October.",
+    icon: Sparkles,
+    highlight: "The Great Migration",
+  },
+  {
+    name: "Ngorongoro Crater",
+    slug: "ngorongoro-crater",
+    hook: "A UNESCO World Heritage Site — the world's largest intact volcanic caldera, 260 km² holding ~25,000 large mammals including the endangered black rhino.",
+    icon: Binoculars,
+    highlight: "Big Five in a day",
+  },
+  {
+    name: "Tarangire National Park",
+    slug: "tarangire-national-park",
+    hook: "Famous for its ancient baobab trees, the largest elephant herds in northern Tanzania, and over 550 recorded bird species along the Tarangire River.",
+    icon: Compass,
+    highlight: "Elephants & baobabs",
+  },
+  {
+    name: "Lake Manyara National Park",
+    slug: "lake-manyara-national-park",
+    hook: "Compact, diverse, and famous for tree-climbing lions. Flamingo-lined alkaline lake, lush groundwater forest, and one of the few parks with night game drives.",
+    icon: Waves,
+    highlight: "Tree-climbing lions",
+  },
+  {
+    name: "Arusha National Park",
+    slug: "arusha-national-park",
+    hook: "Often overlooked but excellent for walking safaris, canoeing on Momella Lakes, and views of Mount Meru. An ideal first-day safari close to town.",
+    icon: Camera,
+    highlight: "Walking safaris",
+  },
+];
+
+// WhatsApp href: strip everything non-digit, prefix with wa.me/
+const whatsappHref = `https://wa.me/${SITE_CONFIG.phone.replace(/\D/g, "")}`;
+const telHref = `tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`;
 
 // Fetch safaris from database with all relevant fields
 async function getSafaris() {
@@ -105,8 +196,6 @@ async function getSafariTypes() {
 export default async function SafarisPage() {
   const [safaris, types, experienceYears] = await Promise.all([getSafaris(), getSafariTypes(), getExperienceYears()]);
 
-  const featuredSafari = safaris.find((s) => s.type === "Mid-Range") || safaris[0];
-
   return (
     <div className="min-h-screen bg-[var(--surface)]">
       {/* Breadcrumbs */}
@@ -123,7 +212,14 @@ export default async function SafarisPage() {
           url: `/tanzania-safaris/${safari.slug}/`,
           description: safari.overview || undefined,
           image: safari.featuredImage || undefined,
+          price: safari.priceFrom || undefined,
         }))),
+        generateAggregateRatingSchema({
+          ratingValue: 4.9,
+          reviewCount: 115,
+          itemName: SITE_CONFIG.name,
+          itemType: "TourOperator",
+        }),
       ]} />
 
       {/* Hero Section - Immersive */}
@@ -132,7 +228,7 @@ export default async function SafarisPage() {
         <div className="absolute inset-0">
           <Image
             src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg"
-            alt="Tanzania Safari Wildlife"
+            alt="Lions resting on the Serengeti plains at sunrise — Tanzania safari with Snow Africa Adventure"
             fill
             className="object-cover"
             priority
@@ -196,14 +292,30 @@ export default async function SafarisPage() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <a href="#safaris" className="btn btn-primary">
-                Explore Safaris
+            <div className="flex flex-wrap gap-3">
+              <a href="#inquire" className="btn btn-primary">
+                Get a Free Quote
                 <ArrowRight className="w-5 h-5" />
               </a>
               <Link href="/tailor-made-safari/" className="btn btn-outline-white">
                 Design Your Own Safari
               </Link>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-semibold transition-colors"
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp
+              </a>
+              <a
+                href={telHref}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold transition-colors backdrop-blur-sm"
+              >
+                <Phone className="w-5 h-5" />
+                {SITE_CONFIG.phone}
+              </a>
             </div>
           </div>
         </div>
@@ -261,8 +373,60 @@ export default async function SafarisPage() {
         </div>
       </section>
 
+      {/* Testimonial Strip */}
+      <section className="py-12 bg-white border-b border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {TESTIMONIALS.map((t) => (
+              <figure
+                key={t.author}
+                className="bg-[var(--surface)] rounded-2xl p-6 relative"
+              >
+                <Quote className="w-8 h-8 text-[var(--secondary)]/30 absolute top-4 right-4" />
+                <div className="flex items-center gap-1 mb-3">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <blockquote className="text-[var(--text)] leading-relaxed mb-4">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className="text-sm">
+                  <p className="font-semibold">{t.author}</p>
+                  <p className="text-[var(--text-muted)]">{t.location} · {t.trip}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TOC */}
+      <section className="py-10 bg-[var(--surface)] border-b border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-2 text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide mb-4">
+              <BookOpen className="w-4 h-4" />
+              On this page
+            </div>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+              {TOC_ITEMS.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="flex items-center justify-between bg-white rounded-lg px-4 py-3 text-sm hover:shadow-md hover:text-[var(--primary)] transition-all border border-[var(--border)]"
+                >
+                  <span>{item.label}</span>
+                  <ArrowRight className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content with Client-Side Filtering */}
-      <section id="safaris" className="py-12 md:py-16">
+      <section id="packages" className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <Suspense fallback={<SafarisSkeleton />}>
             <SafarisPageClient safaris={safaris} types={types} />
@@ -270,22 +434,25 @@ export default async function SafarisPage() {
         </div>
       </section>
 
-      {/* Safari Types Explained */}
-      <section className="py-16 bg-white">
+      {/* Safari Styles — clickable spoke links */}
+      <section id="styles" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="section-label justify-center">Choose Your Style</span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Safari Accommodation Types
+              Browse Safaris by Style
             </h2>
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
-              We offer three distinct safari experiences to match your preferences and budget
+              Four ways to experience Tanzania — each with its own price point, comfort level, and character. Tap any style for a full list of matching packages.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Budget */}
-            <div className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-sky-400 transition-all hover:shadow-lg">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {/* Camping */}
+            <Link
+              href="/tanzania-camping-safaris/"
+              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-sky-400 transition-all hover:shadow-lg flex flex-col"
+            >
               <div className="absolute -top-4 left-6">
                 <span className="px-4 py-1.5 bg-sky-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Budget
@@ -295,27 +462,34 @@ export default async function SafarisPage() {
                 <Tent className="w-7 h-7 text-sky-600" />
               </div>
               <h3 className="font-heading text-xl font-bold mb-3">Camping Safari</h3>
-              <p className="text-[var(--text-muted)] mb-5 leading-relaxed">
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
                 Fall asleep to the sounds of the wild in quality tents at scenic public campsites — the most authentic bush experience.
               </p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-center gap-2.5">
+              <ul className="space-y-2 text-sm mb-5">
+                <li className="flex items-center gap-2">
                   <Flame className="w-4 h-4 text-sky-500 shrink-0" />
-                  <span>Campfire evenings under African skies</span>
+                  <span>Campfire evenings</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2">
                   <Tent className="w-4 h-4 text-sky-500 shrink-0" />
-                  <span>Quality dome tents provided</span>
+                  <span>Quality dome tents</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-sky-500 shrink-0" />
                   <span>Shared campsite facilities</span>
                 </li>
               </ul>
-            </div>
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-sky-600 group-hover:gap-2 transition-all">
+                Browse camping safaris
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
 
-            {/* Mid-Range - Featured */}
-            <div className="group relative bg-gradient-to-br from-teal-50 to-white rounded-2xl p-8 border-2 border-teal-500 shadow-xl transform md:-translate-y-4">
+            {/* Lodge - Featured */}
+            <Link
+              href="/tanzania-lodge-safaris/"
+              className="group relative bg-gradient-to-br from-teal-50 to-white rounded-2xl p-8 border-2 border-teal-500 shadow-xl transform md:-translate-y-4 flex flex-col"
+            >
               <div className="absolute -top-4 left-6 flex items-center gap-2">
                 <span className="px-4 py-1.5 bg-teal-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Mid-Range
@@ -328,27 +502,34 @@ export default async function SafarisPage() {
                 <Hotel className="w-7 h-7 text-teal-600" />
               </div>
               <h3 className="font-heading text-xl font-bold mb-3">Lodge Safari</h3>
-              <p className="text-[var(--text-muted)] mb-5 leading-relaxed">
-                Enjoy comfortable lodges and tented camps with en-suite facilities — the ideal blend of comfort, nature, and value.
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
+                Comfortable lodges and tented camps with en-suite facilities — the ideal blend of comfort, nature, and value.
               </p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-center gap-2.5">
+              <ul className="space-y-2 text-sm mb-5">
+                <li className="flex items-center gap-2">
                   <Bath className="w-4 h-4 text-teal-500 shrink-0" />
                   <span>Private en-suite bathrooms</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2">
                   <UtensilsCrossed className="w-4 h-4 text-teal-500 shrink-0" />
                   <span>Full-board restaurant dining</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2">
                   <Waves className="w-4 h-4 text-teal-500 shrink-0" />
                   <span>Swimming pools &amp; lounges</span>
                 </li>
               </ul>
-            </div>
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-teal-600 group-hover:gap-2 transition-all">
+                Browse lodge safaris
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
 
             {/* Luxury */}
-            <div className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-amber-400 transition-all hover:shadow-lg">
+            <Link
+              href="/luxury-safaris-tanzania/"
+              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-amber-400 transition-all hover:shadow-lg flex flex-col"
+            >
               <div className="absolute -top-4 left-6">
                 <span className="px-4 py-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Luxury
@@ -358,25 +539,112 @@ export default async function SafarisPage() {
                 <Crown className="w-7 h-7 text-amber-600" />
               </div>
               <h3 className="font-heading text-xl font-bold mb-3">Luxury Safari</h3>
-              <p className="text-[var(--text-muted)] mb-5 leading-relaxed">
-                Indulge in five-star lodges with world-class amenities, gourmet cuisine, and exclusive wildlife encounters.
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
+                Five-star lodges with world-class amenities, gourmet cuisine, and exclusive wildlife encounters.
               </p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-center gap-2.5">
+              <ul className="space-y-2 text-sm mb-5">
+                <li className="flex items-center gap-2">
                   <Gem className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>Five-star lodges &amp; villas</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2">
                   <Car className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>Private game drives</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2">
                   <ConciergeBell className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>Dedicated butler service</span>
                 </li>
               </ul>
-            </div>
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-amber-600 group-hover:gap-2 transition-all">
+                Browse luxury safaris
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+
+            {/* Tailor-Made */}
+            <Link
+              href="/tailor-made-safari/"
+              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-purple-400 transition-all hover:shadow-lg flex flex-col"
+            >
+              <div className="absolute -top-4 left-6">
+                <span className="px-4 py-1.5 bg-purple-500 text-white rounded-full text-sm font-bold shadow-sm">
+                  Tailor-Made
+                </span>
+              </div>
+              <div className="w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-purple-100 transition-colors">
+                <Sparkles className="w-7 h-7 text-purple-600" />
+              </div>
+              <h3 className="font-heading text-xl font-bold mb-3">Custom Safari</h3>
+              <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
+                Built around your interests, dates, and budget. Ideal for families, honeymoons, photography trips, and multi-country itineraries.
+              </p>
+              <ul className="space-y-2 text-sm mb-5">
+                <li className="flex items-center gap-2">
+                  <Compass className="w-4 h-4 text-purple-500 shrink-0" />
+                  <span>Private vehicle &amp; guide</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-purple-500 shrink-0" />
+                  <span>Any accommodation level</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-purple-500 shrink-0" />
+                  <span>Combine safari + beach + climb</span>
+                </li>
+              </ul>
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-purple-600 group-hover:gap-2 transition-all">
+                Design your own
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Parks in Focus */}
+      <section id="parks" className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="section-label justify-center">Northern Circuit</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Parks in Focus
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Every Tanzania safari builds on a handful of world-class national parks. Here&apos;s what each one is known for — and what you&apos;ll see there.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {PARKS_IN_FOCUS.map((park) => (
+              <Link
+                key={park.slug}
+                href={`/tanzania-destinations/${park.slug}/`}
+                className="group bg-white rounded-2xl p-6 border border-[var(--border)] hover:border-[var(--secondary)] hover:shadow-lg transition-all flex flex-col"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center">
+                    <park.icon className="w-6 h-6 text-[var(--secondary)]" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wide text-[var(--secondary)]">
+                    {park.highlight}
+                  </span>
+                </div>
+                <h3 className="font-heading text-xl font-bold mb-2">{park.name}</h3>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+                  {park.hook}
+                </p>
+                <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[var(--primary)] group-hover:gap-2 transition-all">
+                  Explore {park.name.split(" ")[0]}
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-[var(--text-muted)] mt-8">
+            See all parks on our <Link href="/tanzania-destinations/" className="text-[var(--primary)] font-semibold hover:underline">Tanzania destinations guide</Link>.
+          </p>
         </div>
       </section>
 
@@ -397,17 +665,21 @@ export default async function SafarisPage() {
         </div>
       </section>
 
-      {/* SEO Content — Expanded for depth */}
-      <section className="py-16 bg-white">
+      {/* SEO Content — Planning Guide */}
+      <section id="guide" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto prose prose-slate">
-            <h2>Tanzania Safari Experience</h2>
+            <h2>Tanzania Safari Planning Guide</h2>
             <p>
               Tanzania offers some of the world&apos;s most spectacular wildlife viewing opportunities.
               With 22 national parks, 33 game reserves, and 44 game-controlled areas covering nearly a
               third of the country, Tanzania protects one of the highest concentrations of wildlife on
-              Earth. Home to the legendary Serengeti, the stunning Ngorongoro Crater, and the
-              elephant-rich Tarangire, a Tanzania safari is the ultimate African adventure.
+              Earth. Home to the legendary{" "}
+              <Link href="/tanzania-destinations/serengeti-national-park/">Serengeti</Link>, the stunning{" "}
+              <Link href="/tanzania-destinations/ngorongoro-crater/">Ngorongoro Crater</Link>, and
+              the elephant-rich{" "}
+              <Link href="/tanzania-destinations/tarangire-national-park/">Tarangire</Link>, a Tanzania
+              safari is the ultimate African adventure.
             </p>
 
             <h3>The Great Migration</h3>
@@ -442,19 +714,6 @@ export default async function SafarisPage() {
               gathering at the Tarangire River during the dry season.
             </p>
 
-            <h3>Tanzania&apos;s Top Safari Parks</h3>
-            <p>
-              The Northern Circuit is Tanzania&apos;s most popular safari region, with all major parks
-              accessible within 3-4 hours of our base in Arusha:
-            </p>
-            <ul>
-              <li><strong>Serengeti National Park</strong> — 14,763 km² of endless plains, home to the Great Migration, massive lion prides, and superb year-round game viewing.</li>
-              <li><strong>Ngorongoro Crater</strong> — a UNESCO World Heritage Site and the world&apos;s largest intact volcanic caldera, with incredible wildlife density including the endangered black rhino.</li>
-              <li><strong>Tarangire National Park</strong> — famous for ancient baobab trees, the largest elephant herds in northern Tanzania, and over 550 bird species.</li>
-              <li><strong>Lake Manyara National Park</strong> — compact and diverse, known for tree-climbing lions, flamingo-lined shores, and lush groundwater forests.</li>
-              <li><strong>Arusha National Park</strong> — often overlooked but excellent for walking safaris, canoeing, and views of Mount Meru. Perfect for a first-day safari.</li>
-            </ul>
-
             <h3>Safari Pricing Guide</h3>
             <p>
               Tanzania safari costs vary based on accommodation type, season, group size, and parks visited.
@@ -462,9 +721,9 @@ export default async function SafarisPage() {
               and accommodation):
             </p>
             <ul>
-              <li><strong>Budget camping safari:</strong> $250-$350/day — quality tents at public campsites, campfire meals</li>
-              <li><strong>Mid-range lodge safari:</strong> $350-$500/day — comfortable lodges with en-suite bathrooms, restaurant dining</li>
-              <li><strong>Luxury safari:</strong> $500-$800+/day — exclusive tented camps and lodges with gourmet cuisine, private guides</li>
+              <li><Link href="/tanzania-camping-safaris/"><strong>Budget camping safari</strong></Link>: $250-$350/day — quality tents at public campsites, campfire meals</li>
+              <li><Link href="/tanzania-lodge-safaris/"><strong>Mid-range lodge safari</strong></Link>: $350-$500/day — comfortable lodges with en-suite bathrooms, restaurant dining</li>
+              <li><Link href="/luxury-safaris-tanzania/"><strong>Luxury safari</strong></Link>: $500-$800+/day — exclusive tented camps and lodges with gourmet cuisine, private guides</li>
             </ul>
             <p>
               Park fees make up a significant portion of the cost (approximately $70-$82 per person per day
@@ -484,6 +743,23 @@ export default async function SafarisPage() {
               <li><strong>Short rains (November-December):</strong> Brief afternoon showers, green scenery, migratory birds arrive. Good value season with excellent game viewing.</li>
             </ul>
 
+            <h3>Combining Your Safari</h3>
+            <p>
+              Most travellers pair their safari with at least one other Tanzania experience, since
+              everything is close. The three classic combinations we build all the time:
+            </p>
+            <ul>
+              <li>
+                <strong>Safari + <Link href="/mount-kilimanjaro/">Kilimanjaro</Link></strong>: climb first, then recover on safari. A 7-day Kilimanjaro climb plus a 4-5 day Northern Circuit safari is our most popular longer itinerary.
+              </li>
+              <li>
+                <strong>Safari + <Link href="/zanzibar/">Zanzibar beach</Link></strong>: end your trip with 3-5 nights on the coast — direct flights from the Serengeti or Arusha. The perfect decompression after dawn-to-dusk game drives.
+              </li>
+              <li>
+                <strong>Safari + cultural experience</strong>: add 1-2 days with a Maasai community, a Hadzabe bushman walk at Lake Eyasi, or a coffee farm tour outside Arusha. These are the trips guests tell us they remember most.
+              </li>
+            </ul>
+
             <h3>Why Choose Snow Africa Adventure?</h3>
             <p>
               Since 2008, Snow Africa Adventure has been providing authentic, personalized safari
@@ -499,11 +775,39 @@ export default async function SafarisPage() {
               <li><strong>4.9/5 on TripAdvisor</strong> with 115+ verified reviews and a Travelers&apos; Choice award</li>
               <li><strong>TATO licensed</strong> (Tanzania Association of Tour Operators) and KPAP partner ensuring ethical porter treatment</li>
             </ul>
+
+            <p className="text-sm text-[var(--text-muted)] italic mt-10 pt-6 border-t border-[var(--border)]">
+              Last updated: {LAST_UPDATED}. Prices and park fee figures reflect the 2026-2027 season.
+            </p>
           </div>
         </div>
       </section>
+
+      {/* Inquiry Form */}
+      <section id="inquire" className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="section-label justify-center">Get a Quote</span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-3">
+                Get a Custom Safari Quote
+              </h2>
+              <p className="text-[var(--text-muted)]">
+                Tell us what you&apos;re looking for — we&apos;ll reply with a detailed, priced itinerary within 24 hours. No obligation.
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-[var(--border)]">
+              <SafariInquiryForm variant="inline" />
+            </div>
+            <p className="text-center text-sm text-[var(--text-muted)] mt-6">
+              Prefer to talk? Call <a href={telHref} className="text-[var(--primary)] font-semibold hover:underline">{SITE_CONFIG.phone}</a> or message us on <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-semibold hover:underline">WhatsApp</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
-      <section className="py-16 bg-[var(--surface)]">
+      <section id="faq" className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -515,7 +819,7 @@ export default async function SafarisPage() {
 
             <div className="space-y-4">
               {SAFARI_FAQS.map((faq, index) => (
-                <details key={index} className="bg-white rounded-xl border border-[var(--border)] group">
+                <details key={index} className="bg-[var(--surface)] rounded-xl border border-[var(--border)] group">
                   <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold text-lg hover:text-[var(--primary)] transition-colors">
                     {faq.question}
                     <ArrowRight className="w-5 h-5 text-[var(--text-muted)] group-open:rotate-90 transition-transform shrink-0 ml-4" />
@@ -558,12 +862,28 @@ const SAFARI_FAQS = [
     answer: "Yes, Tanzania is one of the best countries to see all Big Five animals: lion, leopard, elephant, buffalo, and rhinoceros. The Ngorongoro Crater offers the best chance of seeing all five in a single day. The Serengeti is renowned for its lion and leopard populations, while Tarangire is famous for its large elephant herds.",
   },
   {
+    question: "Which park is best for the Big Five?",
+    answer: "Ngorongoro Crater is the single best park for Big Five in one day — its enclosed 260 km² caldera supports approximately 25,000 large mammals, including one of Tanzania's few black rhino populations. The Serengeti is the best for lion and leopard numbers (3,000+ lions, highest leopard density in East Africa), while Tarangire offers the highest chance of seeing large elephant herds. Most of our guests see all five on a 5-7 day Northern Circuit safari.",
+  },
+  {
     question: "How many days do I need for a Tanzania safari?",
     answer: "We recommend a minimum of 3 days, but 5-7 days allows you to visit multiple parks and have a richer experience. A classic 5-day itinerary covers the Serengeti and Ngorongoro Crater. For a comprehensive Northern Circuit experience including Tarangire and Lake Manyara, plan for 7 days. You can combine a safari with Kilimanjaro trekking or a Zanzibar beach holiday.",
   },
   {
     question: "What is the difference between camping and lodge safaris?",
     answer: "Camping safaris use quality dome tents at public campsites — more affordable and adventurous, with campfire evenings under the stars. Lodge safaris provide comfortable rooms with private bathrooms, restaurants, and often swimming pools. Luxury safaris offer exclusive tented camps or lodges with gourmet dining and personalized service. All options include the same game drives and parks.",
+  },
+  {
+    question: "Can I combine a safari with Kilimanjaro?",
+    answer: "Yes — this is our most popular longer trip. Most climbers summit Kilimanjaro first (6-9 days, depending on route) and then recover on a 4-5 day Northern Circuit safari. Some prefer the reverse order. See our full Mount Kilimanjaro guide for route options. A combined Kilimanjaro + safari itinerary typically runs 10-16 days.",
+  },
+  {
+    question: "Can I add Zanzibar to my safari?",
+    answer: "Absolutely. Most travellers end their safari with 3-5 nights on Zanzibar's beaches — direct flights operate from the Serengeti and Arusha to Zanzibar in under 2 hours. It is the perfect decompression after long game-drive days. We handle the transfers, flights, and beach accommodation as one seamless package.",
+  },
+  {
+    question: "Are family safaris with children available?",
+    answer: "Yes. We run many family safaris each season and adjust the itinerary for the age and energy of children: shorter game drives, child-friendly lodges with pools, interactive activities (Maasai village visits, guide-led tracking lessons), and flexible meal times. Park fees for children aged 5-15 are discounted (typically $23 vs $70 for adults). Children under 5 are usually free for park entry but may have age restrictions at luxury lodges.",
   },
   {
     question: "Is Tanzania safe for safari tourists?",
@@ -579,7 +899,7 @@ const SAFARI_FAQS = [
   },
   {
     question: "Can I combine a safari with other activities?",
-    answer: "Absolutely. Our most popular combinations are: Safari + Kilimanjaro climb (typically safari first as recovery), Safari + Zanzibar beach holiday (3-5 days on the coast after safari), and Safari + cultural visits to Maasai villages. We specialize in tailor-made itineraries that combine multiple experiences into one seamless trip.",
+    answer: "Absolutely. Our most popular combinations are: Safari + Kilimanjaro climb (typically safari after the climb as recovery), Safari + Zanzibar beach holiday (3-5 days on the coast after safari), and Safari + cultural visits to Maasai villages. We specialize in tailor-made itineraries that combine multiple experiences into one seamless trip.",
   },
   {
     question: "Do I need vaccinations for Tanzania?",

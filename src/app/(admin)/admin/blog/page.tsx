@@ -17,6 +17,9 @@ import {
   ExternalLink,
   Clock,
 } from "lucide-react";
+import { scoreBlogSeo, aggregateSeoScores } from "@/lib/seo-score";
+import { SeoScoreBadge } from "@/components/admin/SeoScoreBadge";
+import { SeoSummaryCard } from "@/components/admin/SeoSummaryCard";
 
 async function getBlogPosts(params: {
   status?: string;
@@ -117,6 +120,23 @@ export default async function BlogPage({
     getBlogStats(),
     getCategories(),
   ]);
+
+  const seoResults = posts.map((p) =>
+    scoreBlogSeo({
+      title: p.title,
+      metaTitle: p.metaTitle,
+      metaDescription: p.metaDescription,
+      excerpt: p.excerpt,
+      content: p.content,
+      featuredImage: p.featuredImage,
+      author: p.author,
+      categoryCount: p.categories.length,
+      tagCount: p.tags.length,
+      isPublished: p.isPublished,
+    })
+  );
+  const seoAggregate = aggregateSeoScores(seoResults);
+  const seoByPostId = new Map(posts.map((p, i) => [p.id, seoResults[i]]));
 
   const statuses = [
     { value: "all", label: "All Posts" },
@@ -221,6 +241,7 @@ export default async function BlogPage({
             <Filter className="w-4 h-4 text-slate-400" />
             <select
               name="status"
+              aria-label="Filter by publication status"
               defaultValue={status || "all"}
               className="px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
             >
@@ -235,6 +256,7 @@ export default async function BlogPage({
             <FolderOpen className="w-4 h-4 text-slate-400" />
             <select
               name="category"
+              aria-label="Filter by category"
               defaultValue={category || ""}
               className="px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
             >
@@ -262,6 +284,9 @@ export default async function BlogPage({
           )}
         </form>
       </div>
+
+      {/* SEO aggregate summary */}
+      {posts.length > 0 && <SeoSummaryCard aggregate={seoAggregate} />}
 
       {/* Posts List */}
       {posts.length === 0 ? (
@@ -294,7 +319,9 @@ export default async function BlogPage({
 
           {/* Posts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            {posts.map((post) => (
+            {posts.map((post) => {
+              const seoResult = seoByPostId.get(post.id)!;
+              return (
               <div
                 key={post.id}
                 className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md hover:border-amber-300 transition-all group"
@@ -409,8 +436,15 @@ export default async function BlogPage({
                     </div>
                   </div>
                 </div>
+                <div className="px-4 pb-4">
+                  <SeoScoreBadge
+                    result={seoResult}
+                    editHref={`/admin/blog/${post.id}/`}
+                  />
+                </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination */}
