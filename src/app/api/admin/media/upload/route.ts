@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { uploadToR2, generateFileKey } from "@/lib/r2";
+import { AdminRole } from "@prisma/client";
+import { uploadToR2, deleteFromR2, generateFileKey } from "@/lib/r2";
 import {
   compressImage,
   generateThumbnail,
@@ -19,12 +20,16 @@ const ALLOWED_TYPES = [
 ];
 
 export async function POST(request: NextRequest) {
+  let session;
   try {
-    const session = await auth();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    session = await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
+  }
 
+  try {
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
     const folder = (formData.get("folder") as string) || "general";
@@ -98,36 +103,52 @@ export async function POST(request: NextRequest) {
 
     // Generate and upload thumbnail for images
     let thumbnailUrl: string | undefined;
+    let thumbKey: string | undefined;
     if (isImage) {
       try {
         const thumbnail = await generateThumbnail(buffer, 400);
-        const thumbKey = key.replace(/(\.[^/.]+)$/, "-thumb$1");
+        thumbKey = key.replace(/(\.[^/.]+)$/, "-thumb$1");
         thumbnailUrl = await uploadToR2(thumbnail, thumbKey, "image/jpeg");
       } catch (e) {
         console.error("Thumbnail generation failed:", e);
+        thumbKey = undefined;
         // Continue without thumbnail
       }
     }
 
-    // Save to database
-    const media = await prisma.media.create({
-      data: {
-        filename: file.name,
-        key,
-        url,
-        thumbnailUrl,
-        mimeType,
-        size: finalBuffer.length,
-        width,
-        height,
-        alt,
-        title,
-        folder,
-        originalSize,
-        compressionPct,
-        uploadedBy: session.user.name || session.user.email || undefined,
-      },
-    });
+    // Save to database. If this fails, the R2 objects are already uploaded —
+    // roll them back to avoid orphans (objects with no Media row).
+    let media;
+    try {
+      media = await prisma.media.create({
+        data: {
+          filename: file.name,
+          key,
+          url,
+          thumbnailUrl,
+          mimeType,
+          size: finalBuffer.length,
+          width,
+          height,
+          alt,
+          title,
+          folder,
+          originalSize,
+          compressionPct,
+          uploadedBy: session.user.name || session.user.email || undefined,
+        },
+      });
+    } catch (dbError) {
+      deleteFromR2(key).catch((e) =>
+        console.error("Failed to rollback R2 object after DB error:", e)
+      );
+      if (thumbKey) {
+        deleteFromR2(thumbKey).catch((e) =>
+          console.error("Failed to rollback R2 thumbnail after DB error:", e)
+        );
+      }
+      throw dbError;
+    }
 
     return NextResponse.json({
       success: true,

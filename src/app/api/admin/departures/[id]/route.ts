@@ -1,6 +1,9 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { AdminRole, DepartureStatus, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminDepartureUpdateSchema } from "@/lib/schemas";
 import { manuallyFeatureDeparture } from "@/lib/services/departure-rotation";
 
 // GET /api/admin/departures/[id] - Get a single departure
@@ -68,75 +71,55 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const {
-      routeId,
-      arrivalDate,
-      startDate,
-      summitDate,
-      endDate,
-      price,
-      currency,
-      earlyBirdPrice,
-      earlyBirdUntil,
-      minParticipants,
-      maxParticipants,
-      isFullMoon,
-      isGuaranteed,
-      isFeatured,
-      isManuallyFeatured,
-      excludeFromRotation,
-      status,
-      internalNotes,
-      publicNotes,
-    } = body;
+    const data = adminDepartureUpdateSchema.parse(body);
 
     // Handle manual featuring through the service
-    if (isFeatured !== undefined && isManuallyFeatured) {
-      await manuallyFeatureDeparture(id, isFeatured);
+    if (data.isFeatured !== undefined && data.isManuallyFeatured) {
+      await manuallyFeatureDeparture(id, data.isFeatured);
     }
 
     // Extract year and month if startDate changed
-    let year: number | undefined;
-    let month: number | undefined;
-    if (startDate) {
-      const startDateObj = new Date(startDate);
-      year = startDateObj.getFullYear();
-      month = startDateObj.getMonth() + 1;
+    const updateData: Prisma.GroupDepartureUpdateInput = {};
+    if (data.routeId) updateData.route = { connect: { id: data.routeId } };
+    if (data.arrivalDate) updateData.arrivalDate = data.arrivalDate;
+    if (data.startDate) {
+      updateData.startDate = data.startDate;
+      updateData.year = data.startDate.getFullYear();
+      updateData.month = data.startDate.getMonth() + 1;
     }
+    if (data.summitDate) updateData.summitDate = data.summitDate;
+    if (data.endDate) updateData.endDate = data.endDate;
+    if (data.price !== undefined) updateData.price = data.price;
+    if (data.currency) updateData.currency = data.currency;
+    if (data.earlyBirdPrice !== undefined) updateData.earlyBirdPrice = data.earlyBirdPrice;
+    if (data.earlyBirdUntil !== undefined) updateData.earlyBirdUntil = data.earlyBirdUntil;
+    if (data.minParticipants !== undefined) updateData.minParticipants = data.minParticipants;
+    if (data.maxParticipants !== undefined) updateData.maxParticipants = data.maxParticipants;
+    if (data.isFullMoon !== undefined) updateData.isFullMoon = data.isFullMoon;
+    if (data.isGuaranteed !== undefined) updateData.isGuaranteed = data.isGuaranteed;
+    if (data.isFeatured !== undefined && !data.isManuallyFeatured) {
+      updateData.isFeatured = data.isFeatured;
+    }
+    if (data.excludeFromRotation !== undefined) updateData.excludeFromRotation = data.excludeFromRotation;
+    if (data.status) updateData.status = data.status as DepartureStatus;
+    if (data.internalNotes !== undefined) updateData.internalNotes = data.internalNotes;
+    if (data.publicNotes !== undefined) updateData.publicNotes = data.publicNotes;
 
     const departure = await prisma.groupDeparture.update({
       where: { id },
-      data: {
-        ...(routeId && { routeId }),
-        ...(arrivalDate && { arrivalDate: new Date(arrivalDate) }),
-        ...(startDate && { startDate: new Date(startDate) }),
-        ...(summitDate && { summitDate: new Date(summitDate) }),
-        ...(endDate && { endDate: new Date(endDate) }),
-        ...(price !== undefined && { price }),
-        ...(currency && { currency }),
-        earlyBirdPrice: earlyBirdPrice === null ? null : earlyBirdPrice,
-        earlyBirdUntil: earlyBirdUntil ? new Date(earlyBirdUntil) : null,
-        ...(minParticipants !== undefined && { minParticipants }),
-        ...(maxParticipants !== undefined && { maxParticipants }),
-        ...(isFullMoon !== undefined && { isFullMoon }),
-        ...(isGuaranteed !== undefined && { isGuaranteed }),
-        ...(isFeatured !== undefined && !isManuallyFeatured && { isFeatured }),
-        ...(excludeFromRotation !== undefined && { excludeFromRotation }),
-        ...(status && { status }),
-        ...(internalNotes !== undefined && { internalNotes }),
-        ...(publicNotes !== undefined && { publicNotes }),
-        ...(year && { year }),
-        ...(month && { month }),
-      },
+      data: updateData,
       include: {
         route: {
           select: { title: true, slug: true },
@@ -146,6 +129,12 @@ export async function PUT(
 
     return NextResponse.json(departure);
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating departure:", error);
     return NextResponse.json(
       { error: "Failed to update departure" },
@@ -159,9 +148,12 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;

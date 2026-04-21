@@ -1,7 +1,9 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { DepartureStatus } from "@prisma/client";
+import { AdminRole, DepartureStatus } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminDepartureCreateSchema } from "@/lib/schemas";
 
 // GET /api/admin/departures - List all departures
 export async function GET(request: Request) {
@@ -83,61 +85,43 @@ export async function GET(request: Request) {
 
 // POST /api/admin/departures - Create a new departure
 export async function POST(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   try {
     const body = await request.json();
-    const {
-      routeId,
-      arrivalDate,
-      startDate,
-      summitDate,
-      endDate,
-      price,
-      currency,
-      earlyBirdPrice,
-      earlyBirdUntil,
-      minParticipants,
-      maxParticipants,
-      isFullMoon,
-      isGuaranteed,
-      isFeatured,
-      isManuallyFeatured,
-      excludeFromRotation,
-      status,
-      internalNotes,
-      publicNotes,
-    } = body;
+    const data = adminDepartureCreateSchema.parse(body);
 
     // Extract year and month from startDate
-    const startDateObj = new Date(startDate);
-    const year = startDateObj.getFullYear();
-    const month = startDateObj.getMonth() + 1;
+    const year = data.startDate.getFullYear();
+    const month = data.startDate.getMonth() + 1;
 
     const departure = await prisma.groupDeparture.create({
       data: {
-        routeId,
-        arrivalDate: new Date(arrivalDate),
-        startDate: startDateObj,
-        summitDate: new Date(summitDate),
-        endDate: new Date(endDate),
-        price,
-        currency: currency || "USD",
-        earlyBirdPrice: earlyBirdPrice || null,
-        earlyBirdUntil: earlyBirdUntil ? new Date(earlyBirdUntil) : null,
-        minParticipants: minParticipants || 2,
-        maxParticipants: maxParticipants || 10,
-        isFullMoon: isFullMoon || false,
-        isGuaranteed: isGuaranteed || false,
-        isFeatured: isFeatured || false,
-        isManuallyFeatured: isManuallyFeatured || false,
-        excludeFromRotation: excludeFromRotation || false,
-        status: status || DepartureStatus.OPEN,
-        internalNotes,
-        publicNotes,
+        routeId: data.routeId,
+        arrivalDate: data.arrivalDate,
+        startDate: data.startDate,
+        summitDate: data.summitDate,
+        endDate: data.endDate,
+        price: data.price,
+        currency: data.currency || "USD",
+        earlyBirdPrice: data.earlyBirdPrice ?? null,
+        earlyBirdUntil: data.earlyBirdUntil ?? null,
+        minParticipants: data.minParticipants ?? 2,
+        maxParticipants: data.maxParticipants ?? 10,
+        isFullMoon: data.isFullMoon ?? false,
+        isGuaranteed: data.isGuaranteed ?? false,
+        isFeatured: data.isFeatured ?? false,
+        isManuallyFeatured: data.isManuallyFeatured ?? false,
+        excludeFromRotation: data.excludeFromRotation ?? false,
+        status: (data.status as DepartureStatus) || DepartureStatus.OPEN,
+        internalNotes: data.internalNotes ?? null,
+        publicNotes: data.publicNotes ?? null,
         year,
         month,
       },
@@ -150,6 +134,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json(departure, { status: 201 });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error creating departure:", error);
     return NextResponse.json(
       { error: "Failed to create departure" },

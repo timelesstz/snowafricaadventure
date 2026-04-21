@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { BookingStatus } from "@prisma/client";
 import { sendBookingInquiryEmails } from "@/lib/email/send";
 import { BookingEmailData } from "@/lib/email/templates";
-import { createCommission } from "@/lib/commission";
+import { createCommission, determineTripType } from "@/lib/commission";
 import { BookingNotifications } from "@/lib/notifications";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { extractVisitorData } from "@/lib/visitor-tracking";
@@ -158,17 +158,19 @@ export async function POST(request: NextRequest) {
       include: {
         departure: {
           include: {
-            route: { select: { title: true } },
+            route: { select: { title: true, slug: true } },
           },
         },
       },
     });
 
-    // Create commission for marketing partner (non-blocking)
+    // Create commission for marketing partner (non-blocking).
+    // Derive tripType from the route so Mt Meru or any future non-Kilimanjaro
+    // trekking routes pick up the correct commission rate automatically.
     createCommission({
       bookingId: booking.id,
       bookingAmount: totalPrice,
-      tripType: "kilimanjaro", // Group departures are all Kilimanjaro routes
+      tripType: determineTripType({ routeSlug: booking.departure?.route?.slug }),
     }).catch((error) => {
       console.error("Failed to create commission:", error);
     });

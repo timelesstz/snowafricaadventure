@@ -1,7 +1,12 @@
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { DepartureStatus } from "@prisma/client";
+import { AdminRole, DepartureStatus } from "@prisma/client";
+import { ZodError } from "zod";
+import {
+  adminDepartureBulkCreateSchema,
+  adminDepartureBulkPreviewSchema,
+} from "@/lib/schemas";
 
 // Full moon dates for 2025-2027 (can be extended)
 const FULL_MOON_DATES = [
@@ -33,40 +38,20 @@ function isNearFullMoon(summitDate: Date): boolean {
   });
 }
 
-interface BulkDepartureInput {
-  routeId: string;
-  arrivalDate: string;
-  price: number;
-  currency?: string;
-  earlyBirdPrice?: number;
-  earlyBirdUntil?: string;
-  minParticipants?: number;
-  maxParticipants?: number;
-  isGuaranteed?: boolean;
-  internalNotes?: string;
-  publicNotes?: string;
-}
-
 // POST /api/admin/departures/bulk - Bulk create departures
 export async function POST(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   try {
     const body = await request.json();
-    const { departures, autoDetectFullMoon = true } = body as {
-      departures: BulkDepartureInput[];
-      autoDetectFullMoon?: boolean;
-    };
-
-    if (!departures || !Array.isArray(departures) || departures.length === 0) {
-      return NextResponse.json(
-        { error: "No departures provided" },
-        { status: 400 }
-      );
-    }
+    const { departures, autoDetectFullMoon = true } =
+      adminDepartureBulkCreateSchema.parse(body);
 
     // Get route durations for calculating dates
     const routeIds = [...new Set(departures.map((d) => d.routeId))];
@@ -80,7 +65,7 @@ export async function POST(request: Request) {
     // Prepare bulk create data
     const createData = departures.map((dep) => {
       const routeDays = routeMap.get(dep.routeId) || 7;
-      const arrivalDate = new Date(dep.arrivalDate);
+      const arrivalDate = dep.arrivalDate;
 
       // Calculate dates based on route duration
       // Day 0: Arrival
@@ -111,18 +96,18 @@ export async function POST(request: Request) {
         endDate,
         price: dep.price,
         currency: dep.currency || "USD",
-        earlyBirdPrice: dep.earlyBirdPrice || null,
-        earlyBirdUntil: dep.earlyBirdUntil ? new Date(dep.earlyBirdUntil) : null,
-        minParticipants: dep.minParticipants || 2,
-        maxParticipants: dep.maxParticipants || 10,
+        earlyBirdPrice: dep.earlyBirdPrice ?? null,
+        earlyBirdUntil: dep.earlyBirdUntil ?? null,
+        minParticipants: dep.minParticipants ?? 2,
+        maxParticipants: dep.maxParticipants ?? 10,
         isFullMoon,
-        isGuaranteed: dep.isGuaranteed || false,
+        isGuaranteed: dep.isGuaranteed ?? false,
         isFeatured: false,
         isManuallyFeatured: false,
         excludeFromRotation: false,
         status: DepartureStatus.OPEN,
-        internalNotes: dep.internalNotes || null,
-        publicNotes: dep.publicNotes || null,
+        internalNotes: dep.internalNotes ?? null,
+        publicNotes: dep.publicNotes ?? null,
         year,
         month,
       };
@@ -142,6 +127,12 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error bulk creating departures:", error);
     return NextResponse.json(
       { error: "Failed to bulk create departures" },
@@ -152,9 +143,12 @@ export async function POST(request: Request) {
 
 // Endpoint to generate preview data for bulk creation
 export async function PUT(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   try {
@@ -169,7 +163,7 @@ export async function PUT(request: Request) {
       minParticipants,
       maxParticipants,
       autoDetectFullMoon = true,
-    } = body;
+    } = adminDepartureBulkPreviewSchema.parse(body);
 
     // Get route info
     const route = await prisma.trekkingRoute.findUnique({
@@ -181,8 +175,8 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "Route not found" }, { status: 404 });
     }
 
-    const startDate = new Date(startDateRange);
-    const endDate = new Date(endDateRange);
+    const startDate = startDateRange;
+    const endDate = endDateRange;
     const departures: Array<{
       arrivalDate: Date;
       startDate: Date;
@@ -194,13 +188,7 @@ export async function PUT(request: Request) {
     // Generate departure dates based on frequency
     const currentDate = new Date(startDate);
     const frequencyDays =
-      frequency === "weekly"
-        ? 7
-        : frequency === "biweekly"
-          ? 14
-          : frequency === "monthly"
-            ? 30
-            : 7;
+      frequency === "weekly" ? 7 : frequency === "biweekly" ? 14 : 30;
 
     while (currentDate <= endDate) {
       const arrivalDate = new Date(currentDate);
@@ -232,12 +220,18 @@ export async function PUT(request: Request) {
         ...d,
         price,
         earlyBirdPrice,
-        minParticipants: minParticipants || 2,
-        maxParticipants: maxParticipants || 10,
+        minParticipants: minParticipants ?? 2,
+        maxParticipants: maxParticipants ?? 10,
       })),
       totalCount: departures.length,
     });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error generating preview:", error);
     return NextResponse.json(
       { error: "Failed to generate preview" },

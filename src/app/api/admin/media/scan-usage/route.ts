@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { AdminRole } from "@prisma/client";
 
 export async function POST() {
   try {
-    const session = await auth();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    try {
+      await requireRole(AdminRole.EDITOR);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Unauthorized";
+      const status = msg === "Insufficient permissions" ? 403 : 401;
+      return NextResponse.json({ error: msg }, { status });
     }
 
     // Get all media items

@@ -1,6 +1,9 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { AdminRole, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminInquiryUpdateSchema } from "@/lib/schemas";
 
 // GET /api/admin/inquiries/[id] - Get a single inquiry
 export async function GET(
@@ -41,47 +44,35 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const {
-      status,
-      fullName,
-      email,
-      phone,
-      phonePrefix,
-      nationality,
-      tripType,
-      numAdults,
-      numChildren,
-      arrivalDate,
-      additionalInfo,
-      relatedTo,
-      referralSource,
-    } = body;
+    const data = adminInquiryUpdateSchema.parse(body);
 
-    // Build update data - only include fields that are provided
-    const updateData: Record<string, unknown> = {};
-
-    if (status !== undefined) updateData.status = status;
-    if (fullName !== undefined) updateData.fullName = fullName;
-    if (email !== undefined) updateData.email = email;
-    if (phone !== undefined) updateData.phone = phone;
-    if (phonePrefix !== undefined) updateData.phonePrefix = phonePrefix;
-    if (nationality !== undefined) updateData.nationality = nationality;
-    if (tripType !== undefined) updateData.tripType = tripType;
-    if (numAdults !== undefined) updateData.numAdults = numAdults ? parseInt(numAdults) : null;
-    if (numChildren !== undefined) updateData.numChildren = numChildren ? parseInt(numChildren) : null;
-    if (arrivalDate !== undefined) updateData.arrivalDate = arrivalDate ? new Date(arrivalDate) : null;
-    if (additionalInfo !== undefined) updateData.additionalInfo = additionalInfo;
-    if (relatedTo !== undefined) updateData.relatedTo = relatedTo;
-    if (referralSource !== undefined) updateData.referralSource = referralSource;
+    // Build update data — Zod has already coerced dates/numbers and validated strings
+    const updateData: Prisma.InquiryUpdateInput = {};
+    if (data.status !== undefined) updateData.status = data.status;
+    if (data.fullName !== undefined) updateData.fullName = data.fullName;
+    if (data.email !== undefined) updateData.email = data.email;
+    if (data.phone !== undefined) updateData.phone = data.phone;
+    if (data.phonePrefix !== undefined) updateData.phonePrefix = data.phonePrefix;
+    if (data.nationality !== undefined) updateData.nationality = data.nationality;
+    if (data.tripType !== undefined) updateData.tripType = data.tripType;
+    if (data.numAdults !== undefined) updateData.numAdults = data.numAdults;
+    if (data.numChildren !== undefined) updateData.numChildren = data.numChildren;
+    if (data.arrivalDate !== undefined) updateData.arrivalDate = data.arrivalDate;
+    if (data.additionalInfo !== undefined) updateData.additionalInfo = data.additionalInfo;
+    if (data.relatedTo !== undefined) updateData.relatedTo = data.relatedTo;
+    if (data.referralSource !== undefined) updateData.referralSource = data.referralSource;
 
     const inquiry = await prisma.inquiry.update({
       where: { id },
@@ -90,6 +81,12 @@ export async function PUT(
 
     return NextResponse.json(inquiry);
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating inquiry:", error);
     return NextResponse.json(
       { error: "Failed to update inquiry" },
@@ -103,15 +100,12 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  // Require ADMIN role for deletion
-  const roleHierarchy = { SUPER_ADMIN: 4, ADMIN: 3, EDITOR: 2, VIEWER: 1 };
-  if ((roleHierarchy[session.user.role] || 0) < roleHierarchy.ADMIN) {
-    return NextResponse.json({ error: "Insufficient permissions — ADMIN role required" }, { status: 403 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;

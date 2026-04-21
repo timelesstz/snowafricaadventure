@@ -1,8 +1,10 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { AdminRole } from "@prisma/client";
 import { hash } from "bcryptjs";
+import { ZodError } from "zod";
+import { adminUserUpdateSchema } from "@/lib/schemas";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -61,19 +63,23 @@ export async function GET(request: Request, { params }: RouteParams) {
 
 // PATCH /api/admin/users/[id] - Update user
 export async function PATCH(request: Request, { params }: RouteParams) {
-  const session = await requireSuperAdmin();
+  try {
+    await requireRole(AdminRole.SUPER_ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
+  }
+  const session = await auth();
   if (!session) {
-    return NextResponse.json(
-      { error: "Forbidden", message: "Super Admin access required" },
-      { status: 403 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const { name, email, role, isActive, password } = body;
+    const { name, email, role, isActive, password } = adminUserUpdateSchema.parse(body);
 
     // Prevent self-demotion
     if (id === session.user.id && role && role !== AdminRole.SUPER_ADMIN) {
@@ -123,6 +129,12 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 
     return NextResponse.json(user);
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating user:", error);
     return NextResponse.json(
       { error: "Failed to update user" },
@@ -133,12 +145,16 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 
 // DELETE /api/admin/users/[id] - Delete user
 export async function DELETE(request: Request, { params }: RouteParams) {
-  const session = await requireSuperAdmin();
+  try {
+    await requireRole(AdminRole.SUPER_ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
+  }
+  const session = await auth();
   if (!session) {
-    return NextResponse.json(
-      { error: "Forbidden", message: "Super Admin access required" },
-      { status: 403 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { id } = await params;

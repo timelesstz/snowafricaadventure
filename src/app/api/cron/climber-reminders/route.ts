@@ -12,30 +12,46 @@ function verifyCronSecret(request: NextRequest): boolean {
   return token === process.env.CRON_SECRET;
 }
 
+async function getNumericSetting(key: string, fallback: number): Promise<number> {
+  const row = await prisma.siteSetting.findUnique({ where: { key } });
+  if (!row) return fallback;
+  const parsed = Number(row.value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function addDays(date: Date, days: number): Date {
+  const copy = new Date(date);
+  copy.setDate(copy.getDate() + days);
+  return copy;
+}
+
 export async function GET(request: NextRequest) {
   // Verify cron secret (for Vercel Cron)
   if (!verifyCronSecret(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // Reminder windows are configurable via SiteSetting so ops can tune them
+  // without a code change. Defaults match the original hard-coded values.
+  const [firstDays, finalDays] = await Promise.all([
+    getNumericSetting("climber_reminder_first_days", 7),
+    getNumericSetting("climber_reminder_final_days", 3),
+  ]);
+
   const now = new Date();
   const results = {
     sevenDayReminders: 0,
     threeDayReminders: 0,
+    firstWindowDays: firstDays,
+    finalWindowDays: finalDays,
     errors: [] as string[],
   };
 
   try {
-    // Find tokens expiring in approximately 7 days (6-8 days to account for timing)
+    // First reminder: tokens expiring in ~firstDays (firstDays-1 .. firstDays+1)
     // that haven't received a first reminder yet
-    const sevenDaysFromNow = new Date(now);
-    sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-
-    const sixDaysFromNow = new Date(now);
-    sixDaysFromNow.setDate(sixDaysFromNow.getDate() + 6);
-
-    const eightDaysFromNow = new Date(now);
-    eightDaysFromNow.setDate(eightDaysFromNow.getDate() + 8);
+    const sixDaysFromNow = addDays(now, firstDays - 1);
+    const eightDaysFromNow = addDays(now, firstDays + 1);
 
     const sevenDayTokens = await prisma.climberToken.findMany({
       where: {
@@ -76,7 +92,7 @@ export async function GET(request: NextRequest) {
             year: "numeric",
           }),
           token: token.code,
-          daysRemaining: 7,
+          daysRemaining: firstDays,
           isUrgent: false,
         });
 
@@ -90,26 +106,20 @@ export async function GET(request: NextRequest) {
         await ClimberNotifications.detailsReminder({
           bookingId: token.bookingId,
           climberName: token.climberName || `Climber ${token.climberIndex + 1}`,
-          daysRemaining: 7,
+          daysRemaining: firstDays,
           isUrgent: false,
         });
 
         results.sevenDayReminders++;
       } catch (error) {
-        results.errors.push(`Failed to send 7-day reminder for token ${token.id}: ${error}`);
+        results.errors.push(`Failed to send first reminder for token ${token.id}: ${error}`);
       }
     }
 
-    // Find tokens expiring in approximately 3 days (2-4 days)
+    // Final reminder: tokens expiring in ~finalDays (finalDays-1 .. finalDays+1)
     // that have received first reminder but not final reminder
-    const threeDaysFromNow = new Date(now);
-    threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
-
-    const twoDaysFromNow = new Date(now);
-    twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 2);
-
-    const fourDaysFromNow = new Date(now);
-    fourDaysFromNow.setDate(fourDaysFromNow.getDate() + 4);
+    const twoDaysFromNow = addDays(now, finalDays - 1);
+    const fourDaysFromNow = addDays(now, finalDays + 1);
 
     const threeDayTokens = await prisma.climberToken.findMany({
       where: {
@@ -150,7 +160,7 @@ export async function GET(request: NextRequest) {
             year: "numeric",
           }),
           token: token.code,
-          daysRemaining: 3,
+          daysRemaining: finalDays,
           isUrgent: true,
         });
 
@@ -164,13 +174,13 @@ export async function GET(request: NextRequest) {
         await ClimberNotifications.detailsReminder({
           bookingId: token.bookingId,
           climberName: token.climberName || `Climber ${token.climberIndex + 1}`,
-          daysRemaining: 3,
+          daysRemaining: finalDays,
           isUrgent: true,
         });
 
         results.threeDayReminders++;
       } catch (error) {
-        results.errors.push(`Failed to send 3-day reminder for token ${token.id}: ${error}`);
+        results.errors.push(`Failed to send final reminder for token ${token.id}: ${error}`);
       }
     }
 
@@ -178,7 +188,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Sent ${results.sevenDayReminders} 7-day reminders and ${results.threeDayReminders} 3-day reminders`,
+      message: `Sent ${results.sevenDayReminders} ${firstDays}-day reminders and ${results.threeDayReminders} ${finalDays}-day reminders`,
       results,
     });
   } catch (error) {

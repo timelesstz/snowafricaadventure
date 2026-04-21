@@ -1,7 +1,9 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { RedirectType, NotFoundStatus } from "@prisma/client";
+import { AdminRole, RedirectType, NotFoundStatus } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminRedirectCreateSchema } from "@/lib/schemas";
 import { invalidateRedirectCache } from "@/lib/redirect-cache";
 
 // GET /api/admin/redirects - List all redirects with pagination
@@ -93,6 +95,13 @@ export async function GET(request: Request) {
 
 // POST /api/admin/redirects - Create a new redirect
 export async function POST(request: Request) {
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
+  }
   const session = await auth();
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -100,17 +109,10 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { sourceUrl, destinationUrl, type, notes, notFoundUrlId } = body;
+    const { sourceUrl, destinationUrl, type, notes, notFoundUrlId, isActive } =
+      adminRedirectCreateSchema.parse(body);
 
-    // Validate required fields
-    if (!sourceUrl || !destinationUrl) {
-      return NextResponse.json(
-        { error: "Source URL and destination URL are required" },
-        { status: 400 }
-      );
-    }
-
-    // Normalize source URL
+    // Normalize source URL (Zod guarantees non-empty)
     const normalizedSource = sourceUrl.toLowerCase().replace(/\/+$/, "") || "/";
 
     // Check for existing redirect with same source
@@ -138,8 +140,9 @@ export async function POST(request: Request) {
       data: {
         sourceUrl: normalizedSource,
         destinationUrl,
-        type: type || "PERMANENT",
-        notes,
+        type: (type as RedirectType) || RedirectType.PERMANENT,
+        notes: notes ?? null,
+        isActive: isActive ?? true,
         createdBy: session.user?.id,
         ...(notFoundUrlId && {
           notFoundUrl: {
@@ -162,6 +165,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ redirect }, { status: 201 });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error creating redirect:", error);
     return NextResponse.json(
       { error: "Failed to create redirect" },

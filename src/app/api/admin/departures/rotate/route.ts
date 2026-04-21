@@ -1,5 +1,6 @@
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import { AdminRole } from "@prisma/client";
 import {
   rotateDepartures,
   manuallyFeatureDeparture,
@@ -8,9 +9,12 @@ import {
 
 // POST /api/admin/departures/rotate - Manually trigger rotation
 export async function POST(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   try {

@@ -1,6 +1,9 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { AdminRole } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminPayoutCreateSchema } from "@/lib/schemas";
 
 // GET /api/admin/payouts - List all payouts
 export async function GET() {
@@ -39,14 +42,24 @@ export async function GET() {
 
 // POST /api/admin/payouts - Generate a new payout
 export async function POST(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   try {
     const body = await request.json();
-    const { partnerId, periodStart, periodEnd } = body;
+    const { partnerId, periodStart, periodEnd } = adminPayoutCreateSchema.parse(body);
+
+    if (periodEnd < periodStart) {
+      return NextResponse.json(
+        { error: "periodEnd must be on or after periodStart" },
+        { status: 400 }
+      );
+    }
 
     // Get eligible commissions in the period
     const commissions = await prisma.commission.findMany({
@@ -54,8 +67,8 @@ export async function POST(request: Request) {
         partnerId,
         status: "ELIGIBLE",
         createdAt: {
-          gte: new Date(periodStart),
-          lte: new Date(periodEnd),
+          gte: periodStart,
+          lte: periodEnd,
         },
       },
     });
@@ -76,8 +89,8 @@ export async function POST(request: Request) {
     const payout = await prisma.commissionPayout.create({
       data: {
         partnerId,
-        periodStart: new Date(periodStart),
-        periodEnd: new Date(periodEnd),
+        periodStart,
+        periodEnd,
         totalCommissions: commissions.length,
         totalAmount,
         status: "PENDING",
@@ -86,6 +99,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json(payout, { status: 201 });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error creating payout:", error);
     return NextResponse.json(
       { error: "Failed to create payout" },

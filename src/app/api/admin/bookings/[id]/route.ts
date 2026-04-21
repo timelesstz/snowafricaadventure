@@ -1,9 +1,11 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { BookingStatus } from "@prisma/client";
+import { AdminRole, BookingStatus, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
 import { nanoid } from "nanoid";
 import { sendClimberDetailsRequestEmail } from "@/lib/email/send";
+import { adminBookingUpdateSchema } from "@/lib/schemas";
 
 // GET /api/admin/bookings/[id] - Get a single booking
 export async function GET(
@@ -60,31 +62,19 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const {
-      leadName,
-      leadEmail,
-      leadPhone,
-      leadNationality,
-      totalClimbers,
-      climberDetails,
-      pricePerPerson,
-      totalPrice,
-      depositAmount,
-      depositPaid,
-      balancePaid,
-      status,
-      notes,
-      source,
-    } = body;
+    const data = adminBookingUpdateSchema.parse(body);
 
     // Get current booking for status change tracking
     const currentBooking = await prisma.booking.findUnique({
@@ -99,48 +89,53 @@ export async function PUT(
       );
     }
 
-    // Prepare update data
-    const updateData: Record<string, unknown> = {};
+    // Prepare update data (partial — only include fields that were sent)
+    const updateData: Prisma.BookingUpdateInput = {};
 
-    if (leadName !== undefined) updateData.leadName = leadName;
-    if (leadEmail !== undefined) updateData.leadEmail = leadEmail;
-    if (leadPhone !== undefined) updateData.leadPhone = leadPhone;
-    if (leadNationality !== undefined) updateData.leadNationality = leadNationality;
-    if (totalClimbers !== undefined) updateData.totalClimbers = totalClimbers;
-    if (climberDetails !== undefined) updateData.climberDetails = climberDetails;
-    if (pricePerPerson !== undefined) updateData.pricePerPerson = pricePerPerson;
-    if (totalPrice !== undefined) updateData.totalPrice = totalPrice;
-    if (depositAmount !== undefined) updateData.depositAmount = depositAmount;
-    if (notes !== undefined) updateData.notes = notes;
-    if (source !== undefined) updateData.source = source;
+    if (data.leadName !== undefined) updateData.leadName = data.leadName;
+    if (data.leadEmail !== undefined) updateData.leadEmail = data.leadEmail;
+    if (data.leadPhone !== undefined) updateData.leadPhone = data.leadPhone;
+    if (data.leadNationality !== undefined) updateData.leadNationality = data.leadNationality;
+    if (data.totalClimbers !== undefined) updateData.totalClimbers = data.totalClimbers;
+    if (data.climberDetails !== undefined) {
+      updateData.climberDetails =
+        data.climberDetails === null
+          ? Prisma.JsonNull
+          : (data.climberDetails as Prisma.InputJsonValue);
+    }
+    if (data.pricePerPerson !== undefined) updateData.pricePerPerson = data.pricePerPerson;
+    if (data.totalPrice !== undefined) updateData.totalPrice = data.totalPrice;
+    if (data.depositAmount !== undefined) updateData.depositAmount = data.depositAmount;
+    if (data.notes !== undefined) updateData.notes = data.notes;
+    if (data.source !== undefined) updateData.source = data.source;
 
     // Handle deposit payment status change
     // When deposit is marked as paid, generate climber tokens
     let shouldGenerateTokens = false;
-    if (depositPaid !== undefined && depositPaid !== currentBooking.depositPaid) {
-      updateData.depositPaid = depositPaid;
-      updateData.depositPaidAt = depositPaid ? new Date() : null;
+    if (data.depositPaid !== undefined && data.depositPaid !== currentBooking.depositPaid) {
+      updateData.depositPaid = data.depositPaid;
+      updateData.depositPaidAt = data.depositPaid ? new Date() : null;
 
       // Only generate tokens when deposit is newly marked as paid
-      if (depositPaid && !currentBooking.depositPaid) {
+      if (data.depositPaid && !currentBooking.depositPaid) {
         shouldGenerateTokens = true;
       }
     }
 
     // Handle balance payment status change
-    if (balancePaid !== undefined && balancePaid !== currentBooking.balancePaid) {
-      updateData.balancePaid = balancePaid;
-      updateData.balancePaidAt = balancePaid ? new Date() : null;
+    if (data.balancePaid !== undefined && data.balancePaid !== currentBooking.balancePaid) {
+      updateData.balancePaid = data.balancePaid;
+      updateData.balancePaidAt = data.balancePaid ? new Date() : null;
     }
 
     // Handle status change
-    if (status !== undefined && status !== currentBooking.status) {
-      updateData.status = status;
+    if (data.status !== undefined && data.status !== currentBooking.status) {
+      updateData.status = data.status as BookingStatus;
 
       // Set timestamps based on status
-      if (status === BookingStatus.CONFIRMED) {
+      if (data.status === BookingStatus.CONFIRMED) {
         updateData.confirmedAt = new Date();
-      } else if (status === BookingStatus.CANCELLED || status === BookingStatus.REFUNDED) {
+      } else if (data.status === BookingStatus.CANCELLED || data.status === BookingStatus.REFUNDED) {
         updateData.cancelledAt = new Date();
       }
     }
@@ -243,6 +238,12 @@ export async function PUT(
 
     return NextResponse.json(booking);
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating booking:", error);
     return NextResponse.json(
       { error: "Failed to update booking" },
@@ -256,15 +257,12 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  // Require ADMIN role for deletion
-  const roleHierarchy = { SUPER_ADMIN: 4, ADMIN: 3, EDITOR: 2, VIEWER: 1 };
-  if ((roleHierarchy[session.user.role] || 0) < roleHierarchy.ADMIN) {
-    return NextResponse.json({ error: "Insufficient permissions — ADMIN role required" }, { status: 403 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;

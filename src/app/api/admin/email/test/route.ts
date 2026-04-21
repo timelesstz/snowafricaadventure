@@ -1,5 +1,8 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import { AdminRole } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminEmailTestSchema } from "@/lib/schemas";
 import { verifySmtpConnection, sendTestEmail, NOTIFICATION_EMAILS } from "@/lib/email/index";
 
 // GET /api/admin/email/test - Verify SMTP configuration
@@ -33,6 +36,13 @@ export async function GET() {
 
 // POST /api/admin/email/test - Send a test email or run diagnostics
 export async function POST(request: Request) {
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
+  }
   const session = await auth();
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -40,7 +50,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { to, diagnostic } = body;
+    const { to, diagnostic } = adminEmailTestSchema.parse(body);
 
     // Diagnostic mode: test delivery to each notification address individually
     if (diagnostic) {
@@ -72,20 +82,17 @@ export async function POST(request: Request) {
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
 
-      // Also test an external address if provided
+      // Also test an external address if provided (Zod already validated format)
       if (to) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailRegex.test(to)) {
-          const result = await sendTestEmail(to);
-          const recipientDomain = to.split("@")[1];
-          results.push({
-            address: to,
-            success: result.success,
-            error: result.error,
-            messageId: result.id,
-            type: recipientDomain === fromDomain ? "same-domain" : "external (user-specified)",
-          });
-        }
+        const result = await sendTestEmail(to);
+        const recipientDomain = to.split("@")[1];
+        results.push({
+          address: to,
+          success: result.success,
+          error: result.error,
+          messageId: result.id,
+          type: recipientDomain === fromDomain ? "same-domain" : "external (user-specified)",
+        });
       }
 
       const hasSameDomainFailure = results.some((r) => !r.success && r.type.includes("same-domain"));
@@ -110,14 +117,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(to)) {
-      return NextResponse.json(
-        { error: "Invalid email address format" },
-        { status: 400 }
-      );
-    }
-
     console.log(`[Admin] Sending test email to ${to} (requested by ${session.user?.email})`);
 
     const result = await sendTestEmail(to);
@@ -130,6 +129,12 @@ export async function POST(request: Request) {
       messageId: result.id,
     });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error sending test email:", error);
     return NextResponse.json(
       {

@@ -27,13 +27,19 @@ const ROUTE_PERMISSIONS: Record<string, AdminRole> = {
   "/api/admin/partners": "ADMIN" as AdminRole,
   "/api/admin/payouts": "ADMIN" as AdminRole,
 
-  // Editor+ routes (commissions viewing, 404 monitor, redirects)
+  // Editor+ routes (commissions viewing, 404 monitor, redirects, content edits)
   "/admin/commissions": "EDITOR" as AdminRole,
   "/api/admin/commissions": "EDITOR" as AdminRole,
   "/admin/404-monitor": "EDITOR" as AdminRole,
   "/api/admin/404-monitor": "EDITOR" as AdminRole,
   "/admin/redirects": "EDITOR" as AdminRole,
   "/api/admin/redirects": "EDITOR" as AdminRole,
+  "/admin/about-us": "EDITOR" as AdminRole,
+  "/admin/email-log": "EDITOR" as AdminRole,
+  "/admin/invite-links": "EDITOR" as AdminRole,
+  "/api/admin/invite-links": "EDITOR" as AdminRole,
+  "/admin/newsletter": "EDITOR" as AdminRole,
+  "/api/admin/newsletter": "EDITOR" as AdminRole,
 
   // SEO Dashboard
   "/admin/seo": "VIEWER" as AdminRole,

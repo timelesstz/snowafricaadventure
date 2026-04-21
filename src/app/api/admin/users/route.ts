@@ -1,8 +1,10 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { AdminRole } from "@prisma/client";
 import { hash } from "bcryptjs";
+import { ZodError } from "zod";
+import { adminUserCreateSchema } from "@/lib/schemas";
 
 // Helper to check if user is SUPER_ADMIN
 async function requireSuperAdmin() {
@@ -49,25 +51,17 @@ export async function GET() {
 
 // POST /api/admin/users - Create new admin user
 export async function POST(request: Request) {
-  const session = await requireSuperAdmin();
-  if (!session) {
-    return NextResponse.json(
-      { error: "Forbidden", message: "Super Admin access required" },
-      { status: 403 }
-    );
+  try {
+    await requireRole(AdminRole.SUPER_ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   try {
     const body = await request.json();
-    const { email, name, password, role } = body;
-
-    // Validate required fields
-    if (!email || !name || !password) {
-      return NextResponse.json(
-        { error: "Email, name, and password are required" },
-        { status: 400 }
-      );
-    }
+    const { email, name, password, role } = adminUserCreateSchema.parse(body);
 
     // Check if email already exists
     const existing = await prisma.adminUser.findUnique({
@@ -90,7 +84,7 @@ export async function POST(request: Request) {
         email,
         name,
         passwordHash,
-        role: role || AdminRole.VIEWER,
+        role: (role as AdminRole) || AdminRole.VIEWER,
         isActive: true,
       },
       select: {
@@ -105,6 +99,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json(user, { status: 201 });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error creating user:", error);
     return NextResponse.json(
       { error: "Failed to create user" },

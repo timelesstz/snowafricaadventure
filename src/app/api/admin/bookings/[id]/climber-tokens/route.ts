@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { AdminRole } from "@prisma/client";
+import { ZodError } from "zod";
+import {
+  adminClimberTokenActionSchema,
+  adminClimberTokenDeleteSchema,
+} from "@/lib/schemas";
 import { nanoid } from "nanoid";
 import { sendClimberDetailsRequestEmail } from "@/lib/email/send";
 
@@ -95,16 +101,19 @@ export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const { action, climberIndex, email } = body;
+    const parsed = adminClimberTokenActionSchema.parse(body);
 
     const booking = await prisma.booking.findUnique({
       where: { id },
@@ -123,7 +132,7 @@ export async function POST(
     }
 
     // Action: generate - Generate tokens for climbers without tokens
-    if (action === "generate") {
+    if (parsed.action === "generate") {
       const climberDetails = (booking.climberDetails as Array<{
         name?: string;
         email?: string;
@@ -163,7 +172,8 @@ export async function POST(
     }
 
     // Action: resend - Resend email for a specific climber
-    if (action === "resend" && typeof climberIndex === "number") {
+    if (parsed.action === "resend") {
+      const { climberIndex, email } = parsed;
       const token = booking.climberTokens.find((t) => t.climberIndex === climberIndex);
 
       if (!token) {
@@ -212,8 +222,8 @@ export async function POST(
     }
 
     // Action: send_all - Send emails to all climbers with pending tokens
-    if (action === "send_all") {
-      const emailsData = body.emails as Array<{ climberIndex: number; email: string }> | undefined;
+    if (parsed.action === "send_all") {
+      const emailsData = parsed.emails;
       let sentCount = 0;
 
       for (const token of booking.climberTokens) {
@@ -259,7 +269,7 @@ export async function POST(
     }
 
     // Action: send_to_lead - Send summary email with all links to lead
-    if (action === "send_to_lead") {
+    if (parsed.action === "send_to_lead") {
       const tokens = booking.climberTokens.filter((t) => !t.isCompleted);
 
       if (tokens.length === 0) {
@@ -297,6 +307,12 @@ export async function POST(
 
     return NextResponse.json({ error: "Invalid action" }, { status: 400 });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error processing climber token action:", error);
     return NextResponse.json(
       { error: "Failed to process request" },
@@ -310,20 +326,19 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const { tokenId } = body;
-
-    if (!tokenId) {
-      return NextResponse.json({ error: "Token ID required" }, { status: 400 });
-    }
+    const { tokenId } = adminClimberTokenDeleteSchema.parse(body);
 
     // Verify token belongs to this booking
     const token = await prisma.climberToken.findFirst({
@@ -341,6 +356,12 @@ export async function DELETE(
       message: "Token deleted",
     });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error deleting climber token:", error);
     return NextResponse.json(
       { error: "Failed to delete token" },

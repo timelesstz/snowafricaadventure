@@ -1,6 +1,7 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { AdminRole } from "@prisma/client";
 import {
   sendBookingStatusUpdateEmail,
   sendInquiryResponseEmail,
@@ -9,6 +10,13 @@ import { BookingEmailData, InquiryEmailData } from "@/lib/email/templates";
 
 // POST /api/admin/email - Send email from admin
 export async function POST(request: Request) {
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
+  }
   const session = await auth();
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

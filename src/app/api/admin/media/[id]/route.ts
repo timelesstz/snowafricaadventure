@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { AdminRole, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminMediaUpdateSchema } from "@/lib/schemas";
 import { deleteFromR2 } from "@/lib/r2";
 
 interface RouteParams {
@@ -42,16 +45,19 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
-    const session = await auth();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    try {
+      await requireRole(AdminRole.EDITOR);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Unauthorized";
+      const status = msg === "Insufficient permissions" ? 403 : 401;
+      return NextResponse.json({ error: msg }, { status });
     }
 
     const { id } = await params;
-    const data = await request.json();
+    const body = await request.json();
+    const data = adminMediaUpdateSchema.parse(body);
 
-    // Only allow updating certain fields
-    const updateData: Record<string, unknown> = {};
+    const updateData: Prisma.MediaUpdateInput = {};
     if (data.alt !== undefined) updateData.alt = data.alt;
     if (data.title !== undefined) updateData.title = data.title;
     if (data.folder !== undefined) updateData.folder = data.folder;
@@ -63,6 +69,12 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json({ success: true, media });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Media update error:", error);
     return NextResponse.json(
       { error: "Failed to update media" },
@@ -73,9 +85,12 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
-    const session = await auth();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    try {
+      await requireRole(AdminRole.EDITOR);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Unauthorized";
+      const status = msg === "Insufficient permissions" ? 403 : 401;
+      return NextResponse.json({ error: msg }, { status });
     }
 
     const { id } = await params;

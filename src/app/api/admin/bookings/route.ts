@@ -1,7 +1,10 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { BookingStatus } from "@prisma/client";
+import { AdminRole, BookingStatus, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminBookingCreateSchema } from "@/lib/schemas";
+import { createCommission, determineTripType } from "@/lib/commission";
 
 // GET /api/admin/bookings - List all bookings
 export async function GET(request: Request) {
@@ -73,58 +76,68 @@ export async function GET(request: Request) {
 
 // POST /api/admin/bookings - Create a new booking (admin)
 export async function POST(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch {
+    return NextResponse.json(
+      { error: "Forbidden", message: "EDITOR role or higher required" },
+      { status: 403 }
+    );
   }
 
   try {
     const body = await request.json();
-    const {
-      departureId,
-      leadName,
-      leadEmail,
-      leadPhone,
-      leadNationality,
-      totalClimbers,
-      climberDetails,
-      pricePerPerson,
-      depositAmount,
-      status,
-      notes,
-      source,
-    } = body;
+    const data = adminBookingCreateSchema.parse(body);
 
-    // Calculate total price
-    const totalPrice = pricePerPerson * totalClimbers;
+    const totalPrice = data.pricePerPerson * data.totalClimbers;
 
     const booking = await prisma.booking.create({
       data: {
-        departureId,
-        leadName,
-        leadEmail,
-        leadPhone,
-        leadNationality,
-        totalClimbers: totalClimbers || 1,
-        climberDetails,
-        pricePerPerson,
+        departureId: data.departureId,
+        leadName: data.leadName,
+        leadEmail: data.leadEmail,
+        leadPhone: data.leadPhone || null,
+        leadNationality: data.leadNationality || null,
+        totalClimbers: data.totalClimbers,
+        climberDetails: (data.climberDetails as Prisma.InputJsonValue) ?? undefined,
+        pricePerPerson: data.pricePerPerson,
         totalPrice,
-        depositAmount,
-        status: status || BookingStatus.INQUIRY,
-        notes,
-        source: source || "admin",
+        depositAmount: data.depositAmount ?? null,
+        status: (data.status as BookingStatus) || BookingStatus.INQUIRY,
+        notes: data.notes || null,
+        source: data.source || "admin",
       },
       include: {
         departure: {
           include: {
-            route: { select: { title: true } },
+            route: { select: { title: true, slug: true } },
           },
         },
       },
     });
 
+    // Create commission for the marketing partner, derived from the route.
+    // Admin path was previously silently skipping this — revenue-tracking bug fix.
+    const tripType =
+      data.tripType ||
+      determineTripType({ routeSlug: booking.departure?.route?.slug });
+
+    createCommission({
+      bookingId: booking.id,
+      bookingAmount: totalPrice,
+      tripType,
+    }).catch((error) => {
+      console.error("Failed to create commission for admin booking:", error);
+    });
+
     return NextResponse.json(booking, { status: 201 });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error creating booking:", error);
     return NextResponse.json(
       { error: "Failed to create booking" },

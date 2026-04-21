@@ -1,6 +1,9 @@
-import { auth } from "@/lib/auth";
+import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { AdminRole, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminPartnerUpdateSchema } from "@/lib/schemas";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
@@ -46,70 +49,56 @@ export async function GET(request: Request, { params }: RouteParams) {
 
 // PUT /api/admin/partners/[id] - Update a partner
 export async function PUT(request: Request, { params }: RouteParams) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const {
-      name,
-      type,
-      contactName,
-      contactEmail,
-      contactPhone,
-      agreementDate,
-      agreementExpiry,
-      agreementDocument,
-      payoutFrequency,
-      payoutMethod,
-      payoutDetails,
-      notes,
-      isActive,
-      commissionRates,
-    } = body;
+    const data = adminPartnerUpdateSchema.parse(body);
 
-    // Update partner
-    const partner = await prisma.partner.update({
-      where: { id },
-      data: {
-        name,
-        type,
-        contactName,
-        contactEmail,
-        contactPhone,
-        agreementDate: agreementDate ? new Date(agreementDate) : null,
-        agreementExpiry: agreementExpiry ? new Date(agreementExpiry) : null,
-        agreementDocument: agreementDocument || null,
-        payoutFrequency,
-        payoutMethod,
-        payoutDetails,
-        notes,
-        isActive,
-      },
-    });
+    // Build a partial update — only include fields the client actually sent
+    const updateData: Prisma.PartnerUpdateInput = {};
+    if (data.name !== undefined) updateData.name = data.name;
+    if (data.type !== undefined) updateData.type = data.type;
+    if (data.contactName !== undefined) updateData.contactName = data.contactName || null;
+    if (data.contactEmail !== undefined) updateData.contactEmail = data.contactEmail || null;
+    if (data.contactPhone !== undefined) updateData.contactPhone = data.contactPhone || null;
+    if (data.agreementDate !== undefined) updateData.agreementDate = data.agreementDate;
+    if (data.agreementExpiry !== undefined) updateData.agreementExpiry = data.agreementExpiry;
+    if (data.agreementDocument !== undefined) updateData.agreementDocument = data.agreementDocument;
+    if (data.payoutFrequency !== undefined) updateData.payoutFrequency = data.payoutFrequency;
+    if (data.payoutMethod !== undefined) updateData.payoutMethod = data.payoutMethod;
+    if (data.payoutDetails !== undefined) {
+      updateData.payoutDetails =
+        data.payoutDetails === null
+          ? Prisma.JsonNull
+          : (data.payoutDetails as Prisma.InputJsonValue);
+    }
+    if (data.notes !== undefined) updateData.notes = data.notes;
+    if (data.isActive !== undefined) updateData.isActive = data.isActive;
 
-    // Update commission rates if provided
-    if (commissionRates) {
-      // Delete existing rates
-      await prisma.partnerCommissionRate.deleteMany({
-        where: { partnerId: id },
-      });
+    await prisma.partner.update({ where: { id }, data: updateData });
 
-      // Create new rates
-      await prisma.partnerCommissionRate.createMany({
-        data: commissionRates.map(
-          (rate: { tripType: string; commissionRate: number; isActive?: boolean }) => ({
+    // Update commission rates if provided (delete + recreate atomically)
+    if (data.commissionRates) {
+      await prisma.$transaction([
+        prisma.partnerCommissionRate.deleteMany({ where: { partnerId: id } }),
+        prisma.partnerCommissionRate.createMany({
+          data: data.commissionRates.map((rate) => ({
             partnerId: id,
             tripType: rate.tripType,
             commissionRate: rate.commissionRate,
             isActive: rate.isActive ?? true,
-          })
-        ),
-      });
+          })),
+        }),
+      ]);
     }
 
     // Fetch updated partner with rates
@@ -120,6 +109,12 @@ export async function PUT(request: Request, { params }: RouteParams) {
 
     return NextResponse.json(updatedPartner);
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating partner:", error);
     return NextResponse.json(
       { error: "Failed to update partner" },
@@ -130,9 +125,12 @@ export async function PUT(request: Request, { params }: RouteParams) {
 
 // DELETE /api/admin/partners/[id] - Delete a partner
 export async function DELETE(request: Request, { params }: RouteParams) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;

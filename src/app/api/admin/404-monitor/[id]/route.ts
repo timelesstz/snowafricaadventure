@@ -2,6 +2,8 @@ import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { AdminRole, NotFoundStatus } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminNotFoundUpdateSchema } from "@/lib/schemas";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -64,28 +66,24 @@ export async function GET(request: Request, { params }: RouteParams) {
 
 // PATCH /api/admin/404-monitor/[id] - Update 404 URL status
 export async function PATCH(request: Request, { params }: RouteParams) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.EDITOR);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const { status } = body;
-
-    if (status && !Object.values(NotFoundStatus).includes(status)) {
-      return NextResponse.json(
-        { error: "Invalid status value" },
-        { status: 400 }
-      );
-    }
+    const { status } = adminNotFoundUpdateSchema.parse(body);
 
     const notFoundUrl = await prisma.notFoundUrl.update({
       where: { id },
       data: {
-        ...(status && { status }),
+        ...(status && { status: status as NotFoundStatus }),
       },
       include: {
         redirect: true,
@@ -94,6 +92,12 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 
     return NextResponse.json({ notFoundUrl });
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating 404 URL:", error);
     return NextResponse.json(
       { error: "Failed to update 404 URL" },

@@ -1,22 +1,27 @@
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { PayoutStatus, CommissionStatus, Prisma } from "@prisma/client";
+import { AdminRole, PayoutStatus, CommissionStatus, Prisma } from "@prisma/client";
+import { ZodError } from "zod";
+import { adminPayoutUpdateSchema } from "@/lib/schemas";
 
 type RouteParams = { params: Promise<{ id: string }> };
 
 // PATCH /api/admin/payouts/[id] - Update payout status
 export async function PATCH(request: Request, { params }: RouteParams) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
 
   try {
     const body = await request.json();
-    const { status, paymentReference, notes } = body;
+    const { status, paymentReference, notes } = adminPayoutUpdateSchema.parse(body);
 
     const updateData: Prisma.CommissionPayoutUpdateInput = {};
 
@@ -50,7 +55,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
       }
     }
 
-    if (paymentReference) updateData.paymentReference = paymentReference;
+    if (paymentReference !== undefined) updateData.paymentReference = paymentReference;
     if (notes !== undefined) updateData.notes = notes;
 
     const payout = await prisma.commissionPayout.update({
@@ -60,6 +65,12 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 
     return NextResponse.json(payout);
   } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { error: "Validation failed", issues: error.issues },
+        { status: 400 }
+      );
+    }
     console.error("Error updating payout:", error);
     return NextResponse.json(
       { error: "Failed to update payout" },
@@ -70,9 +81,12 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 
 // DELETE /api/admin/payouts/[id] - Cancel/delete payout
 export async function DELETE(request: Request, { params }: RouteParams) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unauthorized";
+    const status = msg === "Insufficient permissions" ? 403 : 401;
+    return NextResponse.json({ error: msg }, { status });
   }
 
   const { id } = await params;
