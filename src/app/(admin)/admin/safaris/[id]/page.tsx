@@ -176,9 +176,10 @@ async function saveSafari(_prev: FormShellState, formData: FormData): Promise<Fo
   };
 
   if (id && id !== "new") {
+    const safariId: string = id;
     // Update safari
     await prisma.safariPackage.update({
-      where: { id },
+      where: { id: safariId },
       data,
     });
 
@@ -186,7 +187,7 @@ async function saveSafari(_prev: FormShellState, formData: FormData): Promise<Fo
     await prisma.$transaction(async (tx) => {
       // Get existing destinations
       const existing = await tx.safariDestination.findMany({
-        where: { safariId: id },
+        where: { safariId },
         select: { id: true, destinationId: true },
       });
 
@@ -205,8 +206,8 @@ async function saveSafari(_prev: FormShellState, formData: FormData): Promise<Fo
       const toCreate = destinationIds.filter((destId) => !existingDestIds.has(destId));
       if (toCreate.length > 0) {
         await tx.safariDestination.createMany({
-          data: toCreate.map((destId, index) => ({
-            safariId: id,
+          data: toCreate.map((destId) => ({
+            safariId,
             destinationId: destId,
             order: destinationIds.indexOf(destId),
           })),
