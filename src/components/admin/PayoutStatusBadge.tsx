@@ -1,18 +1,13 @@
-export default function PayoutStatusBadge({ status }: { status: string }) {
-  const statusStyles: Record<string, string> = {
-    PENDING: "bg-amber-100 text-amber-700",
-    APPROVED: "bg-blue-100 text-blue-700",
-    PAID: "bg-green-100 text-green-700",
-    CANCELLED: "bg-red-100 text-red-700",
-  };
+import { StatusBadge, type StatusTone } from "./ui/StatusBadge";
 
-  return (
-    <span
-      className={`px-2 py-1 text-xs font-medium rounded-full ${
-        statusStyles[status] || "bg-slate-100 text-slate-700"
-      }`}
-    >
-      {status}
-    </span>
-  );
+const config: Record<string, { label: string; tone: StatusTone }> = {
+  PENDING: { label: "PENDING", tone: "warning" },
+  APPROVED: { label: "APPROVED", tone: "info" },
+  PAID: { label: "PAID", tone: "success" },
+  CANCELLED: { label: "CANCELLED", tone: "danger" },
+};
+
+export default function PayoutStatusBadge({ status }: { status: string }) {
+  const entry = config[status] ?? { label: status, tone: "neutral" as StatusTone };
+  return <StatusBadge label={entry.label} tone={entry.tone} />;
 }

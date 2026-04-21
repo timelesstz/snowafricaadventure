@@ -5,6 +5,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Moon, Shield, Star, EyeOff, Loader2 } from "lucide-react";
 import { DepartureStatus } from "@prisma/client";
+import { toast } from "sonner";
+import {
+  Field,
+  FieldLabel,
+  FieldHelp,
+  FormGrid,
+  FormSection,
+  fieldControlClass,
+} from "../ui";
 
 interface Route {
   id: string;
@@ -79,7 +88,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
     publicNotes: departure?.publicNotes || "",
   });
 
-  // Auto-calculate dates when arrival date or route changes
+  // Auto-calculate dates when arrival date or route changes.
   useEffect(() => {
     if (formData.arrivalDate && formData.routeId) {
       const route = routes.find((r) => r.id === formData.routeId);
@@ -128,10 +137,13 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
         throw new Error(data.error || "Failed to save departure");
       }
 
+      toast.success(mode === "create" ? "Departure created" : "Departure saved");
       router.push("/admin/departures");
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      const message = err instanceof Error ? err.message : "Something went wrong";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -140,19 +152,20 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
   const selectedRoute = routes.find((r) => r.id === formData.routeId);
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <div className="flex items-center gap-4">
+    <div className="max-w-3xl mx-auto">
+      <div className="flex items-center gap-4 mb-6">
         <Link
           href="/admin/departures"
-          className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+          aria-label="Back to departures"
+          className="p-2 hover:bg-slate-100 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5" aria-hidden="true" />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="text-h1">
             {mode === "create" ? "Add Departure" : "Edit Departure"}
           </h1>
-          <p className="text-slate-600 mt-1">
+          <p className="text-body text-slate-600 mt-1">
             {mode === "create"
               ? "Schedule a new group departure"
               : "Update departure details"}
@@ -160,26 +173,29 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit}>
         {error && (
-          <div className="p-4 bg-red-50 text-red-700 rounded-lg">{error}</div>
+          <div
+            role="alert"
+            className="p-4 bg-red-50 text-red-700 rounded-lg mb-4"
+          >
+            {error}
+          </div>
         )}
 
-        {/* Route Selection */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Route</h2>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Trekking Route *
-            </label>
+        <FormSection title="Route">
+          <Field>
+            <FieldLabel htmlFor="routeId" required>
+              Trekking Route
+            </FieldLabel>
             <select
+              id="routeId"
               value={formData.routeId}
               onChange={(e) =>
                 setFormData({ ...formData, routeId: e.target.value })
               }
               required
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+              className={fieldControlClass}
             >
               {routes.map((route) => (
                 <option key={route.id} value={route.id}>
@@ -188,90 +204,79 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
               ))}
             </select>
             {selectedRoute && (
-              <p className="text-sm text-slate-500 mt-1">
-                Duration: {selectedRoute.durationDays} days
-              </p>
+              <FieldHelp>Duration: {selectedRoute.durationDays} days</FieldHelp>
             )}
-          </div>
-        </div>
+          </Field>
+        </FormSection>
 
-        {/* Dates */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Dates</h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Arrival Date (Day 0) *
-              </label>
+        <FormSection
+          title="Dates"
+          description="Trek start, summit, and end are auto-calculated from arrival + route duration."
+        >
+          <FormGrid cols={2}>
+            <Field>
+              <FieldLabel htmlFor="arrivalDate" required>
+                Arrival Date (Day 0)
+              </FieldLabel>
               <input
+                id="arrivalDate"
                 type="date"
                 value={formData.arrivalDate}
                 onChange={(e) =>
                   setFormData({ ...formData, arrivalDate: e.target.value })
                 }
                 required
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-              <p className="text-xs text-slate-500 mt-1">
-                Day guests arrive in Arusha
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Trek Start (Day 1)
-              </label>
+              <FieldHelp>Day guests arrive in Arusha</FieldHelp>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="startDate">Trek Start (Day 1)</FieldLabel>
               <input
+                id="startDate"
                 type="date"
                 value={formData.startDate}
                 onChange={(e) =>
                   setFormData({ ...formData, startDate: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                className={`${fieldControlClass} bg-slate-50`}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Summit Date
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="summitDate">Summit Date</FieldLabel>
               <input
+                id="summitDate"
                 type="date"
                 value={formData.summitDate}
                 onChange={(e) =>
                   setFormData({ ...formData, summitDate: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                className={`${fieldControlClass} bg-slate-50`}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Trek End Date
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="endDate">Trek End Date</FieldLabel>
               <input
+                id="endDate"
                 type="date"
                 value={formData.endDate}
                 onChange={(e) =>
                   setFormData({ ...formData, endDate: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-slate-50"
+                className={`${fieldControlClass} bg-slate-50`}
               />
-            </div>
-          </div>
-        </div>
+            </Field>
+          </FormGrid>
+        </FormSection>
 
-        {/* Pricing */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Pricing</h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Price (USD) *
-              </label>
+        <FormSection title="Pricing">
+          <FormGrid cols={2}>
+            <Field>
+              <FieldLabel htmlFor="price" required>
+                Price (USD)
+              </FieldLabel>
               <input
+                id="price"
                 type="number"
                 value={formData.price}
                 onChange={(e) =>
@@ -280,15 +285,13 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 required
                 min="0"
                 step="1"
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Early Bird Price
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="earlyBirdPrice">Early Bird Price</FieldLabel>
               <input
+                id="earlyBirdPrice"
                 type="number"
                 value={formData.earlyBirdPrice || ""}
                 onChange={(e) =>
@@ -302,36 +305,31 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 min="0"
                 step="1"
                 placeholder="Optional"
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-            </div>
+            </Field>
+          </FormGrid>
+          <Field>
+            <FieldLabel htmlFor="earlyBirdUntil">Early Bird Until</FieldLabel>
+            <input
+              id="earlyBirdUntil"
+              type="date"
+              aria-label="Early bird until"
+              value={formData.earlyBirdUntil}
+              onChange={(e) =>
+                setFormData({ ...formData, earlyBirdUntil: e.target.value })
+              }
+              className={fieldControlClass}
+            />
+          </Field>
+        </FormSection>
 
-            <div className="col-span-2">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Early Bird Until
-              </label>
+        <FormSection title="Capacity">
+          <FormGrid cols={2}>
+            <Field>
+              <FieldLabel htmlFor="minParticipants">Minimum Participants</FieldLabel>
               <input
-                type="date"
-                value={formData.earlyBirdUntil}
-                onChange={(e) =>
-                  setFormData({ ...formData, earlyBirdUntil: e.target.value })
-                }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Capacity */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Capacity</h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Minimum Participants
-              </label>
-              <input
+                id="minParticipants"
                 type="number"
                 value={formData.minParticipants}
                 onChange={(e) =>
@@ -341,15 +339,13 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                   })
                 }
                 min="1"
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Maximum Participants
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="maxParticipants">Maximum Participants</FieldLabel>
               <input
+                id="maxParticipants"
                 type="number"
                 value={formData.maxParticipants}
                 onChange={(e) =>
@@ -359,19 +355,14 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                   })
                 }
                 min="1"
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-            </div>
-          </div>
-        </div>
+            </Field>
+          </FormGrid>
+        </FormSection>
 
-        {/* Special Flags */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Special Flags
-          </h2>
-
-          <div className="grid grid-cols-2 gap-4">
+        <FormSection title="Special flags">
+          <FormGrid cols={2}>
             <label className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
               <input
                 type="checkbox"
@@ -381,13 +372,12 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 }
                 className="w-4 h-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
               />
-              <Moon className="w-5 h-5 text-indigo-500" />
+              <Moon className="w-5 h-5 text-indigo-500" aria-hidden="true" />
               <div>
                 <p className="font-medium text-slate-900">Full Moon</p>
                 <p className="text-xs text-slate-500">Summit during full moon</p>
               </div>
             </label>
-
             <label className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
               <input
                 type="checkbox"
@@ -397,13 +387,12 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 }
                 className="w-4 h-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
               />
-              <Shield className="w-5 h-5 text-green-500" />
+              <Shield className="w-5 h-5 text-green-500" aria-hidden="true" />
               <div>
                 <p className="font-medium text-slate-900">Guaranteed</p>
                 <p className="text-xs text-slate-500">Will run regardless</p>
               </div>
             </label>
-
             <label className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
               <input
                 type="checkbox"
@@ -417,13 +406,12 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 }
                 className="w-4 h-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
               />
-              <Star className="w-5 h-5 text-amber-500" />
+              <Star className="w-5 h-5 text-amber-500" aria-hidden="true" />
               <div>
                 <p className="font-medium text-slate-900">Manual Feature</p>
                 <p className="text-xs text-slate-500">Override auto-rotation</p>
               </div>
             </label>
-
             <label className="flex items-center gap-3 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
               <input
                 type="checkbox"
@@ -436,90 +424,83 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 }
                 className="w-4 h-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
               />
-              <EyeOff className="w-5 h-5 text-slate-400" />
+              <EyeOff className="w-5 h-5 text-slate-400" aria-hidden="true" />
               <div>
                 <p className="font-medium text-slate-900">Exclude Rotation</p>
                 <p className="text-xs text-slate-500">Skip in auto-rotation</p>
               </div>
             </label>
-          </div>
-        </div>
+          </FormGrid>
+        </FormSection>
 
-        {/* Status */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Status</h2>
+        <FormSection title="Status">
+          <Field>
+            <FieldLabel htmlFor="status">Departure status</FieldLabel>
+            <select
+              id="status"
+              aria-label="Departure status"
+              value={formData.status}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  status: e.target.value as DepartureStatus,
+                })
+              }
+              className={fieldControlClass}
+            >
+              {DEPARTURE_STATUSES.map((status) => (
+                <option key={status.value} value={status.value}>
+                  {status.label}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </FormSection>
 
-          <select
-            value={formData.status}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                status: e.target.value as DepartureStatus,
-              })
-            }
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-          >
-            {DEPARTURE_STATUSES.map((status) => (
-              <option key={status.value} value={status.value}>
-                {status.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FormSection title="Notes">
+          <Field>
+            <FieldLabel htmlFor="publicNotes">Public Notes</FieldLabel>
+            <textarea
+              id="publicNotes"
+              value={formData.publicNotes}
+              onChange={(e) =>
+                setFormData({ ...formData, publicNotes: e.target.value })
+              }
+              rows={2}
+              placeholder="Shown on website…"
+              className={`${fieldControlClass} resize-none`}
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="internalNotes">Internal Notes</FieldLabel>
+            <textarea
+              id="internalNotes"
+              value={formData.internalNotes}
+              onChange={(e) =>
+                setFormData({ ...formData, internalNotes: e.target.value })
+              }
+              rows={3}
+              placeholder="Private notes for admin…"
+              className={`${fieldControlClass} resize-none`}
+            />
+          </Field>
+        </FormSection>
 
-        {/* Notes */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Notes</h2>
-
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Public Notes
-              </label>
-              <textarea
-                value={formData.publicNotes}
-                onChange={(e) =>
-                  setFormData({ ...formData, publicNotes: e.target.value })
-                }
-                rows={2}
-                placeholder="Shown on website..."
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none resize-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Internal Notes
-              </label>
-              <textarea
-                value={formData.internalNotes}
-                onChange={(e) =>
-                  setFormData({ ...formData, internalNotes: e.target.value })
-                }
-                rows={3}
-                placeholder="Private notes for admin..."
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none resize-none"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Submit */}
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end gap-4 mt-6">
           <Link
             href="/admin/departures"
-            className="px-6 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
+            className="px-6 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center gap-2 px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
           >
-            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+            {loading && <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />}
             {loading
-              ? "Saving..."
+              ? "Saving…"
               : mode === "create"
                 ? "Create Departure"
                 : "Save Changes"}

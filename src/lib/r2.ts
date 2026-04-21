@@ -8,18 +8,45 @@ import {
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-// Initialize R2 client
-const R2 = new S3Client({
-  region: "auto",
-  endpoint: process.env.R2_ENDPOINT!,
-  credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
-  },
-});
+function requireEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `Missing required environment variable: ${name}. ` +
+        `R2 media storage is unavailable. Check your .env and restart.`
+    );
+  }
+  return value;
+}
 
-const BUCKET_NAME = process.env.R2_BUCKET_NAME!;
-const PUBLIC_URL = process.env.R2_PUBLIC_URL!;
+// Lazily construct the R2 client so that importing this module (e.g. during
+// `next build` page-data collection) doesn't require R2 credentials to exist.
+// Pages that don't actually call R2 at build time will never touch getR2().
+let cached: {
+  client: S3Client;
+  bucket: string;
+  publicUrl: string;
+} | null = null;
+
+function getR2() {
+  if (cached) return cached;
+  const endpoint = requireEnv("R2_ENDPOINT");
+  const accessKeyId = requireEnv("R2_ACCESS_KEY_ID");
+  const secretAccessKey = requireEnv("R2_SECRET_ACCESS_KEY");
+  const bucket = requireEnv("R2_BUCKET_NAME");
+  const publicUrl = requireEnv("R2_PUBLIC_URL");
+
+  cached = {
+    client: new S3Client({
+      region: "auto",
+      endpoint,
+      credentials: { accessKeyId, secretAccessKey },
+    }),
+    bucket,
+    publicUrl,
+  };
+  return cached;
+}
 
 /**
  * Upload a file to Cloudflare R2
@@ -29,9 +56,10 @@ export async function uploadToR2(
   key: string,
   contentType: string
 ): Promise<string> {
-  await R2.send(
+  const { client, bucket } = getR2();
+  await client.send(
     new PutObjectCommand({
-      Bucket: BUCKET_NAME,
+      Bucket: bucket,
       Key: key,
       Body: file,
       ContentType: contentType,
@@ -45,9 +73,10 @@ export async function uploadToR2(
  * Delete a file from R2
  */
 export async function deleteFromR2(key: string): Promise<void> {
-  await R2.send(
+  const { client, bucket } = getR2();
+  await client.send(
     new DeleteObjectCommand({
-      Bucket: BUCKET_NAME,
+      Bucket: bucket,
       Key: key,
     })
   );
@@ -60,26 +89,37 @@ export async function getSignedR2Url(
   key: string,
   expiresIn: number = 3600
 ): Promise<string> {
+  const { client, bucket } = getR2();
   const command = new GetObjectCommand({
-    Bucket: BUCKET_NAME,
+    Bucket: bucket,
     Key: key,
   });
 
-  return getSignedUrl(R2, command, { expiresIn });
+  return getSignedUrl(client, command, { expiresIn });
 }
 
 /**
  * Get the public URL for a file
  */
 export function getR2Url(key: string): string {
-  return `${PUBLIC_URL}/${key}`;
+  const { publicUrl } = getR2();
+  return `${publicUrl}/${key}`;
 }
 
 /**
  * Generate a unique file key with proper path structure
  */
 export function generateFileKey(
-  category: "uploads" | "routes" | "safaris" | "destinations" | "blog" | "general" | "daytrips" | "reviews" | "homepage",
+  category:
+    | "uploads"
+    | "routes"
+    | "safaris"
+    | "destinations"
+    | "blog"
+    | "general"
+    | "daytrips"
+    | "reviews"
+    | "homepage",
   filename: string
 ): string {
   const date = new Date();
@@ -94,18 +134,21 @@ export function generateFileKey(
 /**
  * List objects in R2 bucket with pagination
  */
-export async function listR2Objects(options: {
-  prefix?: string;
-  maxKeys?: number;
-  continuationToken?: string;
-} = {}): Promise<{
+export async function listR2Objects(
+  options: {
+    prefix?: string;
+    maxKeys?: number;
+    continuationToken?: string;
+  } = {}
+): Promise<{
   objects: { key: string; size: number; lastModified: Date | undefined }[];
   nextToken: string | undefined;
   isTruncated: boolean;
 }> {
-  const result = await R2.send(
+  const { client, bucket } = getR2();
+  const result = await client.send(
     new ListObjectsV2Command({
-      Bucket: BUCKET_NAME,
+      Bucket: bucket,
       Prefix: options.prefix,
       MaxKeys: options.maxKeys || 100,
       ContinuationToken: options.continuationToken,
@@ -132,8 +175,9 @@ export async function getR2ObjectMeta(key: string): Promise<{
   lastModified: Date | undefined;
 } | null> {
   try {
-    const result = await R2.send(
-      new HeadObjectCommand({ Bucket: BUCKET_NAME, Key: key })
+    const { client, bucket } = getR2();
+    const result = await client.send(
+      new HeadObjectCommand({ Bucket: bucket, Key: key })
     );
     return {
       size: result.ContentLength || 0,
@@ -144,5 +188,3 @@ export async function getR2ObjectMeta(key: string): Promise<{
     return null;
   }
 }
-
-export default R2;

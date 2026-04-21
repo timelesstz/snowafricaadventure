@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { Bell, Check, CheckCheck, Trash2, X } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
@@ -146,13 +147,21 @@ export default function NotificationBell() {
   return (
     <div className="relative">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
-        aria-label="Notifications"
+        aria-label={
+          unreadCount > 0
+            ? `Notifications (${unreadCount} unread)`
+            : "Notifications"
+        }
       >
-        <Bell className="h-5 w-5 text-gray-600" />
+        <Bell className="h-5 w-5 text-gray-600" aria-hidden="true" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+          <span
+            className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+            aria-hidden="true"
+          >
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -174,19 +183,22 @@ export default function NotificationBell() {
               <div className="flex items-center gap-2">
                 {unreadCount > 0 && (
                   <button
+                    type="button"
                     onClick={markAllAsRead}
                     disabled={loading}
                     className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1 disabled:opacity-50"
                   >
-                    <CheckCheck className="h-3 w-3" />
+                    <CheckCheck className="h-3 w-3" aria-hidden="true" />
                     Mark all read
                   </button>
                 )}
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
+                  aria-label="Close notifications"
                   className="p-1 hover:bg-gray-200 rounded"
                 >
-                  <X className="h-4 w-4 text-gray-500" />
+                  <X className="h-4 w-4 text-gray-500" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -209,8 +221,8 @@ export default function NotificationBell() {
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        {/* Icon */}
-                        <span className="text-lg">
+                        {/* Icon — decorative; notification title carries meaning for screen readers */}
+                        <span className="text-lg" aria-hidden="true">
                           {typeIcons[notification.type] || "📢"}
                         </span>
 
@@ -233,7 +245,7 @@ export default function NotificationBell() {
                           </div>
 
                           {link ? (
-                            <a
+                            <Link
                               href={link}
                               onClick={() => {
                                 if (!notification.isRead) {
@@ -249,7 +261,7 @@ export default function NotificationBell() {
                               <p className="text-sm text-gray-600 truncate">
                                 {notification.message}
                               </p>
-                            </a>
+                            </Link>
                           ) : (
                             <div className="mt-1">
                               <p className="font-medium text-gray-900 text-sm">
@@ -266,19 +278,23 @@ export default function NotificationBell() {
                         <div className="flex items-center gap-1">
                           {!notification.isRead && (
                             <button
+                              type="button"
                               onClick={() => markAsRead(notification.id)}
                               className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-green-600"
+                              aria-label="Mark notification as read"
                               title="Mark as read"
                             >
-                              <Check className="h-4 w-4" />
+                              <Check className="h-4 w-4" aria-hidden="true" />
                             </button>
                           )}
                           <button
+                            type="button"
                             onClick={() => deleteNotification(notification.id)}
                             className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-red-600"
+                            aria-label="Delete notification"
                             title="Delete"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-4 w-4" aria-hidden="true" />
                           </button>
                         </div>
                       </div>
@@ -291,13 +307,13 @@ export default function NotificationBell() {
             {/* Footer */}
             {notifications.length > 0 && (
               <div className="px-4 py-2 border-t border-gray-200 bg-gray-50">
-                <a
+                <Link
                   href="/admin/notifications"
                   className="text-sm text-blue-600 hover:text-blue-700"
                   onClick={() => setIsOpen(false)}
                 >
                   View all notifications
-                </a>
+                </Link>
               </div>
             )}
           </div>

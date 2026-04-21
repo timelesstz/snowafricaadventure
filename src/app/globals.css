@@ -37,6 +37,28 @@
 
   /* Radius */
   --radius: 0.75rem;
+
+  /* ========================================
+     Admin Design Tokens
+     Namespaced `--admin-*` vars so future theme
+     changes propagate without mass Tailwind-class swaps.
+     Defaults mirror today's hardcoded slate/amber values.
+     ======================================== */
+  --admin-bg: #f1f5f9;
+  --admin-surface: #ffffff;
+  --admin-surface-elevated: #f8fafc;
+  --admin-border: #e2e8f0;
+  --admin-border-strong: #cbd5e1;
+  --admin-text: #0f172a;
+  --admin-text-muted: #64748b;
+  --admin-sidebar: #1e293b;
+  --admin-sidebar-fg: #cbd5e1;
+  --admin-sidebar-active-bg: #d97706;
+  --admin-sidebar-active-fg: #ffffff;
+  --admin-accent: #d97706;
+  --admin-accent-fg: #ffffff;
+  --admin-danger: #dc2626;
+  --admin-success: #16a34a;
 }
 
 @theme inline {
@@ -75,6 +97,59 @@ html {
 *:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* ========================================
+   Admin typography scale
+   Use these on admin/marketing surfaces instead of
+   re-deriving sizes inline on every page.
+   ======================================== */
+.text-h1 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--admin-text);
+}
+
+.text-h2 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--admin-text);
+}
+
+.text-h3 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.text-h4 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--admin-text-muted);
+}
+
+.text-body {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: var(--admin-text);
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--admin-text-muted);
 }
 
 /* Selection */

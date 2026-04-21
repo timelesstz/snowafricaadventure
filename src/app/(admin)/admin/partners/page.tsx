@@ -1,6 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Plus, Users, Eye, DollarSign, TrendingUp } from "lucide-react";
+import {
+  AdminPageHeader,
+  EmptyState,
+  DataTable,
+  StatusBadge,
+  type Column,
+} from "@/components/admin/ui";
 
 async function getPartners() {
   const partners = await prisma.partner.findMany({
@@ -19,7 +26,6 @@ async function getPartners() {
     orderBy: { createdAt: "desc" },
   });
 
-  // Calculate earnings for each partner
   return partners.map((partner) => {
     const totalEarnings = partner.commissions.reduce(
       (sum, c) => sum + Number(c.commissionAmount),
@@ -41,157 +47,140 @@ async function getPartners() {
   });
 }
 
+type PartnerRow = Awaited<ReturnType<typeof getPartners>>[number];
+
 export default async function PartnersPage() {
   const partners = await getPartners();
 
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">Partners</h1>
-          <p className="text-slate-600 mt-1">
-            Manage partner agreements and commission rates
-          </p>
-        </div>
-        <Link
-          href="/admin/partners/new"
-          className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
-        >
-          <Plus className="w-5 h-5" />
-          Add Partner
-        </Link>
-      </div>
+  const addPartnerButton = (
+    <Link
+      href="/admin/partners/new"
+      className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+    >
+      <Plus className="w-4 h-4" aria-hidden="true" />
+      Add Partner
+    </Link>
+  );
 
-      {partners.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">
-          <Users className="w-12 h-12 mx-auto text-slate-400 mb-4" />
-          <h3 className="text-lg font-medium text-slate-900 mb-2">
-            No partners yet
-          </h3>
-          <p className="text-slate-500 mb-4">
-            Add your first partner to start tracking commissions
+  const columns: Column<PartnerRow>[] = [
+    {
+      key: "partner",
+      header: "Partner",
+      render: (p) => (
+        <Link href={`/admin/partners/${p.id}`} className="block group">
+          <p className="font-medium text-slate-900 group-hover:text-amber-600 transition-colors">
+            {p.name}
           </p>
+          {p.contactEmail && (
+            <p className="text-sm text-slate-500">{p.contactEmail}</p>
+          )}
+        </Link>
+      ),
+    },
+    {
+      key: "type",
+      header: "Type",
+      render: (p) => <StatusBadge label={p.type} tone="neutral" />,
+    },
+    {
+      key: "rates",
+      header: "Commission Rates",
+      render: (p) => (
+        <div className="flex flex-wrap gap-1">
+          {p.commissionRates.map((rate) => (
+            <span
+              key={rate.id}
+              className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded"
+            >
+              {rate.tripType}: {Number(rate.commissionRate)}%
+            </span>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "bookings",
+      header: "Bookings",
+      render: (p) => <span className="text-slate-600">{p._count.commissions}</span>,
+    },
+    {
+      key: "earnings",
+      header: "Earnings",
+      render: (p) => (
+        <div className="space-y-1">
+          <div className="flex items-center gap-1">
+            <DollarSign className="w-3 h-3 text-green-600" aria-hidden="true" />
+            <span className="text-sm font-medium text-green-700">
+              ${p.totalEarnings.toLocaleString()}
+            </span>
+          </div>
+          {p.pendingEarnings > 0 && (
+            <div className="flex items-center gap-1">
+              <TrendingUp className="w-3 h-3 text-amber-500" aria-hidden="true" />
+              <span className="text-xs text-amber-600">
+                ${p.pendingEarnings.toLocaleString()} pending
+              </span>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
+      key: "status",
+      header: "Status",
+      render: (p) => (
+        <StatusBadge
+          label={p.isActive ? "Active" : "Inactive"}
+          tone={p.isActive ? "success" : "danger"}
+        />
+      ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "right",
+      render: (p) => (
+        <div className="flex items-center justify-end gap-2">
           <Link
-            href="/admin/partners/new"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+            href={`/admin/partners/${p.id}/earnings`}
+            className="inline-flex items-center gap-1 px-3 py-1 text-sm text-amber-600 hover:text-amber-700 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
-            <Plus className="w-5 h-5" />
-            Add Partner
+            <DollarSign className="w-4 h-4" aria-hidden="true" />
+            Earnings
+          </Link>
+          <Link
+            href={`/admin/partners/${p.id}`}
+            className="inline-flex items-center gap-1 px-3 py-1 text-sm text-slate-600 hover:text-amber-600 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          >
+            <Eye className="w-4 h-4" aria-hidden="true" />
+            View
           </Link>
         </div>
+      ),
+    },
+  ];
+
+  return (
+    <div>
+      <AdminPageHeader
+        title="Partners"
+        description="Manage partner agreements and commission rates"
+        actions={addPartnerButton}
+      />
+
+      {partners.length === 0 ? (
+        <EmptyState
+          icon={Users}
+          title="No partners yet"
+          message="Add your first partner to start tracking commissions"
+          action={addPartnerButton}
+        />
       ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-slate-50 border-b border-slate-200">
-              <tr>
-                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                  Partner
-                </th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                  Type
-                </th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                  Commission Rates
-                </th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                  Bookings
-                </th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                  Earnings
-                </th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">
-                  Status
-                </th>
-                <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200">
-              {partners.map((partner) => (
-                <tr key={partner.id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4">
-                    <Link href={`/admin/partners/${partner.id}`} className="block group">
-                      <p className="font-medium text-slate-900 group-hover:text-amber-600 transition-colors">
-                        {partner.name}
-                      </p>
-                      {partner.contactEmail && (
-                        <p className="text-sm text-slate-500">
-                          {partner.contactEmail}
-                        </p>
-                      )}
-                    </Link>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700">
-                      {partner.type}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex flex-wrap gap-1">
-                      {partner.commissionRates.map((rate) => (
-                        <span
-                          key={rate.id}
-                          className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded"
-                        >
-                          {rate.tripType}: {Number(rate.commissionRate)}%
-                        </span>
-                      ))}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-slate-600">
-                    {partner._count.commissions}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-1">
-                        <DollarSign className="w-3 h-3 text-green-600" />
-                        <span className="text-sm font-medium text-green-700">
-                          ${partner.totalEarnings.toLocaleString()}
-                        </span>
-                      </div>
-                      {partner.pendingEarnings > 0 && (
-                        <div className="flex items-center gap-1">
-                          <TrendingUp className="w-3 h-3 text-amber-500" />
-                          <span className="text-xs text-amber-600">
-                            ${partner.pendingEarnings.toLocaleString()} pending
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        partner.isActive
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {partner.isActive ? "Active" : "Inactive"}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right space-x-2">
-                    <Link
-                      href={`/admin/partners/${partner.id}/earnings`}
-                      className="inline-flex items-center gap-1 px-3 py-1 text-sm text-amber-600 hover:text-amber-700"
-                    >
-                      <DollarSign className="w-4 h-4" />
-                      Earnings
-                    </Link>
-                    <Link
-                      href={`/admin/partners/${partner.id}`}
-                      className="inline-flex items-center gap-1 px-3 py-1 text-sm text-slate-600 hover:text-amber-600"
-                    >
-                      <Eye className="w-4 h-4" />
-                      View
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DataTable
+          columns={columns}
+          rows={partners}
+          getRowKey={(p) => p.id}
+        />
       )}
     </div>
   );

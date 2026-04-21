@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useReducer } from "react";
 import {
   Search,
   Grid,
@@ -71,6 +71,86 @@ type ViewMode = "grid" | "list";
 type FilterMode = "all" | "orphaned" | "used";
 type TabMode = "database" | "r2";
 
+// Consolidated DB-tab filter + view state.
+// Previously lived as 5 separate useState calls (viewMode/filter/folder/search/page);
+// merged into one reducer so filter changes that reset page are a single transition.
+interface DbFilterState {
+  viewMode: ViewMode;
+  filter: FilterMode;
+  folder: string;
+  search: string;
+  page: number;
+}
+
+type DbFilterAction =
+  | { type: "setSearch"; value: string }
+  | { type: "setFilter"; value: FilterMode }
+  | { type: "setFolder"; value: string }
+  | { type: "setViewMode"; value: ViewMode }
+  | { type: "setPage"; value: number }
+  | { type: "nextPage"; max: number }
+  | { type: "prevPage" };
+
+function dbFilterReducer(state: DbFilterState, action: DbFilterAction): DbFilterState {
+  switch (action.type) {
+    case "setSearch":
+      return { ...state, search: action.value, page: 1 };
+    case "setFilter":
+      return { ...state, filter: action.value, page: 1 };
+    case "setFolder":
+      return { ...state, folder: action.value, page: 1 };
+    case "setViewMode":
+      return { ...state, viewMode: action.value };
+    case "setPage":
+      return { ...state, page: action.value };
+    case "nextPage":
+      return { ...state, page: Math.min(action.max, state.page + 1) };
+    case "prevPage":
+      return { ...state, page: Math.max(1, state.page - 1) };
+  }
+}
+
+const initialDbFilters: DbFilterState = {
+  viewMode: "grid",
+  filter: "all",
+  folder: "all",
+  search: "",
+  page: 1,
+};
+
+// R2-tab filter state reducer — mirrors the DB-tab pattern.
+// Fetch state (items, nextToken, hasMore, loading) and selection
+// stay as useState since they update at different cadences.
+type R2FilterMode = "all" | "tracked" | "untracked";
+
+interface R2FilterState {
+  search: string;
+  prefix: string;
+  filter: R2FilterMode;
+}
+
+type R2FilterAction =
+  | { type: "setSearch"; value: string }
+  | { type: "setPrefix"; value: string }
+  | { type: "setFilter"; value: R2FilterMode };
+
+function r2FilterReducer(state: R2FilterState, action: R2FilterAction): R2FilterState {
+  switch (action.type) {
+    case "setSearch":
+      return { ...state, search: action.value };
+    case "setPrefix":
+      return { ...state, prefix: action.value };
+    case "setFilter":
+      return { ...state, filter: action.value };
+  }
+}
+
+const initialR2Filters: R2FilterState = {
+  search: "",
+  prefix: "",
+  filter: "all",
+};
+
 export default function MediaLibrary() {
   // Database tab state
   const [media, setMedia] = useState<Media[]>([]);
@@ -79,11 +159,11 @@ export default function MediaLibrary() {
   const [scanning, setScanning] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  const [viewMode, setViewMode] = useState<ViewMode>("grid");
-  const [filter, setFilter] = useState<FilterMode>("all");
-  const [folder, setFolder] = useState<string>("all");
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [dbFilters, dispatchDbFilters] = useReducer(
+    dbFilterReducer,
+    initialDbFilters
+  );
+  const { viewMode, filter, folder, search, page } = dbFilters;
   const [totalPages, setTotalPages] = useState(1);
 
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -97,9 +177,11 @@ export default function MediaLibrary() {
   // R2 tab state
   const [r2Items, setR2Items] = useState<R2Item[]>([]);
   const [r2Loading, setR2Loading] = useState(false);
-  const [r2Search, setR2Search] = useState("");
-  const [r2Prefix, setR2Prefix] = useState("");
-  const [r2Filter, setR2Filter] = useState<"all" | "tracked" | "untracked">("all");
+  const [r2Filters, dispatchR2Filters] = useReducer(
+    r2FilterReducer,
+    initialR2Filters
+  );
+  const { search: r2Search, prefix: r2Prefix, filter: r2Filter } = r2Filters;
   const [r2NextToken, setR2NextToken] = useState<string | undefined>();
   const [r2HasMore, setR2HasMore] = useState(false);
   const [r2SelectedKeys, setR2SelectedKeys] = useState<Set<string>>(new Set());
@@ -466,20 +548,22 @@ export default function MediaLibrary() {
                   type="text"
                   placeholder="Search files..."
                   value={search}
-                  onChange={(e) => {
-                    setSearch(e.target.value);
-                    setPage(1);
-                  }}
+                  onChange={(e) =>
+                    dispatchDbFilters({ type: "setSearch", value: e.target.value })
+                  }
                   className="w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 />
               </div>
 
               <select
+                aria-label="Filter by usage"
                 value={filter}
-                onChange={(e) => {
-                  setFilter(e.target.value as FilterMode);
-                  setPage(1);
-                }}
+                onChange={(e) =>
+                  dispatchDbFilters({
+                    type: "setFilter",
+                    value: e.target.value as FilterMode,
+                  })
+                }
                 className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500"
               >
                 <option value="all">All Images</option>
@@ -488,11 +572,11 @@ export default function MediaLibrary() {
               </select>
 
               <select
+                aria-label="Filter by folder"
                 value={folder}
-                onChange={(e) => {
-                  setFolder(e.target.value);
-                  setPage(1);
-                }}
+                onChange={(e) =>
+                  dispatchDbFilters({ type: "setFolder", value: e.target.value })
+                }
                 className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500"
               >
                 <option value="all">All Folders</option>
@@ -505,7 +589,7 @@ export default function MediaLibrary() {
 
               <div className="flex border rounded-lg overflow-hidden">
                 <button
-                  onClick={() => setViewMode("grid")}
+                  onClick={() => dispatchDbFilters({ type: "setViewMode", value: "grid" })}
                   className={clsx(
                     "p-2",
                     viewMode === "grid" ? "bg-slate-100" : "hover:bg-slate-50"
@@ -514,7 +598,7 @@ export default function MediaLibrary() {
                   <Grid className="w-5 h-5" />
                 </button>
                 <button
-                  onClick={() => setViewMode("list")}
+                  onClick={() => dispatchDbFilters({ type: "setViewMode", value: "list" })}
                   className={clsx(
                     "p-2",
                     viewMode === "list" ? "bg-slate-100" : "hover:bg-slate-50"
@@ -814,21 +898,25 @@ export default function MediaLibrary() {
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-2">
                 <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  type="button"
+                  aria-label="Previous page"
+                  onClick={() => dispatchDbFilters({ type: "prevPage" })}
                   disabled={page === 1}
                   className="p-2 rounded-lg border hover:bg-slate-50 disabled:opacity-50"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                 </button>
                 <span className="text-sm text-slate-600">
                   Page {page} of {totalPages}
                 </span>
                 <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  type="button"
+                  aria-label="Next page"
+                  onClick={() => dispatchDbFilters({ type: "nextPage", max: totalPages })}
                   disabled={page === totalPages}
                   className="p-2 rounded-lg border hover:bg-slate-50 disabled:opacity-50"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
             )}
@@ -844,16 +932,25 @@ export default function MediaLibrary() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
                   type="text"
+                  aria-label="Search R2 images"
                   placeholder="Search R2 images by filename..."
                   value={r2Search}
-                  onChange={(e) => setR2Search(e.target.value)}
+                  onChange={(e) =>
+                    dispatchR2Filters({ type: "setSearch", value: e.target.value })
+                  }
                   className="w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
 
               <select
+                aria-label="Filter R2 by DB status"
                 value={r2Filter}
-                onChange={(e) => setR2Filter(e.target.value as "all" | "tracked" | "untracked")}
+                onChange={(e) =>
+                  dispatchR2Filters({
+                    type: "setFilter",
+                    value: e.target.value as R2FilterMode,
+                  })
+                }
                 className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="all">All R2 Images</option>
@@ -881,7 +978,7 @@ export default function MediaLibrary() {
                 <button
                   key={p.value}
                   onClick={() => {
-                    setR2Prefix(p.value);
+                    dispatchR2Filters({ type: "setPrefix", value: p.value });
                     setR2NextToken(undefined);
                   }}
                   className={clsx(

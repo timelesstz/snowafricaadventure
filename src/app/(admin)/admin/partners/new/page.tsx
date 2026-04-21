@@ -4,6 +4,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+import { toast } from "sonner";
+import {
+  Field,
+  FieldLabel,
+  FormGrid,
+  FormSection,
+  fieldControlClass,
+} from "@/components/admin/ui";
 
 const TRIP_TYPES = ["kilimanjaro", "safari", "daytrip", "zanzibar"];
 const PARTNER_TYPES = ["DEVELOPER", "MARKETING", "AFFILIATE", "AGENT"];
@@ -58,10 +66,13 @@ export default function NewPartnerPage() {
         throw new Error("Failed to create partner");
       }
 
+      toast.success("Partner created");
       router.push("/admin/partners");
       router.refresh();
     } catch {
-      setError("Failed to create partner. Please try again.");
+      const message = "Failed to create partner. Please try again.";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -90,60 +101,61 @@ export default function NewPartnerPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-4">
+    <div className="max-w-2xl mx-auto">
+      <div className="flex items-center gap-4 mb-6">
         <Link
           href="/admin/partners"
-          className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+          aria-label="Back to partners"
+          className="p-2 hover:bg-slate-100 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5" aria-hidden="true" />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Add Partner</h1>
-          <p className="text-slate-600 mt-1">
+          <h1 className="text-h1">Add Partner</h1>
+          <p className="text-body text-slate-600 mt-1">
             Create a new partner agreement
           </p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit}>
         {error && (
-          <div className="p-4 bg-red-50 text-red-700 rounded-lg">{error}</div>
+          <div role="alert" className="p-4 bg-red-50 text-red-700 rounded-lg mb-4">
+            {error}
+          </div>
         )}
 
-        {/* Basic Info */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Basic Information
-          </h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Partner Name *
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                placeholder="Partner company name"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Partner Type *
-              </label>
+        <FormSection title="Basic Information">
+          <Field>
+            <FieldLabel htmlFor="name" required>
+              Partner Name
+            </FieldLabel>
+            <input
+              id="name"
+              type="text"
+              aria-label="Partner name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              required
+              placeholder="Partner company name"
+              className={fieldControlClass}
+            />
+          </Field>
+          <FormGrid cols={2}>
+            <Field>
+              <FieldLabel htmlFor="type" required>
+                Partner Type
+              </FieldLabel>
               <select
+                id="type"
+                aria-label="Partner type"
                 value={formData.type}
                 onChange={(e) =>
                   setFormData({ ...formData, type: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               >
                 {PARTNER_TYPES.map((type) => (
                   <option key={type} value={type}>
@@ -151,18 +163,17 @@ export default function NewPartnerPage() {
                   </option>
                 ))}
               </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Payout Frequency
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="payoutFrequency">Payout Frequency</FieldLabel>
               <select
+                id="payoutFrequency"
+                aria-label="Payout frequency"
                 value={formData.payoutFrequency}
                 onChange={(e) =>
                   setFormData({ ...formData, payoutFrequency: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               >
                 {PAYOUT_FREQUENCIES.map((freq) => (
                   <option key={freq} value={freq}>
@@ -170,145 +181,128 @@ export default function NewPartnerPage() {
                   </option>
                 ))}
               </select>
-            </div>
-          </div>
-        </div>
+            </Field>
+          </FormGrid>
+        </FormSection>
 
-        {/* Contact Info */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Contact Information
-          </h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Contact Name
-              </label>
+        <FormSection title="Contact Information">
+          <FormGrid cols={2}>
+            <Field>
+              <FieldLabel htmlFor="contactName">Contact Name</FieldLabel>
               <input
+                id="contactName"
                 type="text"
+                aria-label="Contact name"
                 value={formData.contactName}
                 onChange={(e) =>
                   setFormData({ ...formData, contactName: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 placeholder="Primary contact"
+                className={fieldControlClass}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Contact Email
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="contactEmail">Contact Email</FieldLabel>
               <input
+                id="contactEmail"
                 type="email"
+                aria-label="Contact email"
                 value={formData.contactEmail}
                 onChange={(e) =>
                   setFormData({ ...formData, contactEmail: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 placeholder="email@example.com"
+                className={fieldControlClass}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Contact Phone
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="contactPhone">Contact Phone</FieldLabel>
               <input
+                id="contactPhone"
                 type="text"
+                aria-label="Contact phone"
                 value={formData.contactPhone}
                 onChange={(e) =>
                   setFormData({ ...formData, contactPhone: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 placeholder="+255 ..."
+                className={fieldControlClass}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Payout Method
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="payoutMethod">Payout Method</FieldLabel>
               <input
+                id="payoutMethod"
                 type="text"
+                aria-label="Payout method"
                 value={formData.payoutMethod}
                 onChange={(e) =>
                   setFormData({ ...formData, payoutMethod: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 placeholder="Bank transfer, M-Pesa, etc."
+                className={fieldControlClass}
               />
-            </div>
-          </div>
-        </div>
+            </Field>
+          </FormGrid>
+        </FormSection>
 
-        {/* Agreement Dates */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Agreement Dates
-          </h2>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Agreement Start Date
-              </label>
+        <FormSection title="Agreement Dates">
+          <FormGrid cols={2}>
+            <Field>
+              <FieldLabel htmlFor="agreementDate">Agreement Start Date</FieldLabel>
               <input
+                id="agreementDate"
                 type="date"
+                aria-label="Agreement start date"
                 value={formData.agreementDate}
                 onChange={(e) =>
                   setFormData({ ...formData, agreementDate: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                Agreement Expiry
-              </label>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="agreementExpiry">Agreement Expiry</FieldLabel>
               <input
+                id="agreementExpiry"
                 type="date"
+                aria-label="Agreement expiry"
                 value={formData.agreementExpiry}
                 onChange={(e) =>
                   setFormData({ ...formData, agreementExpiry: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                className={fieldControlClass}
               />
-            </div>
-          </div>
-        </div>
+            </Field>
+          </FormGrid>
+        </FormSection>
 
-        {/* Commission Rates */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Commission Rates
-            </h2>
+        <section className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-h3">Commission Rates</h2>
             {commissionRates.length < TRIP_TYPES.length && (
               <button
                 type="button"
                 onClick={addRate}
-                className="flex items-center gap-1 text-sm text-amber-600 hover:text-amber-700"
+                className="flex items-center gap-1 text-sm text-amber-600 hover:text-amber-700 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4" aria-hidden="true" />
                 Add Rate
               </button>
             )}
           </div>
-
           <div className="space-y-3">
             {commissionRates.map((rate, index) => (
               <div key={index} className="flex items-center gap-4">
                 <select
+                  aria-label={`Trip type for rate ${index + 1}`}
                   value={rate.tripType}
                   onChange={(e) => {
                     const updated = [...commissionRates];
                     updated[index].tripType = e.target.value;
                     setCommissionRates(updated);
                   }}
-                  className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  className={`flex-1 ${fieldControlClass}`}
                 >
                   {TRIP_TYPES.map((type) => (
                     <option key={type} value={type}>
@@ -319,55 +313,59 @@ export default function NewPartnerPage() {
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
+                    aria-label={`Commission rate for ${rate.tripType}`}
                     value={rate.commissionRate}
                     onChange={(e) => updateRate(index, Number(e.target.value))}
                     min="0"
                     max="100"
                     step="0.5"
-                    className="w-24 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    className={`w-24 ${fieldControlClass}`}
                   />
                   <span className="text-slate-600">%</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => removeRate(index)}
-                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg"
+                  aria-label={`Remove ${rate.tripType} rate`}
+                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="w-4 h-4" aria-hidden="true" />
                 </button>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Notes */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Notes</h2>
-          <textarea
-            value={formData.notes}
-            onChange={(e) =>
-              setFormData({ ...formData, notes: e.target.value })
-            }
-            rows={4}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none resize-none"
-            placeholder="Additional notes about this partnership..."
-          />
-        </div>
+        <FormSection title="Notes">
+          <Field>
+            <FieldLabel htmlFor="notes">Notes</FieldLabel>
+            <textarea
+              id="notes"
+              aria-label="Notes"
+              value={formData.notes}
+              onChange={(e) =>
+                setFormData({ ...formData, notes: e.target.value })
+              }
+              rows={4}
+              placeholder="Additional notes about this partnership…"
+              className={`${fieldControlClass} resize-none`}
+            />
+          </Field>
+        </FormSection>
 
-        {/* Submit */}
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end gap-4 mt-6">
           <Link
             href="/admin/partners"
-            className="px-6 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
+            className="px-6 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
+            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
           >
-            {loading ? "Creating..." : "Create Partner"}
+            {loading ? "Creating…" : "Create Partner"}
           </button>
         </div>
       </form>

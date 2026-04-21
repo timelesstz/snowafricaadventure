@@ -2,9 +2,16 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { AdminRole } from "@prisma/client";
-import { UserPlus, Mail, Calendar, Clock } from "lucide-react";
+import { UserPlus, Mail, Clock, Users } from "lucide-react";
 import Link from "next/link";
 import { RoleBadge } from "@/components/admin/RoleBadge";
+import {
+  AdminPageHeader,
+  EmptyState,
+  DataTable,
+  StatusBadge,
+  type Column,
+} from "@/components/admin/ui";
 
 async function getUsers() {
   return prisma.adminUser.findMany({
@@ -21,117 +28,107 @@ async function getUsers() {
   });
 }
 
+type UserRow = Awaited<ReturnType<typeof getUsers>>[number];
+
 export default async function UsersPage() {
   const session = await auth();
 
-  // Double-check SUPER_ADMIN access (middleware should catch this, but safety first)
   if (!session?.user || session.user.role !== AdminRole.SUPER_ADMIN) {
     redirect("/admin?error=insufficient_permissions");
   }
 
   const users = await getUsers();
 
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+  const addUserButton = (
+    <Link
+      href="/admin/users/new"
+      className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+    >
+      <UserPlus className="w-4 h-4" aria-hidden="true" />
+      Add User
+    </Link>
+  );
+
+  const columns: Column<UserRow>[] = [
+    {
+      key: "user",
+      header: "User",
+      render: (u) => (
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">User Management</h1>
-          <p className="text-slate-600 mt-1">
-            Manage admin users and their access levels
+          <p className="font-medium text-slate-900">{u.name}</p>
+          <p className="text-sm text-slate-500 flex items-center gap-1">
+            <Mail className="w-3 h-3" aria-hidden="true" />
+            {u.email}
           </p>
         </div>
+      ),
+    },
+    {
+      key: "role",
+      header: "Role",
+      render: (u) => <RoleBadge role={u.role} size="sm" />,
+    },
+    {
+      key: "status",
+      header: "Status",
+      render: (u) => (
+        <StatusBadge
+          label={u.isActive ? "Active" : "Inactive"}
+          tone={u.isActive ? "success" : "danger"}
+          size="sm"
+        />
+      ),
+    },
+    {
+      key: "lastLogin",
+      header: "Last Login",
+      render: (u) =>
+        u.lastLoginAt ? (
+          <span className="text-sm text-slate-500 flex items-center gap-1">
+            <Clock className="w-3 h-3" aria-hidden="true" />
+            {new Date(u.lastLoginAt).toLocaleDateString()}
+          </span>
+        ) : (
+          <span className="text-sm text-slate-400">Never</span>
+        ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "right",
+      render: (u) => (
         <Link
-          href="/admin/users/new"
-          className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition-colors"
+          href={`/admin/users/${u.id}`}
+          className="text-amber-600 hover:text-amber-700 font-medium text-sm rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 px-2 py-1"
         >
-          <UserPlus className="w-4 h-4" />
-          Add User
+          Edit
         </Link>
-      </div>
+      ),
+    },
+  ];
 
-      {/* Users Table */}
-      <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-slate-50 border-b border-slate-200">
-            <tr>
-              <th className="text-left px-6 py-3 text-sm font-semibold text-slate-900">
-                User
-              </th>
-              <th className="text-left px-6 py-3 text-sm font-semibold text-slate-900">
-                Role
-              </th>
-              <th className="text-left px-6 py-3 text-sm font-semibold text-slate-900">
-                Status
-              </th>
-              <th className="text-left px-6 py-3 text-sm font-semibold text-slate-900">
-                Last Login
-              </th>
-              <th className="text-right px-6 py-3 text-sm font-semibold text-slate-900">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-200">
-            {users.map((user) => (
-              <tr key={user.id} className="hover:bg-slate-50">
-                <td className="px-6 py-4">
-                  <div>
-                    <p className="font-medium text-slate-900">{user.name}</p>
-                    <p className="text-sm text-slate-500 flex items-center gap-1">
-                      <Mail className="w-3 h-3" />
-                      {user.email}
-                    </p>
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <RoleBadge role={user.role} size="sm" />
-                </td>
-                <td className="px-6 py-4">
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      user.isActive
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {user.isActive ? "Active" : "Inactive"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-sm text-slate-500">
-                  {user.lastLoginAt ? (
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {new Date(user.lastLoginAt).toLocaleDateString()}
-                    </span>
-                  ) : (
-                    <span className="text-slate-400">Never</span>
-                  )}
-                </td>
-                <td className="px-6 py-4 text-right">
-                  <Link
-                    href={`/admin/users/${user.id}`}
-                    className="text-amber-600 hover:text-amber-700 font-medium text-sm"
-                  >
-                    Edit
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  return (
+    <div>
+      <AdminPageHeader
+        title="User Management"
+        description="Manage admin users and their access levels"
+        actions={addUserButton}
+      />
 
-        {users.length === 0 && (
-          <div className="text-center py-12 text-slate-500">
-            <p>No users found</p>
-          </div>
-        )}
-      </div>
+      {users.length === 0 ? (
+        <EmptyState
+          icon={Users}
+          title="No users found"
+          message="Add your first admin user to get started"
+          action={addUserButton}
+        />
+      ) : (
+        <DataTable columns={columns} rows={users} getRowKey={(u) => u.id} />
+      )}
 
       {/* Role Legend */}
-      <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-        <h2 className="text-lg font-semibold text-slate-900 mb-4">
-          Role Permissions
-        </h2>
+      <section className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mt-6">
+        <h2 className="text-h3 mb-4">Role Permissions</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-4 bg-slate-50 rounded-lg">
             <RoleBadge role={AdminRole.SUPER_ADMIN} />
@@ -158,7 +155,7 @@ export default async function UsersPage() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

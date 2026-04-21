@@ -1,8 +1,10 @@
 import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
 import AdminSidebar from "@/components/admin/AdminSidebar";
+import { AdminBreadcrumbs } from "@/components/admin/AdminBreadcrumbs";
 import { AdminSessionProvider } from "@/components/admin/AdminSessionProvider";
 import AdminPWA from "@/components/admin/AdminPWA";
+import { CommandPalette } from "@/components/admin/CommandPalette";
 import { AdminRole } from "@prisma/client";
 
 import type { Viewport } from "next";
@@ -49,9 +51,14 @@ export default async function AdminLayout({
       <div className="min-h-screen bg-slate-100">
         <AdminSidebar user={user} />
         <main className="lg:pl-64 pt-16 lg:pt-0">
-          <div className="p-6">{children}</div>
+          <div className="p-6">
+            <AdminBreadcrumbs />
+            {children}
+          </div>
         </main>
         <AdminPWA />
+        <CommandPalette />
+        <Toaster position="top-right" richColors closeButton />
       </div>
     </AdminSessionProvider>
   );

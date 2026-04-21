@@ -5,6 +5,13 @@ import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
 import ImageUploadField from "@/components/admin/ImageUploadField";
 import ConfirmDeleteButton from "@/components/admin/ConfirmDeleteButton";
+import {
+  Field,
+  FieldLabel,
+  FieldHelp,
+  FormSection,
+  fieldControlClass,
+} from "@/components/admin/ui";
 
 async function getBlogPost(id: string) {
   if (id === "new") return null;
@@ -43,23 +50,27 @@ async function savePost(formData: FormData) {
   if (!session) throw new Error("Unauthorized");
 
   const id = formData.get("id") as string | null;
-  const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+  const slug = (formData.get("slug") as string)
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, "-")
+    .replace(/-+/g, "-");
   const isPublished = formData.get("isPublished") === "on";
 
-  // Get categories and tags from form
   const categoryIds = formData.getAll("categories") as string[];
   const tagsStr = formData.get("tags") as string;
-  const tagNames = tagsStr ? tagsStr.split(",").map(t => t.trim()).filter(Boolean) : [];
+  const tagNames = tagsStr
+    ? tagsStr.split(",").map((t) => t.trim()).filter(Boolean)
+    : [];
 
   const data = {
     slug,
     title: formData.get("title") as string,
-    metaTitle: formData.get("metaTitle") as string || null,
-    metaDescription: formData.get("metaDescription") as string || null,
-    excerpt: formData.get("excerpt") as string || null,
+    metaTitle: (formData.get("metaTitle") as string) || null,
+    metaDescription: (formData.get("metaDescription") as string) || null,
+    excerpt: (formData.get("excerpt") as string) || null,
     content: formData.get("content") as string,
-    featuredImage: formData.get("featuredImage") as string || null,
-    author: formData.get("author") as string || null,
+    featuredImage: (formData.get("featuredImage") as string) || null,
+    author: (formData.get("author") as string) || null,
     isPublished,
     publishedAt: isPublished ? new Date() : null,
   };
@@ -73,7 +84,6 @@ async function savePost(formData: FormData) {
     });
     postId = id;
 
-    // Delete existing categories and tags
     await prisma.postCategory.deleteMany({ where: { postId: id } });
     await prisma.postTag.deleteMany({ where: { postId: id } });
   } else {
@@ -83,21 +93,21 @@ async function savePost(formData: FormData) {
     postId = newPost.id;
   }
 
-  // Add categories
   if (categoryIds.length > 0) {
     await prisma.postCategory.createMany({
-      data: categoryIds.map(categoryId => ({
+      data: categoryIds.map((categoryId) => ({
         postId,
         categoryId,
       })),
     });
   }
 
-  // Add tags - create new tags if they don't exist
   for (const tagName of tagNames) {
-    const tagSlug = tagName.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+    const tagSlug = tagName
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "-")
+      .replace(/-+/g, "-");
 
-    // Find or create tag
     let tag = await prisma.tag.findUnique({ where: { slug: tagSlug } });
     if (!tag) {
       tag = await prisma.tag.create({
@@ -105,7 +115,6 @@ async function savePost(formData: FormData) {
       });
     }
 
-    // Create post-tag relationship
     await prisma.postTag.create({
       data: { postId, tagId: tag.id },
     });
@@ -125,15 +134,6 @@ async function deletePost(formData: FormData) {
   redirect("/admin/blog");
 }
 
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .trim();
-}
-
 export default async function BlogEditPage({
   params,
 }: {
@@ -151,24 +151,25 @@ export default async function BlogEditPage({
   }
 
   const isNew = id === "new";
-  const selectedCategories = post?.categories?.map(c => c.categoryId) || [];
-  const selectedTags = post?.tags?.map(t => t.tag.name) || [];
+  const selectedCategories = post?.categories?.map((c) => c.categoryId) || [];
+  const selectedTags = post?.tags?.map((t) => t.tag.name) || [];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div>
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
           <Link
             href="/admin/blog"
-            className="p-2 hover:bg-slate-100 rounded-lg"
+            aria-label="Back to blog posts"
+            className="p-2 hover:bg-slate-100 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
-            <ArrowLeft className="w-5 h-5 text-slate-600" />
+            <ArrowLeft className="w-5 h-5 text-slate-600" aria-hidden="true" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="text-h1">
               {isNew ? "New Blog Post" : "Edit Blog Post"}
             </h1>
-            <p className="text-slate-600 mt-1">
+            <p className="text-body text-slate-600 mt-1">
               {isNew ? "Create a new blog post" : "Update post details"}
             </p>
           </div>
@@ -178,94 +179,96 @@ export default async function BlogEditPage({
             href={`/${post.slug}/`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+            className="inline-flex items-center gap-2 px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg text-sm"
           >
-            <Eye className="w-4 h-4" />
+            <Eye className="w-4 h-4" aria-hidden="true" />
             View Post
           </a>
         )}
       </div>
 
-      <form action={savePost} className="space-y-6">
+      <form action={savePost}>
         <input type="hidden" name="id" value={id} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Title *
-                </label>
+          <div className="lg:col-span-2">
+            <FormSection title="Content">
+              <Field>
+                <FieldLabel htmlFor="title" required>
+                  Title
+                </FieldLabel>
                 <input
+                  id="title"
                   type="text"
                   name="title"
+                  aria-label="Post title"
                   required
                   defaultValue={post?.title || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-lg"
-                  placeholder="Enter post title..."
+                  className={`${fieldControlClass} text-lg`}
+                  placeholder="Enter post title…"
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  URL Slug *
-                </label>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="slug" required>
+                  URL Slug
+                </FieldLabel>
                 <div className="flex items-center gap-2">
-                  <span className="text-slate-500">/</span>
+                  <span className="text-slate-500" aria-hidden="true">/</span>
                   <input
+                    id="slug"
                     type="text"
                     name="slug"
+                    aria-label="URL slug"
                     required
                     defaultValue={post?.slug || ""}
-                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                    className={fieldControlClass}
                     placeholder="url-slug"
                   />
-                  <span className="text-slate-500">/</span>
+                  <span className="text-slate-500" aria-hidden="true">/</span>
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
-                  This will be the URL of the post. Use lowercase letters, numbers, and hyphens only.
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Excerpt
-                </label>
+                <FieldHelp>
+                  This will be the URL of the post. Use lowercase letters,
+                  numbers, and hyphens only.
+                </FieldHelp>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="excerpt">Excerpt</FieldLabel>
                 <textarea
+                  id="excerpt"
                   name="excerpt"
+                  aria-label="Post excerpt"
                   rows={3}
                   defaultValue={post?.excerpt || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  placeholder="Brief summary for search results and social sharing..."
+                  className={fieldControlClass}
+                  placeholder="Brief summary for search results and social sharing…"
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Content *
-                </label>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="content" required>
+                  Content
+                </FieldLabel>
                 <textarea
+                  id="content"
                   name="content"
+                  aria-label="Post content"
                   required
                   rows={20}
                   defaultValue={post?.content || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none font-mono text-sm"
-                  placeholder="Write your blog post content here... (HTML supported)"
+                  className={`${fieldControlClass} font-mono text-sm`}
+                  placeholder="Write your blog post content here… (HTML supported)"
                 />
-                <p className="text-xs text-slate-500 mt-1">
-                  HTML formatting is supported. Use heading tags, paragraphs, lists, etc.
-                </p>
-              </div>
-            </div>
+                <FieldHelp>
+                  HTML formatting is supported. Use heading tags, paragraphs,
+                  lists, etc.
+                </FieldHelp>
+              </Field>
+            </FormSection>
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Publish Settings */}
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-              <h3 className="font-semibold text-slate-900">Publish</h3>
-
+          <div>
+            <FormSection title="Publish">
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
                   type="checkbox"
@@ -275,24 +278,20 @@ export default async function BlogEditPage({
                 />
                 <span className="text-slate-700">Publish this post</span>
               </label>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Author
-                </label>
+              <Field>
+                <FieldLabel htmlFor="author">Author</FieldLabel>
                 <input
+                  id="author"
                   type="text"
                   name="author"
+                  aria-label="Author"
                   defaultValue={post?.author || "Snow Africa Team"}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  className={fieldControlClass}
                 />
-              </div>
-            </div>
+              </Field>
+            </FormSection>
 
-            {/* Categories */}
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-              <h3 className="font-semibold text-slate-900">Categories</h3>
-
+            <FormSection title="Categories">
               {categories.length > 0 ? (
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                   {categories.map((cat) => (
@@ -316,25 +315,25 @@ export default async function BlogEditPage({
                   No categories available.
                 </p>
               )}
-            </div>
+            </FormSection>
 
-            {/* Tags */}
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-              <h3 className="font-semibold text-slate-900">Tags</h3>
-
-              <div>
+            <FormSection title="Tags">
+              <Field>
+                <FieldLabel htmlFor="tags">Tag names</FieldLabel>
                 <input
+                  id="tags"
                   type="text"
                   name="tags"
+                  aria-label="Tags"
                   defaultValue={selectedTags.join(", ")}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+                  className={fieldControlClass}
                   placeholder="safari, kilimanjaro, travel tips"
                 />
-                <p className="text-xs text-slate-500 mt-1">
-                  Separate tags with commas. New tags will be created automatically.
-                </p>
-              </div>
-
+                <FieldHelp>
+                  Separate tags with commas. New tags will be created
+                  automatically.
+                </FieldHelp>
+              </Field>
               {tags.length > 0 && (
                 <div className="flex flex-wrap gap-1">
                   {tags.slice(0, 10).map((tag) => (
@@ -352,12 +351,9 @@ export default async function BlogEditPage({
                   )}
                 </div>
               )}
-            </div>
+            </FormSection>
 
-            {/* Featured Image */}
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-              <h3 className="font-semibold text-slate-900">Featured Image</h3>
-
+            <FormSection title="Featured Image">
               <ImageUploadField
                 name="featuredImage"
                 defaultValue={post?.featuredImage}
@@ -366,51 +362,49 @@ export default async function BlogEditPage({
                 helpText="Main image shown in listings and at top of post"
                 deleteFromR2
               />
-            </div>
+            </FormSection>
 
-            {/* SEO */}
-            <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4">
-              <h3 className="font-semibold text-slate-900">SEO</h3>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Meta Title
-                </label>
+            <FormSection title="SEO">
+              <Field>
+                <FieldLabel htmlFor="metaTitle">Meta Title</FieldLabel>
                 <input
+                  id="metaTitle"
                   type="text"
                   name="metaTitle"
+                  aria-label="Meta title"
                   defaultValue={post?.metaTitle || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  placeholder="Custom title for search engines..."
+                  className={fieldControlClass}
+                  placeholder="Custom title for search engines…"
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="metaDescription">
                   Meta Description
-                </label>
+                </FieldLabel>
                 <textarea
+                  id="metaDescription"
                   name="metaDescription"
+                  aria-label="Meta description"
                   rows={3}
                   defaultValue={post?.metaDescription || ""}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
-                  placeholder="Description for search results..."
+                  className={fieldControlClass}
+                  placeholder="Description for search results…"
                 />
-              </div>
-            </div>
+              </Field>
+            </FormSection>
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex items-center justify-end gap-3 mt-6">
           <Link
             href="/admin/blog"
-            className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+            className="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
           >
             Cancel
           </Link>
           <button
             type="submit"
-            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
           >
             {isNew ? "Create Post" : "Save Changes"}
           </button>
@@ -418,10 +412,13 @@ export default async function BlogEditPage({
       </form>
 
       {!isNew && (
-        <div className="flex items-center justify-start">
+        <div className="flex items-center justify-start mt-4">
           <form action={deletePost}>
             <input type="hidden" name="id" value={id} />
-            <ConfirmDeleteButton message="Are you sure you want to delete this post?" label="Delete Post" />
+            <ConfirmDeleteButton
+              message="Are you sure you want to delete this post?"
+              label="Delete Post"
+            />
           </form>
         </div>
       )}
