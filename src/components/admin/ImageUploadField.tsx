@@ -55,7 +55,7 @@ function ImagePreview({
       sizes={isHero ? "(max-width: 768px) 100vw, 640px" : "192px"}
       className="object-cover"
       onError={() => setFailed(true)}
-      unoptimized={url.startsWith("blob:") || url.startsWith("data:")}
+      unoptimized
     />
   );
 }
