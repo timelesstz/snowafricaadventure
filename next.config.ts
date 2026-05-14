@@ -568,6 +568,384 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // Spam e-commerce category URLs (Etsy-like /c/ paths from bot traffic)
+      {
+        source: "/c/:path*",
+        destination: "/",
+        permanent: false,
+      },
+
+      // Destination pages without /tanzania-destinations/ prefix
+      {
+        source: "/kitulo-national-park/",
+        destination: "/tanzania-destinations/kitulo-national-park/",
+        permanent: true,
+      },
+      {
+        source: "/lake-manyara-national-park/",
+        destination: "/tanzania-destinations/lake-manyara-national-park/",
+        permanent: true,
+      },
+      {
+        source: "/ruaha-national-park/",
+        destination: "/tanzania-destinations/ruaha-national-park/",
+        permanent: true,
+      },
+
+      // Trekking routes without /trekking/ prefix
+      {
+        source: "/machame-route/",
+        destination: "/trekking/7-days-machame-route/",
+        permanent: true,
+      },
+      {
+        source: "/rongai-route/",
+        destination: "/trekking/7-days-rongai-route/",
+        permanent: true,
+      },
+      {
+        source: "/lemosho-route/",
+        destination: "/trekking/8-days-lemosho-route/",
+        permanent: true,
+      },
+      {
+        source: "/mountain-trekking/",
+        destination: "/trekking/",
+        permanent: true,
+      },
+
+      // Day trip "tour" → "trip" slug corrections
+      {
+        source: "/arusha-city-day-tour/",
+        destination: "/tanzania-day-tours/arusha-city-day-trip/",
+        permanent: true,
+      },
+      {
+        source: "/tarangire-national-park-day-tour/",
+        destination: "/tanzania-day-tours/tarangire-national-park-day-trip/",
+        permanent: true,
+      },
+      {
+        source: "/lake-manyara-day-tour/",
+        destination: "/tanzania-day-tours/lake-manyara-day-trip/",
+        permanent: true,
+      },
+
+      // Safari package slug variants
+      {
+        source: "/tanzania-safaris/4-days-tanzania-lodge-safari/",
+        destination: "/tanzania-safaris/4-day-safari-adventure-in-tanzania/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/7-days-tanzania-tented-camp-safari-2/",
+        destination: "/tanzania-safaris/7-days-tanzania-tented-camp-safari/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/7-days-safari-to-tanzania-serval-wildlife/",
+        destination: "/tanzania-safaris/7-days-safari-to-tanzania-including-serval-wildlife/",
+        permanent: true,
+      },
+      {
+        source: "/6-day-migration-safari-ndutu-manyara-sere-ngorongorocrater/",
+        destination: "/tanzania-safaris/6-days-tanzania-migration-serengeti-ngorongoro-crater-tarangire/",
+        permanent: true,
+      },
+      {
+        source: "/7-days-walking-safari-ngorongoro-highland/",
+        destination: "/tanzania-safaris/walking-safari-trekking-on-ngorongoro/",
+        permanent: true,
+      },
+
+      // Blog post slug variants → existing content
+      {
+        source: "/wildlife-conservation-efforts-in-tanzania-how-tourists-can-contribute/",
+        destination: "/wildlife-conservation-efforts/",
+        permanent: true,
+      },
+      {
+        source: "/snow-covered-destinations-in-africa/",
+        destination: "/is-there-snow-in-africa-mountains/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-routes-success-rates/",
+        destination: "/kilimanjaro-success-rates/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-climb-gear-list/",
+        destination: "/kilimanjaro-climbing-gear/",
+        permanent: true,
+      },
+      {
+        source: "/cultural-festivals-in-tanzania/",
+        destination: "/tanzania-festival/",
+        permanent: true,
+      },
+      {
+        source: "/visa-for-kilimanjaro/",
+        destination: "/things-to-remember-before-climbing-mount-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/3-days-2-nights-oldoinyolengai/",
+        destination: "/trekking/3-days-oldoinyo-lengai-climbing/",
+        permanent: true,
+      },
+      {
+        source: "/mount-kilimanjaro-altitude-sickness/",
+        destination: "/kilimanjaro-altitude-sickness/",
+        permanent: true,
+      },
+      {
+        source: "/conquering-the-roof-of-africa-the-inspiring-journey-of-the-first-person-to-climb-mount-kilimanjaro/",
+        destination: "/first-person-to-climb-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/maasai-healing-rituals-tanzania-ancient-wellness-in-geothermal-settings/",
+        destination: "/maasai-healing-rituals-tanzania/",
+        permanent: true,
+      },
+
+      // Legal/misc page redirects
+      {
+        source: "/legal/ip/",
+        destination: "/privacy-policy/",
+        permanent: true,
+      },
+      {
+        source: "/legal/terms-of-use/",
+        destination: "/terms-and-conditions/",
+        permanent: true,
+      },
+      {
+        source: "/meru1.html",
+        destination: "/trekking/4-days-mount-meru-climbing/",
+        permanent: true,
+      },
+
+      // Additional destination pages without prefix
+      {
+        source: "/katavi-national-park/",
+        destination: "/tanzania-destinations/katavi-national-park/",
+        permanent: true,
+      },
+      {
+        source: "/rubondo-national-park/",
+        destination: "/tanzania-destinations/rubondo-island-national-park/",
+        permanent: true,
+      },
+
+      // Additional route/tour slug variants
+      {
+        source: "/login/",
+        destination: "/admin/login/",
+        permanent: true,
+      },
+      {
+        source: "/tours/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/how-tall-is-kilimanjaro/",
+        destination: "/how-tall-is-mount-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/all-groups-tours/",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      {
+        source: "/climbing-mount-kilimanjaro-packages/",
+        destination: "/trekking/",
+        permanent: true,
+      },
+      {
+        source: "/best-time-for-safari-in-africa/",
+        destination: "/best-time-to-go-on-safari-in-africa/",
+        permanent: true,
+      },
+      {
+        source: "/faq/",
+        destination: "/tanzania-safari-faqs/",
+        permanent: true,
+      },
+      {
+        source: "/join-group-tour/",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-porter/",
+        destination: "/ethical-kilimanjaro-porter-welfare/",
+        permanent: true,
+      },
+      {
+        source: "/safaris/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro/",
+        destination: "/trekking/",
+        permanent: true,
+      },
+      {
+        source: "/tailormade-form/",
+        destination: "/tailor-made-safari/",
+        permanent: true,
+      },
+      {
+        source: "/group-tours/",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      {
+        source: "/inquire/",
+        destination: "/contact-us/",
+        permanent: true,
+      },
+
+      // Safari slug variants without /tanzania-safaris/ prefix
+      {
+        source: "/3-days-budget-camping-safari-tarangire-lake-manyara-ngorongoro-crater/",
+        destination: "/tanzania-safaris/3-days-tanzania-budget-camping-safari-tarangire-lake-manyara-and-ngorongoro-crater/",
+        permanent: true,
+      },
+      {
+        source: "/5-days-luxury-safari-lakemanyara-serengeti-ngorongoro/",
+        destination: "/tanzania-safaris/5-days-tanzania-luxury-safari-tarangire-manyara-ngorongoro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/7-days-tanzania-lodge-safari/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/9-days-tanzania-wildlife-safari/",
+        destination: "/tanzania-safaris/9-days-tanzania-wildlife-safari-migration/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/3-days-tanzania-lodge-safari/",
+        destination: "/tanzania-safaris/3-days-tanzania-lodge-safari-tarangire-lake-manyara-ngorongoro-crater/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/7-days-northern-circuit-safari/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/7-days-luxury-tented-camp-safari-including-great-wildebeest-migration-serengeti-northern-corridor/",
+        destination: "/tanzania-safaris/7-days-tanzania-tented-camp-safari/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/7-days-6-nights-walking-safari-on-ngorongoro-highlands/",
+        destination: "/tanzania-safaris/walking-safari-trekking-on-ngorongoro/",
+        permanent: true,
+      },
+
+      // Blog slug variants
+      {
+        source: "/kilimanjaro-climbing-routes-which-one-is-right-for-you/",
+        destination: "/kilimanjaro-climbing-routes/",
+        permanent: true,
+      },
+      {
+        source: "/coffee-plantation-yoga-mindfulness-retreats-in-tanzania/",
+        destination: "/coffee-mindfulness-tanzania/",
+        permanent: true,
+      },
+      {
+        source: "/rift-valley-volcano-hikes-exploring-crater-landscapes-beyond-kilimanjaro/",
+        destination: "/rift-valley-volcano-hikes/",
+        permanent: true,
+      },
+      {
+        source: "/mount-kilimanjaro-lemosho-route-your-ultimate-guide-to-an-unforgettable-climb/",
+        destination: "/lemosho-route-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safari-tours-faqs/",
+        destination: "/tanzania-safari-faqs/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-health-and-safety/",
+        destination: "/kilimanjaro-altitude-sickness/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-travel-faqs/",
+        destination: "/things-to-remember-before-climbing-mount-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-health-safaety/",
+        destination: "/tanzania-safari-faqs/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-cultural-tour/",
+        destination: "/tanzania-festival/",
+        permanent: true,
+      },
+
+      // Old standalone trekking routes without /trekking/ prefix
+      {
+        source: "/6-days-marangu-route/",
+        destination: "/trekking/6-days-marangu-route/",
+        permanent: true,
+      },
+      {
+        source: "/6-days-machame-route/",
+        destination: "/trekking/6-days-machame-route/",
+        permanent: true,
+      },
+      {
+        source: "/7-days-machame-route/",
+        destination: "/trekking/7-days-machame-route/",
+        permanent: true,
+      },
+      {
+        source: "/6-days-rongai-route/",
+        destination: "/trekking/6-days-rongai-route/",
+        permanent: true,
+      },
+
+      // Old static HTML pages
+      {
+        source: "/northern.html",
+        destination: "/trekking/9-day-northern-circuit-route-kilimanjaro-guide/",
+        permanent: true,
+      },
+
+      // Spam/external platform URLs → homepage
+      {
+        source: "/featured/:path*",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/legal/:path*",
+        destination: "/terms-and-conditions/",
+        permanent: false,
+      },
+      {
+        source: "/dashboard/:path*",
+        destination: "/",
+        permanent: false,
+      },
+
       // WooCommerce pages → homepage
       {
         source: "/my-account/",
