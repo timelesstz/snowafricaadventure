@@ -33,9 +33,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-there-snow-in-africa-mountains",
-    metaTitle: "Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow",
-    metaDescription: "Yes, it snows in Africa! From Kilimanjaro's glaciers to Morocco's ski resorts — 8 snow-capped peaks across 10 countries. Photos, maps & best months.",
-    excerpt: "Does it snow in Africa? Yes — 8 mountains across 10 countries have snow and ice year-round, from Kilimanjaro's glaciers to Morocco's ski resorts."
+    metaTitle: "Snow in Africa: 8 Peaks With Year-Round Snow & Ice [Photos]",
+    metaDescription: "Africa has snow-capped mountains year-round — and they're vanishing fast. See all 8 peaks from Kilimanjaro to Morocco's ski slopes, with photos, elevations & best months.",
+    excerpt: "Africa has snow-capped mountains year-round — from Kilimanjaro's glaciers to Morocco's ski slopes. Discover all 8 peaks with photos and elevations."
   },
   {
     slug: "best-time-to-climb-mount-kilimanjaro",
@@ -51,9 +51,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-vs-everest",
-    metaTitle: "Kilimanjaro vs Everest: $2K vs $30K — Which to Climb First",
-    metaDescription: "Kilimanjaro: 65% success rate, no ropes, $2K. Everest: 4% summit rate, 2+ months, $30K+. Side-by-side comparison from a Tanzania-based climbing company.",
-    excerpt: "Compare Mount Kilimanjaro vs Mount Everest — difficulty, cost, time, and experience required. Find which mountain suits your adventure goals."
+    metaTitle: "Kilimanjaro vs Everest: Difficulty, Cost & Success Rates Compared",
+    metaDescription: "Kilimanjaro: 65% success, no ropes, $2K. Everest: 4% summit rate, 2+ months, $30K+. Honest side-by-side from guides who lead Kilimanjaro treks daily.",
+    excerpt: "Kilimanjaro vs Everest compared side-by-side — difficulty, cost, success rates, and experience required. Which mountain should you climb first?"
   },
   {
     slug: "kilimanjaro-group-climbing",
@@ -395,9 +395,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "hunting-strategy-of-the-lions",
-    metaTitle: "How Lions Hunt: 6 Tactics That Make Them Deadly",
-    metaDescription: "Lions succeed in only 25% of hunts — yet dominate Africa. Learn 6 coordinated tactics, the role of lionesses, and why they hunt at night.",
-    excerpt: "Understand the sophisticated hunting strategies of lions - from coordinated pride attacks to solo ambush techniques and prey selection."
+    metaTitle: "Lion Hunting Strategy: 6 Deadly Tactics Explained",
+    metaDescription: "Lions succeed only 25% of the time — yet dominate Africa's food chain. Safari guides break down 6 coordinated tactics, including the lioness ambush formation.",
+    excerpt: "Lions succeed only 25% of the time yet dominate Africa. Safari guides explain 6 coordinated hunting tactics from ambush formations to night hunts."
   },
   {
     slug: "why-do-zebra-and-wildebeest-migrate-together",
@@ -407,9 +407,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "amazing-teamwork-of-lions",
-    metaTitle: "Lion Pride Teamwork: How Lions Cooperate to Survive",
-    metaDescription: "Explore remarkable lion cooperation: coordinated hunts, cub protection, territory defense. The social bonds that make lions Africa's top predator.",
-    excerpt: "Marvel at the incredible teamwork within lion prides - cooperative hunting, shared parenting, and the bonds that define lion society."
+    metaTitle: "How Lion Prides Work Together: The Science Behind It",
+    metaDescription: "Lions are Africa's only truly social cats — and their survival depends on teamwork. How prides coordinate hunts, protect cubs & defend territory together.",
+    excerpt: "Lions are Africa's only truly social cats. Discover how prides coordinate hunts, protect cubs, and defend territory through remarkable teamwork."
   },
   {
     slug: "african-cape-buffalo",
@@ -419,9 +419,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "a-complete-overview-about-aardvark",
-    metaTitle: "Aardvark: 15 Surprising Facts About Africa's Strangest Animal",
-    metaDescription: "Most safari-goers never see one. The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species. Where to spot one in Tanzania.",
-    excerpt: "Discover the secretive aardvark - Africa's bizarre nocturnal anteater and one of the most sought-after sightings on night safaris."
+    metaTitle: "Aardvark: 15 Facts Most People Get Wrong [With Photos]",
+    metaDescription: "The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species — yet most safari-goers never see one. Everything about Africa's strangest mammal.",
+    excerpt: "The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species. Everything you need to know about Africa's strangest nocturnal mammal."
   },
   {
     slug: "15-interesting-facts-about-serengeti-great-wildebeest-migration",
@@ -449,9 +449,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-lion-hunting-legal-in-africa",
-    metaTitle: "Is Lion Hunting Legal in Africa? Country-by-Country Laws",
-    metaDescription: "Lion hunting is legal in 6 African countries but banned in 48. Country-by-country breakdown: costs ($35K-$75K), quotas, and the conservation debate.",
-    excerpt: "Understanding lion hunting in Africa - the legal framework, ethical debates, and what it means for lion conservation across the continent."
+    metaTitle: "Is Lion Hunting Legal in Africa? 2026 Laws Explained",
+    metaDescription: "Lion hunting is legal in only 6 African countries and banned in 48. Full breakdown: which countries, costs ($35K-$75K), quotas, and the conservation debate.",
+    excerpt: "Lion hunting is legal in only 6 African countries and banned in 48. Full country-by-country breakdown of laws, costs, quotas, and the conservation debate."
   },
   {
     slug: "a-glimpse-on-african-wild-cats",
@@ -597,9 +597,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "first-person-to-climb-kilimanjaro",
-    metaTitle: "First Kilimanjaro Summit: Hans Meyer's Historic 1889 Climb",
-    metaDescription: "Hans Meyer and Ludwig Purtscheller reached Uhuru Peak on October 6, 1889. The fascinating history of Kilimanjaro's first recorded ascent.",
-    excerpt: "Learn about Hans Meyer's historic 1889 first ascent of Kilimanjaro - the expedition, challenges, and legacy of this pioneering climb."
+    metaTitle: "Who First Climbed Kilimanjaro? The Untold Full Story",
+    metaDescription: "It took 3 failed attempts, a local guide history nearly forgot, and a political crisis. The complete story of Kilimanjaro's first summit on October 6, 1889.",
+    excerpt: "The first Kilimanjaro summit took 3 failed attempts and a local guide history nearly forgot. The complete story of Hans Meyer's 1889 ascent."
   },
 
   // ============================================
@@ -607,9 +607,9 @@ const blogSeoData: BlogSeoData[] = [
   // ============================================
   {
     slug: "tanzania-festival",
-    metaTitle: "Tanzania Festivals 2026: Cultural Events & Celebrations Guide",
-    metaDescription: "Experience Tanzania's vibrant festivals: Sauti za Busara, Kilimanjaro Marathon, cultural celebrations. Event calendar and travel planning tips.",
-    excerpt: "Immerse yourself in Tanzania's rich culture through its festivals - music, dance, and traditions that showcase the nation's diverse heritage."
+    metaTitle: "Tanzania Festivals 2026: Events Worth Planning Your Trip Around",
+    metaDescription: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts — Tanzania's best festivals with 2026 dates, locations & tips. Plan your trip around these cultural events.",
+    excerpt: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts — Tanzania's best festivals with 2026 dates, locations, and travel planning tips."
   },
   {
     slug: "best-tour-operator-in-tanzania",
@@ -631,9 +631,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "tanzania-itinerary-10-days",
-    metaTitle: "10 Days in Tanzania: Perfect Safari & Beach Itinerary",
-    metaDescription: "Ideal 10-day Tanzania itinerary: Serengeti, Ngorongoro, Tarangire plus Zanzibar beach. Day-by-day guide with costs and booking tips.",
-    excerpt: "Plan the perfect 10-day Tanzania adventure - combining world-class safari experiences with relaxing beach time on Zanzibar."
+    metaTitle: "10-Day Tanzania Itinerary: Safari + Zanzibar [Day-by-Day]",
+    metaDescription: "Day-by-day 10-day Tanzania plan: Serengeti, Ngorongoro & Tarangire safari + Zanzibar beach. Includes costs, transfers & where to stay. By local operators.",
+    excerpt: "Day-by-day 10-day Tanzania itinerary: Serengeti, Ngorongoro & Tarangire safari plus Zanzibar beach, with costs, transfers, and accommodation tips."
   },
   {
     slug: "maasai-healing-rituals-tanzania",

@@ -437,6 +437,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/6-days-umbwe-route/",
+        destination: "/trekking/6-days-umbwe-route/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-northern-circuit/",
+        destination: "/trekking/9-days-northern-circuit-route/",
+        permanent: true,
+      },
+      {
         source: "/mount-kilimanjaro/",
         destination: "/trekking/",
         permanent: true,
@@ -458,6 +468,21 @@ const nextConfig: NextConfig = {
       {
         source: "/tarangire-national-park/",
         destination: "/tanzania-destinations/tarangire-national-park/",
+        permanent: true,
+      },
+      {
+        source: "/mkomazi-national-park/",
+        destination: "/tanzania-destinations/mkomazi-national-park/",
+        permanent: true,
+      },
+      {
+        source: "/ngorongoro-conservation-area/",
+        destination: "/tanzania-destinations/ngorongoro-conservation-area/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-destination/",
+        destination: "/tanzania-destinations/",
         permanent: true,
       },
 
@@ -482,6 +507,21 @@ const nextConfig: NextConfig = {
       {
         source: "/term-conditions/",
         destination: "/terms-and-conditions/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safety/",
+        destination: "/tanzania-safari-faqs/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-rescue/",
+        destination: "/climbing-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-tourist-visa/",
+        destination: "/things-to-remember-before-climbing-mount-kilimanjaro/",
         permanent: true,
       },
       // Typo in crawled URL (missing trailing 't')
