@@ -114,6 +114,11 @@ export default auth(async (req) => {
     // Good bots pass through freely
   }
 
+  // Block spam e-commerce probe paths (Etsy-like bot patterns)
+  if (pathname.startsWith("/c/")) {
+    return new NextResponse("Gone", { status: 410 });
+  }
+
   // Skip redirect logic for admin routes, API routes, and static files
   const shouldCheckRedirects =
     !pathname.startsWith("/admin") &&

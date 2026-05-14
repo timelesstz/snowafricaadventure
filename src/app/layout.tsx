@@ -8,7 +8,7 @@ import { generateThemeCSS, DEFAULT_THEME } from "@/lib/theme";
 import type { ThemeSettings, LogoSettings } from "@/lib/theme";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { WebVitalsReporter } from "@/components/analytics/WebVitalsReporter";
-import TawkTo from "@/components/TawkTo";
+import WhatsAppChat from "@/components/WhatsAppChat";
 import { prisma } from "@/lib/prisma";
 
 const outfit = Outfit({
@@ -128,7 +128,7 @@ export default async function RootLayout({
           {children}
         </ThemeProvider>
         <WebVitalsReporter endpoint="/api/analytics/vitals" />
-        <TawkTo />
+        <WhatsAppChat />
       </body>
     </html>
   );

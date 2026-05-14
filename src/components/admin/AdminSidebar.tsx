@@ -109,7 +109,7 @@ const navGroups: NavGroup[] = [
     label: "Marketing",
     items: [
       { href: "/admin/newsletter", label: "Newsletter", icon: Inbox, minRole: AdminRole.EDITOR },
-      { href: "/admin/email-log", label: "Email Log", icon: Send, minRole: AdminRole.EDITOR },
+      { href: "/admin/email-log", label: "Communications", icon: Send, minRole: AdminRole.EDITOR },
       { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
       { href: "/admin/conversion-analytics", label: "Conversion Analytics", icon: Target },
     ],

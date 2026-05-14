@@ -35,7 +35,7 @@
 | `Footer` | `layout/Footer.tsx` | Site footer with links |
 | `FaqAccordion` | `ui/FaqAccordion.tsx` | Expandable FAQ sections |
 | `Breadcrumbs` | `ui/Breadcrumbs.tsx` | Navigation breadcrumbs |
-| `TawkTo` | `TawkTo.tsx` | Live chat widget integration |
+| `WhatsAppChat` | `WhatsAppChat.tsx` | WhatsApp chat widget with quick-start questions |
 | `theme-provider` | `theme-provider.tsx` | CSS variable theming |
 
 ## Dependencies

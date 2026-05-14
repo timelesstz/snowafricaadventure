@@ -825,18 +825,20 @@ model Notification {
 }
 
 model EmailLog {
-  id          String      @id @default(cuid())
+  id          String              @id @default(cuid())
+  channel     CommunicationChannel @default(EMAIL)
   recipient   String
   subject     String
   type        String
-  status      EmailStatus @default(PENDING)
+  status      EmailStatus         @default(PENDING)
   messageId   String?
   error       String?
   metadata    Json?
   sentAt      DateTime?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
 
+  @@index([channel])
   @@index([recipient])
   @@index([type])
   @@index([status])
@@ -885,6 +887,11 @@ enum EmailStatus {
   SENT
   FAILED
   BOUNCED
+}
+
+enum CommunicationChannel {
+  EMAIL
+  WHATSAPP
 }
 
 // ============================================
