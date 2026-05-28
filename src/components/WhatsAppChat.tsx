@@ -115,12 +115,12 @@ export default function WhatsAppChat() {
   if (isAdmin) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 pointer-events-none">
       {/* Chat popup */}
       <div
         className={`origin-bottom-right transition-all duration-300 ease-out ${
           isOpen
-            ? "scale-100 opacity-100 translate-y-0"
+            ? "scale-100 opacity-100 translate-y-0 pointer-events-auto"
             : "scale-95 opacity-0 translate-y-2 pointer-events-none"
         }`}
       >
@@ -210,7 +210,7 @@ export default function WhatsAppChat() {
       {/* Floating button */}
       <button
         onClick={handleToggle}
-        className={`group relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:bg-[#128C7E] hover:shadow-xl active:scale-95 ${
+        className={`pointer-events-auto group relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:bg-[#128C7E] hover:shadow-xl active:scale-95 ${
           isOpen ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
         }`}
         aria-label="Chat on WhatsApp"
