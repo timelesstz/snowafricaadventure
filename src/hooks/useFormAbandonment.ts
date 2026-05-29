@@ -17,7 +17,7 @@ export function useFormAbandonment({
   getCurrentStep,
 }: UseFormAbandonmentParams) {
   const hasStarted = useRef(false);
-  const lastField = useRef<string | undefined>();
+  const lastField = useRef<string | undefined>(undefined);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const markStarted = useCallback(() => {
