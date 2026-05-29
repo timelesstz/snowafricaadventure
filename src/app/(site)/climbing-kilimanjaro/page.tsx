@@ -14,6 +14,8 @@ import {
   Clock,
   TrendingUp,
   Wind,
+  BookOpen,
+  Thermometer,
 } from "lucide-react";
 import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
@@ -586,6 +588,16 @@ export default async function ClimbingKilimanjaroPage() {
                 <Star className="w-6 h-6 text-[var(--secondary)] mb-2" />
                 <p className="font-semibold text-sm">Training Plan</p>
                 <p className="text-xs text-[var(--text-muted)]">12-week preparation</p>
+              </Link>
+              <Link href="/first-person-to-climb-kilimanjaro/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow">
+                <BookOpen className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">First Ascent (1889)</p>
+                <p className="text-xs text-[var(--text-muted)]">Who climbed it first?</p>
+              </Link>
+              <Link href="/is-there-snow-in-africa-mountains/" className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow">
+                <Thermometer className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Snow in Africa</p>
+                <p className="text-xs text-[var(--text-muted)]">8 peaks with ice year-round</p>
               </Link>
             </div>
           </div>

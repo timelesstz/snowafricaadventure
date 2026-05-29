@@ -290,6 +290,11 @@ export default async function AboutPage() {
                 <p className={`text-lg text-slate-600 leading-relaxed ${!s["about.commitment.image"] ? "text-center" : ""}`}>
                   {s["about.commitment.content"]}
                 </p>
+                <p className={`mt-4 ${!s["about.commitment.image"] ? "text-center" : ""}`}>
+                  <Link href="/best-tanzania-tour-operator/" className="text-[var(--secondary)] font-semibold hover:underline">
+                    See what makes us Tanzania&apos;s best tour operator &rarr;
+                  </Link>
+                </p>
 
                 {/* Partner/Certification Logos */}
                 {partnerLogos.length > 0 && (

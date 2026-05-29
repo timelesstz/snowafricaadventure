@@ -326,13 +326,13 @@ export default function MountKilimanjaroPage() {
               equatorial farmland at the Machame Gate, through dense montane
               rainforest dripping with old-man&apos;s beard, up into heather
               and giant groundsel, across the high-altitude alpine desert, and
-              finally onto the glaciated arctic summit. Few places on Earth
+              finally onto the <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">glaciated arctic summit</Link>. Few places on Earth
               stack climate bands that aggressively.
             </p>
             <p className="text-[var(--text)] leading-relaxed">
               Kilimanjaro National Park has been a{" "}
               <strong>UNESCO World Heritage Site since 1987</strong> and the
-              mountain appears on Tanzania&apos;s coat of arms. Its glaciers,
+              mountain appears on Tanzania&apos;s coat of arms. Its <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">glaciers</Link>,
               however, are retreating fast: ice-cover has shrunk by roughly 85%
               since 1912 and glaciologists estimate the summit ice field could
               be gone within 20-30 years. The mountain you see in photos today
@@ -917,6 +917,26 @@ export default function MountKilimanjaroPage() {
                 </p>
                 <p className="text-xs text-[var(--text-muted)]">
                   Florent &amp; the team
+                </p>
+              </Link>
+              <Link
+                href="/first-person-to-climb-kilimanjaro/"
+                className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow"
+              >
+                <BookOpen className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">First ascent (1889)</p>
+                <p className="text-xs text-[var(--text-muted)]">
+                  The untold story
+                </p>
+              </Link>
+              <Link
+                href="/is-there-snow-in-africa-mountains/"
+                className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow"
+              >
+                <Thermometer className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Snow in Africa</p>
+                <p className="text-xs text-[var(--text-muted)]">
+                  8 peaks with ice
                 </p>
               </Link>
             </div>

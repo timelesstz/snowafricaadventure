@@ -620,7 +620,7 @@ export default async function HomePage() {
         </div>
         <div className="why-content">
           <span className="section-label">Why Snow Africa</span>
-          <h2>Tanzania&apos;s Most Trusted Operator</h2>
+          <h2><Link href="/best-tanzania-tour-operator/">Tanzania&apos;s Most Trusted Operator</Link></h2>
           <p>What sets us apart from the rest</p>
 
           <div className="why-us-list">

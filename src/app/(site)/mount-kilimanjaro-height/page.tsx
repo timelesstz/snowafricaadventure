@@ -307,7 +307,7 @@ export default function MountKilimanjaroHeightPage() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">Free-Standing Mountain</h3>
                 <p className="text-[var(--text-muted)] text-sm">
-                  Unlike Everest, which belongs to a range, Kilimanjaro rises in dramatic isolation from the surrounding savannah — a full 5,885m of topographic prominence.
+                  Unlike <Link href="/kilimanjaro-vs-everest/" className="text-[var(--secondary)] hover:underline">Everest</Link>, which belongs to a range, Kilimanjaro rises in dramatic isolation from the surrounding savannah — a full 5,885m of topographic prominence.
                 </p>
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
@@ -390,6 +390,43 @@ export default function MountKilimanjaroHeightPage() {
                   <p className="text-[var(--text-muted)]">{faq.answer}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Guides */}
+      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-heading text-xl font-bold mb-6 text-center">
+              Related Reading
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <Link
+                href="/first-person-to-climb-kilimanjaro/"
+                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow border border-[var(--border)]"
+              >
+                <Mountain className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">First Ascent (1889)</p>
+                <p className="text-xs text-[var(--text-muted)]">Hans Meyer&apos;s summit story</p>
+              </Link>
+              <Link
+                href="/is-there-snow-in-africa-mountains/"
+                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow border border-[var(--border)]"
+              >
+                <Thermometer className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Snow in Africa</p>
+                <p className="text-xs text-[var(--text-muted)]">8 peaks with year-round ice</p>
+              </Link>
+              <Link
+                href="/kilimanjaro-vs-everest/"
+                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow border border-[var(--border)]"
+              >
+                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
+                <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
+                <p className="text-xs text-[var(--text-muted)]">$2K vs $30K compared</p>
+              </Link>
             </div>
           </div>
         </div>
