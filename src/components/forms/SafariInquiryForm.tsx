@@ -4,7 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, Search, ChevronDown } from "lucide-react";
 import { PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
 import { COUNTRIES as COUNTRIES_LIB } from "@/lib/countries";
-import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
+import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout } from "@/lib/analytics";
+import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
 
 // Map shared country list to the format used by this component
@@ -35,6 +36,7 @@ export function SafariInquiryForm({
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  useFormAbandonment({ formName: "safari_inquiry_form", formId: safariSlug, isSubmitted: submitted, getCurrentStep: () => stage });
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -191,6 +193,12 @@ export function SafariInquiryForm({
           tripType: "Wildlife Safari",
           numTravelers: numPax,
           relatedItem: safariSlug,
+        });
+        trackBeginCheckout({
+          itemId: safariSlug || "safari-inquiry",
+          itemName: safariTitle || "Safari Inquiry",
+          itemCategory: "safari",
+          value: 0,
         });
         setSubmitted(true);
       } else {

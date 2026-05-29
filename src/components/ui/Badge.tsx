@@ -48,11 +48,12 @@ export function AvailabilityBadge({
   const variant =
     available === 0 ? "danger" : available <= 3 ? "warning" : "success";
 
-  // Show "Guaranteed" for all available departures, "Sold Out" when full
   const label =
     available === 0
       ? "Sold Out"
-      : "Guaranteed";
+      : available <= 3
+        ? `Only ${available} left!`
+        : "Guaranteed";
 
   return (
     <Badge variant={variant} className={className}>

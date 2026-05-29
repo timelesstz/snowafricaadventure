@@ -10,11 +10,18 @@ const navItems = [
   { id: 'inclusions', label: 'Inclusions' },
 ];
 
-export function QuickNav() {
+interface QuickNavProps {
+  priceFrom?: number;
+}
+
+export function QuickNav({ priceFrom }: QuickNavProps) {
   const [activeSection, setActiveSection] = useState('overview');
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsSticky(window.scrollY > 500);
+
       const sections = navItems.map(item => ({
         id: item.id,
         element: document.getElementById(item.id),
@@ -36,6 +43,7 @@ export function QuickNav() {
   }, []);
 
   return (
+    <>
     <nav className="sticky top-0 z-50 bg-white border-b border-[var(--border)] shadow-sm">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -70,5 +78,30 @@ export function QuickNav() {
         </div>
       </div>
     </nav>
+
+      {/* Mobile Sticky CTA Bar */}
+      {isSticky && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-[var(--border)] shadow-[0_-2px_10px_rgba(0,0,0,0.08)] px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
+            {priceFrom ? (
+              <div>
+                <div className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">From</div>
+                <div className="font-heading font-bold text-[var(--primary)] text-lg leading-tight">
+                  ${priceFrom.toLocaleString()}<span className="text-xs font-normal text-[var(--text-muted)]">/person</span>
+                </div>
+              </div>
+            ) : (
+              <div className="text-sm font-medium text-[var(--text)]">Ready to book?</div>
+            )}
+            <Link
+              href="#book"
+              className="px-6 py-2.5 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] transition-colors text-sm whitespace-nowrap"
+            >
+              Book This Safari
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

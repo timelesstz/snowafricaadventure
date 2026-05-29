@@ -16,6 +16,7 @@ import {
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
 import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
+import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
 import {
   MapPin,
@@ -34,12 +35,10 @@ import {
 
 const STEPS = [
   { id: 1, title: "About You", icon: User },
-  { id: 2, title: "Group Size", icon: Users },
-  { id: 3, title: "Travel Dates", icon: Calendar },
-  { id: 4, title: "Destinations", icon: MapPin },
-  { id: 5, title: "Budget & Style", icon: Wallet },
-  { id: 6, title: "Interests", icon: Sparkles },
-  { id: 7, title: "Final Details", icon: MessageSquare },
+  { id: 2, title: "Trip Details", icon: Calendar },
+  { id: 3, title: "Budget & Style", icon: Wallet },
+  { id: 4, title: "Preferences", icon: MapPin },
+  { id: 5, title: "Final Details", icon: MessageSquare },
 ];
 
 export function TailorMadeForm() {
@@ -47,6 +46,7 @@ export function TailorMadeForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  useFormAbandonment({ formName: "tailor_made_safari_form", isSubmitted: submitted, getCurrentStep: () => currentStep });
 
   // Form data state
   const [formData, setFormData] = useState({
@@ -197,24 +197,20 @@ export function TailorMadeForm() {
           setError("Please select at least 1 adult traveler.");
           return false;
         }
-        return true;
-      case 3:
         if (!formData.arrivalDate) {
           setError("Please select your preferred arrival date.");
           return false;
         }
         return true;
-      case 4:
-        return true; // Destinations are optional
-      case 5:
+      case 3:
         if (!formData.budget) {
           setError("Please select your budget level.");
           return false;
         }
         return true;
-      case 6:
-        return true; // Interests are optional
-      case 7:
+      case 4:
+        return true; // Destinations and interests are optional
+      case 5:
         return true; // Additional info is optional
       default:
         return true;
@@ -485,176 +481,143 @@ export function TailorMadeForm() {
           </div>
         )}
 
-        {/* Step 2: Group Size */}
+        {/* Step 2: Trip Details (merged Group Size + Travel Dates) */}
         {currentStep === 2 && (
-          <div className="space-y-4 animate-in fade-in duration-300">
-            <h3 className="font-semibold text-lg flex items-center gap-2">
-              <Users className="w-5 h-5 text-[var(--primary)]" />
-              How many travelers?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Adults <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  max="20"
-                  value={formData.numAdults}
-                  onChange={(e) => updateFormData("numAdults", parseInt(e.target.value) || 1)}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                />
+          <div className="space-y-6 animate-in fade-in duration-300">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-lg flex items-center gap-2">
+                <Users className="w-5 h-5 text-[var(--primary)]" />
+                How many travelers?
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                    Adults <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="20"
+                    value={formData.numAdults}
+                    onChange={(e) => updateFormData("numAdults", parseInt(e.target.value) || 1)}
+                    className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                    Children (under 16)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    value={formData.numChildren}
+                    onChange={(e) => handleChildrenChange(parseInt(e.target.value) || 0)}
+                    className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Children (under 16)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  max="10"
-                  value={formData.numChildren}
-                  onChange={(e) => handleChildrenChange(parseInt(e.target.value) || 0)}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                />
-              </div>
+              {formData.numChildren > 0 && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                    Children&apos;s Ages
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {Array.from({ length: formData.numChildren }).map((_, i) => (
+                      <input
+                        key={i}
+                        type="number"
+                        min="0"
+                        max="15"
+                        placeholder={`Child ${i + 1}`}
+                        value={formData.childrenAges[i] || ""}
+                        onChange={(e) => updateChildAge(i, e.target.value)}
+                        className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
+                      />
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Ages help us recommend suitable activities
+                  </p>
+                </div>
+              )}
             </div>
-            {formData.numChildren > 0 && (
+
+            <hr className="border-slate-200" />
+
+            <div className="space-y-4">
+              <h3 className="font-semibold text-lg flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-[var(--primary)]" />
+                When do you want to travel?
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                    Preferred Start Date <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.arrivalDate}
+                    min={new Date().toISOString().split("T")[0]}
+                    onChange={(e) => updateFormData("arrivalDate", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                    Duration
+                  </label>
+                  <select
+                    value={formData.duration}
+                    onChange={(e) => updateFormData("duration", e.target.value)}
+                    className="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white"
+                  >
+                    <option value="">Select duration</option>
+                    <option value="3">3 Days</option>
+                    <option value="4">4 Days</option>
+                    <option value="5">5 Days</option>
+                    <option value="6">6 Days</option>
+                    <option value="7">7 Days (1 Week)</option>
+                    <option value="10">10 Days</option>
+                    <option value="14">14 Days (2 Weeks)</option>
+                    <option value="custom">Custom / Not Sure</option>
+                  </select>
+                </div>
+              </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Children&apos;s Ages
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Date Flexibility
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {Array.from({ length: formData.numChildren }).map((_, i) => (
-                    <input
-                      key={i}
-                      type="number"
-                      min="0"
-                      max="15"
-                      placeholder={`Child ${i + 1}`}
-                      value={formData.childrenAges[i] || ""}
-                      onChange={(e) => updateChildAge(i, e.target.value)}
-                      className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
-                    />
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {DATE_FLEXIBILITY.map((option) => (
+                    <label
+                      key={option.value}
+                      className={`relative flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
+                        formData.flexibility === option.value
+                          ? "border-[var(--primary)] bg-[var(--primary)]/5"
+                          : "border-slate-300 hover:border-[var(--primary)]"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="flexibility"
+                        value={option.value}
+                        checked={formData.flexibility === option.value}
+                        onChange={(e) => updateFormData("flexibility", e.target.value)}
+                        className="absolute top-3 right-3 w-4 h-4"
+                      />
+                      <span className="font-medium text-slate-900">{option.label}</span>
+                      <span className="text-xs text-slate-500 mt-1">{option.description}</span>
+                    </label>
                   ))}
                 </div>
-                <p className="text-xs text-slate-500 mt-1">
-                  Ages help us recommend suitable activities
-                </p>
               </div>
-            )}
+            </div>
           </div>
         )}
 
-        {/* Step 3: Travel Dates */}
+        {/* Step 3: Budget & Accommodation */}
         {currentStep === 3 && (
-          <div className="space-y-4 animate-in fade-in duration-300">
-            <h3 className="font-semibold text-lg flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-[var(--primary)]" />
-              When do you want to travel?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Preferred Start Date <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="date"
-                  value={formData.arrivalDate}
-                  min={new Date().toISOString().split("T")[0]}
-                  onChange={(e) => updateFormData("arrivalDate", e.target.value)}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Duration
-                </label>
-                <select
-                  value={formData.duration}
-                  onChange={(e) => updateFormData("duration", e.target.value)}
-                  className="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white"
-                >
-                  <option value="">Select duration</option>
-                  <option value="3">3 Days</option>
-                  <option value="4">4 Days</option>
-                  <option value="5">5 Days</option>
-                  <option value="6">6 Days</option>
-                  <option value="7">7 Days (1 Week)</option>
-                  <option value="10">10 Days</option>
-                  <option value="14">14 Days (2 Weeks)</option>
-                  <option value="custom">Custom / Not Sure</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
-                Date Flexibility
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {DATE_FLEXIBILITY.map((option) => (
-                  <label
-                    key={option.value}
-                    className={`relative flex flex-col p-4 border rounded-lg cursor-pointer transition-all ${
-                      formData.flexibility === option.value
-                        ? "border-[var(--primary)] bg-[var(--primary)]/5"
-                        : "border-slate-300 hover:border-[var(--primary)]"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="flexibility"
-                      value={option.value}
-                      checked={formData.flexibility === option.value}
-                      onChange={(e) => updateFormData("flexibility", e.target.value)}
-                      className="absolute top-3 right-3 w-4 h-4"
-                    />
-                    <span className="font-medium text-slate-900">{option.label}</span>
-                    <span className="text-xs text-slate-500 mt-1">{option.description}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Step 4: Destinations */}
-        {currentStep === 4 && (
-          <div className="space-y-4 animate-in fade-in duration-300">
-            <h3 className="font-semibold text-lg flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-[var(--primary)]" />
-              Where would you like to go?
-            </h3>
-            <p className="text-sm text-slate-500">
-              Select all parks you&apos;d like to visit (or leave blank for recommendations)
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {SAFARI_DESTINATIONS.map((dest) => (
-                <button
-                  key={dest.value}
-                  type="button"
-                  onClick={() => toggleDestination(dest.value)}
-                  className={`px-3 py-2.5 text-sm rounded-lg border transition-all text-left ${
-                    selectedDestinations.includes(dest.value)
-                      ? "bg-[var(--primary)] text-white border-[var(--primary)]"
-                      : "bg-white text-slate-700 border-slate-300 hover:border-[var(--primary)]"
-                  }`}
-                >
-                  {dest.label}
-                </button>
-              ))}
-            </div>
-            {selectedDestinations.length > 0 && (
-              <p className="text-sm text-green-600">
-                ✓ {selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""} selected
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* Step 5: Budget & Accommodation */}
-        {currentStep === 5 && (
           <div className="space-y-6 animate-in fade-in duration-300">
             <div>
               <h3 className="font-semibold text-lg flex items-center gap-2 mb-4">
@@ -718,17 +681,47 @@ export function TailorMadeForm() {
           </div>
         )}
 
-        {/* Step 6: Interests & Experience */}
-        {currentStep === 6 && (
+        {/* Step 4: Preferences (merged Destinations + Interests) */}
+        {currentStep === 4 && (
           <div className="space-y-6 animate-in fade-in duration-300">
+            <div>
+              <h3 className="font-semibold text-lg flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-[var(--primary)]" />
+                Where would you like to go?
+              </h3>
+              <p className="text-sm text-slate-500 mb-3">
+                Select parks to visit (or leave blank for recommendations)
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {SAFARI_DESTINATIONS.map((dest) => (
+                  <button
+                    key={dest.value}
+                    type="button"
+                    onClick={() => toggleDestination(dest.value)}
+                    className={`px-3 py-2.5 text-sm rounded-lg border transition-all text-left ${
+                      selectedDestinations.includes(dest.value)
+                        ? "bg-[var(--primary)] text-white border-[var(--primary)]"
+                        : "bg-white text-slate-700 border-slate-300 hover:border-[var(--primary)]"
+                    }`}
+                  >
+                    {dest.label}
+                  </button>
+                ))}
+              </div>
+              {selectedDestinations.length > 0 && (
+                <p className="text-sm text-green-600 mt-2">
+                  {selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""} selected
+                </p>
+              )}
+            </div>
+
+            <hr className="border-slate-200" />
+
             <div>
               <h3 className="font-semibold text-lg flex items-center gap-2 mb-2">
                 <Sparkles className="w-5 h-5 text-[var(--primary)]" />
                 What interests you most?
               </h3>
-              <p className="text-sm text-slate-500 mb-4">
-                Select all that apply
-              </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {SAFARI_INTERESTS.map((interest) => (
                   <button
@@ -746,6 +739,8 @@ export function TailorMadeForm() {
                 ))}
               </div>
             </div>
+
+            <hr className="border-slate-200" />
 
             <div>
               <h3 className="font-semibold text-lg flex items-center gap-2 mb-4">
@@ -779,8 +774,8 @@ export function TailorMadeForm() {
           </div>
         )}
 
-        {/* Step 7: Final Details */}
-        {currentStep === 7 && (
+        {/* Step 5: Final Details */}
+        {currentStep === 5 && (
           <div className="space-y-4 animate-in fade-in duration-300">
             <h3 className="font-semibold text-lg flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-[var(--primary)]" />

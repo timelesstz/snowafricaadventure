@@ -13,7 +13,8 @@ import {
 } from "@/lib/constants";
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
-import { trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
+import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout } from "@/lib/analytics";
+import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
 import {
   Users,
@@ -44,6 +45,7 @@ export function ZanzibarInquiryForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  useFormAbandonment({ formName: "zanzibar_inquiry_form", isSubmitted: submitted, getCurrentStep: () => currentStep });
 
   // Form data state
   const [formData, setFormData] = useState({
@@ -273,6 +275,12 @@ export function ZanzibarInquiryForm() {
           tripType: formData.combineWithSafari === "yes" ? "Wildlife Safari + Zanzibar Beach" : "Zanzibar Beach",
           numTravelers: formData.numAdults + formData.numChildren,
           relatedItem: formData.beachArea || "Zanzibar Holiday",
+        });
+        trackBeginCheckout({
+          itemId: "zanzibar-inquiry",
+          itemName: "Zanzibar Holiday Inquiry",
+          itemCategory: "zanzibar",
+          value: 0,
         });
         // Clear draft on success
         try { sessionStorage.removeItem("zanzibarDraft"); } catch { /* ignore */ }

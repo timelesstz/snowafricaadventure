@@ -7,6 +7,7 @@ import { formatPrice } from "@/lib/utils";
 import { PHONE_PREFIXES } from "@/lib/constants";
 import { AvailabilityBadge } from "@/components/ui/Badge";
 import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout, trackPurchase, trackSelectDeparture } from "@/lib/analytics";
+import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
 
 interface Departure {
@@ -54,6 +55,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
   const [stage, setStage] = useState<0 | 1 | 2 | "success">(departure ? 1 : 0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  useFormAbandonment({ formName: "group_booking_form", isSubmitted: stage === "success", getCurrentStep: () => typeof stage === "number" ? stage : undefined });
 
   // Stage 1 fields
   const [leadName, setLeadName] = useState("");

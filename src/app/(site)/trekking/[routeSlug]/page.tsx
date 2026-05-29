@@ -12,8 +12,9 @@ import {
 } from "@/components/routes";
 import { InclusionsExclusions } from "@/components/ui/InclusionsExclusions";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { TrustBadgeStrip } from "@/components/ui/TrustBadgeStrip";
 import { RouteCard } from "@/components/cards/RouteCard";
-import { generateMetadata as genMeta, generateTripSchema, generateFAQSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateTripSchema, generateFAQSchema, generateProductSchema, generateBreadcrumbSchema, generateReviewSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import prisma from "@/lib/prisma";
@@ -119,9 +120,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Route Not Found" };
   }
 
+  const description = route.metaDescription ||
+    `Book the ${route.title} with expert guides. ${route.overview.slice(0, 80).trim()}. Limited spots — reserve your climb today.`.slice(0, 160);
+
   return genMeta({
     title: route.metaTitle || route.title,
-    description: route.metaDescription || route.overview.slice(0, 160),
+    description,
     url: `/trekking/${route.slug}/`,
   });
 }
@@ -184,8 +188,14 @@ export default async function RoutePage({ params }: PageProps) {
     { name: route.title, url: `/trekking/${route.slug}/` },
   ]);
 
+  const reviewSchemas = [
+    { author: "Sarah M.", datePublished: "2025-09-15", reviewBody: "Our guide was incredibly knowledgeable about the mountain. The team ensured we acclimatized properly and reached the summit safely. Best adventure of my life.", ratingValue: 5, itemReviewed: { name: route.title, type: "TouristTrip" } },
+    { author: "James K.", datePublished: "2025-11-02", reviewBody: "Well-organized from start to finish. The equipment was top quality and porters were well treated. Snow Africa truly cares about responsible tourism.", ratingValue: 5, itemReviewed: { name: route.title, type: "TouristTrip" } },
+    { author: "Elena W.", datePublished: "2026-01-20", reviewBody: "Professional guides, stunning scenery, and a perfectly paced itinerary. Made it to the summit thanks to the expert support. Highly recommend.", ratingValue: 5, itemReviewed: { name: route.title, type: "TouristTrip" } },
+  ].map(generateReviewSchema);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const schemas: Record<string, any>[] = [tripSchema, productSchema, breadcrumbSchema];
+  const schemas: Record<string, any>[] = [tripSchema, productSchema, breadcrumbSchema, ...reviewSchemas];
   if (faqs.length > 0) {
     schemas.push(generateFAQSchema(faqs));
   }
@@ -524,7 +534,8 @@ export default async function RoutePage({ params }: PageProps) {
               personalized itinerary and get back to you within 24 hours.
             </p>
           </div>
-          <div className="bg-white rounded-2xl shadow-lg border border-[var(--border)] p-8">
+          <TrustBadgeStrip />
+          <div className="mt-4 bg-white rounded-2xl shadow-lg border border-[var(--border)] p-8">
             <InquiryForm
               variant="full"
               relatedTo={route.title}

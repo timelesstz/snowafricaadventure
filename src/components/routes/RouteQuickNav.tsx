@@ -61,6 +61,7 @@ export function RouteQuickNav({
   };
 
   return (
+    <>
     <nav
       className={`bg-white border-b border-[var(--border)] transition-all z-40 ${
         isSticky ? "sticky top-0 shadow-md" : ""
@@ -103,5 +104,26 @@ export function RouteQuickNav({
         </div>
       </div>
     </nav>
+
+      {/* Mobile Sticky CTA Bar */}
+      {isSticky && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-[var(--border)] shadow-[0_-2px_10px_rgba(0,0,0,0.08)] px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">From</div>
+              <div className="font-heading font-bold text-[var(--primary)] text-lg leading-tight">
+                ${price.toLocaleString()}<span className="text-xs font-normal text-[var(--text-muted)]">/person</span>
+              </div>
+            </div>
+            <Link
+              href="#inquiry-form"
+              className="px-6 py-2.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-lg hover:bg-[var(--secondary-dark)] transition-colors text-sm whitespace-nowrap"
+            >
+              Book Now
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

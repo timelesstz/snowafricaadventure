@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
-import { format } from "date-fns";
+import { format, differenceInDays } from "date-fns";
 import { AvailabilityBadge, SocialProofBadge } from "@/components/ui/Badge";
 import { ShareButton } from "@/components/social/ShareButtons";
 import { InviteFriendsModal } from "@/components/forms/InviteFriendsModal";
 import { formatPrice } from "@/lib/utils";
 import { type DepartureShareData } from "@/lib/share";
+import { trackAddToCart } from "@/lib/analytics";
 import {
   Filter,
   X,
@@ -464,15 +465,22 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                       {formatPrice(dep.price)}
                     </td>
                     <td className="px-3 py-2">
-                      <div className="flex items-center gap-1.5">
-                        <AvailabilityBadge
-                          available={dep.availableSpots}
-                          total={dep.maxParticipants}
-                        />
-                        <SocialProofBadge
-                          bookedSpots={dep.bookedSpots}
-                          availableSpots={dep.availableSpots}
-                        />
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5">
+                          <AvailabilityBadge
+                            available={dep.availableSpots}
+                            total={dep.maxParticipants}
+                          />
+                          <SocialProofBadge
+                            bookedSpots={dep.bookedSpots}
+                            availableSpots={dep.availableSpots}
+                          />
+                        </div>
+                        {dep.availableSpots > 0 && differenceInDays(new Date(dep.arrivalDate), new Date()) <= 60 && differenceInDays(new Date(dep.arrivalDate), new Date()) > 0 && (
+                          <span className="text-[10px] text-[var(--secondary-dark)] font-medium">
+                            Departs in {differenceInDays(new Date(dep.arrivalDate), new Date())} days
+                          </span>
+                        )}
                       </div>
                     </td>
                     <td className="px-3 py-2">
@@ -480,7 +488,15 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                         {dep.availableSpots > 0 ? (
                           <button
                             type="button"
-                            onClick={() => onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id)}
+                            onClick={() => {
+                              trackAddToCart({
+                                itemId: dep.id,
+                                itemName: dep.route.name,
+                                itemCategory: "kilimanjaro",
+                                price: dep.price,
+                              });
+                              onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id);
+                            }}
                             className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-3 py-1.5 rounded font-medium text-xs transition-colors cursor-pointer"
                           >
                             JOIN NOW
@@ -554,7 +570,15 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                     {dep.availableSpots > 0 ? (
                       <button
                         type="button"
-                        onClick={() => onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id)}
+                        onClick={() => {
+                          trackAddToCart({
+                            itemId: dep.id,
+                            itemName: dep.route.name,
+                            itemCategory: "kilimanjaro",
+                            price: dep.price,
+                          });
+                          onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id);
+                        }}
                         className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-3 py-1.5 rounded font-medium text-xs transition-colors cursor-pointer"
                       >
                         JOIN NOW

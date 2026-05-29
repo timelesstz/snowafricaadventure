@@ -6,7 +6,8 @@ import { TRIP_TYPES, PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
 import { InviteFriendsSection, type InviteFriend } from "./InviteFriendsSection";
 import { PostSubmissionShare } from "@/components/social/ShareButtons";
-import { trackFormStart, trackFormSubmit } from "@/lib/analytics";
+import { trackFormStart, trackFormSubmit, trackBeginCheckout } from "@/lib/analytics";
+import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
 
 interface InquiryFormProps {
@@ -29,6 +30,7 @@ export function InquiryForm({
   const [showOtherReferral, setShowOtherReferral] = useState(false);
   const formStartTracked = useRef(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  useFormAbandonment({ formName: "inquiry_form", formId: variant, isSubmitted: submitted });
   const phonePrefixRef = useRef<HTMLSelectElement>(null);
 
   // Auto-match phone prefix when country changes
@@ -136,6 +138,12 @@ export function InquiryForm({
           tripType: tripType || (data.tripType as string) || "general",
           numTravelers: numAdults + numChildren,
           relatedItem: relatedTo,
+        });
+        trackBeginCheckout({
+          itemId: relatedTo || "general-inquiry",
+          itemName: relatedTo || "General Inquiry",
+          itemCategory: tripType?.toLowerCase() || "general",
+          value: 0,
         });
         setSubmitted(true);
       } else {

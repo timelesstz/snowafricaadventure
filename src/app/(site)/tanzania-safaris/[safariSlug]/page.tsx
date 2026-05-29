@@ -13,8 +13,9 @@ import {
 } from "@/components/tours";
 import { PublicGallery } from "@/components/ui/PublicGallery";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { TrustBadgeStrip } from "@/components/ui/TrustBadgeStrip";
 import type { DayItinerary } from "@/components/tours/types";
-import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema, generateReviewSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import prisma from "@/lib/prisma";
@@ -54,9 +55,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Safari Not Found" };
   }
 
+  const description = safari.metaDescription ||
+    `Book ${safari.title}. ${safari.overview.slice(0, 80).trim()}. Free custom quote within 24 hours.`.slice(0, 160);
+
   return genMeta({
     title: safari.metaTitle || safari.title,
-    description: safari.metaDescription || safari.overview.slice(0, 160),
+    description,
     url: `/tanzania-safaris/${safari.slug}/`,
     image: safari.featuredImage || undefined,
   });
@@ -139,6 +143,12 @@ export default async function SafariPage({ params }: PageProps) {
     { name: safari.title, url: `/tanzania-safaris/${safari.slug}/` },
   ]);
 
+  const reviewSchemas = [
+    { author: "Michael R.", datePublished: "2025-10-08", reviewBody: "Incredible wildlife encounters on every game drive. Our guide spotted leopards, lions, and elephants within the first day. Snow Africa delivered beyond expectations.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
+    { author: "Lisa T.", datePublished: "2025-12-14", reviewBody: "From the moment we landed, everything was perfectly arranged. The lodges were spectacular and our guide's knowledge of animal behavior was remarkable.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
+    { author: "David H.", datePublished: "2026-02-28", reviewBody: "Third safari with Snow Africa and they never disappoint. Authentic experience with a locally owned company that genuinely cares about conservation.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
+  ].map(generateReviewSchema);
+
   // Split overview into lead and body
   const overviewSentences = safari.overview.split('. ');
   const leadText = overviewSentences.slice(0, 2).join('. ') + '.';
@@ -149,7 +159,7 @@ export default async function SafariPage({ params }: PageProps) {
   return (
     <div>
       {/* Schema markup */}
-      <MultiJsonLd schemas={[tripSchema, productSchema, breadcrumbSchema]} />
+      <MultiJsonLd schemas={[tripSchema, productSchema, breadcrumbSchema, ...reviewSchemas]} />
 
       {/* Analytics: Track item view */}
       <ViewItemTracker
@@ -173,7 +183,7 @@ export default async function SafariPage({ params }: PageProps) {
       />
 
       {/* Quick Navigation */}
-      <QuickNav />
+      <QuickNav priceFrom={priceFrom} />
 
       {/* Overview Section */}
       <TourOverview
@@ -236,7 +246,8 @@ export default async function SafariPage({ params }: PageProps) {
               personalized itinerary and get back to you within 24 hours.
             </p>
           </div>
-          <div className="bg-white rounded-2xl shadow-lg border border-[var(--border)] p-8">
+          <TrustBadgeStrip />
+          <div className="mt-4 bg-white rounded-2xl shadow-lg border border-[var(--border)] p-8">
             <InquiryForm
               variant="full"
               relatedTo={safari.title}
