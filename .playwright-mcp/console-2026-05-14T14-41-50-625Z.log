@@ -1,0 +1,284 @@
+[    1451ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/admin/login/:0
+[    1748ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_4411d9bd._.js:15305
+[    1873ms] Error: ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/components/admin/CommandPalette.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file://L:\snowafrica\node_modules\next\dist\server\dev\hot-reloader-turbopack.js:1008:59)
+    at DevBundlerService.getCompilationError (file://L:\snowafrica\node_modules\next\dist\server\lib\dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file://L:\snowafrica\node_modules\next\dist\server\dev\next-dev-server.js:706:42)
+    at DevServer.findPageComponents (file://L:\snowafrica\node_modules\next\dist\server\dev\next-dev-server.js:676:43)
+    at async DevServer.renderErrorToResponseImpl (file://L:\snowafrica\node_modules\next\dist\server\base-server.js:1713:26)
+[    1874ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[    1879ms] [ERROR] ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    1879ms] [ERROR] ./src/app/(admin)/admin/layout.tsx:2:1
+Module not found: Can't resolve 'sonner'
+  1 | import { auth } from "@/lib/auth";
+> 2 | import { Toaster } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import AdminSidebar from "@/components/admin/AdminSidebar";
+  4 | import AdminTopBar from "@/components/admin/AdminTopBar";
+  5 | import { AdminSessionProvider } from "@/components/admin/AdminSessionProvider";
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    1879ms] [ERROR] ./src/components/admin/NotificationBell.tsx:8:1
+Module not found: Can't resolve 'sonner'
+   6 | import { formatDistanceToNow } from "date-fns";
+   7 | import { clsx } from "clsx";
+>  8 | import { toast } from "sonner";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import type { NotificationPriority } from "@prisma/client";
+  10 | import {
+  11 |   iconForType,
+
+Import traces:
+  Client Component Browser:
+    ./src/components/admin/NotificationBell.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/admin/NotificationBell.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    1960ms] [ERROR] ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    1960ms] [ERROR] ./src/app/(admin)/admin/layout.tsx:2:1
+Module not found: Can't resolve 'sonner'
+  1 | import { auth } from "@/lib/auth";
+> 2 | import { Toaster } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import AdminSidebar from "@/components/admin/AdminSidebar";
+  4 | import AdminTopBar from "@/components/admin/AdminTopBar";
+  5 | import { AdminSessionProvider } from "@/components/admin/AdminSessionProvider";
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    1961ms] [ERROR] ./src/components/admin/NotificationBell.tsx:8:1
+Module not found: Can't resolve 'sonner'
+   6 | import { formatDistanceToNow } from "date-fns";
+   7 | import { clsx } from "clsx";
+>  8 | import { toast } from "sonner";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import type { NotificationPriority } from "@prisma/client";
+  10 | import {
+  11 |   iconForType,
+
+Import traces:
+  Client Component Browser:
+    ./src/components/admin/NotificationBell.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/admin/NotificationBell.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    2050ms] [ERROR] ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    2050ms] [ERROR] ./src/app/(admin)/admin/layout.tsx:2:1
+Module not found: Can't resolve 'sonner'
+  1 | import { auth } from "@/lib/auth";
+> 2 | import { Toaster } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import AdminSidebar from "@/components/admin/AdminSidebar";
+  4 | import AdminTopBar from "@/components/admin/AdminTopBar";
+  5 | import { AdminSessionProvider } from "@/components/admin/AdminSessionProvider";
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    2050ms] [ERROR] ./src/components/admin/NotificationBell.tsx:8:1
+Module not found: Can't resolve 'sonner'
+   6 | import { formatDistanceToNow } from "date-fns";
+   7 | import { clsx } from "clsx";
+>  8 | import { toast } from "sonner";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import type { NotificationPriority } from "@prisma/client";
+  10 | import {
+  11 |   iconForType,
+
+Import traces:
+  Client Component Browser:
+    ./src/components/admin/NotificationBell.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/admin/NotificationBell.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[    2151ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   14475ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   14673ms] [ERROR] ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[   14674ms] [ERROR] ./src/app/(admin)/admin/layout.tsx:2:1
+Module not found: Can't resolve 'sonner'
+  1 | import { auth } from "@/lib/auth";
+> 2 | import { Toaster } from "sonner";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import AdminSidebar from "@/components/admin/AdminSidebar";
+  4 | import AdminTopBar from "@/components/admin/AdminTopBar";
+  5 | import { AdminSessionProvider } from "@/components/admin/AdminSessionProvider";
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[   14674ms] [ERROR] ./src/components/admin/NotificationBell.tsx:8:1
+Module not found: Can't resolve 'sonner'
+   6 | import { formatDistanceToNow } from "date-fns";
+   7 | import { clsx } from "clsx";
+>  8 | import { toast } from "sonner";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import type { NotificationPriority } from "@prisma/client";
+  10 | import {
+  11 |   iconForType,
+
+Import traces:
+  Client Component Browser:
+    ./src/components/admin/NotificationBell.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Client Component Browser]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/admin/NotificationBell.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Client Component SSR]
+    ./src/components/admin/AdminTopBar.tsx [Server Component]
+    ./src/app/(admin)/admin/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[   14958ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   15056ms] [ERROR] ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[   15162ms] [ERROR] ./src/components/admin/CommandPalette.tsx:3:1
+Module not found: Can't resolve 'cmdk'
+  1 | "use client";
+  2 |
+> 3 | import { Command } from "cmdk";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { useEffect, useState } from "react";
+  5 | import { useRouter } from "next/navigation";
+  6 | import {
+
+Import trace:
+  Server Component:
+    ./src/components/admin/CommandPalette.tsx
+    ./src/app/(admin)/admin/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1920
+[   15267ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   15455ms] [LOG] [Fast Refresh] done in 244ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   15595ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   16026ms] [LOG] [Fast Refresh] done in 540ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   16772ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   16797ms] [LOG] [Fast Refresh] done in 132ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_b3fb3b5f._.js:1206
+[   17412ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ http://localhost:3000/admin/login/:0
+[   17781ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18021ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18176ms] [LOG] [32m[Web Vitals] LCP: 2044.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18177ms] [LOG] [33m[Web Vitals] TTFB: 1610.80 (needs-improvement)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18179ms] [LOG] [33m[Web Vitals] FCP: 2044.00 (needs-improvement)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18241ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18242ms] [LOG] [Fast Refresh] done in 171ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   18323ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/admin/manifest.json:0
+[   22352ms] [WARNING] The resource http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__e409d4e7._.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/admin/login/:0
+[   22352ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/admin/login/:0
+[   27129ms] [WARNING] The resource http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__e409d4e7._.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/admin/login/:0
+[   27130ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/admin/login/:0

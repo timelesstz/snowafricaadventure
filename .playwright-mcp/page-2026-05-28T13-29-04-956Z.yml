@@ -1,0 +1,952 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1122]:
+    - banner [ref=e1123]:
+      - 'link "Call us: +255 766 657 854" [ref=e1128] [cursor=pointer]':
+        - /url: tel:+255766657854
+        - img [ref=e1129]
+        - generic [ref=e1131]: +255 766 657 854
+      - generic [ref=e1132]:
+        - generic [ref=e1134]:
+          - link "Snow Africa Adventure" [ref=e1135] [cursor=pointer]:
+            - /url: /
+            - img "Snow Africa Adventure" [ref=e1136]
+          - generic [ref=e1137]:
+            - link "Plan Your Trip" [ref=e1138] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+            - link "Search" [ref=e1139] [cursor=pointer]:
+              - /url: /search/
+              - img [ref=e1140]
+            - button "Open menu" [ref=e1143]:
+              - img [ref=e1144]
+        - navigation [ref=e1146]:
+          - link "Home" [ref=e1147] [cursor=pointer]:
+            - /url: /
+            - text: Home
+            - img [ref=e1148]
+          - generic [ref=e1150]:
+            - button "Safaris & Tours" [ref=e1151]:
+              - text: Safaris & Tours
+              - img [ref=e1152]
+            - generic [ref=e1154]:
+              - link "All Safari Packages Browse curated Tanzania safaris" [ref=e1155] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+                - img [ref=e1156]
+                - generic [ref=e1161]:
+                  - generic [ref=e1162]: All Safari Packages
+                  - generic [ref=e1163]: Browse curated Tanzania safaris
+              - link "Tailor-Made Safaris Custom itineraries for your group" [ref=e1164] [cursor=pointer]:
+                - /url: /tailor-made-safari/
+                - img [ref=e1165]
+                - generic [ref=e1168]:
+                  - generic [ref=e1169]: Tailor-Made Safaris
+                  - generic [ref=e1170]: Custom itineraries for your group
+              - link "Destinations Serengeti, Ngorongoro & more" [ref=e1171] [cursor=pointer]:
+                - /url: /tanzania-destinations/
+                - img [ref=e1172]
+                - generic [ref=e1174]:
+                  - generic [ref=e1175]: Destinations
+                  - generic [ref=e1176]: Serengeti, Ngorongoro & more
+              - link "Day Tours Single-day excursions from Arusha" [ref=e1177] [cursor=pointer]:
+                - /url: /tanzania-day-tours/
+                - img [ref=e1178]
+                - generic [ref=e1184]:
+                  - generic [ref=e1185]: Day Tours
+                  - generic [ref=e1186]: Single-day excursions from Arusha
+          - generic [ref=e1187]:
+            - button "Trekking" [ref=e1188]:
+              - text: Trekking
+              - img [ref=e1189]
+            - generic [ref=e1191]:
+              - link "All Trekking Routes Compare all Kilimanjaro routes" [ref=e1192] [cursor=pointer]:
+                - /url: /trekking/
+                - img [ref=e1193]
+                - generic [ref=e1195]:
+                  - generic [ref=e1196]: All Trekking Routes
+                  - generic [ref=e1197]: Compare all Kilimanjaro routes
+              - link "Best Route to Climb Route comparison guide" [ref=e1198] [cursor=pointer]:
+                - /url: /best-route-to-climb-kilimanjaro/
+                - img [ref=e1199]
+                - generic [ref=e1202]:
+                  - generic [ref=e1203]: Best Route to Climb
+                  - generic [ref=e1204]: Route comparison guide
+              - link "Climbing Guide Everything you need to know" [ref=e1205] [cursor=pointer]:
+                - /url: /climbing-kilimanjaro/
+                - img [ref=e1206]
+                - generic [ref=e1208]:
+                  - generic [ref=e1209]: Climbing Guide
+                  - generic [ref=e1210]: Everything you need to know
+              - link "Kilimanjaro Prices Full cost breakdown" [ref=e1211] [cursor=pointer]:
+                - /url: /kilimanjaro-prices/
+                - img [ref=e1212]
+                - generic [ref=e1214]:
+                  - generic [ref=e1215]: Kilimanjaro Prices
+                  - generic [ref=e1216]: Full cost breakdown
+              - link "Best Time to Climb Seasonal guide" [ref=e1217] [cursor=pointer]:
+                - /url: /best-time-to-climb-kilimanjaro/
+                - img [ref=e1218]
+                - generic [ref=e1221]:
+                  - generic [ref=e1222]: Best Time to Climb
+                  - generic [ref=e1223]: Seasonal guide
+          - link "Join Group Climb" [ref=e1224] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e1225]
+            - text: Join Group Climb
+            - img [ref=e1230]
+          - link "Zanzibar" [ref=e1232] [cursor=pointer]:
+            - /url: /zanzibar/
+            - text: Zanzibar
+            - img [ref=e1233]
+          - link "Contact Us" [ref=e1235] [cursor=pointer]:
+            - /url: /contact-us/
+            - text: Contact Us
+            - img [ref=e1236]
+          - generic [ref=e1239]:
+            - link "About Us" [ref=e1240] [cursor=pointer]:
+              - /url: /about-us/
+              - text: About Us
+              - img [ref=e1241]
+            - link "Tailor-Made Safaris" [ref=e1243] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+              - text: Tailor-Made Safaris
+              - img [ref=e1244]
+            - link "Blog" [ref=e1246] [cursor=pointer]:
+              - /url: /blog/
+              - text: Blog
+              - img [ref=e1247]
+          - link "Plan Your Trip" [ref=e1250] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - generic [ref=e1252]:
+            - link "+255 766 657 854" [ref=e1253] [cursor=pointer]:
+              - /url: tel:+255766657854
+              - img [ref=e1254]
+              - text: +255 766 657 854
+            - link "info@snowafricaadventure.com" [ref=e1256] [cursor=pointer]:
+              - /url: mailto:info@snowafricaadventure.com
+              - img [ref=e1257]
+              - text: info@snowafricaadventure.com
+    - main [ref=e693]:
+      - generic [ref=e1260]:
+        - navigation "Breadcrumb" [ref=e1262]:
+          - list [ref=e1263]:
+            - listitem [ref=e1264]:
+              - link "Home" [ref=e1265] [cursor=pointer]:
+                - /url: /
+                - img [ref=e1266]
+                - generic [ref=e1269]: Home
+            - listitem [ref=e1270]:
+              - img [ref=e1271]
+              - generic [ref=e1273]: Trekking Routes
+        - generic [ref=e1274]:
+          - img "Mount Kilimanjaro Summit" [ref=e1276]
+          - generic [ref=e1279]:
+            - generic [ref=e1280]:
+              - generic [ref=e1281]: 5,895m Summit
+              - generic [ref=e1282]:
+                - img [ref=e1283]
+                - generic [ref=e1287]: 93% Success Rate
+            - heading "Kilimanjaro Trekking Routes" [level=1] [ref=e1288]:
+              - text: Kilimanjaro
+              - text: Trekking Routes
+            - paragraph [ref=e1289]: Choose your path to the Roof of Africa. Each route offers a unique experience with different scenery, challenge levels, and summit success rates.
+            - generic [ref=e1290]:
+              - generic [ref=e1291]:
+                - img [ref=e1293]
+                - paragraph [ref=e1295]: "9"
+                - paragraph [ref=e1296]: Routes
+              - generic [ref=e1297]:
+                - img [ref=e1299]
+                - paragraph [ref=e1302]: 5-10
+                - paragraph [ref=e1303]: Days
+              - generic [ref=e1304]:
+                - img [ref=e1306]
+                - paragraph [ref=e1310]: 93%
+                - paragraph [ref=e1311]: Success
+              - generic [ref=e1312]:
+                - img [ref=e1314]
+                - paragraph [ref=e1316]: 500+
+                - paragraph [ref=e1317]: Summits
+            - generic [ref=e1318]:
+              - link "Explore Routes" [ref=e1319] [cursor=pointer]:
+                - /url: "#routes"
+                - text: Explore Routes
+                - img [ref=e1320]
+              - link "View Group Departures" [ref=e1322] [cursor=pointer]:
+                - /url: /kilimanjaro-join-group-departures/
+          - generic [ref=e1323]:
+            - generic [ref=e1324]: Explore
+            - img [ref=e1325]
+        - generic [ref=e1329]:
+          - generic [ref=e1330]:
+            - img [ref=e1332]
+            - generic [ref=e1335]:
+              - paragraph [ref=e1336]: KINAPA Certified
+              - paragraph [ref=e1337]: Guides
+          - generic [ref=e1338]:
+            - img [ref=e1340]
+            - generic [ref=e1342]:
+              - paragraph [ref=e1343]: KPAP Partner
+              - paragraph [ref=e1344]: Porter Welfare
+          - link "4.9/5 Rating TripAdvisor" [ref=e1345] [cursor=pointer]:
+            - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - img [ref=e1347]
+            - generic [ref=e1349]:
+              - paragraph [ref=e1350]: 4.9/5 Rating
+              - paragraph [ref=e1351]: TripAdvisor
+          - generic [ref=e1352]:
+            - img [ref=e1354]
+            - generic [ref=e1356]:
+              - paragraph [ref=e1357]: Pulse Oximeters
+              - paragraph [ref=e1358]: Safety First
+        - generic [ref=e1360]:
+          - generic [ref=e1361]:
+            - generic [ref=e1362]: How To Choose
+            - heading "Which Route Is Right for You?" [level=2] [ref=e1363]
+            - paragraph [ref=e1364]: Not sure where to start? Pick your climbing style and we'll point you to the best route.
+          - generic [ref=e1365]:
+            - generic [ref=e1366]:
+              - img [ref=e1368]
+              - heading "For Beginners" [level=3] [ref=e1373]
+              - paragraph [ref=e1374]: First-time climbers with moderate fitness
+              - generic [ref=e1375]:
+                - link "Marangu Route →" [ref=e1376] [cursor=pointer]:
+                  - /url: /trekking/6-days-marangu-route/
+                - link "Rongai Route →" [ref=e1377] [cursor=pointer]:
+                  - /url: /trekking/7-days-rongai-route/
+            - generic [ref=e1378]:
+              - img [ref=e1380]
+              - heading "Most Popular" [level=3] [ref=e1382]
+              - paragraph [ref=e1383]: Best scenery and acclimatization
+              - generic [ref=e1384]:
+                - link "Machame Route →" [ref=e1385] [cursor=pointer]:
+                  - /url: /trekking/7-days-machame-route/
+                - link "Lemosho Route →" [ref=e1386] [cursor=pointer]:
+                  - /url: /trekking/8-days-lemosho-route/
+            - generic [ref=e1387]:
+              - img [ref=e1389]
+              - heading "Highest Success" [level=3] [ref=e1393]
+              - paragraph [ref=e1394]: Best acclimatization profiles
+              - generic [ref=e1395]:
+                - link "Lemosho Route →" [ref=e1396] [cursor=pointer]:
+                  - /url: /trekking/8-days-lemosho-route/
+                - link "Northern Circuit →" [ref=e1397] [cursor=pointer]:
+                  - /url: /trekking/9-day-northern-circuit-route-kilimanjaro-guide/
+            - generic [ref=e1398]:
+              - img [ref=e1400]
+              - heading "For Adventurers" [level=3] [ref=e1402]
+              - paragraph [ref=e1403]: Less crowded, technical challenge
+              - generic [ref=e1404]:
+                - link "Umbwe Route →" [ref=e1405] [cursor=pointer]:
+                  - /url: /trekking/6-days-umbwe-route/
+                - link "Western Breach →" [ref=e1406] [cursor=pointer]:
+                  - /url: /trekking/8-days-lemosho-route/
+        - generic [ref=e1409]:
+          - complementary [ref=e1410]:
+            - group [ref=e1412]:
+              - generic "Filters" [ref=e1413] [cursor=pointer]:
+                - generic [ref=e1414]:
+                  - img [ref=e1415]
+                  - text: Filters
+                - img [ref=e1416]
+              - option "Most Popular" [selected]
+              - option "Success Rate"
+              - option "Shortest First"
+              - option "Longest First"
+              - option "Easiest First"
+              - option "Hardest First"
+          - generic [ref=e1418]:
+            - generic [ref=e1419]:
+              - heading "All Kilimanjaro Routes" [level=2] [ref=e1420]
+              - generic [ref=e1421]:
+                - button "Grid view" [ref=e1422]:
+                  - img [ref=e1423]
+                - button "List view" [ref=e1428]:
+                  - img [ref=e1429]
+            - generic [ref=e1431]:
+              - link "5 Days Marangu Route Challenging 65% 5 Days Max 12 5 Days Marangu Route The 5-day Marangu Route is the shortest option for climbing Kilimanjaro. Due to limited acclimatization time, this route is only recommended for very fit and experienced trekkers. Difficulty →" [ref=e1432] [cursor=pointer]:
+                - /url: /trekking/5-days-marangu-route/
+                - generic [ref=e1433]:
+                  - img "5 Days Marangu Route" [ref=e1434]
+                  - generic [ref=e1436]:
+                    - generic [ref=e1437]: Challenging
+                    - generic [ref=e1438]:
+                      - img [ref=e1439]
+                      - generic [ref=e1443]: 65%
+                  - generic [ref=e1445]:
+                    - generic [ref=e1446]:
+                      - img [ref=e1447]
+                      - text: 5 Days
+                    - generic [ref=e1450]:
+                      - img [ref=e1451]
+                      - text: Max 12
+                - generic [ref=e1456]:
+                  - heading "5 Days Marangu Route" [level=3] [ref=e1457]
+                  - paragraph [ref=e1458]: The 5-day Marangu Route is the shortest option for climbing Kilimanjaro. Due to limited acclimatization time, this route is only recommended for very fit and experienced trekkers.
+                  - generic [ref=e1459]:
+                    - generic [ref=e1461]: Difficulty
+                    - generic [ref=e1468]: →
+              - link "6 Days Rongai Route Moderate 85% 6 Days Max 10 6 Days Rongai Route The Rongai Route approaches Kilimanjaro from the north, near the Kenyan border. This less-traveled route offers a wilderness experience with fewer crowds and unique views of the mountain. Difficulty →" [ref=e1469] [cursor=pointer]:
+                - /url: /trekking/6-days-rongai-route/
+                - generic [ref=e1470]:
+                  - img "6 Days Rongai Route" [ref=e1471]
+                  - generic [ref=e1473]:
+                    - generic [ref=e1474]: Moderate
+                    - generic [ref=e1475]:
+                      - img [ref=e1476]
+                      - generic [ref=e1480]: 85%
+                  - generic [ref=e1482]:
+                    - generic [ref=e1483]:
+                      - img [ref=e1484]
+                      - text: 6 Days
+                    - generic [ref=e1487]:
+                      - img [ref=e1488]
+                      - text: Max 10
+                - generic [ref=e1493]:
+                  - heading "6 Days Rongai Route" [level=3] [ref=e1494]
+                  - paragraph [ref=e1495]: The Rongai Route approaches Kilimanjaro from the north, near the Kenyan border. This less-traveled route offers a wilderness experience with fewer crowds and unique views of the mountain.
+                  - generic [ref=e1496]:
+                    - generic [ref=e1498]: Difficulty
+                    - generic [ref=e1505]: →
+              - link "6 Days Machame Route Challenging 80% 6 Days Max 12 6 Days Machame Route The 6-day Machame Route is a shorter version of the popular 'Whiskey Route'. This condensed itinerary is best suited for fit trekkers with previous high-altitude experience. Difficulty →" [ref=e1506] [cursor=pointer]:
+                - /url: /trekking/6-days-machame-route/
+                - generic [ref=e1507]:
+                  - img "6 Days Machame Route" [ref=e1508]
+                  - generic [ref=e1510]:
+                    - generic [ref=e1511]: Challenging
+                    - generic [ref=e1512]:
+                      - img [ref=e1513]
+                      - generic [ref=e1517]: 80%
+                  - generic [ref=e1519]:
+                    - generic [ref=e1520]:
+                      - img [ref=e1521]
+                      - text: 6 Days
+                    - generic [ref=e1524]:
+                      - img [ref=e1525]
+                      - text: Max 12
+                - generic [ref=e1530]:
+                  - heading "6 Days Machame Route" [level=3] [ref=e1531]
+                  - paragraph [ref=e1532]: The 6-day Machame Route is a shorter version of the popular 'Whiskey Route'. This condensed itinerary is best suited for fit trekkers with previous high-altitude experience.
+                  - generic [ref=e1533]:
+                    - generic [ref=e1535]: Difficulty
+                    - generic [ref=e1542]: →
+              - link "6 Days Umbwe Route Challenging 70% 6 Days Max 12 6 Days Umbwe Route The Umbwe Route is the most challenging and direct route on Kilimanjaro. It's steep, demanding, and offers minimal acclimatization time. Only recommended for experienced high-altitude trekkers. Difficulty →" [ref=e1543] [cursor=pointer]:
+                - /url: /trekking/6-days-umbwe-route/
+                - generic [ref=e1544]:
+                  - img "6 Days Umbwe Route" [ref=e1545]
+                  - generic [ref=e1547]:
+                    - generic [ref=e1548]: Challenging
+                    - generic [ref=e1549]:
+                      - img [ref=e1550]
+                      - generic [ref=e1554]: 70%
+                  - generic [ref=e1556]:
+                    - generic [ref=e1557]:
+                      - img [ref=e1558]
+                      - text: 6 Days
+                    - generic [ref=e1561]:
+                      - img [ref=e1562]
+                      - text: Max 12
+                - generic [ref=e1567]:
+                  - heading "6 Days Umbwe Route" [level=3] [ref=e1568]
+                  - paragraph [ref=e1569]: The Umbwe Route is the most challenging and direct route on Kilimanjaro. It's steep, demanding, and offers minimal acclimatization time. Only recommended for experienced high-altitude trekkers.
+                  - generic [ref=e1570]:
+                    - generic [ref=e1572]: Difficulty
+                    - generic [ref=e1579]: →
+              - link "6 Days Marangu Route Moderate 80% 6 Days Max 12 6 Days Marangu Route The Marangu Route, nicknamed the 'Coca-Cola Route', is the oldest and most established route on Kilimanjaro. It's the only route offering hut accommodation with beds, making it popular for those who prefer more comfort. Difficulty →" [ref=e1580] [cursor=pointer]:
+                - /url: /trekking/6-days-marangu-route/
+                - generic [ref=e1581]:
+                  - img "6 Days Marangu Route" [ref=e1582]
+                  - generic [ref=e1584]:
+                    - generic [ref=e1585]: Moderate
+                    - generic [ref=e1586]:
+                      - img [ref=e1587]
+                      - generic [ref=e1591]: 80%
+                  - generic [ref=e1593]:
+                    - generic [ref=e1594]:
+                      - img [ref=e1595]
+                      - text: 6 Days
+                    - generic [ref=e1598]:
+                      - img [ref=e1599]
+                      - text: Max 12
+                - generic [ref=e1604]:
+                  - heading "6 Days Marangu Route" [level=3] [ref=e1605]
+                  - paragraph [ref=e1606]: The Marangu Route, nicknamed the 'Coca-Cola Route', is the oldest and most established route on Kilimanjaro. It's the only route offering hut accommodation with beds, making it popular for those who prefer more comfort.
+                  - generic [ref=e1607]:
+                    - generic [ref=e1609]: Difficulty
+                    - generic [ref=e1616]: →
+              - link "7 Days Machame Route Challenging 90% 7 Days Max 12 7 Days Machame Route The Machame Route, also known as the 'Whiskey Route', is one of the most scenic and popular routes on Kilimanjaro. This 7-day itinerary provides excellent acclimatization through a 'climb high, sleep low' profile, giving you the best chance of reaching Uhuru Peak at 5,895m. Difficulty →" [ref=e1617] [cursor=pointer]:
+                - /url: /trekking/7-days-machame-route/
+                - generic [ref=e1618]:
+                  - img "7 Days Machame Route" [ref=e1619]
+                  - generic [ref=e1621]:
+                    - generic [ref=e1622]: Challenging
+                    - generic [ref=e1623]:
+                      - img [ref=e1624]
+                      - generic [ref=e1628]: 90%
+                  - generic [ref=e1630]:
+                    - generic [ref=e1631]:
+                      - img [ref=e1632]
+                      - text: 7 Days
+                    - generic [ref=e1635]:
+                      - img [ref=e1636]
+                      - text: Max 12
+                - generic [ref=e1641]:
+                  - heading "7 Days Machame Route" [level=3] [ref=e1642]
+                  - paragraph [ref=e1643]: The Machame Route, also known as the 'Whiskey Route', is one of the most scenic and popular routes on Kilimanjaro. This 7-day itinerary provides excellent acclimatization through a 'climb high, sleep low' profile, giving you the best chance of reaching Uhuru Peak at 5,895m.
+                  - generic [ref=e1644]:
+                    - generic [ref=e1646]: Difficulty
+                    - generic [ref=e1653]: →
+              - link "7 Days Rongai Route Moderate 90% 7 Days Max 10 7 Days Rongai Route The 7-day Rongai Route adds an extra acclimatization day compared to the standard 6-day version, significantly improving your chances of summit success. Difficulty →" [ref=e1654] [cursor=pointer]:
+                - /url: /trekking/7-days-rongai-route/
+                - generic [ref=e1655]:
+                  - img "7 Days Rongai Route" [ref=e1656]
+                  - generic [ref=e1658]:
+                    - generic [ref=e1659]: Moderate
+                    - generic [ref=e1660]:
+                      - img [ref=e1661]
+                      - generic [ref=e1665]: 90%
+                  - generic [ref=e1667]:
+                    - generic [ref=e1668]:
+                      - img [ref=e1669]
+                      - text: 7 Days
+                    - generic [ref=e1672]:
+                      - img [ref=e1673]
+                      - text: Max 10
+                - generic [ref=e1678]:
+                  - heading "7 Days Rongai Route" [level=3] [ref=e1679]
+                  - paragraph [ref=e1680]: The 7-day Rongai Route adds an extra acclimatization day compared to the standard 6-day version, significantly improving your chances of summit success.
+                  - generic [ref=e1681]:
+                    - generic [ref=e1683]: Difficulty
+                    - generic [ref=e1690]: →
+              - link "8 Days Lemosho Route Moderate 95% 8 Days Max 10 8 Days Lemosho Route The Lemosho Route is widely considered the most beautiful and remote route on Kilimanjaro. Starting from the western Lemosho Gate, you'll traverse the entire mountain through pristine wilderness before reaching Uhuru Peak. Difficulty →" [ref=e1691] [cursor=pointer]:
+                - /url: /trekking/8-days-lemosho-route/
+                - generic [ref=e1692]:
+                  - img "8 Days Lemosho Route" [ref=e1693]
+                  - generic [ref=e1695]:
+                    - generic [ref=e1696]: Moderate
+                    - generic [ref=e1697]:
+                      - img [ref=e1698]
+                      - generic [ref=e1702]: 95%
+                  - generic [ref=e1704]:
+                    - generic [ref=e1705]:
+                      - img [ref=e1706]
+                      - text: 8 Days
+                    - generic [ref=e1709]:
+                      - img [ref=e1710]
+                      - text: Max 10
+                - generic [ref=e1715]:
+                  - heading "8 Days Lemosho Route" [level=3] [ref=e1716]
+                  - paragraph [ref=e1717]: The Lemosho Route is widely considered the most beautiful and remote route on Kilimanjaro. Starting from the western Lemosho Gate, you'll traverse the entire mountain through pristine wilderness before reaching Uhuru Peak.
+                  - generic [ref=e1718]:
+                    - generic [ref=e1720]: Difficulty
+                    - generic [ref=e1727]: →
+              - link "9 Days Northern Circuit Route Moderate 98% 9 days Max 12 9 Days Northern Circuit Route The 9-day Northern Circuit Route, starting at Lemosho Gate, offers the highest percentage of reaching the summit of Mount Kilimanjaro, Uhuru Peak. The route is less crowded due to its higher cost. This route provides superior acclimatization and presents the best views of the the Kilimanjaro, allowing you to experience breathtaking perspectives from the west, north, east, and south sides of Kilimanjaro. Difficulty →" [ref=e1728] [cursor=pointer]:
+                - /url: /trekking/9-day-northern-circuit-route-kilimanjaro-guide/
+                - generic [ref=e1729]:
+                  - img "9 Days Northern Circuit Route" [ref=e1730]
+                  - generic [ref=e1732]:
+                    - generic [ref=e1733]: Moderate
+                    - generic [ref=e1734]:
+                      - img [ref=e1735]
+                      - generic [ref=e1739]: 98%
+                  - generic [ref=e1741]:
+                    - generic [ref=e1742]:
+                      - img [ref=e1743]
+                      - text: 9 days
+                    - generic [ref=e1746]:
+                      - img [ref=e1747]
+                      - text: Max 12
+                - generic [ref=e1752]:
+                  - heading "9 Days Northern Circuit Route" [level=3] [ref=e1753]
+                  - paragraph [ref=e1754]: The 9-day Northern Circuit Route, starting at Lemosho Gate, offers the highest percentage of reaching the summit of Mount Kilimanjaro, Uhuru Peak. The route is less crowded due to its higher cost. This route provides superior acclimatization and presents the best views of the the Kilimanjaro, allowing you to experience breathtaking perspectives from the west, north, east, and south sides of Kilimanjaro.
+                  - generic [ref=e1755]:
+                    - generic [ref=e1757]: Difficulty
+                    - generic [ref=e1764]: →
+        - generic [ref=e1770]:
+          - heading "Ready to Climb Kilimanjaro?" [level=2] [ref=e1771]
+          - paragraph [ref=e1772]: Tell us your preferred dates and route. We'll craft a personalized itinerary with transparent pricing — no hidden fees.
+          - generic [ref=e1773]:
+            - link "Get a Free Quote" [ref=e1774] [cursor=pointer]:
+              - /url: /inquire/
+              - text: Get a Free Quote
+              - img [ref=e1775]
+            - link "Join a Group Departure" [ref=e1777] [cursor=pointer]:
+              - /url: /kilimanjaro-join-group-departures/
+        - generic [ref=e1779]:
+          - generic [ref=e1780]:
+            - generic [ref=e1781]: All-Inclusive
+            - heading "What's Included in Every Trek" [level=2] [ref=e1782]
+            - paragraph [ref=e1783]: Our packages cover everything so you can focus entirely on the climb.
+          - generic [ref=e1784]:
+            - generic [ref=e1785]:
+              - img [ref=e1787]
+              - generic [ref=e1790]:
+                - heading "KINAPA-Certified Guides" [level=3] [ref=e1791]
+                - paragraph [ref=e1792]: Experienced, English-speaking mountain guides trained in wilderness first aid.
+            - generic [ref=e1793]:
+              - img [ref=e1795]
+              - generic [ref=e1797]:
+                - heading "All Park Fees & Permits" [level=3] [ref=e1798]
+                - paragraph [ref=e1799]: Kilimanjaro National Park entry, camping/hut fees, and rescue fees included.
+            - generic [ref=e1800]:
+              - img [ref=e1802]
+              - generic [ref=e1806]:
+                - heading "Quality Equipment" [level=3] [ref=e1807]
+                - paragraph [ref=e1808]: 4-season tents, sleeping mats, dining tent with tables and chairs.
+            - generic [ref=e1809]:
+              - img [ref=e1811]
+              - generic [ref=e1814]:
+                - heading "Nutritious Meals" [level=3] [ref=e1815]
+                - paragraph [ref=e1816]: Three hot meals daily plus trail snacks and beverages, by our mountain chef.
+            - generic [ref=e1817]:
+              - img [ref=e1819]
+              - generic [ref=e1821]:
+                - heading "Emergency Oxygen & First Aid" [level=3] [ref=e1822]
+                - paragraph [ref=e1823]: Pulse oximeters and emergency oxygen carried on every single climb.
+            - generic [ref=e1824]:
+              - img [ref=e1826]
+              - generic [ref=e1828]:
+                - heading "Airport Transfers" [level=3] [ref=e1829]
+                - paragraph [ref=e1830]: Pickup from Kilimanjaro Airport (JRO) and return transfer.
+            - generic [ref=e1831]:
+              - img [ref=e1833]
+              - generic [ref=e1836]:
+                - heading "Hotel Accommodation" [level=3] [ref=e1837]
+                - paragraph [ref=e1838]: One night pre-climb and one night post-climb in Moshi or Arusha.
+            - generic [ref=e1839]:
+              - img [ref=e1841]
+              - generic [ref=e1846]:
+                - heading "Porters & Cook" [level=3] [ref=e1847]
+                - paragraph [ref=e1848]: Full support team to carry equipment and prepare meals on the mountain.
+            - generic [ref=e1849]:
+              - img [ref=e1851]
+              - generic [ref=e1853]:
+                - heading "KPAP Partner" [level=3] [ref=e1854]
+                - paragraph [ref=e1855]: Fair wages, proper equipment, and adequate food for all porters.
+        - generic [ref=e1857]:
+          - generic [ref=e1858]:
+            - generic [ref=e1859]: Get Ready
+            - heading "How to Prepare for Kilimanjaro" [level=2] [ref=e1860]
+            - paragraph [ref=e1861]: Start training 2-3 months before your climb. Here's your roadmap.
+          - generic [ref=e1862]:
+            - generic [ref=e1863]:
+              - generic [ref=e1864]: "1"
+              - generic [ref=e1865]:
+                - heading "Build Cardiovascular Fitness" [level=3] [ref=e1866]
+                - paragraph [ref=e1867]: Hike, run, cycle, or swim 3-4 times per week. Focus on sustained effort over 2-4 hours.
+            - generic [ref=e1868]:
+              - generic [ref=e1869]: "2"
+              - generic [ref=e1870]:
+                - heading "Practice Hiking with Elevation" [level=3] [ref=e1871]
+                - paragraph [ref=e1872]: Hike hills or stairs with a loaded daypack (8-10 kg) to simulate trail conditions.
+            - generic [ref=e1873]:
+              - generic [ref=e1874]: "3"
+              - generic [ref=e1875]:
+                - heading "Strengthen Your Legs" [level=3] [ref=e1876]
+                - paragraph [ref=e1877]: Squats, lunges, and step-ups help with the long descents. Focus on endurance over power.
+            - generic [ref=e1878]:
+              - generic [ref=e1879]: "4"
+              - generic [ref=e1880]:
+                - heading "Build Mental Resilience" [level=3] [ref=e1881]
+                - paragraph [ref=e1882]: Summit night is as much mental as physical. Practice pushing through discomfort during training.
+            - generic [ref=e1883]:
+              - generic [ref=e1884]: "5"
+              - generic [ref=e1885]:
+                - heading "Get Proper Gear" [level=3] [ref=e1886]
+                - paragraph [ref=e1887]: "We provide a packing list after booking. Key items: layered clothing, broken-in boots, and a -10°C sleeping bag."
+        - generic [ref=e1890]:
+          - generic [ref=e1891]:
+            - generic [ref=e1892]: Compare
+            - heading "Kilimanjaro Route Comparison" [level=2] [ref=e1893]
+          - table [ref=e1895]:
+            - rowgroup [ref=e1896]:
+              - row "Route Days Difficulty Success Rate Traffic Best For" [ref=e1897]:
+                - columnheader "Route" [ref=e1898]
+                - columnheader "Days" [ref=e1899]
+                - columnheader "Difficulty" [ref=e1900]
+                - columnheader "Success Rate" [ref=e1901]
+                - columnheader "Traffic" [ref=e1902]
+                - columnheader "Best For" [ref=e1903]
+            - rowgroup [ref=e1904]:
+              - row "Machame 7 Moderate-Hard 90%+ High Most climbers" [ref=e1905]:
+                - cell "Machame" [ref=e1906]
+                - cell "7" [ref=e1907]
+                - cell "Moderate-Hard" [ref=e1908]
+                - cell "90%+" [ref=e1909]
+                - cell "High" [ref=e1910]
+                - cell "Most climbers" [ref=e1911]
+              - row "Lemosho 8 Moderate 95%+ Low-Medium Best acclimatization" [ref=e1912]:
+                - cell "Lemosho" [ref=e1913]
+                - cell "8" [ref=e1914]
+                - cell "Moderate" [ref=e1915]
+                - cell "95%+" [ref=e1916]
+                - cell "Low-Medium" [ref=e1917]
+                - cell "Best acclimatization" [ref=e1918]
+              - row "Rongai 7 Moderate 85%+ Low Rainy season / beginners" [ref=e1919]:
+                - cell "Rongai" [ref=e1920]
+                - cell "7" [ref=e1921]
+                - cell "Moderate" [ref=e1922]
+                - cell "85%+" [ref=e1923]
+                - cell "Low" [ref=e1924]
+                - cell "Rainy season / beginners" [ref=e1925]
+              - row "Northern Circuit 9 Moderate 95%+ Very Low Ultimate experience" [ref=e1926]:
+                - cell "Northern Circuit" [ref=e1927]
+                - cell "9" [ref=e1928]
+                - cell "Moderate" [ref=e1929]
+                - cell "95%+" [ref=e1930]
+                - cell "Very Low" [ref=e1931]
+                - cell "Ultimate experience" [ref=e1932]
+              - row "Marangu 5-6 Moderate 65% High Hut accommodation" [ref=e1933]:
+                - cell "Marangu" [ref=e1934]
+                - cell "5-6" [ref=e1935]
+                - cell "Moderate" [ref=e1936]
+                - cell "65%" [ref=e1937]
+                - cell "High" [ref=e1938]
+                - cell "Hut accommodation" [ref=e1939]
+              - row "Umbwe 6-7 Hard 70% Very Low Experienced trekkers" [ref=e1940]:
+                - cell "Umbwe" [ref=e1941]
+                - cell "6-7" [ref=e1942]
+                - cell "Hard" [ref=e1943]
+                - cell "70%" [ref=e1944]
+                - cell "Very Low" [ref=e1945]
+                - cell "Experienced trekkers" [ref=e1946]
+        - generic [ref=e1949]:
+          - generic [ref=e1950]:
+            - heading "Kilimanjaro Climate Zones" [level=3] [ref=e1951]
+            - paragraph [ref=e1952]: "You'll pass through five distinct zones on your way to the summit:"
+            - generic [ref=e1953]:
+              - generic [ref=e1954]:
+                - generic [ref=e1955]: 🌾
+                - generic [ref=e1956]:
+                  - paragraph [ref=e1957]:
+                    - text: Cultivation Zone
+                    - generic [ref=e1958]: (800-1,800m)
+                  - paragraph [ref=e1959]: Farmland and banana plantations at the mountain base.
+              - generic [ref=e1960]:
+                - generic [ref=e1961]: 🌿
+                - generic [ref=e1962]:
+                  - paragraph [ref=e1963]:
+                    - text: Rainforest Zone
+                    - generic [ref=e1964]: (1,800-2,800m)
+                  - paragraph [ref=e1965]: Dense tropical forest with colobus monkeys and exotic birds.
+              - generic [ref=e1966]:
+                - generic [ref=e1967]: 🌸
+                - generic [ref=e1968]:
+                  - paragraph [ref=e1969]:
+                    - text: Heath & Moorland
+                    - generic [ref=e1970]: (2,800-4,000m)
+                  - paragraph [ref=e1971]: Giant heather, lobelia, and groundsel in an otherworldly landscape.
+              - generic [ref=e1972]:
+                - generic [ref=e1973]: 🏜️
+                - generic [ref=e1974]:
+                  - paragraph [ref=e1975]:
+                    - text: Alpine Desert
+                    - generic [ref=e1976]: (4,000-5,000m)
+                  - paragraph [ref=e1977]: Barren, Mars-like terrain with extreme temperature swings.
+              - generic [ref=e1978]:
+                - generic [ref=e1979]: 🏔️
+                - generic [ref=e1980]:
+                  - paragraph [ref=e1981]:
+                    - text: Arctic Zone
+                    - generic [ref=e1982]: (5,000-5,895m)
+                  - paragraph [ref=e1983]: Glaciers and ice fields. Temperatures drop to -20°C on summit night.
+          - generic [ref=e1984]:
+            - heading "Best Time to Climb" [level=3] [ref=e1985]
+            - paragraph [ref=e1986]: Kilimanjaro can be climbed year-round, but dry seasons offer the best conditions.
+            - generic [ref=e1987]:
+              - generic [ref=e1988]:
+                - paragraph [ref=e1989]: January to mid-March
+                - paragraph [ref=e1990]: Less crowded, warmer nights. Great visibility.
+              - generic [ref=e1991]:
+                - paragraph [ref=e1992]: June to October
+                - paragraph [ref=e1993]: Peak season. Clearest skies. Best weather overall.
+              - generic [ref=e1994]:
+                - paragraph [ref=e1995]: "Avoid: April & November"
+                - paragraph [ref=e1996]: Heavy rain months. Lower success rates.
+            - paragraph [ref=e1997]: Full moon summit nights are magical — summit by moonlight without a headlamp.
+        - generic [ref=e2000]:
+          - generic [ref=e2001]:
+            - generic [ref=e2002]:
+              - generic [ref=e2003]: About the Mountain
+              - heading "Climbing Mount Kilimanjaro with Snow Africa Adventure" [level=2] [ref=e2004]
+              - paragraph [ref=e2005]:
+                - text: Mount Kilimanjaro stands at
+                - strong [ref=e2006]: 5,895 m (19,341 ft)
+                - text: as the highest peak in Africa and the tallest free-standing mountain in the world. Located in northeastern Tanzania near the town of Moshi, it is a dormant stratovolcano and one of the Seven Summits. Unlike most peaks of comparable height, Kilimanjaro requires no technical climbing skills — making it accessible to determined trekkers with proper preparation.
+              - paragraph [ref=e2007]:
+                - text: Our experienced guides have led thousands of successful summit attempts across every route since
+                - strong [ref=e2008]: "2008"
+                - text: . As a locally owned company based in Arusha, we maintain direct relationships with Kilimanjaro National Park (KINAPA), ensure fair wages for all porters through our KPAP partnership, and provide the personalized attention that larger operators cannot match.
+            - generic [ref=e2009]:
+              - img "Snow Africa Adventure Kilimanjaro guides and climbers" [ref=e2010]
+              - generic [ref=e2012]:
+                - generic [ref=e2013]: 5,895 m Summit
+                - generic [ref=e2014]: Climbing Since 2008
+                - generic [ref=e2015]: 93% Success Rate
+          - generic [ref=e2016]:
+            - generic [ref=e2017]:
+              - generic [ref=e2018]: Safety First
+              - heading "Our Safety Standards" [level=3] [ref=e2019]
+              - paragraph [ref=e2020]: Safety is our top priority on every climb. These four pillars keep our climbers — and our mountain crew — protected from gate to summit.
+            - generic [ref=e2021]:
+              - generic [ref=e2022]:
+                - img [ref=e2024]
+                - heading "KINAPA-Certified Guides" [level=4] [ref=e2026]
+                - paragraph [ref=e2027]: All our guides are KINAPA-certified and trained in wilderness first aid — a guide-to-climber ratio that ensures personalized attention at altitude.
+              - generic [ref=e2028]:
+                - img [ref=e2030]
+                - heading "Pulse Oximeters & Oxygen" [level=4] [ref=e2032]
+                - paragraph [ref=e2033]: Mandatory health checks twice daily with pulse oximeters, plus emergency oxygen and comprehensive first aid kits carried on every single climb.
+              - generic [ref=e2034]:
+                - img [ref=e2036]
+                - heading "Climb High, Sleep Low" [level=4] [ref=e2038]
+                - paragraph [ref=e2039]: Strict acclimatization protocols on every route, giving your body the time it needs to adjust safely before the final summit push.
+              - generic [ref=e2040]:
+                - img [ref=e2042]
+                - heading "KPAP Porter Welfare" [level=4] [ref=e2044]
+                - paragraph [ref=e2045]: As a KPAP partner, every porter receives fair wages, proper equipment, adequate food, and loads within the KINAPA weight limit — a happier team supports a stronger climb.
+        - generic [ref=e2048]:
+          - generic [ref=e2049]:
+            - generic [ref=e2050]: Common Questions
+            - heading "Kilimanjaro Trekking FAQ" [level=2] [ref=e2051]
+          - generic [ref=e2052]:
+            - group [ref=e2053]:
+              - generic "How much does it cost to climb Kilimanjaro?" [ref=e2054] [cursor=pointer]:
+                - text: How much does it cost to climb Kilimanjaro?
+                - img [ref=e2055]
+            - group [ref=e2057]:
+              - generic "What is the best time to climb Kilimanjaro?" [ref=e2058] [cursor=pointer]:
+                - text: What is the best time to climb Kilimanjaro?
+                - img [ref=e2059]
+            - group [ref=e2061]:
+              - generic "How fit do I need to be to climb Kilimanjaro?" [ref=e2062] [cursor=pointer]:
+                - text: How fit do I need to be to climb Kilimanjaro?
+                - img [ref=e2063]
+            - group [ref=e2065]:
+              - generic "What is the success rate for reaching the summit?" [ref=e2066] [cursor=pointer]:
+                - text: What is the success rate for reaching the summit?
+                - img [ref=e2067]
+            - group [ref=e2069]:
+              - generic "Which Kilimanjaro route is best for beginners?" [ref=e2070] [cursor=pointer]:
+                - text: Which Kilimanjaro route is best for beginners?
+                - img [ref=e2071]
+            - group [ref=e2073]:
+              - generic "How dangerous is altitude sickness on Kilimanjaro?" [ref=e2074] [cursor=pointer]:
+                - text: How dangerous is altitude sickness on Kilimanjaro?
+                - img [ref=e2075]
+            - group [ref=e2077]:
+              - generic "What is included in a Kilimanjaro trek package?" [ref=e2078] [cursor=pointer]:
+                - text: What is included in a Kilimanjaro trek package?
+                - img [ref=e2079]
+            - group [ref=e2081]:
+              - generic "Can I combine a Kilimanjaro trek with a safari?" [ref=e2082] [cursor=pointer]:
+                - text: Can I combine a Kilimanjaro trek with a safari?
+                - img [ref=e2083]
+            - group [ref=e2085]:
+              - generic "Do I need a guide to climb Kilimanjaro?" [ref=e2086] [cursor=pointer]:
+                - text: Do I need a guide to climb Kilimanjaro?
+                - img [ref=e2087]
+            - group [ref=e2089]:
+              - generic "How long does it take to climb Kilimanjaro?" [ref=e2090] [cursor=pointer]:
+                - text: How long does it take to climb Kilimanjaro?
+                - img [ref=e2091]
+        - generic [ref=e2094]:
+          - generic [ref=e2095]:
+            - generic [ref=e2096]: Beyond Kilimanjaro
+            - heading "Other Mountains to Climb" [level=2] [ref=e2097]
+            - paragraph [ref=e2098]: Looking for alternatives? We also guide treks on Tanzania's other peaks.
+          - generic [ref=e2099]:
+            - link "Mount Meru 4,566m • 4 Days Tanzania's second highest peak. Perfect acclimatization before Kilimanjaro. Learn More →" [ref=e2100] [cursor=pointer]:
+              - /url: /mount-meru/
+              - img [ref=e2101]
+              - heading "Mount Meru" [level=3] [ref=e2103]
+              - paragraph [ref=e2104]: 4,566m • 4 Days
+              - paragraph [ref=e2105]: Tanzania's second highest peak. Perfect acclimatization before Kilimanjaro.
+              - generic [ref=e2106]: Learn More →
+            - link "Ol Doinyo Lengai 2,962m • 2 Days Africa's only active natrocarbonatite volcano. Night summit experience. Learn More →" [ref=e2107] [cursor=pointer]:
+              - /url: /ol-doinyo-lengai/
+              - img [ref=e2108]
+              - heading "Ol Doinyo Lengai" [level=3] [ref=e2110]
+              - paragraph [ref=e2111]: 2,962m • 2 Days
+              - paragraph [ref=e2112]: Africa's only active natrocarbonatite volcano. Night summit experience.
+              - generic [ref=e2113]: Learn More →
+            - link "Mount Kenya 5,199m • 5 Days Africa's second highest peak. Technical climbing available. Learn More →" [ref=e2114] [cursor=pointer]:
+              - /url: /mount-kenya/
+              - img [ref=e2115]
+              - heading "Mount Kenya" [level=3] [ref=e2117]
+              - paragraph [ref=e2118]: 5,199m • 5 Days
+              - paragraph [ref=e2119]: Africa's second highest peak. Technical climbing available.
+              - generic [ref=e2120]: Learn More →
+    - contentinfo [ref=e2121]:
+      - generic [ref=e2124]:
+        - generic [ref=e2125]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e2126]
+      - generic [ref=e2131]:
+        - generic [ref=e2132]:
+          - generic [ref=e2133]:
+            - img "Snow Africa Adventure" [ref=e2135]
+            - paragraph [ref=e2136]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e2137]:
+              - listitem [ref=e2138]:
+                - link "+255 766 657 854" [ref=e2139] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e2141]
+                  - generic [ref=e2143]: +255 766 657 854
+              - listitem [ref=e2144]:
+                - link "info@snowafricaadventure.com" [ref=e2145] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e2147]
+                  - generic [ref=e2150]: info@snowafricaadventure.com
+              - listitem [ref=e2151]:
+                - img [ref=e2153]
+                - generic [ref=e2156]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e2157]:
+            - heading "Safari & Tours" [level=3] [ref=e2158]
+            - list [ref=e2159]:
+              - listitem [ref=e2160]:
+                - link "All Safari Packages" [ref=e2161] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e2162]:
+                - link "Tailor-Made Safaris" [ref=e2163] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e2164]:
+                - link "Tanzania Destinations" [ref=e2165] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e2166]:
+                - link "View all" [ref=e2167] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e2168]: →
+          - generic [ref=e2169]:
+            - heading "Kilimanjaro" [level=3] [ref=e2170]
+            - list [ref=e2171]:
+              - listitem [ref=e2172]:
+                - link "All Trekking Routes" [ref=e2173] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e2174]:
+                - link "Best Route to Climb" [ref=e2175] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e2176]:
+                - link "Climbing Kilimanjaro Guide" [ref=e2177] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e2178]:
+                - link "Join Group Departures" [ref=e2179] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e2180]:
+                - link "Kilimanjaro Prices" [ref=e2181] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e2182]:
+                - link "Best Time to Climb" [ref=e2183] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e2184]:
+                - link "View all routes" [ref=e2185] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e2186]: →
+          - generic [ref=e2187]:
+            - heading "Company" [level=3] [ref=e2188]
+            - list [ref=e2189]:
+              - listitem [ref=e2190]:
+                - link "About Us" [ref=e2191] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e2192]:
+                - link "Our Guides" [ref=e2193] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e2194]:
+                - link "Contact Us" [ref=e2195] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e2196]:
+                - link "Terms & Conditions" [ref=e2197] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e2198]:
+                - link "Privacy Policy" [ref=e2199] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e2200]:
+                - link "Blog" [ref=e2201] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e2202]:
+              - heading "Follow the Journey" [level=4] [ref=e2203]
+              - generic [ref=e2204]:
+                - link "Facebook" [ref=e2205] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e2206]
+                - link "Twitter" [ref=e2208] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e2209]
+                - link "Instagram" [ref=e2211] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e2212]
+                - link "YouTube" [ref=e2215] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e2216]
+        - generic [ref=e2220]:
+          - generic [ref=e2221]: Accredited & Trusted
+          - generic [ref=e2222]:
+            - link "TripAdvisor" [ref=e2223] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e2225]: SafariBookings
+            - generic [ref=e2227]: TATO Member
+            - generic [ref=e2229]: KPAP Partner
+      - generic [ref=e2232]:
+        - generic [ref=e2233]:
+          - generic [ref=e2234]: © 2026 Snow Africa Adventure. All rights reserved.
+          - link "Terms & Conditions" [ref=e2235] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e2236]: ·
+          - link "Privacy Policy" [ref=e2237] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e2238]:
+          - generic [ref=e2239]: Crafted by
+          - link "Timeless International" [ref=e2240] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 04:29 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e2241]:
+      - img [ref=e2242]
+  - alert [ref=e2244]: Kilimanjaro Trek Packages & Routes | Snow Africa Adventure
+  - generic [ref=e2246]:
+    - img "Trustindex"
+    - text: Unfortunately, the 7-day trial period has expired.
+    - strong [ref=e2247]:
+      - link "Check our subscription plans! >>" [ref=e2248] [cursor=pointer]:
+        - /url: https://admin.trustindex.io/subscription/details

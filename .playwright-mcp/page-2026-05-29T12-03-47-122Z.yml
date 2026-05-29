@@ -1,0 +1,700 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - img "Your Safari, Your Way" [ref=e55]
+          - generic [ref=e58]:
+            - generic [ref=e59]: Custom Itineraries
+            - heading "Your Safari, Your Way" [level=1] [ref=e60]
+            - paragraph [ref=e61]: No fixed itineraries. No compromises. We create unique Tanzania journeys designed entirely around your dreams, budget, and travel style.
+            - generic [ref=e62]:
+              - link "Start Planning" [ref=e63] [cursor=pointer]:
+                - /url: "#inquiry-form"
+              - link "View Packages" [ref=e64] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+          - generic [ref=e65]:
+            - generic [ref=e66]: Scroll
+            - img [ref=e67]
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e72]: Why Choose Us
+            - heading "Why Choose a Tailor-Made Safari?" [level=2] [ref=e73]
+            - paragraph [ref=e74]: Every traveler is unique. A family with young children has different needs than a couple celebrating their honeymoon or a photography enthusiast chasing the perfect shot. Our custom safaris ensure your trip matches your dreams perfectly.
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - img [ref=e78]
+              - heading "Flexible Timing" [level=3] [ref=e80]
+              - paragraph [ref=e81]: Travel on your schedule, not ours. Any duration, any dates.
+            - generic [ref=e82]:
+              - img [ref=e84]
+              - heading "Your Destinations" [level=3] [ref=e87]
+              - paragraph [ref=e88]: Mix popular parks with hidden gems based on your interests.
+            - generic [ref=e89]:
+              - img [ref=e91]
+              - heading "Private Experience" [level=3] [ref=e96]
+              - paragraph [ref=e97]: Your own vehicle, guide, and schedule. No sharing with strangers.
+        - generic [ref=e99]:
+          - generic [ref=e100]: Simple Process
+          - heading "How It Works" [level=2] [ref=e101]
+          - generic [ref=e102]:
+            - generic [ref=e103]:
+              - generic [ref=e104]: "01"
+              - heading "Tell Us Your Dreams" [level=3] [ref=e105]
+              - paragraph [ref=e106]: Share your interests, travel dates, group size, budget, and what you'd love to experience in Tanzania.
+            - generic [ref=e107]:
+              - generic [ref=e108]: "02"
+              - heading "Receive Your Custom Itinerary" [level=3] [ref=e109]
+              - paragraph [ref=e110]: Our experts design a unique journey tailored to your preferences, complete with accommodation options.
+            - generic [ref=e111]:
+              - generic [ref=e112]: "03"
+              - heading "Refine Together" [level=3] [ref=e113]
+              - paragraph [ref=e114]: We'll work with you to adjust the itinerary until it's perfect. No pressure, no rush.
+            - generic [ref=e115]:
+              - generic [ref=e116]: "04"
+              - heading "Book & Adventure" [level=3] [ref=e117]
+              - paragraph [ref=e118]: Confirm your trip with a deposit, and we'll handle all the logistics. You just show up and enjoy!
+        - generic [ref=e120]:
+          - generic [ref=e121]: Safari Styles
+          - heading "Popular Safari Styles" [level=2] [ref=e122]
+          - paragraph [ref=e123]: Whether you're seeking adventure, relaxation, or wildlife encounters, we'll create the perfect experience.
+          - generic [ref=e124]:
+            - generic [ref=e125]:
+              - img "Classic Safari" [ref=e127]
+              - generic [ref=e129]:
+                - heading "Classic Safari" [level=3] [ref=e130]
+                - paragraph [ref=e131]: Experience the iconic Northern Circuit - Serengeti, Ngorongoro, Tarangire, and Lake Manyara.
+            - generic [ref=e132]:
+              - img "Great Migration" [ref=e134]
+              - generic [ref=e136]:
+                - heading "Great Migration" [level=3] [ref=e137]
+                - paragraph [ref=e138]: Witness the world's greatest wildlife spectacle with river crossings and predator action.
+            - generic [ref=e139]:
+              - img "Kilimanjaro + Safari" [ref=e141]
+              - generic [ref=e143]:
+                - heading "Kilimanjaro + Safari" [level=3] [ref=e144]
+                - paragraph [ref=e145]: Combine the adventure of climbing Africa's highest peak with wildlife encounters.
+            - generic [ref=e146]:
+              - img "Family Safari" [ref=e148]
+              - generic [ref=e150]:
+                - heading "Family Safari" [level=3] [ref=e151]
+                - paragraph [ref=e152]: Kid-friendly adventures with shorter drives, engaging activities, and family lodges.
+            - generic [ref=e153]:
+              - img "Honeymoon & Romance" [ref=e155]
+              - generic [ref=e157]:
+                - heading "Honeymoon & Romance" [level=3] [ref=e158]
+                - paragraph [ref=e159]: Intimate camps, private game drives, and sunset champagne in the bush.
+            - generic [ref=e160]:
+              - img "Photography Safari" [ref=e162]
+              - generic [ref=e164]:
+                - heading "Photography Safari" [level=3] [ref=e165]
+                - paragraph [ref=e166]: Specialized vehicles, flexible timing, and expert guidance for the perfect shot.
+        - generic [ref=e168]:
+          - generic [ref=e169]: All Inclusive
+          - heading "Every Tailor-Made Safari Includes" [level=2] [ref=e170]
+          - generic [ref=e171]:
+            - generic [ref=e172]:
+              - img [ref=e174]
+              - generic [ref=e176]: Personal safari consultant
+            - generic [ref=e177]:
+              - img [ref=e179]
+              - generic [ref=e181]: Custom itinerary design
+            - generic [ref=e182]:
+              - img [ref=e184]
+              - generic [ref=e186]: Private 4x4 safari vehicle
+            - generic [ref=e187]:
+              - img [ref=e189]
+              - generic [ref=e191]: Expert English-speaking guide
+            - generic [ref=e192]:
+              - img [ref=e194]
+              - generic [ref=e196]: All park entry fees
+            - generic [ref=e197]:
+              - img [ref=e199]
+              - generic [ref=e201]: Accommodation as selected
+            - generic [ref=e202]:
+              - img [ref=e204]
+              - generic [ref=e206]: All meals during safari
+            - generic [ref=e207]:
+              - img [ref=e209]
+              - generic [ref=e211]: Airport/hotel transfers
+            - generic [ref=e212]:
+              - img [ref=e214]
+              - generic [ref=e216]: Drinking water in vehicle
+            - generic [ref=e217]:
+              - img [ref=e219]
+              - generic [ref=e221]: 24/7 support during your trip
+            - generic [ref=e222]:
+              - img [ref=e224]
+              - generic [ref=e226]: Flexible payment options
+            - generic [ref=e227]:
+              - img [ref=e229]
+              - generic [ref=e231]: No booking fees
+        - generic [ref=e233]:
+          - generic [ref=e234]: Testimonials
+          - heading "Stories from Our Travelers" [level=2] [ref=e235]
+          - generic [ref=e236]:
+            - generic [ref=e237]:
+              - generic [ref=e238]:
+                - img [ref=e239]
+                - img [ref=e241]
+                - img [ref=e243]
+                - img [ref=e245]
+                - img [ref=e247]
+              - paragraph [ref=e249]: “Snow Africa created the perfect honeymoon for us. Every detail was thought of, and the surprise sunset dinner in the Serengeti was magical!”
+              - generic [ref=e250]:
+                - paragraph [ref=e251]: Sarah & James
+                - paragraph [ref=e252]: United Kingdom
+                - paragraph [ref=e253]: 14-Day Honeymoon Safari
+            - generic [ref=e254]:
+              - generic [ref=e255]:
+                - img [ref=e256]
+                - img [ref=e258]
+                - img [ref=e260]
+                - img [ref=e262]
+                - img [ref=e264]
+              - paragraph [ref=e266]: “Traveling with three kids ages 5-12, I was nervous about logistics. The team designed an amazing family adventure that kept everyone engaged.”
+              - generic [ref=e267]:
+                - paragraph [ref=e268]: The Martinez Family
+                - paragraph [ref=e269]: United States
+                - paragraph [ref=e270]: 10-Day Family Safari
+            - generic [ref=e271]:
+              - generic [ref=e272]:
+                - img [ref=e273]
+                - img [ref=e275]
+                - img [ref=e277]
+                - img [ref=e279]
+                - img [ref=e281]
+              - paragraph [ref=e283]: “As a solo female traveler, safety was my priority. I felt completely taken care of throughout my 12-day adventure.”
+              - generic [ref=e284]:
+                - paragraph [ref=e285]: Emma L.
+                - paragraph [ref=e286]: Australia
+                - paragraph [ref=e287]: 12-Day Solo Adventure
+        - generic [ref=e290]:
+          - generic [ref=e291]:
+            - generic [ref=e292]: Get Started
+            - heading "Let's Plan Your Safari" [level=2] [ref=e293]
+            - paragraph [ref=e294]: The more details you share, the better we can tailor your perfect Tanzania adventure. We'll respond within 24-48 hours.
+          - generic [ref=e296]:
+            - generic [ref=e298]:
+              - generic [ref=e299]:
+                - img [ref=e301]
+                - generic [ref=e304]: About You
+              - generic [ref=e305]:
+                - img [ref=e307]
+                - generic [ref=e309]: Trip Details
+              - generic [ref=e310]:
+                - img [ref=e312]
+                - generic [ref=e315]: Budget & Style
+              - generic [ref=e316]:
+                - img [ref=e318]
+                - generic [ref=e321]: Preferences
+              - generic [ref=e322]:
+                - img [ref=e324]
+                - generic [ref=e326]: Final Details
+            - generic [ref=e329]: Step 1 of 5
+            - generic [ref=e331]:
+              - heading "Tell us about yourself" [level=3] [ref=e332]:
+                - img [ref=e333]
+                - text: Tell us about yourself
+              - generic [ref=e336]:
+                - generic [ref=e337]:
+                  - generic [ref=e338]: Full Name *
+                  - textbox "John Smith" [ref=e339]
+                - generic [ref=e340]:
+                  - generic [ref=e341]: Email Address *
+                  - textbox "john@example.com" [ref=e342]
+              - generic [ref=e343]:
+                - generic [ref=e344]:
+                  - generic [ref=e345]: Country *
+                  - combobox [ref=e346]:
+                    - option "Select your country" [selected]
+                    - option "🇺🇸 United States"
+                    - option "🇬🇧 United Kingdom"
+                    - option "🇩🇪 Germany"
+                    - option "🇫🇷 France"
+                    - option "🇨🇦 Canada"
+                    - option "🇦🇺 Australia"
+                    - option "🇳🇱 Netherlands"
+                    - option "🇮🇹 Italy"
+                    - option "🇪🇸 Spain"
+                    - option "🇨🇭 Switzerland"
+                    - option "🇧🇪 Belgium"
+                    - option "🇦🇹 Austria"
+                    - option "🇸🇪 Sweden"
+                    - option "🇳🇴 Norway"
+                    - option "🇩🇰 Denmark"
+                    - option "🇮🇪 Ireland"
+                    - option "🇳🇿 New Zealand"
+                    - option "🇿🇦 South Africa"
+                    - option "🇯🇵 Japan"
+                    - option "🇸🇬 Singapore"
+                    - option "──────────────" [disabled]
+                    - option "🇦🇫 Afghanistan"
+                    - option "🇦🇱 Albania"
+                    - option "🇩🇿 Algeria"
+                    - option "🇦🇩 Andorra"
+                    - option "🇦🇴 Angola"
+                    - option "🇦🇬 Antigua and Barbuda"
+                    - option "🇦🇷 Argentina"
+                    - option "🇦🇲 Armenia"
+                    - option "🇦🇿 Azerbaijan"
+                    - option "🇧🇸 Bahamas"
+                    - option "🇧🇭 Bahrain"
+                    - option "🇧🇩 Bangladesh"
+                    - option "🇧🇧 Barbados"
+                    - option "🇧🇾 Belarus"
+                    - option "🇧🇿 Belize"
+                    - option "🇧🇯 Benin"
+                    - option "🇧🇹 Bhutan"
+                    - option "🇧🇴 Bolivia"
+                    - option "🇧🇦 Bosnia and Herzegovina"
+                    - option "🇧🇼 Botswana"
+                    - option "🇧🇷 Brazil"
+                    - option "🇧🇳 Brunei"
+                    - option "🇧🇬 Bulgaria"
+                    - option "🇧🇫 Burkina Faso"
+                    - option "🇧🇮 Burundi"
+                    - option "🇨🇻 Cabo Verde"
+                    - option "🇰🇭 Cambodia"
+                    - option "🇨🇲 Cameroon"
+                    - option "🇨🇫 Central African Republic"
+                    - option "🇹🇩 Chad"
+                    - option "🇨🇱 Chile"
+                    - option "🇨🇳 China"
+                    - option "🇨🇴 Colombia"
+                    - option "🇰🇲 Comoros"
+                    - option "🇨🇬 Congo"
+                    - option "🇨🇩 Congo (DRC)"
+                    - option "🇨🇷 Costa Rica"
+                    - option "🇭🇷 Croatia"
+                    - option "🇨🇺 Cuba"
+                    - option "🇨🇾 Cyprus"
+                    - option "🇨🇿 Czech Republic"
+                    - option "🇨🇮 Cote d'Ivoire"
+                    - option "🇩🇯 Djibouti"
+                    - option "🇩🇲 Dominica"
+                    - option "🇩🇴 Dominican Republic"
+                    - option "🇪🇨 Ecuador"
+                    - option "🇪🇬 Egypt"
+                    - option "🇸🇻 El Salvador"
+                    - option "🇬🇶 Equatorial Guinea"
+                    - option "🇪🇷 Eritrea"
+                    - option "🇪🇪 Estonia"
+                    - option "🇸🇿 Eswatini"
+                    - option "🇪🇹 Ethiopia"
+                    - option "🇫🇯 Fiji"
+                    - option "🇫🇮 Finland"
+                    - option "🇬🇦 Gabon"
+                    - option "🇬🇲 Gambia"
+                    - option "🇬🇪 Georgia"
+                    - option "🇬🇭 Ghana"
+                    - option "🇬🇷 Greece"
+                    - option "🇬🇩 Grenada"
+                    - option "🇬🇹 Guatemala"
+                    - option "🇬🇳 Guinea"
+                    - option "🇬🇼 Guinea-Bissau"
+                    - option "🇬🇾 Guyana"
+                    - option "🇭🇹 Haiti"
+                    - option "🇭🇳 Honduras"
+                    - option "🇭🇰 Hong Kong"
+                    - option "🇭🇺 Hungary"
+                    - option "🇮🇸 Iceland"
+                    - option "🇮🇳 India"
+                    - option "🇮🇩 Indonesia"
+                    - option "🇮🇷 Iran"
+                    - option "🇮🇶 Iraq"
+                    - option "🇮🇱 Israel"
+                    - option "🇯🇲 Jamaica"
+                    - option "🇯🇴 Jordan"
+                    - option "🇰🇿 Kazakhstan"
+                    - option "🇰🇪 Kenya"
+                    - option "🇰🇮 Kiribati"
+                    - option "🇰🇼 Kuwait"
+                    - option "🇰🇬 Kyrgyzstan"
+                    - option "🇱🇦 Laos"
+                    - option "🇱🇻 Latvia"
+                    - option "🇱🇧 Lebanon"
+                    - option "🇱🇸 Lesotho"
+                    - option "🇱🇷 Liberia"
+                    - option "🇱🇾 Libya"
+                    - option "🇱🇮 Liechtenstein"
+                    - option "🇱🇹 Lithuania"
+                    - option "🇱🇺 Luxembourg"
+                    - option "🇲🇴 Macau"
+                    - option "🇲🇬 Madagascar"
+                    - option "🇲🇼 Malawi"
+                    - option "🇲🇾 Malaysia"
+                    - option "🇲🇻 Maldives"
+                    - option "🇲🇱 Mali"
+                    - option "🇲🇹 Malta"
+                    - option "🇲🇭 Marshall Islands"
+                    - option "🇲🇷 Mauritania"
+                    - option "🇲🇺 Mauritius"
+                    - option "🇲🇽 Mexico"
+                    - option "🇫🇲 Micronesia"
+                    - option "🇲🇩 Moldova"
+                    - option "🇲🇨 Monaco"
+                    - option "🇲🇳 Mongolia"
+                    - option "🇲🇪 Montenegro"
+                    - option "🇲🇦 Morocco"
+                    - option "🇲🇿 Mozambique"
+                    - option "🇲🇲 Myanmar"
+                    - option "🇳🇦 Namibia"
+                    - option "🇳🇷 Nauru"
+                    - option "🇳🇵 Nepal"
+                    - option "🇳🇮 Nicaragua"
+                    - option "🇳🇪 Niger"
+                    - option "🇳🇬 Nigeria"
+                    - option "🇰🇵 North Korea"
+                    - option "🇲🇰 North Macedonia"
+                    - option "🇴🇲 Oman"
+                    - option "🇵🇰 Pakistan"
+                    - option "🇵🇼 Palau"
+                    - option "🇵🇸 Palestine"
+                    - option "🇵🇦 Panama"
+                    - option "🇵🇬 Papua New Guinea"
+                    - option "🇵🇾 Paraguay"
+                    - option "🇵🇪 Peru"
+                    - option "🇵🇭 Philippines"
+                    - option "🇵🇱 Poland"
+                    - option "🇵🇹 Portugal"
+                    - option "🇶🇦 Qatar"
+                    - option "🇷🇴 Romania"
+                    - option "🇷🇺 Russia"
+                    - option "🇷🇼 Rwanda"
+                    - option "🇰🇳 Saint Kitts and Nevis"
+                    - option "🇱🇨 Saint Lucia"
+                    - option "🇻🇨 Saint Vincent"
+                    - option "🇼🇸 Samoa"
+                    - option "🇸🇲 San Marino"
+                    - option "🇸🇹 Sao Tome and Principe"
+                    - option "🇸🇦 Saudi Arabia"
+                    - option "🇸🇳 Senegal"
+                    - option "🇷🇸 Serbia"
+                    - option "🇸🇨 Seychelles"
+                    - option "🇸🇱 Sierra Leone"
+                    - option "🇸🇰 Slovakia"
+                    - option "🇸🇮 Slovenia"
+                    - option "🇸🇧 Solomon Islands"
+                    - option "🇸🇴 Somalia"
+                    - option "🇰🇷 South Korea"
+                    - option "🇸🇸 South Sudan"
+                    - option "🇱🇰 Sri Lanka"
+                    - option "🇸🇩 Sudan"
+                    - option "🇸🇷 Suriname"
+                    - option "🇸🇾 Syria"
+                    - option "🇹🇼 Taiwan"
+                    - option "🇹🇯 Tajikistan"
+                    - option "🇹🇿 Tanzania"
+                    - option "🇹🇭 Thailand"
+                    - option "🇹🇱 Timor-Leste"
+                    - option "🇹🇬 Togo"
+                    - option "🇹🇴 Tonga"
+                    - option "🇹🇹 Trinidad and Tobago"
+                    - option "🇹🇳 Tunisia"
+                    - option "🇹🇷 Turkey"
+                    - option "🇹🇲 Turkmenistan"
+                    - option "🇹🇻 Tuvalu"
+                    - option "🇺🇬 Uganda"
+                    - option "🇺🇦 Ukraine"
+                    - option "🇦🇪 United Arab Emirates"
+                    - option "🇺🇾 Uruguay"
+                    - option "🇺🇿 Uzbekistan"
+                    - option "🇻🇺 Vanuatu"
+                    - option "🇻🇦 Vatican City"
+                    - option "🇻🇪 Venezuela"
+                    - option "🇻🇳 Vietnam"
+                    - option "🇾🇪 Yemen"
+                    - option "🇿🇲 Zambia"
+                    - option "🇿🇼 Zimbabwe"
+                - generic [ref=e347]:
+                  - generic [ref=e348]: Phone / WhatsApp
+                  - generic [ref=e349]:
+                    - combobox [ref=e350]:
+                      - option "+1" [selected]
+                      - option "+44"
+                      - option "+49"
+                      - option "+33"
+                      - option "+31"
+                      - option "+61"
+                      - option "+255"
+                      - option "+254"
+                      - option "+27"
+                      - option "+91"
+                      - option "+86"
+                      - option "+81"
+                      - option "+34"
+                      - option "+39"
+                      - option "+41"
+                      - option "+43"
+                      - option "+46"
+                      - option "+47"
+                      - option "+45"
+                      - option "+353"
+                      - option "+64"
+                      - option "+32"
+                      - option "+65"
+                      - option "+55"
+                      - option "+52"
+                      - option "+48"
+                      - option "+7"
+                      - option "+971"
+                      - option "+966"
+                      - option "+90"
+                      - option "+62"
+                      - option "+60"
+                      - option "+66"
+                      - option "+84"
+                      - option "+82"
+                      - option "+234"
+                      - option "+20"
+                      - option "+256"
+                      - option "+250"
+                    - textbox "123 456 7890" [ref=e351]
+            - text: Website
+            - textbox [ref=e352]
+            - button "Next" [ref=e354]:
+              - text: Next
+              - img [ref=e355]
+            - paragraph [ref=e357]:
+              - text: We'll send you a personalized itinerary within 24-48 hours. No spam, ever. Your data is protected under our
+              - link "privacy policy" [ref=e358] [cursor=pointer]:
+                - /url: /privacy-policy/
+              - text: .
+        - generic [ref=e361]:
+          - generic [ref=e362]: FAQ
+          - heading "Common Questions" [level=2] [ref=e363]
+          - generic [ref=e364]:
+            - generic [ref=e365]:
+              - heading "How far in advance should I book?" [level=3] [ref=e366]
+              - paragraph [ref=e367]: We recommend 3-6 months for peak season (July-October, December-February) to secure the best lodges. Shorter notice is possible during shoulder seasons.
+            - generic [ref=e368]:
+              - heading "What's the minimum duration for a safari?" [level=3] [ref=e369]
+              - paragraph [ref=e370]: While we offer day trips, we recommend at least 3-4 days for a proper safari experience. 5-7 days allows you to explore multiple parks without rushing.
+            - generic [ref=e371]:
+              - heading "Can you accommodate special requirements?" [level=3] [ref=e372]
+              - paragraph [ref=e373]: Absolutely! Whether it's dietary restrictions, mobility considerations, or specific interests like bird watching or photography, we'll customize accordingly.
+        - generic [ref=e375]:
+          - heading "Your Adventure Awaits" [level=2] [ref=e376]
+          - paragraph [ref=e377]: Don't settle for a generic package tour. Let us create something special, just for you.
+          - link "Start Your Custom Safari" [ref=e378] [cursor=pointer]:
+            - /url: "#inquiry-form"
+    - contentinfo [ref=e379]:
+      - generic [ref=e382]:
+        - generic [ref=e383]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e384]
+      - generic [ref=e389]:
+        - generic [ref=e390]:
+          - generic [ref=e391]:
+            - img "Snow Africa Adventure" [ref=e393]
+            - paragraph [ref=e394]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e395]:
+              - listitem [ref=e396]:
+                - link "+255 766 657 854" [ref=e397] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e399]
+                  - generic [ref=e401]: +255 766 657 854
+              - listitem [ref=e402]:
+                - link "info@snowafricaadventure.com" [ref=e403] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e405]
+                  - generic [ref=e408]: info@snowafricaadventure.com
+              - listitem [ref=e409]:
+                - img [ref=e411]
+                - generic [ref=e414]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e415]:
+            - heading "Safari & Tours" [level=3] [ref=e416]
+            - list [ref=e417]:
+              - listitem [ref=e418]:
+                - link "All Safari Packages" [ref=e419] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e420]:
+                - link "Tailor-Made Safaris" [ref=e421] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e422]:
+                - link "Tanzania Destinations" [ref=e423] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e424]:
+                - link "View all" [ref=e425] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e426]: →
+          - generic [ref=e427]:
+            - heading "Kilimanjaro" [level=3] [ref=e428]
+            - list [ref=e429]:
+              - listitem [ref=e430]:
+                - link "All Trekking Routes" [ref=e431] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e432]:
+                - link "Best Route to Climb" [ref=e433] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e434]:
+                - link "Climbing Kilimanjaro Guide" [ref=e435] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e436]:
+                - link "Join Group Departures" [ref=e437] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e438]:
+                - link "Kilimanjaro Prices" [ref=e439] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e440]:
+                - link "Best Time to Climb" [ref=e441] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e442]:
+                - link "View all routes" [ref=e443] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e444]: →
+          - generic [ref=e445]:
+            - heading "Company" [level=3] [ref=e446]
+            - list [ref=e447]:
+              - listitem [ref=e448]:
+                - link "About Us" [ref=e449] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e450]:
+                - link "Our Guides" [ref=e451] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e452]:
+                - link "Contact Us" [ref=e453] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e454]:
+                - link "Terms & Conditions" [ref=e455] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e456]:
+                - link "Privacy Policy" [ref=e457] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e458]:
+                - link "Blog" [ref=e459] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e460]:
+              - heading "Follow the Journey" [level=4] [ref=e461]
+              - generic [ref=e462]:
+                - link "Facebook" [ref=e463] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e464]
+                - link "Twitter" [ref=e466] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e467]
+                - link "Instagram" [ref=e469] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e470]
+                - link "YouTube" [ref=e473] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e474]
+        - generic [ref=e478]:
+          - generic [ref=e479]: Accredited & Trusted
+          - generic [ref=e480]:
+            - link "TripAdvisor" [ref=e481] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e483]: SafariBookings
+            - generic [ref=e485]: TATO Member
+            - generic [ref=e487]: KPAP Partner
+      - generic [ref=e490]:
+        - generic [ref=e491]:
+          - generic [ref=e492]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e493]: "|"
+          - link "Terms & Conditions" [ref=e494] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e495]: ·
+          - link "Privacy Policy" [ref=e496] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e497]:
+          - generic [ref=e498]: Crafted by
+          - link "Timeless International" [ref=e499] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 03:03 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e500]:
+      - img [ref=e501]
+  - button "Open Next.js Dev Tools" [ref=e509] [cursor=pointer]:
+    - img [ref=e510]
+  - alert [ref=e513]

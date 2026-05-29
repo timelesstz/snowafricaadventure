@@ -1,0 +1,13 @@
+[     600ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rK (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:45832)
+    at rX (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:46865)
+    at https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:140584
+    at sp (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:145745)
+    at sc (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:137085)
+    at https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:131914
+    at u9 (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:132015)
+    at sV (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:158397)
+    at MessagePort.O (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_6bcUzAo2qgoKmgwoE9YzvpYMeVVN:1:7356)
+[    3627ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://snowafricaadventure.com/:0
+[   20407ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://snowafricaadventure.com/:0
+[   33258ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://snowafricaadventure.com/terms-and-conditions/:0

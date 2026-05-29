@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Dashboard Architecture &mdash; Reusable Blueprint</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f111a;
+      --surface: #181b2a;
+      --surface-2: #1e2235;
+      --surface-3: #252a40;
+      --border: #2a2f4a;
+      --text: #e2e8f0;
+      --text-muted: #8892b0;
+      --text-dim: #5a6380;
+      --accent: #f59e0b;
+      --accent-2: #3b82f6;
+      --accent-3: #10b981;
+      --accent-4: #8b5cf6;
+      --accent-5: #ef4444;
+      --accent-6: #ec4899;
+      --code-bg: #141625;
+      --code-border: #252a40;
+      --code-keyword: #c792ea;
+      --code-string: #c3e88d;
+      --code-number: #f78c6c;
+      --code-comment: #546e7a;
+      --code-func: #82aaff;
+      --code-type: #ffcb6b;
+      --code-tag: #f07178;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0,0,0,.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── Scrollbar ─────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+    /* ── Layout ────────────────────────────────────────────────── */
+    .page-wrap {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar / TOC ─────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 28px 0;
+      z-index: 100;
+    }
+
+    .sidebar-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0 24px 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-title span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: .02em;
+      text-transform: none;
+      margin-top: 4px;
+    }
+
+    .toc-group { margin-bottom: 6px; }
+    .toc-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-dim);
+      padding: 10px 24px 4px;
+    }
+    .toc-link {
+      display: block;
+      padding: 6px 24px 6px 28px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all .15s;
+    }
+    .toc-link:hover {
+      color: var(--text);
+      background: var(--surface-2);
+      border-left-color: var(--accent);
+    }
+
+    /* ── Main Content ──────────────────────────────────────────── */
+    .main {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 960px;
+      padding: 48px 56px 120px;
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      margin-bottom: 56px;
+    }
+    .hero h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--accent), var(--accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.8;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .badge.amber { color: var(--accent); border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.08); }
+    .badge.blue { color: var(--accent-2); border-color: rgba(59,130,246,.3); background: rgba(59,130,246,.08); }
+    .badge.green { color: var(--accent-3); border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.08); }
+    .badge.purple { color: var(--accent-4); border-color: rgba(139,92,246,.3); background: rgba(139,92,246,.08); }
+    .badge.red { color: var(--accent-5); border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.08); }
+
+    /* ── Section ────────────────────────────────────────────────── */
+    section {
+      margin-bottom: 64px;
+      scroll-margin-top: 32px;
+    }
+    section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    section h2 .sec-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), #d97706);
+      color: #000;
+      flex-shrink: 0;
+    }
+    section h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 28px 0 12px;
+      color: var(--accent-2);
+    }
+    section h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+      color: var(--accent-4);
+    }
+    section p {
+      margin-bottom: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ── Architecture Diagram ──────────────────────────────────── */
+    .arch-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 24px 0;
+      overflow-x: auto;
+    }
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .arch-box {
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      min-width: 140px;
+      border: 1px solid;
+    }
+    .arch-box.api { background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.3); color: var(--accent-2); }
+    .arch-box.db { background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.3); color: var(--accent-3); }
+    .arch-box.ui { background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.3); color: var(--accent); }
+    .arch-box.lib { background: rgba(139,92,246,.1); border-color: rgba(139,92,246,.3); color: var(--accent-4); }
+    .arch-box.cron { background: rgba(236,72,153,.1); border-color: rgba(236,72,153,.3); color: var(--accent-6); }
+    .arch-arrow { color: var(--text-dim); font-size: 20px; flex-shrink: 0; }
+
+    /* Multi-row architecture */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .arch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .arch-row-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-dim);
+      width: 90px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .arch-row-items {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .arch-row-items .arch-box { min-width: 120px; font-size: 12px; padding: 10px 14px; }
+
+    /* ── Table ──────────────────────────────────────────────────── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead { background: var(--surface-2); }
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface-2); }
+    td code {
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      color: var(--code-func);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Code Block ────────────────────────────────────────────── */
+    .code-block {
+      position: relative;
+      margin: 16px 0 24px;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--code-border);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .code-header .lang {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--surface-3);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .code-header .copy-btn {
+      padding: 4px 10px;
+      font-size: 11px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .code-header .copy-btn:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+    pre {
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    /* syntax highlighting classes */
+    .kw { color: var(--code-keyword); }
+    .str { color: var(--code-string); }
+    .num { color: var(--code-number); }
+    .cmt { color: var(--code-comment); font-style: italic; }
+    .fn { color: var(--code-func); }
+    .tp { color: var(--code-type); }
+    .tg { color: var(--code-tag); }
+    .op { color: #89ddff; }
+
+    /* ── Info Cards ─────────────────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0 28px;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color .2s;
+    }
+    .info-card:hover { border-color: var(--accent); }
+    .info-card h5 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .info-card p {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin: 0;
+    }
+    .info-card .ic-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .ic-amber .ic-icon { background: rgba(245,158,11,.12); }
+    .ic-blue .ic-icon { background: rgba(59,130,246,.12); }
+    .ic-green .ic-icon { background: rgba(16,185,129,.12); }
+    .ic-purple .ic-icon { background: rgba(139,92,246,.12); }
+    .ic-red .ic-icon { background: rgba(239,68,68,.12); }
+    .ic-pink .ic-icon { background: rgba(236,72,153,.12); }
+
+    /* ── Callout ────────────────────────────────────────────────── */
+    .callout {
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      margin: 16px 0;
+      font-size: 13px;
+      border-left: 3px solid;
+    }
+    .callout.tip { background: rgba(16,185,129,.08); border-color: var(--accent-3); color: var(--accent-3); }
+    .callout.warn { background: rgba(245,158,11,.08); border-color: var(--accent); color: var(--accent); }
+    .callout.info { background: rgba(59,130,246,.08); border-color: var(--accent-2); color: var(--accent-2); }
+    .callout strong { display: block; margin-bottom: 4px; }
+
+    /* ── Flow Diagram ──────────────────────────────────────────── */
+    .flow-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 20px 0;
+    }
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .flow-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .flow-step-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .flow-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #000;
+      flex-shrink: 0;
+    }
+    .flow-dot.blue { background: var(--accent-2); }
+    .flow-dot.green { background: var(--accent-3); }
+    .flow-dot.amber { background: var(--accent); }
+    .flow-dot.purple { background: var(--accent-4); }
+    .flow-dot.red { background: var(--accent-5); }
+    .flow-dot.pink { background: var(--accent-6); }
+    .flow-connector {
+      width: 2px;
+      height: 32px;
+      background: var(--border);
+    }
+    .flow-content {
+      padding-bottom: 24px;
+    }
+    .flow-content h5 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .flow-content p {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin: 0;
+    }
+
+    /* ── Weight Bar Chart ──────────────────────────────────────── */
+    .weight-bars {
+      margin: 16px 0;
+    }
+    .weight-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .weight-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      width: 130px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .weight-track {
+      flex: 1;
+      height: 24px;
+      background: var(--surface-2);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .weight-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #000;
+      transition: width .4s;
+    }
+    .weight-fill.amber { background: linear-gradient(90deg, #f59e0b, #d97706); }
+    .weight-fill.blue { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+    .weight-fill.green { background: linear-gradient(90deg, #10b981, #059669); }
+    .weight-fill.red { background: linear-gradient(90deg, #ef4444, #dc2626); }
+    .weight-fill.gray { background: linear-gradient(90deg, #6b7280, #4b5563); }
+
+    /* ── File Tree ──────────────────────────────────────────────── */
+    .file-tree {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 16px 0;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      overflow-x: auto;
+    }
+    .file-tree .dir { color: var(--accent-2); font-weight: 600; }
+    .file-tree .file { color: var(--text-muted); }
+    .file-tree .desc { color: var(--text-dim); font-style: italic; }
+
+    /* ── Dependencies ──────────────────────────────────────────── */
+    .dep-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 20px;
+    }
+    .dep-pill {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 24px; }
+      .hero h1 { font-size: 28px; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <!-- ═══════════════════════ SIDEBAR / TOC ═══════════════════════ -->
+  <nav class="sidebar">
+    <div class="sidebar-title">
+      SEO Dashboard
+      <span>Reusable Architecture Blueprint</span>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">Overview</div>
+      <a href="#overview" class="toc-link">System Overview</a>
+      <a href="#architecture" class="toc-link">Architecture Diagram</a>
+      <a href="#stack" class="toc-link">Tech Stack</a>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">Database</div>
+      <a href="#prisma" class="toc-link">Prisma Models</a>
+      <a href="#enums" class="toc-link">Enums</a>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">Service Layer</div>
+      <a href="#google-auth" class="toc-link">Google Auth</a>
+      <a href="#gsc-client" class="toc-link">GSC Client</a>
+      <a href="#ga4-client" class="toc-link">GA4 Client</a>
+      <a href="#page-auditor" class="toc-link">Page Auditor</a>
+      <a href="#recommendations" class="toc-link">Recommendation Engine</a>
+      <a href="#query-advisor" class="toc-link">Query Advisor</a>
+      <a href="#bot-detector" class="toc-link">Bot Detector</a>
+      <a href="#redirect-cache" class="toc-link">Redirect Cache</a>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">API Layer</div>
+      <a href="#api-routes" class="toc-link">API Routes Map</a>
+      <a href="#api-overview" class="toc-link">Overview Endpoint</a>
+      <a href="#api-sync" class="toc-link">Cron Sync</a>
+      <a href="#api-404" class="toc-link">404 Tracking</a>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">UI Layer</div>
+      <a href="#admin-pages" class="toc-link">Admin Pages</a>
+      <a href="#components" class="toc-link">Components</a>
+      <a href="#health-score" class="toc-link">Health Score</a>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">Features</div>
+      <a href="#sitemap" class="toc-link">Sitemap &amp; Robots</a>
+      <a href="#jsonld" class="toc-link">JSON-LD Schemas</a>
+      <a href="#404-flow" class="toc-link">404 Monitoring Flow</a>
+      <a href="#sync-strategy" class="toc-link">Sync Strategy</a>
+    </div>
+
+    <div class="toc-group">
+      <div class="toc-group-label">Reuse Guide</div>
+      <a href="#portable" class="toc-link">Portable Pieces</a>
+      <a href="#env-vars" class="toc-link">Environment Variables</a>
+      <a href="#setup-steps" class="toc-link">Setup Steps</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
+  <main class="main">
+
+    <!-- ─── Hero ──────────────────────────────────────────────── -->
+    <div class="hero">
+      <h1>SEO Dashboard Architecture</h1>
+      <p>
+        A production-grade SEO monitoring system built with Next.js App Router, Prisma, and Google APIs.
+        This document covers every layer &mdash; database models, service libraries, API routes, admin UI, and cron jobs &mdash;
+        so you can port it to any Next.js project.
+      </p>
+      <div class="hero-badges">
+        <span class="badge amber">Next.js 16</span>
+        <span class="badge green">Prisma 7</span>
+        <span class="badge blue">Google APIs</span>
+        <span class="badge purple">TypeScript</span>
+        <span class="badge red">Cheerio</span>
+        <span class="badge">Tailwind CSS 4</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════ 1. SYSTEM OVERVIEW ════════════════════ -->
+    <section id="overview">
+      <h2><span class="sec-num">1</span> System Overview</h2>
+      <p>The SEO Dashboard is a 5-layer system that syncs data from Google Search Console and Google Analytics 4 into a local database, then surfaces insights through an admin UI with health scoring, on-page audits, keyword tracking, 404 monitoring, and actionable recommendations.</p>
+
+      <div class="info-grid">
+        <div class="info-card ic-green">
+          <div class="ic-icon">&#x1f4be;</div>
+          <h5>Database Layer</h5>
+          <p>9 Prisma models + 4 enums storing GSC queries, GA4 metrics, page audits, keywords, 404s, redirects, and sync logs.</p>
+        </div>
+        <div class="info-card ic-purple">
+          <div class="ic-icon">&#x2699;</div>
+          <h5>Service Layer</h5>
+          <p>8 library modules: Google auth, GSC client, GA4 client, page auditor, recommendation engine, query advisor, bot detector, redirect cache.</p>
+        </div>
+        <div class="info-card ic-blue">
+          <div class="ic-icon">&#x1f310;</div>
+          <h5>API Layer</h5>
+          <p>15+ API routes for dashboard data, manual syncs, page audits, keyword management, 404 tracking, and redirect CRUD.</p>
+        </div>
+        <div class="info-card ic-amber">
+          <div class="ic-icon">&#x1f4ca;</div>
+          <h5>UI Layer</h5>
+          <p>8 admin pages with health gauge, metric cards, sparklines, search query tables, and recommendation cards.</p>
+        </div>
+        <div class="info-card ic-pink">
+          <div class="ic-icon">&#x23f0;</div>
+          <h5>Cron Layer</h5>
+          <p>Daily 4 AM UTC sync job pulling last 3 days of GSC data and yesterday's GA4 organic traffic.</p>
+        </div>
+        <div class="info-card ic-red">
+          <div class="ic-icon">&#x1f6e1;</div>
+          <h5>SEO Utilities</h5>
+          <p>14 JSON-LD schema generators, dynamic sitemap, smart robots.txt, and metadata helpers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 2. ARCHITECTURE ═══════════════════════ -->
+    <section id="architecture">
+      <h2><span class="sec-num">2</span> Architecture Diagram</h2>
+
+      <h3>Data Flow</h3>
+      <div class="arch-diagram">
+        <div class="arch-flow">
+          <div class="arch-box api">Google APIs<br><small>GSC &amp; GA4</small></div>
+          <span class="arch-arrow">&rarr;</span>
+          <div class="arch-box cron">Cron Sync<br><small>4 AM UTC daily</small></div>
+          <span class="arch-arrow">&rarr;</span>
+          <div class="arch-box db">PostgreSQL<br><small>Prisma ORM</small></div>
+          <span class="arch-arrow">&rarr;</span>
+          <div class="arch-box lib">API Routes<br><small>Next.js</small></div>
+          <span class="arch-arrow">&rarr;</span>
+          <div class="arch-box ui">Admin UI<br><small>React + Recharts</small></div>
+        </div>
+      </div>
+
+      <h3>Layer Map</h3>
+      <div class="arch-diagram">
+        <div class="arch-grid">
+          <div class="arch-row">
+            <div class="arch-row-label">External</div>
+            <div class="arch-row-items">
+              <div class="arch-box api">GSC API</div>
+              <div class="arch-box api">GA4 Data API</div>
+              <div class="arch-box api">Client 404 Track</div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-row-label">Services</div>
+            <div class="arch-row-items">
+              <div class="arch-box lib">google-auth</div>
+              <div class="arch-box lib">gsc-client</div>
+              <div class="arch-box lib">ga4-client</div>
+              <div class="arch-box lib">page-auditor</div>
+              <div class="arch-box lib">rec-engine</div>
+              <div class="arch-box lib">query-advisor</div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-row-label">Helpers</div>
+            <div class="arch-row-items">
+              <div class="arch-box lib">bot-detector</div>
+              <div class="arch-box lib">redirect-cache</div>
+              <div class="arch-box lib">seo.ts (schemas)</div>
+            </div>
+          </div>
+          <div class="arch-row">
+            <div class="arch-row-label">Database</div>
+            <div class="arch-row-items">
+              <div class="arch-box db">GscSearchQuery</div>
+              <div class="arch-box db">GscPageMetric</div>
+              <div class="arch-box db">GaOrganicMetric</div>
+              <div class="arch-box db">SeoPageAudit</div>
+              <div class="arch-box db">NotFoundUrl</div>
+              <div class="arch-box db">Redirect</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 3. TECH STACK ═════════════════════════ -->
+    <section id="stack">
+      <h2><span class="sec-num">3</span> Tech Stack</h2>
+      <h3>Dependencies</h3>
+      <div class="dep-list">
+        <span class="dep-pill">next@16</span>
+        <span class="dep-pill">react@19</span>
+        <span class="dep-pill">prisma@7</span>
+        <span class="dep-pill">googleapis</span>
+        <span class="dep-pill">cheerio</span>
+        <span class="dep-pill">recharts</span>
+        <span class="dep-pill">tailwindcss@4</span>
+        <span class="dep-pill">lucide-react</span>
+        <span class="dep-pill">clsx</span>
+        <span class="dep-pill">next-auth@5</span>
+      </div>
+
+      <h3>File Structure</h3>
+      <div class="file-tree">
+<span class="dir">src/</span>
+  <span class="dir">lib/</span>
+    <span class="dir">seo-dashboard/</span>
+      <span class="file">types.ts</span>          <span class="desc"># TypeScript interfaces</span>
+      <span class="file">google-auth.ts</span>     <span class="desc"># Google service account auth</span>
+      <span class="file">gsc-client.ts</span>      <span class="desc"># Search Console API client</span>
+      <span class="file">ga4-client.ts</span>      <span class="desc"># GA4 Data API client</span>
+      <span class="file">page-auditor.ts</span>    <span class="desc"># On-page SEO analysis</span>
+      <span class="file">recommendation-engine.ts</span> <span class="desc"># Actionable SEO recs</span>
+      <span class="file">query-advisor.ts</span>   <span class="desc"># Query intelligence &amp; CTR benchmarks</span>
+    <span class="file">seo.ts</span>             <span class="desc"># Metadata + 14 JSON-LD generators</span>
+    <span class="file">redirect-cache.ts</span>  <span class="desc"># In-memory redirect cache</span>
+    <span class="file">bot-detector.ts</span>    <span class="desc"># User-agent bot classification</span>
+  <span class="dir">app/</span>
+    <span class="file">sitemap.ts</span>         <span class="desc"># Dynamic sitemap generation</span>
+    <span class="file">robots.ts</span>          <span class="desc"># Robots.txt rules</span>
+    <span class="dir">api/</span>
+      <span class="dir">admin/seo/</span>       <span class="desc"># 10 dashboard endpoints</span>
+      <span class="dir">admin/404-monitor/</span> <span class="desc"># 404 management endpoints</span>
+      <span class="dir">admin/redirects/</span>  <span class="desc"># Redirect CRUD endpoints</span>
+      <span class="dir">track-404/</span>       <span class="desc"># Client-side 404 tracker</span>
+      <span class="dir">cron/seo-sync/</span>   <span class="desc"># Daily sync cron job</span>
+    <span class="dir">(admin)/admin/seo/</span>  <span class="desc"># 8 admin UI pages</span>
+  <span class="dir">components/</span>
+    <span class="dir">admin/seo/</span>        <span class="desc"># Dashboard UI components</span>
+    <span class="dir">seo/</span>              <span class="desc"># JsonLd components</span>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 4. PRISMA MODELS ═════════════════════ -->
+    <section id="prisma">
+      <h2><span class="sec-num">4</span> Prisma Models</h2>
+      <p>9 dedicated SEO models. Copy these into your <code>schema.prisma</code> to get started.</p>
+
+      <h3>GSC Search Query</h3>
+      <p>Stores query-level metrics from Google Search Console. Unique per date + query + page + country + device.</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">model</span> <span class="tp">GscSearchQuery</span> {
+  id          <span class="tp">String</span>   <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  date        <span class="tp">DateTime</span>
+  query       <span class="tp">String</span>
+  page        <span class="tp">String?</span>
+  country     <span class="tp">String?</span>
+  device      <span class="tp">String?</span>
+  clicks      <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  impressions <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  ctr         <span class="tp">Float</span>    <span class="fn">@default</span>(<span class="num">0</span>)
+  position    <span class="tp">Float</span>    <span class="fn">@default</span>(<span class="num">0</span>)
+  createdAt   <span class="tp">DateTime</span> <span class="fn">@default</span>(<span class="fn">now</span>())
+
+  <span class="fn">@@unique</span>([date, query, page, country, device])
+  <span class="fn">@@index</span>([date])
+  <span class="fn">@@index</span>([query])
+  <span class="fn">@@index</span>([page])
+  <span class="fn">@@index</span>([clicks])
+  <span class="fn">@@index</span>([impressions])
+}</pre>
+      </div>
+
+      <h3>GSC Page Metric</h3>
+      <p>Aggregated page-level metrics by date. Used for the overview dashboard sparklines.</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">model</span> <span class="tp">GscPageMetric</span> {
+  id          <span class="tp">String</span>   <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  date        <span class="tp">DateTime</span>
+  page        <span class="tp">String</span>
+  clicks      <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  impressions <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  ctr         <span class="tp">Float</span>    <span class="fn">@default</span>(<span class="num">0</span>)
+  position    <span class="tp">Float</span>    <span class="fn">@default</span>(<span class="num">0</span>)
+  createdAt   <span class="tp">DateTime</span> <span class="fn">@default</span>(<span class="fn">now</span>())
+
+  <span class="fn">@@unique</span>([date, page])
+  <span class="fn">@@index</span>([date])
+  <span class="fn">@@index</span>([page])
+}</pre>
+      </div>
+
+      <h3>GA4 Organic Metric</h3>
+      <p>Stores organic search traffic from GA4 Data API. One row per date + landing page.</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">model</span> <span class="tp">GaOrganicMetric</span> {
+  id                 <span class="tp">String</span>   <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  date               <span class="tp">DateTime</span>
+  landingPage        <span class="tp">String?</span>
+  sessions           <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  users              <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  newUsers           <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  bounceRate         <span class="tp">Float</span>    <span class="fn">@default</span>(<span class="num">0</span>)
+  avgSessionDuration <span class="tp">Float</span>    <span class="fn">@default</span>(<span class="num">0</span>)
+  conversions        <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  createdAt          <span class="tp">DateTime</span> <span class="fn">@default</span>(<span class="fn">now</span>())
+
+  <span class="fn">@@unique</span>([date, landingPage])
+  <span class="fn">@@index</span>([date])
+  <span class="fn">@@index</span>([landingPage])
+}</pre>
+      </div>
+
+      <h3>SEO Page Audit</h3>
+      <p>On-page audit results. Score 0-100 with issues stored as JSON array.</p>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">model</span> <span class="tp">SeoPageAudit</span> {
+  id               <span class="tp">String</span>   <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  url              <span class="tp">String</span>
+  title            <span class="tp">String?</span>
+  titleLength      <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  metaDescription  <span class="tp">String?</span>
+  metaDescLength   <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  h1Count          <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  h1Text           <span class="tp">String?</span>
+  h2Count          <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  h3Count          <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  wordCount        <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  hasCanonical     <span class="tp">Boolean</span>  <span class="fn">@default</span>(<span class="kw">false</span>)
+  canonicalUrl     <span class="tp">String?</span>
+  hasSchema        <span class="tp">Boolean</span>  <span class="fn">@default</span>(<span class="kw">false</span>)
+  schemaTypes      <span class="tp">String</span>[]
+  internalLinks    <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  externalLinks    <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  imagesTotal      <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  imagesMissingAlt <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  score            <span class="tp">Int</span>      <span class="fn">@default</span>(<span class="num">0</span>)
+  issues           <span class="tp">Json?</span>
+  createdAt        <span class="tp">DateTime</span> <span class="fn">@default</span>(<span class="fn">now</span>())
+
+  <span class="fn">@@index</span>([url])
+  <span class="fn">@@index</span>([score])
+  <span class="fn">@@index</span>([createdAt])
+}</pre>
+      </div>
+
+      <h3>404 Monitoring &amp; Redirects</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">model</span> <span class="tp">NotFoundUrl</span> {
+  id            <span class="tp">String</span>         <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  url           <span class="tp">String</span>         <span class="fn">@unique</span>
+  hitCount      <span class="tp">Int</span>            <span class="fn">@default</span>(<span class="num">1</span>)
+  botHitCount   <span class="tp">Int</span>            <span class="fn">@default</span>(<span class="num">0</span>)
+  humanHitCount <span class="tp">Int</span>            <span class="fn">@default</span>(<span class="num">0</span>)
+  lastHitAt     <span class="tp">DateTime</span>       <span class="fn">@default</span>(<span class="fn">now</span>())
+  firstHitAt    <span class="tp">DateTime</span>       <span class="fn">@default</span>(<span class="fn">now</span>())
+  lastReferer   <span class="tp">String?</span>
+  lastUserAgent <span class="tp">String?</span>
+  status        <span class="tp">NotFoundStatus</span> <span class="fn">@default</span>(ACTIVE)
+  redirectId    <span class="tp">String?</span>        <span class="fn">@unique</span>
+  redirect      <span class="tp">Redirect?</span>      <span class="fn">@relation</span>(fields: [redirectId], references: [id])
+  createdAt     <span class="tp">DateTime</span>       <span class="fn">@default</span>(<span class="fn">now</span>())
+  updatedAt     <span class="tp">DateTime</span>       <span class="fn">@updatedAt</span>
+
+  <span class="fn">@@index</span>([hitCount])
+  <span class="fn">@@index</span>([lastHitAt])
+  <span class="fn">@@index</span>([status])
+}
+
+<span class="kw">model</span> <span class="tp">NotFoundHit</span> {
+  id        <span class="tp">String</span>   <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  url       <span class="tp">String</span>
+  userAgent <span class="tp">String?</span>
+  referer   <span class="tp">String?</span>
+  isBot     <span class="tp">Boolean</span>  <span class="fn">@default</span>(<span class="kw">false</span>)
+  botName   <span class="tp">String?</span>
+  createdAt <span class="tp">DateTime</span> <span class="fn">@default</span>(<span class="fn">now</span>())
+
+  <span class="fn">@@index</span>([url])
+  <span class="fn">@@index</span>([createdAt])
+  <span class="fn">@@index</span>([isBot])
+}
+
+<span class="kw">model</span> <span class="tp">Redirect</span> {
+  id             <span class="tp">String</span>       <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  sourceUrl      <span class="tp">String</span>       <span class="fn">@unique</span>
+  destinationUrl <span class="tp">String</span>
+  type           <span class="tp">RedirectType</span> <span class="fn">@default</span>(PERMANENT)
+  isActive       <span class="tp">Boolean</span>      <span class="fn">@default</span>(<span class="kw">true</span>)
+  hitCount       <span class="tp">Int</span>          <span class="fn">@default</span>(<span class="num">0</span>)
+  lastHitAt      <span class="tp">DateTime?</span>
+  notes          <span class="tp">String?</span>
+  createdBy      <span class="tp">String?</span>
+  notFoundUrl    <span class="tp">NotFoundUrl?</span>
+  createdAt      <span class="tp">DateTime</span>     <span class="fn">@default</span>(<span class="fn">now</span>())
+  updatedAt      <span class="tp">DateTime</span>     <span class="fn">@updatedAt</span>
+
+  <span class="fn">@@index</span>([sourceUrl])
+  <span class="fn">@@index</span>([isActive])
+}</pre>
+      </div>
+
+      <h3>Sync &amp; Keywords</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">model</span> <span class="tp">SeoSyncLog</span> {
+  id          <span class="tp">String</span>        <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  source      <span class="tp">SeoDataSource</span>
+  status      <span class="tp">SyncStatus</span>    <span class="fn">@default</span>(RUNNING)
+  recordCount <span class="tp">Int</span>           <span class="fn">@default</span>(<span class="num">0</span>)
+  error       <span class="tp">String?</span>
+  startedAt   <span class="tp">DateTime</span>      <span class="fn">@default</span>(<span class="fn">now</span>())
+  completedAt <span class="tp">DateTime?</span>
+  metadata    <span class="tp">Json?</span>
+
+  <span class="fn">@@index</span>([source])
+  <span class="fn">@@index</span>([startedAt])
+}
+
+<span class="kw">model</span> <span class="tp">SeoKeywordTracker</span> {
+  id        <span class="tp">String</span>   <span class="fn">@id</span> <span class="fn">@default</span>(<span class="fn">cuid</span>())
+  keyword   <span class="tp">String</span>
+  targetUrl <span class="tp">String?</span>
+  isActive  <span class="tp">Boolean</span>  <span class="fn">@default</span>(<span class="kw">true</span>)
+  createdAt <span class="tp">DateTime</span> <span class="fn">@default</span>(<span class="fn">now</span>())
+  updatedAt <span class="tp">DateTime</span> <span class="fn">@updatedAt</span>
+
+  <span class="fn">@@unique</span>([keyword])
+  <span class="fn">@@index</span>([isActive])
+}</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ ENUMS ═════════════════════════════════ -->
+    <section id="enums">
+      <h2><span class="sec-num">5</span> Enums</h2>
+      <div class="code-block">
+        <div class="code-header">
+          <span>prisma/schema.prisma</span>
+          <span class="lang">Prisma</span>
+        </div>
+<pre><span class="kw">enum</span> <span class="tp">NotFoundStatus</span> {
+  ACTIVE
+  IGNORED
+  REDIRECTED
+}
+
+<span class="kw">enum</span> <span class="tp">RedirectType</span> {
+  PERMANENT    <span class="cmt">// 301</span>
+  TEMPORARY    <span class="cmt">// 302</span>
+}
+
+<span class="kw">enum</span> <span class="tp">SeoDataSource</span> {
+  GSC
+  GA4
+  CRAWL
+}
+
+<span class="kw">enum</span> <span class="tp">SyncStatus</span> {
+  RUNNING
+  COMPLETED
+  FAILED
+}</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 6. GOOGLE AUTH ════════════════════════ -->
+    <section id="google-auth">
+      <h2><span class="sec-num">6</span> Google Auth</h2>
+      <p>Service account authentication for both GSC and GA4 APIs. Reads a base64-encoded JSON key from environment variables and caches the auth instance.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/lib/seo-dashboard/google-auth.ts</span>
+          <span class="lang">TypeScript</span>
+        </div>
+<pre><span class="kw">import</span> { google, Auth } <span class="kw">from</span> <span class="str">"googleapis"</span>;
+
+<span class="kw">let</span> cachedAuth: Auth.GoogleAuth | <span class="kw">null</span> = <span class="kw">null</span>;
+
+<span class="kw">function</span> <span class="fn">getServiceAccountKey</span>(): Record&lt;<span class="tp">string</span>, <span class="tp">string</span>&gt; | <span class="kw">null</span> {
+  <span class="kw">const</span> encoded = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+  <span class="kw">if</span> (!encoded) <span class="kw">return null</span>;
+  <span class="kw">try</span> {
+    <span class="kw">return</span> JSON.parse(Buffer.from(encoded, <span class="str">"base64"</span>).toString(<span class="str">"utf-8"</span>));
+  } <span class="kw">catch</span> {
+    console.error(<span class="str">"Failed to parse GOOGLE_SERVICE_ACCOUNT_KEY"</span>);
+    <span class="kw">return null</span>;
+  }
+}
+
+<span class="kw">export function</span> <span class="fn">getGoogleAuth</span>() {
+  <span class="kw">if</span> (cachedAuth) <span class="kw">return</span> cachedAuth;
+  <span class="kw">const</span> key = getServiceAccountKey();
+  <span class="kw">if</span> (!key) <span class="kw">throw new</span> Error(<span class="str">"GOOGLE_SERVICE_ACCOUNT_KEY not set"</span>);
+
+  cachedAuth = <span class="kw">new</span> google.auth.GoogleAuth({
+    credentials: key,
+    scopes: [
+      <span class="str">"https://www.googleapis.com/auth/webmasters.readonly"</span>,
+      <span class="str">"https://www.googleapis.com/auth/analytics.readonly"</span>,
+    ],
+  });
+  <span class="kw">return</span> cachedAuth;
+}
+
+<span class="kw">export function</span> <span class="fn">getSearchConsoleClient</span>() {
+  <span class="kw">return</span> google.searchconsole({ version: <span class="str">"v1"</span>, auth: getGoogleAuth() });
+}
+
+<span class="kw">export function</span> <span class="fn">getAnalyticsDataClient</span>() {
+  <span class="kw">return</span> google.analyticsdata({ version: <span class="str">"v1beta"</span>, auth: getGoogleAuth() });
+}
+
+<span class="kw">export function</span> <span class="fn">isGoogleConfigured</span>(): <span class="tp">boolean</span> {
+  <span class="kw">return</span> !!getServiceAccountKey();
+}
+
+<span class="kw">export function</span> <span class="fn">getServiceAccountEmail</span>(): <span class="tp">string</span> | <span class="kw">null</span> {
+  <span class="kw">return</span> getServiceAccountKey()?.client_email ?? <span class="kw">null</span>;
+}</pre>
+      </div>
+
+      <div class="callout info">
+        <strong>Google Setup Requirements</strong>
+        1. Create a Google Cloud project with Search Console API and Analytics Data API enabled.<br>
+        2. Create a service account and download the JSON key.<br>
+        3. Base64-encode the JSON key: <code>base64 -w0 service-account.json</code><br>
+        4. Set as <code>GOOGLE_SERVICE_ACCOUNT_KEY</code> env var.<br>
+        5. Add the service account email as a user in GSC and GA4.
+      </div>
+    </section>
+
+    <!-- ════════════════════ 7. GSC CLIENT ═════════════════════════ -->
+    <section id="gsc-client">
+      <h2><span class="sec-num">7</span> GSC Client</h2>
+      <p>Fetches search analytics data from Google Search Console. Handles pagination (25K row limit per request) and returns structured rows.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/lib/seo-dashboard/gsc-client.ts</span>
+          <span class="lang">TypeScript</span>
+        </div>
+<pre><span class="kw">import</span> { getSearchConsoleClient } <span class="kw">from</span> <span class="str">"./google-auth"</span>;
+
+<span class="cmt">// Key function: fetches query-level data with pagination</span>
+<span class="kw">export async function</span> <span class="fn">fetchSearchAnalytics</span>(
+  siteUrl: <span class="tp">string</span>,
+  dateRange: DateRange,
+  rowLimit = <span class="num">25000</span>
+): Promise&lt;GscRow[]&gt; {
+  <span class="kw">const</span> client = getSearchConsoleClient();
+  <span class="kw">let</span> startRow = <span class="num">0</span>;
+
+  <span class="kw">while</span> (<span class="kw">true</span>) {
+    <span class="kw">const</span> response = <span class="kw">await</span> client.searchanalytics.query({
+      siteUrl,
+      requestBody: {
+        startDate: dateRange.startDate,
+        endDate: dateRange.endDate,
+        dimensions: [<span class="str">"query"</span>, <span class="str">"page"</span>, <span class="str">"date"</span>, <span class="str">"country"</span>, <span class="str">"device"</span>],
+        rowLimit: Math.min(rowLimit, <span class="num">25000</span>),
+        startRow,
+      },
+    });
+    <span class="cmt">// ... parse rows, break when exhausted</span>
+  }
+}
+
+<span class="cmt">// Also exports: fetchPageMetrics(), listSites()</span></pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 8. GA4 CLIENT ═════════════════════════ -->
+    <section id="ga4-client">
+      <h2><span class="sec-num">8</span> GA4 Client</h2>
+      <p>Fetches organic search traffic filtered to the "Organic Search" channel. Returns sessions, users, bounce rate, and conversions by landing page.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/lib/seo-dashboard/ga4-client.ts</span>
+          <span class="lang">TypeScript</span>
+        </div>
+<pre><span class="kw">export async function</span> <span class="fn">fetchOrganicTraffic</span>(
+  propertyId: <span class="tp">string</span>, dateRange: DateRange
+): Promise&lt;OrganicRow[]&gt; {
+  <span class="kw">const</span> client = getAnalyticsDataClient();
+
+  <span class="kw">const</span> response = <span class="kw">await</span> client.properties.runReport({
+    property: <span class="str">`properties/${propertyId}`</span>,
+    requestBody: {
+      dateRanges: [{ startDate, endDate }],
+      dimensions: [
+        { name: <span class="str">"date"</span> },
+        { name: <span class="str">"landingPagePlusQueryString"</span> },
+      ],
+      metrics: [
+        { name: <span class="str">"sessions"</span> },
+        { name: <span class="str">"totalUsers"</span> },
+        { name: <span class="str">"newUsers"</span> },
+        { name: <span class="str">"bounceRate"</span> },
+        { name: <span class="str">"averageSessionDuration"</span> },
+        { name: <span class="str">"conversions"</span> },
+      ],
+      dimensionFilter: {
+        filter: {
+          fieldName: <span class="str">"sessionDefaultChannelGroup"</span>,
+          stringFilter: { matchType: <span class="str">"EXACT"</span>, value: <span class="str">"Organic Search"</span> },
+        },
+      },
+    },
+  });
+  <span class="cmt">// ... parse and return rows</span>
+}
+
+<span class="cmt">// Also exports: fetchDailyOrganicSummary()</span></pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 9. PAGE AUDITOR ═══════════════════════ -->
+    <section id="page-auditor">
+      <h2><span class="sec-num">9</span> Page Auditor</h2>
+      <p>Fetches a URL's HTML with Cheerio and audits 13 on-page SEO factors, returning a 0-100 score.</p>
+
+      <h3>Scoring Breakdown</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Factor</th><th>Max Points</th><th>Rules</th></tr></thead>
+          <tbody>
+            <tr><td>Title tag</td><td>10</td><td>30-60 chars ideal. Critical if missing.</td></tr>
+            <tr><td>Meta description</td><td>10</td><td>120-160 chars ideal. Critical if missing.</td></tr>
+            <tr><td>H1 tag</td><td>10</td><td>Exactly 1. Critical if missing, warning if multiple.</td></tr>
+            <tr><td>H2 structure</td><td>5</td><td>2+ recommended.</td></tr>
+            <tr><td>Word count</td><td>10</td><td>300+ words. Proportional if below.</td></tr>
+            <tr><td>Schema markup</td><td>10</td><td>JSON-LD or microdata.</td></tr>
+            <tr><td>Canonical tag</td><td>5</td><td>Warning if missing.</td></tr>
+            <tr><td>Internal links</td><td>10</td><td>3+ recommended. Proportional if below.</td></tr>
+            <tr><td>External links</td><td>5</td><td>Info if none.</td></tr>
+            <tr><td>Images alt text</td><td>10</td><td>Proportional to missing alt text ratio.</td></tr>
+            <tr><td>Open Graph</td><td>5</td><td>og:title + og:description.</td></tr>
+            <tr><td>HTTPS</td><td>5</td><td>Critical if HTTP.</td></tr>
+            <tr><td>Robots meta</td><td>5</td><td>Critical if noindex.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip">
+        <strong>Total possible: 100 points</strong>
+        Each check adds to the score and generates an issue with severity: <code>critical</code>, <code>warning</code>, <code>info</code>, or <code>pass</code>.
+      </div>
+    </section>
+
+    <!-- ════════════════════ 10. RECOMMENDATIONS ══════════════════ -->
+    <section id="recommendations">
+      <h2><span class="sec-num">10</span> Recommendation Engine</h2>
+      <p>Queries stored SEO data and generates prioritized, actionable recommendations across 6 categories.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Category</th><th>Severity</th><th>Trigger</th></tr></thead>
+          <tbody>
+            <tr><td>CTR Optimization</td><td><span class="badge red">Critical</span></td><td>200+ impressions, &lt;2% CTR in 30 days</td></tr>
+            <tr><td>Position Drop</td><td><span class="badge amber">Warning</span></td><td>Query lost 5+ positions vs prior week</td></tr>
+            <tr><td>Page Quality</td><td><span class="badge red">Critical</span> / <span class="badge amber">Warning</span></td><td>Audit score &lt;50 (critical if &lt;30)</td></tr>
+            <tr><td>Content Quality</td><td><span class="badge amber">Warning</span></td><td>Published blog post with &lt;300 words</td></tr>
+            <tr><td>Meta Tags</td><td><span class="badge red">Critical</span></td><td>Published post missing meta description</td></tr>
+            <tr><td>404 Errors</td><td><span class="badge red">Critical</span> / <span class="badge amber">Warning</span></td><td>Active 404 with 5+ hits (critical at 20+)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 11. QUERY ADVISOR ════════════════════ -->
+    <section id="query-advisor">
+      <h2><span class="sec-num">11</span> Query Advisor</h2>
+      <p>AI-powered query intelligence engine. Classifies search intent, benchmarks CTR against position, estimates traffic potential, and assigns actionable tags.</p>
+
+      <h3>CTR Benchmarks</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Position</th><th>Expected CTR</th><th>Position</th><th>Expected CTR</th></tr></thead>
+          <tbody>
+            <tr><td>#1</td><td>27.6%</td><td>#6</td><td>4.9%</td></tr>
+            <tr><td>#2</td><td>15.8%</td><td>#7</td><td>3.9%</td></tr>
+            <tr><td>#3</td><td>11.0%</td><td>#8</td><td>3.3%</td></tr>
+            <tr><td>#4</td><td>8.4%</td><td>#9</td><td>2.7%</td></tr>
+            <tr><td>#5</td><td>6.3%</td><td>#10</td><td>2.4%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Advisor Tags</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tag</th><th>When</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td><code>quick-win</code></td><td>Page 1, below-benchmark CTR</td><td>1 (highest)</td></tr>
+            <tr><td><code>almost-there</code></td><td>Page 2, close to breaking page 1</td><td>2</td></tr>
+            <tr><td><code>defend</code></td><td>Bottom page 1, decent CTR</td><td>3</td></tr>
+            <tr><td><code>wasted</code></td><td>High impressions, zero clicks</td><td>2</td></tr>
+            <tr><td><code>opportunity</code></td><td>Content gaps, deep results</td><td>2-4</td></tr>
+            <tr><td><code>cannibalized</code></td><td>Page ranking for 5+ overlapping queries</td><td>3</td></tr>
+            <tr><td><code>strong</code></td><td>Top 3, good CTR</td><td>5</td></tr>
+            <tr><td><code>branded</code></td><td>Brand query performance</td><td>1 or 6</td></tr>
+            <tr><td><code>low-priority</code></td><td>Deep rankings, minimal traffic</td><td>6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 12. BOT DETECTOR ════════════════════ -->
+    <section id="bot-detector">
+      <h2><span class="sec-num">12</span> Bot Detector</h2>
+      <p>Classifies user agents into good bots (search engines, social crawlers), bad bots (scrapers, AI training), and unknown. Used by 404 tracking.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Category</th><th>Examples</th><th>Count</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge green">Good</span></td><td>Googlebot, Bingbot, Facebook, Twitter, LinkedIn, ClaudeBot, UptimeRobot</td><td>13+</td></tr>
+            <tr><td><span class="badge red">Bad</span></td><td>SEMrush, Ahrefs, GPTBot, CCBot, Puppeteer, Selenium</td><td>12+</td></tr>
+            <tr><td><span class="badge">Unknown</span></td><td>Generic bot/crawler/spider patterns</td><td>3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 13. REDIRECT CACHE ══════════════════ -->
+    <section id="redirect-cache">
+      <h2><span class="sec-num">13</span> Redirect Cache</h2>
+      <p>In-memory cache with 5-minute TTL for fast redirect lookups in middleware. Normalizes URLs (lowercase, strips trailing slashes) and logs hits fire-and-forget.</p>
+
+      <h4>Exports</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Function</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>checkRedirect(pathname)</code></td><td>Look up cached redirect, fall back to DB</td></tr>
+            <tr><td><code>logRedirectHit(id)</code></td><td>Increment hit count + timestamp (async)</td></tr>
+            <tr><td><code>invalidateRedirectCache()</code></td><td>Clear cache on redirect CRUD</td></tr>
+            <tr><td><code>getCacheStats()</code></td><td>Cache health metrics for debugging</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 14. API ROUTES ═══════════════════════ -->
+    <section id="api-routes">
+      <h2><span class="sec-num">14</span> API Routes</h2>
+
+      <h3>SEO Dashboard</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Route</th><th>Method</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>/api/admin/seo/overview</code></td><td>GET</td><td>Dashboard metrics, health score, trends, top queries/pages</td></tr>
+            <tr><td><code>/api/admin/seo/settings</code></td><td>GET/POST</td><td>GSC &amp; GA4 configuration</td></tr>
+            <tr><td><code>/api/admin/seo/audit-page</code></td><td>POST</td><td>Run on-page SEO audit</td></tr>
+            <tr><td><code>/api/admin/seo/keywords</code></td><td>GET/POST/DEL</td><td>Keyword tracking management</td></tr>
+            <tr><td><code>/api/admin/seo/page-metrics</code></td><td>GET</td><td>Per-page GSC metrics with pagination</td></tr>
+            <tr><td><code>/api/admin/seo/search-queries</code></td><td>GET</td><td>Search queries with filtering &amp; sorting</td></tr>
+            <tr><td><code>/api/admin/seo/recommendations</code></td><td>GET</td><td>Generated SEO recommendations</td></tr>
+            <tr><td><code>/api/admin/seo/organic-traffic</code></td><td>GET</td><td>GA4 organic traffic data</td></tr>
+            <tr><td><code>/api/admin/seo/sync-gsc</code></td><td>POST</td><td>Manual GSC sync trigger</td></tr>
+            <tr><td><code>/api/admin/seo/sync-ga</code></td><td>POST</td><td>Manual GA4 sync trigger</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>404 &amp; Redirects</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Route</th><th>Method</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>/api/track-404</code></td><td>POST</td><td>Client-side 404 tracking (rate-limited)</td></tr>
+            <tr><td><code>/api/admin/404-monitor</code></td><td>GET</td><td>List 404s with filters &amp; pagination</td></tr>
+            <tr><td><code>/api/admin/404-monitor/stats</code></td><td>GET</td><td>404 aggregate statistics</td></tr>
+            <tr><td><code>/api/admin/404-monitor/[id]</code></td><td>PATCH/DEL</td><td>Update/resolve individual 404s</td></tr>
+            <tr><td><code>/api/admin/redirects</code></td><td>GET/POST</td><td>List/create redirects</td></tr>
+            <tr><td><code>/api/admin/redirects/[id]</code></td><td>PATCH/DEL</td><td>Update/delete redirects</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cron</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Route</th><th>Schedule</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>/api/cron/seo-sync</code></td><td>0 4 * * *</td><td>Daily sync: 3 days GSC + 1 day GA4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 15. OVERVIEW ENDPOINT ════════════════ -->
+    <section id="api-overview">
+      <h2><span class="sec-num">15</span> Overview Endpoint</h2>
+      <p>The heart of the dashboard. Calculates current-vs-prior period trends, top queries/pages, daily sparklines, and the weighted health score.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/app/api/admin/seo/overview/route.ts</span>
+          <span class="lang">TypeScript</span>
+        </div>
+<pre><span class="cmt">// Key calculations:</span>
+
+<span class="cmt">// 1. Compare current (7d) vs prior (7-14d) periods</span>
+<span class="kw">const</span> current = <span class="kw">await</span> prisma.gscPageMetric.aggregate({
+  where: { date: { gte: sevenDaysAgo } },
+  _sum: { clicks: <span class="kw">true</span>, impressions: <span class="kw">true</span> },
+  _avg: { ctr: <span class="kw">true</span>, position: <span class="kw">true</span> },
+});
+
+<span class="cmt">// 2. Trend = ((current - prior) / prior) * 100</span>
+<span class="kw">const</span> <span class="fn">calcTrend</span> = (curr, prev) =&gt;
+  prev === <span class="num">0</span> ? <span class="num">0</span> : ((curr - prev) / prev) * <span class="num">100</span>;
+
+<span class="cmt">// 3. Health score (weighted)</span>
+<span class="kw">const</span> healthScore = Math.round(
+  auditScore * <span class="num">0.3</span> +  <span class="cmt">// avg page audit score</span>
+  ctrScore   * <span class="num">0.2</span> +  <span class="cmt">// CTR / 5% * 100</span>
+  posScore   * <span class="num">0.2</span> +  <span class="cmt">// 100 - (pos - 1) * 5</span>
+  errorScore * <span class="num">0.15</span> + <span class="cmt">// 100 - unresolved404s * 2</span>
+  <span class="num">50</span>         * <span class="num">0.15</span>   <span class="cmt">// baseline buffer</span>
+);</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 16. CRON SYNC ════════════════════════ -->
+    <section id="api-sync">
+      <h2><span class="sec-num">16</span> Cron Sync</h2>
+      <p>Daily cron job at 4 AM UTC. Protected by <code>CRON_SECRET</code> Bearer token. Runs GSC and GA4 syncs independently, logging status to <code>SeoSyncLog</code>.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/app/api/cron/seo-sync/route.ts</span>
+          <span class="lang">TypeScript</span>
+        </div>
+<pre><span class="cmt">// Vercel cron config in vercel.json:</span>
+<span class="cmt">// { "crons": [{ "path": "/api/cron/seo-sync", "schedule": "0 4 * * *" }] }</span>
+
+<span class="kw">export async function</span> <span class="fn">GET</span>(request: Request) {
+  <span class="cmt">// 1. Verify CRON_SECRET Bearer token</span>
+  <span class="cmt">// 2. Check Google is configured</span>
+
+  <span class="cmt">// GSC Sync (last 3 days)</span>
+  <span class="kw">const</span> queries = <span class="kw">await</span> fetchSearchAnalytics(gscSiteUrl, dateRange);
+  <span class="kw">for</span> (<span class="kw">const</span> row <span class="kw">of</span> queries) {
+    <span class="kw">await</span> prisma.gscSearchQuery.<span class="fn">upsert</span>({
+      where: { date_query_page_country_device: { <span class="op">...</span> } },
+      update: { clicks, impressions, ctr, position },
+      create: { <span class="op">...</span> },
+    });
+  }
+
+  <span class="cmt">// GA4 Sync (yesterday)</span>
+  <span class="kw">const</span> rows = <span class="kw">await</span> fetchOrganicTraffic(ga4PropertyId, dateRange);
+  <span class="kw">for</span> (<span class="kw">const</span> row <span class="kw">of</span> rows) {
+    <span class="kw">await</span> prisma.gaOrganicMetric.<span class="fn">upsert</span>({
+      where: { date_landingPage: { <span class="op">...</span> } },
+      <span class="op">...</span>
+    });
+  }
+
+  <span class="cmt">// Log sync status: RUNNING → COMPLETED or FAILED</span>
+}</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 17. 404 TRACKING ════════════════════ -->
+    <section id="api-404">
+      <h2><span class="sec-num">17</span> 404 Tracking Endpoint</h2>
+      <p>Client-side POST endpoint with in-memory rate limiting (1 hit per IP per URL per minute). Detects bots, creates raw hit records, and upserts aggregated counts.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/app/api/track-404/route.ts</span>
+          <span class="lang">TypeScript</span>
+        </div>
+<pre><span class="cmt">// Rate limiting: Map&lt;`${ip}:${url}`, timestamp&gt;</span>
+<span class="cmt">// Window: 60 seconds, auto-cleanup at 10K entries</span>
+
+<span class="kw">export async function</span> <span class="fn">POST</span>(request: Request) {
+  <span class="kw">const</span> { url, userAgent, referer } = <span class="kw">await</span> request.json();
+  <span class="kw">const</span> normalizedUrl = url.split(<span class="str">"?"</span>)[<span class="num">0</span>].split(<span class="str">"#"</span>)[<span class="num">0</span>].toLowerCase();
+
+  <span class="kw">if</span> (isRateLimited(<span class="str">`${ip}:${normalizedUrl}`</span>)) <span class="kw">return</span> ok;
+
+  <span class="kw">const</span> { isBot, botName } = detectBot(userAgent);
+
+  <span class="cmt">// Raw hit log</span>
+  <span class="kw">await</span> prisma.notFoundHit.create({ data: { url, userAgent, referer, isBot, botName } });
+
+  <span class="cmt">// Aggregated URL record</span>
+  <span class="kw">await</span> prisma.notFoundUrl.upsert({
+    where: { url: normalizedUrl },
+    create: { url, hitCount: <span class="num">1</span>, botHitCount: isBot ? <span class="num">1</span> : <span class="num">0</span>, <span class="op">...</span> },
+    update: { hitCount: { increment: <span class="num">1</span> }, <span class="op">...</span> },
+  });
+}</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 18. ADMIN PAGES ═════════════════════ -->
+    <section id="admin-pages">
+      <h2><span class="sec-num">18</span> Admin Pages</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Page</th><th>Route</th><th>Key Features</th></tr></thead>
+          <tbody>
+            <tr><td>Overview</td><td><code>/admin/seo/</code></td><td>Health gauge, metric cards with sparklines, top queries/pages</td></tr>
+            <tr><td>Search Console</td><td><code>/admin/seo/search-console/</code></td><td>GSC queries, pages, country/device breakdowns</td></tr>
+            <tr><td>Analytics</td><td><code>/admin/seo/analytics/</code></td><td>GA4 organic traffic, sessions, bounce rate trends</td></tr>
+            <tr><td>Page Analyzer</td><td><code>/admin/seo/page-analyzer/</code></td><td>Enter URL, get audit score + issue list</td></tr>
+            <tr><td>Keywords</td><td><code>/admin/seo/keywords/</code></td><td>Keyword tracking, position history charts</td></tr>
+            <tr><td>Recommendations</td><td><code>/admin/seo/recommendations/</code></td><td>Prioritized actionable SEO improvements</td></tr>
+            <tr><td>Content Perf.</td><td><code>/admin/seo/content-performance/</code></td><td>Content-level metrics analysis</td></tr>
+            <tr><td>Settings</td><td><code>/admin/seo/settings/</code></td><td>GSC &amp; GA4 property configuration</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 19. COMPONENTS ═══════════════════════ -->
+    <section id="components">
+      <h2><span class="sec-num">19</span> Components</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Component</th><th>File</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>SeoSubNav</td><td><code>admin/seo/SeoSubNav.tsx</code></td><td>8-tab navigation with active state</td></tr>
+            <tr><td>OverviewDashboard</td><td><code>admin/seo/OverviewDashboard.tsx</code></td><td>Main dashboard layout with metric grid</td></tr>
+            <tr><td>HealthScoreGauge</td><td><code>admin/seo/HealthScoreGauge.tsx</code></td><td>SVG semicircle health score (0-100)</td></tr>
+            <tr><td>MetricCard</td><td><code>admin/seo/MetricCard.tsx</code></td><td>Individual metric with trend + sparkline</td></tr>
+            <tr><td>SyncStatusBadge</td><td><code>admin/seo/SyncStatusBadge.tsx</code></td><td>Last sync timestamp display</td></tr>
+            <tr><td>RecommendationCard</td><td><code>admin/seo/RecommendationCard.tsx</code></td><td>Recommendation with severity badge</td></tr>
+            <tr><td>DateRangePicker</td><td><code>admin/seo/DateRangePicker.tsx</code></td><td>Date range filter for reports</td></tr>
+            <tr><td>JsonLd</td><td><code>seo/JsonLd.tsx</code></td><td>JSON-LD structured data renderer</td></tr>
+            <tr><td>MultiJsonLd</td><td><code>seo/JsonLd.tsx</code></td><td>Multiple schemas renderer</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 20. HEALTH SCORE ════════════════════ -->
+    <section id="health-score">
+      <h2><span class="sec-num">20</span> Health Score Formula</h2>
+      <p>Weighted 0-100 composite score displayed as an SVG semicircle gauge.</p>
+
+      <div class="weight-bars">
+        <div class="weight-bar">
+          <span class="weight-label">Audit Score</span>
+          <div class="weight-track"><div class="weight-fill amber" style="width:30%">30%</div></div>
+        </div>
+        <div class="weight-bar">
+          <span class="weight-label">CTR Score</span>
+          <div class="weight-track"><div class="weight-fill blue" style="width:20%">20%</div></div>
+        </div>
+        <div class="weight-bar">
+          <span class="weight-label">Position Score</span>
+          <div class="weight-track"><div class="weight-fill green" style="width:20%">20%</div></div>
+        </div>
+        <div class="weight-bar">
+          <span class="weight-label">Error Score</span>
+          <div class="weight-track"><div class="weight-fill red" style="width:15%">15%</div></div>
+        </div>
+        <div class="weight-bar">
+          <span class="weight-label">Baseline</span>
+          <div class="weight-track"><div class="weight-fill gray" style="width:15%">15%</div></div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Component</th><th>Weight</th><th>Calculation</th></tr></thead>
+          <tbody>
+            <tr><td>Audit Score</td><td>30%</td><td>Average of all <code>SeoPageAudit.score</code> values</td></tr>
+            <tr><td>CTR Score</td><td>20%</td><td><code>min(avgCTR / 0.05 * 100, 100)</code> &mdash; 5% CTR = perfect</td></tr>
+            <tr><td>Position Score</td><td>20%</td><td><code>max(0, 100 - (avgPosition - 1) * 5)</code> &mdash; lower is better</td></tr>
+            <tr><td>Error Score</td><td>15%</td><td><code>max(0, 100 - activeUnresolved404s * 2)</code></td></tr>
+            <tr><td>Baseline</td><td>15%</td><td>Constant 50 &mdash; ensures new sites don't start at zero</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Score Thresholds</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Range</th><th>Label</th><th>Color</th></tr></thead>
+          <tbody>
+            <tr><td>80-100</td><td>Excellent</td><td><span class="badge green">Green</span></td></tr>
+            <tr><td>60-79</td><td>Good</td><td><span class="badge amber">Amber</span></td></tr>
+            <tr><td>40-59</td><td>Needs Work</td><td><span class="badge" style="color:#f97316;border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.08)">Orange</span></td></tr>
+            <tr><td>0-39</td><td>Poor</td><td><span class="badge red">Red</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 21. SITEMAP & ROBOTS ════════════════ -->
+    <section id="sitemap">
+      <h2><span class="sec-num">21</span> Sitemap &amp; Robots</h2>
+
+      <h3>Dynamic Sitemap</h3>
+      <p><code>src/app/sitemap.ts</code> &mdash; Queries the database for all published content, sets <code>changeFrequency</code> and <code>priority</code> per content type, and handles slug collisions.</p>
+
+      <h3>Robots.txt</h3>
+      <p><code>src/app/robots.ts</code> &mdash; Rule categories:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Action</th><th>User Agents</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge green">Allow</span></td><td>Googlebot, Bingbot, social crawlers, AI search bots (ClaudeBot)</td></tr>
+            <tr><td><span class="badge red">Block</span></td><td>AI training bots (GPTBot, CCBot, Google-Extended), SEO scrapers (Ahrefs, SEMrush)</td></tr>
+            <tr><td><span class="badge">Disallow</span></td><td>/admin/, /api/, /_next/ for all bots</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 22. JSON-LD ═════════════════════════ -->
+    <section id="jsonld">
+      <h2><span class="sec-num">22</span> JSON-LD Structured Data</h2>
+      <p>14 schema generators in <code>src/lib/seo.ts</code>, rendered via the <code>&lt;JsonLd&gt;</code> component.</p>
+
+      <div class="info-grid">
+        <div class="info-card ic-blue">
+          <h5>Content Schemas</h5>
+          <p>Article, HowTo, FAQ, Video, ItemList</p>
+        </div>
+        <div class="info-card ic-green">
+          <h5>Business Schemas</h5>
+          <p>LocalBusiness, Organization, TourOperator</p>
+        </div>
+        <div class="info-card ic-purple">
+          <h5>Product Schemas</h5>
+          <p>Product, TouristTrip, Event</p>
+        </div>
+        <div class="info-card ic-amber">
+          <h5>Navigation Schemas</h5>
+          <p>BreadcrumbList, WebSite + SearchAction</p>
+        </div>
+        <div class="info-card ic-red">
+          <h5>Review Schemas</h5>
+          <p>AggregateRating, Review</p>
+        </div>
+      </div>
+
+      <h3>JsonLd Component</h3>
+      <div class="code-block">
+        <div class="code-header">
+          <span>src/components/seo/JsonLd.tsx</span>
+          <span class="lang">TSX</span>
+        </div>
+<pre><span class="kw">export function</span> <span class="fn">JsonLd</span>({ data }: { data: Record&lt;<span class="tp">string</span>, <span class="tp">any</span>&gt; }) {
+  <span class="kw">return</span> (
+    &lt;<span class="tg">script</span>
+      type=<span class="str">"application/ld+json"</span>
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    /&gt;
+  );
+}
+
+<span class="kw">export function</span> <span class="fn">MultiJsonLd</span>({ schemas }: { schemas: Record&lt;<span class="tp">string</span>, <span class="tp">any</span>&gt;[] }) {
+  <span class="kw">return</span> (
+    &lt;&gt;
+      {schemas.map((schema, i) =&gt; (
+        &lt;<span class="tg">script</span> key={i}
+          type=<span class="str">"application/ld+json"</span>
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        /&gt;
+      ))}
+    &lt;/&gt;
+  );
+}</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 23. 404 MONITORING FLOW ═════════════ -->
+    <section id="404-flow">
+      <h2><span class="sec-num">23</span> 404 Monitoring Flow</h2>
+
+      <div class="flow-diagram">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot blue">1</div><div class="flow-connector"></div></div>
+            <div class="flow-content"><h5>Client Detection</h5><p>User/bot hits a 404 page &rarr; JS sends POST to <code>/api/track-404</code></p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot amber">2</div><div class="flow-connector"></div></div>
+            <div class="flow-content"><h5>Rate Limiting</h5><p>In-memory check: 1 hit per IP per URL per minute. Rejects duplicates silently.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot purple">3</div><div class="flow-connector"></div></div>
+            <div class="flow-content"><h5>Bot Detection</h5><p>User agent classified as good bot, bad bot, or human via pattern matching.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot green">4</div><div class="flow-connector"></div></div>
+            <div class="flow-content"><h5>Database Storage</h5><p>Creates <code>NotFoundHit</code> (raw log) + upserts <code>NotFoundUrl</code> (aggregate with bot/human counts).</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot amber">5</div><div class="flow-connector"></div></div>
+            <div class="flow-content"><h5>Admin Review</h5><p>Admin views 404s in <code>/admin/404-monitor/</code> with filters by status, date, bot/human.</p></div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot red">6</div><div class="flow-connector"></div></div>
+            <div class="flow-content"><h5>Resolution</h5><p>Mark as IGNORED or create Redirect (REDIRECTED). Links <code>NotFoundUrl.redirectId</code> to <code>Redirect</code>.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 24. SYNC STRATEGY ═══════════════════ -->
+    <section id="sync-strategy">
+      <h2><span class="sec-num">24</span> Sync Strategy</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Source</th><th>Schedule</th><th>Window</th><th>Upsert Key</th></tr></thead>
+          <tbody>
+            <tr><td>GSC Queries</td><td>Daily 4 AM UTC</td><td>Last 3 days</td><td><code>date + query + page + country + device</code></td></tr>
+            <tr><td>GSC Pages</td><td>Daily 4 AM UTC</td><td>Last 3 days</td><td><code>date + page</code></td></tr>
+            <tr><td>GA4 Organic</td><td>Daily 4 AM UTC</td><td>Yesterday</td><td><code>date + landingPage</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn">
+        <strong>Why 3 days for GSC?</strong>
+        Google Search Console data is typically delayed 2-3 days. By syncing the last 3 days, you catch updated data for dates that were incomplete in prior syncs. The upsert pattern ensures no duplicates.
+      </div>
+    </section>
+
+    <!-- ════════════════════ 25. PORTABLE PIECES ═════════════════ -->
+    <section id="portable">
+      <h2><span class="sec-num">25</span> Portable Pieces for Reuse</h2>
+      <p>The minimum files to copy into another Next.js + Prisma project:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>What to Copy</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>9 Prisma models + 4 enums</td><td>Database schema (add to your schema.prisma)</td></tr>
+            <tr><td>2</td><td><code>src/lib/seo-dashboard/</code> (entire folder)</td><td>Service layer: auth, clients, auditor, recs, types</td></tr>
+            <tr><td>3</td><td><code>src/lib/seo.ts</code></td><td>Metadata + 14 JSON-LD schema generators</td></tr>
+            <tr><td>4</td><td><code>src/lib/redirect-cache.ts</code></td><td>Redirect caching middleware</td></tr>
+            <tr><td>5</td><td><code>src/lib/bot-detector.ts</code></td><td>User-agent classification</td></tr>
+            <tr><td>6</td><td><code>src/app/api/admin/seo/</code> (all routes)</td><td>Dashboard API endpoints</td></tr>
+            <tr><td>7</td><td><code>src/app/api/track-404/</code></td><td>Client-side 404 tracking</td></tr>
+            <tr><td>8</td><td><code>src/app/api/cron/seo-sync/</code></td><td>Daily sync cron</td></tr>
+            <tr><td>9</td><td><code>src/app/(admin)/admin/seo/</code> (all pages)</td><td>Admin UI pages</td></tr>
+            <tr><td>10</td><td><code>src/components/admin/seo/</code></td><td>Dashboard UI components</td></tr>
+            <tr><td>11</td><td><code>src/components/seo/JsonLd.tsx</code></td><td>JSON-LD renderer</td></tr>
+            <tr><td>12</td><td><code>src/app/sitemap.ts</code> + <code>robots.ts</code></td><td>SEO infrastructure</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 26. ENV VARS ════════════════════════ -->
+    <section id="env-vars">
+      <h2><span class="sec-num">26</span> Environment Variables</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Variable</th><th>Required</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>GOOGLE_SERVICE_ACCOUNT_KEY</code></td><td><span class="badge red">Required</span></td><td>Base64-encoded Google service account JSON key</td></tr>
+            <tr><td><code>GSC_SITE_URL</code></td><td><span class="badge amber">Fallback</span></td><td>GSC site URL (can also be set in admin UI)</td></tr>
+            <tr><td><code>GA4_PROPERTY_ID</code></td><td><span class="badge amber">Fallback</span></td><td>GA4 property ID (can also be set in admin UI)</td></tr>
+            <tr><td><code>CRON_SECRET</code></td><td><span class="badge red">Required</span></td><td>Bearer token for cron endpoint authorization</td></tr>
+            <tr><td><code>NEXT_PUBLIC_SITE_URL</code></td><td><span class="badge">Optional</span></td><td>Site URL for schema generation and auditor</td></tr>
+            <tr><td><code>DATABASE_URL</code></td><td><span class="badge red">Required</span></td><td>PostgreSQL connection string (Prisma)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════ 27. SETUP STEPS ═════════════════════ -->
+    <section id="setup-steps">
+      <h2><span class="sec-num">27</span> Setup Steps for New Project</h2>
+
+      <div class="flow-diagram">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot blue">1</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Install Dependencies</h5>
+              <p><code>npm install googleapis cheerio recharts lucide-react clsx</code></p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot green">2</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Add Prisma Models</h5>
+              <p>Copy the 9 models + 4 enums into your <code>schema.prisma</code>. Add a <code>SiteSetting</code> model for storing GSC/GA4 config in the database. Run <code>npx prisma db push</code>.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot purple">3</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Copy Service Libraries</h5>
+              <p>Copy <code>src/lib/seo-dashboard/</code>, <code>bot-detector.ts</code>, <code>redirect-cache.ts</code>, and <code>seo.ts</code>. Update import paths to match your project.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot amber">4</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Copy API Routes</h5>
+              <p>Copy <code>src/app/api/admin/seo/</code>, <code>track-404/</code>, <code>admin/404-monitor/</code>, <code>admin/redirects/</code>, and <code>cron/seo-sync/</code>. Update auth middleware imports.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot red">5</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Copy Admin UI</h5>
+              <p>Copy <code>src/app/(admin)/admin/seo/</code> pages and <code>src/components/admin/seo/</code> components. Adapt layout to your admin shell.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot pink">6</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Configure Environment</h5>
+              <p>Set <code>GOOGLE_SERVICE_ACCOUNT_KEY</code>, <code>CRON_SECRET</code>, and optionally <code>GSC_SITE_URL</code> + <code>GA4_PROPERTY_ID</code>.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot green">7</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Configure Cron</h5>
+              <p>Add to <code>vercel.json</code>: <code>{ "crons": [{ "path": "/api/cron/seo-sync", "schedule": "0 4 * * *" }] }</code></p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-line"><div class="flow-dot blue">8</div><div class="flow-connector"></div></div>
+            <div class="flow-content">
+              <h5>Customize</h5>
+              <p>Update brand terms in <code>query-advisor.ts</code>, adapt <code>recommendation-engine.ts</code> to your content models, and customize schema generators in <code>seo.ts</code>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <strong>Quick Adaptation Checklist</strong>
+        &bull; Replace <code>BlogPost</code> references in recommendation engine with your content model<br>
+        &bull; Update <code>BRAND_TERMS</code> in query-advisor.ts with your brand name<br>
+        &bull; Adapt <code>sitemap.ts</code> to query your content models<br>
+        &bull; Swap <code>requireRole()</code> for your auth middleware<br>
+        &bull; Update <code>SITE_URL</code> constant in page-auditor.ts
+      </div>
+    </section>
+
+    <!-- ═══════════════════ Footer ════════════════════════════════ -->
+    <footer style="text-align:center;padding:40px 0;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);">
+      Generated from Snow Africa Adventure codebase &mdash; April 2026
+    </footer>
+
+  </main>
+</div>
+
+<script>
+// Copy button functionality
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pre = btn.closest('.code-block').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,742 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+        - /url: tel:+255766657854
+        - img [ref=e9]
+        - generic [ref=e11]: +255 766 657 854
+      - generic [ref=e12]:
+        - generic [ref=e14]:
+          - link "Snow Africa Adventure" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - img "Snow Africa Adventure" [ref=e16]
+          - generic [ref=e17]:
+            - link "Plan Your Trip" [ref=e18] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+            - link "Search" [ref=e19] [cursor=pointer]:
+              - /url: /search/
+              - img [ref=e20]
+            - button "Open menu" [ref=e702]:
+              - img [ref=e703]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+            - text: Home
+            - img [ref=e28]
+          - generic [ref=e30]:
+            - button "Safaris & Tours" [ref=e31]:
+              - text: Safaris & Tours
+              - img [ref=e32]
+            - generic [ref=e34]:
+              - link "All Safari Packages Browse curated Tanzania safaris" [ref=e35] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+                - img [ref=e36]
+                - generic [ref=e41]:
+                  - generic [ref=e42]: All Safari Packages
+                  - generic [ref=e43]: Browse curated Tanzania safaris
+              - link "Tailor-Made Safaris Custom itineraries for your group" [ref=e44] [cursor=pointer]:
+                - /url: /tailor-made-safari/
+                - img [ref=e45]
+                - generic [ref=e48]:
+                  - generic [ref=e49]: Tailor-Made Safaris
+                  - generic [ref=e50]: Custom itineraries for your group
+              - link "Destinations Serengeti, Ngorongoro & more" [ref=e51] [cursor=pointer]:
+                - /url: /tanzania-destinations/
+                - img [ref=e52]
+                - generic [ref=e54]:
+                  - generic [ref=e55]: Destinations
+                  - generic [ref=e56]: Serengeti, Ngorongoro & more
+              - link "Day Tours Single-day excursions from Arusha" [ref=e57] [cursor=pointer]:
+                - /url: /tanzania-day-tours/
+                - img [ref=e58]
+                - generic [ref=e64]:
+                  - generic [ref=e65]: Day Tours
+                  - generic [ref=e66]: Single-day excursions from Arusha
+          - generic [ref=e67]:
+            - button "Trekking" [ref=e68]:
+              - text: Trekking
+              - img [ref=e69]
+            - generic [ref=e71]:
+              - link "All Trekking Routes Compare all Kilimanjaro routes" [ref=e72] [cursor=pointer]:
+                - /url: /trekking/
+                - img [ref=e73]
+                - generic [ref=e75]:
+                  - generic [ref=e76]: All Trekking Routes
+                  - generic [ref=e77]: Compare all Kilimanjaro routes
+              - link "Best Route to Climb Route comparison guide" [ref=e78] [cursor=pointer]:
+                - /url: /best-route-to-climb-kilimanjaro/
+                - img [ref=e79]
+                - generic [ref=e82]:
+                  - generic [ref=e83]: Best Route to Climb
+                  - generic [ref=e84]: Route comparison guide
+              - link "Climbing Guide Everything you need to know" [ref=e85] [cursor=pointer]:
+                - /url: /climbing-kilimanjaro/
+                - img [ref=e86]
+                - generic [ref=e88]:
+                  - generic [ref=e89]: Climbing Guide
+                  - generic [ref=e90]: Everything you need to know
+              - link "Kilimanjaro Prices Full cost breakdown" [ref=e91] [cursor=pointer]:
+                - /url: /kilimanjaro-prices/
+                - img [ref=e92]
+                - generic [ref=e94]:
+                  - generic [ref=e95]: Kilimanjaro Prices
+                  - generic [ref=e96]: Full cost breakdown
+              - link "Best Time to Climb Seasonal guide" [ref=e97] [cursor=pointer]:
+                - /url: /best-time-to-climb-kilimanjaro/
+                - img [ref=e98]
+                - generic [ref=e101]:
+                  - generic [ref=e102]: Best Time to Climb
+                  - generic [ref=e103]: Seasonal guide
+          - link "Join Group Climb" [ref=e104] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e105]
+            - text: Join Group Climb
+            - img [ref=e110]
+          - link "Zanzibar" [active] [ref=e112] [cursor=pointer]:
+            - /url: /zanzibar/
+            - text: Zanzibar
+            - img [ref=e113]
+          - link "Contact Us" [ref=e115] [cursor=pointer]:
+            - /url: /contact-us/
+            - text: Contact Us
+            - img [ref=e116]
+          - generic [ref=e119]:
+            - link "About Us" [ref=e120] [cursor=pointer]:
+              - /url: /about-us/
+              - text: About Us
+              - img [ref=e121]
+            - link "Tailor-Made Safaris" [ref=e123] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+              - text: Tailor-Made Safaris
+              - img [ref=e124]
+            - link "Blog" [ref=e126] [cursor=pointer]:
+              - /url: /blog/
+              - text: Blog
+              - img [ref=e127]
+          - link "Plan Your Trip" [ref=e130] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - generic [ref=e132]:
+            - link "+255 766 657 854" [ref=e133] [cursor=pointer]:
+              - /url: tel:+255766657854
+              - img [ref=e134]
+              - text: +255 766 657 854
+            - link "info@snowafricaadventure.com" [ref=e136] [cursor=pointer]:
+              - /url: mailto:info@snowafricaadventure.com
+              - img [ref=e137]
+              - text: info@snowafricaadventure.com
+    - main [ref=e140]:
+      - generic [ref=e704]:
+        - generic [ref=e705]:
+          - img "Zanzibar Beach Holidays" [ref=e707]
+          - generic [ref=e710]:
+            - heading "Zanzibar Beach Holidays" [level=1] [ref=e711]
+            - paragraph [ref=e712]: The perfect ending to your Tanzania adventure. Pristine white sand beaches, turquoise waters, and rich Swahili culture.
+        - generic [ref=e715]:
+          - heading "The Spice Island Awaits" [level=2] [ref=e716]
+          - paragraph [ref=e717]: Just a short flight from Arusha or the Serengeti, Zanzibar offers the perfect contrast to your safari adventure. Relax on powder-white beaches, explore the historic Stone Town, dive crystal-clear waters, and immerse yourself in the island's unique blend of African, Arab, and Indian cultures.
+        - generic [ref=e719]:
+          - heading "Where to Stay" [level=2] [ref=e720]
+          - generic [ref=e721]:
+            - generic [ref=e722]:
+              - img "Nungwi Beach" [ref=e724]
+              - generic [ref=e725]:
+                - heading "Nungwi Beach" [level=3] [ref=e726]
+                - paragraph [ref=e727]: Northern tip of Zanzibar with stunning sunsets and vibrant nightlife.
+            - generic [ref=e728]:
+              - img "Kendwa Beach" [ref=e730]
+              - generic [ref=e731]:
+                - heading "Kendwa Beach" [level=3] [ref=e732]
+                - paragraph [ref=e733]: Calm waters perfect for swimming at any tide, with boutique resorts.
+            - generic [ref=e734]:
+              - img "Paje Beach" [ref=e736]
+              - generic [ref=e737]:
+                - heading "Paje Beach" [level=3] [ref=e738]
+                - paragraph [ref=e739]: Kite surfing paradise on the east coast with laid-back atmosphere.
+            - generic [ref=e740]:
+              - img "Jambiani Beach" [ref=e742]
+              - generic [ref=e743]:
+                - heading "Jambiani Beach" [level=3] [ref=e744]
+                - paragraph [ref=e745]: Traditional fishing village feel with seaweed farming and local culture.
+        - generic [ref=e747]:
+          - heading "Things to Do" [level=2] [ref=e748]
+          - generic [ref=e749]:
+            - generic [ref=e750]:
+              - img [ref=e752]
+              - generic [ref=e755]:
+                - generic [ref=e756]:
+                  - heading "Stone Town Walking Tour" [level=3] [ref=e757]
+                  - generic [ref=e758]: Half Day
+                - paragraph [ref=e759]: Explore the UNESCO World Heritage Site with its winding alleys, ornate doors, and rich history.
+            - generic [ref=e760]:
+              - img [ref=e762]
+              - generic [ref=e765]:
+                - generic [ref=e766]:
+                  - heading "Spice Tour" [level=3] [ref=e767]
+                  - generic [ref=e768]: Half Day
+                - paragraph [ref=e769]: Visit local spice farms to see, smell, and taste cloves, vanilla, cinnamon, and more.
+            - generic [ref=e770]:
+              - img [ref=e772]
+              - generic [ref=e776]:
+                - generic [ref=e777]:
+                  - heading "Snorkeling & Diving" [level=3] [ref=e778]
+                  - generic [ref=e779]: Full Day
+                - paragraph [ref=e780]: Discover vibrant coral reefs and marine life around Mnemba Atoll and other dive sites.
+            - generic [ref=e781]:
+              - img [ref=e783]
+              - generic [ref=e789]:
+                - generic [ref=e790]:
+                  - heading "Sunset Dhow Cruise" [level=3] [ref=e791]
+                  - generic [ref=e792]: Evening
+                - paragraph [ref=e793]: Sail on a traditional wooden dhow while watching the sun set over the Indian Ocean.
+        - generic [ref=e795]:
+          - heading "Beach Extension Packages" [level=2] [ref=e796]
+          - generic [ref=e797]:
+            - generic [ref=e798]:
+              - heading "3-Day Beach Escape" [level=3] [ref=e799]
+              - paragraph [ref=e800]: 3 Nights
+              - generic [ref=e801]:
+                - generic [ref=e802]: from
+                - generic [ref=e803]: $850
+                - text: /person
+              - list [ref=e804]:
+                - listitem [ref=e805]:
+                  - generic [ref=e806]: ✓
+                  - text: Beach Resort
+                - listitem [ref=e807]:
+                  - generic [ref=e808]: ✓
+                  - text: Stone Town Tour
+                - listitem [ref=e809]:
+                  - generic [ref=e810]: ✓
+                  - text: Airport Transfers
+              - link "Inquire Now" [ref=e811] [cursor=pointer]:
+                - /url: "#inquiry-form"
+            - generic [ref=e812]:
+              - generic [ref=e813]: MOST POPULAR
+              - heading "5-Day Island Explorer" [level=3] [ref=e814]
+              - paragraph [ref=e815]: 5 Nights
+              - generic [ref=e816]:
+                - generic [ref=e817]: from
+                - generic [ref=e818]: $1,100
+                - text: /person
+              - list [ref=e819]:
+                - listitem [ref=e820]:
+                  - generic [ref=e821]: ✓
+                  - text: Beach Resort
+                - listitem [ref=e822]:
+                  - generic [ref=e823]: ✓
+                  - text: Stone Town Tour
+                - listitem [ref=e824]:
+                  - generic [ref=e825]: ✓
+                  - text: Spice Tour
+                - listitem [ref=e826]:
+                  - generic [ref=e827]: ✓
+                  - text: Snorkeling Trip
+              - link "Inquire Now" [ref=e828] [cursor=pointer]:
+                - /url: "#inquiry-form"
+            - generic [ref=e829]:
+              - heading "7-Day Ultimate Zanzibar" [level=3] [ref=e830]
+              - paragraph [ref=e831]: 7 Nights
+              - generic [ref=e832]:
+                - generic [ref=e833]: from
+                - generic [ref=e834]: $1,980
+                - text: /person
+              - list [ref=e835]:
+                - listitem [ref=e836]:
+                  - generic [ref=e837]: ✓
+                  - text: Premium Resort
+                - listitem [ref=e838]:
+                  - generic [ref=e839]: ✓
+                  - text: All Tours Included
+                - listitem [ref=e840]:
+                  - generic [ref=e841]: ✓
+                  - text: Sunset Dhow Cruise
+                - listitem [ref=e842]:
+                  - generic [ref=e843]: ✓
+                  - text: Private Transfers
+              - link "Inquire Now" [ref=e844] [cursor=pointer]:
+                - /url: "#inquiry-form"
+          - paragraph [ref=e845]: All packages can be customized. Prices based on double occupancy, mid-range accommodation.
+        - generic [ref=e848]:
+          - img "Stone Town" [ref=e850]
+          - generic [ref=e851]:
+            - heading "Stone Town - A UNESCO World Heritage Site" [level=2] [ref=e852]
+            - paragraph [ref=e853]: The historic heart of Zanzibar, Stone Town is a labyrinth of narrow streets, ancient buildings, and carved wooden doors that tell stories of centuries of trade and cultural exchange.
+            - paragraph [ref=e854]: Walk through the old slave market, visit the Sultan's Palace, haggle in the bustling Darajani Market, and watch the sunset from the famous Forodhani Gardens food market.
+            - list [ref=e855]:
+              - listitem [ref=e856]:
+                - generic [ref=e857]: ✓
+                - text: UNESCO World Heritage Site since 2000
+              - listitem [ref=e858]:
+                - generic [ref=e859]: ✓
+                - text: Over 1,000 years of history
+              - listitem [ref=e860]:
+                - generic [ref=e861]: ✓
+                - text: Famous ornate carved doors
+              - listitem [ref=e862]:
+                - generic [ref=e863]: ✓
+                - text: Birthplace of Freddie Mercury
+        - generic [ref=e865]:
+          - heading "Safari + Beach = Perfect Combo" [level=2] [ref=e866]
+          - paragraph [ref=e867]: Many of our guests combine their Tanzania safari with a few relaxing days in Zanzibar. We'll handle all the logistics - just tell us your dates and preferences.
+          - generic [ref=e868]:
+            - link "View Safari Packages" [ref=e869] [cursor=pointer]:
+              - /url: /tanzania-safaris/
+            - link "Kilimanjaro + Zanzibar" [ref=e870] [cursor=pointer]:
+              - /url: /trekking/
+        - generic [ref=e873]:
+          - generic [ref=e874]:
+            - heading "Plan Your Zanzibar Getaway" [level=2] [ref=e875]
+            - paragraph [ref=e876]: Tell us about your dream beach holiday and we'll create the perfect Zanzibar experience for you.
+          - generic [ref=e878]:
+            - generic [ref=e880]:
+              - img [ref=e883]
+              - img [ref=e888]
+              - img [ref=e895]
+              - img [ref=e899]
+              - img [ref=e906]
+              - img [ref=e912]
+            - generic [ref=e916]: Step 1 of 6
+            - generic [ref=e918]:
+              - heading "Tell us about yourself" [level=3] [ref=e919]:
+                - img [ref=e920]
+                - text: Tell us about yourself
+              - generic [ref=e923]:
+                - generic [ref=e924]:
+                  - generic [ref=e925]: Full Name *
+                  - textbox "John Smith" [ref=e926]
+                - generic [ref=e927]:
+                  - generic [ref=e928]: Email Address *
+                  - textbox "john@example.com" [ref=e929]
+              - generic [ref=e930]:
+                - generic [ref=e931]:
+                  - generic [ref=e932]: Country *
+                  - combobox [ref=e933]:
+                    - option "Select your country" [selected]
+                    - option "🇺🇸 United States"
+                    - option "🇬🇧 United Kingdom"
+                    - option "🇩🇪 Germany"
+                    - option "🇫🇷 France"
+                    - option "🇨🇦 Canada"
+                    - option "🇦🇺 Australia"
+                    - option "🇳🇱 Netherlands"
+                    - option "🇮🇹 Italy"
+                    - option "🇪🇸 Spain"
+                    - option "🇨🇭 Switzerland"
+                    - option "🇧🇪 Belgium"
+                    - option "🇦🇹 Austria"
+                    - option "🇸🇪 Sweden"
+                    - option "🇳🇴 Norway"
+                    - option "🇩🇰 Denmark"
+                    - option "🇮🇪 Ireland"
+                    - option "🇳🇿 New Zealand"
+                    - option "🇿🇦 South Africa"
+                    - option "🇯🇵 Japan"
+                    - option "🇸🇬 Singapore"
+                    - option "──────────────" [disabled]
+                    - option "🇦🇫 Afghanistan"
+                    - option "🇦🇱 Albania"
+                    - option "🇩🇿 Algeria"
+                    - option "🇦🇩 Andorra"
+                    - option "🇦🇴 Angola"
+                    - option "🇦🇬 Antigua and Barbuda"
+                    - option "🇦🇷 Argentina"
+                    - option "🇦🇲 Armenia"
+                    - option "🇦🇿 Azerbaijan"
+                    - option "🇧🇸 Bahamas"
+                    - option "🇧🇭 Bahrain"
+                    - option "🇧🇩 Bangladesh"
+                    - option "🇧🇧 Barbados"
+                    - option "🇧🇾 Belarus"
+                    - option "🇧🇿 Belize"
+                    - option "🇧🇯 Benin"
+                    - option "🇧🇹 Bhutan"
+                    - option "🇧🇴 Bolivia"
+                    - option "🇧🇦 Bosnia and Herzegovina"
+                    - option "🇧🇼 Botswana"
+                    - option "🇧🇷 Brazil"
+                    - option "🇧🇳 Brunei"
+                    - option "🇧🇬 Bulgaria"
+                    - option "🇧🇫 Burkina Faso"
+                    - option "🇧🇮 Burundi"
+                    - option "🇨🇻 Cabo Verde"
+                    - option "🇰🇭 Cambodia"
+                    - option "🇨🇲 Cameroon"
+                    - option "🇨🇫 Central African Republic"
+                    - option "🇹🇩 Chad"
+                    - option "🇨🇱 Chile"
+                    - option "🇨🇳 China"
+                    - option "🇨🇴 Colombia"
+                    - option "🇰🇲 Comoros"
+                    - option "🇨🇬 Congo"
+                    - option "🇨🇩 Congo (DRC)"
+                    - option "🇨🇷 Costa Rica"
+                    - option "🇭🇷 Croatia"
+                    - option "🇨🇺 Cuba"
+                    - option "🇨🇾 Cyprus"
+                    - option "🇨🇿 Czech Republic"
+                    - option "🇨🇮 Cote d'Ivoire"
+                    - option "🇩🇯 Djibouti"
+                    - option "🇩🇲 Dominica"
+                    - option "🇩🇴 Dominican Republic"
+                    - option "🇪🇨 Ecuador"
+                    - option "🇪🇬 Egypt"
+                    - option "🇸🇻 El Salvador"
+                    - option "🇬🇶 Equatorial Guinea"
+                    - option "🇪🇷 Eritrea"
+                    - option "🇪🇪 Estonia"
+                    - option "🇸🇿 Eswatini"
+                    - option "🇪🇹 Ethiopia"
+                    - option "🇫🇯 Fiji"
+                    - option "🇫🇮 Finland"
+                    - option "🇬🇦 Gabon"
+                    - option "🇬🇲 Gambia"
+                    - option "🇬🇪 Georgia"
+                    - option "🇬🇭 Ghana"
+                    - option "🇬🇷 Greece"
+                    - option "🇬🇩 Grenada"
+                    - option "🇬🇹 Guatemala"
+                    - option "🇬🇳 Guinea"
+                    - option "🇬🇼 Guinea-Bissau"
+                    - option "🇬🇾 Guyana"
+                    - option "🇭🇹 Haiti"
+                    - option "🇭🇳 Honduras"
+                    - option "🇭🇰 Hong Kong"
+                    - option "🇭🇺 Hungary"
+                    - option "🇮🇸 Iceland"
+                    - option "🇮🇳 India"
+                    - option "🇮🇩 Indonesia"
+                    - option "🇮🇷 Iran"
+                    - option "🇮🇶 Iraq"
+                    - option "🇮🇱 Israel"
+                    - option "🇯🇲 Jamaica"
+                    - option "🇯🇴 Jordan"
+                    - option "🇰🇿 Kazakhstan"
+                    - option "🇰🇪 Kenya"
+                    - option "🇰🇮 Kiribati"
+                    - option "🇰🇼 Kuwait"
+                    - option "🇰🇬 Kyrgyzstan"
+                    - option "🇱🇦 Laos"
+                    - option "🇱🇻 Latvia"
+                    - option "🇱🇧 Lebanon"
+                    - option "🇱🇸 Lesotho"
+                    - option "🇱🇷 Liberia"
+                    - option "🇱🇾 Libya"
+                    - option "🇱🇮 Liechtenstein"
+                    - option "🇱🇹 Lithuania"
+                    - option "🇱🇺 Luxembourg"
+                    - option "🇲🇴 Macau"
+                    - option "🇲🇬 Madagascar"
+                    - option "🇲🇼 Malawi"
+                    - option "🇲🇾 Malaysia"
+                    - option "🇲🇻 Maldives"
+                    - option "🇲🇱 Mali"
+                    - option "🇲🇹 Malta"
+                    - option "🇲🇭 Marshall Islands"
+                    - option "🇲🇷 Mauritania"
+                    - option "🇲🇺 Mauritius"
+                    - option "🇲🇽 Mexico"
+                    - option "🇫🇲 Micronesia"
+                    - option "🇲🇩 Moldova"
+                    - option "🇲🇨 Monaco"
+                    - option "🇲🇳 Mongolia"
+                    - option "🇲🇪 Montenegro"
+                    - option "🇲🇦 Morocco"
+                    - option "🇲🇿 Mozambique"
+                    - option "🇲🇲 Myanmar"
+                    - option "🇳🇦 Namibia"
+                    - option "🇳🇷 Nauru"
+                    - option "🇳🇵 Nepal"
+                    - option "🇳🇮 Nicaragua"
+                    - option "🇳🇪 Niger"
+                    - option "🇳🇬 Nigeria"
+                    - option "🇰🇵 North Korea"
+                    - option "🇲🇰 North Macedonia"
+                    - option "🇴🇲 Oman"
+                    - option "🇵🇰 Pakistan"
+                    - option "🇵🇼 Palau"
+                    - option "🇵🇸 Palestine"
+                    - option "🇵🇦 Panama"
+                    - option "🇵🇬 Papua New Guinea"
+                    - option "🇵🇾 Paraguay"
+                    - option "🇵🇪 Peru"
+                    - option "🇵🇭 Philippines"
+                    - option "🇵🇱 Poland"
+                    - option "🇵🇹 Portugal"
+                    - option "🇶🇦 Qatar"
+                    - option "🇷🇴 Romania"
+                    - option "🇷🇺 Russia"
+                    - option "🇷🇼 Rwanda"
+                    - option "🇰🇳 Saint Kitts and Nevis"
+                    - option "🇱🇨 Saint Lucia"
+                    - option "🇻🇨 Saint Vincent"
+                    - option "🇼🇸 Samoa"
+                    - option "🇸🇲 San Marino"
+                    - option "🇸🇹 Sao Tome and Principe"
+                    - option "🇸🇦 Saudi Arabia"
+                    - option "🇸🇳 Senegal"
+                    - option "🇷🇸 Serbia"
+                    - option "🇸🇨 Seychelles"
+                    - option "🇸🇱 Sierra Leone"
+                    - option "🇸🇰 Slovakia"
+                    - option "🇸🇮 Slovenia"
+                    - option "🇸🇧 Solomon Islands"
+                    - option "🇸🇴 Somalia"
+                    - option "🇰🇷 South Korea"
+                    - option "🇸🇸 South Sudan"
+                    - option "🇱🇰 Sri Lanka"
+                    - option "🇸🇩 Sudan"
+                    - option "🇸🇷 Suriname"
+                    - option "🇸🇾 Syria"
+                    - option "🇹🇼 Taiwan"
+                    - option "🇹🇯 Tajikistan"
+                    - option "🇹🇿 Tanzania"
+                    - option "🇹🇭 Thailand"
+                    - option "🇹🇱 Timor-Leste"
+                    - option "🇹🇬 Togo"
+                    - option "🇹🇴 Tonga"
+                    - option "🇹🇹 Trinidad and Tobago"
+                    - option "🇹🇳 Tunisia"
+                    - option "🇹🇷 Turkey"
+                    - option "🇹🇲 Turkmenistan"
+                    - option "🇹🇻 Tuvalu"
+                    - option "🇺🇬 Uganda"
+                    - option "🇺🇦 Ukraine"
+                    - option "🇦🇪 United Arab Emirates"
+                    - option "🇺🇾 Uruguay"
+                    - option "🇺🇿 Uzbekistan"
+                    - option "🇻🇺 Vanuatu"
+                    - option "🇻🇦 Vatican City"
+                    - option "🇻🇪 Venezuela"
+                    - option "🇻🇳 Vietnam"
+                    - option "🇾🇪 Yemen"
+                    - option "🇿🇲 Zambia"
+                    - option "🇿🇼 Zimbabwe"
+                - generic [ref=e934]:
+                  - generic [ref=e935]: Phone / WhatsApp
+                  - generic [ref=e936]:
+                    - combobox [ref=e937]:
+                      - option "+1" [selected]
+                      - option "+44"
+                      - option "+49"
+                      - option "+33"
+                      - option "+31"
+                      - option "+61"
+                      - option "+255"
+                      - option "+254"
+                      - option "+27"
+                      - option "+91"
+                      - option "+86"
+                      - option "+81"
+                      - option "+34"
+                      - option "+39"
+                      - option "+41"
+                      - option "+43"
+                      - option "+46"
+                      - option "+47"
+                      - option "+45"
+                      - option "+353"
+                      - option "+64"
+                      - option "+32"
+                      - option "+65"
+                      - option "+55"
+                      - option "+52"
+                      - option "+48"
+                      - option "+7"
+                      - option "+971"
+                      - option "+966"
+                      - option "+90"
+                      - option "+62"
+                      - option "+60"
+                      - option "+66"
+                      - option "+84"
+                      - option "+82"
+                      - option "+234"
+                      - option "+20"
+                      - option "+256"
+                      - option "+250"
+                    - textbox "123 456 7890" [ref=e938]
+            - text: Website
+            - textbox [ref=e939]
+            - button "Next" [ref=e941]:
+              - text: Next
+              - img [ref=e942]
+            - paragraph [ref=e944]:
+              - text: We'll send you beach holiday options within 24 hours. No spam, ever. Your data is protected under our
+              - link "privacy policy" [ref=e945] [cursor=pointer]:
+                - /url: /privacy-policy/
+              - text: .
+    - contentinfo [ref=e569]:
+      - generic [ref=e572]:
+        - generic [ref=e573]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e574]
+      - generic [ref=e579]:
+        - generic [ref=e580]:
+          - generic [ref=e581]:
+            - img "Snow Africa Adventure" [ref=e583]
+            - paragraph [ref=e584]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e585]:
+              - listitem [ref=e586]:
+                - link "+255 766 657 854" [ref=e587] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e589]
+                  - generic [ref=e591]: +255 766 657 854
+              - listitem [ref=e592]:
+                - link "info@snowafricaadventure.com" [ref=e593] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e595]
+                  - generic [ref=e598]: info@snowafricaadventure.com
+              - listitem [ref=e599]:
+                - img [ref=e601]
+                - generic [ref=e604]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e605]:
+            - heading "Safari & Tours" [level=3] [ref=e606]
+            - list [ref=e607]:
+              - listitem [ref=e608]:
+                - link "All Safari Packages" [ref=e609] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e610]:
+                - link "Tailor-Made Safaris" [ref=e611] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e612]:
+                - link "Tanzania Destinations" [ref=e613] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e614]:
+                - link "View all" [ref=e615] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e616]: →
+          - generic [ref=e617]:
+            - heading "Kilimanjaro" [level=3] [ref=e618]
+            - list [ref=e619]:
+              - listitem [ref=e620]:
+                - link "All Trekking Routes" [ref=e621] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e622]:
+                - link "Best Route to Climb" [ref=e623] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e624]:
+                - link "Climbing Kilimanjaro Guide" [ref=e625] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e626]:
+                - link "Join Group Departures" [ref=e627] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e628]:
+                - link "Kilimanjaro Prices" [ref=e629] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e630]:
+                - link "Best Time to Climb" [ref=e631] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e632]:
+                - link "View all routes" [ref=e633] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e634]: →
+          - generic [ref=e635]:
+            - heading "Company" [level=3] [ref=e636]
+            - list [ref=e637]:
+              - listitem [ref=e638]:
+                - link "About Us" [ref=e639] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e640]:
+                - link "Our Guides" [ref=e641] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e642]:
+                - link "Contact Us" [ref=e643] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e644]:
+                - link "Terms & Conditions" [ref=e645] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e646]:
+                - link "Privacy Policy" [ref=e647] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e648]:
+                - link "Blog" [ref=e649] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e650]:
+              - heading "Follow the Journey" [level=4] [ref=e651]
+              - generic [ref=e652]:
+                - link "Facebook" [ref=e653] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e654]
+                - link "Twitter" [ref=e656] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e657]
+                - link "Instagram" [ref=e659] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e660]
+                - link "YouTube" [ref=e663] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e664]
+        - generic [ref=e668]:
+          - generic [ref=e669]: Accredited & Trusted
+          - generic [ref=e670]:
+            - link "TripAdvisor" [ref=e671] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e673]: SafariBookings
+            - generic [ref=e675]: TATO Member
+            - generic [ref=e677]: KPAP Partner
+      - generic [ref=e680]:
+        - generic [ref=e681]:
+          - generic [ref=e682]: © 2026 Snow Africa Adventure. All rights reserved.
+          - link "Terms & Conditions" [ref=e683] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e684]: ·
+          - link "Privacy Policy" [ref=e685] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e686]:
+          - generic [ref=e687]: Crafted by
+          - link "Timeless International" [ref=e688] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 04:31 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e689]:
+      - img [ref=e690]
+  - alert [ref=e693]: Zanzibar Beach Holidays Tanzania | Snow Africa Adventure
+  - generic [ref=e699]:
+    - img "Trustindex"
+    - text: Unfortunately, the 7-day trial period has expired.
+    - strong [ref=e700]:
+      - link "Check our subscription plans! >>" [ref=e701] [cursor=pointer]:
+        - /url: https://admin.trustindex.io/subscription/details

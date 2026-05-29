@@ -1,0 +1,387 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+        - /url: tel:+255766657854
+        - img [ref=e9]
+        - generic [ref=e11]: +255 766 657 854
+      - generic [ref=e12]:
+        - generic [ref=e14]:
+          - link "Snow Africa Adventure" [ref=e15] [cursor=pointer]:
+            - /url: /
+            - img "Snow Africa Adventure" [ref=e16]
+          - generic [ref=e17]:
+            - link "Plan Your Trip" [ref=e18] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+            - link "Search" [ref=e19] [cursor=pointer]:
+              - /url: /search/
+              - img [ref=e20]
+            - button "Open menu" [ref=e23]:
+              - img [ref=e24]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+            - text: Home
+            - img [ref=e28]
+          - generic [ref=e30]:
+            - button "Safaris & Tours" [ref=e31]:
+              - text: Safaris & Tours
+              - img [ref=e32]
+            - generic [ref=e34]:
+              - link "All Safari Packages Browse curated Tanzania safaris" [ref=e35] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+                - img [ref=e36]
+                - generic [ref=e41]:
+                  - generic [ref=e42]: All Safari Packages
+                  - generic [ref=e43]: Browse curated Tanzania safaris
+              - link "Tailor-Made Safaris Custom itineraries for your group" [ref=e44] [cursor=pointer]:
+                - /url: /tailor-made-safari/
+                - img [ref=e45]
+                - generic [ref=e48]:
+                  - generic [ref=e49]: Tailor-Made Safaris
+                  - generic [ref=e50]: Custom itineraries for your group
+              - link "Destinations Serengeti, Ngorongoro & more" [ref=e51] [cursor=pointer]:
+                - /url: /tanzania-destinations/
+                - img [ref=e52]
+                - generic [ref=e54]:
+                  - generic [ref=e55]: Destinations
+                  - generic [ref=e56]: Serengeti, Ngorongoro & more
+              - link "Day Tours Single-day excursions from Arusha" [ref=e57] [cursor=pointer]:
+                - /url: /tanzania-day-tours/
+                - img [ref=e58]
+                - generic [ref=e64]:
+                  - generic [ref=e65]: Day Tours
+                  - generic [ref=e66]: Single-day excursions from Arusha
+          - generic [ref=e67]:
+            - button "Trekking" [ref=e68]:
+              - text: Trekking
+              - img [ref=e69]
+            - generic [ref=e71]:
+              - link "All Trekking Routes Compare all Kilimanjaro routes" [ref=e72] [cursor=pointer]:
+                - /url: /trekking/
+                - img [ref=e73]
+                - generic [ref=e75]:
+                  - generic [ref=e76]: All Trekking Routes
+                  - generic [ref=e77]: Compare all Kilimanjaro routes
+              - link "Best Route to Climb Route comparison guide" [ref=e78] [cursor=pointer]:
+                - /url: /best-route-to-climb-kilimanjaro/
+                - img [ref=e79]
+                - generic [ref=e82]:
+                  - generic [ref=e83]: Best Route to Climb
+                  - generic [ref=e84]: Route comparison guide
+              - link "Climbing Guide Everything you need to know" [ref=e85] [cursor=pointer]:
+                - /url: /climbing-kilimanjaro/
+                - img [ref=e86]
+                - generic [ref=e88]:
+                  - generic [ref=e89]: Climbing Guide
+                  - generic [ref=e90]: Everything you need to know
+              - link "Kilimanjaro Prices Full cost breakdown" [ref=e91] [cursor=pointer]:
+                - /url: /kilimanjaro-prices/
+                - img [ref=e92]
+                - generic [ref=e94]:
+                  - generic [ref=e95]: Kilimanjaro Prices
+                  - generic [ref=e96]: Full cost breakdown
+              - link "Best Time to Climb Seasonal guide" [ref=e97] [cursor=pointer]:
+                - /url: /best-time-to-climb-kilimanjaro/
+                - img [ref=e98]
+                - generic [ref=e101]:
+                  - generic [ref=e102]: Best Time to Climb
+                  - generic [ref=e103]: Seasonal guide
+          - link "Join Group Climb" [ref=e104] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e105]
+            - text: Join Group Climb
+            - img [ref=e110]
+          - link "Zanzibar" [ref=e112] [cursor=pointer]:
+            - /url: /zanzibar/
+            - text: Zanzibar
+            - img [ref=e113]
+          - link "Contact Us" [ref=e115] [cursor=pointer]:
+            - /url: /contact-us/
+            - text: Contact Us
+            - img [ref=e116]
+          - generic [ref=e119]:
+            - link "About Us" [ref=e120] [cursor=pointer]:
+              - /url: /about-us/
+              - text: About Us
+              - img [ref=e121]
+            - link "Tailor-Made Safaris" [ref=e123] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+              - text: Tailor-Made Safaris
+              - img [ref=e124]
+            - link "Blog" [ref=e126] [cursor=pointer]:
+              - /url: /blog/
+              - text: Blog
+              - img [ref=e127]
+          - link "Plan Your Trip" [ref=e130] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - generic [ref=e132]:
+            - link "+255 766 657 854" [ref=e133] [cursor=pointer]:
+              - /url: tel:+255766657854
+              - img [ref=e134]
+              - text: +255 766 657 854
+            - link "info@snowafricaadventure.com" [ref=e136] [cursor=pointer]:
+              - /url: mailto:info@snowafricaadventure.com
+              - img [ref=e137]
+              - text: info@snowafricaadventure.com
+    - main [ref=e140]:
+      - generic [ref=e700]:
+        - generic [ref=e702]:
+          - heading "Terms and Conditions" [level=1] [ref=e703]
+          - paragraph [ref=e704]: "Last updated: January 2025"
+        - generic [ref=e707]:
+          - paragraph [ref=e708]: These terms and conditions govern your use of Snow Africa Adventure services and website. By booking with us, you agree to these terms.
+          - heading "1. Booking and Confirmation" [level=2] [ref=e709]
+          - paragraph [ref=e710]: A booking is confirmed once we receive your deposit and send you a written confirmation. Please review your confirmation carefully and notify us of any errors within 48 hours.
+          - list [ref=e711]:
+            - listitem [ref=e712]: "Kilimanjaro climbs: 10% deposit required at booking, balance due 30 days before departure"
+            - listitem [ref=e713]: "Safari packages: 30% deposit required at booking, balance due 30 days before departure"
+            - listitem [ref=e714]: "Day trips: Full payment required at booking"
+            - listitem [ref=e715]: "Group departures: 10% deposit to secure your spot, balance due 45 days before departure"
+          - heading "2. Payment Methods" [level=2] [ref=e716]
+          - paragraph [ref=e717]: "We accept the following payment methods:"
+          - list [ref=e718]:
+            - listitem [ref=e719]: Bank transfer (USD)
+            - listitem [ref=e720]: Credit/debit card (Visa, Mastercard) - 3% processing fee
+            - listitem [ref=e721]: PayPal - 4% processing fee
+            - listitem [ref=e722]: Cash (USD) upon arrival
+          - paragraph [ref=e723]: All prices are quoted in US Dollars (USD) unless otherwise stated. Payments in other currencies will be converted at the prevailing exchange rate.
+          - heading "3. Cancellation Policy" [level=2] [ref=e724]
+          - paragraph [ref=e725]: "We understand plans can change. Our cancellation policy is as follows:"
+          - heading "Kilimanjaro Climbs & Safaris" [level=3] [ref=e726]
+          - list [ref=e727]:
+            - listitem [ref=e728]: "More than 60 days before departure: Full refund minus $100 admin fee"
+            - listitem [ref=e729]: "31-60 days before departure: 50% refund"
+            - listitem [ref=e730]: "15-30 days before departure: 25% refund"
+            - listitem [ref=e731]: "Less than 15 days before departure: No refund"
+          - heading "Group Departures" [level=3] [ref=e732]
+          - list [ref=e733]:
+            - listitem [ref=e734]: "More than 60 days: Full refund minus $100 admin fee"
+            - listitem [ref=e735]: "45-60 days: 70% refund"
+            - listitem [ref=e736]: "30-44 days: 50% refund"
+            - listitem [ref=e737]: "Less than 30 days: No refund"
+          - heading "Day Trips" [level=3] [ref=e738]
+          - list [ref=e739]:
+            - listitem [ref=e740]: "More than 48 hours: Full refund"
+            - listitem [ref=e741]: "24-48 hours: 50% refund"
+            - listitem [ref=e742]: "Less than 24 hours: No refund"
+          - paragraph [ref=e743]:
+            - text: Cancellations must be made in writing via email to
+            - link "info@snowafricaadventure.com" [ref=e744] [cursor=pointer]:
+              - /url: mailto:info@snowafricaadventure.com
+            - text: .
+          - heading "4. Changes and Amendments" [level=2] [ref=e745]
+          - paragraph [ref=e746]: We will do our best to accommodate changes to your booking. Amendment requests made more than 30 days before departure are subject to a $50 admin fee plus any supplier charges. Changes within 30 days may not be possible and may be treated as cancellations.
+          - heading "5. Travel Insurance" [level=2] [ref=e747]
+          - paragraph [ref=e748]:
+            - strong [ref=e749]: Travel insurance is mandatory for all Kilimanjaro climbs and strongly recommended for all other activities.
+            - text: Your insurance must cover emergency evacuation, trip cancellation, medical expenses, and personal belongings.
+          - paragraph [ref=e750]: For Kilimanjaro climbs, your policy must specifically cover trekking/mountaineering up to 6,000 meters altitude and emergency helicopter evacuation.
+          - heading "6. Health and Fitness" [level=2] [ref=e751]
+          - paragraph [ref=e752]: You are responsible for ensuring you are physically fit and healthy for your chosen activity. For Kilimanjaro climbs, we recommend consulting a doctor before booking, especially if you have any pre-existing medical conditions.
+          - paragraph [ref=e753]: You must disclose any medical conditions that may affect your ability to participate safely. Our guides reserve the right to prevent anyone from continuing if they believe it poses a safety risk.
+          - heading "7. Itinerary Changes" [level=2] [ref=e754]
+          - paragraph [ref=e755]: While we make every effort to follow the planned itinerary, changes may be necessary due to weather, road conditions, wildlife movements, park regulations, or other factors beyond our control. We reserve the right to modify itineraries to ensure safety and maximize your experience.
+          - paragraph [ref=e756]: No refunds will be given for itinerary changes caused by circumstances beyond our control.
+          - heading "8. Liability" [level=2] [ref=e757]
+          - paragraph [ref=e758]: Snow Africa Adventure acts as an agent for various suppliers (hotels, lodges, transport, etc.) and is not liable for any loss, damage, injury, or death arising from services provided by these suppliers.
+          - paragraph [ref=e759]: We are not responsible for delays, changes, or cancellations caused by weather, political instability, natural disasters, pandemic, or other force majeure events.
+          - paragraph [ref=e760]: Our maximum liability is limited to the total amount paid for your trip.
+          - heading "9. Complaints" [level=2] [ref=e761]
+          - paragraph [ref=e762]: If you have any issues during your trip, please inform your guide immediately so we can address them on the spot. If you wish to file a formal complaint, please do so in writing within 14 days of your trip completion.
+          - heading "10. Photography and Marketing" [level=2] [ref=e763]
+          - paragraph [ref=e764]: We may take photographs during your trip for marketing purposes. If you do not wish to be photographed, please inform your guide at the start of your trip. By participating in our activities, you grant us permission to use photos containing your likeness for promotional purposes unless you opt out.
+          - heading "11. Environmental Responsibility" [level=2] [ref=e765]
+          - paragraph [ref=e766]: We are committed to responsible tourism. All participants must respect wildlife, local communities, and the environment. Littering, feeding wildlife, or engaging in any activity that harms the environment or local culture is strictly prohibited and may result in immediate termination of your trip without refund.
+          - heading "12. Governing Law" [level=2] [ref=e767]
+          - paragraph [ref=e768]: These terms are governed by the laws of the United Republic of Tanzania. Any disputes shall be resolved through arbitration in Arusha, Tanzania.
+          - heading "Contact Information" [level=2] [ref=e769]
+          - paragraph [ref=e770]: "For questions about these terms, please contact us:"
+          - list [ref=e771]:
+            - listitem [ref=e772]: "Email: info@snowafricaadventure.com"
+            - listitem [ref=e773]: "Phone: +255 766 657 854"
+            - listitem [ref=e774]: "Address: MEC House, Plot no 161, Second floor, Mianzini Area, Arusha, Tanzania"
+        - generic [ref=e777]:
+          - link "Privacy Policy" [ref=e778] [cursor=pointer]:
+            - /url: /privacy-policy/
+          - generic [ref=e779]: "|"
+          - link "Contact Us" [ref=e780] [cursor=pointer]:
+            - /url: /contact-us/
+          - generic [ref=e781]: "|"
+          - link "About Us" [ref=e782] [cursor=pointer]:
+            - /url: /about-us/
+    - contentinfo [ref=e569]:
+      - generic [ref=e572]:
+        - generic [ref=e573]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e574]
+      - generic [ref=e579]:
+        - generic [ref=e580]:
+          - generic [ref=e581]:
+            - img "Snow Africa Adventure" [ref=e583]
+            - paragraph [ref=e584]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e585]:
+              - listitem [ref=e586]:
+                - link "+255 766 657 854" [ref=e587] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e589]
+                  - generic [ref=e591]: +255 766 657 854
+              - listitem [ref=e592]:
+                - link "info@snowafricaadventure.com" [ref=e593] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e595]
+                  - generic [ref=e598]: info@snowafricaadventure.com
+              - listitem [ref=e599]:
+                - img [ref=e601]
+                - generic [ref=e604]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e605]:
+            - heading "Safari & Tours" [level=3] [ref=e606]
+            - list [ref=e607]:
+              - listitem [ref=e608]:
+                - link "All Safari Packages" [ref=e609] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e610]:
+                - link "Tailor-Made Safaris" [ref=e611] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e612]:
+                - link "Tanzania Destinations" [ref=e613] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e614]:
+                - link "View all" [ref=e615] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e616]: →
+          - generic [ref=e617]:
+            - heading "Kilimanjaro" [level=3] [ref=e618]
+            - list [ref=e619]:
+              - listitem [ref=e620]:
+                - link "All Trekking Routes" [ref=e621] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e622]:
+                - link "Best Route to Climb" [ref=e623] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e624]:
+                - link "Climbing Kilimanjaro Guide" [ref=e625] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e626]:
+                - link "Join Group Departures" [ref=e627] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e628]:
+                - link "Kilimanjaro Prices" [ref=e629] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e630]:
+                - link "Best Time to Climb" [ref=e631] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e632]:
+                - link "View all routes" [ref=e633] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e634]: →
+          - generic [ref=e635]:
+            - heading "Company" [level=3] [ref=e636]
+            - list [ref=e637]:
+              - listitem [ref=e638]:
+                - link "About Us" [ref=e639] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e640]:
+                - link "Our Guides" [ref=e641] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e642]:
+                - link "Contact Us" [ref=e643] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e644]:
+                - link "Terms & Conditions" [ref=e645] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e646]:
+                - link "Privacy Policy" [ref=e647] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e648]:
+                - link "Blog" [ref=e649] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e650]:
+              - heading "Follow the Journey" [level=4] [ref=e651]
+              - generic [ref=e652]:
+                - link "Facebook" [ref=e653] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e654]
+                - link "Twitter" [ref=e656] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e657]
+                - link "Instagram" [ref=e659] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e660]
+                - link "YouTube" [ref=e663] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e664]
+        - generic [ref=e668]:
+          - generic [ref=e669]: Accredited & Trusted
+          - generic [ref=e670]:
+            - link "TripAdvisor" [ref=e671] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e673]: SafariBookings
+            - generic [ref=e675]: TATO Member
+            - generic [ref=e677]: KPAP Partner
+      - generic [ref=e680]:
+        - generic [ref=e681]:
+          - generic [ref=e682]: © 2026 Snow Africa Adventure. All rights reserved.
+          - link "Terms & Conditions" [active] [ref=e683] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e684]: ·
+          - link "Privacy Policy" [ref=e685] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e686]:
+          - generic [ref=e687]: Crafted by
+          - link "Timeless International" [ref=e688] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 04:30 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e689]:
+      - img [ref=e690]
+  - alert [ref=e693]: Terms and Conditions | Snow Africa Adventure
+  - generic [ref=e697]:
+    - img "Trustindex" [ref=e783]
+    - text: Unfortunately, the 7-day trial period has expired.
+    - strong [ref=e698]:
+      - link "Check our subscription plans! >>" [ref=e699] [cursor=pointer]:
+        - /url: https://admin.trustindex.io/subscription/details

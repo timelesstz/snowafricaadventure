@@ -1,0 +1,1341 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e54]:
+          - text: 2026–2027 Season
+          - heading "Kilimanjaro Group Departures" [level=1] [ref=e55]
+          - paragraph [ref=e56]: Join our scheduled group climbs with fixed departure dates. Share the adventure with fellow climbers from around the world.
+          - generic [ref=e57]:
+            - generic [ref=e58]: 🌕 Full Moon climbs available
+            - generic [ref=e59]: 👥 Small groups (max 10)
+            - generic [ref=e60]: ✓ Expert local guides
+          - link "View Departure Dates & Prices" [ref=e62] [cursor=pointer]:
+            - /url: "#departures"
+          - generic [ref=e63]:
+            - generic [ref=e64]: "Share this page:"
+            - generic [ref=e65]:
+              - button "Share on Facebook" [ref=e66]:
+                - img [ref=e67]
+              - button "Share on X" [ref=e69]:
+                - img [ref=e70]
+              - button "Share on WhatsApp" [ref=e72]:
+                - img [ref=e73]
+              - button "Share via Email" [ref=e75]:
+                - img [ref=e76]
+              - button "Copy Link" [ref=e78]:
+                - img [ref=e79]
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e86]: "1"
+            - heading "Choose Your Date" [level=3] [ref=e87]
+            - paragraph [ref=e88]: Browse departures below and pick a date
+          - generic [ref=e89]:
+            - generic [ref=e91]: "2"
+            - heading "Book Your Spot" [level=3] [ref=e92]
+            - paragraph [ref=e93]: Secure with 10% deposit. Balance due 60 days before
+          - generic [ref=e94]:
+            - generic [ref=e96]: "3"
+            - heading "Join Your Group" [level=3] [ref=e97]
+            - paragraph [ref=e98]: Meet fellow climbers and summit together
+        - generic [ref=e99]:
+          - generic [ref=e101]:
+            - heading "2026 Departures" [level=2] [ref=e102]
+            - generic [ref=e104]:
+              - complementary [ref=e105]:
+                - generic [ref=e107]:
+                  - heading "Filters" [level=3] [ref=e109]:
+                    - img [ref=e110]
+                    - text: Filters
+                  - generic [ref=e112]:
+                    - heading "Route" [level=4] [ref=e113]:
+                      - img [ref=e114]
+                      - text: Route
+                    - generic [ref=e116]:
+                      - generic [ref=e117] [cursor=pointer]:
+                        - checkbox "8 Days Lemosho Route 28" [ref=e118]
+                        - generic [ref=e119]: 8 Days Lemosho Route
+                        - generic [ref=e120]: "28"
+                      - generic [ref=e121] [cursor=pointer]:
+                        - checkbox "7 Days Machame Route 20" [ref=e122]
+                        - generic [ref=e123]: 7 Days Machame Route
+                        - generic [ref=e124]: "20"
+                      - generic [ref=e125] [cursor=pointer]:
+                        - checkbox "6 Days Rongai Route 3" [ref=e126]
+                        - generic [ref=e127]: 6 Days Rongai Route
+                        - generic [ref=e128]: "3"
+                      - generic [ref=e129] [cursor=pointer]:
+                        - checkbox "9 Days Northern Circuit Route 9" [ref=e130]
+                        - generic [ref=e131]: 9 Days Northern Circuit Route
+                        - generic [ref=e132]: "9"
+                  - generic [ref=e133]:
+                    - heading "Month" [level=4] [ref=e134]:
+                      - img [ref=e135]
+                      - text: Month
+                    - generic [ref=e137]:
+                      - button "Feb4" [ref=e138]
+                      - button "Mar6" [ref=e139]
+                      - button "Apr2" [ref=e140]
+                      - button "May3" [ref=e141]
+                      - button "Jun7" [ref=e142]
+                      - button "Jul8" [ref=e143]
+                      - button "Aug7" [ref=e144]
+                      - button "Sep7" [ref=e145]
+                      - button "Oct5" [ref=e146]
+                      - button "Nov5" [ref=e147]
+                      - button "Dec6" [ref=e148]
+                  - generic [ref=e149]:
+                    - heading "Special" [level=4] [ref=e150]:
+                      - img [ref=e151]
+                      - text: Special
+                    - generic [ref=e153] [cursor=pointer]:
+                      - switch "Full Moon climbs only" [ref=e154]
+                      - generic [ref=e156]: Full Moon climbs only
+                  - generic [ref=e157]:
+                    - heading "Availability" [level=4] [ref=e158]:
+                      - img [ref=e159]
+                      - text: Availability
+                    - generic [ref=e164]:
+                      - generic [ref=e165] [cursor=pointer]:
+                        - radio "All departures" [checked] [ref=e166]
+                        - generic [ref=e167]: All departures
+                      - generic [ref=e168] [cursor=pointer]:
+                        - radio "Available spots only" [ref=e169]
+                        - generic [ref=e170]: Available spots only
+                      - generic [ref=e171] [cursor=pointer]:
+                        - radio "Last few spots (≤3)" [ref=e172]
+                        - generic [ref=e173]: Last few spots (≤3)
+                  - paragraph [ref=e175]: Showing 60 of 60 departures
+              - table [ref=e178]:
+                - rowgroup [ref=e179]:
+                  - row "Route Arrival End Price Availability Action" [ref=e180]:
+                    - columnheader "Route" [ref=e181]
+                    - columnheader "Arrival" [ref=e182]
+                    - columnheader "End" [ref=e183]
+                    - columnheader "Price" [ref=e184]
+                    - columnheader "Availability" [ref=e185]
+                    - columnheader "Action" [ref=e186]
+                - rowgroup [ref=e187]:
+                  - row "8 Days Lemosho Route Feb 14, 2026 Feb 24, 2026 $2,680 Guaranteed JOIN NOW" [ref=e188]:
+                    - cell "8 Days Lemosho Route" [ref=e189]:
+                      - generic [ref=e190]: 8 Days Lemosho Route
+                    - cell "Feb 14, 2026" [ref=e191]
+                    - cell "Feb 24, 2026" [ref=e192]
+                    - cell "$2,680" [ref=e193]
+                    - cell "Guaranteed" [ref=e194]:
+                      - generic [ref=e197]: Guaranteed
+                    - cell "JOIN NOW" [ref=e198]:
+                      - generic [ref=e199]:
+                        - button "JOIN NOW" [ref=e200] [cursor=pointer]
+                        - button [ref=e202]:
+                          - img [ref=e203]
+                  - row "7 Days Machame Route Feb 18, 2026 Feb 26, 2026 $2,440 Guaranteed JOIN NOW" [ref=e205]:
+                    - cell "7 Days Machame Route" [ref=e206]:
+                      - generic [ref=e207]: 7 Days Machame Route
+                    - cell "Feb 18, 2026" [ref=e208]
+                    - cell "Feb 26, 2026" [ref=e209]
+                    - cell "$2,440" [ref=e210]
+                    - cell "Guaranteed" [ref=e211]:
+                      - generic [ref=e214]: Guaranteed
+                    - cell "JOIN NOW" [ref=e215]:
+                      - generic [ref=e216]:
+                        - button "JOIN NOW" [ref=e217] [cursor=pointer]
+                        - button [ref=e219]:
+                          - img [ref=e220]
+                  - row "🌕8 Days Lemosho Route Full Moon Summit Feb 25, 2026 Mar 6, 2026 $2,680 Guaranteed JOIN NOW" [ref=e222]:
+                    - cell "🌕8 Days Lemosho Route Full Moon Summit" [ref=e223]:
+                      - generic [ref=e224]: 🌕8 Days Lemosho Route
+                      - text: Full Moon Summit
+                    - cell "Feb 25, 2026" [ref=e225]
+                    - cell "Mar 6, 2026" [ref=e226]
+                    - cell "$2,680" [ref=e227]
+                    - cell "Guaranteed" [ref=e228]:
+                      - generic [ref=e231]: Guaranteed
+                    - cell "JOIN NOW" [ref=e232]:
+                      - generic [ref=e233]:
+                        - button "JOIN NOW" [ref=e234] [cursor=pointer]
+                        - button [ref=e236]:
+                          - img [ref=e237]
+                  - row "7 Days Machame Route Feb 28, 2026 Mar 8, 2026 $2,440 Guaranteed JOIN NOW" [ref=e239]:
+                    - cell "7 Days Machame Route" [ref=e240]:
+                      - generic [ref=e241]: 7 Days Machame Route
+                    - cell "Feb 28, 2026" [ref=e242]
+                    - cell "Mar 8, 2026" [ref=e243]
+                    - cell "$2,440" [ref=e244]
+                    - cell "Guaranteed" [ref=e245]:
+                      - generic [ref=e248]: Guaranteed
+                    - cell "JOIN NOW" [ref=e249]:
+                      - generic [ref=e250]:
+                        - button "JOIN NOW" [ref=e251] [cursor=pointer]
+                        - button [ref=e253]:
+                          - img [ref=e254]
+                  - row "7 Days Machame Route Mar 6, 2026 Mar 15, 2026 $2,440 Guaranteed JOIN NOW" [ref=e256]:
+                    - cell "7 Days Machame Route" [ref=e257]:
+                      - generic [ref=e258]: 7 Days Machame Route
+                    - cell "Mar 6, 2026" [ref=e259]
+                    - cell "Mar 15, 2026" [ref=e260]
+                    - cell "$2,440" [ref=e261]
+                    - cell "Guaranteed" [ref=e262]:
+                      - generic [ref=e265]: Guaranteed
+                    - cell "JOIN NOW" [ref=e266]:
+                      - generic [ref=e267]:
+                        - button "JOIN NOW" [ref=e268] [cursor=pointer]
+                        - button [ref=e270]:
+                          - img [ref=e271]
+                  - row "7 Days Machame Route Mar 7, 2026 Mar 15, 2026 $2,440 Guaranteed JOIN NOW" [ref=e273]:
+                    - cell "7 Days Machame Route" [ref=e274]:
+                      - generic [ref=e275]: 7 Days Machame Route
+                    - cell "Mar 7, 2026" [ref=e276]
+                    - cell "Mar 15, 2026" [ref=e277]
+                    - cell "$2,440" [ref=e278]
+                    - cell "Guaranteed" [ref=e279]:
+                      - generic [ref=e282]: Guaranteed
+                    - cell "JOIN NOW" [ref=e283]:
+                      - generic [ref=e284]:
+                        - button "JOIN NOW" [ref=e285] [cursor=pointer]
+                        - button [ref=e287]:
+                          - img [ref=e288]
+                  - row "6 Days Rongai Route Mar 8, 2026 Mar 15, 2026 $2,390 Guaranteed JOIN NOW" [ref=e290]:
+                    - cell "6 Days Rongai Route" [ref=e291]:
+                      - generic [ref=e292]: 6 Days Rongai Route
+                    - cell "Mar 8, 2026" [ref=e293]
+                    - cell "Mar 15, 2026" [ref=e294]
+                    - cell "$2,390" [ref=e295]
+                    - cell "Guaranteed" [ref=e296]:
+                      - generic [ref=e299]: Guaranteed
+                    - cell "JOIN NOW" [ref=e300]:
+                      - generic [ref=e301]:
+                        - button "JOIN NOW" [ref=e302] [cursor=pointer]
+                        - button [ref=e304]:
+                          - img [ref=e305]
+                  - row "8 Days Lemosho Route Mar 15, 2026 Mar 24, 2026 $2,680 Guaranteed JOIN NOW" [ref=e307]:
+                    - cell "8 Days Lemosho Route" [ref=e308]:
+                      - generic [ref=e309]: 8 Days Lemosho Route
+                    - cell "Mar 15, 2026" [ref=e310]
+                    - cell "Mar 24, 2026" [ref=e311]
+                    - cell "$2,680" [ref=e312]
+                    - cell "Guaranteed" [ref=e313]:
+                      - generic [ref=e316]: Guaranteed
+                    - cell "JOIN NOW" [ref=e317]:
+                      - generic [ref=e318]:
+                        - button "JOIN NOW" [ref=e319] [cursor=pointer]
+                        - button [ref=e321]:
+                          - img [ref=e322]
+                  - row "7 Days Machame Route Mar 20, 2026 Mar 28, 2026 $2,440 Guaranteed JOIN NOW" [ref=e324]:
+                    - cell "7 Days Machame Route" [ref=e325]:
+                      - generic [ref=e326]: 7 Days Machame Route
+                    - cell "Mar 20, 2026" [ref=e327]
+                    - cell "Mar 28, 2026" [ref=e328]
+                    - cell "$2,440" [ref=e329]
+                    - cell "Guaranteed" [ref=e330]:
+                      - generic [ref=e333]: Guaranteed
+                    - cell "JOIN NOW" [ref=e334]:
+                      - generic [ref=e335]:
+                        - button "JOIN NOW" [ref=e336] [cursor=pointer]
+                        - button [ref=e338]:
+                          - img [ref=e339]
+                  - row "8 Days Lemosho Route Mar 25, 2026 Apr 3, 2026 $2,680 Guaranteed JOIN NOW" [ref=e341]:
+                    - cell "8 Days Lemosho Route" [ref=e342]:
+                      - generic [ref=e343]: 8 Days Lemosho Route
+                    - cell "Mar 25, 2026" [ref=e344]
+                    - cell "Apr 3, 2026" [ref=e345]
+                    - cell "$2,680" [ref=e346]
+                    - cell "Guaranteed" [ref=e347]:
+                      - generic [ref=e350]: Guaranteed
+                    - cell "JOIN NOW" [ref=e351]:
+                      - generic [ref=e352]:
+                        - button "JOIN NOW" [ref=e353] [cursor=pointer]
+                        - button [ref=e355]:
+                          - img [ref=e356]
+                  - row "8 Days Lemosho Route Apr 8, 2026 Apr 17, 2026 $2,680 Guaranteed JOIN NOW" [ref=e358]:
+                    - cell "8 Days Lemosho Route" [ref=e359]:
+                      - generic [ref=e360]: 8 Days Lemosho Route
+                    - cell "Apr 8, 2026" [ref=e361]
+                    - cell "Apr 17, 2026" [ref=e362]
+                    - cell "$2,680" [ref=e363]
+                    - cell "Guaranteed" [ref=e364]:
+                      - generic [ref=e367]: Guaranteed
+                    - cell "JOIN NOW" [ref=e368]:
+                      - generic [ref=e369]:
+                        - button "JOIN NOW" [ref=e370] [cursor=pointer]
+                        - button [ref=e372]:
+                          - img [ref=e373]
+                  - row "7 Days Machame Route Apr 22, 2026 Apr 30, 2026 $2,440 Guaranteed JOIN NOW" [ref=e375]:
+                    - cell "7 Days Machame Route" [ref=e376]:
+                      - generic [ref=e377]: 7 Days Machame Route
+                    - cell "Apr 22, 2026" [ref=e378]
+                    - cell "Apr 30, 2026" [ref=e379]
+                    - cell "$2,440" [ref=e380]
+                    - cell "Guaranteed" [ref=e381]:
+                      - generic [ref=e384]: Guaranteed
+                    - cell "JOIN NOW" [ref=e385]:
+                      - generic [ref=e386]:
+                        - button "JOIN NOW" [ref=e387] [cursor=pointer]
+                        - button [ref=e389]:
+                          - img [ref=e390]
+                  - row "8 Days Lemosho Route May 5, 2026 May 14, 2026 $2,680 Guaranteed JOIN NOW" [ref=e392]:
+                    - cell "8 Days Lemosho Route" [ref=e393]:
+                      - generic [ref=e394]: 8 Days Lemosho Route
+                    - cell "May 5, 2026" [ref=e395]
+                    - cell "May 14, 2026" [ref=e396]
+                    - cell "$2,680" [ref=e397]
+                    - cell "Guaranteed" [ref=e398]:
+                      - generic [ref=e401]: Guaranteed
+                    - cell "JOIN NOW" [ref=e402]:
+                      - generic [ref=e403]:
+                        - button "JOIN NOW" [ref=e404] [cursor=pointer]
+                        - button [ref=e406]:
+                          - img [ref=e407]
+                  - row "8 Days Lemosho Route May 17, 2026 May 26, 2026 $2,680 Guaranteed JOIN NOW" [ref=e409]:
+                    - cell "8 Days Lemosho Route" [ref=e410]:
+                      - generic [ref=e411]: 8 Days Lemosho Route
+                    - cell "May 17, 2026" [ref=e412]
+                    - cell "May 26, 2026" [ref=e413]
+                    - cell "$2,680" [ref=e414]
+                    - cell "Guaranteed" [ref=e415]:
+                      - generic [ref=e418]: Guaranteed
+                    - cell "JOIN NOW" [ref=e419]:
+                      - generic [ref=e420]:
+                        - button "JOIN NOW" [ref=e421] [cursor=pointer]
+                        - button [ref=e423]:
+                          - img [ref=e424]
+                  - row "7 Days Machame Route May 26, 2026 Jun 3, 2026 $2,440 Guaranteed JOIN NOW" [ref=e426]:
+                    - cell "7 Days Machame Route" [ref=e427]:
+                      - generic [ref=e428]: 7 Days Machame Route
+                    - cell "May 26, 2026" [ref=e429]
+                    - cell "Jun 3, 2026" [ref=e430]
+                    - cell "$2,440" [ref=e431]
+                    - cell "Guaranteed" [ref=e432]:
+                      - generic [ref=e435]: Guaranteed
+                    - cell "JOIN NOW" [ref=e436]:
+                      - generic [ref=e437]:
+                        - button "JOIN NOW" [ref=e438] [cursor=pointer]
+                        - button [ref=e440]:
+                          - img [ref=e441]
+                  - row "8 Days Lemosho Route Jun 4, 2026 Jun 13, 2026 $2,680 Guaranteed Departs in 5 days JOIN NOW" [ref=e443]:
+                    - cell "8 Days Lemosho Route" [ref=e444]:
+                      - generic [ref=e445]: 8 Days Lemosho Route
+                    - cell "Jun 4, 2026" [ref=e446]
+                    - cell "Jun 13, 2026" [ref=e447]
+                    - cell "$2,680" [ref=e448]
+                    - cell "Guaranteed Departs in 5 days" [ref=e449]:
+                      - generic [ref=e450]:
+                        - generic [ref=e452]: Guaranteed
+                        - generic [ref=e453]: Departs in 5 days
+                    - cell "JOIN NOW" [ref=e454]:
+                      - generic [ref=e455]:
+                        - button "JOIN NOW" [ref=e456] [cursor=pointer]
+                        - button [ref=e458]:
+                          - img [ref=e459]
+                  - row "7 Days Machame Route Jun 5, 2026 Jun 13, 2026 $2,440 Guaranteed Departs in 6 days JOIN NOW" [ref=e461]:
+                    - cell "7 Days Machame Route" [ref=e462]:
+                      - generic [ref=e463]: 7 Days Machame Route
+                    - cell "Jun 5, 2026" [ref=e464]
+                    - cell "Jun 13, 2026" [ref=e465]
+                    - cell "$2,440" [ref=e466]
+                    - cell "Guaranteed Departs in 6 days" [ref=e467]:
+                      - generic [ref=e468]:
+                        - generic [ref=e470]: Guaranteed
+                        - generic [ref=e471]: Departs in 6 days
+                    - cell "JOIN NOW" [ref=e472]:
+                      - generic [ref=e473]:
+                        - button "JOIN NOW" [ref=e474] [cursor=pointer]
+                        - button [ref=e476]:
+                          - img [ref=e477]
+                  - row "6 Days Rongai Route Jun 6, 2026 Jun 13, 2026 $2,390 Guaranteed Departs in 7 days JOIN NOW" [ref=e479]:
+                    - cell "6 Days Rongai Route" [ref=e480]:
+                      - generic [ref=e481]: 6 Days Rongai Route
+                    - cell "Jun 6, 2026" [ref=e482]
+                    - cell "Jun 13, 2026" [ref=e483]
+                    - cell "$2,390" [ref=e484]
+                    - cell "Guaranteed Departs in 7 days" [ref=e485]:
+                      - generic [ref=e486]:
+                        - generic [ref=e488]: Guaranteed
+                        - generic [ref=e489]: Departs in 7 days
+                    - cell "JOIN NOW" [ref=e490]:
+                      - generic [ref=e491]:
+                        - button "JOIN NOW" [ref=e492] [cursor=pointer]
+                        - button [ref=e494]:
+                          - img [ref=e495]
+                  - row "8 Days Lemosho Route Jun 10, 2026 Jun 19, 2026 $2,680 Sold Out Sold Out" [ref=e497]:
+                    - cell "8 Days Lemosho Route" [ref=e498]:
+                      - generic [ref=e499]: 8 Days Lemosho Route
+                    - cell "Jun 10, 2026" [ref=e500]
+                    - cell "Jun 19, 2026" [ref=e501]
+                    - cell "$2,680" [ref=e502]
+                    - cell "Sold Out" [ref=e503]:
+                      - generic [ref=e506]: Sold Out
+                    - cell "Sold Out" [ref=e507]:
+                      - generic [ref=e508]:
+                        - generic [ref=e509]: Sold Out
+                        - button [ref=e511]:
+                          - img [ref=e512]
+                  - row "7 Days Machame Route Jun 18, 2026 Jun 26, 2026 $2,440 Guaranteed Departs in 19 days JOIN NOW" [ref=e514]:
+                    - cell "7 Days Machame Route" [ref=e515]:
+                      - generic [ref=e516]: 7 Days Machame Route
+                    - cell "Jun 18, 2026" [ref=e517]
+                    - cell "Jun 26, 2026" [ref=e518]
+                    - cell "$2,440" [ref=e519]
+                    - cell "Guaranteed Departs in 19 days" [ref=e520]:
+                      - generic [ref=e521]:
+                        - generic [ref=e523]: Guaranteed
+                        - generic [ref=e524]: Departs in 19 days
+                    - cell "JOIN NOW" [ref=e525]:
+                      - generic [ref=e526]:
+                        - button "JOIN NOW" [ref=e527] [cursor=pointer]
+                        - button [ref=e529]:
+                          - img [ref=e530]
+                  - row "🌕8 Days Lemosho Route Full Moon Summit Jun 24, 2026 Jul 3, 2026 $2,680 Guaranteed Departs in 25 days JOIN NOW" [ref=e532]:
+                    - cell "🌕8 Days Lemosho Route Full Moon Summit" [ref=e533]:
+                      - generic [ref=e534]: 🌕8 Days Lemosho Route
+                      - text: Full Moon Summit
+                    - cell "Jun 24, 2026" [ref=e535]
+                    - cell "Jul 3, 2026" [ref=e536]
+                    - cell "$2,680" [ref=e537]
+                    - cell "Guaranteed Departs in 25 days" [ref=e538]:
+                      - generic [ref=e539]:
+                        - generic [ref=e541]: Guaranteed
+                        - generic [ref=e542]: Departs in 25 days
+                    - cell "JOIN NOW" [ref=e543]:
+                      - generic [ref=e544]:
+                        - button "JOIN NOW" [ref=e545] [cursor=pointer]
+                        - button [ref=e547]:
+                          - img [ref=e548]
+                  - row "8 Days Lemosho Route Jun 25, 2026 Jul 4, 2026 $2,680 Guaranteed Departs in 26 days JOIN NOW" [ref=e550]:
+                    - cell "8 Days Lemosho Route" [ref=e551]:
+                      - generic [ref=e552]: 8 Days Lemosho Route
+                    - cell "Jun 25, 2026" [ref=e553]
+                    - cell "Jul 4, 2026" [ref=e554]
+                    - cell "$2,680" [ref=e555]
+                    - cell "Guaranteed Departs in 26 days" [ref=e556]:
+                      - generic [ref=e557]:
+                        - generic [ref=e559]: Guaranteed
+                        - generic [ref=e560]: Departs in 26 days
+                    - cell "JOIN NOW" [ref=e561]:
+                      - generic [ref=e562]:
+                        - button "JOIN NOW" [ref=e563] [cursor=pointer]
+                        - button [ref=e565]:
+                          - img [ref=e566]
+                  - row "8 Days Lemosho Route Jul 3, 2026 Jul 12, 2026 $2,680 Guaranteed Departs in 34 days JOIN NOW" [ref=e568]:
+                    - cell "8 Days Lemosho Route" [ref=e569]:
+                      - generic [ref=e570]: 8 Days Lemosho Route
+                    - cell "Jul 3, 2026" [ref=e571]
+                    - cell "Jul 12, 2026" [ref=e572]
+                    - cell "$2,680" [ref=e573]
+                    - cell "Guaranteed Departs in 34 days" [ref=e574]:
+                      - generic [ref=e575]:
+                        - generic [ref=e577]: Guaranteed
+                        - generic [ref=e578]: Departs in 34 days
+                    - cell "JOIN NOW" [ref=e579]:
+                      - generic [ref=e580]:
+                        - button "JOIN NOW" [ref=e581] [cursor=pointer]
+                        - button [ref=e583]:
+                          - img [ref=e584]
+                  - row "7 Days Machame Route Jul 4, 2026 Jul 12, 2026 $2,440 Guaranteed Departs in 35 days JOIN NOW" [ref=e586]:
+                    - cell "7 Days Machame Route" [ref=e587]:
+                      - generic [ref=e588]: 7 Days Machame Route
+                    - cell "Jul 4, 2026" [ref=e589]
+                    - cell "Jul 12, 2026" [ref=e590]
+                    - cell "$2,440" [ref=e591]
+                    - cell "Guaranteed Departs in 35 days" [ref=e592]:
+                      - generic [ref=e593]:
+                        - generic [ref=e595]: Guaranteed
+                        - generic [ref=e596]: Departs in 35 days
+                    - cell "JOIN NOW" [ref=e597]:
+                      - generic [ref=e598]:
+                        - button "JOIN NOW" [ref=e599] [cursor=pointer]
+                        - button [ref=e601]:
+                          - img [ref=e602]
+                  - row "6 Days Rongai Route Jul 5, 2026 Jul 12, 2026 $2,390 Guaranteed Departs in 36 days JOIN NOW" [ref=e604]:
+                    - cell "6 Days Rongai Route" [ref=e605]:
+                      - generic [ref=e606]: 6 Days Rongai Route
+                    - cell "Jul 5, 2026" [ref=e607]
+                    - cell "Jul 12, 2026" [ref=e608]
+                    - cell "$2,390" [ref=e609]
+                    - cell "Guaranteed Departs in 36 days" [ref=e610]:
+                      - generic [ref=e611]:
+                        - generic [ref=e613]: Guaranteed
+                        - generic [ref=e614]: Departs in 36 days
+                    - cell "JOIN NOW" [ref=e615]:
+                      - generic [ref=e616]:
+                        - button "JOIN NOW" [ref=e617] [cursor=pointer]
+                        - button [ref=e619]:
+                          - img [ref=e620]
+                  - row "8 Days Lemosho Route Jul 10, 2026 Jul 19, 2026 $2,680 Guaranteed Departs in 41 days JOIN NOW" [ref=e622]:
+                    - cell "8 Days Lemosho Route" [ref=e623]:
+                      - generic [ref=e624]: 8 Days Lemosho Route
+                    - cell "Jul 10, 2026" [ref=e625]
+                    - cell "Jul 19, 2026" [ref=e626]
+                    - cell "$2,680" [ref=e627]
+                    - cell "Guaranteed Departs in 41 days" [ref=e628]:
+                      - generic [ref=e629]:
+                        - generic [ref=e631]: Guaranteed
+                        - generic [ref=e632]: Departs in 41 days
+                    - cell "JOIN NOW" [ref=e633]:
+                      - generic [ref=e634]:
+                        - button "JOIN NOW" [ref=e635] [cursor=pointer]
+                        - button [ref=e637]:
+                          - img [ref=e638]
+                  - row "7 Days Machame Route Jul 16, 2026 Jul 24, 2026 $2,440 Guaranteed Departs in 47 days JOIN NOW" [ref=e640]:
+                    - cell "7 Days Machame Route" [ref=e641]:
+                      - generic [ref=e642]: 7 Days Machame Route
+                    - cell "Jul 16, 2026" [ref=e643]
+                    - cell "Jul 24, 2026" [ref=e644]
+                    - cell "$2,440" [ref=e645]
+                    - cell "Guaranteed Departs in 47 days" [ref=e646]:
+                      - generic [ref=e647]:
+                        - generic [ref=e649]: Guaranteed
+                        - generic [ref=e650]: Departs in 47 days
+                    - cell "JOIN NOW" [ref=e651]:
+                      - generic [ref=e652]:
+                        - button "JOIN NOW" [ref=e653] [cursor=pointer]
+                        - button [ref=e655]:
+                          - img [ref=e656]
+                  - row "9 Days Northern Circuit Route Jul 20, 2026 Jul 29, 2026 $2,995 Guaranteed Departs in 51 days JOIN NOW" [ref=e658]:
+                    - cell "9 Days Northern Circuit Route" [ref=e659]:
+                      - generic [ref=e660]: 9 Days Northern Circuit Route
+                    - cell "Jul 20, 2026" [ref=e661]
+                    - cell "Jul 29, 2026" [ref=e662]
+                    - cell "$2,995" [ref=e663]
+                    - cell "Guaranteed Departs in 51 days" [ref=e664]:
+                      - generic [ref=e665]:
+                        - generic [ref=e667]: Guaranteed
+                        - generic [ref=e668]: Departs in 51 days
+                    - cell "JOIN NOW" [ref=e669]:
+                      - generic [ref=e670]:
+                        - button "JOIN NOW" [ref=e671] [cursor=pointer]
+                        - button [ref=e673]:
+                          - img [ref=e674]
+                  - row "🌕8 Days Lemosho Route Full Moon Summit Jul 23, 2026 Aug 1, 2026 $2,680 Guaranteed Departs in 54 days JOIN NOW" [ref=e676]:
+                    - cell "🌕8 Days Lemosho Route Full Moon Summit" [ref=e677]:
+                      - generic [ref=e678]: 🌕8 Days Lemosho Route
+                      - text: Full Moon Summit
+                    - cell "Jul 23, 2026" [ref=e679]
+                    - cell "Aug 1, 2026" [ref=e680]
+                    - cell "$2,680" [ref=e681]
+                    - cell "Guaranteed Departs in 54 days" [ref=e682]:
+                      - generic [ref=e683]:
+                        - generic [ref=e685]: Guaranteed
+                        - generic [ref=e686]: Departs in 54 days
+                    - cell "JOIN NOW" [ref=e687]:
+                      - generic [ref=e688]:
+                        - button "JOIN NOW" [ref=e689] [cursor=pointer]
+                        - button [ref=e691]:
+                          - img [ref=e692]
+                  - row "7 Days Machame Route Jul 28, 2026 Aug 5, 2026 $2,440 Guaranteed Departs in 59 days JOIN NOW" [ref=e694]:
+                    - cell "7 Days Machame Route" [ref=e695]:
+                      - generic [ref=e696]: 7 Days Machame Route
+                    - cell "Jul 28, 2026" [ref=e697]
+                    - cell "Aug 5, 2026" [ref=e698]
+                    - cell "$2,440" [ref=e699]
+                    - cell "Guaranteed Departs in 59 days" [ref=e700]:
+                      - generic [ref=e701]:
+                        - generic [ref=e703]: Guaranteed
+                        - generic [ref=e704]: Departs in 59 days
+                    - cell "JOIN NOW" [ref=e705]:
+                      - generic [ref=e706]:
+                        - button "JOIN NOW" [ref=e707] [cursor=pointer]
+                        - button [ref=e709]:
+                          - img [ref=e710]
+                  - row "8 Days Lemosho Route Aug 2, 2026 Aug 11, 2026 $2,680 Guaranteed JOIN NOW" [ref=e712]:
+                    - cell "8 Days Lemosho Route" [ref=e713]:
+                      - generic [ref=e714]: 8 Days Lemosho Route
+                    - cell "Aug 2, 2026" [ref=e715]
+                    - cell "Aug 11, 2026" [ref=e716]
+                    - cell "$2,680" [ref=e717]
+                    - cell "Guaranteed" [ref=e718]:
+                      - generic [ref=e721]: Guaranteed
+                    - cell "JOIN NOW" [ref=e722]:
+                      - generic [ref=e723]:
+                        - button "JOIN NOW" [ref=e724] [cursor=pointer]
+                        - button [ref=e726]:
+                          - img [ref=e727]
+                  - row "7 Days Machame Route Aug 3, 2026 Aug 11, 2026 $2,440 Guaranteed JOIN NOW" [ref=e729]:
+                    - cell "7 Days Machame Route" [ref=e730]:
+                      - generic [ref=e731]: 7 Days Machame Route
+                    - cell "Aug 3, 2026" [ref=e732]
+                    - cell "Aug 11, 2026" [ref=e733]
+                    - cell "$2,440" [ref=e734]
+                    - cell "Guaranteed" [ref=e735]:
+                      - generic [ref=e738]: Guaranteed
+                    - cell "JOIN NOW" [ref=e739]:
+                      - generic [ref=e740]:
+                        - button "JOIN NOW" [ref=e741] [cursor=pointer]
+                        - button [ref=e743]:
+                          - img [ref=e744]
+                  - row "9 Days Northern Circuit Route Aug 4, 2026 Aug 13, 2026 $2,995 Guaranteed JOIN NOW" [ref=e746]:
+                    - cell "9 Days Northern Circuit Route" [ref=e747]:
+                      - generic [ref=e748]: 9 Days Northern Circuit Route
+                    - cell "Aug 4, 2026" [ref=e749]
+                    - cell "Aug 13, 2026" [ref=e750]
+                    - cell "$2,995" [ref=e751]
+                    - cell "Guaranteed" [ref=e752]:
+                      - generic [ref=e755]: Guaranteed
+                    - cell "JOIN NOW" [ref=e756]:
+                      - generic [ref=e757]:
+                        - button "JOIN NOW" [ref=e758] [cursor=pointer]
+                        - button [ref=e760]:
+                          - img [ref=e761]
+                  - row "8 Days Lemosho Route Aug 8, 2026 Aug 17, 2026 $2,680 Guaranteed JOIN NOW" [ref=e763]:
+                    - cell "8 Days Lemosho Route" [ref=e764]:
+                      - generic [ref=e765]: 8 Days Lemosho Route
+                    - cell "Aug 8, 2026" [ref=e766]
+                    - cell "Aug 17, 2026" [ref=e767]
+                    - cell "$2,680" [ref=e768]
+                    - cell "Guaranteed" [ref=e769]:
+                      - generic [ref=e772]: Guaranteed
+                    - cell "JOIN NOW" [ref=e773]:
+                      - generic [ref=e774]:
+                        - button "JOIN NOW" [ref=e775] [cursor=pointer]
+                        - button [ref=e777]:
+                          - img [ref=e778]
+                  - row "7 Days Machame Route Aug 14, 2026 Aug 22, 2026 $2,440 Guaranteed JOIN NOW" [ref=e780]:
+                    - cell "7 Days Machame Route" [ref=e781]:
+                      - generic [ref=e782]: 7 Days Machame Route
+                    - cell "Aug 14, 2026" [ref=e783]
+                    - cell "Aug 22, 2026" [ref=e784]
+                    - cell "$2,440" [ref=e785]
+                    - cell "Guaranteed" [ref=e786]:
+                      - generic [ref=e789]: Guaranteed
+                    - cell "JOIN NOW" [ref=e790]:
+                      - generic [ref=e791]:
+                        - button "JOIN NOW" [ref=e792] [cursor=pointer]
+                        - button [ref=e794]:
+                          - img [ref=e795]
+                  - row "9 Days Northern Circuit Route Aug 18, 2026 Aug 27, 2026 $2,995 Guaranteed JOIN NOW" [ref=e797]:
+                    - cell "9 Days Northern Circuit Route" [ref=e798]:
+                      - generic [ref=e799]: 9 Days Northern Circuit Route
+                    - cell "Aug 18, 2026" [ref=e800]
+                    - cell "Aug 27, 2026" [ref=e801]
+                    - cell "$2,995" [ref=e802]
+                    - cell "Guaranteed" [ref=e803]:
+                      - generic [ref=e806]: Guaranteed
+                    - cell "JOIN NOW" [ref=e807]:
+                      - generic [ref=e808]:
+                        - button "JOIN NOW" [ref=e809] [cursor=pointer]
+                        - button [ref=e811]:
+                          - img [ref=e812]
+                  - row "🌕8 Days Lemosho Route Full Moon Summit Aug 22, 2026 Aug 31, 2026 $2,680 Guaranteed JOIN NOW" [ref=e814]:
+                    - cell "🌕8 Days Lemosho Route Full Moon Summit" [ref=e815]:
+                      - generic [ref=e816]: 🌕8 Days Lemosho Route
+                      - text: Full Moon Summit
+                    - cell "Aug 22, 2026" [ref=e817]
+                    - cell "Aug 31, 2026" [ref=e818]
+                    - cell "$2,680" [ref=e819]
+                    - cell "Guaranteed" [ref=e820]:
+                      - generic [ref=e823]: Guaranteed
+                    - cell "JOIN NOW" [ref=e824]:
+                      - generic [ref=e825]:
+                        - button "JOIN NOW" [ref=e826] [cursor=pointer]
+                        - button [ref=e828]:
+                          - img [ref=e829]
+                  - row "7 Days Machame Route Sep 1, 2026 Sep 9, 2026 $2,440 Guaranteed JOIN NOW" [ref=e831]:
+                    - cell "7 Days Machame Route" [ref=e832]:
+                      - generic [ref=e833]: 7 Days Machame Route
+                    - cell "Sep 1, 2026" [ref=e834]
+                    - cell "Sep 9, 2026" [ref=e835]
+                    - cell "$2,440" [ref=e836]
+                    - cell "Guaranteed" [ref=e837]:
+                      - generic [ref=e840]: Guaranteed
+                    - cell "JOIN NOW" [ref=e841]:
+                      - generic [ref=e842]:
+                        - button "JOIN NOW" [ref=e843] [cursor=pointer]
+                        - button [ref=e845]:
+                          - img [ref=e846]
+                  - row "9 Days Northern Circuit Route Sep 2, 2026 Sep 11, 2026 $2,995 Guaranteed JOIN NOW" [ref=e848]:
+                    - cell "9 Days Northern Circuit Route" [ref=e849]:
+                      - generic [ref=e850]: 9 Days Northern Circuit Route
+                    - cell "Sep 2, 2026" [ref=e851]
+                    - cell "Sep 11, 2026" [ref=e852]
+                    - cell "$2,995" [ref=e853]
+                    - cell "Guaranteed" [ref=e854]:
+                      - generic [ref=e857]: Guaranteed
+                    - cell "JOIN NOW" [ref=e858]:
+                      - generic [ref=e859]:
+                        - button "JOIN NOW" [ref=e860] [cursor=pointer]
+                        - button [ref=e862]:
+                          - img [ref=e863]
+                  - row "8 Days Lemosho Route Sep 5, 2026 Sep 14, 2026 $2,680 Guaranteed JOIN NOW" [ref=e865]:
+                    - cell "8 Days Lemosho Route" [ref=e866]:
+                      - generic [ref=e867]: 8 Days Lemosho Route
+                    - cell "Sep 5, 2026" [ref=e868]
+                    - cell "Sep 14, 2026" [ref=e869]
+                    - cell "$2,680" [ref=e870]
+                    - cell "Guaranteed" [ref=e871]:
+                      - generic [ref=e874]: Guaranteed
+                    - cell "JOIN NOW" [ref=e875]:
+                      - generic [ref=e876]:
+                        - button "JOIN NOW" [ref=e877] [cursor=pointer]
+                        - button [ref=e879]:
+                          - img [ref=e880]
+                  - row "7 Days Machame Route Sep 15, 2026 Sep 23, 2026 $2,440 Guaranteed JOIN NOW" [ref=e882]:
+                    - cell "7 Days Machame Route" [ref=e883]:
+                      - generic [ref=e884]: 7 Days Machame Route
+                    - cell "Sep 15, 2026" [ref=e885]
+                    - cell "Sep 23, 2026" [ref=e886]
+                    - cell "$2,440" [ref=e887]
+                    - cell "Guaranteed" [ref=e888]:
+                      - generic [ref=e891]: Guaranteed
+                    - cell "JOIN NOW" [ref=e892]:
+                      - generic [ref=e893]:
+                        - button "JOIN NOW" [ref=e894] [cursor=pointer]
+                        - button [ref=e896]:
+                          - img [ref=e897]
+                  - row "8 Days Lemosho Route Sep 20, 2026 Sep 29, 2026 $2,680 Guaranteed JOIN NOW" [ref=e899]:
+                    - cell "8 Days Lemosho Route" [ref=e900]:
+                      - generic [ref=e901]: 8 Days Lemosho Route
+                    - cell "Sep 20, 2026" [ref=e902]
+                    - cell "Sep 29, 2026" [ref=e903]
+                    - cell "$2,680" [ref=e904]
+                    - cell "Guaranteed" [ref=e905]:
+                      - generic [ref=e908]: Guaranteed
+                    - cell "JOIN NOW" [ref=e909]:
+                      - generic [ref=e910]:
+                        - button "JOIN NOW" [ref=e911] [cursor=pointer]
+                        - button [ref=e913]:
+                          - img [ref=e914]
+                  - row "8 Days Lemosho Route Sep 26, 2026 Oct 5, 2026 $2,680 Guaranteed JOIN NOW" [ref=e916]:
+                    - cell "8 Days Lemosho Route" [ref=e917]:
+                      - generic [ref=e918]: 8 Days Lemosho Route
+                    - cell "Sep 26, 2026" [ref=e919]
+                    - cell "Oct 5, 2026" [ref=e920]
+                    - cell "$2,680" [ref=e921]
+                    - cell "Guaranteed" [ref=e922]:
+                      - generic [ref=e925]: Guaranteed
+                    - cell "JOIN NOW" [ref=e926]:
+                      - generic [ref=e927]:
+                        - button "JOIN NOW" [ref=e928] [cursor=pointer]
+                        - button [ref=e930]:
+                          - img [ref=e931]
+                  - row "8 Days Lemosho Route Sep 30, 2026 Oct 9, 2026 $2,680 Guaranteed JOIN NOW" [ref=e933]:
+                    - cell "8 Days Lemosho Route" [ref=e934]:
+                      - generic [ref=e935]: 8 Days Lemosho Route
+                    - cell "Sep 30, 2026" [ref=e936]
+                    - cell "Oct 9, 2026" [ref=e937]
+                    - cell "$2,680" [ref=e938]
+                    - cell "Guaranteed" [ref=e939]:
+                      - generic [ref=e942]: Guaranteed
+                    - cell "JOIN NOW" [ref=e943]:
+                      - generic [ref=e944]:
+                        - button "JOIN NOW" [ref=e945] [cursor=pointer]
+                        - button [ref=e947]:
+                          - img [ref=e948]
+                  - row "7 Days Machame Route Oct 1, 2026 Oct 9, 2026 $2,440 Guaranteed JOIN NOW" [ref=e950]:
+                    - cell "7 Days Machame Route" [ref=e951]:
+                      - generic [ref=e952]: 7 Days Machame Route
+                    - cell "Oct 1, 2026" [ref=e953]
+                    - cell "Oct 9, 2026" [ref=e954]
+                    - cell "$2,440" [ref=e955]
+                    - cell "Guaranteed" [ref=e956]:
+                      - generic [ref=e959]: Guaranteed
+                    - cell "JOIN NOW" [ref=e960]:
+                      - generic [ref=e961]:
+                        - button "JOIN NOW" [ref=e962] [cursor=pointer]
+                        - button [ref=e964]:
+                          - img [ref=e965]
+                  - row "9 Days Northern Circuit Route Oct 2, 2026 Oct 11, 2026 $2,995 Guaranteed JOIN NOW" [ref=e967]:
+                    - cell "9 Days Northern Circuit Route" [ref=e968]:
+                      - generic [ref=e969]: 9 Days Northern Circuit Route
+                    - cell "Oct 2, 2026" [ref=e970]
+                    - cell "Oct 11, 2026" [ref=e971]
+                    - cell "$2,995" [ref=e972]
+                    - cell "Guaranteed" [ref=e973]:
+                      - generic [ref=e976]: Guaranteed
+                    - cell "JOIN NOW" [ref=e977]:
+                      - generic [ref=e978]:
+                        - button "JOIN NOW" [ref=e979] [cursor=pointer]
+                        - button [ref=e981]:
+                          - img [ref=e982]
+                  - row "8 Days Lemosho Route Oct 10, 2026 Oct 19, 2026 $2,680 Guaranteed JOIN NOW" [ref=e984]:
+                    - cell "8 Days Lemosho Route" [ref=e985]:
+                      - generic [ref=e986]: 8 Days Lemosho Route
+                    - cell "Oct 10, 2026" [ref=e987]
+                    - cell "Oct 19, 2026" [ref=e988]
+                    - cell "$2,680" [ref=e989]
+                    - cell "Guaranteed" [ref=e990]:
+                      - generic [ref=e993]: Guaranteed
+                    - cell "JOIN NOW" [ref=e994]:
+                      - generic [ref=e995]:
+                        - button "JOIN NOW" [ref=e996] [cursor=pointer]
+                        - button [ref=e998]:
+                          - img [ref=e999]
+                  - row "9 Days Northern Circuit Route Oct 20, 2026 Oct 29, 2026 $2,995 Guaranteed JOIN NOW" [ref=e1001]:
+                    - cell "9 Days Northern Circuit Route" [ref=e1002]:
+                      - generic [ref=e1003]: 9 Days Northern Circuit Route
+                    - cell "Oct 20, 2026" [ref=e1004]
+                    - cell "Oct 29, 2026" [ref=e1005]
+                    - cell "$2,995" [ref=e1006]
+                    - cell "Guaranteed" [ref=e1007]:
+                      - generic [ref=e1010]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1011]:
+                      - generic [ref=e1012]:
+                        - button "JOIN NOW" [ref=e1013] [cursor=pointer]
+                        - button [ref=e1015]:
+                          - img [ref=e1016]
+                  - row "🌕8 Days Lemosho Route Full Moon Summit Oct 24, 2026 Oct 29, 2026 $2,680 Guaranteed JOIN NOW" [ref=e1018]:
+                    - cell "🌕8 Days Lemosho Route Full Moon Summit" [ref=e1019]:
+                      - generic [ref=e1020]: 🌕8 Days Lemosho Route
+                      - text: Full Moon Summit
+                    - cell "Oct 24, 2026" [ref=e1021]
+                    - cell "Oct 29, 2026" [ref=e1022]
+                    - cell "$2,680" [ref=e1023]
+                    - cell "Guaranteed" [ref=e1024]:
+                      - generic [ref=e1027]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1028]:
+                      - generic [ref=e1029]:
+                        - button "JOIN NOW" [ref=e1030] [cursor=pointer]
+                        - button [ref=e1032]:
+                          - img [ref=e1033]
+                  - row "7 Days Machame Route Nov 5, 2026 Nov 13, 2026 $2,440 Guaranteed JOIN NOW" [ref=e1035]:
+                    - cell "7 Days Machame Route" [ref=e1036]:
+                      - generic [ref=e1037]: 7 Days Machame Route
+                    - cell "Nov 5, 2026" [ref=e1038]
+                    - cell "Nov 13, 2026" [ref=e1039]
+                    - cell "$2,440" [ref=e1040]
+                    - cell "Guaranteed" [ref=e1041]:
+                      - generic [ref=e1044]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1045]:
+                      - generic [ref=e1046]:
+                        - button "JOIN NOW" [ref=e1047] [cursor=pointer]
+                        - button [ref=e1049]:
+                          - img [ref=e1050]
+                  - row "9 Days Northern Circuit Route Nov 18, 2026 Nov 27, 2026 $2,995 Guaranteed JOIN NOW" [ref=e1052]:
+                    - cell "9 Days Northern Circuit Route" [ref=e1053]:
+                      - generic [ref=e1054]: 9 Days Northern Circuit Route
+                    - cell "Nov 18, 2026" [ref=e1055]
+                    - cell "Nov 27, 2026" [ref=e1056]
+                    - cell "$2,995" [ref=e1057]
+                    - cell "Guaranteed" [ref=e1058]:
+                      - generic [ref=e1061]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1062]:
+                      - generic [ref=e1063]:
+                        - button "JOIN NOW" [ref=e1064] [cursor=pointer]
+                        - button [ref=e1066]:
+                          - img [ref=e1067]
+                  - row "8 Days Lemosho Route Nov 28, 2026 Dec 7, 2026 $2,680 Guaranteed JOIN NOW" [ref=e1069]:
+                    - cell "8 Days Lemosho Route" [ref=e1070]:
+                      - generic [ref=e1071]: 8 Days Lemosho Route
+                    - cell "Nov 28, 2026" [ref=e1072]
+                    - cell "Dec 7, 2026" [ref=e1073]
+                    - cell "$2,680" [ref=e1074]
+                    - cell "Guaranteed" [ref=e1075]:
+                      - generic [ref=e1078]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1079]:
+                      - generic [ref=e1080]:
+                        - button "JOIN NOW" [ref=e1081] [cursor=pointer]
+                        - button [ref=e1083]:
+                          - img [ref=e1084]
+                  - row "7 Days Machame Route Nov 29, 2026 Dec 7, 2026 $2,440 Guaranteed JOIN NOW" [ref=e1086]:
+                    - cell "7 Days Machame Route" [ref=e1087]:
+                      - generic [ref=e1088]: 7 Days Machame Route
+                    - cell "Nov 29, 2026" [ref=e1089]
+                    - cell "Dec 7, 2026" [ref=e1090]
+                    - cell "$2,440" [ref=e1091]
+                    - cell "Guaranteed" [ref=e1092]:
+                      - generic [ref=e1095]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1096]:
+                      - generic [ref=e1097]:
+                        - button "JOIN NOW" [ref=e1098] [cursor=pointer]
+                        - button [ref=e1100]:
+                          - img [ref=e1101]
+                  - row "9 Days Northern Circuit Route Nov 30, 2026 Dec 9, 2026 $2,995 Guaranteed JOIN NOW" [ref=e1103]:
+                    - cell "9 Days Northern Circuit Route" [ref=e1104]:
+                      - generic [ref=e1105]: 9 Days Northern Circuit Route
+                    - cell "Nov 30, 2026" [ref=e1106]
+                    - cell "Dec 9, 2026" [ref=e1107]
+                    - cell "$2,995" [ref=e1108]
+                    - cell "Guaranteed" [ref=e1109]:
+                      - generic [ref=e1112]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1113]:
+                      - generic [ref=e1114]:
+                        - button "JOIN NOW" [ref=e1115] [cursor=pointer]
+                        - button [ref=e1117]:
+                          - img [ref=e1118]
+                  - row "8 Days Lemosho Route Dec 6, 2026 Dec 15, 2026 $2,680 Guaranteed JOIN NOW" [ref=e1120]:
+                    - cell "8 Days Lemosho Route" [ref=e1121]:
+                      - generic [ref=e1122]: 8 Days Lemosho Route
+                    - cell "Dec 6, 2026" [ref=e1123]
+                    - cell "Dec 15, 2026" [ref=e1124]
+                    - cell "$2,680" [ref=e1125]
+                    - cell "Guaranteed" [ref=e1126]:
+                      - generic [ref=e1129]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1130]:
+                      - generic [ref=e1131]:
+                        - button "JOIN NOW" [ref=e1132] [cursor=pointer]
+                        - button [ref=e1134]:
+                          - img [ref=e1135]
+                  - row "7 Days Machame Route Dec 10, 2026 Dec 18, 2026 $2,440 Guaranteed JOIN NOW" [ref=e1137]:
+                    - cell "7 Days Machame Route" [ref=e1138]:
+                      - generic [ref=e1139]: 7 Days Machame Route
+                    - cell "Dec 10, 2026" [ref=e1140]
+                    - cell "Dec 18, 2026" [ref=e1141]
+                    - cell "$2,440" [ref=e1142]
+                    - cell "Guaranteed" [ref=e1143]:
+                      - generic [ref=e1146]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1147]:
+                      - generic [ref=e1148]:
+                        - button "JOIN NOW" [ref=e1149] [cursor=pointer]
+                        - button [ref=e1151]:
+                          - img [ref=e1152]
+                  - row "🌕8 Days Lemosho Route Full Moon Summit Dec 18, 2026 Dec 27, 2026 $2,680 Guaranteed JOIN NOW" [ref=e1154]:
+                    - cell "🌕8 Days Lemosho Route Full Moon Summit" [ref=e1155]:
+                      - generic [ref=e1156]: 🌕8 Days Lemosho Route
+                      - text: Full Moon Summit
+                    - cell "Dec 18, 2026" [ref=e1157]
+                    - cell "Dec 27, 2026" [ref=e1158]
+                    - cell "$2,680" [ref=e1159]
+                    - cell "Guaranteed" [ref=e1160]:
+                      - generic [ref=e1163]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1164]:
+                      - generic [ref=e1165]:
+                        - button "JOIN NOW" [ref=e1166] [cursor=pointer]
+                        - button [ref=e1168]:
+                          - img [ref=e1169]
+                  - row "9 Days Northern Circuit Route Dec 22, 2026 Dec 31, 2026 $2,995 Guaranteed JOIN NOW" [ref=e1171]:
+                    - cell "9 Days Northern Circuit Route" [ref=e1172]:
+                      - generic [ref=e1173]: 9 Days Northern Circuit Route
+                    - cell "Dec 22, 2026" [ref=e1174]
+                    - cell "Dec 31, 2026" [ref=e1175]
+                    - cell "$2,995" [ref=e1176]
+                    - cell "Guaranteed" [ref=e1177]:
+                      - generic [ref=e1180]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1181]:
+                      - generic [ref=e1182]:
+                        - button "JOIN NOW" [ref=e1183] [cursor=pointer]
+                        - button [ref=e1185]:
+                          - img [ref=e1186]
+                  - row "8 Days Lemosho Route Dec 25, 2026 Jan 2, 2027 $2,680 Guaranteed JOIN NOW" [ref=e1188]:
+                    - cell "8 Days Lemosho Route" [ref=e1189]:
+                      - generic [ref=e1190]: 8 Days Lemosho Route
+                    - cell "Dec 25, 2026" [ref=e1191]
+                    - cell "Jan 2, 2027" [ref=e1192]
+                    - cell "$2,680" [ref=e1193]
+                    - cell "Guaranteed" [ref=e1194]:
+                      - generic [ref=e1197]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1198]:
+                      - generic [ref=e1199]:
+                        - button "JOIN NOW" [ref=e1200] [cursor=pointer]
+                        - button [ref=e1202]:
+                          - img [ref=e1203]
+                  - row "8 Days Lemosho Route Dec 28, 2026 Jan 6, 2027 $2,680 Guaranteed JOIN NOW" [ref=e1205]:
+                    - cell "8 Days Lemosho Route" [ref=e1206]:
+                      - generic [ref=e1207]: 8 Days Lemosho Route
+                    - cell "Dec 28, 2026" [ref=e1208]
+                    - cell "Jan 6, 2027" [ref=e1209]
+                    - cell "$2,680" [ref=e1210]
+                    - cell "Guaranteed" [ref=e1211]:
+                      - generic [ref=e1214]: Guaranteed
+                    - cell "JOIN NOW" [ref=e1215]:
+                      - generic [ref=e1216]:
+                        - button "JOIN NOW" [ref=e1217] [cursor=pointer]
+                        - button [ref=e1219]:
+                          - img [ref=e1220]
+          - generic [ref=e1223]:
+            - heading "Book Your Spot" [level=2] [ref=e1224]
+            - generic [ref=e1225]:
+              - img [ref=e1227]
+              - heading "Book Your Kilimanjaro Adventure" [level=3] [ref=e1229]
+              - paragraph [ref=e1230]:
+                - text: Browse the departures above and click
+                - strong [ref=e1231]: JOIN NOW
+                - text: on your preferred date to start booking.
+        - generic [ref=e1233]:
+          - heading "2027 Departures — Coming Soon!" [level=2] [ref=e1234]
+          - paragraph [ref=e1235]: We're finalizing our 2027 Kilimanjaro group climb schedule. Contact us to express your interest and be the first to know when dates are released.
+          - link "Register Your Interest" [ref=e1236] [cursor=pointer]:
+            - /url: "#booking-form"
+        - generic [ref=e1239]:
+          - heading "Why Join a Kilimanjaro Group Climb?" [level=2] [ref=e1240]
+          - generic [ref=e1241]:
+            - paragraph [ref=e1242]: Climbing Mount Kilimanjaro — Africa's highest peak at 5,895 metres above sea level — is one of the most transformative experiences a traveller can undertake. Whether you're a seasoned trekker or embarking on your first high-altitude adventure, joining one of Snow Africa Adventure's scheduled group departures offers an unbeatable combination of value, camaraderie, and expert support that makes your Kilimanjaro dream both achievable and unforgettable.
+            - paragraph [ref=e1243]:
+              - text: "Group climbing is ideal for solo travellers, couples, and small groups of friends who want the full Kilimanjaro experience without the premium cost of a private expedition. By sharing logistics, guides, and camping equipment with a small group of like-minded adventurers, you dramatically reduce the per-person cost while gaining something money can't buy: the shared energy, motivation, and friendship that comes from tackling Africa's greatest challenge together. Read our full"
+              - link "Kilimanjaro group climbs guide" [ref=e1244] [cursor=pointer]:
+                - /url: /kilimanjaro-group-climbs/
+              - text: for a detailed breakdown of costs, routes, and what to expect.
+            - heading "The Social Advantage of Group Climbing" [level=3] [ref=e1245]
+            - paragraph [ref=e1246]: Many of our climbers arrive as strangers and leave as lifelong friends. There is something uniquely bonding about the shared experience of altitude sickness, pre-dawn summit pushes, and the indescribable emotion of standing at Uhuru Peak with the African continent spread out far below. Group departures create an instant community — a team of people who push each other forward on hard days and celebrate together on summit morning.
+            - paragraph [ref=e1247]: Solo travellers in particular benefit enormously from the group dynamic. Rather than facing the mountain's psychological challenges alone, you're embedded in a small team with your own guides, porters, and cook. The mountain becomes a shared project, and your fellow climbers become your support network for the days ahead. Past clients regularly tell us that the friendships made on Kilimanjaro became some of the most meaningful relationships of their travels.
+            - heading "Expert Guides with a 95%+ Summit Success Rate" [level=3] [ref=e1248]
+            - paragraph [ref=e1249]: Every Snow Africa Adventure group departure is led by KINAPA-certified professional guides with a minimum of five years' experience on Kilimanjaro. Our lead guides carry emergency oxygen, wilderness first aid certification, and comprehensive knowledge of every route's acclimatization profile. Our 95%+ summit success rate across all group departures is among the highest in the industry — a testament to our guides' ability to manage pace, monitor altitude symptoms, and make smart decisions under pressure.
+            - paragraph [ref=e1250]: Our guide-to-climber ratio ensures individual attention throughout the climb. No one gets left behind or rushed ahead. Our guides adjust the pace each day to the needs of the group, following the core acclimatization principle of "climb high, sleep low." We also carry pulse oximeters for every climber, monitoring oxygen saturation at each camp to catch any altitude-related issues early.
+            - heading "What Is Included in Every Group Departure?" [level=3] [ref=e1251]
+            - paragraph [ref=e1252]: "Our group departure price is all-inclusive, covering everything you need from the moment you land in Arusha to the moment we drop you back at the airport. Included in every departure: two nights' pre-climb accommodation in Arusha, all Kilimanjaro National Park fees (which have increased significantly in recent years), professional lead guides and assistant guides, a full portering team, a mountain cook preparing three hot meals per day plus snacks, all camping equipment (tents, sleeping mats, dining tent, toilet tent), emergency oxygen, and private airport transfers."
+            - paragraph [ref=e1253]: The only items not included are your personal trekking gear, flights, visa, travel insurance, and tips for the mountain crew. We provide a comprehensive pre-departure gear list and can advise on rental options in Arusha for items like trekking poles, sleeping bags, and gaiters if you prefer not to purchase.
+            - heading "Who Are Group Departures Ideal For?" [level=3] [ref=e1254]
+            - paragraph [ref=e1255]: Group departures are perfectly suited for solo adventurers looking to share costs and connect with other climbers, couples wanting a structured adventure without the logistics of planning a private expedition, friends or colleagues in groups of two to four who want to join a larger team, and budget-conscious travellers who want a premium experience at a significantly lower price point than a private climb.
+            - paragraph [ref=e1256]: Our groups are deliberately small — a maximum of ten climbers per departure — ensuring an intimate experience that feels nothing like the large commercial groups sometimes seen on popular routes like Marangu. With a maximum of ten people, you get the benefits of group pricing while maintaining the personal attention and flexibility of a near-private experience.
+            - 'heading "Full Moon Climbs: Summit Under the Stars" [level=3] [ref=e1257]'
+            - paragraph [ref=e1258]: Among our most popular group departures are our Full Moon climbs, where the summit push coincides with a full or near-full moon. Reaching Stella Point and Uhuru Peak by moonlight — with the glaciers glowing silver and the curvature of the Earth visible on the horizon — is an experience that transcends description. We schedule several full moon departures each year across both the Lemosho and Machame routes. Check the departure calendar for upcoming full moon dates and book early, as these sell out months in advance.
+            - heading "Flexible Booking and Payment" [level=3] [ref=e1259]
+            - paragraph [ref=e1260]: Securing your spot on a group departure requires only a 10% deposit, with the remaining balance due 60 days before your arrival date. This makes it easy to commit to your Kilimanjaro adventure well in advance while keeping your cash flow flexible. We accept international bank transfers, credit cards, and other secure payment methods. If you need to change your departure date after booking, we will do our best to accommodate you on another available departure, subject to availability.
+        - generic [ref=e1263]:
+          - 'heading "What to Expect: Your Kilimanjaro Group Climb Journey" [level=2] [ref=e1264]'
+          - generic [ref=e1265]:
+            - paragraph [ref=e1266]: "From the moment you arrive in Arusha to the day you descend from the mountain, every detail of your group climb is managed by our team. Here is what a typical group departure looks like:"
+            - heading "Arrival & Pre-Climb Briefing" [level=3] [ref=e1267]
+            - paragraph [ref=e1268]: You arrive in Arusha and we transfer you to your hotel, where you meet your fellow climbers over dinner. The following morning, our lead guide conducts a thorough gear check and briefing, covering everything from altitude awareness to daily schedules and summit night expectations. This is your chance to ask questions, finalize any gear rentals, and get to know the team who will be by your side for the next week.
+            - 'heading "On the Mountain: Daily Routine" [level=3] [ref=e1269]'
+            - paragraph [ref=e1270]: Each morning begins with a wake-up call, hot drinks, and breakfast in the dining tent. After packing, you hike for 5-8 hours at a gentle pace — "pole pole" (slowly slowly) in Swahili — with regular rest stops for water, snacks, and photography. Your porters move ahead to set up the next camp, so when you arrive you're welcomed with popcorn, tea, and hot wash water. Evenings are spent sharing stories, playing cards, and watching the stars at altitude before an early night.
+            - 'heading "Summit Night: The Final Push" [level=3] [ref=e1271]'
+            - paragraph [ref=e1272]: The summit attempt begins around midnight from the high camp. You'll climb through the darkness with your headlamp illuminating the trail, stopping frequently for hot drinks and rest. As dawn approaches, the sky begins to glow and the first rays of sunrise hit the glaciers — an unforgettable sight. By 6-8 AM, you reach Uhuru Peak at 5,895m. After celebrating, photographs, and soaking in the views, you begin the long descent to your base camp, arriving by late afternoon.
+            - heading "Post-Climb Celebration" [level=3] [ref=e1273]
+            - paragraph [ref=e1274]: After descending to the final gate, you receive your official summit certificate and celebrate with your team — tipping ceremony, group photos, and the satisfaction of having conquered Africa's highest peak. We transfer you back to your Arusha hotel for a well-earned hot shower and celebration dinner.
+        - generic [ref=e1276]:
+          - heading "What Our Climbers Say" [level=2] [ref=e1277]
+          - generic [ref=e1278]:
+            - generic [ref=e1279]:
+              - blockquote [ref=e1280]: "\"An incredible experience! The crew was amazing and our guides made sure everyone reached the summit safely. Highly recommend the Lemosho route.\""
+              - paragraph [ref=e1281]: — Sarah M., United Kingdom (January 2025)
+            - generic [ref=e1282]:
+              - blockquote [ref=e1283]: "\"I joined as a solo traveller and left with friends for life. The group dynamic was the highlight — we pushed each other through the tough moments and celebrated together at the summit.\""
+              - paragraph [ref=e1284]: — Marcus K., Germany (March 2025)
+            - generic [ref=e1285]:
+              - blockquote [ref=e1286]: "\"At 58, I wasn't sure I could do it. Emmanuel and the team believed in me when I didn't believe in myself. Standing on Uhuru Peak was the proudest moment of my life.\""
+              - paragraph [ref=e1287]: — Linda T., Australia (July 2025)
+          - link "★★★★★ 4.9/5 on TripAdvisor" [ref=e1288] [cursor=pointer]:
+            - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - text: ★★★★★
+            - generic [ref=e1289]: 4.9/5 on TripAdvisor
+        - generic [ref=e1291]:
+          - heading "Route Comparison" [level=2] [ref=e1292]
+          - table [ref=e1294]:
+            - rowgroup [ref=e1295]:
+              - row "Route Duration Difficulty Success Rate Price (PP)" [ref=e1296]:
+                - columnheader "Route" [ref=e1297]
+                - columnheader "Duration" [ref=e1298]
+                - columnheader "Difficulty" [ref=e1299]
+                - columnheader "Success Rate" [ref=e1300]
+                - columnheader "Price (PP)" [ref=e1301]
+            - rowgroup [ref=e1302]:
+              - row "8-Day Lemosho 8 Days Moderate 95% $2,680" [ref=e1303]:
+                - cell "8-Day Lemosho" [ref=e1304]:
+                  - link "8-Day Lemosho" [ref=e1305] [cursor=pointer]:
+                    - /url: /trekking/8-days-lemosho-route/
+                - cell "8 Days" [ref=e1306]
+                - cell "Moderate" [ref=e1307]
+                - cell "95%" [ref=e1308]
+                - cell "$2,680" [ref=e1309]
+              - row "7-Day Machame 7 Days Challenging 93% $2,440" [ref=e1310]:
+                - cell "7-Day Machame" [ref=e1311]:
+                  - link "7-Day Machame" [ref=e1312] [cursor=pointer]:
+                    - /url: /trekking/7-days-machame-route/
+                - cell "7 Days" [ref=e1313]
+                - cell "Challenging" [ref=e1314]
+                - cell "93%" [ref=e1315]
+                - cell "$2,440" [ref=e1316]
+              - row "6-Day Rongai 6 Days Moderate 90% $2,390" [ref=e1317]:
+                - cell "6-Day Rongai" [ref=e1318]:
+                  - link "6-Day Rongai" [ref=e1319] [cursor=pointer]:
+                    - /url: /trekking/6-days-rongai-route/
+                - cell "6 Days" [ref=e1320]
+                - cell "Moderate" [ref=e1321]
+                - cell "90%" [ref=e1322]
+                - cell "$2,390" [ref=e1323]
+        - generic [ref=e1326]:
+          - generic [ref=e1327]:
+            - heading "8-Day Lemosho Route" [level=3] [ref=e1328]
+            - paragraph [ref=e1329]: Our most popular route for group climbs. The extra day allows excellent acclimatization, resulting in our highest success rate. Scenic approach through pristine rainforest.
+            - link "Learn More →" [ref=e1330] [cursor=pointer]:
+              - /url: /trekking/8-days-lemosho-route/
+          - generic [ref=e1331]:
+            - heading "7-Day Machame Route" [level=3] [ref=e1332]
+            - paragraph [ref=e1333]: The classic "Whiskey Route" known for its stunning scenery and the famous Barranco Wall. A challenging but rewarding climb with diverse landscapes.
+            - link "Learn More →" [ref=e1334] [cursor=pointer]:
+              - /url: /trekking/7-days-machame-route/
+          - generic [ref=e1335]:
+            - heading "6-Day Rongai Route" [level=3] [ref=e1336]
+            - paragraph [ref=e1337]: Approach from the quieter north side near the Kenyan border. Less crowded with a gradual ascent. Ideal for those seeking a more remote wilderness experience.
+            - link "Learn More →" [ref=e1338] [cursor=pointer]:
+              - /url: /trekking/6-days-rongai-route/
+        - generic [ref=e1340]:
+          - heading "What to Pack for Your Group Climb" [level=2] [ref=e1341]
+          - generic [ref=e1342]:
+            - paragraph [ref=e1343]: "We provide all camping and climbing equipment. You only need personal gear. Here are the essentials:"
+            - generic [ref=e1344]:
+              - generic [ref=e1345]:
+                - heading "Clothing Layers" [level=3] [ref=e1346]
+                - list [ref=e1347]:
+                  - listitem [ref=e1348]: • Moisture-wicking base layers
+                  - listitem [ref=e1349]: • Insulated mid-layer (fleece or down)
+                  - listitem [ref=e1350]: • Waterproof outer shell jacket
+                  - listitem [ref=e1351]: • Waterproof trousers
+                  - listitem [ref=e1352]: • Warm summit gloves (2 pairs)
+                  - listitem [ref=e1353]: • Thermal beanie and balaclava
+                  - listitem [ref=e1354]: • Sunhat and sunglasses
+              - generic [ref=e1355]:
+                - heading "Footwear & Accessories" [level=3] [ref=e1356]
+                - list [ref=e1357]:
+                  - listitem [ref=e1358]: • Broken-in hiking boots (waterproof)
+                  - listitem [ref=e1359]: • Gaiters for scree and dust
+                  - listitem [ref=e1360]: • Camp shoes or sandals
+                  - listitem [ref=e1361]: • 3-4 pairs hiking socks (merino wool)
+                  - listitem [ref=e1362]: • Trekking poles (recommended)
+                  - listitem [ref=e1363]: • 30-40L daypack
+                  - listitem [ref=e1364]: • Headlamp with spare batteries
+              - generic [ref=e1365]:
+                - heading "Health & Essentials" [level=3] [ref=e1366]
+                - list [ref=e1367]:
+                  - listitem [ref=e1368]: • SPF 50+ sunscreen
+                  - listitem [ref=e1369]: • Lip balm with SPF
+                  - listitem [ref=e1370]: • Personal first aid kit
+                  - listitem [ref=e1371]: • Diamox (consult your doctor)
+                  - listitem [ref=e1372]: • 2-3 litre water bottles/bladder
+                  - listitem [ref=e1373]: • Snacks (energy bars, nuts, chocolate)
+                  - listitem [ref=e1374]: • Portable phone charger
+            - paragraph [ref=e1375]: We send a comprehensive packing list after booking. Gear rental available in Arusha for sleeping bags, trekking poles, and down jackets.
+        - generic [ref=e1377]:
+          - heading "Frequently Asked Questions" [level=2] [ref=e1378]
+          - generic [ref=e1379]:
+            - group [ref=e1380]:
+              - generic "What is included in the group departure price?" [ref=e1381] [cursor=pointer]
+            - group [ref=e1382]:
+              - generic "What is the deposit and payment schedule?" [ref=e1383] [cursor=pointer]
+            - group [ref=e1384]:
+              - generic "What happens if a departure doesn't reach minimum numbers?" [ref=e1385] [cursor=pointer]
+            - group [ref=e1386]:
+              - generic "Can I do a private climb instead?" [ref=e1387] [cursor=pointer]
+            - group [ref=e1388]:
+              - generic "How fit do I need to be for a group climb?" [ref=e1389] [cursor=pointer]
+            - group [ref=e1390]:
+              - generic "What is the summit success rate for group departures?" [ref=e1391] [cursor=pointer]
+            - group [ref=e1392]:
+              - generic "Can I join a group climb as a solo traveller?" [ref=e1393] [cursor=pointer]
+            - group [ref=e1394]:
+              - generic "What happens on summit night?" [ref=e1395] [cursor=pointer]
+            - group [ref=e1396]:
+              - generic "What altitude sickness precautions are taken?" [ref=e1397] [cursor=pointer]
+            - group [ref=e1398]:
+              - generic "Do I need travel insurance?" [ref=e1399] [cursor=pointer]
+        - generic [ref=e1402]:
+          - heading "Continue Reading" [level=2] [ref=e1403]
+          - generic [ref=e1404]:
+            - link "Kilimanjaro vs Everest" [ref=e1405] [cursor=pointer]:
+              - /url: /kilimanjaro-vs-everest/
+            - link "Best Route Guide" [ref=e1406] [cursor=pointer]:
+              - /url: /best-route-to-climb-kilimanjaro/
+            - link "Kilimanjaro Prices" [ref=e1407] [cursor=pointer]:
+              - /url: /kilimanjaro-prices/
+        - paragraph [ref=e1409]:
+          - text: Website by
+          - link "Timeless International" [ref=e1410] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+    - contentinfo [ref=e1411]:
+      - generic [ref=e1414]:
+        - generic [ref=e1415]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e1416]
+      - generic [ref=e1421]:
+        - generic [ref=e1422]:
+          - generic [ref=e1423]:
+            - img "Snow Africa Adventure" [ref=e1425]
+            - paragraph [ref=e1426]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e1427]:
+              - listitem [ref=e1428]:
+                - link "+255 766 657 854" [ref=e1429] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e1431]
+                  - generic [ref=e1433]: +255 766 657 854
+              - listitem [ref=e1434]:
+                - link "info@snowafricaadventure.com" [ref=e1435] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e1437]
+                  - generic [ref=e1440]: info@snowafricaadventure.com
+              - listitem [ref=e1441]:
+                - img [ref=e1443]
+                - generic [ref=e1446]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e1447]:
+            - heading "Safari & Tours" [level=3] [ref=e1448]
+            - list [ref=e1449]:
+              - listitem [ref=e1450]:
+                - link "All Safari Packages" [ref=e1451] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e1452]:
+                - link "Tailor-Made Safaris" [ref=e1453] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e1454]:
+                - link "Tanzania Destinations" [ref=e1455] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e1456]:
+                - link "View all" [ref=e1457] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e1458]: →
+          - generic [ref=e1459]:
+            - heading "Kilimanjaro" [level=3] [ref=e1460]
+            - list [ref=e1461]:
+              - listitem [ref=e1462]:
+                - link "All Trekking Routes" [ref=e1463] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e1464]:
+                - link "Best Route to Climb" [ref=e1465] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e1466]:
+                - link "Climbing Kilimanjaro Guide" [ref=e1467] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e1468]:
+                - link "Join Group Departures" [ref=e1469] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e1470]:
+                - link "Kilimanjaro Prices" [ref=e1471] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e1472]:
+                - link "Best Time to Climb" [ref=e1473] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e1474]:
+                - link "View all routes" [ref=e1475] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e1476]: →
+          - generic [ref=e1477]:
+            - heading "Company" [level=3] [ref=e1478]
+            - list [ref=e1479]:
+              - listitem [ref=e1480]:
+                - link "About Us" [ref=e1481] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e1482]:
+                - link "Our Guides" [ref=e1483] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e1484]:
+                - link "Contact Us" [ref=e1485] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e1486]:
+                - link "Terms & Conditions" [ref=e1487] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e1488]:
+                - link "Privacy Policy" [ref=e1489] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e1490]:
+                - link "Blog" [ref=e1491] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e1492]:
+              - heading "Follow the Journey" [level=4] [ref=e1493]
+              - generic [ref=e1494]:
+                - link "Facebook" [ref=e1495] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e1496]
+                - link "Twitter" [ref=e1498] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e1499]
+                - link "Instagram" [ref=e1501] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e1502]
+                - link "YouTube" [ref=e1505] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e1506]
+        - generic [ref=e1510]:
+          - generic [ref=e1511]: Accredited & Trusted
+          - generic [ref=e1512]:
+            - link "TripAdvisor" [ref=e1513] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e1515]: SafariBookings
+            - generic [ref=e1517]: TATO Member
+            - generic [ref=e1519]: KPAP Partner
+      - generic [ref=e1522]:
+        - generic [ref=e1523]:
+          - generic [ref=e1524]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e1525]: "|"
+          - link "Terms & Conditions" [ref=e1526] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e1527]: ·
+          - link "Privacy Policy" [ref=e1528] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e1529]:
+          - generic [ref=e1530]: Crafted by
+          - link "Timeless International" [ref=e1531] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 03:04 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e1532]:
+      - img [ref=e1533]
+  - button "Open Next.js Dev Tools" [ref=e1541] [cursor=pointer]:
+    - img [ref=e1542]
+  - alert [ref=e1545]

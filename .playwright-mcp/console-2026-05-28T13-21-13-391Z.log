@@ -1,0 +1,11 @@
+[    4988ms] [INFO] Redirecting navigation www.snowafricaadventure.com -> snowafricaadventure.com because the server presented a certificate valid for snowafricaadventure.com but not for www.snowafricaadventure.com. To disable such redirects launch Chrome with the following flag: --disable-features=SSLCommonNameMismatchHandling @ https://snowafricaadventure.com/:0
+[    5970ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rK (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:45832)
+    at rX (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:46865)
+    at https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:140584
+    at sp (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:145745)
+    at sc (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:137085)
+    at https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:131914
+    at u9 (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:132015)
+    at sV (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:158397)
+    at MessagePort.O (https://snowafricaadventure.com/_next/static/chunks/ddff2c68e46cf76d.js?dpl=dpl_A9HYNHU5efLQ9M4UMtdmwUtzXVqi:1:7356)

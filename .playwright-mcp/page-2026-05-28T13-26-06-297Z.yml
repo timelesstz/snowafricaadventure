@@ -1,0 +1,859 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Worldwide Safaris" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "Worldwide Safaris" [ref=e6]
+        - generic [ref=e7]:
+          - link "Start Planning" [ref=e8] [cursor=pointer]:
+            - /url: /start-planning/
+          - button "Open menu" [ref=e9]:
+            - img [ref=e10]
+    - generic:
+      - generic:
+        - link "Worldwide Safaris":
+          - /url: /
+          - img "Worldwide Safaris"
+        - button "Close menu":
+          - img
+      - navigation:
+        - generic:
+          - generic:
+            - generic:
+              - link "01Safari Tours":
+                - /url: /safari-tours/
+              - button "Expand":
+                - img
+            - generic:
+              - generic:
+                - link "Kenya(7)":
+                  - /url: /safari-tours/kenya/
+                  - text: Kenya
+                  - generic: (7)
+                - link "Rwanda(8)":
+                  - /url: /safari-tours/rwanda/
+                  - text: Rwanda
+                  - generic: (8)
+                - link "Tanzania(16)":
+                  - /url: /safari-tours/tanzania/
+                  - text: Tanzania
+                  - generic: (16)
+                - link "Uganda(7)":
+                  - /url: /safari-tours/uganda/
+                  - text: Uganda
+                  - generic: (7)
+                - link "Botswana(8)":
+                  - /url: /safari-tours/botswana/
+                  - text: Botswana
+                  - generic: (8)
+                - link "Namibia(8)":
+                  - /url: /safari-tours/namibia/
+                  - text: Namibia
+                  - generic: (8)
+                - link "South Africa(8)":
+                  - /url: /safari-tours/south-africa/
+                  - text: South Africa
+                  - generic: (8)
+                - link "Zimbabwe(8)":
+                  - /url: /safari-tours/zimbabwe/
+                  - text: Zimbabwe
+                  - generic: (8)
+          - generic:
+            - generic:
+              - link "02Destinations":
+                - /url: /safari-destinations/
+              - button "Expand":
+                - img
+            - generic:
+              - generic:
+                - link "Kenya":
+                  - /url: /safari-destinations/east-africa/kenya/
+                - link "Rwanda":
+                  - /url: /safari-destinations/east-africa/rwanda/
+                - link "Tanzania":
+                  - /url: /safari-destinations/east-africa/tanzania/
+                - link "Uganda":
+                  - /url: /safari-destinations/east-africa/uganda/
+                - link "Botswana":
+                  - /url: /safari-destinations/southern-africa/botswana/
+                - link "Namibia":
+                  - /url: /safari-destinations/southern-africa/namibia/
+                - link "South Africa":
+                  - /url: /safari-destinations/southern-africa/south-africa/
+                - link "Zimbabwe":
+                  - /url: /safari-destinations/southern-africa/zimbabwe/
+          - generic:
+            - generic:
+              - link "03Trip Types":
+                - /url: /trip-types/
+          - generic:
+            - generic:
+              - link "04Travel Info":
+                - /url: /travel-info/
+          - generic:
+            - generic:
+              - link "05Blog":
+                - /url: /blog/
+          - generic:
+            - generic:
+              - link "06Contact":
+                - /url: /contact/
+        - generic:
+          - link "Start Planning Your Safari":
+            - /url: /start-planning/
+        - generic:
+          - link "+255786158702":
+            - /url: tel:+255786158702
+            - img
+            - text: "+255786158702"
+          - link "info@worldwide-safaris.com":
+            - /url: mailto:info@worldwide-safaris.com
+            - img
+            - text: info@worldwide-safaris.com
+  - main [ref=e13]:
+    - region "Hero" [ref=e14]:
+      - generic [ref=e15]:
+        - img "Elephant crossing, Tarangire National Park" [ref=e17]
+        - img "Dawn patrol, Serengeti National Park" [ref=e19]
+        - img "Golden hour, Ngorongoro Crater" [ref=e21]
+      - generic [ref=e22]:
+        - generic [ref=e24]: Worldwide Safaris
+        - generic [ref=e26]:
+          - generic [ref=e27]: Private African Safaris
+          - heading "The Wild Is Waiting" [level=1] [ref=e29]:
+            - generic [ref=e30]: The Wild
+            - generic [ref=e31]: Is Waiting
+          - paragraph [ref=e32]: Private game drives, trusted camps and honest safari planning across eight countries, from Tanzania's northern circuit to the Okavango Delta.
+          - generic [ref=e33]:
+            - link "Browse Itineraries" [ref=e34] [cursor=pointer]:
+              - /url: /safari-tours/
+              - generic [ref=e35]: Browse Itineraries
+              - img [ref=e37]
+            - link "Design a Private Safari" [ref=e39] [cursor=pointer]:
+              - /url: /start-planning/
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: 06:42
+            - generic [ref=e43]: Elephant crossing, Tarangire National Park
+          - generic [ref=e45]: Explore
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - link "BOTSWANA✦" [ref=e50] [cursor=pointer]:
+          - /url: /safari-tours/botswana/
+        - link "KENYA✦" [ref=e51] [cursor=pointer]:
+          - /url: /safari-tours/kenya/
+        - link "NAMIBIA✦" [ref=e52] [cursor=pointer]:
+          - /url: /safari-tours/namibia/
+        - link "RWANDA✦" [ref=e53] [cursor=pointer]:
+          - /url: /safari-tours/rwanda/
+        - link "SOUTH AFRICA✦" [ref=e54] [cursor=pointer]:
+          - /url: /safari-tours/south-africa/
+        - link "TANZANIA✦" [ref=e55] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+        - link "UGANDA✦" [ref=e56] [cursor=pointer]:
+          - /url: /safari-tours/uganda/
+        - link "ZIMBABWE✦" [ref=e57] [cursor=pointer]:
+          - /url: /safari-tours/zimbabwe/
+      - generic [ref=e58]:
+        - link "BOTSWANA✦" [ref=e59] [cursor=pointer]:
+          - /url: /safari-tours/botswana/
+        - link "KENYA✦" [ref=e60] [cursor=pointer]:
+          - /url: /safari-tours/kenya/
+        - link "NAMIBIA✦" [ref=e61] [cursor=pointer]:
+          - /url: /safari-tours/namibia/
+        - link "RWANDA✦" [ref=e62] [cursor=pointer]:
+          - /url: /safari-tours/rwanda/
+        - link "SOUTH AFRICA✦" [ref=e63] [cursor=pointer]:
+          - /url: /safari-tours/south-africa/
+        - link "TANZANIA✦" [ref=e64] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+        - link "UGANDA✦" [ref=e65] [cursor=pointer]:
+          - /url: /safari-tours/uganda/
+        - link "ZIMBABWE✦" [ref=e66] [cursor=pointer]:
+          - /url: /safari-tours/zimbabwe/
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]: African Safari Tours
+        - heading "Safari & Beyond" [level=2] [ref=e72]
+        - paragraph [ref=e73]: Private game drives, trusted camps and honest safari planning.
+        - generic [ref=e74]:
+          - paragraph [ref=e75]: With over two decades in the field, we plan private African safaris around strong guiding, well-run camps and the seasons that matter for wildlife.
+          - paragraph [ref=e76]: Planning an African safari and unsure where to start? Tell us your dates, budget and wildlife priorities. From Serengeti game drives and Ngorongoro Crater to Kilimanjaro trekking and Zanzibar beach time, our Arusha-based team turns the moving parts into a clear, private itinerary.
+        - link "Start planning →" [ref=e78] [cursor=pointer]:
+          - /url: /start-planning/
+          - text: Start planning
+          - generic [ref=e79]: →
+      - img "African safari landscape" [ref=e81]
+    - generic [ref=e83]:
+      - generic [ref=e84]:
+        - generic [ref=e85]: Why Travel With Us
+        - heading "Two decades of careful ground work." [level=2] [ref=e86]
+      - generic [ref=e87]:
+        - generic [ref=e88]:
+          - text: "01"
+          - heading "Certified Tour Operator" [level=3] [ref=e89]
+          - paragraph [ref=e90]: A licensed Tanzanian operator partnered with elite lodges and camps — not a reseller, not a marketplace.
+        - generic [ref=e91]:
+          - text: "02"
+          - heading "Honest, All-in Pricing" [level=3] [ref=e92]
+          - paragraph [ref=e93]: Park fees, tips, internal flights — everything in one transparent quote. No line-item surprises at the gate.
+        - generic [ref=e94]:
+          - text: "03"
+          - heading "Operated, Not Brokered" [level=3] [ref=e95]
+          - paragraph [ref=e96]: We own the vehicles, employ the guides, and sleep in the camps ourselves. No middlemen, full accountability.
+        - generic [ref=e97]:
+          - text: "04"
+          - heading "Built Around You" [level=3] [ref=e98]
+          - paragraph [ref=e99]: A honeymoon reads differently than a family of nine. Every itinerary starts with a conversation, not a catalogue.
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - generic [ref=e103]: Tanzania Safari Tours
+        - heading "No matter where you're going from, we take you there." [level=2] [ref=e104]
+        - generic [ref=e105]: Tanzania safari routes by circuit and season
+        - generic [ref=e106]:
+          - paragraph [ref=e107]: Private safaris for the great migration, big cats, Ngorongoro Crater and Zanzibar beach extensions.
+          - link "See all safari itineraries →" [ref=e108] [cursor=pointer]:
+            - /url: /safari-tours/
+            - text: See all safari itineraries
+            - generic [ref=e109]: →
+      - generic [ref=e110]:
+        - 'link "Grand Tanzania: Migration Safari & Zanzibar Escape 13 DAYS Tanzania Grand Tanzania: Migration Safari & Zanzibar Escape" [ref=e111] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/13-day-grand-tanzanian-migration-beach-odyssey/
+          - 'img "Grand Tanzania: Migration Safari & Zanzibar Escape" [ref=e113]'
+          - generic [ref=e115]: 13 DAYS
+          - generic [ref=e116]:
+            - generic [ref=e118]: Tanzania
+            - 'heading "Grand Tanzania: Migration Safari & Zanzibar Escape" [level=3] [ref=e119]'
+        - 'link "Classic Tanzania Safari: Serengeti & Ngorongoro 6 DAYS Tanzania Classic Tanzania Safari: Serengeti & Ngorongoro From $4,200 per person →" [ref=e120] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/6-day-tanzania-safari/
+          - 'img "Classic Tanzania Safari: Serengeti & Ngorongoro" [ref=e122]'
+          - generic [ref=e124]: 6 DAYS
+          - generic [ref=e125]:
+            - generic [ref=e127]: Tanzania
+            - 'heading "Classic Tanzania Safari: Serengeti & Ngorongoro" [level=3] [ref=e128]'
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - text: From
+                - generic [ref=e131]: $4,200
+                - text: per person
+              - generic [ref=e132]: →
+        - link "Tanzania Wildlife Photography Safari 9 DAYS Tanzania Tanzania Wildlife Photography Safari From $5,200 per person →" [ref=e133] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/tanzania-wildlife-photography-safari/
+          - img "Tanzania Wildlife Photography Safari" [ref=e135]
+          - generic [ref=e137]: 9 DAYS
+          - generic [ref=e138]:
+            - generic [ref=e140]: Tanzania
+            - heading "Tanzania Wildlife Photography Safari" [level=3] [ref=e141]
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - text: From
+                - generic [ref=e144]: $5,200
+                - text: per person
+              - generic [ref=e145]: →
+        - 'link "Tanzania Express: Big Five in 5 Days 5 DAYS Tanzania Tanzania Express: Big Five in 5 Days From $2,800 per person →" [ref=e146] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/tanzania-express-big-five-in-5-days/
+          - 'img "Tanzania Express: Big Five in 5 Days" [ref=e148]'
+          - generic [ref=e150]: 5 DAYS
+          - generic [ref=e151]:
+            - generic [ref=e153]: Tanzania
+            - 'heading "Tanzania Express: Big Five in 5 Days" [level=3] [ref=e154]'
+            - generic [ref=e155]:
+              - generic [ref=e156]:
+                - text: From
+                - generic [ref=e157]: $2,800
+                - text: per person
+              - generic [ref=e158]: →
+        - 'link "Tanzania Luxury Honeymoon: Safari & Zanzibar Romance 12 DAYS Tanzania Tanzania Luxury Honeymoon: Safari & Zanzibar Romance From $6,800 per person →" [ref=e159] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/tanzania-luxury-honeymoon-safari-zanzibar/
+          - 'img "Tanzania Luxury Honeymoon: Safari & Zanzibar Romance" [ref=e161]'
+          - generic [ref=e163]: 12 DAYS
+          - generic [ref=e164]:
+            - generic [ref=e166]: Tanzania
+            - 'heading "Tanzania Luxury Honeymoon: Safari & Zanzibar Romance" [level=3] [ref=e167]'
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - text: From
+                - generic [ref=e170]: $6,800
+                - text: per person
+              - generic [ref=e171]: →
+        - 'link "Lake Manyara, Tarangire & Ngorongoro: Bush & Culture Safari 4 DAYS Tanzania Lake Manyara, Tarangire & Ngorongoro: Bush & Culture Safari From $1,950 per person →" [ref=e172] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/lake-manyara-tarangire-ngorongoro-bush-culture/
+          - 'img "Lake Manyara, Tarangire & Ngorongoro: Bush & Culture Safari" [ref=e174]'
+          - generic [ref=e176]: 4 DAYS
+          - generic [ref=e177]:
+            - generic [ref=e179]: Tanzania
+            - 'heading "Lake Manyara, Tarangire & Ngorongoro: Bush & Culture Safari" [level=3] [ref=e180]'
+            - generic [ref=e181]:
+              - generic [ref=e182]:
+                - text: From
+                - generic [ref=e183]: $1,950
+                - text: per person
+              - generic [ref=e184]: →
+        - 'link "Southern Tanzania Wilderness: Ruaha & Nyerere 8 DAYS Tanzania Southern Tanzania Wilderness: Ruaha & Nyerere From $4,500 per person →" [ref=e185] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/southern-tanzania-wilderness-ruaha-nyerere/
+          - 'img "Southern Tanzania Wilderness: Ruaha & Nyerere" [ref=e187]'
+          - generic [ref=e189]: 8 DAYS
+          - generic [ref=e190]:
+            - generic [ref=e192]: Tanzania
+            - 'heading "Southern Tanzania Wilderness: Ruaha & Nyerere" [level=3] [ref=e193]'
+            - generic [ref=e194]:
+              - generic [ref=e195]:
+                - text: From
+                - generic [ref=e196]: $4,500
+                - text: per person
+              - generic [ref=e197]: →
+        - 'link "Serengeti Great Migration: River Crossings & Calving Season 10 DAYS Tanzania Serengeti Great Migration: River Crossings & Calving Season From $5,800 per person →" [ref=e198] [cursor=pointer]':
+          - /url: /safari-tours/tanzania/serengeti-great-migration-river-crossings/
+          - 'img "Serengeti Great Migration: River Crossings & Calving Season" [ref=e200]'
+          - generic [ref=e202]: 10 DAYS
+          - generic [ref=e203]:
+            - generic [ref=e205]: Tanzania
+            - 'heading "Serengeti Great Migration: River Crossings & Calving Season" [level=3] [ref=e206]'
+            - generic [ref=e207]:
+              - generic [ref=e208]:
+                - text: From
+                - generic [ref=e209]: $5,800
+                - text: per person
+              - generic [ref=e210]: →
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - generic [ref=e213]:
+            - generic [ref=e214]: Beyond Tanzania Tours & Safaris
+            - heading "A taste of the rest of the continent." [level=3] [ref=e215]
+          - link "All destinations →" [ref=e216] [cursor=pointer]:
+            - /url: /safari-destinations/
+            - text: All destinations
+            - generic [ref=e217]: →
+        - paragraph [ref=e218]: Mountain gorillas in the Virungas, salt pans in the Kalahari, dunes at Sossusvlei, walking safaris in the Zambezi Valley — a rotating pick from across the continent. Refresh for a different selection.
+        - generic [ref=e219]:
+          - link "Victoria Falls & Hwange Safari 7 DAYS Zimbabwe Victoria Falls & Hwange Safari" [ref=e220] [cursor=pointer]:
+            - /url: /safari-tours/zimbabwe/victoria-falls-and-hwange-national-park-safari-7-days/
+            - img "Victoria Falls & Hwange Safari" [ref=e222]
+            - generic [ref=e224]: 7 DAYS
+            - generic [ref=e225]:
+              - generic [ref=e227]: Zimbabwe
+              - heading "Victoria Falls & Hwange Safari" [level=4] [ref=e228]
+          - link "Rwanda Gorilla Trekking & Wildlife Safari 7 DAYS Rwanda Rwanda Gorilla Trekking & Wildlife Safari" [ref=e229] [cursor=pointer]:
+            - /url: /safari-tours/rwanda/gorilla-trekking-and-wildlife-safari-7-days/
+            - img "Rwanda Gorilla Trekking & Wildlife Safari" [ref=e231]
+            - generic [ref=e233]: 7 DAYS
+            - generic [ref=e234]:
+              - generic [ref=e236]: Rwanda
+              - heading "Rwanda Gorilla Trekking & Wildlife Safari" [level=4] [ref=e237]
+          - link "Samburu & Aberdare Wilderness 8 DAYS Kenya Samburu & Aberdare Wilderness" [ref=e238] [cursor=pointer]:
+            - /url: /safari-tours/kenya/samburu-and-aberdare-wilderness-8-days/
+            - img "Samburu & Aberdare Wilderness" [ref=e240]
+            - generic [ref=e242]: 8 DAYS
+            - generic [ref=e243]:
+              - generic [ref=e245]: Kenya
+              - heading "Samburu & Aberdare Wilderness" [level=4] [ref=e246]
+          - link "Botswana Cultural Immersion 5 DAYS Botswana Botswana Cultural Immersion" [ref=e247] [cursor=pointer]:
+            - /url: /safari-tours/botswana/botswana-cultural-immersion-5-days/
+            - img "Botswana Cultural Immersion" [ref=e249]
+            - generic [ref=e251]: 5 DAYS
+            - generic [ref=e252]:
+              - generic [ref=e254]: Botswana
+              - heading "Botswana Cultural Immersion" [level=4] [ref=e255]
+          - link "Lake Mburo & Mount Elgon Adventure 6 DAYS Uganda Lake Mburo & Mount Elgon Adventure" [ref=e256] [cursor=pointer]:
+            - /url: /safari-tours/uganda/lake-mburo-and-mount-elgon-adventure-6-days/
+            - img "Lake Mburo & Mount Elgon Adventure" [ref=e258]
+            - generic [ref=e260]: 6 DAYS
+            - generic [ref=e261]:
+              - generic [ref=e263]: Uganda
+              - heading "Lake Mburo & Mount Elgon Adventure" [level=4] [ref=e264]
+          - link "Namibia Family Safari 9 DAYS Namibia Namibia Family Safari" [ref=e265] [cursor=pointer]:
+            - /url: /safari-tours/namibia/namibia-family-safari-9-days/
+            - img "Namibia Family Safari" [ref=e267]
+            - generic [ref=e269]: 9 DAYS
+            - generic [ref=e270]:
+              - generic [ref=e272]: Namibia
+              - heading "Namibia Family Safari" [level=4] [ref=e273]
+          - link "Johannesburg & Sun City Escape 6 DAYS South Africa Johannesburg & Sun City Escape" [ref=e274] [cursor=pointer]:
+            - /url: /safari-tours/south-africa/johannesburg-and-sun-city-escape-6-days/
+            - img "Johannesburg & Sun City Escape" [ref=e276]
+            - generic [ref=e278]: 6 DAYS
+            - generic [ref=e279]:
+              - generic [ref=e281]: South Africa
+              - heading "Johannesburg & Sun City Escape" [level=4] [ref=e282]
+          - link "Gonarezhou & Eastern Highlands Discovery 10 DAYS Zimbabwe Gonarezhou & Eastern Highlands Discovery" [ref=e283] [cursor=pointer]:
+            - /url: /safari-tours/zimbabwe/gonarezhou-national-park-and-eastern-highlands-discovery-10-days/
+            - img "Gonarezhou & Eastern Highlands Discovery" [ref=e285]
+            - generic [ref=e287]: 10 DAYS
+            - generic [ref=e288]:
+              - generic [ref=e290]: Zimbabwe
+              - heading "Gonarezhou & Eastern Highlands Discovery" [level=4] [ref=e291]
+          - link "Rwanda Birding Tour 9 DAYS Rwanda Rwanda Birding Tour" [ref=e292] [cursor=pointer]:
+            - /url: /safari-tours/rwanda/rwanda-birding-tour-9-days/
+            - img "Rwanda Birding Tour" [ref=e294]
+            - generic [ref=e296]: 9 DAYS
+            - generic [ref=e297]:
+              - generic [ref=e299]: Rwanda
+              - heading "Rwanda Birding Tour" [level=4] [ref=e300]
+          - link "Maasai Mara Wildlife Adventure 4 DAYS Kenya Maasai Mara Wildlife Adventure" [ref=e301] [cursor=pointer]:
+            - /url: /safari-tours/kenya/masai-mara-wildlife-adventure-4-days/
+            - img "Maasai Mara Wildlife Adventure" [ref=e303]
+            - generic [ref=e305]: 4 DAYS
+            - generic [ref=e306]:
+              - generic [ref=e308]: Kenya
+              - heading "Maasai Mara Wildlife Adventure" [level=4] [ref=e309]
+    - generic [ref=e312]:
+      - generic [ref=e313]:
+        - generic [ref=e314]: Plan Your Safari
+        - heading "Tell us your dates, we'll do the rest." [level=2] [ref=e315]:
+          - text: Tell us your dates,
+          - text: we'll do the rest.
+        - paragraph [ref=e316]: Every itinerary is built around you — destinations you want, lodges you'll love, and the pace that fits how you travel. Send us the outline and a senior expert from Arusha will sketch a plan within a day.
+        - generic [ref=e317]:
+          - generic [ref=e318]:
+            - generic [ref=e319]: 24h
+            - generic [ref=e320]: reply time
+          - generic [ref=e321]:
+            - generic [ref=e322]: 20+
+            - generic [ref=e323]: years on the ground
+          - generic [ref=e324]:
+            - generic [ref=e325]: 100%
+            - generic [ref=e326]: tailor-made
+      - generic [ref=e327]:
+        - generic [ref=e328]:
+          - generic [ref=e329]:
+            - generic [ref=e330]: Your name *
+            - textbox "Your name" [ref=e331]
+          - generic [ref=e332]:
+            - generic [ref=e333]: Email *
+            - textbox "Email" [ref=e334]
+        - generic [ref=e335]:
+          - generic [ref=e336]:
+            - generic [ref=e337]: Phone (optional)
+            - textbox "Phone (optional)" [ref=e338]
+          - generic [ref=e339]:
+            - generic [ref=e340]: Travellers
+            - combobox "Travellers" [ref=e341]:
+              - option "1"
+              - option "2" [selected]
+              - option "3-4"
+              - option "5-6"
+              - option "7+"
+        - generic [ref=e342]:
+          - generic [ref=e343]:
+            - generic [ref=e344]: Destination
+            - combobox "Destination" [ref=e345]:
+              - option "Tanzania" [selected]
+              - option "Kenya"
+              - option "Uganda"
+              - option "Rwanda"
+              - option "Botswana"
+              - option "Namibia"
+              - option "South Africa"
+              - option "Zimbabwe"
+              - option "Zanzibar"
+              - option "Not sure yet"
+          - generic [ref=e346]:
+            - generic [ref=e347]: Travel month
+            - combobox "Travel month" [ref=e348]:
+              - option "Flexible" [selected]
+              - option "January"
+              - option "February"
+              - option "March"
+              - option "April"
+              - option "May"
+              - option "June"
+              - option "July"
+              - option "August"
+              - option "September"
+              - option "October"
+              - option "November"
+              - option "December"
+        - generic [ref=e349]:
+          - generic [ref=e350]: Tell us anything you'd like (optional)
+          - textbox "Tell us anything you'd like (optional)" [ref=e351]:
+            - /placeholder: Honeymoon, family with kids, photographic focus, must-see species, budget…
+        - button "Request my safari plan →" [ref=e352] [cursor=pointer]:
+          - text: Request my safari plan
+          - generic [ref=e353]: →
+        - paragraph [ref=e354]: No spam, ever. A senior expert replies within 24 hours.
+    - generic [ref=e355]:
+      - generic [ref=e357]:
+        - generic [ref=e358]:
+          - generic [ref=e359]: Destinations
+          - heading "From the salt pans of Botswana to the gorillas of the Virungas." [level=2] [ref=e360]
+        - link "Open the destinations →" [ref=e361] [cursor=pointer]:
+          - /url: /safari-tours/
+          - text: Open the destinations
+          - generic [ref=e362]: →
+      - generic [ref=e363]:
+        - link "South Africa Southern Africa South Africa View safaris →" [ref=e364] [cursor=pointer]:
+          - /url: /safari-tours/south-africa/
+          - generic [ref=e365]:
+            - img "South Africa" [ref=e366]
+            - generic [ref=e367]:
+              - generic [ref=e368]: Southern Africa
+              - heading "South Africa" [level=3] [ref=e369]
+              - generic [ref=e370]:
+                - text: View safaris
+                - generic [ref=e371]: →
+        - link "Zimbabwe Southern Africa Zimbabwe View safaris →" [ref=e372] [cursor=pointer]:
+          - /url: /safari-tours/zimbabwe/
+          - generic [ref=e373]:
+            - img "Zimbabwe" [ref=e374]
+            - generic [ref=e375]:
+              - generic [ref=e376]: Southern Africa
+              - heading "Zimbabwe" [level=3] [ref=e377]
+              - generic [ref=e378]:
+                - text: View safaris
+                - generic [ref=e379]: →
+        - link "Tanzania East Africa Tanzania View safaris →" [ref=e380] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - generic [ref=e381]:
+            - img "Tanzania" [ref=e382]
+            - generic [ref=e383]:
+              - generic [ref=e384]: East Africa
+              - heading "Tanzania" [level=3] [ref=e385]
+              - generic [ref=e386]:
+                - text: View safaris
+                - generic [ref=e387]: →
+        - link "Rwanda East Africa Rwanda View safaris →" [ref=e388] [cursor=pointer]:
+          - /url: /safari-tours/rwanda/
+          - generic [ref=e389]:
+            - img "Rwanda" [ref=e390]
+            - generic [ref=e391]:
+              - generic [ref=e392]: East Africa
+              - heading "Rwanda" [level=3] [ref=e393]
+              - generic [ref=e394]:
+                - text: View safaris
+                - generic [ref=e395]: →
+        - link "Kenya East Africa Kenya View safaris →" [ref=e396] [cursor=pointer]:
+          - /url: /safari-tours/kenya/
+          - generic [ref=e397]:
+            - img "Kenya" [ref=e398]
+            - generic [ref=e399]:
+              - generic [ref=e400]: East Africa
+              - heading "Kenya" [level=3] [ref=e401]
+              - generic [ref=e402]:
+                - text: View safaris
+                - generic [ref=e403]: →
+        - link "Uganda East Africa Uganda View safaris →" [ref=e404] [cursor=pointer]:
+          - /url: /safari-tours/uganda/
+          - generic [ref=e405]:
+            - img "Uganda" [ref=e406]
+            - generic [ref=e407]:
+              - generic [ref=e408]: East Africa
+              - heading "Uganda" [level=3] [ref=e409]
+              - generic [ref=e410]:
+                - text: View safaris
+                - generic [ref=e411]: →
+    - generic [ref=e412]:
+      - img "Kilimanjaro Lemosho Route" [ref=e413]
+      - generic [ref=e415]:
+        - generic [ref=e416]: From the Guide
+        - paragraph [ref=e417]: “At 5,895 metres, the only sound is your own breath. You do not climb Kilimanjaro. You are slowly let up.”
+        - generic [ref=e418]:
+          - generic [ref=e419]: — Amani M., lead guide
+          - generic [ref=e420]: Lemosho route, day six
+        - link "Read the full account →" [ref=e421] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/9-day-kilimanjaros-lemosho-route/
+          - text: Read the full account
+          - generic [ref=e422]: →
+    - generic [ref=e424]:
+      - generic [ref=e425]:
+        - generic [ref=e426]: Kiss the African Sky
+        - heading "Kilimanjaro Climbing" [level=2] [ref=e427]
+        - paragraph [ref=e428]: Trek Kilimanjaro with mountain crews who know the routes, acclimatisation days and summit pacing.
+      - generic [ref=e429]:
+        - link "Machame Route The Whiskey Route Machame Route The most popular route up Kilimanjaro, known for its stunning scenic variety and high summit success rate. Duration 6-7 days Difficulty Challenging From $4,450" [ref=e430] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - img "Machame Route" [ref=e432]
+          - generic [ref=e434]:
+            - generic [ref=e435]: The Whiskey Route
+            - heading "Machame Route" [level=3] [ref=e436]
+            - paragraph [ref=e437]: The most popular route up Kilimanjaro, known for its stunning scenic variety and high summit success rate.
+            - generic [ref=e438]:
+              - generic [ref=e439]:
+                - text: Duration
+                - text: 6-7 days
+              - generic [ref=e440]:
+                - text: Difficulty
+                - text: Challenging
+              - generic [ref=e441]:
+                - text: From
+                - text: $4,450
+        - link "Marangu Route The Coca-Cola Route Marangu Route The only route offering sleeping huts along the way, making it a comfortable choice for trekkers. Duration 5-6 days Difficulty Moderate From $3,950" [ref=e442] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - img "Marangu Route" [ref=e444]
+          - generic [ref=e446]:
+            - generic [ref=e447]: The Coca-Cola Route
+            - heading "Marangu Route" [level=3] [ref=e448]
+            - paragraph [ref=e449]: The only route offering sleeping huts along the way, making it a comfortable choice for trekkers.
+            - generic [ref=e450]:
+              - generic [ref=e451]:
+                - text: Duration
+                - text: 5-6 days
+              - generic [ref=e452]:
+                - text: Difficulty
+                - text: Moderate
+              - generic [ref=e453]:
+                - text: From
+                - text: $3,950
+        - link "Lemosho Route The Scenic Route Lemosho Route Widely considered the best route for acclimatization, with pristine rainforest and panoramic ridge walks. Duration 7-8 days Difficulty Moderate-Challenging From $5,150" [ref=e454] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - img "Lemosho Route" [ref=e456]
+          - generic [ref=e458]:
+            - generic [ref=e459]: The Scenic Route
+            - heading "Lemosho Route" [level=3] [ref=e460]
+            - paragraph [ref=e461]: Widely considered the best route for acclimatization, with pristine rainforest and panoramic ridge walks.
+            - generic [ref=e462]:
+              - generic [ref=e463]:
+                - text: Duration
+                - text: 7-8 days
+              - generic [ref=e464]:
+                - text: Difficulty
+                - text: Moderate-Challenging
+              - generic [ref=e465]:
+                - text: From
+                - text: $5,150
+        - link "Rongai Route The Gentle Route Rongai Route Approaches Kilimanjaro from the quieter northern side, near the Kenyan border, with drier conditions. Duration 6-7 days Difficulty Moderate From $4,600" [ref=e466] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - img "Rongai Route" [ref=e468]
+          - generic [ref=e470]:
+            - generic [ref=e471]: The Gentle Route
+            - heading "Rongai Route" [level=3] [ref=e472]
+            - paragraph [ref=e473]: Approaches Kilimanjaro from the quieter northern side, near the Kenyan border, with drier conditions.
+            - generic [ref=e474]:
+              - generic [ref=e475]:
+                - text: Duration
+                - text: 6-7 days
+              - generic [ref=e476]:
+                - text: Difficulty
+                - text: Moderate
+              - generic [ref=e477]:
+                - text: From
+                - text: $4,600
+        - link "Northern Circuit The Grand Traverse Northern Circuit The newest and longest route, circumnavigating the mountain for unparalleled views and the highest success rate. Duration 9 days Difficulty Moderate From Enquire" [ref=e478] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - img "Northern Circuit" [ref=e480]
+          - generic [ref=e482]:
+            - generic [ref=e483]: The Grand Traverse
+            - heading "Northern Circuit" [level=3] [ref=e484]
+            - paragraph [ref=e485]: The newest and longest route, circumnavigating the mountain for unparalleled views and the highest success rate.
+            - generic [ref=e486]:
+              - generic [ref=e487]:
+                - text: Duration
+                - text: 9 days
+              - generic [ref=e488]:
+                - text: Difficulty
+                - text: Moderate
+              - generic [ref=e489]:
+                - text: From
+                - text: Enquire
+        - link "Umbwe Route The Steep Route Umbwe Route The most direct and demanding path to the summit, reserved for experienced and physically fit trekkers. Duration 5-6 days Difficulty Very Challenging From $3,950" [ref=e490] [cursor=pointer]:
+          - /url: /safari-tours/tanzania/
+          - img "Umbwe Route" [ref=e492]
+          - generic [ref=e494]:
+            - generic [ref=e495]: The Steep Route
+            - heading "Umbwe Route" [level=3] [ref=e496]
+            - paragraph [ref=e497]: The most direct and demanding path to the summit, reserved for experienced and physically fit trekkers.
+            - generic [ref=e498]:
+              - generic [ref=e499]:
+                - text: Duration
+                - text: 5-6 days
+              - generic [ref=e500]:
+                - text: Difficulty
+                - text: Very Challenging
+              - generic [ref=e501]:
+                - text: From
+                - text: $3,950
+      - link "View all Kilimanjaro routes →" [ref=e503] [cursor=pointer]:
+        - /url: /safari-tours/tanzania/
+        - text: View all Kilimanjaro routes
+        - generic [ref=e504]: →
+    - generic [ref=e506]:
+      - generic [ref=e507]:
+        - generic [ref=e508]: Traveller Letters
+        - heading "Letters from our travellers." [level=2] [ref=e509]
+      - generic [ref=e510]:
+        - figure "Helena & Marcus B. 9 days, Serengeti & Ngorongoro Stockholm" [ref=e511]:
+          - generic [ref=e512]:
+            - generic [ref=e513]: From the Field
+            - generic [ref=e514]: No. 001/2026
+          - blockquote [ref=e515]: “We've been on six safaris in our lifetime. This was the first that felt like it was designed for us, not for everyone.”
+          - generic [ref=e516]:
+            - generic [ref=e517]:
+              - generic [ref=e518]: Helena & Marcus B.
+              - generic [ref=e519]: 9 days, Serengeti & Ngorongoro
+            - generic [ref=e520]:
+              - img [ref=e521]
+              - text: Stockholm
+        - figure "The Peterson family 12 days, Tanzania & Zanzibar Melbourne" [ref=e524]:
+          - generic [ref=e525]:
+            - generic [ref=e526]: From the Field
+            - generic [ref=e527]: No. 002/2026
+          - blockquote [ref=e528]: “Our guide Samuel knew the name of every bird before we lifted the binoculars. That kind of knowledge is rare.”
+          - generic [ref=e529]:
+            - generic [ref=e530]:
+              - generic [ref=e531]: The Peterson family
+              - generic [ref=e532]: 12 days, Tanzania & Zanzibar
+            - generic [ref=e533]:
+              - img [ref=e534]
+              - text: Melbourne
+        - figure "Ayana & Daniel O. 8 days, Okavango honeymoon Lagos" [ref=e537]:
+          - generic [ref=e538]:
+            - generic [ref=e539]: From the Field
+            - generic [ref=e540]: No. 003/2026
+          - blockquote [ref=e541]: “I had given up on honeymoons until this one. A private dinner on the Chobe, at a table set in the river itself.”
+          - generic [ref=e542]:
+            - generic [ref=e543]:
+              - generic [ref=e544]: Ayana & Daniel O.
+              - generic [ref=e545]: 8 days, Okavango honeymoon
+            - generic [ref=e546]:
+              - img [ref=e547]
+              - text: Lagos
+    - generic [ref=e552]:
+      - generic [ref=e553]:
+        - generic [ref=e554]: Next Steps
+        - heading "Tell us about your ideal week." [level=2] [ref=e555]:
+          - text: Tell us about your
+          - emphasis [ref=e556]: ideal
+          - text: week.
+        - paragraph [ref=e557]: Every safari we book starts with a conversation — your dates, travellers, preferred pace and the wildlife areas you've always meant to see. Reply within 24 hours, guaranteed, by a person, not a form.
+        - generic [ref=e558]:
+          - link "Start a conversation →" [ref=e559] [cursor=pointer]:
+            - /url: /start-planning/
+            - text: Start a conversation
+            - generic [ref=e560]: →
+          - link "Browse ready-made itineraries" [ref=e561] [cursor=pointer]:
+            - /url: /safari-tours/
+        - generic [ref=e562]:
+          - generic [ref=e563]:
+            - generic [ref=e564]: 2,400+
+            - text: safaris planned
+          - generic [ref=e565]:
+            - generic [ref=e566]: 4.9/5
+            - text: average review
+          - generic [ref=e567]:
+            - generic [ref=e568]: "8"
+            - text: countries covered
+      - img "Safari planning" [ref=e570]
+  - contentinfo [ref=e571]:
+    - generic [ref=e573]:
+      - generic [ref=e574]:
+        - generic [ref=e575]: Still reading?
+        - heading "Write us a single line. We reply within 24 hours — from Arusha, by a person." [level=2] [ref=e576]:
+          - text: Write us a single line.
+          - emphasis [ref=e577]: We reply within 24 hours
+          - text: — from Arusha, by a person.
+      - generic [ref=e578]:
+        - paragraph [ref=e579]: Every safari starts with a conversation — a loose sketch of what you love, who you're travelling with, and what you've always meant to see.
+        - generic [ref=e580]:
+          - link "Start a conversation →" [ref=e581] [cursor=pointer]:
+            - /url: /start-planning/
+            - text: Start a conversation
+            - generic [ref=e582]: →
+          - link "info@worldwide-safaris.com" [ref=e583] [cursor=pointer]:
+            - /url: mailto:info@worldwide-safaris.com
+    - generic [ref=e584]:
+      - generic [ref=e585]:
+        - generic [ref=e586]:
+          - generic [ref=e587]: Est. 2004 · Arusha, Tanzania
+          - heading "Worldwide Safaris" [level=3] [ref=e588]:
+            - text: Worldwide
+            - emphasis [ref=e589]: Safaris
+          - paragraph [ref=e590]: A small team of safari experts. Writing letters, crossing borders, finding the camps before they're on the map.
+          - generic [ref=e591]:
+            - generic [ref=e592]:
+              - generic [ref=e593]: 2,400+
+              - generic [ref=e594]: safaris
+            - generic [ref=e595]:
+              - generic [ref=e596]: 4.9/5
+              - generic [ref=e597]: reviews
+            - generic [ref=e598]:
+              - generic [ref=e599]: 24hr
+              - generic [ref=e600]: reply
+        - generic [ref=e601]:
+          - heading "Safaris" [level=4] [ref=e602]
+          - list [ref=e603]:
+            - listitem [ref=e604]:
+              - link "All Safari Tours" [ref=e605] [cursor=pointer]:
+                - /url: /safari-tours/
+            - listitem [ref=e606]:
+              - link "Botswana" [ref=e607] [cursor=pointer]:
+                - /url: /safari-tours/botswana/
+            - listitem [ref=e608]:
+              - link "Kenya" [ref=e609] [cursor=pointer]:
+                - /url: /safari-tours/kenya/
+            - listitem [ref=e610]:
+              - link "Namibia" [ref=e611] [cursor=pointer]:
+                - /url: /safari-tours/namibia/
+            - listitem [ref=e612]:
+              - link "Rwanda" [ref=e613] [cursor=pointer]:
+                - /url: /safari-tours/rwanda/
+            - listitem [ref=e614]:
+              - link "South Africa" [ref=e615] [cursor=pointer]:
+                - /url: /safari-tours/south-africa/
+            - listitem [ref=e616]:
+              - link "Tanzania" [ref=e617] [cursor=pointer]:
+                - /url: /safari-tours/tanzania/
+            - listitem [ref=e618]:
+              - link "Uganda" [ref=e619] [cursor=pointer]:
+                - /url: /safari-tours/uganda/
+            - listitem [ref=e620]:
+              - link "Zimbabwe" [ref=e621] [cursor=pointer]:
+                - /url: /safari-tours/zimbabwe/
+        - generic [ref=e622]:
+          - heading "The Atlas" [level=4] [ref=e623]
+          - list [ref=e624]:
+            - listitem [ref=e625]:
+              - link "Activities" [ref=e626] [cursor=pointer]:
+                - /url: /activities/
+            - listitem [ref=e627]:
+              - link "Trip Types" [ref=e628] [cursor=pointer]:
+                - /url: /trip-types/
+            - listitem [ref=e629]:
+              - link "Destinations Atlas" [ref=e630] [cursor=pointer]:
+                - /url: /safari-destinations/
+            - listitem [ref=e631]:
+              - link "Travel Info" [ref=e632] [cursor=pointer]:
+                - /url: /travel-info/
+            - listitem [ref=e633]:
+              - link "Journal" [ref=e634] [cursor=pointer]:
+                - /url: /blog/
+        - generic [ref=e635]:
+          - heading "The Studio" [level=4] [ref=e636]
+          - list [ref=e637]:
+            - listitem [ref=e638]:
+              - link "Start Planning" [ref=e639] [cursor=pointer]:
+                - /url: /start-planning/
+            - listitem [ref=e640]:
+              - link "Contact" [ref=e641] [cursor=pointer]:
+                - /url: /contact/
+            - listitem [ref=e642]:
+              - link "Privacy Policy" [ref=e643] [cursor=pointer]:
+                - /url: /privacy-policy/
+            - listitem [ref=e644]:
+              - link "Terms & Conditions" [ref=e645] [cursor=pointer]:
+                - /url: /terms-and-conditions/
+          - generic [ref=e646]:
+            - generic [ref=e647]: Speak to a safari expert
+            - link "info@worldwide-safaris.com" [ref=e648] [cursor=pointer]:
+              - /url: mailto:info@worldwide-safaris.com
+            - link "+255 786 158 702" [ref=e649] [cursor=pointer]:
+              - /url: tel:+255786158702
+            - link "WhatsApp · +255 689 449 035" [ref=e650] [cursor=pointer]:
+              - /url: https://wa.me/255689449035
+            - generic [ref=e651]:
+              - text: Worldwide Safaris Tanzania Limited
+              - text: P.O. Box 16703, Arusha — Tanzania
+            - generic [ref=e652]:
+              - link "Instagram" [ref=e653] [cursor=pointer]:
+                - /url: https://www.instagram.com/worldwidesafaris
+              - link "Facebook" [ref=e654] [cursor=pointer]:
+                - /url: https://www.facebook.com/worldwidesafaris
+      - generic [ref=e655]:
+        - generic [ref=e656]: © 2026 Worldwide Safaris Tanzania Ltd.
+        - link "Crafted by TIMELESS INTERNATIONAL" [ref=e657] [cursor=pointer]:
+          - /url: http://www.timelesstz.com
+          - generic [ref=e658]: Crafted by
+          - generic [ref=e659]: TIMELESS INTERNATIONAL
+          - generic [ref=e660]: ↗
+  - button "Open Next.js Dev Tools" [ref=e666] [cursor=pointer]:
+    - img [ref=e667]
+  - alert [ref=e670]

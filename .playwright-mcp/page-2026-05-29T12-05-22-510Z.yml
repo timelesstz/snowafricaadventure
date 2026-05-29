@@ -1,0 +1,1262 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - navigation "Breadcrumb" [ref=e53]:
+          - list [ref=e54]:
+            - listitem [ref=e55]:
+              - link "Home" [ref=e56] [cursor=pointer]:
+                - /url: /
+                - img [ref=e57]
+                - generic [ref=e60]: Home
+            - listitem [ref=e61]:
+              - img [ref=e62]
+              - generic [ref=e64]: Tanzania Safari Packages
+        - generic [ref=e65]:
+          - img "Lions resting on the Serengeti plains at sunrise — Tanzania safari with Snow Africa Adventure" [ref=e67]
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - generic [ref=e72]: 2026-2027 Season
+              - generic [ref=e73]:
+                - img [ref=e74]
+                - generic [ref=e76]: 4.9 Rating • 115+ Reviews
+            - heading "Tanzania Safari Packages" [level=1] [ref=e77]:
+              - text: Tanzania Safari
+              - text: Packages
+            - paragraph [ref=e78]: From the endless plains of the Serengeti to the wildlife-rich Ngorongoro Crater, experience Africa's most spectacular safari destinations with Tanzania's trusted local operator.
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - img [ref=e82]
+                - generic [ref=e85]:
+                  - paragraph [ref=e86]: 17+
+                  - paragraph [ref=e87]: Safari Options
+              - generic [ref=e88]:
+                - img [ref=e90]
+                - generic [ref=e93]:
+                  - paragraph [ref=e94]: "7"
+                  - paragraph [ref=e95]: National Parks
+              - generic [ref=e96]:
+                - img [ref=e98]
+                - generic [ref=e100]:
+                  - paragraph [ref=e101]: 15+
+                  - paragraph [ref=e102]: Years Experience
+            - generic [ref=e103]:
+              - link "Get a Free Quote" [ref=e104] [cursor=pointer]:
+                - /url: "#inquire"
+                - text: Get a Free Quote
+                - img [ref=e105]
+              - link "Design Your Own Safari" [ref=e107] [cursor=pointer]:
+                - /url: /tailor-made-safari/
+              - link "WhatsApp" [ref=e108] [cursor=pointer]:
+                - /url: https://wa.me/255766657854
+                - img [ref=e109]
+                - text: WhatsApp
+              - link "+255 766 657 854" [ref=e111] [cursor=pointer]:
+                - /url: tel:+255766657854
+                - img [ref=e112]
+                - text: +255 766 657 854
+          - generic [ref=e115]: Scroll
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - img [ref=e123]
+            - generic [ref=e125]:
+              - paragraph [ref=e126]: TATO Licensed
+              - paragraph [ref=e127]: Tour Operator
+          - generic [ref=e128]:
+            - img [ref=e130]
+            - generic [ref=e135]:
+              - paragraph [ref=e136]: 5,000+
+              - paragraph [ref=e137]: Happy Travelers
+          - link "4.9/5 TripAdvisor" [ref=e138] [cursor=pointer]:
+            - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - img [ref=e140]
+            - generic [ref=e142]:
+              - paragraph [ref=e143]: 4.9/5
+              - paragraph [ref=e144]: TripAdvisor
+          - generic [ref=e145]:
+            - img [ref=e147]
+            - generic [ref=e152]:
+              - paragraph [ref=e153]: Big Five
+              - paragraph [ref=e154]: Guaranteed
+        - generic [ref=e157]:
+          - figure "Sarah M. United Kingdom · 7-day Northern Circuit" [ref=e158]:
+            - img [ref=e159]
+            - generic [ref=e162]:
+              - img [ref=e163]
+              - img [ref=e165]
+              - img [ref=e167]
+              - img [ref=e169]
+              - img [ref=e171]
+            - blockquote [ref=e173]: “Our 7-day Serengeti and Ngorongoro safari was the trip of a lifetime. Our guide spotted everything from the Big Five to a rare serval cat in three days. Everything was handled — airport transfers, park fees, meals — nothing to worry about.”
+            - generic [ref=e174]:
+              - paragraph [ref=e175]: Sarah M.
+              - paragraph [ref=e176]: United Kingdom · 7-day Northern Circuit
+          - figure "Michael K. Germany · 5-day Tarangire + Serengeti" [ref=e177]:
+            - img [ref=e178]
+            - generic [ref=e181]:
+              - img [ref=e182]
+              - img [ref=e184]
+              - img [ref=e186]
+              - img [ref=e188]
+              - img [ref=e190]
+            - blockquote [ref=e192]: “We combined a 5-day safari with our Kilimanjaro climb and it was perfectly balanced. The team at Snow Africa knew every park, every lodge, and every backroad. Communication before the trip was fast, detailed and honest.”
+            - generic [ref=e193]:
+              - paragraph [ref=e194]: Michael K.
+              - paragraph [ref=e195]: Germany · 5-day Tarangire + Serengeti
+          - figure "Jennifer & David L. United States · 8-day Luxury Safari" [ref=e196]:
+            - img [ref=e197]
+            - generic [ref=e200]:
+              - img [ref=e201]
+              - img [ref=e203]
+              - img [ref=e205]
+              - img [ref=e207]
+              - img [ref=e209]
+            - blockquote [ref=e211]: “Locally owned really shows. Our guide was born near the Serengeti and the stories he told made every sighting richer. Booking was transparent — no hidden fees — and the lodge choices exceeded what we expected for the price.”
+            - generic [ref=e212]:
+              - paragraph [ref=e213]: Jennifer & David L.
+              - paragraph [ref=e214]: United States · 8-day Luxury Safari
+        - generic [ref=e217]:
+          - generic [ref=e218]:
+            - img [ref=e219]
+            - text: On this page
+          - generic [ref=e221]:
+            - link "Browse safari packages" [ref=e222] [cursor=pointer]:
+              - /url: "#packages"
+              - generic [ref=e223]: Browse safari packages
+              - img [ref=e224]
+            - link "Choose your safari style" [ref=e226] [cursor=pointer]:
+              - /url: "#styles"
+              - generic [ref=e227]: Choose your safari style
+              - img [ref=e228]
+            - link "Parks in focus" [ref=e230] [cursor=pointer]:
+              - /url: "#parks"
+              - generic [ref=e231]: Parks in focus
+              - img [ref=e232]
+            - link "Planning guide" [ref=e234] [cursor=pointer]:
+              - /url: "#guide"
+              - generic [ref=e235]: Planning guide
+              - img [ref=e236]
+            - link "Get a custom quote" [ref=e238] [cursor=pointer]:
+              - /url: "#inquire"
+              - generic [ref=e239]: Get a custom quote
+              - img [ref=e240]
+            - link "Frequently asked questions" [ref=e242] [cursor=pointer]:
+              - /url: "#faq"
+              - generic [ref=e243]: Frequently asked questions
+              - img [ref=e244]
+        - generic [ref=e248]:
+          - generic [ref=e249]:
+            - generic [ref=e250]:
+              - generic [ref=e251]:
+                - generic [ref=e252]:
+                  - img [ref=e253]
+                  - textbox "Search safari packages..." [ref=e256]
+                - generic [ref=e257]:
+                  - generic [ref=e258]:
+                    - combobox [ref=e259] [cursor=pointer]:
+                      - option "All Types" [selected]
+                      - option "Mid-range"
+                      - option "Luxury"
+                      - option "Budget"
+                    - img
+                  - generic [ref=e260]:
+                    - combobox [ref=e261] [cursor=pointer]:
+                      - option "Any Duration" [selected]
+                      - option "1-3 Days"
+                      - option "4-6 Days"
+                      - option "7-10 Days"
+                      - option "10+ Days"
+                    - img
+              - generic [ref=e263]:
+                - strong [ref=e264]: "17"
+                - text: safaris found
+            - generic [ref=e266]:
+              - button "All Safaris" [ref=e267]
+              - button "Mid-range" [ref=e268]
+              - button "Luxury" [ref=e269]
+              - button "Budget" [ref=e270]
+          - generic [ref=e271]:
+            - heading "All Safari Packages" [level=2] [ref=e272]
+            - generic [ref=e273]:
+              - button "Grid view" [ref=e274]:
+                - img [ref=e275]
+              - button "List view" [ref=e280]:
+                - img [ref=e281]
+          - generic [ref=e282]:
+            - link "2 Days Tanzania Lodge Safari Mid-range 4.9 2 Days Tanzania Lodge Safari A quick but rewarding safari experience. Perfect for those with limited time or looking to add wildlife to their Kilimanjaro trip. 2 Days 1 Night 2 Parks 2 Game Drives From $980 / person Explore Safari →" [ref=e283] [cursor=pointer]:
+              - /url: /tanzania-safaris/2-days-tanzania-lodge-safari/
+              - generic [ref=e284]:
+                - img "2 Days Tanzania Lodge Safari" [ref=e285]
+                - generic [ref=e287]: Mid-range
+                - generic [ref=e288]:
+                  - img [ref=e289]
+                  - generic [ref=e291]: "4.9"
+                - generic [ref=e292]:
+                  - heading "2 Days Tanzania Lodge Safari" [level=3] [ref=e293]
+                  - paragraph [ref=e294]: A quick but rewarding safari experience. Perfect for those with limited time or looking to add wildlife to their Kilimanjaro trip.
+                  - generic [ref=e295]:
+                    - generic [ref=e296]:
+                      - img [ref=e297]
+                      - text: 2 Days 1 Night
+                    - generic [ref=e300]:
+                      - img [ref=e301]
+                      - text: 2 Parks
+                    - generic [ref=e304]:
+                      - img [ref=e305]
+                      - text: 2 Game Drives
+              - generic [ref=e308]:
+                - generic [ref=e310]:
+                  - generic [ref=e311]: From
+                  - generic [ref=e312]: $980
+                  - generic [ref=e313]: / person
+                - generic [ref=e314]:
+                  - text: Explore Safari
+                  - generic [ref=e315]: →
+            - generic [ref=e316]:
+              - link "3 Days Budget Camping Safari Budget 4.9 3 Days 2 Nights 3 Parks 3 Days Budget Camping Safari Our most affordable safari option. Experience three incredible parks with camping under the stars. Perfect for budget-conscious travelers. Lake Manyara National Park • Ngorongoro Conservation Area • Tarangire National Park From $1,050 →" [ref=e317] [cursor=pointer]:
+                - /url: /tanzania-safaris/3-days-tanzania-budget-camping-safari-tarangire-lake-manyara-and-ngorongoro-crater/
+                - generic [ref=e318]:
+                  - img "3 Days Budget Camping Safari" [ref=e319]
+                  - generic [ref=e321]:
+                    - generic [ref=e322]: Budget
+                    - generic [ref=e323]:
+                      - img [ref=e324]
+                      - generic [ref=e326]: "4.9"
+                  - generic [ref=e328]:
+                    - generic [ref=e329]:
+                      - img [ref=e330]
+                      - text: 3 Days 2 Nights
+                    - generic [ref=e333]:
+                      - img [ref=e334]
+                      - text: 3 Parks
+                - generic [ref=e337]:
+                  - heading "3 Days Budget Camping Safari" [level=3] [ref=e338]
+                  - paragraph [ref=e339]: Our most affordable safari option. Experience three incredible parks with camping under the stars. Perfect for budget-conscious travelers.
+                  - generic [ref=e340]:
+                    - img [ref=e341]
+                    - generic [ref=e344]: Lake Manyara National Park • Ngorongoro Conservation Area • Tarangire National Park
+                  - generic [ref=e345]:
+                    - generic [ref=e346]:
+                      - generic [ref=e347]: From
+                      - generic [ref=e348]: $1,050
+                    - generic [ref=e349]: →
+              - link "3 DaysTanzania Lodge Safari Mid-range 4.9 3 Days 2 Nights 3 Parks 3 DaysTanzania Lodge Safari A perfect introduction to Tanzania's Northern Circuit. This 3-day safari covers three diverse ecosystems with comfortable lodge accommodation throughout. Lake Manyara National Park • Ngorongoro Conservation Area • Tarangire National Park From $1,480 →" [ref=e350] [cursor=pointer]:
+                - /url: /tanzania-safaris/3-days-tanzania-lodge-safari-tarangire-lake-manyara-ngorongoro-crater/
+                - generic [ref=e351]:
+                  - img "3 DaysTanzania Lodge Safari" [ref=e352]
+                  - generic [ref=e354]:
+                    - generic [ref=e355]: Mid-range
+                    - generic [ref=e356]:
+                      - img [ref=e357]
+                      - generic [ref=e359]: "4.9"
+                  - generic [ref=e361]:
+                    - generic [ref=e362]:
+                      - img [ref=e363]
+                      - text: 3 Days 2 Nights
+                    - generic [ref=e366]:
+                      - img [ref=e367]
+                      - text: 3 Parks
+                - generic [ref=e370]:
+                  - heading "3 DaysTanzania Lodge Safari" [level=3] [ref=e371]
+                  - paragraph [ref=e372]: A perfect introduction to Tanzania's Northern Circuit. This 3-day safari covers three diverse ecosystems with comfortable lodge accommodation throughout.
+                  - generic [ref=e373]:
+                    - img [ref=e374]
+                    - generic [ref=e377]: Lake Manyara National Park • Ngorongoro Conservation Area • Tarangire National Park
+                  - generic [ref=e378]:
+                    - generic [ref=e379]:
+                      - generic [ref=e380]: From
+                      - generic [ref=e381]: $1,480
+                    - generic [ref=e382]: →
+              - link "4 Days Safari to Ngorongoro and Serengeti Mid-range 4.9 4 Days 3 Nights 3 Parks 4 Days Safari to Ngorongoro and Serengeti Focus on Tanzania's two premier destinations - the endless Serengeti and the wildlife-packed Ngorongoro Crater. Ngorongoro Conservation Area • Serengeti National Park From $1,860 →" [ref=e383] [cursor=pointer]:
+                - /url: /tanzania-safaris/4-days-safari-to-ngorongoro-and-serengeti/
+                - generic [ref=e384]:
+                  - img "4 Days Safari to Ngorongoro and Serengeti" [ref=e385]
+                  - generic [ref=e387]:
+                    - generic [ref=e388]: Mid-range
+                    - generic [ref=e389]:
+                      - img [ref=e390]
+                      - generic [ref=e392]: "4.9"
+                  - generic [ref=e394]:
+                    - generic [ref=e395]:
+                      - img [ref=e396]
+                      - text: 4 Days 3 Nights
+                    - generic [ref=e399]:
+                      - img [ref=e400]
+                      - text: 3 Parks
+                - generic [ref=e403]:
+                  - heading "4 Days Safari to Ngorongoro and Serengeti" [level=3] [ref=e404]
+                  - paragraph [ref=e405]: Focus on Tanzania's two premier destinations - the endless Serengeti and the wildlife-packed Ngorongoro Crater.
+                  - generic [ref=e406]:
+                    - img [ref=e407]
+                    - generic [ref=e410]: Ngorongoro Conservation Area • Serengeti National Park
+                  - generic [ref=e411]:
+                    - generic [ref=e412]:
+                      - generic [ref=e413]: From
+                      - generic [ref=e414]: $1,860
+                    - generic [ref=e415]: →
+              - link "4 Day Safari Adventure in Tanzania Mid-range 4.9 4 Days 3 Nights 3 Parks 4 Day Safari Adventure in Tanzania An action-packed safari adventure perfect for those with limited time. Experience the highlights of Tanzania's wildlife in four exciting days. Lake Manyara National Park • Ngorongoro Conservation Area • Tarangire National Park From $1,840 →" [ref=e416] [cursor=pointer]:
+                - /url: /tanzania-safaris/4-day-safari-adventure-in-tanzania/
+                - generic [ref=e417]:
+                  - img "4 Day Safari Adventure in Tanzania" [ref=e418]
+                  - generic [ref=e420]:
+                    - generic [ref=e421]: Mid-range
+                    - generic [ref=e422]:
+                      - img [ref=e423]
+                      - generic [ref=e425]: "4.9"
+                  - generic [ref=e427]:
+                    - generic [ref=e428]:
+                      - img [ref=e429]
+                      - text: 4 Days 3 Nights
+                    - generic [ref=e432]:
+                      - img [ref=e433]
+                      - text: 3 Parks
+                - generic [ref=e436]:
+                  - heading "4 Day Safari Adventure in Tanzania" [level=3] [ref=e437]
+                  - paragraph [ref=e438]: An action-packed safari adventure perfect for those with limited time. Experience the highlights of Tanzania's wildlife in four exciting days.
+                  - generic [ref=e439]:
+                    - img [ref=e440]
+                    - generic [ref=e443]: Lake Manyara National Park • Ngorongoro Conservation Area • Tarangire National Park
+                  - generic [ref=e444]:
+                    - generic [ref=e445]:
+                      - generic [ref=e446]: From
+                      - generic [ref=e447]: $1,840
+                    - generic [ref=e448]: →
+              - link "5 Days Tanzania Luxury Safari Luxury 4.9 5 Days 4 Nights 5 Parks 5 Days Tanzania Luxury Safari Experience Tanzania's highlights in premium style. This 5-day luxury safari offers the best lodges, exclusive game drives, and personalized service. Ngorongoro Conservation Area • Tarangire National Park From $2,980 →" [ref=e449] [cursor=pointer]:
+                - /url: /tanzania-safaris/5-days-tanzania-luxury-safari-tarangire-manyara-ngorongoro/
+                - generic [ref=e450]:
+                  - img "5 Days Tanzania Luxury Safari" [ref=e451]
+                  - generic [ref=e453]:
+                    - generic [ref=e454]: Luxury
+                    - generic [ref=e455]:
+                      - img [ref=e456]
+                      - generic [ref=e458]: "4.9"
+                  - generic [ref=e460]:
+                    - generic [ref=e461]:
+                      - img [ref=e462]
+                      - text: 5 Days 4 Nights
+                    - generic [ref=e465]:
+                      - img [ref=e466]
+                      - text: 5 Parks
+                - generic [ref=e469]:
+                  - heading "5 Days Tanzania Luxury Safari" [level=3] [ref=e470]
+                  - paragraph [ref=e471]: Experience Tanzania's highlights in premium style. This 5-day luxury safari offers the best lodges, exclusive game drives, and personalized service.
+                  - generic [ref=e472]:
+                    - img [ref=e473]
+                    - generic [ref=e476]: Ngorongoro Conservation Area • Tarangire National Park
+                  - generic [ref=e477]:
+                    - generic [ref=e478]:
+                      - generic [ref=e479]: From
+                      - generic [ref=e480]: $2,980
+                    - generic [ref=e481]: →
+              - link "5 Days Budget Camping Safari Budget 4.9 5 Days 4 Nights 4 Parks 5 Days Budget Camping Safari Five days of incredible wildlife viewing at budget-friendly prices. Camping safari through three iconic parks. Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $1,780 →" [ref=e482] [cursor=pointer]:
+                - /url: /tanzania-safaris/5-days-4-nights-budget-camping-safari-lake-manyara-serengeti-and-ngorongoro/
+                - generic [ref=e483]:
+                  - img "5 Days Budget Camping Safari" [ref=e484]
+                  - generic [ref=e486]:
+                    - generic [ref=e487]: Budget
+                    - generic [ref=e488]:
+                      - img [ref=e489]
+                      - generic [ref=e491]: "4.9"
+                  - generic [ref=e493]:
+                    - generic [ref=e494]:
+                      - img [ref=e495]
+                      - text: 5 Days 4 Nights
+                    - generic [ref=e498]:
+                      - img [ref=e499]
+                      - text: 4 Parks
+                - generic [ref=e502]:
+                  - heading "5 Days Budget Camping Safari" [level=3] [ref=e503]
+                  - paragraph [ref=e504]: Five days of incredible wildlife viewing at budget-friendly prices. Camping safari through three iconic parks.
+                  - generic [ref=e505]:
+                    - img [ref=e506]
+                    - generic [ref=e509]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e510]:
+                    - generic [ref=e511]:
+                      - generic [ref=e512]: From
+                      - generic [ref=e513]: $1,780
+                    - generic [ref=e514]: →
+              - link "6 Days Tanzania Lodge & Luxury Tented Camp Safari Luxury 4.9 6 Days 5 Nights 6 Parks 6 Days Tanzania Lodge & Luxury Tented Camp Safari Experience Tanzania's finest wildlife destinations in style with luxury lodge and tented camp accommodation. Visit Tarangire's elephant herds, Lake Manyara's tree-climbing lions, the endless Serengeti plains, and the wildlife-packed Ngorongoro Crater. Lake Manyara National Park • Ngorongoro Conservation Area • Serengeti National Park From $3,180 →" [ref=e515] [cursor=pointer]:
+                - /url: /tanzania-safaris/6-day-lodge-safari-northern-circuit/
+                - generic [ref=e516]:
+                  - img "6 Days Tanzania Lodge & Luxury Tented Camp Safari" [ref=e517]
+                  - generic [ref=e519]:
+                    - generic [ref=e520]: Luxury
+                    - generic [ref=e521]:
+                      - img [ref=e522]
+                      - generic [ref=e524]: "4.9"
+                  - generic [ref=e526]:
+                    - generic [ref=e527]:
+                      - img [ref=e528]
+                      - text: 6 Days 5 Nights
+                    - generic [ref=e531]:
+                      - img [ref=e532]
+                      - text: 6 Parks
+                - generic [ref=e535]:
+                  - heading "6 Days Tanzania Lodge & Luxury Tented Camp Safari" [level=3] [ref=e536]
+                  - paragraph [ref=e537]: Experience Tanzania's finest wildlife destinations in style with luxury lodge and tented camp accommodation. Visit Tarangire's elephant herds, Lake Manyara's tree-climbing lions, the endless Serengeti plains, and the wildlife-packed Ngorongoro Crater.
+                  - generic [ref=e538]:
+                    - img [ref=e539]
+                    - generic [ref=e542]: Lake Manyara National Park • Ngorongoro Conservation Area • Serengeti National Park
+                  - generic [ref=e543]:
+                    - generic [ref=e544]:
+                      - generic [ref=e545]: From
+                      - generic [ref=e546]: $3,180
+                    - generic [ref=e547]: →
+              - link "6 Days Tanzania Migration Safari Mid-range 4.9 6 Days 5 Nights 6 Parks 6 Days Tanzania Migration Safari A specialized migration safari focusing on the Ndutu area during calving season. Witness thousands of wildebeest giving birth on the short-grass plains. Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $2,680 →" [ref=e548] [cursor=pointer]:
+                - /url: /tanzania-safaris/6-days-tanzania-migration-serengeti-ngorongoro-crater-tarangire/
+                - generic [ref=e549]:
+                  - img "6 Days Tanzania Migration Safari" [ref=e550]
+                  - generic [ref=e552]:
+                    - generic [ref=e553]: Mid-range
+                    - generic [ref=e554]:
+                      - img [ref=e555]
+                      - generic [ref=e557]: "4.9"
+                  - generic [ref=e559]:
+                    - generic [ref=e560]:
+                      - img [ref=e561]
+                      - text: 6 Days 5 Nights
+                    - generic [ref=e564]:
+                      - img [ref=e565]
+                      - text: 6 Parks
+                - generic [ref=e568]:
+                  - heading "6 Days Tanzania Migration Safari" [level=3] [ref=e569]
+                  - paragraph [ref=e570]: A specialized migration safari focusing on the Ndutu area during calving season. Witness thousands of wildebeest giving birth on the short-grass plains.
+                  - generic [ref=e571]:
+                    - img [ref=e572]
+                    - generic [ref=e575]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e576]:
+                    - generic [ref=e577]:
+                      - generic [ref=e578]: From
+                      - generic [ref=e579]: $2,680
+                    - generic [ref=e580]: →
+              - link "6 Days Budget Camping Safari Budget 4.9 6 Days 5 Nights 5 Parks 6 Days Budget Camping Safari Experience the best of Tanzania without breaking the bank. Our budget camping safari takes you through four iconic destinations with comfortable camping under African skies. Lake Manyara National Park • Ngorongoro Conservation Area • Serengeti National Park From $2,180 →" [ref=e581] [cursor=pointer]:
+                - /url: /tanzania-safaris/6-days-5-nights-budget-camping-safari-tarangire-lake-manyara-serengeti-and-ngorongoro-crater/
+                - generic [ref=e582]:
+                  - img "6 Days Budget Camping Safari" [ref=e583]
+                  - generic [ref=e585]:
+                    - generic [ref=e586]: Budget
+                    - generic [ref=e587]:
+                      - img [ref=e588]
+                      - generic [ref=e590]: "4.9"
+                  - generic [ref=e592]:
+                    - generic [ref=e593]:
+                      - img [ref=e594]
+                      - text: 6 Days 5 Nights
+                    - generic [ref=e597]:
+                      - img [ref=e598]
+                      - text: 5 Parks
+                - generic [ref=e601]:
+                  - heading "6 Days Budget Camping Safari" [level=3] [ref=e602]
+                  - paragraph [ref=e603]: Experience the best of Tanzania without breaking the bank. Our budget camping safari takes you through four iconic destinations with comfortable camping under African skies.
+                  - generic [ref=e604]:
+                    - img [ref=e605]
+                    - generic [ref=e608]: Lake Manyara National Park • Ngorongoro Conservation Area • Serengeti National Park
+                  - generic [ref=e609]:
+                    - generic [ref=e610]:
+                      - generic [ref=e611]: From
+                      - generic [ref=e612]: $2,180
+                    - generic [ref=e613]: →
+              - link "6 Days Safari to Tarangire, Ngorongoro & Serengeti Mid-range 4.9 6 Days 5 Nights 5 Parks 6 Days Safari to Tarangire, Ngorongoro & Serengeti A comprehensive Northern Circuit safari exploring Tarangire's elephants, Ngorongoro Crater and Serengeti Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $2,400 →" [ref=e614] [cursor=pointer]:
+                - /url: /tanzania-safaris/6-days-safari-to-tarangire-ngorongoro-serengeti/
+                - generic [ref=e615]:
+                  - img "6 Days Safari to Tarangire, Ngorongoro & Serengeti" [ref=e616]
+                  - generic [ref=e618]:
+                    - generic [ref=e619]: Mid-range
+                    - generic [ref=e620]:
+                      - img [ref=e621]
+                      - generic [ref=e623]: "4.9"
+                  - generic [ref=e625]:
+                    - generic [ref=e626]:
+                      - img [ref=e627]
+                      - text: 6 Days 5 Nights
+                    - generic [ref=e630]:
+                      - img [ref=e631]
+                      - text: 5 Parks
+                - generic [ref=e634]:
+                  - heading "6 Days Safari to Tarangire, Ngorongoro & Serengeti" [level=3] [ref=e635]
+                  - paragraph [ref=e636]: A comprehensive Northern Circuit safari exploring Tarangire's elephants, Ngorongoro Crater and Serengeti
+                  - generic [ref=e637]:
+                    - img [ref=e638]
+                    - generic [ref=e641]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e642]:
+                    - generic [ref=e643]:
+                      - generic [ref=e644]: From
+                      - generic [ref=e645]: $2,400
+                    - generic [ref=e646]: →
+              - link "7 Days Tanzania Tented Camp Safari Mid-range 4.9 7 Days 6 Nights 5 Parks 7 Days Tanzania Tented Camp Safari A comprehensive week-long safari through Tanzania's Northern Circuit. Comfortable tented camp accommodation offers the perfect balance between adventure and comfort. Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $3,160 →" [ref=e647] [cursor=pointer]:
+                - /url: /tanzania-safaris/7-days-tanzania-tented-camp-safari/
+                - generic [ref=e648]:
+                  - img "7 Days Tanzania Tented Camp Safari" [ref=e649]
+                  - generic [ref=e651]:
+                    - generic [ref=e652]: Mid-range
+                    - generic [ref=e653]:
+                      - img [ref=e654]
+                      - generic [ref=e656]: "4.9"
+                  - generic [ref=e658]:
+                    - generic [ref=e659]:
+                      - img [ref=e660]
+                      - text: 7 Days 6 Nights
+                    - generic [ref=e663]:
+                      - img [ref=e664]
+                      - text: 5 Parks
+                - generic [ref=e667]:
+                  - heading "7 Days Tanzania Tented Camp Safari" [level=3] [ref=e668]
+                  - paragraph [ref=e669]: A comprehensive week-long safari through Tanzania's Northern Circuit. Comfortable tented camp accommodation offers the perfect balance between adventure and comfort.
+                  - generic [ref=e670]:
+                    - img [ref=e671]
+                    - generic [ref=e674]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e675]:
+                    - generic [ref=e676]:
+                      - generic [ref=e677]: From
+                      - generic [ref=e678]: $3,160
+                    - generic [ref=e679]: →
+              - link "8 Days Wonders of Tanzania Safari Mid-range 4.9 8 Days 7 Nights 6 Parks 8 Days Wonders of Tanzania Safari The ultimate Tanzania safari experience. Eight days exploring all major parks with ample time for wildlife viewing and photography. Lake Manyara National Park • Ngorongoro Conservation Area • Serengeti National Park From $3,380 →" [ref=e680] [cursor=pointer]:
+                - /url: /tanzania-safaris/8-days-wonders-of-tanzania-safari/
+                - generic [ref=e681]:
+                  - img "8 Days Wonders of Tanzania Safari" [ref=e682]
+                  - generic [ref=e684]:
+                    - generic [ref=e685]: Mid-range
+                    - generic [ref=e686]:
+                      - img [ref=e687]
+                      - generic [ref=e689]: "4.9"
+                  - generic [ref=e691]:
+                    - generic [ref=e692]:
+                      - img [ref=e693]
+                      - text: 8 Days 7 Nights
+                    - generic [ref=e696]:
+                      - img [ref=e697]
+                      - text: 6 Parks
+                - generic [ref=e700]:
+                  - heading "8 Days Wonders of Tanzania Safari" [level=3] [ref=e701]
+                  - paragraph [ref=e702]: The ultimate Tanzania safari experience. Eight days exploring all major parks with ample time for wildlife viewing and photography.
+                  - generic [ref=e703]:
+                    - img [ref=e704]
+                    - generic [ref=e707]: Lake Manyara National Park • Ngorongoro Conservation Area • Serengeti National Park
+                  - generic [ref=e708]:
+                    - generic [ref=e709]:
+                      - generic [ref=e710]: From
+                      - generic [ref=e711]: $3,380
+                    - generic [ref=e712]: →
+              - link "7 Days Safari to Tanzania including Serval Wildlife Mid-range 4.9 8 Days 7 Nights 6 Parks 7 Days Safari to Tanzania including Serval Wildlife A unique safari focusing on northern circuit parks and serval wildlife sanctuary. Experience Tanzania wildlife safari and see thousands of wildlife animals Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $2,980 →" [ref=e713] [cursor=pointer]:
+                - /url: /tanzania-safaris/7-days-safari-to-tanzania-including-serval-wildlife/
+                - generic [ref=e714]:
+                  - img "7 Days Safari to Tanzania including Serval Wildlife" [ref=e715]
+                  - generic [ref=e717]:
+                    - generic [ref=e718]: Mid-range
+                    - generic [ref=e719]:
+                      - img [ref=e720]
+                      - generic [ref=e722]: "4.9"
+                  - generic [ref=e724]:
+                    - generic [ref=e725]:
+                      - img [ref=e726]
+                      - text: 8 Days 7 Nights
+                    - generic [ref=e729]:
+                      - img [ref=e730]
+                      - text: 6 Parks
+                - generic [ref=e733]:
+                  - heading "7 Days Safari to Tanzania including Serval Wildlife" [level=3] [ref=e734]
+                  - paragraph [ref=e735]: A unique safari focusing on northern circuit parks and serval wildlife sanctuary. Experience Tanzania wildlife safari and see thousands of wildlife animals
+                  - generic [ref=e736]:
+                    - img [ref=e737]
+                    - generic [ref=e740]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e741]:
+                    - generic [ref=e742]:
+                      - generic [ref=e743]: From
+                      - generic [ref=e744]: $2,980
+                    - generic [ref=e745]: →
+              - link "9 Days Tanzania Wildlife Safari & migration Mid-range 4.9 9 Days 8 Nights 6 Parks 9 Days Tanzania Wildlife Safari & migration Our most comprehensive safari for wildlife enthusiasts. Nine days of incredible wildlife encounters across Tanzania's finest parks. Starting from Tarangire National Park, we'll explore the Ngorongoro Crater, Central Serengeti, and Northern Serengeti to witness the wildebeest migration as they cross the Mara River. Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $3,200 →" [ref=e746] [cursor=pointer]:
+                - /url: /tanzania-safaris/9-days-tanzania-wildlife-safari-migration/
+                - generic [ref=e747]:
+                  - img "9 Days Tanzania Wildlife Safari & migration" [ref=e748]
+                  - generic [ref=e750]:
+                    - generic [ref=e751]: Mid-range
+                    - generic [ref=e752]:
+                      - img [ref=e753]
+                      - generic [ref=e755]: "4.9"
+                  - generic [ref=e757]:
+                    - generic [ref=e758]:
+                      - img [ref=e759]
+                      - text: 9 Days 8 Nights
+                    - generic [ref=e762]:
+                      - img [ref=e763]
+                      - text: 6 Parks
+                - generic [ref=e766]:
+                  - heading "9 Days Tanzania Wildlife Safari & migration" [level=3] [ref=e767]
+                  - paragraph [ref=e768]: Our most comprehensive safari for wildlife enthusiasts. Nine days of incredible wildlife encounters across Tanzania's finest parks. Starting from Tarangire National Park, we'll explore the Ngorongoro Crater, Central Serengeti, and Northern Serengeti to witness the wildebeest migration as they cross the Mara River.
+                  - generic [ref=e769]:
+                    - img [ref=e770]
+                    - generic [ref=e773]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e774]:
+                    - generic [ref=e775]:
+                      - generic [ref=e776]: From
+                      - generic [ref=e777]: $3,200
+                    - generic [ref=e778]: →
+              - 'link "10 Day Adventure: Safari & Zanzibar Mid-range 4.9 10 Days 9 Nights 7 Parks 10 Day Adventure: Safari & Zanzibar The ultimate Tanzania experience combining wildlife safari with beach relaxation in Zanzibar. Perfect balance of adventure and rest. Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park From $3,600 →" [ref=e779] [cursor=pointer]':
+                - /url: /tanzania-safaris/10-day-adventure-in-tanzania-safari-zanzibar/
+                - generic [ref=e780]:
+                  - 'img "10 Day Adventure: Safari & Zanzibar" [ref=e781]'
+                  - generic [ref=e783]:
+                    - generic [ref=e784]: Mid-range
+                    - generic [ref=e785]:
+                      - img [ref=e786]
+                      - generic [ref=e788]: "4.9"
+                  - generic [ref=e790]:
+                    - generic [ref=e791]:
+                      - img [ref=e792]
+                      - text: 10 Days 9 Nights
+                    - generic [ref=e795]:
+                      - img [ref=e796]
+                      - text: 7 Parks
+                - generic [ref=e799]:
+                  - 'heading "10 Day Adventure: Safari & Zanzibar" [level=3] [ref=e800]'
+                  - paragraph [ref=e801]: The ultimate Tanzania experience combining wildlife safari with beach relaxation in Zanzibar. Perfect balance of adventure and rest.
+                  - generic [ref=e802]:
+                    - img [ref=e803]
+                    - generic [ref=e806]: Ngorongoro Conservation Area • Serengeti National Park • Tarangire National Park
+                  - generic [ref=e807]:
+                    - generic [ref=e808]:
+                      - generic [ref=e809]: From
+                      - generic [ref=e810]: $3,600
+                    - generic [ref=e811]: →
+              - link "Walking Safari on Ngorongoro Highlands & Serengeti Mid-range 4.9 12 Days 11 Nights 10 Parks Walking Safari on Ngorongoro Highlands & Serengeti Embark on the ultimate Tanzanian adventure — a 6-day walking safari that takes you deep into the Ngorongoro Highlands on foot before culminating with thrilling Serengeti game drives. Trek through volcanic craters, visit authentic Maasai villages, descend into the flamingo-filled Empakaai Crater, and camp under the stars at Lake Natron with views of Oldoinyo Lengai, Tanzania's only active volcano. This extraordinary journey combines highland trekking with world-class wildlife viewing across some of East Africa's most iconic landscapes. Ngorongoro Conservation Area • Serengeti National Park From $3,600 →" [ref=e812] [cursor=pointer]:
+                - /url: /tanzania-safaris/walking-safari-trekking-on-ngorongoro/
+                - generic [ref=e813]:
+                  - img "Walking Safari on Ngorongoro Highlands & Serengeti" [ref=e814]
+                  - generic [ref=e816]:
+                    - generic [ref=e817]: Mid-range
+                    - generic [ref=e818]:
+                      - img [ref=e819]
+                      - generic [ref=e821]: "4.9"
+                  - generic [ref=e823]:
+                    - generic [ref=e824]:
+                      - img [ref=e825]
+                      - text: 12 Days 11 Nights
+                    - generic [ref=e828]:
+                      - img [ref=e829]
+                      - text: 10 Parks
+                - generic [ref=e832]:
+                  - heading "Walking Safari on Ngorongoro Highlands & Serengeti" [level=3] [ref=e833]
+                  - paragraph [ref=e834]: Embark on the ultimate Tanzanian adventure — a 6-day walking safari that takes you deep into the Ngorongoro Highlands on foot before culminating with thrilling Serengeti game drives. Trek through volcanic craters, visit authentic Maasai villages, descend into the flamingo-filled Empakaai Crater, and camp under the stars at Lake Natron with views of Oldoinyo Lengai, Tanzania's only active volcano. This extraordinary journey combines highland trekking with world-class wildlife viewing across some of East Africa's most iconic landscapes.
+                  - generic [ref=e835]:
+                    - img [ref=e836]
+                    - generic [ref=e839]: Ngorongoro Conservation Area • Serengeti National Park
+                  - generic [ref=e840]:
+                    - generic [ref=e841]:
+                      - generic [ref=e842]: From
+                      - generic [ref=e843]: $3,600
+                    - generic [ref=e844]: →
+        - generic [ref=e846]:
+          - generic [ref=e847]:
+            - generic [ref=e848]: Choose Your Style
+            - heading "Browse Safaris by Style" [level=2] [ref=e849]
+            - paragraph [ref=e850]: Four ways to experience Tanzania — each with its own price point, comfort level, and character. Tap any style for a full list of matching packages.
+          - generic [ref=e851]:
+            - link "Budget Camping Safari Fall asleep to the sounds of the wild in quality tents at scenic public campsites — the most authentic bush experience. Campfire evenings Quality dome tents Shared campsite facilities Browse camping safaris" [ref=e852] [cursor=pointer]:
+              - /url: /tanzania-camping-safaris/
+              - generic [ref=e853]: Budget
+              - img [ref=e855]
+              - heading "Camping Safari" [level=3] [ref=e859]
+              - paragraph [ref=e860]: Fall asleep to the sounds of the wild in quality tents at scenic public campsites — the most authentic bush experience.
+              - list [ref=e861]:
+                - listitem [ref=e862]:
+                  - img [ref=e863]
+                  - generic [ref=e865]: Campfire evenings
+                - listitem [ref=e866]:
+                  - img [ref=e867]
+                  - generic [ref=e871]: Quality dome tents
+                - listitem [ref=e872]:
+                  - img [ref=e873]
+                  - generic [ref=e878]: Shared campsite facilities
+              - generic [ref=e879]:
+                - text: Browse camping safaris
+                - img [ref=e880]
+            - link "Mid-Range Most Popular Lodge Safari Comfortable lodges and tented camps with en-suite facilities — the ideal blend of comfort, nature, and value. Private en-suite bathrooms Full-board restaurant dining Swimming pools & lounges Browse lodge safaris" [ref=e882] [cursor=pointer]:
+              - /url: /tanzania-lodge-safaris/
+              - generic [ref=e883]:
+                - generic [ref=e884]: Mid-Range
+                - generic [ref=e885]: Most Popular
+              - img [ref=e887]
+              - heading "Lodge Safari" [level=3] [ref=e890]
+              - paragraph [ref=e891]: Comfortable lodges and tented camps with en-suite facilities — the ideal blend of comfort, nature, and value.
+              - list [ref=e892]:
+                - listitem [ref=e893]:
+                  - img [ref=e894]
+                  - generic [ref=e897]: Private en-suite bathrooms
+                - listitem [ref=e898]:
+                  - img [ref=e899]
+                  - generic [ref=e904]: Full-board restaurant dining
+                - listitem [ref=e905]:
+                  - img [ref=e906]
+                  - generic [ref=e910]: Swimming pools & lounges
+              - generic [ref=e911]:
+                - text: Browse lodge safaris
+                - img [ref=e912]
+            - link "Luxury Luxury Safari Five-star lodges with world-class amenities, gourmet cuisine, and exclusive wildlife encounters. Five-star lodges & villas Private game drives Dedicated butler service Browse luxury safaris" [ref=e914] [cursor=pointer]:
+              - /url: /luxury-safaris-tanzania/
+              - generic [ref=e915]: Luxury
+              - img [ref=e917]
+              - heading "Luxury Safari" [level=3] [ref=e919]
+              - paragraph [ref=e920]: Five-star lodges with world-class amenities, gourmet cuisine, and exclusive wildlife encounters.
+              - list [ref=e921]:
+                - listitem [ref=e922]:
+                  - img [ref=e923]
+                  - generic [ref=e926]: Five-star lodges & villas
+                - listitem [ref=e927]:
+                  - img [ref=e928]
+                  - generic [ref=e932]: Private game drives
+                - listitem [ref=e933]:
+                  - img [ref=e934]
+                  - generic [ref=e937]: Dedicated butler service
+              - generic [ref=e938]:
+                - text: Browse luxury safaris
+                - img [ref=e939]
+            - link "Tailor-Made Custom Safari Built around your interests, dates, and budget. Ideal for families, honeymoons, photography trips, and multi-country itineraries. Private vehicle & guide Any accommodation level Combine safari + beach + climb Design your own" [ref=e941] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+              - generic [ref=e942]: Tailor-Made
+              - img [ref=e944]
+              - heading "Custom Safari" [level=3] [ref=e947]
+              - paragraph [ref=e948]: Built around your interests, dates, and budget. Ideal for families, honeymoons, photography trips, and multi-country itineraries.
+              - list [ref=e949]:
+                - listitem [ref=e950]:
+                  - img [ref=e951]
+                  - generic [ref=e954]: Private vehicle & guide
+                - listitem [ref=e955]:
+                  - img [ref=e956]
+                  - generic [ref=e959]: Any accommodation level
+                - listitem [ref=e960]:
+                  - img [ref=e961]
+                  - generic [ref=e964]: Combine safari + beach + climb
+              - generic [ref=e965]:
+                - text: Design your own
+                - img [ref=e966]
+        - generic [ref=e969]:
+          - generic [ref=e970]:
+            - generic [ref=e971]: Northern Circuit
+            - heading "Parks in Focus" [level=2] [ref=e972]
+            - paragraph [ref=e973]: Every Tanzania safari builds on a handful of world-class national parks. Here's what each one is known for — and what you'll see there.
+          - generic [ref=e974]:
+            - link "The Great Migration Serengeti National Park 14,763 km² of endless plains, home to the Great Migration and massive lion prides. Year-round game viewing with legendary Mara River crossings July–October. Explore Serengeti" [ref=e975] [cursor=pointer]:
+              - /url: /tanzania-destinations/serengeti-national-park/
+              - generic [ref=e976]:
+                - img [ref=e978]
+                - generic [ref=e981]: The Great Migration
+              - heading "Serengeti National Park" [level=3] [ref=e982]
+              - paragraph [ref=e983]: 14,763 km² of endless plains, home to the Great Migration and massive lion prides. Year-round game viewing with legendary Mara River crossings July–October.
+              - generic [ref=e984]:
+                - text: Explore Serengeti
+                - img [ref=e985]
+            - link "Big Five in a day Ngorongoro Crater A UNESCO World Heritage Site — the world's largest intact volcanic caldera, 260 km² holding ~25,000 large mammals including the endangered black rhino. Explore Ngorongoro" [ref=e987] [cursor=pointer]:
+              - /url: /tanzania-destinations/ngorongoro-crater/
+              - generic [ref=e988]:
+                - img [ref=e990]
+                - generic [ref=e995]: Big Five in a day
+              - heading "Ngorongoro Crater" [level=3] [ref=e996]
+              - paragraph [ref=e997]: A UNESCO World Heritage Site — the world's largest intact volcanic caldera, 260 km² holding ~25,000 large mammals including the endangered black rhino.
+              - generic [ref=e998]:
+                - text: Explore Ngorongoro
+                - img [ref=e999]
+            - link "Elephants & baobabs Tarangire National Park Famous for its ancient baobab trees, the largest elephant herds in northern Tanzania, and over 550 recorded bird species along the Tarangire River. Explore Tarangire" [ref=e1001] [cursor=pointer]:
+              - /url: /tanzania-destinations/tarangire-national-park/
+              - generic [ref=e1002]:
+                - img [ref=e1004]
+                - generic [ref=e1007]: Elephants & baobabs
+              - heading "Tarangire National Park" [level=3] [ref=e1008]
+              - paragraph [ref=e1009]: Famous for its ancient baobab trees, the largest elephant herds in northern Tanzania, and over 550 recorded bird species along the Tarangire River.
+              - generic [ref=e1010]:
+                - text: Explore Tarangire
+                - img [ref=e1011]
+            - link "Tree-climbing lions Lake Manyara National Park Compact, diverse, and famous for tree-climbing lions. Flamingo-lined alkaline lake, lush groundwater forest, and one of the few parks with night game drives. Explore Lake" [ref=e1013] [cursor=pointer]:
+              - /url: /tanzania-destinations/lake-manyara-national-park/
+              - generic [ref=e1014]:
+                - img [ref=e1016]
+                - generic [ref=e1020]: Tree-climbing lions
+              - heading "Lake Manyara National Park" [level=3] [ref=e1021]
+              - paragraph [ref=e1022]: Compact, diverse, and famous for tree-climbing lions. Flamingo-lined alkaline lake, lush groundwater forest, and one of the few parks with night game drives.
+              - generic [ref=e1023]:
+                - text: Explore Lake
+                - img [ref=e1024]
+            - link "Walking safaris Arusha National Park Often overlooked but excellent for walking safaris, canoeing on Momella Lakes, and views of Mount Meru. An ideal first-day safari close to town. Explore Arusha" [ref=e1026] [cursor=pointer]:
+              - /url: /tanzania-destinations/arusha-national-park/
+              - generic [ref=e1027]:
+                - img [ref=e1029]
+                - generic [ref=e1032]: Walking safaris
+              - heading "Arusha National Park" [level=3] [ref=e1033]
+              - paragraph [ref=e1034]: Often overlooked but excellent for walking safaris, canoeing on Momella Lakes, and views of Mount Meru. An ideal first-day safari close to town.
+              - generic [ref=e1035]:
+                - text: Explore Arusha
+                - img [ref=e1036]
+          - paragraph [ref=e1038]:
+            - text: See all parks on our
+            - link "Tanzania destinations guide" [ref=e1039] [cursor=pointer]:
+              - /url: /tanzania-destinations/
+            - text: .
+        - generic [ref=e1041]:
+          - heading "Can't Find What You're Looking For?" [level=2] [ref=e1042]
+          - paragraph [ref=e1043]: We specialize in tailor-made safaris designed around your interests, schedule, and budget. Let our experts create your perfect Tanzania adventure.
+          - link "Design Your Custom Safari" [ref=e1044] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+            - text: Design Your Custom Safari
+            - img [ref=e1045]
+        - generic [ref=e1049]:
+          - heading "Tanzania Safari Planning Guide" [level=2] [ref=e1050]
+          - paragraph [ref=e1051]:
+            - text: Tanzania offers some of the world's most spectacular wildlife viewing opportunities. With 22 national parks, 33 game reserves, and 44 game-controlled areas covering nearly a third of the country, Tanzania protects one of the highest concentrations of wildlife on Earth. Home to the legendary
+            - link "Serengeti" [ref=e1052] [cursor=pointer]:
+              - /url: /tanzania-destinations/serengeti-national-park/
+            - text: ", the stunning"
+            - link "Ngorongoro Crater" [ref=e1053] [cursor=pointer]:
+              - /url: /tanzania-destinations/ngorongoro-crater/
+            - text: ", and the elephant-rich"
+            - link "Tarangire" [ref=e1054] [cursor=pointer]:
+              - /url: /tanzania-destinations/tarangire-national-park/
+            - text: ", a Tanzania safari is the ultimate African adventure."
+          - heading "The Great Migration" [level=3] [ref=e1055]
+          - paragraph [ref=e1056]: Witness nature's greatest spectacle as over 1.5 million wildebeest, 400,000 zebra, and 200,000 gazelle traverse the Serengeti-Mara ecosystem in a continuous clockwise cycle. This annual migration covers approximately 800 kilometers and offers some of the most dramatic wildlife encounters on the planet.
+          - paragraph [ref=e1057]:
+            - text: "The migration follows a predictable pattern:"
+            - strong [ref=e1058]: January-March
+            - text: sees the calving season in the southern Serengeti, where over 500,000 wildebeest calves are born in just a few weeks, attracting predators for spectacular hunting action.
+            - strong [ref=e1059]: April-June
+            - text: sees the herds moving northwest through the western corridor with dramatic Grumeti River crossings.
+            - strong [ref=e1060]: July-October
+            - text: brings the famous Mara River crossings in the northern Serengeti — arguably the most iconic wildlife event on Earth.
+            - strong [ref=e1061]: November-December
+            - text: sees the herds begin their return south.
+          - heading "The Big Five" [level=3] [ref=e1062]
+          - paragraph [ref=e1063]: "Tanzania is one of the best destinations in Africa to see all of the Big Five: lion, leopard, elephant, Cape buffalo, and rhinoceros. The Ngorongoro Crater is particularly renowned — it's one of the few places where you have a realistic chance of seeing all five in a single day. The crater's enclosed ecosystem supports approximately 25,000 large mammals in just 260 square kilometers."
+          - paragraph [ref=e1064]: The Serengeti is home to one of the largest lion populations in Africa (over 3,000) and is the best place in East Africa to spot leopards, particularly in the Seronera area. Tarangire National Park is famous for its enormous elephant herds — up to 300 elephants gathering at the Tarangire River during the dry season.
+          - heading "Safari Pricing Guide" [level=3] [ref=e1065]
+          - paragraph [ref=e1066]: "Tanzania safari costs vary based on accommodation type, season, group size, and parks visited. Here's what to expect per person per day (all-inclusive with park fees, transport, meals, and accommodation):"
+          - list [ref=e1067]:
+            - listitem [ref=e1068]:
+              - link "Budget camping safari" [ref=e1069] [cursor=pointer]:
+                - /url: /tanzania-camping-safaris/
+                - strong [ref=e1070]: Budget camping safari
+              - text: ": $250-$350/day — quality tents at public campsites, campfire meals"
+            - listitem [ref=e1071]:
+              - link "Mid-range lodge safari" [ref=e1072] [cursor=pointer]:
+                - /url: /tanzania-lodge-safaris/
+                - strong [ref=e1073]: Mid-range lodge safari
+              - text: ": $350-$500/day — comfortable lodges with en-suite bathrooms, restaurant dining"
+            - listitem [ref=e1074]:
+              - link "Luxury safari" [ref=e1075] [cursor=pointer]:
+                - /url: /luxury-safaris-tanzania/
+                - strong [ref=e1076]: Luxury safari
+              - text: ": $500-$800+/day — exclusive tented camps and lodges with gourmet cuisine, private guides"
+          - paragraph [ref=e1077]: Park fees make up a significant portion of the cost (approximately $70-$82 per person per day for major parks). Longer safaris offer better value per day since transport costs are amortized. Group departures and shared safaris offer savings of 15-25% compared to private trips.
+          - heading "Best Time for a Tanzania Safari" [level=3] [ref=e1078]
+          - paragraph [ref=e1079]: "Tanzania offers excellent game viewing year-round, but the experience varies by season:"
+          - list [ref=e1080]:
+            - listitem [ref=e1081]:
+              - strong [ref=e1082]: "Peak dry season (July-October):"
+              - text: Best overall wildlife viewing as animals concentrate around water sources. Excellent for the Great Migration river crossings. Higher prices and more visitors.
+            - listitem [ref=e1083]:
+              - strong [ref=e1084]: "Short dry season (January-February):"
+              - text: Excellent for calving season, predator action, and bird watching. Fewer crowds than peak season.
+            - listitem [ref=e1085]:
+              - strong [ref=e1086]: "Green season (March-May):"
+              - text: Lowest prices, fewest tourists, lush landscapes. Some remote areas may be harder to access. Excellent photography conditions.
+            - listitem [ref=e1087]:
+              - strong [ref=e1088]: "Short rains (November-December):"
+              - text: Brief afternoon showers, green scenery, migratory birds arrive. Good value season with excellent game viewing.
+          - heading "Combining Your Safari" [level=3] [ref=e1089]
+          - paragraph [ref=e1090]: "Most travellers pair their safari with at least one other Tanzania experience, since everything is close. The three classic combinations we build all the time:"
+          - list [ref=e1091]:
+            - listitem [ref=e1092]:
+              - strong [ref=e1093]:
+                - text: Safari +
+                - link "Kilimanjaro" [ref=e1094] [cursor=pointer]:
+                  - /url: /mount-kilimanjaro/
+              - text: ": climb first, then recover on safari. A 7-day Kilimanjaro climb plus a 4-5 day Northern Circuit safari is our most popular longer itinerary."
+            - listitem [ref=e1095]:
+              - strong [ref=e1096]:
+                - text: Safari +
+                - link "Zanzibar beach" [ref=e1097] [cursor=pointer]:
+                  - /url: /zanzibar/
+              - text: ": end your trip with 3-5 nights on the coast — direct flights from the Serengeti or Arusha. The perfect decompression after dawn-to-dusk game drives."
+            - listitem [ref=e1098]:
+              - strong [ref=e1099]: Safari + cultural experience
+              - text: ": add 1-2 days with a Maasai community, a Hadzabe bushman walk at Lake Eyasi, or a coffee farm tour outside Arusha. These are the trips guests tell us they remember most."
+          - heading "Why Choose Snow Africa Adventure?" [level=3] [ref=e1100]:
+            - link "Why Choose Snow Africa Adventure?" [ref=e1101] [cursor=pointer]:
+              - /url: /best-tanzania-tour-operator/
+          - paragraph [ref=e1102]: "Since 2008, Snow Africa Adventure has been providing authentic, personalized safari experiences across Tanzania. Here's what sets us apart:"
+          - list [ref=e1103]:
+            - listitem [ref=e1104]:
+              - strong [ref=e1105]: 100% locally owned and operated
+              - text: — founded by Florent and Caroline, your money supports Tanzanian families and communities directly
+            - listitem [ref=e1106]:
+              - strong [ref=e1107]: Expert guides with 15+ years experience
+              - text: — our guides are TATO-certified, English-speaking naturalists who know every park intimately
+            - listitem [ref=e1108]:
+              - strong [ref=e1109]: Small group sizes
+              - text: — maximum 6 per vehicle for intimate wildlife encounters and flexibility
+            - listitem [ref=e1110]:
+              - strong [ref=e1111]: Fully customizable itineraries
+              - text: — every safari tailored to your interests, timeline, and budget
+            - listitem [ref=e1112]:
+              - strong [ref=e1113]: 24/7 support during your safari
+              - text: — our operations team is always reachable by phone
+            - listitem [ref=e1114]:
+              - strong [ref=e1115]: Competitive pricing with no hidden fees
+              - text: — transparent quotes with all park fees, meals, and transfers included
+            - listitem [ref=e1116]:
+              - strong [ref=e1117]: 4.9/5 on TripAdvisor
+              - text: with 115+ verified reviews and a Travelers' Choice award
+            - listitem [ref=e1118]:
+              - strong [ref=e1119]: TATO licensed
+              - text: (Tanzania Association of Tour Operators) and KPAP partner ensuring ethical porter treatment
+          - paragraph [ref=e1120]: "Last updated: April 2026. Prices and park fee figures reflect the 2026-2027 season."
+        - generic [ref=e1123]:
+          - generic [ref=e1124]:
+            - generic [ref=e1125]: Get a Quote
+            - heading "Get a Custom Safari Quote" [level=2] [ref=e1126]
+            - paragraph [ref=e1127]: Tell us what you're looking for — we'll reply with a detailed, priced itinerary within 24 hours. No obligation.
+          - generic [ref=e1130]:
+            - generic [ref=e1131]:
+              - img [ref=e1132]
+              - heading "Get Your Custom Quote" [level=3] [ref=e1135]
+            - generic [ref=e1136]:
+              - generic [ref=e1137]: Full Name *
+              - textbox "Full Name *" [ref=e1138]:
+                - /placeholder: John Smith
+            - generic [ref=e1139]:
+              - generic [ref=e1140]: Email Address *
+              - textbox "Email Address *" [ref=e1141]:
+                - /placeholder: john@example.com
+            - generic [ref=e1142]:
+              - generic [ref=e1143]: Phone / WhatsApp Number
+              - generic [ref=e1144]:
+                - combobox [ref=e1145]:
+                  - option "+1" [selected]
+                  - option "+44"
+                  - option "+49"
+                  - option "+33"
+                  - option "+31"
+                  - option "+61"
+                  - option "+255"
+                  - option "+254"
+                  - option "+27"
+                  - option "+91"
+                  - option "+86"
+                  - option "+81"
+                  - option "+34"
+                  - option "+39"
+                  - option "+41"
+                  - option "+43"
+                  - option "+46"
+                  - option "+47"
+                  - option "+45"
+                  - option "+353"
+                  - option "+64"
+                  - option "+32"
+                  - option "+65"
+                  - option "+55"
+                  - option "+52"
+                  - option "+48"
+                  - option "+7"
+                  - option "+971"
+                  - option "+966"
+                  - option "+90"
+                  - option "+62"
+                  - option "+60"
+                  - option "+66"
+                  - option "+84"
+                  - option "+82"
+                  - option "+234"
+                  - option "+20"
+                  - option "+256"
+                  - option "+250"
+                - textbox "Phone / WhatsApp Number" [ref=e1146]:
+                  - /placeholder: 123 456 7890
+            - button "Continue" [ref=e1147]:
+              - text: Continue
+              - img [ref=e1148]
+          - paragraph [ref=e1150]:
+            - text: Prefer to talk? Call
+            - link "+255 766 657 854" [ref=e1151] [cursor=pointer]:
+              - /url: tel:+255766657854
+            - text: or message us on
+            - link "WhatsApp" [ref=e1152] [cursor=pointer]:
+              - /url: https://wa.me/255766657854
+            - text: .
+        - generic [ref=e1155]:
+          - generic [ref=e1156]:
+            - generic [ref=e1157]: Common Questions
+            - heading "Tanzania Safari FAQ" [level=2] [ref=e1158]
+          - generic [ref=e1159]:
+            - group [ref=e1160]:
+              - generic "How much does a Tanzania safari cost?" [ref=e1161] [cursor=pointer]:
+                - text: How much does a Tanzania safari cost?
+                - img [ref=e1162]
+            - group [ref=e1164]:
+              - generic "What is the best time to go on safari in Tanzania?" [ref=e1165] [cursor=pointer]:
+                - text: What is the best time to go on safari in Tanzania?
+                - img [ref=e1166]
+            - group [ref=e1168]:
+              - generic "Can I see the Big Five on a Tanzania safari?" [ref=e1169] [cursor=pointer]:
+                - text: Can I see the Big Five on a Tanzania safari?
+                - img [ref=e1170]
+            - group [ref=e1172]:
+              - generic "Which park is best for the Big Five?" [ref=e1173] [cursor=pointer]:
+                - text: Which park is best for the Big Five?
+                - img [ref=e1174]
+            - group [ref=e1176]:
+              - generic "How many days do I need for a Tanzania safari?" [ref=e1177] [cursor=pointer]:
+                - text: How many days do I need for a Tanzania safari?
+                - img [ref=e1178]
+            - group [ref=e1180]:
+              - generic "What is the difference between camping and lodge safaris?" [ref=e1181] [cursor=pointer]:
+                - text: What is the difference between camping and lodge safaris?
+                - img [ref=e1182]
+            - group [ref=e1184]:
+              - generic "Can I combine a safari with Kilimanjaro?" [ref=e1185] [cursor=pointer]:
+                - text: Can I combine a safari with Kilimanjaro?
+                - img [ref=e1186]
+            - group [ref=e1188]:
+              - generic "Can I add Zanzibar to my safari?" [ref=e1189] [cursor=pointer]:
+                - text: Can I add Zanzibar to my safari?
+                - img [ref=e1190]
+            - group [ref=e1192]:
+              - generic "Are family safaris with children available?" [ref=e1193] [cursor=pointer]:
+                - text: Are family safaris with children available?
+                - img [ref=e1194]
+            - group [ref=e1196]:
+              - generic "Is Tanzania safe for safari tourists?" [ref=e1197] [cursor=pointer]:
+                - text: Is Tanzania safe for safari tourists?
+                - img [ref=e1198]
+            - group [ref=e1200]:
+              - generic "What should I pack for a Tanzania safari?" [ref=e1201] [cursor=pointer]:
+                - text: What should I pack for a Tanzania safari?
+                - img [ref=e1202]
+            - group [ref=e1204]:
+              - generic "When is the Great Migration in the Serengeti?" [ref=e1205] [cursor=pointer]:
+                - text: When is the Great Migration in the Serengeti?
+                - img [ref=e1206]
+            - group [ref=e1208]:
+              - generic "Can I combine a safari with other activities?" [ref=e1209] [cursor=pointer]:
+                - text: Can I combine a safari with other activities?
+                - img [ref=e1210]
+            - group [ref=e1212]:
+              - generic "Do I need vaccinations for Tanzania?" [ref=e1213] [cursor=pointer]:
+                - text: Do I need vaccinations for Tanzania?
+                - img [ref=e1214]
+    - contentinfo [ref=e1216]:
+      - generic [ref=e1219]:
+        - generic [ref=e1220]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e1221]
+      - generic [ref=e1226]:
+        - generic [ref=e1227]:
+          - generic [ref=e1228]:
+            - img "Snow Africa Adventure" [ref=e1230]
+            - paragraph [ref=e1231]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e1232]:
+              - listitem [ref=e1233]:
+                - link "+255 766 657 854" [ref=e1234] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e1236]
+                  - generic [ref=e1238]: +255 766 657 854
+              - listitem [ref=e1239]:
+                - link "info@snowafricaadventure.com" [ref=e1240] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e1242]
+                  - generic [ref=e1245]: info@snowafricaadventure.com
+              - listitem [ref=e1246]:
+                - img [ref=e1248]
+                - generic [ref=e1251]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e1252]:
+            - heading "Safari & Tours" [level=3] [ref=e1253]
+            - list [ref=e1254]:
+              - listitem [ref=e1255]:
+                - link "All Safari Packages" [ref=e1256] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e1257]:
+                - link "Tailor-Made Safaris" [ref=e1258] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e1259]:
+                - link "Tanzania Destinations" [ref=e1260] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e1261]:
+                - link "View all" [ref=e1262] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e1263]: →
+          - generic [ref=e1264]:
+            - heading "Kilimanjaro" [level=3] [ref=e1265]
+            - list [ref=e1266]:
+              - listitem [ref=e1267]:
+                - link "All Trekking Routes" [ref=e1268] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e1269]:
+                - link "Best Route to Climb" [ref=e1270] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e1271]:
+                - link "Climbing Kilimanjaro Guide" [ref=e1272] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e1273]:
+                - link "Join Group Departures" [ref=e1274] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e1275]:
+                - link "Kilimanjaro Prices" [ref=e1276] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e1277]:
+                - link "Best Time to Climb" [ref=e1278] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e1279]:
+                - link "View all routes" [ref=e1280] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e1281]: →
+          - generic [ref=e1282]:
+            - heading "Company" [level=3] [ref=e1283]
+            - list [ref=e1284]:
+              - listitem [ref=e1285]:
+                - link "About Us" [ref=e1286] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e1287]:
+                - link "Our Guides" [ref=e1288] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e1289]:
+                - link "Contact Us" [ref=e1290] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e1291]:
+                - link "Terms & Conditions" [ref=e1292] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e1293]:
+                - link "Privacy Policy" [ref=e1294] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e1295]:
+                - link "Blog" [ref=e1296] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e1297]:
+              - heading "Follow the Journey" [level=4] [ref=e1298]
+              - generic [ref=e1299]:
+                - link "Facebook" [ref=e1300] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e1301]
+                - link "Twitter" [ref=e1303] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e1304]
+                - link "Instagram" [ref=e1306] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e1307]
+                - link "YouTube" [ref=e1310] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e1311]
+        - generic [ref=e1315]:
+          - generic [ref=e1316]: Accredited & Trusted
+          - generic [ref=e1317]:
+            - link "TripAdvisor" [ref=e1318] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e1320]: SafariBookings
+            - generic [ref=e1322]: TATO Member
+            - generic [ref=e1324]: KPAP Partner
+      - generic [ref=e1327]:
+        - generic [ref=e1328]:
+          - generic [ref=e1329]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e1330]: "|"
+          - link "Terms & Conditions" [ref=e1331] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e1332]: ·
+          - link "Privacy Policy" [ref=e1333] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e1334]:
+          - generic [ref=e1335]: Crafted by
+          - link "Timeless International" [ref=e1336] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 03:05 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e1337]:
+      - img [ref=e1338]
+  - button "Open Next.js Dev Tools" [ref=e1346] [cursor=pointer]:
+    - img [ref=e1347]
+  - alert [ref=e1350]

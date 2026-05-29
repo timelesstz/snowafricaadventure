@@ -1,0 +1,223 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - paragraph [ref=e64]: Loading content...
+    - contentinfo [ref=e65]:
+      - generic [ref=e68]:
+        - generic [ref=e69]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e70]
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - img "Snow Africa Adventure" [ref=e79]
+            - paragraph [ref=e80]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e81]:
+              - listitem [ref=e82]:
+                - link "+255 766 657 854" [ref=e83] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e85]
+                  - generic [ref=e87]: +255 766 657 854
+              - listitem [ref=e88]:
+                - link "info@snowafricaadventure.com" [ref=e89] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e91]
+                  - generic [ref=e94]: info@snowafricaadventure.com
+              - listitem [ref=e95]:
+                - img [ref=e97]
+                - generic [ref=e100]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e101]:
+            - heading "Safari & Tours" [level=3] [ref=e102]
+            - list [ref=e103]:
+              - listitem [ref=e104]:
+                - link "All Safari Packages" [ref=e105] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e106]:
+                - link "Tailor-Made Safaris" [ref=e107] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e108]:
+                - link "Tanzania Destinations" [ref=e109] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e110]:
+                - link "View all" [ref=e111] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e112]: →
+          - generic [ref=e113]:
+            - heading "Kilimanjaro" [level=3] [ref=e114]
+            - list [ref=e115]:
+              - listitem [ref=e116]:
+                - link "All Trekking Routes" [ref=e117] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e118]:
+                - link "Best Route to Climb" [ref=e119] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e120]:
+                - link "Climbing Kilimanjaro Guide" [ref=e121] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e122]:
+                - link "Join Group Departures" [ref=e123] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e124]:
+                - link "Kilimanjaro Prices" [ref=e125] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e126]:
+                - link "Best Time to Climb" [ref=e127] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e128]:
+                - link "View all routes" [ref=e129] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e130]: →
+          - generic [ref=e131]:
+            - heading "Company" [level=3] [ref=e132]
+            - list [ref=e133]:
+              - listitem [ref=e134]:
+                - link "About Us" [ref=e135] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e136]:
+                - link "Our Guides" [ref=e137] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e138]:
+                - link "Contact Us" [ref=e139] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e140]:
+                - link "Terms & Conditions" [ref=e141] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e142]:
+                - link "Privacy Policy" [ref=e143] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e144]:
+                - link "Blog" [ref=e145] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e146]:
+              - heading "Follow the Journey" [level=4] [ref=e147]
+              - generic [ref=e148]:
+                - link "Facebook" [ref=e149] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e150]
+                - link "Twitter" [ref=e152] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e153]
+                - link "Instagram" [ref=e155] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e156]
+                - link "YouTube" [ref=e159] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e160]
+        - generic [ref=e164]:
+          - generic [ref=e165]: Accredited & Trusted
+          - generic [ref=e166]:
+            - link "TripAdvisor" [ref=e167] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e169]: SafariBookings
+            - generic [ref=e171]: TATO Member
+            - generic [ref=e173]: KPAP Partner
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - generic [ref=e178]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e179]: "|"
+          - link "Terms & Conditions" [ref=e180] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e181]: ·
+          - link "Privacy Policy" [ref=e182] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e183]:
+          - generic [ref=e184]: Crafted by
+          - link "Timeless International" [ref=e185] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 03:05 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e186]:
+      - img [ref=e187]
+  - button "Open Next.js Dev Tools" [ref=e195] [cursor=pointer]:
+    - img [ref=e196]
+  - alert [ref=e199]

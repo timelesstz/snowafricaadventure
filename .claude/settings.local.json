@@ -109,7 +109,15 @@
       "Bash(npx vercel ls)",
       "Bash(wc -l /l/snowafrica/src/app/\\\\\\(admin\\\\\\)/admin/analytics/page.tsx)",
       "Bash(npm ls googleapis recharts)",
-      "Bash(wc -l \"l:\\\\snowafrica\\\\src\\\\app\\\\\\(admin\\)\\\\admin\\\\analytics\\\\page.tsx\")"
+      "Bash(wc -l \"l:\\\\snowafrica\\\\src\\\\app\\\\\\(admin\\)\\\\admin\\\\analytics\\\\page.tsx\")",
+      "Read(//tmp/**)",
+      "Bash([ -d \"src/app/\\(site\\)/$slug\" ])",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_resize"
     ]
   }
 }
