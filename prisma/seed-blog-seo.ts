@@ -33,8 +33,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-there-snow-in-africa-mountains",
-    metaTitle: "Snow in Africa: 8 Peaks With Year-Round Snow & Ice [Photos]",
-    metaDescription: "Africa has snow-capped mountains year-round — and they're vanishing fast. See all 8 peaks from Kilimanjaro to Morocco's ski slopes, with photos, elevations & best months.",
+    metaTitle: "Does Africa Have Snow? 8 Mountains With Ice",
+    metaDescription: "Yes, Africa has snow year-round on 8 mountains. See Kilimanjaro glaciers, Morocco ski slopes & more, with photos, elevations, and best months to visit.",
     excerpt: "Africa has snow-capped mountains year-round — from Kilimanjaro's glaciers to Morocco's ski slopes. Discover all 8 peaks with photos and elevations."
   },
   {
@@ -51,8 +51,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-vs-everest",
-    metaTitle: "Kilimanjaro vs Everest: Difficulty, Cost & Success Rates Compared",
-    metaDescription: "Kilimanjaro: 65% success, no ropes, $2K. Everest: 4% summit rate, 2+ months, $30K+. Honest side-by-side from guides who lead Kilimanjaro treks daily.",
+    metaTitle: "Kilimanjaro vs Everest: $2K vs $30K Compared",
+    metaDescription: "Kilimanjaro costs $2K, takes 7 days, and needs no ropes. Everest costs $30K+ and takes 2 months. Full side-by-side from local Kilimanjaro summit guides.",
     excerpt: "Kilimanjaro vs Everest compared side-by-side — difficulty, cost, success rates, and experience required. Which mountain should you climb first?"
   },
   {
@@ -395,8 +395,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "hunting-strategy-of-the-lions",
-    metaTitle: "Lion Hunting Strategy: 6 Deadly Tactics Explained",
-    metaDescription: "Lions succeed only 25% of the time — yet dominate Africa's food chain. Safari guides break down 6 coordinated tactics, including the lioness ambush formation.",
+    metaTitle: "How Lions Hunt: 6 Tactics They Use to Kill",
+    metaDescription: "Lions kill only 25% of the time yet rule the savanna. Safari guides reveal 6 coordinated tactics: ambush formations, stampede traps, and night-vision hunts.",
     excerpt: "Lions succeed only 25% of the time yet dominate Africa. Safari guides explain 6 coordinated hunting tactics from ambush formations to night hunts."
   },
   {
@@ -407,8 +407,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "amazing-teamwork-of-lions",
-    metaTitle: "How Lion Prides Work Together: The Science Behind It",
-    metaDescription: "Lions are Africa's only truly social cats — and their survival depends on teamwork. How prides coordinate hunts, protect cubs & defend territory together.",
+    metaTitle: "How Lion Prides Hunt Together (Explained)",
+    metaDescription: "Lions are Africa's only social cats. Learn how prides coordinate hunts with flanking and ambush, share cub-rearing duties, and defend territory as a team.",
     excerpt: "Lions are Africa's only truly social cats. Discover how prides coordinate hunts, protect cubs, and defend territory through remarkable teamwork."
   },
   {
@@ -419,8 +419,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "a-complete-overview-about-aardvark",
-    metaTitle: "Aardvark: 15 Facts Most People Get Wrong [With Photos]",
-    metaDescription: "The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species — yet most safari-goers never see one. Everything about Africa's strangest mammal.",
+    metaTitle: "Aardvark: 15 Facts Most People Get Wrong",
+    metaDescription: "Aardvarks eat 50,000 termites a night and dig burrows used by 17+ other species. 15 surprising facts with rare photos of Africa's strangest nocturnal mammal.",
     excerpt: "The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species. Everything you need to know about Africa's strangest nocturnal mammal."
   },
   {
@@ -449,8 +449,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-lion-hunting-legal-in-africa",
-    metaTitle: "Is Lion Hunting Legal in Africa? 2026 Laws Explained",
-    metaDescription: "Lion hunting is legal in only 6 African countries and banned in 48. Full breakdown: which countries, costs ($35K-$75K), quotas, and the conservation debate.",
+    metaTitle: "Is Lion Hunting Legal? 2026 Country-by-Country",
+    metaDescription: "Lion trophy hunting is legal in just 6 African countries and banned in 48. See which nations allow it, what it costs ($35K-$75K), and the full debate.",
     excerpt: "Lion hunting is legal in only 6 African countries and banned in 48. Full country-by-country breakdown of laws, costs, quotas, and the conservation debate."
   },
   {
@@ -597,8 +597,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "first-person-to-climb-kilimanjaro",
-    metaTitle: "Who First Climbed Kilimanjaro? The Untold Full Story",
-    metaDescription: "It took 3 failed attempts, a local guide history nearly forgot, and a political crisis. The complete story of Kilimanjaro's first summit on October 6, 1889.",
+    metaTitle: "Who First Climbed Kilimanjaro? (1889 Story)",
+    metaDescription: "Hans Meyer summited Kilimanjaro on October 6, 1889 after 3 failed attempts. The full story, including the local guide Yohani Lauwo history nearly erased.",
     excerpt: "The first Kilimanjaro summit took 3 failed attempts and a local guide history nearly forgot. The complete story of Hans Meyer's 1889 ascent."
   },
 
@@ -607,8 +607,8 @@ const blogSeoData: BlogSeoData[] = [
   // ============================================
   {
     slug: "tanzania-festival",
-    metaTitle: "Tanzania Festivals 2026: Events Worth Planning Your Trip Around",
-    metaDescription: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts — Tanzania's best festivals with 2026 dates, locations & tips. Plan your trip around these cultural events.",
+    metaTitle: "Tanzania Festivals 2026: 12 Must-See Events",
+    metaDescription: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts Festival and 9 more. 2026 dates, locations, and tips for planning your Tanzania trip around them.",
     excerpt: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts — Tanzania's best festivals with 2026 dates, locations, and travel planning tips."
   },
   {
@@ -631,8 +631,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "tanzania-itinerary-10-days",
-    metaTitle: "10-Day Tanzania Itinerary: Safari + Zanzibar [Day-by-Day]",
-    metaDescription: "Day-by-day 10-day Tanzania plan: Serengeti, Ngorongoro & Tarangire safari + Zanzibar beach. Includes costs, transfers & where to stay. By local operators.",
+    metaTitle: "Tanzania 10-Day Itinerary: Safari + Beach",
+    metaDescription: "Day-by-day 10-day Tanzania plan covering Serengeti, Ngorongoro & Tarangire safari then Zanzibar beaches. Costs, transfers, and local operator booking tips.",
     excerpt: "Day-by-day 10-day Tanzania itinerary: Serengeti, Ngorongoro & Tarangire safari plus Zanzibar beach, with costs, transfers, and accommodation tips."
   },
   {
