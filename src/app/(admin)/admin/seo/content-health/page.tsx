@@ -263,12 +263,53 @@ export default async function SeoContentHealthPage() {
   }
   const topGaps = computeTopGaps(items);
 
+  const criticalItems = items.filter(
+    (i) => i.isPublished && i.result.band === "poor"
+  );
+
   return (
     <div className="space-y-6">
       <p className="text-slate-600 -mt-2">
         Every piece of scored content across the site, ranked by what most
         needs attention.
       </p>
+
+      {/* Critical: Published content scoring "poor" */}
+      {criticalItems.length > 0 && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <AlertCircle className="w-5 h-5 text-red-600" />
+            <h2 className="font-semibold text-red-800">
+              {criticalItems.length} published page{criticalItems.length === 1 ? "" : "s"} scoring &quot;poor&quot; — hurting SEO
+            </h2>
+          </div>
+          <p className="text-sm text-red-700 mb-3">
+            These pages are live and indexed by Google but have critical SEO gaps (thin content, missing meta, no images). Fix these first for maximum impact.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {criticalItems.slice(0, 8).map((item) => {
+              const meta = TYPE_META[item.type];
+              const Icon = meta.icon;
+              return (
+                <Link
+                  key={item.id}
+                  href={item.editHref}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-red-200 text-sm text-red-800 hover:bg-red-100 transition-colors"
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span className="truncate max-w-[200px]">{item.title}</span>
+                  <span className="text-red-500 font-bold">{item.result.score}</span>
+                </Link>
+              );
+            })}
+            {criticalItems.length > 8 && (
+              <span className="text-sm text-red-600 self-center">
+                +{criticalItems.length - 8} more
+              </span>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Platform-wide summary */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
