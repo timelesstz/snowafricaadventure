@@ -30,183 +30,57 @@ const getCategory = cache(async function getCategory(slug: string) {
   }
 });
 
-// Placeholder categories for development
-const placeholderCategories: Record<
-  string,
-  {
-    id: string;
-    name: string;
-    slug: string;
-    description: string;
-    posts: {
-      id: string;
-      title: string;
-      slug: string;
-      excerpt: string;
-      featuredImage: string;
-      publishedAt: string;
-      author: { name: string };
-    }[];
+const getOtherCategories = cache(async function getOtherCategories(
+  currentSlug: string
+) {
+  try {
+    const categories = await prisma.category.findMany({
+      where: {
+        slug: { not: currentSlug },
+      },
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        _count: {
+          select: {
+            posts: {
+              where: { post: { isPublished: true } },
+            },
+          },
+        },
+      },
+      orderBy: { name: "asc" },
+    });
+    return categories;
+  } catch {
+    return [];
   }
-> = {
-  "kilimanjaro-guides": {
-    id: "1",
-    name: "Kilimanjaro Guides",
-    slug: "kilimanjaro-guides",
-    description:
-      "Expert guides, tips, and information for climbing Mount Kilimanjaro. From route selection to packing lists, we cover everything you need for a successful summit.",
-    posts: [
-      {
-        id: "1",
-        title: "Best Time to Climb Kilimanjaro: Month by Month Guide",
-        slug: "best-time-climb-kilimanjaro",
-        excerpt:
-          "Discover the optimal months for climbing Kilimanjaro based on weather patterns, crowd levels, and your personal preferences.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg",
-        publishedAt: "2025-01-10",
-        author: { name: "Florent Ipanga" },
-      },
-      {
-        id: "2",
-        title: "Kilimanjaro Packing List: What to Bring",
-        slug: "kilimanjaro-packing-list",
-        excerpt:
-          "A comprehensive packing list for your Kilimanjaro climb, from technical gear to personal items.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/safari-3242983_1280.jpg",
-        publishedAt: "2025-01-05",
-        author: { name: "Grace Kimaro" },
-      },
-      {
-        id: "3",
-        title: "Machame vs Lemosho: Which Route is Right for You?",
-        slug: "machame-vs-lemosho-route-comparison",
-        excerpt:
-          "A detailed comparison of two of Kilimanjaro's most popular routes to help you decide.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/mount-kilimanjaro-278082_1280.jpg",
-        publishedAt: "2024-12-20",
-        author: { name: "Florent Ipanga" },
-      },
-    ],
-  },
-  "safari-tips": {
-    id: "2",
-    name: "Safari Tips",
-    slug: "safari-tips",
-    description:
-      "Make the most of your Tanzania safari with our expert tips on wildlife spotting, photography, best seasons, and what to expect.",
-    posts: [
-      {
-        id: "4",
-        title: "Great Migration: When and Where to See It",
-        slug: "great-migration-guide",
-        excerpt:
-          "Track the annual wildebeest migration through Tanzania and Kenya with our month-by-month guide.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
-        publishedAt: "2025-01-08",
-        author: { name: "Emmanuel Ole" },
-      },
-      {
-        id: "5",
-        title: "Safari Photography Tips for Beginners",
-        slug: "safari-photography-tips",
-        excerpt:
-          "Essential tips for capturing stunning wildlife photos on your first safari adventure.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/safari-3242983_1280.jpg",
-        publishedAt: "2024-12-15",
-        author: { name: "Grace Kimaro" },
-      },
-    ],
-  },
-  "tanzania-travel": {
-    id: "3",
-    name: "Tanzania Travel",
-    slug: "tanzania-travel",
-    description:
-      "General travel information about Tanzania including visa requirements, health tips, cultural insights, and destination guides.",
-    posts: [
-      {
-        id: "6",
-        title: "Tanzania Visa Requirements 2026: Complete Guide",
-        slug: "tanzania-visa-requirements",
-        excerpt:
-          "Everything you need to know about getting a visa for Tanzania, including the new e-visa system.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/09/kilimanjaro-342702_1280.jpg",
-        publishedAt: "2025-01-12",
-        author: { name: "Grace Kimaro" },
-      },
-      {
-        id: "7",
-        title: "Best Time to Visit Tanzania",
-        slug: "best-time-visit-tanzania",
-        excerpt:
-          "A comprehensive guide to Tanzania's seasons and the best times for different activities.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
-        publishedAt: "2024-12-28",
-        author: { name: "Florent Ipanga" },
-      },
-    ],
-  },
-  "zanzibar": {
-    id: "4",
-    name: "Zanzibar",
-    slug: "zanzibar",
-    description:
-      "Discover the magic of Zanzibar - from Stone Town's history to the best beaches, spice tours, and island activities.",
-    posts: [
-      {
-        id: "8",
-        title: "Top 10 Things to Do in Zanzibar",
-        slug: "things-to-do-zanzibar",
-        excerpt:
-          "From Stone Town to the beaches, discover the best experiences Zanzibar has to offer.",
-        featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
-        publishedAt: "2024-12-22",
-        author: { name: "Grace Kimaro" },
-      },
-    ],
-  },
-};
+});
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { categorySlug } = await params;
   const category = await getCategory(categorySlug);
-  const placeholder = placeholderCategories[categorySlug];
 
-  const cat = category || placeholder;
-  if (!cat) return {};
+  if (!category) return {};
 
   return genMeta({
-    title: cat.name,
-    description: cat.description || `Articles about ${cat.name}`,
+    title: category.name,
+    description: category.description || `Articles about ${category.name}`,
     url: `/category/${categorySlug}/`,
   });
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { categorySlug } = await params;
-  const dbCategory = await getCategory(categorySlug);
-  const placeholder = placeholderCategories[categorySlug];
-
-  const category = dbCategory || placeholder;
+  const category = await getCategory(categorySlug);
 
   if (!category) {
     notFound();
   }
 
-  // Handle both junction table results (from DB) and direct posts (from placeholder)
-  const rawPosts = category.posts || [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const posts = rawPosts.map((item: any) =>
-    'post' in item && item.post ? item.post : item
-  ) as Array<{
-    id: string;
-    slug: string;
-    title: string;
-    excerpt?: string | null;
-    featuredImage?: string | null;
-    publishedAt?: Date | string | null;
-    author?: { name: string } | null;
-  }>;
+  const posts = category.posts.map((item) => item.post);
+  const otherCategories = await getOtherCategories(categorySlug);
 
   return (
     <div>
@@ -250,10 +124,10 @@ export default async function CategoryPage({ params }: Props) {
                     key={post.id}
                     title={post.title}
                     slug={post.slug}
-                    excerpt={post.excerpt || ""}
+                    excerpt={post.excerpt}
                     featuredImage={post.featuredImage}
                     publishedAt={post.publishedAt}
-                    author={post.author?.name || "Snow Africa Team"}
+                    author={post.author || "Snow Africa Team"}
                   />
                 ))}
               </div>
@@ -275,15 +149,14 @@ export default async function CategoryPage({ params }: Props) {
       </section>
 
       {/* Other Categories */}
-      <section className="py-12 bg-[var(--surface)]">
-        <div className="container mx-auto px-4">
-          <h2 className="font-heading text-2xl font-bold mb-6">
-            Explore Other Topics
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {Object.values(placeholderCategories)
-              .filter((c) => c.slug !== categorySlug)
-              .map((cat) => (
+      {otherCategories.length > 0 && (
+        <section className="py-12 bg-[var(--surface)]">
+          <div className="container mx-auto px-4">
+            <h2 className="font-heading text-2xl font-bold mb-6">
+              Explore Other Topics
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {otherCategories.map((cat) => (
                 <Link
                   key={cat.id}
                   href={`/category/${cat.slug}/`}
@@ -291,13 +164,14 @@ export default async function CategoryPage({ params }: Props) {
                 >
                   {cat.name}
                   <span className="text-[var(--text-light)] ml-2 text-sm">
-                    ({cat.posts.length})
+                    ({cat._count.posts})
                   </span>
                 </Link>
               ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="py-12">
