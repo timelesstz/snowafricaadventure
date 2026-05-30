@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, Tag, ChevronRight, Mountain, MapPin, BookOpen } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
 import { AUTHOR_PROFILES } from "@/lib/constants";
 import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
@@ -38,6 +38,33 @@ const reservedSlugs = [
   "category",
   "admin",
 ];
+
+// Extract FAQ question-answer pairs from HTML content
+function extractFAQs(html: string): { question: string; answer: string }[] {
+  const faqs: { question: string; answer: string }[] = [];
+  const faqSectionMatch = html.match(/(?:Frequently Asked Questions|FAQ)<\/h[23]>([\s\S]*?)(?=<h[12][^>]*>|$)/i);
+  if (!faqSectionMatch) return faqs;
+
+  const faqContent = faqSectionMatch[1];
+  const headingRegex = /<h3[^>]*>([^<]+\??)<\/h3>/gi;
+  let match;
+  const questions: { question: string; index: number }[] = [];
+
+  while ((match = headingRegex.exec(faqContent)) !== null) {
+    questions.push({ question: match[1].trim(), index: match.index + match[0].length });
+  }
+
+  for (let i = 0; i < questions.length; i++) {
+    const start = questions[i].index;
+    const end = i + 1 < questions.length ? faqContent.indexOf(`<h3`, start) : faqContent.length;
+    const answerHtml = faqContent.slice(start, end);
+    const answer = answerHtml.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    if (answer.length > 10) {
+      faqs.push({ question: questions[i].question, answer });
+    }
+  }
+  return faqs;
+}
 
 // Calculate reading time
 function calculateReadingTime(content: string): number {
@@ -74,6 +101,7 @@ const getPost = cache(async function getPost(slug: string) {
       const linkMap = await getInternalLinkMap();
       const linkedContent = injectInternalLinks(processedContent, linkMap, slug);
       const tableOfContents = generateTableOfContents(linkedContent);
+      const faqs = extractFAQs(post.content);
 
       return {
         slug: post.slug,
@@ -83,6 +111,7 @@ const getPost = cache(async function getPost(slug: string) {
         excerpt: post.excerpt || "",
         content: linkedContent,
         rawContent: post.content,
+        faqs,
         author: post.author || "Snow Africa Team",
         featuredImage: normalizeImageUrl(post.featuredImage),
         publishedAt: post.publishedAt?.toISOString().split("T")[0] || new Date().toISOString().split("T")[0],
@@ -277,6 +306,14 @@ export default async function BlogPostPage({ params }: PageProps) {
           ),
         }}
       />
+      {post.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateFAQSchema(post.faqs)),
+          }}
+        />
+      )}
 
       {/* Hero Section with Featured Image */}
       <section className="relative">
