@@ -42,7 +42,7 @@ async function getContentFromDb() {
   try {
     const { prisma } = await import("@/lib/prisma");
 
-    const [routes, safaris, destinations, posts, dayTrips, categories] =
+    const [routes, safaris, destinations, posts, dayTrips, categories, tags] =
       await Promise.all([
         prisma.trekkingRoute.findMany({
           where: { isActive: true },
@@ -75,9 +75,20 @@ async function getContentFromDb() {
           },
           select: { slug: true, updatedAt: true },
         }),
+        // Only tags that have at least one published post
+        prisma.tag.findMany({
+          where: {
+            posts: {
+              some: {
+                post: { isPublished: true },
+              },
+            },
+          },
+          select: { slug: true, updatedAt: true },
+        }),
       ]);
 
-    return { routes, safaris, destinations, posts, dayTrips, categories };
+    return { routes, safaris, destinations, posts, dayTrips, categories, tags };
   } catch (err) {
     console.error("[sitemap] Database fetch failed:", err);
     return {
@@ -87,6 +98,7 @@ async function getContentFromDb() {
       posts: [],
       dayTrips: [],
       categories: [],
+      tags: [],
     };
   }
 }
@@ -94,7 +106,7 @@ async function getContentFromDb() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
 
-  const { routes, safaris, destinations, posts, dayTrips, categories } =
+  const { routes, safaris, destinations, posts, dayTrips, categories, tags } =
     await getContentFromDb();
 
   // Static pages with accurate lastModified dates.
@@ -304,6 +316,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const tagUrls: MetadataRoute.Sitemap = tags.map((tag) => ({
+    url: `${baseUrl}/tag/${tag.slug}/`,
+    lastModified: tag.updatedAt,
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
   return [
     ...staticPages,
     ...routeUrls,
@@ -312,5 +331,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...postUrls,
     ...dayTripUrls,
     ...categoryUrls,
+    ...tagUrls,
   ];
 }

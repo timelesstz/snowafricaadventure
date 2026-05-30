@@ -17,6 +17,8 @@ import { RouteCard } from "@/components/cards/RouteCard";
 import { generateMetadata as genMeta, generateTripSchema, generateFAQSchema, generateProductSchema, generateBreadcrumbSchema, generateReviewSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
+import { findRelatedBlogPosts } from "@/lib/related-content";
+import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import prisma from "@/lib/prisma";
 
 interface PageProps {
@@ -139,9 +141,14 @@ export default async function RoutePage({ params }: PageProps) {
   }
 
   // Get related data
-  const [relatedRoutes, departures] = await Promise.all([
+  const [relatedRoutes, departures, routeRelatedPosts] = await Promise.all([
     getRelatedRoutes(routeSlug),
     getUpcomingDepartures(route.id),
+    findRelatedBlogPosts(
+      [route.title, "Kilimanjaro", route.mountain || ""].filter(Boolean),
+      [],
+      3
+    ),
   ]);
 
   // Parse JSON fields
@@ -545,6 +552,9 @@ export default async function RoutePage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Related Blog Posts */}
+      <RelatedBlogPosts posts={routeRelatedPosts} heading="Kilimanjaro Climbing Articles" />
 
       {/* Related Routes */}
       <section className="py-16 bg-[var(--surface)]">

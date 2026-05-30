@@ -18,6 +18,8 @@ import type { DayItinerary } from "@/components/tours/types";
 import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema, generateReviewSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
+import { findRelatedBlogPosts } from "@/lib/related-content";
+import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import prisma from "@/lib/prisma";
 
 interface PageProps {
@@ -149,6 +151,14 @@ export default async function SafariPage({ params }: PageProps) {
     { author: "David H.", datePublished: "2026-02-28", reviewBody: "Third safari with Snow Africa and they never disappoint. Authentic experience with a locally owned company that genuinely cares about conservation.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
   ].map(generateReviewSchema);
 
+  // Fetch related blog posts
+  const destinationNames = safari.destinations.map((d) => d.destination.name);
+  const safariRelatedPosts = await findRelatedBlogPosts(
+    [safari.title, ...destinationNames, "safari"].filter(Boolean),
+    [],
+    3
+  );
+
   // Split overview into lead and body
   const overviewSentences = safari.overview.split('. ');
   const leadText = overviewSentences.slice(0, 2).join('. ') + '.';
@@ -256,6 +266,9 @@ export default async function SafariPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Related Blog Posts */}
+      <RelatedBlogPosts posts={safariRelatedPosts} heading="Safari Planning Articles" />
 
       {/* Final CTA */}
       <FinalCTA />

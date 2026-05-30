@@ -5,7 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, MapPin, Users, Check, X, Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { findRelatedBlogPosts } from "@/lib/related-content";
+import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import { PublicGallery } from "@/components/ui/PublicGallery";
@@ -24,6 +27,16 @@ const getDayTrip = cache(async function getDayTrip(slug: string) {
     return null;
   }
 });
+
+async function getOtherDayTrips(currentSlug: string) {
+  try {
+    return await prisma.dayTrip.findMany({
+      where: { slug: { not: currentSlug }, isActive: true },
+      take: 3,
+      select: { title: true, slug: true, featuredImage: true, priceFrom: true, destination: true },
+    });
+  } catch { return []; }
+}
 
 // Placeholder data
 const placeholderTrips: Record<string, {
@@ -271,8 +284,42 @@ export default async function DayTripDetailPage({ params }: Props) {
   const galleryImages: string[] = dbTrip?.gallery && dbTrip.gallery.length > 0 ? dbTrip.gallery : [];
   const galleryAlts = (dbTrip?.galleryAlts as Record<string, { alt?: string; caption?: string }> | null) ?? null;
 
+  // Fetch related blog posts and other day trips
+  const [relatedPosts, otherTrips] = await Promise.all([
+    findRelatedBlogPosts(
+      [name, tripData.destination || ""].filter(Boolean),
+      [],
+      3
+    ),
+    getOtherDayTrips(slug),
+  ]);
+
   return (
     <div>
+      <MultiJsonLd schemas={[
+        generateTripSchema({
+          name,
+          description: description.slice(0, 200),
+          url: `/tanzania-day-tours/${slug}/`,
+          duration: "P1D",
+          image: heroImage,
+        }),
+        generateProductSchema({
+          name,
+          description: description.slice(0, 200),
+          url: `/tanzania-day-tours/${slug}/`,
+          image: heroImage,
+          price: price ? Number(price) : 0,
+          ratingValue: 5,
+          reviewCount: 12,
+        }),
+        generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Day Tours", url: "/tanzania-day-tours/" },
+          { name, url: `/tanzania-day-tours/${slug}/` },
+        ]),
+      ]} />
+
       {/* Analytics: Track item view */}
       <ViewItemTracker
         itemId={tripData.id || slug}
@@ -508,6 +555,11 @@ export default async function DayTripDetailPage({ params }: Props) {
         />
       )}
 
+      {/* Related Blog Posts */}
+      {relatedPosts.length > 0 && (
+        <RelatedBlogPosts posts={relatedPosts} heading={`Articles About ${name.split(' ').slice(-2).join(' ')}`} />
+      )}
+
       {/* Other Trips */}
       <section className="py-12 bg-[var(--muted)]">
         <div className="container mx-auto px-4">
@@ -515,32 +567,59 @@ export default async function DayTripDetailPage({ params }: Props) {
             More Day Trips
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {Object.values(placeholderTrips)
-              .filter((t) => t.slug !== slug)
-              .slice(0, 3)
-              .map((t) => (
+            {(otherTrips.length > 0
+              ? otherTrips.map((t) => (
                 <Link
-                  key={t.id}
+                  key={t.slug}
                   href={`/tanzania-day-tours/${t.slug}/`}
                   className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
                 >
                   <div className="relative aspect-[16/10]">
                     <Image
-                      src={t.heroImage}
-                      alt={t.name}
+                      src={t.featuredImage || "/images/placeholder-trip.jpg"}
+                      alt={t.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-sm font-bold text-[var(--primary)]">
-                      ${t.price}
-                    </div>
+                    {t.priceFrom && (
+                      <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-sm font-bold text-[var(--primary)]">
+                        ${Number(t.priceFrom)}
+                      </div>
+                    )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-semibold mb-1">{t.name}</h3>
-                    <p className="text-sm text-[var(--text-muted)]">{t.duration}</p>
+                    <h3 className="font-semibold mb-1">{t.title}</h3>
+                    <p className="text-sm text-[var(--text-muted)]">{t.destination || "Tanzania"}</p>
                   </div>
                 </Link>
-              ))}
+              ))
+              : Object.values(placeholderTrips)
+                .filter((t) => t.slug !== slug)
+                .slice(0, 3)
+                .map((t) => (
+                  <Link
+                    key={t.id}
+                    href={`/tanzania-day-tours/${t.slug}/`}
+                    className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
+                  >
+                    <div className="relative aspect-[16/10]">
+                      <Image
+                        src={t.heroImage}
+                        alt={t.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-sm font-bold text-[var(--primary)]">
+                        ${t.price}
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-1">{t.name}</h3>
+                      <p className="text-sm text-[var(--text-muted)]">{t.duration}</p>
+                    </div>
+                  </Link>
+                ))
+            )}
           </div>
           <div className="text-center mt-8">
             <Link

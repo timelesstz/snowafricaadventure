@@ -5,9 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Calendar, Clock, Camera, Star } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateTouristDestinationSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SafariCard } from "@/components/cards/SafariCard";
 import { PublicGallery } from "@/components/ui/PublicGallery";
+import { findRelatedBlogPosts } from "@/lib/related-content";
+import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 
 interface Props {
   params: Promise<{ destSlug: string }>;
@@ -30,6 +33,26 @@ const getDestination = cache(async function getDestination(slug: string) {
     return null;
   }
 });
+
+async function getFallbackSafaris() {
+  try {
+    return await prisma.safariPackage.findMany({
+      where: { isActive: true },
+      take: 3,
+      select: { title: true, slug: true, duration: true, type: true, priceFrom: true, featuredImage: true, overview: true },
+    });
+  } catch { return []; }
+}
+
+async function getOtherDestinations(currentSlug: string) {
+  try {
+    return await prisma.destination.findMany({
+      where: { slug: { not: currentSlug }, isActive: true },
+      take: 4,
+      select: { name: true, slug: true, featuredImage: true },
+    });
+  } catch { return []; }
+}
 
 // Placeholder data for development (also used as fallback if DB record has no content)
 const placeholderDestinations: Record<string, {
@@ -817,7 +840,24 @@ export default async function DestinationDetailPage({ params }: Props) {
   const location = d.location || "Northern Tanzania";
   const wildlife = d.wildlife || ["Various wildlife species"];
   const activities = d.activities || ["Game Drives", "Photography"];
-  const safaris = d.safaris || [];
+
+  // Extract real linked safaris from the DB join table
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const linkedSafaris = (destination?.safaris || []).map((s: any) => s.safari).filter(Boolean);
+  const displaySafaris = linkedSafaris.length > 0 ? linkedSafaris : await getFallbackSafaris();
+
+  // Fetch other destinations from DB
+  const otherDestinations = await getOtherDestinations(destSlug);
+  const displayOtherDestinations = otherDestinations.length > 0
+    ? otherDestinations
+    : Object.values(placeholderDestinations)
+        .filter((pd) => pd.slug !== destSlug)
+        .slice(0, 4)
+        .map((pd) => ({ name: pd.name, slug: pd.slug, featuredImage: pd.heroImage }));
+
+  // Fetch related blog posts
+  const blogKeywords = [name, ...((wildlife as string[]).slice(0, 3))];
+  const relatedPosts = await findRelatedBlogPosts(blogKeywords, [], 3);
 
   const galleryImages: string[] =
     (destination?.gallery && destination.gallery.length > 0)
@@ -827,6 +867,20 @@ export default async function DestinationDetailPage({ params }: Props) {
 
   return (
     <div>
+      <MultiJsonLd schemas={[
+        generateTouristDestinationSchema({
+          name,
+          description: description.slice(0, 300),
+          url: `/tanzania-destinations/${destSlug}/`,
+          image: heroImage,
+        }),
+        generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Destinations", url: "/tanzania-destinations/" },
+          { name, url: `/tanzania-destinations/${destSlug}/` },
+        ]),
+      ]} />
+
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px]">
         <Image
@@ -974,6 +1028,12 @@ export default async function DestinationDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Related Blog Posts */}
+      <RelatedBlogPosts
+        posts={relatedPosts}
+        heading={`Articles About ${name}`}
+      />
+
       {/* Photo Gallery */}
       {galleryImages.length > 0 && (
         <PublicGallery
@@ -986,52 +1046,24 @@ export default async function DestinationDetailPage({ params }: Props) {
       )}
 
       {/* Related Safaris */}
-      {(safaris.length > 0 || true) && (
+      {displaySafaris.length > 0 && (
         <section className="py-12 bg-[var(--surface)]">
           <div className="container mx-auto px-4">
             <h2 className="font-heading text-3xl font-bold text-center mb-10">
               Safaris Featuring {name}
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Placeholder safaris if none from DB */}
-              {[
-                {
-                  title: "5-Day Northern Circuit Safari",
-                  slug: "5-day-northern-circuit-safari",
-                  duration: "5 Days",
-                  type: "Mid-Range",
-                  priceFrom: 2100,
-                  featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg",
-                  overview: "Experience the best of Tanzania's northern parks.",
-                },
-                {
-                  title: "7-Day Great Migration Safari",
-                  slug: "7-day-great-migration-safari",
-                  duration: "7 Days",
-                  type: "Mid-Range",
-                  priceFrom: 3200,
-                  featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/32535628638_2be6219332_k-2.jpg",
-                  overview: "Witness the spectacular Great Migration in the Serengeti.",
-                },
-                {
-                  title: "3-Day Budget Safari",
-                  slug: "3-day-budget-safari",
-                  duration: "3 Days",
-                  type: "Budget",
-                  priceFrom: 850,
-                  featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/3-Days-Tanzania-Budget-Camping-Safari.jpg",
-                  overview: "Affordable safari experience for budget travelers.",
-                },
-              ].map((safari, i) => (
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {displaySafaris.map((safari: any, i: number) => (
                 <SafariCard
-                  key={i}
+                  key={safari.slug || i}
                   title={safari.title}
                   slug={safari.slug}
                   duration={safari.duration}
                   type={safari.type}
-                  priceFrom={safari.priceFrom}
-                  featuredImage={safari.featuredImage}
-                  overview={safari.overview}
+                  priceFrom={safari.priceFrom != null ? Number(safari.priceFrom) : undefined}
+                  featuredImage={safari.featuredImage ?? undefined}
+                  overview={safari.overview ?? undefined}
                 />
               ))}
             </div>
@@ -1048,38 +1080,37 @@ export default async function DestinationDetailPage({ params }: Props) {
       )}
 
       {/* Other Destinations */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="font-heading text-3xl font-bold text-center mb-10">
-            Explore More Destinations
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            {Object.values(placeholderDestinations)
-              .filter((d) => d.slug !== destSlug)
-              .slice(0, 4)
-              .map((d) => (
+      {displayOtherDestinations.length > 0 && (
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <h2 className="font-heading text-3xl font-bold text-center mb-10">
+              Explore More Destinations
+            </h2>
+            <div className="grid md:grid-cols-4 gap-6">
+              {displayOtherDestinations.map((od) => (
                 <Link
-                  key={d.id}
-                  href={`/tanzania-destinations/${d.slug}/`}
+                  key={od.slug}
+                  href={`/tanzania-destinations/${od.slug}/`}
                   className="group"
                 >
                   <div className="relative aspect-square rounded-lg overflow-hidden mb-3">
                     <Image
-                      src={d.heroImage}
-                      alt={d.name}
+                      src={od.featuredImage || "/images/placeholder-destination.jpg"}
+                      alt={od.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-white font-semibold">{d.name}</h3>
+                      <h3 className="text-white font-semibold">{od.name}</h3>
                     </div>
                   </div>
                 </Link>
               ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

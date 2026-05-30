@@ -204,3 +204,85 @@ export function generateTableOfContents(html: string): Array<{ id: string; text:
 
   return toc;
 }
+
+/**
+ * Inject internal links into processed HTML content.
+ * Finds the first occurrence of each keyword phrase and wraps it in an anchor tag.
+ * Respects existing links, headings, and buttons — never nests anchors.
+ */
+import type { LinkMapEntry } from "./internal-link-map";
+
+const MAX_AUTO_LINKS = 5;
+
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+export function injectInternalLinks(
+  html: string,
+  linkMap: LinkMapEntry[],
+  currentSlug?: string
+): string {
+  let linksInjected = 0;
+  let result = html;
+
+  for (const entry of linkMap) {
+    if (linksInjected >= MAX_AUTO_LINKS) break;
+
+    // Skip self-links: if the entry href matches the current slug
+    if (currentSlug && entry.href === `/${currentSlug}/`) continue;
+
+    const escapedPhrase = escapeRegExp(entry.phrase);
+
+    // Split by tags that should not contain injected links: <a>...</a>, <h1>-<h6>, <button>
+    // We process only text segments that are outside these protected tags.
+    const protectedTagRegex =
+      /(<a\b[^>]*>[\s\S]*?<\/a>|<h[1-6]\b[^>]*>[\s\S]*?<\/h[1-6]>|<button\b[^>]*>[\s\S]*?<\/button>)/gi;
+
+    const segments = result.split(protectedTagRegex);
+    let matched = false;
+
+    for (let i = 0; i < segments.length; i++) {
+      // Protected segments (matched by the split regex) appear at odd indices
+      // but more reliably, we check if the segment looks like a protected tag
+      if (protectedTagRegex.test(segments[i])) {
+        // Reset lastIndex since we're reusing the regex
+        protectedTagRegex.lastIndex = 0;
+        continue;
+      }
+      protectedTagRegex.lastIndex = 0;
+
+      // Within this safe segment, find the phrase in text content only (not inside tags)
+      // The regex matches: (start-of-string or end-of-tag ">") ... phrase ... (start-of-tag "<" or end-of-string)
+      const phraseRegex = new RegExp(
+        `(^|>)([^<]*?)(${escapedPhrase})([^<]*?)(<|$)`,
+        "i"
+      );
+      const phraseMatch = segments[i].match(phraseRegex);
+
+      if (phraseMatch) {
+        // Reconstruct the segment with the link injected
+        const before = phraseMatch[1] + phraseMatch[2];
+        const matchedText = phraseMatch[3];
+        const after = phraseMatch[4] + phraseMatch[5];
+        const link = `<a href="${entry.href}" class="internal-link">${matchedText}</a>`;
+
+        // Replace only the first match in this segment
+        segments[i] = segments[i].replace(
+          phraseRegex,
+          before + link + after
+        );
+
+        matched = true;
+        break;
+      }
+    }
+
+    if (matched) {
+      result = segments.join("");
+      linksInjected++;
+    }
+  }
+
+  return result;
+}

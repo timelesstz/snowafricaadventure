@@ -529,6 +529,27 @@ export function generateVideoSchema(video: {
  * Generate ItemList schema for collections (routes, safaris, etc.)
  * Includes a schema.org Offer when `price` is present.
  */
+export function generateTouristDestinationSchema(dest: {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    name: dest.name,
+    description: dest.description.slice(0, 300),
+    url: `${SITE_CONFIG.url}${dest.url}`,
+    ...(dest.image && { image: dest.image }),
+    touristType: ["Nature", "Wildlife", "Adventure"],
+    containedInPlace: {
+      "@type": "Country",
+      name: "Tanzania",
+    },
+  };
+}
+
 export function generateItemListSchema(items: {
   name: string;
   url: string;

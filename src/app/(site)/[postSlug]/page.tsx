@@ -9,7 +9,8 @@ import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbS
 import { AUTHOR_PROFILES } from "@/lib/constants";
 import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
-import { processContent, generateTableOfContents } from "@/lib/content-processor";
+import { processContent, generateTableOfContents, injectInternalLinks } from "@/lib/content-processor";
+import { getInternalLinkMap } from "@/lib/internal-link-map";
 import { BlogContentClient } from "@/components/blog/BlogContentClient";
 import { AuthorBio } from "@/components/blog/AuthorBio";
 
@@ -68,9 +69,11 @@ const getPost = cache(async function getPost(slug: string) {
 
       if (!post) return null;
 
-      // Process content for better formatting
+      // Process content for better formatting and inject internal links
       const processedContent = processContent(post.content);
-      const tableOfContents = generateTableOfContents(processedContent);
+      const linkMap = await getInternalLinkMap();
+      const linkedContent = injectInternalLinks(processedContent, linkMap, slug);
+      const tableOfContents = generateTableOfContents(linkedContent);
 
       return {
         slug: post.slug,
@@ -78,7 +81,7 @@ const getPost = cache(async function getPost(slug: string) {
         metaTitle: post.metaTitle,
         metaDescription: post.metaDescription,
         excerpt: post.excerpt || "",
-        content: processedContent,
+        content: linkedContent,
         rawContent: post.content,
         author: post.author || "Snow Africa Team",
         featuredImage: normalizeImageUrl(post.featuredImage),
@@ -239,6 +242,10 @@ export default async function BlogPostPage({ params }: PageProps) {
     featuredImage: normalizeImageUrl(p.featuredImage),
   }));
 
+  const kiliKeywords = ["kilimanjaro", "climbing", "trekking", "trek", "summit", "route", "altitude", "porter"];
+  const postTextLower = `${post.title} ${post.categories.map(c => c.name).join(" ")} ${post.tags.map(t => t.name).join(" ")}`.toLowerCase();
+  const isKilimanjaroPost = kiliKeywords.some((kw) => postTextLower.includes(kw));
+
   return (
     <article className="bg-[var(--surface)]">
       {/* Schema markup */}
@@ -372,12 +379,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
-                      <span
+                      <Link
                         key={tag.slug}
+                        href={`/tag/${tag.slug}/`}
                         className="text-sm bg-[var(--muted)] text-[var(--text-muted)] px-4 py-2 rounded-full hover:bg-border transition-colors"
                       >
                         #{tag.name}
-                      </span>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -468,26 +476,48 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </div>
                 )}
 
-                {/* CTA Card */}
-                <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white rounded-2xl p-6 shadow-lg">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                      <Mountain className="w-6 h-6" />
+                {/* Primary CTA - contextual based on post content */}
+                {isKilimanjaroPost ? (
+                  <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white rounded-2xl p-6 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <Mountain className="w-6 h-6" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold">
+                        Climb Kilimanjaro
+                      </h3>
                     </div>
-                    <h3 className="font-heading text-xl font-bold">
-                      Climb Kilimanjaro
-                    </h3>
+                    <p className="text-[var(--primary-light)] text-sm mb-5 leading-relaxed">
+                      Ready for the adventure of a lifetime? Join our expert guides on Africa&apos;s highest peak.
+                    </p>
+                    <Link
+                      href="/trekking/"
+                      className="block text-center bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-light)] transition-colors"
+                    >
+                      View Routes
+                    </Link>
                   </div>
-                  <p className="text-[var(--primary-light)] text-sm mb-5 leading-relaxed">
-                    Ready for the adventure of a lifetime? Join our expert guides on Africa&apos;s highest peak.
-                  </p>
-                  <Link
-                    href="/trekking/"
-                    className="block text-center bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-light)] transition-colors"
-                  >
-                    View Routes
-                  </Link>
-                </div>
+                ) : (
+                  <div className="bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] text-white rounded-2xl p-6 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <MapPin className="w-6 h-6" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold">
+                        Tanzania Safari
+                      </h3>
+                    </div>
+                    <p className="text-[var(--secondary-light)] text-sm mb-5 leading-relaxed">
+                      Explore the Serengeti, Ngorongoro Crater, and more with our expert-led safaris.
+                    </p>
+                    <Link
+                      href="/tanzania-safaris/"
+                      className="block text-center bg-white text-[var(--secondary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
+                    >
+                      View Safaris
+                    </Link>
+                  </div>
+                )}
 
                 {/* Categories */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
@@ -514,28 +544,51 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </ul>
                 </div>
 
-                {/* Safari CTA */}
-                <div className="bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] text-white rounded-2xl p-6 shadow-lg">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                      <MapPin className="w-6 h-6" />
+                {/* Secondary CTA - the opposite of the primary */}
+                {isKilimanjaroPost ? (
+                  <div className="bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] text-white rounded-2xl p-6 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <MapPin className="w-6 h-6" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold">
+                        Tanzania Safari
+                      </h3>
                     </div>
-                    <h3 className="font-heading text-xl font-bold">
-                      Tanzania Safari
-                    </h3>
+                    <p className="text-[var(--secondary-light)] text-sm mb-5 leading-relaxed">
+                      Combine your climb with a wildlife safari through Tanzania&apos;s iconic parks.
+                    </p>
+                    <Link
+                      href="/tanzania-safaris/"
+                      className="block text-center bg-white text-[var(--secondary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
+                    >
+                      View Safaris
+                    </Link>
                   </div>
-                  <p className="text-[var(--secondary-light)] text-sm mb-5 leading-relaxed">
-                    Explore the Serengeti, Ngorongoro Crater, and more with our expert-led safaris.
-                  </p>
-                  <Link
-                    href="/tanzania-safaris/"
-                    className="block text-center bg-white text-[var(--secondary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
-                  >
-                    View Safaris
-                  </Link>
-                </div>
+                ) : (
+                  <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white rounded-2xl p-6 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <Mountain className="w-6 h-6" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold">
+                        Climb Kilimanjaro
+                      </h3>
+                    </div>
+                    <p className="text-[var(--primary-light)] text-sm mb-5 leading-relaxed">
+                      Add Africa&apos;s highest peak to your Tanzania adventure.
+                    </p>
+                    <Link
+                      href="/trekking/"
+                      className="block text-center bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-light)] transition-colors"
+                    >
+                      View Routes
+                    </Link>
+                  </div>
+                )}
 
                 {/* Group Departures */}
+                {isKilimanjaroPost && (
                 <div className="bg-white rounded-2xl p-6 shadow-sm border-2 border-dashed border-[var(--border)]">
                   <h3 className="font-semibold text-[var(--text)] mb-2">
                     Join a Group Climb
@@ -551,6 +604,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
+                )}
               </div>
             </aside>
           </div>
