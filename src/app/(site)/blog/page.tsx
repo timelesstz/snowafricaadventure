@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User, ArrowRight, Mountain, MapPin, ChevronRight } from "lucide-react";
 import { BlogCard } from "@/components/cards/BlogCard";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { normalizeImageUrl, formatDate, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 import { PageHero } from "@/components/layout/PageHero";
@@ -76,6 +77,11 @@ export default async function BlogPage() {
 
   return (
     <div>
+      <JsonLd data={generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Blog", url: "/blog/" },
+      ])} />
+
       {/* Hero */}
       <PageHero pageSlug="blog" />
 
