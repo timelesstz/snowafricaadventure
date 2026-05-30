@@ -26,7 +26,7 @@ import {
   FileText,
   Eye,
 } from "lucide-react";
-import { BookingStatus, DepartureStatus } from "@prisma/client";
+import { BookingStatus, DepartureStatus, EmailStatus } from "@prisma/client";
 
 async function getBusinessMetrics() {
   const now = new Date();
@@ -193,6 +193,29 @@ async function getBusinessMetrics() {
     }),
   ]);
 
+  // Communication channel metrics
+  const [
+    emailsSent,
+    emailsFailed,
+    whatsappTotal,
+    whatsappRecent,
+    whatsappPrevious,
+    whatsappByAction,
+  ] = await Promise.all([
+    prisma.emailLog.count({ where: { channel: "EMAIL", status: EmailStatus.SENT } }),
+    prisma.emailLog.count({ where: { channel: "EMAIL", status: EmailStatus.FAILED } }),
+    prisma.emailLog.count({ where: { channel: "WHATSAPP" } }),
+    prisma.emailLog.count({ where: { channel: "WHATSAPP", createdAt: { gte: thirtyDaysAgo } } }),
+    prisma.emailLog.count({ where: { channel: "WHATSAPP", createdAt: { gte: sixtyDaysAgo, lt: thirtyDaysAgo } } }),
+    prisma.emailLog.groupBy({
+      by: ["subject"],
+      where: { channel: "WHATSAPP" },
+      _count: true,
+      orderBy: { _count: { id: "desc" } },
+      take: 10,
+    }),
+  ]);
+
   // Calculate trends
   const bookingTrend = previousPeriodBookings > 0
     ? ((recentBookings - previousPeriodBookings) / previousPeriodBookings) * 100
@@ -259,6 +282,22 @@ async function getBusinessMetrics() {
       percentage: totalBookings > 0 ? (partnerBookings / totalBookings) * 100 : 0,
       totalPaid: Number(totalCommissions._sum.commissionAmount || 0),
       pending: Number(pendingCommissions._sum.commissionAmount || 0),
+    },
+    communications: {
+      emailsSent,
+      emailsFailed,
+      emailSuccessRate: (emailsSent + emailsFailed) > 0
+        ? (emailsSent / (emailsSent + emailsFailed)) * 100
+        : 0,
+      whatsappTotal,
+      whatsappRecent,
+      whatsappTrend: whatsappPrevious > 0
+        ? ((whatsappRecent - whatsappPrevious) / whatsappPrevious) * 100
+        : whatsappRecent > 0 ? 100 : 0,
+      whatsappByAction: whatsappByAction.map((a) => ({
+        action: a.subject,
+        count: a._count,
+      })),
     },
   };
 }
@@ -933,6 +972,108 @@ export default async function AnalyticsPage() {
               ))}
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Communication Channels */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+              <Phone className="w-5 h-5 text-green-600" />
+              WhatsApp Engagement
+            </h3>
+            <Link href="/admin/email-log/?channel=WHATSAPP" className="text-sm text-amber-600 hover:text-amber-700">
+              View all
+            </Link>
+          </div>
+          <div className="grid grid-cols-3 gap-4 mb-5">
+            <div className="text-center p-3 bg-green-50 rounded-lg">
+              <div className="text-2xl font-bold text-green-700">{metrics.communications.whatsappTotal}</div>
+              <div className="text-xs text-slate-500">Total Clicks</div>
+            </div>
+            <div className="text-center p-3 bg-green-50 rounded-lg">
+              <div className="text-2xl font-bold text-green-700">{metrics.communications.whatsappRecent}</div>
+              <div className="text-xs text-slate-500">Last 30 Days</div>
+            </div>
+            <div className="text-center p-3 bg-green-50 rounded-lg">
+              <div className={`text-2xl font-bold ${metrics.communications.whatsappTrend >= 0 ? "text-green-700" : "text-red-600"}`}>
+                {metrics.communications.whatsappTrend >= 0 ? "+" : ""}{metrics.communications.whatsappTrend.toFixed(0)}%
+              </div>
+              <div className="text-xs text-slate-500">Trend</div>
+            </div>
+          </div>
+          {metrics.communications.whatsappByAction.length > 0 ? (
+            <div className="space-y-2">
+              <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wide">Top Questions</h4>
+              {metrics.communications.whatsappByAction.map((item, i) => {
+                const maxCount = metrics.communications.whatsappByAction[0]?.count || 1;
+                return (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm text-slate-700 truncate">{item.action}</span>
+                        <span className="text-sm font-medium text-slate-900 ml-2">{item.count}</span>
+                      </div>
+                      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-green-500 rounded-full"
+                          style={{ width: `${(item.count / maxCount) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="text-sm text-slate-500">No WhatsApp data yet</p>
+          )}
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+              <Mail className="w-5 h-5 text-blue-600" />
+              Email Delivery
+            </h3>
+            <Link href="/admin/email-log/?channel=EMAIL" className="text-sm text-amber-600 hover:text-amber-700">
+              View all
+            </Link>
+          </div>
+          <div className="grid grid-cols-3 gap-4 mb-5">
+            <div className="text-center p-3 bg-blue-50 rounded-lg">
+              <div className="text-2xl font-bold text-blue-700">{metrics.communications.emailsSent}</div>
+              <div className="text-xs text-slate-500">Delivered</div>
+            </div>
+            <div className="text-center p-3 bg-red-50 rounded-lg">
+              <div className="text-2xl font-bold text-red-600">{metrics.communications.emailsFailed}</div>
+              <div className="text-xs text-slate-500">Failed</div>
+            </div>
+            <div className="text-center p-3 bg-emerald-50 rounded-lg">
+              <div className="text-2xl font-bold text-emerald-700">{metrics.communications.emailSuccessRate.toFixed(1)}%</div>
+              <div className="text-xs text-slate-500">Success Rate</div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-slate-600">Delivery Success</span>
+                <span className="text-sm font-medium text-emerald-600">
+                  {metrics.communications.emailSuccessRate.toFixed(1)}%
+                </span>
+              </div>
+              <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-emerald-500 rounded-full"
+                  style={{ width: `${metrics.communications.emailSuccessRate}%` }}
+                />
+              </div>
+            </div>
+            <div className="pt-3 border-t border-slate-100 text-sm text-slate-500">
+              Total emails processed: {(metrics.communications.emailsSent + metrics.communications.emailsFailed).toLocaleString()}
+            </div>
+          </div>
         </div>
       </div>
 
