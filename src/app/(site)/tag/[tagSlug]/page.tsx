@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { BlogCard } from "@/components/cards/BlogCard";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 interface Props {
   params: Promise<{ tagSlug: string }>;
@@ -92,6 +93,12 @@ export default async function TagPage({ params }: Props) {
 
   return (
     <div>
+      <JsonLd data={generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Blog", url: "/blog/" },
+        { name: `Tag: ${tag.name}`, url: `/tag/${tagSlug}/` },
+      ])} />
+
       {/* Hero */}
       <section className="bg-gradient-to-br from-[var(--primary-dark)] to-[var(--text)] text-white py-16">
         <div className="container mx-auto px-4">
