@@ -6,21 +6,19 @@ export const contentType = "image/png";
 export const size = { width: 180, height: 180 };
 
 export default async function AppleIcon() {
-  // Try to get apple touch icon from database
   let iconUrl: string | null = null;
 
   try {
-    // First try apple touch icon, then fallback to regular favicon
     const settings = await prisma.siteSetting.findMany({
       where: {
-        key: { in: ["site.appleTouchIconUrl", "site.faviconUrl"] },
+        key: { in: ["site.appleTouchIconUrl", "site.logoUrl"] },
       },
     });
 
     const appleIcon = settings.find((s) => s.key === "site.appleTouchIconUrl");
-    const favicon = settings.find((s) => s.key === "site.faviconUrl");
+    const logo = settings.find((s) => s.key === "site.logoUrl");
 
-    iconUrl = appleIcon?.value || favicon?.value || null;
+    iconUrl = appleIcon?.value || logo?.value || null;
   } catch (error) {
     console.error("Failed to fetch apple icon from database:", error);
   }

@@ -6,20 +6,18 @@ export const contentType = "image/png";
 export const size = { width: 32, height: 32 };
 
 export default async function Icon() {
-  // Try to get favicon from database
-  let faviconUrl: string | null = null;
+  let logoUrl: string | null = null;
 
   try {
     const setting = await prisma.siteSetting.findUnique({
-      where: { key: "site.faviconUrl" },
+      where: { key: "site.logoUrl" },
     });
-    faviconUrl = setting?.value || null;
+    logoUrl = setting?.value || null;
   } catch (error) {
-    console.error("Failed to fetch favicon from database:", error);
+    console.error("Failed to fetch logo from database:", error);
   }
 
-  // If we have a favicon URL, redirect to it or use default
-  if (faviconUrl) {
+  if (logoUrl) {
     // Return a simple redirect response by rendering the external image
     return new ImageResponse(
       (
@@ -34,8 +32,8 @@ export default async function Icon() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={faviconUrl}
-            alt="Favicon"
+            src={logoUrl}
+            alt="Logo"
             width={32}
             height={32}
             style={{ objectFit: "contain" }}
