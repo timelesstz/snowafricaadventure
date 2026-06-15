@@ -33,9 +33,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-there-snow-in-africa-mountains",
-    metaTitle: "Does Africa Have Snow? 8 Mountains With Ice",
-    metaDescription: "Yes, Africa has snow year-round on 8 mountains. See Kilimanjaro glaciers, Morocco ski slopes & more, with photos, elevations, and best months to visit.",
-    excerpt: "Africa has snow-capped mountains year-round — from Kilimanjaro's glaciers to Morocco's ski slopes. Discover all 8 peaks with photos and elevations."
+    metaTitle: "Snow in Africa? These 8 Mountains Prove It [Photos]",
+    metaDescription: "Most people assume Africa is all desert. These 8 snow-capped peaks tell a different story — including one you can ski on year-round.",
+    excerpt: "Most people assume Africa is all desert. These 8 snow-capped peaks — from Kilimanjaro's glaciers to Morocco's ski slopes — tell a very different story."
   },
   {
     slug: "best-time-to-climb-mount-kilimanjaro",
@@ -51,9 +51,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "kilimanjaro-vs-everest",
-    metaTitle: "Kilimanjaro vs Everest: $2K vs $30K Compared",
-    metaDescription: "Kilimanjaro costs $2K, takes 7 days, and needs no ropes. Everest costs $30K+ and takes 2 months. Full side-by-side from local Kilimanjaro summit guides.",
-    excerpt: "Kilimanjaro vs Everest compared side-by-side — difficulty, cost, success rates, and experience required. Which mountain should you climb first?"
+    metaTitle: "Kilimanjaro vs Everest: 10 Differences That Matter",
+    metaDescription: "One takes 7 days, the other 2 months. One costs $2K, the other $30K+. Here's what summit guides won't tell you about choosing between them.",
+    excerpt: "Kilimanjaro vs Everest side-by-side: 10 key differences in cost, difficulty, duration, and experience required — from local summit guides."
   },
   {
     slug: "kilimanjaro-group-climbing",
@@ -395,9 +395,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "hunting-strategy-of-the-lions",
-    metaTitle: "How Lions Hunt: 6 Tactics They Use to Kill",
-    metaDescription: "Lions kill only 25% of the time yet rule the savanna. Safari guides reveal 6 coordinated tactics: ambush formations, stampede traps, and night-vision hunts.",
-    excerpt: "Lions succeed only 25% of the time yet dominate Africa. Safari guides explain 6 coordinated hunting tactics from ambush formations to night hunts."
+    metaTitle: "How Lions Hunt: 6 Brutal Tactics [With Video]",
+    metaDescription: "Lions fail 75% of the time — yet nothing survives when the pride coordinates. Safari guides break down 6 kill tactics most tourists never see.",
+    excerpt: "Lions fail 75% of the time yet rule the savanna. Safari guides reveal 6 coordinated kill tactics from ambush formations to night-vision hunts."
   },
   {
     slug: "why-do-zebra-and-wildebeest-migrate-together",
@@ -419,9 +419,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "a-complete-overview-about-aardvark",
-    metaTitle: "Aardvark: 15 Facts Most People Get Wrong",
-    metaDescription: "Aardvarks eat 50,000 termites a night and dig burrows used by 17+ other species. 15 surprising facts with rare photos of Africa's strangest nocturnal mammal.",
-    excerpt: "The aardvark eats 50,000 termites nightly and digs burrows used by 17+ species. Everything you need to know about Africa's strangest nocturnal mammal."
+    metaTitle: "Aardvark Facts: Africa's Strangest Animal [Photos]",
+    metaDescription: "They eat 50,000 termites a night, dig homes for 17+ other species, and vanish before sunrise. Meet the animal most safaris never spot.",
+    excerpt: "The aardvark eats 50,000 termites nightly, digs burrows used by 17+ species, and disappears before dawn. Africa's strangest nocturnal mammal revealed."
   },
   {
     slug: "15-interesting-facts-about-serengeti-great-wildebeest-migration",
@@ -449,9 +449,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "is-lion-hunting-legal-in-africa",
-    metaTitle: "Is Lion Hunting Legal? 2026 Country-by-Country",
-    metaDescription: "Lion trophy hunting is legal in just 6 African countries and banned in 48. See which nations allow it, what it costs ($35K-$75K), and the full debate.",
-    excerpt: "Lion hunting is legal in only 6 African countries and banned in 48. Full country-by-country breakdown of laws, costs, quotas, and the conservation debate."
+    metaTitle: "Is Lion Hunting Legal in Africa? [2026 Update]",
+    metaDescription: "Only 6 of 54 African countries still allow it. See which ones, what a trophy hunt actually costs, and why the debate is far from settled.",
+    excerpt: "Lion trophy hunting is legal in just 6 African countries and banned in 48. Full country-by-country breakdown of laws, costs, and the conservation debate."
   },
   {
     slug: "a-glimpse-on-african-wild-cats",
@@ -597,8 +597,8 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "first-person-to-climb-kilimanjaro",
-    metaTitle: "Who First Climbed Kilimanjaro? (1889 Story)",
-    metaDescription: "Hans Meyer summited Kilimanjaro on October 6, 1889 after 3 failed attempts. The full story, including the local guide Yohani Lauwo history nearly erased.",
+    metaTitle: "First Person to Climb Kilimanjaro: The Hidden Story",
+    metaDescription: "Hans Meyer needed 3 failed attempts and a local guide the world nearly forgot. The real story of Kilimanjaro's 1889 first summit.",
     excerpt: "The first Kilimanjaro summit took 3 failed attempts and a local guide history nearly forgot. The complete story of Hans Meyer's 1889 ascent."
   },
 
@@ -607,14 +607,14 @@ const blogSeoData: BlogSeoData[] = [
   // ============================================
   {
     slug: "tanzania-festival",
-    metaTitle: "Tanzania Festivals 2026: 12 Must-See Events",
-    metaDescription: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts Festival and 9 more. 2026 dates, locations, and tips for planning your Tanzania trip around them.",
-    excerpt: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts — Tanzania's best festivals with 2026 dates, locations, and travel planning tips."
+    metaTitle: "Tanzania Festivals 2026: Dates, Tickets & Tips",
+    metaDescription: "Sauti za Busara, Kilimanjaro Marathon, and 10 more. Complete 2026 calendar with dates, how to get tickets, and which festivals are worth the trip.",
+    excerpt: "Sauti za Busara, Kilimanjaro Marathon, Bagamoyo Arts — Tanzania's best festivals with 2026 dates, ticket info, and travel planning tips."
   },
   {
     slug: "best-tour-operator-in-tanzania",
     metaTitle: "Best Tanzania Tour Operators 2026: How to Choose Wisely",
-    metaDescription: "Find reliable Tanzania tour operators: certifications to check, questions to ask, and red flags to avoid. Expert guide to booking with confidence.",
+    metaDescription: "Find the best tourism company in Tanzania: TATO certifications to check, questions to ask, and red flags to avoid. Expert guide to booking with confidence.",
     excerpt: "Learn how to choose the best Tanzania tour operator - what credentials matter, questions to ask, and how to avoid common pitfalls."
   },
   {
@@ -745,9 +745,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "weather-in-tanzania",
-    metaTitle: "Tanzania Weather by Month: Best & Worst Times to Visit",
-    metaDescription: "Tanzania has 2 dry seasons (Jan-Feb, Jun-Oct) and 2 rainy. Month-by-month breakdown for Serengeti, Zanzibar, Kilimanjaro, and Ngorongoro.",
-    excerpt: "Understand Tanzania's diverse climate - from the humid coast to cool highlands and safari country, with tips for packing and planning."
+    metaTitle: "Tanzania Weather: Coast, Safari & Mountain Guide",
+    metaDescription: "Month-by-month Tanzania weather for coastal areas, safari parks, and Kilimanjaro. Rainfall, temperatures, and the best windows — from Arusha-based guides.",
+    excerpt: "Month-by-month Tanzania weather guide covering coastal areas, safari parks, and Kilimanjaro. Rainfall data, temperatures, and the best travel windows."
   },
   {
     slug: "a-partnership-between-snow-africa-adventure-kilimanjaro-porters-assistance-project",

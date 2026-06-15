@@ -835,7 +835,11 @@ const blogContentData: BlogContentData[] = [
 
 <h3>Coastal Zone</h3>
 
-<p>The Indian Ocean coast and Zanzibar experience tropical maritime climate—hot and humid year-round with temperatures typically ranging from 25-33°C (77-91°F). Sea breezes moderate the heat, particularly on Zanzibar. Rainfall concentrates in two seasons: heavy "long rains" from March through May, and lighter "short rains" in November.</p>
+<p>The Indian Ocean coast and Zanzibar experience tropical maritime climate — hot and humid year-round with temperatures typically ranging from 25–33°C (77–91°F). Sea breezes moderate the heat, particularly on Zanzibar and Mafia Island. Rainfall concentrates in two seasons: heavy "long rains" from March through May, and lighter "short rains" in November–December.</p>
+
+<p>Coastal areas in Tanzania experience two distinct monsoon seasons that shape weather patterns throughout the year. The <strong>Kaskazi</strong> (northeast monsoon, December–March) brings warmer temperatures with average highs of 32–34°C and higher humidity, while the <strong>Kusi</strong> (southeast monsoon, June–October) brings cooler, drier conditions with average highs of 28–30°C and comfortable trade winds. The Kusi period is widely considered the best window for coastal holidays — clear skies, low humidity, and Indian Ocean water temperatures of 25–27°C create ideal conditions for diving, snorkelling, and beach activities.</p>
+
+<p>Annual rainfall along the coast varies from 1,000 mm in Dar es Salaam to over 1,600 mm in Zanzibar's south. April is the wettest month (averaging 250–300 mm), when some beach resorts close or offer steep discounts. Humidity remains above 70% year-round but drops noticeably during the Kusi months. Tropical cyclones are rare in Tanzania's waters, though the northern Mozambique Channel can produce storm systems that occasionally bring heavy swells to the southern coast between January and April.</p>
 
 <h3>Northern Safari Circuit</h3>
 
@@ -953,11 +957,55 @@ const blogContentData: BlogContentData[] = [
 
 <p>Kilimanjaro climbers should prioritize drier months for best summit conditions, though the mountain can be climbed year-round with appropriate expectations.</p>
 
+<h2>Coastal Tanzania Weather by Month</h2>
+
+<p>The following month-by-month breakdown covers what kind of weather the coastal areas in Tanzania experience, including Dar es Salaam, Zanzibar, Mafia Island, and the Pangani coast. Temperatures are daytime averages; rainfall is monthly totals.</p>
+
+<table>
+<thead><tr><th>Month</th><th>Avg High</th><th>Rainfall</th><th>Humidity</th><th>Sea Temp</th><th>Conditions</th></tr></thead>
+<tbody>
+<tr><td>January</td><td>32°C (90°F)</td><td>65 mm</td><td>75%</td><td>28°C</td><td>Hot, occasional showers, good for diving</td></tr>
+<tr><td>February</td><td>33°C (91°F)</td><td>55 mm</td><td>73%</td><td>29°C</td><td>Hottest month, mostly dry, excellent beach weather</td></tr>
+<tr><td>March</td><td>32°C (90°F)</td><td>150 mm</td><td>80%</td><td>29°C</td><td>Long rains begin, afternoon storms, warm seas</td></tr>
+<tr><td>April</td><td>30°C (86°F)</td><td>280 mm</td><td>85%</td><td>28°C</td><td>Heaviest rainfall, some resorts close, overcast</td></tr>
+<tr><td>May</td><td>29°C (84°F)</td><td>190 mm</td><td>82%</td><td>27°C</td><td>Rains easing, still wet, budget-friendly prices</td></tr>
+<tr><td>June</td><td>29°C (84°F)</td><td>45 mm</td><td>72%</td><td>26°C</td><td>Kusi winds begin, dry and pleasant</td></tr>
+<tr><td>July</td><td>28°C (82°F)</td><td>30 mm</td><td>68%</td><td>25°C</td><td>Coolest month, low humidity, ideal for coast</td></tr>
+<tr><td>August</td><td>29°C (84°F)</td><td>25 mm</td><td>67%</td><td>25°C</td><td>Driest month, perfect beach and diving conditions</td></tr>
+<tr><td>September</td><td>30°C (86°F)</td><td>30 mm</td><td>68%</td><td>26°C</td><td>Warming up, still dry, excellent visibility</td></tr>
+<tr><td>October</td><td>31°C (88°F)</td><td>70 mm</td><td>72%</td><td>27°C</td><td>Short rains approaching, warm and mostly dry</td></tr>
+<tr><td>November</td><td>31°C (88°F)</td><td>130 mm</td><td>77%</td><td>28°C</td><td>Short rains, afternoon showers, mornings clear</td></tr>
+<tr><td>December</td><td>32°C (90°F)</td><td>110 mm</td><td>76%</td><td>28°C</td><td>Rains easing, holiday season, busy beaches</td></tr>
+</tbody>
+</table>
+
+<p>The best months for coastal Tanzania beach holidays are <strong>June through October</strong>, when the southeast monsoon (Kusi) delivers dry conditions, comfortable temperatures, and excellent underwater visibility for diving and snorkelling. January and February are also good — hotter but mostly dry. Avoid April unless you want empty beaches at heavily discounted rates and don't mind daily rain.</p>
+
 <h2>Planning Around Weather</h2>
 
 <p>Tanzania rewards visitors year-round, but understanding weather patterns enables informed planning that aligns conditions with specific interests. Rather than seeking the single "best" time, identify what matters most for your particular journey and time accordingly.</p>
 
-<p>Contact us to discuss optimal timing for your Tanzania interests. We'll recommend specific windows based on your priorities, explain current conditions and forecasts, and help structure itineraries that maximize weather-dependent opportunities.</p>`
+<p>Contact us to discuss optimal timing for your Tanzania interests. We'll recommend specific windows based on your priorities, explain current conditions and forecasts, and help structure itineraries that maximize weather-dependent opportunities.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What kind of weather do the coastal areas in Tanzania experience?</h3>
+<p>Coastal areas in Tanzania experience a tropical maritime climate with hot, humid conditions year-round. Temperatures range from 25–34°C (77–93°F), with two monsoon seasons shaping the weather: the Kaskazi (northeast monsoon, December–March) brings heat and humidity, while the Kusi (southeast monsoon, June–October) brings cooler, drier trade winds. Rainfall averages 1,000–1,600 mm annually, concentrated in the long rains (March–May) and short rains (November–December).</p>
+
+<h3>When is the best time to visit coastal Tanzania?</h3>
+<p>June through October offers the best coastal weather — dry skies, comfortable temperatures around 28–30°C, low humidity, and excellent ocean visibility for diving and snorkelling. January and February are also good for beach holidays, though hotter and more humid. April is the worst month for coastal visits due to heavy rainfall averaging 250–300 mm.</p>
+
+<h3>Does it rain every day during Tanzania's wet season?</h3>
+<p>No. Even during the heaviest rains in March–May, rainfall typically arrives as intense afternoon thunderstorms lasting 1–3 hours, with mornings often clear and sunny. The "long rains" don't mean continuous rain — rather, expect daily afternoon downpours with pleasant mornings. The short rains (November–December) are even lighter and more intermittent.</p>
+
+<h3>What is the water temperature in Zanzibar?</h3>
+<p>Indian Ocean water temperatures around Zanzibar range from 25°C (77°F) in July–August to 29°C (84°F) in February–March. These warm temperatures make Zanzibar suitable for swimming and water sports year-round. Diving visibility is best from October through March, reaching 20–40 metres on good days.</p>
+
+<h3>Is Tanzania affected by tropical cyclones?</h3>
+<p>Tanzania's coast rarely experiences direct cyclone hits. However, the northern Mozambique Channel can produce tropical storm systems between January and April that occasionally bring heavy swells and increased rainfall to the southern Tanzanian coast. Zanzibar and the northern coast are largely sheltered from these systems.</p>
+
+<h3>How does weather differ between Zanzibar and the mainland coast?</h3>
+<p>Zanzibar receives slightly more annual rainfall (up to 1,600 mm) than Dar es Salaam (around 1,000 mm), and its island geography means stronger sea breezes that moderate temperatures. The southeast monsoon (Kusi) affects Zanzibar more noticeably, creating cooler conditions from June through October. Mainland coastal cities like Dar es Salaam tend to be slightly hotter and more humid, with less wind relief.</p>`
   },
   {
     slug: "hadzabe-datoga-cultural-tours",

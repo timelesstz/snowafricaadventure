@@ -42,6 +42,13 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // WordPress admin panel → Next.js admin
+      {
+        source: "/wp-admin/:path*",
+        destination: "/admin/login/",
+        permanent: true,
+      },
+
       // Redirect old WordPress image paths to R2
       {
         source: "/wp-content/uploads/:path*",

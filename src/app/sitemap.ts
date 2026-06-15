@@ -16,6 +16,8 @@ const RESERVED_SLUGS = new Set([
   "kilimanjaro-join-group-departures",
   "tailor-made-safari",
   "best-route-to-climb-kilimanjaro",
+  "best-tanzania-tour-operator",
+  "best-kilimanjaro-tour-operators",
   "our-guides",
   "climbing-kilimanjaro",
   "best-time-to-climb-kilimanjaro",
@@ -190,6 +192,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/best-tanzania-tour-operator/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/best-kilimanjaro-tour-operators/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/best-route-to-climb-kilimanjaro/`,

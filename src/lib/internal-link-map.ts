@@ -90,6 +90,12 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     priority: 3,
   });
 
+  entries.push({
+    phrase: "Tanzania weather",
+    href: "/weather-in-tanzania/",
+    priority: 3,
+  });
+
   // Sort by phrase length descending (longest match first)
   entries.sort((a, b) => b.phrase.length - a.phrase.length);
 

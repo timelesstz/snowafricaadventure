@@ -17,9 +17,9 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
-  title: "How High is Kilimanjaro? 19,341 Feet (5,895m)",
+  title: "Kilimanjaro Height: 5 Zones From Base to Summit",
   description:
-    "Kilimanjaro stands at 5,895 metres (19,341 ft), making it Africa's tallest peak. Summit points, 5 climate zones, and how to climb it — all explained here.",
+    "Kilimanjaro is 19,341 ft (5,895m) — but the climb passes through 5 wildly different worlds. See what each altitude zone looks and feels like.",
   url: "/mount-kilimanjaro-height/",
   image:
     "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
