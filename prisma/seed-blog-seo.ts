@@ -597,9 +597,9 @@ const blogSeoData: BlogSeoData[] = [
   },
   {
     slug: "first-person-to-climb-kilimanjaro",
-    metaTitle: "First Person to Climb Kilimanjaro: The Hidden Story",
-    metaDescription: "Hans Meyer needed 3 failed attempts and a local guide the world nearly forgot. The real story of Kilimanjaro's 1889 first summit.",
-    excerpt: "The first Kilimanjaro summit took 3 failed attempts and a local guide history nearly forgot. The complete story of Hans Meyer's 1889 ascent."
+    metaTitle: "First Person to Climb Kilimanjaro: The Complete History (1889-Today)",
+    metaDescription: "Hans Meyer needed 3 failed attempts, a kidnapping, and 30,000 marks to summit Kilimanjaro in 1889. The true story — including the guide controversy historians still debate.",
+    excerpt: "On October 6, 1889, Hans Meyer and Ludwig Purtscheller stood on the highest point in Africa. Their summit came after two failed expeditions, a kidnapping, and years of obsession — and who really guided them there is still debated."
   },
 
   // ============================================

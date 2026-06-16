@@ -598,7 +598,7 @@ export default async function TrekkingPage() {
                   Mount Kilimanjaro stands at <strong className="text-[var(--text)]">5,895 m (19,341 ft)</strong> as
                   the highest peak in Africa and the tallest free-standing mountain in the world. Located
                   in northeastern Tanzania near the town of Moshi, it is a dormant stratovolcano and one
-                  of the Seven Summits. Unlike most peaks of comparable height, Kilimanjaro requires no
+                  of the Seven Summits. Its <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">glaciers and snow fields</Link> make it one of only three African mountains with permanent ice. Unlike most peaks of comparable height, Kilimanjaro requires no
                   technical climbing skills — making it accessible to determined trekkers with proper
                   preparation.
                 </p>

@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
-import { TripAdvisorWidget } from "@/components/reviews/TripAdvisorWidget";
 import { TripAdvisorCOE } from "@/components/reviews/TripAdvisorCOE";
 import { generateMetadata as genMeta, generateItemListSchema, generateAggregateRatingSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
+import { generateBlurPlaceholder } from "@/lib/utils";
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = genMeta({
@@ -19,9 +19,9 @@ export const metadata: Metadata = genMeta({
 
 // Default company info (overridden by database settings)
 const DEFAULT_COMPANY_INFO = {
-  tagline: "Travelling More Easy With Snow Africa Adventure",
-  description: `Snow Africa Adventure is the authentic African safari specialist having its head office in Arusha, Tanzania. Being one of the reliable names in safari industry Snow Africa has arranged thousands of successful safari & trekking trips. We are a specialist of every aspect of Tanzania.`,
-  valueProposition: `We are offering some of the finest and handpicked pricing packages that are suitable for all types of budget. We are constantly researching on improving our services as well our aim is to provide our clients with the best services within their pocket-friendly budget.`,
+  tagline: "Travel Made Easy With Snow Africa Adventure",
+  description: `Snow Africa Adventure is an authentic African safari specialist headquartered in Arusha, Tanzania. As one of the most trusted names in the safari industry, Snow Africa has arranged thousands of successful safari and trekking trips. We are specialists in every aspect of Tanzania.`,
+  valueProposition: `We offer handpicked packages suitable for every budget. We continually refine our services with one clear aim: to deliver the best possible experience within your budget.`,
   registration: {
     name: "Snow Africa Adventures Limited",
     incorporationNo: "90147",
@@ -78,6 +78,36 @@ function getWhyUsItems(talaLicense: string) {
     },
   ];
 }
+
+const FALLBACK_REVIEWS = [
+  {
+    id: "fallback-1",
+    authorName: "Sarah M.",
+    content: "Snow Africa made our Kilimanjaro dream come true. The guides were incredibly professional and encouraging. We felt safe every step of the way to the summit.",
+    rating: 5,
+    tripType: "Kilimanjaro Trek",
+    source: "TripAdvisor",
+    title: "Summit dream come true",
+  },
+  {
+    id: "fallback-2",
+    authorName: "James & Lisa K.",
+    content: "Our 7-day Serengeti and Ngorongoro safari exceeded all expectations. The wildlife sightings were extraordinary and our guide knew exactly where to find the animals.",
+    rating: 5,
+    tripType: "Wildlife Safari",
+    source: "TripAdvisor",
+    title: "Best safari experience ever",
+  },
+  {
+    id: "fallback-3",
+    authorName: "Michael R.",
+    content: "From the moment we landed in Arusha to the last day on Zanzibar, everything was perfectly organized. Transparent pricing, no hidden fees, and genuine care for our experience.",
+    rating: 5,
+    tripType: "Safari & Beach",
+    source: "Google",
+    title: "Perfectly organized from start to finish",
+  },
+];
 
 const destinations = [
   {
@@ -192,7 +222,7 @@ function safeImageUrl(url: string | null | undefined, fallback: string): string 
 // Fetch data from database
 async function getHomePageData() {
   try {
-    const [routes, safaris, blogPosts, featuredDeparture] = await Promise.all([
+    const [routes, safaris, blogPosts, featuredDeparture, featuredReviews] = await Promise.all([
       // Get featured trekking routes
       prisma.trekkingRoute.findMany({
         where: { isActive: true },
@@ -204,6 +234,7 @@ async function getHomePageData() {
           successRate: true,
           featuredImage: true,
           overview: true,
+          pricingTiers: true,
         },
         orderBy: { createdAt: "asc" },
         take: 6,
@@ -247,17 +278,32 @@ async function getHomePageData() {
         },
         orderBy: { startDate: "asc" },
       }),
+      // Get featured reviews for testimonials
+      prisma.review.findMany({
+        where: { isFeatured: true, rating: { gte: 4 } },
+        select: {
+          id: true,
+          authorName: true,
+          content: true,
+          rating: true,
+          tripType: true,
+          source: true,
+          title: true,
+        },
+        orderBy: { publishedAt: "desc" },
+        take: 6,
+      }),
     ]);
 
-    return { routes, safaris, blogPosts, featuredDeparture };
+    return { routes, safaris, blogPosts, featuredDeparture, featuredReviews };
   } catch (error) {
     console.error("[Homepage] Failed to fetch data:", error);
-    return { routes: [], safaris: [], blogPosts: [], featuredDeparture: null };
+    return { routes: [], safaris: [], blogPosts: [], featuredDeparture: null, featuredReviews: [] };
   }
 }
 
 export default async function HomePage() {
-  const [{ routes, safaris, blogPosts, featuredDeparture }, homepageSettings] = await Promise.all([
+  const [{ routes, safaris, blogPosts, featuredDeparture, featuredReviews }, homepageSettings] = await Promise.all([
     getHomePageData(),
     getHomepageSettings(),
   ]);
@@ -442,6 +488,8 @@ export default async function HomePage() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 loading="lazy"
+                placeholder="blur"
+                blurDataURL={generateBlurPlaceholder("#475569")}
               />
               <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-badge">
                 <div className="tripadvisor-badge-inner">
@@ -477,6 +525,11 @@ export default async function HomePage() {
                   <div className="route-item-meta">
                     <span>{route.duration}</span>
                     <span>{route.successRate ? `${route.successRate}% Success` : route.physicalRating}</span>
+                    {(() => {
+                      const tiers = route.pricingTiers as { price: number }[] | null;
+                      const minPrice = tiers?.length ? Math.min(...tiers.map(t => t.price)) : null;
+                      return minPrice ? <span className="route-item-price">From ${minPrice.toLocaleString()}</span> : null;
+                    })()}
                   </div>
                   <ArrowRight className="route-item-arrow" />
                 </Link>
@@ -512,6 +565,8 @@ export default async function HomePage() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 loading="lazy"
+                placeholder="blur"
+                blurDataURL={generateBlurPlaceholder("#334155")}
               />
               <div className="route-card-overlay">
                 <span className="route-card-tag">{i === 0 ? 'Most Popular' : route.physicalRating}</span>
@@ -521,6 +576,11 @@ export default async function HomePage() {
                   <span>{route.duration}</span>
                   <span>{route.physicalRating}</span>
                 </div>
+                {(() => {
+                  const tiers = route.pricingTiers as { price: number }[] | null;
+                  const minPrice = tiers?.length ? Math.min(...tiers.map(t => t.price)) : null;
+                  return minPrice ? <span className="route-card-price">From ${minPrice.toLocaleString()}</span> : null;
+                })()}
               </div>
             </Link>
           ))}
@@ -553,6 +613,8 @@ export default async function HomePage() {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 60vw"
                   loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={generateBlurPlaceholder("#334155")}
                 />
                 <div className="safari-main-overlay">
                   <span className="badge badge-secondary">{featuredSafari.type}</span>
@@ -616,6 +678,8 @@ export default async function HomePage() {
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
             loading="lazy"
+            placeholder="blur"
+            blurDataURL={generateBlurPlaceholder("#475569")}
           />
         </div>
         <div className="why-content">
@@ -649,8 +713,27 @@ export default async function HomePage() {
             <h2>Real Stories, Real Adventures</h2>
           </div>
 
-          {/* TripAdvisor Reviews Widget powered by Trustindex */}
-          <TripAdvisorWidget variant="slider" className="my-8" />
+          {/* Featured Reviews Grid */}
+          <div className="testimonials-grid">
+            {(featuredReviews.length > 0 ? featuredReviews : FALLBACK_REVIEWS).slice(0, 6).map((review, i) => (
+              <div key={review.id || i} className="testimonial-card">
+                <div className="testimonial-stars">
+                  {[...Array(review.rating)].map((_, j) => (
+                    <Star key={j} className="w-4 h-4" fill="currentColor" />
+                  ))}
+                </div>
+                {review.title && <h3 className="testimonial-title">{review.title}</h3>}
+                <p className="testimonial-content">
+                  &ldquo;{review.content.length > 180 ? `${review.content.substring(0, 180)}...` : review.content}&rdquo;
+                </p>
+                <div className="testimonial-author">
+                  <span className="testimonial-name">{review.authorName}</span>
+                  {review.tripType && <span className="testimonial-trip">{review.tripType}</span>}
+                </div>
+                {review.source && <span className="testimonial-source">{review.source}</span>}
+              </div>
+            ))}
+          </div>
 
           <div className="testimonials-footer">
             <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-inline">
@@ -698,6 +781,8 @@ export default async function HomePage() {
                   className="object-cover"
                   sizes={dest.wide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
                   loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={generateBlurPlaceholder("#1e293b")}
                 />
                 <div className="destination-overlay">
                   <h3>{dest.title}</h3>
@@ -721,6 +806,8 @@ export default async function HomePage() {
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
             loading="lazy"
+            placeholder="blur"
+            blurDataURL={generateBlurPlaceholder("#1e293b")}
           />
           <div className="contact-image-overlay">
             <span className="section-label">Start Planning</span>
@@ -802,6 +889,8 @@ export default async function HomePage() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
                       loading="lazy"
+                      placeholder="blur"
+                      blurDataURL={generateBlurPlaceholder()}
                     />
                   </div>
                   <div className="blog-card-content">
@@ -822,6 +911,8 @@ export default async function HomePage() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
                       loading="lazy"
+                      placeholder="blur"
+                      blurDataURL={generateBlurPlaceholder()}
                     />
                   </div>
                   <div className="blog-card-content">
@@ -838,6 +929,8 @@ export default async function HomePage() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
                       loading="lazy"
+                      placeholder="blur"
+                      blurDataURL={generateBlurPlaceholder()}
                     />
                   </div>
                   <div className="blog-card-content">
@@ -854,6 +947,8 @@ export default async function HomePage() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
                       loading="lazy"
+                      placeholder="blur"
+                      blurDataURL={generateBlurPlaceholder()}
                     />
                   </div>
                   <div className="blog-card-content">

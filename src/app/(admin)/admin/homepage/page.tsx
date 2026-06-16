@@ -23,9 +23,9 @@ const DEFAULT_SETTINGS = {
   "homepage.stats.ratingLabel": "TripAdvisor Rating",
 
   // Company Info
-  "homepage.company.tagline": "Travelling More Easy With Snow Africa Adventure",
-  "homepage.company.description": "Snow Africa Adventure is the authentic African safari specialist having its head office in Arusha, Tanzania. Being one of the reliable names in safari industry Snow Africa has arranged thousands of successful safari & trekking trips. We are a specialist of every aspect of Tanzania.",
-  "homepage.company.valueProposition": "We are offering some of the finest and handpicked pricing packages that are suitable for all types of budget. We are constantly researching on improving our services as well our aim is to provide our clients with the best services within their pocket-friendly budget.",
+  "homepage.company.tagline": "Travel Made Easy With Snow Africa Adventure",
+  "homepage.company.description": "Snow Africa Adventure is an authentic African safari specialist headquartered in Arusha, Tanzania. As one of the most trusted names in the safari industry, Snow Africa has arranged thousands of successful safari and trekking trips. We are specialists in every aspect of Tanzania.",
+  "homepage.company.valueProposition": "We offer handpicked packages suitable for every budget. We continually refine our services with one clear aim: to deliver the best possible experience within your budget.",
 
   // Registration Details
   "homepage.registration.name": "Snow Africa Adventures Limited",

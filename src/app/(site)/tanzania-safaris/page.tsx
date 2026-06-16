@@ -45,9 +45,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = genMeta({
-  title: "Tanzania Safari Packages 2026-2027",
+  title: "Tanzania Safaris: Compare Packages & Prices (2026-2027)",
   description:
-    "Explore Tanzania's incredible wildlife with our safari packages. From budget camping to luxury lodges, experience the Serengeti, Ngorongoro Crater, Tarangire and more. Book your dream African safari today.",
+    "Compare Tanzania safari packages from $250/day. Serengeti, Ngorongoro Crater, Tarangire — camping to luxury lodges. Great Migration dates, Big Five parks, honest pricing from a local operator.",
   url: "/tanzania-safaris/",
 });
 
@@ -420,6 +420,34 @@ export default async function SafarisPage() {
                   <ArrowRight className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
                 </a>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SEO Intro — targets "Tanzania safaris" head term */}
+      <section className="py-12 bg-white border-b border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
+              Tanzania Safaris: Why This Is Africa&apos;s #1 Safari Destination
+            </h2>
+            <div className="space-y-4 text-[var(--text)] leading-[1.8]">
+              <p>
+                Tanzania safaris offer something no other African destination can match: the <Link href="/tanzania-destinations/serengeti-national-park/" className="text-[var(--secondary)] hover:underline">Serengeti&apos;s Great Migration</Link> — 1.5 million wildebeest, 400,000 zebra, and 200,000 gazelle moving across 14,763 square kilometres of endless savannah in a cycle that has repeated for millennia. Add the <Link href="/tanzania-destinations/ngorongoro-crater/" className="text-[var(--secondary)] hover:underline">Ngorongoro Crater</Link> (the world&apos;s largest intact volcanic caldera, home to 25,000 large mammals including the endangered black rhino), and you have a wildlife experience that no competitor in Kenya, Botswana, or South Africa can replicate.
+              </p>
+              <p>
+                Tanzania protects nearly a third of its land area — 22 national parks, 33 game reserves, and 44 game-controlled areas. The Northern Circuit alone (<Link href="/tanzania-destinations/serengeti-national-park/" className="text-[var(--secondary)] hover:underline">Serengeti</Link>, <Link href="/tanzania-destinations/ngorongoro-crater/" className="text-[var(--secondary)] hover:underline">Ngorongoro</Link>, <Link href="/tanzania-destinations/tarangire-national-park/" className="text-[var(--secondary)] hover:underline">Tarangire</Link>, and <Link href="/tanzania-destinations/lake-manyara-national-park/" className="text-[var(--secondary)] hover:underline">Lake Manyara</Link>) is home to the highest density of large mammals anywhere on Earth. On a 5-7 day Tanzania safari covering these parks, sighting all of the Big Five — lion, leopard, elephant, buffalo, and rhino — is a realistic expectation, not a marketing promise.
+              </p>
+              <p>
+                Safari styles range from <Link href="/tanzania-camping-safaris/" className="text-[var(--secondary)] hover:underline">budget camping</Link> at $250/day (quality tents at public campsites, campfire meals under the stars) to <Link href="/luxury-safaris-tanzania/" className="text-[var(--secondary)] hover:underline">luxury tented camps</Link> at $500-$800+/day with gourmet cuisine and private guides. Most travellers choose <Link href="/tanzania-lodge-safaris/" className="text-[var(--secondary)] hover:underline">mid-range lodge safaris</Link> at $350-$500/day — comfortable rooms with en-suite bathrooms, full-board dining, and often a swimming pool for the midday heat. All styles include the same parks, the same game drives, and the same wildlife — the difference is where you sleep and eat.
+              </p>
+              <p>
+                As a 100% locally owned operator based in Arusha, we run every safari with our own vehicles and guides — no subcontracting. Our guides are TATO-certified naturalists who have spent years learning every park&apos;s rhythms: where the leopards rest in the Seronera Valley, which river crossing points the wildebeest favour in August, and where the tree-climbing lions of Manyara actually climb. That local knowledge is the difference between a safari where you tick the boxes and one where you see things other vehicles miss.
+              </p>
+              <p>
+                Tanzania safaris pair naturally with <Link href="/climbing-kilimanjaro/" className="text-[var(--secondary)] hover:underline">climbing Kilimanjaro</Link> (Africa&apos;s highest peak sits just 3 hours from the safari circuit) or a <Link href="/zanzibar/" className="text-[var(--secondary)] hover:underline">Zanzibar beach holiday</Link> (direct flights from the Serengeti). Browse our packages below, filter by style and duration, and request a free quote — we reply with a detailed, priced itinerary within 24 hours.
+              </p>
             </div>
           </div>
         </div>

@@ -1371,7 +1371,8 @@ export default function KilimanjaroStatisticsPage() {
                 <p className="text-xs text-white/60">
                   From 12.1 km² in 1912 to approximately 1.76 km² in 2022.
                   Scientists project the remaining glaciers will disappear
-                  entirely between 2030 and 2040.
+                  entirely between 2030 and 2040. Learn more about{" "}
+                  <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">Africa&apos;s snow-capped mountains and disappearing glaciers</Link>.
                 </p>
               </div>
 

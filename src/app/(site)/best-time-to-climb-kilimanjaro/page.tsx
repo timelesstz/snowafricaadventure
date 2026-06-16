@@ -489,7 +489,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <div className="mt-6 flex items-start gap-3 bg-white/5 rounded-xl p-4 border border-white/10">
               <Thermometer className="w-5 h-5 text-[var(--secondary)] shrink-0 mt-0.5" />
               <p className="text-white/70 text-sm">
-                Summit night temperatures can reach -20°C in winter months (June–August). A sleeping bag rated to at least -15°C is essential for all climbers regardless of season.
+                Summit night temperatures can reach -20°C in winter months (June–August). A sleeping bag rated to at least -15°C is essential for all climbers regardless of season. Kilimanjaro&apos;s <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">glaciers and snow fields</Link> are visible year-round but fresh snowfall is most common during the rainy seasons.
               </p>
             </div>
           </div>

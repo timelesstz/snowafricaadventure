@@ -21,9 +21,9 @@ import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchem
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
-  title: "Climbing Kilimanjaro Guide 2026",
+  title: "Climbing Kilimanjaro: The Complete Guide (2026)",
   description:
-    "Everything you need to know about climbing Kilimanjaro: 6 routes, training tips, gear requirements, best seasons, success rates, and costs. Plan your Kilimanjaro climb with Snow Africa Adventure — 93% summit success rate.",
+    "Plan your Kilimanjaro climb: 6 routes compared, real costs ($1,850–$3,200), 12-week training plan, packing list, summit night breakdown, and how to choose the right route. 93% success rate with Snow Africa.",
   url: "/climbing-kilimanjaro/",
 });
 
@@ -166,12 +166,12 @@ export default async function ClimbingKilimanjaroPage() {
           ]),
           generateFAQSchema(kilimanjaroFaqs),
           generateArticleSchema({
-            title: "Climbing Kilimanjaro: Complete Guide to Routes, Costs & Training",
-            description: "Everything you need to know about climbing Kilimanjaro: 6 routes, training tips, gear requirements, best seasons, success rates, and costs.",
+            title: "Climbing Kilimanjaro: The Complete Guide (2026)",
+            description: "Plan your Kilimanjaro climb: 6 routes compared, real costs ($1,850–$3,200), 12-week training plan, packing list, summit night breakdown, and how to choose the right route.",
             url: "/climbing-kilimanjaro/",
             image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2024-07-15",
-            modifiedTime: "2026-03-01",
+            modifiedTime: "2026-06-16",
             author: "Emmanuel Moshi",
             authorRole: "Founder & Lead Guide",
             authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
@@ -304,8 +304,116 @@ export default async function ClimbingKilimanjaroPage() {
         </div>
       </section>
 
-      {/* Routes Table */}
+      {/* What You Need to Know — prose content for SEO depth */}
       <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto prose prose-lg">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 not-prose">
+              Essential Guide
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 not-prose">
+              What You Need to Know Before Climbing Kilimanjaro
+            </h2>
+
+            <p className="text-[var(--text)] leading-[1.8]">
+              Kilimanjaro stands 5,895 metres above sea level in northeastern Tanzania, inside <Link href="/tanzania-destinations/kilimanjaro-national-park/" className="text-[var(--secondary)] hover:underline">Kilimanjaro National Park</Link> — a UNESCO World Heritage Site. It is the highest mountain in Africa and the tallest free-standing mountain on Earth, meaning it rises directly from the surrounding plains rather than being part of a mountain range. The summit, Uhuru Peak, sits on the rim of Kibo, an ancient volcanic crater that last erupted roughly 360,000 years ago.
+            </p>
+
+            <p className="text-[var(--text)] leading-[1.8]">
+              What makes Kilimanjaro extraordinary for trekkers is that no technical climbing skills are required. There are no ropes, harnesses, crampons, or ice axes needed on any of the standard routes. You walk to the top. The challenge is altitude — at 5,895 metres, oxygen levels are roughly half of what they are at sea level, and your body must adapt progressively over several days to function in thin air. This is why route selection and acclimatization strategy matter more than raw fitness.
+            </p>
+
+            <h3 className="font-heading text-2xl font-bold mt-10 mb-4 not-prose">
+              The Five Climate Zones
+            </h3>
+            <p className="text-[var(--text)] leading-[1.8]">
+              One of Kilimanjaro&apos;s most remarkable features is the range of ecosystems you pass through on the way to the summit. The mountain&apos;s massive elevation gain — from around 1,800 metres at the gate to 5,895 metres at the peak — creates five distinct climate zones, each with its own vegetation, temperature range, and character:
+            </p>
+            <ol className="text-[var(--text)] leading-[1.8] space-y-3">
+              <li><strong>Cultivation Zone (800–1,800m):</strong> Coffee farms, banana plantations, and villages surround the mountain&apos;s base. You drive through this zone on the way to the trailhead.</li>
+              <li><strong>Montane Rainforest (1,800–2,800m):</strong> Dense, humid forest with towering trees, hanging moss, colobus monkeys, and tropical birds. The air is warm and wet. Most trekkers hike through this zone on day 1.</li>
+              <li><strong>Heath and Moorland (2,800–4,000m):</strong> Giant heather gives way to an open landscape of tussock grass, giant lobelias, and senecios — bizarre plants that look prehistoric. Temperatures drop noticeably.</li>
+              <li><strong>Alpine Desert (4,000–5,000m):</strong> Almost no vegetation survives here. The landscape is lunar — scree fields, volcanic rock, and glaciers visible above. Nights are freezing and the air is thin.</li>
+              <li><strong>Arctic Summit Zone (5,000–5,895m):</strong> Ice, rock, and snow. <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">Kilimanjaro&apos;s glaciers</Link> cling to the crater rim, remnants of an ice cap that once covered the entire summit. Scientists estimate these glaciers will disappear entirely by 2040–2050.</li>
+            </ol>
+
+            <h3 className="font-heading text-2xl font-bold mt-10 mb-4 not-prose">
+              How Much Does It Cost to Climb Kilimanjaro?
+            </h3>
+            <p className="text-[var(--text)] leading-[1.8]">
+              A Kilimanjaro climb costs between $1,850 and $3,200+ per person depending on route, duration, group size, and operator quality. Here is what drives the cost:
+            </p>
+            <ul className="text-[var(--text)] leading-[1.8] space-y-2">
+              <li><strong>KINAPA park fees:</strong> $70 per day entrance + $60 per night camping + rescue fee. For a 7-day climb, park fees alone total approximately $960 per person — the single largest cost component.</li>
+              <li><strong>Guide and porter wages:</strong> A typical team for 2 climbers includes 1 lead guide, 1 assistant guide, a cook, and 6-8 porters. Ethical operators pay fair wages above KINAPA minimums.</li>
+              <li><strong>Equipment:</strong> Tents, dining tent, tables, chairs, cooking equipment, emergency oxygen cylinders, pulse oximeters, and communication devices.</li>
+              <li><strong>Meals and water:</strong> 3 meals per day on the mountain plus snacks, tea, and water purification.</li>
+              <li><strong>Transport and accommodation:</strong> Airport transfers, hotel nights in Moshi or Arusha before and after the climb.</li>
+            </ul>
+            <p className="text-[var(--text)] leading-[1.8]">
+              Our <Link href="/kilimanjaro-prices/" className="text-[var(--secondary)] hover:underline">Kilimanjaro pricing page</Link> breaks down exact costs by route and group size. Solo travellers pay more (because fixed costs like transport and guide wages are not shared), while groups of 4+ receive meaningful discounts.
+            </p>
+
+            <h3 className="font-heading text-2xl font-bold mt-10 mb-4 not-prose">
+              Summit Night: What Actually Happens
+            </h3>
+            <p className="text-[var(--text)] leading-[1.8]">
+              Summit night is the defining experience of climbing Kilimanjaro — and the part that most first-timers underestimate. You leave base camp (Barafu or Kibo Hut, depending on your route) between 11 PM and midnight, climbing in complete darkness by headlamp.
+            </p>
+            <p className="text-[var(--text)] leading-[1.8]">
+              The temperature at departure is typically -10°C to -20°C. The trail ascends through loose volcanic scree in a series of switchbacks, and the thin air at 4,700m+ means every step requires deliberate effort. Your guide sets a very slow, rhythmic pace — slower than feels natural — because rushing at altitude is the fastest way to exhaust yourself or trigger altitude sickness. Most climbers describe this section as mentally harder than physically hard. The darkness, cold, and fatigue test your determination more than your legs.
+            </p>
+            <p className="text-[var(--text)] leading-[1.8]">
+              After 5-7 hours of climbing, you reach Stella Point (5,756m) on the crater rim just as the eastern sky turns gold. From Stella Point, it is a 45-minute walk along the surprisingly flat crater rim to Uhuru Peak at 5,895 metres. The sunrise from the Roof of Africa — looking out over the clouds, with Kilimanjaro&apos;s <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">glaciers and ice fields</Link> glowing in the first light — is one of the most powerful moments in trekking. You spend 15-30 minutes at the summit for photos before beginning the descent.
+            </p>
+
+            <h3 className="font-heading text-2xl font-bold mt-10 mb-4 not-prose">
+              Choosing the Right Operator
+            </h3>
+            <p className="text-[var(--text)] leading-[1.8]">
+              The operator you choose has a direct impact on your safety, comfort, and summit chances. <Link href="/best-kilimanjaro-tour-operators/" className="text-[var(--secondary)] hover:underline">Choosing the right Kilimanjaro operator</Link> matters more than most climbers realize. Key factors to evaluate:
+            </p>
+            <ul className="text-[var(--text)] leading-[1.8] space-y-2">
+              <li><strong>KINAPA licensing and TATO membership:</strong> Your operator should hold current licences from Kilimanjaro National Park Authority and the Tanzania Association of Tour Operators.</li>
+              <li><strong>Guide-to-climber ratio:</strong> A maximum of 2 climbers per assistant guide ensures personalized attention and faster response in emergencies.</li>
+              <li><strong>Porter welfare:</strong> Ethical operators are members of the <Link href="/climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/" className="text-[var(--secondary)] hover:underline">Kilimanjaro Porters Assistance Project (KPAP)</Link>, ensuring fair wages, proper equipment, and decent food for the climbing team.</li>
+              <li><strong>Emergency equipment:</strong> Supplemental oxygen cylinders, pulse oximeters, a stretcher, and satellite communication should be on every climb — not as add-ons but as standard equipment.</li>
+              <li><strong>Summit success rate:</strong> Ask for the operator&apos;s verified success rate. The mountain-wide average is approximately 65%. Operators using 7+ day routes with proper acclimatization protocols achieve 85-95%.</li>
+            </ul>
+
+            <h3 className="font-heading text-2xl font-bold mt-10 mb-4 not-prose">
+              Essential Packing List
+            </h3>
+            <p className="text-[var(--text)] leading-[1.8]">
+              Kilimanjaro&apos;s temperature range — from +30°C in the rainforest to -20°C at the summit — demands a layering system. For a complete breakdown, see our <Link href="/kilimanjaro-climbing-gear/" className="text-[var(--secondary)] hover:underline">Kilimanjaro gear guide</Link>. The essentials:
+            </p>
+            <ul className="text-[var(--text)] leading-[1.8] space-y-1">
+              <li>Waterproof hiking boots (broken in over at least 20km before the trek)</li>
+              <li>4-season sleeping bag rated to -10°C or colder</li>
+              <li>Base layers, insulating mid-layers, and a waterproof outer shell</li>
+              <li>Down or synthetic insulated jacket for summit night</li>
+              <li>Trekking poles (reduce knee strain on descent by up to 25%)</li>
+              <li>Headlamp with spare batteries (essential for summit night)</li>
+              <li>3+ litre water capacity (hydration bladder or bottles)</li>
+              <li>Sun protection: SPF 50+ sunscreen, UV-blocking sunglasses, wide-brim hat</li>
+              <li>Warm gloves and a balaclava or buff for summit night wind</li>
+            </ul>
+
+            <h3 className="font-heading text-2xl font-bold mt-10 mb-4 not-prose">
+              After the Summit: What Happens Next
+            </h3>
+            <p className="text-[var(--text)] leading-[1.8]">
+              After summiting and descending to the gate (usually Mweka Gate on the southern routes), you receive your summit certificate from KINAPA — either a green certificate for reaching Stella Point (5,756m) or a gold certificate for reaching Uhuru Peak (5,895m). Your guides and porters will line up for a farewell ceremony with singing and dancing — one of the most emotional moments of the trip.
+            </p>
+            <p className="text-[var(--text)] leading-[1.8]">
+              Many climbers extend their Tanzania trip with a <Link href="/tanzania-safaris/" className="text-[var(--secondary)] hover:underline">safari through the Serengeti and Ngorongoro Crater</Link> — the perfect complement to the mountain experience. We offer combined Kilimanjaro + Safari packages with 1-2 rest days between the climb and the game drives. A <Link href="/tanzania-destinations/zanzibar/" className="text-[var(--secondary)] hover:underline">Zanzibar beach extension</Link> is another popular option for post-climb recovery.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Routes Table */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
             All 6 Routes

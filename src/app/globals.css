@@ -714,10 +714,15 @@ img {
 .btn-primary {
   background: var(--secondary);
   color: white;
+  font-size: 1.125rem;
+  padding: 1.125rem 2.5rem;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
 }
 
 .btn-primary:hover {
   background: var(--secondary-dark);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -732,7 +737,9 @@ img {
 .btn-outline-white {
   background: transparent;
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 0.9375rem;
+  padding: 0.875rem 1.75rem;
 }
 
 .btn-outline-white:hover {
@@ -796,7 +803,7 @@ img {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.6) 100%);
 }
 
 .hero-content {
@@ -1390,6 +1397,21 @@ img {
   letter-spacing: 0.05em;
 }
 
+.route-card-price {
+  color: var(--secondary) !important;
+  font-weight: 600;
+  font-size: 0.875rem !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  margin-top: 0.5rem;
+}
+
+.route-item-price {
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
 /* ============================================
    SAFARI SECTION
    ============================================ */
@@ -1658,6 +1680,77 @@ img {
   margin-top: 0.5rem;
 }
 
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 0.2rem;
+  color: var(--secondary);
+  margin-bottom: 0.75rem;
+}
+
+.testimonial-title {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-content {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.testimonial-trip {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.testimonial-source {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 128, 0, 0.08);
+  color: #16a34a;
+}
+
 .testimonials-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1753,6 +1846,10 @@ img {
 }
 
 @media (max-width: 1024px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .testimonials-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -1769,6 +1866,11 @@ img {
 }
 
 @media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
   .testimonials-list {
     grid-template-columns: 1fr;
     gap: 0;

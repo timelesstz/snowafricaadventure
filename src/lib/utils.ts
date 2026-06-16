@@ -207,3 +207,8 @@ export function isNearFullMoon(date: Date, withinDays: number = 2): boolean {
     return diff <= withinDays * msPerDay;
   });
 }
+
+export function generateBlurPlaceholder(color: string = "#94a3b8"): string {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 5"><rect width="8" height="5" fill="${color}"/></svg>`;
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
+}
