@@ -212,7 +212,7 @@ export function generateTableOfContents(html: string): Array<{ id: string; text:
  */
 import type { LinkMapEntry } from "./internal-link-map";
 
-const MAX_AUTO_LINKS = 5;
+const MAX_AUTO_LINKS = 7;
 
 function escapeRegExp(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

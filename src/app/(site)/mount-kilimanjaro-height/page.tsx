@@ -13,8 +13,10 @@ import {
   generateMetadata as genMeta,
   generateBreadcrumbSchema,
   generateFAQSchema,
+  generateArticleSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Height: 5 Zones From Base to Summit",
@@ -32,11 +34,20 @@ const keyFacts = [
 ];
 
 const heightComparisons = [
-  { mountain: "Mont Blanc (Alps)", height: "4,808m", comparison: "Kilimanjaro is 1,087m taller" },
-  { mountain: "Mount Elbrus (Europe)", height: "5,642m", comparison: "Kilimanjaro is 253m taller" },
   { mountain: "Mount Everest", height: "8,849m", comparison: "Kilimanjaro is ~66% of Everest's height" },
+  { mountain: "Aconcagua (South America)", height: "6,961m", comparison: "Kilimanjaro is 1,066m shorter" },
   { mountain: "Denali (North America)", height: "6,190m", comparison: "Kilimanjaro is 295m shorter" },
+  { mountain: "Mount Elbrus (Europe)", height: "5,642m", comparison: "Kilimanjaro is 253m taller" },
   { mountain: "Mount Kenya", height: "5,199m", comparison: "Kilimanjaro is 696m taller" },
+  { mountain: "Mont Blanc (Alps)", height: "4,808m", comparison: "Kilimanjaro is 1,087m taller" },
+  { mountain: "Mount Rainier (USA)", height: "4,392m", comparison: "Kilimanjaro is 1,503m taller" },
+  { mountain: "Mount Fuji (Japan)", height: "3,776m", comparison: "Kilimanjaro is 2,119m taller" },
+];
+
+const volcanicCones = [
+  { name: "Kibo", height: "5,895m (19,341ft)", status: "Dormant", description: "The highest and youngest cone, home to Uhuru Peak. Kibo is dormant but not extinct — fumaroles still emit gases in its crater." },
+  { name: "Mawenzi", height: "5,149m (16,893ft)", status: "Extinct", description: "The second highest cone with dramatic jagged peaks. Technical climbing skills are required to summit Mawenzi." },
+  { name: "Shira", height: "4,005m (13,140ft)", status: "Extinct", description: "The oldest and most eroded cone, now a broad plateau that the Lemosho and Shira routes traverse on their way to the summit." },
 ];
 
 const climateZones = [
@@ -44,40 +55,45 @@ const climateZones = [
     icon: <Mountain className="w-5 h-5" />,
     name: "Cultivated Zone",
     elevation: "800 – 1,800m",
+    temp: "20–30°C",
     description:
-      "Farmland and villages surround the mountain's lower slopes. Coffee and banana plantations dominate this warm, humid belt.",
+      "The fertile lower slopes where the Chagga people grow coffee, bananas, and maize. Rich volcanic soil makes this region incredibly productive. Most climbers pass through this zone by vehicle on their way to the park gate.",
     color: "bg-green-100 text-green-700",
   },
   {
     icon: <TrendingUp className="w-5 h-5" />,
     name: "Montane Forest",
     elevation: "1,800 – 2,800m",
+    temp: "12–20°C",
     description:
-      "Dense rainforest with towering trees, mosses, and diverse wildlife. Colobus monkeys and buffalo inhabit this zone.",
+      "Lush rainforest with towering trees, mosses, and diverse wildlife. Black-and-white colobus monkeys, blue monkeys, and buffalo inhabit this zone. It receives the most rainfall and is often misty — expect muddy trails.",
     color: "bg-emerald-100 text-emerald-700",
   },
   {
     icon: <MapPin className="w-5 h-5" />,
     name: "Heath & Moorland",
     elevation: "2,800 – 4,000m",
+    temp: "5–15°C",
     description:
-      "Giant heather and surreal giant groundsels define the landscape. Temperatures begin to drop significantly.",
+      "Giant heather and unique endemic species like giant lobelias, groundsels, and the famous Senecio kilimanjari define this otherworldly landscape. Temperatures drop significantly at night and clouds often settle below you.",
     color: "bg-yellow-100 text-yellow-700",
   },
   {
     icon: <Thermometer className="w-5 h-5" />,
     name: "Alpine Desert",
     elevation: "4,000 – 5,000m",
+    temp: "-5–15°C",
     description:
-      "Sparse vegetation in a stark, rocky landscape. Extreme temperature swings between day and night. Acclimatisation is essential here.",
+      "A barren, Mars-like landscape with extreme temperature swings — scorching sun by day, well below freezing at night. Vegetation is sparse, the air is noticeably thinner, and acclimatisation becomes critical. Most high camps sit in this zone.",
     color: "bg-orange-100 text-orange-700",
   },
   {
     icon: <Mountain className="w-5 h-5" />,
     name: "Arctic Summit",
     elevation: "5,000 – 5,895m",
+    temp: "-15–-25°C",
     description:
-      "Ice, glaciers, and sub-zero temperatures characterise the summit zone. Uhuru Peak crowns this otherworldly environment.",
+      "Ice fields, glaciers, and sub-zero temperatures characterise the summit zone. Oxygen is roughly 50% of sea level. Uhuru Peak crowns this otherworldly environment — and the glaciers here have lost over 80% of their mass since 1912.",
     color: "bg-blue-100 text-blue-700",
   },
 ];
@@ -120,11 +136,35 @@ const faqs = [
     answer:
       "Summit success rates vary significantly by route and duration: approximately 65% on the Marangu 5-day route, rising to 85–95% on the Lemosho 8-day route. Longer itineraries allow better acclimatisation and dramatically improve your chances.",
   },
+  {
+    question: "Is Mount Kilimanjaro a volcano?",
+    answer:
+      "Yes, Kilimanjaro is a stratovolcano made up of three volcanic cones: Kibo (5,895m, dormant), Mawenzi (5,149m, extinct), and Shira (4,005m, extinct). Kibo last erupted roughly 360,000 years ago and still emits sulphur gases through fumaroles in its crater, meaning it could theoretically erupt again — though geologists consider this extremely unlikely.",
+  },
+  {
+    question: "What is Kilimanjaro's prominence?",
+    answer:
+      "Mount Kilimanjaro has a topographic prominence of 5,885 metres (19,308 ft) — the fourth highest prominence of any mountain on Earth. This means you must descend nearly 5,885m before ascending any higher peak. This extreme prominence is why Kilimanjaro appears so dramatically against the surrounding plains.",
+  },
+  {
+    question: "Are Kilimanjaro's glaciers disappearing?",
+    answer:
+      "Yes. Over 80% of the ice that existed in 1912 has melted. Scientists estimate the remaining glaciers could disappear entirely by 2040–2050 due to climate change and reduced precipitation. This makes climbing Kilimanjaro increasingly urgent for those wanting to witness its ice fields firsthand.",
+  },
 ];
 
 export default function MountKilimanjaroHeightPage() {
   return (
     <div>
+      <div className="container mx-auto px-4">
+        <Breadcrumbs
+          items={[
+            { label: "Trekking Routes", href: "/trekking/" },
+            { label: "Kilimanjaro Height" },
+          ]}
+        />
+      </div>
+
       <MultiJsonLd
         schemas={[
           generateBreadcrumbSchema([
@@ -133,6 +173,17 @@ export default function MountKilimanjaroHeightPage() {
             { name: "Mount Kilimanjaro Height", url: "/mount-kilimanjaro-height/" },
           ]),
           generateFAQSchema(faqs),
+          generateArticleSchema({
+            title: "Mount Kilimanjaro Height: 5 Zones From Base to Summit",
+            description: "Kilimanjaro is 19,341 ft (5,895m) — but the climb passes through 5 wildly different worlds. See what each altitude zone looks and feels like.",
+            url: "/mount-kilimanjaro-height/",
+            image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
+            publishedTime: "2026-03-04",
+            modifiedTime: "2026-06-16",
+            author: "Emmanuel Moshi",
+            authorRole: "Founder & Lead Guide",
+            authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
+          }),
         ]}
       />
 
@@ -289,6 +340,9 @@ export default function MountKilimanjaroHeightPage() {
                       <span className="text-sm text-[var(--text-muted)] bg-[var(--muted)] px-2 py-0.5 rounded-full">
                         {zone.elevation}
                       </span>
+                      <span className="text-sm text-[var(--text-muted)] bg-[var(--muted)] px-2 py-0.5 rounded-full">
+                        {zone.temp}
+                      </span>
                     </div>
                     <p className="text-[var(--text-muted)]">{zone.description}</p>
                   </div>
@@ -336,6 +390,68 @@ export default function MountKilimanjaroHeightPage() {
                 <p className="text-[var(--text-muted)] text-sm">
                   Kilimanjaro is accessible to non-technical climbers. No ropes, ice axes, or specialist training are required — making it the most achievable of the Seven Summits.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Three Volcanic Cones */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2">
+              Geology
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Kilimanjaro&apos;s Three Volcanic Cones
+            </h2>
+            <p className="text-[var(--text-muted)] mb-8 text-lg">
+              Kilimanjaro is a stratovolcano comprised of three distinct volcanic cones formed at different times. Only Kibo — the highest — retains any volcanic activity, with fumaroles still emitting gases inside its crater.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {volcanicCones.map((cone) => (
+                <div key={cone.name} className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-heading text-xl font-bold">{cone.name}</h3>
+                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${cone.status === "Dormant" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700"}`}>
+                      {cone.status}
+                    </span>
+                  </div>
+                  <p className="text-[var(--secondary)] font-semibold text-lg mb-2">{cone.height}</p>
+                  <p className="text-sm text-[var(--text-muted)]">{cone.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Shrinking Glaciers */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2">
+              Climate Change
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Kilimanjaro&apos;s Disappearing Glaciers
+            </h2>
+            <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
+              Kilimanjaro&apos;s iconic <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">snow cap</Link> has been rapidly diminishing. Over 80% of the ice that existed when it was first surveyed in 1912 has now melted, and scientists estimate the remaining glaciers could disappear entirely by 2040–2050.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className="bg-white rounded-xl p-5 border border-[var(--border)] text-center">
+                <p className="font-heading text-3xl font-bold text-red-600">80%+</p>
+                <p className="text-sm text-[var(--text-muted)] mt-1">Ice lost since 1912</p>
+              </div>
+              <div className="bg-white rounded-xl p-5 border border-[var(--border)] text-center">
+                <p className="font-heading text-3xl font-bold text-amber-600">2040–50</p>
+                <p className="text-sm text-[var(--text-muted)] mt-1">Projected disappearance</p>
+              </div>
+              <div className="bg-white rounded-xl p-5 border border-[var(--border)] text-center">
+                <p className="font-heading text-3xl font-bold text-[var(--secondary)]">Now</p>
+                <p className="text-sm text-[var(--text-muted)] mt-1">Best time to witness them</p>
               </div>
             </div>
           </div>

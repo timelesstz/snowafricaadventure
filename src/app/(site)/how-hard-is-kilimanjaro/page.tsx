@@ -45,7 +45,7 @@ const difficultyFactors = [
     rating: "Moderate-Hard",
     ratingColor: "text-orange-600 bg-orange-50",
     description:
-      "Summit night temperatures drop to -15°C to -25°C with wind chill. You'll experience everything from tropical heat in the rainforest to arctic conditions at the summit. Proper layering makes this manageable.",
+      "Summit night temperatures drop to -15°C to -25°C with wind chill. You'll walk through tropical rainforest, alpine desert, and finally across glaciers and snow fields at the summit. Proper layering makes this manageable.",
   },
   {
     icon: Clock,
@@ -131,6 +131,21 @@ const faqs = [
     answer:
       "Summit night temperatures range from -15°C to -25°C with wind chill. At base camp (4,700m), nighttime temperatures are typically -5°C to -10°C. During the day, lower altitudes (2,000-3,500m) can be warm (15-25°C). You need layered clothing designed for this extreme temperature range. We provide a detailed gear list when you book.",
   },
+  {
+    question: "Can a 60-year-old climb Kilimanjaro?",
+    answer:
+      "Yes. We have guided climbers in their 60s and 70s to the summit. Age is less important than fitness and preparation. Older climbers should choose a longer route (7-8 days) for better acclimatisation, train for at least 12 weeks, and get a thorough medical check-up. The oldest person to summit Kilimanjaro was 89 years old. With realistic expectations and proper preparation, age alone is not a barrier.",
+  },
+  {
+    question: "What fitness level do you need for Kilimanjaro?",
+    answer:
+      "You should be able to hike 6-8 hours with a daypack comfortably and do so on consecutive days. A good benchmark: if you can walk 15-20 km on hilly terrain without significant fatigue, you have a solid base. We recommend 8-12 weeks of training including hiking, cardio (running, cycling, swimming), and leg exercises (squats, lunges, stair climbing). You don't need to be an elite athlete — consistent preparation matters more than peak fitness.",
+  },
+  {
+    question: "How long does it take to climb Kilimanjaro?",
+    answer:
+      "Most routes take 5 to 9 days. The shortest option is 5 days on the Marangu route, but success rates are low (~65%). We recommend 7-8 day routes (like Lemosho or Machame) which provide better acclimatisation and push success rates to 85-95%. The Northern Circuit is the longest at 9 days and offers the best acclimatisation. Factor in 1-2 travel days on either side for flights and transfers.",
+  },
 ];
 
 export default function HowHardIsKilimanjaroPage() {
@@ -159,7 +174,7 @@ export default function HowHardIsKilimanjaroPage() {
             url: "/how-hard-is-kilimanjaro/",
             image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2026-03-04",
-            modifiedTime: "2026-03-04",
+            modifiedTime: "2026-06-16",
             author: "Emmanuel Moshi",
             authorRole: "Founder & Lead Guide",
             authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
@@ -239,6 +254,61 @@ export default function HowHardIsKilimanjaroPage() {
         </div>
       </section>
 
+      {/* Age & Fitness */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Age &amp; Fitness: Who Can Climb Kilimanjaro?
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-8 max-w-2xl mx-auto">
+              Kilimanjaro welcomes climbers from 10 to 80+. Age matters less than preparation — here&apos;s what each age bracket should know.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full bg-white border border-[var(--border)] rounded-xl overflow-hidden shadow-sm text-sm">
+                <thead className="bg-[var(--primary-dark)] text-white">
+                  <tr>
+                    <th className="text-left px-4 py-3 font-semibold">Age Range</th>
+                    <th className="text-left px-4 py-3 font-semibold">Training</th>
+                    <th className="text-left px-4 py-3 font-semibold">Recommended Route</th>
+                    <th className="text-left px-4 py-3 font-semibold">Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-[var(--border)]">
+                    <td className="px-4 py-3 font-semibold">18–30</td>
+                    <td className="px-4 py-3">8 weeks</td>
+                    <td className="px-4 py-3">Any 6–8 day route</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">Good baseline fitness usually sufficient; don&apos;t underestimate altitude</td>
+                  </tr>
+                  <tr className="border-t border-[var(--border)] bg-[var(--surface)]">
+                    <td className="px-4 py-3 font-semibold">30–50</td>
+                    <td className="px-4 py-3">10 weeks</td>
+                    <td className="px-4 py-3">7–8 day (Lemosho, Machame)</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">Focus on cardio and leg strength; extra acclimatisation days help</td>
+                  </tr>
+                  <tr className="border-t border-[var(--border)]">
+                    <td className="px-4 py-3 font-semibold">50–65</td>
+                    <td className="px-4 py-3">12 weeks</td>
+                    <td className="px-4 py-3">8+ day (Lemosho, Northern Circuit)</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">Medical check-up essential; longer routes strongly recommended</td>
+                  </tr>
+                  <tr className="border-t border-[var(--border)] bg-[var(--surface)]">
+                    <td className="px-4 py-3 font-semibold">65+</td>
+                    <td className="px-4 py-3">12–16 weeks</td>
+                    <td className="px-4 py-3">8–9 day (Northern Circuit)</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">Absolutely achievable — the oldest summiter was 89. Prioritise acclimatisation</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-center text-sm text-[var(--text-muted)] mt-4">
+              The minimum age to climb Kilimanjaro is 10 years old (KINAPA regulation). Children 10–17 must be accompanied by an adult.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Summit Night - The Hardest Part */}
       <section className="py-16 bg-[var(--primary-dark)] text-white">
         <div className="container mx-auto px-4">
@@ -255,7 +325,7 @@ export default function HowHardIsKilimanjaroPage() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <p className="text-white/80 leading-relaxed mb-6">
-                  Summit night is the hardest 12 hours of the trek. You wake at 11 PM at Barafu Camp (4,700m) and begin climbing in total darkness. The temperature is -15°C to -25°C with wind chill. Oxygen is at roughly 50% of sea level. You climb for 6-7 hours to reach Stella Point (5,756m), then another 45 minutes to Uhuru Peak (5,895m).
+                  Summit night is the hardest 12 hours of the trek. You wake at 11 PM at Barafu Camp (4,700m) and begin climbing in total darkness. The temperature is -15°C to -25°C with wind chill. Oxygen is at roughly 50% of sea level. You climb for 6-7 hours through <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">snow and ice fields</Link> to reach Stella Point (5,756m), then another 45 minutes to Uhuru Peak (5,895m).
                 </p>
                 <p className="text-white/80 leading-relaxed">
                   The pace is extremely slow — one step every few seconds. Many climbers experience nausea, headaches, and extreme fatigue. This is where <strong className="text-white">mental preparation matters as much as physical fitness</strong>. Our guides are trained to keep you motivated, monitor your health, and make the right call if conditions become unsafe.

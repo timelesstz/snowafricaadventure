@@ -759,7 +759,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/how-tall-is-kilimanjaro/",
-        destination: "/how-tall-is-mount-kilimanjaro/",
+        destination: "/mount-kilimanjaro-height/",
+        permanent: true,
+      },
+      {
+        source: "/how-tall-is-mount-kilimanjaro/",
+        destination: "/mount-kilimanjaro-height/",
         permanent: true,
       },
       {

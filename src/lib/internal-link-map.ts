@@ -96,6 +96,90 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     priority: 3,
   });
 
+  entries.push({
+    phrase: "Kilimanjaro height",
+    href: "/mount-kilimanjaro-height/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "height of Kilimanjaro",
+    href: "/mount-kilimanjaro-height/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Kilimanjaro elevation",
+    href: "/mount-kilimanjaro-height/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Kilimanjaro difficulty",
+    href: "/how-hard-is-kilimanjaro/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "best time for safari",
+    href: "/best-time-to-go-on-safari-in-africa/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "best time to visit Tanzania",
+    href: "/best-time-to-visit-tanzania-for-safari/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Mount Meru",
+    href: "/climbing-mount-meru/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "wildebeest migration",
+    href: "/great-wildebeest-migration/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Kilimanjaro routes",
+    href: "/kilimanjaro-climbing-routes/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Kilimanjaro packing list",
+    href: "/the-ultimate-kilimanjaro-packing-list/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "what to pack for Kilimanjaro",
+    href: "/the-ultimate-kilimanjaro-packing-list/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Lemosho route",
+    href: "/kilimanjaro-lemosho-route-8-days-guide/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "Tanzania national parks",
+    href: "/tanzania-national-parks-guide/",
+    priority: 3,
+  });
+
+  entries.push({
+    phrase: "beach holidays in Tanzania",
+    href: "/tanzania-beach-holidays/",
+    priority: 3,
+  });
+
   // Sort by phrase length descending (longest match first)
   entries.sort((a, b) => b.phrase.length - a.phrase.length);
 
