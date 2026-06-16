@@ -201,6 +201,7 @@ export default function SafariItineraryEditor({
                     type="text"
                     value={day.title}
                     onChange={(e) => updateDay(index, "title", e.target.value)}
+                    aria-label={`Day ${day.day} title`}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                     placeholder="e.g., Arrival in Arusha"
                   />
@@ -230,6 +231,7 @@ export default function SafariItineraryEditor({
                       type="text"
                       value={day.location || ""}
                       onChange={(e) => updateDay(index, "location", e.target.value)}
+                      aria-label={`Day ${day.day} location`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="e.g., Serengeti"
                     />
@@ -242,6 +244,7 @@ export default function SafariItineraryEditor({
                       type="text"
                       value={day.accommodation || ""}
                       onChange={(e) => updateDay(index, "accommodation", e.target.value)}
+                      aria-label={`Day ${day.day} accommodation`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="e.g., Serena Lodge"
                     />
@@ -254,6 +257,7 @@ export default function SafariItineraryEditor({
                       type="text"
                       value={day.meals || ""}
                       onChange={(e) => updateDay(index, "meals", e.target.value)}
+                      aria-label={`Day ${day.day} meals`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="e.g., B, L, D"
                     />
@@ -303,6 +307,7 @@ export default function SafariItineraryEditor({
                           addHighlight(index);
                         }
                       }}
+                      aria-label={`Add highlight for day ${day.day}`}
                       className="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="Add highlight and press Enter"
                     />

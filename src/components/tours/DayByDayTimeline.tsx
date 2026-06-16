@@ -317,7 +317,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
                 <div className={`${isEven ? 'lg:order-3' : 'lg:order-1'}`}>
                   <div className="relative h-[200px] lg:h-[280px] overflow-hidden rounded-sm shadow-lg group">
                     <Image
-                      src={day.image || `https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/safaritanzania.jpg`}
+                      src={day.image || "/images/safari-itinerary-default.jpg"}
                       alt={day.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"

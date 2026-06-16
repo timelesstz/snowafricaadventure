@@ -967,7 +967,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
               {/* Image Section */}
               <div className={`relative overflow-hidden ${isSummit ? "h-[180px]" : "h-[140px]"}`}>
                 <Image
-                  src={day.image || "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp"}
+                  src={day.image || "/images/kilimanjaro-itinerary-default.webp"}
                   alt={day.title}
                   fill
                   className="object-cover transition-transform duration-500 hover:scale-[1.08]"

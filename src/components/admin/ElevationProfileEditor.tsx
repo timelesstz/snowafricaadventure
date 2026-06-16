@@ -302,6 +302,7 @@ export default function ElevationProfileEditor({
                     type="button"
                     onClick={() => movePoint(index, "up")}
                     disabled={index === 0}
+                    aria-label="Move point up"
                     className="text-slate-400 hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     <ChevronUp className="w-3.5 h-3.5" />
@@ -310,6 +311,7 @@ export default function ElevationProfileEditor({
                     type="button"
                     onClick={() => movePoint(index, "down")}
                     disabled={index === points.length - 1}
+                    aria-label="Move point down"
                     className="text-slate-400 hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     <ChevronDown className="w-3.5 h-3.5" />
@@ -322,6 +324,7 @@ export default function ElevationProfileEditor({
                   min="1"
                   value={point.day}
                   onChange={(e) => updatePoint(index, "day", e.target.value)}
+                  aria-label={`Day number for point ${index + 1}`}
                   className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
                 />
 
@@ -335,6 +338,7 @@ export default function ElevationProfileEditor({
                     updatePoint(index, "elevation", e.target.value)
                   }
                   placeholder="e.g. 2720"
+                  aria-label={`Elevation in meters for point ${index + 1}`}
                   className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
                 />
 
@@ -344,6 +348,7 @@ export default function ElevationProfileEditor({
                   value={point.camp}
                   onChange={(e) => updatePoint(index, "camp", e.target.value)}
                   placeholder="e.g. Mandara Hut"
+                  aria-label={`Camp or location for point ${index + 1}`}
                   className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
                 />
 
@@ -353,6 +358,7 @@ export default function ElevationProfileEditor({
                   value={point.label || ""}
                   onChange={(e) => updatePoint(index, "label", e.target.value)}
                   placeholder="e.g. Summit!"
+                  aria-label={`Label for point ${index + 1}`}
                   className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
                 />
 
@@ -362,6 +368,7 @@ export default function ElevationProfileEditor({
                     type="button"
                     onClick={() => removePoint(index)}
                     className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
+                    aria-label="Remove point"
                     title="Remove point"
                   >
                     <Trash2 className="w-4 h-4" />

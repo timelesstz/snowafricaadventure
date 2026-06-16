@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { Puck, type Data } from "@measured/puck";
 import "@measured/puck/puck.css";
 import { puckConfig } from "@/lib/cms/config";
@@ -25,6 +25,7 @@ export function PuckEditorWrapper({
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [status, setStatus] = useState(pageStatus);
+  const [publishing, setPublishing] = useState(false);
 
   const handleSave = useCallback(
     async (data: Data) => {
@@ -53,6 +54,7 @@ export function PuckEditorWrapper({
 
   const handlePublish = useCallback(async () => {
     const newStatus = status === "PUBLISHED" ? "DRAFT" : "PUBLISHED";
+    setPublishing(true);
     try {
       const response = await fetch(`/api/admin/pages/${pageId}/`, {
         method: "PATCH",
@@ -65,6 +67,8 @@ export function PuckEditorWrapper({
       }
     } catch (error) {
       console.error("Failed to update status:", error);
+    } finally {
+      setPublishing(false);
     }
   }, [pageId, status]);
 
@@ -107,13 +111,22 @@ export function PuckEditorWrapper({
           </Link>
           <button
             onClick={handlePublish}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+            disabled={publishing}
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border transition-colors disabled:opacity-50 ${
               status === "PUBLISHED"
                 ? "text-amber-700 border-amber-200 hover:bg-amber-50"
                 : "text-green-700 border-green-200 hover:bg-green-50"
             }`}
           >
-            {status === "PUBLISHED" ? (
+            {publishing ? (
+              <>
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                {status === "PUBLISHED" ? "Unpublishing..." : "Publishing..."}
+              </>
+            ) : status === "PUBLISHED" ? (
               <>
                 <FileText className="w-4 h-4" />
                 Unpublish
@@ -129,7 +142,14 @@ export function PuckEditorWrapper({
             disabled={saving}
             className="flex items-center gap-1.5 px-4 py-1.5 text-sm bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
           >
-            <Save className="w-4 h-4" />
+            {saving ? (
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            ) : (
+              <Save className="w-4 h-4" />
+            )}
             {saving ? "Saving..." : "Save"}
           </button>
         </div>

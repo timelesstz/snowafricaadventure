@@ -54,6 +54,7 @@ export function SafariFilters({
               placeholder="Search safari packages..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
+              aria-label="Search safari packages"
               className="w-full pl-12 pr-4 py-3 bg-[var(--surface)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
             />
           </div>

@@ -1154,10 +1154,10 @@ const blogContent: BlogContent[] = [
 <p><strong>Skills needed:</strong> None beyond hiking fitness</p>
 
 <ul>
-<li>Walk-up mountain with established trails across <a href="/kilimanjaro-climbing-routes/">multiple routes</a></li>
+<li>Walk-up mountain with established trails across <a href="/trekking/">multiple routes</a></li>
 <li>No ropes, crampons, or ice axes required</li>
 <li>Barranco Wall involves scrambling but no technical climbing</li>
-<li>Professional guides handle all logistics — see our <a href="/kilimanjaro-climbing-tips/">climbing tips</a> for preparation advice</li>
+<li>Professional guides handle all logistics — see our <a href="/climbing-kilimanjaro/">climbing tips</a> for preparation advice</li>
 </ul>
 
 <h3>Everest Base Camp</h3>

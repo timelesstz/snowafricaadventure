@@ -148,6 +148,7 @@ export default function PricingTiersEditor({
                 value={tier.groupSize}
                 onChange={(e) => updateTier(index, "groupSize", e.target.value)}
                 placeholder="e.g. 2-4 People"
+                aria-label={`Group size for tier ${index + 1}`}
                 className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
               />
 
@@ -157,6 +158,7 @@ export default function PricingTiersEditor({
                 value={tier.description}
                 onChange={(e) => updateTier(index, "description", e.target.value)}
                 placeholder="e.g. Small group adventure"
+                aria-label={`Description for tier ${index + 1}`}
                 className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
               />
 
@@ -167,6 +169,7 @@ export default function PricingTiersEditor({
                 value={tier.price || ""}
                 onChange={(e) => updateTier(index, "price", e.target.value)}
                 placeholder="2450"
+                aria-label={`Price for tier ${index + 1}`}
                 className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
               />
 
@@ -177,6 +180,7 @@ export default function PricingTiersEditor({
                 value={tier.savings || ""}
                 onChange={(e) => updateTier(index, "savings", e.target.value)}
                 placeholder="800"
+                aria-label={`Savings for tier ${index + 1}`}
                 className="px-2 py-1.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none w-full"
               />
 

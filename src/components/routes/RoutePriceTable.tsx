@@ -240,7 +240,7 @@ function CustomQuoteModal({
                   name="email"
                   required
                   className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none"
-                  placeholder="john@example.com"
+                  placeholder="you@email.com"
                 />
               </div>
             </div>

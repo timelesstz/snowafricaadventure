@@ -239,7 +239,11 @@ export default function MediaUploader({
 
       {/* Drop Zone */}
       <div
+        role="button"
+        tabIndex={0}
         onClick={handleClick}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleClick(); } }}
+        aria-label={label}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
@@ -257,6 +261,7 @@ export default function MediaUploader({
           accept={accept}
           multiple={multiple}
           onChange={handleFileSelect}
+          aria-label="Upload file"
           className="hidden"
         />
 

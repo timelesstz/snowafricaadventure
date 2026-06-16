@@ -167,6 +167,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
               value={pin}
               onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
               required
+              aria-label="New PIN"
               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-center text-2xl tracking-widest"
               placeholder="••••••"
             />
@@ -184,6 +185,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
               value={confirmPin}
               onChange={(e) => setConfirmPin(e.target.value.replace(/\D/g, ""))}
               required
+              aria-label="Confirm PIN"
               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-center text-2xl tracking-widest"
               placeholder="••••••"
             />
@@ -199,12 +201,14 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 required
+                aria-label="Current password"
                 className="w-full px-4 py-2 pr-10 border border-slate-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                 placeholder="Enter your current password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}

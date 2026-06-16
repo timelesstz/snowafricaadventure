@@ -177,6 +177,7 @@ export default function ImageUploadField({
               onClick={handleRemove}
               disabled={isDeleting}
               className="absolute top-2 right-2 p-1.5 bg-red-500/90 text-white rounded-full shadow hover:bg-red-600 transition-colors disabled:opacity-50"
+              aria-label="Remove image"
               title="Remove image"
             >
               {isDeleting ? (

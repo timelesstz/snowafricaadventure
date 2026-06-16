@@ -149,6 +149,7 @@ export default function R2BrowserModal({
           </div>
           <button
             onClick={onClose}
+            aria-label="Close modal"
             className="p-1 hover:bg-slate-100 rounded"
           >
             <X className="w-5 h-5" />
@@ -164,6 +165,7 @@ export default function R2BrowserModal({
               placeholder="Search images by filename..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              aria-label="Search images by filename"
               className="w-full pl-9 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             />
           </div>

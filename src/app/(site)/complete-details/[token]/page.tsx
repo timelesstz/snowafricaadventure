@@ -319,7 +319,7 @@ export default function CompleteDetailsPage() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-2.5 border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
-                    placeholder="john@example.com"
+                    placeholder="you@email.com"
                   />
                 </div>
                 <div>

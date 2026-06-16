@@ -82,6 +82,7 @@ function SidebarFilters({
             placeholder="Search routes..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
+            aria-label="Search routes"
             className="w-full pl-9 pr-8 py-2.5 text-sm bg-[var(--surface)] border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
           />
           {searchQuery && (
@@ -275,6 +276,7 @@ function BarFilters({
               placeholder="Search routes..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
+              aria-label="Search routes"
               className="w-full pl-12 pr-4 py-3 bg-[var(--surface)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all"
             />
           </div>

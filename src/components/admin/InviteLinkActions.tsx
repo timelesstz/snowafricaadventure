@@ -40,6 +40,7 @@ export function InviteLinkActions({
     <button
       onClick={toggle}
       disabled={loading}
+      aria-label={isActive ? "Revoke invite link" : "Reactivate invite link"}
       className={`inline-flex items-center gap-1 px-3 py-1 text-sm rounded-lg disabled:opacity-50 ${
         isActive
           ? "bg-red-50 text-red-700 hover:bg-red-100"

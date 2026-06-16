@@ -72,66 +72,7 @@ async function getDestinations() {
 export default async function DestinationsPage() {
   const destinations = await getDestinations();
 
-  // Placeholder data for development
-  const placeholderDestinations = [
-    {
-      id: "1",
-      name: "Serengeti National Park",
-      slug: "serengeti-national-park",
-      shortDescription:
-        "The endless plains of Serengeti host the Great Migration and offer unparalleled wildlife viewing year-round.",
-      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Serengeri-National-Park.jpg",
-      highlights: ["Great Migration", "Big Five", "Endless Plains"],
-    },
-    {
-      id: "2",
-      name: "Ngorongoro Crater",
-      slug: "ngorongoro-crater",
-      shortDescription:
-        "The world's largest intact volcanic caldera, home to an incredible concentration of wildlife.",
-      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Ngorongoro-conservation-area.jpg",
-      highlights: ["UNESCO World Heritage", "Big Five", "Crater Floor"],
-    },
-    {
-      id: "3",
-      name: "Tarangire National Park",
-      slug: "tarangire-national-park",
-      shortDescription:
-        "Famous for its giant baobab trees and large elephant herds, especially during the dry season.",
-      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Tarangire-National-Park.jpg",
-      highlights: ["Elephant Herds", "Baobab Trees", "Bird Watching"],
-    },
-    {
-      id: "4",
-      name: "Lake Manyara National Park",
-      slug: "lake-manyara-national-park",
-      shortDescription:
-        "A compact park known for tree-climbing lions, flamingos, and diverse ecosystems.",
-      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/Lake-manyara-national-park.jpg",
-      highlights: ["Tree-climbing Lions", "Flamingos", "Hot Springs"],
-    },
-    {
-      id: "5",
-      name: "Mount Kilimanjaro",
-      slug: "mount-kilimanjaro",
-      shortDescription:
-        "Africa's highest peak and the world's tallest free-standing mountain at 5,895m.",
-      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
-      highlights: ["Uhuru Peak", "Glaciers", "5 Climate Zones"],
-    },
-    {
-      id: "6",
-      name: "Zanzibar Island",
-      slug: "zanzibar-island",
-      shortDescription:
-        "The Spice Island offers pristine beaches, historic Stone Town, and rich Swahili culture.",
-      heroImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
-      highlights: ["Stone Town", "Spice Tours", "Beach Paradise"],
-    },
-  ];
-
-  const displayDestinations =
-    destinations.length > 0 ? destinations : placeholderDestinations;
+  const displayDestinations = destinations;
 
   return (
     <div>
@@ -177,24 +118,33 @@ export default async function DestinationsPage() {
       {/* Destinations Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
+          {displayDestinations.length === 0 ? (
+            <div className="col-span-full text-center py-16">
+              <p className="text-[var(--text-muted)] text-lg">
+                Destinations coming soon. Browse our safari packages in the meantime.
+              </p>
+              <Link
+                href="/tanzania-safaris/"
+                className="inline-block mt-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-2 rounded-lg font-medium transition-colors"
+              >
+                View Safari Packages
+              </Link>
+            </div>
+          ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayDestinations.map((destItem) => {
-              // Handle both DB and placeholder structures
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const dest = destItem as any;
-              return (
+            {displayDestinations.map((dest) => (
                 <DestinationCard
                   key={dest.id}
                   name={dest.name}
                   slug={dest.slug}
-                  circuit={dest.circuit || "Northern"}
-                  description={dest.description || dest.shortDescription || ""}
-                  featuredImage={dest.featuredImage || dest.heroImage || "/images/placeholder-destination.jpg"}
-                  wildlife={dest.wildlife || dest.highlights || ["Various wildlife"]}
+                  circuit={dest.circuit}
+                  description={dest.description}
+                  featuredImage={dest.featuredImage || ""}
+                  wildlife={dest.wildlife}
                 />
-              );
-            })}
+            ))}
           </div>
+          )}
         </div>
       </section>
 

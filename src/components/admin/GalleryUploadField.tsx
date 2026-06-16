@@ -79,6 +79,7 @@ export default function GalleryUploadField({
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
+  const [deletingIndex, setDeletingIndex] = useState<number | null>(null);
   const [alts, setAlts] = useState<GalleryAlts>(defaultAlts ?? {});
 
   const updateAlt = (url: string, field: keyof GalleryAlt, value: string) => {
@@ -146,8 +147,10 @@ export default function GalleryUploadField({
 
   const handleRemove = async (index: number) => {
     const removedUrl = value[index];
+    setDeletingIndex(index);
     updateValue(value.filter((_, i) => i !== index));
     await disposeUrl(removedUrl);
+    setDeletingIndex(null);
   };
 
   const handleDragStart = (index: number) => {
@@ -224,6 +227,15 @@ export default function GalleryUploadField({
               )}
             >
               <GalleryThumb url={url} alt={alts[url]?.alt || `Gallery image ${index + 1}`} />
+
+              {deletingIndex === index && (
+                <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+                  <svg className="animate-spin h-6 w-6 text-slate-500" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                </div>
+              )}
 
               <div className="absolute top-1 left-1 flex items-center gap-1">
                 <span className="px-1.5 py-0.5 bg-black/70 text-white text-[11px] font-medium rounded">

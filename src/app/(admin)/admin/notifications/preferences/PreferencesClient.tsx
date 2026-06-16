@@ -252,7 +252,13 @@ export default function PreferencesClient({
                   disabled={busy}
                   className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-sm text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 disabled:opacity-50"
                 >
-                  Disable browser notifications
+                  {busy ? (
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                  ) : null}
+                  {busy ? "Disabling..." : "Disable browser notifications"}
                 </button>
               ) : (
                 <button
@@ -266,8 +272,15 @@ export default function PreferencesClient({
                   }
                   className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-sm text-white bg-amber-600 hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <Check className="h-4 w-4" aria-hidden="true" />
-                  Enable browser notifications
+                  {busy ? (
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                  ) : (
+                    <Check className="h-4 w-4" aria-hidden="true" />
+                  )}
+                  {busy ? "Enabling..." : "Enable browser notifications"}
                 </button>
               )}
             </div>

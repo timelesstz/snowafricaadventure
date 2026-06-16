@@ -424,7 +424,7 @@ export function TailorMadeForm() {
                   value={formData.email}
                   onChange={(e) => updateFormData("email", e.target.value)}
                   className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                  placeholder="john@example.com"
+                  placeholder="you@email.com"
                 />
               </div>
             </div>

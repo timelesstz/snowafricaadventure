@@ -87,7 +87,12 @@ export default function FaqsEditor({
             {/* Header */}
             <div
               className="flex items-center gap-3 px-4 py-3 cursor-pointer select-none"
+              role="button"
+              tabIndex={0}
               onClick={() => setExpandedIndex(isExpanded ? null : index)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpandedIndex(isExpanded ? null : index); } }}
+              aria-expanded={isExpanded}
+              aria-label={`Toggle FAQ ${index + 1}`}
             >
               <div className="flex flex-col gap-0.5">
                 <button
@@ -145,6 +150,7 @@ export default function FaqsEditor({
                     type="text"
                     value={faq.question}
                     onChange={(e) => updateFaq(index, "question", e.target.value)}
+                    aria-label={`FAQ question ${index + 1}`}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                     placeholder="e.g., How difficult is this route?"
                   />

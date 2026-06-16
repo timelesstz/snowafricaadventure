@@ -387,7 +387,11 @@ export default function AdminSidebar({ user }: { user: User }) {
       >
         <div
           className="absolute inset-0 bg-black/50"
+          role="button"
+          tabIndex={0}
           onClick={() => setMobileOpen(false)}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setMobileOpen(false); } }}
+          aria-label="Close navigation"
           aria-hidden="true"
         />
         <div

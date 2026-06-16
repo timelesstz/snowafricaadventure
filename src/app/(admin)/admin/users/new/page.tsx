@@ -98,7 +98,7 @@ export default function NewUserPage() {
               name="email"
               required
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-              placeholder="john@example.com"
+              placeholder="you@email.com"
             />
           </div>
 

@@ -133,7 +133,12 @@ export default function ItineraryEditor({
             {/* Header */}
             <div
               className="flex items-center gap-3 px-4 py-3 cursor-pointer select-none"
+              role="button"
+              tabIndex={0}
               onClick={() => setExpandedIndex(isExpanded ? null : index)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpandedIndex(isExpanded ? null : index); } }}
+              aria-expanded={isExpanded}
+              aria-label={`Toggle day ${day.day}`}
             >
               <div className="flex flex-col gap-0.5">
                 <button
@@ -201,6 +206,7 @@ export default function ItineraryEditor({
                     type="text"
                     value={day.title}
                     onChange={(e) => updateDay(index, "title", e.target.value)}
+                    aria-label={`Day ${day.day} title`}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                     placeholder="e.g., Marangu Gate to Mandara Hut"
                   />
@@ -230,6 +236,7 @@ export default function ItineraryEditor({
                       type="text"
                       value={day.elevation || ""}
                       onChange={(e) => updateDay(index, "elevation", e.target.value)}
+                      aria-label={`Day ${day.day} elevation`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="1,860m to 2,720m"
                     />
@@ -242,6 +249,7 @@ export default function ItineraryEditor({
                       type="text"
                       value={day.distance || ""}
                       onChange={(e) => updateDay(index, "distance", e.target.value)}
+                      aria-label={`Day ${day.day} distance`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="8km"
                     />
@@ -254,6 +262,7 @@ export default function ItineraryEditor({
                       type="text"
                       value={day.duration || ""}
                       onChange={(e) => updateDay(index, "duration", e.target.value)}
+                      aria-label={`Day ${day.day} duration`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="3-5 hours"
                     />
@@ -266,6 +275,7 @@ export default function ItineraryEditor({
                       type="text"
                       value={day.camp || ""}
                       onChange={(e) => updateDay(index, "camp", e.target.value)}
+                      aria-label={`Day ${day.day} camp or hut`}
                       className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="Mandara Hut"
                     />
@@ -281,6 +291,7 @@ export default function ItineraryEditor({
                     type="text"
                     value={day.meals || ""}
                     onChange={(e) => updateDay(index, "meals", e.target.value)}
+                    aria-label={`Day ${day.day} meals`}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                     placeholder="Breakfast, Lunch, Dinner"
                   />
@@ -329,6 +340,7 @@ export default function ItineraryEditor({
                           addTag(index);
                         }
                       }}
+                      aria-label={`Add tag for day ${day.day}`}
                       className="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
                       placeholder="Add tag and press Enter"
                     />

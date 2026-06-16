@@ -43,7 +43,6 @@ In Vercel Dashboard → Settings → Environment Variables, add:
 | Variable | Description |
 |----------|-------------|
 | `NEXT_PUBLIC_GA_ID` | Google Analytics ID |
-| `SENTRY_DSN` | Sentry error tracking |
 
 ### 3. Deploy
 
