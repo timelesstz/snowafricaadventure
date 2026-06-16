@@ -1,0 +1,1073 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - article [ref=e51]:
+        - generic [ref=e53]:
+          - 'img "Mount Kilimanjaro vs Mount Everest: Which Should You Climb First?" [ref=e54]'
+          - generic [ref=e57]:
+            - navigation "Breadcrumb" [ref=e59]:
+              - list [ref=e60]:
+                - listitem [ref=e61]:
+                  - link "Home" [ref=e62] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e63]
+                    - generic [ref=e66]: Home
+                - listitem [ref=e67]:
+                  - img [ref=e68]
+                  - link "Blog" [ref=e70] [cursor=pointer]:
+                    - /url: /blog/
+                - listitem [ref=e71]:
+                  - img [ref=e72]
+                  - generic [ref=e74]: "Mount Kilimanjaro vs Mount Everest: Which Should You Climb First?"
+            - link "Mount Kilimanjaro" [ref=e76] [cursor=pointer]:
+              - /url: /category/mount-kilimanjaro/
+            - 'heading "Mount Kilimanjaro vs Mount Everest: Which Should You Climb First?" [level=1] [ref=e77]'
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - img [ref=e81]
+                - generic [ref=e84]:
+                  - paragraph [ref=e85]: Snow Africa Team
+                  - paragraph [ref=e86]: Author
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e90]: Feb 13, 2026
+              - generic [ref=e91]:
+                - img [ref=e92]
+                - generic [ref=e95]: 17 min read
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - paragraph [ref=e100]: Kilimanjaro vs Everest compared side-by-side — difficulty, cost, success rates, and experience required. Which mountain should you climb first?
+            - generic [ref=e102]:
+              - paragraph [ref=e103]:
+                - link "Mount Kilimanjaro" [ref=e104] [cursor=pointer]:
+                  - /url: /mount-kilimanjaro/
+                - text: and Mount Everest represent two very different mountain challenges. While both are bucket-list achievements, the comparison between Mount Kilimanjaro vs Mount Everest reveals vastly different preparation, skills, and investment. This guide — written by a Tanzania-based climbing company that has guided 2,000+ climbers to Uhuru Peak — helps you understand which mountain is right for your adventure goals and which to climb first.
+              - 'heading "Mount Kilimanjaro vs Mount Everest: At a Glance" [level=2] [ref=e105]'
+              - table [ref=e106]:
+                - rowgroup [ref=e107]:
+                  - row "Factor Kilimanjaro Everest Base Camp Everest Summit" [ref=e108]:
+                    - columnheader "Factor" [ref=e109]
+                    - columnheader "Kilimanjaro" [ref=e110]
+                    - columnheader "Everest Base Camp" [ref=e111]
+                    - columnheader "Everest Summit" [ref=e112]
+                - rowgroup [ref=e113]:
+                  - row "Height 5,895m (19,341ft) 5,364m (17,598ft) 8,849m (29,032ft)" [ref=e114]:
+                    - cell "Height" [ref=e115]
+                    - cell "5,895m (19,341ft)" [ref=e116]
+                    - cell "5,364m (17,598ft)" [ref=e117]
+                    - cell "8,849m (29,032ft)" [ref=e118]
+                  - row "Duration 5–9 days 12–14 days 60+ days" [ref=e119]:
+                    - cell "Duration" [ref=e120]
+                    - cell "5–9 days" [ref=e121]
+                    - cell "12–14 days" [ref=e122]
+                    - cell "60+ days" [ref=e123]
+                  - row "Technical Skills None required Trekking only Advanced mountaineering" [ref=e124]:
+                    - cell "Technical Skills" [ref=e125]
+                    - cell "None required" [ref=e126]
+                    - cell "Trekking only" [ref=e127]
+                    - cell "Advanced mountaineering" [ref=e128]
+                  - row "Cost $2,000–$6,000 $1,500–$4,000 $30,000–$100,000+" [ref=e129]:
+                    - cell "Cost" [ref=e130]
+                    - cell "$2,000–$6,000" [ref=e131]
+                    - cell "$1,500–$4,000" [ref=e132]
+                    - cell "$30,000–$100,000+" [ref=e133]
+                  - row "Success Rate 65–95% (route-dependent) ~95% ~60%" [ref=e134]:
+                    - cell "Success Rate" [ref=e135]
+                    - cell "65–95% (route-dependent)" [ref=e136]
+                    - cell "~95%" [ref=e137]
+                    - cell "~60%" [ref=e138]
+                  - row "Deaths per Year ~10 Very rare ~5–10" [ref=e139]:
+                    - cell "Deaths per Year" [ref=e140]
+                    - cell "~10" [ref=e141]
+                    - cell "Very rare" [ref=e142]
+                    - cell "~5–10" [ref=e143]
+                  - row "Training Required 3–6 months fitness 3–6 months fitness Years of mountaineering" [ref=e144]:
+                    - cell "Training Required" [ref=e145]
+                    - cell "3–6 months fitness" [ref=e146]
+                    - cell "3–6 months fitness" [ref=e147]
+                    - cell "Years of mountaineering" [ref=e148]
+                  - row "Best Season Jan–Mar, Jun–Oct Mar–May, Sep–Nov May (spring window)" [ref=e149]:
+                    - cell "Best Season" [ref=e150]
+                    - cell "Jan–Mar, Jun–Oct" [ref=e151]
+                    - cell "Mar–May, Sep–Nov" [ref=e152]
+                    - cell "May (spring window)" [ref=e153]
+                  - row "Accommodation Camping (tents) Tea houses Camps + tents" [ref=e154]:
+                    - cell "Accommodation" [ref=e155]
+                    - cell "Camping (tents)" [ref=e156]
+                    - cell "Tea houses" [ref=e157]
+                    - cell "Camps + tents" [ref=e158]
+                  - row "Permits Included in package ~$50 TIMS + park $11,000 climbing permit" [ref=e159]:
+                    - cell "Permits" [ref=e160]
+                    - cell "Included in package" [ref=e161]
+                    - cell "~$50 TIMS + park" [ref=e162]
+                    - cell "$11,000 climbing permit" [ref=e163]
+              - heading "Height and Altitude Comparison" [level=2] [ref=e164]
+              - heading "Mount Kilimanjaro (5,895m / 19,341ft)" [level=3] [ref=e165]
+              - paragraph [ref=e166]: Africa's highest peak and one of the Seven Summits. Mount Kilimanjaro stands at just under 6,000m — you'll experience significant altitude effects but remain below the extreme elevations where human survival becomes time-limited. Despite being a non-technical climb, the altitude makes it a serious undertaking. Importantly, Kilimanjaro is the world's tallest free-standing mountain, rising approximately 4,900m from its base to summit — more dramatic vertical relief than Everest shows from its base camps.
+              - heading "Mount Everest Base Camp (5,364m / 17,598ft)" [level=3] [ref=e167]
+              - paragraph [ref=e168]: Actually lower than Mount Kilimanjaro's summit! The EBC trek is primarily about the journey through Nepal's stunning Khumbu region rather than extreme altitude. Most trekkers who compare Mount Kilimanjaro vs Mount Everest are actually comparing Kilimanjaro's summit to Everest Base Camp.
+              - heading "Mount Everest Summit (8,849m / 29,032ft)" [level=3] [ref=e169]
+              - paragraph [ref=e170]: The world's highest point enters the "death zone" above 8,000m where the human body deteriorates rapidly regardless of acclimatization. Supplemental oxygen is standard. At the summit, air pressure is roughly one-third of sea level, meaning each breath delivers only a third of the oxygen your body needs.
+              - 'heading "Which Is Harder: Mount Kilimanjaro or Mount Everest?" [level=2] [ref=e171]'
+              - paragraph [ref=e172]: "This is the most common question when comparing these two mountains. The answer depends on what you're attempting:"
+              - list [ref=e173]:
+                - listitem [ref=e174]:
+                  - generic [ref=e176]:
+                    - generic [ref=e177]: Mount Kilimanjaro vs Everest Base Camp
+                    - generic [ref=e178]: Kilimanjaro is harder. You climb higher (5,895m vs 5,364m) and the summit night push is extremely demanding — 12–15 hours of climbing through the night in freezing temperatures.
+                - listitem [ref=e179]:
+                  - generic [ref=e181]:
+                    - generic [ref=e182]: Mount Kilimanjaro vs Everest Summit
+                    - generic [ref=e183]: Everest is incomparably harder. It requires years of mountaineering experience, technical climbing skills, and a $30,000–$100,000 budget. The death rate is significantly higher.
+              - paragraph [ref=e184]: For most adventure travelers comparing Mount Kilimanjaro vs Mount Everest, the realistic comparison is Kilimanjaro summit vs Everest Base Camp trek — and in that match-up, Kilimanjaro is the harder but more rewarding achievement.
+              - blockquote [ref=e185]:
+                - paragraph [ref=e186]: "\"I've guided climbers who trekked to Everest Base Camp before attempting Kilimanjaro, and they consistently say summit night on Kilimanjaro was the hardest thing they've done. The altitude is similar, but pushing for the summit through the night at -20°C is a completely different challenge to arriving at a base camp during daylight.\""
+                - paragraph [ref=e187]:
+                  - strong [ref=e188]: — Joseph Makundi, Lead Mountain Guide, Snow Africa Adventure (18 years, 400+ summits)
+              - 'heading "Acclimatization: The Crucial Difference" [level=2] [ref=e189]'
+              - paragraph [ref=e190]: "How your body adjusts to altitude is often the deciding factor in summit success, and the acclimatization profiles of these two mountains differ significantly:"
+              - heading "Kilimanjaro Acclimatization" [level=3] [ref=e191]
+              - paragraph [ref=e192]:
+                - text: Kilimanjaro demands rapid altitude gain — you ascend roughly 3,600m in just 5–9 days. This is one of the fastest altitude-gain rates of any popular trek in the world. The best routes (like the 8-day Lemosho) build in "climb high, sleep low" days where you ascend to ~4,630m at Lava Tower before descending to sleep at ~3,960m. Around 75% of Kilimanjaro climbers experience some degree of mild
+                - link "altitude sickness" [ref=e193] [cursor=pointer]:
+                  - /url: /kilimanjaro-altitude-sickness/
+                - text: ", making route selection and pacing critical."
+              - heading "Everest Base Camp Acclimatization" [level=3] [ref=e194]
+              - paragraph [ref=e195]: The EBC trek is gentler — you gain ~2,500m over 12–14 days, with built-in rest days at Namche Bazaar (3,440m) and Dingboche (4,410m). The slower pace means AMS rates are notably lower. Most trekkers acclimatize well because the trail infrastructure allows gradual progression with comfortable tea house stops.
+              - heading "Everest Summit Acclimatization" [level=3] [ref=e196]
+              - paragraph [ref=e197]: Expedition members spend weeks at base camp (5,364m) and make multiple rotations to higher camps before a summit attempt. Despite this, above 8,000m the human body deteriorates regardless of acclimatization — time in the death zone must be minimized.
+              - paragraph
+              - generic [ref=e199]:
+                - generic [ref=e200]: Key takeaway
+                - generic [ref=e201]: If altitude concerns you, the EBC trek is more forgiving. For Kilimanjaro, choosing a 7+ day route dramatically improves your acclimatization and
+              - link "summit success rates" [ref=e202] [cursor=pointer]:
+                - /url: /kilimanjaro-success-rates/
+              - text: .
+              - paragraph
+              - heading "Technical Requirements" [level=2] [ref=e203]
+              - heading "Kilimanjaro" [level=3] [ref=e204]
+              - paragraph
+              - generic [ref=e206]:
+                - generic [ref=e207]: Skills needed
+                - generic [ref=e208]: None beyond hiking fitness
+              - paragraph
+              - list [ref=e209]:
+                - listitem [ref=e210]:
+                  - text: Walk-up mountain with established trails across
+                  - link "multiple routes" [ref=e211] [cursor=pointer]:
+                    - /url: /kilimanjaro-climbing-routes/
+                - listitem [ref=e212]: No ropes, crampons, or ice axes required
+                - listitem [ref=e213]: Barranco Wall involves scrambling but no technical climbing
+                - listitem [ref=e214]:
+                  - text: Professional guides handle all logistics — see our
+                  - link "climbing tips" [ref=e215] [cursor=pointer]:
+                    - /url: /kilimanjaro-climbing-tips/
+                  - text: for preparation advice
+              - heading "Everest Base Camp" [level=3] [ref=e216]
+              - paragraph
+              - generic [ref=e218]:
+                - generic [ref=e219]: Skills needed
+                - generic [ref=e220]: Trekking experience helpful but not essential
+              - paragraph
+              - list [ref=e221]:
+                - listitem [ref=e222]: Well-maintained tea house trail
+                - listitem [ref=e223]: No technical sections
+                - listitem [ref=e224]: Suspension bridges require head for heights
+                - listitem [ref=e225]: Possible snow on trail at times
+              - heading "Everest Summit" [level=3] [ref=e226]
+              - paragraph
+              - generic [ref=e228]:
+                - generic [ref=e229]: Skills needed
+                - generic [ref=e230]: Advanced mountaineering
+              - paragraph
+              - list [ref=e231]:
+                - listitem [ref=e232]: Crampon and ice axe proficiency
+                - listitem [ref=e233]: Fixed rope ascending/descending (jumar technique)
+                - listitem [ref=e234]: Crevasse rescue knowledge
+                - listitem [ref=e235]: Previous high-altitude (7,000m+) experience typically required
+                - listitem [ref=e236]: Ladder crossings over crevasses
+                - listitem [ref=e237]: Ability to climb in extreme cold and wind
+              - 'heading "Best Season to Climb: Kilimanjaro vs Everest" [level=2] [ref=e238]'
+              - paragraph [ref=e239]: "The optimal climbing windows differ significantly between the two mountains:"
+              - heading "Kilimanjaro Climbing Seasons" [level=3] [ref=e240]
+              - paragraph [ref=e241]:
+                - text: Kilimanjaro can be climbed year-round, but the
+                - link "best months" [ref=e242] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+                - text: "fall into two dry seasons:"
+              - list [ref=e243]:
+                - listitem [ref=e244]:
+                  - generic [ref=e246]:
+                    - generic [ref=e247]: Peak season (June–October)
+                    - generic [ref=e248]: Dry, cold nights, clear skies. Busiest period but highest summit success rates.
+                - listitem [ref=e249]:
+                  - generic [ref=e251]:
+                    - generic [ref=e252]: Second season (January–March)
+                    - generic [ref=e253]: Warmer days, slightly more rain risk but fewer crowds. Our guides report comparable success rates to peak season on 7+ day routes.
+                - listitem [ref=e254]:
+                  - generic [ref=e256]:
+                    - generic [ref=e257]: Shoulder months (November, April–May)
+                    - generic [ref=e258]: Possible but wetter. Lower prices and very quiet trails.
+              - heading "Everest Base Camp Trekking Seasons" [level=3] [ref=e259]
+              - list [ref=e260]:
+                - listitem [ref=e261]:
+                  - generic [ref=e263]:
+                    - generic [ref=e264]: Spring (March–May)
+                    - generic [ref=e265]: Warmer temperatures, rhododendron blooms, clearer views before monsoon.
+                - listitem [ref=e266]:
+                  - generic [ref=e268]:
+                    - generic [ref=e269]: Autumn (September–November)
+                    - generic [ref=e270]: Post-monsoon clarity, stable weather, most popular season.
+              - heading "Everest Summit Window" [level=3] [ref=e271]
+              - paragraph [ref=e272]: The summit window is extremely narrow — most successful summit attempts happen in a 2–3 week period in May when the jet stream lifts temporarily. A secondary window exists in September–October but is used far less frequently.
+              - heading "Accommodation and Logistics" [level=2] [ref=e273]
+              - paragraph [ref=e274]: "The day-to-day experience on each mountain is surprisingly different:"
+              - 'heading "Kilimanjaro: Full-Service Camping" [level=3] [ref=e275]'
+              - paragraph [ref=e276]: On Kilimanjaro, your operator provides everything. A typical group of 4 climbers will have 15–20 support crew including guides, cooks, and porters who carry all equipment. You sleep in tents at designated campsites, eat hot meals prepared by a dedicated cook, and carry only a daypack. The camping experience is well-organized — you arrive at camp to find your tent set up and hot tea waiting.
+              - 'heading "Everest Base Camp: Tea House Trekking" [level=3] [ref=e277]'
+              - paragraph [ref=e278]: The EBC trek uses Nepal's famous tea house (lodge) system. You sleep in basic but comfortable lodges along the trail, eat in communal dining rooms, and can buy snacks and supplies at small shops. There's a social, community atmosphere. You carry your own pack or hire a porter.
+              - 'heading "Everest Summit: Expedition-Style" [level=3] [ref=e279]'
+              - paragraph [ref=e280]: A full Everest expedition involves weeks at base camp (a small tent city), followed by rotations to progressively higher camps. You'll spend significant time waiting for weather windows. Life at base camp includes a mess tent, cook, and communication equipment.
+              - heading "Scenery and Experience Compared" [level=2] [ref=e281]
+              - paragraph [ref=e282]: "Both mountains deliver extraordinary experiences, but the character of each journey is distinct:"
+              - 'heading "Kilimanjaro: Five Climate Zones in One Week" [level=3] [ref=e283]'
+              - paragraph [ref=e284]: "Kilimanjaro is unique among the world's great mountains for the diversity of ecosystems you traverse. In 5–9 days you pass through:"
+              - list [ref=e285]:
+                - listitem [ref=e286]:
+                  - strong [ref=e287]: Cultivation zone
+                  - text: – Banana plantations and coffee farms at the base
+                - listitem [ref=e288]:
+                  - strong [ref=e289]: Rainforest
+                  - text: – Dense montane forest with colobus monkeys and exotic birds
+                - listitem [ref=e290]:
+                  - strong [ref=e291]: Heath and moorland
+                  - text: – Giant heathers and otherworldly lobelia plants
+                - listitem [ref=e292]:
+                  - strong [ref=e293]: Alpine desert
+                  - text: – Barren, Mars-like volcanic landscape
+                - listitem [ref=e294]:
+                  - strong [ref=e295]: Arctic summit zone
+                  - text: – Glaciers and ice fields at the roof of Africa
+              - paragraph [ref=e296]: This ecological diversity means every day looks completely different — something no other mountain on Earth offers in such compressed vertical distance.
+              - 'heading "Everest Base Camp: Himalayan Culture and Grandeur" [level=3] [ref=e297]'
+              - paragraph [ref=e298]: The EBC trek is as much a cultural journey as a physical one. You walk through Sherpa villages, visit Buddhist monasteries (including the famous Tengboche Monastery), cross dramatic suspension bridges, and are surrounded by 8,000m giants — Lhotse, Nuptse, Ama Dablam, and Everest itself. The Himalayan scale is staggering and nothing else on Earth matches it.
+              - 'heading "Route Options: 7 Routes vs 1 Trail" [level=2] [ref=e299]'
+              - paragraph [ref=e300]:
+                - text: One of Kilimanjaro's biggest advantages is choice. There are
+                - link "seven established routes" [ref=e301] [cursor=pointer]:
+                  - /url: /kilimanjaro-climbing-routes/
+                - text: ", each with a different character:"
+              - table [ref=e302]:
+                - rowgroup [ref=e303]:
+                  - row "Route Days Success Rate Character" [ref=e304]:
+                    - columnheader "Route" [ref=e305]
+                    - columnheader "Days" [ref=e306]
+                    - columnheader "Success Rate" [ref=e307]
+                    - columnheader "Character" [ref=e308]
+                - rowgroup [ref=e309]:
+                  - row "Lemosho 7–8 90–95% Scenic, low crowds, best acclimatization" [ref=e310]:
+                    - cell "Lemosho" [ref=e311]
+                    - cell "7–8" [ref=e312]
+                    - cell "90–95%" [ref=e313]
+                    - cell "Scenic, low crowds, best acclimatization" [ref=e314]
+                  - row "Machame 6–7 85–90% Most popular, dramatic scenery" [ref=e315]:
+                    - cell "Machame" [ref=e316]
+                    - cell "6–7" [ref=e317]
+                    - cell "85–90%" [ref=e318]
+                    - cell "Most popular, dramatic scenery" [ref=e319]
+                  - row "Marangu 5–6 65–85% Only hut route, \"Coca-Cola route\"" [ref=e320]:
+                    - cell "Marangu" [ref=e321]
+                    - cell "5–6" [ref=e322]
+                    - cell "65–85%" [ref=e323]
+                    - cell "Only hut route, \"Coca-Cola route\"" [ref=e324]
+                  - row "Rongai 6–7 85–90% Northern approach, drier, quieter" [ref=e325]:
+                    - cell "Rongai" [ref=e326]
+                    - cell "6–7" [ref=e327]
+                    - cell "85–90%" [ref=e328]
+                    - cell "Northern approach, drier, quieter" [ref=e329]
+                  - row "Northern Circuit 9 90%+ Full circumnavigation, longest route" [ref=e330]:
+                    - cell "Northern Circuit" [ref=e331]
+                    - cell "9" [ref=e332]
+                    - cell "90%+" [ref=e333]
+                    - cell "Full circumnavigation, longest route" [ref=e334]
+                  - row "Umbwe 5–6 70–80% Steepest, for experienced trekkers" [ref=e335]:
+                    - cell "Umbwe" [ref=e336]
+                    - cell "5–6" [ref=e337]
+                    - cell "70–80%" [ref=e338]
+                    - cell "Steepest, for experienced trekkers" [ref=e339]
+                  - row "Shira 7–8 85–90% High starting point, joins Lemosho" [ref=e340]:
+                    - cell "Shira" [ref=e341]
+                    - cell "7–8" [ref=e342]
+                    - cell "85–90%" [ref=e343]
+                    - cell "High starting point, joins Lemosho" [ref=e344]
+              - paragraph [ref=e345]: Everest Base Camp, by contrast, has essentially one trail — the classic Lukla-to-EBC route through the Khumbu Valley. There are minor variations (like the Gokyo Lakes detour), but the core path is the same for everyone.
+              - paragraph [ref=e346]: This means Kilimanjaro lets you tailor the experience to your fitness level, budget, and preference for crowds — something the EBC trek doesn't offer.
+              - heading "Permits and Bureaucracy" [level=2] [ref=e347]
+              - heading "Kilimanjaro" [level=3] [ref=e348]
+              - paragraph [ref=e349]: Straightforward. Park fees ($70/day for adults) are included in your operator's package price. Your climbing company handles all permits, registration, and park formalities. You need a valid passport and a Tanzania visa (available on arrival for most nationalities, ~$50). There's minimal paperwork on your end — one of Kilimanjaro's advantages for first-time international trekkers.
+              - heading "Everest Base Camp" [level=3] [ref=e350]
+              - paragraph [ref=e351]: You'll need a TIMS card (Trekkers' Information Management System) and a Sagarmatha National Park entry permit. These are typically arranged by your trekking agency in Kathmandu. Total permit costs are under $100. You'll also need a Nepal visa.
+              - heading "Everest Summit" [level=3] [ref=e352]
+              - paragraph [ref=e353]: This is where bureaucracy becomes expensive. The climbing permit alone is $11,000 per person (issued by Nepal's government). Your expedition operator handles liaison officer requirements, icefall doctor fees, and various deposits. The permit process requires months of advance planning and paperwork.
+              - heading "Time Investment" [level=2] [ref=e354]
+              - heading "Kilimanjaro" [level=3] [ref=e355]
+              - list [ref=e356]:
+                - listitem [ref=e357]:
+                  - generic [ref=e359]:
+                    - generic [ref=e360]: Climb duration
+                    - generic [ref=e361]: 5–9 days
+                - listitem [ref=e362]:
+                  - generic [ref=e364]:
+                    - generic [ref=e365]: Total trip
+                    - generic [ref=e366]: 8–12 days including travel
+                - listitem [ref=e367]:
+                  - generic [ref=e369]:
+                    - generic [ref=e370]: Training
+                    - generic [ref=e371]: 3–6 months of fitness preparation — see our
+                  - link "12-week training plan" [ref=e372] [cursor=pointer]:
+                    - /url: /kilimanjaro-training-plan/
+              - heading "Everest Base Camp" [level=3] [ref=e373]
+              - list [ref=e374]:
+                - listitem [ref=e375]:
+                  - generic [ref=e377]:
+                    - generic [ref=e378]: Trek duration
+                    - generic [ref=e379]: 12–14 days
+                - listitem [ref=e380]:
+                  - generic [ref=e382]:
+                    - generic [ref=e383]: Total trip
+                    - generic [ref=e384]: 16–18 days including travel
+                - listitem [ref=e385]:
+                  - generic [ref=e387]:
+                    - generic [ref=e388]: Training
+                    - generic [ref=e389]: 3–6 months of hiking preparation
+              - heading "Everest Summit" [level=3] [ref=e390]
+              - list [ref=e391]:
+                - listitem [ref=e392]:
+                  - generic [ref=e394]:
+                    - generic [ref=e395]: Expedition duration
+                    - generic [ref=e396]: 60–70 days
+                - listitem [ref=e397]:
+                  - generic [ref=e399]:
+                    - generic [ref=e400]: Training
+                    - generic [ref=e401]: Years of progressive mountaineering
+                - listitem [ref=e402]:
+                  - generic [ref=e404]:
+                    - generic [ref=e405]: Prerequisite climbs
+                    - generic [ref=e406]: Multiple 6,000m+ and typically 7,000m+ peaks
+              - 'heading "Cost Comparison: Kilimanjaro vs Everest" [level=2] [ref=e407]'
+              - 'heading "Mount Kilimanjaro: $2,000–$6,000" [level=3] [ref=e408]'
+              - list [ref=e409]:
+                - listitem [ref=e410]:
+                  - text: "Climb package: $2,000–$4,500 (see"
+                  - link "full Kilimanjaro price breakdown" [ref=e411] [cursor=pointer]:
+                    - /url: /kilimanjaro-prices/
+                  - text: )
+                - listitem [ref=e412]: "Flights: $800–$1,500"
+                - listitem [ref=e413]: "Gear: $500–$1,500 (can rent locally)"
+                - listitem [ref=e414]: "Tips: $250–$400"
+              - 'heading "Everest Base Camp: $1,500–$5,000" [level=3] [ref=e415]'
+              - list [ref=e416]:
+                - listitem [ref=e417]: "Trek package: $1,000–$3,000"
+                - listitem [ref=e418]: "Flights: $1,000–$1,800"
+                - listitem [ref=e419]: "Permits: Included or ~$50"
+                - listitem [ref=e420]: "Gear: $500–$1,000"
+              - 'heading "Everest Summit: $30,000–$100,000+" [level=3] [ref=e421]'
+              - list [ref=e422]:
+                - listitem [ref=e423]: "Expedition fee: $25,000–$80,000"
+                - listitem [ref=e424]: "Permit: $11,000"
+                - listitem [ref=e425]: "Gear: $5,000–$15,000"
+                - listitem [ref=e426]: "Training expeditions: $10,000–$30,000"
+                - listitem [ref=e427]: "Insurance: $500–$2,000"
+              - paragraph
+              - generic [ref=e429]:
+                - generic [ref=e430]: Value perspective
+                - generic [ref=e431]: Dollar for dollar, Kilimanjaro offers one of the best summit-to-cost ratios of any major mountain in the world. For under $5,000 total, you stand on the roof of Africa and one of the Seven Summits. That same budget doesn't even cover the permit fee for Everest.
+              - paragraph
+              - heading "Risks and Safety" [level=2] [ref=e432]
+              - heading "Kilimanjaro" [level=3] [ref=e433]
+              - paragraph
+              - generic [ref=e435]:
+                - generic [ref=e436]: Death rate
+                - generic [ref=e437]: Approximately 10 per year (~0.03% of climbers)
+              - paragraph
+              - paragraph [ref=e438]: "Main risks:"
+              - list [ref=e439]:
+                - listitem [ref=e440]:
+                  - link "Altitude sickness" [ref=e441] [cursor=pointer]:
+                    - /url: /kilimanjaro-altitude-sickness/
+                  - text: (AMS, HACE, HAPE)
+                - listitem [ref=e442]: Hypothermia
+                - listitem [ref=e443]: Falls (rare)
+                - listitem [ref=e444]: Pre-existing conditions exacerbated by altitude
+              - paragraph [ref=e445]: "Mitigations: Proper acclimatization, guide monitoring, descent when symptomatic. Reputable operators (including Snow Africa Adventure) carry pulse oximeters and emergency oxygen on every climb and monitor climbers twice daily."
+              - heading "Everest Base Camp" [level=3] [ref=e446]
+              - paragraph
+              - generic [ref=e448]:
+                - generic [ref=e449]: Death rate
+                - generic [ref=e450]: Very low (trail deaths rare)
+              - paragraph
+              - paragraph [ref=e451]: "Main risks:"
+              - list [ref=e452]:
+                - listitem [ref=e453]: Altitude sickness
+                - listitem [ref=e454]: Trail accidents
+                - listitem [ref=e455]: Weather exposure
+              - heading "Everest Summit" [level=3] [ref=e456]
+              - paragraph
+              - generic [ref=e458]:
+                - generic [ref=e459]: Death rate
+                - generic [ref=e460]: Approximately 1–2% of summit attempts
+              - paragraph
+              - paragraph [ref=e461]: "Main risks:"
+              - list [ref=e462]:
+                - listitem [ref=e463]: Extreme altitude (death zone)
+                - listitem [ref=e464]: Avalanches
+                - listitem [ref=e465]: Falls
+                - listitem [ref=e466]: Crevasses
+                - listitem [ref=e467]: Frostbite
+                - listitem [ref=e468]: Exhaustion
+                - listitem [ref=e469]: Weather
+                - listitem [ref=e470]: Khumbu Icefall collapse
+              - heading "Experience Level Comparison" [level=2] [ref=e471]
+              - heading "If You're a Fit Beginner" [level=3] [ref=e472]
+              - paragraph
+              - generic [ref=e474]:
+                - generic [ref=e475]: Choose
+                - generic [ref=e476]: Kilimanjaro or Everest Base Camp
+              - paragraph
+              - paragraph [ref=e477]:
+                - text: Both are achievable for motivated beginners with proper preparation. Kilimanjaro offers a summit achievement; EBC offers cultural immersion and Everest views. Check our
+                - link "beginner's guide to Kilimanjaro" [ref=e478] [cursor=pointer]:
+                  - /url: /can-beginners-climb-kilimanjaro/
+                - text: for honest advice on whether you're ready.
+              - heading "If You Want a Summit" [level=3] [ref=e479]
+              - paragraph
+              - generic [ref=e481]:
+                - generic [ref=e482]: Choose
+                - generic [ref=e483]: Kilimanjaro
+              - paragraph
+              - paragraph [ref=e484]: You'll stand on a true summit — the highest point in Africa and one of the Seven Summits. EBC is not a summit, and Everest's summit requires years of preparation.
+              - heading "If You Want Extreme Challenge" [level=3] [ref=e485]
+              - paragraph
+              - generic [ref=e487]:
+                - generic [ref=e488]: Long-term goal
+                - generic [ref=e489]: Everest Summit
+              - paragraph
+              - paragraph [ref=e490]: But start with Kilimanjaro and other peaks. Build progressive experience on increasingly difficult mountains.
+              - 'heading "Real Climber Experience: Kilimanjaro Then Everest Base Camp" [level=2] [ref=e491]'
+              - paragraph [ref=e492]:
+                - text: Sarah Mitchell, a 34-year-old teacher from the UK, climbed Kilimanjaro with Snow Africa Adventure in February 2025 via the
+                - link "Lemosho route" [ref=e493] [cursor=pointer]:
+                  - /url: /trekking/
+                - text: ", then trekked to Everest Base Camp six months later. Her comparison:"
+              - blockquote [ref=e494]:
+                - paragraph [ref=e495]: "\"Kilimanjaro was physically harder — summit night nearly broke me. But the sense of achievement standing on Uhuru Peak at sunrise was unlike anything I'd experienced. EBC was longer and the scenery was spectacular, but you arrive at a rocky campsite, take photos, and turn around. On Kilimanjaro, you reach the actual summit of a continent. If I could only do one, I'd choose Kilimanjaro every time.\""
+              - paragraph [ref=e496]:
+                - text: Sarah's experience is typical. Our post-climb surveys show that
+                - strong [ref=e497]: 92% of climbers who've done both Kilimanjaro and EBC rate the Kilimanjaro summit as the more meaningful achievement
+                - text: ", while acknowledging the Himalayan scenery on the EBC trek is harder to match."
+              - heading "The Typical Progression" [level=2] [ref=e498]
+              - paragraph [ref=e499]: "Many aspiring mountaineers follow a progression:"
+              - list [ref=e500]:
+                - listitem [ref=e501]:
+                  - strong [ref=e502]:
+                    - link "Kilimanjaro:" [ref=e503] [cursor=pointer]:
+                      - /url: /climbing-kilimanjaro/
+                  - text: First high-altitude experience
+                - listitem [ref=e504]:
+                  - generic [ref=e506]:
+                    - generic [ref=e507]: Other trekking peaks
+                    - generic [ref=e508]: Mount Kenya, Aconcagua trek, etc.
+                - listitem [ref=e509]:
+                  - generic [ref=e511]:
+                    - generic [ref=e512]: Technical mountains
+                    - generic [ref=e513]: Learn ropes, crampons, ice axe
+                - listitem [ref=e514]:
+                  - generic [ref=e516]:
+                    - generic [ref=e517]: 6,000m peaks
+                    - generic [ref=e518]: Cotopaxi, Huayna Potosi, etc.
+                - listitem [ref=e519]:
+                  - generic [ref=e521]:
+                    - generic [ref=e522]: 7,000m peaks
+                    - generic [ref=e523]: Aconcagua summit, Lenin Peak, etc.
+                - listitem [ref=e524]:
+                  - generic [ref=e526]:
+                    - generic [ref=e527]: 8,000m preparation
+                    - generic [ref=e528]: Cho Oyu or other "easier" 8,000ers
+                - listitem [ref=e529]:
+                  - generic [ref=e531]:
+                    - generic [ref=e532]: Everest
+                    - generic [ref=e533]: The ultimate goal
+              - 'heading "Our Recommendation: Mount Kilimanjaro First" [level=2] [ref=e534]'
+              - paragraph [ref=e535]:
+                - text: For most adventure travelers comparing Mount Kilimanjaro vs Mount Everest,
+                - strong [ref=e536]: Kilimanjaro offers the best combination
+                - text: "of:"
+              - list [ref=e537]:
+                - listitem [ref=e538]: Achievable challenge — no technical skills required
+                - listitem [ref=e539]: True summit achievement — one of the Seven Summits
+                - listitem [ref=e540]: Reasonable cost — under $5,000 all-in
+                - listitem [ref=e541]: Manageable time commitment — 8–12 days total
+                - listitem [ref=e542]: Relatively low risk — with experienced guides and proper acclimatization
+                - listitem [ref=e543]: Incredible experience — five climate zones, sunrise from the roof of Africa
+              - paragraph [ref=e544]: Everest Base Camp is a wonderful trek, but you're visiting a location rather than achieving a summit. Mount Everest's summit is a lifetime commitment requiring years of preparation and significant resources. When it comes to Mount Kilimanjaro vs Mount Everest, start with Kilimanjaro — it's the smarter first step toward bigger mountains.
+              - 'heading "Climate Change: Why Timing Matters" [level=2] [ref=e545]'
+              - paragraph [ref=e546]: "Both mountains are being reshaped by climate change, adding urgency to the \"which first\" question:"
+              - list [ref=e547]:
+                - listitem [ref=e548]:
+                  - strong [ref=e549]: Kilimanjaro's glaciers
+                  - text: have lost approximately 85% of their ice coverage since 1912. The rate of loss has accelerated — from ~1% per year before 1953 to ~2.5% annually since 1989. Current projections suggest the iconic summit glaciers could disappear entirely by 2040–2060. If seeing
+                  - link "Kilimanjaro's snow-capped peak" [ref=e550] [cursor=pointer]:
+                    - /url: /mount-kilimanjaro-height/
+                  - text: matters to you, the window is closing.
+                - listitem [ref=e551]:
+                  - strong [ref=e552]: The Khumbu Glacier
+                  - text: on Everest has thinned by approximately 50 meters and the Khumbu Icefall is becoming increasingly unstable. Base camp itself may need to be relocated lower in coming decades.
+              - paragraph [ref=e553]: For climbers planning to do both mountains eventually, Kilimanjaro's glaciers are changing faster and more visibly than EBC's landscape — another reason to prioritize it.
+              - heading "When Everest Base Camp Is the Better Choice" [level=2] [ref=e554]
+              - paragraph [ref=e555]: "We're a Kilimanjaro company, so we'll be transparent about when EBC might suit you better:"
+              - list [ref=e556]:
+                - listitem [ref=e557]:
+                  - strong [ref=e558]: You prefer comfort over achievement.
+                  - text: Tea houses on the EBC trek offer warm beds, hot showers (at lower elevations), and freshly cooked meals. Kilimanjaro is camping only.
+                - listitem [ref=e559]:
+                  - strong [ref=e560]: You have 2+ weeks.
+                  - text: EBC's slower pace is gentler on the body. If you have the time, the gradual acclimatization is easier.
+                - listitem [ref=e561]:
+                  - strong [ref=e562]: You want cultural immersion.
+                  - text: Walking through Sherpa villages, visiting monasteries, and experiencing Himalayan culture is woven into every day of the EBC trek. Kilimanjaro's cultural experiences are concentrated at the start and end.
+                - listitem [ref=e563]:
+                  - strong [ref=e564]: You're nervous about altitude.
+                  - text: EBC tops out at 5,364m — lower than Kilimanjaro — with more acclimatization time built in.
+                - listitem [ref=e565]:
+                  - strong [ref=e566]: You want Himalayan scale.
+                  - text: Being surrounded by multiple 8,000m peaks is an experience no other trek on Earth matches.
+              - paragraph [ref=e567]:
+                - text: That said, if you want a
+                - emphasis [ref=e568]: summit
+                - text: — a true peak-bagging achievement — Kilimanjaro is the clear winner. EBC is a destination, not a summit.
+              - paragraph [ref=e569]:
+                - text: Ready to start with Mount Kilimanjaro?
+                - link "View our upcoming departures" [ref=e570] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+                - text: or
+                - link "contact us" [ref=e571] [cursor=pointer]:
+                  - /url: /contact-us/
+                - text: to begin planning your adventure.
+              - heading "Frequently Asked Questions" [level=2] [ref=e572]
+              - generic [ref=e573]:
+                - generic [ref=e574]:
+                  - heading "Is Mount Kilimanjaro harder than Mount Everest?" [level=3] [ref=e575]
+                  - paragraph [ref=e577]: It depends on the comparison. Mount Kilimanjaro's summit (5,895m) is harder than the Everest Base Camp trek (5,364m) due to higher altitude and a grueling summit night. However, summiting Mount Everest (8,849m) is incomparably harder, requiring years of mountaineering experience and technical climbing skills.
+                - generic [ref=e578]:
+                  - heading "Which is taller, Mount Kilimanjaro or Mount Everest?" [level=3] [ref=e579]
+                  - paragraph [ref=e581]: Mount Everest is significantly taller at 8,849m (29,032ft) compared to Mount Kilimanjaro at 5,895m (19,341ft) — a difference of 2,954 meters. However, Kilimanjaro is the tallest free-standing mountain in the world, rising nearly 4,900m from base to summit, while Everest is part of the Himalayan mountain range and rises about 3,600m above its base.
+                - generic [ref=e582]:
+                  - heading "How much does it cost to climb Kilimanjaro vs Everest?" [level=3] [ref=e583]
+                  - paragraph [ref=e585]: Mount Kilimanjaro costs $2,000–$6,000 total including flights, gear, and tips. The Everest Base Camp trek costs $1,500–$5,000. Summiting Mount Everest costs $30,000–$100,000+ including permits ($11,000), expedition fees, gear, and years of preparatory climbs. Dollar for dollar, Kilimanjaro offers one of the best summit-to-cost ratios of any major mountain.
+                - generic [ref=e586]:
+                  - heading "Can beginners climb Mount Kilimanjaro?" [level=3] [ref=e587]
+                  - paragraph [ref=e589]: Yes. Mount Kilimanjaro is a non-technical climb that requires no mountaineering experience. With 3–6 months of fitness training, most healthy adults can attempt the climb. Success rates range from 65–90% depending on the route chosen. It's an ideal first high-altitude mountain before progressing to harder peaks like those in the Himalayas.
+                - generic [ref=e590]:
+                  - heading "Should I climb Kilimanjaro before Everest?" [level=3] [ref=e591]
+                  - paragraph [ref=e593]:
+                    - text: Yes, most mountaineers
+                    - link "climb Kilimanjaro" [ref=e594] [cursor=pointer]:
+                      - /url: /trekking/
+                    - text: "before attempting Everest. Kilimanjaro provides valuable high-altitude experience and tests your body's response to altitude above 5,000m. The typical progression is: Kilimanjaro → other trekking peaks → technical mountains → 6,000m+ peaks → 7,000m+ peaks → Everest."
+                - generic [ref=e595]:
+                  - heading "What is the death rate on Kilimanjaro vs Everest?" [level=3] [ref=e596]
+                  - paragraph [ref=e598]: Mount Kilimanjaro has approximately 10 deaths per year among roughly 35,000 climbers (~0.03%). Everest Base Camp trekking deaths are very rare. Summiting Mount Everest has a fatality rate of approximately 1–2% of summit attempts, with 5–10 deaths in a typical year. The main cause of death on Kilimanjaro is altitude sickness, while Everest fatalities are caused by falls, avalanches, extreme altitude, and weather.
+                - generic [ref=e599]:
+                  - heading "Do you need supplemental oxygen on Kilimanjaro?" [level=3] [ref=e600]
+                  - paragraph [ref=e602]: No. Supplemental oxygen is not used for climbing on Kilimanjaro (5,895m), though reputable operators carry emergency oxygen for medical situations. On Everest above 8,000m, supplemental oxygen is standard and considered essential for survival by most climbers. The altitude on Kilimanjaro, while challenging, is within the range where the human body can acclimatize naturally with proper pacing.
+                - generic [ref=e603]:
+                  - heading "What is the best month to climb Kilimanjaro?" [level=3] [ref=e604]
+                  - paragraph [ref=e606]: The best months to climb Kilimanjaro are January–March and June–October (the two dry seasons). July and August offer the driest conditions but are the busiest. January–February provides warmer temperatures and fewer crowds. For a detailed month-by-month breakdown including weather data and crowd levels, see our best time to climb Kilimanjaro guide.
+                - generic [ref=e607]:
+                  - heading "Is Kilimanjaro higher than Everest Base Camp?" [level=3] [ref=e608]
+                  - paragraph [ref=e610]: Yes. Kilimanjaro's summit (Uhuru Peak) stands at 5,895m, which is 531 meters higher than Everest Base Camp at 5,364m. This surprises many people — you actually reach a higher altitude climbing Kilimanjaro than trekking to Everest Base Camp, despite Everest being the taller mountain overall.
+                - generic [ref=e611]:
+                  - heading "How fit do you need to be for Kilimanjaro vs Everest Base Camp?" [level=3] [ref=e612]
+                  - paragraph [ref=e614]: Both treks are achievable for regular hikers with 3–6 months of fitness training. You should be able to hike 6–8 hours on varied terrain. The key difference is that Kilimanjaro requires a demanding summit night push (12–15 hours), so cardio endurance and mental resilience matter more. EBC requires stamina over longer consecutive trekking days (12–14 days vs 5–9 days). Neither requires technical climbing skills.
+                - generic [ref=e615]:
+                  - heading "Do you need a guide for Kilimanjaro vs Everest Base Camp?" [level=3] [ref=e616]
+                  - paragraph [ref=e618]: On Kilimanjaro, a licensed guide is legally mandatory — you cannot enter Kilimanjaro National Park without a registered guide and crew. On the Everest Base Camp trek, a guide is not legally required and some experienced trekkers go independently, though hiring a guide is strongly recommended for safety, navigation, and altitude monitoring. Most trekking agencies include a guide in their EBC packages.
+              - generic [ref=e619]:
+                - paragraph [ref=e620]: Ready to climb Kilimanjaro yourself?
+                - paragraph [ref=e621]: We run KPAP-member small-group and private climbs year-round from Arusha.
+                - paragraph [ref=e622]:
+                  - link "Complete Kilimanjaro climbing guide" [ref=e623] [cursor=pointer]:
+                    - /url: /mount-kilimanjaro/
+                  - text: ·
+                  - link "Upcoming group departures" [ref=e624] [cursor=pointer]:
+                    - /url: /kilimanjaro-join-group-departures/
+                  - text: ·
+                  - link "Pricing breakdown" [ref=e625] [cursor=pointer]:
+                    - /url: /kilimanjaro-prices/
+            - generic [ref=e628]:
+              - img [ref=e630]
+              - generic [ref=e633]:
+                - generic [ref=e634]:
+                  - heading "Snow Africa Team" [level=3] [ref=e635]
+                  - generic [ref=e636]: Safari & Trekking Experts
+                - paragraph [ref=e637]: The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.
+                - generic [ref=e638]:
+                  - generic [ref=e639]:
+                    - img [ref=e640]
+                    - text: TATO Licensed Operator
+                  - generic [ref=e643]:
+                    - img [ref=e644]
+                    - text: Kilimanjaro Certified Guides
+                  - generic [ref=e647]:
+                    - img [ref=e648]
+                    - text: First Aid Wilderness Certified
+                  - generic [ref=e651]:
+                    - img [ref=e652]
+                    - text: Based in Arusha, Tanzania
+            - link "Back to Blog" [ref=e656] [cursor=pointer]:
+              - /url: /blog/
+              - img [ref=e657]
+              - text: Back to Blog
+            - generic [ref=e659]:
+              - heading "Continue Reading" [level=2] [ref=e660]
+              - generic [ref=e661]:
+                - link "Climbing Kilimanjaro Sustainably with KPAP Climbing Kilimanjaro Sustainably with KPAP Mar 18, 2026" [ref=e662] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+                  - img "Climbing Kilimanjaro Sustainably with KPAP" [ref=e664]
+                  - generic [ref=e665]:
+                    - heading "Climbing Kilimanjaro Sustainably with KPAP" [level=3] [ref=e666]
+                    - paragraph [ref=e667]: Mar 18, 2026
+                - 'link "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide Mar 2, 2026" [ref=e668] [cursor=pointer]':
+                  - /url: /best-time-to-climb-mount-kilimanjaro/
+                  - 'img "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide" [ref=e670]'
+                  - generic [ref=e671]:
+                    - 'heading "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide" [level=3] [ref=e672]'
+                    - paragraph [ref=e673]: Mar 2, 2026
+                - link "Conquer the Roof of Africa Conquer the Roof of Africa Feb 13, 2026" [ref=e674] [cursor=pointer]:
+                  - /url: /conquer-the-roof-of-africa-climbing-mount-kilimanjaro-with-snow-africa-adventures/
+                  - img "Conquer the Roof of Africa" [ref=e676]
+                  - generic [ref=e677]:
+                    - heading "Conquer the Roof of Africa" [level=3] [ref=e678]
+                    - paragraph [ref=e679]: Feb 13, 2026
+          - complementary [ref=e680]:
+            - generic [ref=e681]:
+              - generic [ref=e682]:
+                - heading "In This Article" [level=3] [ref=e683]:
+                  - img [ref=e685]
+                  - text: In This Article
+                - navigation [ref=e687]:
+                  - link "Mount Kilimanjaro (5,895m / 19,341ft)" [ref=e688] [cursor=pointer]:
+                    - /url: "#mount-kilimanjaro-5-895m-19-341ft"
+                    - generic [ref=e689]: Mount Kilimanjaro (5,895m / 19,341ft)
+                  - link "Mount Everest Base Camp (5,364m / 17,598ft)" [ref=e690] [cursor=pointer]:
+                    - /url: "#mount-everest-base-camp-5-364m-17-598ft"
+                    - generic [ref=e691]: Mount Everest Base Camp (5,364m / 17,598ft)
+                  - link "Mount Everest Summit (8,849m / 29,032ft)" [ref=e692] [cursor=pointer]:
+                    - /url: "#mount-everest-summit-8-849m-29-032ft"
+                    - generic [ref=e693]: Mount Everest Summit (8,849m / 29,032ft)
+                  - link "Kilimanjaro Acclimatization" [ref=e694] [cursor=pointer]:
+                    - /url: "#kilimanjaro-acclimatization"
+                    - generic [ref=e695]: Kilimanjaro Acclimatization
+                  - link "Everest Base Camp Acclimatization" [ref=e696] [cursor=pointer]:
+                    - /url: "#everest-base-camp-acclimatization"
+                    - generic [ref=e697]: Everest Base Camp Acclimatization
+                  - link "Everest Summit Acclimatization" [ref=e698] [cursor=pointer]:
+                    - /url: "#everest-summit-acclimatization"
+                    - generic [ref=e699]: Everest Summit Acclimatization
+                  - link "Kilimanjaro" [ref=e700] [cursor=pointer]:
+                    - /url: "#kilimanjaro"
+                    - generic [ref=e701]: Kilimanjaro
+                  - link "Everest Base Camp" [ref=e702] [cursor=pointer]:
+                    - /url: "#everest-base-camp"
+                    - generic [ref=e703]: Everest Base Camp
+                  - link "Everest Summit" [ref=e704] [cursor=pointer]:
+                    - /url: "#everest-summit"
+                    - generic [ref=e705]: Everest Summit
+                  - link "Kilimanjaro Climbing Seasons" [ref=e706] [cursor=pointer]:
+                    - /url: "#kilimanjaro-climbing-seasons"
+                    - generic [ref=e707]: Kilimanjaro Climbing Seasons
+                  - link "Everest Base Camp Trekking Seasons" [ref=e708] [cursor=pointer]:
+                    - /url: "#everest-base-camp-trekking-seasons"
+                    - generic [ref=e709]: Everest Base Camp Trekking Seasons
+                  - link "Everest Summit Window" [ref=e710] [cursor=pointer]:
+                    - /url: "#everest-summit-window"
+                    - generic [ref=e711]: Everest Summit Window
+                  - 'link "Kilimanjaro: Full-Service Camping" [ref=e712] [cursor=pointer]':
+                    - /url: "#kilimanjaro-full-service-camping"
+                    - generic [ref=e713]: "Kilimanjaro: Full-Service Camping"
+                  - 'link "Everest Base Camp: Tea House Trekking" [ref=e714] [cursor=pointer]':
+                    - /url: "#everest-base-camp-tea-house-trekking"
+                    - generic [ref=e715]: "Everest Base Camp: Tea House Trekking"
+                  - 'link "Everest Summit: Expedition-Style" [ref=e716] [cursor=pointer]':
+                    - /url: "#everest-summit-expedition-style"
+                    - generic [ref=e717]: "Everest Summit: Expedition-Style"
+                  - 'link "Kilimanjaro: Five Climate Zones in One Week" [ref=e718] [cursor=pointer]':
+                    - /url: "#kilimanjaro-five-climate-zones-in-one-week"
+                    - generic [ref=e719]: "Kilimanjaro: Five Climate Zones in One Week"
+                  - 'link "Everest Base Camp: Himalayan Culture and Grandeur" [ref=e720] [cursor=pointer]':
+                    - /url: "#everest-base-camp-himalayan-culture-and-grandeur"
+                    - generic [ref=e721]: "Everest Base Camp: Himalayan Culture and Grandeur"
+                  - link "Kilimanjaro" [ref=e722] [cursor=pointer]:
+                    - /url: "#kilimanjaro"
+                    - generic [ref=e723]: Kilimanjaro
+                  - link "Everest Base Camp" [ref=e724] [cursor=pointer]:
+                    - /url: "#everest-base-camp"
+                    - generic [ref=e725]: Everest Base Camp
+                  - link "Everest Summit" [ref=e726] [cursor=pointer]:
+                    - /url: "#everest-summit"
+                    - generic [ref=e727]: Everest Summit
+                  - link "Kilimanjaro" [ref=e728] [cursor=pointer]:
+                    - /url: "#kilimanjaro"
+                    - generic [ref=e729]: Kilimanjaro
+                  - link "Everest Base Camp" [ref=e730] [cursor=pointer]:
+                    - /url: "#everest-base-camp"
+                    - generic [ref=e731]: Everest Base Camp
+                  - link "Everest Summit" [ref=e732] [cursor=pointer]:
+                    - /url: "#everest-summit"
+                    - generic [ref=e733]: Everest Summit
+                  - 'link "Mount Kilimanjaro: $2,000–$6,000" [ref=e734] [cursor=pointer]':
+                    - /url: "#mount-kilimanjaro-2-000-6-000"
+                    - generic [ref=e735]: "Mount Kilimanjaro: $2,000–$6,000"
+                  - 'link "Everest Base Camp: $1,500–$5,000" [ref=e736] [cursor=pointer]':
+                    - /url: "#everest-base-camp-1-500-5-000"
+                    - generic [ref=e737]: "Everest Base Camp: $1,500–$5,000"
+                  - 'link "Everest Summit: $30,000–$100,000+" [ref=e738] [cursor=pointer]':
+                    - /url: "#everest-summit-30-000-100-000"
+                    - generic [ref=e739]: "Everest Summit: $30,000–$100,000+"
+                  - link "Kilimanjaro" [ref=e740] [cursor=pointer]:
+                    - /url: "#kilimanjaro"
+                    - generic [ref=e741]: Kilimanjaro
+                  - link "Everest Base Camp" [ref=e742] [cursor=pointer]:
+                    - /url: "#everest-base-camp"
+                    - generic [ref=e743]: Everest Base Camp
+                  - link "Everest Summit" [ref=e744] [cursor=pointer]:
+                    - /url: "#everest-summit"
+                    - generic [ref=e745]: Everest Summit
+                  - link "If You're a Fit Beginner" [ref=e746] [cursor=pointer]:
+                    - /url: "#if-you-re-a-fit-beginner"
+                    - generic [ref=e747]: If You're a Fit Beginner
+                  - link "If You Want a Summit" [ref=e748] [cursor=pointer]:
+                    - /url: "#if-you-want-a-summit"
+                    - generic [ref=e749]: If You Want a Summit
+                  - link "If You Want Extreme Challenge" [ref=e750] [cursor=pointer]:
+                    - /url: "#if-you-want-extreme-challenge"
+                    - generic [ref=e751]: If You Want Extreme Challenge
+                  - link "Is Mount Kilimanjaro harder than Mount Everest?" [ref=e752] [cursor=pointer]:
+                    - /url: "#is-mount-kilimanjaro-harder-than-mount-everest"
+                    - generic [ref=e753]: Is Mount Kilimanjaro harder than Mount Everest?
+                  - link "Which is taller, Mount Kilimanjaro or Mount Everest?" [ref=e754] [cursor=pointer]:
+                    - /url: "#which-is-taller-mount-kilimanjaro-or-mount-everest"
+                    - generic [ref=e755]: Which is taller, Mount Kilimanjaro or Mount Everest?
+                  - link "How much does it cost to climb Kilimanjaro vs Everest?" [ref=e756] [cursor=pointer]:
+                    - /url: "#how-much-does-it-cost-to-climb-kilimanjaro-vs-everest"
+                    - generic [ref=e757]: How much does it cost to climb Kilimanjaro vs Everest?
+                  - link "Can beginners climb Mount Kilimanjaro?" [ref=e758] [cursor=pointer]:
+                    - /url: "#can-beginners-climb-mount-kilimanjaro"
+                    - generic [ref=e759]: Can beginners climb Mount Kilimanjaro?
+                  - link "Should I climb Kilimanjaro before Everest?" [ref=e760] [cursor=pointer]:
+                    - /url: "#should-i-climb-kilimanjaro-before-everest"
+                    - generic [ref=e761]: Should I climb Kilimanjaro before Everest?
+                  - link "What is the death rate on Kilimanjaro vs Everest?" [ref=e762] [cursor=pointer]:
+                    - /url: "#what-is-the-death-rate-on-kilimanjaro-vs-everest"
+                    - generic [ref=e763]: What is the death rate on Kilimanjaro vs Everest?
+                  - link "Do you need supplemental oxygen on Kilimanjaro?" [ref=e764] [cursor=pointer]:
+                    - /url: "#do-you-need-supplemental-oxygen-on-kilimanjaro"
+                    - generic [ref=e765]: Do you need supplemental oxygen on Kilimanjaro?
+                  - link "What is the best month to climb Kilimanjaro?" [ref=e766] [cursor=pointer]:
+                    - /url: "#what-is-the-best-month-to-climb-kilimanjaro"
+                    - generic [ref=e767]: What is the best month to climb Kilimanjaro?
+                  - link "Is Kilimanjaro higher than Everest Base Camp?" [ref=e768] [cursor=pointer]:
+                    - /url: "#is-kilimanjaro-higher-than-everest-base-camp"
+                    - generic [ref=e769]: Is Kilimanjaro higher than Everest Base Camp?
+                  - link "How fit do you need to be for Kilimanjaro vs Everest Base Camp?" [ref=e770] [cursor=pointer]:
+                    - /url: "#how-fit-do-you-need-to-be-for-kilimanjaro-vs-everest-base-camp"
+                    - generic [ref=e771]: How fit do you need to be for Kilimanjaro vs Everest Base Camp?
+                  - link "Do you need a guide for Kilimanjaro vs Everest Base Camp?" [ref=e772] [cursor=pointer]:
+                    - /url: "#do-you-need-a-guide-for-kilimanjaro-vs-everest-base-camp"
+                    - generic [ref=e773]: Do you need a guide for Kilimanjaro vs Everest Base Camp?
+              - generic [ref=e774]:
+                - generic [ref=e775]:
+                  - img [ref=e777]
+                  - heading "Climb Kilimanjaro" [level=3] [ref=e779]
+                - paragraph [ref=e780]: Ready for the adventure of a lifetime? Join our expert guides on Africa's highest peak.
+                - link "View Routes" [ref=e781] [cursor=pointer]:
+                  - /url: /trekking/
+              - generic [ref=e782]:
+                - heading "Categories" [level=3] [ref=e783]:
+                  - img [ref=e785]
+                  - text: Categories
+                - list [ref=e788]:
+                  - listitem [ref=e789]:
+                    - link "Blog 27" [ref=e790] [cursor=pointer]:
+                      - /url: /category/blog/
+                      - generic [ref=e791]: Blog
+                      - generic [ref=e792]: "27"
+                  - listitem [ref=e793]:
+                    - link "Day Trips 1" [ref=e794] [cursor=pointer]:
+                      - /url: /category/day-trip/
+                      - generic [ref=e795]: Day Trips
+                      - generic [ref=e796]: "1"
+                  - listitem [ref=e797]:
+                    - link "Kilimanjaro Climbing Guide 16" [ref=e798] [cursor=pointer]:
+                      - /url: /category/kilimanjaro-climbing-guide/
+                      - generic [ref=e799]: Kilimanjaro Climbing Guide
+                      - generic [ref=e800]: "16"
+                  - listitem [ref=e801]:
+                    - link "Mount Kilimanjaro 33" [ref=e802] [cursor=pointer]:
+                      - /url: /category/mount-kilimanjaro/
+                      - generic [ref=e803]: Mount Kilimanjaro
+                      - generic [ref=e804]: "33"
+                  - listitem [ref=e805]:
+                    - link "Safari Tours 41" [ref=e806] [cursor=pointer]:
+                      - /url: /category/safari-tours/
+                      - generic [ref=e807]: Safari Tours
+                      - generic [ref=e808]: "41"
+                  - listitem [ref=e809]:
+                    - link "Tanzania Destinations 7" [ref=e810] [cursor=pointer]:
+                      - /url: /category/tanzania-destinations/
+                      - generic [ref=e811]: Tanzania Destinations
+                      - generic [ref=e812]: "7"
+              - generic [ref=e813]:
+                - generic [ref=e814]:
+                  - img [ref=e816]
+                  - heading "Tanzania Safari" [level=3] [ref=e819]
+                - paragraph [ref=e820]: Combine your climb with a wildlife safari through Tanzania's iconic parks.
+                - link "View Safaris" [ref=e821] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - generic [ref=e822]:
+                - heading "Join a Group Climb" [level=3] [ref=e823]
+                - paragraph [ref=e824]: Fixed departure dates with fellow adventurers from around the world.
+                - link "View 2026 Dates" [ref=e825] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+                  - text: View 2026 Dates
+                  - img [ref=e826]
+    - contentinfo [ref=e828]:
+      - generic [ref=e831]:
+        - generic [ref=e832]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e833]
+      - generic [ref=e838]:
+        - generic [ref=e839]:
+          - generic [ref=e840]:
+            - img "Snow Africa Adventure" [ref=e842]
+            - paragraph [ref=e843]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e844]:
+              - listitem [ref=e845]:
+                - link "+255 766 657 854" [ref=e846] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e848]
+                  - generic [ref=e850]: +255 766 657 854
+              - listitem [ref=e851]:
+                - link "info@snowafricaadventure.com" [ref=e852] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e854]
+                  - generic [ref=e857]: info@snowafricaadventure.com
+              - listitem [ref=e858]:
+                - img [ref=e860]
+                - generic [ref=e863]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e864]:
+            - heading "Safari & Tours" [level=3] [ref=e865]
+            - list [ref=e866]:
+              - listitem [ref=e867]:
+                - link "All Safari Packages" [ref=e868] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e869]:
+                - link "Tailor-Made Safaris" [ref=e870] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e871]:
+                - link "Tanzania Destinations" [ref=e872] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e873]:
+                - link "View all" [ref=e874] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e875]: →
+          - generic [ref=e876]:
+            - heading "Kilimanjaro" [level=3] [ref=e877]
+            - list [ref=e878]:
+              - listitem [ref=e879]:
+                - link "All Trekking Routes" [ref=e880] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e881]:
+                - link "Best Route to Climb" [ref=e882] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e883]:
+                - link "Climbing Kilimanjaro Guide" [ref=e884] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e885]:
+                - link "Join Group Departures" [ref=e886] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e887]:
+                - link "Kilimanjaro Prices" [ref=e888] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e889]:
+                - link "Best Time to Climb" [ref=e890] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e891]:
+                - link "View all routes" [ref=e892] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e893]: →
+          - generic [ref=e894]:
+            - heading "Company" [level=3] [ref=e895]
+            - list [ref=e896]:
+              - listitem [ref=e897]:
+                - link "About Us" [ref=e898] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e899]:
+                - link "Our Guides" [ref=e900] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e901]:
+                - link "Contact Us" [ref=e902] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e903]:
+                - link "Terms & Conditions" [ref=e904] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e905]:
+                - link "Privacy Policy" [ref=e906] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e907]:
+                - link "Blog" [ref=e908] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e909]:
+              - heading "Follow the Journey" [level=4] [ref=e910]
+              - generic [ref=e911]:
+                - link "Facebook" [ref=e912] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e913]
+                - link "Twitter" [ref=e915] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e916]
+                - link "Instagram" [ref=e918] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e919]
+                - link "YouTube" [ref=e922] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e923]
+        - generic [ref=e927]:
+          - generic [ref=e928]: Accredited & Trusted
+          - generic [ref=e929]:
+            - link "TripAdvisor" [ref=e930] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e932]: SafariBookings
+            - generic [ref=e934]: TATO Member
+            - generic [ref=e936]: KPAP Partner
+      - generic [ref=e939]:
+        - generic [ref=e940]:
+          - generic [ref=e941]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e942]: "|"
+          - link "Terms & Conditions" [ref=e943] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e944]: ·
+          - link "Privacy Policy" [ref=e945] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e946]:
+          - generic [ref=e947]: Crafted by
+          - link "Timeless International" [ref=e948] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 12:35 PM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e949]:
+      - img [ref=e950]
+  - generic [ref=e957] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e958]:
+      - img [ref=e959]
+    - generic [ref=e962]:
+      - button "Open issues overlay" [ref=e963]:
+        - generic [ref=e964]:
+          - generic [ref=e965]: "2"
+          - generic [ref=e966]: "3"
+        - generic [ref=e967]:
+          - text: Issue
+          - generic [ref=e968]: s
+      - button "Collapse issues badge" [ref=e969]:
+        - img [ref=e970]
+  - alert [ref=e972]

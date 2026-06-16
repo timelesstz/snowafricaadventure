@@ -1,0 +1,472 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]: info@goshenisafaris.com
+        - generic [ref=e8]: +255 715 636 967
+      - generic [ref=e9]:
+        - button "en" [ref=e10]
+        - button "fr" [ref=e11]
+        - button "de" [ref=e12]
+    - generic [ref=e14]:
+      - link "Gosheni Safaris" [ref=e15] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e16]: Gosheni Safaris
+      - navigation [ref=e17]:
+        - link "Safari Guide" [ref=e18] [cursor=pointer]:
+          - /url: /safari-guide
+        - link "Destinations" [ref=e20] [cursor=pointer]:
+          - /url: /destinations
+          - text: Destinations
+          - img [ref=e21]
+        - link "Tours & Safaris" [ref=e24] [cursor=pointer]:
+          - /url: /tours
+          - text: Tours & Safaris
+          - img [ref=e25]
+        - link "Accommodations" [ref=e28] [cursor=pointer]:
+          - /url: /accommodations
+          - text: Accommodations
+          - img [ref=e29]
+        - link "Travel by Month" [ref=e31] [cursor=pointer]:
+          - /url: /travel-by-month
+        - link "About Us" [ref=e33] [cursor=pointer]:
+          - /url: /about
+          - text: About Us
+          - img [ref=e34]
+        - link "Blog" [ref=e36] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e37] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=e38]:
+        - button "Search" [ref=e39]:
+          - img [ref=e40]
+        - link "Start Planning" [ref=e43] [cursor=pointer]:
+          - /url: /safari-planner
+  - main [ref=e44]:
+    - generic [ref=e48]:
+      - paragraph [ref=e51]: Award-Winning African Safaris Since 2009
+      - heading "Discover The Unexpected" [level=1] [ref=e53]
+      - link "Start Planning" [ref=e55] [cursor=pointer]:
+        - /url: /safari-planner
+      - paragraph [ref=e56]: Africa's Leading Tour Operator 2024 · World Travel Awards Winner
+    - generic [ref=e60]:
+      - generic [ref=e61]:
+        - img [ref=e62]
+        - generic [ref=e64]: 0+
+        - paragraph [ref=e65]: Years of Safari Expertise
+      - generic [ref=e66]:
+        - img [ref=e67]
+        - generic [ref=e70]: 0+
+        - paragraph [ref=e71]: Curated Safari Packages
+      - generic [ref=e72]:
+        - img [ref=e73]
+        - generic [ref=e76]: "0"
+        - paragraph [ref=e77]: African Countries
+      - generic [ref=e78]:
+        - img [ref=e79]
+        - generic [ref=e84]: 0+
+        - paragraph [ref=e85]: Self-Owned Safari Vehicles
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e92]:
+          - paragraph [ref=e93]: Since 2009
+          - paragraph [ref=e94]: Crafted journeys across six African wildernesses.
+        - generic [ref=e95]:
+          - generic [ref=e96]: 15+
+          - generic [ref=e97]: Years of Excellence
+      - generic [ref=e98]:
+        - paragraph [ref=e99]: Since 2009 · Arusha, Tanzania
+        - heading "Experience Africa, Beyond Your Imagination" [level=2] [ref=e100]
+        - paragraph [ref=e101]: Founded in 2009 by Peter Robert — a former safari guide and driver — Gosheni Safaris has grown into one of Africa's premier safari operators. With over 50 self-owned vehicles, 100% Tanzanian staff, and an unwavering commitment to excellence, every journey is crafted with firsthand expertise and genuine passion.
+        - generic [ref=e102]:
+          - generic [ref=e103]:
+            - img [ref=e104]
+            - generic [ref=e107]: World Travel Awards Winner
+          - generic [ref=e108]:
+            - img [ref=e109]
+            - generic [ref=e111]: TripAdvisor Excellence Since 2015
+          - generic [ref=e112]:
+            - img [ref=e113]
+            - generic [ref=e115]: 100% Locally Owned
+        - link "Learn More About Us" [ref=e117] [cursor=pointer]:
+          - /url: /about
+    - generic [ref=e119]:
+      - generic [ref=e120]:
+        - generic [ref=e122]:
+          - heading "Top African Safari Destinations" [level=2] [ref=e123]
+          - paragraph [ref=e124]: Whether it's your first safari or your twentieth, our Africa Safari Experts can tailor-make any vacation to make it the trip of a lifetime.
+        - generic [ref=e125]:
+          - button "Previous" [ref=e126]:
+            - img [ref=e127]
+          - button "Next" [ref=e129]:
+            - img [ref=e130]
+      - generic [ref=e132]:
+        - link "Tanzania Tanzania 56 tours" [ref=e134] [cursor=pointer]:
+          - /url: /destinations/tanzania
+          - img "Tanzania" [ref=e135]
+          - generic [ref=e137]:
+            - heading "Tanzania" [level=3] [ref=e138]
+            - paragraph [ref=e139]: 56 tours
+        - link "Kenya Kenya 32 tours" [ref=e141] [cursor=pointer]:
+          - /url: /destinations/kenya
+          - img "Kenya" [ref=e142]
+          - generic [ref=e144]:
+            - heading "Kenya" [level=3] [ref=e145]
+            - paragraph [ref=e146]: 32 tours
+        - link "South Africa South Africa 30 tours" [ref=e148] [cursor=pointer]:
+          - /url: /destinations/south-africa
+          - img "South Africa" [ref=e149]
+          - generic [ref=e151]:
+            - heading "South Africa" [level=3] [ref=e152]
+            - paragraph [ref=e153]: 30 tours
+        - link "Uganda Uganda 20 tours" [ref=e155] [cursor=pointer]:
+          - /url: /destinations/uganda
+          - img "Uganda" [ref=e156]
+          - generic [ref=e158]:
+            - heading "Uganda" [level=3] [ref=e159]
+            - paragraph [ref=e160]: 20 tours
+        - link "Rwanda Rwanda 12 tours" [ref=e162] [cursor=pointer]:
+          - /url: /destinations/rwanda
+          - img "Rwanda" [ref=e163]
+          - generic [ref=e165]:
+            - heading "Rwanda" [level=3] [ref=e166]
+            - paragraph [ref=e167]: 12 tours
+        - link "Botswana Botswana 4 tours" [ref=e169] [cursor=pointer]:
+          - /url: /destinations/botswana
+          - img "Botswana" [ref=e170]
+          - generic [ref=e172]:
+            - heading "Botswana" [level=3] [ref=e173]
+            - paragraph [ref=e174]: 4 tours
+      - link "View All Destinations" [ref=e176] [cursor=pointer]:
+        - /url: /destinations
+    - generic [ref=e178]:
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - heading "Trips To Inspire" [level=2] [ref=e181]
+          - paragraph [ref=e182]: Be inspired by a selection of our favourite African safari tours. All completely flexible and arranged to your travel needs.
+        - generic [ref=e183]:
+          - button "Previous" [ref=e184]:
+            - img [ref=e185]
+          - button "Next" [ref=e187]:
+            - img [ref=e188]
+      - link "See All Safaris" [ref=e192] [cursor=pointer]:
+        - /url: /tours
+    - generic [ref=e194]:
+      - generic [ref=e195]:
+        - paragraph [ref=e196]: How It Works
+        - heading "Your Journey Starts Here" [level=2] [ref=e197]
+        - paragraph [ref=e198]: Three simple steps to your dream African safari
+      - generic [ref=e199]:
+        - generic [ref=e201]:
+          - generic [ref=e202]: "01"
+          - img [ref=e204]
+          - heading "Tell Us Your Dream" [level=3] [ref=e206]
+          - paragraph [ref=e207]: Share your ideal destinations, travel dates, and the experiences that matter most to you.
+        - generic [ref=e208]:
+          - generic [ref=e209]: "02"
+          - img [ref=e211]
+          - heading "We Craft Your Safari" [level=3] [ref=e214]
+          - paragraph [ref=e215]: Your dedicated Gosheni specialist designs a bespoke itinerary with our own vehicles, guides, and insider knowledge.
+        - generic [ref=e216]:
+          - generic [ref=e217]: "03"
+          - img [ref=e219]
+          - heading "Confirm & Explore" [level=3] [ref=e222]
+          - paragraph [ref=e223]: Review your personalised proposal, make any adjustments, and set off on an unforgettable African adventure.
+      - link "Start Planning" [ref=e225] [cursor=pointer]:
+        - /url: /safari-planner
+    - generic [ref=e227]:
+      - generic [ref=e228]:
+        - paragraph [ref=e229]: Why Gosheni
+        - heading "Why Travel With Gosheni Safaris?" [level=2] [ref=e230]
+      - generic [ref=e231]:
+        - generic [ref=e232]:
+          - img [ref=e234]
+          - heading "Professional Guides" [level=3] [ref=e239]
+          - paragraph [ref=e240]: Our trained naturalists and trackers are among the best in Africa — passionate storytellers who bring the bush to life.
+        - generic [ref=e241]:
+          - img [ref=e243]
+          - heading "Local Expertise" [level=3] [ref=e245]
+          - paragraph [ref=e246]: Founded in Arusha by a former safari guide, we are 100% Tanzanian-owned with deep roots across East and Southern Africa.
+        - generic [ref=e247]:
+          - img [ref=e249]
+          - heading "Exclusive Vehicles" [level=3] [ref=e253]
+          - paragraph [ref=e254]: Over 50 self-owned custom safari Land Cruisers — no third-party rentals, no compromises on comfort or reliability.
+        - generic [ref=e255]:
+          - img [ref=e257]
+          - heading "Expertise & Experience" [level=3] [ref=e260]
+          - paragraph [ref=e261]: Since 2009, we've earned TripAdvisor Excellence (since 2015) and multiple World Travel Awards for Africa's leading operator.
+        - generic [ref=e262]:
+          - img [ref=e264]
+          - heading "Tailored Customisation" [level=3] [ref=e266]
+          - paragraph [ref=e267]: No two safaris are alike. Every itinerary is designed around your interests, pace, and budget — never off-the-shelf.
+        - generic [ref=e268]:
+          - img [ref=e270]
+          - heading "Variety of Destinations" [level=3] [ref=e273]
+          - paragraph [ref=e274]: Six countries, 159+ curated tours — from the Serengeti and Masai Mara to gorilla trekking in Rwanda and the Okavango Delta.
+      - link "Enquire Now" [ref=e276] [cursor=pointer]:
+        - /url: /safari-planner
+    - generic [ref=e278]:
+      - generic [ref=e279]:
+        - paragraph [ref=e280]: Plan Your Safari
+        - heading "Best Time to Visit Africa" [level=2] [ref=e281]
+        - paragraph [ref=e282]: Each month offers a different side of Africa. Find the perfect time for your adventure.
+      - generic [ref=e283]:
+        - button "Jan 27°C" [ref=e284]:
+          - generic [ref=e286]: Jan
+          - generic [ref=e287]: 27°C
+        - button "Feb 27°C" [ref=e288]:
+          - generic [ref=e290]: Feb
+          - generic [ref=e291]: 27°C
+        - button "Mar 26°C" [ref=e292]:
+          - generic [ref=e294]: Mar
+          - generic [ref=e295]: 26°C
+        - button "Apr 22°C" [ref=e296]:
+          - generic [ref=e298]: Apr
+          - generic [ref=e299]: 22°C
+        - button "May 21°C" [ref=e300]:
+          - generic [ref=e302]: May
+          - generic [ref=e303]: 21°C
+        - button "Jun 22°C" [ref=e304]:
+          - generic [ref=e306]: Jun
+          - generic [ref=e307]: 22°C
+        - button "Jul 21°C" [ref=e308]:
+          - generic [ref=e310]: Jul
+          - generic [ref=e311]: 21°C
+        - button "Aug 22°C" [ref=e312]:
+          - generic [ref=e314]: Aug
+          - generic [ref=e315]: 22°C
+        - button "Sep 23°C" [ref=e316]:
+          - generic [ref=e318]: Sep
+          - generic [ref=e319]: 23°C
+        - button "Oct 24°C" [ref=e320]:
+          - generic [ref=e322]: Oct
+          - generic [ref=e323]: 24°C
+        - button "Nov 22°C" [ref=e324]:
+          - generic [ref=e326]: Nov
+          - generic [ref=e327]: 22°C
+        - button "Dec 21°C" [ref=e328]:
+          - generic [ref=e330]: Dec
+          - generic [ref=e331]: 21°C
+      - generic [ref=e333]:
+        - generic [ref=e336]:
+          - generic [ref=e337]:
+            - paragraph [ref=e338]: Green Season
+            - heading "Safari in January" [level=3] [ref=e339]:
+              - text: Safari in
+              - emphasis [ref=e340]: January
+          - generic [ref=e341]:
+            - generic [ref=e342]:
+              - img [ref=e343]
+              - generic [ref=e345]: 27°C
+            - generic [ref=e346]:
+              - img [ref=e347]
+              - generic [ref=e350]: 93mm
+            - generic [ref=e351]:
+              - img [ref=e352]
+              - generic [ref=e358]: Medium
+        - generic [ref=e359]:
+          - paragraph [ref=e360]: Wildebeest calving in Ndutu — up to 8,000 calves born daily. Predators at their most active.
+          - generic [ref=e361]:
+            - paragraph [ref=e362]: Top Destinations
+            - generic [ref=e363]:
+              - generic [ref=e364]:
+                - img [ref=e365]
+                - text: Serengeti
+              - generic [ref=e368]:
+                - img [ref=e369]
+                - text: Ngorongoro
+              - generic [ref=e372]:
+                - img [ref=e373]
+                - text: Tarangire
+          - generic [ref=e376]:
+            - link "Plan a January Safari" [ref=e377] [cursor=pointer]:
+              - /url: /travel-by-month/january
+              - text: Plan a January Safari
+              - img
+            - link "View all months →" [ref=e378] [cursor=pointer]:
+              - /url: /travel-by-month
+    - generic [ref=e380]:
+      - generic [ref=e381]:
+        - generic [ref=e382]:
+          - paragraph [ref=e383]: Traveller Stories
+          - heading "What Our Travellers Say" [level=2] [ref=e384]
+          - generic [ref=e385]:
+            - generic "5 out of 5 stars" [ref=e386]:
+              - img [ref=e387]
+              - img [ref=e389]
+              - img [ref=e391]
+              - img [ref=e393]
+              - img [ref=e395]
+            - generic [ref=e397]: Based on 100+ reviews
+        - generic [ref=e398]:
+          - button "Previous reviews" [ref=e399]:
+            - img [ref=e400]
+          - button "Next reviews" [ref=e402]:
+            - img [ref=e403]
+      - link "See All Reviews" [ref=e407] [cursor=pointer]:
+        - /url: /about/reviews
+    - generic [ref=e411]:
+      - paragraph [ref=e412]: Travel With Purpose
+      - heading "Every Safari Makes A Difference" [level=2] [ref=e413]
+      - paragraph [ref=e415]: Every safari with Gosheni not only inspires travellers but also contributes positively to Tanzania's people, wildlife, and environment. With 100% Tanzanian staff and deep community roots, your journey creates real, lasting impact.
+      - generic [ref=e416]:
+        - link "Start Planning Your Safari" [ref=e417] [cursor=pointer]:
+          - /url: /safari-planner
+        - link "Learn About Our Impact" [ref=e418] [cursor=pointer]:
+          - /url: /about/foundation
+  - contentinfo [ref=e419]:
+    - generic [ref=e423]:
+      - generic [ref=e424]:
+        - paragraph [ref=e425]: Stay Updated
+        - heading "Join the Journey" [level=3] [ref=e426]:
+          - text: Join the
+          - emphasis [ref=e427]: Journey
+        - paragraph [ref=e428]: Subscribe for safari tips, travel deals, and wildlife stories.
+      - generic [ref=e430]:
+        - textbox "Your email address" [ref=e431]
+        - button "Subscribe" [ref=e432]:
+          - text: Subscribe
+          - img [ref=e433]
+    - generic [ref=e436]:
+      - generic [ref=e438]:
+        - generic [ref=e439]:
+          - link "Gosheni Safaris" [ref=e440] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e441]: Gosheni Safaris
+          - paragraph [ref=e442]: Gosheni Safaris crafts unforgettable African safari experiences across Tanzania, Kenya, South Africa, Botswana, Rwanda, and Uganda.
+        - generic [ref=e443]:
+          - link "Facebook" [ref=e444] [cursor=pointer]:
+            - /url: https://www.facebook.com/goshenisafarisafrica
+            - img [ref=e445]
+          - link "Instagram" [ref=e447] [cursor=pointer]:
+            - /url: https://www.instagram.com/goshenisafaris/
+            - img [ref=e448]
+          - link "YouTube" [ref=e450] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/GosheniSafarisAfrica
+            - img [ref=e451]
+          - link "TikTok" [ref=e453] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@goshenisafaris
+            - img [ref=e454]
+          - link "Pinterest" [ref=e456] [cursor=pointer]:
+            - /url: https://www.pinterest.ph/goshenisafarisa/
+            - img [ref=e457]
+          - link "LinkedIn" [ref=e459] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/gosheni-safaris-limited/
+            - img [ref=e460]
+          - link "X" [ref=e462] [cursor=pointer]:
+            - /url: https://twitter.com/gosheni_safaris
+            - img [ref=e463]
+          - link "Email" [ref=e465] [cursor=pointer]:
+            - /url: mailto:info@goshenisafaris.com
+            - img [ref=e466]
+      - generic [ref=e470]:
+        - generic [ref=e472]:
+          - heading "Destinations" [level=4] [ref=e473]:
+            - img [ref=e474]
+            - text: Destinations
+          - list [ref=e477]:
+            - listitem [ref=e478]:
+              - link "Tanzania" [ref=e479] [cursor=pointer]:
+                - /url: /destinations/tanzania
+                - text: Tanzania
+            - listitem [ref=e481]:
+              - link "Kenya" [ref=e482] [cursor=pointer]:
+                - /url: /destinations/kenya
+                - text: Kenya
+            - listitem [ref=e484]:
+              - link "South Africa" [ref=e485] [cursor=pointer]:
+                - /url: /destinations/south-africa
+                - text: South Africa
+            - listitem [ref=e487]:
+              - link "Botswana" [ref=e488] [cursor=pointer]:
+                - /url: /destinations/botswana
+                - text: Botswana
+            - listitem [ref=e490]:
+              - link "Rwanda" [ref=e491] [cursor=pointer]:
+                - /url: /destinations/rwanda
+                - text: Rwanda
+            - listitem [ref=e493]:
+              - link "Uganda" [ref=e494] [cursor=pointer]:
+                - /url: /destinations/uganda
+                - text: Uganda
+        - generic [ref=e497]:
+          - heading "Tour Types" [level=4] [ref=e498]
+          - list [ref=e499]:
+            - listitem [ref=e500]:
+              - link "Great Migration" [ref=e501] [cursor=pointer]:
+                - /url: /safari-types/great-migration
+                - text: Great Migration
+            - listitem [ref=e503]:
+              - link "Big 5 Safari" [ref=e504] [cursor=pointer]:
+                - /url: /safari-types/big-5
+                - text: Big 5 Safari
+            - listitem [ref=e506]:
+              - link "Family Safari" [ref=e507] [cursor=pointer]:
+                - /url: /safari-types/family
+                - text: Family Safari
+            - listitem [ref=e509]:
+              - link "Honeymoon" [ref=e510] [cursor=pointer]:
+                - /url: /safari-types/honeymoon
+                - text: Honeymoon
+            - listitem [ref=e512]:
+              - link "Luxury Safari" [ref=e513] [cursor=pointer]:
+                - /url: /safari-types/luxury
+                - text: Luxury Safari
+            - listitem [ref=e515]:
+              - link "Kilimanjaro" [ref=e516] [cursor=pointer]:
+                - /url: /safari-types/kilimanjaro
+                - text: Kilimanjaro
+        - generic [ref=e519]:
+          - heading "Company" [level=4] [ref=e520]
+          - list [ref=e521]:
+            - listitem [ref=e522]:
+              - link "Our Story" [ref=e523] [cursor=pointer]:
+                - /url: /about
+                - text: Our Story
+            - listitem [ref=e525]:
+              - link "Why Book with Gosheni" [ref=e526] [cursor=pointer]:
+                - /url: /about/why-book
+                - text: Why Book with Gosheni
+            - listitem [ref=e528]:
+              - link "Our Guides" [ref=e529] [cursor=pointer]:
+                - /url: /about/guides
+                - text: Our Guides
+            - listitem [ref=e531]:
+              - link "Our Vehicles" [ref=e532] [cursor=pointer]:
+                - /url: /about/vehicles
+                - text: Our Vehicles
+            - listitem [ref=e534]:
+              - link "Gosheni Foundation" [ref=e535] [cursor=pointer]:
+                - /url: /about/foundation
+                - text: Gosheni Foundation
+            - listitem [ref=e537]:
+              - link "Gosheni DMC" [ref=e538] [cursor=pointer]:
+                - /url: /about/dmc
+                - text: Gosheni DMC
+            - listitem [ref=e540]:
+              - link "Traveller Reviews" [ref=e541] [cursor=pointer]:
+                - /url: /about/reviews
+                - text: Traveller Reviews
+            - listitem [ref=e543]:
+              - link "Contact Us" [ref=e544] [cursor=pointer]:
+                - /url: /contact
+                - text: Contact Us
+    - generic [ref=e547]:
+      - paragraph [ref=e548]: © 2026 Gosheni Safaris. All rights reserved.
+      - generic [ref=e549]:
+        - link "Privacy Policy" [ref=e550] [cursor=pointer]:
+          - /url: /privacy-policy
+        - generic [ref=e551]: "|"
+        - link "Payment Terms" [ref=e552] [cursor=pointer]:
+          - /url: /payment-terms
+        - generic [ref=e553]: "|"
+        - link "FAQ" [ref=e554] [cursor=pointer]:
+          - /url: /faq
+        - generic [ref=e555]:
+          - button "en" [ref=e556]
+          - button "fr" [ref=e557]
+          - button "de" [ref=e558]
+  - button "Open Next.js Dev Tools" [ref=e564] [cursor=pointer]:
+    - img [ref=e565]

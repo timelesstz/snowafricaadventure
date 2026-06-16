@@ -1,0 +1,1042 @@
+[    4040ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    4095ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    4165ms] [LOG] [31m[Web Vitals] TTFB: 3859.60 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    4908ms] [LOG] [32m[Web Vitals] CLS: 0.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    6162ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    6306ms] [LOG] [31m[Web Vitals] TTFB: 3859.60 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    6474ms] [WARNING] Image with src "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/branding/2026/02/1770644684164-logo-2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    6509ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6510ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6510ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6510ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6511ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6511ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6511ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6512ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6512ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    6551ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[    6615ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    6689ms] [LOG] [Fast Refresh] done in 194ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    9669ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[   13881ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[  131667ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  131940ms] [LOG] [Fast Refresh] done in 382ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  190770ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  191063ms] [LOG] [Fast Refresh] done in 406ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  356336ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  359354ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[  360448ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  360598ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  360665ms] [LOG] [31m[Web Vitals] TTFB: 3795.50 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  361196ms] [LOG] [32m[Web Vitals] CLS: 0.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  361865ms] [LOG] [31m[Web Vitals] TTFB: 3795.50 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  361911ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[  362212ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  362311ms] [WARNING] Image with src "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/branding/2026/02/1770644684164-logo-2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  362325ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362325ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362325ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362326ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362326ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362326ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362328ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362329ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  362330ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  365395ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[  369570ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[  473896ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  476904ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[  478539ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  478639ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  478770ms] [LOG] [31m[Web Vitals] TTFB: 4428.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  479359ms] [LOG] [32m[Web Vitals] CLS: 0.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  480250ms] [LOG] [31m[Web Vitals] TTFB: 4428.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  480273ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[  480425ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  480505ms] [WARNING] Image with src "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/branding/2026/02/1770644684164-logo-2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  480655ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  480656ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  480657ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  480657ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  481213ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  481218ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  481219ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  481220ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  481221ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[  487584ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 1339399ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 1339517ms] [LOG] [Fast Refresh] done in 221ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 1460393ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 1463300ms] [LOG] [Fast Refresh] done in 3018ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2609170ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2612519ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 2623434ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2623567ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2623644ms] [LOG] [31m[Web Vitals] TTFB: 13942.70 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2624175ms] [LOG] [32m[Web Vitals] CLS: 0.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2625396ms] [WARNING] Image with src "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/branding/2026/02/1770644684164-logo-2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2625431ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625431ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625432ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625433ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625433ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625433ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625434ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625434ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2625435ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 2626055ms] [LOG] [31m[Web Vitals] TTFB: 13942.70 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2626089ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[ 2626196ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2629214ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 2634249ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 3769950ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3770756ms] [LOG] [Fast Refresh] done in 912ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3912383ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3912570ms] [LOG] [Fast Refresh] done in 258ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3915698ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 3917193ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917193ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917194ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917194ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917194ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917195ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917195ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917196ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917196ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3917310ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3917341ms] [LOG] [Fast Refresh] done in 130ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3917413ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[ 3917413ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[ 3920434ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 3925896ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3925917ms] [LOG] [Fast Refresh] done in 6ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3929333ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 3930578ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930579ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930579ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930579ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930579ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930580ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930580ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930580ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-base-camp @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930580ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. everest-summit @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 3930701ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[ 3930701ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[ 3933733ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 4011783ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 4011811ms] [LOG] [Fast Refresh] done in 145ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 5129261ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 5129747ms] [LOG] [Fast Refresh] done in 728ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 5132781ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[ 5791151ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 5791349ms] [LOG] [Fast Refresh] done in 305ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6632060ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6632234ms] [LOG] [Fast Refresh] done in 281ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6651638ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6651779ms] [LOG] [Fast Refresh] done in 250ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6925577ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6925672ms] [LOG] [Fast Refresh] done in 200ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6972028ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6972292ms] [LOG] [Fast Refresh] done in 372ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7227605ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7227716ms] [LOG] [Fast Refresh] done in 214ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7261515ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7261687ms] [LOG] [Fast Refresh] done in 280ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7786028ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7786240ms] [LOG] [Fast Refresh] done in 397ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7875581ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 7875709ms] [LOG] [Fast Refresh] done in 237ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 8881713ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 8881824ms] [LOG] [Fast Refresh] done in 230ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 9044210ms] [LOG] [31m[Web Vitals] FCP: 6435032.00 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 9044211ms] [LOG] [31m[Web Vitals] LCP: 6435032.00 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 9046175ms] [LOG] [32m[Web Vitals] INP: 24.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 9046247ms] [LOG] [32m[Web Vitals] INP: 32.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 9047215ms] [LOG] [32m[Web Vitals] INP: 40.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 9050253ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/:0
+[15963160ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15963190ms] [LOG] [32m[Web Vitals] FID: 1.70 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[15964196ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15965124ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15965780ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15966617ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15967331ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15967559ms] [LOG] [32m[Web Vitals] INP: 48.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[15967914ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15968396ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15968948ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15969452ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15970019ms] [ERROR] Failed to load resource: net::ERR_TOO_MANY_REDIRECTS @ http://localhost:3000/icon?8e3f56f49ddcd161=:0
+[15973027ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/#kilimanjaro:0
+[16285827ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16285920ms] [LOG] [Fast Refresh] done in 203ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16326804ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16326882ms] [LOG] [Fast Refresh] done in 186ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16444207ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16445168ms] [LOG] [Fast Refresh] done in 1065ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16518133ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16518139ms] [LOG] [Fast Refresh] done in 117ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16619380ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16619605ms] [LOG] [Fast Refresh] done in 339ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16750992ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[16751059ms] [LOG] [Fast Refresh] done in 174ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[17217577ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[17217587ms] [LOG] [Fast Refresh] done in 121ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[17315735ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=uo7zlmkICvG0kQlKEcGgw' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10884
+[17319175ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=uo7zlmkICvG0kQlKEcGgw' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10884
+[17322514ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=uo7zlmkICvG0kQlKEcGgw' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10884
+[17327339ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[17330464ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/kilimanjaro-vs-everest/#kilimanjaro:0
+[17337663ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17340361ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17340921ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17341306ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="2vMLr9G6mChsIXUe5JSMrg=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17342297ms] [LOG] [Web Vital] TTFB: 9356.20000000298 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17346104ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17346256ms] [LOG] [Fast Refresh] done in 412ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17346380ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17346382ms] [LOG] [Fast Refresh] done in 115ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17349428ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17351025ms] [LOG] [Fast Refresh] done in 1713ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17378273ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17378788ms] [LOG] [Fast Refresh] done in 627ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17438381ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17438719ms] [LOG] [Fast Refresh] done in 447ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17501583ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17501721ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17501752ms] [LOG] [Fast Refresh] done in 251ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17502690ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17503067ms] [LOG] [Fast Refresh] done in 480ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17503461ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17503934ms] [LOG] [Fast Refresh] done in 581ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17503949ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151192045&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=4&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115616985%7E115938466%7E115938469%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest%2F&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=160922&tfd=176599&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17503949ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151192045&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=4&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115616985%7E115938466%7E115938469%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest%2F&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=160922&tfd=176599&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17504790ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17505052ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17505346ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="pQmCSzQY5dn6gJU/VaJX9w=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17505438ms] [LOG] [Web Vital] TTFB: 2205 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17505987ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17507653ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17507883ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17507913ms] [LOG] [Fast Refresh] done in 331ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17508031ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17508546ms] [LOG] [Fast Refresh] done in 628ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17509031ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17510129ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151355339&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938468%7E119027222%7E119034493%7E119205315&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=scroll&epn.percent_scrolled=90&_et=120&tfd=8400&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17510129ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151355339&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938468%7E119027222%7E119034493%7E119205315&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=scroll&epn.percent_scrolled=90&_et=120&tfd=8400&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17510130ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151355339&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115938466%7E115938468%7E119027222%7E119034493%7E119205315&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=4372&tfd=8401&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17510130ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151355339&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115938466%7E115938468%7E119027222%7E119034493%7E119205315&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=4372&tfd=8401&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17510151ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17510220ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17510277ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17510598ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="Bd/eKEQw+lg3jF5Pnch7Tw=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17510870ms] [LOG] [Web Vital] TTFB: 2210.5 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17510986ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17511154ms] [LOG] [Fast Refresh] done in 273ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17511280ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17511351ms] [LOG] [Fast Refresh] done in 176ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17511551ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17511654ms] [LOG] [Fast Refresh] done in 218ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17518801ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17519260ms] [LOG] [Fast Refresh] done in 575ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17520583ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17521218ms] [LOG] [Fast Refresh] done in 748ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17603450ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17603523ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17603543ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17603555ms] [LOG] [Fast Refresh] done in 192ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17604581ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17604892ms] [LOG] [Fast Refresh] done in 427ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17605347ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17606062ms] [LOG] [Fast Refresh] done in 830ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17606127ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151360600&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115616985%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=95192&tfd=98222&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17606127ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151360600&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115616985%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=95192&tfd=98222&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17606148ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17606427ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17606514ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17606724ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="vuNw9wxQqTsE2b2uIIOgjA=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17606972ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17606982ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/branding/B2450k-vlrlVGYUug4Htu.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17607601ms] [LOG] [Fast Refresh] done in 781ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17609309ms] [LOG] [Web Vital] TTFB: 2563 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17612896ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17613078ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17613104ms] [LOG] [Fast Refresh] done in 286ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17613238ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17615303ms] [LOG] [Fast Refresh] done in 2173ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17615913ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151456721&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=11&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115616986%7E115938466%7E115938469%7E119027223%7E119034493%7E119064590%7E119168154&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=9052&tfd=12365&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17615914ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151456721&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=11&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115616986%7E115938466%7E115938469%7E119027223%7E119034493%7E119064590%7E119168154&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=9052&tfd=12365&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17615933ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17616130ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17616236ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17616426ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="A5koGk/OPdsgZqB3cWwggg=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17616738ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/branding/B2450k-vlrlVGYUug4Htu.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17616882ms] [LOG] [Web Vital] TTFB: 2818.7999999970198 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17641643ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17641970ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17642012ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17642022ms] [LOG] [Fast Refresh] done in 461ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17642151ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17643417ms] [LOG] [Fast Refresh] done in 1382ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17643467ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151466423&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=11&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938465%7E115938468%7E119034491&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=26857&tfd=30381&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17643467ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151466423&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=11&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938465%7E115938468%7E119034491&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=26857&tfd=30381&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17643491ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17643872ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17643986ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17644223ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="tGiTu/teuIZT9MAcIu4lBA=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17644512ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/branding/B2450k-vlrlVGYUug4Htu.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17647668ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/e5681870-4ce4-47df-bfb3-24131a45ce7b.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17647669ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/160c1685-b737-409f-aa88-94b5d5b3495a.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17647670ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/1798da4f-4e03-4e3d-993c-cd8d768410bf.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17647671ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/765cf5d2-7435-410b-9619-46ea639886dc.png" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17647838ms] [LOG] [Web Vital] TTFB: 1396.8999999910593 (needs-improvement) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17655686ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17655849ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17655879ms] [LOG] [Fast Refresh] done in 265ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17656014ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17657959ms] [LOG] [Fast Refresh] done in 2057ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17658483ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151494229&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=14093&tfd=16467&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17658483ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151494229&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=18&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=14093&tfd=16467&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17658560ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17658728ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17658833ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17659072ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="CIW/fyHwUaNNYq2TDjxDrQ=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17659353ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/branding/B2450k-vlrlVGYUug4Htu.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17659384ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/e5681870-4ce4-47df-bfb3-24131a45ce7b.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17659387ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/160c1685-b737-409f-aa88-94b5d5b3495a.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17659388ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/1798da4f-4e03-4e3d-993c-cd8d768410bf.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17659389ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/765cf5d2-7435-410b-9619-46ea639886dc.png" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17660544ms] [LOG] [Web Vital] TTFB: 2618.2000000029802 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17664219ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17664986ms] [LOG] [Fast Refresh] done in 868ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17717030ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17717382ms] [LOG] [Fast Refresh] done in 435ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17726651ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17726663ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17726689ms] [LOG] [Fast Refresh] done in 233ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17727469ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17727954ms] [LOG] [Fast Refresh] done in 589ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17728378ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17728722ms] [LOG] [Fast Refresh] done in 445ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17728878ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151509069&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=0&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938468%7E118228214%7E119034491&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=69646&tfd=73023&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17728878ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151509069&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=0&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938468%7E118228214%7E119034491&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=69646&tfd=73023&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17728899ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17729329ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17729418ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17729620ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="BUBylZJv5dTM24EnugowiQ=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17730146ms] [LOG] [Web Vital] TTFB: 2177.2999999970198 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17735302ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17735307ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17735336ms] [LOG] [Fast Refresh] done in 28ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17735876ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17736565ms] [LOG] [Fast Refresh] done in 798ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17736723ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151579624&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=14&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115938466%7E115938469%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=6624&tfd=10055&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17736724ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151579624&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=14&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115938466%7E115938469%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=6624&tfd=10055&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17736745ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17736958ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737044ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737212ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="CC1oFSVstC/nSyjSiGL0TQ=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17737491ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737498ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/branding/B2450k-vlrlVGYUug4Htu.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737521ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/e5681870-4ce4-47df-bfb3-24131a45ce7b.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737523ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/160c1685-b737-409f-aa88-94b5d5b3495a.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737524ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/1798da4f-4e03-4e3d-993c-cd8d768410bf.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737526ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/765cf5d2-7435-410b-9619-46ea639886dc.png" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17737540ms] [LOG] [Fast Refresh] done in 225ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17738747ms] [LOG] [Web Vital] TTFB: 1383.7999999970198 (needs-improvement) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17746647ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17746696ms] [LOG] [Fast Refresh] done in 1030ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17747420ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17747600ms] [LOG] [Fast Refresh] done in 301ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17845866ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17846107ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17846137ms] [LOG] [Fast Refresh] done in 342ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17847311ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17848571ms] [LOG] [Fast Refresh] done in 1374ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17848660ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151587209&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=3&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938469%7E119034491&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=111264&tfd=113330&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17848660ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151587209&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=3&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115938466%7E115938469%7E119034491&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=111264&tfd=113330&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17848840ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17849136ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17849275ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17850169ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17850236ms] [LOG] [Fast Refresh] done in 892ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17850379ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17851364ms] [LOG] [Fast Refresh] done in 1100ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17851481ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="aMJ8U6Z9yLVYe/P+NjYASQ=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17851683ms] [LOG] [Web Vital] TTFB: 2515.2999999970198 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17853522ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17853752ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17853756ms] [LOG] [Fast Refresh] done in 320ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17853884ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17854704ms] [LOG] [Fast Refresh] done in 929ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17855384ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17855536ms] [LOG] [Fast Refresh] done in 397ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17855716ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151701525&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115616986%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=3685&tfd=9590&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17855716ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151701525&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=3&tag_exp=0%7E115616986%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=user_engagement&_et=3685&tfd=9590&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17855717ms] [ERROR] Connecting to 'https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151701525&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115616986%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=scroll&epn.percent_scrolled=90&_et=32&tfd=9587&gaf=1' violates the following Content Security Policy directive: "connect-src 'self' https://api.mapbox.com https://*.pesapal.com https://www.google-analytics.com https://www.googletagmanager.com https://*.tiles.mapbox.com https://events.mapbox.com". The action has been blocked. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17855717ms] [ERROR] Fetch API cannot load https://www.google.com/g/collect?v=2&tid=G-M1R5DF95T6&gtm=45je65r2v9250231249za200zd9250231249&_p=1780151701525&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=1590992269.1778768918&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.179%7CGoogle%2520Chrome%3B148.0.7778.179%7CNot%252FA%29Brand%3B99.0.0.0&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=2&tag_exp=0%7E115616986%7E115938466%7E115938468%7E119034493&sid=1780151192&sct=1&seg=1&dl=http%3A%2F%2Flocalhost%2Fkilimanjaro-vs-everest&dr=http%3A%2F%2Flocalhost%3A3000%2Fkilimanjaro-vs-everest&dt=Acacia+Collections+%7C+Safari+Lodges+%26+Camps+in+Tanzania&en=scroll&epn.percent_scrolled=90&_et=32&tfd=9587&gaf=1. Refused to connect because it violates the document's Content Security Policy. @ https://www.googletagmanager.com/gtag/js?id=G-M1R5DF95T6:230
+[17855747ms] [LOG] %c
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+
+      Crafted by Timeless International      
+
+  ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ·· ··
+  background: #3F3A34; color: #D4AF37; font-size: 20px; font-weight: bold; padding: 12px 24px; border-radius: 6px; font-family: Georgia, serif; line-height: 1.8; @ http://localhost:3000/kilimanjaro-vs-everest:2
+[17855823ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17855901ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17856103ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/kilimanja..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_3101...">
+                          <head>
+                          <body className="antialiase..." suppressHydrationWarning={true}>
+                            <script>
+                            <script>
+                            <script
++                             nonce="en1lw+awMdNE4p5gJQdt3Q=="
+-                             nonce=""
+                              dangerouslySetInnerHTML={{__html:"\n        ..."}}
+                            >
+                            ...
+                  ...
+ @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:3127
+[17856455ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/branding/B2450k-vlrlVGYUug4Htu.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17856484ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/e5681870-4ce4-47df-bfb3-24131a45ce7b.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17856486ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/160c1685-b737-409f-aa88-94b5d5b3495a.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17856489ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/1798da4f-4e03-4e3d-993c-cd8d768410bf.webp" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17856490ms] [WARNING] Image with src "https://pub-aaed7a0049da4cf4be4aa0205b1bcc01.r2.dev/awards/765cf5d2-7435-410b-9619-46ea639886dc.png" has a "loader" property that does not implement width. Please implement it or use the "unoptimized" property instead.
+Read more: https://nextjs.org/docs/messages/next-image-missing-loader-width @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17858900ms] [LOG] [Web Vital] TTFB: 1929.7999999970198 (poor) @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17865029ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17865786ms] [LOG] [Fast Refresh] done in 723ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17876869ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17878847ms] [LOG] [Fast Refresh] done in 2093ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17879166ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17880269ms] [LOG] [Fast Refresh] done in 1268ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17931328ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17931603ms] [LOG] [Fast Refresh] done in 581ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17941963ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297
+[17942052ms] [LOG] [Fast Refresh] done in 206ms @ http://localhost:3000/_next/static/chunks/82e97_next_dist_518569c6._.js:2297

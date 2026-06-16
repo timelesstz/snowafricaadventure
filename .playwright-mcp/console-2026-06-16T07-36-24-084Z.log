@@ -1,0 +1,23 @@
+[     864ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     916ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     999ms] [LOG] [32m[Web Vitals] LCP: 820.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1001ms] [LOG] [32m[Web Vitals] TTFB: 739.80 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1001ms] [LOG] [32m[Web Vitals] FCP: 820.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1153ms] [LOG] [32m[Web Vitals] CLS: 0.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1202ms] [WARNING] Image with src "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/branding/2026/02/1770644684164-logo-2.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1202ms] [LOG] [32m[Web Vitals] LCP: 1172.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1898ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    1911ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. is-mount-meru-harder-than-kilimanjaro @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    1911ms] [ERROR] Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. how-much-does-it-cost-to-climb-mount-meru @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[    2007ms] [LOG] [32m[Web Vitals] LCP: 1920.00 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2697ms] [LOG] [32m[Web Vitals] TTFB: 739.80 (good)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2766ms] [LOG] [33m[Web Vitals] LCP: 2736.00 (needs-improvement)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2913ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    3039ms] [LOG] [Fast Refresh] done in 231ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    5791ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/climbing-mount-meru/:0
+[    7353ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    7361ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    7371ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    7608ms] [LOG] [31m[Web Vitals] LCP: 7504.00 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    8993ms] [LOG] [31m[Web Vitals] CLS: 0.30 (poor)[0m @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   12015ms] [WARNING] The resource https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/climbing-mount-meru/:0

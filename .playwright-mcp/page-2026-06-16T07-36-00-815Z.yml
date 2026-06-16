@@ -1,0 +1,733 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - article [ref=e51]:
+        - generic [ref=e53]:
+          - img "Best Time to Go on Safari in Africa" [ref=e54]
+          - generic [ref=e57]:
+            - navigation "Breadcrumb" [ref=e59]:
+              - list [ref=e60]:
+                - listitem [ref=e61]:
+                  - link "Home" [ref=e62] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e63]
+                    - generic [ref=e66]: Home
+                - listitem [ref=e67]:
+                  - img [ref=e68]
+                  - link "Blog" [ref=e70] [cursor=pointer]:
+                    - /url: /blog/
+                - listitem [ref=e71]:
+                  - img [ref=e72]
+                  - generic [ref=e74]: Best Time to Go on Safari in Africa
+            - link "Safari Tours" [ref=e76] [cursor=pointer]:
+              - /url: /category/safari-tours/
+            - heading "Best Time to Go on Safari in Africa" [level=1] [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - img [ref=e81]
+                - generic [ref=e84]:
+                  - paragraph [ref=e85]: Snow Africa Team
+                  - paragraph [ref=e86]: Author
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e90]: Feb 13, 2026
+              - generic [ref=e91]:
+                - img [ref=e92]
+                - generic [ref=e95]: 8 min read
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - paragraph [ref=e100]: Plan the perfect African safari with our seasonal guide - when to see the migration, best weather, and optimal wildlife viewing by country.
+            - generic [ref=e102]:
+              - paragraph [ref=e103]:
+                - strong [ref=e104]: The best time for an African safari depends on your destination.
+                - text: For East Africa (Tanzania and Kenya), June to October offers dry weather and peak wildlife concentration. Southern Africa's prime season runs May to October. The
+                - link "Great Migration" [ref=e105] [cursor=pointer]:
+                  - /url: /great-wildebeest-migration/
+                - text: "'s river crossings peak July to September, while calving season is January to March. Budget travelers should target shoulder seasons — November and March — for lower rates with decent wildlife viewing."
+              - paragraph [ref=e106]: Planning an African safari requires understanding the continent's diverse climates and wildlife patterns. From the savannas of East Africa to the deserts of Namibia and the waterways of Botswana, each region offers unique experiences that vary dramatically by season.
+              - 'heading "East Africa: Tanzania and Kenya" [level=2] [ref=e107]'
+              - heading "The Great Migration" [level=3] [ref=e108]
+              - paragraph [ref=e109]: "The world's largest wildlife movement drives timing for many safaris:"
+              - table [ref=e110]:
+                - rowgroup [ref=e111]:
+                  - row "Month Location Highlights" [ref=e112]:
+                    - columnheader "Month" [ref=e113]
+                    - columnheader "Location" [ref=e114]
+                    - columnheader "Highlights" [ref=e115]
+                - rowgroup [ref=e116]:
+                  - row "January-March Southern Serengeti Calving season, predator action" [ref=e117]:
+                    - cell "January-March" [ref=e118]
+                    - cell "Southern Serengeti" [ref=e119]
+                    - cell "Calving season, predator action" [ref=e120]
+                  - row "April-May Central Serengeti Herds moving north" [ref=e121]:
+                    - cell "April-May" [ref=e122]
+                    - cell "Central Serengeti" [ref=e123]
+                    - cell "Herds moving north" [ref=e124]
+                  - row "June-July Western Corridor Grumeti River crossings" [ref=e125]:
+                    - cell "June-July" [ref=e126]
+                    - cell "Western Corridor" [ref=e127]
+                    - cell "Grumeti River crossings" [ref=e128]
+                  - row "August-October Masai Mara/Northern Serengeti Mara River crossings" [ref=e129]:
+                    - cell "August-October" [ref=e130]
+                    - cell "Masai Mara/Northern Serengeti" [ref=e131]
+                    - cell "Mara River crossings" [ref=e132]
+                  - row "November-December Moving south Return to Serengeti" [ref=e133]:
+                    - cell "November-December" [ref=e134]
+                    - cell "Moving south" [ref=e135]
+                    - cell "Return to Serengeti" [ref=e136]
+              - heading "Best Overall Period" [level=3] [ref=e137]
+              - list [ref=e138]:
+                - listitem [ref=e139]:
+                  - generic [ref=e141]:
+                    - generic [ref=e142]: Dry Season (June-October)
+                    - generic [ref=e143]: Best visibility and wildlife concentration
+                - listitem [ref=e144]:
+                  - generic [ref=e146]:
+                    - generic [ref=e147]: Calving Season (January-February)
+                    - generic [ref=e148]: Dramatic predator-prey interactions
+                - listitem [ref=e149]:
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: Shoulder Seasons
+                    - generic [ref=e153]: Good wildlife, fewer crowds, better prices
+              - 'heading "Southern Africa: Botswana, Zimbabwe, Zambia" [level=2] [ref=e154]'
+              - heading "Dry Season (May-October)" [level=3] [ref=e155]
+              - paragraph [ref=e156]: "Peak safari season in Southern Africa:"
+              - list [ref=e157]:
+                - listitem [ref=e158]: Wildlife concentrates at permanent water sources
+                - listitem [ref=e159]: Vegetation thins for better visibility
+                - listitem [ref=e160]: Cool, comfortable temperatures
+                - listitem [ref=e161]: Victoria Falls at its lowest but still impressive
+              - heading "Wet Season (November-April)" [level=3] [ref=e162]
+              - list [ref=e163]:
+                - listitem [ref=e164]: Lush green landscapes
+                - listitem [ref=e165]: Baby animals born
+                - listitem [ref=e166]: Migratory birds arrive
+                - listitem [ref=e167]: Victoria Falls at full power (March-April)
+                - listitem [ref=e168]: Lower prices and fewer tourists
+              - heading "Okavango Delta (Botswana)" [level=3] [ref=e169]
+              - paragraph [ref=e170]: "Unique flood-driven ecosystem:"
+              - list [ref=e171]:
+                - listitem [ref=e172]:
+                  - generic [ref=e174]:
+                    - generic [ref=e175]: Peak floods (July-October)
+                    - generic [ref=e176]: Best for mokoro trips and water-based activities
+                - listitem [ref=e177]:
+                  - generic [ref=e179]:
+                    - generic [ref=e180]: Dry season (September-November)
+                    - generic [ref=e181]: Excellent game viewing as water recedes
+              - heading "South Africa" [level=2] [ref=e182]
+              - heading "Kruger National Park" [level=3] [ref=e183]
+              - list [ref=e184]:
+                - listitem [ref=e185]:
+                  - generic [ref=e187]:
+                    - generic [ref=e188]: Dry Season (May-September)
+                    - generic [ref=e189]: Best wildlife viewing, cooler temperatures
+                - listitem [ref=e190]:
+                  - generic [ref=e192]:
+                    - generic [ref=e193]: Wet Season (October-April)
+                    - generic [ref=e194]: Lush scenery, bird watching, lower prices
+              - heading "Cape Region" [level=3] [ref=e195]
+              - list [ref=e196]:
+                - listitem [ref=e197]:
+                  - generic [ref=e199]:
+                    - generic [ref=e200]: Whale watching (July-November)
+                    - generic [ref=e201]: Southern right whales along the coast
+                - listitem [ref=e202]:
+                  - generic [ref=e204]:
+                    - generic [ref=e205]: Great white sharks
+                    - generic [ref=e206]: Year-round but peak May-September
+                - listitem [ref=e207]:
+                  - generic [ref=e209]:
+                    - generic [ref=e210]: Cape floral kingdom
+                    - generic [ref=e211]: Spring flowers August-September
+              - heading "Namibia" [level=2] [ref=e212]
+              - heading "Best Time to Visit" [level=3] [ref=e213]
+              - list [ref=e214]:
+                - listitem [ref=e215]:
+                  - generic [ref=e217]:
+                    - generic [ref=e218]: Dry Season (May-October)
+                    - generic [ref=e219]: Best for Etosha wildlife viewing
+                - listitem [ref=e220]:
+                  - generic [ref=e222]:
+                    - generic [ref=e223]: Skeleton Coast
+                    - generic [ref=e224]: Year-round but fog common
+                - listitem [ref=e225]:
+                  - generic [ref=e227]:
+                    - generic [ref=e228]: Sossusvlei dunes
+                    - generic [ref=e229]: Cooler months (May-September) more comfortable
+              - heading "Unique Experiences" [level=3] [ref=e230]
+              - list [ref=e231]:
+                - listitem [ref=e232]: "Desert-adapted elephants: Year-round"
+                - listitem [ref=e233]: "Cape fur seal colonies: Year-round, pupping November-December"
+                - listitem [ref=e234]: "Stargazing: Dry season offers clearest skies"
+              - 'heading "Rwanda and Uganda: Gorilla Trekking" [level=2] [ref=e235]'
+              - heading "Dry Seasons (June-September, December-February)" [level=3] [ref=e236]
+              - list [ref=e237]:
+                - listitem [ref=e238]: Easier trekking conditions
+                - listitem [ref=e239]: Less muddy trails
+                - listitem [ref=e240]: Gorillas often at lower elevations
+              - heading "Wet Seasons" [level=3] [ref=e241]
+              - list [ref=e242]:
+                - listitem [ref=e243]: Still possible but more challenging
+                - listitem [ref=e244]: Fewer tourists
+                - listitem [ref=e245]: Lower permit availability pressure
+              - heading "Year-Round Considerations" [level=3] [ref=e246]
+              - list [ref=e247]:
+                - listitem [ref=e248]: Gorilla permits required regardless of season
+                - listitem [ref=e249]: Book 6-12 months ahead for peak times
+                - listitem [ref=e250]: Chimps also trackable year-round
+              - heading "Factors to Consider" [level=2] [ref=e251]
+              - heading "Wildlife Priorities" [level=3] [ref=e252]
+              - paragraph [ref=e253]: "Match your timing to what you want to see:"
+              - list [ref=e254]:
+                - listitem [ref=e255]:
+                  - generic [ref=e257]:
+                    - generic [ref=e258]: Big cats
+                    - generic [ref=e259]: Dry season when prey congregates
+                - listitem [ref=e260]:
+                  - generic [ref=e262]:
+                    - generic [ref=e263]: Migration
+                    - generic [ref=e264]: Follow the herds' calendar
+                - listitem [ref=e265]:
+                  - generic [ref=e267]:
+                    - generic [ref=e268]: Baby animals
+                    - generic [ref=e269]: Wet season births
+                - listitem [ref=e270]:
+                  - generic [ref=e272]:
+                    - generic [ref=e273]: Birds
+                    - generic [ref=e274]: Wet season for migrants
+                - listitem [ref=e275]:
+                  - generic [ref=e277]:
+                    - generic [ref=e278]: Gorillas/chimps
+                    - generic [ref=e279]: Dry seasons easier
+              - heading "Budget Considerations" [level=3] [ref=e280]
+              - list [ref=e281]:
+                - listitem [ref=e282]:
+                  - generic [ref=e284]:
+                    - generic [ref=e285]: Peak season
+                    - generic [ref=e286]: Highest prices, best wildlife
+                - listitem [ref=e287]:
+                  - generic [ref=e289]:
+                    - generic [ref=e290]: Shoulder season
+                    - generic [ref=e291]: Good value, good viewing
+                - listitem [ref=e292]:
+                  - generic [ref=e294]:
+                    - generic [ref=e295]: Green season
+                    - generic [ref=e296]: Lowest prices, variable conditions
+              - heading "Crowd Levels" [level=3] [ref=e297]
+              - list [ref=e298]:
+                - listitem [ref=e299]:
+                  - generic [ref=e301]:
+                    - generic [ref=e302]: July-August
+                    - generic [ref=e303]: European summer holidays
+                - listitem [ref=e304]:
+                  - generic [ref=e306]:
+                    - generic [ref=e307]: December-January
+                    - generic [ref=e308]: Festive season rush
+                - listitem [ref=e309]:
+                  - generic [ref=e311]:
+                    - generic [ref=e312]: March-May
+                    - generic [ref=e313]: Quietest period
+              - heading "Weather Comfort" [level=3] [ref=e314]
+              - list [ref=e315]:
+                - listitem [ref=e316]:
+                  - generic [ref=e318]:
+                    - generic [ref=e319]: Dry season
+                    - generic [ref=e320]: Predictable, comfortable
+                - listitem [ref=e321]:
+                  - generic [ref=e323]:
+                    - generic [ref=e324]: Wet season
+                    - generic [ref=e325]: Hot, humid, afternoon storms
+                - listitem [ref=e326]:
+                  - generic [ref=e328]:
+                    - generic [ref=e329]: Highlands
+                    - generic [ref=e330]: Cooler year-round
+              - heading "Regional Combinations" [level=2] [ref=e331]
+              - heading "East + Southern Africa" [level=3] [ref=e332]
+              - paragraph [ref=e333]: "Combining regions can optimize experiences:"
+              - list [ref=e334]:
+                - listitem [ref=e335]: Tanzania in February (calving) + Botswana in July (floods)
+                - listitem [ref=e336]: Kenya in September (crossings) + South Africa in October (spring)
+              - heading "Safari + Beach" [level=3] [ref=e337]
+              - list [ref=e338]:
+                - listitem [ref=e339]: "Tanzania + Zanzibar: Year-round combination"
+                - listitem [ref=e340]: "Kenya + Mombasa coast: Best June-October"
+                - listitem [ref=e341]: "South Africa + Mozambique: Year-round options"
+              - heading "Month-by-Month Summary" [level=2] [ref=e342]
+              - heading "January-February" [level=3] [ref=e343]
+              - paragraph [ref=e344]: "Excellent for: Serengeti calving, Southern Africa green season"
+              - heading "March-May" [level=3] [ref=e345]
+              - paragraph [ref=e346]: "Challenging in: East Africa (long rains), many Southern Africa areas"
+              - paragraph [ref=e347]: "Good for: Budget travelers, bird watching"
+              - heading "June-August" [level=3] [ref=e348]
+              - paragraph [ref=e349]: "Peak season for: Almost all African destinations"
+              - paragraph [ref=e350]: "Book early for: Victoria Falls, Okavango Delta, Masai Mara"
+              - heading "September-October" [level=3] [ref=e351]
+              - paragraph [ref=e352]: "Excellent for: Mara River crossings, Southern Africa dry season peak"
+              - heading "November-December" [level=3] [ref=e353]
+              - paragraph [ref=e354]: "Transitional: Short rains in East Africa, green season begins in South"
+              - heading "The Bottom Line" [level=2] [ref=e355]
+              - paragraph [ref=e356]: There's no single "best" time for African safari—it depends entirely on what you want to experience, where you want to go, and what constraints you face. The dry season offers the most predictable wildlife viewing across the continent, but every season has unique rewards for those who embrace them.
+              - paragraph [ref=e357]: Work with a knowledgeable safari operator to match your interests with the optimal timing and destinations for your dream African adventure.
+              - heading "Frequently Asked Questions" [level=2] [ref=e358]
+              - heading "Does the best safari time differ between East Africa and Southern Africa?" [level=3] [ref=e359]
+              - paragraph [ref=e360]: Yes, the seasons are somewhat different. East Africa's dry season runs June to October and January to February. Southern Africa's dry season is May to October with peak game viewing from July to September. The Okavango Delta floods from June to August creating unique water-based safari experiences. Research your specific destination's seasonal patterns rather than relying on general Africa-wide advice.
+              - heading "Is the rainy season a bad time for an African safari?" [level=3] [ref=e361]
+              - paragraph [ref=e362]: Not necessarily. The green season offers lush scenery, newborn animals, spectacular birdwatching, dramatic storm skies for photography, and significantly lower prices. Some parks are inaccessible during heavy rains, but many remain fully operational. The Serengeti calving season in February is technically rainy season yet is one of the most spectacular wildlife events of the entire year.
+              - heading "How far in advance should I book an African safari?" [level=3] [ref=e363]
+              - paragraph [ref=e364]: Book 6-12 months ahead for peak season travel from July to October, especially for popular lodges in the Serengeti, Masai Mara, and Okavango Delta. Green season trips can be booked 3-6 months out with better availability. Last-minute deals exist but limit your choices significantly. Christmas and New Year safaris should be booked 12 months in advance due to extreme demand.
+              - 'heading "Budget vs Luxury: When Safari Prices Drop" [level=2] [ref=e365]'
+              - paragraph [ref=e366]: "Safari pricing follows predictable seasonal patterns across Africa. High season (June–October in most regions) brings premium rates — lodges charge 40–60% more than low season. But shoulder seasons offer a sweet spot: lower prices with reasonable wildlife viewing."
+              - list [ref=e367]:
+                - listitem [ref=e368]:
+                  - generic [ref=e370]:
+                    - generic [ref=e371]: Best budget months
+                    - generic [ref=e372]: "April–May (green season) in Tanzania and Kenya — rates drop 30–50%, parks are empty, and birdlife is exceptional. The downside: some roads become difficult and short afternoon rains are common."
+                - listitem [ref=e373]:
+                  - generic [ref=e375]:
+                    - generic [ref=e376]: Best value months
+                    - generic [ref=e377]: November and March — shoulder seasons with good wildlife, moderate prices, and fewer crowds than peak season. These months often deliver the best overall experience for the price.
+                - listitem [ref=e378]:
+                  - generic [ref=e380]:
+                    - generic [ref=e381]: Peak premium months
+                    - generic [ref=e382]: July–September — the Great Migration river crossings drive highest demand. Book 6–12 months ahead for the best camps.
+              - paragraph [ref=e383]: Southern Africa follows a similar pattern — May and November are shoulder months with good value. Namibia's green season (January–April) offers dramatic landscapes and lower rates, though some desert-adapted wildlife disperses.
+              - paragraph [ref=e385]:
+                - strong [ref=e386]:
+                  - text: Planning a
+                  - link "Tanzania safari" [ref=e387] [cursor=pointer]:
+                    - /url: /tanzania-safaris/
+                  - text: specifically?
+                - text: Our detailed
+                - link "Tanzania Safari Timing Guide" [ref=e388] [cursor=pointer]:
+                  - /url: /best-time-to-visit-tanzania-for-safari/
+                - text: breaks it down park by park — Serengeti, Ngorongoro, Tarangire, and Selous — with month-by-month recommendations.
+              - heading "Frequently Asked Questions" [level=2] [ref=e389]
+              - heading "What is the best month for an African safari?" [level=3] [ref=e390]
+              - paragraph [ref=e391]: July through September is widely considered the best time across most of Africa. In East Africa, the dry season concentrates wildlife around water sources, and the Great Migration river crossings peak in the Serengeti and Masai Mara. In Southern Africa, winter (June–August) brings the driest conditions and best game viewing in Botswana, Zimbabwe, and Zambia.
+              - heading "Is dry season or wet season better for safari?" [level=3] [ref=e392]
+              - paragraph [ref=e393]: Dry season (June–October in most regions) is better for wildlife spotting — animals gather at remaining water sources and vegetation thins out, making them easier to see. Wet season (November–May) brings lush landscapes, newborn animals, exceptional birdlife, and lower prices — but some roads become impassable and animals disperse widely.
+              - heading "How much does an African safari cost?" [level=3] [ref=e394]
+              - paragraph [ref=e395]: Budget safaris in Tanzania and Kenya start from $150–250 per person per day for camping-based trips. Mid-range lodge safaris run $300–500 per day. Luxury and fly-in safaris in Botswana, Tanzania's private concessions, or Rwanda's gorilla treks range from $600 to $2,000+ per day. The biggest cost factors are accommodation level, season, and whether you fly between parks or drive.
+              - heading "What is the best country for a first safari?" [level=3] [ref=e396]
+              - paragraph [ref=e397]: "Tanzania and Kenya are the best countries for a first-time safari. Both offer reliable year-round wildlife, well-established tourism infrastructure, English-speaking guides, and diverse experiences — from the Serengeti's endless plains to Ngorongoro Crater's concentrated wildlife. Tanzania edges ahead for variety: you can combine safari with Kilimanjaro trekking, Zanzibar beaches, and cultural visits in a single trip."
+              - heading "Can you see the Big Five year-round in Africa?" [level=3] [ref=e398]
+              - paragraph [ref=e399]: Yes, the Big Five (lion, leopard, elephant, rhino, buffalo) are resident year-round in parks like the Serengeti, Ngorongoro Crater, Kruger, and the Okavango Delta. However, sighting probability improves in dry season when vegetation thins out and animals concentrate near water. Rhinos are the hardest to spot regardless of season — Ngorongoro Crater offers the best chances in East Africa.
+              - heading "Is it safe to go on safari in Africa?" [level=3] [ref=e400]
+              - paragraph [ref=e401]: Safari tourism is very safe when booked with reputable operators. Tanzania, Kenya, Botswana, South Africa, and Namibia have well-established tourism industries with strict safety standards. You'll be accompanied by trained guides in national parks, and accommodation ranges from secure lodges to fenced camps. The main risks — sunburn, dehydration, and motion sickness on bumpy roads — are easily managed with preparation.
+            - generic [ref=e404]:
+              - img [ref=e406]
+              - generic [ref=e409]:
+                - generic [ref=e410]:
+                  - heading "Snow Africa Team" [level=3] [ref=e411]
+                  - generic [ref=e412]: Safari & Trekking Experts
+                - paragraph [ref=e413]: The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.
+                - generic [ref=e414]:
+                  - generic [ref=e415]:
+                    - img [ref=e416]
+                    - text: TATO Licensed Operator
+                  - generic [ref=e419]:
+                    - img [ref=e420]
+                    - text: Kilimanjaro Certified Guides
+                  - generic [ref=e423]:
+                    - img [ref=e424]
+                    - text: First Aid Wilderness Certified
+                  - generic [ref=e427]:
+                    - img [ref=e428]
+                    - text: Based in Arusha, Tanzania
+            - link "Back to Blog" [ref=e432] [cursor=pointer]:
+              - /url: /blog/
+              - img [ref=e433]
+              - text: Back to Blog
+            - generic [ref=e435]:
+              - heading "Continue Reading" [level=2] [ref=e436]
+              - generic [ref=e437]:
+                - link "What to Wear on Tanzania Safari What to Wear on Tanzania Safari Feb 20, 2026" [ref=e438] [cursor=pointer]:
+                  - /url: /what-to-wear-in-tanzania-safari-a-guide-to-perfectly-blend-with-the-color-of-tanzania/
+                  - img "What to Wear on Tanzania Safari" [ref=e440]
+                  - generic [ref=e441]:
+                    - heading "What to Wear on Tanzania Safari" [level=3] [ref=e442]
+                    - paragraph [ref=e443]: Feb 20, 2026
+                - link "Why Do Zebra and Wildebeest Migrate Together? Why Do Zebra and Wildebeest Migrate Together? Feb 19, 2026" [ref=e444] [cursor=pointer]:
+                  - /url: /why-do-zebra-and-wildebeest-migrate-together/
+                  - img "Why Do Zebra and Wildebeest Migrate Together?" [ref=e446]
+                  - generic [ref=e447]:
+                    - heading "Why Do Zebra and Wildebeest Migrate Together?" [level=3] [ref=e448]
+                    - paragraph [ref=e449]: Feb 19, 2026
+                - link "Birdwatching Tours Tanzania Birdwatching Tours Tanzania Feb 19, 2026" [ref=e450] [cursor=pointer]:
+                  - /url: /birdwatching-tours-tanzania/
+                  - img "Birdwatching Tours Tanzania" [ref=e452]
+                  - generic [ref=e453]:
+                    - heading "Birdwatching Tours Tanzania" [level=3] [ref=e454]
+                    - paragraph [ref=e455]: Feb 19, 2026
+          - complementary [ref=e456]:
+            - generic [ref=e457]:
+              - generic [ref=e458]:
+                - heading "In This Article" [level=3] [ref=e459]:
+                  - img [ref=e461]
+                  - text: In This Article
+                - navigation [ref=e463]:
+                  - link "The Great Migration" [ref=e464] [cursor=pointer]:
+                    - /url: "#the-great-migration"
+                    - generic [ref=e465]: The Great Migration
+                  - link "Best Overall Period" [ref=e466] [cursor=pointer]:
+                    - /url: "#best-overall-period"
+                    - generic [ref=e467]: Best Overall Period
+                  - link "Dry Season (May-October)" [ref=e468] [cursor=pointer]:
+                    - /url: "#dry-season-may-october"
+                    - generic [ref=e469]: Dry Season (May-October)
+                  - link "Wet Season (November-April)" [ref=e470] [cursor=pointer]:
+                    - /url: "#wet-season-november-april"
+                    - generic [ref=e471]: Wet Season (November-April)
+                  - link "Okavango Delta (Botswana)" [ref=e472] [cursor=pointer]:
+                    - /url: "#okavango-delta-botswana"
+                    - generic [ref=e473]: Okavango Delta (Botswana)
+                  - link "Kruger National Park" [ref=e474] [cursor=pointer]:
+                    - /url: "#kruger-national-park"
+                    - generic [ref=e475]: Kruger National Park
+                  - link "Cape Region" [ref=e476] [cursor=pointer]:
+                    - /url: "#cape-region"
+                    - generic [ref=e477]: Cape Region
+                  - link "Best Time to Visit" [ref=e478] [cursor=pointer]:
+                    - /url: "#best-time-to-visit"
+                    - generic [ref=e479]: Best Time to Visit
+                  - link "Unique Experiences" [ref=e480] [cursor=pointer]:
+                    - /url: "#unique-experiences"
+                    - generic [ref=e481]: Unique Experiences
+                  - link "Dry Seasons (June-September, December-February)" [ref=e482] [cursor=pointer]:
+                    - /url: "#dry-seasons-june-september-december-february"
+                    - generic [ref=e483]: Dry Seasons (June-September, December-February)
+                  - link "Wet Seasons" [ref=e484] [cursor=pointer]:
+                    - /url: "#wet-seasons"
+                    - generic [ref=e485]: Wet Seasons
+                  - link "Year-Round Considerations" [ref=e486] [cursor=pointer]:
+                    - /url: "#year-round-considerations"
+                    - generic [ref=e487]: Year-Round Considerations
+                  - link "Wildlife Priorities" [ref=e488] [cursor=pointer]:
+                    - /url: "#wildlife-priorities"
+                    - generic [ref=e489]: Wildlife Priorities
+                  - link "Budget Considerations" [ref=e490] [cursor=pointer]:
+                    - /url: "#budget-considerations"
+                    - generic [ref=e491]: Budget Considerations
+                  - link "Crowd Levels" [ref=e492] [cursor=pointer]:
+                    - /url: "#crowd-levels"
+                    - generic [ref=e493]: Crowd Levels
+                  - link "Weather Comfort" [ref=e494] [cursor=pointer]:
+                    - /url: "#weather-comfort"
+                    - generic [ref=e495]: Weather Comfort
+                  - link "East + Southern Africa" [ref=e496] [cursor=pointer]:
+                    - /url: "#east-southern-africa"
+                    - generic [ref=e497]: East + Southern Africa
+                  - link "Safari + Beach" [ref=e498] [cursor=pointer]:
+                    - /url: "#safari-beach"
+                    - generic [ref=e499]: Safari + Beach
+                  - link "January-February" [ref=e500] [cursor=pointer]:
+                    - /url: "#january-february"
+                    - generic [ref=e501]: January-February
+                  - link "March-May" [ref=e502] [cursor=pointer]:
+                    - /url: "#march-may"
+                    - generic [ref=e503]: March-May
+                  - link "June-August" [ref=e504] [cursor=pointer]:
+                    - /url: "#june-august"
+                    - generic [ref=e505]: June-August
+                  - link "September-October" [ref=e506] [cursor=pointer]:
+                    - /url: "#september-october"
+                    - generic [ref=e507]: September-October
+                  - link "November-December" [ref=e508] [cursor=pointer]:
+                    - /url: "#november-december"
+                    - generic [ref=e509]: November-December
+                  - link "Does the best safari time differ between East Africa and Southern Africa?" [ref=e510] [cursor=pointer]:
+                    - /url: "#does-the-best-safari-time-differ-between-east-africa-and-southern-africa"
+                    - generic [ref=e511]: Does the best safari time differ between East Africa and Southern Africa?
+                  - link "Is the rainy season a bad time for an African safari?" [ref=e512] [cursor=pointer]:
+                    - /url: "#is-the-rainy-season-a-bad-time-for-an-african-safari"
+                    - generic [ref=e513]: Is the rainy season a bad time for an African safari?
+                  - link "How far in advance should I book an African safari?" [ref=e514] [cursor=pointer]:
+                    - /url: "#how-far-in-advance-should-i-book-an-african-safari"
+                    - generic [ref=e515]: How far in advance should I book an African safari?
+                  - link "What is the best month for an African safari?" [ref=e516] [cursor=pointer]:
+                    - /url: "#what-is-the-best-month-for-an-african-safari"
+                    - generic [ref=e517]: What is the best month for an African safari?
+                  - link "Is dry season or wet season better for safari?" [ref=e518] [cursor=pointer]:
+                    - /url: "#is-dry-season-or-wet-season-better-for-safari"
+                    - generic [ref=e519]: Is dry season or wet season better for safari?
+                  - link "How much does an African safari cost?" [ref=e520] [cursor=pointer]:
+                    - /url: "#how-much-does-an-african-safari-cost"
+                    - generic [ref=e521]: How much does an African safari cost?
+                  - link "What is the best country for a first safari?" [ref=e522] [cursor=pointer]:
+                    - /url: "#what-is-the-best-country-for-a-first-safari"
+                    - generic [ref=e523]: What is the best country for a first safari?
+                  - link "Can you see the Big Five year-round in Africa?" [ref=e524] [cursor=pointer]:
+                    - /url: "#can-you-see-the-big-five-year-round-in-africa"
+                    - generic [ref=e525]: Can you see the Big Five year-round in Africa?
+                  - link "Is it safe to go on safari in Africa?" [ref=e526] [cursor=pointer]:
+                    - /url: "#is-it-safe-to-go-on-safari-in-africa"
+                    - generic [ref=e527]: Is it safe to go on safari in Africa?
+              - generic [ref=e528]:
+                - generic [ref=e529]:
+                  - img [ref=e531]
+                  - heading "Tanzania Safari" [level=3] [ref=e534]
+                - paragraph [ref=e535]: Explore the Serengeti, Ngorongoro Crater, and more with our expert-led safaris.
+                - link "View Safaris" [ref=e536] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - generic [ref=e537]:
+                - heading "Categories" [level=3] [ref=e538]:
+                  - img [ref=e540]
+                  - text: Categories
+                - list [ref=e543]:
+                  - listitem [ref=e544]:
+                    - link "Blog 27" [ref=e545] [cursor=pointer]:
+                      - /url: /category/blog/
+                      - generic [ref=e546]: Blog
+                      - generic [ref=e547]: "27"
+                  - listitem [ref=e548]:
+                    - link "Day Trips 1" [ref=e549] [cursor=pointer]:
+                      - /url: /category/day-trip/
+                      - generic [ref=e550]: Day Trips
+                      - generic [ref=e551]: "1"
+                  - listitem [ref=e552]:
+                    - link "Kilimanjaro Climbing Guide 16" [ref=e553] [cursor=pointer]:
+                      - /url: /category/kilimanjaro-climbing-guide/
+                      - generic [ref=e554]: Kilimanjaro Climbing Guide
+                      - generic [ref=e555]: "16"
+                  - listitem [ref=e556]:
+                    - link "Mount Kilimanjaro 33" [ref=e557] [cursor=pointer]:
+                      - /url: /category/mount-kilimanjaro/
+                      - generic [ref=e558]: Mount Kilimanjaro
+                      - generic [ref=e559]: "33"
+                  - listitem [ref=e560]:
+                    - link "Safari Tours 41" [ref=e561] [cursor=pointer]:
+                      - /url: /category/safari-tours/
+                      - generic [ref=e562]: Safari Tours
+                      - generic [ref=e563]: "41"
+                  - listitem [ref=e564]:
+                    - link "Tanzania Destinations 7" [ref=e565] [cursor=pointer]:
+                      - /url: /category/tanzania-destinations/
+                      - generic [ref=e566]: Tanzania Destinations
+                      - generic [ref=e567]: "7"
+              - generic [ref=e568]:
+                - generic [ref=e569]:
+                  - img [ref=e571]
+                  - heading "Climb Kilimanjaro" [level=3] [ref=e573]
+                - paragraph [ref=e574]: Add Africa's highest peak to your Tanzania adventure.
+                - link "View Routes" [ref=e575] [cursor=pointer]:
+                  - /url: /trekking/
+    - contentinfo [ref=e576]:
+      - generic [ref=e579]:
+        - generic [ref=e580]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e581]
+      - generic [ref=e586]:
+        - generic [ref=e587]:
+          - generic [ref=e588]:
+            - img "Snow Africa Adventure" [ref=e590]
+            - paragraph [ref=e591]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e592]:
+              - listitem [ref=e593]:
+                - link "+255 766 657 854" [ref=e594] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e596]
+                  - generic [ref=e598]: +255 766 657 854
+              - listitem [ref=e599]:
+                - link "info@snowafricaadventure.com" [ref=e600] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e602]
+                  - generic [ref=e605]: info@snowafricaadventure.com
+              - listitem [ref=e606]:
+                - img [ref=e608]
+                - generic [ref=e611]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e612]:
+            - heading "Safari & Tours" [level=3] [ref=e613]
+            - list [ref=e614]:
+              - listitem [ref=e615]:
+                - link "All Safari Packages" [ref=e616] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e617]:
+                - link "Tailor-Made Safaris" [ref=e618] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e619]:
+                - link "Tanzania Destinations" [ref=e620] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e621]:
+                - link "View all" [ref=e622] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e623]: →
+          - generic [ref=e624]:
+            - heading "Kilimanjaro" [level=3] [ref=e625]
+            - list [ref=e626]:
+              - listitem [ref=e627]:
+                - link "All Trekking Routes" [ref=e628] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e629]:
+                - link "Best Route to Climb" [ref=e630] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e631]:
+                - link "Climbing Kilimanjaro Guide" [ref=e632] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e633]:
+                - link "Join Group Departures" [ref=e634] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e635]:
+                - link "Kilimanjaro Prices" [ref=e636] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e637]:
+                - link "Best Time to Climb" [ref=e638] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e639]:
+                - link "View all routes" [ref=e640] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e641]: →
+          - generic [ref=e642]:
+            - heading "Company" [level=3] [ref=e643]
+            - list [ref=e644]:
+              - listitem [ref=e645]:
+                - link "About Us" [ref=e646] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e647]:
+                - link "Our Guides" [ref=e648] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e649]:
+                - link "Contact Us" [ref=e650] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e651]:
+                - link "Terms & Conditions" [ref=e652] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e653]:
+                - link "Privacy Policy" [ref=e654] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e655]:
+                - link "Blog" [ref=e656] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e657]:
+              - heading "Follow the Journey" [level=4] [ref=e658]
+              - generic [ref=e659]:
+                - link "Facebook" [ref=e660] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e661]
+                - link "Twitter" [ref=e663] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e664]
+                - link "Instagram" [ref=e666] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e667]
+                - link "YouTube" [ref=e670] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e671]
+        - generic [ref=e675]:
+          - generic [ref=e676]: Accredited & Trusted
+          - generic [ref=e677]:
+            - link "TripAdvisor" [ref=e678] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e680]: SafariBookings
+            - generic [ref=e682]: TATO Member
+            - generic [ref=e684]: KPAP Partner
+      - generic [ref=e687]:
+        - generic [ref=e688]:
+          - generic [ref=e689]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e690]: "|"
+          - link "Terms & Conditions" [ref=e691] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e692]: ·
+          - link "Privacy Policy" [ref=e693] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e694]:
+          - generic [ref=e695]: Crafted by
+          - link "Timeless International" [ref=e696] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:35 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e697]:
+      - img [ref=e698]
+  - button "Open Next.js Dev Tools" [ref=e706] [cursor=pointer]:
+    - img [ref=e707]
+  - alert [ref=e710]

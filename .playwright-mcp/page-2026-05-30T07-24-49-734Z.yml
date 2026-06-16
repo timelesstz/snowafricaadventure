@@ -1,0 +1,448 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - img "Tarangire National Park" [ref=e53]
+          - generic [ref=e56]:
+            - navigation [ref=e57]:
+              - link "Home" [ref=e58] [cursor=pointer]:
+                - /url: /
+              - text: /
+              - link "Destinations" [ref=e59] [cursor=pointer]:
+                - /url: /tanzania-destinations/
+              - text: /Tarangire National Park
+            - heading "Tarangire National Park" [level=1] [ref=e60]
+            - generic [ref=e61]:
+              - generic [ref=e62]: Largest Elephant Herds in Tanzania
+              - generic [ref=e63]: Ancient Baobab Trees
+              - generic [ref=e64]: 550+ Bird Species
+              - generic [ref=e65]: Tarangire River Wildlife Corridor
+              - generic [ref=e66]: Dry Season Concentrations
+              - generic [ref=e67]: Night Game Drives
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e72]
+            - generic [ref=e75]: Northern Tanzania
+          - generic [ref=e76]:
+            - img [ref=e77]
+            - generic [ref=e79]: "Best: June to October for spectacular dry-season wildlife concentrations"
+          - generic [ref=e80]:
+            - img [ref=e81]
+            - generic [ref=e83]: Must-Visit Destination
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - heading "About Tarangire National Park" [level=2] [ref=e88]
+            - generic [ref=e89]:
+              - paragraph [ref=e90]: Tarangire National Park is Tanzania's sixth-largest national park and one of the most underrated gems of the Northern Circuit. Named after the Tarangire River that flows through its entire length, this park is best known for its vast elephant herds — some of the largest concentrations of elephants anywhere in Tanzania — and its iconic landscape studded with enormous ancient baobab trees that have stood for thousands of years.
+              - paragraph [ref=e91]: Located just 120 kilometres from Arusha along the road towards Dodoma, Tarangire is remarkably accessible yet remains far less crowded than the Serengeti or Ngorongoro, making it an ideal addition to any northern Tanzania itinerary or a destination in its own right.
+              - paragraph [ref=e92]: During the dry season from June through October, the Tarangire River becomes the only reliable water source across a vast semi-arid ecosystem, drawing extraordinary concentrations of wildlife from hundreds of kilometres around. Herds of 200 to 300 elephants are a common sight at the riverbanks, while lion prides, leopards, cheetahs, and large herds of buffalo, zebra, wildebeest, impala, and giraffe converge on this lifeline. This seasonal congregation rivals the famous wildlife spectacles of the Serengeti and is one of East Africa's most underappreciated safari experiences.
+              - paragraph [ref=e93]: The baobab trees of Tarangire are among the most photographed in Africa. These extraordinary trees — some estimated to be over 1,000 years old — create a surreal landscape unlike anywhere else in Tanzania. The baobabs provide food and shelter for a remarkable range of wildlife, from elephant families stripping bark with their tusks, to hornbills nesting in hollow trunks, to vervet monkeys raiding the hanging fruit. At sunset, the baobab silhouettes against the golden sky create images that stay with visitors for a lifetime.
+              - paragraph [ref=e94]: Tarangire holds one of Tanzania's highest concentrations of bird species — over 550 recorded species — making it a paradise for birding enthusiasts. The park is particularly famous for its populations of yellow-collared lovebird, ashy starling, and several species found nowhere else on Tanzania's northern circuit. The riparian forest along the Tarangire River hosts spectacular concentrations of green wood-hoopoe, African broadbill, and white-headed buffalo weaver. Migrant species arrive from Europe and northern Africa between November and April, significantly swelling the bird diversity.
+              - paragraph [ref=e95]: The southern section of the park near Silale Swamp offers outstanding wildlife viewing in a remote setting that few visitors reach. Here, large herds of buffalo gather in the wet season alongside fringe-eared oryx, eland, greater kudu, and the striking gerenuk. The python population in Tarangire is notable — the African rock python, Africa's largest snake reaching up to six metres, is frequently spotted in the rocky outcrops and riverine vegetation.
+              - paragraph [ref=e96]: "Night game drives in Tarangire, available through select camps, reveal a completely different world of nocturnal hunters: honey badgers, genets, spring hares, aardvark, bush babies, and occasionally the elusive African wildcat emerge after dark. Walking safaris from mobile camps offer the rare opportunity to experience the park on foot — tracking wildlife through the bush with an expert guide in a way that connects you intimately with the landscape and its animal inhabitants."
+              - paragraph [ref=e97]: Tarangire is best visited in combination with other northern circuit parks. A classic itinerary pairs Tarangire with Lake Manyara, Ngorongoro Crater, and the Serengeti for a comprehensive northern Tanzania experience covering all major ecosystems and wildlife spectacles. For a Kilimanjaro climbing trip combined with wildlife, a two or three-day Tarangire stop either before or after your climb makes for a perfectly balanced Tanzania adventure.
+            - generic [ref=e98]:
+              - heading "Wildlife You'll See" [level=3] [ref=e99]
+              - generic [ref=e100]:
+                - generic [ref=e101]: Elephant
+                - generic [ref=e102]: Lion
+                - generic [ref=e103]: Leopard
+                - generic [ref=e104]: Cheetah
+                - generic [ref=e105]: Buffalo
+                - generic [ref=e106]: Giraffe
+                - generic [ref=e107]: Zebra
+                - generic [ref=e108]: Wildebeest
+                - generic [ref=e109]: African Rock Python
+                - generic [ref=e110]: Oryx
+                - generic [ref=e111]: Eland
+                - generic [ref=e112]: Greater Kudu
+            - generic [ref=e113]:
+              - heading "Activities & Experiences" [level=3] [ref=e114]
+              - generic [ref=e115]:
+                - generic [ref=e116]:
+                  - img [ref=e118]
+                  - generic [ref=e121]: Game Drives
+                - generic [ref=e122]:
+                  - img [ref=e124]
+                  - generic [ref=e127]: Photography
+          - generic [ref=e128]:
+            - generic [ref=e129]:
+              - heading "Best Time to Visit" [level=3] [ref=e130]:
+                - img [ref=e131]
+                - text: Best Time to Visit
+              - paragraph [ref=e133]: June to October for spectacular dry-season wildlife concentrations; November to April for birding and lush landscapes
+            - generic [ref=e134]:
+              - heading "Plan Your Visit to Tarangire National Park" [level=3] [ref=e135]
+              - paragraph [ref=e136]: Let us create a custom safari itinerary featuring this incredible destination.
+              - link "Get Free Quote" [ref=e137] [cursor=pointer]:
+                - /url: /contact-us/
+        - generic [ref=e139]:
+          - heading "Articles About Tarangire National Park" [level=2] [ref=e140]
+          - generic [ref=e141]:
+            - article [ref=e142]:
+              - link "Lion vs Lioness" [ref=e143] [cursor=pointer]:
+                - /url: /lion-vs-lioness/
+                - img "Lion vs Lioness" [ref=e145]
+              - generic [ref=e146]:
+                - link "Lion vs Lioness" [ref=e147] [cursor=pointer]:
+                  - /url: /lion-vs-lioness/
+                  - heading "Lion vs Lioness" [level=3] [ref=e148]
+                - paragraph [ref=e149]: Compare lions and lionesses - the fascinating differences in their roles, behaviors, and contributions to pride survival.
+                - generic [ref=e150]:
+                  - generic [ref=e151]:
+                    - img [ref=e152]
+                    - text: Snow Africa Team
+                  - generic [ref=e155]:
+                    - img [ref=e156]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e158] [cursor=pointer]:
+                  - /url: /lion-vs-lioness/
+                  - text: Read More
+                  - generic [ref=e159]: →
+            - article [ref=e160]:
+              - link "Is Lion Hunting Legal in Africa?" [ref=e161] [cursor=pointer]:
+                - /url: /is-lion-hunting-legal-in-africa/
+                - img "Is Lion Hunting Legal in Africa?" [ref=e163]
+              - generic [ref=e164]:
+                - link "Is Lion Hunting Legal in Africa?" [ref=e165] [cursor=pointer]:
+                  - /url: /is-lion-hunting-legal-in-africa/
+                  - heading "Is Lion Hunting Legal in Africa?" [level=3] [ref=e166]
+                - paragraph [ref=e167]: Lion hunting is legal in only 6 African countries and banned in 48. Full country-by-country breakdown of laws, costs, quotas, and the conservation debate.
+                - generic [ref=e168]:
+                  - generic [ref=e169]:
+                    - img [ref=e170]
+                    - text: Snow Africa Team
+                  - generic [ref=e173]:
+                    - img [ref=e174]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e176] [cursor=pointer]:
+                  - /url: /is-lion-hunting-legal-in-africa/
+                  - text: Read More
+                  - generic [ref=e177]: →
+            - article [ref=e178]:
+              - link "10 Interesting Facts About Lions" [ref=e179] [cursor=pointer]:
+                - /url: /10-interesting-facts-about-the-lions/
+                - img "10 Interesting Facts About Lions" [ref=e181]
+              - generic [ref=e182]:
+                - link "10 Interesting Facts About Lions" [ref=e183] [cursor=pointer]:
+                  - /url: /10-interesting-facts-about-the-lions/
+                  - heading "10 Interesting Facts About Lions" [level=3] [ref=e184]
+                - paragraph [ref=e185]: Discover surprising facts about lions - from their incredible roars to unique social structures and hunting behaviors.
+                - generic [ref=e186]:
+                  - generic [ref=e187]:
+                    - img [ref=e188]
+                    - text: Snow Africa Team
+                  - generic [ref=e191]:
+                    - img [ref=e192]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e194] [cursor=pointer]:
+                  - /url: /10-interesting-facts-about-the-lions/
+                  - text: Read More
+                  - generic [ref=e195]: →
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - img [ref=e200]
+            - heading "Tarangire National Park — Gallery" [level=2] [ref=e205]
+          - generic [ref=e206]:
+            - figure [ref=e207]:
+              - img "Tarangire National Park - Photo 1" [ref=e208]
+            - figure [ref=e209]:
+              - img "Tarangire National Park - Photo 2" [ref=e210]
+            - figure [ref=e211]:
+              - img "Tarangire National Park - Photo 3" [ref=e212]
+        - generic [ref=e214]:
+          - heading "Safaris Featuring Tarangire National Park" [level=2] [ref=e215]
+          - generic [ref=e216]:
+            - link "3 DaysTanzania Lodge Safari Mid-range 3 DaysTanzania Lodge Safari A perfect introduction to Tanzania's Northern Circuit. This 3-day safari covers three diverse ecosystems with comfortable lodge accommodation throughout. 3 Days 2 Nights From $1,480 View Safari →" [ref=e217] [cursor=pointer]:
+              - /url: /tanzania-safaris/3-days-tanzania-lodge-safari-tarangire-lake-manyara-ngorongoro-crater/
+              - generic [ref=e218]:
+                - img "3 DaysTanzania Lodge Safari" [ref=e219]
+                - generic [ref=e221]: Mid-range
+              - generic [ref=e222]:
+                - heading "3 DaysTanzania Lodge Safari" [level=3] [ref=e223]
+                - paragraph [ref=e224]: A perfect introduction to Tanzania's Northern Circuit. This 3-day safari covers three diverse ecosystems with comfortable lodge accommodation throughout.
+                - generic [ref=e225]:
+                  - generic [ref=e226]:
+                    - img [ref=e227]
+                    - text: 3 Days 2 Nights
+                  - generic [ref=e230]: From $1,480
+                - generic [ref=e232]:
+                  - text: View Safari
+                  - generic [ref=e233]: →
+            - link "7 Days Safari to Tanzania including Serval Wildlife Mid-range 7 Days Safari to Tanzania including Serval Wildlife A unique safari focusing on northern circuit parks and serval wildlife sanctuary. Experience Tanzania wildlife safari and see thousands of wildlife animals 8 Days 7 Nights From $2,980 View Safari →" [ref=e234] [cursor=pointer]:
+              - /url: /tanzania-safaris/7-days-safari-to-tanzania-including-serval-wildlife/
+              - generic [ref=e235]:
+                - img "7 Days Safari to Tanzania including Serval Wildlife" [ref=e236]
+                - generic [ref=e238]: Mid-range
+              - generic [ref=e239]:
+                - heading "7 Days Safari to Tanzania including Serval Wildlife" [level=3] [ref=e240]
+                - paragraph [ref=e241]: A unique safari focusing on northern circuit parks and serval wildlife sanctuary. Experience Tanzania wildlife safari and see thousands of wildlife animals
+                - generic [ref=e242]:
+                  - generic [ref=e243]:
+                    - img [ref=e244]
+                    - text: 8 Days 7 Nights
+                  - generic [ref=e247]: From $2,980
+                - generic [ref=e249]:
+                  - text: View Safari
+                  - generic [ref=e250]: →
+            - 'link "10 Day Adventure: Safari & Zanzibar Mid-range 10 Day Adventure: Safari & Zanzibar The ultimate Tanzania experience combining wildlife safari with beach relaxation in Zanzibar. Perfect balance of adventure and rest. 10 Days 9 Nights From $3,600 View Safari →" [ref=e251] [cursor=pointer]':
+              - /url: /tanzania-safaris/10-day-adventure-in-tanzania-safari-zanzibar/
+              - generic [ref=e252]:
+                - 'img "10 Day Adventure: Safari & Zanzibar" [ref=e253]'
+                - generic [ref=e255]: Mid-range
+              - generic [ref=e256]:
+                - 'heading "10 Day Adventure: Safari & Zanzibar" [level=3] [ref=e257]'
+                - paragraph [ref=e258]: The ultimate Tanzania experience combining wildlife safari with beach relaxation in Zanzibar. Perfect balance of adventure and rest.
+                - generic [ref=e259]:
+                  - generic [ref=e260]:
+                    - img [ref=e261]
+                    - text: 10 Days 9 Nights
+                  - generic [ref=e264]: From $3,600
+                - generic [ref=e266]:
+                  - text: View Safari
+                  - generic [ref=e267]: →
+          - link "View All Safari Packages →" [ref=e269] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+        - generic [ref=e271]:
+          - heading "Explore More Destinations" [level=2] [ref=e272]
+          - generic [ref=e273]:
+            - link "Serengeti National Park Serengeti National Park" [ref=e274] [cursor=pointer]:
+              - /url: /tanzania-destinations/serengeti-national-park/
+              - generic [ref=e275]:
+                - img "Serengeti National Park" [ref=e276]
+                - heading "Serengeti National Park" [level=3] [ref=e279]
+            - link "Ngorongoro Conservation Area Ngorongoro Conservation Area" [ref=e280] [cursor=pointer]:
+              - /url: /tanzania-destinations/ngorongoro-conservation-area/
+              - generic [ref=e281]:
+                - img "Ngorongoro Conservation Area" [ref=e282]
+                - heading "Ngorongoro Conservation Area" [level=3] [ref=e285]
+            - link "Lake Manyara National Park Lake Manyara National Park" [ref=e286] [cursor=pointer]:
+              - /url: /tanzania-destinations/lake-manyara-national-park/
+              - generic [ref=e287]:
+                - img "Lake Manyara National Park" [ref=e288]
+                - heading "Lake Manyara National Park" [level=3] [ref=e291]
+            - link "Arusha National Park Arusha National Park" [ref=e292] [cursor=pointer]:
+              - /url: /tanzania-destinations/arusha-national-park/
+              - generic [ref=e293]:
+                - img "Arusha National Park" [ref=e294]
+                - heading "Arusha National Park" [level=3] [ref=e297]
+    - contentinfo [ref=e298]:
+      - generic [ref=e301]:
+        - generic [ref=e302]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e303]
+      - generic [ref=e308]:
+        - generic [ref=e309]:
+          - generic [ref=e310]:
+            - img "Snow Africa Adventure" [ref=e312]
+            - paragraph [ref=e313]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e314]:
+              - listitem [ref=e315]:
+                - link "+255 766 657 854" [ref=e316] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e318]
+                  - generic [ref=e320]: +255 766 657 854
+              - listitem [ref=e321]:
+                - link "info@snowafricaadventure.com" [ref=e322] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e324]
+                  - generic [ref=e327]: info@snowafricaadventure.com
+              - listitem [ref=e328]:
+                - img [ref=e330]
+                - generic [ref=e333]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e334]:
+            - heading "Safari & Tours" [level=3] [ref=e335]
+            - list [ref=e336]:
+              - listitem [ref=e337]:
+                - link "All Safari Packages" [ref=e338] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e339]:
+                - link "Tailor-Made Safaris" [ref=e340] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e341]:
+                - link "Tanzania Destinations" [ref=e342] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e343]:
+                - link "View all" [ref=e344] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e345]: →
+          - generic [ref=e346]:
+            - heading "Kilimanjaro" [level=3] [ref=e347]
+            - list [ref=e348]:
+              - listitem [ref=e349]:
+                - link "All Trekking Routes" [ref=e350] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e351]:
+                - link "Best Route to Climb" [ref=e352] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e353]:
+                - link "Climbing Kilimanjaro Guide" [ref=e354] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e355]:
+                - link "Join Group Departures" [ref=e356] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e357]:
+                - link "Kilimanjaro Prices" [ref=e358] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e359]:
+                - link "Best Time to Climb" [ref=e360] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e361]:
+                - link "View all routes" [ref=e362] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e363]: →
+          - generic [ref=e364]:
+            - heading "Company" [level=3] [ref=e365]
+            - list [ref=e366]:
+              - listitem [ref=e367]:
+                - link "About Us" [ref=e368] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e369]:
+                - link "Our Guides" [ref=e370] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e371]:
+                - link "Contact Us" [ref=e372] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e373]:
+                - link "Terms & Conditions" [ref=e374] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e375]:
+                - link "Privacy Policy" [ref=e376] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e377]:
+                - link "Blog" [ref=e378] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e379]:
+              - heading "Follow the Journey" [level=4] [ref=e380]
+              - generic [ref=e381]:
+                - link "Facebook" [ref=e382] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e383]
+                - link "Twitter" [ref=e385] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e386]
+                - link "Instagram" [ref=e388] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e389]
+                - link "YouTube" [ref=e392] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e393]
+        - generic [ref=e397]:
+          - generic [ref=e398]: Accredited & Trusted
+          - generic [ref=e399]:
+            - link "TripAdvisor" [ref=e400] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e402]: SafariBookings
+            - generic [ref=e404]: TATO Member
+            - generic [ref=e406]: KPAP Partner
+      - generic [ref=e409]:
+        - generic [ref=e410]:
+          - generic [ref=e411]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e412]: "|"
+          - link "Terms & Conditions" [ref=e413] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e414]: ·
+          - link "Privacy Policy" [ref=e415] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e416]:
+          - generic [ref=e417]: Crafted by
+          - link "Timeless International" [ref=e418] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:24 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e419]:
+      - img [ref=e420]
+  - button "Open Next.js Dev Tools" [ref=e428] [cursor=pointer]:
+    - img [ref=e429]
+  - alert [ref=e432]

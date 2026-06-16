@@ -1,0 +1,604 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - article [ref=e51]:
+        - generic [ref=e53]:
+          - img "Great Wildebeest Migration Guide" [ref=e54]
+          - generic [ref=e57]:
+            - navigation "Breadcrumb" [ref=e59]:
+              - list [ref=e60]:
+                - listitem [ref=e61]:
+                  - link "Home" [ref=e62] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e63]
+                    - generic [ref=e66]: Home
+                - listitem [ref=e67]:
+                  - img [ref=e68]
+                  - link "Blog" [ref=e70] [cursor=pointer]:
+                    - /url: /blog/
+                - listitem [ref=e71]:
+                  - img [ref=e72]
+                  - generic [ref=e74]: Great Wildebeest Migration Guide
+            - link "Safari Tours" [ref=e76] [cursor=pointer]:
+              - /url: /category/safari-tours/
+            - heading "Great Wildebeest Migration Guide" [level=1] [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - img [ref=e81]
+                - generic [ref=e84]:
+                  - paragraph [ref=e85]: Snow Africa Team
+                  - paragraph [ref=e86]: Author
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e90]: Feb 13, 2026
+              - generic [ref=e91]:
+                - img [ref=e92]
+                - generic [ref=e95]: 13 min read
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - paragraph [ref=e100]: Witness Earth's greatest wildlife spectacle - the Great Wildebeest Migration, with 2 million animals crossing the Serengeti ecosystem.
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: The Great Wildebeest Migration stands as nature's most spectacular wildlife event—a continuous circular journey of nearly two million animals across the Serengeti-Mara ecosystem. This ceaseless movement of wildebeest, zebra, and gazelle in search of fresh grazing creates drama, danger, and wonder throughout the year. Understanding how this migration works, where to witness it, and when to plan your visit unlocks access to experiences that define East African safari travel.
+              - paragraph [ref=e104]: Unlike many wildlife events that occur briefly or unpredictably, the migration offers opportunities for extended observation. The herds are always somewhere in the ecosystem, always moving, always providing something remarkable to witness. From dramatic river crossings to the chaos of calving season, the migration delivers unforgettable encounters across different landscapes and seasons.
+              - heading "Understanding the Migration" [level=2] [ref=e105]
+              - paragraph [ref=e106]: The Great Migration is not a single event but a year-round phenomenon driven by rainfall and grass growth. Approximately 1.5 million wildebeest, 400,000 zebra, and 200,000 Thomson's gazelle participate in this endless circuit, following the rains that trigger fresh grass growth essential for their survival.
+              - heading "Why Animals Migrate" [level=3] [ref=e107]
+              - paragraph [ref=e108]: "The fundamental driver is simple: food. Grazing animals require fresh, nutritious grass, which grows in response to rainfall. As each area's grass is consumed or dries out, the herds must move to find new pastures. The Serengeti-Mara ecosystem's rainfall patterns create a roughly circular route that provides fresh grazing somewhere throughout the year."
+              - paragraph [ref=e109]: Zebras typically lead the migration, consuming the longer, coarser grass tops. Wildebeest follow, preferring the medium-length grass the zebras expose. Thomson's gazelles bring up the rear, grazing the shortest, most nutritious new growth. This sequential feeding allows the system to support far more animals than if all species competed for identical food sources.
+              - heading "The Annual Cycle" [level=3] [ref=e110]
+              - paragraph [ref=e111]: While exact timing varies with rainfall patterns, the migration follows a general annual rhythm. Understanding this cycle helps visitors choose optimal timing for different experiences.
+              - paragraph [ref=e112]: December through March finds the herds concentrated in the southern Serengeti and Ndutu area, where short-grass plains provide ideal calving grounds. The nutrient-rich volcanic soil produces grass with exceptionally high mineral content, supporting nursing mothers and newborn calves. February typically sees the most intense calving, with up to 8,000 calves born daily during peak periods.
+              - paragraph [ref=e113]: April and May see the herds moving northwest as the southern plains dry. The long rains complicate photography but create lush landscapes and fewer tourists. By June, concentrations build in the Western Corridor, often gathering for dramatic crossings of the Grumeti River.
+              - paragraph [ref=e114]: July through October represents peak migration spectacle in the northern Serengeti and Kenya's Masai Mara. Multiple Mara River crossings occur as herds move between countries, creating the iconic images of wildebeest plunging into crocodile-infested waters. This period attracts the most visitors for good reason—the crossings deliver unparalleled drama.
+              - paragraph [ref=e115]: November brings return movement southward as the short rains begin, completing the annual circuit. The herds disperse across broader areas during this transition, making them somewhat harder to locate but also meaning fewer vehicles at sightings.
+              - heading "The River Crossings" [level=2] [ref=e116]
+              - paragraph [ref=e117]: While the entire migration impresses, the river crossings generate the most dramatic footage and memorable encounters. Understanding crossing dynamics helps visitors position themselves for optimal viewing.
+              - heading "Crossing Behavior" [level=3] [ref=e118]
+              - paragraph [ref=e119]: Wildebeest approach rivers nervously, gathering in increasingly large groups at established crossing points. Tension builds as animals at the front hesitate while those behind push forward. Eventually, one animal commits, triggering a cascade of followers plunging into the water.
+              - paragraph [ref=e120]: Once a crossing begins, the herd mentality takes over. Animals enter regardless of conditions, sometimes jumping from significant heights into shallow water or directly onto animals already in the river. The chaos creates heartbreaking and exhilarating scenes simultaneously—calves separated from mothers, strong swimmers pulling ahead while weaker animals struggle, crocodiles attacking from below.
+              - paragraph [ref=e121]: Crossings can last minutes or hours depending on herd size and conditions. Sometimes herds cross, then immediately return, seemingly changing their collective mind. Other times, herds gather at crossing points for days without committing, testing visitors' patience.
+              - heading "The Grumeti River" [level=3] [ref=e122]
+              - paragraph [ref=e123]: The Grumeti River crossings occur earlier in the season, typically June and July, as herds move through the Western Corridor. These crossings tend to be smaller in scale than Mara crossings but feature some of the largest crocodiles in the ecosystem—individuals exceeding five meters inhabit these waters.
+              - heading "The Mara River" [level=3] [ref=e124]
+              - paragraph [ref=e125]: The Mara River crossings, occurring July through October in the northern Serengeti and Masai Mara, represent the migration's peak spectacle. Multiple crossing points along the river mean guides must judge where herds are likely to cross on any given day—a combination of experience, local intelligence, and sometimes luck.
+              - paragraph [ref=e126]: "The Mara presents various challenges depending on location: steep banks requiring dangerous descents, strong currents that sweep away weaker animals, and significant crocodile populations. Some crossing points are notoriously treacherous, creating maximum drama; others offer easier passage and correspondingly less spectacular viewing."
+              - heading "Calving Season" [level=2] [ref=e127]
+              - paragraph [ref=e128]: The calving season offers a completely different but equally compelling migration experience. Concentrated in the southern Serengeti from late January through March, this period features both the miracle of new life and intense predator activity.
+              - heading "The Calving Grounds" [level=3] [ref=e129]
+              - paragraph [ref=e130]: The Ndutu area and surrounding short-grass plains provide ideal calving conditions. The open terrain allows mothers to spot predators from distance while nutritious grass supports lactation. Visitors encounter vast herds spread across seemingly endless plains, with newborn calves visible throughout.
+              - heading "Predator Abundance" [level=3] [ref=e131]
+              - paragraph [ref=e132]: The concentration of vulnerable calves attracts predators from throughout the ecosystem. Lions, cheetahs, leopards, and hyenas converge on the calving grounds, creating exceptional predator viewing. The open terrain makes hunts particularly visible—cheetah pursuits across flat plains, lion ambushes from slight depressions, hyena packs testing herd edges.
+              - paragraph [ref=e133]: This predator-prey dynamic, while sometimes difficult to witness, represents nature at its most raw and honest. The abundance of prey means predators hunt successfully more often than usual, providing opportunities to observe complete hunting sequences rather than just occasional attempts.
+              - heading "Where to See the Migration" [level=2] [ref=e134]
+              - paragraph [ref=e135]: The migration spans an enormous area, and different regions offer distinct experiences depending on season and priorities.
+              - heading "Southern Serengeti and Ndutu" [level=3] [ref=e136]
+              - paragraph [ref=e137]:
+                - text: Best visited December through March for calving season. The Ndutu area, technically in the
+                - link "Ngorongoro Conservation Area" [ref=e138] [cursor=pointer]:
+                  - /url: /tanzania-destinations/ngorongoro-conservation-area/
+                - text: ", provides access to the short-grass plains where calving concentrates. Accommodations range from basic camping to luxury lodges, though options are more limited than in central Serengeti."
+              - heading "Central Serengeti (Seronera)" [level=3] [ref=e139]
+              - paragraph [ref=e140]: The central Serengeti offers year-round wildlife, with migration herds passing through in roughly April-May and November. Even when the main migration is elsewhere, this area supports resident wildlife populations including excellent predator viewing. The highest concentration of accommodations makes this area accessible for various budgets.
+              - heading "Western Corridor" [level=3] [ref=e141]
+              - paragraph [ref=e142]: Prime for Grumeti River crossings in June and July. This less-visited region offers more exclusive experiences with fewer vehicles, though infrastructure is less developed than central areas. The landscape differs from classic Serengeti plains, featuring more woodland and riverine forest.
+              - heading "Northern Serengeti" [level=3] [ref=e143]
+              - paragraph [ref=e144]: The remote north delivers peak crossing drama from July through October. The Lamai Wedge and Kogatende areas position visitors near multiple Mara River crossing points. Accommodations tend toward higher-end given the logistical challenges of operating in this remote region. Flight access is typically necessary; driving from Arusha takes most of a day.
+              - heading "Masai Mara, Kenya" [level=3] [ref=e145]
+              - paragraph [ref=e146]: Kenya's Masai Mara receives migration herds typically August through October. The Mara offers advantages including easier access from Nairobi, more accommodation options, and permission for off-road driving that Tanzanian parks prohibit. However, higher visitor numbers during peak season mean more crowded sightings.
+              - heading "Planning Your Migration Safari" [level=2] [ref=e147]
+              - paragraph [ref=e148]: Successfully witnessing the migration requires matching your visit timing and location to the current migration position—which varies annually with rainfall patterns.
+              - heading "Flexibility" [level=3] [ref=e149]
+              - paragraph [ref=e150]: The migration's timing isn't perfectly predictable. Herds don't consult calendars; they follow the rain. Unusual weather patterns can shift timing by weeks. Building flexibility into plans—whether in dates or willingness to change locations—increases chances of optimal encounters.
+              - heading "Duration" [level=3] [ref=e151]
+              - paragraph [ref=e152]: For river crossings specifically, plan multiple days in position. Crossings don't occur on schedule; herds might gather at a crossing point for days before committing. Single-day visits to crossing areas often result in disappointment. Three or more days significantly improve chances of witnessing a crossing.
+              - paragraph [ref=e153]: For calving season, the action is more predictable since herds concentrate reliably in the south. Two to three days provide excellent experiences without requiring the patience that crossing viewing demands.
+              - heading "Combining Destinations" [level=3] [ref=e154]
+              - paragraph [ref=e155]: Many itineraries combine migration viewing with other Tanzanian highlights. A classic pattern visits Ngorongoro Crater and central Serengeti year-round, adding northern Serengeti for crossing season or southern plains for calving. This approach ensures excellent wildlife even if migration timing isn't perfect.
+              - heading "Conservation Considerations" [level=2] [ref=e156]
+              - paragraph [ref=e157]: The migration persists only because sufficient habitat remains intact. Unlike many wildlife spectacles reduced to remnants of former glory, the Serengeti-Mara migration continues at near-historical scale thanks to protected area management and tourism revenue that provides economic alternatives to habitat conversion.
+              - heading "Threats" [level=3] [ref=e158]
+              - paragraph [ref=e159]: Proposed infrastructure projects, including roads and railways across migration corridors, present ongoing threats. Climate change may alter rainfall patterns that drive the entire system. Human population growth increases pressure on ecosystem edges. Visitors supporting conservation-minded operators contribute to protecting this phenomenon for future generations.
+              - heading "Ethical Viewing" [level=3] [ref=e160]
+              - paragraph [ref=e161]: The migration's popularity creates crowding at popular sightings, particularly river crossings. Choosing operators who limit vehicle numbers at sightings, maintain appropriate distances, and avoid aggressive positioning preserves experience quality for all visitors while reducing stress on wildlife.
+              - heading "Photography Tips" [level=2] [ref=e162]
+              - paragraph [ref=e163]: The migration provides endless photographic opportunities, from intimate portraits to sweeping landscapes filled with animals.
+              - heading "River Crossings" [level=3] [ref=e164]
+              - paragraph [ref=e165]: Crossing photography rewards preparation. Position with good angles before action begins; repositioning during crossings disturbs the scene and may cause animals to abort. Fast shutter speeds freeze action—1/1000 second or faster for splashing water. Continuous shooting captures peak action moments that single frames miss.
+              - heading "Herds and Landscapes" [level=3] [ref=e166]
+              - paragraph [ref=e167]: The migration's scale challenges photographers to convey vastness. Wide-angle lenses show herds extending to the horizon. Elevated viewpoints—hill slopes or vehicle rooftops where permitted—provide perspective impossible from ground level. Dramatic skies during afternoon storms create memorable backdrops.
+              - heading "Predator-Prey Interactions" [level=3] [ref=e168]
+              - paragraph [ref=e169]: Calving season's predator activity rewards patience and long lenses. Position before action begins—once a hunt starts, repositioning typically means missing the climax. Continuous shooting at high frame rates captures action sequences that tell complete stories.
+              - heading "Booking Your Migration Safari" [level=2] [ref=e170]
+              - paragraph [ref=e171]: The Great Wildebeest Migration offers experiences available nowhere else on Earth—the scale, the drama, the primal spectacle of millions of animals following ancient patterns across vast African landscapes. Whether witnessing newborn calves taking first steps, holding breath as thousands plunge into crocodile-filled rivers, or simply absorbing the enormity of herds stretching beyond sight, the migration creates memories that define safari travel.
+              - paragraph [ref=e172]: Contact us to plan your migration safari. We track current migration positions, recommend optimal timing for your priorities, and design itineraries that position you for unforgettable encounters. Whether first-time visitors seeking accessible migration experiences or returning travelers pursuing specific seasonal phenomena, we'll help you witness nature's greatest wildlife spectacle.
+              - heading "Frequently Asked Questions" [level=2] [ref=e173]
+              - heading "When is the best time to see the Great Migration?" [level=3] [ref=e174]
+              - paragraph [ref=e175]: The migration happens year-round in different locations. River crossings in the northern Serengeti occur June-October (the most dramatic spectacle). Calving season in the southern Serengeti runs January-March (800,000 calves born in weeks). The migration is circular — there is always something happening, but July-September is peak viewing.
+              - heading "Where exactly does the Great Migration happen?" [level=3] [ref=e176]
+              - paragraph [ref=e177]: "The migration follows a clockwise loop through the Serengeti-Mara ecosystem: southern Serengeti (December-March) for calving, western corridor (April-May), northern Serengeti and Mara River crossings (June-October), then Masai Mara in Kenya (August-October) before returning south. The entire circuit covers roughly 800 kilometres."
+              - heading "How many animals are in the Great Migration?" [level=3] [ref=e178]
+              - paragraph [ref=e179]: Approximately 1.5 million wildebeest, 400,000 zebra, 200,000 Thomson's gazelle, and thousands of eland move together. This is the largest animal migration on Earth. Predators — lions, leopards, cheetahs, hyenas, crocodiles — follow the herds, creating constant drama across the plains.
+              - heading "Can you see the migration on a 3-day safari?" [level=3] [ref=e180]
+              - paragraph [ref=e181]: It is possible but depends entirely on timing and location. During peak river crossing season (July-September), a 3-day trip focused on the northern Serengeti gives a reasonable chance. For calving season, the southern Serengeti is more accessible on a shorter trip. For the best experience, 4-5 days in the Serengeti is recommended.
+              - heading "Why do wildebeest migrate?" [level=3] [ref=e182]
+              - paragraph [ref=e183]: Wildebeest follow the rains in search of fresh grazing. The migration is driven by rainfall patterns — as grass dries out in one area, herds move to where recent rains have produced new growth. It is not a conscious decision but an instinctive response to resource availability that has occurred for thousands of years.
+              - heading "Month-by-Month Migration Tracker" [level=2] [ref=e184]
+              - paragraph [ref=e185]: "The Great Migration follows a roughly clockwise circuit through the Serengeti-Mara ecosystem. Here is where the herds are each month:"
+              - table [ref=e186]:
+                - rowgroup [ref=e187]:
+                  - row "Month Location Key Event Best Park/Area" [ref=e188]:
+                    - columnheader "Month" [ref=e189]
+                    - columnheader "Location" [ref=e190]
+                    - columnheader "Key Event" [ref=e191]
+                    - columnheader "Best Park/Area" [ref=e192]
+                - rowgroup [ref=e193]:
+                  - row "January–March Southern Serengeti (Ndutu) Calving season — 8,000+ calves born daily Ndutu, Lake Ndutu area" [ref=e194]:
+                    - cell "January–March" [ref=e195]:
+                      - strong [ref=e196]: January–March
+                    - cell "Southern Serengeti (Ndutu)" [ref=e197]
+                    - cell "Calving season — 8,000+ calves born daily" [ref=e198]
+                    - cell "Ndutu, Lake Ndutu area" [ref=e199]
+                  - row "April–May Central Serengeti Long rains begin; herds move north Seronera Valley" [ref=e200]:
+                    - cell "April–May" [ref=e201]:
+                      - strong [ref=e202]: April–May
+                    - cell "Central Serengeti" [ref=e203]
+                    - cell "Long rains begin; herds move north" [ref=e204]
+                    - cell "Seronera Valley" [ref=e205]
+                  - row "June Western Corridor Grumeti River crossings begin Grumeti Reserve" [ref=e206]:
+                    - cell "June" [ref=e207]:
+                      - strong [ref=e208]: June
+                    - cell "Western Corridor" [ref=e209]
+                    - cell "Grumeti River crossings begin" [ref=e210]
+                    - cell "Grumeti Reserve" [ref=e211]
+                  - row "July–August Northern Serengeti / Mara River Dramatic Mara River crossings — peak migration spectacle Kogatende, Lamai" [ref=e212]:
+                    - cell "July–August" [ref=e213]:
+                      - strong [ref=e214]: July–August
+                    - cell "Northern Serengeti / Mara River" [ref=e215]
+                    - cell "Dramatic Mara River crossings — peak migration spectacle" [ref=e216]
+                    - cell "Kogatende, Lamai" [ref=e217]
+                  - row "September–October Masai Mara (Kenya) / Northern Serengeti Return crossings; herds spread across Mara Masai Mara, Kogatende" [ref=e218]:
+                    - cell "September–October" [ref=e219]:
+                      - strong [ref=e220]: September–October
+                    - cell "Masai Mara (Kenya) / Northern Serengeti" [ref=e221]
+                    - cell "Return crossings; herds spread across Mara" [ref=e222]
+                    - cell "Masai Mara, Kogatende" [ref=e223]
+                  - row "November–December Eastern Serengeti moving south Short rains trigger southward movement Loliondo, Namiri Plains" [ref=e224]:
+                    - cell "November–December" [ref=e225]:
+                      - strong [ref=e226]: November–December
+                    - cell "Eastern Serengeti moving south" [ref=e227]
+                    - cell "Short rains trigger southward movement" [ref=e228]
+                    - cell "Loliondo, Namiri Plains" [ref=e229]
+              - paragraph [ref=e230]:
+                - emphasis [ref=e231]: Timing varies by 2–4 weeks each year depending on rainfall patterns. Contact us for real-time migration updates before booking.
+              - heading "Frequently Asked Questions" [level=2] [ref=e232]
+              - heading "When is the best time to see the Great Migration?" [level=3] [ref=e233]
+              - paragraph [ref=e234]: The most dramatic spectacle — the Mara River crossings — occurs from July through September in the northern Serengeti (Kogatende area). However, the migration happens year-round. Calving season (January–March) in the southern Serengeti offers equally compelling wildlife viewing with thousands of newborns and predator action. The "best" time depends on which part of the migration you want to witness.
+              - heading "Where do wildebeest cross the Mara River?" [level=3] [ref=e235]
+              - paragraph [ref=e236]: The main crossing points are in the northern Serengeti near Kogatende and along the Mara River on both the Tanzania and Kenya sides. There are several established crossing points, but the herds may choose different locations each time based on water levels and predator presence. River crossings are unpredictable — herds may approach, hesitate for hours, then suddenly surge across, or turn back entirely. Positioning yourself at a known crossing point with a good guide gives you the best chance.
+              - heading "How many animals are in the Great Migration?" [level=3] [ref=e237]
+              - paragraph [ref=e238]: "The Great Migration involves approximately 1.5 million wildebeest, 400,000 zebra, and 200,000 Thomson's gazelle — over 2 million animals in total. It is the largest overland wildlife migration on Earth. Along the way, the herds are trailed by predators: lions, cheetahs, leopards, hyenas, and crocodiles that wait at river crossings."
+              - heading "How far do wildebeest migrate each year?" [level=3] [ref=e239]
+              - paragraph [ref=e240]: The herds travel approximately 800 to 1,000 kilometres (500–620 miles) annually in a roughly clockwise loop between the southern Serengeti in Tanzania and the Masai Mara in Kenya. The exact route and timing vary each year based on rainfall patterns — the herds follow the fresh grass that grows after rains.
+              - heading "Can you see the Great Migration from Kenya?" [level=3] [ref=e241]
+              - paragraph [ref=e242]: Yes. From approximately August to October, large portions of the herds cross into Kenya's Masai Mara National Reserve, and dramatic Mara River crossings happen on both sides of the border. However, the migration spends the majority of the year (roughly 9–10 months) on the Tanzania side in the Serengeti. For the full migration experience across multiple months, Tanzania offers more flexibility.
+            - generic [ref=e245]:
+              - img [ref=e247]
+              - generic [ref=e250]:
+                - generic [ref=e251]:
+                  - heading "Snow Africa Team" [level=3] [ref=e252]
+                  - generic [ref=e253]: Safari & Trekking Experts
+                - paragraph [ref=e254]: The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.
+                - generic [ref=e255]:
+                  - generic [ref=e256]:
+                    - img [ref=e257]
+                    - text: TATO Licensed Operator
+                  - generic [ref=e260]:
+                    - img [ref=e261]
+                    - text: Kilimanjaro Certified Guides
+                  - generic [ref=e264]:
+                    - img [ref=e265]
+                    - text: First Aid Wilderness Certified
+                  - generic [ref=e268]:
+                    - img [ref=e269]
+                    - text: Based in Arusha, Tanzania
+            - link "Back to Blog" [ref=e273] [cursor=pointer]:
+              - /url: /blog/
+              - img [ref=e274]
+              - text: Back to Blog
+            - generic [ref=e276]:
+              - heading "Continue Reading" [level=2] [ref=e277]
+              - generic [ref=e278]:
+                - link "What to Wear on Tanzania Safari What to Wear on Tanzania Safari Feb 20, 2026" [ref=e279] [cursor=pointer]:
+                  - /url: /what-to-wear-in-tanzania-safari-a-guide-to-perfectly-blend-with-the-color-of-tanzania/
+                  - img "What to Wear on Tanzania Safari" [ref=e281]
+                  - generic [ref=e282]:
+                    - heading "What to Wear on Tanzania Safari" [level=3] [ref=e283]
+                    - paragraph [ref=e284]: Feb 20, 2026
+                - link "Why Do Zebra and Wildebeest Migrate Together? Why Do Zebra and Wildebeest Migrate Together? Feb 19, 2026" [ref=e285] [cursor=pointer]:
+                  - /url: /why-do-zebra-and-wildebeest-migrate-together/
+                  - img "Why Do Zebra and Wildebeest Migrate Together?" [ref=e287]
+                  - generic [ref=e288]:
+                    - heading "Why Do Zebra and Wildebeest Migrate Together?" [level=3] [ref=e289]
+                    - paragraph [ref=e290]: Feb 19, 2026
+                - link "Birdwatching Tours Tanzania Birdwatching Tours Tanzania Feb 19, 2026" [ref=e291] [cursor=pointer]:
+                  - /url: /birdwatching-tours-tanzania/
+                  - img "Birdwatching Tours Tanzania" [ref=e293]
+                  - generic [ref=e294]:
+                    - heading "Birdwatching Tours Tanzania" [level=3] [ref=e295]
+                    - paragraph [ref=e296]: Feb 19, 2026
+          - complementary [ref=e297]:
+            - generic [ref=e298]:
+              - generic [ref=e299]:
+                - heading "In This Article" [level=3] [ref=e300]:
+                  - img [ref=e302]
+                  - text: In This Article
+                - navigation [ref=e304]:
+                  - link "Why Animals Migrate" [ref=e305] [cursor=pointer]:
+                    - /url: "#why-animals-migrate"
+                    - generic [ref=e306]: Why Animals Migrate
+                  - link "The Annual Cycle" [ref=e307] [cursor=pointer]:
+                    - /url: "#the-annual-cycle"
+                    - generic [ref=e308]: The Annual Cycle
+                  - link "Crossing Behavior" [ref=e309] [cursor=pointer]:
+                    - /url: "#crossing-behavior"
+                    - generic [ref=e310]: Crossing Behavior
+                  - link "The Grumeti River" [ref=e311] [cursor=pointer]:
+                    - /url: "#the-grumeti-river"
+                    - generic [ref=e312]: The Grumeti River
+                  - link "The Mara River" [ref=e313] [cursor=pointer]:
+                    - /url: "#the-mara-river"
+                    - generic [ref=e314]: The Mara River
+                  - link "The Calving Grounds" [ref=e315] [cursor=pointer]:
+                    - /url: "#the-calving-grounds"
+                    - generic [ref=e316]: The Calving Grounds
+                  - link "Predator Abundance" [ref=e317] [cursor=pointer]:
+                    - /url: "#predator-abundance"
+                    - generic [ref=e318]: Predator Abundance
+                  - link "Southern Serengeti and Ndutu" [ref=e319] [cursor=pointer]:
+                    - /url: "#southern-serengeti-and-ndutu"
+                    - generic [ref=e320]: Southern Serengeti and Ndutu
+                  - link "Central Serengeti (Seronera)" [ref=e321] [cursor=pointer]:
+                    - /url: "#central-serengeti-seronera"
+                    - generic [ref=e322]: Central Serengeti (Seronera)
+                  - link "Western Corridor" [ref=e323] [cursor=pointer]:
+                    - /url: "#western-corridor"
+                    - generic [ref=e324]: Western Corridor
+                  - link "Northern Serengeti" [ref=e325] [cursor=pointer]:
+                    - /url: "#northern-serengeti"
+                    - generic [ref=e326]: Northern Serengeti
+                  - link "Masai Mara, Kenya" [ref=e327] [cursor=pointer]:
+                    - /url: "#masai-mara-kenya"
+                    - generic [ref=e328]: Masai Mara, Kenya
+                  - link "Flexibility" [ref=e329] [cursor=pointer]:
+                    - /url: "#flexibility"
+                    - generic [ref=e330]: Flexibility
+                  - link "Duration" [ref=e331] [cursor=pointer]:
+                    - /url: "#duration"
+                    - generic [ref=e332]: Duration
+                  - link "Combining Destinations" [ref=e333] [cursor=pointer]:
+                    - /url: "#combining-destinations"
+                    - generic [ref=e334]: Combining Destinations
+                  - link "Threats" [ref=e335] [cursor=pointer]:
+                    - /url: "#threats"
+                    - generic [ref=e336]: Threats
+                  - link "Ethical Viewing" [ref=e337] [cursor=pointer]:
+                    - /url: "#ethical-viewing"
+                    - generic [ref=e338]: Ethical Viewing
+                  - link "River Crossings" [ref=e339] [cursor=pointer]:
+                    - /url: "#river-crossings"
+                    - generic [ref=e340]: River Crossings
+                  - link "Herds and Landscapes" [ref=e341] [cursor=pointer]:
+                    - /url: "#herds-and-landscapes"
+                    - generic [ref=e342]: Herds and Landscapes
+                  - link "Predator-Prey Interactions" [ref=e343] [cursor=pointer]:
+                    - /url: "#predator-prey-interactions"
+                    - generic [ref=e344]: Predator-Prey Interactions
+                  - link "When is the best time to see the Great Migration?" [ref=e345] [cursor=pointer]:
+                    - /url: "#when-is-the-best-time-to-see-the-great-migration"
+                    - generic [ref=e346]: When is the best time to see the Great Migration?
+                  - link "Where exactly does the Great Migration happen?" [ref=e347] [cursor=pointer]:
+                    - /url: "#where-exactly-does-the-great-migration-happen"
+                    - generic [ref=e348]: Where exactly does the Great Migration happen?
+                  - link "How many animals are in the Great Migration?" [ref=e349] [cursor=pointer]:
+                    - /url: "#how-many-animals-are-in-the-great-migration"
+                    - generic [ref=e350]: How many animals are in the Great Migration?
+                  - link "Can you see the migration on a 3-day safari?" [ref=e351] [cursor=pointer]:
+                    - /url: "#can-you-see-the-migration-on-a-3-day-safari"
+                    - generic [ref=e352]: Can you see the migration on a 3-day safari?
+                  - link "Why do wildebeest migrate?" [ref=e353] [cursor=pointer]:
+                    - /url: "#why-do-wildebeest-migrate"
+                    - generic [ref=e354]: Why do wildebeest migrate?
+                  - link "When is the best time to see the Great Migration?" [ref=e355] [cursor=pointer]:
+                    - /url: "#when-is-the-best-time-to-see-the-great-migration"
+                    - generic [ref=e356]: When is the best time to see the Great Migration?
+                  - link "Where do wildebeest cross the Mara River?" [ref=e357] [cursor=pointer]:
+                    - /url: "#where-do-wildebeest-cross-the-mara-river"
+                    - generic [ref=e358]: Where do wildebeest cross the Mara River?
+                  - link "How many animals are in the Great Migration?" [ref=e359] [cursor=pointer]:
+                    - /url: "#how-many-animals-are-in-the-great-migration"
+                    - generic [ref=e360]: How many animals are in the Great Migration?
+                  - link "How far do wildebeest migrate each year?" [ref=e361] [cursor=pointer]:
+                    - /url: "#how-far-do-wildebeest-migrate-each-year"
+                    - generic [ref=e362]: How far do wildebeest migrate each year?
+                  - link "Can you see the Great Migration from Kenya?" [ref=e363] [cursor=pointer]:
+                    - /url: "#can-you-see-the-great-migration-from-kenya"
+                    - generic [ref=e364]: Can you see the Great Migration from Kenya?
+              - generic [ref=e365]:
+                - generic [ref=e366]:
+                  - img [ref=e368]
+                  - heading "Tanzania Safari" [level=3] [ref=e371]
+                - paragraph [ref=e372]: Explore the Serengeti, Ngorongoro Crater, and more with our expert-led safaris.
+                - link "View Safaris" [ref=e373] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - generic [ref=e374]:
+                - heading "Categories" [level=3] [ref=e375]:
+                  - img [ref=e377]
+                  - text: Categories
+                - list [ref=e380]:
+                  - listitem [ref=e381]:
+                    - link "Blog 27" [ref=e382] [cursor=pointer]:
+                      - /url: /category/blog/
+                      - generic [ref=e383]: Blog
+                      - generic [ref=e384]: "27"
+                  - listitem [ref=e385]:
+                    - link "Day Trips 1" [ref=e386] [cursor=pointer]:
+                      - /url: /category/day-trip/
+                      - generic [ref=e387]: Day Trips
+                      - generic [ref=e388]: "1"
+                  - listitem [ref=e389]:
+                    - link "Kilimanjaro Climbing Guide 16" [ref=e390] [cursor=pointer]:
+                      - /url: /category/kilimanjaro-climbing-guide/
+                      - generic [ref=e391]: Kilimanjaro Climbing Guide
+                      - generic [ref=e392]: "16"
+                  - listitem [ref=e393]:
+                    - link "Mount Kilimanjaro 33" [ref=e394] [cursor=pointer]:
+                      - /url: /category/mount-kilimanjaro/
+                      - generic [ref=e395]: Mount Kilimanjaro
+                      - generic [ref=e396]: "33"
+                  - listitem [ref=e397]:
+                    - link "Safari Tours 41" [ref=e398] [cursor=pointer]:
+                      - /url: /category/safari-tours/
+                      - generic [ref=e399]: Safari Tours
+                      - generic [ref=e400]: "41"
+                  - listitem [ref=e401]:
+                    - link "Tanzania Destinations 7" [ref=e402] [cursor=pointer]:
+                      - /url: /category/tanzania-destinations/
+                      - generic [ref=e403]: Tanzania Destinations
+                      - generic [ref=e404]: "7"
+              - generic [ref=e405]:
+                - generic [ref=e406]:
+                  - img [ref=e408]
+                  - heading "Climb Kilimanjaro" [level=3] [ref=e410]
+                - paragraph [ref=e411]: Add Africa's highest peak to your Tanzania adventure.
+                - link "View Routes" [ref=e412] [cursor=pointer]:
+                  - /url: /trekking/
+    - contentinfo [ref=e413]:
+      - generic [ref=e416]:
+        - generic [ref=e417]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e418]
+      - generic [ref=e423]:
+        - generic [ref=e424]:
+          - generic [ref=e425]:
+            - img "Snow Africa Adventure" [ref=e427]
+            - paragraph [ref=e428]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e429]:
+              - listitem [ref=e430]:
+                - link "+255 766 657 854" [ref=e431] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e433]
+                  - generic [ref=e435]: +255 766 657 854
+              - listitem [ref=e436]:
+                - link "info@snowafricaadventure.com" [ref=e437] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e439]
+                  - generic [ref=e442]: info@snowafricaadventure.com
+              - listitem [ref=e443]:
+                - img [ref=e445]
+                - generic [ref=e448]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e449]:
+            - heading "Safari & Tours" [level=3] [ref=e450]
+            - list [ref=e451]:
+              - listitem [ref=e452]:
+                - link "All Safari Packages" [ref=e453] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e454]:
+                - link "Tailor-Made Safaris" [ref=e455] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e456]:
+                - link "Tanzania Destinations" [ref=e457] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e458]:
+                - link "View all" [ref=e459] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e460]: →
+          - generic [ref=e461]:
+            - heading "Kilimanjaro" [level=3] [ref=e462]
+            - list [ref=e463]:
+              - listitem [ref=e464]:
+                - link "All Trekking Routes" [ref=e465] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e466]:
+                - link "Best Route to Climb" [ref=e467] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e468]:
+                - link "Climbing Kilimanjaro Guide" [ref=e469] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e470]:
+                - link "Join Group Departures" [ref=e471] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e472]:
+                - link "Kilimanjaro Prices" [ref=e473] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e474]:
+                - link "Best Time to Climb" [ref=e475] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e476]:
+                - link "View all routes" [ref=e477] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e478]: →
+          - generic [ref=e479]:
+            - heading "Company" [level=3] [ref=e480]
+            - list [ref=e481]:
+              - listitem [ref=e482]:
+                - link "About Us" [ref=e483] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e484]:
+                - link "Our Guides" [ref=e485] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e486]:
+                - link "Contact Us" [ref=e487] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e488]:
+                - link "Terms & Conditions" [ref=e489] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e490]:
+                - link "Privacy Policy" [ref=e491] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e492]:
+                - link "Blog" [ref=e493] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e494]:
+              - heading "Follow the Journey" [level=4] [ref=e495]
+              - generic [ref=e496]:
+                - link "Facebook" [ref=e497] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e498]
+                - link "Twitter" [ref=e500] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e501]
+                - link "Instagram" [ref=e503] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e504]
+                - link "YouTube" [ref=e507] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e508]
+        - generic [ref=e512]:
+          - generic [ref=e513]: Accredited & Trusted
+          - generic [ref=e514]:
+            - link "TripAdvisor" [ref=e515] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e517]: SafariBookings
+            - generic [ref=e519]: TATO Member
+            - generic [ref=e521]: KPAP Partner
+      - generic [ref=e524]:
+        - generic [ref=e525]:
+          - generic [ref=e526]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e527]: "|"
+          - link "Terms & Conditions" [ref=e528] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e529]: ·
+          - link "Privacy Policy" [ref=e530] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e531]:
+          - generic [ref=e532]: Crafted by
+          - link "Timeless International" [ref=e533] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:36 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e534]:
+      - img [ref=e535]
+  - generic [ref=e542] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e543]:
+      - img [ref=e544]
+    - generic [ref=e547]:
+      - button "Open issues overlay" [ref=e548]:
+        - generic [ref=e549]:
+          - generic [ref=e550]: "1"
+          - generic [ref=e551]: "2"
+        - generic [ref=e552]:
+          - text: Issue
+          - generic [ref=e553]: s
+      - button "Collapse issues badge" [ref=e554]:
+        - img [ref=e555]
+  - alert [ref=e557]

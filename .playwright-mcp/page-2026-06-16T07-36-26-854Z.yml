@@ -1,0 +1,663 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - article [ref=e51]:
+        - generic [ref=e53]:
+          - img "Climbing Mount Meru Guide" [ref=e54]
+          - generic [ref=e57]:
+            - navigation "Breadcrumb" [ref=e59]:
+              - list [ref=e60]:
+                - listitem [ref=e61]:
+                  - link "Home" [ref=e62] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e63]
+                    - generic [ref=e66]: Home
+                - listitem [ref=e67]:
+                  - img [ref=e68]
+                  - link "Blog" [ref=e70] [cursor=pointer]:
+                    - /url: /blog/
+                - listitem [ref=e71]:
+                  - img [ref=e72]
+                  - generic [ref=e74]: Climbing Mount Meru Guide
+            - link "Mount Kilimanjaro" [ref=e76] [cursor=pointer]:
+              - /url: /category/mount-kilimanjaro/
+            - heading "Climbing Mount Meru Guide" [level=1] [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - img [ref=e81]
+                - generic [ref=e84]:
+                  - paragraph [ref=e85]: Snow Africa Team
+                  - paragraph [ref=e86]: Author
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e90]: Feb 13, 2026
+              - generic [ref=e91]:
+                - img [ref=e92]
+                - generic [ref=e95]: 9 min read
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - paragraph [ref=e100]: Discover Mount Meru - Tanzania's second highest peak and the perfect preparation for Kilimanjaro or a rewarding climb on its own.
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: Standing at 4,566 meters (14,980 feet), Mount Meru is Tanzania's second-highest peak and Africa's fifth-highest. Often overshadowed by its famous neighbor Kilimanjaro, Mount Meru offers an exceptional climbing experience with dramatic scenery, abundant wildlife, and excellent acclimatization for those planning to tackle Kilimanjaro afterward.
+              - heading "Why Climb Mount Meru?" [level=2] [ref=e104]
+              - paragraph [ref=e105]: "Mount Meru deserves recognition as a world-class trek in its own right:"
+              - heading "Stunning Scenery" [level=3] [ref=e106]
+              - paragraph [ref=e107]: The volcanic crater rim provides spectacular views into the massive caldera and across to Kilimanjaro. On clear days, the sunrise reveals Kilimanjaro emerging from clouds—one of Africa's most impressive mountain vistas.
+              - heading "Wildlife Encounters" [level=3] [ref=e108]
+              - paragraph [ref=e109]:
+                - text: Located within
+                - link "Arusha National Park" [ref=e110] [cursor=pointer]:
+                  - /url: /tanzania-destinations/arusha-national-park/
+                - text: ", Meru's lower slopes teem with wildlife. Climbers regularly encounter giraffes, buffaloes, warthogs, and various monkey species. An armed ranger accompanies each group for safety."
+              - heading "Technical Interest" [level=3] [ref=e111]
+              - paragraph [ref=e112]: The summit ridge offers more technical climbing than Kilimanjaro's trekking routes. While not requiring ropes, the exposed sections provide a taste of alpinism for those seeking more challenge.
+              - heading "Fewer Crowds" [level=3] [ref=e113]
+              - paragraph [ref=e114]: Compared to Kilimanjaro's 50,000+ annual climbers, Meru sees only about 3,000. This means quieter trails, more peaceful huts, and a more intimate mountain experience.
+              - heading "Excellent Acclimatization" [level=3] [ref=e115]
+              - paragraph [ref=e116]: Climbing Meru before Kilimanjaro significantly improves acclimatization and success rates on the higher peak. The 4,566m summit prepares your body for the altitude challenges ahead.
+              - heading "The Momella Route" [level=2] [ref=e117]
+              - paragraph [ref=e118]: "Mount Meru has one main climbing route—the Momella Route from Momella Gate on the eastern side. The standard itinerary spans 3-4 days:"
+              - 'heading "Day 1: Momella Gate to Miriakamba Hut" [level=3] [ref=e119]'
+              - paragraph [ref=e120]: "Distance: 10 km | Elevation: 1,500m to 2,514m"
+              - paragraph [ref=e121]: The trek begins in dense montane forest with excellent wildlife viewing opportunities. Giraffes, buffaloes, and colobus monkeys are common. The trail passes beautiful waterfalls before reaching Miriakamba Hut.
+              - 'heading "Day 2: Miriakamba Hut to Saddle Hut" [level=3] [ref=e122]'
+              - paragraph [ref=e123]: "Distance: 5 km | Elevation: 2,514m to 3,570m"
+              - paragraph [ref=e124]: A shorter but steeper day climbing through the forest zone into heath and moorland. The vegetation transitions dramatically as you gain altitude. Many groups use the afternoon to acclimatize with a hike to Little Meru (3,820m).
+              - 'heading "Day 3: Summit Day" [level=3] [ref=e125]'
+              - paragraph [ref=e126]: "Distance: 5 km to summit + descent | Elevation: 3,570m to 4,566m and back"
+              - paragraph [ref=e127]: Starting around 2:00 AM, climbers traverse the crater rim toward Socialist Peak (the true summit). The narrow ridge requires careful footing but offers unparalleled views. Descent to Miriakamba Hut for overnight.
+              - 'heading "Day 4: Descent to Momella Gate" [level=3] [ref=e128]'
+              - paragraph [ref=e129]: "Distance: 10 km | Elevation: 2,514m to 1,500m"
+              - paragraph [ref=e130]: Final descent through the forest with more wildlife viewing opportunities. Transfer back to Arusha.
+              - heading "Best Time to Climb" [level=2] [ref=e131]
+              - paragraph [ref=e132]: "Mount Meru shares similar seasons with Kilimanjaro:"
+              - list [ref=e133]:
+                - listitem [ref=e134]:
+                  - generic [ref=e136]:
+                    - generic [ref=e137]: Best conditions
+                    - generic [ref=e138]: June to February (dry seasons)
+                - listitem [ref=e139]:
+                  - generic [ref=e141]:
+                    - generic [ref=e142]: Peak months
+                    - generic [ref=e143]: July-August and December-January
+                - listitem [ref=e144]:
+                  - generic [ref=e146]:
+                    - generic [ref=e147]: Avoid
+                    - generic [ref=e148]: March to May (heavy rains)
+                - listitem [ref=e149]:
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: Good value
+                    - generic [ref=e153]: June, September-November
+              - paragraph [ref=e154]: Rain is possible year-round on the forested lower slopes, so waterproof gear is essential regardless of when you climb.
+              - heading "Accommodation on the Mountain" [level=2] [ref=e155]
+              - paragraph [ref=e156]:
+                - text: Unlike most
+                - link "Kilimanjaro routes" [ref=e157] [cursor=pointer]:
+                  - /url: /kilimanjaro-climbing-routes/
+                - text: ", Mount Meru uses hut accommodation:"
+              - heading "Miriakamba Hut (2,514m)" [level=3] [ref=e158]
+              - paragraph [ref=e159]: Basic dormitory-style accommodation with bunk beds. Cooking facilities for porters, separate dining area, and pit toilets. Can accommodate around 48 climbers.
+              - heading "Saddle Hut (3,570m)" [level=3] [ref=e160]
+              - paragraph [ref=e161]: Similar facilities at higher altitude. Sleeping at this elevation helps with acclimatization. Great views of both Meru's crater and distant Kilimanjaro.
+              - paragraph [ref=e162]: Bring a warm sleeping bag as nights are cold, especially at Saddle Hut where temperatures can drop below freezing.
+              - heading "Physical Requirements" [level=2] [ref=e163]
+              - paragraph [ref=e164]: "Mount Meru is a moderately challenging trek:"
+              - list [ref=e165]:
+                - listitem [ref=e166]: Good basic fitness required
+                - listitem [ref=e167]: Summit day involves 6-8 hours of climbing
+                - listitem [ref=e168]: Exposed ridge sections require sure-footedness
+                - listitem [ref=e169]: No technical climbing skills needed
+                - listitem [ref=e170]: Trekking poles highly recommended
+              - paragraph [ref=e171]: If you're planning to climb both Meru and Kilimanjaro, the combined challenge requires solid preparation. Begin training 3-4 months before your trip.
+              - heading "What to Bring" [level=2] [ref=e172]
+              - paragraph [ref=e173]: "Essential gear for Mount Meru includes:"
+              - list [ref=e174]:
+                - listitem [ref=e175]: Waterproof hiking boots
+                - listitem [ref=e176]: Warm layered clothing
+                - listitem [ref=e177]: Rain jacket and pants
+                - listitem [ref=e178]: Warm hat and gloves
+                - listitem [ref=e179]: Headlamp with extra batteries
+                - listitem [ref=e180]: Sleeping bag rated to -10°C
+                - listitem [ref=e181]: Trekking poles
+                - listitem [ref=e182]: Daypack (20-30L)
+                - listitem [ref=e183]: Water bottles (2-3L capacity)
+                - listitem [ref=e184]: Sunscreen and sunglasses
+              - heading "Wildlife Safety" [level=2] [ref=e185]
+              - paragraph [ref=e186]: "An armed park ranger accompanies all climbing groups due to wildlife presence. Buffalo and elephants can be dangerous if encountered unexpectedly. Follow your ranger's instructions carefully::"
+              - list [ref=e187]:
+                - listitem [ref=e188]: Stay with the group at all times
+                - listitem [ref=e189]: Do not approach wildlife
+                - listitem [ref=e190]: Make noise when walking to alert animals
+                - listitem [ref=e191]: Never get between a mother and offspring
+                - listitem [ref=e192]: Report any animal sightings to your ranger
+              - heading "Meru as Kilimanjaro Preparation" [level=2] [ref=e193]
+              - paragraph [ref=e194]: "Climbing Meru 2-3 days before Kilimanjaro significantly improves your acclimatization:"
+              - list [ref=e195]:
+                - listitem [ref=e196]: Sleep at 3,570m before starting Kilimanjaro
+                - listitem [ref=e197]: Experience altitude effects in a lower-stakes environment
+                - listitem [ref=e198]: Test your gear and fitness
+                - listitem [ref=e199]: Build confidence for the bigger climb
+                - listitem [ref=e200]: Acclimatization benefits last about 7-10 days
+              - paragraph [ref=e201]: Our Meru + Kilimanjaro combination packages provide ideal timing with 1-2 rest days between climbs.
+              - heading "Park Fees and Requirements" [level=2] [ref=e202]
+              - paragraph [ref=e203]:
+                - link "Mount Meru climbing" [ref=e204] [cursor=pointer]:
+                  - /url: /trekking/4-days-mount-meru-climbing/
+                - text: "requires:"
+              - list [ref=e205]:
+                - listitem [ref=e206]: Arusha National Park entry fees
+                - listitem [ref=e207]: Hut fees for accommodation
+                - listitem [ref=e208]: Guide and porter services (mandatory)
+                - listitem [ref=e209]: Ranger escort (mandatory)
+                - listitem [ref=e210]: Rescue fees
+              - paragraph [ref=e211]: All climbers must be accompanied by a licensed guide and armed ranger—solo climbing is not permitted.
+              - heading "Experience Mount Meru" [level=2] [ref=e212]
+              - paragraph [ref=e213]: Whether as a standalone adventure or preparation for Kilimanjaro, Mount Meru offers an exceptional African mountain experience. The combination of wildlife, scenery, and climbing challenge creates memories that rival its more famous neighbor. For those seeking an authentic, uncrowded mountain experience, Meru delivers in spectacular fashion.
+              - heading "Frequently Asked Questions" [level=2] [ref=e214]
+              - heading "Is Mount Meru harder than Kilimanjaro?" [level=3] [ref=e215]
+              - paragraph [ref=e216]:
+                - text: Mount Meru is shorter (4,566m vs 5,895m) and takes less time (3-4 days vs 5-9 days), but the daily elevation gain is steeper and the final summit ridge is more exposed and vertigo-inducing than Kilimanjaro. Overall, Meru is considered moderately difficult — harder than
+                - link "Marangu Route" [ref=e217] [cursor=pointer]:
+                  - /url: /trekking/6-days-marangu-route/
+                - text: Kilimanjaro but easier than Umbwe or the Kilimanjaro summit push.
+              - heading "Should I climb Meru before Kilimanjaro?" [level=3] [ref=e218]
+              - paragraph [ref=e219]: Highly recommended. Meru is the best acclimatization climb for Kilimanjaro — you spend 3-4 days at altitude (up to 4,566m), which significantly helps your body adapt before Kilimanjaro's higher altitudes. Climbers who do Meru first typically have higher Kilimanjaro summit success rates and fewer altitude sickness symptoms.
+              - heading "Do you need a guide for Mount Meru?" [level=3] [ref=e220]
+              - paragraph [ref=e221]: Yes — an armed ranger accompanies all Meru climbers because the route passes through Arusha National Park where buffalo and elephant are present. A guide is also mandatory. The ranger carries a rifle for wildlife protection, making Meru one of the only mountain climbs in the world where you trek with an armed escort.
+              - heading "How much does it cost to climb Mount Meru?" [level=3] [ref=e222]
+              - paragraph [ref=e223]: A 4-day Mount Meru climb costs USD 800-1,500 per person including park fees, guide, ranger, cook, porters, and accommodation in mountain huts. This is roughly half the cost of a Kilimanjaro climb. Park fees alone are approximately USD 50 per day. Meru offers excellent value as both a standalone climb and a Kilimanjaro warm-up.
+              - heading "What wildlife will I see on Mount Meru?" [level=3] [ref=e224]
+              - paragraph [ref=e225]: The lower slopes pass through Arusha National Park where you may encounter giraffe, buffalo, colobus monkeys, blue monkeys, bushbuck, and warthogs. Elephants are occasionally spotted on the trail. Above 3,000m, wildlife thins out but you may see klipspringer, eland, and various raptors. The morning walk through the park forest is a unique safari-meets-hiking experience.
+              - 'heading "Mount Meru vs Kilimanjaro: Side-by-Side Comparison" [level=2] [ref=e226]'
+              - paragraph [ref=e227]: "Many climbers debate whether to tackle Meru, Kilimanjaro, or both. Here is how the two mountains compare:"
+              - table [ref=e228]:
+                - rowgroup [ref=e229]:
+                  - row "Factor Mount Meru Mount Kilimanjaro" [ref=e230]:
+                    - columnheader "Factor" [ref=e231]
+                    - columnheader "Mount Meru" [ref=e232]
+                    - columnheader "Mount Kilimanjaro" [ref=e233]:
+                      - link "Mount Kilimanjaro" [ref=e234] [cursor=pointer]:
+                        - /url: /mount-kilimanjaro/
+                - rowgroup [ref=e235]:
+                  - row "Height 4,566m (14,980ft) 5,895m (19,341ft)" [ref=e236]:
+                    - cell "Height" [ref=e237]:
+                      - strong [ref=e238]: Height
+                    - cell "4,566m (14,980ft)" [ref=e239]
+                    - cell "5,895m (19,341ft)" [ref=e240]
+                  - row "Duration 3–4 days 5–9 days" [ref=e241]:
+                    - cell "Duration" [ref=e242]:
+                      - strong [ref=e243]: Duration
+                    - cell "3–4 days" [ref=e244]
+                    - cell "5–9 days" [ref=e245]
+                  - row "Difficulty Moderate-Challenging Challenging" [ref=e246]:
+                    - cell "Difficulty" [ref=e247]:
+                      - strong [ref=e248]: Difficulty
+                    - cell "Moderate-Challenging" [ref=e249]
+                    - cell "Challenging" [ref=e250]
+                  - row "Technical sections Narrow ridgeline on summit day Barranco Wall scramble (some routes)" [ref=e251]:
+                    - cell "Technical sections" [ref=e252]:
+                      - strong [ref=e253]: Technical sections
+                    - cell "Narrow ridgeline on summit day" [ref=e254]
+                    - cell "Barranco Wall scramble (some routes)" [ref=e255]
+                  - row "Cost $800–1,200 $2,000–5,000" [ref=e256]:
+                    - cell "Cost" [ref=e257]:
+                      - strong [ref=e258]: Cost
+                    - cell "$800–1,200" [ref=e259]
+                    - cell "$2,000–5,000" [ref=e260]
+                  - row "Park fees ~$295 (3 nights) ~$785–1,065 (5–8 nights)" [ref=e261]:
+                    - cell "Park fees" [ref=e262]:
+                      - strong [ref=e263]: Park fees
+                    - cell "~$295 (3 nights)" [ref=e264]
+                    - cell "~$785–1,065 (5–8 nights)" [ref=e265]
+                  - row "Annual climbers ~3,000 ~35,000" [ref=e266]:
+                    - cell "Annual climbers" [ref=e267]:
+                      - strong [ref=e268]: Annual climbers
+                    - cell "~3,000" [ref=e269]
+                    - cell "~35,000" [ref=e270]
+                  - row "Wildlife Excellent — buffalo, giraffe, colobus monkeys, occasional leopard Limited — colobus monkeys in forest zone" [ref=e271]:
+                    - cell "Wildlife" [ref=e272]:
+                      - strong [ref=e273]: Wildlife
+                    - cell "Excellent — buffalo, giraffe, colobus monkeys, occasional leopard" [ref=e274]
+                    - cell "Limited — colobus monkeys in forest zone" [ref=e275]
+                  - row "Crowds Very quiet Busy in peak season" [ref=e276]:
+                    - cell "Crowds" [ref=e277]:
+                      - strong [ref=e278]: Crowds
+                    - cell "Very quiet" [ref=e279]
+                    - cell "Busy in peak season" [ref=e280]
+                  - row "Best for Acclimatization before Kilimanjaro, wildlife lovers, budget climbers Summit seekers, bucket list, Seven Summits" [ref=e281]:
+                    - cell "Best for" [ref=e282]:
+                      - strong [ref=e283]: Best for
+                    - cell "Acclimatization before Kilimanjaro, wildlife lovers, budget climbers" [ref=e284]
+                    - cell "Summit seekers, bucket list, Seven Summits" [ref=e285]
+              - heading "How Much Does It Cost to Climb Mount Meru?" [level=2] [ref=e286]
+              - paragraph [ref=e287]: "Mount Meru is significantly more affordable than Kilimanjaro. Here is a typical cost breakdown for a 4-day climb:"
+              - list [ref=e288]:
+                - listitem [ref=e289]:
+                  - generic [ref=e291]:
+                    - generic [ref=e292]: Park fees
+                    - generic [ref=e293]: $295 for a 3-night stay in Arusha National Park (adults, foreign visitors)
+                - listitem [ref=e294]:
+                  - generic [ref=e296]:
+                    - generic [ref=e297]: Guide and ranger fees
+                    - generic [ref=e298]: $80–120 (an armed ranger is mandatory due to wildlife)
+                - listitem [ref=e299]:
+                  - generic [ref=e301]:
+                    - generic [ref=e302]: Operator cost (guide, cook, porters, meals, transport)
+                    - generic [ref=e303]: $500–800
+                - listitem [ref=e304]:
+                  - generic [ref=e306]:
+                    - generic [ref=e307]: Total budget
+                    - generic [ref=e308]: $800–1,200 per person, all-inclusive
+              - paragraph [ref=e309]: Compare this to Kilimanjaro at $2,000–5,000 per person. If you are climbing both mountains, adding Meru before Kilimanjaro typically costs $900–1,200 extra but significantly improves your Kilimanjaro summit chances through better acclimatization.
+              - heading "Frequently Asked Questions" [level=2] [ref=e310]
+              - heading "How many days does it take to climb Mount Meru?" [level=3] [ref=e311]
+              - paragraph [ref=e312]: Most climbers complete Mount Meru in 3 to 4 days. The standard itinerary is 3 days up and 1 day down, staying at Miriakamba Hut (2,514m) and Saddle Hut (3,566m) before the summit push. A 4-day option adds an extra acclimatization day at Saddle Hut, which is recommended if you are climbing Kilimanjaro afterward.
+              - heading "Is Mount Meru harder than Kilimanjaro?" [level=3] [ref=e313]
+              - paragraph [ref=e314]: Mount Meru is physically less demanding due to its lower altitude (4,566m vs 5,895m), but it has a more technical summit approach — a narrow, exposed ridgeline that requires sure-footedness and a head for heights. Kilimanjaro is harder overall because altitude is the dominant challenge, but Meru's summit ridge is more technically demanding than anything on standard Kilimanjaro routes.
+              - heading "Do you need a guide to climb Mount Meru?" [level=3] [ref=e315]
+              - paragraph [ref=e316]: Yes, a licensed guide and an armed park ranger are mandatory for all Mount Meru climbs. The ranger requirement exists because the route passes through Arusha National Park, where buffalo, elephant, and occasionally leopard are present on the lower slopes. You cannot enter the park without both a guide and ranger.
+              - heading "Can you see Kilimanjaro from Mount Meru?" [level=3] [ref=e317]
+              - paragraph [ref=e318]: Yes — on clear mornings, Mount Meru offers one of the most spectacular views of Kilimanjaro you will find anywhere. The summit and Saddle Hut both provide panoramic views of Kilimanjaro rising above the clouds approximately 70 km to the east. Early morning before clouds build offers the best visibility, typically between 5:30 and 8:00 AM.
+              - heading "How much does it cost to climb Mount Meru?" [level=3] [ref=e319]
+              - paragraph [ref=e320]: A complete Mount Meru climb costs $800–1,200 per person, including park fees ($295 for 3 nights), guide and armed ranger fees, porters, meals, accommodation in mountain huts, and transport. This is roughly one-third to one-half the cost of a Kilimanjaro climb, making Meru excellent value — especially as acclimatization before a Kilimanjaro attempt.
+            - generic [ref=e323]:
+              - img [ref=e325]
+              - generic [ref=e328]:
+                - generic [ref=e329]:
+                  - heading "Snow Africa Team" [level=3] [ref=e330]
+                  - generic [ref=e331]: Safari & Trekking Experts
+                - paragraph [ref=e332]: The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.
+                - generic [ref=e333]:
+                  - generic [ref=e334]:
+                    - img [ref=e335]
+                    - text: TATO Licensed Operator
+                  - generic [ref=e338]:
+                    - img [ref=e339]
+                    - text: Kilimanjaro Certified Guides
+                  - generic [ref=e342]:
+                    - img [ref=e343]
+                    - text: First Aid Wilderness Certified
+                  - generic [ref=e346]:
+                    - img [ref=e347]
+                    - text: Based in Arusha, Tanzania
+            - link "Back to Blog" [ref=e351] [cursor=pointer]:
+              - /url: /blog/
+              - img [ref=e352]
+              - text: Back to Blog
+            - generic [ref=e354]:
+              - heading "Continue Reading" [level=2] [ref=e355]
+              - generic [ref=e356]:
+                - link "Climbing Kilimanjaro Sustainably with KPAP Climbing Kilimanjaro Sustainably with KPAP Mar 18, 2026" [ref=e357] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+                  - img "Climbing Kilimanjaro Sustainably with KPAP" [ref=e359]
+                  - generic [ref=e360]:
+                    - heading "Climbing Kilimanjaro Sustainably with KPAP" [level=3] [ref=e361]
+                    - paragraph [ref=e362]: Mar 18, 2026
+                - 'link "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide Mar 2, 2026" [ref=e363] [cursor=pointer]':
+                  - /url: /best-time-to-climb-mount-kilimanjaro/
+                  - 'img "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide" [ref=e365]'
+                  - generic [ref=e366]:
+                    - 'heading "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide" [level=3] [ref=e367]'
+                    - paragraph [ref=e368]: Mar 2, 2026
+                - link "Conquer the Roof of Africa Conquer the Roof of Africa Feb 13, 2026" [ref=e369] [cursor=pointer]:
+                  - /url: /conquer-the-roof-of-africa-climbing-mount-kilimanjaro-with-snow-africa-adventures/
+                  - img "Conquer the Roof of Africa" [ref=e371]
+                  - generic [ref=e372]:
+                    - heading "Conquer the Roof of Africa" [level=3] [ref=e373]
+                    - paragraph [ref=e374]: Feb 13, 2026
+          - complementary [ref=e375]:
+            - generic [ref=e376]:
+              - generic [ref=e377]:
+                - heading "In This Article" [level=3] [ref=e378]:
+                  - img [ref=e380]
+                  - text: In This Article
+                - navigation [ref=e382]:
+                  - link "Stunning Scenery" [ref=e383] [cursor=pointer]:
+                    - /url: "#stunning-scenery"
+                    - generic [ref=e384]: Stunning Scenery
+                  - link "Wildlife Encounters" [ref=e385] [cursor=pointer]:
+                    - /url: "#wildlife-encounters"
+                    - generic [ref=e386]: Wildlife Encounters
+                  - link "Technical Interest" [ref=e387] [cursor=pointer]:
+                    - /url: "#technical-interest"
+                    - generic [ref=e388]: Technical Interest
+                  - link "Fewer Crowds" [ref=e389] [cursor=pointer]:
+                    - /url: "#fewer-crowds"
+                    - generic [ref=e390]: Fewer Crowds
+                  - link "Excellent Acclimatization" [ref=e391] [cursor=pointer]:
+                    - /url: "#excellent-acclimatization"
+                    - generic [ref=e392]: Excellent Acclimatization
+                  - 'link "Day 1: Momella Gate to Miriakamba Hut" [ref=e393] [cursor=pointer]':
+                    - /url: "#day-1-momella-gate-to-miriakamba-hut"
+                    - generic [ref=e394]: "Day 1: Momella Gate to Miriakamba Hut"
+                  - 'link "Day 2: Miriakamba Hut to Saddle Hut" [ref=e395] [cursor=pointer]':
+                    - /url: "#day-2-miriakamba-hut-to-saddle-hut"
+                    - generic [ref=e396]: "Day 2: Miriakamba Hut to Saddle Hut"
+                  - 'link "Day 3: Summit Day" [ref=e397] [cursor=pointer]':
+                    - /url: "#day-3-summit-day"
+                    - generic [ref=e398]: "Day 3: Summit Day"
+                  - 'link "Day 4: Descent to Momella Gate" [ref=e399] [cursor=pointer]':
+                    - /url: "#day-4-descent-to-momella-gate"
+                    - generic [ref=e400]: "Day 4: Descent to Momella Gate"
+                  - link "Miriakamba Hut (2,514m)" [ref=e401] [cursor=pointer]:
+                    - /url: "#miriakamba-hut-2-514m"
+                    - generic [ref=e402]: Miriakamba Hut (2,514m)
+                  - link "Saddle Hut (3,570m)" [ref=e403] [cursor=pointer]:
+                    - /url: "#saddle-hut-3-570m"
+                    - generic [ref=e404]: Saddle Hut (3,570m)
+                  - link "Is Mount Meru harder than Kilimanjaro?" [ref=e405] [cursor=pointer]:
+                    - /url: "#is-mount-meru-harder-than-kilimanjaro"
+                    - generic [ref=e406]: Is Mount Meru harder than Kilimanjaro?
+                  - link "Should I climb Meru before Kilimanjaro?" [ref=e407] [cursor=pointer]:
+                    - /url: "#should-i-climb-meru-before-kilimanjaro"
+                    - generic [ref=e408]: Should I climb Meru before Kilimanjaro?
+                  - link "Do you need a guide for Mount Meru?" [ref=e409] [cursor=pointer]:
+                    - /url: "#do-you-need-a-guide-for-mount-meru"
+                    - generic [ref=e410]: Do you need a guide for Mount Meru?
+                  - link "How much does it cost to climb Mount Meru?" [ref=e411] [cursor=pointer]:
+                    - /url: "#how-much-does-it-cost-to-climb-mount-meru"
+                    - generic [ref=e412]: How much does it cost to climb Mount Meru?
+                  - link "What wildlife will I see on Mount Meru?" [ref=e413] [cursor=pointer]:
+                    - /url: "#what-wildlife-will-i-see-on-mount-meru"
+                    - generic [ref=e414]: What wildlife will I see on Mount Meru?
+                  - link "How many days does it take to climb Mount Meru?" [ref=e415] [cursor=pointer]:
+                    - /url: "#how-many-days-does-it-take-to-climb-mount-meru"
+                    - generic [ref=e416]: How many days does it take to climb Mount Meru?
+                  - link "Is Mount Meru harder than Kilimanjaro?" [ref=e417] [cursor=pointer]:
+                    - /url: "#is-mount-meru-harder-than-kilimanjaro"
+                    - generic [ref=e418]: Is Mount Meru harder than Kilimanjaro?
+                  - link "Do you need a guide to climb Mount Meru?" [ref=e419] [cursor=pointer]:
+                    - /url: "#do-you-need-a-guide-to-climb-mount-meru"
+                    - generic [ref=e420]: Do you need a guide to climb Mount Meru?
+                  - link "Can you see Kilimanjaro from Mount Meru?" [ref=e421] [cursor=pointer]:
+                    - /url: "#can-you-see-kilimanjaro-from-mount-meru"
+                    - generic [ref=e422]: Can you see Kilimanjaro from Mount Meru?
+                  - link "How much does it cost to climb Mount Meru?" [ref=e423] [cursor=pointer]:
+                    - /url: "#how-much-does-it-cost-to-climb-mount-meru"
+                    - generic [ref=e424]: How much does it cost to climb Mount Meru?
+              - generic [ref=e425]:
+                - generic [ref=e426]:
+                  - img [ref=e428]
+                  - heading "Climb Kilimanjaro" [level=3] [ref=e430]
+                - paragraph [ref=e431]: Ready for the adventure of a lifetime? Join our expert guides on Africa's highest peak.
+                - link "View Routes" [ref=e432] [cursor=pointer]:
+                  - /url: /trekking/
+              - generic [ref=e433]:
+                - heading "Categories" [level=3] [ref=e434]:
+                  - img [ref=e436]
+                  - text: Categories
+                - list [ref=e439]:
+                  - listitem [ref=e440]:
+                    - link "Blog 27" [ref=e441] [cursor=pointer]:
+                      - /url: /category/blog/
+                      - generic [ref=e442]: Blog
+                      - generic [ref=e443]: "27"
+                  - listitem [ref=e444]:
+                    - link "Day Trips 1" [ref=e445] [cursor=pointer]:
+                      - /url: /category/day-trip/
+                      - generic [ref=e446]: Day Trips
+                      - generic [ref=e447]: "1"
+                  - listitem [ref=e448]:
+                    - link "Kilimanjaro Climbing Guide 16" [ref=e449] [cursor=pointer]:
+                      - /url: /category/kilimanjaro-climbing-guide/
+                      - generic [ref=e450]: Kilimanjaro Climbing Guide
+                      - generic [ref=e451]: "16"
+                  - listitem [ref=e452]:
+                    - link "Mount Kilimanjaro 33" [ref=e453] [cursor=pointer]:
+                      - /url: /category/mount-kilimanjaro/
+                      - generic [ref=e454]: Mount Kilimanjaro
+                      - generic [ref=e455]: "33"
+                  - listitem [ref=e456]:
+                    - link "Safari Tours 41" [ref=e457] [cursor=pointer]:
+                      - /url: /category/safari-tours/
+                      - generic [ref=e458]: Safari Tours
+                      - generic [ref=e459]: "41"
+                  - listitem [ref=e460]:
+                    - link "Tanzania Destinations 7" [ref=e461] [cursor=pointer]:
+                      - /url: /category/tanzania-destinations/
+                      - generic [ref=e462]: Tanzania Destinations
+                      - generic [ref=e463]: "7"
+              - generic [ref=e464]:
+                - generic [ref=e465]:
+                  - img [ref=e467]
+                  - heading "Tanzania Safari" [level=3] [ref=e470]
+                - paragraph [ref=e471]: Combine your climb with a wildlife safari through Tanzania's iconic parks.
+                - link "View Safaris" [ref=e472] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - generic [ref=e473]:
+                - heading "Join a Group Climb" [level=3] [ref=e474]
+                - paragraph [ref=e475]: Fixed departure dates with fellow adventurers from around the world.
+                - link "View 2026 Dates" [ref=e476] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+                  - text: View 2026 Dates
+                  - img [ref=e477]
+    - contentinfo [ref=e479]:
+      - generic [ref=e482]:
+        - generic [ref=e483]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e484]
+      - generic [ref=e489]:
+        - generic [ref=e490]:
+          - generic [ref=e491]:
+            - img "Snow Africa Adventure" [ref=e493]
+            - paragraph [ref=e494]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e495]:
+              - listitem [ref=e496]:
+                - link "+255 766 657 854" [ref=e497] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e499]
+                  - generic [ref=e501]: +255 766 657 854
+              - listitem [ref=e502]:
+                - link "info@snowafricaadventure.com" [ref=e503] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e505]
+                  - generic [ref=e508]: info@snowafricaadventure.com
+              - listitem [ref=e509]:
+                - img [ref=e511]
+                - generic [ref=e514]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e515]:
+            - heading "Safari & Tours" [level=3] [ref=e516]
+            - list [ref=e517]:
+              - listitem [ref=e518]:
+                - link "All Safari Packages" [ref=e519] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e520]:
+                - link "Tailor-Made Safaris" [ref=e521] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e522]:
+                - link "Tanzania Destinations" [ref=e523] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e524]:
+                - link "View all" [ref=e525] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e526]: →
+          - generic [ref=e527]:
+            - heading "Kilimanjaro" [level=3] [ref=e528]
+            - list [ref=e529]:
+              - listitem [ref=e530]:
+                - link "All Trekking Routes" [ref=e531] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e532]:
+                - link "Best Route to Climb" [ref=e533] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e534]:
+                - link "Climbing Kilimanjaro Guide" [ref=e535] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e536]:
+                - link "Join Group Departures" [ref=e537] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e538]:
+                - link "Kilimanjaro Prices" [ref=e539] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e540]:
+                - link "Best Time to Climb" [ref=e541] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e542]:
+                - link "View all routes" [ref=e543] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e544]: →
+          - generic [ref=e545]:
+            - heading "Company" [level=3] [ref=e546]
+            - list [ref=e547]:
+              - listitem [ref=e548]:
+                - link "About Us" [ref=e549] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e550]:
+                - link "Our Guides" [ref=e551] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e552]:
+                - link "Contact Us" [ref=e553] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e554]:
+                - link "Terms & Conditions" [ref=e555] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e556]:
+                - link "Privacy Policy" [ref=e557] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e558]:
+                - link "Blog" [ref=e559] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e560]:
+              - heading "Follow the Journey" [level=4] [ref=e561]
+              - generic [ref=e562]:
+                - link "Facebook" [ref=e563] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e564]
+                - link "Twitter" [ref=e566] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e567]
+                - link "Instagram" [ref=e569] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e570]
+                - link "YouTube" [ref=e573] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e574]
+        - generic [ref=e578]:
+          - generic [ref=e579]: Accredited & Trusted
+          - generic [ref=e580]:
+            - link "TripAdvisor" [ref=e581] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e583]: SafariBookings
+            - generic [ref=e585]: TATO Member
+            - generic [ref=e587]: KPAP Partner
+      - generic [ref=e590]:
+        - generic [ref=e591]:
+          - generic [ref=e592]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e593]: "|"
+          - link "Terms & Conditions" [ref=e594] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e595]: ·
+          - link "Privacy Policy" [ref=e596] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e597]:
+          - generic [ref=e598]: Crafted by
+          - link "Timeless International" [ref=e599] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:36 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e600]:
+      - img [ref=e601]
+  - generic [ref=e608] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e609]:
+      - img [ref=e610]
+    - generic [ref=e613]:
+      - button "Open issues overlay" [ref=e614]:
+        - generic [ref=e615]:
+          - generic [ref=e616]: "1"
+          - generic [ref=e617]: "2"
+        - generic [ref=e618]:
+          - text: Issue
+          - generic [ref=e619]: s
+      - button "Collapse issues badge" [ref=e620]:
+        - img [ref=e621]
+  - alert [ref=e623]

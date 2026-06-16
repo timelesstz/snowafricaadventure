@@ -1,0 +1,590 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e21]:
+        - generic [ref=e23]:
+          - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+            - /url: /
+            - img "Snow Africa Adventure" [ref=e25]
+          - generic [ref=e26]:
+            - link "Plan Your Trip" [ref=e27] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+            - link "Search" [ref=e28] [cursor=pointer]:
+              - /url: /search/
+              - img [ref=e29]
+            - button "Open menu" [ref=e32]:
+              - img [ref=e33]
+        - navigation [ref=e35]:
+          - link "Home" [ref=e36] [cursor=pointer]:
+            - /url: /
+            - text: Home
+            - img [ref=e37]
+          - generic [ref=e39]:
+            - button "Safaris & Tours" [ref=e40]:
+              - text: Safaris & Tours
+              - img [ref=e41]
+            - generic [ref=e43]:
+              - link "All Safari Packages Browse curated Tanzania safaris" [ref=e44] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+                - img [ref=e45]
+                - generic [ref=e50]:
+                  - generic [ref=e51]: All Safari Packages
+                  - generic [ref=e52]: Browse curated Tanzania safaris
+              - link "Tailor-Made Safaris Custom itineraries for your group" [ref=e53] [cursor=pointer]:
+                - /url: /tailor-made-safari/
+                - img [ref=e54]
+                - generic [ref=e57]:
+                  - generic [ref=e58]: Tailor-Made Safaris
+                  - generic [ref=e59]: Custom itineraries for your group
+              - link "Destinations Serengeti, Ngorongoro & more" [ref=e60] [cursor=pointer]:
+                - /url: /tanzania-destinations/
+                - img [ref=e61]
+                - generic [ref=e63]:
+                  - generic [ref=e64]: Destinations
+                  - generic [ref=e65]: Serengeti, Ngorongoro & more
+              - link "Day Tours Single-day excursions from Arusha" [ref=e66] [cursor=pointer]:
+                - /url: /tanzania-day-tours/
+                - img [ref=e67]
+                - generic [ref=e73]:
+                  - generic [ref=e74]: Day Tours
+                  - generic [ref=e75]: Single-day excursions from Arusha
+          - generic [ref=e76]:
+            - button "Trekking" [ref=e77]:
+              - text: Trekking
+              - img [ref=e78]
+            - generic [ref=e80]:
+              - link "All Trekking Routes Compare all Kilimanjaro routes" [ref=e81] [cursor=pointer]:
+                - /url: /trekking/
+                - img [ref=e82]
+                - generic [ref=e84]:
+                  - generic [ref=e85]: All Trekking Routes
+                  - generic [ref=e86]: Compare all Kilimanjaro routes
+              - link "Best Route to Climb Route comparison guide" [ref=e87] [cursor=pointer]:
+                - /url: /best-route-to-climb-kilimanjaro/
+                - img [ref=e88]
+                - generic [ref=e91]:
+                  - generic [ref=e92]: Best Route to Climb
+                  - generic [ref=e93]: Route comparison guide
+              - link "Climbing Guide Everything you need to know" [ref=e94] [cursor=pointer]:
+                - /url: /climbing-kilimanjaro/
+                - img [ref=e95]
+                - generic [ref=e97]:
+                  - generic [ref=e98]: Climbing Guide
+                  - generic [ref=e99]: Everything you need to know
+              - link "Kilimanjaro Prices Full cost breakdown" [ref=e100] [cursor=pointer]:
+                - /url: /kilimanjaro-prices/
+                - img [ref=e101]
+                - generic [ref=e103]:
+                  - generic [ref=e104]: Kilimanjaro Prices
+                  - generic [ref=e105]: Full cost breakdown
+              - link "Best Time to Climb Seasonal guide" [ref=e106] [cursor=pointer]:
+                - /url: /best-time-to-climb-kilimanjaro/
+                - img [ref=e107]
+                - generic [ref=e110]:
+                  - generic [ref=e111]: Best Time to Climb
+                  - generic [ref=e112]: Seasonal guide
+          - link "Join Group Climb" [ref=e113] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e114]
+            - text: Join Group Climb
+            - img [ref=e119]
+          - link "Zanzibar" [ref=e121] [cursor=pointer]:
+            - /url: /zanzibar/
+            - text: Zanzibar
+            - img [ref=e122]
+          - link "Contact Us" [ref=e124] [cursor=pointer]:
+            - /url: /contact-us/
+            - text: Contact Us
+            - img [ref=e125]
+          - generic [ref=e128]:
+            - link "About Us" [ref=e129] [cursor=pointer]:
+              - /url: /about-us/
+              - text: About Us
+              - img [ref=e130]
+            - link "Tailor-Made Safaris" [ref=e132] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+              - text: Tailor-Made Safaris
+              - img [ref=e133]
+            - link "Blog" [ref=e135] [cursor=pointer]:
+              - /url: /blog/
+              - text: Blog
+              - img [ref=e136]
+          - link "Plan Your Trip" [ref=e139] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - generic [ref=e141]:
+            - link "+255 766 657 854" [ref=e142] [cursor=pointer]:
+              - /url: tel:+255766657854
+              - img [ref=e143]
+              - text: +255 766 657 854
+            - link "info@snowafricaadventure.com" [ref=e145] [cursor=pointer]:
+              - /url: mailto:info@snowafricaadventure.com
+              - img [ref=e146]
+              - text: info@snowafricaadventure.com
+    - main [ref=e149]:
+      - generic [ref=e150]:
+        - navigation "Breadcrumb" [ref=e152]:
+          - list [ref=e153]:
+            - listitem [ref=e154]:
+              - link "Home" [ref=e155] [cursor=pointer]:
+                - /url: /
+                - img [ref=e156]
+                - generic [ref=e159]: Home
+            - listitem [ref=e160]:
+              - img [ref=e161]
+              - link "Trekking Routes" [ref=e163] [cursor=pointer]:
+                - /url: /trekking/
+            - listitem [ref=e164]:
+              - img [ref=e165]
+              - generic [ref=e167]: Kilimanjaro Height
+        - generic [ref=e168]:
+          - img "Climbers approaching the summit of Mount Kilimanjaro" [ref=e170]
+          - generic [ref=e173]:
+            - generic [ref=e175]: Africa's Highest Peak
+            - heading "How High is Mount Kilimanjaro?" [level=1] [ref=e176]
+            - paragraph [ref=e177]: Africa's Highest Peak — 5,895m (19,341 ft)
+            - paragraph [ref=e178]: Kilimanjaro rises from the Tanzanian plains to an icy summit at 5,895 metres, making it the world's highest free-standing mountain and one of the Seven Summits.
+            - generic [ref=e179]:
+              - link "Book Your Kilimanjaro Climb" [ref=e180] [cursor=pointer]:
+                - /url: /trekking/
+              - link "Group Departures" [ref=e181] [cursor=pointer]:
+                - /url: /kilimanjaro-join-group-departures/
+          - generic [ref=e182]:
+            - generic [ref=e183]: Scroll
+            - img [ref=e184]
+        - paragraph [ref=e188]:
+          - strong [ref=e189]: Mount Kilimanjaro is 19,341 feet (5,895 metres) tall.
+          - text: Its summit, Uhuru Peak, is the highest point in Africa and the tallest free-standing mountain on Earth. Kilimanjaro rises from the Tanzanian plains near Moshi at around 900 metres (2,953 ft) to its ice-capped peak, passing through five distinct climate zones — from tropical rainforest to arctic conditions — in just 35 kilometres.
+        - generic [ref=e192]:
+          - generic [ref=e193]:
+            - paragraph [ref=e194]: Summit
+            - paragraph [ref=e195]: Uhuru Peak
+            - paragraph [ref=e196]: 5,895m / 19,341ft
+          - generic [ref=e197]:
+            - paragraph [ref=e198]: Base Elevation
+            - paragraph [ref=e199]: ~1,800m
+            - paragraph [ref=e200]: 5,906ft
+          - generic [ref=e201]:
+            - paragraph [ref=e202]: Prominence
+            - paragraph [ref=e203]: 5,885m
+            - paragraph [ref=e204]: 19,308ft
+        - generic [ref=e207]:
+          - generic [ref=e208]: Global Perspective
+          - heading "Mount Kilimanjaro's Altitude Compared to the World's Highest Peaks" [level=2] [ref=e209]
+          - paragraph [ref=e210]: "At 5,895 metres (19,341 ft), the kilimanjaro peak height places it among Earth's elite summits. As Africa's highest mountain with a prominence of 5,885m, mt kilimanjaro height surpasses the Alps and most of Europe. Here is how the mount kilimanjaro height compares to other notable mountains:"
+          - table [ref=e212]:
+            - rowgroup [ref=e213]:
+              - row "Mountain Height Comparison" [ref=e214]:
+                - columnheader "Mountain" [ref=e215]
+                - columnheader "Height" [ref=e216]
+                - columnheader "Comparison" [ref=e217]
+            - rowgroup [ref=e218]:
+              - row "Mount Everest 8,849m Kilimanjaro is ~66% of Everest's height" [ref=e219]:
+                - cell "Mount Everest" [ref=e220]
+                - cell "8,849m" [ref=e221]
+                - cell "Kilimanjaro is ~66% of Everest's height" [ref=e222]
+              - row "Aconcagua (South America) 6,961m Kilimanjaro is 1,066m shorter" [ref=e223]:
+                - cell "Aconcagua (South America)" [ref=e224]
+                - cell "6,961m" [ref=e225]
+                - cell "Kilimanjaro is 1,066m shorter" [ref=e226]
+              - row "Denali (North America) 6,190m Kilimanjaro is 295m shorter" [ref=e227]:
+                - cell "Denali (North America)" [ref=e228]
+                - cell "6,190m" [ref=e229]
+                - cell "Kilimanjaro is 295m shorter" [ref=e230]
+              - row "Mount Elbrus (Europe) 5,642m Kilimanjaro is 253m taller" [ref=e231]:
+                - cell "Mount Elbrus (Europe)" [ref=e232]
+                - cell "5,642m" [ref=e233]
+                - cell "Kilimanjaro is 253m taller" [ref=e234]
+              - row "Mount Kenya 5,199m Kilimanjaro is 696m taller" [ref=e235]:
+                - cell "Mount Kenya" [ref=e236]
+                - cell "5,199m" [ref=e237]
+                - cell "Kilimanjaro is 696m taller" [ref=e238]
+              - row "Mont Blanc (Alps) 4,808m Kilimanjaro is 1,087m taller" [ref=e239]:
+                - cell "Mont Blanc (Alps)" [ref=e240]
+                - cell "4,808m" [ref=e241]
+                - cell "Kilimanjaro is 1,087m taller" [ref=e242]
+              - row "Mount Rainier (USA) 4,392m Kilimanjaro is 1,503m taller" [ref=e243]:
+                - cell "Mount Rainier (USA)" [ref=e244]
+                - cell "4,392m" [ref=e245]
+                - cell "Kilimanjaro is 1,503m taller" [ref=e246]
+              - row "Mount Fuji (Japan) 3,776m Kilimanjaro is 2,119m taller" [ref=e247]:
+                - cell "Mount Fuji (Japan)" [ref=e248]
+                - cell "3,776m" [ref=e249]
+                - cell "Kilimanjaro is 2,119m taller" [ref=e250]
+        - generic [ref=e253]:
+          - generic [ref=e254]: Altitude Ecosystems
+          - heading "Five Climate Zones of Mount Kilimanjaro" [level=2] [ref=e255]
+          - paragraph [ref=e256]: Climbing Kilimanjaro is like travelling from the equator to the Arctic — the mountain's altitude spans five distinct ecological zones, each with unique flora, fauna, and weather conditions.
+          - generic [ref=e257]:
+            - generic [ref=e258]:
+              - img [ref=e260]
+              - generic [ref=e262]:
+                - generic [ref=e263]:
+                  - heading "Cultivated Zone" [level=3] [ref=e264]
+                  - generic [ref=e265]: 800 – 1,800m
+                  - generic [ref=e266]: 20–30°C
+                - paragraph [ref=e267]: The fertile lower slopes where the Chagga people grow coffee, bananas, and maize. Rich volcanic soil makes this region incredibly productive. Most climbers pass through this zone by vehicle on their way to the park gate.
+            - generic [ref=e268]:
+              - img [ref=e270]
+              - generic [ref=e273]:
+                - generic [ref=e274]:
+                  - heading "Montane Forest" [level=3] [ref=e275]
+                  - generic [ref=e276]: 1,800 – 2,800m
+                  - generic [ref=e277]: 12–20°C
+                - paragraph [ref=e278]: Lush rainforest with towering trees, mosses, and diverse wildlife. Black-and-white colobus monkeys, blue monkeys, and buffalo inhabit this zone. It receives the most rainfall and is often misty — expect muddy trails.
+            - generic [ref=e279]:
+              - img [ref=e281]
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - heading "Heath & Moorland" [level=3] [ref=e286]
+                  - generic [ref=e287]: 2,800 – 4,000m
+                  - generic [ref=e288]: 5–15°C
+                - paragraph [ref=e289]: Giant heather and unique endemic species like giant lobelias, groundsels, and the famous Senecio kilimanjari define this otherworldly landscape. Temperatures drop significantly at night and clouds often settle below you.
+            - generic [ref=e290]:
+              - img [ref=e292]
+              - generic [ref=e294]:
+                - generic [ref=e295]:
+                  - heading "Alpine Desert" [level=3] [ref=e296]
+                  - generic [ref=e297]: 4,000 – 5,000m
+                  - generic [ref=e298]: "-5–15°C"
+                - paragraph [ref=e299]: A barren, Mars-like landscape with extreme temperature swings — scorching sun by day, well below freezing at night. Vegetation is sparse, the air is noticeably thinner, and acclimatisation becomes critical. Most high camps sit in this zone.
+            - generic [ref=e300]:
+              - img [ref=e302]
+              - generic [ref=e304]:
+                - generic [ref=e305]:
+                  - heading "Arctic Summit" [level=3] [ref=e306]
+                  - generic [ref=e307]: 5,000 – 5,895m
+                  - generic [ref=e308]: "-15–-25°C"
+                - paragraph [ref=e309]: Ice fields, glaciers, and sub-zero temperatures characterise the summit zone. Oxygen is roughly 50% of sea level. Uhuru Peak crowns this otherworldly environment — and the glaciers here have lost over 80% of their mass since 1912.
+        - generic [ref=e312]:
+          - generic [ref=e313]: Geography
+          - heading "Why Mount Kilimanjaro is the World's Most Accessible High-Altitude Summit" [level=2] [ref=e314]
+          - generic [ref=e315]:
+            - generic [ref=e316]:
+              - img [ref=e318]
+              - heading "Free-Standing Mountain" [level=3] [ref=e320]
+              - paragraph [ref=e321]:
+                - text: Unlike
+                - link "Everest" [ref=e322] [cursor=pointer]:
+                  - /url: /kilimanjaro-vs-everest/
+                - text: ", which belongs to a range, Kilimanjaro rises in dramatic isolation from the surrounding savannah — a full 5,885m of topographic prominence."
+            - generic [ref=e323]:
+              - img [ref=e325]
+              - heading "Fastest Elevation Gain" [level=3] [ref=e328]
+              - paragraph [ref=e329]: Trekkers gain nearly 4,000m in elevation over 5–8 days — one of the steepest altitude gains of any high-altitude trek on Earth, making acclimatisation critical.
+            - generic [ref=e330]:
+              - img [ref=e332]
+              - heading "No Technical Skills Needed" [level=3] [ref=e334]
+              - paragraph [ref=e335]: Kilimanjaro is accessible to non-technical climbers. No ropes, ice axes, or specialist training are required — making it the most achievable of the Seven Summits.
+        - generic [ref=e338]:
+          - generic [ref=e339]: Geology
+          - heading "Kilimanjaro's Three Volcanic Cones" [level=2] [ref=e340]
+          - paragraph [ref=e341]: Kilimanjaro is a stratovolcano comprised of three distinct volcanic cones formed at different times. Only Kibo — the highest — retains any volcanic activity, with fumaroles still emitting gases inside its crater.
+          - generic [ref=e342]:
+            - generic [ref=e343]:
+              - generic [ref=e344]:
+                - heading "Kibo" [level=3] [ref=e345]
+                - generic [ref=e346]: Dormant
+              - paragraph [ref=e347]: 5,895m (19,341ft)
+              - paragraph [ref=e348]: The highest and youngest cone, home to Uhuru Peak. Kibo is dormant but not extinct — fumaroles still emit gases in its crater.
+            - generic [ref=e349]:
+              - generic [ref=e350]:
+                - heading "Mawenzi" [level=3] [ref=e351]
+                - generic [ref=e352]: Extinct
+              - paragraph [ref=e353]: 5,149m (16,893ft)
+              - paragraph [ref=e354]: The second highest cone with dramatic jagged peaks. Technical climbing skills are required to summit Mawenzi.
+            - generic [ref=e355]:
+              - generic [ref=e356]:
+                - heading "Shira" [level=3] [ref=e357]
+                - generic [ref=e358]: Extinct
+              - paragraph [ref=e359]: 4,005m (13,140ft)
+              - paragraph [ref=e360]: The oldest and most eroded cone, now a broad plateau that the Lemosho and Shira routes traverse on their way to the summit.
+        - generic [ref=e363]:
+          - generic [ref=e364]: Climate Change
+          - heading "Kilimanjaro's Disappearing Glaciers" [level=2] [ref=e365]
+          - paragraph [ref=e366]:
+            - text: Kilimanjaro's iconic
+            - link "snow cap" [ref=e367] [cursor=pointer]:
+              - /url: /is-there-snow-in-africa-mountains/
+            - text: has been rapidly diminishing. Over 80% of the ice that existed when it was first surveyed in 1912 has now melted, and scientists estimate the remaining glaciers could disappear entirely by 2040–2050.
+          - generic [ref=e368]:
+            - generic [ref=e369]:
+              - paragraph [ref=e370]: 80%+
+              - paragraph [ref=e371]: Ice lost since 1912
+            - generic [ref=e372]:
+              - paragraph [ref=e373]: 2040–50
+              - paragraph [ref=e374]: Projected disappearance
+            - generic [ref=e375]:
+              - paragraph [ref=e376]: Now
+              - paragraph [ref=e377]: Best time to witness them
+        - generic [ref=e380]:
+          - generic [ref=e381]: Summit Reference
+          - heading "Kilimanjaro Summit Points & Peak Heights" [level=2] [ref=e382]
+          - table [ref=e384]:
+            - rowgroup [ref=e385]:
+              - row "Summit Point Height Significance" [ref=e386]:
+                - columnheader "Summit Point" [ref=e387]
+                - columnheader "Height" [ref=e388]
+                - columnheader "Significance" [ref=e389]
+            - rowgroup [ref=e390]:
+              - row "Uhuru Peak 5,895m (19,341ft) Highest point in Africa — the true summit" [ref=e391]:
+                - cell "Uhuru Peak" [ref=e392]
+                - cell "5,895m (19,341ft)" [ref=e393]
+                - cell "Highest point in Africa — the true summit" [ref=e394]
+              - row "Stella Point 5,756m (18,885ft) Reached on the crater rim — certificate awarded" [ref=e395]:
+                - cell "Stella Point" [ref=e396]
+                - cell "5,756m (18,885ft)" [ref=e397]
+                - cell "Reached on the crater rim — certificate awarded" [ref=e398]
+              - row "Gilman's Point 5,685m (18,652ft) First major goal on Marangu & Rongai routes" [ref=e399]:
+                - cell "Gilman's Point" [ref=e400]
+                - cell "5,685m (18,652ft)" [ref=e401]
+                - cell "First major goal on Marangu & Rongai routes" [ref=e402]
+              - row "Hans Meyer Point 5,183m (17,005ft) Minor sub-peak on the southern slopes" [ref=e403]:
+                - cell "Hans Meyer Point" [ref=e404]
+                - cell "5,183m (17,005ft)" [ref=e405]
+                - cell "Minor sub-peak on the southern slopes" [ref=e406]
+        - generic [ref=e409]:
+          - generic [ref=e410]: FAQ
+          - heading "Common Questions About Kilimanjaro's Height" [level=2] [ref=e411]
+          - generic [ref=e412]:
+            - generic [ref=e413]:
+              - heading "How high is Mount Kilimanjaro in metres?" [level=3] [ref=e414]
+              - paragraph [ref=e415]: Mount Kilimanjaro stands at 5,895 metres (19,341 feet) above sea level at its highest point, Uhuru Peak on the Kibo crater rim.
+            - generic [ref=e416]:
+              - heading "Is Kilimanjaro the highest mountain in Africa?" [level=3] [ref=e417]
+              - paragraph [ref=e418]: Yes, Mount Kilimanjaro is the highest peak on the African continent, towering above all other mountains including Mount Kenya (5,199m) and the Rwenzori range.
+            - generic [ref=e419]:
+              - heading "How tall is Kilimanjaro compared to Everest?" [level=3] [ref=e420]
+              - paragraph [ref=e421]: Mount Kilimanjaro is 5,895m while Mount Everest reaches 8,849m — making Kilimanjaro approximately 66% of Everest's height. Despite this, Kilimanjaro remains one of the most challenging climbs due to rapid altitude gain.
+            - generic [ref=e422]:
+              - heading "What is the height of Kilimanjaro in feet?" [level=3] [ref=e423]
+              - paragraph [ref=e424]: Kilimanjaro's summit, Uhuru Peak, stands at 19,341 feet (5,895 metres) above sea level, making it the highest free-standing mountain in the world.
+            - generic [ref=e425]:
+              - heading "Do you need climbing experience to reach the summit?" [level=3] [ref=e426]
+              - paragraph [ref=e427]: No technical climbing skills are required to climb Kilimanjaro. It is a high-altitude trek that demands physical fitness, mental determination, and proper acclimatisation. With a reputable guide company, most reasonably fit people can attempt the summit.
+            - generic [ref=e428]:
+              - heading "What percentage of climbers reach the top?" [level=3] [ref=e429]
+              - paragraph [ref=e430]: "Summit success rates vary significantly by route and duration: approximately 65% on the Marangu 5-day route, rising to 85–95% on the Lemosho 8-day route. Longer itineraries allow better acclimatisation and dramatically improve your chances."
+            - generic [ref=e431]:
+              - heading "Is Mount Kilimanjaro a volcano?" [level=3] [ref=e432]
+              - paragraph [ref=e433]: "Yes, Kilimanjaro is a stratovolcano made up of three volcanic cones: Kibo (5,895m, dormant), Mawenzi (5,149m, extinct), and Shira (4,005m, extinct). Kibo last erupted roughly 360,000 years ago and still emits sulphur gases through fumaroles in its crater, meaning it could theoretically erupt again — though geologists consider this extremely unlikely."
+            - generic [ref=e434]:
+              - heading "What is Kilimanjaro's prominence?" [level=3] [ref=e435]
+              - paragraph [ref=e436]: Mount Kilimanjaro has a topographic prominence of 5,885 metres (19,308 ft) — the fourth highest prominence of any mountain on Earth. This means you must descend nearly 5,885m before ascending any higher peak. This extreme prominence is why Kilimanjaro appears so dramatically against the surrounding plains.
+            - generic [ref=e437]:
+              - heading "Are Kilimanjaro's glaciers disappearing?" [level=3] [ref=e438]
+              - paragraph [ref=e439]: Yes. Over 80% of the ice that existed in 1912 has melted. Scientists estimate the remaining glaciers could disappear entirely by 2040–2050 due to climate change and reduced precipitation. This makes climbing Kilimanjaro increasingly urgent for those wanting to witness its ice fields firsthand.
+        - generic [ref=e442]:
+          - heading "Related Reading" [level=2] [ref=e443]
+          - generic [ref=e444]:
+            - link "First Ascent (1889) Hans Meyer's summit story" [ref=e445] [cursor=pointer]:
+              - /url: /first-person-to-climb-kilimanjaro/
+              - img [ref=e446]
+              - paragraph [ref=e448]: First Ascent (1889)
+              - paragraph [ref=e449]: Hans Meyer's summit story
+            - link "Snow in Africa 8 peaks with year-round ice" [ref=e450] [cursor=pointer]:
+              - /url: /is-there-snow-in-africa-mountains/
+              - img [ref=e451]
+              - paragraph [ref=e453]: Snow in Africa
+              - paragraph [ref=e454]: 8 peaks with year-round ice
+            - link "Kilimanjaro vs Everest $2K vs $30K compared" [ref=e455] [cursor=pointer]:
+              - /url: /kilimanjaro-vs-everest/
+              - img [ref=e456]
+              - paragraph [ref=e459]: Kilimanjaro vs Everest
+              - paragraph [ref=e460]: $2K vs $30K compared
+        - generic [ref=e462]:
+          - heading "Ready to Stand on Africa's Roof?" [level=2] [ref=e463]
+          - paragraph [ref=e464]: Our expert guides have led thousands of trekkers to Uhuru Peak. Choose your route, pick your dates, and let us handle the rest.
+          - generic [ref=e465]:
+            - link "Book Your Kilimanjaro Climb" [ref=e466] [cursor=pointer]:
+              - /url: /trekking/
+            - link "View Group Departures" [ref=e467] [cursor=pointer]:
+              - /url: /kilimanjaro-join-group-departures/
+    - contentinfo [ref=e468]:
+      - generic [ref=e471]:
+        - generic [ref=e472]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e473]
+      - generic [ref=e478]:
+        - generic [ref=e479]:
+          - generic [ref=e480]:
+            - img "Snow Africa Adventure" [ref=e482]
+            - paragraph [ref=e483]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e484]:
+              - listitem [ref=e485]:
+                - link "+255 766 657 854" [ref=e486] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e488]
+                  - generic [ref=e490]: +255 766 657 854
+              - listitem [ref=e491]:
+                - link "info@snowafricaadventure.com" [ref=e492] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e494]
+                  - generic [ref=e497]: info@snowafricaadventure.com
+              - listitem [ref=e498]:
+                - img [ref=e500]
+                - generic [ref=e503]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e504]:
+            - heading "Safari & Tours" [level=3] [ref=e505]
+            - list [ref=e506]:
+              - listitem [ref=e507]:
+                - link "All Safari Packages" [ref=e508] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e509]:
+                - link "Tailor-Made Safaris" [ref=e510] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e511]:
+                - link "Tanzania Destinations" [ref=e512] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e513]:
+                - link "View all" [ref=e514] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e515]: →
+          - generic [ref=e516]:
+            - heading "Kilimanjaro" [level=3] [ref=e517]
+            - list [ref=e518]:
+              - listitem [ref=e519]:
+                - link "All Trekking Routes" [ref=e520] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e521]:
+                - link "Best Route to Climb" [ref=e522] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e523]:
+                - link "Climbing Kilimanjaro Guide" [ref=e524] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e525]:
+                - link "Join Group Departures" [ref=e526] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e527]:
+                - link "Kilimanjaro Prices" [ref=e528] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e529]:
+                - link "Best Time to Climb" [ref=e530] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e531]:
+                - link "View all routes" [ref=e532] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e533]: →
+          - generic [ref=e534]:
+            - heading "Company" [level=3] [ref=e535]
+            - list [ref=e536]:
+              - listitem [ref=e537]:
+                - link "About Us" [ref=e538] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e539]:
+                - link "Our Guides" [ref=e540] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e541]:
+                - link "Contact Us" [ref=e542] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e543]:
+                - link "Terms & Conditions" [ref=e544] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e545]:
+                - link "Privacy Policy" [ref=e546] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e547]:
+                - link "Blog" [ref=e548] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e549]:
+              - heading "Follow the Journey" [level=4] [ref=e550]
+              - generic [ref=e551]:
+                - link "Facebook" [ref=e552] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e553]
+                - link "Twitter" [ref=e555] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e556]
+                - link "Instagram" [ref=e558] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e559]
+                - link "YouTube" [ref=e562] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e563]
+        - generic [ref=e567]:
+          - generic [ref=e568]: Accredited & Trusted
+          - generic [ref=e569]:
+            - link "TripAdvisor" [ref=e570] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e572]: SafariBookings
+            - generic [ref=e574]: TATO Member
+            - generic [ref=e576]: KPAP Partner
+      - generic [ref=e579]:
+        - generic [ref=e580]:
+          - generic [ref=e581]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e582]: "|"
+          - link "Terms & Conditions" [ref=e583] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e584]: ·
+          - link "Privacy Policy" [ref=e585] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e586]:
+          - generic [ref=e587]: Crafted by
+          - link "Timeless International" [ref=e588] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:01 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e589]:
+      - img [ref=e590]
+  - button "Open Next.js Dev Tools" [ref=e598] [cursor=pointer]:
+    - img [ref=e599]
+  - alert [ref=e602]

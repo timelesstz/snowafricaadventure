@@ -1,0 +1,1247 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - img "Walking Safari on Ngorongoro Highlands & Serengeti" [ref=e54]
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - navigation [ref=e59]:
+                - link "Home" [ref=e60] [cursor=pointer]:
+                  - /url: /
+                - generic [ref=e61]: /
+                - link "Tanzania Safaris" [ref=e62] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                - generic [ref=e63]: /
+                - generic [ref=e64]: Walking Safari on...
+              - generic [ref=e65]:
+                - generic [ref=e66]:
+                  - img [ref=e67]
+                  - text: Mid-range
+                - generic [ref=e69]: Best Seller
+                - generic [ref=e70]: Big Five Guaranteed
+              - heading "Walking Safari on Ngorongoro Highlands & Serengeti" [level=1] [ref=e71]:
+                - generic [ref=e72]: Walking Safari on Ngorongoro Highlands
+                - generic [ref=e73]: "& Serengeti"
+              - paragraph [ref=e74]: Embark on the ultimate Tanzanian adventure — a 6-day walking safari that takes you deep into the Ngorongoro Highlands on foot before culminating with thrilling Serengeti game drives. Trek through volc
+              - generic [ref=e75]:
+                - generic [ref=e76]:
+                  - generic [ref=e77]: "12"
+                  - generic [ref=e78]: Days
+                - generic [ref=e79]:
+                  - generic [ref=e80]: "10"
+                  - generic [ref=e81]: Parks
+                - generic [ref=e82]:
+                  - generic [ref=e83]: "6"
+                  - generic [ref=e84]: Game Drives
+                - generic [ref=e85]:
+                  - generic [ref=e86]: "4.9"
+                  - generic [ref=e87]: Rating
+              - generic [ref=e88]:
+                - generic [ref=e89]:
+                  - img [ref=e90]
+                  - text: Expert safari guides
+                - generic [ref=e92]:
+                  - img [ref=e93]
+                  - text: 4x4 Land Cruisers
+                - generic [ref=e95]:
+                  - img [ref=e96]
+                  - text: Full board included
+            - generic [ref=e98]:
+              - generic [ref=e100]:
+                - heading "Request a Quote" [level=2] [ref=e101]
+                - paragraph [ref=e102]: Tailored to your group size
+              - generic [ref=e105]:
+                - generic [ref=e106]:
+                  - img [ref=e107]
+                  - heading "Get Your Custom Quote" [level=3] [ref=e110]
+                - generic [ref=e111]:
+                  - generic [ref=e112]: Full Name *
+                  - textbox "Full Name * Full Name *" [ref=e113]:
+                    - /placeholder: John Smith
+                - generic [ref=e114]:
+                  - generic [ref=e115]: Email Address *
+                  - textbox "Email Address * Email Address *" [ref=e116]:
+                    - /placeholder: john@example.com
+                - generic [ref=e117]:
+                  - generic [ref=e118]: Phone / WhatsApp Number
+                  - generic [ref=e119]:
+                    - combobox [ref=e120]:
+                      - option "+1" [selected]
+                      - option "+44"
+                      - option "+49"
+                      - option "+33"
+                      - option "+31"
+                      - option "+61"
+                      - option "+255"
+                      - option "+254"
+                      - option "+27"
+                      - option "+91"
+                      - option "+86"
+                      - option "+81"
+                      - option "+34"
+                      - option "+39"
+                      - option "+41"
+                      - option "+43"
+                      - option "+46"
+                      - option "+47"
+                      - option "+45"
+                      - option "+353"
+                      - option "+64"
+                      - option "+32"
+                      - option "+65"
+                      - option "+55"
+                      - option "+52"
+                      - option "+48"
+                      - option "+7"
+                      - option "+971"
+                      - option "+966"
+                      - option "+90"
+                      - option "+62"
+                      - option "+60"
+                      - option "+66"
+                      - option "+84"
+                      - option "+82"
+                      - option "+234"
+                      - option "+20"
+                      - option "+256"
+                      - option "+250"
+                    - textbox "Phone / WhatsApp Number Phone / WhatsApp" [ref=e121]:
+                      - /placeholder: 123 456 7890
+                - button "Continue" [ref=e122]:
+                  - text: Continue
+                  - img [ref=e123]
+              - generic [ref=e125]:
+                - generic [ref=e126]:
+                  - img [ref=e127]
+                  - text: Free cancellation up to 30 days
+                - generic [ref=e129]:
+                  - img [ref=e130]
+                  - text: Expert local guides
+                - generic [ref=e132]:
+                  - img [ref=e133]
+                  - text: Customizable itinerary
+          - generic [ref=e135]:
+            - generic [ref=e136]: Scroll to explore
+            - img [ref=e137]
+        - navigation [ref=e139]:
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - link "Overview" [ref=e143] [cursor=pointer]:
+                - /url: "#overview"
+              - link "Highlights" [ref=e144] [cursor=pointer]:
+                - /url: "#highlights"
+              - link "Day by Day" [ref=e145] [cursor=pointer]:
+                - /url: "#itinerary"
+              - link "Inclusions" [ref=e146] [cursor=pointer]:
+                - /url: "#inclusions"
+            - link "Book This Safari" [ref=e148] [cursor=pointer]:
+              - /url: "#book"
+        - generic [ref=e151]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: About This Safari
+            - heading "The Ultimate Tanzania Experience" [level=2] [ref=e154]
+            - paragraph [ref=e155]: Embark on the ultimate Tanzanian adventure — a 6-day walking safari that takes you deep into the Ngorongoro Highlands on foot before culminating with thrilling Serengeti game drives. Trek through volcanic craters, visit authentic Maasai villages, descend into the flamingo-filled Empakaai Crater, and camp under the stars at Lake Natron with views of Oldoinyo Lengai, Tanzania's only active volcano.
+            - paragraph [ref=e156]: This extraordinary journey combines highland trekking with world-class wildlife viewing across some of East Africa's most iconic landscapes.
+            - blockquote [ref=e158]: “Watching a leopard descend from an acacia tree at sunset, with the Serengeti stretching endlessly behind - that's a moment that stays with you forever.”
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - heading "Ready to Go Wild?" [level=3] [ref=e161]
+                - paragraph [ref=e162]: Secure your spot with just a 30% deposit
+              - link "Book Now" [ref=e163] [cursor=pointer]:
+                - /url: "#book"
+          - complementary [ref=e164]:
+            - generic [ref=e165]:
+              - heading "Safari Highlights" [level=4] [ref=e166]
+              - list [ref=e167]:
+                - listitem [ref=e168]:
+                  - img [ref=e170]
+                  - generic [ref=e173]: Big Five guaranteed
+                - listitem [ref=e174]:
+                  - img [ref=e176]
+                  - generic [ref=e180]: Private 4x4 Land Cruiser
+                - listitem [ref=e181]:
+                  - img [ref=e183]
+                  - generic [ref=e187]: Luxury lodges & tented camps
+                - listitem [ref=e188]:
+                  - img [ref=e190]
+                  - generic [ref=e195]: Full board included
+                - listitem [ref=e196]:
+                  - img [ref=e198]
+                  - generic [ref=e201]: Photography-friendly vehicles
+                - listitem [ref=e202]:
+                  - img [ref=e204]
+                  - generic [ref=e206]: Airport transfers included
+            - generic [ref=e207]:
+              - heading "Best Time to Visit" [level=4] [ref=e208]
+              - list [ref=e209]:
+                - listitem [ref=e210]:
+                  - img [ref=e212]
+                  - generic [ref=e215]:
+                    - strong [ref=e216]: "Jun-Oct:"
+                    - text: Migration in Serengeti
+                - listitem [ref=e217]:
+                  - img [ref=e219]
+                  - generic [ref=e225]:
+                    - strong [ref=e226]: "Jan-Mar:"
+                    - text: Calving season
+                - listitem [ref=e227]:
+                  - img [ref=e229]
+                  - generic [ref=e232]:
+                    - strong [ref=e233]: "Year-round:"
+                    - text: Ngorongoro Crater
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - heading "Why Choose This Safari?" [level=2] [ref=e237]
+            - paragraph [ref=e238]: Discover what makes this our most popular Tanzania adventure
+          - generic [ref=e239]:
+            - generic [ref=e240]:
+              - img [ref=e242]
+              - generic [ref=e245]: Big Five Territory
+            - generic [ref=e246]:
+              - img [ref=e248]
+              - generic [ref=e251]: Great Migration
+            - generic [ref=e252]:
+              - img [ref=e254]
+              - generic [ref=e256]: Ngorongoro Crater
+            - generic [ref=e257]:
+              - img [ref=e259]
+              - generic [ref=e263]: Luxury Camps
+          - link "Start Planning Your Safari" [ref=e265] [cursor=pointer]:
+            - /url: "#book"
+        - generic [ref=e266]:
+          - generic [ref=e267]:
+            - generic [ref=e268]: Day by Day
+            - heading "Your Safari Journey" [level=2] [ref=e269]
+            - paragraph [ref=e270]: From Arusha to the Serengeti - 12 days of unforgettable wildlife encounters
+          - generic [ref=e271]:
+            - generic [ref=e273]:
+              - generic [ref=e274]:
+                - generic [ref=e276]:
+                  - img "Arrival in Arusha" [ref=e277]
+                  - generic [ref=e279]: Day One
+                - generic [ref=e281]: "1"
+                - generic [ref=e283] [cursor=pointer]:
+                  - heading "Arrival in Arusha" [level=3] [ref=e285]
+                  - generic [ref=e286]:
+                    - generic [ref=e287]:
+                      - img [ref=e288]
+                      - text: Arusha Planet Lodge
+                    - generic [ref=e292]:
+                      - img [ref=e293]
+                      - text: Breakfast
+                  - paragraph [ref=e297]: Arrive at Kilimanjaro International Airport, where a Snow Africa driver will be waiting to greet you and transfer you to Arusha City, a scenic 50-minu...
+                  - button "Read more details" [ref=e298]:
+                    - img [ref=e299]
+                    - text: Read more details
+              - generic [ref=e301]:
+                - generic [ref=e303]:
+                  - img "Ngorongoro Crater Game Drive" [ref=e304]
+                  - generic [ref=e306]: Day Two
+                - generic [ref=e308]: "2"
+                - generic [ref=e310] [cursor=pointer]:
+                  - generic [ref=e312]: Safari Highlight
+                  - heading "Ngorongoro Crater Game Drive" [level=3] [ref=e313]
+                  - generic [ref=e314]:
+                    - generic [ref=e315]:
+                      - img [ref=e316]
+                      - text: Nainokanoka Camp
+                    - generic [ref=e320]:
+                      - img [ref=e321]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e325]: After a hearty breakfast, set out on a scenic three-hour drive to the Ngorongoro Conservation Area — a UNESCO World Heritage Site and one of Africa's...
+                  - button "Read more details" [ref=e326]:
+                    - img [ref=e327]
+                    - text: Read more details
+              - generic [ref=e329]:
+                - generic [ref=e331]:
+                  - img "Olmoti Crater Trek & Maasai Boma Visit" [ref=e332]
+                  - generic [ref=e334]: Day Three
+                - generic [ref=e336]: "3"
+                - generic [ref=e338] [cursor=pointer]:
+                  - generic [ref=e340]: Safari Highlight
+                  - heading "Olmoti Crater Trek & Maasai Boma Visit" [level=3] [ref=e341]
+                  - generic [ref=e342]:
+                    - generic [ref=e343]:
+                      - img [ref=e344]
+                      - text: Nainokanoka Camp
+                    - generic [ref=e348]:
+                      - img [ref=e349]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e353]: Today marks the beginning of your walking safari as you trade the vehicle for your own two feet. After breakfast at Nainokanoka Camp, lace up your hik...
+                  - button "Read more details" [ref=e354]:
+                    - img [ref=e355]
+                    - text: Read more details
+              - generic [ref=e357]:
+                - generic [ref=e359]:
+                  - img "Trek to Bulati Village" [ref=e360]
+                  - generic [ref=e362]: Day Four
+                - generic [ref=e364]: "4"
+                - generic [ref=e366] [cursor=pointer]:
+                  - generic [ref=e368]: Safari Highlight
+                  - heading "Trek to Bulati Village" [level=3] [ref=e369]
+                  - generic [ref=e370]:
+                    - generic [ref=e371]:
+                      - img [ref=e372]
+                      - text: Bulati Village Camp
+                    - generic [ref=e376]:
+                      - img [ref=e377]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e381]: After breakfast, shoulder your daypack and embark on the day's main trek — a rewarding five to six-hour hike from Nainokanoka to Bulati Village throug...
+                  - button "Read more details" [ref=e382]:
+                    - img [ref=e383]
+                    - text: Read more details
+              - generic [ref=e385]:
+                - generic [ref=e387]:
+                  - img "Trek to Empakaai Crater" [ref=e388]
+                  - generic [ref=e390]: Day Five
+                - generic [ref=e392]: "5"
+                - generic [ref=e394] [cursor=pointer]:
+                  - generic [ref=e396]: Safari Highlight
+                  - heading "Trek to Empakaai Crater" [level=3] [ref=e397]
+                  - generic [ref=e398]:
+                    - generic [ref=e399]:
+                      - img [ref=e400]
+                      - text: Empakaai Crater Rim Camp
+                    - generic [ref=e404]:
+                      - img [ref=e405]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e409]: Today's trek leads you from Bulati Village to one of Tanzania's most breathtaking hidden gems — Empakaai Crater. The 11-kilometre hike takes four to f...
+                  - button "Read more details" [ref=e410]:
+                    - img [ref=e411]
+                    - text: Read more details
+              - generic [ref=e413]:
+                - generic [ref=e415]:
+                  - img "Trek to Acacia Camp" [ref=e416]
+                  - generic [ref=e418]: Day Six
+                - generic [ref=e420]: "6"
+                - generic [ref=e422] [cursor=pointer]:
+                  - heading "Trek to Acacia Camp" [level=3] [ref=e424]
+                  - generic [ref=e425]:
+                    - generic [ref=e426]:
+                      - img [ref=e427]
+                      - text: Acacia Camp
+                    - generic [ref=e431]:
+                      - img [ref=e432]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e436]: After breakfast on the Empakaai Crater rim with its spectacular morning views, set off on the day's 13-kilometre trek to Acacia Camp. This five to six...
+                  - button "Read more details" [ref=e437]:
+                    - img [ref=e438]
+                    - text: Read more details
+              - generic [ref=e440]:
+                - generic [ref=e442]:
+                  - img "Trek to Lake Natron" [ref=e443]
+                  - generic [ref=e445]: Day Seven
+                - generic [ref=e447]: "7"
+                - generic [ref=e449] [cursor=pointer]:
+                  - generic [ref=e451]: Safari Highlight
+                  - heading "Trek to Lake Natron" [level=3] [ref=e452]
+                  - generic [ref=e453]:
+                    - generic [ref=e454]:
+                      - img [ref=e455]
+                      - text: Africa Safari Lake Natron Luxury Camp
+                    - generic [ref=e459]:
+                      - img [ref=e460]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e464]: Today's trek brings the highland walking safari to a dramatic finale as you descend from the cool Ngorongoro Highlands to the shores of Lake Natron —...
+                  - button "Read more details" [ref=e465]:
+                    - img [ref=e466]
+                    - text: Read more details
+              - generic [ref=e468]:
+                - generic [ref=e470]:
+                  - img "Lake Natron Exploration" [ref=e471]
+                  - generic [ref=e473]: Day Eight
+                - generic [ref=e475]: "8"
+                - generic [ref=e477] [cursor=pointer]:
+                  - heading "Lake Natron Exploration" [level=3] [ref=e479]
+                  - generic [ref=e480]:
+                    - generic [ref=e481]:
+                      - img [ref=e482]
+                      - text: Africa Safari Lake Natron Luxury Camp
+                    - generic [ref=e486]:
+                      - img [ref=e487]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e491]: Enjoy a full day exploring the surreal landscapes around Lake Natron — a place unlike anywhere else on Earth. This shallow alkaline lake is one of the...
+                  - button "Read more details" [ref=e492]:
+                    - img [ref=e493]
+                    - text: Read more details
+              - generic [ref=e495]:
+                - generic [ref=e497]:
+                  - img "Serengeti National Park via Klein's Gate" [ref=e498]
+                  - generic [ref=e500]: Day Nine
+                - generic [ref=e502]: "9"
+                - generic [ref=e504] [cursor=pointer]:
+                  - heading "Serengeti National Park via Klein's Gate" [level=3] [ref=e506]
+                  - generic [ref=e507]:
+                    - generic [ref=e508]:
+                      - img [ref=e509]
+                      - text: Kimbilio Tented Camp
+                    - generic [ref=e513]:
+                      - img [ref=e514]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e518]: Leave Lake Natron behind and embark on a scenic five-hour drive to the legendary Serengeti National Park, entering through the remote Klein's Gate on...
+                  - button "Read more details" [ref=e519]:
+                    - img [ref=e520]
+                    - text: Read more details
+              - generic [ref=e522]:
+                - generic [ref=e524]:
+                  - img "Serengeti Game Drive — Lobo to Central Serengeti" [ref=e525]
+                  - generic [ref=e527]: Day Ten
+                - generic [ref=e529]: "10"
+                - generic [ref=e531] [cursor=pointer]:
+                  - generic [ref=e533]: Safari Highlight
+                  - heading "Serengeti Game Drive — Lobo to Central Serengeti" [level=3] [ref=e534]
+                  - generic [ref=e535]:
+                    - generic [ref=e536]:
+                      - img [ref=e537]
+                      - text: Tukaone Mwaloni Tented Camp
+                    - generic [ref=e541]:
+                      - img [ref=e542]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e546]: Embark on a full-day game drive through the Serengeti — widely regarded as the greatest wildlife spectacle on the planet. Today's route takes you from...
+                  - button "Read more details" [ref=e547]:
+                    - img [ref=e548]
+                    - text: Read more details
+              - generic [ref=e550]:
+                - generic [ref=e552]:
+                  - img "Central Serengeti Game Drive" [ref=e553]
+                  - generic [ref=e555]: Day 11
+                - generic [ref=e557]: "11"
+                - generic [ref=e559] [cursor=pointer]:
+                  - heading "Central Serengeti Game Drive" [level=3] [ref=e561]
+                  - generic [ref=e562]:
+                    - generic [ref=e563]:
+                      - img [ref=e564]
+                      - text: Tukaone Mwaloni Tented Camp
+                    - generic [ref=e568]:
+                      - img [ref=e569]
+                      - text: Breakfast, Lunch, Dinner
+                  - paragraph [ref=e573]: Spend another full day immersed in the wildlife-rich Central Serengeti — one of the most productive game-viewing regions in Africa. With a full day at...
+                  - button "Read more details" [ref=e574]:
+                    - img [ref=e575]
+                    - text: Read more details
+              - generic [ref=e577]:
+                - generic [ref=e579]:
+                  - img "Serengeti to Arusha & Departure" [ref=e580]
+                  - generic [ref=e582]: Day 12
+                - generic [ref=e584]: "12"
+                - generic [ref=e586] [cursor=pointer]:
+                  - heading "Serengeti to Arusha & Departure" [level=3] [ref=e588]
+                  - generic [ref=e589]:
+                    - generic [ref=e590]:
+                      - img [ref=e591]
+                      - text: Arusha Planet Lodge
+                    - generic [ref=e595]:
+                      - img [ref=e596]
+                      - text: Breakfast
+                  - paragraph [ref=e600]: Embark on a morning game drive in Serengeti National Park en route to Arusha. After checking out of the park, enjoy the scenic five to six-hour drive...
+                  - button "Read more details" [ref=e601]:
+                    - img [ref=e602]
+                    - text: Read more details
+            - button "Download Full Itinerary PDF" [ref=e605]:
+              - img [ref=e606]
+              - text: Download Full Itinerary PDF
+            - generic [ref=e609]:
+              - heading "Ready for Your Safari Adventure?" [level=3] [ref=e610]
+              - paragraph [ref=e611]: Join hundreds of travelers who've experienced Tanzania with Snow Africa
+              - generic [ref=e612]:
+                - link "Check Availability" [ref=e613] [cursor=pointer]:
+                  - /url: "#book"
+                - link "Ask a Question" [ref=e614] [cursor=pointer]:
+                  - /url: /contact-us/
+        - generic [ref=e615]:
+          - generic [ref=e616]:
+            - generic [ref=e617]: What's Included
+            - heading "Everything You Need" [level=2] [ref=e618]
+          - generic [ref=e619]:
+            - generic [ref=e620]:
+              - heading "Included" [level=3] [ref=e621]:
+                - img [ref=e622]
+                - text: Included
+              - list [ref=e624]:
+                - listitem [ref=e625]:
+                  - img [ref=e626]
+                  - text: Roundtrip airport transfers
+                - listitem [ref=e628]:
+                  - img [ref=e629]
+                  - text: English-speaking professional safari guide
+                - listitem [ref=e631]:
+                  - img [ref=e632]
+                  - text: 4x4 open-sided pop-up roof safari vehicle
+                - listitem [ref=e634]:
+                  - img [ref=e635]
+                  - text: Ranger fees for Ngorongoro trekking
+                - listitem [ref=e637]:
+                  - img [ref=e638]
+                  - text: Donkeys, porters, and chef for Ngorongoro trekking
+                - listitem [ref=e640]:
+                  - img [ref=e641]
+                  - text: Wildlife Management Area (WMA) and village fees
+                - listitem [ref=e643]:
+                  - img [ref=e644]
+                  - text: Drinking water throughout
+                - listitem [ref=e646]:
+                  - img [ref=e647]
+                  - text: All current government park fees
+                - listitem [ref=e649]:
+                  - img [ref=e650]
+                  - text: Accommodation as specified in itinerary
+                - listitem [ref=e652]:
+                  - img [ref=e653]
+                  - text: All meals as specified in itinerary
+                - listitem [ref=e655]:
+                  - img [ref=e656]
+                  - text: Portable private toilet, tents, table, and seats for hiking
+                - listitem [ref=e658]:
+                  - img [ref=e659]
+                  - text: Sleeping pads and mattresses for hiking
+                - listitem [ref=e661]:
+                  - img [ref=e662]
+                  - text: Sleeping bags
+            - generic [ref=e664]:
+              - heading "Not Included" [level=3] [ref=e665]:
+                - img [ref=e666]
+                - text: Not Included
+              - list [ref=e669]:
+                - listitem [ref=e670]:
+                  - img [ref=e671]
+                  - text: Drinks at hotels unless otherwise specified
+                - listitem [ref=e674]:
+                  - img [ref=e675]
+                  - text: Personal items such as souvenirs, travel insurance, and visa fees
+                - listitem [ref=e678]:
+                  - img [ref=e679]
+                  - text: Tips and gratuities
+                - listitem [ref=e682]:
+                  - img [ref=e683]
+                  - text: International flights
+                - listitem [ref=e686]:
+                  - img [ref=e687]
+                  - text: Personal hiking gear (boots, walking poles, clothing)
+                - listitem [ref=e690]:
+                  - img [ref=e691]
+                  - text: Extra nights in town
+                - listitem [ref=e694]:
+                  - img [ref=e695]
+                  - text: Soft and alcoholic beverages
+                - listitem [ref=e698]:
+                  - img [ref=e699]
+                  - text: Dinner in town
+        - generic [ref=e703]:
+          - generic [ref=e704]:
+            - img [ref=e706]
+            - generic [ref=e710]:
+              - heading "Walking Safari on Ngorongoro Highlands & Serengeti — Gallery" [level=2] [ref=e711]
+              - paragraph [ref=e712]: Photos from past departures
+          - generic [ref=e713]:
+            - figure [ref=e714]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 1" [ref=e715]
+            - figure [ref=e716]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 2" [ref=e717]
+            - figure [ref=e718]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 3" [ref=e719]
+            - figure [ref=e720]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 4" [ref=e721]
+            - figure [ref=e722]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 5" [ref=e723]
+            - figure [ref=e724]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 6" [ref=e725]
+            - figure [ref=e726]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 7" [ref=e727]
+            - figure [ref=e728]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 8" [ref=e729]
+            - figure [ref=e730]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 9" [ref=e731]
+            - figure [ref=e732]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 10" [ref=e733]
+            - figure [ref=e734]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 11" [ref=e735]
+            - figure [ref=e736]:
+              - img "Walking Safari on Ngorongoro Highlands & Serengeti - Photo 12" [ref=e737]
+        - generic [ref=e739]:
+          - generic [ref=e740]:
+            - generic [ref=e741]:
+              - img [ref=e742]
+              - text: Group Pricing
+            - heading "12 Days 11 Nights Walking Safari on Ngorongoro Highlands & Serengeti Pricing" [level=2] [ref=e744]
+            - paragraph [ref=e745]: Save more when you travel with friends. All prices include accommodation, meals, park fees, expert guides, and 4x4 transport.
+          - generic [ref=e746]:
+            - generic [ref=e747]:
+              - generic [ref=e748]: Group Size
+              - generic [ref=e749]: Price per Person
+              - generic [ref=e750]: Savings
+            - button "1 Person Private safari experience $4,500 USD —" [ref=e751] [cursor=pointer]:
+              - generic [ref=e752]:
+                - img [ref=e754]
+                - generic [ref=e757]:
+                  - heading "1 Person" [level=3] [ref=e758]
+                  - text: Private safari experience
+              - generic [ref=e759]: $4,500 USD
+              - generic [ref=e760]:
+                - generic [ref=e761]: —
+                - img [ref=e762]
+            - button "Most Popular 2-4 People Small group adventure $3,500 USD Save $1,000" [ref=e764] [cursor=pointer]:
+              - generic [ref=e765]: Most Popular
+              - generic [ref=e766]:
+                - img [ref=e768]
+                - generic [ref=e773]:
+                  - heading "2-4 People" [level=3] [ref=e774]
+                  - text: Small group adventure
+              - generic [ref=e775]: $3,500 USD
+              - generic [ref=e776]:
+                - generic [ref=e777]: Save $1,000
+                - img [ref=e778]
+            - button "5-7 People Medium group savings $3,200 USD Save $1,300" [ref=e780] [cursor=pointer]:
+              - generic [ref=e781]:
+                - img [ref=e783]
+                - generic [ref=e788]:
+                  - heading "5-7 People" [level=3] [ref=e789]
+                  - text: Medium group savings
+              - generic [ref=e790]: $3,200 USD
+              - generic [ref=e791]:
+                - generic [ref=e792]: Save $1,300
+                - img [ref=e793]
+            - button "8-10 People Large group discount $2,950 USD Save $1,550" [ref=e795] [cursor=pointer]:
+              - generic [ref=e796]:
+                - img [ref=e798]
+                - generic [ref=e803]:
+                  - heading "8-10 People" [level=3] [ref=e804]
+                  - text: Large group discount
+              - generic [ref=e805]: $2,950 USD
+              - generic [ref=e806]:
+                - generic [ref=e807]: Save $1,550
+                - img [ref=e808]
+            - button "11 & Above Best value for groups $2,750 USD Save $1,750" [ref=e810] [cursor=pointer]:
+              - generic [ref=e811]:
+                - img [ref=e813]
+                - generic [ref=e818]:
+                  - heading "11 & Above" [level=3] [ref=e819]
+                  - text: Best value for groups
+              - generic [ref=e820]: $2,750 USD
+              - generic [ref=e821]:
+                - generic [ref=e822]: Save $1,750
+                - img [ref=e823]
+            - generic [ref=e825]:
+              - generic [ref=e826]:
+                - generic [ref=e827]:
+                  - img [ref=e828]
+                  - text: Park fees included
+                - generic [ref=e830]:
+                  - img [ref=e831]
+                  - text: All meals
+                - generic [ref=e833]:
+                  - img [ref=e834]
+                  - text: Expert guide
+                - generic [ref=e836]:
+                  - img [ref=e837]
+                  - text: 4x4 game drives
+              - button "Request a Quote" [ref=e839] [cursor=pointer]
+        - generic [ref=e841]:
+          - generic [ref=e842]:
+            - heading "Book This Safari" [level=2] [ref=e843]
+            - paragraph [ref=e844]: Tell us about your group and preferred dates. We'll craft a personalized itinerary and get back to you within 24 hours.
+          - generic [ref=e845]:
+            - generic [ref=e846]:
+              - img [ref=e847]
+              - generic [ref=e849]: TATO Licensed
+            - generic [ref=e850]:
+              - img [ref=e851]
+              - generic [ref=e853]: 4.9/5 TripAdvisor
+            - generic [ref=e854]:
+              - img [ref=e855]
+              - generic [ref=e858]: No Hidden Fees
+            - generic [ref=e859]:
+              - img [ref=e860]
+              - generic [ref=e862]: 24hr Support
+            - generic [ref=e863]:
+              - img [ref=e864]
+              - generic [ref=e867]: Secure Booking
+          - generic [ref=e869]:
+            - generic [ref=e870]:
+              - generic [ref=e871]:
+                - generic [ref=e872]:
+                  - generic [ref=e873]: Full Name *
+                  - textbox "John Smith" [ref=e874]
+                - generic [ref=e875]:
+                  - generic [ref=e876]: Email Address *
+                  - textbox "john@example.com" [ref=e877]
+              - generic [ref=e878]:
+                - generic [ref=e879]:
+                  - generic [ref=e880]: Country *
+                  - combobox "Country *" [ref=e881]:
+                    - option "Select your country" [selected]
+                    - option "🇺🇸 United States"
+                    - option "🇬🇧 United Kingdom"
+                    - option "🇩🇪 Germany"
+                    - option "🇫🇷 France"
+                    - option "🇨🇦 Canada"
+                    - option "🇦🇺 Australia"
+                    - option "🇳🇱 Netherlands"
+                    - option "🇮🇹 Italy"
+                    - option "🇪🇸 Spain"
+                    - option "🇨🇭 Switzerland"
+                    - option "🇧🇪 Belgium"
+                    - option "🇦🇹 Austria"
+                    - option "🇸🇪 Sweden"
+                    - option "🇳🇴 Norway"
+                    - option "🇩🇰 Denmark"
+                    - option "🇮🇪 Ireland"
+                    - option "🇳🇿 New Zealand"
+                    - option "🇿🇦 South Africa"
+                    - option "🇯🇵 Japan"
+                    - option "🇸🇬 Singapore"
+                    - option "──────────────" [disabled]
+                    - option "🇦🇫 Afghanistan"
+                    - option "🇦🇱 Albania"
+                    - option "🇩🇿 Algeria"
+                    - option "🇦🇩 Andorra"
+                    - option "🇦🇴 Angola"
+                    - option "🇦🇬 Antigua and Barbuda"
+                    - option "🇦🇷 Argentina"
+                    - option "🇦🇲 Armenia"
+                    - option "🇦🇿 Azerbaijan"
+                    - option "🇧🇸 Bahamas"
+                    - option "🇧🇭 Bahrain"
+                    - option "🇧🇩 Bangladesh"
+                    - option "🇧🇧 Barbados"
+                    - option "🇧🇾 Belarus"
+                    - option "🇧🇿 Belize"
+                    - option "🇧🇯 Benin"
+                    - option "🇧🇹 Bhutan"
+                    - option "🇧🇴 Bolivia"
+                    - option "🇧🇦 Bosnia and Herzegovina"
+                    - option "🇧🇼 Botswana"
+                    - option "🇧🇷 Brazil"
+                    - option "🇧🇳 Brunei"
+                    - option "🇧🇬 Bulgaria"
+                    - option "🇧🇫 Burkina Faso"
+                    - option "🇧🇮 Burundi"
+                    - option "🇨🇻 Cabo Verde"
+                    - option "🇰🇭 Cambodia"
+                    - option "🇨🇲 Cameroon"
+                    - option "🇨🇫 Central African Republic"
+                    - option "🇹🇩 Chad"
+                    - option "🇨🇱 Chile"
+                    - option "🇨🇳 China"
+                    - option "🇨🇴 Colombia"
+                    - option "🇰🇲 Comoros"
+                    - option "🇨🇬 Congo"
+                    - option "🇨🇩 Congo (DRC)"
+                    - option "🇨🇷 Costa Rica"
+                    - option "🇭🇷 Croatia"
+                    - option "🇨🇺 Cuba"
+                    - option "🇨🇾 Cyprus"
+                    - option "🇨🇿 Czech Republic"
+                    - option "🇨🇮 Cote d'Ivoire"
+                    - option "🇩🇯 Djibouti"
+                    - option "🇩🇲 Dominica"
+                    - option "🇩🇴 Dominican Republic"
+                    - option "🇪🇨 Ecuador"
+                    - option "🇪🇬 Egypt"
+                    - option "🇸🇻 El Salvador"
+                    - option "🇬🇶 Equatorial Guinea"
+                    - option "🇪🇷 Eritrea"
+                    - option "🇪🇪 Estonia"
+                    - option "🇸🇿 Eswatini"
+                    - option "🇪🇹 Ethiopia"
+                    - option "🇫🇯 Fiji"
+                    - option "🇫🇮 Finland"
+                    - option "🇬🇦 Gabon"
+                    - option "🇬🇲 Gambia"
+                    - option "🇬🇪 Georgia"
+                    - option "🇬🇭 Ghana"
+                    - option "🇬🇷 Greece"
+                    - option "🇬🇩 Grenada"
+                    - option "🇬🇹 Guatemala"
+                    - option "🇬🇳 Guinea"
+                    - option "🇬🇼 Guinea-Bissau"
+                    - option "🇬🇾 Guyana"
+                    - option "🇭🇹 Haiti"
+                    - option "🇭🇳 Honduras"
+                    - option "🇭🇰 Hong Kong"
+                    - option "🇭🇺 Hungary"
+                    - option "🇮🇸 Iceland"
+                    - option "🇮🇳 India"
+                    - option "🇮🇩 Indonesia"
+                    - option "🇮🇷 Iran"
+                    - option "🇮🇶 Iraq"
+                    - option "🇮🇱 Israel"
+                    - option "🇯🇲 Jamaica"
+                    - option "🇯🇴 Jordan"
+                    - option "🇰🇿 Kazakhstan"
+                    - option "🇰🇪 Kenya"
+                    - option "🇰🇮 Kiribati"
+                    - option "🇰🇼 Kuwait"
+                    - option "🇰🇬 Kyrgyzstan"
+                    - option "🇱🇦 Laos"
+                    - option "🇱🇻 Latvia"
+                    - option "🇱🇧 Lebanon"
+                    - option "🇱🇸 Lesotho"
+                    - option "🇱🇷 Liberia"
+                    - option "🇱🇾 Libya"
+                    - option "🇱🇮 Liechtenstein"
+                    - option "🇱🇹 Lithuania"
+                    - option "🇱🇺 Luxembourg"
+                    - option "🇲🇴 Macau"
+                    - option "🇲🇬 Madagascar"
+                    - option "🇲🇼 Malawi"
+                    - option "🇲🇾 Malaysia"
+                    - option "🇲🇻 Maldives"
+                    - option "🇲🇱 Mali"
+                    - option "🇲🇹 Malta"
+                    - option "🇲🇭 Marshall Islands"
+                    - option "🇲🇷 Mauritania"
+                    - option "🇲🇺 Mauritius"
+                    - option "🇲🇽 Mexico"
+                    - option "🇫🇲 Micronesia"
+                    - option "🇲🇩 Moldova"
+                    - option "🇲🇨 Monaco"
+                    - option "🇲🇳 Mongolia"
+                    - option "🇲🇪 Montenegro"
+                    - option "🇲🇦 Morocco"
+                    - option "🇲🇿 Mozambique"
+                    - option "🇲🇲 Myanmar"
+                    - option "🇳🇦 Namibia"
+                    - option "🇳🇷 Nauru"
+                    - option "🇳🇵 Nepal"
+                    - option "🇳🇮 Nicaragua"
+                    - option "🇳🇪 Niger"
+                    - option "🇳🇬 Nigeria"
+                    - option "🇰🇵 North Korea"
+                    - option "🇲🇰 North Macedonia"
+                    - option "🇴🇲 Oman"
+                    - option "🇵🇰 Pakistan"
+                    - option "🇵🇼 Palau"
+                    - option "🇵🇸 Palestine"
+                    - option "🇵🇦 Panama"
+                    - option "🇵🇬 Papua New Guinea"
+                    - option "🇵🇾 Paraguay"
+                    - option "🇵🇪 Peru"
+                    - option "🇵🇭 Philippines"
+                    - option "🇵🇱 Poland"
+                    - option "🇵🇹 Portugal"
+                    - option "🇶🇦 Qatar"
+                    - option "🇷🇴 Romania"
+                    - option "🇷🇺 Russia"
+                    - option "🇷🇼 Rwanda"
+                    - option "🇰🇳 Saint Kitts and Nevis"
+                    - option "🇱🇨 Saint Lucia"
+                    - option "🇻🇨 Saint Vincent"
+                    - option "🇼🇸 Samoa"
+                    - option "🇸🇲 San Marino"
+                    - option "🇸🇹 Sao Tome and Principe"
+                    - option "🇸🇦 Saudi Arabia"
+                    - option "🇸🇳 Senegal"
+                    - option "🇷🇸 Serbia"
+                    - option "🇸🇨 Seychelles"
+                    - option "🇸🇱 Sierra Leone"
+                    - option "🇸🇰 Slovakia"
+                    - option "🇸🇮 Slovenia"
+                    - option "🇸🇧 Solomon Islands"
+                    - option "🇸🇴 Somalia"
+                    - option "🇰🇷 South Korea"
+                    - option "🇸🇸 South Sudan"
+                    - option "🇱🇰 Sri Lanka"
+                    - option "🇸🇩 Sudan"
+                    - option "🇸🇷 Suriname"
+                    - option "🇸🇾 Syria"
+                    - option "🇹🇼 Taiwan"
+                    - option "🇹🇯 Tajikistan"
+                    - option "🇹🇿 Tanzania"
+                    - option "🇹🇭 Thailand"
+                    - option "🇹🇱 Timor-Leste"
+                    - option "🇹🇬 Togo"
+                    - option "🇹🇴 Tonga"
+                    - option "🇹🇹 Trinidad and Tobago"
+                    - option "🇹🇳 Tunisia"
+                    - option "🇹🇷 Turkey"
+                    - option "🇹🇲 Turkmenistan"
+                    - option "🇹🇻 Tuvalu"
+                    - option "🇺🇬 Uganda"
+                    - option "🇺🇦 Ukraine"
+                    - option "🇦🇪 United Arab Emirates"
+                    - option "🇺🇾 Uruguay"
+                    - option "🇺🇿 Uzbekistan"
+                    - option "🇻🇺 Vanuatu"
+                    - option "🇻🇦 Vatican City"
+                    - option "🇻🇪 Venezuela"
+                    - option "🇻🇳 Vietnam"
+                    - option "🇾🇪 Yemen"
+                    - option "🇿🇲 Zambia"
+                    - option "🇿🇼 Zimbabwe"
+                - generic [ref=e882]:
+                  - generic [ref=e883]: Preferred Travel Date
+                  - textbox "Preferred Travel Date" [ref=e884]
+              - generic [ref=e885]:
+                - generic [ref=e886]: Phone / WhatsApp
+                - generic [ref=e887]:
+                  - combobox "Phone country code" [ref=e888]:
+                    - option "+1" [selected]
+                    - option "+44"
+                    - option "+49"
+                    - option "+33"
+                    - option "+31"
+                    - option "+61"
+                    - option "+255"
+                    - option "+254"
+                    - option "+27"
+                    - option "+91"
+                    - option "+86"
+                    - option "+81"
+                    - option "+34"
+                    - option "+39"
+                    - option "+41"
+                    - option "+43"
+                    - option "+46"
+                    - option "+47"
+                    - option "+45"
+                    - option "+353"
+                    - option "+64"
+                    - option "+32"
+                    - option "+65"
+                    - option "+55"
+                    - option "+52"
+                    - option "+48"
+                    - option "+7"
+                    - option "+971"
+                    - option "+966"
+                    - option "+90"
+                    - option "+62"
+                    - option "+60"
+                    - option "+66"
+                    - option "+84"
+                    - option "+82"
+                    - option "+234"
+                    - option "+20"
+                    - option "+256"
+                    - option "+250"
+                  - textbox "123 456 7890" [ref=e889]
+              - generic [ref=e890]:
+                - generic [ref=e891]:
+                  - generic [ref=e892]: Adults
+                  - spinbutton "Adults" [ref=e893]: "2"
+                - generic [ref=e894]:
+                  - generic [ref=e895]: Children
+                  - spinbutton "Children" [ref=e896]: "0"
+            - generic [ref=e897]:
+              - generic [ref=e898]: How did you hear about us?
+              - combobox "How did you hear about us?" [ref=e899]:
+                - option "Please select..." [selected]
+                - option "Google Search"
+                - option "Social Media (Facebook, Instagram, etc.)"
+                - option "TripAdvisor"
+                - option "Friend or Family Recommendation"
+                - option "Travel Agent"
+                - option "Blog or Article"
+                - option "YouTube"
+                - option "I've traveled with you before"
+                - option "Other"
+            - generic [ref=e900]:
+              - generic [ref=e901]: Tell us about your dream trip
+              - textbox "Tell us about your dream trip" [ref=e902]:
+                - /placeholder: What are your interests? Any special requirements? Preferred activities?
+            - button "Traveling with Friends or Family? Invite them to join your adventure" [ref=e904]:
+              - generic [ref=e905]:
+                - img [ref=e907]
+                - generic [ref=e912]:
+                  - generic [ref=e913]: Traveling with Friends or Family?
+                  - text: Invite them to join your adventure
+              - img [ref=e915]
+            - text: Website
+            - textbox [ref=e917]
+            - button "Send Inquiry" [ref=e918]
+            - paragraph [ref=e919]:
+              - text: We typically respond within 24 hours. No spam, ever. Your data is protected under our
+              - link "privacy policy" [ref=e920] [cursor=pointer]:
+                - /url: /privacy-policy/
+              - text: .
+        - generic [ref=e922]:
+          - heading "Safari Planning Articles" [level=2] [ref=e923]
+          - generic [ref=e924]:
+            - article [ref=e925]:
+              - link "What to Wear on Tanzania Safari" [ref=e926] [cursor=pointer]:
+                - /url: /what-to-wear-in-tanzania-safari-a-guide-to-perfectly-blend-with-the-color-of-tanzania/
+                - img "What to Wear on Tanzania Safari" [ref=e928]
+              - generic [ref=e929]:
+                - link "What to Wear on Tanzania Safari" [ref=e930] [cursor=pointer]:
+                  - /url: /what-to-wear-in-tanzania-safari-a-guide-to-perfectly-blend-with-the-color-of-tanzania/
+                  - heading "What to Wear on Tanzania Safari" [level=3] [ref=e931]
+                - paragraph [ref=e932]: Dress for safari success - what to wear for wildlife viewing, cultural sensitivity, and comfort in Tanzania's varied conditions.
+                - generic [ref=e933]:
+                  - generic [ref=e934]:
+                    - img [ref=e935]
+                    - text: Snow Africa Team
+                  - generic [ref=e938]:
+                    - img [ref=e939]
+                    - text: Feb 20, 2026
+                - link "Read More →" [ref=e941] [cursor=pointer]:
+                  - /url: /what-to-wear-in-tanzania-safari-a-guide-to-perfectly-blend-with-the-color-of-tanzania/
+                  - text: Read More
+                  - generic [ref=e942]: →
+            - article [ref=e943]:
+              - 'link "Safari Survival: Essential Tips" [ref=e944] [cursor=pointer]':
+                - /url: /safari-survival-essential-tips-for-your-african-adventure/
+                - 'img "Safari Survival: Essential Tips" [ref=e946]'
+              - generic [ref=e947]:
+                - 'link "Safari Survival: Essential Tips" [ref=e948] [cursor=pointer]':
+                  - /url: /safari-survival-essential-tips-for-your-african-adventure/
+                  - 'heading "Safari Survival: Essential Tips" [level=3] [ref=e949]'
+                - paragraph [ref=e950]: Stay safe on safari with our essential guide - from wildlife encounter protocols to health precautions and emergency preparedness.
+                - generic [ref=e951]:
+                  - generic [ref=e952]:
+                    - img [ref=e953]
+                    - text: Snow Africa Team
+                  - generic [ref=e956]:
+                    - img [ref=e957]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e959] [cursor=pointer]:
+                  - /url: /safari-survival-essential-tips-for-your-african-adventure/
+                  - text: Read More
+                  - generic [ref=e960]: →
+            - article [ref=e961]:
+              - link "Experience Tanzania Walking Safari" [ref=e962] [cursor=pointer]:
+                - /url: /experience-the-tanzania-walking-safari/
+                - img "Experience Tanzania Walking Safari" [ref=e964]
+              - generic [ref=e965]:
+                - link "Experience Tanzania Walking Safari" [ref=e966] [cursor=pointer]:
+                  - /url: /experience-the-tanzania-walking-safari/
+                  - heading "Experience Tanzania Walking Safari" [level=3] [ref=e967]
+                - paragraph [ref=e968]: Step into the wild on a walking safari - tracking wildlife on foot for the most intimate and thrilling African experience.
+                - generic [ref=e969]:
+                  - generic [ref=e970]:
+                    - img [ref=e971]
+                    - text: Snow Africa Team
+                  - generic [ref=e974]:
+                    - img [ref=e975]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e977] [cursor=pointer]:
+                  - /url: /experience-the-tanzania-walking-safari/
+                  - text: Read More
+                  - generic [ref=e978]: →
+        - generic [ref=e981]:
+          - heading "Your Tanzania Adventure Awaits" [level=2] [ref=e982]
+          - paragraph [ref=e983]: Join thousands of travelers who've experienced the magic of Tanzania with Snow Africa. Expert guides, luxury lodges, and memories that last a lifetime.
+          - generic [ref=e984]:
+            - link "Book Your Safari" [ref=e985] [cursor=pointer]:
+              - /url: "#book"
+            - link "Talk to an Expert" [ref=e986] [cursor=pointer]:
+              - /url: /contact-us/
+    - contentinfo [ref=e987]:
+      - generic [ref=e990]:
+        - generic [ref=e991]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e992]
+      - generic [ref=e997]:
+        - generic [ref=e998]:
+          - generic [ref=e999]:
+            - img "Snow Africa Adventure" [ref=e1001]
+            - paragraph [ref=e1002]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e1003]:
+              - listitem [ref=e1004]:
+                - link "+255 766 657 854" [ref=e1005] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e1007]
+                  - generic [ref=e1009]: +255 766 657 854
+              - listitem [ref=e1010]:
+                - link "info@snowafricaadventure.com" [ref=e1011] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e1013]
+                  - generic [ref=e1016]: info@snowafricaadventure.com
+              - listitem [ref=e1017]:
+                - img [ref=e1019]
+                - generic [ref=e1022]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e1023]:
+            - heading "Safari & Tours" [level=3] [ref=e1024]
+            - list [ref=e1025]:
+              - listitem [ref=e1026]:
+                - link "All Safari Packages" [ref=e1027] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e1028]:
+                - link "Tailor-Made Safaris" [ref=e1029] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e1030]:
+                - link "Tanzania Destinations" [ref=e1031] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e1032]:
+                - link "View all" [ref=e1033] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e1034]: →
+          - generic [ref=e1035]:
+            - heading "Kilimanjaro" [level=3] [ref=e1036]
+            - list [ref=e1037]:
+              - listitem [ref=e1038]:
+                - link "All Trekking Routes" [ref=e1039] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e1040]:
+                - link "Best Route to Climb" [ref=e1041] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e1042]:
+                - link "Climbing Kilimanjaro Guide" [ref=e1043] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e1044]:
+                - link "Join Group Departures" [ref=e1045] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e1046]:
+                - link "Kilimanjaro Prices" [ref=e1047] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e1048]:
+                - link "Best Time to Climb" [ref=e1049] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e1050]:
+                - link "View all routes" [ref=e1051] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e1052]: →
+          - generic [ref=e1053]:
+            - heading "Company" [level=3] [ref=e1054]
+            - list [ref=e1055]:
+              - listitem [ref=e1056]:
+                - link "About Us" [ref=e1057] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e1058]:
+                - link "Our Guides" [ref=e1059] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e1060]:
+                - link "Contact Us" [ref=e1061] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e1062]:
+                - link "Terms & Conditions" [ref=e1063] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e1064]:
+                - link "Privacy Policy" [ref=e1065] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e1066]:
+                - link "Blog" [ref=e1067] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e1068]:
+              - heading "Follow the Journey" [level=4] [ref=e1069]
+              - generic [ref=e1070]:
+                - link "Facebook" [ref=e1071] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e1072]
+                - link "Twitter" [ref=e1074] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e1075]
+                - link "Instagram" [ref=e1077] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e1078]
+                - link "YouTube" [ref=e1081] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e1082]
+        - generic [ref=e1086]:
+          - generic [ref=e1087]: Accredited & Trusted
+          - generic [ref=e1088]:
+            - link "TripAdvisor" [ref=e1089] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e1091]: SafariBookings
+            - generic [ref=e1093]: TATO Member
+            - generic [ref=e1095]: KPAP Partner
+      - generic [ref=e1098]:
+        - generic [ref=e1099]:
+          - generic [ref=e1100]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e1101]: "|"
+          - link "Terms & Conditions" [ref=e1102] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e1103]: ·
+          - link "Privacy Policy" [ref=e1104] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e1105]:
+          - generic [ref=e1106]: Crafted by
+          - link "Timeless International" [ref=e1107] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:25 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e1108]:
+      - img [ref=e1109]
+  - button "Open Next.js Dev Tools" [ref=e1117] [cursor=pointer]:
+    - img [ref=e1118]
+  - alert [ref=e1121]

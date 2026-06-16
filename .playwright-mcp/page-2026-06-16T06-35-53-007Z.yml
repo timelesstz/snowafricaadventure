@@ -1,0 +1,1080 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - text: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e11] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e12]
+            - text: info@snowafricaadventure.com
+        - navigation [ref=e15]:
+          - link "About Us" [ref=e16] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e17] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e18] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e19]:
+        - generic [ref=e21]:
+          - link "Snow Africa Adventure" [ref=e22] [cursor=pointer]:
+            - /url: /
+            - img "Snow Africa Adventure" [ref=e23]
+          - navigation [ref=e24]:
+            - link "Home" [ref=e25] [cursor=pointer]:
+              - /url: /
+            - generic [ref=e26]:
+              - link "Safaris & Tours" [ref=e27] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+                - text: Safaris & Tours
+                - img [ref=e28]
+              - generic [ref=e32]:
+                - link "All Safari Packages Browse curated Tanzania safaris" [ref=e33] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - img [ref=e35]
+                  - generic [ref=e40]:
+                    - generic [ref=e41]: All Safari Packages
+                    - generic [ref=e42]: Browse curated Tanzania safaris
+                - link "Tailor-Made Safaris Custom itineraries for your group" [ref=e43] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+                  - img [ref=e45]
+                  - generic [ref=e48]:
+                    - generic [ref=e49]: Tailor-Made Safaris
+                    - generic [ref=e50]: Custom itineraries for your group
+                - link "Destinations Serengeti, Ngorongoro & more" [ref=e51] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+                  - img [ref=e53]
+                  - generic [ref=e55]:
+                    - generic [ref=e56]: Destinations
+                    - generic [ref=e57]: Serengeti, Ngorongoro & more
+                - link "Day Tours Single-day excursions from Arusha" [ref=e58] [cursor=pointer]:
+                  - /url: /tanzania-day-tours/
+                  - img [ref=e60]
+                  - generic [ref=e66]:
+                    - generic [ref=e67]: Day Tours
+                    - generic [ref=e68]: Single-day excursions from Arusha
+            - generic [ref=e69]:
+              - link "Trekking" [ref=e70] [cursor=pointer]:
+                - /url: /trekking/
+                - text: Trekking
+                - img [ref=e71]
+              - generic [ref=e75]:
+                - link "All Trekking Routes Compare all Kilimanjaro routes" [ref=e76] [cursor=pointer]:
+                  - /url: /trekking/
+                  - img [ref=e78]
+                  - generic [ref=e80]:
+                    - generic [ref=e81]: All Trekking Routes
+                    - generic [ref=e82]: Compare all Kilimanjaro routes
+                - link "Best Route to Climb Route comparison guide" [ref=e83] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+                  - img [ref=e85]
+                  - generic [ref=e88]:
+                    - generic [ref=e89]: Best Route to Climb
+                    - generic [ref=e90]: Route comparison guide
+                - link "Climbing Guide Everything you need to know" [ref=e91] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+                  - img [ref=e93]
+                  - generic [ref=e95]:
+                    - generic [ref=e96]: Climbing Guide
+                    - generic [ref=e97]: Everything you need to know
+                - link "Kilimanjaro Prices Full cost breakdown" [ref=e98] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+                  - img [ref=e100]
+                  - generic [ref=e102]:
+                    - generic [ref=e103]: Kilimanjaro Prices
+                    - generic [ref=e104]: Full cost breakdown
+                - link "Best Time to Climb Seasonal guide" [ref=e105] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+                  - img [ref=e107]
+                  - generic [ref=e110]:
+                    - generic [ref=e111]: Best Time to Climb
+                    - generic [ref=e112]: Seasonal guide
+            - link "Join Group Climb" [ref=e113] [cursor=pointer]:
+              - /url: /kilimanjaro-join-group-departures/
+              - img [ref=e114]
+              - text: Join Group Climb
+            - link "Zanzibar" [ref=e119] [cursor=pointer]:
+              - /url: /zanzibar/
+            - link "Contact Us" [ref=e120] [cursor=pointer]:
+              - /url: /contact-us/
+          - generic [ref=e121]:
+            - link "Plan Your Trip" [ref=e122] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+            - link "Search" [ref=e123] [cursor=pointer]:
+              - /url: /search/
+              - img [ref=e124]
+            - button "Open menu" [ref=e127]:
+              - img [ref=e128]
+        - navigation [ref=e130]:
+          - link "Home" [ref=e131] [cursor=pointer]:
+            - /url: /
+            - text: Home
+            - img [ref=e132]
+          - generic [ref=e134]:
+            - button "Safaris & Tours" [ref=e135]:
+              - text: Safaris & Tours
+              - img [ref=e136]
+            - generic [ref=e139]:
+              - link "All Safari Packages Browse curated Tanzania safaris" [ref=e140] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+                - img [ref=e141]
+                - generic [ref=e146]:
+                  - generic [ref=e147]: All Safari Packages
+                  - generic [ref=e148]: Browse curated Tanzania safaris
+              - link "Tailor-Made Safaris Custom itineraries for your group" [ref=e149] [cursor=pointer]:
+                - /url: /tailor-made-safari/
+                - img [ref=e150]
+                - generic [ref=e153]:
+                  - generic [ref=e154]: Tailor-Made Safaris
+                  - generic [ref=e155]: Custom itineraries for your group
+              - link "Destinations Serengeti, Ngorongoro & more" [ref=e156] [cursor=pointer]:
+                - /url: /tanzania-destinations/
+                - img [ref=e157]
+                - generic [ref=e159]:
+                  - generic [ref=e160]: Destinations
+                  - generic [ref=e161]: Serengeti, Ngorongoro & more
+              - link "Day Tours Single-day excursions from Arusha" [ref=e162] [cursor=pointer]:
+                - /url: /tanzania-day-tours/
+                - img [ref=e163]
+                - generic [ref=e169]:
+                  - generic [ref=e170]: Day Tours
+                  - generic [ref=e171]: Single-day excursions from Arusha
+          - generic [ref=e172]:
+            - button "Trekking" [ref=e173]:
+              - text: Trekking
+              - img [ref=e174]
+            - generic [ref=e177]:
+              - link "All Trekking Routes Compare all Kilimanjaro routes" [ref=e178] [cursor=pointer]:
+                - /url: /trekking/
+                - img [ref=e179]
+                - generic [ref=e181]:
+                  - generic [ref=e182]: All Trekking Routes
+                  - generic [ref=e183]: Compare all Kilimanjaro routes
+              - link "Best Route to Climb Route comparison guide" [ref=e184] [cursor=pointer]:
+                - /url: /best-route-to-climb-kilimanjaro/
+                - img [ref=e185]
+                - generic [ref=e188]:
+                  - generic [ref=e189]: Best Route to Climb
+                  - generic [ref=e190]: Route comparison guide
+              - link "Climbing Guide Everything you need to know" [ref=e191] [cursor=pointer]:
+                - /url: /climbing-kilimanjaro/
+                - img [ref=e192]
+                - generic [ref=e194]:
+                  - generic [ref=e195]: Climbing Guide
+                  - generic [ref=e196]: Everything you need to know
+              - link "Kilimanjaro Prices Full cost breakdown" [ref=e197] [cursor=pointer]:
+                - /url: /kilimanjaro-prices/
+                - img [ref=e198]
+                - generic [ref=e200]:
+                  - generic [ref=e201]: Kilimanjaro Prices
+                  - generic [ref=e202]: Full cost breakdown
+              - link "Best Time to Climb Seasonal guide" [ref=e203] [cursor=pointer]:
+                - /url: /best-time-to-climb-kilimanjaro/
+                - img [ref=e204]
+                - generic [ref=e207]:
+                  - generic [ref=e208]: Best Time to Climb
+                  - generic [ref=e209]: Seasonal guide
+          - link "Join Group Climb" [ref=e210] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e211]
+            - text: Join Group Climb
+            - img [ref=e216]
+          - link "Zanzibar" [ref=e218] [cursor=pointer]:
+            - /url: /zanzibar/
+            - text: Zanzibar
+            - img [ref=e219]
+          - link "Contact Us" [ref=e221] [cursor=pointer]:
+            - /url: /contact-us/
+            - text: Contact Us
+            - img [ref=e222]
+          - generic [ref=e224]:
+            - link "About Us" [ref=e225] [cursor=pointer]:
+              - /url: /about-us/
+              - text: About Us
+              - img [ref=e226]
+            - link "Tailor-Made Safaris" [ref=e228] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+              - text: Tailor-Made Safaris
+              - img [ref=e229]
+            - link "Blog" [ref=e231] [cursor=pointer]:
+              - /url: /blog/
+              - text: Blog
+              - img [ref=e232]
+          - link "Plan Your Trip" [ref=e235] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - generic [ref=e237]:
+            - link "+255 766 657 854" [ref=e238] [cursor=pointer]:
+              - /url: tel:+255766657854
+              - img [ref=e239]
+              - text: +255 766 657 854
+            - link "info@snowafricaadventure.com" [ref=e241] [cursor=pointer]:
+              - /url: mailto:info@snowafricaadventure.com
+              - img [ref=e242]
+              - text: info@snowafricaadventure.com
+    - main [ref=e245]:
+      - generic [ref=e246]:
+        - generic [ref=e247]:
+          - img "Mount Kilimanjaro at sunrise" [ref=e248]
+          - generic [ref=e249]:
+            - generic [ref=e250]:
+              - img [ref=e251]
+              - text: Tanzania's Trusted Adventure Partner
+            - heading "Climb Kilimanjaro. Safari Tanzania." [level=1] [ref=e253]:
+              - generic [ref=e254]: Climb Kilimanjaro.
+              - generic [ref=e255]: Safari Tanzania.
+            - paragraph [ref=e256]: Summit Africa's highest peak. Tanzania safaris. Witness the Great Migration. Relax on Zanzibar beaches. Your adventure of a lifetime starts with Tanzania's most trusted local operator.
+            - generic [ref=e257]:
+              - link "Explore Kilimanjaro" [ref=e258] [cursor=pointer]:
+                - /url: /trekking/
+                - text: Explore Kilimanjaro
+                - img [ref=e259]
+              - link "View Safari Packages" [ref=e261] [cursor=pointer]:
+                - /url: /tanzania-safaris/
+            - list [ref=e264]:
+              - listitem [ref=e265]:
+                - link "TripAdvisor Travelers' Choice 2025" [ref=e266] [cursor=pointer]:
+                  - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+                  - img "TripAdvisor Travelers' Choice 2025" [ref=e267]
+          - generic [ref=e268]:
+            - text: Scroll to explore
+            - img [ref=e269]
+          - generic [ref=e273]:
+            - generic [ref=e274]:
+              - generic [ref=e275]: 15+
+              - generic [ref=e276]: Years Experience
+            - generic [ref=e277]:
+              - generic [ref=e278]: 5,000+
+              - generic [ref=e279]: Happy Travelers
+            - generic [ref=e280]:
+              - generic [ref=e281]: 93%
+              - generic [ref=e282]: Summit Success
+            - generic [ref=e283]:
+              - generic [ref=e284]: "4.9"
+              - generic [ref=e285]: TripAdvisor Rating
+        - generic [ref=e288]:
+          - generic [ref=e289]:
+            - img [ref=e291]
+            - generic [ref=e294]: 15+ YearsLocally Owned
+          - link "115+5-Star Reviews" [ref=e295] [cursor=pointer]:
+            - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - img [ref=e297]
+            - generic [ref=e299]:
+              - generic [ref=e300]: 115+
+              - text: 5-Star Reviews
+          - generic [ref=e301]:
+            - img [ref=e303]
+            - generic [ref=e305]: TATOLicensed Operator
+          - generic [ref=e306]:
+            - img [ref=e308]
+            - generic [ref=e313]: KPAPCertified Partner
+        - generic [ref=e316]:
+          - generic [ref=e317]:
+            - text: About Us
+            - heading "Travelling More Easy With Snow Africa Adventure" [level=2] [ref=e318]
+            - paragraph [ref=e319]: Snow Africa Adventure is the authentic African safari specialist having its head office in Arusha, Tanzania. Being one of the reliable names in safari industry Snow Africa has arranged thousands of successful safari & trekking trips. We are a specialist of every aspect of Tanzania.
+            - paragraph [ref=e320]: We are offering some of the finest and handpicked pricing packages that are suitable for all types of budget. We are constantly researching on improving our services as well our aim is to provide our clients with the best services within their pocket-friendly budget.
+            - generic [ref=e321]:
+              - heading "Registered & Licensed" [level=3] [ref=e322]
+              - list [ref=e323]:
+                - listitem [ref=e324]:
+                  - strong [ref=e325]: "Company:"
+                  - text: Snow Africa Adventures Limited
+                - listitem [ref=e326]:
+                  - strong [ref=e327]: "Registration No:"
+                  - text: "90147"
+                - listitem [ref=e328]:
+                  - strong [ref=e329]: "VAT No:"
+                  - text: 40311448-A
+                - listitem [ref=e330]:
+                  - strong [ref=e331]: "TIN:"
+                  - text: 116-858-398
+                - listitem [ref=e332]:
+                  - strong [ref=e333]: "2026 Tour Operator License:"
+                  - text: "034263"
+                - listitem [ref=e334]:
+                  - strong [ref=e335]: "2026 Trekking License:"
+                  - text: "035492"
+            - link "Learn More About Us" [ref=e336] [cursor=pointer]:
+              - /url: /about-us/
+              - text: Learn More About Us
+              - img [ref=e337]
+          - generic [ref=e339]:
+            - img "Snow Africa Adventure Team" [ref=e340]
+            - link "5.0TripAdvisor115+ Reviews" [ref=e341] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - img [ref=e344]
+                  - img [ref=e346]
+                  - img [ref=e348]
+                  - img [ref=e350]
+                  - img [ref=e352]
+                - generic [ref=e354]: "5.0"
+                - text: TripAdvisor
+                - generic [ref=e355]: 115+ Reviews
+        - generic [ref=e356]:
+          - generic [ref=e357]:
+            - text: Kilimanjaro Trekking
+            - heading "6 Routes to Africa's Highest Peak" [level=2] [ref=e358]
+            - paragraph [ref=e359]: Choose from proven routes to the summit. Our certified guides have summited over 500 times with an industry-leading 93% success rate.
+            - list [ref=e360]:
+              - listitem [ref=e361]:
+                - link "7 Days Machame Route 7 Days90% SuccessFrom $2,350" [ref=e362] [cursor=pointer]:
+                  - /url: /trekking/7-days-machame-route/
+                  - text: 7 Days Machame Route
+                  - generic [ref=e363]:
+                    - text: 7 Days90% Success
+                    - generic [ref=e364]: From $2,350
+                  - img [ref=e365]
+              - listitem [ref=e367]:
+                - link "8 Days Lemosho Route 8 Days95% SuccessFrom $2,560" [ref=e368] [cursor=pointer]:
+                  - /url: /trekking/8-days-lemosho-route/
+                  - text: 8 Days Lemosho Route
+                  - generic [ref=e369]:
+                    - text: 8 Days95% Success
+                    - generic [ref=e370]: From $2,560
+                  - img [ref=e371]
+              - listitem [ref=e373]:
+                - link "6 Days Marangu Route 6 Days80% SuccessFrom $1,880" [ref=e374] [cursor=pointer]:
+                  - /url: /trekking/6-days-marangu-route/
+                  - text: 6 Days Marangu Route
+                  - generic [ref=e375]:
+                    - text: 6 Days80% Success
+                    - generic [ref=e376]: From $1,880
+                  - img [ref=e377]
+              - listitem [ref=e379]:
+                - link "5 Days Marangu Route 5 Days65% SuccessFrom $1,620" [ref=e380] [cursor=pointer]:
+                  - /url: /trekking/5-days-marangu-route/
+                  - text: 5 Days Marangu Route
+                  - generic [ref=e381]:
+                    - text: 5 Days65% Success
+                    - generic [ref=e382]: From $1,620
+                  - img [ref=e383]
+            - link "View All Routes" [ref=e385] [cursor=pointer]:
+              - /url: /trekking/
+            - generic [ref=e386]:
+              - heading "Join a Group Climb & Save" [level=3] [ref=e387]
+              - paragraph [ref=e388]: Join climbers from around the world on our scheduled departures. Fixed dates, lower prices, shared adventure.
+              - link "View 2026-2027 Departures" [ref=e389] [cursor=pointer]:
+                - /url: /kilimanjaro-join-group-departures/
+          - generic [ref=e390]:
+            - link "7 Days Machame Route Most Popular 7 Days Machame Route The 7 Days Machame Route is the most popular path on Kiliman... 7 DaysChallenging From $2,350" [ref=e391] [cursor=pointer]:
+              - /url: /trekking/7-days-machame-route/
+              - img "7 Days Machame Route" [ref=e392]
+              - generic [ref=e393]:
+                - text: Most Popular
+                - heading "7 Days Machame Route" [level=3] [ref=e394]
+                - paragraph [ref=e395]: The 7 Days Machame Route is the most popular path on Kiliman...
+                - generic [ref=e396]: 7 DaysChallenging
+                - generic [ref=e397]: From $2,350
+            - link "8 Days Lemosho Route Moderate 8 Days Lemosho Route The 8 Days Lemosho Route is widely regarded as the finest pa... 8 DaysModerate From $2,560" [ref=e398] [cursor=pointer]:
+              - /url: /trekking/8-days-lemosho-route/
+              - img "8 Days Lemosho Route" [ref=e399]
+              - generic [ref=e400]:
+                - text: Moderate
+                - heading "8 Days Lemosho Route" [level=3] [ref=e401]
+                - paragraph [ref=e402]: The 8 Days Lemosho Route is widely regarded as the finest pa...
+                - generic [ref=e403]: 8 DaysModerate
+                - generic [ref=e404]: From $2,560
+            - link "6 Days Marangu Route Moderate 6 Days Marangu Route The 6 Days Marangu Route is the classic Kilimanjaro climb, o... 6 DaysModerate From $1,880" [ref=e405] [cursor=pointer]:
+              - /url: /trekking/6-days-marangu-route/
+              - img "6 Days Marangu Route" [ref=e406]
+              - generic [ref=e407]:
+                - text: Moderate
+                - heading "6 Days Marangu Route" [level=3] [ref=e408]
+                - paragraph [ref=e409]: The 6 Days Marangu Route is the classic Kilimanjaro climb, o...
+                - generic [ref=e410]: 6 DaysModerate
+                - generic [ref=e411]: From $1,880
+        - generic [ref=e413]:
+          - generic [ref=e414]:
+            - generic [ref=e415]:
+              - heading "Tanzania Wildlife Safaris" [level=2] [ref=e416]
+              - paragraph [ref=e417]: From the Serengeti's Great Migration to Ngorongoro Crater's wildlife paradise. Budget to luxury options.
+            - link "View All Safaris" [ref=e418] [cursor=pointer]:
+              - /url: /tanzania-safaris/
+              - text: View All Safaris
+              - img [ref=e419]
+          - generic [ref=e421]:
+            - link "6 Days Tanzania Lodge & Luxury Tented Camp Safari Luxury 6 Days Tanzania Lodge & Luxury Tented Camp Safari This six-day lodge and luxury tented camp safari takes you through the heart of Tanzania's northern circuit, a region I ... $3,180 / per person" [ref=e422] [cursor=pointer]:
+              - /url: /tanzania-safaris/6-day-lodge-safari-northern-circuit/
+              - img "6 Days Tanzania Lodge & Luxury Tented Camp Safari" [ref=e423]
+              - generic [ref=e424]:
+                - text: Luxury
+                - heading "6 Days Tanzania Lodge & Luxury Tented Camp Safari" [level=3] [ref=e425]
+                - paragraph [ref=e426]: This six-day lodge and luxury tented camp safari takes you through the heart of Tanzania's northern circuit, a region I ...
+                - generic [ref=e427]: $3,180 / per person
+            - generic [ref=e428]:
+              - link "3 DaysTanzania Lodge Safari 3 DaysTanzania Lodge Safari 3 Days 2 NightsMid-range From $1,480" [ref=e429] [cursor=pointer]:
+                - /url: /tanzania-safaris/3-days-tanzania-lodge-safari-tarangire-lake-manyara-ngorongoro-crater/
+                - img "3 DaysTanzania Lodge Safari" [ref=e431]
+                - generic [ref=e432]:
+                  - heading "3 DaysTanzania Lodge Safari" [level=3] [ref=e433]
+                  - generic [ref=e434]: 3 Days 2 NightsMid-range
+                  - generic [ref=e435]: From $1,480
+              - link "6 Days Budget Camping Safari 6 Days Budget Camping Safari 6 Days 5 NightsBudget From $2,180" [ref=e436] [cursor=pointer]:
+                - /url: /tanzania-safaris/6-days-5-nights-budget-camping-safari-tarangire-lake-manyara-serengeti-and-ngorongoro-crater/
+                - img "6 Days Budget Camping Safari" [ref=e438]
+                - generic [ref=e439]:
+                  - heading "6 Days Budget Camping Safari" [level=3] [ref=e440]
+                  - generic [ref=e441]: 6 Days 5 NightsBudget
+                  - generic [ref=e442]: From $2,180
+              - link "7 Days Tanzania Tented Camp Safari 7 Days Tanzania Tented Camp Safari 7 Days 6 NightsMid-range From $3,160" [ref=e443] [cursor=pointer]:
+                - /url: /tanzania-safaris/7-days-tanzania-tented-camp-safari/
+                - img "7 Days Tanzania Tented Camp Safari" [ref=e445]
+                - generic [ref=e446]:
+                  - heading "7 Days Tanzania Tented Camp Safari" [level=3] [ref=e447]
+                  - generic [ref=e448]: 7 Days 6 NightsMid-range
+                  - generic [ref=e449]: From $3,160
+              - link "5 Days Tanzania Luxury Safari 5 Days Tanzania Luxury Safari 5 Days 4 NightsLuxury From $2,980" [ref=e450] [cursor=pointer]:
+                - /url: /tanzania-safaris/5-days-tanzania-luxury-safari-tarangire-manyara-ngorongoro/
+                - img "5 Days Tanzania Luxury Safari" [ref=e452]
+                - generic [ref=e453]:
+                  - heading "5 Days Tanzania Luxury Safari" [level=3] [ref=e454]
+                  - generic [ref=e455]: 5 Days 4 NightsLuxury
+                  - generic [ref=e456]: From $2,980
+          - generic [ref=e457]:
+            - generic [ref=e458]:
+              - heading "Can't Find What You're Looking For?" [level=3] [ref=e459]
+              - paragraph [ref=e460]: We specialize in tailor-made safaris designed around your interests, schedule, and budget.
+            - link "Design Your Safari" [ref=e461] [cursor=pointer]:
+              - /url: /tailor-made-safari/
+        - generic [ref=e462]:
+          - img "Snow Africa Team" [ref=e463]
+          - generic [ref=e464]:
+            - text: Why Snow Africa
+            - heading "Tanzania's Most Trusted Operator" [level=2] [ref=e465]:
+              - link "Tanzania's Most Trusted Operator" [ref=e466] [cursor=pointer]:
+                - /url: /best-tanzania-tour-operator/
+            - paragraph [ref=e467]: What sets us apart from the rest
+            - generic [ref=e468]:
+              - generic [ref=e469]:
+                - img [ref=e471]
+                - generic [ref=e476]:
+                  - heading "100% Locally Owned" [level=3] [ref=e477]
+                  - paragraph [ref=e478]: Based in Arusha since 2010. Your money supports local families and communities directly. No middlemen, no overseas offices.
+              - generic [ref=e479]:
+                - img [ref=e481]
+                - generic [ref=e483]:
+                  - heading "Safety First Always" [level=3] [ref=e484]
+                  - paragraph [ref=e485]: KINAPA-certified guides, pulse oximeters, quality gear, and strict emergency protocols on every expedition.
+              - generic [ref=e486]:
+                - img [ref=e488]
+                - generic [ref=e491]:
+                  - heading "TATO & KPAP Certified" [level=3] [ref=e492]
+                  - paragraph [ref=e493]: "Licensed member of Tanzania Association of Tour Operators (TALA No: 034263). Proud partner of Kilimanjaro Porters Assistance Project."
+              - generic [ref=e494]:
+                - img [ref=e496]
+                - generic [ref=e498]:
+                  - heading "115+ Five-Star Reviews" [level=3] [ref=e499]
+                  - paragraph [ref=e500]: 4.9 average rating on TripAdvisor and SafariBookings from verified travelers worldwide. Excellence is our standard.
+        - generic [ref=e502]:
+          - generic [ref=e503]:
+            - text: What Travelers Say
+            - heading "Real Stories, Real Adventures" [level=2] [ref=e504]
+          - generic [ref=e505]:
+            - generic [ref=e506]:
+              - generic [ref=e507]:
+                - img [ref=e508]
+                - img [ref=e510]
+                - img [ref=e512]
+                - img [ref=e514]
+                - img [ref=e516]
+              - heading "Summit dream come true" [level=3] [ref=e518]
+              - paragraph [ref=e519]: “Snow Africa made our Kilimanjaro dream come true. The guides were incredibly professional and encouraging. We felt safe every step of the way to the summit.”
+              - generic [ref=e520]: Sarah M.Kilimanjaro Trek
+              - text: TripAdvisor
+            - generic [ref=e521]:
+              - generic [ref=e522]:
+                - img [ref=e523]
+                - img [ref=e525]
+                - img [ref=e527]
+                - img [ref=e529]
+                - img [ref=e531]
+              - heading "Best safari experience ever" [level=3] [ref=e533]
+              - paragraph [ref=e534]: “Our 7-day Serengeti and Ngorongoro safari exceeded all expectations. The wildlife sightings were extraordinary and our guide knew exactly where to find the animals.”
+              - generic [ref=e535]: James & Lisa K.Wildlife Safari
+              - text: TripAdvisor
+            - generic [ref=e536]:
+              - generic [ref=e537]:
+                - img [ref=e538]
+                - img [ref=e540]
+                - img [ref=e542]
+                - img [ref=e544]
+                - img [ref=e546]
+              - heading "Perfectly organized from start to finish" [level=3] [ref=e548]
+              - paragraph [ref=e549]: “From the moment we landed in Arusha to the last day on Zanzibar, everything was perfectly organized. Transparent pricing, no hidden fees, and genuine care for our experience.”
+              - generic [ref=e550]: Michael R.Safari & Beach
+              - text: Google
+          - generic [ref=e551]:
+            - link "5.0 115+ reviews on TripAdvisor" [ref=e552] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+              - generic [ref=e553]: "5.0"
+              - generic [ref=e554]:
+                - generic [ref=e555]:
+                  - img [ref=e556]
+                  - img [ref=e558]
+                  - img [ref=e560]
+                  - img [ref=e562]
+                  - img [ref=e564]
+                - generic [ref=e566]: 115+ reviews on TripAdvisor
+            - link "Read all reviews" [ref=e567] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+              - text: Read all reviews
+              - img [ref=e568]
+        - generic [ref=e571]:
+          - generic [ref=e572]:
+            - text: More Adventures
+            - heading "Explore Beyond" [level=2] [ref=e573]
+            - paragraph [ref=e574]: Tanzania offers countless experiences beyond Kilimanjaro and safaris. Discover beach escapes, cultural tours, and day trips.
+          - generic [ref=e575]:
+            - link "Zanzibar Beach Escapes Zanzibar Beach Escapes Pristine beaches, spice tours & Stone Town heritage" [ref=e576] [cursor=pointer]:
+              - /url: /zanzibar/
+              - img "Zanzibar Beach Escapes" [ref=e577]
+              - generic [ref=e578]:
+                - heading "Zanzibar Beach Escapes" [level=3] [ref=e579]
+                - paragraph [ref=e580]: Pristine beaches, spice tours & Stone Town heritage
+            - link "Cultural Tours Cultural Tours Maasai villages & coffee farms" [ref=e581] [cursor=pointer]:
+              - /url: /tanzania-day-tours/
+              - img "Cultural Tours" [ref=e582]
+              - generic [ref=e583]:
+                - heading "Cultural Tours" [level=3] [ref=e584]
+                - paragraph [ref=e585]: Maasai villages & coffee farms
+            - link "Day Tours Day Tours Waterfalls & wildlife in a day" [ref=e586] [cursor=pointer]:
+              - /url: /tanzania-day-tours/
+              - img "Day Tours" [ref=e587]
+              - generic [ref=e588]:
+                - heading "Day Tours" [level=3] [ref=e589]
+                - paragraph [ref=e590]: Waterfalls & wildlife in a day
+            - link "Serengeti Serengeti Endless plains & Big Five" [ref=e591] [cursor=pointer]:
+              - /url: /tanzania-destinations/serengeti-national-park/
+              - img "Serengeti" [ref=e592]
+              - generic [ref=e593]:
+                - heading "Serengeti" [level=3] [ref=e594]
+                - paragraph [ref=e595]: Endless plains & Big Five
+            - link "Ngorongoro Crater Ngorongoro Crater World's largest caldera" [ref=e596] [cursor=pointer]:
+              - /url: /tanzania-destinations/ngorongoro-conservation-area/
+              - img "Ngorongoro Crater" [ref=e597]
+              - generic [ref=e598]:
+                - heading "Ngorongoro Crater" [level=3] [ref=e599]
+                - paragraph [ref=e600]: World's largest caldera
+            - link "The Great Migration The Great Migration Witness the world's greatest wildlife spectacle" [ref=e601] [cursor=pointer]:
+              - /url: /great-wildebeest-migration/
+              - img "The Great Migration" [ref=e602]
+              - generic [ref=e603]:
+                - heading "The Great Migration" [level=3] [ref=e604]
+                - paragraph [ref=e605]: Witness the world's greatest wildlife spectacle
+        - generic [ref=e606]:
+          - generic [ref=e607]:
+            - img "Safari landscape" [ref=e608]
+            - generic [ref=e609]:
+              - text: Start Planning
+              - heading "Your Adventure Awaits" [level=2] [ref=e610]
+              - paragraph [ref=e611]: Tell us about your dream trip and our Tanzania experts will create a custom proposal within 24 hours. No obligation, no spam - just expert advice.
+              - generic [ref=e612]:
+                - generic [ref=e613]: 1Share your travel dates and interests
+                - generic [ref=e614]: 2Receive a custom itinerary within 24 hours
+                - generic [ref=e615]: 3Refine together until it's perfect
+              - generic [ref=e616]:
+                - generic [ref=e617]:
+                  - img [ref=e618]
+                  - generic [ref=e620]:
+                    - paragraph [ref=e621]: Call or WhatsApp
+                    - link "+255 766 657 854" [ref=e622] [cursor=pointer]:
+                      - /url: tel:+255766657854
+                - generic [ref=e623]:
+                  - img [ref=e624]
+                  - generic [ref=e627]:
+                    - paragraph [ref=e628]: Email Us
+                    - link "info@snowafricaadventure.com" [ref=e629] [cursor=pointer]:
+                      - /url: mailto:info@snowafricaadventure.com
+                - generic [ref=e630]:
+                  - img [ref=e631]
+                  - generic [ref=e634]:
+                    - paragraph [ref=e635]: Visit Us
+                    - generic [ref=e636]: MEC House, Plot no 161, Second floor, Mianzini Area, Arusha
+          - generic [ref=e637]:
+            - heading "Get Your Free Quote" [level=3] [ref=e638]
+            - paragraph [ref=e639]: Fill out the form and we'll get back to you within 24 hours.
+            - generic [ref=e640]:
+              - generic [ref=e641]:
+                - generic [ref=e642]:
+                  - generic [ref=e643]:
+                    - generic [ref=e644]: Full Name *
+                    - textbox "Full Name *" [ref=e645]:
+                      - /placeholder: John Smith
+                  - generic [ref=e646]:
+                    - generic [ref=e647]: Email Address *
+                    - textbox "Email Address *" [ref=e648]:
+                      - /placeholder: you@email.com
+                - generic [ref=e649]:
+                  - generic [ref=e650]:
+                    - generic [ref=e651]: Country *
+                    - combobox "Country *" [ref=e652]:
+                      - option "Select your country" [selected]
+                      - option "🇺🇸 United States"
+                      - option "🇬🇧 United Kingdom"
+                      - option "🇩🇪 Germany"
+                      - option "🇫🇷 France"
+                      - option "🇨🇦 Canada"
+                      - option "🇦🇺 Australia"
+                      - option "🇳🇱 Netherlands"
+                      - option "🇮🇹 Italy"
+                      - option "🇪🇸 Spain"
+                      - option "🇨🇭 Switzerland"
+                      - option "🇧🇪 Belgium"
+                      - option "🇦🇹 Austria"
+                      - option "🇸🇪 Sweden"
+                      - option "🇳🇴 Norway"
+                      - option "🇩🇰 Denmark"
+                      - option "🇮🇪 Ireland"
+                      - option "🇳🇿 New Zealand"
+                      - option "🇿🇦 South Africa"
+                      - option "🇯🇵 Japan"
+                      - option "🇸🇬 Singapore"
+                      - option "──────────────" [disabled]
+                      - option "🇦🇫 Afghanistan"
+                      - option "🇦🇱 Albania"
+                      - option "🇩🇿 Algeria"
+                      - option "🇦🇩 Andorra"
+                      - option "🇦🇴 Angola"
+                      - option "🇦🇬 Antigua and Barbuda"
+                      - option "🇦🇷 Argentina"
+                      - option "🇦🇲 Armenia"
+                      - option "🇦🇿 Azerbaijan"
+                      - option "🇧🇸 Bahamas"
+                      - option "🇧🇭 Bahrain"
+                      - option "🇧🇩 Bangladesh"
+                      - option "🇧🇧 Barbados"
+                      - option "🇧🇾 Belarus"
+                      - option "🇧🇿 Belize"
+                      - option "🇧🇯 Benin"
+                      - option "🇧🇹 Bhutan"
+                      - option "🇧🇴 Bolivia"
+                      - option "🇧🇦 Bosnia and Herzegovina"
+                      - option "🇧🇼 Botswana"
+                      - option "🇧🇷 Brazil"
+                      - option "🇧🇳 Brunei"
+                      - option "🇧🇬 Bulgaria"
+                      - option "🇧🇫 Burkina Faso"
+                      - option "🇧🇮 Burundi"
+                      - option "🇨🇻 Cabo Verde"
+                      - option "🇰🇭 Cambodia"
+                      - option "🇨🇲 Cameroon"
+                      - option "🇨🇫 Central African Republic"
+                      - option "🇹🇩 Chad"
+                      - option "🇨🇱 Chile"
+                      - option "🇨🇳 China"
+                      - option "🇨🇴 Colombia"
+                      - option "🇰🇲 Comoros"
+                      - option "🇨🇬 Congo"
+                      - option "🇨🇩 Congo (DRC)"
+                      - option "🇨🇷 Costa Rica"
+                      - option "🇭🇷 Croatia"
+                      - option "🇨🇺 Cuba"
+                      - option "🇨🇾 Cyprus"
+                      - option "🇨🇿 Czech Republic"
+                      - option "🇨🇮 Cote d'Ivoire"
+                      - option "🇩🇯 Djibouti"
+                      - option "🇩🇲 Dominica"
+                      - option "🇩🇴 Dominican Republic"
+                      - option "🇪🇨 Ecuador"
+                      - option "🇪🇬 Egypt"
+                      - option "🇸🇻 El Salvador"
+                      - option "🇬🇶 Equatorial Guinea"
+                      - option "🇪🇷 Eritrea"
+                      - option "🇪🇪 Estonia"
+                      - option "🇸🇿 Eswatini"
+                      - option "🇪🇹 Ethiopia"
+                      - option "🇫🇯 Fiji"
+                      - option "🇫🇮 Finland"
+                      - option "🇬🇦 Gabon"
+                      - option "🇬🇲 Gambia"
+                      - option "🇬🇪 Georgia"
+                      - option "🇬🇭 Ghana"
+                      - option "🇬🇷 Greece"
+                      - option "🇬🇩 Grenada"
+                      - option "🇬🇹 Guatemala"
+                      - option "🇬🇳 Guinea"
+                      - option "🇬🇼 Guinea-Bissau"
+                      - option "🇬🇾 Guyana"
+                      - option "🇭🇹 Haiti"
+                      - option "🇭🇳 Honduras"
+                      - option "🇭🇰 Hong Kong"
+                      - option "🇭🇺 Hungary"
+                      - option "🇮🇸 Iceland"
+                      - option "🇮🇳 India"
+                      - option "🇮🇩 Indonesia"
+                      - option "🇮🇷 Iran"
+                      - option "🇮🇶 Iraq"
+                      - option "🇮🇱 Israel"
+                      - option "🇯🇲 Jamaica"
+                      - option "🇯🇴 Jordan"
+                      - option "🇰🇿 Kazakhstan"
+                      - option "🇰🇪 Kenya"
+                      - option "🇰🇮 Kiribati"
+                      - option "🇰🇼 Kuwait"
+                      - option "🇰🇬 Kyrgyzstan"
+                      - option "🇱🇦 Laos"
+                      - option "🇱🇻 Latvia"
+                      - option "🇱🇧 Lebanon"
+                      - option "🇱🇸 Lesotho"
+                      - option "🇱🇷 Liberia"
+                      - option "🇱🇾 Libya"
+                      - option "🇱🇮 Liechtenstein"
+                      - option "🇱🇹 Lithuania"
+                      - option "🇱🇺 Luxembourg"
+                      - option "🇲🇴 Macau"
+                      - option "🇲🇬 Madagascar"
+                      - option "🇲🇼 Malawi"
+                      - option "🇲🇾 Malaysia"
+                      - option "🇲🇻 Maldives"
+                      - option "🇲🇱 Mali"
+                      - option "🇲🇹 Malta"
+                      - option "🇲🇭 Marshall Islands"
+                      - option "🇲🇷 Mauritania"
+                      - option "🇲🇺 Mauritius"
+                      - option "🇲🇽 Mexico"
+                      - option "🇫🇲 Micronesia"
+                      - option "🇲🇩 Moldova"
+                      - option "🇲🇨 Monaco"
+                      - option "🇲🇳 Mongolia"
+                      - option "🇲🇪 Montenegro"
+                      - option "🇲🇦 Morocco"
+                      - option "🇲🇿 Mozambique"
+                      - option "🇲🇲 Myanmar"
+                      - option "🇳🇦 Namibia"
+                      - option "🇳🇷 Nauru"
+                      - option "🇳🇵 Nepal"
+                      - option "🇳🇮 Nicaragua"
+                      - option "🇳🇪 Niger"
+                      - option "🇳🇬 Nigeria"
+                      - option "🇰🇵 North Korea"
+                      - option "🇲🇰 North Macedonia"
+                      - option "🇴🇲 Oman"
+                      - option "🇵🇰 Pakistan"
+                      - option "🇵🇼 Palau"
+                      - option "🇵🇸 Palestine"
+                      - option "🇵🇦 Panama"
+                      - option "🇵🇬 Papua New Guinea"
+                      - option "🇵🇾 Paraguay"
+                      - option "🇵🇪 Peru"
+                      - option "🇵🇭 Philippines"
+                      - option "🇵🇱 Poland"
+                      - option "🇵🇹 Portugal"
+                      - option "🇶🇦 Qatar"
+                      - option "🇷🇴 Romania"
+                      - option "🇷🇺 Russia"
+                      - option "🇷🇼 Rwanda"
+                      - option "🇰🇳 Saint Kitts and Nevis"
+                      - option "🇱🇨 Saint Lucia"
+                      - option "🇻🇨 Saint Vincent"
+                      - option "🇼🇸 Samoa"
+                      - option "🇸🇲 San Marino"
+                      - option "🇸🇹 Sao Tome and Principe"
+                      - option "🇸🇦 Saudi Arabia"
+                      - option "🇸🇳 Senegal"
+                      - option "🇷🇸 Serbia"
+                      - option "🇸🇨 Seychelles"
+                      - option "🇸🇱 Sierra Leone"
+                      - option "🇸🇰 Slovakia"
+                      - option "🇸🇮 Slovenia"
+                      - option "🇸🇧 Solomon Islands"
+                      - option "🇸🇴 Somalia"
+                      - option "🇰🇷 South Korea"
+                      - option "🇸🇸 South Sudan"
+                      - option "🇱🇰 Sri Lanka"
+                      - option "🇸🇩 Sudan"
+                      - option "🇸🇷 Suriname"
+                      - option "🇸🇾 Syria"
+                      - option "🇹🇼 Taiwan"
+                      - option "🇹🇯 Tajikistan"
+                      - option "🇹🇿 Tanzania"
+                      - option "🇹🇭 Thailand"
+                      - option "🇹🇱 Timor-Leste"
+                      - option "🇹🇬 Togo"
+                      - option "🇹🇴 Tonga"
+                      - option "🇹🇹 Trinidad and Tobago"
+                      - option "🇹🇳 Tunisia"
+                      - option "🇹🇷 Turkey"
+                      - option "🇹🇲 Turkmenistan"
+                      - option "🇹🇻 Tuvalu"
+                      - option "🇺🇬 Uganda"
+                      - option "🇺🇦 Ukraine"
+                      - option "🇦🇪 United Arab Emirates"
+                      - option "🇺🇾 Uruguay"
+                      - option "🇺🇿 Uzbekistan"
+                      - option "🇻🇺 Vanuatu"
+                      - option "🇻🇦 Vatican City"
+                      - option "🇻🇪 Venezuela"
+                      - option "🇻🇳 Vietnam"
+                      - option "🇾🇪 Yemen"
+                      - option "🇿🇲 Zambia"
+                      - option "🇿🇼 Zimbabwe"
+                  - generic [ref=e653]:
+                    - generic [ref=e654]: Trip Type *
+                    - combobox "Trip Type *" [ref=e655]:
+                      - option "Select trip type" [selected]
+                      - option "Wildlife Safari"
+                      - option "Kilimanjaro"
+                      - option "Zanzibar Beach"
+                      - option "Wildlife Safari + Kilimanjaro"
+                      - option "Wildlife Safari + Zanzibar Beach"
+                      - option "Customized"
+                - generic [ref=e656]:
+                  - text: Phone / WhatsApp
+                  - generic [ref=e657]:
+                    - combobox "Phone country code" [ref=e658]:
+                      - option "+1" [selected]
+                      - option "+44"
+                      - option "+49"
+                      - option "+33"
+                      - option "+31"
+                      - option "+61"
+                      - option "+255"
+                      - option "+254"
+                      - option "+27"
+                      - option "+91"
+                      - option "+86"
+                      - option "+81"
+                      - option "+34"
+                      - option "+39"
+                      - option "+41"
+                      - option "+43"
+                      - option "+46"
+                      - option "+47"
+                      - option "+45"
+                      - option "+353"
+                      - option "+64"
+                      - option "+32"
+                      - option "+65"
+                      - option "+55"
+                      - option "+52"
+                      - option "+48"
+                      - option "+7"
+                      - option "+971"
+                      - option "+966"
+                      - option "+90"
+                      - option "+62"
+                      - option "+60"
+                      - option "+66"
+                      - option "+84"
+                      - option "+82"
+                      - option "+234"
+                      - option "+20"
+                      - option "+256"
+                      - option "+250"
+                    - textbox "Phone / WhatsApp" [ref=e659]:
+                      - /placeholder: 123 456 7890
+                - generic [ref=e660]:
+                  - generic [ref=e661]:
+                    - text: Adults
+                    - spinbutton "Adults" [ref=e662]: "2"
+                  - generic [ref=e663]:
+                    - text: Children
+                    - spinbutton "Children" [ref=e664]: "0"
+                  - generic [ref=e665]:
+                    - text: Travel Date
+                    - textbox "Travel Date" [ref=e666]
+              - generic [ref=e667]:
+                - text: Tell us about your dream trip
+                - textbox "Tell us about your dream trip" [ref=e668]:
+                  - /placeholder: What are your interests? Any special requirements? Preferred activities?
+              - generic [ref=e669]:
+                - text: Website
+                - textbox [ref=e670]
+              - button "Send Inquiry" [ref=e671]
+              - paragraph [ref=e672]:
+                - text: We typically respond within 24 hours. No spam, ever. Your data is protected under our
+                - link "privacy policy" [ref=e673] [cursor=pointer]:
+                  - /url: /privacy-policy/
+                - text: .
+        - generic [ref=e675]:
+          - generic [ref=e676]:
+            - generic [ref=e677]:
+              - heading "From Our Blog" [level=2] [ref=e678]
+              - paragraph [ref=e679]: Tips, guides, and stories from Tanzania
+            - link "View All Posts" [ref=e680] [cursor=pointer]:
+              - /url: /blog/
+              - text: View All Posts
+              - img [ref=e681]
+          - generic [ref=e683]:
+            - 'link "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide 6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide The 6-Day Rongai Route is Kilimanjaro''s only northern approach — quieter, wilder, and excellent in t" [ref=e684] [cursor=pointer]':
+              - /url: /6-day-rongai-route-kilimanjaro-guide/
+              - 'img "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e685]'
+              - generic [ref=e686]:
+                - 'heading "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [level=3] [ref=e687]'
+                - paragraph [ref=e688]: The 6-Day Rongai Route is Kilimanjaro's only northern approach — quieter, wilder, and excellent in t
+            - link "Climbing Kilimanjaro Sustainably with KPAP Climbing Kilimanjaro Sustainably with KPAP Learn how we make Kilimanjaro climbing sustainable - from porter welfare to environmental protection" [ref=e689] [cursor=pointer]:
+              - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+              - img "Climbing Kilimanjaro Sustainably with KPAP" [ref=e690]
+              - generic [ref=e691]:
+                - heading "Climbing Kilimanjaro Sustainably with KPAP" [level=3] [ref=e692]
+                - paragraph [ref=e693]: Learn how we make Kilimanjaro climbing sustainable - from porter welfare to environmental protection
+            - 'link "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide 8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide The 8-Day Lemosho Route is Kilimanjaro''s finest and most rewarding itinerary, with a 95%+ summit suc" [ref=e694] [cursor=pointer]':
+              - /url: /8-day-lemosho-route-kilimanjaro-guide/
+              - 'img "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e695]'
+              - generic [ref=e696]:
+                - 'heading "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide" [level=3] [ref=e697]'
+                - paragraph [ref=e698]: The 8-Day Lemosho Route is Kilimanjaro's finest and most rewarding itinerary, with a 95%+ summit suc
+    - contentinfo [ref=e699]:
+      - generic [ref=e701]:
+        - text: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e702]
+      - generic [ref=e703]:
+        - generic [ref=e704]:
+          - generic [ref=e705]:
+            - img "Snow Africa Adventure" [ref=e707]
+            - paragraph [ref=e708]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e709]:
+              - listitem [ref=e710]:
+                - link "+255 766 657 854" [ref=e711] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e713]
+                  - text: +255 766 657 854
+              - listitem [ref=e715]:
+                - link "info@snowafricaadventure.com" [ref=e716] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e718]
+                  - text: info@snowafricaadventure.com
+              - listitem [ref=e721]:
+                - img [ref=e723]
+                - generic [ref=e726]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e727]:
+            - heading "Safari & Tours" [level=3] [ref=e728]
+            - list [ref=e729]:
+              - listitem [ref=e730]:
+                - link "All Safari Packages" [ref=e731] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e732]:
+                - link "Tailor-Made Safaris" [ref=e733] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e734]:
+                - link "Tanzania Destinations" [ref=e735] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e736]:
+                - link "View all" [ref=e737] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all →
+          - generic [ref=e738]:
+            - heading "Kilimanjaro" [level=3] [ref=e739]
+            - list [ref=e740]:
+              - listitem [ref=e741]:
+                - link "All Trekking Routes" [ref=e742] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e743]:
+                - link "Best Route to Climb" [ref=e744] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e745]:
+                - link "Climbing Kilimanjaro Guide" [ref=e746] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e747]:
+                - link "Join Group Departures" [ref=e748] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e749]:
+                - link "Kilimanjaro Prices" [ref=e750] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e751]:
+                - link "Best Time to Climb" [ref=e752] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e753]:
+                - link "View all routes" [ref=e754] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes →
+          - generic [ref=e755]:
+            - heading "Company" [level=3] [ref=e756]
+            - list [ref=e757]:
+              - listitem [ref=e758]:
+                - link "About Us" [ref=e759] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e760]:
+                - link "Our Guides" [ref=e761] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e762]:
+                - link "Contact Us" [ref=e763] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e764]:
+                - link "Terms & Conditions" [ref=e765] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e766]:
+                - link "Privacy Policy" [ref=e767] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e768]:
+                - link "Blog" [ref=e769] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e770]:
+              - heading "Follow the Journey" [level=4] [ref=e771]
+              - generic [ref=e772]:
+                - link "Facebook" [ref=e773] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e774]
+                - link "Twitter" [ref=e776] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e777]
+                - link "Instagram" [ref=e779] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e780]
+                - link "YouTube" [ref=e783] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e784]
+        - generic [ref=e788]:
+          - text: Accredited & Trusted
+          - generic [ref=e789]:
+            - link "TripAdvisor" [ref=e790] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - text: SafariBookings
+            - text: TATO Member
+            - text: KPAP Partner
+      - generic [ref=e793]:
+        - generic [ref=e794]:
+          - generic [ref=e795]: © 2026 Snow Africa Adventure. All rights reserved.
+          - text: "|"
+          - link "Terms & Conditions" [ref=e796] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - text: ·
+          - link "Privacy Policy" [ref=e797] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e798]:
+          - text: Crafted by
+          - link "Timeless International" [ref=e799] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic [ref=e800]:
+    - generic [ref=e802]:
+      - generic [ref=e803]:
+        - button "Close chat" [ref=e804]:
+          - img
+        - generic [ref=e807]:
+          - img [ref=e809]
+          - generic [ref=e811]:
+            - paragraph [ref=e812]: Snow Africa Adventure
+            - paragraph [ref=e813]: Typically replies within minutes
+      - generic [ref=e814]:
+        - generic [ref=e815]:
+          - paragraph [ref=e816]: Your Tanzania adventure starts here!
+          - paragraph [ref=e817]: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+          - generic [ref=e818]: 09:32 AM
+        - generic [ref=e819]:
+          - button "🏔️Climb Kilimanjaro" [ref=e820]:
+            - text: 🏔️Climb Kilimanjaro
+            - img [ref=e821]
+          - button "🦁Tanzania Safari" [ref=e823]:
+            - text: 🦁Tanzania Safari
+            - img [ref=e824]
+          - button "🏖️Zanzibar Beach Holiday" [ref=e826]:
+            - text: 🏖️Zanzibar Beach Holiday
+            - img [ref=e827]
+          - button "🌍Custom Trip" [ref=e829]:
+            - text: 🌍Custom Trip
+            - img [ref=e830]
+          - button "👥Join a Group Climb" [ref=e832]:
+            - text: 👥Join a Group Climb
+            - img [ref=e833]
+      - button "Type your own message" [ref=e836]:
+        - img [ref=e837]
+        - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e839]:
+      - img

@@ -1,0 +1,624 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - article [ref=e51]:
+        - generic [ref=e53]:
+          - img "Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow" [ref=e54]
+          - generic [ref=e57]:
+            - navigation "Breadcrumb" [ref=e59]:
+              - list [ref=e60]:
+                - listitem [ref=e61]:
+                  - link "Home" [ref=e62] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=e63]
+                    - generic [ref=e66]: Home
+                - listitem [ref=e67]:
+                  - img [ref=e68]
+                  - link "Blog" [ref=e70] [cursor=pointer]:
+                    - /url: /blog/
+                - listitem [ref=e71]:
+                  - img [ref=e72]
+                  - generic [ref=e74]: Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow
+            - link "Mount Kilimanjaro" [ref=e76] [cursor=pointer]:
+              - /url: /category/mount-kilimanjaro/
+            - heading "Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow" [level=1] [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - img [ref=e81]
+                - generic [ref=e84]:
+                  - paragraph [ref=e85]: Snow Africa Team
+                  - paragraph [ref=e86]: Author
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - generic [ref=e90]: Feb 13, 2026
+              - generic [ref=e91]:
+                - img [ref=e92]
+                - generic [ref=e95]: 9 min read
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - paragraph [ref=e100]: Africa has snow-capped mountains year-round — from Kilimanjaro's glaciers to Morocco's ski slopes. Discover all 8 peaks with photos and elevations.
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: Does it snow in Africa? Yes — and it might surprise you how much. From Kilimanjaro's iconic glaciers in Tanzania to the ski slopes of Morocco's Atlas Mountains, Africa is home to 8 snow-capped peaks across 10 countries — and several places where you can actually ski. Here's a complete guide to every African mountain with snow, where to find it, and why you should see it before it disappears.
+              - heading "Which Mountains in Africa Have Snow?" [level=2] [ref=e104]
+              - paragraph [ref=e105]: "Africa has at least eight major mountains and ranges where snow falls regularly or persists year-round. Here's a comparison of every African peak with snow:"
+              - table [ref=e106]:
+                - rowgroup [ref=e107]:
+                  - row "Mountain / Range Country Elevation Snow Type Best Months to See Snow" [ref=e108]:
+                    - columnheader "Mountain / Range" [ref=e109]
+                    - columnheader "Country" [ref=e110]
+                    - columnheader "Elevation" [ref=e111]
+                    - columnheader "Snow Type" [ref=e112]
+                    - columnheader "Best Months to See Snow" [ref=e113]
+                - rowgroup [ref=e114]:
+                  - row "Mount Kilimanjaro Tanzania 5,895 m (19,341 ft) Permanent glaciers Year-round (glaciers); fresh snow Nov–May" [ref=e115]:
+                    - cell "Mount Kilimanjaro" [ref=e116]:
+                      - strong [ref=e117]:
+                        - link "Mount Kilimanjaro" [ref=e118] [cursor=pointer]:
+                          - /url: /mount-kilimanjaro/
+                    - cell "Tanzania" [ref=e119]
+                    - cell "5,895 m (19,341 ft)" [ref=e120]
+                    - cell "Permanent glaciers" [ref=e121]
+                    - cell "Year-round (glaciers); fresh snow Nov–May" [ref=e122]
+                  - row "Mount Kenya Kenya 5,199 m (17,057 ft) Permanent glaciers Year-round" [ref=e123]:
+                    - cell "Mount Kenya" [ref=e124]:
+                      - strong [ref=e125]: Mount Kenya
+                    - cell "Kenya" [ref=e126]
+                    - cell "5,199 m (17,057 ft)" [ref=e127]
+                    - cell "Permanent glaciers" [ref=e128]
+                    - cell "Year-round" [ref=e129]
+                  - row "Rwenzori Mountains Uganda / DRC 5,109 m (16,762 ft) Permanent glaciers Year-round; drier Jun–Aug & Dec–Feb" [ref=e130]:
+                    - cell "Rwenzori Mountains" [ref=e131]:
+                      - strong [ref=e132]: Rwenzori Mountains
+                    - cell "Uganda / DRC" [ref=e133]
+                    - cell "5,109 m (16,762 ft)" [ref=e134]
+                    - cell "Permanent glaciers" [ref=e135]
+                    - cell "Year-round; drier Jun–Aug & Dec–Feb" [ref=e136]
+                  - row "Simien Mountains Ethiopia 4,550 m (14,928 ft) Seasonal snow November–February" [ref=e137]:
+                    - cell "Simien Mountains" [ref=e138]:
+                      - strong [ref=e139]: Simien Mountains
+                    - cell "Ethiopia" [ref=e140]
+                    - cell "4,550 m (14,928 ft)" [ref=e141]
+                    - cell "Seasonal snow" [ref=e142]
+                    - cell "November–February" [ref=e143]
+                  - row "Atlas Mountains Morocco 4,167 m (13,671 ft) Heavy seasonal snow November–April" [ref=e144]:
+                    - cell "Atlas Mountains" [ref=e145]:
+                      - strong [ref=e146]: Atlas Mountains
+                    - cell "Morocco" [ref=e147]
+                    - cell "4,167 m (13,671 ft)" [ref=e148]
+                    - cell "Heavy seasonal snow" [ref=e149]
+                    - cell "November–April" [ref=e150]
+                  - row "Drakensberg Mountains South Africa / Lesotho 3,482 m (11,424 ft) Seasonal snow May–September (winter)" [ref=e151]:
+                    - cell "Drakensberg Mountains" [ref=e152]:
+                      - strong [ref=e153]: Drakensberg Mountains
+                    - cell "South Africa / Lesotho" [ref=e154]
+                    - cell "3,482 m (11,424 ft)" [ref=e155]
+                    - cell "Seasonal snow" [ref=e156]
+                    - cell "May–September (winter)" [ref=e157]
+                  - row "Thabana Ntlenyana Lesotho 3,482 m (11,424 ft) Regular winter snow May–August" [ref=e158]:
+                    - cell "Thabana Ntlenyana" [ref=e159]:
+                      - strong [ref=e160]: Thabana Ntlenyana
+                    - cell "Lesotho" [ref=e161]
+                    - cell "3,482 m (11,424 ft)" [ref=e162]
+                    - cell "Regular winter snow" [ref=e163]
+                    - cell "May–August" [ref=e164]
+                  - row "Brandberg Mountain Namibia 2,573 m (8,442 ft) Rare snowfall Unpredictable; occasional winter" [ref=e165]:
+                    - cell "Brandberg Mountain" [ref=e166]:
+                      - strong [ref=e167]: Brandberg Mountain
+                    - cell "Namibia" [ref=e168]
+                    - cell "2,573 m (8,442 ft)" [ref=e169]
+                    - cell "Rare snowfall" [ref=e170]
+                    - cell "Unpredictable; occasional winter" [ref=e171]
+              - heading "Mount Kilimanjaro — Africa's Most Famous Snow-Capped Peak" [level=2] [ref=e172]
+              - paragraph [ref=e173]:
+                - text: Standing at 5,895 meters,
+                - link "Mount Kilimanjaro" [ref=e174] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+                - text: is Africa's tallest mountain and the highest free-standing mountain in the world. Its summit glaciers have existed for approximately 11,700 years, creating an otherworldly landscape of ice walls, glacial formations, and snow fields just 340 kilometres from the equator.
+              - paragraph [ref=e175]: "The main glacial zones on Kilimanjaro include:"
+              - list [ref=e176]:
+                - listitem [ref=e177]:
+                  - strong [ref=e178]: The Northern Icefield
+                  - text: – the largest remaining ice mass on the mountain
+                - listitem [ref=e179]:
+                  - strong [ref=e180]: The Southern Icefield
+                  - text: – includes the famous Kersten Glacier
+                - listitem [ref=e181]:
+                  - strong [ref=e182]: The Eastern Ice Field
+                  - text: – features the Rebmann Glacier
+                - listitem [ref=e183]:
+                  - strong [ref=e184]: The Furtwängler Glacier
+                  - text: – located in the crater near Uhuru Peak
+              - paragraph [ref=e185]: Climbers who summit Kilimanjaro walk across snow and ice near the peak, particularly during the early morning summit push when temperatures can drop to −20°C (−4°F). The journey passes through five distinct climate zones — from tropical rainforest at the base to arctic conditions at the summit — making it one of the most unique treks on Earth.
+              - paragraph [ref=e186]:
+                - text: The
+                - link "best time to climb Kilimanjaro" [ref=e187] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+                - text: for stable weather is during the dry seasons (January–March and June–October), though glaciers and snow are visible year-round at the summit.
+              - heading "Mount Kenya — Africa's Second Highest Peak" [level=2] [ref=e188]
+              - paragraph [ref=e189]: Africa's second-highest mountain, Mount Kenya at 5,199 meters (17,057 feet), hosts permanent glaciers on its twin peaks — Batian and Nelion. The Lewis Glacier, the mountain's most studied ice mass, has been extensively monitored by climate scientists tracking glacial retreat since the 1890s.
+              - paragraph [ref=e190]: Mount Kenya's glaciers are even more vulnerable than Kilimanjaro's. The Lewis Glacier has lost over 90% of its area since 1934, and scientists project it could disappear entirely within the next decade.
+              - heading "Rwenzori Mountains — The \"Mountains of the Moon\"" [level=2] [ref=e191]
+              - paragraph [ref=e192]: The Rwenzori Mountains, straddling the border between Uganda and the Democratic Republic of Congo, contain Africa's third-highest peak — Mount Stanley at 5,109 meters (16,762 feet). These mountains receive heavy precipitation, creating significant glaciers and permanent snow cover on the upper peaks.
+              - paragraph [ref=e193]: Ptolemy called these the "Mountains of the Moon" in his ancient texts, and early explorers sought them for centuries. The Rwenzori's glaciers feed rivers that ultimately contribute to the Nile, making them hydrologically significant beyond their visual spectacle.
+              - heading "Simien Mountains — Ethiopia's Frozen Highlands" [level=2] [ref=e194]
+              - paragraph [ref=e195]: Ethiopia's Simien Mountains, a UNESCO World Heritage Site, reach 4,550 meters at Ras Dashen — Ethiopia's highest point. While lacking permanent glaciers, the Simien range receives regular snowfall during the cooler months (November–February), blanketing the dramatic escarpments in white.
+              - paragraph [ref=e196]: The Simien Mountains are also home to the endemic gelada baboon, Ethiopian wolf, and walia ibex — making them one of the few places on Earth where you can see snow alongside unique African wildlife.
+              - heading "Atlas Mountains — Where You Can Ski in Africa" [level=2] [ref=e197]
+              - paragraph [ref=e198]: Morocco's Atlas Mountains receive the heaviest reliable snowfall on the continent. Jebel Toubkal, North Africa's highest peak at 4,167 meters (13,671 feet), often requires crampons and ice axes during winter ascents from November through April.
+              - paragraph [ref=e199]:
+                - text: The Atlas range is also home to
+                - strong [ref=e200]: Oukaimeden
+                - text: ", Africa's highest ski resort at 3,200 meters — just 80 km from Marrakech. The resort operates chair lifts and attracts skiers from across North Africa and Europe. The contrast of snow-capped mountains visible from the Sahara Desert edge is one of Africa's most striking sights."
+              - heading "Drakensberg & Lesotho — Southern Africa's Snow Country" [level=2] [ref=e201]
+              - paragraph [ref=e202]: The Drakensberg mountain range, stretching along the South Africa–Lesotho border, receives regular winter snowfall from May through September. Thabana Ntlenyana in Lesotho reaches 3,482 meters and is the highest peak in southern Africa.
+              - paragraph [ref=e203]: Lesotho is called the "Kingdom in the Sky" because its entire territory sits above 1,000 meters — making it one of the world's highest countries. Winter snow transforms the highlands into landscapes that look more like the Scottish Highlands than sub-Saharan Africa.
+              - paragraph [ref=e204]:
+                - strong [ref=e205]: Afriski Mountain Resort
+                - text: in Lesotho (altitude 3,222 m) is southern Africa's premier ski and snowboard destination, operating from June through August with groomed runs and snow-making capabilities.
+              - heading "Which Countries in Africa Get Snow?" [level=2] [ref=e206]
+              - paragraph [ref=e207]: "At least 10 African countries experience snowfall, either regularly or occasionally:"
+              - list [ref=e208]:
+                - listitem [ref=e209]:
+                  - strong [ref=e210]: Tanzania
+                  - text: – permanent glaciers on Kilimanjaro
+                - listitem [ref=e211]:
+                  - strong [ref=e212]: Kenya
+                  - text: – permanent glaciers on Mount Kenya
+                - listitem [ref=e213]:
+                  - strong [ref=e214]: Uganda
+                  - text: – permanent glaciers in the Rwenzori Mountains
+                - listitem [ref=e215]:
+                  - strong [ref=e216]: Ethiopia
+                  - text: – seasonal snow in the Simien Mountains
+                - listitem [ref=e217]:
+                  - strong [ref=e218]: Morocco
+                  - text: – heavy winter snow in the Atlas Mountains
+                - listitem [ref=e219]:
+                  - strong [ref=e220]: Algeria
+                  - text: – winter snow in the Tell Atlas and Aurès Mountains
+                - listitem [ref=e221]:
+                  - strong [ref=e222]: Tunisia
+                  - text: – occasional snow in the northern mountains
+                - listitem [ref=e223]:
+                  - strong [ref=e224]: South Africa
+                  - text: – winter snow on the Drakensberg peaks
+                - listitem [ref=e225]:
+                  - strong [ref=e226]: Lesotho
+                  - text: – regular winter snowfall across the highlands
+                - listitem [ref=e227]:
+                  - strong [ref=e228]: Namibia
+                  - text: – rare snowfall on Brandberg Mountain
+              - heading "Why Is Snow Rare in Most of Africa?" [level=2] [ref=e229]
+              - paragraph [ref=e230]: Africa straddles the equator, and the majority of the continent lies within the tropics. Temperatures decrease with altitude at a rate of roughly 6.5°C per 1,000 meters (known as the lapse rate). Since snow forms at or below 0°C, African mountains need to be approximately 4,500–5,000 meters high near the equator — or 3,000+ meters at subtropical latitudes — to sustain snow.
+              - paragraph [ref=e231]: Most of Africa's terrain sits below 2,000 meters, which is why snow remains rare across the continent despite covering a massive land area. The few peaks that break through the freezing altitude threshold create some of the world's most dramatic landscapes — tropical forests at the base transitioning to ice fields at the summit.
+              - heading "Can You Ski in Africa?" [level=2] [ref=e232]
+              - paragraph [ref=e233]: "Yes — Africa has three operational ski resorts:"
+              - list [ref=e234]:
+                - listitem [ref=e235]:
+                  - strong [ref=e236]: Oukaimeden, Morocco
+                  - text: – Africa's highest ski resort (3,200 m), 80 km from Marrakech, operating December–March
+                - listitem [ref=e237]:
+                  - strong [ref=e238]: Afriski Mountain Resort, Lesotho
+                  - text: – southern Africa's ski destination (3,222 m), operating June–August
+                - listitem [ref=e239]:
+                  - strong [ref=e240]: Tiffindell, South Africa
+                  - text: – small ski resort in the Eastern Cape, with snow-making, operating June–August
+              - paragraph [ref=e241]: Beyond formal resorts, glacier trekking on Kilimanjaro and the Rwenzori Mountains offers a different kind of snow experience — one that combines high-altitude adventure with the unique context of equatorial Africa.
+              - heading "Climate Change and Africa's Disappearing Snow" [level=2] [ref=e242]
+              - paragraph [ref=e243]: "Africa's glaciers are retreating at an alarming rate. The numbers are stark:"
+              - list [ref=e244]:
+                - listitem [ref=e245]:
+                  - generic [ref=e247]:
+                    - generic [ref=e248]: Kilimanjaro
+                    - generic [ref=e249]: has lost over 85% of its ice cover since 1912. UNESCO researchers project the glaciers could disappear entirely by the 2040s
+                - listitem [ref=e250]:
+                  - generic [ref=e252]:
+                    - generic [ref=e253]: Mount Kenya
+                    - generic [ref=e254]: the Lewis Glacier has lost over 90% of its area since 1934
+                - listitem [ref=e255]:
+                  - generic [ref=e257]:
+                    - generic [ref=e258]: Rwenzori
+                    - generic [ref=e259]: glacier coverage has shrunk by more than 50% since the 1950s
+              - paragraph [ref=e260]: The causes include rising global temperatures, reduced precipitation at high altitudes, changes in local climate patterns, and increased sublimation (ice turning directly to water vapor without melting first). This makes witnessing Africa's glaciers an increasingly urgent experience for those who want to see this natural wonder before it potentially disappears.
+              - heading "When to See Snow on Kilimanjaro" [level=2] [ref=e261]
+              - paragraph [ref=e262]:
+                - text: Kilimanjaro's summit maintains glacial ice year-round, but fresh snowfall is most common during the rainy seasons (March–May and November). The
+                - link "best climbing conditions" [ref=e263] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+                - text: occur during the dry seasons (January–March and June–October) when weather is more stable for summit attempts.
+              - paragraph [ref=e264]: Morning arrivals at the summit offer the best glacier views, as clouds typically build later in the day. The famous sunrise from Uhuru Peak — with ice cliffs glowing orange and pink against the African plains far below — is one of mountaineering's most spectacular sights.
+              - paragraph [ref=e265]:
+                - text: Ready to experience Africa's snow firsthand?
+                - link "Explore our Kilimanjaro routes" [ref=e266] [cursor=pointer]:
+                  - /url: /trekking/
+                - text: or
+                - link "join a scheduled group departure" [ref=e267] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+                - text: and walk among glaciers that have existed for over 11,000 years — while you still can.
+              - generic [ref=e268]:
+                - heading "Frequently Asked Questions" [level=2] [ref=e269]
+                - generic [ref=e270]:
+                  - heading "Does it snow in Africa?" [level=3] [ref=e271]
+                  - paragraph [ref=e273]: Yes, it snows in Africa. At least 10 African countries experience snowfall, including Tanzania, Kenya, Uganda, Morocco, South Africa, and Lesotho. Three mountains — Kilimanjaro, Mount Kenya, and the Rwenzori Mountains — have permanent glaciers and snow year-round, while the Atlas Mountains and Drakensberg receive heavy seasonal snow with operational ski resorts.
+                - generic [ref=e274]:
+                  - heading "Does Africa have mountains with snow?" [level=3] [ref=e275]
+                  - paragraph [ref=e277]: Yes. Africa has at least eight major mountains and ranges with snow. Mount Kilimanjaro (5,895 m), Mount Kenya (5,199 m), and the Rwenzori Mountains (5,109 m) have permanent glaciers. The Atlas Mountains in Morocco, Drakensberg in South Africa/Lesotho, and Simien Mountains in Ethiopia receive heavy seasonal snowfall.
+                - generic [ref=e278]:
+                  - heading "Which African mountain has the most snow?" [level=3] [ref=e279]
+                  - paragraph [ref=e281]: Mount Kilimanjaro in Tanzania has the most permanent ice of any African mountain, though the Atlas Mountains in Morocco receive the most seasonal snowfall. Kilimanjaro's glaciers cover approximately 1.76 square kilometres, while the Atlas range receives enough snow to support Africa's highest ski resort.
+                - generic [ref=e282]:
+                  - heading "Can you ski in Africa?" [level=3] [ref=e283]
+                  - paragraph [ref=e285]: "Yes. Africa has three ski resorts: Oukaimeden in Morocco (Africa's highest at 3,200 m, open December–March), Afriski Mountain Resort in Lesotho (open June–August), and Tiffindell in South Africa (open June–August with snow-making). Glacier trekking on Kilimanjaro also offers a unique snow experience."
+                - generic [ref=e286]:
+                  - heading "Is the snow on Mount Kilimanjaro disappearing?" [level=3] [ref=e287]
+                  - paragraph [ref=e289]: Yes. Kilimanjaro has lost over 85% of its glacial ice since 1912, and UNESCO researchers predict the glaciers could be gone by the 2040s. Rising temperatures, reduced precipitation, and increased sublimation are the primary causes. This makes climbing Kilimanjaro to see its glaciers an increasingly time-sensitive experience.
+                - generic [ref=e290]:
+                  - heading "What months does it snow in Africa?" [level=3] [ref=e291]
+                  - paragraph [ref=e293]: It depends on the region. In East Africa (Kilimanjaro, Kenya, Rwenzori), permanent glaciers exist year-round with fresh snowfall during rainy seasons. In North Africa (Atlas Mountains), snow falls November–April. In southern Africa (Drakensberg, Lesotho), snow falls during winter months May–September. Equatorial glaciers are permanent but shrinking.
+                - generic [ref=e294]:
+                  - heading "Which countries in Africa get snow?" [level=3] [ref=e295]
+                  - paragraph [ref=e297]: "At least 10 African countries experience snowfall: Tanzania, Kenya, Uganda, Ethiopia, Morocco, Algeria, Tunisia, South Africa, Lesotho, and Namibia. Morocco and Lesotho receive the most reliable seasonal snowfall, while Tanzania, Kenya, and Uganda have permanent equatorial glaciers."
+              - generic [ref=e298]:
+                - paragraph [ref=e299]:
+                  - text: Ready to
+                  - link "climb Kilimanjaro" [ref=e300] [cursor=pointer]:
+                    - /url: /trekking/
+                  - text: yourself?
+                - paragraph [ref=e301]: We run KPAP-member small-group and private climbs year-round from Arusha.
+                - paragraph [ref=e302]:
+                  - link "Complete Kilimanjaro climbing guide" [ref=e303] [cursor=pointer]:
+                    - /url: /mount-kilimanjaro/
+                  - text: ·
+                  - link "Upcoming group departures" [ref=e304] [cursor=pointer]:
+                    - /url: /kilimanjaro-join-group-departures/
+                  - text: ·
+                  - link "Pricing breakdown" [ref=e305] [cursor=pointer]:
+                    - /url: /kilimanjaro-prices/
+            - generic [ref=e308]:
+              - img [ref=e310]
+              - generic [ref=e313]:
+                - generic [ref=e314]:
+                  - heading "Snow Africa Team" [level=3] [ref=e315]
+                  - generic [ref=e316]: Safari & Trekking Experts
+                - paragraph [ref=e317]: The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.
+                - generic [ref=e318]:
+                  - generic [ref=e319]:
+                    - img [ref=e320]
+                    - text: TATO Licensed Operator
+                  - generic [ref=e323]:
+                    - img [ref=e324]
+                    - text: Kilimanjaro Certified Guides
+                  - generic [ref=e327]:
+                    - img [ref=e328]
+                    - text: First Aid Wilderness Certified
+                  - generic [ref=e331]:
+                    - img [ref=e332]
+                    - text: Based in Arusha, Tanzania
+            - link "Back to Blog" [ref=e336] [cursor=pointer]:
+              - /url: /blog/
+              - img [ref=e337]
+              - text: Back to Blog
+            - generic [ref=e339]:
+              - heading "Continue Reading" [level=2] [ref=e340]
+              - generic [ref=e341]:
+                - link "Climbing Kilimanjaro Sustainably with KPAP Climbing Kilimanjaro Sustainably with KPAP Mar 18, 2026" [ref=e342] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+                  - img "Climbing Kilimanjaro Sustainably with KPAP" [ref=e344]
+                  - generic [ref=e345]:
+                    - heading "Climbing Kilimanjaro Sustainably with KPAP" [level=3] [ref=e346]
+                    - paragraph [ref=e347]: Mar 18, 2026
+                - 'link "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide Mar 2, 2026" [ref=e348] [cursor=pointer]':
+                  - /url: /best-time-to-climb-mount-kilimanjaro/
+                  - 'img "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide" [ref=e350]'
+                  - generic [ref=e351]:
+                    - 'heading "Best Time to Climb Mount Kilimanjaro: A Complete Month-by-Month Guide" [level=3] [ref=e352]'
+                    - paragraph [ref=e353]: Mar 2, 2026
+                - link "Conquer the Roof of Africa Conquer the Roof of Africa Feb 13, 2026" [ref=e354] [cursor=pointer]:
+                  - /url: /conquer-the-roof-of-africa-climbing-mount-kilimanjaro-with-snow-africa-adventures/
+                  - img "Conquer the Roof of Africa" [ref=e356]
+                  - generic [ref=e357]:
+                    - heading "Conquer the Roof of Africa" [level=3] [ref=e358]
+                    - paragraph [ref=e359]: Feb 13, 2026
+          - complementary [ref=e360]:
+            - generic [ref=e361]:
+              - generic [ref=e362]:
+                - heading "In This Article" [level=3] [ref=e363]:
+                  - img [ref=e365]
+                  - text: In This Article
+                - navigation [ref=e367]:
+                  - link "Does it snow in Africa?" [ref=e368] [cursor=pointer]:
+                    - /url: "#does-it-snow-in-africa"
+                    - generic [ref=e369]: Does it snow in Africa?
+                  - link "Does Africa have mountains with snow?" [ref=e370] [cursor=pointer]:
+                    - /url: "#does-africa-have-mountains-with-snow"
+                    - generic [ref=e371]: Does Africa have mountains with snow?
+                  - link "Which African mountain has the most snow?" [ref=e372] [cursor=pointer]:
+                    - /url: "#which-african-mountain-has-the-most-snow"
+                    - generic [ref=e373]: Which African mountain has the most snow?
+                  - link "Can you ski in Africa?" [ref=e374] [cursor=pointer]:
+                    - /url: "#can-you-ski-in-africa"
+                    - generic [ref=e375]: Can you ski in Africa?
+                  - link "Is the snow on Mount Kilimanjaro disappearing?" [ref=e376] [cursor=pointer]:
+                    - /url: "#is-the-snow-on-mount-kilimanjaro-disappearing"
+                    - generic [ref=e377]: Is the snow on Mount Kilimanjaro disappearing?
+                  - link "What months does it snow in Africa?" [ref=e378] [cursor=pointer]:
+                    - /url: "#what-months-does-it-snow-in-africa"
+                    - generic [ref=e379]: What months does it snow in Africa?
+                  - link "Which countries in Africa get snow?" [ref=e380] [cursor=pointer]:
+                    - /url: "#which-countries-in-africa-get-snow"
+                    - generic [ref=e381]: Which countries in Africa get snow?
+              - generic [ref=e382]:
+                - generic [ref=e383]:
+                  - img [ref=e385]
+                  - heading "Climb Kilimanjaro" [level=3] [ref=e387]
+                - paragraph [ref=e388]: Ready for the adventure of a lifetime? Join our expert guides on Africa's highest peak.
+                - link "View Routes" [ref=e389] [cursor=pointer]:
+                  - /url: /trekking/
+              - generic [ref=e390]:
+                - heading "Categories" [level=3] [ref=e391]:
+                  - img [ref=e393]
+                  - text: Categories
+                - list [ref=e396]:
+                  - listitem [ref=e397]:
+                    - link "Blog 27" [ref=e398] [cursor=pointer]:
+                      - /url: /category/blog/
+                      - generic [ref=e399]: Blog
+                      - generic [ref=e400]: "27"
+                  - listitem [ref=e401]:
+                    - link "Day Trips 1" [ref=e402] [cursor=pointer]:
+                      - /url: /category/day-trip/
+                      - generic [ref=e403]: Day Trips
+                      - generic [ref=e404]: "1"
+                  - listitem [ref=e405]:
+                    - link "Kilimanjaro Climbing Guide 16" [ref=e406] [cursor=pointer]:
+                      - /url: /category/kilimanjaro-climbing-guide/
+                      - generic [ref=e407]: Kilimanjaro Climbing Guide
+                      - generic [ref=e408]: "16"
+                  - listitem [ref=e409]:
+                    - link "Mount Kilimanjaro 33" [ref=e410] [cursor=pointer]:
+                      - /url: /category/mount-kilimanjaro/
+                      - generic [ref=e411]: Mount Kilimanjaro
+                      - generic [ref=e412]: "33"
+                  - listitem [ref=e413]:
+                    - link "Safari Tours 41" [ref=e414] [cursor=pointer]:
+                      - /url: /category/safari-tours/
+                      - generic [ref=e415]: Safari Tours
+                      - generic [ref=e416]: "41"
+                  - listitem [ref=e417]:
+                    - link "Tanzania Destinations 7" [ref=e418] [cursor=pointer]:
+                      - /url: /category/tanzania-destinations/
+                      - generic [ref=e419]: Tanzania Destinations
+                      - generic [ref=e420]: "7"
+              - generic [ref=e421]:
+                - generic [ref=e422]:
+                  - img [ref=e424]
+                  - heading "Tanzania Safari" [level=3] [ref=e427]
+                - paragraph [ref=e428]: Combine your climb with a wildlife safari through Tanzania's iconic parks.
+                - link "View Safaris" [ref=e429] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - generic [ref=e430]:
+                - heading "Join a Group Climb" [level=3] [ref=e431]
+                - paragraph [ref=e432]: Fixed departure dates with fellow adventurers from around the world.
+                - link "View 2026 Dates" [ref=e433] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+                  - text: View 2026 Dates
+                  - img [ref=e434]
+    - contentinfo [ref=e436]:
+      - generic [ref=e439]:
+        - generic [ref=e440]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e441]
+      - generic [ref=e446]:
+        - generic [ref=e447]:
+          - generic [ref=e448]:
+            - img "Snow Africa Adventure" [ref=e450]
+            - paragraph [ref=e451]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e452]:
+              - listitem [ref=e453]:
+                - link "+255 766 657 854" [ref=e454] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e456]
+                  - generic [ref=e458]: +255 766 657 854
+              - listitem [ref=e459]:
+                - link "info@snowafricaadventure.com" [ref=e460] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e462]
+                  - generic [ref=e465]: info@snowafricaadventure.com
+              - listitem [ref=e466]:
+                - img [ref=e468]
+                - generic [ref=e471]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e472]:
+            - heading "Safari & Tours" [level=3] [ref=e473]
+            - list [ref=e474]:
+              - listitem [ref=e475]:
+                - link "All Safari Packages" [ref=e476] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e477]:
+                - link "Tailor-Made Safaris" [ref=e478] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e479]:
+                - link "Tanzania Destinations" [ref=e480] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e481]:
+                - link "View all" [ref=e482] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e483]: →
+          - generic [ref=e484]:
+            - heading "Kilimanjaro" [level=3] [ref=e485]
+            - list [ref=e486]:
+              - listitem [ref=e487]:
+                - link "All Trekking Routes" [ref=e488] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e489]:
+                - link "Best Route to Climb" [ref=e490] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e491]:
+                - link "Climbing Kilimanjaro Guide" [ref=e492] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e493]:
+                - link "Join Group Departures" [ref=e494] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e495]:
+                - link "Kilimanjaro Prices" [ref=e496] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e497]:
+                - link "Best Time to Climb" [ref=e498] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e499]:
+                - link "View all routes" [ref=e500] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e501]: →
+          - generic [ref=e502]:
+            - heading "Company" [level=3] [ref=e503]
+            - list [ref=e504]:
+              - listitem [ref=e505]:
+                - link "About Us" [ref=e506] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e507]:
+                - link "Our Guides" [ref=e508] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e509]:
+                - link "Contact Us" [ref=e510] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e511]:
+                - link "Terms & Conditions" [ref=e512] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e513]:
+                - link "Privacy Policy" [ref=e514] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e515]:
+                - link "Blog" [ref=e516] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e517]:
+              - heading "Follow the Journey" [level=4] [ref=e518]
+              - generic [ref=e519]:
+                - link "Facebook" [ref=e520] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e521]
+                - link "Twitter" [ref=e523] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e524]
+                - link "Instagram" [ref=e526] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e527]
+                - link "YouTube" [ref=e530] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e531]
+        - generic [ref=e535]:
+          - generic [ref=e536]: Accredited & Trusted
+          - generic [ref=e537]:
+            - link "TripAdvisor" [ref=e538] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e540]: SafariBookings
+            - generic [ref=e542]: TATO Member
+            - generic [ref=e544]: KPAP Partner
+      - generic [ref=e547]:
+        - generic [ref=e548]:
+          - generic [ref=e549]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e550]: "|"
+          - link "Terms & Conditions" [ref=e551] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e552]: ·
+          - link "Privacy Policy" [ref=e553] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e554]:
+          - generic [ref=e555]: Crafted by
+          - link "Timeless International" [ref=e556] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:23 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e557]:
+      - img [ref=e558]
+  - button "Open Next.js Dev Tools" [ref=e566] [cursor=pointer]:
+    - img [ref=e567]
+  - alert [ref=e570]

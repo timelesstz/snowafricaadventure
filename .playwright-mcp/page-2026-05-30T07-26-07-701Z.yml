@@ -1,0 +1,721 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - img "Ngorongoro Crater Day Trip" [ref=e53]
+          - generic [ref=e56]:
+            - navigation [ref=e57]:
+              - link "Home" [ref=e58] [cursor=pointer]:
+                - /url: /
+              - text: /
+              - link "Tanzania Day Tours" [ref=e59] [cursor=pointer]:
+                - /url: /tanzania-day-tours/
+              - text: /Ngorongoro Crater Day Trip
+            - heading "Ngorongoro Crater Day Trip" [level=1] [ref=e60]
+            - generic [ref=e61]:
+              - generic [ref=e62]:
+                - img [ref=e63]
+                - text: Full Day
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - text: 2-6 people
+              - generic [ref=e72]:
+                - img [ref=e73]
+                - text: From Arusha
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - text: Price per person
+            - generic [ref=e80]: $400 USD
+          - generic [ref=e81]:
+            - link "Book This Trip" [ref=e82] [cursor=pointer]:
+              - /url: "#booking-form"
+            - link "WhatsApp" [ref=e83] [cursor=pointer]:
+              - /url: https://wa.me/255123456789
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e88]:
+              - heading "About This Trip" [level=2] [ref=e89]
+              - paragraph [ref=e91]: Experience the Ngorongoro Crater, the world's largest intact volcanic caldera, on a full-day safari from Arusha. Descend to the crater floor for incredible wildlife viewing.
+            - generic [ref=e92]:
+              - heading "Trip Highlights" [level=2] [ref=e93]
+              - generic [ref=e94]:
+                - generic [ref=e95]: Crater Floor Game Drive
+                - generic [ref=e96]: Big Five Chance
+                - generic [ref=e97]: UNESCO Site
+                - generic [ref=e98]: Crater Views
+                - generic [ref=e99]: Wildlife Photography
+            - generic [ref=e100]:
+              - generic [ref=e101]:
+                - heading "What's Included" [level=3] [ref=e102]:
+                  - img [ref=e103]
+                  - text: What's Included
+                - list [ref=e105]:
+                  - listitem [ref=e106]:
+                    - img [ref=e107]
+                    - text: Hotel pickup & dropoff
+                  - listitem [ref=e109]:
+                    - img [ref=e110]
+                    - text: 4x4 safari vehicle
+                  - listitem [ref=e112]:
+                    - img [ref=e113]
+                    - text: Professional guide
+                  - listitem [ref=e115]:
+                    - img [ref=e116]
+                    - text: All park fees
+                  - listitem [ref=e118]:
+                    - img [ref=e119]
+                    - text: Crater service fee
+                  - listitem [ref=e121]:
+                    - img [ref=e122]
+                    - text: Packed lunch
+                  - listitem [ref=e124]:
+                    - img [ref=e125]
+                    - text: Bottled water
+              - generic [ref=e127]:
+                - heading "Not Included" [level=3] [ref=e128]:
+                  - img [ref=e129]
+                  - text: Not Included
+                - list [ref=e132]:
+                  - listitem [ref=e133]:
+                    - img [ref=e134]
+                    - text: Tips
+                  - listitem [ref=e137]:
+                    - img [ref=e138]
+                    - text: Personal expenses
+                  - listitem [ref=e141]:
+                    - img [ref=e142]
+                    - text: Additional drinks
+                  - listitem [ref=e145]:
+                    - img [ref=e146]
+                    - text: Town accommodation
+                  - listitem [ref=e149]:
+                    - img [ref=e150]
+                    - text: Airport transfer
+          - generic [ref=e154]:
+            - heading "Book This Trip" [level=3] [ref=e155]:
+              - img [ref=e156]
+              - text: Book This Trip
+            - generic [ref=e158]:
+              - generic [ref=e159]:
+                - generic [ref=e160]:
+                  - generic [ref=e161]:
+                    - generic [ref=e162]: Full Name *
+                    - textbox "Full Name *" [ref=e163]:
+                      - /placeholder: John Smith
+                  - generic [ref=e164]:
+                    - generic [ref=e165]: Email Address *
+                    - textbox "Email Address *" [ref=e166]:
+                      - /placeholder: john@example.com
+                - generic [ref=e167]:
+                  - generic [ref=e168]:
+                    - generic [ref=e169]: Country *
+                    - combobox "Country *" [ref=e170]:
+                      - option "Select your country" [selected]
+                      - option "🇺🇸 United States"
+                      - option "🇬🇧 United Kingdom"
+                      - option "🇩🇪 Germany"
+                      - option "🇫🇷 France"
+                      - option "🇨🇦 Canada"
+                      - option "🇦🇺 Australia"
+                      - option "🇳🇱 Netherlands"
+                      - option "🇮🇹 Italy"
+                      - option "🇪🇸 Spain"
+                      - option "🇨🇭 Switzerland"
+                      - option "🇧🇪 Belgium"
+                      - option "🇦🇹 Austria"
+                      - option "🇸🇪 Sweden"
+                      - option "🇳🇴 Norway"
+                      - option "🇩🇰 Denmark"
+                      - option "🇮🇪 Ireland"
+                      - option "🇳🇿 New Zealand"
+                      - option "🇿🇦 South Africa"
+                      - option "🇯🇵 Japan"
+                      - option "🇸🇬 Singapore"
+                      - option "──────────────" [disabled]
+                      - option "🇦🇫 Afghanistan"
+                      - option "🇦🇱 Albania"
+                      - option "🇩🇿 Algeria"
+                      - option "🇦🇩 Andorra"
+                      - option "🇦🇴 Angola"
+                      - option "🇦🇬 Antigua and Barbuda"
+                      - option "🇦🇷 Argentina"
+                      - option "🇦🇲 Armenia"
+                      - option "🇦🇿 Azerbaijan"
+                      - option "🇧🇸 Bahamas"
+                      - option "🇧🇭 Bahrain"
+                      - option "🇧🇩 Bangladesh"
+                      - option "🇧🇧 Barbados"
+                      - option "🇧🇾 Belarus"
+                      - option "🇧🇿 Belize"
+                      - option "🇧🇯 Benin"
+                      - option "🇧🇹 Bhutan"
+                      - option "🇧🇴 Bolivia"
+                      - option "🇧🇦 Bosnia and Herzegovina"
+                      - option "🇧🇼 Botswana"
+                      - option "🇧🇷 Brazil"
+                      - option "🇧🇳 Brunei"
+                      - option "🇧🇬 Bulgaria"
+                      - option "🇧🇫 Burkina Faso"
+                      - option "🇧🇮 Burundi"
+                      - option "🇨🇻 Cabo Verde"
+                      - option "🇰🇭 Cambodia"
+                      - option "🇨🇲 Cameroon"
+                      - option "🇨🇫 Central African Republic"
+                      - option "🇹🇩 Chad"
+                      - option "🇨🇱 Chile"
+                      - option "🇨🇳 China"
+                      - option "🇨🇴 Colombia"
+                      - option "🇰🇲 Comoros"
+                      - option "🇨🇬 Congo"
+                      - option "🇨🇩 Congo (DRC)"
+                      - option "🇨🇷 Costa Rica"
+                      - option "🇭🇷 Croatia"
+                      - option "🇨🇺 Cuba"
+                      - option "🇨🇾 Cyprus"
+                      - option "🇨🇿 Czech Republic"
+                      - option "🇨🇮 Cote d'Ivoire"
+                      - option "🇩🇯 Djibouti"
+                      - option "🇩🇲 Dominica"
+                      - option "🇩🇴 Dominican Republic"
+                      - option "🇪🇨 Ecuador"
+                      - option "🇪🇬 Egypt"
+                      - option "🇸🇻 El Salvador"
+                      - option "🇬🇶 Equatorial Guinea"
+                      - option "🇪🇷 Eritrea"
+                      - option "🇪🇪 Estonia"
+                      - option "🇸🇿 Eswatini"
+                      - option "🇪🇹 Ethiopia"
+                      - option "🇫🇯 Fiji"
+                      - option "🇫🇮 Finland"
+                      - option "🇬🇦 Gabon"
+                      - option "🇬🇲 Gambia"
+                      - option "🇬🇪 Georgia"
+                      - option "🇬🇭 Ghana"
+                      - option "🇬🇷 Greece"
+                      - option "🇬🇩 Grenada"
+                      - option "🇬🇹 Guatemala"
+                      - option "🇬🇳 Guinea"
+                      - option "🇬🇼 Guinea-Bissau"
+                      - option "🇬🇾 Guyana"
+                      - option "🇭🇹 Haiti"
+                      - option "🇭🇳 Honduras"
+                      - option "🇭🇰 Hong Kong"
+                      - option "🇭🇺 Hungary"
+                      - option "🇮🇸 Iceland"
+                      - option "🇮🇳 India"
+                      - option "🇮🇩 Indonesia"
+                      - option "🇮🇷 Iran"
+                      - option "🇮🇶 Iraq"
+                      - option "🇮🇱 Israel"
+                      - option "🇯🇲 Jamaica"
+                      - option "🇯🇴 Jordan"
+                      - option "🇰🇿 Kazakhstan"
+                      - option "🇰🇪 Kenya"
+                      - option "🇰🇮 Kiribati"
+                      - option "🇰🇼 Kuwait"
+                      - option "🇰🇬 Kyrgyzstan"
+                      - option "🇱🇦 Laos"
+                      - option "🇱🇻 Latvia"
+                      - option "🇱🇧 Lebanon"
+                      - option "🇱🇸 Lesotho"
+                      - option "🇱🇷 Liberia"
+                      - option "🇱🇾 Libya"
+                      - option "🇱🇮 Liechtenstein"
+                      - option "🇱🇹 Lithuania"
+                      - option "🇱🇺 Luxembourg"
+                      - option "🇲🇴 Macau"
+                      - option "🇲🇬 Madagascar"
+                      - option "🇲🇼 Malawi"
+                      - option "🇲🇾 Malaysia"
+                      - option "🇲🇻 Maldives"
+                      - option "🇲🇱 Mali"
+                      - option "🇲🇹 Malta"
+                      - option "🇲🇭 Marshall Islands"
+                      - option "🇲🇷 Mauritania"
+                      - option "🇲🇺 Mauritius"
+                      - option "🇲🇽 Mexico"
+                      - option "🇫🇲 Micronesia"
+                      - option "🇲🇩 Moldova"
+                      - option "🇲🇨 Monaco"
+                      - option "🇲🇳 Mongolia"
+                      - option "🇲🇪 Montenegro"
+                      - option "🇲🇦 Morocco"
+                      - option "🇲🇿 Mozambique"
+                      - option "🇲🇲 Myanmar"
+                      - option "🇳🇦 Namibia"
+                      - option "🇳🇷 Nauru"
+                      - option "🇳🇵 Nepal"
+                      - option "🇳🇮 Nicaragua"
+                      - option "🇳🇪 Niger"
+                      - option "🇳🇬 Nigeria"
+                      - option "🇰🇵 North Korea"
+                      - option "🇲🇰 North Macedonia"
+                      - option "🇴🇲 Oman"
+                      - option "🇵🇰 Pakistan"
+                      - option "🇵🇼 Palau"
+                      - option "🇵🇸 Palestine"
+                      - option "🇵🇦 Panama"
+                      - option "🇵🇬 Papua New Guinea"
+                      - option "🇵🇾 Paraguay"
+                      - option "🇵🇪 Peru"
+                      - option "🇵🇭 Philippines"
+                      - option "🇵🇱 Poland"
+                      - option "🇵🇹 Portugal"
+                      - option "🇶🇦 Qatar"
+                      - option "🇷🇴 Romania"
+                      - option "🇷🇺 Russia"
+                      - option "🇷🇼 Rwanda"
+                      - option "🇰🇳 Saint Kitts and Nevis"
+                      - option "🇱🇨 Saint Lucia"
+                      - option "🇻🇨 Saint Vincent"
+                      - option "🇼🇸 Samoa"
+                      - option "🇸🇲 San Marino"
+                      - option "🇸🇹 Sao Tome and Principe"
+                      - option "🇸🇦 Saudi Arabia"
+                      - option "🇸🇳 Senegal"
+                      - option "🇷🇸 Serbia"
+                      - option "🇸🇨 Seychelles"
+                      - option "🇸🇱 Sierra Leone"
+                      - option "🇸🇰 Slovakia"
+                      - option "🇸🇮 Slovenia"
+                      - option "🇸🇧 Solomon Islands"
+                      - option "🇸🇴 Somalia"
+                      - option "🇰🇷 South Korea"
+                      - option "🇸🇸 South Sudan"
+                      - option "🇱🇰 Sri Lanka"
+                      - option "🇸🇩 Sudan"
+                      - option "🇸🇷 Suriname"
+                      - option "🇸🇾 Syria"
+                      - option "🇹🇼 Taiwan"
+                      - option "🇹🇯 Tajikistan"
+                      - option "🇹🇿 Tanzania"
+                      - option "🇹🇭 Thailand"
+                      - option "🇹🇱 Timor-Leste"
+                      - option "🇹🇬 Togo"
+                      - option "🇹🇴 Tonga"
+                      - option "🇹🇹 Trinidad and Tobago"
+                      - option "🇹🇳 Tunisia"
+                      - option "🇹🇷 Turkey"
+                      - option "🇹🇲 Turkmenistan"
+                      - option "🇹🇻 Tuvalu"
+                      - option "🇺🇬 Uganda"
+                      - option "🇺🇦 Ukraine"
+                      - option "🇦🇪 United Arab Emirates"
+                      - option "🇺🇾 Uruguay"
+                      - option "🇺🇿 Uzbekistan"
+                      - option "🇻🇺 Vanuatu"
+                      - option "🇻🇦 Vatican City"
+                      - option "🇻🇪 Venezuela"
+                      - option "🇻🇳 Vietnam"
+                      - option "🇾🇪 Yemen"
+                      - option "🇿🇲 Zambia"
+                      - option "🇿🇼 Zimbabwe"
+                  - generic [ref=e171]:
+                    - generic [ref=e172]: Preferred Travel Date
+                    - textbox "Preferred Travel Date" [ref=e173]
+                - generic [ref=e174]:
+                  - generic [ref=e175]: Phone / WhatsApp
+                  - generic [ref=e176]:
+                    - combobox "Phone country code" [ref=e177]:
+                      - option "+1" [selected]
+                      - option "+44"
+                      - option "+49"
+                      - option "+33"
+                      - option "+31"
+                      - option "+61"
+                      - option "+255"
+                      - option "+254"
+                      - option "+27"
+                      - option "+91"
+                      - option "+86"
+                      - option "+81"
+                      - option "+34"
+                      - option "+39"
+                      - option "+41"
+                      - option "+43"
+                      - option "+46"
+                      - option "+47"
+                      - option "+45"
+                      - option "+353"
+                      - option "+64"
+                      - option "+32"
+                      - option "+65"
+                      - option "+55"
+                      - option "+52"
+                      - option "+48"
+                      - option "+7"
+                      - option "+971"
+                      - option "+966"
+                      - option "+90"
+                      - option "+62"
+                      - option "+60"
+                      - option "+66"
+                      - option "+84"
+                      - option "+82"
+                      - option "+234"
+                      - option "+20"
+                      - option "+256"
+                      - option "+250"
+                    - textbox "Phone / WhatsApp" [ref=e178]:
+                      - /placeholder: 123 456 7890
+                - generic [ref=e179]:
+                  - generic [ref=e180]:
+                    - generic [ref=e181]: Adults
+                    - spinbutton "Adults" [ref=e182]: "2"
+                  - generic [ref=e183]:
+                    - generic [ref=e184]: Children
+                    - spinbutton "Children" [ref=e185]: "0"
+              - generic [ref=e186]:
+                - generic [ref=e187]: Tell us about your dream trip
+                - textbox "Tell us about your dream trip" [ref=e188]:
+                  - /placeholder: What are your interests? Any special requirements? Preferred activities?
+              - text: Website
+              - textbox [ref=e189]
+              - button "Send Inquiry" [ref=e190]
+              - paragraph [ref=e191]:
+                - text: We typically respond within 24 hours. No spam, ever. Your data is protected under our
+                - link "privacy policy" [ref=e192] [cursor=pointer]:
+                  - /url: /privacy-policy/
+                - text: .
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - img [ref=e197]
+            - heading "Ngorongoro Crater Day Trip — Gallery" [level=2] [ref=e202]
+          - generic [ref=e203]:
+            - figure [ref=e204]:
+              - img "Ngorongoro Crater Day Trip - Photo 1" [ref=e205]
+            - figure [ref=e206]:
+              - img "Ngorongoro Crater Day Trip - Photo 2" [ref=e207]
+            - figure [ref=e208]:
+              - img "Ngorongoro Crater Day Trip - Photo 3" [ref=e209]
+            - figure [ref=e210]:
+              - img "Ngorongoro Crater Day Trip - Photo 4" [ref=e211]
+            - figure [ref=e212]:
+              - img "Ngorongoro Crater Day Trip - Photo 5" [ref=e213]
+            - figure [ref=e214]:
+              - img "Ngorongoro Crater Day Trip - Photo 6" [ref=e215]
+            - figure [ref=e216]:
+              - img "Ngorongoro Crater Day Trip - Photo 7" [ref=e217]
+        - generic [ref=e219]:
+          - heading "Articles About Day Trip" [level=2] [ref=e220]
+          - generic [ref=e221]:
+            - article [ref=e222]:
+              - link "10 Facts About Ngorongoro Crater" [ref=e223] [cursor=pointer]:
+                - /url: /10-interesting-facts-that-surely-inspire-you-to-visit-ngorongoro-crater/
+                - img "10 Facts About Ngorongoro Crater" [ref=e225]
+              - generic [ref=e226]:
+                - link "10 Facts About Ngorongoro Crater" [ref=e227] [cursor=pointer]:
+                  - /url: /10-interesting-facts-that-surely-inspire-you-to-visit-ngorongoro-crater/
+                  - heading "10 Facts About Ngorongoro Crater" [level=3] [ref=e228]
+                - paragraph [ref=e229]: Discover fascinating facts about Ngorongoro Crater - the world's largest intact caldera and one of Africa's most incredible wildlife destinations.
+                - generic [ref=e230]:
+                  - generic [ref=e231]:
+                    - img [ref=e232]
+                    - text: Snow Africa Team
+                  - generic [ref=e235]:
+                    - img [ref=e236]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e238] [cursor=pointer]:
+                  - /url: /10-interesting-facts-that-surely-inspire-you-to-visit-ngorongoro-crater/
+                  - text: Read More
+                  - generic [ref=e239]: →
+            - article [ref=e240]:
+              - link "Ngorongoro Crater Safari Guide" [ref=e241] [cursor=pointer]:
+                - /url: /ngorongoro-crater-safari/
+                - img "Ngorongoro Crater Safari Guide" [ref=e243]
+              - generic [ref=e244]:
+                - link "Ngorongoro Crater Safari Guide" [ref=e245] [cursor=pointer]:
+                  - /url: /ngorongoro-crater-safari/
+                  - heading "Ngorongoro Crater Safari Guide" [level=3] [ref=e246]
+                - paragraph [ref=e247]: Explore the Ngorongoro Crater - a UNESCO World Heritage site with the highest density of wildlife in Africa and guaranteed Big Five sightings.
+                - generic [ref=e248]:
+                  - generic [ref=e249]:
+                    - img [ref=e250]
+                    - text: Snow Africa Team
+                  - generic [ref=e253]:
+                    - img [ref=e254]
+                    - text: Feb 13, 2026
+                - link "Read More →" [ref=e256] [cursor=pointer]:
+                  - /url: /ngorongoro-crater-safari/
+                  - text: Read More
+                  - generic [ref=e257]: →
+            - article [ref=e258]:
+              - 'link "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e259] [cursor=pointer]':
+                - /url: /6-day-rongai-route-kilimanjaro-guide/
+                - 'img "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e261]'
+              - generic [ref=e262]:
+                - 'link "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e263] [cursor=pointer]':
+                  - /url: /6-day-rongai-route-kilimanjaro-guide/
+                  - 'heading "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [level=3] [ref=e264]'
+                - paragraph [ref=e265]: The 6-Day Rongai Route is Kilimanjaro's only northern approach — quieter, wilder, and excellent in the rainy season. This complete guide covers the full day-by-day itinerary, camps, elevation data, difficulty, and everything you need to plan your climb.
+                - generic [ref=e266]:
+                  - generic [ref=e267]:
+                    - img [ref=e268]
+                    - text: Snow Africa Adventure
+                  - generic [ref=e271]:
+                    - img [ref=e272]
+                    - text: Mar 18, 2026
+                - link "Read More →" [ref=e274] [cursor=pointer]:
+                  - /url: /6-day-rongai-route-kilimanjaro-guide/
+                  - text: Read More
+                  - generic [ref=e275]: →
+        - generic [ref=e277]:
+          - heading "More Day Trips" [level=2] [ref=e278]
+          - generic [ref=e279]:
+            - link "Arusha City Day Trip $100 Arusha City Day Trip Arusha" [ref=e280] [cursor=pointer]:
+              - /url: /tanzania-day-tours/arusha-city-day-trip/
+              - generic [ref=e281]:
+                - img "Arusha City Day Trip" [ref=e282]
+                - generic [ref=e283]: $100
+              - generic [ref=e284]:
+                - heading "Arusha City Day Trip" [level=3] [ref=e285]
+                - paragraph [ref=e286]: Arusha
+            - link "Tarangire National Park Day Trip $300 Tarangire National Park Day Trip Tarangire National Park" [ref=e287] [cursor=pointer]:
+              - /url: /tanzania-day-tours/tarangire-national-park-day-trip/
+              - generic [ref=e288]:
+                - img "Tarangire National Park Day Trip" [ref=e289]
+                - generic [ref=e290]: $300
+              - generic [ref=e291]:
+                - heading "Tarangire National Park Day Trip" [level=3] [ref=e292]
+                - paragraph [ref=e293]: Tarangire National Park
+            - link "Lake Manyara Day Trip $290 Lake Manyara Day Trip Lake Manyara National Park" [ref=e294] [cursor=pointer]:
+              - /url: /tanzania-day-tours/lake-manyara-day-trip/
+              - generic [ref=e295]:
+                - img "Lake Manyara Day Trip" [ref=e296]
+                - generic [ref=e297]: $290
+              - generic [ref=e298]:
+                - heading "Lake Manyara Day Trip" [level=3] [ref=e299]
+                - paragraph [ref=e300]: Lake Manyara National Park
+          - link "View All Day Tours →" [ref=e302] [cursor=pointer]:
+            - /url: /tanzania-day-tours/
+    - contentinfo [ref=e303]:
+      - generic [ref=e306]:
+        - generic [ref=e307]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e308]
+      - generic [ref=e313]:
+        - generic [ref=e314]:
+          - generic [ref=e315]:
+            - img "Snow Africa Adventure" [ref=e317]
+            - paragraph [ref=e318]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e319]:
+              - listitem [ref=e320]:
+                - link "+255 766 657 854" [ref=e321] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e323]
+                  - generic [ref=e325]: +255 766 657 854
+              - listitem [ref=e326]:
+                - link "info@snowafricaadventure.com" [ref=e327] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e329]
+                  - generic [ref=e332]: info@snowafricaadventure.com
+              - listitem [ref=e333]:
+                - img [ref=e335]
+                - generic [ref=e338]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e339]:
+            - heading "Safari & Tours" [level=3] [ref=e340]
+            - list [ref=e341]:
+              - listitem [ref=e342]:
+                - link "All Safari Packages" [ref=e343] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e344]:
+                - link "Tailor-Made Safaris" [ref=e345] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e346]:
+                - link "Tanzania Destinations" [ref=e347] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e348]:
+                - link "View all" [ref=e349] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e350]: →
+          - generic [ref=e351]:
+            - heading "Kilimanjaro" [level=3] [ref=e352]
+            - list [ref=e353]:
+              - listitem [ref=e354]:
+                - link "All Trekking Routes" [ref=e355] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e356]:
+                - link "Best Route to Climb" [ref=e357] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e358]:
+                - link "Climbing Kilimanjaro Guide" [ref=e359] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e360]:
+                - link "Join Group Departures" [ref=e361] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e362]:
+                - link "Kilimanjaro Prices" [ref=e363] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e364]:
+                - link "Best Time to Climb" [ref=e365] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e366]:
+                - link "View all routes" [ref=e367] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e368]: →
+          - generic [ref=e369]:
+            - heading "Company" [level=3] [ref=e370]
+            - list [ref=e371]:
+              - listitem [ref=e372]:
+                - link "About Us" [ref=e373] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e374]:
+                - link "Our Guides" [ref=e375] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e376]:
+                - link "Contact Us" [ref=e377] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e378]:
+                - link "Terms & Conditions" [ref=e379] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e380]:
+                - link "Privacy Policy" [ref=e381] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e382]:
+                - link "Blog" [ref=e383] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e384]:
+              - heading "Follow the Journey" [level=4] [ref=e385]
+              - generic [ref=e386]:
+                - link "Facebook" [ref=e387] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e388]
+                - link "Twitter" [ref=e390] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e391]
+                - link "Instagram" [ref=e393] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e394]
+                - link "YouTube" [ref=e397] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e398]
+        - generic [ref=e402]:
+          - generic [ref=e403]: Accredited & Trusted
+          - generic [ref=e404]:
+            - link "TripAdvisor" [ref=e405] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e407]: SafariBookings
+            - generic [ref=e409]: TATO Member
+            - generic [ref=e411]: KPAP Partner
+      - generic [ref=e414]:
+        - generic [ref=e415]:
+          - generic [ref=e416]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e417]: "|"
+          - link "Terms & Conditions" [ref=e418] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e419]: ·
+          - link "Privacy Policy" [ref=e420] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e421]:
+          - generic [ref=e422]: Crafted by
+          - link "Timeless International" [ref=e423] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:26 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e424]:
+      - img [ref=e425]
+  - generic [ref=e432] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e433]:
+      - img [ref=e434]
+    - generic [ref=e437]:
+      - button "Open issues overlay" [ref=e438]:
+        - generic [ref=e439]:
+          - generic [ref=e440]: "1"
+          - generic [ref=e441]: "2"
+        - generic [ref=e442]:
+          - text: Issue
+          - generic [ref=e443]: s
+      - button "Collapse issues badge" [ref=e444]:
+        - img [ref=e445]
+  - alert [ref=e447]

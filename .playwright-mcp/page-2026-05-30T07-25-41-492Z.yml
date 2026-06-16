@@ -1,0 +1,1251 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - 'link "Call us: +255 766 657 854" [ref=e8] [cursor=pointer]':
+            - /url: tel:+255766657854
+            - img [ref=e9]
+            - generic [ref=e11]: +255 766 657 854
+          - 'link "Email us: info@snowafricaadventure.com" [ref=e12] [cursor=pointer]':
+            - /url: mailto:info@snowafricaadventure.com
+            - img [ref=e13]
+            - generic [ref=e16]: info@snowafricaadventure.com
+        - navigation [ref=e17]:
+          - link "About Us" [ref=e18] [cursor=pointer]:
+            - /url: /about-us/
+          - link "Tailor-Made Safaris" [ref=e19] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Blog" [ref=e20] [cursor=pointer]:
+            - /url: /blog/
+      - generic [ref=e23]:
+        - link "Snow Africa Adventure" [ref=e24] [cursor=pointer]:
+          - /url: /
+          - img "Snow Africa Adventure" [ref=e25]
+        - navigation [ref=e26]:
+          - link "Home" [ref=e27] [cursor=pointer]:
+            - /url: /
+          - link "Safaris & Tours" [ref=e29] [cursor=pointer]:
+            - /url: /tanzania-safaris/
+            - text: Safaris & Tours
+            - img [ref=e30]
+          - link "Trekking" [ref=e33] [cursor=pointer]:
+            - /url: /trekking/
+            - text: Trekking
+            - img [ref=e34]
+          - link "Join Group Climb" [ref=e36] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - img [ref=e37]
+            - text: Join Group Climb
+          - link "Zanzibar" [ref=e42] [cursor=pointer]:
+            - /url: /zanzibar/
+          - link "Contact Us" [ref=e43] [cursor=pointer]:
+            - /url: /contact-us/
+        - generic [ref=e44]:
+          - link "Plan Your Trip" [ref=e45] [cursor=pointer]:
+            - /url: /tailor-made-safari/
+          - link "Search" [ref=e46] [cursor=pointer]:
+            - /url: /search/
+            - img [ref=e47]
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - img "8 Days Lemosho Route" [ref=e54]
+          - generic [ref=e55]:
+            - navigation [ref=e56]:
+              - link "Home" [ref=e57] [cursor=pointer]:
+                - /url: /
+              - generic [ref=e58]: /
+              - link "Kilimanjaro" [ref=e59] [cursor=pointer]:
+                - /url: /trekking/
+              - generic [ref=e60]: /
+              - generic [ref=e61]: 8 Days Lemosho Route
+            - generic [ref=e62]:
+              - img [ref=e63]
+              - text: 95% Success Rate
+            - heading "8 Days Lemosho Route" [level=1] [ref=e65]
+            - paragraph [ref=e66]: The Lemosho Route is widely considered the most beautiful and remote route on Kilimanjaro. Starting from the western Lemosho Gate, you'll traverse the entire mountain through pristine wilderness befor...
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - img [ref=e70]
+                - generic [ref=e72]:
+                  - generic [ref=e73]: 8 Days
+                  - generic [ref=e74]: Duration
+              - generic [ref=e75]:
+                - img [ref=e77]
+                - generic [ref=e79]:
+                  - generic [ref=e80]: Moderate
+                  - generic [ref=e81]: Difficulty
+              - generic [ref=e82]:
+                - img [ref=e84]
+                - generic [ref=e89]:
+                  - generic [ref=e90]: 95%
+                  - generic [ref=e91]: Success Rate
+              - generic [ref=e92]:
+                - img [ref=e94]
+                - generic [ref=e96]:
+                  - generic [ref=e97]: 5895m
+                  - generic [ref=e98]: Summit
+        - navigation [ref=e99]:
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - button "Overview" [ref=e103]
+              - button "Itinerary" [ref=e104]
+              - button "What's Included" [ref=e105]
+              - button "Pricing" [ref=e106]
+              - button "Departures" [ref=e107]
+              - button "FAQs" [ref=e108]
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - generic [ref=e111]: From
+                - generic [ref=e112]: $2,680/person
+              - link "Book Now" [ref=e113] [cursor=pointer]:
+                - /url: "#inquiry-form"
+        - main [ref=e114]:
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - generic [ref=e119]:
+                  - img [ref=e121]
+                  - heading "Route Overview" [level=2] [ref=e123]
+                - paragraph [ref=e124]: The Lemosho Route is widely considered the most beautiful and remote route on Kilimanjaro. Starting from the western Lemosho Gate, you'll traverse the entire mountain through pristine wilderness before reaching Uhuru Peak.
+                - generic [ref=e125]:
+                  - generic [ref=e126]:
+                    - img [ref=e128]
+                    - heading "Highest success rate on Kilimanjaro (95%)" [level=4] [ref=e132]
+                    - paragraph [ref=e133]: Unique experience
+                  - generic [ref=e134]:
+                    - img [ref=e136]
+                    - heading "95% Success" [level=4] [ref=e139]
+                    - paragraph [ref=e140]: Industry-leading summit rate
+                  - generic [ref=e141]:
+                    - img [ref=e143]
+                    - heading "Small Groups" [level=4] [ref=e148]
+                    - paragraph [ref=e149]: Maximum 12 climbers
+              - generic [ref=e150]:
+                - generic [ref=e151]:
+                  - img [ref=e153]
+                  - heading "Route Gallery" [level=2] [ref=e157]
+                - figure [ref=e159]:
+                  - img "8 Days Lemosho Route - Photo 1" [ref=e160]
+              - generic [ref=e161]:
+                - generic [ref=e162]:
+                  - img [ref=e164]
+                  - heading "Your 9-Day Journey" [level=2] [ref=e166]
+                - paragraph [ref=e167]: From rainforest floor to Africa's rooftop - traverse 5 climate zones and experience the adventure of a lifetime.
+                - generic [ref=e168]:
+                  - generic [ref=e169]:
+                    - generic [ref=e170]: Elevation Profile
+                    - generic [ref=e171]:
+                      - generic [ref=e172]: Camp
+                      - generic [ref=e174]: Summit
+                  - generic [ref=e176]:
+                    - img [ref=e178]
+                    - generic [ref=e181]:
+                      - generic [ref=e182] [cursor=pointer]:
+                        - generic [ref=e184]: 2,650m
+                        - generic [ref=e185]: Mti Mkubwa camp (2,650m)
+                      - generic [ref=e186] [cursor=pointer]:
+                        - generic [ref=e188]: 3,610m
+                        - generic [ref=e189]: Shira 1 Camp (3,610m)
+                      - generic [ref=e190] [cursor=pointer]:
+                        - generic [ref=e192]: 3,850m
+                        - generic [ref=e193]: Shira 2 Camp (3,850m)
+                      - generic [ref=e194] [cursor=pointer]:
+                        - generic [ref=e196]: 3,960m
+                        - generic [ref=e197]: Baranco (3,900m)
+                      - generic [ref=e198] [cursor=pointer]:
+                        - generic [ref=e200]: 3,995m
+                        - generic [ref=e201]: Karanga camp(3,995m)
+                      - generic [ref=e202] [cursor=pointer]:
+                        - generic [ref=e204]: 4,673m
+                        - generic [ref=e205]: Barafu Camp (4,673m)
+                      - generic [ref=e206] [cursor=pointer]:
+                        - generic [ref=e208]: 5,895m
+                        - generic [ref=e209]: Uhuru Peak (5,895m-Mweka camp (3,100m)
+                - generic [ref=e210]:
+                  - generic [ref=e211] [cursor=pointer]:
+                    - generic [ref=e212]:
+                      - img "Arrival Day" [ref=e213]
+                      - generic [ref=e214]: "0"
+                      - generic [ref=e215]: Start
+                    - generic [ref=e216]:
+                      - heading "Arrival Day" [level=4] [ref=e218]
+                      - paragraph [ref=e219]: Arrive at Kilimanjaro International Airport. Transfer to Arusha Planet lodge in Arusha for overnight stay, briefing, and gear check.
+                  - generic [ref=e221] [cursor=pointer]:
+                    - generic [ref=e222]:
+                      - img "Lemosho Gate to Mti Mkubwa Camp" [ref=e223]
+                      - generic [ref=e224]: "1"
+                    - generic [ref=e225]:
+                      - generic [ref=e226]:
+                        - heading "Lemosho Gate to Mti Mkubwa Camp" [level=4] [ref=e227]
+                        - generic [ref=e228]:
+                          - img [ref=e229]
+                          - text: +550m
+                      - paragraph [ref=e231]: Drive to Lemosho Gate on the western side of Kilimanjaro. After registration, begin trekking through pristine montane forest, rich in wildlife including Colobus monkeys and tropical birds.
+                      - generic [ref=e232]:
+                        - generic [ref=e233]:
+                          - generic [ref=e234]: 6km
+                          - generic [ref=e235]: Distance
+                        - generic [ref=e236]:
+                          - generic [ref=e237]: 3-4 hours
+                          - generic [ref=e238]: Duration
+                        - generic [ref=e239]:
+                          - generic [ref=e240]: Mti
+                          - generic [ref=e241]: Camp
+                  - generic [ref=e242] [cursor=pointer]:
+                    - generic [ref=e243]:
+                      - img "Mti Mkubwa to Shira 1 Camp" [ref=e244]
+                      - generic [ref=e245]: "2"
+                    - generic [ref=e246]:
+                      - generic [ref=e247]:
+                        - heading "Mti Mkubwa to Shira 1 Camp" [level=4] [ref=e248]
+                        - generic [ref=e249]:
+                          - img [ref=e250]
+                          - text: +960m
+                      - paragraph [ref=e252]: Continue through rainforest before emerging onto the Shira Plateau. The vegetation transitions from forest to moorland with giant heathers. Enjoy spectacular views of Kibo Peak.
+                      - generic [ref=e253]:
+                        - generic [ref=e254]:
+                          - generic [ref=e255]: 9km
+                          - generic [ref=e256]: Distance
+                        - generic [ref=e257]:
+                          - generic [ref=e258]: 5-6 hours
+                          - generic [ref=e259]: Duration
+                        - generic [ref=e260]:
+                          - generic [ref=e261]: Shira
+                          - generic [ref=e262]: Camp
+                  - generic [ref=e263] [cursor=pointer]:
+                    - generic [ref=e264]:
+                      - img "Shira 1 to Shira 2 Camp" [ref=e265]
+                      - generic [ref=e266]: "3"
+                    - generic [ref=e267]:
+                      - generic [ref=e268]:
+                        - heading "Shira 1 to Shira 2 Camp" [level=4] [ref=e269]
+                        - generic [ref=e270]:
+                          - img [ref=e271]
+                          - text: +240m
+                      - paragraph [ref=e273]: Trek across the Shira Plateau, one of Africa's highest plateaus. Pass unique alpine vegetation including giant groundsels and lobelias. Optional acclimatization hike to Shira Cathedral.
+                      - generic [ref=e274]:
+                        - generic [ref=e275]:
+                          - generic [ref=e276]: 6km
+                          - generic [ref=e277]: Distance
+                        - generic [ref=e278]:
+                          - generic [ref=e279]: 4-5 hours
+                          - generic [ref=e280]: Duration
+                        - generic [ref=e281]:
+                          - generic [ref=e282]: Shira
+                          - generic [ref=e283]: Camp
+                  - generic [ref=e284] [cursor=pointer]:
+                    - generic [ref=e285]:
+                      - img "Shira 2 to Barranco Camp via Lava Tower" [ref=e286]
+                      - generic [ref=e287]: "4"
+                      - generic [ref=e288]: Key Day
+                    - generic [ref=e289]:
+                      - generic [ref=e290]:
+                        - heading "Shira 2 to Barranco Camp via Lava Tower" [level=4] [ref=e291]
+                        - generic [ref=e292]:
+                          - img [ref=e293]
+                          - text: +110m
+                      - paragraph [ref=e295]: Ascend towards Lava Tower (4,600m) for excellent acclimatization. Enjoy lunch at this dramatic volcanic formation before descending to Baranco Camp through the alpine desert zone.
+                      - generic [ref=e296]:
+                        - generic [ref=e297]:
+                          - generic [ref=e298]: 10km
+                          - generic [ref=e299]: Distance
+                        - generic [ref=e300]:
+                          - generic [ref=e301]: 6-7 hours
+                          - generic [ref=e302]: Duration
+                        - generic [ref=e303]:
+                          - generic [ref=e304]: Baranco
+                          - generic [ref=e305]: Camp
+                  - generic [ref=e306] [cursor=pointer]:
+                    - generic [ref=e307]:
+                      - img "Baranco Camp to Karanga Camp" [ref=e308]
+                      - generic [ref=e309]: "5"
+                    - generic [ref=e310]:
+                      - generic [ref=e311]:
+                        - heading "Baranco Camp to Karanga Camp" [level=4] [ref=e312]
+                        - generic [ref=e313]:
+                          - img [ref=e314]
+                          - text: +95m
+                      - paragraph [ref=e316]: Climb the spectacular Barranco Wall, a highlight of the route. This non-technical scramble rewards you with stunning views of the southern glaciers. Continue to Karanga Valley.
+                      - generic [ref=e317]:
+                        - generic [ref=e318]:
+                          - generic [ref=e319]: 5km
+                          - generic [ref=e320]: Distance
+                        - generic [ref=e321]:
+                          - generic [ref=e322]: 4-5 hours
+                          - generic [ref=e323]: Duration
+                        - generic [ref=e324]:
+                          - generic [ref=e325]: Karanga
+                          - generic [ref=e326]: Camp
+                  - generic [ref=e327] [cursor=pointer]:
+                    - generic [ref=e328]:
+                      - img "Karanga Camp to Barafu Camp" [ref=e329]
+                      - generic [ref=e330]: "6"
+                    - generic [ref=e331]:
+                      - generic [ref=e332]:
+                        - heading "Karanga Camp to Barafu Camp" [level=4] [ref=e333]
+                        - generic [ref=e334]:
+                          - img [ref=e335]
+                          - text: +678m
+                      - paragraph [ref=e337]: Short but steady trek to Barafu Camp, your summit base. The landscape becomes increasingly barren as you enter the Alpine desert zone. Rest and prepare for summit night.
+                      - generic [ref=e338]:
+                        - generic [ref=e339]:
+                          - generic [ref=e340]: 4km
+                          - generic [ref=e341]: Distance
+                        - generic [ref=e342]:
+                          - generic [ref=e343]: 3-4 hours
+                          - generic [ref=e344]: Duration
+                        - generic [ref=e345]:
+                          - generic [ref=e346]: Barafu
+                          - generic [ref=e347]: Camp
+                  - generic [ref=e348] [cursor=pointer]:
+                    - generic [ref=e349]:
+                      - img "Summit Day - Uhuru Peak" [ref=e350]
+                      - generic [ref=e351]: "7"
+                      - generic [ref=e352]: Summit!
+                    - generic [ref=e353]:
+                      - generic [ref=e354]:
+                        - heading "Summit Day - Uhuru Peak" [level=4] [ref=e355]
+                        - generic [ref=e356]:
+                          - img [ref=e357]
+                          - text: "-1,573m"
+                      - paragraph [ref=e359]: Begin summit attempt around midnight. Trek through scree to Stella Point on the crater rim, then continue to Uhuru Peak (5,895m). Witness an unforgettable sunrise from the Roof of Africa. Descend to Mweka Camp.
+                      - generic [ref=e360]:
+                        - generic [ref=e361]:
+                          - generic [ref=e362]: 16km
+                          - generic [ref=e363]: Distance
+                        - generic [ref=e364]:
+                          - generic [ref=e365]: 12-16 hours
+                          - generic [ref=e366]: Duration
+                        - generic [ref=e367]:
+                          - generic [ref=e368]: Uhuru
+                          - generic [ref=e369]: Camp
+                  - generic [ref=e370] [cursor=pointer]:
+                    - generic [ref=e371]:
+                      - img "Mweka Camp to Mweka Gate" [ref=e372]
+                      - generic [ref=e373]: "8"
+                      - generic [ref=e374]: Finish
+                    - generic [ref=e375]:
+                      - generic [ref=e376]:
+                        - heading "Mweka Camp to Mweka Gate" [level=4] [ref=e377]
+                        - generic [ref=e378]:
+                          - img [ref=e379]
+                          - text: "-1,460m"
+                      - paragraph [ref=e381]: Descend through rainforest to Mweka Gate. Receive summit certificates and transfer to Arusha for celebration dinner. Tipping is done at the lodge, where you will also say goodbye to your team
+                      - generic [ref=e382]:
+                        - generic [ref=e383]:
+                          - generic [ref=e384]: 10km
+                          - generic [ref=e385]: Distance
+                        - generic [ref=e386]:
+                          - generic [ref=e387]: 3-4 hours
+                          - generic [ref=e388]: Duration
+                - button "Download Full Itinerary PDF" [ref=e390]:
+                  - img [ref=e391]
+                  - text: Download Full Itinerary PDF
+              - generic [ref=e394]:
+                - generic [ref=e395]:
+                  - img [ref=e397]
+                  - heading "What's Included" [level=2] [ref=e400]
+                - generic [ref=e401]:
+                  - generic [ref=e402]:
+                    - heading "Included" [level=4] [ref=e403]:
+                      - img [ref=e404]
+                      - text: Included
+                    - list [ref=e406]:
+                      - listitem [ref=e407]:
+                        - img [ref=e408]
+                        - generic [ref=e410]: Park entrance fees
+                      - listitem [ref=e411]:
+                        - img [ref=e412]
+                        - generic [ref=e414]: Professional mountain guides
+                      - listitem [ref=e415]:
+                        - img [ref=e416]
+                        - generic [ref=e418]: Porters and cook
+                      - listitem [ref=e419]:
+                        - img [ref=e420]
+                        - generic [ref=e422]: All meals on the mountain
+                      - listitem [ref=e423]:
+                        - img [ref=e424]
+                        - generic [ref=e426]: Quality camping equipment
+                      - listitem [ref=e427]:
+                        - img [ref=e428]
+                        - generic [ref=e430]: Airport transfers
+                      - listitem [ref=e431]:
+                        - img [ref=e432]
+                        - generic [ref=e434]: 2 nights hotel (pre and post trek)
+                      - listitem [ref=e435]:
+                        - img [ref=e436]
+                        - generic [ref=e438]: Emergence Oxygen Tank
+                      - listitem [ref=e439]:
+                        - img [ref=e440]
+                        - generic [ref=e442]: Sleeping pad
+                      - listitem [ref=e443]:
+                        - img [ref=e444]
+                        - generic [ref=e446]: A Pulse Oximeter
+                      - listitem [ref=e447]:
+                        - img [ref=e448]
+                        - generic [ref=e450]: Roundtrip Park gates transfer
+                  - generic [ref=e451]:
+                    - heading "Not Included" [level=4] [ref=e452]:
+                      - img [ref=e453]
+                      - text: Not Included
+                    - list [ref=e455]:
+                      - listitem [ref=e456]:
+                        - img [ref=e457]
+                        - generic [ref=e459]: International flights
+                      - listitem [ref=e460]:
+                        - img [ref=e461]
+                        - generic [ref=e463]: Travel insurance
+                      - listitem [ref=e464]:
+                        - img [ref=e465]
+                        - generic [ref=e467]: Personal climbing gear
+                      - listitem [ref=e468]:
+                        - img [ref=e469]
+                        - generic [ref=e471]: Tips for crew
+                      - listitem [ref=e472]:
+                        - img [ref=e473]
+                        - generic [ref=e475]: Visa fees
+            - generic [ref=e477]:
+              - generic [ref=e478]:
+                - heading "Quick Inquiry" [level=3] [ref=e480]
+                - generic [ref=e481]:
+                  - paragraph [ref=e482]: Get a personalized quote for your group. We'll respond within 24 hours.
+                  - link "View Pricing" [ref=e483] [cursor=pointer]:
+                    - /url: "#pricing"
+                  - link "See Departures →" [ref=e484] [cursor=pointer]:
+                    - /url: "#departures"
+              - generic [ref=e485]:
+                - heading "Your Expert Guide" [level=3] [ref=e487]
+                - generic [ref=e488]:
+                  - generic [ref=e489]:
+                    - img "Guide Florent & Caroline" [ref=e490]
+                    - generic [ref=e491]: Florent & Caroline
+                    - generic [ref=e492]: Co-Founders, Safari & Trekking Experts
+                  - blockquote [ref=e493]: “The mountain teaches patience and rewards determination. Every step is a story.”
+                  - button "Ask Florent a Question" [ref=e494]
+        - generic [ref=e496]:
+          - generic [ref=e497]:
+            - generic [ref=e498]:
+              - img [ref=e499]
+              - text: Group Pricing
+            - heading "8 Days 8 Days Lemosho Route Pricing" [level=2] [ref=e501]
+            - paragraph [ref=e502]: Save more when you climb with friends. All prices include accommodation, meals, park fees, and expert guides.
+          - generic [ref=e503]:
+            - generic [ref=e504]:
+              - generic [ref=e505]: Group Size
+              - generic [ref=e506]: Price per Person
+              - generic [ref=e507]: Savings
+            - button "1 Person Private climb experience $3,150 USD —" [ref=e508] [cursor=pointer]:
+              - generic [ref=e509]:
+                - img [ref=e511]
+                - generic [ref=e514]:
+                  - heading "1 Person" [level=4] [ref=e515]
+                  - text: Private climb experience
+              - generic [ref=e516]: $3,150 USD
+              - generic [ref=e517]:
+                - generic [ref=e518]: —
+                - img [ref=e519]
+            - button "Most Popular 2-4 People Small group adventure $2,890 USD Save $260" [ref=e521] [cursor=pointer]:
+              - generic [ref=e522]: Most Popular
+              - generic [ref=e523]:
+                - img [ref=e525]
+                - generic [ref=e530]:
+                  - heading "2-4 People" [level=4] [ref=e531]
+                  - text: Small group adventure
+              - generic [ref=e532]: $2,890 USD
+              - generic [ref=e533]:
+                - generic [ref=e534]: Save $260
+                - img [ref=e535]
+            - button "5-7 People Medium group savings $2,780 USD Save $370" [ref=e537] [cursor=pointer]:
+              - generic [ref=e538]:
+                - img [ref=e540]
+                - generic [ref=e545]:
+                  - heading "5-7 People" [level=4] [ref=e546]
+                  - text: Medium group savings
+              - generic [ref=e547]: $2,780 USD
+              - generic [ref=e548]:
+                - generic [ref=e549]: Save $370
+                - img [ref=e550]
+            - button "8-10 People Large group discount $2,680 USD Save $470" [ref=e552] [cursor=pointer]:
+              - generic [ref=e553]:
+                - img [ref=e555]
+                - generic [ref=e560]:
+                  - heading "8-10 People" [level=4] [ref=e561]
+                  - text: Large group discount
+              - generic [ref=e562]: $2,680 USD
+              - generic [ref=e563]:
+                - generic [ref=e564]: Save $470
+                - img [ref=e565]
+            - button "11 & Above Best value for groups $2,560 USD Save $590" [ref=e567] [cursor=pointer]:
+              - generic [ref=e568]:
+                - img [ref=e570]
+                - generic [ref=e575]:
+                  - heading "11 & Above" [level=4] [ref=e576]
+                  - text: Best value for groups
+              - generic [ref=e577]: $2,560 USD
+              - generic [ref=e578]:
+                - generic [ref=e579]: Save $590
+                - img [ref=e580]
+            - generic [ref=e582]:
+              - generic [ref=e583]:
+                - generic [ref=e584]:
+                  - img [ref=e585]
+                  - text: Park fees included
+                - generic [ref=e587]:
+                  - img [ref=e588]
+                  - text: All meals
+                - generic [ref=e590]:
+                  - img [ref=e591]
+                  - text: Expert guides
+                - generic [ref=e593]:
+                  - img [ref=e594]
+                  - text: Camping equipment
+              - button "Get Custom Quote" [ref=e596] [cursor=pointer]
+        - generic [ref=e598]:
+          - generic [ref=e599]:
+            - generic [ref=e600]:
+              - img [ref=e601]
+              - text: Join Group Departures
+            - heading "Upcoming Kilimanjaro Climbs" [level=2] [ref=e606]
+            - paragraph [ref=e607]: Join fellow adventurers on scheduled group departures and save up to 25%
+          - generic [ref=e608]:
+            - generic [ref=e609]:
+              - generic [ref=e610]:
+                - generic [ref=e611]:
+                  - generic [ref=e612]:
+                    - generic [ref=e613]: Jun
+                    - generic [ref=e614]: "05"
+                  - generic [ref=e615]:
+                    - heading "Jun 5 - Jun 13, 2026" [level=4] [ref=e616]
+                    - generic [ref=e617]: 8 Days • 8 Days Lemosho Route
+                - generic [ref=e618]:
+                  - generic [ref=e619]: $2,680
+                  - generic [ref=e620]: per person
+              - generic [ref=e621]:
+                - generic [ref=e622]:
+                  - img [ref=e623]
+                  - text: 8 Days
+                - generic [ref=e626]:
+                  - img [ref=e627]
+                  - text: Max 10 climbers
+                - generic [ref=e632]:
+                  - img [ref=e633]
+                  - text: English guide
+              - generic [ref=e636]:
+                - generic [ref=e649]:
+                  - strong [ref=e650]: 10 spots
+                  - text: available
+                - button "Join This Group" [ref=e651]
+            - generic [ref=e652]:
+              - generic [ref=e653]:
+                - generic [ref=e654]:
+                  - generic [ref=e655]:
+                    - generic [ref=e656]: Jun
+                    - generic [ref=e657]: "11"
+                  - generic [ref=e658]:
+                    - heading "Jun 11 - Jun 19, 2026" [level=4] [ref=e659]
+                    - generic [ref=e660]: 8 Days • 8 Days Lemosho Route
+                - generic [ref=e661]:
+                  - generic [ref=e662]: $2,680
+                  - generic [ref=e663]: per person
+              - generic [ref=e664]:
+                - generic [ref=e665]:
+                  - img [ref=e666]
+                  - text: 8 Days
+                - generic [ref=e669]:
+                  - img [ref=e670]
+                  - text: Max 10 climbers
+                - generic [ref=e675]:
+                  - img [ref=e676]
+                  - text: English guide
+              - generic [ref=e679]:
+                - generic [ref=e692]:
+                  - strong [ref=e693]: 0 spots
+                  - text: left
+                - button "Join This Group" [ref=e694]
+            - generic [ref=e695]:
+              - generic [ref=e696]:
+                - generic [ref=e697]:
+                  - generic [ref=e698]:
+                    - generic [ref=e699]: Jun
+                    - generic [ref=e700]: "25"
+                  - generic [ref=e701]:
+                    - heading "Jun 25 - Jul 3, 2026" [level=4] [ref=e702]
+                    - generic [ref=e703]: 8 Days • 8 Days Lemosho Route
+                - generic [ref=e704]:
+                  - generic [ref=e705]: $2,680
+                  - generic [ref=e706]: per person
+              - generic [ref=e707]:
+                - generic [ref=e708]:
+                  - img [ref=e709]
+                  - text: 8 Days
+                - generic [ref=e712]:
+                  - img [ref=e713]
+                  - text: Max 10 climbers
+                - generic [ref=e718]:
+                  - img [ref=e719]
+                  - text: English guide
+              - generic [ref=e722]:
+                - generic [ref=e735]:
+                  - strong [ref=e736]: 10 spots
+                  - text: available
+                - button "Join This Group" [ref=e737]
+            - generic [ref=e738]:
+              - generic [ref=e739]:
+                - generic [ref=e740]:
+                  - generic [ref=e741]:
+                    - generic [ref=e742]: Jun
+                    - generic [ref=e743]: "26"
+                  - generic [ref=e744]:
+                    - heading "Jun 26 - Jul 4, 2026" [level=4] [ref=e745]
+                    - generic [ref=e746]: 8 Days • 8 Days Lemosho Route
+                - generic [ref=e747]:
+                  - generic [ref=e748]: $2,680
+                  - generic [ref=e749]: per person
+              - generic [ref=e750]:
+                - generic [ref=e751]:
+                  - img [ref=e752]
+                  - text: 8 Days
+                - generic [ref=e755]:
+                  - img [ref=e756]
+                  - text: Max 10 climbers
+                - generic [ref=e761]:
+                  - img [ref=e762]
+                  - text: English guide
+              - generic [ref=e765]:
+                - generic [ref=e778]:
+                  - strong [ref=e779]: 10 spots
+                  - text: available
+                - button "Join This Group" [ref=e780]
+          - link "View All Departures" [ref=e782] [cursor=pointer]:
+            - /url: /kilimanjaro-join-group-departures/
+            - text: View All Departures
+            - img [ref=e783]
+        - generic [ref=e788]:
+          - img [ref=e790]
+          - heading "Ready to Conquer Africa's Highest Peak?" [level=2] [ref=e792]
+          - paragraph [ref=e793]: Start your Kilimanjaro adventure today. Our expert team will help you choose the perfect route, departure date, and ensure you're fully prepared for the climb of a lifetime.
+          - generic [ref=e794]:
+            - link "Book Your Climb" [ref=e795] [cursor=pointer]:
+              - /url: "#inquiry-form"
+              - img [ref=e796]
+              - text: Book Your Climb
+            - link "Talk to an Expert" [ref=e798] [cursor=pointer]:
+              - /url: /contact-us/
+              - img [ref=e799]
+              - text: Talk to an Expert
+          - generic [ref=e801]:
+            - generic [ref=e802]:
+              - img [ref=e804]
+              - text: 4.9/5 Rating
+            - generic [ref=e806]:
+              - img [ref=e808]
+              - text: 2,500+ Climbers
+            - generic [ref=e813]:
+              - img [ref=e815]
+              - text: 95% Success Rate
+            - generic [ref=e818]:
+              - img [ref=e820]
+              - text: Licensed Operator
+        - generic [ref=e823]:
+          - generic [ref=e824]:
+            - heading "Get Custom Quote & Book Your Climb" [level=2] [ref=e825]
+            - paragraph [ref=e826]: Tell us about your group and preferred dates. We'll craft a personalized itinerary and get back to you within 24 hours.
+          - generic [ref=e827]:
+            - generic [ref=e828]:
+              - img [ref=e829]
+              - generic [ref=e831]: TATO Licensed
+            - generic [ref=e832]:
+              - img [ref=e833]
+              - generic [ref=e835]: 4.9/5 TripAdvisor
+            - generic [ref=e836]:
+              - img [ref=e837]
+              - generic [ref=e840]: No Hidden Fees
+            - generic [ref=e841]:
+              - img [ref=e842]
+              - generic [ref=e844]: 24hr Support
+            - generic [ref=e845]:
+              - img [ref=e846]
+              - generic [ref=e849]: Secure Booking
+          - generic [ref=e851]:
+            - generic [ref=e852]:
+              - generic [ref=e853]:
+                - generic [ref=e854]:
+                  - generic [ref=e855]: Full Name *
+                  - textbox "Full Name *" [ref=e856]:
+                    - /placeholder: John Smith
+                - generic [ref=e857]:
+                  - generic [ref=e858]: Email Address *
+                  - textbox "Email Address *" [ref=e859]:
+                    - /placeholder: john@example.com
+              - generic [ref=e860]:
+                - generic [ref=e861]:
+                  - generic [ref=e862]: Country *
+                  - combobox "Country *" [ref=e863]:
+                    - option "Select your country" [selected]
+                    - option "🇺🇸 United States"
+                    - option "🇬🇧 United Kingdom"
+                    - option "🇩🇪 Germany"
+                    - option "🇫🇷 France"
+                    - option "🇨🇦 Canada"
+                    - option "🇦🇺 Australia"
+                    - option "🇳🇱 Netherlands"
+                    - option "🇮🇹 Italy"
+                    - option "🇪🇸 Spain"
+                    - option "🇨🇭 Switzerland"
+                    - option "🇧🇪 Belgium"
+                    - option "🇦🇹 Austria"
+                    - option "🇸🇪 Sweden"
+                    - option "🇳🇴 Norway"
+                    - option "🇩🇰 Denmark"
+                    - option "🇮🇪 Ireland"
+                    - option "🇳🇿 New Zealand"
+                    - option "🇿🇦 South Africa"
+                    - option "🇯🇵 Japan"
+                    - option "🇸🇬 Singapore"
+                    - option "──────────────" [disabled]
+                    - option "🇦🇫 Afghanistan"
+                    - option "🇦🇱 Albania"
+                    - option "🇩🇿 Algeria"
+                    - option "🇦🇩 Andorra"
+                    - option "🇦🇴 Angola"
+                    - option "🇦🇬 Antigua and Barbuda"
+                    - option "🇦🇷 Argentina"
+                    - option "🇦🇲 Armenia"
+                    - option "🇦🇿 Azerbaijan"
+                    - option "🇧🇸 Bahamas"
+                    - option "🇧🇭 Bahrain"
+                    - option "🇧🇩 Bangladesh"
+                    - option "🇧🇧 Barbados"
+                    - option "🇧🇾 Belarus"
+                    - option "🇧🇿 Belize"
+                    - option "🇧🇯 Benin"
+                    - option "🇧🇹 Bhutan"
+                    - option "🇧🇴 Bolivia"
+                    - option "🇧🇦 Bosnia and Herzegovina"
+                    - option "🇧🇼 Botswana"
+                    - option "🇧🇷 Brazil"
+                    - option "🇧🇳 Brunei"
+                    - option "🇧🇬 Bulgaria"
+                    - option "🇧🇫 Burkina Faso"
+                    - option "🇧🇮 Burundi"
+                    - option "🇨🇻 Cabo Verde"
+                    - option "🇰🇭 Cambodia"
+                    - option "🇨🇲 Cameroon"
+                    - option "🇨🇫 Central African Republic"
+                    - option "🇹🇩 Chad"
+                    - option "🇨🇱 Chile"
+                    - option "🇨🇳 China"
+                    - option "🇨🇴 Colombia"
+                    - option "🇰🇲 Comoros"
+                    - option "🇨🇬 Congo"
+                    - option "🇨🇩 Congo (DRC)"
+                    - option "🇨🇷 Costa Rica"
+                    - option "🇭🇷 Croatia"
+                    - option "🇨🇺 Cuba"
+                    - option "🇨🇾 Cyprus"
+                    - option "🇨🇿 Czech Republic"
+                    - option "🇨🇮 Cote d'Ivoire"
+                    - option "🇩🇯 Djibouti"
+                    - option "🇩🇲 Dominica"
+                    - option "🇩🇴 Dominican Republic"
+                    - option "🇪🇨 Ecuador"
+                    - option "🇪🇬 Egypt"
+                    - option "🇸🇻 El Salvador"
+                    - option "🇬🇶 Equatorial Guinea"
+                    - option "🇪🇷 Eritrea"
+                    - option "🇪🇪 Estonia"
+                    - option "🇸🇿 Eswatini"
+                    - option "🇪🇹 Ethiopia"
+                    - option "🇫🇯 Fiji"
+                    - option "🇫🇮 Finland"
+                    - option "🇬🇦 Gabon"
+                    - option "🇬🇲 Gambia"
+                    - option "🇬🇪 Georgia"
+                    - option "🇬🇭 Ghana"
+                    - option "🇬🇷 Greece"
+                    - option "🇬🇩 Grenada"
+                    - option "🇬🇹 Guatemala"
+                    - option "🇬🇳 Guinea"
+                    - option "🇬🇼 Guinea-Bissau"
+                    - option "🇬🇾 Guyana"
+                    - option "🇭🇹 Haiti"
+                    - option "🇭🇳 Honduras"
+                    - option "🇭🇰 Hong Kong"
+                    - option "🇭🇺 Hungary"
+                    - option "🇮🇸 Iceland"
+                    - option "🇮🇳 India"
+                    - option "🇮🇩 Indonesia"
+                    - option "🇮🇷 Iran"
+                    - option "🇮🇶 Iraq"
+                    - option "🇮🇱 Israel"
+                    - option "🇯🇲 Jamaica"
+                    - option "🇯🇴 Jordan"
+                    - option "🇰🇿 Kazakhstan"
+                    - option "🇰🇪 Kenya"
+                    - option "🇰🇮 Kiribati"
+                    - option "🇰🇼 Kuwait"
+                    - option "🇰🇬 Kyrgyzstan"
+                    - option "🇱🇦 Laos"
+                    - option "🇱🇻 Latvia"
+                    - option "🇱🇧 Lebanon"
+                    - option "🇱🇸 Lesotho"
+                    - option "🇱🇷 Liberia"
+                    - option "🇱🇾 Libya"
+                    - option "🇱🇮 Liechtenstein"
+                    - option "🇱🇹 Lithuania"
+                    - option "🇱🇺 Luxembourg"
+                    - option "🇲🇴 Macau"
+                    - option "🇲🇬 Madagascar"
+                    - option "🇲🇼 Malawi"
+                    - option "🇲🇾 Malaysia"
+                    - option "🇲🇻 Maldives"
+                    - option "🇲🇱 Mali"
+                    - option "🇲🇹 Malta"
+                    - option "🇲🇭 Marshall Islands"
+                    - option "🇲🇷 Mauritania"
+                    - option "🇲🇺 Mauritius"
+                    - option "🇲🇽 Mexico"
+                    - option "🇫🇲 Micronesia"
+                    - option "🇲🇩 Moldova"
+                    - option "🇲🇨 Monaco"
+                    - option "🇲🇳 Mongolia"
+                    - option "🇲🇪 Montenegro"
+                    - option "🇲🇦 Morocco"
+                    - option "🇲🇿 Mozambique"
+                    - option "🇲🇲 Myanmar"
+                    - option "🇳🇦 Namibia"
+                    - option "🇳🇷 Nauru"
+                    - option "🇳🇵 Nepal"
+                    - option "🇳🇮 Nicaragua"
+                    - option "🇳🇪 Niger"
+                    - option "🇳🇬 Nigeria"
+                    - option "🇰🇵 North Korea"
+                    - option "🇲🇰 North Macedonia"
+                    - option "🇴🇲 Oman"
+                    - option "🇵🇰 Pakistan"
+                    - option "🇵🇼 Palau"
+                    - option "🇵🇸 Palestine"
+                    - option "🇵🇦 Panama"
+                    - option "🇵🇬 Papua New Guinea"
+                    - option "🇵🇾 Paraguay"
+                    - option "🇵🇪 Peru"
+                    - option "🇵🇭 Philippines"
+                    - option "🇵🇱 Poland"
+                    - option "🇵🇹 Portugal"
+                    - option "🇶🇦 Qatar"
+                    - option "🇷🇴 Romania"
+                    - option "🇷🇺 Russia"
+                    - option "🇷🇼 Rwanda"
+                    - option "🇰🇳 Saint Kitts and Nevis"
+                    - option "🇱🇨 Saint Lucia"
+                    - option "🇻🇨 Saint Vincent"
+                    - option "🇼🇸 Samoa"
+                    - option "🇸🇲 San Marino"
+                    - option "🇸🇹 Sao Tome and Principe"
+                    - option "🇸🇦 Saudi Arabia"
+                    - option "🇸🇳 Senegal"
+                    - option "🇷🇸 Serbia"
+                    - option "🇸🇨 Seychelles"
+                    - option "🇸🇱 Sierra Leone"
+                    - option "🇸🇰 Slovakia"
+                    - option "🇸🇮 Slovenia"
+                    - option "🇸🇧 Solomon Islands"
+                    - option "🇸🇴 Somalia"
+                    - option "🇰🇷 South Korea"
+                    - option "🇸🇸 South Sudan"
+                    - option "🇱🇰 Sri Lanka"
+                    - option "🇸🇩 Sudan"
+                    - option "🇸🇷 Suriname"
+                    - option "🇸🇾 Syria"
+                    - option "🇹🇼 Taiwan"
+                    - option "🇹🇯 Tajikistan"
+                    - option "🇹🇿 Tanzania"
+                    - option "🇹🇭 Thailand"
+                    - option "🇹🇱 Timor-Leste"
+                    - option "🇹🇬 Togo"
+                    - option "🇹🇴 Tonga"
+                    - option "🇹🇹 Trinidad and Tobago"
+                    - option "🇹🇳 Tunisia"
+                    - option "🇹🇷 Turkey"
+                    - option "🇹🇲 Turkmenistan"
+                    - option "🇹🇻 Tuvalu"
+                    - option "🇺🇬 Uganda"
+                    - option "🇺🇦 Ukraine"
+                    - option "🇦🇪 United Arab Emirates"
+                    - option "🇺🇾 Uruguay"
+                    - option "🇺🇿 Uzbekistan"
+                    - option "🇻🇺 Vanuatu"
+                    - option "🇻🇦 Vatican City"
+                    - option "🇻🇪 Venezuela"
+                    - option "🇻🇳 Vietnam"
+                    - option "🇾🇪 Yemen"
+                    - option "🇿🇲 Zambia"
+                    - option "🇿🇼 Zimbabwe"
+                - generic [ref=e864]:
+                  - generic [ref=e865]: Preferred Travel Date
+                  - textbox "Preferred Travel Date" [ref=e866]
+              - generic [ref=e867]:
+                - generic [ref=e868]: Phone / WhatsApp
+                - generic [ref=e869]:
+                  - combobox "Phone country code" [ref=e870]:
+                    - option "+1" [selected]
+                    - option "+44"
+                    - option "+49"
+                    - option "+33"
+                    - option "+31"
+                    - option "+61"
+                    - option "+255"
+                    - option "+254"
+                    - option "+27"
+                    - option "+91"
+                    - option "+86"
+                    - option "+81"
+                    - option "+34"
+                    - option "+39"
+                    - option "+41"
+                    - option "+43"
+                    - option "+46"
+                    - option "+47"
+                    - option "+45"
+                    - option "+353"
+                    - option "+64"
+                    - option "+32"
+                    - option "+65"
+                    - option "+55"
+                    - option "+52"
+                    - option "+48"
+                    - option "+7"
+                    - option "+971"
+                    - option "+966"
+                    - option "+90"
+                    - option "+62"
+                    - option "+60"
+                    - option "+66"
+                    - option "+84"
+                    - option "+82"
+                    - option "+234"
+                    - option "+20"
+                    - option "+256"
+                    - option "+250"
+                  - textbox "Phone / WhatsApp" [ref=e871]:
+                    - /placeholder: 123 456 7890
+              - generic [ref=e872]:
+                - generic [ref=e873]:
+                  - generic [ref=e874]: Adults
+                  - spinbutton "Adults" [ref=e875]: "2"
+                - generic [ref=e876]:
+                  - generic [ref=e877]: Children
+                  - spinbutton "Children" [ref=e878]: "0"
+            - generic [ref=e879]:
+              - generic [ref=e880]: How did you hear about us?
+              - combobox "How did you hear about us?" [ref=e881]:
+                - option "Please select..." [selected]
+                - option "Google Search"
+                - option "Social Media (Facebook, Instagram, etc.)"
+                - option "TripAdvisor"
+                - option "Friend or Family Recommendation"
+                - option "Travel Agent"
+                - option "Blog or Article"
+                - option "YouTube"
+                - option "I've traveled with you before"
+                - option "Other"
+            - generic [ref=e882]:
+              - generic [ref=e883]: Tell us about your dream trip
+              - textbox "Tell us about your dream trip" [ref=e884]:
+                - /placeholder: What are your interests? Any special requirements? Preferred activities?
+            - button "Traveling with Friends or Family? Invite them to join your adventure" [ref=e886]:
+              - generic [ref=e887]:
+                - img [ref=e889]
+                - generic [ref=e894]:
+                  - generic [ref=e895]: Traveling with Friends or Family?
+                  - text: Invite them to join your adventure
+              - img [ref=e897]
+            - text: Website
+            - textbox [ref=e899]
+            - button "Send Inquiry" [ref=e900]
+            - paragraph [ref=e901]:
+              - text: We typically respond within 24 hours. No spam, ever. Your data is protected under our
+              - link "privacy policy" [ref=e902] [cursor=pointer]:
+                - /url: /privacy-policy/
+              - text: .
+        - generic [ref=e904]:
+          - heading "Kilimanjaro Climbing Articles" [level=2] [ref=e905]
+          - generic [ref=e906]:
+            - article [ref=e907]:
+              - 'link "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e908] [cursor=pointer]':
+                - /url: /6-day-rongai-route-kilimanjaro-guide/
+                - 'img "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e910]'
+              - generic [ref=e911]:
+                - 'link "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e912] [cursor=pointer]':
+                  - /url: /6-day-rongai-route-kilimanjaro-guide/
+                  - 'heading "6-Day Rongai Route Kilimanjaro: Complete Day-by-Day Guide" [level=3] [ref=e913]'
+                - paragraph [ref=e914]: The 6-Day Rongai Route is Kilimanjaro's only northern approach — quieter, wilder, and excellent in the rainy season. This complete guide covers the full day-by-day itinerary, camps, elevation data, difficulty, and everything you need to plan your climb.
+                - generic [ref=e915]:
+                  - generic [ref=e916]:
+                    - img [ref=e917]
+                    - text: Snow Africa Adventure
+                  - generic [ref=e920]:
+                    - img [ref=e921]
+                    - text: Mar 18, 2026
+                - link "Read More →" [ref=e923] [cursor=pointer]:
+                  - /url: /6-day-rongai-route-kilimanjaro-guide/
+                  - text: Read More
+                  - generic [ref=e924]: →
+            - article [ref=e925]:
+              - link "Climbing Kilimanjaro Sustainably with KPAP" [ref=e926] [cursor=pointer]:
+                - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+                - img "Climbing Kilimanjaro Sustainably with KPAP" [ref=e928]
+              - generic [ref=e929]:
+                - link "Climbing Kilimanjaro Sustainably with KPAP" [ref=e930] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+                  - heading "Climbing Kilimanjaro Sustainably with KPAP" [level=3] [ref=e931]
+                - paragraph [ref=e932]: Learn how we make Kilimanjaro climbing sustainable - from porter welfare to environmental protection and supporting local communities.
+                - generic [ref=e933]:
+                  - generic [ref=e934]:
+                    - img [ref=e935]
+                    - text: Snow Africa Team
+                  - generic [ref=e938]:
+                    - img [ref=e939]
+                    - text: Mar 18, 2026
+                - link "Read More →" [ref=e941] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro-sustainably-with-snow-africa-adventures-as-a-kpap-member/
+                  - text: Read More
+                  - generic [ref=e942]: →
+            - article [ref=e943]:
+              - 'link "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e944] [cursor=pointer]':
+                - /url: /8-day-lemosho-route-kilimanjaro-guide/
+                - 'img "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e946]'
+              - generic [ref=e947]:
+                - 'link "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide" [ref=e948] [cursor=pointer]':
+                  - /url: /8-day-lemosho-route-kilimanjaro-guide/
+                  - 'heading "8-Day Lemosho Route Kilimanjaro: Complete Day-by-Day Guide" [level=3] [ref=e949]'
+                - paragraph [ref=e950]: The 8-Day Lemosho Route is Kilimanjaro's finest and most rewarding itinerary, with a 95%+ summit success rate. This complete guide covers every day from Lemosho gate to Uhuru Peak — with elevation data, camps, the Barranco Wall, Lava Tower acclimatisation day, and expert tips.
+                - generic [ref=e951]:
+                  - generic [ref=e952]:
+                    - img [ref=e953]
+                    - text: Snow Africa Adventure
+                  - generic [ref=e956]:
+                    - img [ref=e957]
+                    - text: Mar 17, 2026
+                - link "Read More →" [ref=e959] [cursor=pointer]:
+                  - /url: /8-day-lemosho-route-kilimanjaro-guide/
+                  - text: Read More
+                  - generic [ref=e960]: →
+        - generic [ref=e962]:
+          - generic [ref=e963]:
+            - heading "Explore Other Routes" [level=2] [ref=e964]
+            - paragraph [ref=e965]: Compare routes to find your perfect Kilimanjaro adventure
+          - generic [ref=e966]:
+            - link "Challenging 7 Days Machame Route 7 Days View Details →" [ref=e967] [cursor=pointer]:
+              - /url: /trekking/7-days-machame-route/
+              - generic [ref=e968]:
+                - img [ref=e970]
+                - generic [ref=e973]: Challenging
+              - generic [ref=e974]:
+                - heading "7 Days Machame Route" [level=3] [ref=e975]
+                - generic [ref=e977]:
+                  - img [ref=e978]
+                  - text: 7 Days
+                - generic [ref=e982]:
+                  - text: View Details
+                  - generic [ref=e983]: →
+            - link "Moderate 6 Days Marangu Route 6 Days View Details →" [ref=e984] [cursor=pointer]:
+              - /url: /trekking/6-days-marangu-route/
+              - generic [ref=e985]:
+                - img [ref=e987]
+                - generic [ref=e990]: Moderate
+              - generic [ref=e991]:
+                - heading "6 Days Marangu Route" [level=3] [ref=e992]
+                - generic [ref=e994]:
+                  - img [ref=e995]
+                  - text: 6 Days
+                - generic [ref=e999]:
+                  - text: View Details
+                  - generic [ref=e1000]: →
+            - link "Challenging 5 Days Marangu Route 5 Days View Details →" [ref=e1001] [cursor=pointer]:
+              - /url: /trekking/5-days-marangu-route/
+              - generic [ref=e1002]:
+                - img [ref=e1004]
+                - generic [ref=e1007]: Challenging
+              - generic [ref=e1008]:
+                - heading "5 Days Marangu Route" [level=3] [ref=e1009]
+                - generic [ref=e1011]:
+                  - img [ref=e1012]
+                  - text: 5 Days
+                - generic [ref=e1016]:
+                  - text: View Details
+                  - generic [ref=e1017]: →
+    - contentinfo [ref=e1018]:
+      - generic [ref=e1021]:
+        - generic [ref=e1022]: Tanzania · Since 2013
+        - heading "Handcrafted safaris, summits & shorelines — guided by the people who call this land home." [level=2] [ref=e1023]
+      - generic [ref=e1028]:
+        - generic [ref=e1029]:
+          - generic [ref=e1030]:
+            - img "Snow Africa Adventure" [ref=e1032]
+            - paragraph [ref=e1033]: Expert-led Kilimanjaro treks, curated Tanzania safaris, and Zanzibar beach escapes — drawn up by veteran guides with decades on these routes.
+            - list [ref=e1034]:
+              - listitem [ref=e1035]:
+                - link "+255 766 657 854" [ref=e1036] [cursor=pointer]:
+                  - /url: tel:+255766657854
+                  - img [ref=e1038]
+                  - generic [ref=e1040]: +255 766 657 854
+              - listitem [ref=e1041]:
+                - link "info@snowafricaadventure.com" [ref=e1042] [cursor=pointer]:
+                  - /url: mailto:info@snowafricaadventure.com
+                  - img [ref=e1044]
+                  - generic [ref=e1047]: info@snowafricaadventure.com
+              - listitem [ref=e1048]:
+                - img [ref=e1050]
+                - generic [ref=e1053]:
+                  - text: MEC House, Plot no 161, Second floor, Mianzini Area
+                  - text: Arusha, Tanzania
+          - generic [ref=e1054]:
+            - heading "Safari & Tours" [level=3] [ref=e1055]
+            - list [ref=e1056]:
+              - listitem [ref=e1057]:
+                - link "All Safari Packages" [ref=e1058] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+              - listitem [ref=e1059]:
+                - link "Tailor-Made Safaris" [ref=e1060] [cursor=pointer]:
+                  - /url: /tailor-made-safari/
+              - listitem [ref=e1061]:
+                - link "Tanzania Destinations" [ref=e1062] [cursor=pointer]:
+                  - /url: /tanzania-destinations/
+              - listitem [ref=e1063]:
+                - link "View all" [ref=e1064] [cursor=pointer]:
+                  - /url: /tanzania-safaris/
+                  - text: View all
+                  - generic [ref=e1065]: →
+          - generic [ref=e1066]:
+            - heading "Kilimanjaro" [level=3] [ref=e1067]
+            - list [ref=e1068]:
+              - listitem [ref=e1069]:
+                - link "All Trekking Routes" [ref=e1070] [cursor=pointer]:
+                  - /url: /trekking/
+              - listitem [ref=e1071]:
+                - link "Best Route to Climb" [ref=e1072] [cursor=pointer]:
+                  - /url: /best-route-to-climb-kilimanjaro/
+              - listitem [ref=e1073]:
+                - link "Climbing Kilimanjaro Guide" [ref=e1074] [cursor=pointer]:
+                  - /url: /climbing-kilimanjaro/
+              - listitem [ref=e1075]:
+                - link "Join Group Departures" [ref=e1076] [cursor=pointer]:
+                  - /url: /kilimanjaro-join-group-departures/
+              - listitem [ref=e1077]:
+                - link "Kilimanjaro Prices" [ref=e1078] [cursor=pointer]:
+                  - /url: /kilimanjaro-prices/
+              - listitem [ref=e1079]:
+                - link "Best Time to Climb" [ref=e1080] [cursor=pointer]:
+                  - /url: /best-time-to-climb-kilimanjaro/
+              - listitem [ref=e1081]:
+                - link "View all routes" [ref=e1082] [cursor=pointer]:
+                  - /url: /trekking/
+                  - text: View all routes
+                  - generic [ref=e1083]: →
+          - generic [ref=e1084]:
+            - heading "Company" [level=3] [ref=e1085]
+            - list [ref=e1086]:
+              - listitem [ref=e1087]:
+                - link "About Us" [ref=e1088] [cursor=pointer]:
+                  - /url: /about-us/
+              - listitem [ref=e1089]:
+                - link "Our Guides" [ref=e1090] [cursor=pointer]:
+                  - /url: /our-guides/
+              - listitem [ref=e1091]:
+                - link "Contact Us" [ref=e1092] [cursor=pointer]:
+                  - /url: /contact-us/
+              - listitem [ref=e1093]:
+                - link "Terms & Conditions" [ref=e1094] [cursor=pointer]:
+                  - /url: /terms-and-conditions/
+              - listitem [ref=e1095]:
+                - link "Privacy Policy" [ref=e1096] [cursor=pointer]:
+                  - /url: /privacy-policy/
+              - listitem [ref=e1097]:
+                - link "Blog" [ref=e1098] [cursor=pointer]:
+                  - /url: /blog/
+            - generic [ref=e1099]:
+              - heading "Follow the Journey" [level=4] [ref=e1100]
+              - generic [ref=e1101]:
+                - link "Facebook" [ref=e1102] [cursor=pointer]:
+                  - /url: https://facebook.com/snowafricaadventure
+                  - img [ref=e1103]
+                - link "Twitter" [ref=e1105] [cursor=pointer]:
+                  - /url: https://twitter.com/snowafrica
+                  - img [ref=e1106]
+                - link "Instagram" [ref=e1108] [cursor=pointer]:
+                  - /url: https://instagram.com/snow_africa_adventures
+                  - img [ref=e1109]
+                - link "YouTube" [ref=e1112] [cursor=pointer]:
+                  - /url: https://youtube.com/snowafricaadventure
+                  - img [ref=e1113]
+        - generic [ref=e1117]:
+          - generic [ref=e1118]: Accredited & Trusted
+          - generic [ref=e1119]:
+            - link "TripAdvisor" [ref=e1120] [cursor=pointer]:
+              - /url: https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html
+            - generic [ref=e1122]: SafariBookings
+            - generic [ref=e1124]: TATO Member
+            - generic [ref=e1126]: KPAP Partner
+      - generic [ref=e1129]:
+        - generic [ref=e1130]:
+          - generic [ref=e1131]: © 2026 Snow Africa Adventure. All rights reserved.
+          - generic [ref=e1132]: "|"
+          - link "Terms & Conditions" [ref=e1133] [cursor=pointer]:
+            - /url: /terms-and-conditions/
+          - generic [ref=e1134]: ·
+          - link "Privacy Policy" [ref=e1135] [cursor=pointer]:
+            - /url: /privacy-policy/
+        - generic [ref=e1136]:
+          - generic [ref=e1137]: Crafted by
+          - link "Timeless International" [ref=e1138] [cursor=pointer]:
+            - /url: https://www.craftedbytimeless.com
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - button "Close chat":
+            - img
+          - generic:
+            - generic:
+              - img
+            - generic:
+              - paragraph: Snow Africa Adventure
+              - paragraph: Typically replies within minutes
+        - generic:
+          - generic:
+            - paragraph: Your Tanzania adventure starts here!
+            - paragraph: "Kilimanjaro summit, Big Five safari, or Zanzibar beaches — tell us your dream and we'll make it happen. Pick a question below to get started:"
+            - generic: 10:25 AM
+          - generic:
+            - button "🏔️ Climb Kilimanjaro":
+              - generic: 🏔️
+              - generic: Climb Kilimanjaro
+              - img
+            - button "🦁 Tanzania Safari":
+              - generic: 🦁
+              - generic: Tanzania Safari
+              - img
+            - button "🏖️ Zanzibar Beach Holiday":
+              - generic: 🏖️
+              - generic: Zanzibar Beach Holiday
+              - img
+            - button "🌍 Custom Trip":
+              - generic: 🌍
+              - generic: Custom Trip
+              - img
+            - button "👥 Join a Group Climb":
+              - generic: 👥
+              - generic: Join a Group Climb
+              - img
+        - generic:
+          - button "Type your own message":
+            - img
+            - text: Type your own message
+    - button "Chat on WhatsApp" [ref=e1139]:
+      - img [ref=e1140]
+  - button "Open Next.js Dev Tools" [ref=e1148] [cursor=pointer]:
+    - img [ref=e1149]
+  - alert [ref=e1152]
