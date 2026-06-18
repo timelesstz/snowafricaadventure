@@ -163,6 +163,12 @@ const ARTICLES = [
   { href: "/kilimanjaro-vs-table-mountain/", label: "Kili vs Table Mountain" },
   { href: "/kilimanjaro-flat-land-training/", label: "Flat-Land Training" },
   { href: "/kilimanjaro-best-camps/", label: "Best Camps Guide" },
+  { href: "/climbing-kilimanjaro-in-january/", label: "Climbing in January" },
+  { href: "/climbing-kilimanjaro-in-february/", label: "Climbing in February" },
+  { href: "/climbing-kilimanjaro-in-july/", label: "Climbing in July" },
+  { href: "/climbing-kilimanjaro-in-september/", label: "Climbing in September" },
+  { href: "/climbing-kilimanjaro-in-october/", label: "Climbing in October" },
+  { href: "/climbing-kilimanjaro-in-december/", label: "Climbing in December" },
 ] as const;
 
 export function KnowledgeBase({
