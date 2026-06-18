@@ -688,6 +688,30 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "rainy season Kilimanjaro climb", href: "/climbing-kilimanjaro-in-april/", priority: 3 },
     { phrase: "long rains Kilimanjaro", href: "/climbing-kilimanjaro-in-april/", priority: 4 },
     { phrase: "short rains Kilimanjaro", href: "/climbing-kilimanjaro-in-november/", priority: 4 },
+
+    // Batch 33-34 (keyword gap fills)
+    { phrase: "how long to climb Kilimanjaro", href: "/how-long-to-climb-kilimanjaro/", priority: 2 },
+    { phrase: "how many days to climb Kilimanjaro", href: "/how-long-to-climb-kilimanjaro/", priority: 2 },
+    { phrase: "Kilimanjaro climb duration", href: "/how-long-to-climb-kilimanjaro/", priority: 3 },
+    { phrase: "days on Kilimanjaro", href: "/how-long-to-climb-kilimanjaro/", priority: 4 },
+    { phrase: "Kilimanjaro hotels", href: "/kilimanjaro-hotels-accommodation/", priority: 2 },
+    { phrase: "hotels near Kilimanjaro", href: "/kilimanjaro-hotels-accommodation/", priority: 2 },
+    { phrase: "Kilimanjaro accommodation", href: "/kilimanjaro-hotels-accommodation/", priority: 2 },
+    { phrase: "where to stay Kilimanjaro", href: "/kilimanjaro-hotels-accommodation/", priority: 3 },
+    { phrase: "Moshi hotels", href: "/kilimanjaro-hotels-accommodation/", priority: 3 },
+    { phrase: "Lemosho Route guide", href: "/kilimanjaro-lemosho-route-guide/", priority: 2 },
+    { phrase: "Lemosho Route itinerary", href: "/kilimanjaro-lemosho-route-guide/", priority: 3 },
+    { phrase: "Lemosho Route Kilimanjaro", href: "/kilimanjaro-lemosho-route-guide/", priority: 3 },
+    { phrase: "Machame Route guide", href: "/kilimanjaro-machame-route-guide/", priority: 2 },
+    { phrase: "Machame Route itinerary", href: "/kilimanjaro-machame-route-guide/", priority: 3 },
+    { phrase: "Machame Route Kilimanjaro", href: "/kilimanjaro-machame-route-guide/", priority: 3 },
+    { phrase: "Whiskey Route Kilimanjaro", href: "/kilimanjaro-machame-route-guide/", priority: 4 },
+    { phrase: "fitness requirements Kilimanjaro", href: "/kilimanjaro-fitness-requirements/", priority: 2 },
+    { phrase: "how fit to climb Kilimanjaro", href: "/kilimanjaro-fitness-requirements/", priority: 2 },
+    { phrase: "Kilimanjaro fitness level", href: "/kilimanjaro-fitness-requirements/", priority: 3 },
+    { phrase: "Kilimanjaro vs Inca Trail", href: "/kilimanjaro-vs-inca-trail/", priority: 2 },
+    { phrase: "Inca Trail or Kilimanjaro", href: "/kilimanjaro-vs-inca-trail/", priority: 3 },
+    { phrase: "Kilimanjaro compared to Inca Trail", href: "/kilimanjaro-vs-inca-trail/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)

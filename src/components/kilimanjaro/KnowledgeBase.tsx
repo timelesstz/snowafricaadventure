@@ -175,6 +175,12 @@ const ARTICLES = [
   { href: "/climbing-kilimanjaro-in-june/", label: "Climbing in June" },
   { href: "/climbing-kilimanjaro-in-august/", label: "Climbing in August" },
   { href: "/climbing-kilimanjaro-in-november/", label: "Climbing in November" },
+  { href: "/how-long-to-climb-kilimanjaro/", label: "How Long to Climb" },
+  { href: "/kilimanjaro-hotels-accommodation/", label: "Hotels & Accommodation" },
+  { href: "/kilimanjaro-lemosho-route-guide/", label: "Lemosho Route Guide" },
+  { href: "/kilimanjaro-machame-route-guide/", label: "Machame Route Guide" },
+  { href: "/kilimanjaro-fitness-requirements/", label: "Fitness Requirements" },
+  { href: "/kilimanjaro-vs-inca-trail/", label: "Kili vs Inca Trail" },
 ] as const;
 
 export function KnowledgeBase({
