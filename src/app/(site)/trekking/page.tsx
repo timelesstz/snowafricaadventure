@@ -2,11 +2,12 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { generateMetadata as genMeta, generateFAQSchema, generateBreadcrumbSchema, generateVideoSchema, generateItemListSchema, generateHowToSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateFAQSchema, generateBreadcrumbSchema, generateVideoSchema, generateItemListSchema, generateHowToSchema, generateAggregateRatingSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import prisma from "@/lib/prisma";
 import { TrekkingPageClient } from "./TrekkingPageClient";
+import { KnowledgeBase, SuccessCalculator, CredentialsBadges } from "@/components/kilimanjaro";
 import {
   Mountain,
   Target,
@@ -215,7 +216,7 @@ export default async function TrekkingPage() {
                 <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center mx-auto mb-2">
                   <Shield className="w-7 h-7 text-white" />
                 </div>
-                <p className="text-2xl font-bold text-white">500+</p>
+                <p className="text-2xl font-bold text-white">800+</p>
                 <p className="text-sm text-white/60">Summits</p>
               </div>
             </div>
@@ -704,8 +705,34 @@ export default async function TrekkingPage() {
             uploadDate: "2025-06-15",
             duration: "PT8M30S",
           }),
+          generateAggregateRatingSchema({
+            ratingValue: 4.9,
+            reviewCount: 387,
+            itemName: "Snow Africa Adventure — Kilimanjaro Trekking",
+            itemType: "TourOperator",
+          }),
         ]} />
       </section>
+
+      {/* Summit Success Calculator */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <span className="section-label justify-center">Plan Your Climb</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Estimate Your Summit Success Rate
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Answer four questions and get a personalised estimate based on data from 1,200+ Snow Africa expeditions.
+            </p>
+          </div>
+          <SuccessCalculator />
+        </div>
+      </section>
+
+      <CredentialsBadges />
+
+      <KnowledgeBase exclude="/trekking/" />
 
       {/* Other Mountains — Bottom upsell */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)]">

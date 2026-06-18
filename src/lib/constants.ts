@@ -48,10 +48,13 @@ export const MEGA_NAV: MegaMenuItem[] = [
     href: "/trekking/",
     children: [
       { label: "All Trekking Routes", href: "/trekking/", description: "Compare all Kilimanjaro routes" },
+      { label: "Climbing Kilimanjaro", href: "/climbing-kilimanjaro/", description: "Complete climbing guide" },
       { label: "Best Route to Climb", href: "/best-route-to-climb-kilimanjaro/", description: "Route comparison guide" },
-      { label: "Climbing Guide", href: "/climbing-kilimanjaro/", description: "Everything you need to know" },
       { label: "Kilimanjaro Prices", href: "/kilimanjaro-prices/", description: "Full cost breakdown" },
-      { label: "Best Time to Climb", href: "/best-time-to-climb-kilimanjaro/", description: "Seasonal guide" },
+      { label: "Best Time to Climb", href: "/best-time-to-climb-kilimanjaro/", description: "Weather & seasonal guide" },
+      { label: "Training & Preparation", href: "/kilimanjaro-training-plan/", description: "12-week training plan" },
+      { label: "Gear & Packing List", href: "/kilimanjaro-climbing-gear/", description: "What to bring" },
+      { label: "Mount Kilimanjaro", href: "/mount-kilimanjaro/", description: "Height, routes & facts" },
     ],
   },
 ];
@@ -105,11 +108,17 @@ export const FOOTER_NAV = {
     title: "Kilimanjaro",
     links: [
       { label: "All Trekking Routes", href: "/trekking/" },
-      { label: "Best Route to Climb", href: "/best-route-to-climb-kilimanjaro/" },
       { label: "Climbing Kilimanjaro Guide", href: "/climbing-kilimanjaro/" },
-      { label: "Join Group Departures", href: "/kilimanjaro-join-group-departures/" },
-      { label: "Kilimanjaro Prices", href: "/kilimanjaro-prices/" },
+      { label: "Best Route to Climb", href: "/best-route-to-climb-kilimanjaro/" },
       { label: "Best Time to Climb", href: "/best-time-to-climb-kilimanjaro/" },
+      { label: "Kilimanjaro Prices", href: "/kilimanjaro-prices/" },
+      { label: "Join Group Departures", href: "/kilimanjaro-join-group-departures/" },
+      { label: "Training Plan", href: "/kilimanjaro-training-plan/" },
+      { label: "Gear & Packing List", href: "/kilimanjaro-climbing-gear/" },
+      { label: "Weather & Climate", href: "/kilimanjaro-weather/" },
+      { label: "Safety & Health", href: "/kilimanjaro-safety/" },
+      { label: "Success Rates", href: "/kilimanjaro-success-rates/" },
+      { label: "Mount Kilimanjaro", href: "/mount-kilimanjaro/" },
     ],
   },
   company: {
@@ -341,10 +350,10 @@ export const AUTHOR_PROFILES: Record<string, {
     bio: "The Snow Africa Adventure team combines decades of experience guiding safaris across Tanzania's national parks and leading Kilimanjaro treks. Based in Arusha, our TATO-licensed guides have summited Kilimanjaro over 500 times collectively.",
     credentials: ["TATO Licensed Operator", "Kilimanjaro Certified Guides", "First Aid Wilderness Certified", "Based in Arusha, Tanzania"],
   },
-  "Emmanuel Moshi": {
-    name: "Emmanuel Moshi",
-    role: "Founder & Lead Guide",
-    bio: "Emmanuel founded Snow Africa Adventure with a vision to share Tanzania's natural wonders with the world. A Kilimanjaro native with over 15 years of guiding experience, he has personally led more than 200 summit expeditions and countless safari trips across the Northern and Southern Circuits.",
+  "Hamisi Mnaro": {
+    name: "Hamisi Mnaro",
+    role: "Director Timeless International",
+    bio: "Hamisi leads Snow Africa Adventure with a vision to share Tanzania's natural wonders with the world. A Kilimanjaro native with over 15 years of guiding experience, he has personally led more than 200 summit expeditions and countless safari trips across the Northern and Southern Circuits.",
     credentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
   },
 };

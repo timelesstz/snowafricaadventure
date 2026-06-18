@@ -23,9 +23,11 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Climb Kilimanjaro from USA",
@@ -200,15 +202,21 @@ export default async function ClimbKilimanjaroFromUSAPage() {
             url: "/climb-kilimanjaro-from-usa/",
             image: "https://cdn.snowafricaadventure.com/kilimanjaro-summit-sunrise.webp",
             publishedTime: "2026-03-11",
-            modifiedTime: "2026-03-11",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: [
               "200+ Kilimanjaro Summits",
               "15+ Years Guiding Experience",
               "TATO Licensed Operator",
               "Wilderness First Responder",
             ],
+          }),
+          generateAggregateRatingSchema({
+            ratingValue: 4.9,
+            reviewCount: 387,
+            itemName: "Snow Africa Adventure — Kilimanjaro Expeditions for Americans",
+            itemType: "TourOperator",
           }),
         ]}
       />
@@ -1335,6 +1343,8 @@ export default async function ClimbKilimanjaroFromUSAPage() {
         </div>
       </section>
 
+      <KnowledgeBase exclude="/climb-kilimanjaro-from-usa/" />
+
       {/* Final CTA */}
       <section className="py-20 bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white">
         <div className="container mx-auto px-4 text-center">
@@ -1351,7 +1361,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
             {[
               { value: "93%", label: "Summit Success Rate" },
               { value: "4.9/5", label: "TripAdvisor Rating" },
-              { value: "500+", label: "Successful Summits" },
+              { value: "800+", label: "Successful Summits" },
               { value: "15+", label: "Years Operating" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">

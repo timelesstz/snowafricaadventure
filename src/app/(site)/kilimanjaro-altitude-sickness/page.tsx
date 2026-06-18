@@ -23,14 +23,17 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
+  generateHowToSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Altitude Sickness: Prevention & Treatment",
   description:
-    "Complete guide to altitude sickness on Kilimanjaro from guides with 500+ summits. Symptoms, prevention, Diamox protocol, acclimatization strategies, and when to descend.",
+    "Complete guide to altitude sickness on Kilimanjaro from guides with 800+ summits. Symptoms, prevention, Diamox protocol, acclimatization strategies, and when to descend.",
   url: "/kilimanjaro-altitude-sickness/",
 });
 
@@ -294,7 +297,7 @@ const faqs = [
   {
     question: "Should I take Diamox for Kilimanjaro?",
     answer:
-      "Many experienced Kilimanjaro guides and altitude medicine specialists recommend Diamox (acetazolamide) for climbers, especially those with no prior high-altitude experience. It genuinely aids acclimatization by stimulating faster, deeper breathing. The standard dose is 125-250mg twice daily, starting 24-48 hours before ascending above 2,500m. It is a prescription medication — consult your doctor before your trip. From our experience guiding 500+ summits, climbers who take Diamox prophylactically tend to report fewer and milder AMS symptoms and maintain higher SpO2 readings.",
+      "Many experienced Kilimanjaro guides and altitude medicine specialists recommend Diamox (acetazolamide) for climbers, especially those with no prior high-altitude experience. It genuinely aids acclimatization by stimulating faster, deeper breathing. The standard dose is 125-250mg twice daily, starting 24-48 hours before ascending above 2,500m. It is a prescription medication — consult your doctor before your trip. From our experience guiding 800+ summits, climbers who take Diamox prophylactically tend to report fewer and milder AMS symptoms and maintain higher SpO2 readings.",
   },
   {
     question: "How do you prevent altitude sickness on Kilimanjaro?",
@@ -351,19 +354,33 @@ export default function KilimanjaroAltitudeSicknessPage() {
           generateArticleSchema({
             title: "Kilimanjaro Altitude Sickness: Prevention & Treatment",
             description:
-              "Complete guide to altitude sickness on Kilimanjaro from guides with 500+ summits. Symptoms, prevention, Diamox protocol, acclimatization strategies, and when to descend.",
+              "Complete guide to altitude sickness on Kilimanjaro from guides with 800+ summits. Symptoms, prevention, Diamox protocol, acclimatization strategies, and when to descend.",
             url: "/kilimanjaro-altitude-sickness/",
             image:
               "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2026-03-04",
-            modifiedTime: "2026-03-04",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: [
               "200+ Kilimanjaro Summits",
               "15+ Years Guiding Experience",
               "TATO Licensed Guide",
               "Wilderness First Responder",
+            ],
+          }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
+          generateHowToSchema({
+            name: "How to Prevent Altitude Sickness on Kilimanjaro",
+            description: "Step-by-step prevention strategy for acute mountain sickness (AMS) when climbing Mount Kilimanjaro.",
+            steps: [
+              { name: "Choose the Right Route Duration", text: "Select a route of 7+ days for gradual acclimatization. The 5-day Marangu has the highest AMS rates (35%) while the 8-day Lemosho has the lowest (5-10%)." },
+              { name: "Ascend Gradually", text: "Follow the recommended ascent profile — no more than 300-500 metres of sleeping altitude gain per day above 3,000 metres." },
+              { name: "Stay Hydrated", text: "Drink 3-4 litres of water daily. Dehydration mimics and worsens altitude sickness symptoms. Add electrolytes to replace lost salts." },
+              { name: "Avoid Alcohol and Sleeping Pills", text: "Both suppress breathing during sleep, worsening oxygen deprivation at altitude. Save celebrations for after descent." },
+              { name: "Recognise Early Symptoms", text: "Watch for mild headache, nausea, loss of appetite, dizziness, and poor sleep. Mild symptoms are normal — report them to your guide for monitoring." },
+              { name: "Use Medication if Appropriate", text: "Discuss Diamox (acetazolamide) or ibuprofen with your doctor. Diamox helps prevent AMS by increasing breathing rate and kidney bicarbonate excretion." },
+              { name: "Descend if Symptoms Worsen", text: "If symptoms progress to severe headache, vomiting, confusion, or ataxia (inability to walk straight), descend immediately. Descent is the only reliable cure for serious altitude sickness." },
             ],
           }),
         ]}
@@ -391,11 +408,13 @@ export default function KilimanjaroAltitudeSicknessPage() {
               Kilimanjaro <span className="text-[var(--secondary)]">Altitude Sickness</span>
             </h1>
             <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
-              Prevention, symptoms, and treatment — from guides who have managed altitude illness on 500+ summits and hold Wilderness First Responder certification.
+              Prevention, symptoms, and treatment — from guides who have managed altitude illness on 800+ summits and hold Wilderness First Responder certification.
             </p>
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Quick Answer Box */}
       <section className="py-12 bg-white border-b border-[var(--border)]">
@@ -647,7 +666,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
                 <div>
                   <p className="text-emerald-800 text-sm font-semibold mb-1">Our Guides&apos; Perspective</p>
                   <p className="text-emerald-800 text-sm">
-                    From our experience guiding 500+ Kilimanjaro summits, climbers who take Diamox prophylactically tend to report fewer and milder AMS symptoms, sleep better at altitude, and maintain higher SpO2 readings. We do not push Diamox on anyone — it is a personal decision best made with your doctor — but we encourage climbers to at least obtain a prescription and carry it as a backup.
+                    From our experience guiding 800+ Kilimanjaro summits, climbers who take Diamox prophylactically tend to report fewer and milder AMS symptoms, sleep better at altitude, and maintain higher SpO2 readings. We do not push Diamox on anyone — it is a personal decision best made with your doctor — but we encourage climbers to at least obtain a prescription and carry it as a backup.
                   </p>
                 </div>
               </div>
@@ -832,6 +851,8 @@ export default function KilimanjaroAltitudeSicknessPage() {
           </div>
         </div>
       </section>
+
+      <KnowledgeBase exclude="/kilimanjaro-altitude-sickness/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

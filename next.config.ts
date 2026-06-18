@@ -104,7 +104,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/trekking/visa-for-kilimanjaro/",
-        destination: "/contact-us/",
+        destination: "/kilimanjaro-visa-tanzania/",
         permanent: true,
       },
 
@@ -458,11 +458,7 @@ const nextConfig: NextConfig = {
         destination: "/trekking/9-days-northern-circuit-route/",
         permanent: true,
       },
-      {
-        source: "/mount-kilimanjaro/",
-        destination: "/trekking/",
-        permanent: true,
-      },
+      // /mount-kilimanjaro/ is now a dedicated static page — no redirect needed
       {
         source: "/4-days-mount-meru/",
         destination: "/trekking/4-days-mount-meru-climbing/",
@@ -533,7 +529,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/tanzania-tourist-visa/",
-        destination: "/things-to-remember-before-climbing-mount-kilimanjaro/",
+        destination: "/kilimanjaro-visa-tanzania/",
         permanent: true,
       },
       // Typo in crawled URL (missing trailing 't')
@@ -698,7 +694,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/visa-for-kilimanjaro/",
-        destination: "/things-to-remember-before-climbing-mount-kilimanjaro/",
+        destination: "/kilimanjaro-visa-tanzania/",
         permanent: true,
       },
       {
@@ -898,12 +894,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/kilimanjaro-health-and-safety/",
-        destination: "/kilimanjaro-altitude-sickness/",
+        destination: "/kilimanjaro-safety/",
         permanent: true,
       },
       {
         source: "/kilimanjaro-travel-faqs/",
-        destination: "/things-to-remember-before-climbing-mount-kilimanjaro/",
+        destination: "/climbing-kilimanjaro/",
         permanent: true,
       },
       {

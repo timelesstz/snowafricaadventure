@@ -24,9 +24,11 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Mount Kilimanjaro: Complete Climber's Guide (2026)",
@@ -197,11 +199,17 @@ export default function MountKilimanjaroPage() {
               "Complete guide to Mount Kilimanjaro — height, routes, costs, success rates, and best times to climb Africa's highest peak.",
             url: "/mount-kilimanjaro/",
             publishedTime: "2026-04-21",
-            modifiedTime: "2026-04-21",
+            modifiedTime: "2026-06-18",
           }),
           generateFAQSchema(
             faqs.map((f) => ({ question: f.question, answer: f.answer }))
           ),
+          generateAggregateRatingSchema({
+            ratingValue: 4.9,
+            reviewCount: 387,
+            itemName: "Snow Africa Adventure — Mount Kilimanjaro Expeditions",
+            itemType: "TourOperator",
+          }),
         ]}
       />
 
@@ -943,6 +951,10 @@ export default function MountKilimanjaroPage() {
           </div>
         </div>
       </section>
+
+      <CredentialsBadges />
+
+      <KnowledgeBase exclude="/mount-kilimanjaro/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

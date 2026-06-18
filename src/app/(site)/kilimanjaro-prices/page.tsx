@@ -9,9 +9,17 @@ import {
   TrendingUp,
   Users,
   Mountain,
+  ArrowRight,
+  AlertTriangle,
+  Lightbulb,
+  Wallet,
+  CreditCard,
+  Backpack,
 } from "lucide-react";
-import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateProductSchema, generateAggregateRatingSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Prices & Cost Guide 2026",
@@ -142,6 +150,67 @@ const priceFaqs = [
     answer:
       "No. Tipping is customary in Tanzania and is an important part of your crew's income. Budget approximately $150–$250 per person in total tips, distributed among your guide, assistant guides, porters, and cook at the end of the climb.",
   },
+  {
+    question: "How much do Kilimanjaro park fees cost?",
+    answer:
+      "KINAPA park fees are $70 per day for entry, $50 per day for camping, and a flat $20 rescue fee per climber. For a 7-day Lemosho climb, park fees alone total approximately $860 per person. These fees are set by TANAPA and are non-negotiable — any operator claiming to offer discounts on park fees is misrepresenting costs.",
+  },
+  {
+    question: "How much should I budget for tips on Kilimanjaro?",
+    answer:
+      "Budget $150–$250 per person in total tips. Recommended amounts: lead guide $20–$25/day, assistant guide $15–$18/day, cook $10–$12/day, and porters $8–$10/day each. Tips are given in cash (USD or Tanzanian Shillings) at the end of the trek during a tipping ceremony. Your operator will provide envelopes and guidance on distribution.",
+  },
+  {
+    question: "What is the cheapest month to climb Kilimanjaro?",
+    answer:
+      "January–February and June are considered shoulder season months with slightly lower demand. Some operators offer 5–10% discounts during these periods. However, don't choose dates purely based on price — weather conditions and route availability matter more for summit success. The true peak months are July–September and late December.",
+  },
+  {
+    question: "Do I need travel insurance for Kilimanjaro?",
+    answer:
+      "Yes — travel insurance with high-altitude trekking cover (up to 6,000m) and emergency helicopter evacuation is essential. Standard travel insurance does NOT cover Kilimanjaro. Specialist policies cost $50–$150 depending on coverage and trip duration. We recommend purchasing insurance immediately after booking.",
+  },
+  {
+    question: "How much does gear rental cost for Kilimanjaro?",
+    answer:
+      "If you don't own hiking gear, budget $200–$500 to buy essentials or $50–$100 to rent from your operator. Key items include a quality sleeping bag rated to -10°C, trekking poles, a headlamp, and layered clothing. Snow Africa Adventure offers gear rental packages — contact us for current prices.",
+  },
+  {
+    question: "Can I pay for my Kilimanjaro climb in instalments?",
+    answer:
+      "Yes. Snow Africa Adventure accepts a 30% deposit at booking with the balance due 60 days before your climb date. We accept bank transfers, credit cards, and PayPal. For group departures, early booking with a deposit secures your spot and locks in the current price.",
+  },
+  {
+    question: "What currency should I bring to Tanzania?",
+    answer:
+      "Bring US Dollars (printed after 2006) for tips, souvenirs, and incidentals. Tanzanian Shillings are useful for small purchases in Moshi or Arusha. ATMs are available in Moshi and Arusha but can be unreliable. We recommend bringing $300–$500 in cash beyond your tipping budget for personal expenses during your trip.",
+  },
+];
+
+const parkFeeTable = [
+  { days: 5, entry: 350, camping: 250, rescue: 20, crew: 150, conservation: 0, total: 770 },
+  { days: 6, entry: 420, camping: 300, rescue: 20, crew: 180, conservation: 0, total: 920 },
+  { days: 7, entry: 490, camping: 350, rescue: 20, crew: 210, conservation: 0, total: 1070 },
+  { days: 8, entry: 560, camping: 400, rescue: 20, crew: 240, conservation: 0, total: 1220 },
+  { days: 9, entry: 630, camping: 450, rescue: 20, crew: 270, conservation: 0, total: 1370 },
+];
+
+const hiddenCosts = [
+  { item: "Tanzania Tourist Visa", cost: "$50", note: "Single-entry e-visa, applied online before travel", link: "/kilimanjaro-visa-tanzania/" },
+  { item: "Travel Insurance", cost: "$50–$150", note: "Must cover high-altitude trekking up to 6,000m and evacuation", link: "/kilimanjaro-travel-insurance/" },
+  { item: "Crew Tips", cost: "$150–$250", note: "Customary for guides, porters, and cook — given at end of trek", link: "/kilimanjaro-tipping-guide/" },
+  { item: "International Flights", cost: "$500–$1,500", note: "Varies by origin — Kilimanjaro (JRO) or Dar es Salaam (DAR)" },
+  { item: "Hotel in Arusha/Moshi", cost: "$100–$300", note: "1–2 nights pre/post climb at $50–$150 per night" },
+  { item: "Gear (Buy or Rent)", cost: "$50–$500", note: "Rent from $50–$100, or buy essentials for $200–$500" },
+  { item: "Personal Snacks & Extras", cost: "$20–$50", note: "Energy bars, electrolytes, water purification tablets" },
+  { item: "Airport Transfer (if not included)", cost: "$50–$80", note: "Round-trip from JRO to Moshi or Arusha" },
+];
+
+const privateVsGroup = [
+  { groupSize: "1 Person (Private)", privateCost: "$3,200–$4,500", groupCost: "N/A", savings: "—" },
+  { groupSize: "2 People (Private)", privateCost: "$2,800–$3,500 pp", groupCost: "N/A", savings: "~$400–$1,000 pp" },
+  { groupSize: "4+ People (Private)", privateCost: "$2,500–$3,200 pp", groupCost: "N/A", savings: "~$700–$1,300 pp" },
+  { groupSize: "Group Departure (4–8)", privateCost: "N/A", groupCost: "$1,850–$2,800 pp", savings: "Save 15–30%" },
 ];
 
 export default function KilimanjaroPricesPage() {
@@ -151,11 +220,45 @@ export default function KilimanjaroPricesPage() {
         schemas={[
           generateBreadcrumbSchema([
             { name: "Home", url: "/" },
+            { name: "Climbing Kilimanjaro", url: "/climbing-kilimanjaro/" },
             { name: "Kilimanjaro Prices", url: "/kilimanjaro-prices/" },
           ]),
           generateFAQSchema(priceFaqs),
+          generateArticleSchema({
+            title: "Kilimanjaro Prices & Cost Guide 2026",
+            description: "Kilimanjaro climbing costs from $1,850 to $4,500+ depending on route, duration, and operator. Compare prices for all 6 routes, understand what's included, and get an instant quote.",
+            url: "/kilimanjaro-prices/",
+            image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
+            publishedTime: "2026-03-04",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
+            authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
+          }),
+          generateProductSchema({
+            name: "Kilimanjaro Climbing Package — Lemosho Route (8 Days)",
+            description: "All-inclusive 8-day Lemosho Route Kilimanjaro trek with KINAPA-certified guides, park fees, camping equipment, meals, airport transfers, and pre/post hotel accommodation.",
+            url: "/kilimanjaro-prices/",
+            image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
+            price: 2350,
+            priceValidUntil: "2026-12-31",
+            sku: "KILI-LEMOSHO-8D",
+            ratingValue: 4.9,
+            reviewCount: 387,
+          }),
+          generateAggregateRatingSchema({
+            ratingValue: 4.9,
+            reviewCount: 387,
+            itemName: "Snow Africa Adventure — Kilimanjaro Climbing Packages",
+            itemType: "TourOperator",
+          }),
         ]}
       />
+
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4">
+        <Breadcrumbs items={[{ label: "Climbing Kilimanjaro", href: "/climbing-kilimanjaro/" }, { label: "Kilimanjaro Prices" }]} />
+      </div>
 
       {/* Hero */}
       <section className="relative min-h-[70vh]">
@@ -225,6 +328,8 @@ export default function KilimanjaroPricesPage() {
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Price Tier Cards */}
       <section className="py-16">
@@ -508,6 +613,286 @@ export default function KilimanjaroPricesPage() {
         </div>
       </section>
 
+      {/* Hidden Costs Most Operators Don't Mention */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+              Beyond the Climb Price
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+              Hidden Costs Most Operators Don&apos;t Mention
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+              Your climbing package covers the mountain — but there are additional expenses that catch many trekkers off guard. Here&apos;s the full picture so you can budget accurately.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              {hiddenCosts.map((cost) => (
+                <div key={cost.item} className="bg-white border border-[var(--border)] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="font-semibold text-[var(--text)]">
+                      {cost.link ? (
+                        <Link href={cost.link} className="hover:text-[var(--primary)] transition-colors">
+                          {cost.item}
+                          <ArrowRight className="w-3.5 h-3.5 inline ml-1" />
+                        </Link>
+                      ) : (
+                        cost.item
+                      )}
+                    </h3>
+                    <span className="font-bold text-[var(--secondary-dark)] whitespace-nowrap text-sm">{cost.cost}</span>
+                  </div>
+                  <p className="text-sm text-[var(--text-muted)]">{cost.note}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Wallet className="w-5 h-5 text-amber-700" />
+                <span className="font-bold text-amber-900 text-lg">Total Hidden Costs: $500–$2,000+</span>
+              </div>
+              <p className="text-amber-800 text-sm">
+                When budgeting for Kilimanjaro, add $500–$2,000 on top of your climbing package price. Budget travellers from nearby countries may spend as little as $500 extra, while those flying from the US or Europe should plan for $1,500–$2,000 in additional expenses.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* KINAPA Park Fees Breakdown */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+              2026 Park Fee Rates
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+              KINAPA Park Fees Breakdown by Route &amp; Duration
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+              Park fees represent the single largest cost component of any Kilimanjaro climb. These fees are paid directly to the Kilimanjaro National Park Authority (KINAPA) and are non-negotiable regardless of operator.
+            </p>
+
+            <div className="overflow-x-auto rounded-xl shadow-sm mb-6">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-[var(--primary-dark)] text-white">
+                    <th className="text-left px-4 py-3 font-semibold">Duration</th>
+                    <th className="text-right px-4 py-3 font-semibold">Entry Fee ($70/day)</th>
+                    <th className="text-right px-4 py-3 font-semibold">Camping ($50/day)</th>
+                    <th className="text-right px-4 py-3 font-semibold">Rescue Fee</th>
+                    <th className="text-right px-4 py-3 font-semibold">Crew Fees</th>
+                    <th className="text-right px-4 py-3 font-semibold whitespace-nowrap">Total per Person</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {parkFeeTable.map((row, i) => (
+                    <tr
+                      key={row.days}
+                      className={`border-b border-[var(--border)] ${
+                        i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
+                      } hover:bg-amber-50 transition-colors`}
+                    >
+                      <td className="px-4 py-3 font-medium">{row.days}-Day Climb</td>
+                      <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.entry}</td>
+                      <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.camping}</td>
+                      <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.rescue}</td>
+                      <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.crew}</td>
+                      <td className="px-4 py-3 text-right font-bold text-[var(--secondary-dark)]">${row.total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-4 mb-6">
+              <div className="bg-white border border-[var(--border)] rounded-lg p-4 text-center">
+                <p className="text-2xl font-bold text-[var(--secondary-dark)]">$70</p>
+                <p className="text-sm text-[var(--text-muted)]">Entry fee per day</p>
+              </div>
+              <div className="bg-white border border-[var(--border)] rounded-lg p-4 text-center">
+                <p className="text-2xl font-bold text-[var(--secondary-dark)]">$50</p>
+                <p className="text-sm text-[var(--text-muted)]">Camping fee per night</p>
+              </div>
+              <div className="bg-white border border-[var(--border)] rounded-lg p-4 text-center">
+                <p className="text-2xl font-bold text-[var(--secondary-dark)]">$20</p>
+                <p className="text-sm text-[var(--text-muted)]">Rescue fee (flat rate)</p>
+              </div>
+            </div>
+
+            <p className="text-center text-sm text-[var(--text-muted)]">
+              <AlertTriangle className="w-4 h-4 inline mr-1 text-amber-500" />
+              These are 2026 rates set by TANAPA and are subject to change. Marangu Route uses hut accommodation ($60/night) instead of camping fees. Crew fees vary by team size and route.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* How to Save Money on Kilimanjaro */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+              Smart Budgeting
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+              How to Save Money on Kilimanjaro Without Cutting Corners
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+              There are legitimate ways to reduce your Kilimanjaro costs without compromising safety or experience. Here are the strategies that actually work.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                  <Users className="w-5 h-5 text-emerald-700" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Join a Group Departure</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-3">
+                  The single most effective way to save 15–30%. Guide, porter, and vehicle costs are shared across 4–8 climbers. You get the same route, equipment, and safety standards — just with fellow adventurers.
+                </p>
+                <Link href="/kilimanjaro-join-group-departures/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
+                  View group departures <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <TrendingUp className="w-5 h-5 text-blue-700" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Climb in Shoulder Season</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-3">
+                  January–February and June see slightly lower demand. Some operators offer 5–10% discounts during these months. Weather is still favourable — these aren&apos;t rainy months, just less crowded ones.
+                </p>
+                <Link href="/kilimanjaro-weather/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
+                  Check weather by month <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+                  <DollarSign className="w-5 h-5 text-amber-700" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Book Direct with a Local Operator</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-3">
+                  International travel agents and booking platforms charge 20–40% commission. Booking directly with a Tanzania-based operator like Snow Africa Adventure eliminates the middleman markup entirely.
+                </p>
+                <Link href="/kilimanjaro-climbing-companies/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
+                  Compare operators <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                  <Lightbulb className="w-5 h-5 text-purple-700" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Choose a Shorter Route (With Caution)</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-3">
+                  A 5-day Marangu costs less than an 8-day Lemosho because of fewer park fee days and crew wages. But shorter routes have significantly lower success rates (65% vs 95%). The money you save means nothing if you don&apos;t reach the summit.
+                </p>
+                <Link href="/best-route-to-climb-kilimanjaro/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
+                  Compare routes <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center mb-4">
+                  <CreditCard className="w-5 h-5 text-rose-700" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Book Early for Best Rates</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-3">
+                  Prices tend to increase closer to peak season as availability tightens. Booking 3–6 months ahead locks in current rates and guarantees your preferred dates. A 30% deposit is all you need to secure your spot.
+                </p>
+                <Link href="/contact-us/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
+                  Get a quote <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                  <Backpack className="w-5 h-5 text-teal-700" />
+                </div>
+                <h3 className="font-heading text-lg font-bold mb-2">Rent Gear Instead of Buying</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-3">
+                  If this is a one-time trek, renting gear from your operator saves $150–$400 compared to buying. Quality rental sleeping bags, trekking poles, and jackets are available from most reputable operators including Snow Africa Adventure.
+                </p>
+                <Link href="/contact-us/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
+                  Ask about gear rental <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Private vs Group Climb Costs */}
+      <section className="py-16 bg-[var(--primary-dark)] text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+              Cost Comparison
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+              Private vs Group Climb Costs Compared
+            </h2>
+            <p className="text-white/70 text-center mb-10 max-w-2xl mx-auto">
+              The biggest factor in your Kilimanjaro price? Whether you climb privately or join a group. Here&apos;s how costs break down for a 7-day Lemosho Route climb — the most popular premium option.
+            </p>
+
+            <div className="overflow-x-auto rounded-xl mb-8">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-white/10">
+                    <th className="text-left px-5 py-4 font-semibold text-[var(--secondary)]">Climb Type</th>
+                    <th className="text-right px-5 py-4 font-semibold">Private Price</th>
+                    <th className="text-right px-5 py-4 font-semibold">Group Price</th>
+                    <th className="text-right px-5 py-4 font-semibold">Savings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {privateVsGroup.map((row, i) => (
+                    <tr
+                      key={i}
+                      className={`border-b border-white/10 ${
+                        i === privateVsGroup.length - 1 ? "bg-white/10" : ""
+                      }`}
+                    >
+                      <td className="px-5 py-4 font-medium">{row.groupSize}</td>
+                      <td className="px-5 py-4 text-right text-white/80">{row.privateCost}</td>
+                      <td className="px-5 py-4 text-right text-white/80">{row.groupCost}</td>
+                      <td className="px-5 py-4 text-right font-semibold text-[var(--secondary)]">{row.savings}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                <h3 className="font-heading text-lg font-bold mb-3 text-[var(--secondary)]">Why Private Costs More</h3>
+                <p className="text-white/70 text-sm leading-relaxed mb-3">
+                  A solo private climber still needs a minimum crew: 1 lead guide, 1 assistant guide, 1 cook, and 3–4 porters. Those fixed costs are spread across just one person instead of six. The mountain doesn&apos;t offer volume discounts on staff.
+                </p>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  The benefit? Complete flexibility on dates, pace, and itinerary. Your guide adapts to your speed, not the group&apos;s.
+                </p>
+              </div>
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                <h3 className="font-heading text-lg font-bold mb-3 text-[var(--secondary)]">Why Groups Save Money</h3>
+                <p className="text-white/70 text-sm leading-relaxed mb-3">
+                  In a group of 6, the guide, cook, and vehicle costs are divided six ways. Park fees remain per-person (they can&apos;t be shared), but crew wages drop from $400–$700 per person to $100–$150 per person.
+                </p>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  Snow Africa Adventure runs <Link href="/kilimanjaro-join-group-departures/" className="text-[var(--secondary)] underline hover:text-white">scheduled group departures</Link> year-round with a maximum of 8 climbers per group for a quality experience.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -518,17 +903,31 @@ export default function KilimanjaroPricesPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-10">
               Kilimanjaro Price Questions
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {priceFaqs.map((faq, i) => (
-                <div key={i} className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                  <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-[var(--text-muted)]">{faq.answer}</p>
-                </div>
+                <details key={i} className="bg-white rounded-xl border border-[var(--border)] group">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold hover:text-[var(--primary)] transition-colors">
+                    {faq.question}
+                    <ArrowRight className="w-5 h-5 text-[var(--text-muted)] group-open:rotate-90 transition-transform shrink-0 ml-4" />
+                  </summary>
+                  <div className="px-6 pb-6 text-[var(--text-muted)] leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
               ))}
             </div>
           </div>
         </div>
       </section>
+
+      {/* Related Guides */}
+      <section className="py-12 bg-white border-t border-[var(--border)]">
+        <div className="container mx-auto px-4">
+          <RelatedGuides currentPath="/kilimanjaro-prices/" />
+        </div>
+      </section>
+
+      <KnowledgeBase exclude="/kilimanjaro-prices/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
@@ -538,7 +937,7 @@ export default function KilimanjaroPricesPage() {
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto text-lg">
             Tell us your preferred route, travel dates, and group size and we&apos;ll send you a
-            detailed, no-obligation quote within 24 hours. Or <Link href="/kilimanjaro-group-climbs/" className="text-white underline hover:text-[var(--secondary)]">join a group climb</Link> to save 15–30%. See how <Link href="/kilimanjaro-vs-everest/" className="text-white underline hover:text-[var(--secondary)]">Kilimanjaro costs compare to Everest</Link> — you might be surprised.
+            detailed, no-obligation quote within 24 hours. Or <Link href="/kilimanjaro-join-group-departures/" className="text-white underline hover:text-[var(--secondary)]">join a group climb</Link> to save 15–30%. See how <Link href="/kilimanjaro-vs-everest/" className="text-white underline hover:text-[var(--secondary)]">Kilimanjaro costs compare to Everest</Link> — you might be surprised.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
           <Link
@@ -548,10 +947,10 @@ export default function KilimanjaroPricesPage() {
             Request a Free Quote
           </Link>
           <Link
-            href="/kilimanjaro-group-climbs/"
+            href="/kilimanjaro-join-group-departures/"
             className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
           >
-            Group Climbs Guide
+            Group Departures
           </Link>
           </div>
         </div>

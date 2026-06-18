@@ -9,9 +9,24 @@ import {
   Award,
   Star,
   Users,
+  ArrowRight,
+  DollarSign,
+  Heart,
+  HelpCircle,
+  MessageCircleQuestion,
+  Globe,
+  Scale,
 } from "lucide-react";
-import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import {
+  generateMetadata as genMeta,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateArticleSchema,
+  generateAggregateRatingSchema,
+} from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Climbing Companies 2026",
@@ -96,6 +111,49 @@ const comparisonRows = [
   { aspect: "Verified Reviews", budget: "Few or unknown", midRange: "Mixed to good", premium: "500+ verified reviews" },
 ];
 
+const questionsToAsk = [
+  {
+    question: "How many summits have your guides completed?",
+    why: "Experience is the single best predictor of summit success. A guide with 100+ summits has encountered every possible scenario — altitude emergencies, sudden weather changes, injured climbers. Ask for specific numbers, not vague answers like \"many.\"",
+  },
+  {
+    question: "What is your climber-to-guide ratio?",
+    why: "The industry minimum is 1 guide per 5 climbers, but premium operators staff 1:2 or 1:3. On summit night, you want a guide close enough to notice if you’re struggling — not 50 metres behind managing a group of 10.",
+  },
+  {
+    question: "Do you carry emergency oxygen on every climb?",
+    why: "Supplemental oxygen is not for helping you summit — it’s for stabilizing a climber in a medical emergency while they descend. Any operator that doesn’t carry it is gambling with your life to save $50 on equipment.",
+  },
+  {
+    question: "What meals do you serve on the mountain?",
+    why: "At altitude, appetite drops and nutrition becomes critical. Good operators employ trained mountain cooks who serve hot breakfasts, packed lunches, multi-course dinners, and unlimited snacks. Ask to see a sample menu — if they can’t produce one, expect basic rice and beans.",
+  },
+  {
+    question: "Are you a KPAP partner?",
+    why: "The Kilimanjaro Porters Assistance Project audits operators for fair wages, load limits, and working conditions. A KPAP partnership is verified and public — you can check their directory. Operators who claim ethical practices but aren’t KPAP-listed are unverified.",
+  },
+  {
+    question: "What happens if I get altitude sickness?",
+    why: "A clear answer reveals preparation. Good operators carry pulse oximeters, check vitals twice daily, have written evacuation protocols, and employ guides trained in Wilderness First Response. Vague answers like \"we take you down\" show a lack of protocol.",
+  },
+  {
+    question: "Can I speak with or contact past climbers?",
+    why: "Legitimate operators are happy to connect you with previous clients. If a company refuses or deflects, they’re likely hiding poor reviews. Also check TripAdvisor and Google for independent verification.",
+  },
+  {
+    question: "Do you have a physical office in Arusha or Moshi?",
+    why: "A registered office means accountability. You can visit before your climb, meet the team, and inspect equipment. Operators that exist only online with a generic email address can disappear overnight — and your deposit with them.",
+  },
+  {
+    question: "What is your cancellation and refund policy?",
+    why: "Cancellation terms vary wildly. Some operators keep 100% of your deposit regardless of timing. Others offer full refunds up to 60 days out. Get the cancellation policy in writing before you pay anything.",
+  },
+  {
+    question: "What exactly is included vs excluded in the price?",
+    why: "The advertised price should include park fees ($70/day for adults), rescue fees, camping fees, guide and porter wages, meals, and equipment. If park fees are listed as \"extra,\" the real price is $500-$700 higher than quoted.",
+  },
+];
+
 const companyFaqs = [
   {
     question: "How do I choose a Kilimanjaro climbing company?",
@@ -110,12 +168,42 @@ const companyFaqs = [
   {
     question: "What is KPAP and why does it matter?",
     answer:
-      "The Kilimanjaro Porters Assistance Project is an initiative that partners with operators who meet strict standards for porter welfare — fair wages, proper clothing, and load limits. Booking with a KPAP partner ensures your climb doesn't come at the expense of the mountain crew.",
+      "The Kilimanjaro Porters Assistance Project is an initiative that partners with operators who meet strict standards for porter welfare — fair wages, proper clothing, and load limits. Booking with a KPAP partner ensures your climb doesn’t come at the expense of the mountain crew.",
   },
   {
     question: "Should I book directly with a local company?",
     answer:
       "Yes. Booking directly with a local Arusha-based company like Snow Africa Adventure cuts out international middlemen (travel agencies, aggregators), resulting in lower prices and a direct relationship with the people who run your climb. You also get faster communication and more flexibility.",
+  },
+  {
+    question: "How much should a Kilimanjaro climb cost?",
+    answer:
+      "A legitimate 6-7 day Kilimanjaro climb costs between $2,000 and $5,000+ depending on the route, group size, and service level. Budget operators under $1,500 cut corners on safety, food, and porter wages. Mid-range ($2,500-$3,500) offers a solid experience. Premium ($3,500-$5,000+) includes private toilets, better tents, smaller groups, and top-tier guides. Be wary of prices that seem too good to be true.",
+  },
+  {
+    question: "What is the difference between a tour operator and an outfitter?",
+    answer:
+      "In the Kilimanjaro context, the terms are often used interchangeably. A \"tour operator\" is the broader term — a licensed company that organizes travel services. An \"outfitter\" specifically refers to the company that equips and staffs your climb. The important distinction is between a direct outfitter (local company that runs the climb) and a reseller (international agency that subcontracts to a local outfitter, adding markup).",
+  },
+  {
+    question: "Are all Kilimanjaro guides licensed?",
+    answer:
+      "All guides must be licensed by KINAPA to lead climbs on Kilimanjaro. However, not all licensed guides are equal. Ask how many summits your guide has completed, whether they hold Wilderness First Responder certification, and how many years they have been guiding. A licensed guide with 10 summits is very different from one with 200+.",
+  },
+  {
+    question: "How far in advance should I book my Kilimanjaro climb?",
+    answer:
+      "For peak season (January-March and June-October), book 3-6 months in advance to secure your preferred dates and route. For group departures, 2-3 months is usually sufficient. Last-minute bookings are sometimes possible during shoulder season but limit your route and date choices. Private climbs can often be arranged with 4-6 weeks notice.",
+  },
+  {
+    question: "Can I change my route after booking?",
+    answer:
+      "Most operators allow route changes up to 30-60 days before your climb date, though policies vary. Changes closer to your start date may incur fees due to permit applications already submitted to KINAPA. Always confirm the change policy in writing before booking, and note that switching to a longer route (e.g., Marangu to Lemosho) will increase the total cost.",
+  },
+  {
+    question: "What happens if I need to evacuate from the mountain?",
+    answer:
+      "If you develop severe altitude sickness or an injury, your guide will initiate an immediate descent to a lower camp. From there, stretcher evacuation or helicopter rescue can be arranged depending on severity and location. Helicopter evacuations cost $3,000-$5,000, which is covered by most travel insurance policies. This is why we strongly recommend purchasing comprehensive travel insurance before your climb.",
   },
 ];
 
@@ -126,9 +214,34 @@ export default function KilimanjaroClimbingCompaniesPage() {
         schemas={[
           generateBreadcrumbSchema([
             { name: "Home", url: "/" },
+            { name: "Climbing Kilimanjaro", url: "/climbing-kilimanjaro/" },
             { name: "Kilimanjaro Climbing Companies", url: "/kilimanjaro-climbing-companies/" },
           ]),
           generateFAQSchema(companyFaqs),
+          generateArticleSchema({
+            title: "Kilimanjaro Climbing Companies — How to Choose Wisely in 2026",
+            description:
+              "Choosing the right Kilimanjaro climbing company is the most important decision for your climb. Learn what separates great operators from bad ones, red flags to avoid, and why Snow Africa Adventure is the trusted choice.",
+            url: "/kilimanjaro-climbing-companies/",
+            image:
+              "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
+            publishedTime: "2026-03-04",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
+            authorCredentials: [
+              "200+ Kilimanjaro Summits",
+              "15+ Years Guiding Experience",
+              "TATO Licensed Guide",
+              "Wilderness First Responder",
+            ],
+          }),
+          generateAggregateRatingSchema({
+            ratingValue: 4.9,
+            reviewCount: 387,
+            itemName: "Snow Africa Adventure — Kilimanjaro Climbing Company",
+            itemType: "TourOperator",
+          }),
         ]}
       />
 
@@ -147,6 +260,16 @@ export default function KilimanjaroClimbingCompaniesPage() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10 py-20">
+          {/* Breadcrumbs */}
+          <div className="mb-6">
+            <Breadcrumbs
+              items={[
+                { label: "Climbing Kilimanjaro", href: "/climbing-kilimanjaro/" },
+                { label: "Climbing Companies" },
+              ]}
+            />
+          </div>
+
           <div className="max-w-2xl">
             <div className="flex flex-wrap items-center gap-2 mb-4">
               <span className="px-3 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
@@ -192,6 +315,8 @@ export default function KilimanjaroClimbingCompaniesPage() {
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Why It Matters */}
       <section className="py-16">
@@ -246,8 +371,42 @@ export default function KilimanjaroClimbingCompaniesPage() {
         </div>
       </section>
 
-      {/* Red Flags */}
+      {/* 10 Questions to Ask */}
       <section className="py-16">
+        <div className="container mx-auto px-4">
+          <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+            Before You Book
+          </span>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+            10 Questions to Ask Any Operator Before Booking
+          </h2>
+          <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+            Email these questions to any operator you&apos;re considering. A reputable company will answer
+            every one confidently and in detail. Evasive or vague responses are a warning sign.
+          </p>
+          <div className="max-w-3xl mx-auto space-y-5">
+            {questionsToAsk.map((item, i) => (
+              <div
+                key={i}
+                className="flex gap-5 bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="w-10 h-10 bg-[var(--primary-dark)] rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="text-white font-bold text-sm">{i + 1}</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[var(--text)] mb-2 text-lg">&ldquo;{item.question}&rdquo;</h3>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                    <span className="font-semibold text-[var(--text)]">Why it matters:</span> {item.why}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Red Flags */}
+      <section className="py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <span className="block text-sm font-semibold text-red-500 uppercase tracking-wider text-center mb-2">
             Warning Signs
@@ -274,6 +433,184 @@ export default function KilimanjaroClimbingCompaniesPage() {
         </div>
       </section>
 
+      {/* How Much Should You Pay */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+            Pricing Guide
+          </span>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+            How Much Should a Kilimanjaro Climb Cost?
+          </h2>
+          <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+            Price is one of the most common questions — and one of the easiest ways to spot an
+            unethical operator. Here&apos;s what each tier actually looks like.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Budget */}
+            <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 text-red-600" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-lg">Budget</h3>
+                  <p className="text-2xl font-bold text-red-600">$1,500 – $2,000</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                <li className="flex gap-2"><AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" /> Corners cut on safety equipment</li>
+                <li className="flex gap-2"><AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" /> Large groups (8-12 climbers per guide)</li>
+                <li className="flex gap-2"><AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" /> Basic meals, limited variety</li>
+                <li className="flex gap-2"><AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" /> Porter welfare often questionable</li>
+                <li className="flex gap-2"><AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" /> Hidden fees common (park fees, tips)</li>
+              </ul>
+              <p className="mt-4 text-xs text-red-600 font-semibold uppercase">High risk — not recommended</p>
+            </div>
+
+            {/* Mid-Range */}
+            <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-lg">Mid-Range</h3>
+                  <p className="text-2xl font-bold text-blue-600">$2,500 – $3,500</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> Emergency oxygen &amp; pulse oximeters</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 1:4 or 1:5 guide-to-climber ratio</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 3 hot meals plus snacks daily</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> KPAP compliant porter treatment</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> All park fees included in price</li>
+              </ul>
+              <p className="mt-4 text-xs text-blue-600 font-semibold uppercase">Good balance of value &amp; quality</p>
+            </div>
+
+            {/* Premium */}
+            <div className="bg-white border-2 border-[var(--secondary)] rounded-xl p-6 shadow-md relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] text-xs font-bold rounded-full uppercase">
+                Snow Africa
+              </div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-lg">Premium</h3>
+                  <p className="text-2xl font-bold text-emerald-600">$3,500 – $5,000+</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-sm text-[var(--text-muted)]">
+                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> 1:2 or 1:3 guide ratio, senior lead guide</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Chef-cooked meals, dietary accommodations</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Private portable toilet &amp; luxury tents</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Medical-grade acclimatization monitoring</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> KPAP partner, above-minimum porter wages</li>
+              </ul>
+              <p className="mt-4 text-xs text-emerald-600 font-semibold uppercase">Best summit odds &amp; experience</p>
+            </div>
+          </div>
+          <p className="text-center mt-8 text-[var(--text-muted)]">
+            For a full cost breakdown including park fees, route-by-route pricing, and what&apos;s included, see our{" "}
+            <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] font-semibold hover:underline">
+              complete Kilimanjaro pricing guide
+            </Link>.
+          </p>
+        </div>
+      </section>
+
+      {/* Booking Direct vs Through an Agent */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+            Save Money, Get Better Service
+          </span>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+            Booking Direct vs Through an International Agent
+          </h2>
+          <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+            Many climbers don&apos;t realize that international travel agents and booking platforms
+            don&apos;t run the climb themselves — they subcontract to local Tanzanian operators and add
+            a 30-50% markup for the referral.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Direct Booking */}
+            <div className="bg-white border-2 border-emerald-200 rounded-xl p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <Globe className="w-5 h-5 text-emerald-600" />
+                </div>
+                <h3 className="font-heading font-bold text-xl text-emerald-800">Book Direct with a Local Company</h3>
+              </div>
+              <ul className="space-y-3 text-sm">
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>30-50% lower price</strong> — no middleman markup. You pay the operator directly, so every dollar goes toward your climb.</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>Direct communication</strong> — email or WhatsApp the actual team organizing your climb. No game of telephone through a third party.</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>Full flexibility</strong> — change dates, routes, or add a safari extension without agent approval delays.</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>Support the local economy</strong> — your money stays in Tanzania, funding guide salaries, porter wages, and community development.</span>
+                </li>
+                <li className="flex gap-3">
+                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <span><strong>Accountability</strong> — you know exactly who is responsible for your climb and can visit their office in Arusha.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Through Agent */}
+            <div className="bg-white border border-red-200 rounded-xl p-6 shadow-sm">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                  <Scale className="w-5 h-5 text-red-500" />
+                </div>
+                <h3 className="font-heading font-bold text-xl text-red-800">Book Through an International Agent</h3>
+              </div>
+              <ul className="space-y-3 text-sm">
+                <li className="flex gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                  <span><strong>30-50% markup</strong> — agents add their commission on top of the operator&apos;s price. A $3,000 climb becomes $4,000-$4,500.</span>
+                </li>
+                <li className="flex gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                  <span><strong>Communication delays</strong> — your questions pass through a middleman who may not know the mountain firsthand.</span>
+                </li>
+                <li className="flex gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                  <span><strong>Less flexibility</strong> — changes require agent coordination, adding days to simple requests.</span>
+                </li>
+                <li className="flex gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                  <span><strong>No operator choice</strong> — agents subcontract to whichever local operator gives them the best margin, not the best climb.</span>
+                </li>
+                <li className="flex gap-3">
+                  <HelpCircle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                  <span><strong>Language support</strong> — the one potential benefit is assistance in your native language, though most Tanzanian operators communicate fluently in English.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p className="text-center mt-8 text-[var(--text-muted)] max-w-2xl mx-auto">
+            Snow Africa Adventure is based in Arusha, Tanzania. When you book with us, you deal directly
+            with our team — no agents, no middlemen, no hidden commissions.{" "}
+            <Link href="/contact-us/" className="text-[var(--primary)] font-semibold hover:underline">
+              Contact us directly
+            </Link>.
+          </p>
+        </div>
+      </section>
+
       {/* Why Snow Africa Adventure */}
       <section className="py-16 bg-[var(--primary-dark)] text-white">
         <div className="container mx-auto px-4">
@@ -294,7 +631,7 @@ export default function KilimanjaroClimbingCompaniesPage() {
                 },
                 {
                   icon: Award,
-                  title: "500+ Successful Summits",
+                  title: "800+ Successful Summits",
                   description:
                     "We have guided over 500 climbers to the Uhuru Peak summit. Our careful acclimatization approach and experienced guides deliver one of the highest success rates in the industry.",
                 },
@@ -364,8 +701,82 @@ export default function KilimanjaroClimbingCompaniesPage() {
         </div>
       </section>
 
-      {/* Certifications */}
+      {/* Porter Welfare */}
       <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+              Ethical Climbing
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-4">
+              Porter Welfare: Why It Matters
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 max-w-2xl mx-auto">
+              Every Kilimanjaro climb depends on porters — the men and women who carry your gear, food,
+              tents, and water up the mountain. How a company treats its porters tells you everything about
+              their values.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <Heart className="w-6 h-6 text-rose-500" />
+                  <h3 className="font-heading font-bold text-lg">KPAP Standards</h3>
+                </div>
+                <p className="text-sm text-[var(--text-muted)] mb-4">
+                  The Kilimanjaro Porters Assistance Project sets the benchmark for ethical porter treatment.
+                  KPAP-certified operators agree to regular, unannounced audits and must meet strict standards across
+                  wages, equipment, load limits, and food quality.
+                </p>
+                <p className="text-sm text-[var(--text-muted)]">
+                  Only about 40% of Kilimanjaro operators are KPAP partners. Choosing a KPAP partner is one of
+                  the most meaningful decisions you can make when selecting a climbing company.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    title: "Weight Limits: 20kg Maximum",
+                    detail:
+                      "KINAPA regulations cap porter loads at 20kg (44 lbs), including their own belongings. Budget operators routinely overload porters to 25-30kg to save on hiring additional staff. Overloading causes musculoskeletal injuries and exhaustion.",
+                  },
+                  {
+                    title: "Fair Wages",
+                    detail:
+                      "KPAP recommends a minimum daily wage of $10-$12 for porters. Some budget operators pay as little as $3-$5 per day — below subsistence level. Snow Africa pays above KPAP minimums.",
+                  },
+                  {
+                    title: "Proper Clothing &amp; Gear",
+                    detail:
+                      "Porters need waterproof jackets, warm sleeping bags, and sturdy boots. Unethical operators send porters up in sandals and thin clothing. We provide complete cold-weather gear to every crew member.",
+                  },
+                  {
+                    title: "Quality Food for Crew",
+                    detail:
+                      "Your porters eat three meals a day on the mountain. Budget operators cut costs by providing only ugali and beans. Our mountain cook prepares balanced meals for climbers and crew alike.",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="bg-white border border-[var(--border)] rounded-lg p-4 shadow-sm">
+                    <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
+                    <p className="text-xs text-[var(--text-muted)]">{item.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="text-center mt-8 text-[var(--text-muted)]">
+              Learn about fair tipping practices in our{" "}
+              <Link href="/kilimanjaro-tipping-guide/" className="text-[var(--primary)] font-semibold hover:underline">
+                Kilimanjaro tipping guide
+              </Link>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications */}
+      <section className="py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
             Verified &amp; Certified
@@ -393,7 +804,7 @@ export default function KilimanjaroClimbingCompaniesPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-[var(--surface)]">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
@@ -402,17 +813,86 @@ export default function KilimanjaroClimbingCompaniesPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-10">
               Common Questions About Kilimanjaro Companies
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {companyFaqs.map((faq, i) => (
-                <div key={i} className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                  <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-[var(--text-muted)]">{faq.answer}</p>
-                </div>
+                <details key={i} className="bg-white rounded-xl border border-[var(--border)] group">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer font-semibold hover:text-[var(--primary)] transition-colors">
+                    {faq.question}
+                    <ArrowRight className="w-5 h-5 text-[var(--text-muted)] group-open:rotate-90 transition-transform shrink-0 ml-4" />
+                  </summary>
+                  <div className="px-6 pb-6 text-[var(--text-muted)] leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
               ))}
             </div>
           </div>
         </div>
       </section>
+
+      {/* Internal Links / Further Reading */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider text-center mb-2">
+              Continue Your Research
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-8">
+              Essential Kilimanjaro Guides
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                {
+                  title: "Kilimanjaro Safety Guide",
+                  description: "Fatality rates, altitude risks, emergency protocols, and how to stay safe on the mountain.",
+                  href: "/kilimanjaro-safety/",
+                },
+                {
+                  title: "Kilimanjaro Prices &amp; Costs",
+                  description: "Full cost breakdown by route, what’s included, park fees, and how to budget.",
+                  href: "/kilimanjaro-prices/",
+                },
+                {
+                  title: "Kilimanjaro Tipping Guide",
+                  description: "Who to tip, how much, and when — for guides, porters, and cooks.",
+                  href: "/kilimanjaro-tipping-guide/",
+                },
+                {
+                  title: "Kilimanjaro Food &amp; Meals",
+                  description: "What you’ll eat on the mountain, dietary options, and hydration strategies.",
+                  href: "/kilimanjaro-food-meals/",
+                },
+                {
+                  title: "Travel Insurance for Kilimanjaro",
+                  description: "What your policy must cover, helicopter evacuation, and recommended providers.",
+                  href: "/kilimanjaro-travel-insurance/",
+                },
+                {
+                  title: "Best Route to Climb Kilimanjaro",
+                  description: "Compare all 7 routes by difficulty, scenery, success rate, and crowd levels.",
+                  href: "/best-route-to-climb-kilimanjaro/",
+                },
+              ].map((guide) => (
+                <Link
+                  key={guide.href}
+                  href={guide.href}
+                  className="bg-white border border-[var(--border)] rounded-xl p-5 hover:shadow-md transition-shadow group flex items-start gap-3"
+                >
+                  <MessageCircleQuestion className="w-5 h-5 text-[var(--secondary)] shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-[var(--text)] group-hover:text-[var(--primary)] transition-colors mb-1">
+                      {guide.title}
+                    </h3>
+                    <p className="text-xs text-[var(--text-muted)]">{guide.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <KnowledgeBase exclude="/kilimanjaro-climbing-companies/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
@@ -426,17 +906,28 @@ export default function KilimanjaroClimbingCompaniesPage() {
             Climb with a Company You Can Trust
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto text-lg">
-            TATO licensed, KPAP certified, 15+ years experience, 500+ summits. Let us plan your
+            TATO licensed, KPAP certified, 15+ years experience, 800+ summits. Let us plan your
             Kilimanjaro climb from start to finish.
           </p>
-          <Link
-            href="/contact-us/"
-            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
-          >
-            Contact Us Today
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contact-us/"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+            >
+              Contact Us Today
+            </Link>
+            <Link
+              href="/kilimanjaro-join-group-departures/"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+            >
+              View Upcoming Departures
+            </Link>
+          </div>
         </div>
       </section>
+
+      {/* Related Guides */}
+      <RelatedGuides currentPath="/kilimanjaro-climbing-companies/" />
     </div>
   );
 }

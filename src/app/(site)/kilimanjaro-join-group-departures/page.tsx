@@ -6,6 +6,7 @@ import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
 import { SITE_CONFIG, PARTNER_INFO } from "@/lib/constants";
 import { ShareButtons } from "@/components/social/ShareButtons";
+import { CredentialsBadges } from "@/components/kilimanjaro";
 
 // Revalidate every 60 seconds to fetch fresh departure data
 export const revalidate = 60;
@@ -230,6 +231,8 @@ export default async function GroupDeparturesPage() {
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* How It Works — Brief */}
       <section className="py-8 bg-[var(--surface)]">

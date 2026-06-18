@@ -24,14 +24,17 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateHowToSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Training Plan: 12-Week Preparation Guide",
   description:
-    "12-week Kilimanjaro training plan from guides with 500+ summits. Weekly schedules for hiking, cardio, strength, and mental prep. Works for all fitness levels.",
+    "12-week Kilimanjaro training plan from guides with 800+ summits. Weekly schedules for hiking, cardio, strength, and mental prep. Works for all fitness levels.",
   url: "/kilimanjaro-training-plan/",
 });
 
@@ -259,7 +262,7 @@ const keyExercises = [
     icon: Dumbbell,
     name: "Squats and Lunges",
     color: "bg-amber-100 text-amber-700",
-    why: "Your quads, glutes, and calves do the heavy lifting on Kilimanjaro — particularly during the Barranco Wall scramble and the long summit night ascent through loose scree.",
+    why: "Your quads, glutes, and calves do the heavy lifting on Kilimanjaro — particularly during the famous Barranco Wall scramble and the long summit night ascent through loose scree.",
     how: "Start bodyweight, progress to weighted. Squats 3-4x12-15, walking lunges 3x15 each leg, Bulgarian split squats 3x10 each leg. Add a weighted pack for step-ups from week 5.",
   },
   {
@@ -301,7 +304,7 @@ const faqs = [
   {
     question: "Can I climb Kilimanjaro without training?",
     answer:
-      "Technically, you can attempt it — but your summit chances drop dramatically, and you are far more likely to suffer injury, exhaustion, and severe altitude sickness. Trained climbers have a 15-20% higher summit success rate than untrained climbers. Without preparation, summit night (12-15 hours of continuous effort at -15 to -20 degrees C with 50% oxygen) will be overwhelming. Our guides with 500+ summits strongly recommend training for every climber.",
+      "Technically, you can attempt it — but your summit chances drop dramatically, and you are far more likely to suffer injury, exhaustion, and severe altitude sickness. Trained climbers have a 15-20% higher summit success rate than untrained climbers. Without preparation, summit night (12-15 hours of continuous effort at -15 to -20 degrees C with 50% oxygen) will be overwhelming. Our guides with 800+ summits strongly recommend training for every climber.",
   },
   {
     question: "What exercises are best for Kilimanjaro training?",
@@ -355,17 +358,28 @@ export default function KilimanjaroTrainingPlanPage() {
             { name: "Training Plan", url: "/kilimanjaro-training-plan/" },
           ]),
           generateFAQSchema(faqs),
+          generateHowToSchema({
+            name: "How to Train for Kilimanjaro: 12-Week Plan",
+            description: "A structured 12-week training programme to prepare your body and mind for summiting Mount Kilimanjaro at 5,895m.",
+            totalTime: "P84D",
+            steps: [
+              { name: "Weeks 1-4: Build Your Base", text: "Start with 3-4 sessions per week. Walk 60-90 minutes on hilly terrain twice a week. Add 2 cardio sessions (cycling, swimming, or jogging) at moderate intensity. Include 1 strength session focused on legs, core, and back." },
+              { name: "Weeks 5-8: Increase Volume", text: "Increase to 5 sessions per week. Extend weekend hikes to 3-5 hours with a loaded daypack (8-10kg). Add stair climbing or incline treadmill sessions. Increase strength training to 2 sessions per week. Begin back-to-back weekend hikes." },
+              { name: "Weeks 9-11: Peak Training", text: "Train 5-6 sessions per week at highest volume. Complete at least one full-day hike (6-8 hours) with summit-weight pack. Practice hiking in your actual climbing boots and gear. Add altitude simulation if available. Focus on mental preparation and pacing." },
+              { name: "Week 12: Taper and Rest", text: "Reduce training volume by 50%. Keep sessions light — easy walks, gentle stretching, and rest. Finalise gear, check travel insurance, and review your packing list. Arrive in Tanzania well-rested and confident." },
+            ],
+          }),
           generateArticleSchema({
             title: "Kilimanjaro Training Plan: 12-Week Preparation Guide",
             description:
-              "12-week Kilimanjaro training plan from guides with 500+ summits. Weekly schedules for hiking, cardio, strength, and mental prep. Works for all fitness levels.",
+              "12-week Kilimanjaro training plan from guides with 800+ summits. Weekly schedules for hiking, cardio, strength, and mental prep. Works for all fitness levels.",
             url: "/kilimanjaro-training-plan/",
             image:
               "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2026-03-04",
-            modifiedTime: "2026-03-04",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: [
               "200+ Kilimanjaro Summits",
               "15+ Years Guiding Experience",
@@ -373,6 +387,7 @@ export default function KilimanjaroTrainingPlanPage() {
               "Wilderness First Responder",
             ],
           }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 
@@ -398,11 +413,13 @@ export default function KilimanjaroTrainingPlanPage() {
               Kilimanjaro <span className="text-[var(--secondary)]">Training Plan</span>: 12-Week Guide
             </h1>
             <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
-              A proven week-by-week training programme from guides who have led 500+ summits. Build the fitness, strength, and mental resilience to reach Uhuru Peak at 5,895m.
+              A proven week-by-week training programme from guides who have led 800+ summits. Build the fitness, strength, and mental resilience to reach Uhuru Peak at 5,895m.
             </p>
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Quick Answer Box */}
       <section className="py-12 bg-white border-b border-[var(--border)]">
@@ -426,7 +443,7 @@ export default function KilimanjaroTrainingPlanPage() {
               Why Training Matters for Kilimanjaro
             </h2>
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg">
-              Kilimanjaro is not a casual hike. At 5,895m, your body faces extreme conditions that proper training directly prepares you for.
+              Kilimanjaro is not a casual hike. At 5,895m, your body faces extreme conditions that proper training directly prepares you for. Whether you are in your 20s or <Link href="/climbing-kilimanjaro-over-50/" className="text-[var(--primary)] hover:underline">climbing Kilimanjaro over 50</Link>, a structured plan makes the difference.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -445,7 +462,7 @@ export default function KilimanjaroTrainingPlanPage() {
               </div>
               <h3 className="font-heading text-lg font-bold mb-2">Prevents Injury & Illness</h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Strong legs reduce knee and ankle injuries on uneven terrain. Cardiovascular fitness helps your body acclimatize more effectively — a tired, deconditioned body is significantly more susceptible to altitude sickness. Training also prevents the cumulative fatigue that derails climbers from day 3 onwards.
+                Strong legs reduce knee and ankle injuries on uneven terrain, especially during technical sections like the <Link href="/kilimanjaro-barranco-wall/" className="text-[var(--primary)] hover:underline">Barranco Wall scramble</Link>. Cardiovascular fitness helps your body acclimatize more effectively — a tired, deconditioned body is significantly more susceptible to altitude sickness. Training also prevents the cumulative fatigue that derails climbers from day 3 onwards.
               </p>
             </div>
             <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm">
@@ -1134,6 +1151,8 @@ export default function KilimanjaroTrainingPlanPage() {
         </div>
       </section>
 
+      <KnowledgeBase exclude="/kilimanjaro-training-plan/" />
+
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">
@@ -1142,7 +1161,7 @@ export default function KilimanjaroTrainingPlanPage() {
             Train Smart. Climb Strong. Summit Kilimanjaro.
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto text-lg">
-            Start training today and climb with a team that has guided 500+ successful summits. Snow Africa Adventure provides expert guides, proper acclimatization schedules, and 24/7 support from Arusha to Uhuru Peak.
+            Start training today and climb with a team that has guided 800+ successful summits. Snow Africa Adventure provides expert guides, proper acclimatization schedules, and 24/7 support from Arusha to Uhuru Peak.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

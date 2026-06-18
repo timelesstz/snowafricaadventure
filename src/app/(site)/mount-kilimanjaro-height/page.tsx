@@ -8,15 +8,21 @@ import {
   TrendingUp,
   MapPin,
   Info,
+  Clock,
+  Ruler,
+  Wind,
+  Triangle,
 } from "lucide-react";
 import {
   generateMetadata as genMeta,
   generateBreadcrumbSchema,
   generateFAQSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Height: 5 Zones From Base to Summit",
@@ -129,7 +135,12 @@ const faqs = [
   {
     question: "Do you need climbing experience to reach the summit?",
     answer:
-      "No technical climbing skills are required to climb Kilimanjaro. It is a high-altitude trek that demands physical fitness, mental determination, and proper acclimatisation. With a reputable guide company, most reasonably fit people can attempt the summit.",
+      "No technical climbing skills are required to climb Kilimanjaro. It is a high-altitude trek that demands physical fitness, mental determination, and proper acclimatisation. With a reputable guide company, most reasonably fit people can attempt the summit. The mountain has an excellent safety record — fatality rates are extremely low when climbing with licensed operators.",
+  },
+  {
+    question: "Is climbing Mount Kilimanjaro dangerous?",
+    answer:
+      "Kilimanjaro is one of the safest high-altitude treks in the world when approached responsibly. The main risk is altitude sickness, which proper acclimatisation and experienced guides mitigate effectively. Fatalities are rare — roughly 3–7 deaths per year among tens of thousands of climbers — and most are linked to pre-existing conditions or inadequate preparation. Choosing a reputable operator with emergency protocols, supplemental oxygen, and trained guides makes a significant difference.",
   },
   {
     question: "What percentage of climbers reach the top?",
@@ -144,12 +155,71 @@ const faqs = [
   {
     question: "What is Kilimanjaro's prominence?",
     answer:
-      "Mount Kilimanjaro has a topographic prominence of 5,885 metres (19,308 ft) — the fourth highest prominence of any mountain on Earth. This means you must descend nearly 5,885m before ascending any higher peak. This extreme prominence is why Kilimanjaro appears so dramatically against the surrounding plains.",
+      "Mount Kilimanjaro has a topographic prominence of 5,885 metres (19,308 ft) — the fourth highest prominence of any mountain on Earth. This means you must descend nearly 5,885m before ascending any higher peak. This extreme prominence is why Kilimanjaro appears so dramatically against the surrounding plains, and why it holds so many remarkable records in mountaineering history.",
   },
   {
     question: "Are Kilimanjaro's glaciers disappearing?",
     answer:
       "Yes. Over 80% of the ice that existed in 1912 has melted. Scientists estimate the remaining glaciers could disappear entirely by 2040–2050 due to climate change and reduced precipitation. This makes climbing Kilimanjaro increasingly urgent for those wanting to witness its ice fields firsthand.",
+  },
+];
+
+const geologicalTimeline = [
+  { year: "~2.5 million years ago", event: "Volcanic activity begins on the Shira cone — the oldest of Kilimanjaro’s three peaks starts forming on the East African Rift" },
+  { year: "~1.8 million years ago", event: "Mawenzi cone forms to the east, building dramatic jagged peaks that would later attract technical rock climbers" },
+  { year: "~750,000 years ago", event: "Kibo cone emerges as the youngest and highest peak, eventually reaching 5,895m — the summit we climb today" },
+  { year: "~500,000 years ago", event: "Shira cone collapses inward, creating today’s broad Shira Plateau at 4,000m, now traversed by the Lemosho and Shira routes" },
+  { year: "~360,000 years ago", event: "Kibo’s last major eruption shapes the caldera; volcanic activity tapers but does not fully cease" },
+  { year: "~200,000 years ago", event: "The inner Reusch Crater forms within the Kibo caldera — an 800-metre-wide ash pit that still emits sulphur gases" },
+  { year: "1889", event: "Hans Meyer and Ludwig Purtscheller make the first recorded summit, reaching what Meyer estimated to be 5,893m" },
+  { year: "1912", event: "First detailed glacier survey establishes the baseline for over a century of climate monitoring on the mountain" },
+  { year: "2000s–present", event: "Rapid glacier retreat accelerates; over 80% of ice recorded in 1912 has disappeared, prompting urgent climate research" },
+];
+
+const altitudeEffects = [
+  { elevation: "2,500m (8,200ft)", oxygen: "~75%", effect: "First noticeable breathlessness during exertion. Most trekkers feel fine at rest but notice faster breathing on uphills.", color: "bg-green-50 border-green-200" },
+  { elevation: "3,500m (11,500ft)", oxygen: "~65%", effect: "Headaches become common, especially in the evening. Appetite may dip. Drink at least 3–4 litres of water daily.", color: "bg-yellow-50 border-yellow-200" },
+  { elevation: "4,500m (14,800ft)", oxygen: "~55%", effect: "Appetite loss, disrupted sleep, and mild nausea are normal. The body is working hard to acclimatise. Pole pole (slowly, slowly) is essential.", color: "bg-orange-50 border-orange-200" },
+  { elevation: "5,500m (18,000ft)", oxygen: "~50%", effect: "Simple tasks like tying bootlaces require deliberate effort. Cold becomes biting. Mental focus narrows — stay hydrated and keep moving.", color: "bg-red-50 border-red-200" },
+  { elevation: "5,895m (19,341ft)", oxygen: "~49%", effect: "Every step demands concentration. Breathing rate roughly doubles compared to sea level. The final push to Uhuru Peak is as much mental as physical.", color: "bg-blue-50 border-blue-200" },
+];
+
+const threePeaksDeepDive = [
+  {
+    name: "Kibo",
+    height: "5,895m (19,341ft)",
+    status: "Dormant",
+    details: [
+      "Contains the Reusch Crater — an 800-metre-wide inner crater within the main caldera, with a central ash pit roughly 350m across",
+      "Fumaroles inside the crater still emit sulphur gases, confirming that Kibo is dormant rather than extinct",
+      "Last erupted approximately 360,000 years ago; geologists consider another eruption extremely unlikely but not impossible",
+      "The glacial ice cap on Kibo’s summit is what defines the official 5,895m measurement — the rock beneath may be slightly lower",
+    ],
+    color: "bg-amber-50 border-amber-300",
+  },
+  {
+    name: "Mawenzi",
+    height: "5,149m (16,893ft)",
+    status: "Extinct",
+    details: [
+      "Dramatic jagged peaks formed by deep erosion of the extinct volcanic cone — visually the most striking of the three",
+      "Hans Meyer Peak (5,149m) is the highest point on Mawenzi and requires technical rock climbing to reach",
+      "Popular with experienced rock climbers; routes range from Grade III to Grade V scrambles",
+      "Visible from many Kilimanjaro routes, particularly stunning at sunrise from Kibo’s eastern approaches",
+    ],
+    color: "bg-slate-50 border-slate-300",
+  },
+  {
+    name: "Shira",
+    height: "4,005m (13,140ft)",
+    status: "Extinct",
+    details: [
+      "The oldest of the three cones, Shira collapsed inward roughly 500,000 years ago to form a broad plateau",
+      "The Shira Plateau sits at approximately 4,000m and spans about 6.5 km east to west",
+      "Both the Lemosho and Shira routes traverse this plateau, offering wide-open moorland scenery and excellent acclimatisation",
+      "Shira Cathedral (3,962m) is a prominent rock formation on the plateau’s southern edge, visible from multiple routes",
+    ],
+    color: "bg-emerald-50 border-emerald-300",
   },
 ];
 
@@ -180,10 +250,11 @@ export default function MountKilimanjaroHeightPage() {
             image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2026-03-04",
             modifiedTime: "2026-06-16",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
           }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 
@@ -241,6 +312,8 @@ export default function MountKilimanjaroHeightPage() {
         </div>
       </section>
 
+      <CredentialsBadges variant="compact" />
+
       {/* Featured Snippet Target — direct answer for "how high is kilimanjaro in feet" */}
       <section className="py-8 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
@@ -281,7 +354,7 @@ export default function MountKilimanjaroHeightPage() {
               Mount Kilimanjaro&apos;s Altitude Compared to the World&apos;s Highest Peaks
             </h2>
             <p className="text-[var(--text-muted)] mb-8 text-lg">
-              At 5,895 metres (19,341 ft), the kilimanjaro peak height places it among Earth&apos;s elite summits. As Africa&apos;s highest mountain with a prominence of 5,885m, mt kilimanjaro height surpasses the Alps and most of Europe. Here is how the mount kilimanjaro height compares to other notable mountains:
+              At 5,895 metres (19,341 ft), Kilimanjaro stands among Earth&apos;s elite summits. With a topographic prominence of 5,885m — the fourth highest of any peak on the planet — it towers above the Alps, the Andes south of Aconcagua, and every mountain in Europe. Here is how Kilimanjaro&apos;s height compares to other notable peaks around the world:
             </p>
             <div className="overflow-x-auto rounded-xl border border-[var(--border)] shadow-sm">
               <table className="w-full text-sm">
@@ -321,7 +394,7 @@ export default function MountKilimanjaroHeightPage() {
               Five Climate Zones of Mount Kilimanjaro
             </h2>
             <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
-              Climbing Kilimanjaro is like travelling from the equator to the Arctic — the mountain&apos;s altitude spans five distinct ecological zones, each with unique flora, fauna, and weather conditions.
+              Climbing Kilimanjaro is like travelling from the equator to the Arctic — the mountain&apos;s altitude spans <Link href="/kilimanjaro-climate-zones/" className="text-[var(--secondary)] hover:underline">five distinct ecological zones</Link>, each with unique flora, fauna, and weather conditions.
             </p>
             <div className="space-y-4">
               {climateZones.map((zone) => (
@@ -396,6 +469,97 @@ export default function MountKilimanjaroHeightPage() {
         </div>
       </section>
 
+      {/* Geological History Timeline */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
+              Formation &amp; History
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Geological History of Mount Kilimanjaro
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+              Kilimanjaro&apos;s story spans millions of years — from its volcanic birth on the East African Rift to the first human summit and today&apos;s climate crisis. Understanding its geology puts the mountain&apos;s sheer scale into perspective.
+            </p>
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-[var(--border)] hidden md:block" />
+              <div className="space-y-6">
+                {geologicalTimeline.map((item, i) => (
+                  <div key={i} className="flex gap-4 md:gap-6 items-start">
+                    <div className="relative z-10 shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-[var(--primary-dark)] flex items-center justify-center">
+                        <Clock className="w-5 h-5 text-[var(--secondary)]" />
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-xl p-5 border border-[var(--border)] shadow-sm flex-1">
+                      <p className="text-sm font-bold text-[var(--secondary)] mb-1">{item.year}</p>
+                      <p className="text-[var(--text-muted)]">{item.event}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How Kilimanjaro's Height Was Measured */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2">
+              Measurement History
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              How Kilimanjaro&apos;s Height Was Measured
+            </h2>
+            <div className="space-y-6">
+              <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center shrink-0">
+                    <Ruler className="w-6 h-6 text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">First Estimate — 1889</h3>
+                    <p className="text-[var(--text-muted)]">
+                      When <Link href="/first-person-to-climb-kilimanjaro/" className="text-[var(--secondary)] hover:underline">Hans Meyer and Ludwig Purtscheller</Link> made the first recorded summit in 1889, Meyer estimated the height at 5,893 metres using barometric pressure readings. Remarkably close, given the instruments available at the time.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+                    <MapPin className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Modern GPS Surveys — 5,895m</h3>
+                    <p className="text-[var(--text-muted)]">
+                      Modern GPS-based surveys refined the summit elevation to the widely accepted figure of 5,895 metres (19,341 ft). However, some recent measurements cite 5,891m, reflecting ongoing ice melt on the summit glacier. The exact height fluctuates slightly as the glacial ice cap thins.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
+                    <Info className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">The Ice Factor</h3>
+                    <p className="text-[var(--text-muted)]">
+                      Here is an interesting detail most guides overlook: the actual rock peak beneath the <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline">summit glaciers</Link> may be slightly lower than the ice surface. As the ice cap continues to melt, Kilimanjaro&apos;s official height could eventually be revised downward — another reason why <Link href="/trekking/" className="text-[var(--secondary)] hover:underline">climbing now</Link> means witnessing the mountain at its most iconic.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Three Volcanic Cones */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -427,8 +591,48 @@ export default function MountKilimanjaroHeightPage() {
         </div>
       </section>
 
-      {/* Shrinking Glaciers */}
+      {/* Three Peaks Deep Dive */}
       <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
+              In-Depth Geology
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Kilimanjaro&apos;s Three Peaks: A Closer Look
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+              Each of Kilimanjaro&apos;s volcanic cones has a distinct character, age, and climbing significance. Together they form one of the most geologically fascinating mountains on the planet, visible on the <Link href="/kilimanjaro-map/" className="text-[var(--secondary)] hover:underline">Kilimanjaro route map</Link>.
+            </p>
+            <div className="space-y-6">
+              {threePeaksDeepDive.map((peak) => (
+                <div key={peak.name} className={`rounded-xl p-6 border ${peak.color}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 bg-[var(--primary-dark)] rounded-lg flex items-center justify-center">
+                      <Triangle className="w-5 h-5 text-[var(--secondary)]" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-xl font-bold">{peak.name}</h3>
+                      <p className="text-sm text-[var(--text-muted)]">{peak.height} — {peak.status}</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-3">
+                    {peak.details.map((detail, i) => (
+                      <li key={i} className="flex gap-3 items-start">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--secondary)] mt-2 shrink-0" />
+                        <span className="text-[var(--text-muted)]">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Shrinking Glaciers */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2">
@@ -438,7 +642,7 @@ export default function MountKilimanjaroHeightPage() {
               Kilimanjaro&apos;s Disappearing Glaciers
             </h2>
             <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
-              Kilimanjaro&apos;s iconic <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">snow cap</Link> has been rapidly diminishing. Over 80% of the ice that existed when it was first surveyed in 1912 has now melted, and scientists estimate the remaining glaciers could disappear entirely by 2040–2050.
+              Kilimanjaro&apos;s iconic <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">snow cap</Link> has been rapidly diminishing. Over 80% of the ice that existed when it was first surveyed in 1912 has now melted, and scientists estimate the <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline">remaining glaciers</Link> could disappear entirely by 2040–2050.
             </p>
             <div className="grid sm:grid-cols-3 gap-4">
               <div className="bg-white rounded-xl p-5 border border-[var(--border)] text-center">
@@ -454,6 +658,43 @@ export default function MountKilimanjaroHeightPage() {
                 <p className="text-sm text-[var(--text-muted)] mt-1">Best time to witness them</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Altitude Effects at Each Height */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
+              What Your Body Feels
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Altitude Effects at Each Height on Kilimanjaro
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+              As you ascend Kilimanjaro, the air thins progressively. Understanding what your body experiences at each elevation helps you prepare mentally and recognise the signs of <Link href="/kilimanjaro-altitude-sickness/" className="text-[var(--secondary)] hover:underline">altitude sickness</Link> early.
+            </p>
+            <div className="space-y-4">
+              {altitudeEffects.map((level) => (
+                <div
+                  key={level.elevation}
+                  className={`rounded-xl p-5 border ${level.color}`}
+                >
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <Wind className="w-5 h-5 text-[var(--text-muted)]" />
+                    <h3 className="font-semibold text-lg">{level.elevation}</h3>
+                    <span className="text-sm font-bold text-[var(--primary-dark)] bg-white/80 px-2.5 py-0.5 rounded-full">
+                      {level.oxygen} oxygen
+                    </span>
+                  </div>
+                  <p className="text-[var(--text-muted)]">{level.effect}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-[var(--text-muted)] mt-6 text-center">
+              Proper acclimatisation is the single biggest factor in <Link href="/kilimanjaro-success-rates/" className="text-[var(--secondary)] hover:underline">summit success</Link>. Longer routes like the 8-day <Link href="/trekking/8-days-lemosho-route/" className="text-[var(--secondary)] hover:underline">Lemosho</Link> give your body more time to adapt, pushing success rates above 90%.
+            </p>
           </div>
         </div>
       </section>
@@ -513,6 +754,27 @@ export default function MountKilimanjaroHeightPage() {
                 >
                   <h3 className="font-semibold mb-2">{faq.question}</h3>
                   <p className="text-[var(--text-muted)]">{faq.answer}</p>
+                  {faq.question === "Is climbing Mount Kilimanjaro dangerous?" && (
+                    <p className="text-sm mt-3">
+                      <Link href="/kilimanjaro-deaths/" className="text-[var(--secondary)] hover:underline font-medium">
+                        See full Kilimanjaro death statistics &amp; safety data &rarr;
+                      </Link>
+                    </p>
+                  )}
+                  {faq.question === "What is Kilimanjaro's prominence?" && (
+                    <p className="text-sm mt-3">
+                      <Link href="/kilimanjaro-records/" className="text-[var(--secondary)] hover:underline font-medium">
+                        Explore Kilimanjaro records &amp; firsts &rarr;
+                      </Link>
+                    </p>
+                  )}
+                  {faq.question === "Are Kilimanjaro's glaciers disappearing?" && (
+                    <p className="text-sm mt-3">
+                      <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline font-medium">
+                        Read our complete guide to Kilimanjaro&apos;s glaciers &rarr;
+                      </Link>
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -521,41 +783,9 @@ export default function MountKilimanjaroHeightPage() {
       </section>
 
       {/* Related Guides */}
-      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-xl font-bold mb-6 text-center">
-              Related Reading
-            </h2>
-            <div className="grid sm:grid-cols-3 gap-4">
-              <Link
-                href="/first-person-to-climb-kilimanjaro/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow border border-[var(--border)]"
-              >
-                <Mountain className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">First Ascent (1889)</p>
-                <p className="text-xs text-[var(--text-muted)]">Hans Meyer&apos;s summit story</p>
-              </Link>
-              <Link
-                href="/is-there-snow-in-africa-mountains/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow border border-[var(--border)]"
-              >
-                <Thermometer className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Snow in Africa</p>
-                <p className="text-xs text-[var(--text-muted)]">8 peaks with year-round ice</p>
-              </Link>
-              <Link
-                href="/kilimanjaro-vs-everest/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow border border-[var(--border)]"
-              >
-                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
-                <p className="text-xs text-[var(--text-muted)]">$2K vs $30K compared</p>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <RelatedGuides currentPath="/mount-kilimanjaro-height/" />
+
+      <KnowledgeBase exclude="/mount-kilimanjaro-height/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

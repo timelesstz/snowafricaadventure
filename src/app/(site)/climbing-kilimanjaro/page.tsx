@@ -17,8 +17,9 @@ import {
   BookOpen,
   Thermometer,
 } from "lucide-react";
-import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema, generateAggregateRatingSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { SuccessCalculator, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Climbing Kilimanjaro: The Complete Guide (2026)",
@@ -75,7 +76,7 @@ const dayByDay = [
   { day: "Day 1", title: "Gate to Forest Camp", altitude: "1,640m → 2,800m", description: "Drive from Arusha to the Lemosho Glades trailhead. Enter the montane rainforest and trek 4-5 hours to Big Tree Camp. Giant heather, colobus monkeys, and lush green surrounds." },
   { day: "Day 2", title: "Forest Camp to Shira Camp", altitude: "2,800m → 3,840m", description: "Climb through heath and moorland onto the Shira Plateau. Wide open landscapes with Kilimanjaro's glaciers visible ahead. 5-6 hours walking." },
   { day: "Day 3", title: "Acclimatization Day", altitude: "3,840m → 4,600m (return to 3,840m)", description: "Hike high to the Lava Tower at 4,600m for acclimatization, then descend to Barranco Camp at 3,900m. This 'climb high, sleep low' profile significantly increases summit success rates." },
-  { day: "Day 4", title: "Barranco Wall & Karanga Camp", altitude: "3,900m → 4,035m", description: "The famous Barranco Wall — a scramble up a near-vertical cliff face that looks impossible from below. It takes 1-2 hours and requires hands and feet but no ropes. One of the trek's highlights." },
+  { day: "Day 4", title: "Barranco Wall & Karanga Camp", altitude: "3,900m → 4,035m", description: "The famous Barranco Wall — a scramble up a near-vertical cliff face that looks impossible from below. It takes 1-2 hours and requires hands and feet but no ropes. One of the trek's highlights. Read our detailed Barranco Wall guide for what to expect." },
   { day: "Day 5", title: "Karanga to Base Camp", altitude: "4,035m → 4,700m", description: "Ascend the alpine desert to Barafu Base Camp. Rest in the afternoon in preparation for the midnight summit push. Temperature drops sharply." },
   { day: "Day 6", title: "Summit Night & Descent", altitude: "4,700m → 5,895m → 3,100m", description: "Depart at midnight for the 5-7 hour summit push in cold, dark, and thin air. Reach Stella Point (5,756m) at dawn, then Uhuru Peak (5,895m) at sunrise. Descend all the way to Millennium Camp for the night." },
   { day: "Day 7", title: "Descent to Gate", altitude: "3,100m → 1,640m", description: "Final descent through the rainforest to the Mweka Gate. Certificate presentation, farewell to your guides and porters, and transfer back to Arusha." },
@@ -105,7 +106,7 @@ const kilimanjaroFaqs = [
   {
     question: "Can older adults climb Kilimanjaro?",
     answer:
-      "Many people in their 60s and 70s successfully summit Kilimanjaro. Age matters far less than fitness, determination, and proper preparation. The oldest person to summit was in their 80s. The key is giving yourself enough time on the mountain (choose a 7+ day route) and listening to your body and guides on the way up.",
+      "Many people in their 60s and 70s successfully summit Kilimanjaro. Age matters far less than fitness, determination, and proper preparation. The oldest person to summit was in their 80s. Read our guide to climbing Kilimanjaro over 50 for age-specific advice. The key is giving yourself enough time on the mountain (choose a 7+ day route) and listening to your body and guides on the way up.",
   },
   {
     question: "What is the Kilimanjaro altitude sickness risk?",
@@ -172,8 +173,8 @@ export default async function ClimbingKilimanjaroPage() {
             image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2024-07-15",
             modifiedTime: "2026-06-16",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
           }),
           generateItemListSchema(routes.map((route, i) => ({
@@ -182,6 +183,12 @@ export default async function ClimbingKilimanjaroPage() {
             description: route.notes,
             position: i + 1,
           }))),
+          generateAggregateRatingSchema({
+            ratingValue: 4.9,
+            reviewCount: 387,
+            itemName: "Snow Africa Adventure — Kilimanjaro Climbing",
+            itemType: "TouristAttraction",
+          }),
         ]}
       />
 
@@ -223,7 +230,7 @@ export default async function ClimbingKilimanjaroPage() {
                 { icon: TrendingUp, value: "93%", label: "Success Rate" },
                 { icon: Compass, value: "6", label: "Routes" },
                 { icon: Calendar, value: "5-9", label: "Days" },
-                { icon: Mountain, value: "500+", label: "Summits Guided" },
+                { icon: Mountain, value: "800+", label: "Summits Guided" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center gap-2 text-white">
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
@@ -259,6 +266,9 @@ export default async function ClimbingKilimanjaroPage() {
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </section>
+
+      {/* Credentials */}
+      <CredentialsBadges />
 
       {/* Quick Facts */}
       <section className="py-12 bg-[var(--primary-dark)] text-white">
@@ -316,7 +326,7 @@ export default async function ClimbingKilimanjaroPage() {
             </h2>
 
             <p className="text-[var(--text)] leading-[1.8]">
-              Kilimanjaro stands 5,895 metres above sea level in northeastern Tanzania, inside <Link href="/tanzania-destinations/kilimanjaro-national-park/" className="text-[var(--secondary)] hover:underline">Kilimanjaro National Park</Link> — a UNESCO World Heritage Site. It is the highest mountain in Africa and the tallest free-standing mountain on Earth, meaning it rises directly from the surrounding plains rather than being part of a mountain range. The summit, Uhuru Peak, sits on the rim of Kibo, an ancient volcanic crater that last erupted roughly 360,000 years ago.
+              Kilimanjaro stands 5,895 metres above sea level in northeastern Tanzania, inside <Link href="/tanzania-destinations/kilimanjaro-national-park/" className="text-[var(--secondary)] hover:underline">Kilimanjaro National Park</Link> — a UNESCO World Heritage Site. It is the highest mountain in Africa and the tallest free-standing mountain on Earth, meaning it rises directly from the surrounding plains rather than being part of a mountain range. The <Link href="/kilimanjaro-meaning-name-origin/" className="text-[var(--secondary)] hover:underline">name &quot;Kilimanjaro&quot;</Link> itself has debated origins, with theories ranging from Swahili to Chagga language roots. The summit, Uhuru Peak, sits on the rim of Kibo, an ancient volcanic crater that last erupted roughly 360,000 years ago.
             </p>
 
             <p className="text-[var(--text)] leading-[1.8]">
@@ -406,7 +416,7 @@ export default async function ClimbingKilimanjaroPage() {
               After summiting and descending to the gate (usually Mweka Gate on the southern routes), you receive your summit certificate from KINAPA — either a green certificate for reaching Stella Point (5,756m) or a gold certificate for reaching Uhuru Peak (5,895m). Your guides and porters will line up for a farewell ceremony with singing and dancing — one of the most emotional moments of the trip.
             </p>
             <p className="text-[var(--text)] leading-[1.8]">
-              Many climbers extend their Tanzania trip with a <Link href="/tanzania-safaris/" className="text-[var(--secondary)] hover:underline">safari through the Serengeti and Ngorongoro Crater</Link> — the perfect complement to the mountain experience. We offer combined Kilimanjaro + Safari packages with 1-2 rest days between the climb and the game drives. A <Link href="/tanzania-destinations/zanzibar/" className="text-[var(--secondary)] hover:underline">Zanzibar beach extension</Link> is another popular option for post-climb recovery.
+              Many climbers extend their Tanzania trip with a <Link href="/tanzania-safaris/" className="text-[var(--secondary)] hover:underline">safari through the Serengeti and Ngorongoro Crater</Link> — the perfect complement to the mountain experience. We offer combined <Link href="/kilimanjaro-safari-combo/" className="text-[var(--secondary)] hover:underline">Kilimanjaro + Safari packages</Link> with 1-2 rest days between the climb and the game drives. A <Link href="/tanzania-destinations/zanzibar/" className="text-[var(--secondary)] hover:underline">Zanzibar beach extension</Link> is another popular option for post-climb recovery.
             </p>
           </div>
         </div>
@@ -639,6 +649,24 @@ export default async function ClimbingKilimanjaroPage() {
         </div>
       </section>
 
+      {/* Summit Success Calculator */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2">
+              Interactive Tool
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              What Are Your Summit Chances?
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Select your fitness level, age, route, and altitude experience to get a personalised estimate of your Kilimanjaro summit success probability.
+            </p>
+          </div>
+          <SuccessCalculator />
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -711,6 +739,8 @@ export default async function ClimbingKilimanjaroPage() {
           </div>
         </div>
       </section>
+
+      <KnowledgeBase exclude="/climbing-kilimanjaro/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

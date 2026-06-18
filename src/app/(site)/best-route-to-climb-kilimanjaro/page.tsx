@@ -23,14 +23,16 @@ import {
   generateBreadcrumbSchema,
   generateArticleSchema,
   generateItemListSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Best Route to Climb Kilimanjaro",
   description:
-    "Compare all 7 Kilimanjaro routes side-by-side. Success rates, difficulty, cost, scenery, and expert recommendations from guides with 500+ summits. Find your perfect route.",
+    "Compare all 7 Kilimanjaro routes side-by-side. Success rates, difficulty, cost, scenery, and expert recommendations from guides with 800+ summits. Find your perfect route.",
   url: "/best-route-to-climb-kilimanjaro/",
 });
 
@@ -311,9 +313,9 @@ export default function BestRouteToClimbKilimanjaroPage() {
             url: "/best-route-to-climb-kilimanjaro/",
             image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2026-03-01",
-            modifiedTime: "2026-03-04",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
           }),
           generateItemListSchema(
@@ -324,6 +326,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
               position: i + 1,
             }))
           ),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 
@@ -349,7 +352,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
               </span>
               <div className="flex items-center gap-1 text-white/80">
                 <Award className="w-4 h-4 text-amber-400" />
-                <span className="text-sm">Written by guides with 500+ summits</span>
+                <span className="text-sm">Written by guides with 800+ summits</span>
               </div>
             </div>
 
@@ -357,7 +360,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
               Best Route to Climb <span className="text-[var(--secondary)]">Kilimanjaro</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl">
-              Compare all 6 Kilimanjaro routes side-by-side — success rates, difficulty, cost, and scenery — from guides who&apos;ve led 500+ summits across every route.
+              Compare all 6 Kilimanjaro routes side-by-side — success rates, difficulty, cost, and scenery — from guides who&apos;ve led 800+ summits across every route.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -384,7 +387,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 <div>
                   <h2 className="font-heading text-2xl font-bold mb-3">Quick Answer: The Best Route is the Lemosho Route (8 Days)</h2>
                   <p className="text-[var(--text-muted)] leading-relaxed mb-4">
-                    Based on our experience guiding 500+ summits across every route, the <strong>8-day Lemosho Route</strong> is the best overall choice for most climbers. It offers the ideal combination of scenery (panoramic views from the remote western approach), acclimatization (climb high, sleep low profile), and success rate (90-95%). The first two days see very few other trekkers, giving a true wilderness feel.
+                    Based on our experience guiding 800+ summits across every route, the <strong>8-day Lemosho Route</strong> is the best overall choice for most climbers. It offers the ideal combination of scenery (panoramic views from the remote western approach), acclimatization (climb high, sleep low profile), and success rate (90-95%). The first two days see very few other trekkers, giving a true wilderness feel.
                   </p>
                   <div className="flex flex-wrap gap-6 text-sm">
                     <div className="flex items-center gap-2">
@@ -501,7 +504,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
             </table>
           </div>
           <p className="text-center text-sm text-[var(--text-muted)] mt-4 max-w-2xl mx-auto">
-            Prices are per person based on 2 people. Success rates are based on our own guiding data across 500+ summits.
+            Prices are per person based on 2 people. Success rates are based on our own guiding data across 800+ summits.
             Solo travellers and larger groups have different rates. <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline">See full pricing</Link> or read our <Link href="/kilimanjaro-group-climbs/" className="text-[var(--primary)] hover:underline">group climbs guide</Link> to save 15–30%.
           </p>
         </div>
@@ -517,7 +520,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
               </div>
               <div>
                 <h2 className="font-heading text-2xl md:text-3xl font-bold">The #1 Factor in Summit Success: Duration</h2>
-                <p className="text-white/60 text-sm">Based on our guiding data from 500+ summits</p>
+                <p className="text-white/60 text-sm">Based on our guiding data from 800+ summits</p>
               </div>
             </div>
             <p className="text-white/80 leading-relaxed mb-8 text-lg">
@@ -802,6 +805,8 @@ export default function BestRouteToClimbKilimanjaroPage() {
           </div>
         </div>
       </section>
+
+      <KnowledgeBase exclude="/best-route-to-climb-kilimanjaro/" />
 
       {/* Final CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

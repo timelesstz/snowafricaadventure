@@ -23,14 +23,16 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { CredentialsBadges, KnowledgeBase, SuccessCalculator } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Can Beginners Climb Kilimanjaro? Yes — Here's How",
   description:
-    "Yes, beginners climb Kilimanjaro every year. No mountaineering experience needed. Choose a 7+ day route, train for 3 months, and use an experienced operator. Guide from 500+ summit team.",
+    "Yes, beginners climb Kilimanjaro every year. No mountaineering experience needed. Choose a 7+ day route, train for 3 months, and use an experienced operator. Guide from 800+ summit team.",
   url: "/can-beginners-climb-kilimanjaro/",
 });
 
@@ -369,9 +371,9 @@ export default function CanBeginnersClimbKilimanjaroPage() {
             image:
               "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
             publishedTime: "2026-03-04",
-            modifiedTime: "2026-03-04",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: [
               "200+ Kilimanjaro Summits",
               "15+ Years Guiding Experience",
@@ -379,6 +381,7 @@ export default function CanBeginnersClimbKilimanjaroPage() {
               "Wilderness First Responder",
             ],
           }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 
@@ -405,13 +408,15 @@ export default function CanBeginnersClimbKilimanjaroPage() {
               <span className="text-[var(--secondary)]">Kilimanjaro</span>?
             </h1>
             <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
-              The answer from a team with 500+ summits: absolutely yes. Here&apos;s
+              The answer from a team with 800+ summits: absolutely yes. Here&apos;s
               everything a first-timer needs to know — the honest truth, the best
               routes, and how to prepare.
             </p>
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Quick Answer / Featured Snippet Box */}
       <section className="py-12 bg-white border-b border-[var(--border)]">
@@ -823,6 +828,23 @@ export default function CanBeginnersClimbKilimanjaroPage() {
           </div>
         </div>
       </section>
+
+      {/* Summit Success Calculator */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Estimate Your Summit Success Rate
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Answer four questions and get a personalised estimate based on data from 1,200+ Snow Africa expeditions.
+            </p>
+          </div>
+          <SuccessCalculator />
+        </div>
+      </section>
+
+      <KnowledgeBase exclude="/can-beginners-climb-kilimanjaro/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

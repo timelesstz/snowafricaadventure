@@ -25,9 +25,11 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Statistics & Facts 2026",
@@ -408,9 +410,9 @@ export default function KilimanjaroStatisticsPage() {
             image:
               "https://cdn.snowafricaadventure.com/kilimanjaro-aerial-view.webp",
             publishedTime: "2026-03-11",
-            modifiedTime: "2026-03-11",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: [
               "200+ Kilimanjaro Summits",
               "15+ Years Guiding Experience",
@@ -418,6 +420,7 @@ export default function KilimanjaroStatisticsPage() {
               "Wilderness First Responder",
             ],
           }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 
@@ -455,6 +458,8 @@ export default function KilimanjaroStatisticsPage() {
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Quick Answer Box */}
       <section className="py-12 bg-white border-b border-[var(--border)]">
@@ -1615,7 +1620,7 @@ export default function KilimanjaroStatisticsPage() {
               annually. If you are a journalist or researcher and require
               specific data citations, please{" "}
               <Link
-                href="/contact/"
+                href="/contact-us/"
                 className="text-[var(--primary)] hover:underline"
               >
                 contact us
@@ -1688,6 +1693,8 @@ export default function KilimanjaroStatisticsPage() {
           </div>
         </div>
       </section>
+
+      <KnowledgeBase exclude="/kilimanjaro-statistics/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

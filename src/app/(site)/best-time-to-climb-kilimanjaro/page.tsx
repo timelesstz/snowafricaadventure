@@ -9,13 +9,21 @@ import {
   ChevronDown,
   Calendar,
   TrendingUp,
+  ArrowRight,
+  Moon,
+  Mountain,
+  Binoculars,
 } from "lucide-react";
 import {
   generateMetadata as genMeta,
   generateBreadcrumbSchema,
   generateFAQSchema,
+  generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Best Time to Climb Kilimanjaro 2026",
@@ -125,6 +133,21 @@ const months = [
   },
 ];
 
+const weatherData = [
+  { month: "January", gateTemp: 18, summitTemp: -7, rainfall: 80, clearDays: 20, crowd: "Medium" },
+  { month: "February", gateTemp: 18, summitTemp: -7, rainfall: 60, clearDays: 22, crowd: "Medium" },
+  { month: "March", gateTemp: 17, summitTemp: -8, rainfall: 150, clearDays: 15, crowd: "Low" },
+  { month: "April", gateTemp: 16, summitTemp: -8, rainfall: 300, clearDays: 8, crowd: "Very Low" },
+  { month: "May", gateTemp: 15, summitTemp: -9, rainfall: 250, clearDays: 10, crowd: "Very Low" },
+  { month: "June", gateTemp: 14, summitTemp: -10, rainfall: 30, clearDays: 25, crowd: "Low–Medium" },
+  { month: "July", gateTemp: 13, summitTemp: -12, rainfall: 15, clearDays: 28, crowd: "High" },
+  { month: "August", gateTemp: 13, summitTemp: -12, rainfall: 15, clearDays: 28, crowd: "High" },
+  { month: "September", gateTemp: 14, summitTemp: -10, rainfall: 20, clearDays: 26, crowd: "Medium–High" },
+  { month: "October", gateTemp: 16, summitTemp: -8, rainfall: 50, clearDays: 22, crowd: "Medium" },
+  { month: "November", gateTemp: 17, summitTemp: -7, rainfall: 150, clearDays: 15, crowd: "Low" },
+  { month: "December", gateTemp: 18, summitTemp: -7, rainfall: 120, clearDays: 18, crowd: "Medium–High" },
+];
+
 const seasonCards = [
   {
     icon: <Sun className="w-7 h-7" />,
@@ -172,7 +195,7 @@ const faqs = [
   {
     question: "What is the best month to climb Kilimanjaro?",
     answer:
-      "January, February, July, August, and September are consistently the best months to climb Kilimanjaro. These months fall within Tanzania's two dry seasons, offering clear skies, firm trail conditions, and the highest summit success rates.",
+      "January, February, July, August, and September are consistently the best months to climb Kilimanjaro. These months fall within Tanzania’s two dry seasons, offering clear skies, firm trail conditions, and the highest summit success rates.",
   },
   {
     question: "Can you climb Kilimanjaro in the rainy season?",
@@ -194,6 +217,36 @@ const faqs = [
     answer:
       "Both are excellent choices. January offers fewer crowds, more competitive pricing, and superb clarity after the short rains clear. July falls in the peak season with guaranteed dry conditions but busier trails. For first-time climbers who prefer quieter routes, January and February are ideal.",
   },
+  {
+    question: "Does it rain on the summit?",
+    answer:
+      "Precipitation at the summit (5,895m) typically falls as snow or sleet rather than rain. Above 4,500m the air is too cold and dry for significant rainfall. However, during the rainy seasons (April–May and November), snow flurries are more frequent and can reduce visibility. The lower forest and moorland zones receive the heaviest rainfall, not the summit itself.",
+  },
+  {
+    question: "What is the warmest month on Kilimanjaro?",
+    answer:
+      "January, February, and December are the warmest months at the gate (around 18°C), while summit temperatures remain frigid year-round. At Uhuru Peak, expect -7°C to -12°C regardless of season. The warmest summit conditions occur during January–March when solar radiation is strongest, but summit night temperatures still drop well below freezing.",
+  },
+  {
+    question: "Can I combine Kilimanjaro with a safari?",
+    answer:
+      "Absolutely — and we strongly recommend it. A Kilimanjaro climb pairs perfectly with a 3–5 day Tanzania safari. January–March lets you witness the Great Migration calving season in the Ngorongoro Crater area, while June–October coincides with dramatic river crossings in the Serengeti. Most climbers add a safari after their descent to celebrate and recover.",
+  },
+  {
+    question: "Is December a good time to climb?",
+    answer:
+      "December is a viable climbing month, especially the second half after the short rains taper off. It coincides with the festive season, so trails can be busy around Christmas and New Year. Expect occasional afternoon showers in early December, but overall conditions are good. It’s a popular choice for those who want to summit on New Year’s Eve or celebrate Christmas on the mountain.",
+  },
+  {
+    question: "How cold is summit night?",
+    answer:
+      "Summit night is the coldest part of any Kilimanjaro climb. Temperatures at Stella Point (5,756m) and Uhuru Peak (5,895m) typically range from -15°C to -25°C between midnight and 7am. Wind chill can make it feel even colder. You’ll need insulated gloves, a balaclava, a heavy down jacket, and hand warmers. Most climbers start the summit push around midnight from high camp, reaching the crater rim at sunrise when temperatures begin to rise.",
+  },
+  {
+    question: "When is the cheapest time to climb Kilimanjaro?",
+    answer:
+      "The most affordable months are typically April, May, and November — the shoulder and rainy seasons when operator demand drops. January–March also offers more competitive pricing than the peak July–September season. However, lower prices during wet months come with reduced summit success rates and less comfortable conditions, so the value equation favours the short dry season (January–February) for budget-conscious climbers.",
+  },
 ];
 
 function StarRating({ count }: { count: number }) {
@@ -201,9 +254,25 @@ function StarRating({ count }: { count: number }) {
     <span className="flex gap-0.5">
       {[1, 2, 3, 4, 5].map((i) => (
         <span key={i} className={i <= count ? "text-amber-400" : "text-gray-300"}>
-          ★
+          &#9733;
         </span>
       ))}
+    </span>
+  );
+}
+
+function CrowdBadge({ level }: { level: string }) {
+  const colorMap: Record<string, string> = {
+    "Very Low": "bg-emerald-100 text-emerald-700",
+    "Low": "bg-green-100 text-green-700",
+    "Low–Medium": "bg-lime-100 text-lime-700",
+    "Medium": "bg-amber-100 text-amber-700",
+    "Medium–High": "bg-orange-100 text-orange-700",
+    "High": "bg-red-100 text-red-700",
+  };
+  return (
+    <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${colorMap[level] || "bg-gray-100 text-gray-700"}`}>
+      {level}
     </span>
   );
 }
@@ -219,8 +288,37 @@ export default function BestTimeToClimbKilimanjaroPage() {
             { name: "Best Time to Climb Kilimanjaro", url: "/best-time-to-climb-kilimanjaro/" },
           ]),
           generateFAQSchema(faqs),
+          generateArticleSchema({
+            title: "Best Time to Climb Kilimanjaro 2026",
+            description:
+              "The best time to climb Mount Kilimanjaro is during the dry seasons: January–March and June–October. Discover which months offer the clearest skies, best trail conditions, and highest summit success rates.",
+            url: "/best-time-to-climb-kilimanjaro/",
+            image:
+              "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
+            authorCredentials: [
+              "200+ Kilimanjaro Summits",
+              "15+ Years Guiding Experience",
+              "TATO Licensed Guide",
+              "Wilderness First Responder",
+            ],
+            publishedTime: "2026-03-04",
+            modifiedTime: "2026-06-18",
+          }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
+
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4">
+        <Breadcrumbs
+          items={[
+            { label: "Trekking Routes", href: "/trekking/" },
+            { label: "Best Time to Climb" },
+          ]}
+        />
+      </div>
 
       {/* Hero */}
       <section className="relative min-h-[70vh]">
@@ -273,6 +371,8 @@ export default function BestTimeToClimbKilimanjaroPage() {
         </div>
       </section>
 
+      <CredentialsBadges variant="compact" />
+
       {/* Quick Answer */}
       <section className="py-10 bg-[var(--secondary)]">
         <div className="container mx-auto px-4">
@@ -283,7 +383,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
                 Quick Answer: Best Months to Climb Kilimanjaro
               </p>
               <p className="text-[var(--primary-dark)]/80">
-                <strong>January–March</strong> and <strong>June–October</strong> — Tanzania&apos;s dry seasons offer the clearest skies, driest trails, and highest summit success rates.
+                <strong>January&ndash;March</strong> and <strong>June&ndash;October</strong> &mdash; Tanzania&apos;s dry seasons offer the clearest skies, driest trails, and highest summit success rates.
               </p>
             </div>
           </div>
@@ -342,8 +442,62 @@ export default function BestTimeToClimbKilimanjaroPage() {
         </div>
       </section>
 
-      {/* Two Seasons */}
+      {/* Monthly Weather Data */}
       <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
+              Climate Data
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Monthly Weather Data
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-8 max-w-2xl mx-auto">
+              Detailed temperature, rainfall, and visibility data for each month. Gate temperatures are measured at 1,800m (Machame or Marangu Gate) and summit temperatures at Uhuru Peak (5,895m). Understanding Kilimanjaro&apos;s <Link href="/kilimanjaro-climate-zones/" className="text-[var(--secondary)] hover:underline">five distinct climate zones</Link> helps you prepare for the dramatic temperature shifts.
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-[var(--border)] shadow-sm">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-[var(--primary-dark)] text-white">
+                    <th className="text-left px-4 py-3 font-semibold">Month</th>
+                    <th className="text-left px-4 py-3 font-semibold">Gate Temp</th>
+                    <th className="text-left px-4 py-3 font-semibold">Summit Temp</th>
+                    <th className="text-left px-4 py-3 font-semibold hidden sm:table-cell">Rainfall</th>
+                    <th className="text-left px-4 py-3 font-semibold hidden md:table-cell">Clear Days</th>
+                    <th className="text-left px-4 py-3 font-semibold">Crowds</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {weatherData.map((row, i) => (
+                    <tr
+                      key={row.month}
+                      className={i % 2 === 0 ? "bg-white" : "bg-[var(--muted)]"}
+                    >
+                      <td className="px-4 py-3 font-semibold">{row.month}</td>
+                      <td className="px-4 py-3 text-[var(--text-muted)]">{row.gateTemp}&deg;C</td>
+                      <td className="px-4 py-3 text-[var(--text-muted)]">{row.summitTemp}&deg;C</td>
+                      <td className="px-4 py-3 text-[var(--text-muted)] hidden sm:table-cell">{row.rainfall}mm</td>
+                      <td className="px-4 py-3 text-[var(--text-muted)] hidden md:table-cell">{row.clearDays}</td>
+                      <td className="px-4 py-3">
+                        <CrowdBadge level={row.crowd} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-4 flex items-start gap-3 bg-white rounded-xl p-4 border border-[var(--border)]">
+              <Thermometer className="w-5 h-5 text-[var(--secondary)] shrink-0 mt-0.5" />
+              <p className="text-[var(--text-muted)] text-sm">
+                For a deeper look at conditions at every elevation, read our full <Link href="/kilimanjaro-weather/" className="text-[var(--secondary)] hover:underline">Kilimanjaro weather guide</Link>. Summit temperatures remain below freezing year-round, and Kilimanjaro&apos;s iconic <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline">glaciers</Link> are a stark reminder of the extreme cold at altitude.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Two Seasons */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
@@ -363,24 +517,24 @@ export default function BestTimeToClimbKilimanjaroPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Short Dry Season</h3>
-                    <p className="text-sm text-[var(--secondary)] font-medium">January – March</p>
+                    <p className="text-sm text-[var(--secondary)] font-medium">January &ndash; March</p>
                   </div>
                 </div>
                 <ul className="space-y-2 text-[var(--text-muted)] text-sm">
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
-                    Clear skies — often the best summit visibility of the year
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
+                    Clear skies &mdash; often the best summit visibility of the year
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
-                    Fewer climbers than July–September peak
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
+                    Fewer climbers than July&ndash;September peak
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
                     More competitive pricing on routes and lodges
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
                     Coincides with Great Migration calving season in Ngorongoro
                   </li>
                 </ul>
@@ -392,24 +546,24 @@ export default function BestTimeToClimbKilimanjaroPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Main Dry Season</h3>
-                    <p className="text-sm text-[var(--secondary)] font-medium">June – October</p>
+                    <p className="text-sm text-[var(--secondary)] font-medium">June &ndash; October</p>
                   </div>
                 </div>
                 <ul className="space-y-2 text-[var(--text-muted)] text-sm">
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
                     Most reliable dry conditions of the year
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
                     Warmest daytime temperatures on the mountain
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
                     Best combined with a Northern Circuit safari
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[var(--secondary)] mt-0.5">✓</span>
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
                     Coincides with peak Great Migration river crossings
                   </li>
                 </ul>
@@ -420,7 +574,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
       </section>
 
       {/* Season Cards */}
-      <section className="py-16">
+      <section className="py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
             What to Expect
@@ -459,7 +613,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
               Summit Temperature by Altitude
             </h2>
             <p className="text-white/70 text-center mb-8">
-              Temperatures drop approximately 6–7°C for every 1,000m of elevation gain. Always pack for the summit, not the base.
+              Temperatures drop approximately 6&ndash;7&deg;C for every 1,000m of elevation gain. Always pack for the summit, not the base.
             </p>
             <div className="overflow-x-auto rounded-xl border border-white/10">
               <table className="w-full text-sm">
@@ -489,7 +643,131 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <div className="mt-6 flex items-start gap-3 bg-white/5 rounded-xl p-4 border border-white/10">
               <Thermometer className="w-5 h-5 text-[var(--secondary)] shrink-0 mt-0.5" />
               <p className="text-white/70 text-sm">
-                Summit night temperatures can reach -20°C in winter months (June–August). A sleeping bag rated to at least -15°C is essential for all climbers regardless of season. Kilimanjaro&apos;s <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">glaciers and snow fields</Link> are visible year-round but fresh snowfall is most common during the rainy seasons.
+                Summit night temperatures can reach -20&deg;C in winter months (June&ndash;August). A sleeping bag rated to at least -15&deg;C is essential for all climbers regardless of season. Kilimanjaro&apos;s <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline">glaciers and snow fields</Link> are visible year-round but fresh snowfall is most common during the rainy seasons.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Kilimanjaro + Safari Combo Timing */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
+              Climb &amp; Safari
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Kilimanjaro + Safari Combo Timing
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+              Many travellers combine a Kilimanjaro climb with a <Link href="/tanzania-safaris/" className="text-[var(--secondary)] hover:underline">Tanzania safari</Link> &mdash; and timing both correctly maximises your experience. Our <Link href="/kilimanjaro-safari-combo/" className="text-[var(--secondary)] hover:underline">Kilimanjaro safari combo guide</Link> covers how to plan the perfect combination trip.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
+                <div className="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center mb-4">
+                  <Binoculars className="w-6 h-6 text-sky-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-1">January &ndash; March</h3>
+                <p className="text-sm text-[var(--secondary)] font-medium mb-3">Calving Season</p>
+                <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                  The Great Migration calving season centres on the Ngorongoro Conservation Area and southern Serengeti. Over 8,000 wildebeest calves are born daily during February. Combine your climb with a visit to the <Link href="/tanzania-destinations/" className="text-[var(--secondary)] hover:underline">Ngorongoro Crater</Link> &mdash; one of Africa&apos;s most wildlife-dense destinations. The dry climbing conditions on Kilimanjaro during this window make it an ideal pairing.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
+                <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                  <Mountain className="w-6 h-6 text-amber-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-1">June &ndash; October</h3>
+                <p className="text-sm text-[var(--secondary)] font-medium mb-3">River Crossings</p>
+                <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                  The dramatic Mara River crossings in the northern Serengeti typically peak from July through September. This coincides with Kilimanjaro&apos;s main dry season, making it the ultimate Tanzania combination trip. Climb Kilimanjaro first, then head to the <Link href="/tanzania-safaris/" className="text-[var(--secondary)] hover:underline">Serengeti</Link> to witness one of nature&apos;s most spectacular events. Park fees and lodge rates are highest during this window.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
+                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+                  <Users className="w-6 h-6 text-emerald-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-1">December &ndash; January</h3>
+                <p className="text-sm text-[var(--secondary)] font-medium mb-3">Green Season Value</p>
+                <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                  The green season offers lush landscapes, fewer tourists, and more competitive pricing across both Kilimanjaro and safari <Link href="/tanzania-destinations/" className="text-[var(--secondary)] hover:underline">destinations</Link>. Bird migration peaks during this period, and the scenery is at its most photogenic. A great option for budget-conscious travellers who don&apos;t mind occasional afternoon showers on safari.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Full Moon Summit Nights */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Moon className="w-8 h-8 text-[var(--secondary)]" />
+            </div>
+            <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 text-center">
+              Summit Strategy
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
+              Full Moon Summit Nights
+            </h2>
+            <p className="text-[var(--text-muted)] text-center mb-8 text-lg">
+              Some climbers specifically time their summit push to coincide with a full moon &mdash; and there are good reasons why.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
+                <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                  <Sun className="w-5 h-5 text-amber-500" />
+                  Why Target a Full Moon
+                </h3>
+                <ul className="space-y-2 text-[var(--text-muted)] text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
+                    Natural moonlight illuminates the entire scree slope, reducing reliance on head torches
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
+                    The <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline">glaciers</Link> glow under full moonlight &mdash; an unforgettable sight
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
+                    Better depth perception on uneven terrain during the midnight ascent
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[var(--secondary)] mt-0.5">&#10003;</span>
+                    A psychologically uplifting experience during the hardest part of the climb
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
+                <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
+                  <Users className="w-5 h-5 text-red-500" />
+                  What to Consider
+                </h3>
+                <ul className="space-y-2 text-[var(--text-muted)] text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">&#9888;</span>
+                    Full moon dates attract more climbers, meaning busier summit trails
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">&#9888;</span>
+                    Cloud cover can negate the benefit entirely &mdash; clear skies are never guaranteed
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">&#9888;</span>
+                    Popular routes like Machame and Lemosho will be more congested at the crater rim
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">&#9888;</span>
+                    Limiting yourself to full moon dates reduces your scheduling flexibility
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-[var(--border)] shadow-sm">
+              <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                <strong className="text-[var(--primary-dark)]">Our recommendation:</strong> If a full moon aligns with your preferred travel window during a dry season month, it&apos;s a wonderful bonus. But don&apos;t sacrifice ideal <Link href="/kilimanjaro-weather/" className="text-[var(--secondary)] hover:underline">weather conditions</Link> just to chase a full moon. A clear, moonless summit night with stars is equally breathtaking &mdash; and often less crowded.
               </p>
             </div>
           </div>
@@ -506,15 +784,20 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-10">
               Questions About Timing Your Climb
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {faqs.map((faq) => (
-                <div
+                <details
                   key={faq.question}
-                  className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm"
+                  className="group bg-white border border-[var(--border)] rounded-xl shadow-sm"
                 >
-                  <h3 className="font-semibold mb-2">{faq.question}</h3>
-                  <p className="text-[var(--text-muted)]">{faq.answer}</p>
-                </div>
+                  <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <h3 className="font-semibold text-sm md:text-base">{faq.question}</h3>
+                    <ArrowRight className="w-5 h-5 text-[var(--text-muted)] shrink-0 transition-transform group-open:rotate-90" />
+                  </summary>
+                  <div className="px-5 pb-5 pt-0">
+                    <p className="text-[var(--text-muted)] text-sm leading-relaxed">{faq.answer}</p>
+                  </div>
+                </details>
               ))}
             </div>
           </div>
@@ -522,30 +805,9 @@ export default function BestTimeToClimbKilimanjaroPage() {
       </section>
 
       {/* Related Guides */}
-      <section className="py-12 bg-white border-t border-[var(--border)]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-xl font-bold mb-6 text-center">Related Kilimanjaro Guides</h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <Link href="/best-route-to-climb-kilimanjaro/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
-                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Best Route Guide</p>
-                <p className="text-xs text-[var(--text-muted)]">Compare all 6 routes</p>
-              </Link>
-              <Link href="/kilimanjaro-prices/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
-                <Calendar className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Kilimanjaro Prices</p>
-                <p className="text-xs text-[var(--text-muted)]">Full cost breakdown</p>
-              </Link>
-              <Link href="/kilimanjaro-vs-everest/" className="bg-[var(--surface)] rounded-xl p-4 hover:shadow-md transition-shadow">
-                <TrendingUp className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Kilimanjaro vs Everest</p>
-                <p className="text-xs text-[var(--text-muted)]">Which to climb first?</p>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <RelatedGuides currentPath="/best-time-to-climb-kilimanjaro/" />
+
+      <KnowledgeBase exclude="/best-time-to-climb-kilimanjaro/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

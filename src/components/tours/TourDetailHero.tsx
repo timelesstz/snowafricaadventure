@@ -240,7 +240,7 @@ export function TourDetailHero({
 
               {/* Group Dates Link */}
               <Link
-                href="/safari-group-departures"
+                href="/safari-group-departures/"
                 className="flex items-center justify-center gap-2 mt-4 p-4 bg-[var(--surface)] rounded-sm text-[var(--primary)] font-heading text-sm font-semibold hover:bg-[var(--surface-elevated)] transition-colors"
               >
                 <Users className="w-[18px] h-[18px]" />

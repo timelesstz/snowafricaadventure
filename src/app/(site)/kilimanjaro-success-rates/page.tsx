@@ -24,9 +24,11 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { CredentialsBadges, KnowledgeBase, SuccessCalculator } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Success Rates by Route",
@@ -342,9 +344,9 @@ export default function KilimanjaroSuccessRatesPage() {
             image:
               "https://cdn.snowafricaadventure.com/kilimanjaro-summit-uhuru-peak.webp",
             publishedTime: "2026-03-11",
-            modifiedTime: "2026-03-11",
-            author: "Emmanuel Moshi",
-            authorRole: "Founder & Lead Guide",
+            modifiedTime: "2026-06-18",
+            author: "Hamisi Mnaro",
+            authorRole: "Director Timeless International",
             authorCredentials: [
               "200+ Kilimanjaro Summits",
               "15+ Years Guiding Experience",
@@ -352,6 +354,7 @@ export default function KilimanjaroSuccessRatesPage() {
               "Wilderness First Responder",
             ],
           }),
+          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 
@@ -385,6 +388,8 @@ export default function KilimanjaroSuccessRatesPage() {
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       {/* Quick Answer Box */}
       <section className="py-12 bg-white border-b border-[var(--border)]">
@@ -1169,6 +1174,23 @@ export default function KilimanjaroSuccessRatesPage() {
           </div>
         </div>
       </section>
+
+      {/* Summit Success Calculator */}
+      <section className="py-16 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Estimate Your Summit Success Rate
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
+              Answer four questions and get a personalised estimate based on data from 1,200+ Snow Africa expeditions.
+            </p>
+          </div>
+          <SuccessCalculator />
+        </div>
+      </section>
+
+      <KnowledgeBase exclude="/kilimanjaro-success-rates/" />
 
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">

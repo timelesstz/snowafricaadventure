@@ -88,17 +88,84 @@ export function generateTourOperatorSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "TourOperator",
+    "@id": `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.name,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     telephone: SITE_CONFIG.phone,
     email: SITE_CONFIG.email,
+    foundingDate: "2008",
+    foundingLocation: {
+      "@type": "Place",
+      name: "Arusha, Tanzania",
+    },
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      minValue: 20,
+      maxValue: 50,
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.address.street,
       addressLocality: SITE_CONFIG.address.city,
       addressCountry: "TZ",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -3.3869,
+      longitude: 36.6830,
+    },
+    areaServed: [
+      { "@type": "Country", name: "Tanzania" },
+      { "@type": "AdministrativeArea", name: "Kilimanjaro Region" },
+    ],
+    knowsAbout: [
+      "Mount Kilimanjaro climbing",
+      "Tanzania safari tours",
+      "Kilimanjaro trekking routes",
+      "High altitude trekking",
+      "Zanzibar beach holidays",
+      "Tanzania wildlife safaris",
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Professional License",
+        name: "TATO Licensed Tour Operator",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Tanzania Association of Tour Operators",
+        },
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Certification",
+        name: "KPAP Partner for Responsible Travel",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Kilimanjaro Porters Assistance Project",
+        },
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Certification",
+        name: "KINAPA Certified Mountain Guides",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Kilimanjaro National Park Authority",
+        },
+      },
+    ],
+    memberOf: [
+      {
+        "@type": "Organization",
+        name: "Tanzania Association of Tour Operators (TATO)",
+      },
+      {
+        "@type": "Organization",
+        name: "Kilimanjaro Porters Assistance Project (KPAP)",
+      },
+    ],
     sameAs: [
       SITE_CONFIG.social.facebook,
       SITE_CONFIG.social.twitter,
