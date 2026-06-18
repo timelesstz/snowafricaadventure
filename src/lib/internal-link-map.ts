@@ -665,6 +665,29 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "climb Kilimanjaro in December", href: "/climbing-kilimanjaro-in-december/", priority: 3 },
     { phrase: "December Kilimanjaro", href: "/climbing-kilimanjaro-in-december/", priority: 4 },
     { phrase: "Christmas Kilimanjaro climb", href: "/climbing-kilimanjaro-in-december/", priority: 3 },
+
+    // Batch 31-32 (remaining monthly guides)
+    { phrase: "climbing Kilimanjaro in March", href: "/climbing-kilimanjaro-in-march/", priority: 2 },
+    { phrase: "Kilimanjaro in March", href: "/climbing-kilimanjaro-in-march/", priority: 3 },
+    { phrase: "March Kilimanjaro", href: "/climbing-kilimanjaro-in-march/", priority: 4 },
+    { phrase: "climbing Kilimanjaro in April", href: "/climbing-kilimanjaro-in-april/", priority: 2 },
+    { phrase: "Kilimanjaro in April", href: "/climbing-kilimanjaro-in-april/", priority: 3 },
+    { phrase: "April Kilimanjaro", href: "/climbing-kilimanjaro-in-april/", priority: 4 },
+    { phrase: "climbing Kilimanjaro in May", href: "/climbing-kilimanjaro-in-may/", priority: 2 },
+    { phrase: "Kilimanjaro in May", href: "/climbing-kilimanjaro-in-may/", priority: 3 },
+    { phrase: "May Kilimanjaro", href: "/climbing-kilimanjaro-in-may/", priority: 4 },
+    { phrase: "climbing Kilimanjaro in June", href: "/climbing-kilimanjaro-in-june/", priority: 2 },
+    { phrase: "Kilimanjaro in June", href: "/climbing-kilimanjaro-in-june/", priority: 3 },
+    { phrase: "June Kilimanjaro climb", href: "/climbing-kilimanjaro-in-june/", priority: 4 },
+    { phrase: "climbing Kilimanjaro in August", href: "/climbing-kilimanjaro-in-august/", priority: 2 },
+    { phrase: "Kilimanjaro in August", href: "/climbing-kilimanjaro-in-august/", priority: 3 },
+    { phrase: "August Kilimanjaro", href: "/climbing-kilimanjaro-in-august/", priority: 4 },
+    { phrase: "climbing Kilimanjaro in November", href: "/climbing-kilimanjaro-in-november/", priority: 2 },
+    { phrase: "Kilimanjaro in November", href: "/climbing-kilimanjaro-in-november/", priority: 3 },
+    { phrase: "November Kilimanjaro", href: "/climbing-kilimanjaro-in-november/", priority: 4 },
+    { phrase: "rainy season Kilimanjaro climb", href: "/climbing-kilimanjaro-in-april/", priority: 3 },
+    { phrase: "long rains Kilimanjaro", href: "/climbing-kilimanjaro-in-april/", priority: 4 },
+    { phrase: "short rains Kilimanjaro", href: "/climbing-kilimanjaro-in-november/", priority: 4 },
   );
 
   // Sort by phrase length descending (longest match first)

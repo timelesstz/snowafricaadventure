@@ -169,6 +169,12 @@ const ARTICLES = [
   { href: "/climbing-kilimanjaro-in-september/", label: "Climbing in September" },
   { href: "/climbing-kilimanjaro-in-october/", label: "Climbing in October" },
   { href: "/climbing-kilimanjaro-in-december/", label: "Climbing in December" },
+  { href: "/climbing-kilimanjaro-in-march/", label: "Climbing in March" },
+  { href: "/climbing-kilimanjaro-in-april/", label: "Climbing in April" },
+  { href: "/climbing-kilimanjaro-in-may/", label: "Climbing in May" },
+  { href: "/climbing-kilimanjaro-in-june/", label: "Climbing in June" },
+  { href: "/climbing-kilimanjaro-in-august/", label: "Climbing in August" },
+  { href: "/climbing-kilimanjaro-in-november/", label: "Climbing in November" },
 ] as const;
 
 export function KnowledgeBase({
