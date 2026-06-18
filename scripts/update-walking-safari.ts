@@ -320,6 +320,9 @@ async function updateWalkingSafari() {
             "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/03/Ngorongoro-Walking-Safari-ways-african-safaris.jpg",
           priceFrom: 950,
           isActive: true,
+          parksCount: 3,
+          gameDrives: 5,
+          rating: 4.9,
         },
       });
       console.log("✅ Created new safari package with full itinerary.");
@@ -329,6 +332,9 @@ async function updateWalkingSafari() {
         data: {
           ...metadata,
           itinerary: itinerary as any,
+          parksCount: 3,
+          gameDrives: 5,
+          rating: 4.9,
         },
       });
       console.log("✅ Updated safari package metadata and itinerary.");
