@@ -751,6 +751,30 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "safari packing list", href: "/tanzania-safari-packing-list/", priority: 2 },
     { phrase: "what to pack for safari", href: "/tanzania-safari-packing-list/", priority: 2 },
     { phrase: "safari clothing", href: "/tanzania-safari-packing-list/", priority: 3 },
+
+    // Safari cluster batch 2 (destinations + planning)
+    { phrase: "Great Migration", href: "/serengeti-great-migration-guide/", priority: 2 },
+    { phrase: "Great Migration Serengeti", href: "/serengeti-great-migration-guide/", priority: 2 },
+    { phrase: "wildebeest migration", href: "/serengeti-great-migration-guide/", priority: 2 },
+    { phrase: "migration season", href: "/serengeti-great-migration-guide/", priority: 3 },
+    { phrase: "river crossing Serengeti", href: "/serengeti-great-migration-guide/", priority: 3 },
+    { phrase: "Tarangire National Park", href: "/tarangire-national-park-guide/", priority: 2 },
+    { phrase: "Tarangire safari", href: "/tarangire-national-park-guide/", priority: 3 },
+    { phrase: "Tarangire elephants", href: "/tarangire-national-park-guide/", priority: 3 },
+    { phrase: "Lake Manyara", href: "/lake-manyara-national-park-guide/", priority: 2 },
+    { phrase: "Lake Manyara National Park", href: "/lake-manyara-national-park-guide/", priority: 2 },
+    { phrase: "tree-climbing lions", href: "/lake-manyara-national-park-guide/", priority: 3 },
+    { phrase: "family safari Tanzania", href: "/family-safari-tanzania/", priority: 2 },
+    { phrase: "family safari", href: "/family-safari-tanzania/", priority: 2 },
+    { phrase: "safari with kids", href: "/family-safari-tanzania/", priority: 3 },
+    { phrase: "children on safari", href: "/family-safari-tanzania/", priority: 3 },
+    { phrase: "Tanzania safari itinerary", href: "/tanzania-safari-itinerary/", priority: 2 },
+    { phrase: "safari itinerary", href: "/tanzania-safari-itinerary/", priority: 3 },
+    { phrase: "safari itinerary planning", href: "/tanzania-safari-itinerary/", priority: 3 },
+    { phrase: "luxury safari Tanzania", href: "/luxury-safari-tanzania-guide/", priority: 2 },
+    { phrase: "luxury safari", href: "/luxury-safari-tanzania-guide/", priority: 2 },
+    { phrase: "luxury lodge safari", href: "/luxury-safari-tanzania-guide/", priority: 3 },
+    { phrase: "five-star safari", href: "/luxury-safari-tanzania-guide/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
