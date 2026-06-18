@@ -48,12 +48,21 @@ export const metadata: Metadata = {
   },
 };
 
+const CERTIFICATION_ENTRIES = [
+  { key: "about.commitment.logo1", alt: "TATO Licensed Operator" },
+  { key: "about.commitment.logo2", alt: "KPAP Certified Partner" },
+  { key: "about.commitment.logo3", alt: "IMEC International Mountain Explorers Connection" },
+  { key: "about.commitment.logo4", alt: "Certification" },
+  { key: "about.commitment.logo5", alt: "Certification" },
+] as const;
+
 async function getThemeAndLogo(): Promise<{ theme: ThemeSettings; logo: LogoSettings }> {
   try {
+    const certKeys = CERTIFICATION_ENTRIES.map((c) => c.key);
     const [dbTheme, logoSettings] = await Promise.all([
       prisma.themeSetting.findFirst({ where: { isActive: true } }),
       prisma.siteSetting.findMany({
-        where: { key: { in: ["site.logoUrl", "site.logoDarkUrl"] } },
+        where: { key: { in: ["site.logoUrl", "site.logoDarkUrl", ...certKeys] } },
       }),
     ]);
 
@@ -64,18 +73,23 @@ async function getThemeAndLogo(): Promise<{ theme: ThemeSettings; logo: LogoSett
     const logoMap: Record<string, string> = {};
     logoSettings.forEach((s) => { logoMap[s.key] = s.value; });
 
+    const certificationLogos = CERTIFICATION_ENTRIES
+      .filter((c) => logoMap[c.key])
+      .map((c) => ({ url: logoMap[c.key], alt: c.alt }));
+
     return {
       theme,
       logo: {
         logoUrl: logoMap["site.logoUrl"] || null,
         logoDarkUrl: logoMap["site.logoDarkUrl"] || null,
+        certificationLogos,
       },
     };
   } catch (error) {
     console.error("Failed to fetch theme server-side:", error);
     return {
       theme: DEFAULT_THEME,
-      logo: { logoUrl: null, logoDarkUrl: null },
+      logo: { logoUrl: null, logoDarkUrl: null, certificationLogos: [] },
     };
   }
 }

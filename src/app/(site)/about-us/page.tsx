@@ -50,6 +50,7 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   "about.commitment.logo2": "",
   "about.commitment.logo3": "",
   "about.commitment.logo4": "",
+  "about.commitment.logo5": "",
   "about.hosts.title": "Meet Your Hosts",
   "about.hosts.content":
     "As the founders of Snow Africa Adventure, Florent and Caroline are the driving force behind every journey we create. Their knowledge, experience, and genuine hospitality set the tone for our company culture, ensuring every traveler feels at home from the moment they arrive in Tanzania. They look forward to welcoming you, sharing their love for this spectacular land, and creating memories that will last a lifetime.",
@@ -120,13 +121,13 @@ const values = [
 export default async function AboutPage() {
   const s = await getAboutSettings();
 
-  // Get partner logos
-  const partnerLogos = [
-    s["about.commitment.logo1"],
-    s["about.commitment.logo2"],
-    s["about.commitment.logo3"],
-    s["about.commitment.logo4"],
-  ].filter(Boolean);
+  const certificationEntries = [
+    { url: s["about.commitment.logo1"], alt: "TATO Licensed Operator" },
+    { url: s["about.commitment.logo2"], alt: "KPAP Certified Partner" },
+    { url: s["about.commitment.logo3"], alt: "IMEC International Mountain Explorers Connection" },
+    { url: s["about.commitment.logo4"], alt: "Certification" },
+    { url: s["about.commitment.logo5"], alt: "Certification" },
+  ].filter((entry) => entry.url);
 
   return (
     <div className="bg-white">
@@ -296,14 +297,14 @@ export default async function AboutPage() {
                   </Link>
                 </p>
 
-                {/* Partner/Certification Logos */}
-                {partnerLogos.length > 0 && (
+                {/* Certification Logos */}
+                {certificationEntries.length > 0 && (
                   <div className={`mt-10 flex flex-wrap gap-6 ${!s["about.commitment.image"] ? "justify-center" : ""}`}>
-                    {partnerLogos.map((logo, i) => (
+                    {certificationEntries.map((cert, i) => (
                       <div key={i} className="h-16 w-auto">
                         <Image
-                          src={logo}
-                          alt={`Partner logo ${i + 1}`}
+                          src={cert.url}
+                          alt={cert.alt}
                           width={120}
                           height={64}
                           className="h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all"

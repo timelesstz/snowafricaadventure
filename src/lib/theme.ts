@@ -28,6 +28,7 @@ export interface ThemeSettings {
 export interface LogoSettings {
   logoUrl: string | null;
   logoDarkUrl: string | null;
+  certificationLogos: { url: string; alt: string }[];
 }
 
 /**

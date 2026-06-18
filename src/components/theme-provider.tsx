@@ -16,7 +16,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: null,
-  logo: { logoUrl: null, logoDarkUrl: null },
+  logo: { logoUrl: null, logoDarkUrl: null, certificationLogos: [] },
   isLoading: true,
   refreshTheme: async () => {},
 });
@@ -66,7 +66,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children, initialTheme, initialLogo }: ThemeProviderProps) {
   const [theme, setTheme] = useState<ThemeSettings | null>(initialTheme || null);
-  const [logo, setLogo] = useState<LogoSettings>(initialLogo || { logoUrl: null, logoDarkUrl: null });
+  const [logo, setLogo] = useState<LogoSettings>(initialLogo || { logoUrl: null, logoDarkUrl: null, certificationLogos: [] });
   const [isLoading, setIsLoading] = useState(!initialTheme);
 
   const fetchTheme = async () => {

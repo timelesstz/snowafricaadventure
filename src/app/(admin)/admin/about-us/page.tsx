@@ -40,6 +40,7 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   "about.commitment.logo2": "",
   "about.commitment.logo3": "",
   "about.commitment.logo4": "",
+  "about.commitment.logo5": "",
 
   // Meet Your Hosts
   "about.hosts.title": "Meet Your Hosts",
@@ -507,25 +508,62 @@ export default function AboutUsSettingsPage() {
           {/* Partner/Certification Logos */}
           <div className="pt-4 border-t border-slate-200">
             <label className="block text-sm font-medium text-slate-700 mb-4">
-              Partner & Certification Logos
+              Certification & Accreditation Logos
             </label>
             <p className="text-sm text-slate-500 mb-4">
-              Upload logos for KPAP, TATO, TripAdvisor, etc. These will display below the commitment text.
+              Upload logos for your certifications. These display on the About page and in the site footer.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <ImageUploadField
-                  key={i}
-                  name={`about.commitment.logo${i}`}
-                  value={settings[`about.commitment.logo${i}`] || ""}
-                  onChange={(url) => handleChange(`about.commitment.logo${i}`, url)}
-                  folder="about/logos"
-                  label={`Logo ${i}`}
-                  helpText="PNG with transparency recommended"
-                  previewSize="sm"
-                  deleteFromR2
-                />
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <ImageUploadField
+                name="about.commitment.logo1"
+                value={settings["about.commitment.logo1"] || ""}
+                onChange={(url) => handleChange("about.commitment.logo1", url)}
+                folder="about/logos"
+                label="TATO — Licensed Operator"
+                helpText="Tanzania Association of Tour Operators"
+                previewSize="sm"
+                deleteFromR2
+              />
+              <ImageUploadField
+                name="about.commitment.logo2"
+                value={settings["about.commitment.logo2"] || ""}
+                onChange={(url) => handleChange("about.commitment.logo2", url)}
+                folder="about/logos"
+                label="KPAP — Certified Partner"
+                helpText="Kilimanjaro Porters Assistance Project"
+                previewSize="sm"
+                deleteFromR2
+              />
+              <ImageUploadField
+                name="about.commitment.logo3"
+                value={settings["about.commitment.logo3"] || ""}
+                onChange={(url) => handleChange("about.commitment.logo3", url)}
+                folder="about/logos"
+                label="IMEC"
+                helpText="International Mountain Explorers Connection"
+                previewSize="sm"
+                deleteFromR2
+              />
+              <ImageUploadField
+                name="about.commitment.logo4"
+                value={settings["about.commitment.logo4"] || ""}
+                onChange={(url) => handleChange("about.commitment.logo4", url)}
+                folder="about/logos"
+                label="Additional Logo"
+                helpText="e.g., TripAdvisor, SafariBookings"
+                previewSize="sm"
+                deleteFromR2
+              />
+              <ImageUploadField
+                name="about.commitment.logo5"
+                value={settings["about.commitment.logo5"] || ""}
+                onChange={(url) => handleChange("about.commitment.logo5", url)}
+                folder="about/logos"
+                label="Additional Logo"
+                helpText="Optional extra certification"
+                previewSize="sm"
+                deleteFromR2
+              />
             </div>
           </div>
         </div>
