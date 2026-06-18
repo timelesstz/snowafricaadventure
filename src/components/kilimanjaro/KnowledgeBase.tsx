@@ -151,6 +151,12 @@ const ARTICLES = [
   { href: "/kilimanjaro-group-dynamics/", label: "Group Dynamics" },
   { href: "/kilimanjaro-drone-rules/", label: "Drone Rules" },
   { href: "/kilimanjaro-charity-climbs/", label: "Charity Climbs" },
+  { href: "/kilimanjaro-national-park/", label: "National Park Guide" },
+  { href: "/kilimanjaro-seven-summits/", label: "Seven Summits" },
+  { href: "/kilimanjaro-climbing-season/", label: "Climbing Season Guide" },
+  { href: "/kilimanjaro-vs-aconcagua/", label: "Kili vs Aconcagua" },
+  { href: "/kilimanjaro-preparation-checklist/", label: "Preparation Checklist" },
+  { href: "/kilimanjaro-for-seniors/", label: "Senior Climbers Guide" },
 ] as const;
 
 export function KnowledgeBase({

@@ -26,6 +26,7 @@ import {
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Best Kilimanjaro Tour Operators 2026",
@@ -952,6 +953,10 @@ export default function BestKilimanjaroTourOperatorsPage() {
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
+
+      <KnowledgeBase exclude="/best-kilimanjaro-tour-operators/" />
     </div>
   );
 }

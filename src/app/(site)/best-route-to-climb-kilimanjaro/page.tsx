@@ -27,7 +27,7 @@ import {
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { KnowledgeBase } from "@/components/kilimanjaro";
+import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
   title: "Best Route to Climb Kilimanjaro",
@@ -805,6 +805,8 @@ export default function BestRouteToClimbKilimanjaroPage() {
           </div>
         </div>
       </section>
+
+      <CredentialsBadges variant="compact" />
 
       <KnowledgeBase exclude="/best-route-to-climb-kilimanjaro/" />
 
