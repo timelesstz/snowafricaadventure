@@ -157,6 +157,12 @@ const ARTICLES = [
   { href: "/kilimanjaro-vs-aconcagua/", label: "Kili vs Aconcagua" },
   { href: "/kilimanjaro-preparation-checklist/", label: "Preparation Checklist" },
   { href: "/kilimanjaro-for-seniors/", label: "Senior Climbers Guide" },
+  { href: "/kilimanjaro-cost-breakdown/", label: "Cost Breakdown 2026" },
+  { href: "/kilimanjaro-summit-temperature/", label: "Summit Temperature" },
+  { href: "/kilimanjaro-8-day-itinerary/", label: "8-Day Lemosho Itinerary" },
+  { href: "/kilimanjaro-vs-table-mountain/", label: "Kili vs Table Mountain" },
+  { href: "/kilimanjaro-flat-land-training/", label: "Flat-Land Training" },
+  { href: "/kilimanjaro-best-camps/", label: "Best Camps Guide" },
 ] as const;
 
 export function KnowledgeBase({
