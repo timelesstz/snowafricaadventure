@@ -233,11 +233,11 @@ export function Footer() {
 
         {/* Trust band */}
         <div className="mt-14 pt-8 border-t border-white/10">
-          <div className="flex flex-col items-center gap-4 text-center">
+          <div className="flex flex-col items-center gap-5 text-center">
             <span className="text-[10px] tracking-[0.35em] uppercase text-[var(--secondary)]/90 font-semibold">
               Accredited & Trusted
             </span>
-            {logo.certificationLogos.length > 0 ? (
+            {logo.certificationLogos.length > 0 && (
               <div className="flex flex-wrap justify-center items-center gap-6">
                 {logo.certificationLogos.map((cert, i) => (
                   <Image
@@ -250,24 +250,25 @@ export function Footer() {
                   />
                 ))}
               </div>
-            ) : (
-              <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-sm text-slate-400">
-                <a
-                  href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  TripAdvisor
-                </a>
-                <span className="h-1 w-1 rounded-full bg-white/20" />
-                <span>SafariBookings</span>
-                <span className="h-1 w-1 rounded-full bg-white/20" />
-                <span>TATO Member</span>
-                <span className="h-1 w-1 rounded-full bg-white/20" />
-                <span>KPAP Partner</span>
-              </div>
             )}
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-sm text-slate-400">
+              <a
+                href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                TripAdvisor
+              </a>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span>SafariBookings</span>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span>TATO Member</span>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span>KPAP Partner</span>
+              <span className="h-1 w-1 rounded-full bg-white/20" />
+              <span>IMEC Partner</span>
+            </div>
           </div>
         </div>
       </div>
