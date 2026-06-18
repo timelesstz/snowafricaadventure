@@ -210,7 +210,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/tanzania-safaris/5-day-northern-circuit-safari/",
-        destination: "/tanzania-safaris/5-days-tanzania-luxury-safarilake-manyara-serengeti-ngorongoro/",
+        destination: "/tanzania-safaris/5-days-tanzania-luxury-safari-tarangire-manyara-ngorongoro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-safaris/5-days-tanzania-luxury-safarilake-manyara-serengeti-ngorongoro/",
+        destination: "/tanzania-safaris/5-days-tanzania-luxury-safari-tarangire-manyara-ngorongoro/",
         permanent: true,
       },
       {
