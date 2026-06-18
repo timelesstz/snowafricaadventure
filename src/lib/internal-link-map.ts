@@ -732,6 +732,25 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "7-day Kilimanjaro itinerary", href: "/kilimanjaro-7-day-itinerary/", priority: 2 },
     { phrase: "Lemosho 7-day itinerary", href: "/kilimanjaro-7-day-itinerary/", priority: 3 },
     { phrase: "7 days on Kilimanjaro", href: "/kilimanjaro-7-day-itinerary/", priority: 3 },
+
+    // Safari content cluster
+    { phrase: "best time for safari in Tanzania", href: "/best-time-safari-tanzania/", priority: 2 },
+    { phrase: "Tanzania safari season", href: "/best-time-safari-tanzania/", priority: 3 },
+    { phrase: "when to go on safari", href: "/best-time-safari-tanzania/", priority: 3 },
+    { phrase: "Serengeti vs Masai Mara", href: "/serengeti-vs-masai-mara/", priority: 2 },
+    { phrase: "Masai Mara or Serengeti", href: "/serengeti-vs-masai-mara/", priority: 3 },
+    { phrase: "Tanzania safari cost", href: "/tanzania-safari-cost/", priority: 2 },
+    { phrase: "safari cost Tanzania", href: "/tanzania-safari-cost/", priority: 3 },
+    { phrase: "how much does a safari cost", href: "/tanzania-safari-cost/", priority: 3 },
+    { phrase: "Ngorongoro Crater", href: "/ngorongoro-crater-guide/", priority: 2 },
+    { phrase: "Ngorongoro Crater guide", href: "/ngorongoro-crater-guide/", priority: 2 },
+    { phrase: "Ngorongoro Conservation Area", href: "/ngorongoro-crater-guide/", priority: 3 },
+    { phrase: "Big Five Tanzania", href: "/big-five-tanzania/", priority: 2 },
+    { phrase: "Big Five safari", href: "/big-five-tanzania/", priority: 3 },
+    { phrase: "Big Five animals", href: "/big-five-tanzania/", priority: 3 },
+    { phrase: "safari packing list", href: "/tanzania-safari-packing-list/", priority: 2 },
+    { phrase: "what to pack for safari", href: "/tanzania-safari-packing-list/", priority: 2 },
+    { phrase: "safari clothing", href: "/tanzania-safari-packing-list/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
