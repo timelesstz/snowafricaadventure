@@ -150,11 +150,25 @@ const destinations = [
   },
 ];
 
+const CERTIFICATION_ENTRIES = [
+  { key: "about.commitment.logo1", alt: "TATO Licensed Operator" },
+  { key: "about.commitment.logo2", alt: "KPAP Certified Partner" },
+  { key: "about.commitment.logo3", alt: "IMEC International Mountain Explorers Connection" },
+  { key: "about.commitment.logo4", alt: "Certification" },
+  { key: "about.commitment.logo5", alt: "Certification" },
+] as const;
+
 // Fetch homepage settings from database
 async function getHomepageSettings() {
   try {
+    const certKeys = CERTIFICATION_ENTRIES.map(c => c.key);
     const settings = await prisma.siteSetting.findMany({
-      where: { key: { startsWith: "homepage." } },
+      where: {
+        OR: [
+          { key: { startsWith: "homepage." } },
+          { key: { in: certKeys } },
+        ],
+      },
     });
 
     const settingsMap: Record<string, string> = {};
@@ -191,6 +205,9 @@ async function getHomepageSettings() {
         reviews: parseInt(settingsMap["homepage.tripadvisor.reviews"]) || DEFAULT_COMPANY_INFO.tripAdvisor.reviews,
         url: settingsMap["homepage.tripadvisor.url"] || DEFAULT_COMPANY_INFO.tripAdvisor.url,
       },
+      certificationLogos: CERTIFICATION_ENTRIES
+        .filter(c => settingsMap[c.key])
+        .map(c => ({ url: settingsMap[c.key], alt: c.alt })),
     };
   } catch (error) {
     console.error("[Homepage] Failed to fetch settings:", error);
@@ -200,6 +217,7 @@ async function getHomepageSettings() {
       company: DEFAULT_COMPANY_INFO,
       registration: DEFAULT_COMPANY_INFO.registration,
       tripAdvisor: DEFAULT_COMPANY_INFO.tripAdvisor,
+      certificationLogos: [],
     };
   }
 }
@@ -308,7 +326,7 @@ export default async function HomePage() {
     getHomepageSettings(),
   ]);
 
-  const { hero, stats, company, registration, tripAdvisor } = homepageSettings;
+  const { hero, stats, company, registration, tripAdvisor, certificationLogos } = homepageSettings;
   const whyUsItems = getWhyUsItems(registration.talaLicense);
 
   // Split routes for display
@@ -450,6 +468,20 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
+          {certificationLogos.length > 0 && (
+            <div className="flex justify-center items-center gap-8 mt-6 pt-5 border-t border-slate-200/60">
+              {certificationLogos.map((cert, i) => (
+                <Image
+                  key={i}
+                  src={cert.url}
+                  alt={cert.alt}
+                  width={100}
+                  height={48}
+                  className="h-10 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
