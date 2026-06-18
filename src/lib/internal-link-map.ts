@@ -775,6 +775,29 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "luxury safari", href: "/luxury-safari-tanzania-guide/", priority: 2 },
     { phrase: "luxury lodge safari", href: "/luxury-safari-tanzania-guide/", priority: 3 },
     { phrase: "five-star safari", href: "/luxury-safari-tanzania-guide/", priority: 3 },
+
+    // Safari cluster batch 3 (audience segments + planning)
+    { phrase: "honeymoon safari Tanzania", href: "/honeymoon-safari-tanzania/", priority: 2 },
+    { phrase: "honeymoon safari", href: "/honeymoon-safari-tanzania/", priority: 2 },
+    { phrase: "romantic safari", href: "/honeymoon-safari-tanzania/", priority: 3 },
+    { phrase: "couples safari", href: "/honeymoon-safari-tanzania/", priority: 3 },
+    { phrase: "budget safari Tanzania", href: "/budget-safari-tanzania/", priority: 2 },
+    { phrase: "budget safari", href: "/budget-safari-tanzania/", priority: 2 },
+    { phrase: "cheap safari Tanzania", href: "/budget-safari-tanzania/", priority: 3 },
+    { phrase: "affordable safari", href: "/budget-safari-tanzania/", priority: 3 },
+    { phrase: "safari and Zanzibar", href: "/zanzibar-safari-combo/", priority: 2 },
+    { phrase: "Zanzibar safari combo", href: "/zanzibar-safari-combo/", priority: 2 },
+    { phrase: "safari and beach", href: "/zanzibar-safari-combo/", priority: 3 },
+    { phrase: "Zanzibar after safari", href: "/zanzibar-safari-combo/", priority: 3 },
+    { phrase: "photography safari Tanzania", href: "/photography-safari-tanzania/", priority: 2 },
+    { phrase: "photography safari", href: "/photography-safari-tanzania/", priority: 2 },
+    { phrase: "safari photography tips", href: "/photography-safari-tanzania/", priority: 3 },
+    { phrase: "first time safari", href: "/first-time-safari-tips/", priority: 2 },
+    { phrase: "first safari tips", href: "/first-time-safari-tips/", priority: 3 },
+    { phrase: "safari for beginners", href: "/first-time-safari-tips/", priority: 3 },
+    { phrase: "Tanzania vs Kenya safari", href: "/tanzania-vs-kenya-safari/", priority: 2 },
+    { phrase: "Tanzania or Kenya", href: "/tanzania-vs-kenya-safari/", priority: 3 },
+    { phrase: "Kenya vs Tanzania", href: "/tanzania-vs-kenya-safari/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
