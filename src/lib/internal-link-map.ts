@@ -798,6 +798,27 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Tanzania vs Kenya safari", href: "/tanzania-vs-kenya-safari/", priority: 2 },
     { phrase: "Tanzania or Kenya", href: "/tanzania-vs-kenya-safari/", priority: 3 },
     { phrase: "Kenya vs Tanzania", href: "/tanzania-vs-kenya-safari/", priority: 3 },
+
+    // Safari cluster batch 4 (southern circuit + experiences)
+    { phrase: "solo safari Tanzania", href: "/solo-safari-tanzania/", priority: 2 },
+    { phrase: "solo safari", href: "/solo-safari-tanzania/", priority: 2 },
+    { phrase: "solo traveler safari", href: "/solo-safari-tanzania/", priority: 3 },
+    { phrase: "walking safari Tanzania", href: "/walking-safari-tanzania/", priority: 2 },
+    { phrase: "walking safari", href: "/walking-safari-tanzania/", priority: 2 },
+    { phrase: "safari on foot", href: "/walking-safari-tanzania/", priority: 3 },
+    { phrase: "Ruaha National Park", href: "/ruaha-national-park-guide/", priority: 2 },
+    { phrase: "Ruaha safari", href: "/ruaha-national-park-guide/", priority: 3 },
+    { phrase: "southern Tanzania safari", href: "/ruaha-national-park-guide/", priority: 3 },
+    { phrase: "Nyerere National Park", href: "/nyerere-national-park-guide/", priority: 2 },
+    { phrase: "Selous Game Reserve", href: "/nyerere-national-park-guide/", priority: 2 },
+    { phrase: "Nyerere safari", href: "/nyerere-national-park-guide/", priority: 3 },
+    { phrase: "balloon safari Serengeti", href: "/balloon-safari-serengeti/", priority: 2 },
+    { phrase: "balloon safari", href: "/balloon-safari-serengeti/", priority: 2 },
+    { phrase: "hot air balloon safari", href: "/balloon-safari-serengeti/", priority: 2 },
+    { phrase: "group safari Tanzania", href: "/group-safari-tanzania/", priority: 2 },
+    { phrase: "group safari", href: "/group-safari-tanzania/", priority: 2 },
+    { phrase: "joining safari", href: "/group-safari-tanzania/", priority: 3 },
+    { phrase: "shared safari", href: "/group-safari-tanzania/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
