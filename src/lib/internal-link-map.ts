@@ -712,6 +712,26 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Kilimanjaro vs Inca Trail", href: "/kilimanjaro-vs-inca-trail/", priority: 2 },
     { phrase: "Inca Trail or Kilimanjaro", href: "/kilimanjaro-vs-inca-trail/", priority: 3 },
     { phrase: "Kilimanjaro compared to Inca Trail", href: "/kilimanjaro-vs-inca-trail/", priority: 3 },
+
+    // Batch 35-36 (source markets + itinerary durations)
+    { phrase: "Kilimanjaro from India", href: "/kilimanjaro-from-india/", priority: 2 },
+    { phrase: "climb Kilimanjaro from India", href: "/kilimanjaro-from-india/", priority: 2 },
+    { phrase: "Indian climbers Kilimanjaro", href: "/kilimanjaro-from-india/", priority: 3 },
+    { phrase: "Kilimanjaro from Australia", href: "/kilimanjaro-from-australia/", priority: 2 },
+    { phrase: "climb Kilimanjaro from Australia", href: "/kilimanjaro-from-australia/", priority: 2 },
+    { phrase: "Australian climbers Kilimanjaro", href: "/kilimanjaro-from-australia/", priority: 3 },
+    { phrase: "Kilimanjaro from Canada", href: "/kilimanjaro-from-canada/", priority: 2 },
+    { phrase: "climb Kilimanjaro from Canada", href: "/kilimanjaro-from-canada/", priority: 2 },
+    { phrase: "Canadian climbers Kilimanjaro", href: "/kilimanjaro-from-canada/", priority: 3 },
+    { phrase: "5-day Kilimanjaro itinerary", href: "/kilimanjaro-5-day-itinerary/", priority: 2 },
+    { phrase: "Marangu 5-day itinerary", href: "/kilimanjaro-5-day-itinerary/", priority: 3 },
+    { phrase: "5 days on Kilimanjaro", href: "/kilimanjaro-5-day-itinerary/", priority: 3 },
+    { phrase: "6-day Kilimanjaro itinerary", href: "/kilimanjaro-6-day-itinerary/", priority: 2 },
+    { phrase: "Machame 6-day itinerary", href: "/kilimanjaro-6-day-itinerary/", priority: 3 },
+    { phrase: "6 days on Kilimanjaro", href: "/kilimanjaro-6-day-itinerary/", priority: 3 },
+    { phrase: "7-day Kilimanjaro itinerary", href: "/kilimanjaro-7-day-itinerary/", priority: 2 },
+    { phrase: "Lemosho 7-day itinerary", href: "/kilimanjaro-7-day-itinerary/", priority: 3 },
+    { phrase: "7 days on Kilimanjaro", href: "/kilimanjaro-7-day-itinerary/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)

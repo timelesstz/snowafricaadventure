@@ -181,6 +181,12 @@ const ARTICLES = [
   { href: "/kilimanjaro-machame-route-guide/", label: "Machame Route Guide" },
   { href: "/kilimanjaro-fitness-requirements/", label: "Fitness Requirements" },
   { href: "/kilimanjaro-vs-inca-trail/", label: "Kili vs Inca Trail" },
+  { href: "/kilimanjaro-from-india/", label: "Climbing from India" },
+  { href: "/kilimanjaro-from-australia/", label: "Climbing from Australia" },
+  { href: "/kilimanjaro-from-canada/", label: "Climbing from Canada" },
+  { href: "/kilimanjaro-5-day-itinerary/", label: "5-Day Marangu Itinerary" },
+  { href: "/kilimanjaro-6-day-itinerary/", label: "6-Day Machame Itinerary" },
+  { href: "/kilimanjaro-7-day-itinerary/", label: "7-Day Lemosho Itinerary" },
 ] as const;
 
 export function KnowledgeBase({
