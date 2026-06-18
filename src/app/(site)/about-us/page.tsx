@@ -401,6 +401,41 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Accreditations */}
+      {certificationEntries.length > 0 && (
+        <section className="py-16 md:py-20 bg-white border-t border-slate-100">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="text-xs tracking-[0.3em] uppercase text-[var(--secondary)] font-semibold">
+                Accredited & Certified
+              </span>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mt-3 mb-3">
+                Trusted by Industry Leaders
+              </h2>
+              <p className="text-slate-500 mb-10 max-w-2xl mx-auto">
+                We are proud members and certified partners of these leading organizations in responsible tourism and mountain safety.
+              </p>
+              <div className="flex flex-wrap justify-center items-center gap-10 md:gap-14">
+                {certificationEntries.map((cert, i) => (
+                  <div key={i} className="flex flex-col items-center gap-3">
+                    <Image
+                      src={cert.url}
+                      alt={cert.alt}
+                      width={140}
+                      height={80}
+                      className="h-16 md:h-20 w-auto object-contain"
+                    />
+                    <span className="text-xs font-medium text-slate-500 tracking-wide uppercase">
+                      {cert.alt}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-amber-500 via-amber-600 to-orange-600 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
