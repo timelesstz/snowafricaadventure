@@ -845,6 +845,32 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Zanzibar activities", href: "/zanzibar-things-to-do/", priority: 2 },
     { phrase: "Zanzibar excursions", href: "/zanzibar-things-to-do/", priority: 3 },
     { phrase: "spice tour Zanzibar", href: "/zanzibar-things-to-do/", priority: 3 },
+
+    // Zanzibar cluster batch 2 (audience + planning)
+    { phrase: "Zanzibar honeymoon", href: "/zanzibar-honeymoon-guide/", priority: 2 },
+    { phrase: "honeymoon in Zanzibar", href: "/zanzibar-honeymoon-guide/", priority: 2 },
+    { phrase: "romantic Zanzibar", href: "/zanzibar-honeymoon-guide/", priority: 3 },
+    { phrase: "Zanzibar for couples", href: "/zanzibar-honeymoon-guide/", priority: 3 },
+    { phrase: "Zanzibar safari combo", href: "/zanzibar-safari-combo/", priority: 2 },
+    { phrase: "safari and Zanzibar itinerary", href: "/zanzibar-safari-combo/", priority: 2 },
+    { phrase: "Zanzibar after safari", href: "/zanzibar-safari-combo/", priority: 3 },
+    { phrase: "Tanzania safari and beach", href: "/zanzibar-safari-combo/", priority: 3 },
+    { phrase: "best time to visit Zanzibar", href: "/best-time-visit-zanzibar/", priority: 2 },
+    { phrase: "Zanzibar weather", href: "/best-time-visit-zanzibar/", priority: 2 },
+    { phrase: "Zanzibar dry season", href: "/best-time-visit-zanzibar/", priority: 3 },
+    { phrase: "Zanzibar rainy season", href: "/best-time-visit-zanzibar/", priority: 3 },
+    { phrase: "Zanzibar food", href: "/zanzibar-food-guide/", priority: 2 },
+    { phrase: "Zanzibar food guide", href: "/zanzibar-food-guide/", priority: 2 },
+    { phrase: "Zanzibar restaurants", href: "/zanzibar-food-guide/", priority: 3 },
+    { phrase: "Forodhani Gardens", href: "/zanzibar-food-guide/", priority: 3 },
+    { phrase: "Zanzibar on a budget", href: "/zanzibar-budget-travel/", priority: 2 },
+    { phrase: "budget Zanzibar", href: "/zanzibar-budget-travel/", priority: 3 },
+    { phrase: "cheap Zanzibar", href: "/zanzibar-budget-travel/", priority: 3 },
+    { phrase: "Zanzibar backpacker", href: "/zanzibar-budget-travel/", priority: 3 },
+    { phrase: "Zanzibar with kids", href: "/zanzibar-family-holiday/", priority: 2 },
+    { phrase: "Zanzibar family holiday", href: "/zanzibar-family-holiday/", priority: 2 },
+    { phrase: "family friendly Zanzibar", href: "/zanzibar-family-holiday/", priority: 3 },
+    { phrase: "Zanzibar for families", href: "/zanzibar-family-holiday/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
