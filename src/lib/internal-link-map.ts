@@ -819,6 +819,32 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "group safari", href: "/group-safari-tanzania/", priority: 2 },
     { phrase: "joining safari", href: "/group-safari-tanzania/", priority: 3 },
     { phrase: "shared safari", href: "/group-safari-tanzania/", priority: 3 },
+
+    // Zanzibar content cluster
+    { phrase: "Zanzibar travel guide", href: "/zanzibar-travel-guide/", priority: 2 },
+    { phrase: "visit Zanzibar", href: "/zanzibar-travel-guide/", priority: 3 },
+    { phrase: "Zanzibar holiday", href: "/zanzibar-travel-guide/", priority: 3 },
+    { phrase: "Zanzibar vacation", href: "/zanzibar-travel-guide/", priority: 3 },
+    { phrase: "Zanzibar beaches", href: "/zanzibar-best-beaches/", priority: 2 },
+    { phrase: "best beaches Zanzibar", href: "/zanzibar-best-beaches/", priority: 2 },
+    { phrase: "Nungwi beach", href: "/zanzibar-best-beaches/", priority: 3 },
+    { phrase: "Kendwa beach", href: "/zanzibar-best-beaches/", priority: 3 },
+    { phrase: "Paje beach", href: "/zanzibar-best-beaches/", priority: 3 },
+    { phrase: "Stone Town", href: "/stone-town-guide/", priority: 2 },
+    { phrase: "Stone Town guide", href: "/stone-town-guide/", priority: 2 },
+    { phrase: "Stone Town walking tour", href: "/stone-town-guide/", priority: 3 },
+    { phrase: "Zanzibar diving", href: "/zanzibar-diving-snorkelling/", priority: 2 },
+    { phrase: "Zanzibar snorkelling", href: "/zanzibar-diving-snorkelling/", priority: 2 },
+    { phrase: "Mnemba Atoll", href: "/zanzibar-diving-snorkelling/", priority: 2 },
+    { phrase: "snorkelling Zanzibar", href: "/zanzibar-diving-snorkelling/", priority: 3 },
+    { phrase: "where to stay Zanzibar", href: "/zanzibar-where-to-stay/", priority: 2 },
+    { phrase: "Zanzibar hotels", href: "/zanzibar-where-to-stay/", priority: 2 },
+    { phrase: "Zanzibar resorts", href: "/zanzibar-where-to-stay/", priority: 3 },
+    { phrase: "Zanzibar accommodation", href: "/zanzibar-where-to-stay/", priority: 3 },
+    { phrase: "things to do Zanzibar", href: "/zanzibar-things-to-do/", priority: 2 },
+    { phrase: "Zanzibar activities", href: "/zanzibar-things-to-do/", priority: 2 },
+    { phrase: "Zanzibar excursions", href: "/zanzibar-things-to-do/", priority: 3 },
+    { phrase: "spice tour Zanzibar", href: "/zanzibar-things-to-do/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
