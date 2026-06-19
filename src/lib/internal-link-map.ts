@@ -871,6 +871,32 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Zanzibar family holiday", href: "/zanzibar-family-holiday/", priority: 2 },
     { phrase: "family friendly Zanzibar", href: "/zanzibar-family-holiday/", priority: 3 },
     { phrase: "Zanzibar for families", href: "/zanzibar-family-holiday/", priority: 3 },
+
+    // Zanzibar cluster batch 3 (niche + experiences)
+    { phrase: "Zanzibar water sports", href: "/zanzibar-water-sports/", priority: 2 },
+    { phrase: "kite surfing Zanzibar", href: "/zanzibar-water-sports/", priority: 2 },
+    { phrase: "Zanzibar kite surfing", href: "/zanzibar-water-sports/", priority: 2 },
+    { phrase: "paddleboarding Zanzibar", href: "/zanzibar-water-sports/", priority: 3 },
+    { phrase: "Zanzibar spice tour", href: "/zanzibar-spice-tour-guide/", priority: 2 },
+    { phrase: "spice farm Zanzibar", href: "/zanzibar-spice-tour-guide/", priority: 2 },
+    { phrase: "Zanzibar spice island", href: "/zanzibar-spice-tour-guide/", priority: 3 },
+    { phrase: "spice plantation Zanzibar", href: "/zanzibar-spice-tour-guide/", priority: 3 },
+    { phrase: "Zanzibar history", href: "/zanzibar-history-guide/", priority: 2 },
+    { phrase: "history of Zanzibar", href: "/zanzibar-history-guide/", priority: 2 },
+    { phrase: "Zanzibar slave trade", href: "/zanzibar-history-guide/", priority: 3 },
+    { phrase: "Zanzibar sultanate", href: "/zanzibar-history-guide/", priority: 3 },
+    { phrase: "Zanzibar nightlife", href: "/zanzibar-nightlife-guide/", priority: 2 },
+    { phrase: "nightlife in Zanzibar", href: "/zanzibar-nightlife-guide/", priority: 3 },
+    { phrase: "Full Moon party Zanzibar", href: "/zanzibar-nightlife-guide/", priority: 3 },
+    { phrase: "Zanzibar bars", href: "/zanzibar-nightlife-guide/", priority: 3 },
+    { phrase: "solo travel Zanzibar", href: "/zanzibar-solo-travel/", priority: 2 },
+    { phrase: "Zanzibar solo", href: "/zanzibar-solo-travel/", priority: 3 },
+    { phrase: "solo female Zanzibar", href: "/zanzibar-solo-travel/", priority: 3 },
+    { phrase: "Zanzibar alone", href: "/zanzibar-solo-travel/", priority: 3 },
+    { phrase: "Zanzibar photography", href: "/zanzibar-photography-guide/", priority: 2 },
+    { phrase: "photography in Zanzibar", href: "/zanzibar-photography-guide/", priority: 3 },
+    { phrase: "Zanzibar photo spots", href: "/zanzibar-photography-guide/", priority: 3 },
+    { phrase: "Instagram Zanzibar", href: "/zanzibar-photography-guide/", priority: 3 },
   );
 
   // Sort by phrase length descending (longest match first)
