@@ -102,10 +102,13 @@ async function getDeparturesByYear(year: number) {
 
 export default async function GroupDeparturesPage() {
   // Fetch real data from database
-  const departures2026 = await getDeparturesByYear(2026);
+  const [departures2026, departures2027] = await Promise.all([
+    getDeparturesByYear(2026),
+    getDeparturesByYear(2027),
+  ]);
 
   // Generate Event schemas for featured departures
-  const allDepartures = departures2026;
+  const allDepartures = [...departures2026, ...departures2027];
   const eventSchemas = allDepartures.slice(0, 10).map((dep) =>
     generateEventSchema({
       name: `${dep.route.name} - Kilimanjaro Group Climb`,
@@ -275,31 +278,38 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
-      {/* 2026 Departures + Booking Form — PRIMARY CONTENT */}
+      {/* 2026 + 2027 Departures + Booking Form — PRIMARY CONTENT */}
       <div id="departures">
-        {departures2026.length > 0 && (
-          <DeparturesBookingSection departures={departures2026} year={2026} />
+        {allDepartures.length > 0 && (
+          <DeparturesBookingSection
+            yearGroups={[
+              { year: 2026, departures: departures2026 },
+              { year: 2027, departures: departures2027 },
+            ].filter((group) => group.departures.length > 0)}
+          />
         )}
       </div>
 
-      {/* 2027 Departures - Coming Soon */}
-      <section className="py-12 bg-[var(--surface)]">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold mb-4">
-            2027 Departures — Coming Soon!
-          </h2>
-          <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
-            We&apos;re finalizing our 2027 Kilimanjaro group climb schedule.
-            Contact us to express your interest and be the first to know when dates are released.
-          </p>
-          <Link
-            href="#booking-form"
-            className="inline-block bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-3 rounded-lg font-medium transition-colors"
-          >
-            Register Your Interest
-          </Link>
-        </div>
-      </section>
+      {/* 2027 Departures - Coming Soon (only until 2027 dates are published) */}
+      {departures2027.length === 0 && (
+        <section className="py-12 bg-[var(--surface)]">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="font-heading text-3xl font-bold mb-4">
+              2027 Departures — Coming Soon!
+            </h2>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-6">
+              We&apos;re finalizing our 2027 Kilimanjaro group climb schedule.
+              Contact us to express your interest and be the first to know when dates are released.
+            </p>
+            <Link
+              href="#booking-form"
+              className="inline-block bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              Register Your Interest
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Why Join a Group Climb — SEO Content */}
       <section className="py-16">

@@ -6,14 +6,13 @@ import { DeparturesTable, type Departure } from "./DeparturesTable";
 import { GroupBookingForm } from "@/components/forms/GroupBookingForm";
 
 interface DeparturesBookingSectionProps {
-  departures: Departure[];
-  year: number;
+  yearGroups: { year: number; departures: Departure[] }[];
 }
 
 export function DeparturesBookingSection({
-  departures,
-  year,
+  yearGroups,
 }: DeparturesBookingSectionProps) {
+  const departures = yearGroups.flatMap((g) => g.departures);
   const searchParams = useSearchParams();
   const [selectedDeparture, setSelectedDeparture] = useState<Departure | null>(null);
   const bookingFormRef = useRef<HTMLDivElement>(null);
@@ -62,19 +61,21 @@ export function DeparturesBookingSection({
 
   return (
     <>
-      {/* Departures Table */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="font-heading text-3xl font-bold mb-8">
-            {year} Departures
-          </h2>
-          <DeparturesTable
-            departures={departures}
-            year={year}
-            onSelectDeparture={handleSelectDeparture}
-          />
-        </div>
-      </section>
+      {/* Departures Tables — one per year */}
+      {yearGroups.map((group) => (
+        <section key={group.year} className="py-12">
+          <div className="container mx-auto px-4">
+            <h2 className="font-heading text-3xl font-bold mb-8">
+              {group.year} Departures
+            </h2>
+            <DeparturesTable
+              departures={group.departures}
+              year={group.year}
+              onSelectDeparture={handleSelectDeparture}
+            />
+          </div>
+        </section>
+      ))}
 
       {/* Booking Form */}
       <section id="booking-form" ref={bookingFormRef} className="py-12 bg-[var(--muted)]">
