@@ -69,7 +69,7 @@ export async function compressImage(
   }
 
   // Build sharp pipeline
-  let pipeline = sharp(input).resize(width, height, {
+  const pipeline = sharp(input).resize(width, height, {
     fit: "inside",
     withoutEnlargement: true,
   });

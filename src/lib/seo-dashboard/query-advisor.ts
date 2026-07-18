@@ -146,13 +146,6 @@ function classifyIntent(query: string): SearchIntent {
   return "informational";
 }
 
-const INTENT_LABELS: Record<SearchIntent, string> = {
-  branded: "Branded",
-  transactional: "Transactional",
-  navigational: "Navigational",
-  informational: "Informational",
-};
-
 // ─── Cannibalization Detection ───────────────────────────────────────────────
 
 export function detectCannibalization(

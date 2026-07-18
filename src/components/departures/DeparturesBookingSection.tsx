@@ -14,26 +14,28 @@ export function DeparturesBookingSection({
 }: DeparturesBookingSectionProps) {
   const departures = yearGroups.flatMap((g) => g.departures);
   const searchParams = useSearchParams();
-  const [selectedDeparture, setSelectedDeparture] = useState<Departure | null>(null);
   const bookingFormRef = useRef<HTMLDivElement>(null);
-  const hasAutoSelected = useRef(false);
 
-  // Auto-select departure from URL param on mount
-  useEffect(() => {
-    if (hasAutoSelected.current) return;
-    const departureId = searchParams.get("departure");
-    if (departureId) {
-      const found = departures.find((d) => d.id === departureId);
-      if (found) {
-        setSelectedDeparture(found);
-        hasAutoSelected.current = true;
-        // Scroll to form after a brief delay for render
-        setTimeout(() => {
-          bookingFormRef.current?.scrollIntoView({ behavior: "smooth" });
-        }, 300);
-      }
+  // Auto-select the departure named in ?departure= on first render via a lazy
+  // initializer (departures are server-provided props, present immediately).
+  const [selectedDeparture, setSelectedDeparture] = useState<Departure | null>(
+    () => {
+      const id = searchParams.get("departure");
+      if (!id) return null;
+      return departures.find((d) => d.id === id) ?? null;
     }
-  }, [searchParams, departures]);
+  );
+
+  // Scroll to the form once, only when a departure was auto-selected on mount.
+  const shouldAutoScrollRef = useRef(selectedDeparture !== null);
+  useEffect(() => {
+    if (!shouldAutoScrollRef.current) return;
+    shouldAutoScrollRef.current = false;
+    const timer = setTimeout(() => {
+      bookingFormRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSelectDeparture = useCallback(
     (departure: Departure) => {

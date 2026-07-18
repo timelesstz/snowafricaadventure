@@ -4,10 +4,15 @@ import DeparturesClient from "./DeparturesClient";
 
 export const dynamic = "force-dynamic";
 
+// Module-level so the render body stays pure (react-hooks/purity)
+function daysAgo(days: number): Date {
+  return new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+}
+
 export default async function DeparturesAnalyticsPage() {
   const departures = await prisma.groupDeparture.findMany({
     where: {
-      arrivalDate: { gte: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000) },
+      arrivalDate: { gte: daysAgo(90) },
     },
     include: {
       route: { select: { title: true } },

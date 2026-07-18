@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { X, GripVertical, Plus, FolderOpen, ImageOff, Info, Star, AlertTriangle } from "lucide-react";
 import MediaUploader from "./MediaUploader";
@@ -96,11 +96,15 @@ export default function GalleryUploadField({
     });
   };
 
-  useEffect(() => {
+  // Sync from the controlled prop during render (React's "adjust state when
+  // props change" pattern) instead of via an effect, avoiding a wasted render.
+  const [prevControlled, setPrevControlled] = useState(controlledValue);
+  if (controlledValue !== prevControlled) {
+    setPrevControlled(controlledValue);
     if (controlledValue !== undefined) {
       setValue(controlledValue);
     }
-  }, [controlledValue]);
+  }
 
   const updateValue = (newValue: string[]) => {
     setValue(newValue);

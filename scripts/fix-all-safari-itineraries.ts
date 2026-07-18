@@ -1109,7 +1109,7 @@ Arrive in Arusha in the late afternoon or early evening. Your guide will deliver
 // Continue with remaining safaris in Part 2...
 // For brevity, I'll include the update function and add remaining safaris
 
-const allItineraries: Record<string, any[]> = {
+const allItineraries: Record<string, unknown[]> = {
   "2-days-tanzania-lodge-safari": twoDay,
   "3-days-tanzania-budget-camping-safari-tarangire-lake-manyara-and-ngorongoro-crater": threeDayBudget,
   "3-days-tanzania-lodge-safari-tarangire-lake-manyara-ngorongoro-crater": threeDayLodge,
@@ -1140,7 +1140,7 @@ async function updateAllItineraries() {
 
       if (result.count > 0) {
         const avgLength = Math.round(
-          itinerary.reduce((sum: number, day: any) => sum + (day.description?.length || 0), 0) / itinerary.length
+          itinerary.reduce((sum: number, day: { description?: string }) => sum + (day.description?.length || 0), 0) / itinerary.length
         );
         console.log(`✅ ${slug.substring(0, 50)}...`);
         console.log(`   ${itinerary.length} days, avg ${avgLength} chars/day`);

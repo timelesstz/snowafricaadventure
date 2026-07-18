@@ -258,7 +258,7 @@ export default function MeetFlorentPage() {
                 Growing up in Tanzania, I was surrounded by a landscape that
                 most people only see in documentaries. The snow-capped peak of
                 Kilimanjaro was my backdrop. The Serengeti plains were a few
-                hours' drive away. The Ngorongoro Crater, with its breathtaking
+                hours&rsquo; drive away. The Ngorongoro Crater, with its breathtaking
                 concentration of wildlife, was a place I first visited as a
                 teenager. But it was not until I started working as a safari
                 guide that I truly understood how special this land is — and how

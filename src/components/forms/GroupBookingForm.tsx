@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { format } from "date-fns";
 import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp, Info } from "lucide-react";
@@ -938,10 +939,10 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
 
               <p className="text-xs text-center text-[var(--text-muted)]">
                 By booking you agree to our{" "}
-                <a href="/terms-and-conditions/" className="underline hover:text-[var(--text)]">terms</a>.
+                <Link href="/terms-and-conditions/" className="underline hover:text-[var(--text)]">terms</Link>.
                 A 10% deposit secures your spot. Full balance is due 2 weeks before arrival.
                 Your data is protected under our{" "}
-                <a href="/privacy-policy/" className="underline hover:text-[var(--text)]">privacy policy</a>.
+                <Link href="/privacy-policy/" className="underline hover:text-[var(--text)]">privacy policy</Link>.
               </p>
             </form>
           )}

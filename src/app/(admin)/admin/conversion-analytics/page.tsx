@@ -4,6 +4,11 @@ import OverviewClient from "./OverviewClient";
 
 export const dynamic = "force-dynamic";
 
+// Module-level so the render body stays pure (react-hooks/purity)
+function daysAgo(days: number): Date {
+  return new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+}
+
 export default async function ConversionAnalyticsPage() {
   // Run all queries in parallel
   const [
@@ -97,14 +102,14 @@ export default async function ConversionAnalyticsPage() {
     prisma.booking.count({
       where: {
         createdAt: {
-          gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+          gte: daysAgo(30),
         },
       },
     }),
     prisma.inquiry.count({
       where: {
         createdAt: {
-          gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+          gte: daysAgo(30),
         },
       },
     }),

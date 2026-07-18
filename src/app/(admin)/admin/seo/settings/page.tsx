@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckCircle2,
   XCircle,
@@ -43,25 +43,32 @@ export default function SettingsPage() {
   const [ga4PropertyId, setGa4PropertyId] = useState("");
   const [syncDays, setSyncDays] = useState(3);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  // Bumping this counter re-runs the loader effect (used after save/sync).
+  // Keeps all setState in async callbacks rather than synchronous in-effect.
+  const [reloadKey, setReloadKey] = useState(0);
+  const reloadSettings = () => setReloadKey((k) => k + 1);
 
-  const fetchSettings = useCallback(async () => {
-    try {
-      const res = await fetch("/api/admin/seo/settings");
-      if (res.ok) {
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/admin/seo/settings")
+      .then(async (res) => {
+        if (!res.ok || cancelled) return;
         const data: SeoSettingsData = await res.json();
+        if (cancelled) return;
         setSettings(data);
         setGscSiteUrl(data.gscSiteUrl || "");
         setGa4PropertyId(data.ga4PropertyId || "");
-      }
-    } catch (error) {
-      console.error("Failed to fetch settings:", error);
-    }
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchSettings();
-  }, [fetchSettings]);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch settings:", error);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [reloadKey]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -74,7 +81,7 @@ export default function SettingsPage() {
       });
       if (res.ok) {
         setMessage({ type: "success", text: "Settings saved successfully" });
-        fetchSettings();
+        reloadSettings();
       } else {
         const data = await res.json();
         setMessage({ type: "error", text: data.error || "Failed to save" });
@@ -102,7 +109,7 @@ export default function SettingsPage() {
           type: "success",
           text: `${type.toUpperCase()} sync completed: ${data.recordCount} records`,
         });
-        fetchSettings();
+        reloadSettings();
       } else {
         setMessage({ type: "error", text: data.error || "Sync failed" });
       }

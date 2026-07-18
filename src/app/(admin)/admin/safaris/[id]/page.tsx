@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
@@ -604,7 +605,9 @@ export default async function SafariEditPage({
               </h2>
               <SafariItineraryEditor
                 name="itinerary"
-                defaultValue={safari?.itinerary as any[] | null}
+                defaultValue={
+                  safari?.itinerary as ComponentProps<typeof SafariItineraryEditor>["defaultValue"]
+                }
               />
             </div>
           </div>

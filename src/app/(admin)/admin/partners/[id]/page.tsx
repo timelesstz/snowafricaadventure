@@ -64,6 +64,11 @@ async function getPartner(id: string) {
   });
 }
 
+// Module-level so the render body stays pure (react-hooks/purity)
+function daysFromNow(days: number): Date {
+  return new Date(Date.now() + days * 24 * 60 * 60 * 1000);
+}
+
 export default async function PartnerDetailPage({ params }: PageProps) {
   const { id } = await params;
 
@@ -78,11 +83,10 @@ export default async function PartnerDetailPage({ params }: PageProps) {
   // Check if agreement is expiring soon (within 30 days)
   const agreementExpiringSoon =
     partner.agreementExpiry &&
-    new Date(partner.agreementExpiry) <
-      new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    new Date(partner.agreementExpiry) < daysFromNow(30);
 
   const agreementExpired =
-    partner.agreementExpiry && new Date(partner.agreementExpiry) < new Date();
+    partner.agreementExpiry && new Date(partner.agreementExpiry) < daysFromNow(0);
 
   return (
     <div className="space-y-6">

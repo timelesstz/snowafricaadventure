@@ -74,16 +74,15 @@ export default function WhatsAppChat() {
   const isAdmin = pathname?.startsWith("/admin");
   const [isOpen, setIsOpen] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [pulse, setPulse] = useState(true);
+  // Pulse until the user interacts or the intro timeout elapses — derived so
+  // no synchronous setState runs inside the effect.
+  const [timedOut, setTimedOut] = useState(false);
+  const pulse = !hasInteracted && !timedOut;
 
   useEffect(() => {
-    if (hasInteracted) {
-      setPulse(false);
-      return;
-    }
-    const timer = setTimeout(() => setPulse(false), 8000);
+    const timer = setTimeout(() => setTimedOut(true), 8000);
     return () => clearTimeout(timer);
-  }, [hasInteracted]);
+  }, []);
 
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev);

@@ -8,7 +8,7 @@ const prisma = new PrismaClient({
 });
 
 // Detailed itineraries for remaining 7-10 day safaris
-const safariItineraries: Record<string, any[]> = {
+const safariItineraries: Record<string, unknown[]> = {
   "7-days-tanzania-tented-camp-safari": [
     {
       day: 1,
@@ -772,7 +772,7 @@ async function fixItineraries() {
 
       if (result.count > 0) {
         const avgLength = Math.round(
-          itinerary.reduce((sum: number, day: any) => sum + (day.description?.length || 0), 0) / itinerary.length
+          itinerary.reduce((sum: number, day: { description?: string }) => sum + (day.description?.length || 0), 0) / itinerary.length
         );
         console.log(`✅ ${slug}`);
         console.log(`   Days: ${itinerary.length} | Avg desc length: ${avgLength} chars\n`);

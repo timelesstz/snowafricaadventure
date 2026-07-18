@@ -183,7 +183,7 @@ async function seedSafari() {
       create: {
         slug: SLUG,
         ...metadata,
-        itinerary: itinerary as any,
+        itinerary: itinerary as object[],
         featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/Ngorongoro_Crater_Maasai_herding_mating_lion_couple-1.jpg",
         priceFrom: 2750,
         isActive: true,
@@ -193,7 +193,7 @@ async function seedSafari() {
       },
       update: {
         ...metadata,
-        itinerary: itinerary as any,
+        itinerary: itinerary as object[],
         featuredImage: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/05/Ngorongoro_Crater_Maasai_herding_mating_lion_couple-1.jpg",
         priceFrom: 2750,
         isActive: true,

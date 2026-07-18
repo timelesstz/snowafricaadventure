@@ -43,7 +43,7 @@ export function TrekkingPageClient({ routes, difficulties }: TrekkingPageClientP
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const filteredAndSortedRoutes = useMemo(() => {
-    let result = routes.filter((route) => {
+    const result = routes.filter((route) => {
       // Difficulty filter
       if (selectedDifficulty && route.physicalRating !== selectedDifficulty) return false;
 

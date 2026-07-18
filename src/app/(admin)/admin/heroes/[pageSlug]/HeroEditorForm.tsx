@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
@@ -540,12 +541,12 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
         >
           Save Hero
         </button>
-        <a
+        <Link
           href="/admin/heroes/"
           className="px-6 py-3 border border-slate-300 text-slate-600 font-semibold rounded-lg hover:bg-slate-50 transition-colors"
         >
           Cancel
-        </a>
+        </Link>
       </div>
     </form>
   );

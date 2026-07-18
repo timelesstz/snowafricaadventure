@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import DateRangePicker from "@/components/admin/seo/DateRangePicker";
 import {
   ExternalLink,
@@ -34,7 +34,6 @@ import {
   analyzeQuery,
   generateTopInsights,
   type QueryAdvice,
-  type TopInsight,
 } from "@/lib/seo-dashboard/query-advisor";
 
 interface QueryRow {
@@ -157,12 +156,33 @@ function IntentBadge({ intent }: { intent: string }) {
   );
 }
 
+// Module-level so it isn't re-created every render (react-hooks/static-components)
+function SortHeader({
+  field,
+  label,
+  onSort,
+}: {
+  field: SortField;
+  label: string;
+  onSort: (field: SortField) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onSort(field)}
+      className="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700"
+    >
+      {label}
+      <ArrowUpDown className="w-3 h-3" />
+    </button>
+  );
+}
+
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function SearchConsolePage() {
   const [days, setDays] = useState(28);
   const [data, setData] = useState<SearchConsoleData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortField>("clicks");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
@@ -174,32 +194,40 @@ export default function SearchConsolePage() {
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
   const [showAdvisor, setShowAdvisor] = useState(true);
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({
-        days: days.toString(),
-        sort,
-        order,
-        search,
-        limit: "100",
-      });
-      const res = await fetch(`/api/admin/seo/search-queries?${params}`);
-      if (res.ok) setData(await res.json());
-
-      const pRes = await fetch(
-        `/api/admin/seo/page-metrics?days=${days}&search=${search}&limit=100`
-      );
-      if (pRes.ok) setPageData(await pRes.json());
-    } catch (error) {
-      console.error("Failed to fetch search console data:", error);
-    }
-    setLoading(false);
-  }, [days, sort, order, search]);
+  // Loading is derived from which request key has landed, so no synchronous
+  // setLoading runs inside the effect (react-hooks/set-state-in-effect).
+  const requestKey = `${days}|${sort}|${order}|${search}`;
+  const [loadedKey, setLoadedKey] = useState<string | null>(null);
+  const loading = loadedKey !== requestKey;
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const params = new URLSearchParams({
+          days: days.toString(),
+          sort,
+          order,
+          search,
+          limit: "100",
+        });
+        const res = await fetch(`/api/admin/seo/search-queries?${params}`);
+        if (!cancelled && res.ok) setData(await res.json());
+
+        const pRes = await fetch(
+          `/api/admin/seo/page-metrics?days=${days}&search=${search}&limit=100`
+        );
+        if (!cancelled && pRes.ok) setPageData(await pRes.json());
+      } catch (error) {
+        console.error("Failed to fetch search console data:", error);
+      } finally {
+        if (!cancelled) setLoadedKey(requestKey);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [requestKey, days, sort, order, search]);
 
   const insights = useMemo(() => {
     if (!data?.queries || data.queries.length === 0) return [];
@@ -240,23 +268,6 @@ export default function SearchConsolePage() {
       setOrder("desc");
     }
   };
-
-  const SortHeader = ({
-    field,
-    label,
-  }: {
-    field: SortField;
-    label: string;
-  }) => (
-    <button
-      type="button"
-      onClick={() => handleSort(field)}
-      className="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700"
-    >
-      {label}
-      <ArrowUpDown className="w-3 h-3" />
-    </button>
-  );
 
   const rows = tab === "queries" ? data?.queries : pageData?.pages;
 
@@ -483,16 +494,16 @@ export default function SearchConsolePage() {
                     {tab === "queries" ? "Query" : "Page"}
                   </th>
                   <th className="text-right px-3 py-3">
-                    <SortHeader field="clicks" label="Clicks" />
+                    <SortHeader field="clicks" label="Clicks" onSort={handleSort} />
                   </th>
                   <th className="text-right px-3 py-3">
-                    <SortHeader field="impressions" label="Impr." />
+                    <SortHeader field="impressions" label="Impr." onSort={handleSort} />
                   </th>
                   <th className="text-right px-3 py-3">
-                    <SortHeader field="ctr" label="CTR" />
+                    <SortHeader field="ctr" label="CTR" onSort={handleSort} />
                   </th>
                   <th className="text-right px-3 py-3">
-                    <SortHeader field="position" label="Pos." />
+                    <SortHeader field="position" label="Pos." onSort={handleSort} />
                   </th>
                   {tab === "queries" && (
                     <>

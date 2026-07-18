@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Trash2, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { clsx } from "clsx";
 import {
@@ -20,20 +20,26 @@ export default function KeywordsPage() {
   const [newTargetUrl, setNewTargetUrl] = useState("");
   const [adding, setAdding] = useState(false);
   const [selectedKeyword, setSelectedKeyword] = useState<KeywordWithPosition | null>(null);
-
-  const fetchKeywords = useCallback(async () => {
-    try {
-      const res = await fetch("/api/admin/seo/keywords");
-      if (res.ok) setKeywords(await res.json());
-    } catch (error) {
-      console.error("Failed to fetch keywords:", error);
-    }
-    setLoading(false);
-  }, []);
+  // Bumping this counter re-runs the loader effect (used after add/delete).
+  const [reloadKey, setReloadKey] = useState(0);
+  const fetchKeywords = () => setReloadKey((k) => k + 1);
 
   useEffect(() => {
-    fetchKeywords();
-  }, [fetchKeywords]);
+    let cancelled = false;
+    fetch("/api/admin/seo/keywords")
+      .then(async (res) => {
+        if (res.ok && !cancelled) setKeywords(await res.json());
+      })
+      .catch((error) => {
+        console.error("Failed to fetch keywords:", error);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [reloadKey]);
 
   const handleAdd = async () => {
     if (!newKeyword.trim()) return;

@@ -206,7 +206,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     const postCategorySlugs = post.categories.map((c) => c.slug);
 
     // First try to find posts in the same categories
-    let relatedQuery = prisma.blogPost.findMany({
+    const relatedQuery = prisma.blogPost.findMany({
       where: {
         slug: { not: post.slug },
         isPublished: true,

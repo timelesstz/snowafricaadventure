@@ -315,7 +315,7 @@ async function updateWalkingSafari() {
         data: {
           slug: SLUG,
           ...metadata,
-          itinerary: itinerary as any,
+          itinerary: itinerary as object[],
           featuredImage:
             "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/03/Ngorongoro-Walking-Safari-ways-african-safaris.jpg",
           priceFrom: 950,
@@ -331,7 +331,7 @@ async function updateWalkingSafari() {
         where: { slug: SLUG },
         data: {
           ...metadata,
-          itinerary: itinerary as any,
+          itinerary: itinerary as object[],
           parksCount: 3,
           gameDrives: 5,
           rating: 4.9,

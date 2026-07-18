@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { X, FolderOpen, Loader2, ImageOff } from "lucide-react";
 import MediaUploader from "./MediaUploader";
@@ -92,11 +92,15 @@ export default function ImageUploadField({
   const [showBrowser, setShowBrowser] = useState(false);
   const [pendingDeletions, setPendingDeletions] = useState<string[]>([]);
 
-  useEffect(() => {
+  // Sync from the controlled prop during render (React's "adjust state when
+  // props change" pattern) instead of via an effect, avoiding a wasted render.
+  const [prevControlled, setPrevControlled] = useState(controlledValue);
+  if (controlledValue !== prevControlled) {
+    setPrevControlled(controlledValue);
     if (controlledValue !== undefined) {
       setValue(controlledValue);
     }
-  }, [controlledValue]);
+  }
 
   const previewClasses = {
     sm: "w-24 h-24",

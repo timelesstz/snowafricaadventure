@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -812,7 +813,7 @@ export function ZanzibarInquiryForm() {
       <p className="text-xs text-slate-500 text-center">
         We&apos;ll send you beach holiday options within 24 hours. No spam, ever.
         Your data is protected under our{" "}
-        <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
+        <Link href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</Link>.
       </p>
     </div>
   );

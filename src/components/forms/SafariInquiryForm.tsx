@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, Search, ChevronDown } from "lucide-react";
 import { PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
@@ -507,7 +508,7 @@ export function SafariInquiryForm({
           <p className="text-xs text-slate-500 text-center mt-3">
             We typically respond within 24 hours. No spam, ever.
             Your data is protected under our{" "}
-            <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
+            <Link href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</Link>.
           </p>
         </form>
       )}

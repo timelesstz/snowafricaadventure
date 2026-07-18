@@ -22,7 +22,7 @@ async function check() {
   console.log("=".repeat(80));
 
   for (const safari of safaris) {
-    const itinerary = safari.itinerary as any[];
+    const itinerary = safari.itinerary as { day?: number; description?: string }[];
     if (!Array.isArray(itinerary) || itinerary.length === 0) {
       console.log(`\n❌ ${safari.title} - NO ITINERARY`);
       continue;
@@ -37,7 +37,7 @@ async function check() {
     console.log(`   Days: ${itinerary.length} | Avg desc length: ${avgLength} chars`);
 
     if (avgLength <= 500) {
-      itinerary.forEach((day: any) => {
+      itinerary.forEach((day) => {
         console.log(`   Day ${day.day}: ${day.description?.length || 0} chars`);
       });
     }

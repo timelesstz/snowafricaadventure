@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import DateRangePicker from "@/components/admin/seo/DateRangePicker";
 import MetricCard from "@/components/admin/seo/MetricCard";
 import {
@@ -40,22 +40,28 @@ interface OrganicData {
 export default function AnalyticsPage() {
   const [days, setDays] = useState(28);
   const [data, setData] = useState<OrganicData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/admin/seo/organic-traffic?days=${days}`);
-      if (res.ok) setData(await res.json());
-    } catch (error) {
-      console.error("Failed to fetch organic traffic:", error);
-    }
-    setLoading(false);
-  }, [days]);
+  // Derived: loading until the response for the current `days` has landed.
+  // All state updates happen in async promise callbacks, keeping the effect
+  // body free of synchronous setState (react-hooks/set-state-in-effect).
+  const [loadedDays, setLoadedDays] = useState<number | null>(null);
+  const loading = loadedDays !== days;
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    let cancelled = false;
+    fetch(`/api/admin/seo/organic-traffic?days=${days}`)
+      .then(async (res) => {
+        if (!cancelled && res.ok) setData(await res.json());
+      })
+      .catch((error) => {
+        console.error("Failed to fetch organic traffic:", error);
+      })
+      .finally(() => {
+        if (!cancelled) setLoadedDays(days);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [days]);
 
   if (loading) {
     return (

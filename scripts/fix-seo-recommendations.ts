@@ -112,8 +112,8 @@ async function main() {
         });
         console.log(`     📎 Linked to 404 entry (${notFoundUrl.hitCount} hits)`);
       }
-    } catch (error: any) {
-      console.log(`  ❌ Error creating redirect for ${redirect.sourceUrl}: ${error.message}`);
+    } catch (error) {
+      console.log(`  ❌ Error creating redirect for ${redirect.sourceUrl}: ${error instanceof Error ? error.message : error}`);
     }
   }
 

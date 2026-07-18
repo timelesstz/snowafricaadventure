@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { TRIP_TYPES, PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
@@ -503,7 +504,7 @@ export function InquiryForm({
       <p className="text-xs text-slate-500 text-center">
         We typically respond within 24 hours. No spam, ever.
         Your data is protected under our{" "}
-        <a href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</a>.
+        <Link href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</Link>.
       </p>
     </form>
   );

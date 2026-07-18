@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
@@ -468,7 +469,9 @@ export default async function RouteEditPage({
               </h2>
               <ItineraryEditor
                 name="itinerary"
-                defaultValue={route?.itinerary as any[] | null}
+                defaultValue={
+                  route?.itinerary as ComponentProps<typeof ItineraryEditor>["defaultValue"]
+                }
               />
             </div>
 
