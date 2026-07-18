@@ -59,6 +59,7 @@ const RESERVED_SLUGS = new Set([
   "tanzania-safari-from-uk",
   "wildlife-safaris-tanzania",
   "tanzania-beach-holidays",
+  "tanzania-itinerary-10-days",
   "meet-florent",
   "terms-conditions",
   "terms-and-conditions",
@@ -481,6 +482,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tanzania-itinerary-10-days/`,
+      lastModified: new Date("2026-07-18"),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/tanzania-beach-holidays/`,
