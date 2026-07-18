@@ -52,7 +52,7 @@ export function EmailShareModal({
     }
 
     try {
-      const response = await fetch("/api/share/email", {
+      const response = await fetch("/api/share/email/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -27,8 +27,9 @@ export const RATE_LIMITS = {
   normal: { windowMs: 60_000, maxRequests: 100 } as RateLimitConfig,
   /** Aggressive limit for no-UA or unknown bots */
   suspicious: { windowMs: 60_000, maxRequests: 20 } as RateLimitConfig,
-  /** Form submission limit — 5 per 10 minutes per IP */
-  formSubmission: { windowMs: 600_000, maxRequests: 5 } as RateLimitConfig,
+  /** Form submission limit — 10 per 10 minutes per IP (generous enough for
+   * groups behind a shared hotel/office NAT while still stopping floods) */
+  formSubmission: { windowMs: 600_000, maxRequests: 10 } as RateLimitConfig,
 };
 
 /**

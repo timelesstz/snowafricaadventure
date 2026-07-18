@@ -122,13 +122,6 @@ export function InquiryForm({
       }
 
       if (response.ok) {
-        // Log email delivery status for debugging
-        if (result.emailStatus) {
-          console.log("[InquiryForm] Email status:", JSON.stringify(result.emailStatus));
-          if (result.emailStatus.error) {
-            console.warn("[InquiryForm] Email delivery issue:", result.emailStatus.error);
-          }
-        }
         // Track successful form submission
         const numAdults = parseInt(data.numAdults as string) || 1;
         const numChildren = parseInt(data.numChildren as string) || 0;
@@ -481,7 +474,7 @@ export function InquiryForm({
       )}
 
       {/* Honeypot — hidden from real users, bots fill it */}
-      <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+      <div className="hidden" aria-hidden="true" tabIndex={-1}>
         <label htmlFor={`website-${variant}`}>Website</label>
         <input type="text" id={`website-${variant}`} name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
       </div>

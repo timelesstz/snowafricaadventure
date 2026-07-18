@@ -85,9 +85,12 @@ export async function PUT(
     const body = await request.json();
     const data = adminDepartureUpdateSchema.parse(body);
 
-    // Handle manual featuring through the service
+    // Handle manual featuring through the service. Un-checking the box must
+    // also clear the flag, or the departure stays pinned and rotation skips it.
     if (data.isFeatured !== undefined && data.isManuallyFeatured) {
       await manuallyFeatureDeparture(id, data.isFeatured);
+    } else if (data.isManuallyFeatured === false) {
+      await manuallyFeatureDeparture(id, false);
     }
 
     // Extract year and month if startDate changed

@@ -272,16 +272,15 @@ export function TailorMadeForm() {
         }),
       });
 
-      const result = await response.json();
+      let result: { message?: string };
+      try {
+        result = await response.json();
+      } catch {
+        setError("Something went wrong. Please try again.");
+        return;
+      }
 
       if (response.ok) {
-        // Log email delivery status for debugging
-        if (result.emailStatus) {
-          console.log("[TailorMadeForm] Email status:", JSON.stringify(result.emailStatus));
-          if (result.emailStatus.error) {
-            console.warn("[TailorMadeForm] Email delivery issue:", result.emailStatus.error);
-          }
-        }
         // Track successful form submission
         trackFormSubmit({
           formName: "tailor_made_safari_form",
@@ -837,7 +836,7 @@ export function TailorMadeForm() {
       </div>
 
       {/* Honeypot */}
-      <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+      <div className="hidden" aria-hidden="true" tabIndex={-1}>
         <label htmlFor="website-tailor">Website</label>
         <input type="text" id="website-tailor" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
       </div>

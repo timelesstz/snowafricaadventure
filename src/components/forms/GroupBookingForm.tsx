@@ -913,7 +913,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
               <div className="lg:hidden">{priceBreakdown}</div>
 
               {/* Honeypot */}
-              <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+              <div className="hidden" aria-hidden="true" tabIndex={-1}>
                 <label htmlFor="website-booking">Website</label>
                 <input type="text" id="website-booking" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
               </div>

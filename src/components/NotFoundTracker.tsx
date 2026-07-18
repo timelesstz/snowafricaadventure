@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export function NotFoundTracker() {
   useEffect(() => {
-    fetch("/api/track-404", {
+    fetch("/api/track-404/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 
 interface RouteParams {
   params: Promise<{ code: string }>;
@@ -25,7 +26,7 @@ export async function GET(
             },
             bookings: {
               where: {
-                status: { not: "CANCELLED" },
+                status: { in: SPOT_HOLDING_STATUSES },
               },
               select: {
                 totalClimbers: true,
@@ -69,11 +70,7 @@ export async function GET(
     let departureInfo = null;
     if (inviteLink.departure) {
       const dep = inviteLink.departure;
-      // Sum total climbers from all active bookings
-      const bookedSpots = dep.bookings.reduce(
-        (sum, booking) => sum + booking.totalClimbers,
-        0
-      );
+      const bookedSpots = countBookedSpots(dep.bookings);
       departureInfo = {
         id: dep.id,
         routeName: dep.route.title,

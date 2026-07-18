@@ -2,6 +2,7 @@ import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { AdminRole, DepartureStatus } from "@prisma/client";
+import { SPOT_HOLDING_STATUSES } from "@/lib/booking-spots";
 import { ZodError } from "zod";
 import { adminDepartureCreateSchema } from "@/lib/schemas";
 
@@ -45,9 +46,7 @@ export async function GET(request: Request) {
         },
         bookings: {
           where: {
-            status: {
-              in: ["DEPOSIT_PAID", "CONFIRMED", "COMPLETED"],
-            },
+            status: { in: SPOT_HOLDING_STATUSES },
           },
           select: {
             totalClimbers: true,

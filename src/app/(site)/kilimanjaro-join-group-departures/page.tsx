@@ -4,6 +4,7 @@ import { DeparturesBookingSection } from "@/components/departures/DeparturesBook
 import { generateMetadata as genMeta, generateEventSchema, generateAggregateRatingSchema, generateFAQSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 import { SITE_CONFIG, PARTNER_INFO } from "@/lib/constants";
 import { ShareButtons } from "@/components/social/ShareButtons";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
@@ -50,10 +51,12 @@ async function getDeparturesByYear(year: number) {
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
 
+    // FULL departures are included so they render as "Sold Out" rows instead
+    // of vanishing from the page.
     const departures = await prisma.groupDeparture.findMany({
       where: {
         year,
-        status: { in: ["OPEN", "LIMITED", "GUARANTEED"] },
+        status: { in: ["OPEN", "LIMITED", "GUARANTEED", "FULL"] },
         arrivalDate: { gte: today },
       },
       include: {
@@ -65,7 +68,7 @@ async function getDeparturesByYear(year: number) {
         },
         bookings: {
           where: {
-            status: { not: "CANCELLED" },
+            status: { in: SPOT_HOLDING_STATUSES },
           },
           select: {
             totalClimbers: true,
@@ -76,11 +79,7 @@ async function getDeparturesByYear(year: number) {
     });
 
     return departures.map((dep) => {
-      // Sum total climbers from all active bookings (not just count of booking records)
-      const bookedSpots = dep.bookings.reduce(
-        (sum, booking) => sum + booking.totalClimbers,
-        0
-      );
+      const bookedSpots = countBookedSpots(dep.bookings);
       return {
         id: dep.id,
         route: { name: dep.route.title, slug: dep.route.slug },

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { DepartureStatus, RotationMode, BookingStatus } from "@prisma/client";
+import { DepartureStatus, RotationMode } from "@prisma/client";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 
 export interface RotationResult {
   success: boolean;
@@ -92,39 +93,6 @@ async function markExpiredDepartures(): Promise<{
 }
 
 /**
- * Calculate spots remaining for a departure
- */
-async function getSpotsRemaining(departureId: string): Promise<number> {
-  const departure = await prisma.groupDeparture.findUnique({
-    where: { id: departureId },
-    select: {
-      maxParticipants: true,
-      bookings: {
-        where: {
-          status: {
-            in: [
-              BookingStatus.DEPOSIT_PAID,
-              BookingStatus.CONFIRMED,
-              BookingStatus.COMPLETED,
-            ],
-          },
-        },
-        select: { totalClimbers: true },
-      },
-    },
-  });
-
-  if (!departure) return 0;
-
-  const bookedSpots = departure.bookings.reduce(
-    (sum, booking) => sum + booking.totalClimbers,
-    0
-  );
-
-  return departure.maxParticipants - bookedSpots;
-}
-
-/**
  * Update departure statuses based on booking counts
  */
 async function updateDepartureStatuses(): Promise<
@@ -136,11 +104,17 @@ async function updateDepartureStatuses(): Promise<
     newStatus: DepartureStatus;
   }[] = [];
 
-  // Get all active departures (OPEN, LIMITED, GUARANTEED)
+  // Include FULL so a cancellation that frees seats reopens the departure —
+  // otherwise FULL would be a terminal state and freed spots stay hidden.
   const activeDepartures = await prisma.groupDeparture.findMany({
     where: {
       status: {
-        in: [DepartureStatus.OPEN, DepartureStatus.LIMITED, DepartureStatus.GUARANTEED],
+        in: [
+          DepartureStatus.OPEN,
+          DepartureStatus.LIMITED,
+          DepartureStatus.GUARANTEED,
+          DepartureStatus.FULL,
+        ],
       },
       endDate: { gt: new Date() },
     },
@@ -151,13 +125,7 @@ async function updateDepartureStatuses(): Promise<
       isGuaranteed: true,
       bookings: {
         where: {
-          status: {
-            in: [
-              BookingStatus.DEPOSIT_PAID,
-              BookingStatus.CONFIRMED,
-              BookingStatus.COMPLETED,
-            ],
-          },
+          status: { in: SPOT_HOLDING_STATUSES },
         },
         select: { totalClimbers: true },
       },
@@ -165,20 +133,25 @@ async function updateDepartureStatuses(): Promise<
   });
 
   for (const departure of activeDepartures) {
-    const bookedSpots = departure.bookings.reduce(
-      (sum, booking) => sum + booking.totalClimbers,
-      0
-    );
-    const spotsRemaining = departure.maxParticipants - bookedSpots;
+    const spotsRemaining =
+      departure.maxParticipants - countBookedSpots(departure.bookings);
 
     let newStatus: DepartureStatus = departure.status;
 
     if (spotsRemaining <= 0) {
       newStatus = DepartureStatus.FULL;
-    } else if (spotsRemaining <= 3 && departure.status === DepartureStatus.OPEN) {
-      newStatus = DepartureStatus.LIMITED;
-    } else if (spotsRemaining > 3 && departure.status === DepartureStatus.LIMITED) {
-      // If spots opened up (cancellation), go back to OPEN or GUARANTEED
+    } else if (spotsRemaining <= 3) {
+      if (
+        departure.status === DepartureStatus.OPEN ||
+        departure.status === DepartureStatus.FULL
+      ) {
+        newStatus = DepartureStatus.LIMITED;
+      }
+    } else if (
+      departure.status === DepartureStatus.LIMITED ||
+      departure.status === DepartureStatus.FULL
+    ) {
+      // Spots opened up (cancellation) — go back to OPEN or GUARANTEED
       newStatus = departure.isGuaranteed
         ? DepartureStatus.GUARANTEED
         : DepartureStatus.OPEN;

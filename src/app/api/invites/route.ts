@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 import { sendEmail } from "@/lib/email";
 import { departureInvite } from "@/lib/email/templates";
 import { nanoid } from "nanoid";
 import { SITE_CONFIG } from "@/lib/constants";
+import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
 
 // Validation schema
 const inviteSchema = z.object({
@@ -20,6 +22,16 @@ const inviteSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit — this endpoint sends branded emails to arbitrary addresses,
+    // so an unthrottled caller could abuse it as a spam relay.
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    if (ip && isRateLimited(`invite:${ip}`, RATE_LIMITS.formSubmission)) {
+      return NextResponse.json(
+        { success: false, error: "Too many invitations sent. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const validatedData = inviteSchema.parse(body);
 
@@ -35,7 +47,7 @@ export async function POST(request: NextRequest) {
         },
         bookings: {
           where: {
-            status: { not: "CANCELLED" },
+            status: { in: SPOT_HOLDING_STATUSES },
           },
           select: {
             totalClimbers: true,
@@ -48,6 +60,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: "Departure not found" },
         { status: 404 }
+      );
+    }
+
+    // Only allow invites to departures that are actually bookable
+    const bookableStatuses = ["OPEN", "LIMITED", "GUARANTEED"];
+    if (!bookableStatuses.includes(departure.status) || departure.arrivalDate < new Date()) {
+      return NextResponse.json(
+        { success: false, error: "This departure is no longer open for booking." },
+        { status: 400 }
       );
     }
 
@@ -66,11 +87,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Calculate available spots - sum total climbers from all active bookings
-    const bookedSpots = departure.bookings.reduce(
-      (sum, booking) => sum + booking.totalClimbers,
-      0
-    );
+    const bookedSpots = countBookedSpots(departure.bookings);
     const availableSpots = departure.maxParticipants - bookedSpots;
 
     // Build invite URL

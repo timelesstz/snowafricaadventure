@@ -35,7 +35,7 @@ export function FinalCTA({
             Book Your Safari
           </Link>
           <Link
-            href="/contact-us"
+            href="/contact-us/"
             className="inline-flex items-center justify-center px-10 py-4 bg-transparent text-white font-heading font-semibold text-base rounded-sm border-2 border-white/30 hover:bg-white/10 hover:border-white/50 transition-all"
           >
             Talk to an Expert

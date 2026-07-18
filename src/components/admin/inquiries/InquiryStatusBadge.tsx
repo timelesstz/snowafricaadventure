@@ -2,7 +2,7 @@
 
 import { StatusBadge, type StatusTone } from "../ui/StatusBadge";
 
-type InquiryStatus = "new" | "contacted" | "converted" | "closed";
+type InquiryStatus = "new" | "contacted" | "converted" | "closed" | "spam";
 
 interface InquiryStatusBadgeProps {
   status: string;
@@ -14,6 +14,7 @@ const config: Record<InquiryStatus, { label: string; tone: StatusTone }> = {
   contacted: { label: "Contacted", tone: "pending" },
   converted: { label: "Converted", tone: "success" },
   closed: { label: "Closed", tone: "neutral" },
+  spam: { label: "Spam", tone: "danger" },
 };
 
 export function InquiryStatusBadge({

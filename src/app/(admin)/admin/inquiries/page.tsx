@@ -135,6 +135,7 @@ export default async function InquiriesPage({
     { value: "contacted", label: "Contacted" },
     { value: "converted", label: "Converted" },
     { value: "closed", label: "Closed" },
+    { value: "spam", label: "Spam (flagged)" },
   ];
 
   const types = [

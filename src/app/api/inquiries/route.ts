@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { after } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { sendInquiryReceivedEmails } from "@/lib/email/send";
@@ -50,11 +51,15 @@ const inquirySchema = z.object({
   landingPage: z.string().max(2000).nullish(),
 });
 
+// Allow time for post-response email delivery via after() on slow SMTP
+export const maxDuration = 60;
+
 export async function POST(request: NextRequest) {
   try {
-    // Rate limit by IP
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (isRateLimited(`inquiry:${ip}`, RATE_LIMITS.formSubmission)) {
+    // Rate limit by IP. When no client IP is resolvable (rare outside Vercel),
+    // skip limiting — a shared "unknown" bucket would lock out all such users.
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    if (ip && isRateLimited(`inquiry:${ip}`, RATE_LIMITS.formSubmission)) {
       return NextResponse.json(
         { success: false, message: "Too many submissions. Please try again later." },
         { status: 429 }
@@ -63,13 +68,12 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    // Honeypot check — reject if the hidden field is filled
-    if (body.website) {
-      // Silently accept but don't process (don't reveal bot detection)
-      return NextResponse.json(
-        { success: true, message: "Inquiry received successfully. We'll be in touch soon!", inquiryId: "ok" },
-        { status: 200 }
-      );
+    // Honeypot: browser autofill can occasionally fill the hidden field, so a
+    // hit is saved flagged as spam (recoverable in admin) rather than dropped.
+    const honeypotTripped = Boolean(body.website);
+    if (honeypotTripped) {
+      console.warn(`[Inquiry] Honeypot tripped (ip: ${ip || "unknown"}, email: ${body.email || "?"}) — saving as spam`);
+      body.website = "";
     }
 
     // Validate input
@@ -124,7 +128,7 @@ export async function POST(request: NextRequest) {
         relatedTo: validatedData.relatedTo || null,
         referralSource: validatedData.referralSource || null,
         type: validatedData.type,
-        status: "new",
+        status: honeypotTripped ? "spam" : "new",
         // Server-side tracking
         ipAddress: visitor.ipAddress,
         country: visitor.country,
@@ -165,39 +169,36 @@ export async function POST(request: NextRequest) {
       nationality: inquiry.nationality || undefined,
     };
 
-    // Send confirmation emails and create notification
-    // Must await to prevent Vercel serverless from terminating before completion
-    console.log(`[Inquiry] Sending emails for inquiry ${inquiry.id}, type: ${inquiry.type}, email: ${inquiry.email}`);
+    // Send confirmation emails and create notification after the response is
+    // sent — after() keeps the serverless function alive (waitUntil), so slow
+    // SMTP can no longer delay or kill the user-facing response.
+    if (!honeypotTripped) {
+      after(async () => {
+        console.log(`[Inquiry] Sending emails for inquiry ${inquiry.id}, type: ${inquiry.type}, email: ${inquiry.email}`);
+        try {
+          const emailResults = await sendInquiryReceivedEmails(emailData);
+          console.log(`[Inquiry] Email results - customer: ${emailResults.customer.success}, admin: ${emailResults.admin.success}`);
+          if (!emailResults.customer.success) {
+            console.error(`[Inquiry] Customer email failed:`, emailResults.customer.error);
+          }
+          if (!emailResults.admin.success) {
+            console.error(`[Inquiry] Admin email failed:`, emailResults.admin.error);
+          }
+        } catch (emailError) {
+          console.error(`[Inquiry] Email sending threw:`, emailError instanceof Error ? emailError.message : emailError);
+        }
 
-    let emailStatus = { customer: false, admin: false, error: "" };
-
-    try {
-      const emailResults = await sendInquiryReceivedEmails(emailData);
-      emailStatus.customer = emailResults.customer.success;
-      emailStatus.admin = emailResults.admin.success;
-      if (!emailResults.customer.success) {
-        emailStatus.error = `Customer: ${emailResults.customer.error}`;
-      }
-      if (!emailResults.admin.success) {
-        emailStatus.error += `${emailStatus.error ? "; " : ""}Admin: ${emailResults.admin.error}`;
-      }
-      console.log(`[Inquiry] Email results - customer: ${emailResults.customer.success}, admin: ${emailResults.admin.success}`);
-    } catch (emailError) {
-      const msg = emailError instanceof Error ? emailError.message : "Unknown email error";
-      emailStatus.error = msg;
-      console.error(`[Inquiry] Email sending threw:`, msg);
-    }
-
-    // Create in-app notification (separate from email)
-    try {
-      await InquiryNotifications.newInquiry({
-        inquiryId: inquiry.id,
-        fullName: inquiry.fullName,
-        type: inquiry.type,
-        tripType: inquiry.tripType || undefined,
+        try {
+          await InquiryNotifications.newInquiry({
+            inquiryId: inquiry.id,
+            fullName: inquiry.fullName,
+            type: inquiry.type,
+            tripType: inquiry.tripType || undefined,
+          });
+        } catch (notifError) {
+          console.error("Failed to create inquiry notification:", notifError);
+        }
       });
-    } catch (notifError) {
-      console.error("Failed to create inquiry notification:", notifError);
     }
 
     return NextResponse.json(
@@ -205,7 +206,6 @@ export async function POST(request: NextRequest) {
         success: true,
         message: "Inquiry received successfully. We'll be in touch soon!",
         inquiryId: inquiry.id,
-        emailStatus,
       },
       { status: 200 }
     );

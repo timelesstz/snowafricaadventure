@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Moon, Shield, Star, EyeOff, Loader2 } from "lucide-react";
@@ -89,19 +89,28 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
   });
 
   // Auto-calculate dates when arrival date or route changes.
+  // In edit mode the first run must be skipped: the effect fires on mount with
+  // the loaded values and would overwrite the stored start/summit/end dates.
+  const skipAutoCalc = useRef(mode === "edit");
   useEffect(() => {
+    if (skipAutoCalc.current) {
+      skipAutoCalc.current = false;
+      return;
+    }
     if (formData.arrivalDate && formData.routeId) {
       const route = routes.find((r) => r.id === formData.routeId);
       if (route) {
+        // UTC arithmetic — date-input strings parse as UTC midnight, so local
+        // setDate/toISOString round-trips can shift a day on non-UTC machines
         const arrival = new Date(formData.arrivalDate);
         const start = new Date(arrival);
-        start.setDate(start.getDate() + 1);
+        start.setUTCDate(start.getUTCDate() + 1);
 
         const end = new Date(start);
-        end.setDate(end.getDate() + route.durationDays - 1);
+        end.setUTCDate(end.getUTCDate() + route.durationDays - 1);
 
         const summit = new Date(end);
-        summit.setDate(summit.getDate() - 1);
+        summit.setUTCDate(summit.getUTCDate() - 1);
 
         setFormData((prev) => ({
           ...prev,

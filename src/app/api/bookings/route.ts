@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { after } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { BookingStatus } from "@prisma/client";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 import { sendBookingInquiryEmails } from "@/lib/email/send";
 import { BookingEmailData } from "@/lib/email/templates";
 import { createCommission, determineTripType } from "@/lib/commission";
@@ -44,11 +46,15 @@ const bookingSchema = z.object({
   landingPage: z.string().max(2000).nullish(),
 });
 
+// Allow time for post-response email delivery via after() on slow SMTP
+export const maxDuration = 60;
+
 export async function POST(request: NextRequest) {
   try {
-    // Rate limit by IP
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (isRateLimited(`booking:${ip}`, RATE_LIMITS.formSubmission)) {
+    // Rate limit by IP. When no client IP is resolvable (rare outside Vercel),
+    // skip limiting — a shared "unknown" bucket would lock out all such users.
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    if (ip && isRateLimited(`booking:${ip}`, RATE_LIMITS.formSubmission)) {
       return NextResponse.json(
         { success: false, message: "Too many submissions. Please try again later." },
         { status: 429 }
@@ -57,12 +63,13 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    // Honeypot check — reject if the hidden field is filled
-    if (body.website) {
-      return NextResponse.json(
-        { success: true, message: "Booking inquiry submitted successfully!", bookingId: "ok", bookingRef: "OK" },
-        { status: 201 }
-      );
+    // Honeypot: browser autofill can occasionally fill the hidden field, so a
+    // hit is saved with a flag in the notes (recoverable in admin) rather than
+    // silently discarded — dropping a real booking is worse than one spam row.
+    const honeypotTripped = Boolean(body.website);
+    if (honeypotTripped) {
+      console.warn(`[Booking] Honeypot tripped (ip: ${ip || "unknown"}, email: ${body.leadEmail || "?"}) — saving flagged`);
+      body.website = "";
     }
 
     // Validate input
@@ -85,13 +92,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check availability - sum total climbers from all active bookings
+    // Check availability against seats actually held (paid/confirmed) so the
+    // check agrees with what the public page displays.
     const existingBookings = await prisma.booking.findMany({
       where: {
         departureId: departure.id,
-        status: {
-          notIn: [BookingStatus.CANCELLED],
-        },
+        status: { in: SPOT_HOLDING_STATUSES },
       },
       select: {
         totalClimbers: true,
@@ -99,10 +105,7 @@ export async function POST(request: NextRequest) {
     });
 
     const totalClimbers = validatedData.climbers.length;
-    const bookedSpots = existingBookings.reduce(
-      (sum, booking) => sum + booking.totalClimbers,
-      0
-    );
+    const bookedSpots = countBookedSpots(existingBookings);
     const availableSpots = departure.maxParticipants - bookedSpots;
 
     if (totalClimbers > availableSpots) {
@@ -136,7 +139,9 @@ export async function POST(request: NextRequest) {
         depositAmount,
         status: BookingStatus.INQUIRY,
         climberDetails: validatedData.climbers,
-        notes: validatedData.specialRequests || null,
+        notes: honeypotTripped
+          ? `[FLAGGED: possible bot — hidden form field was filled]${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
+          : validatedData.specialRequests || null,
         source: validatedData.partnerCode ? 'referral' : 'website',
         // Server-side tracking
         ipAddress: visitor.ipAddress,
@@ -163,29 +168,6 @@ export async function POST(request: NextRequest) {
         },
       },
     });
-
-    // Create commission for marketing partner (non-blocking).
-    // Derive tripType from the route so Mt Meru or any future non-Kilimanjaro
-    // trekking routes pick up the correct commission rate automatically.
-    createCommission({
-      bookingId: booking.id,
-      bookingAmount: totalPrice,
-      tripType: determineTripType({ routeSlug: booking.departure?.route?.slug }),
-    }).catch((error) => {
-      console.error("Failed to create commission:", error);
-    });
-
-    // Subscribe lead to newsletter if opted in (non-blocking)
-    if (validatedData.subscribeNewsletter) {
-      subscribeToNewsletter({
-        email: validatedData.leadEmail,
-        name: validatedData.leadName,
-        source: "booking",
-        bookingId: booking.id,
-      }).catch((error) => {
-        console.error("Failed to subscribe to newsletter:", error);
-      });
-    }
 
     // Prepare email data
     const emailData: BookingEmailData = {
@@ -215,35 +197,58 @@ export async function POST(request: NextRequest) {
       })),
     };
 
-    // Send confirmation emails and create notification
-    // Must await to prevent Vercel serverless from terminating before completion
-    const [emailResult, notifResult] = await Promise.allSettled([
-      sendBookingInquiryEmails(emailData),
-      BookingNotifications.newBooking({
-        bookingId: booking.id,
-        leadName: booking.leadName,
-        routeTitle: departure.route.title,
-        totalPrice,
-      }),
-    ]);
+    // Commission, newsletter, emails, and notification all run after the
+    // response is sent — after() keeps the serverless function alive
+    // (waitUntil), so slow SMTP can't delay or kill the user-facing response,
+    // and the commission write is guaranteed to complete (it was previously
+    // fire-and-forget and could be dropped when the function froze).
+    if (!honeypotTripped) {
+      after(async () => {
+        const [commissionResult, newsletterResult, emailResult, notifResult] = await Promise.allSettled([
+          // Derive tripType from the route so Mt Meru or any future
+          // non-Kilimanjaro trekking routes pick up the correct commission rate.
+          createCommission({
+            bookingId: booking.id,
+            bookingAmount: totalPrice,
+            tripType: determineTripType({ routeSlug: booking.departure?.route?.slug }),
+          }),
+          validatedData.subscribeNewsletter
+            ? subscribeToNewsletter({
+                email: validatedData.leadEmail,
+                name: validatedData.leadName,
+                source: "booking",
+                bookingId: booking.id,
+              })
+            : Promise.resolve(null),
+          sendBookingInquiryEmails(emailData),
+          BookingNotifications.newBooking({
+            bookingId: booking.id,
+            leadName: booking.leadName,
+            routeTitle: departure.route.title,
+            totalPrice,
+          }),
+        ]);
 
-    // Build email status for response (matches inquiry route pattern)
-    let emailStatus = { customer: false, admin: false, error: "" };
-    if (emailResult.status === "fulfilled") {
-      emailStatus.customer = emailResult.value.customer.success;
-      emailStatus.admin = emailResult.value.admin.success;
-      if (!emailResult.value.customer.success) {
-        emailStatus.error = `Customer: ${emailResult.value.customer.error}`;
-      }
-      if (!emailResult.value.admin.success) {
-        emailStatus.error += `${emailStatus.error ? "; " : ""}Admin: ${emailResult.value.admin.error}`;
-      }
-    } else {
-      emailStatus.error = `Email sending failed: ${emailResult.reason}`;
-      console.error("Failed to send booking emails:", emailResult.reason);
-    }
-    if (notifResult.status === "rejected") {
-      console.error("Failed to create booking notification:", notifResult.reason);
+        if (commissionResult.status === "rejected") {
+          console.error("Failed to create commission:", commissionResult.reason);
+        }
+        if (newsletterResult.status === "rejected") {
+          console.error("Failed to subscribe to newsletter:", newsletterResult.reason);
+        }
+        if (emailResult.status === "fulfilled") {
+          if (!emailResult.value.customer.success) {
+            console.error("[Booking] Customer email failed:", emailResult.value.customer.error);
+          }
+          if (!emailResult.value.admin.success) {
+            console.error("[Booking] Admin email failed:", emailResult.value.admin.error);
+          }
+        } else {
+          console.error("Failed to send booking emails:", emailResult.reason);
+        }
+        if (notifResult.status === "rejected") {
+          console.error("Failed to create booking notification:", notifResult.reason);
+        }
+      });
     }
 
     return NextResponse.json(
@@ -259,7 +264,6 @@ export async function POST(request: NextRequest) {
           totalPrice,
           depositAmount,
         },
-        emailStatus,
       },
       { status: 201 }
     );

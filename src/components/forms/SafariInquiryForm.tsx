@@ -481,7 +481,7 @@ export function SafariInquiryForm({
           </div>
 
           {/* Honeypot */}
-          <div className="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+          <div className="hidden" aria-hidden="true" tabIndex={-1}>
             <label htmlFor="website-safari">Website</label>
             <input type="text" id="website-safari" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
           </div>

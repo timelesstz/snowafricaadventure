@@ -92,7 +92,7 @@ export default function WhatsAppChat() {
 
   const logWhatsApp = useCallback((action: string, label: string, message?: string) => {
     trackContactClick({ method: "whatsapp", location: pathname || "/" });
-    fetch("/api/whatsapp-log", {
+    fetch("/api/whatsapp-log/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action, label, message, page: pathname }),
