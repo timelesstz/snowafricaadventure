@@ -89,6 +89,7 @@ const navGroups: NavGroup[] = [
     id: "bookings",
     label: "Bookings",
     items: [
+      { href: "/admin/inquiries?status=new", label: "Open Leads", icon: AlertTriangle, minRole: AdminRole.EDITOR },
       { href: "/admin/departures", label: "Departures", icon: CalendarDays, minRole: AdminRole.EDITOR },
       { href: "/admin/bookings", label: "Bookings", icon: ClipboardList, minRole: AdminRole.EDITOR },
       { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquare, minRole: AdminRole.EDITOR },
