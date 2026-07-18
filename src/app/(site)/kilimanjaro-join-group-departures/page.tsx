@@ -45,10 +45,16 @@ export const metadata: Metadata = {
 // Fetch departures from database
 async function getDeparturesByYear(year: number) {
   try {
+    // Only show departures that haven't started yet — the rotation cron marks
+    // ended ones COMPLETED, but this filter keeps the page correct even if it stalls
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+
     const departures = await prisma.groupDeparture.findMany({
       where: {
         year,
         status: { in: ["OPEN", "LIMITED", "GUARANTEED"] },
+        arrivalDate: { gte: today },
       },
       include: {
         route: {
