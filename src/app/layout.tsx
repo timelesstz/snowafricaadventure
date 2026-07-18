@@ -48,22 +48,29 @@ export const metadata: Metadata = {
   },
 };
 
-const CERTIFICATION_ENTRIES = [
-  { key: "about.commitment.logo1", alt: "TATO Licensed Operator" },
-  { key: "about.commitment.logo2", alt: "KPAP Certified Partner" },
-  { key: "about.commitment.logo3", alt: "IMEC International Mountain Explorers Connection" },
-  { key: "about.commitment.logo4", alt: "Certification" },
-  { key: "about.commitment.logo5", alt: "Certification" },
-] as const;
+// Footer logos come from the Logo table. The footer is a client component fed
+// by the theme provider, so they are resolved here rather than via <LogoStrip>.
+async function getFooterLogos() {
+  try {
+    const logos = await prisma.logo.findMany({
+      where: { isActive: true, placements: { has: "footer" } },
+      orderBy: [{ order: "asc" }, { name: "asc" }],
+      select: { image: true, name: true },
+    });
+    return logos.map((l) => ({ url: l.image, alt: l.name }));
+  } catch {
+    return [];
+  }
+}
 
 async function getThemeAndLogo(): Promise<{ theme: ThemeSettings; logo: LogoSettings }> {
   try {
-    const certKeys = CERTIFICATION_ENTRIES.map((c) => c.key);
-    const [dbTheme, logoSettings] = await Promise.all([
+    const [dbTheme, logoSettings, certificationLogos] = await Promise.all([
       prisma.themeSetting.findFirst({ where: { isActive: true } }),
       prisma.siteSetting.findMany({
-        where: { key: { in: ["site.logoUrl", "site.logoDarkUrl", ...certKeys] } },
+        where: { key: { in: ["site.logoUrl", "site.logoDarkUrl"] } },
       }),
+      getFooterLogos(),
     ]);
 
     const theme: ThemeSettings = dbTheme
@@ -72,10 +79,6 @@ async function getThemeAndLogo(): Promise<{ theme: ThemeSettings; logo: LogoSett
 
     const logoMap: Record<string, string> = {};
     logoSettings.forEach((s) => { logoMap[s.key] = s.value; });
-
-    const certificationLogos = CERTIFICATION_ENTRIES
-      .filter((c) => logoMap[c.key])
-      .map((c) => ({ url: logoMap[c.key], alt: c.alt }));
 
     return {
       theme,

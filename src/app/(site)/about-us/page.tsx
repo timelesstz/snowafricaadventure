@@ -5,7 +5,12 @@ import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { LogoStrip, hasLogos } from "@/components/logos/LogoStrip";
 import Image from "next/image";
+
+// Guide profiles are editable in the admin, so revalidate rather than
+// serving a build-time snapshot indefinitely.
+export const revalidate = 300;
 
 export const metadata: Metadata = genMeta({
   title: "About Us - Tanzania Tour Operator",
@@ -67,6 +72,23 @@ const DEFAULT_SETTINGS: Record<string, string> = {
     "Welcome to Snow Africa Adventure—where every journey tells a story and every traveler becomes part of our extended Tanzanian family.",
 };
 
+async function getGuidePreview() {
+  try {
+    const [guides, total] = await Promise.all([
+      prisma.guide.findMany({
+        where: { isActive: true },
+        orderBy: [{ order: "asc" }, { name: "asc" }],
+        take: 6,
+        select: { id: true, name: true, image: true },
+      }),
+      prisma.guide.count({ where: { isActive: true } }),
+    ]);
+    return { guides, total };
+  } catch {
+    return { guides: [], total: 0 };
+  }
+}
+
 async function getAboutSettings() {
   try {
     const settings = await prisma.siteSetting.findMany({
@@ -120,14 +142,10 @@ const values = [
 
 export default async function AboutPage() {
   const s = await getAboutSettings();
+  const { guides: guidePreview, total: guideCount } = await getGuidePreview();
+  const showAccreditations = await hasLogos("about");
 
-  const certificationEntries = [
-    { url: s["about.commitment.logo1"], alt: "TATO Licensed Operator" },
-    { url: s["about.commitment.logo2"], alt: "KPAP Certified Partner" },
-    { url: s["about.commitment.logo3"], alt: "IMEC International Mountain Explorers Connection" },
-    { url: s["about.commitment.logo4"], alt: "Certification" },
-    { url: s["about.commitment.logo5"], alt: "Certification" },
-  ].filter((entry) => entry.url);
+
 
   return (
     <div className="bg-white">
@@ -298,21 +316,11 @@ export default async function AboutPage() {
                 </p>
 
                 {/* Certification Logos */}
-                {certificationEntries.length > 0 && (
-                  <div className={`mt-10 flex flex-wrap gap-6 ${!s["about.commitment.image"] ? "justify-center" : ""}`}>
-                    {certificationEntries.map((cert, i) => (
-                      <div key={i} className="h-16 w-auto">
-                        <Image
-                          src={cert.url}
-                          alt={cert.alt}
-                          width={120}
-                          height={64}
-                          className="h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <LogoStrip
+                  placement="about"
+                  variant="muted"
+                  className={`mt-10 ${!s["about.commitment.image"] ? "justify-center" : "justify-start"}`}
+                />
               </div>
               {s["about.commitment.image"] && (
                 <div className="relative">
@@ -401,8 +409,72 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Meet Our Guides */}
+      {guideCount > 0 && (
+        <section className="py-16 md:py-20 bg-slate-50 border-t border-slate-100">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 md:p-10 text-center">
+                <span className="text-xs tracking-[0.3em] uppercase text-[var(--secondary)] font-semibold">
+                  Our Team
+                </span>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 mt-3 mb-4">
+                  Meet Our Guides
+                </h2>
+                <p className="text-slate-600 max-w-2xl mx-auto mb-8">
+                  Behind every summit and safari is a team of KINAPA-certified, Wilderness First
+                  Responder guides who know Tanzania intimately. Get to know the people who will be
+                  leading your adventure.
+                </p>
+
+                <div className="flex items-center justify-center -space-x-3 mb-8">
+                  {guidePreview.map((guide) => (
+                    <div
+                      key={guide.id}
+                      className="relative w-14 h-14 md:w-16 md:h-16 rounded-full ring-4 ring-white overflow-hidden bg-slate-200"
+                      title={guide.name}
+                    >
+                      {guide.image ? (
+                        <Image
+                          src={guide.image}
+                          alt={guide.name}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-200 to-slate-300">
+                          <span className="text-lg font-bold text-slate-500">
+                            {guide.name.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  {guideCount > guidePreview.length && (
+                    <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full ring-4 ring-white bg-[var(--primary)] flex items-center justify-center">
+                      <span className="text-sm font-bold text-white">
+                        +{guideCount - guidePreview.length}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  href="/our-guides/"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                >
+                  <Users className="w-5 h-5" />
+                  Meet all {guideCount} guides
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Accreditations */}
-      {certificationEntries.length > 0 && (
+      {showAccreditations && (
         <section className="py-16 md:py-20 bg-white border-t border-slate-100">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
@@ -415,22 +487,7 @@ export default async function AboutPage() {
               <p className="text-slate-500 mb-10 max-w-2xl mx-auto">
                 We are proud members and certified partners of these leading organizations in responsible tourism and mountain safety.
               </p>
-              <div className="flex flex-wrap justify-center items-center gap-10 md:gap-14">
-                {certificationEntries.map((cert, i) => (
-                  <div key={i} className="flex flex-col items-center gap-3">
-                    <Image
-                      src={cert.url}
-                      alt={cert.alt}
-                      width={140}
-                      height={80}
-                      className="h-16 md:h-20 w-auto object-contain"
-                    />
-                    <span className="text-xs font-medium text-slate-500 tracking-wide uppercase">
-                      {cert.alt}
-                    </span>
-                  </div>
-                ))}
-              </div>
+<LogoStrip placement="about" variant="full" />
             </div>
           </div>
         </section>

@@ -616,11 +616,9 @@ const nextConfig: NextConfig = {
         destination: "/trekking/8-days-lemosho-route/",
         permanent: true,
       },
-      {
-        source: "/mountain-trekking/",
-        destination: "/trekking/",
-        permanent: true,
-      },
+      // /mountain-trekking/ was a legacy WordPress URL redirected to /trekking/.
+      // It is now a real page again (Mount Meru & Ol Doinyo Lengai), so the
+      // redirect is removed to let it serve.
 
       // Day trip "tour" → "trip" slug corrections
       {

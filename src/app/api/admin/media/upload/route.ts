@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
     const extension = mimeType.split("/")[1] || "bin";
     const sanitizedName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
     const key = generateFileKey(
-      folder as "uploads" | "routes" | "safaris" | "destinations" | "blog" | "general",
+      folder as "uploads" | "routes" | "safaris" | "destinations" | "blog" | "general" | "guides",
       `${sanitizedName}.${extension}`
     );
 

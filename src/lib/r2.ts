@@ -119,7 +119,8 @@ export function generateFileKey(
     | "general"
     | "daytrips"
     | "reviews"
-    | "homepage",
+    | "homepage"
+    | "guides",
   filename: string
 ): string {
   const date = new Date();

@@ -35,6 +35,8 @@ const ROUTE_PERMISSIONS: Record<string, AdminRole> = {
   "/admin/redirects": "EDITOR" as AdminRole,
   "/api/admin/redirects": "EDITOR" as AdminRole,
   "/admin/about-us": "EDITOR" as AdminRole,
+  "/admin/guides": "EDITOR" as AdminRole,
+  "/admin/logos": "EDITOR" as AdminRole,
   "/admin/email-log": "EDITOR" as AdminRole,
   "/admin/invite-links": "EDITOR" as AdminRole,
   "/api/admin/invite-links": "EDITOR" as AdminRole,

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { cache } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -6,6 +7,7 @@ import {
   generateBreadcrumbSchema,
   generateArticleSchema,
 } from "@/lib/seo";
+import { prisma } from "@/lib/prisma";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import {
@@ -25,6 +27,46 @@ import {
   CheckCircle,
 } from "lucide-react";
 
+// Florent's profile lives in the Guide table so it stays in step with
+// /our-guides/ and the admin. Falls back to the previous hardcoded copy only
+// if the record is missing.
+export const revalidate = 300;
+
+const FOUNDER_SLUG = "florent-ipanga";
+
+const FALLBACK = {
+  name: "Florent Ipanga",
+  role: "Co-Founder & Safari Expert",
+  image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
+  bio: "Co-Founder of Snow Africa Adventure, a TATO-licensed safari and Kilimanjaro trekking operator based in Arusha, Tanzania.",
+  summits: null as string | null,
+  experience: null as string | null,
+  specialties: [] as string[],
+  certifications: [] as string[],
+};
+
+const getFounder = cache(async function getFounder() {
+  try {
+    const guide = await prisma.guide.findUnique({
+      where: { slug: FOUNDER_SLUG },
+      select: {
+        name: true,
+        role: true,
+        image: true,
+        bio: true,
+        summits: true,
+        experience: true,
+        specialties: true,
+        certifications: true,
+      },
+    });
+    if (!guide) return FALLBACK;
+    return { ...guide, image: guide.image ?? FALLBACK.image };
+  } catch {
+    return FALLBACK;
+  }
+});
+
 export const metadata: Metadata = genMeta({
   title: "Meet Florent — Co-Founder",
   description:
@@ -32,52 +74,37 @@ export const metadata: Metadata = genMeta({
   url: "/meet-florent/",
 });
 
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Florent Ipanga",
-  jobTitle: "Co-Founder & Safari Expert",
-  description:
-    "Co-Founder of Snow Africa Adventure, a TATO-licensed safari and Kilimanjaro trekking operator based in Arusha, Tanzania. Florent has over 12 years of experience leading safaris across the Northern Circuit and Kilimanjaro expeditions with 150+ successful summits.",
-  image: "https://cdn.snowafricaadventure.com/florent-safari-guide.webp",
-  url: "https://snowafricaadventure.com/meet-florent/",
-  knowsAbout: [
-    "Tanzania Safari Planning",
-    "Kilimanjaro Trekking",
-    "Northern Circuit Wildlife",
-    "Sustainable Tourism",
-    "Ethical Porter Welfare",
-  ],
-  hasCredential: [
-    {
+function buildPersonSchema(founder: Awaited<ReturnType<typeof getFounder>>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: founder.name,
+    jobTitle: founder.role,
+    description: founder.bio,
+    image: founder.image,
+    url: "https://snowafricaadventure.com/meet-florent/",
+    knowsAbout: founder.specialties,
+    hasCredential: founder.certifications.map((cert) => ({
       "@type": "EducationalOccupationalCredential",
-      credentialCategory: "KINAPA Certified Mountain Guide",
+      credentialCategory: cert,
+    })),
+    worksFor: {
+      "@type": "TourOperator",
+      name: "Snow Africa Adventure",
+      url: "https://snowafricaadventure.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "MEC House, Plot no 161, Second floor, Mianzini Area",
+        addressLocality: "Arusha",
+        addressCountry: "TZ",
+      },
     },
-    {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "Wilderness First Responder",
-    },
-    {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "TATO Licensed Operator",
-    },
-  ],
-  worksFor: {
-    "@type": "TourOperator",
-    name: "Snow Africa Adventure",
-    url: "https://snowafricaadventure.com",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "MEC House, Plot no 161, Second floor, Mianzini Area",
-      addressLocality: "Arusha",
-      addressCountry: "TZ",
-    },
-  },
-  sameAs: [
-    "https://instagram.com/snow_africa_adventures",
-    "https://facebook.com/snowafricaadventure",
-  ],
-};
+    sameAs: [
+      "https://instagram.com/snow_africa_adventures",
+      "https://facebook.com/snowafricaadventure",
+    ],
+  };
+}
 
 const testimonials = [
   {
@@ -130,7 +157,10 @@ const credentials = [
   },
 ];
 
-export default function MeetFlorentPage() {
+export default async function MeetFlorentPage() {
+  const founder = await getFounder();
+  const personSchema = buildPersonSchema(founder);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumbs */}
@@ -152,22 +182,15 @@ export default function MeetFlorentPage() {
             { name: "Meet Florent", url: "/meet-florent/" },
           ]),
           generateArticleSchema({
-            title: "Meet Florent — Co-Founder & Safari Expert",
-            description:
-              "Meet Florent, Co-Founder & Safari Expert at Snow Africa Adventure. Based in Arusha, Tanzania, Florent leads our team of expert guides with a passion for sharing Tanzania's natural wonders.",
+            title: `Meet ${founder.name.split(" ")[0]} — ${founder.role}`,
+            description: founder.bio.slice(0, 160),
             url: "/meet-florent/",
-            image:
-              "https://cdn.snowafricaadventure.com/florent-safari-guide.webp",
+            image: founder.image,
             publishedTime: "2025-01-15T00:00:00Z",
             modifiedTime: "2026-03-11T00:00:00Z",
-            author: "Florent Ipanga",
-            authorRole: "Co-Founder & Safari Expert",
-            authorCredentials: [
-              "Tanzania Safari Planning",
-              "Kilimanjaro Trekking",
-              "Northern Circuit Wildlife",
-              "Sustainable Tourism",
-            ],
+            author: founder.name,
+            authorRole: founder.role,
+            authorCredentials: founder.specialties,
           }),
           personSchema,
         ]}
@@ -176,8 +199,8 @@ export default function MeetFlorentPage() {
       {/* ── Hero Section ── */}
       <section className="relative min-h-[65vh] flex items-center">
         <Image
-          src="https://cdn.snowafricaadventure.com/florent-safari-guide.webp"
-          alt="Florent Ipanga, Co-Founder of Snow Africa Adventure, guiding a safari in Tanzania"
+          src={founder.image}
+          alt={`${founder.name}, ${founder.role} of Snow Africa Adventure, guiding a safari in Tanzania`}
           fill
           className="object-cover"
           style={{ objectPosition: "50% 30%" }}
@@ -190,15 +213,19 @@ export default function MeetFlorentPage() {
               <MapPin className="w-4 h-4" /> Based in Arusha, Tanzania
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
-              Meet Florent Ipanga
+              Meet {founder.name}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-4">
-              Co-Founder &amp; Safari Expert at Snow Africa Adventure
+              {founder.role} at Snow Africa Adventure
             </p>
             <p className="text-lg text-white/75 leading-relaxed max-w-2xl">
-              150+ Kilimanjaro summits. 12+ years guiding across Tanzania&apos;s
-              Northern Circuit. A lifelong mission to share the real Tanzania
-              with the world.
+              {[
+                founder.summits && `${founder.summits} Kilimanjaro summits.`,
+                founder.experience && `${founder.experience} guiding across Tanzania's Northern Circuit.`,
+              ]
+                .filter(Boolean)
+                .join(" ")}{" "}
+              A lifelong mission to share the real Tanzania with the world.
             </p>
           </div>
         </div>
@@ -211,14 +238,14 @@ export default function MeetFlorentPage() {
             <div className="flex items-center gap-3">
               <Mountain className="w-6 h-6 text-amber-400" />
               <div>
-                <p className="text-xl font-bold">150+</p>
+                <p className="text-xl font-bold">{founder.summits ?? "—"}</p>
                 <p className="text-xs text-slate-400">Kilimanjaro Summits</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <Compass className="w-6 h-6 text-amber-400" />
               <div>
-                <p className="text-xl font-bold">12+</p>
+                <p className="text-xl font-bold">{founder.experience ?? "—"}</p>
                 <p className="text-xs text-slate-400">Years Experience</p>
               </div>
             </div>

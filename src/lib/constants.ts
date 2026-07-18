@@ -48,6 +48,7 @@ export const MEGA_NAV: MegaMenuItem[] = [
     href: "/trekking/",
     children: [
       { label: "All Trekking Routes", href: "/trekking/", description: "Compare all Kilimanjaro routes" },
+      { label: "Mountain Trekking", href: "/mountain-trekking/", description: "Mount Meru & Ol Doinyo Lengai" },
       { label: "Climbing Kilimanjaro", href: "/climbing-kilimanjaro/", description: "Complete climbing guide" },
       { label: "Best Route to Climb", href: "/best-route-to-climb-kilimanjaro/", description: "Route comparison guide" },
       { label: "Kilimanjaro Prices", href: "/kilimanjaro-prices/", description: "Full cost breakdown" },

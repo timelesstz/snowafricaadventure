@@ -1094,3 +1094,48 @@ enum SyncStatus {
   COMPLETED
   FAILED
 }
+
+model Guide {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  role            String
+  image           String?
+  bio             String
+  quote           String?
+  experience      String?
+  summits         String?
+  specialty       String?
+  specialties     String[]
+  certifications  String[]
+  languages       String[]
+  routes          String[]
+  isFounder       Boolean  @default(false)
+  isMountainGuide Boolean  @default(true)
+  isActive        Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+  @@index([order])
+  @@index([isMountainGuide])
+}
+
+model Logo {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  name       String
+  image      String
+  linkUrl    String?
+  placements String[]
+  order      Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+  @@index([order])
+}

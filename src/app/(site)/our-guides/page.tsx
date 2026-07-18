@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { cache } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,9 +19,14 @@ import {
   generateFAQSchema,
 } from "@/lib/seo";
 import { SITE_CONFIG } from "@/lib/constants";
+import { prisma } from "@/lib/prisma";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { RelatedGuides, CredentialsBadges } from "@/components/kilimanjaro";
+
+// Guide profiles are editable in the admin, so revalidate rather than
+// serving a build-time snapshot indefinitely.
+export const revalidate = 300;
 
 export const metadata: Metadata = genMeta({
   title: "Our Kilimanjaro Guides & Team",
@@ -29,105 +35,50 @@ export const metadata: Metadata = genMeta({
   url: "/our-guides/",
 });
 
-const founder = {
-  name: "Florent Ipanga",
-  role: "Founder & Owner",
-  summits: "200+",
-  experience: "15+ years",
-  image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-  specialties: ["All Kilimanjaro Routes", "Wildlife Safaris", "Safari Planning"],
-  certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "TATO Licensed Operator", "Wildlife Guide"],
-  bio: "Florent founded Snow Africa Adventure with a mission to share Tanzania's natural wonders through authentic, responsible tourism. With over 200 Kilimanjaro summits and extensive experience across Tanzania's national parks, he personally trains every guide on the team and insists on the highest standards for safety and porter welfare. Florent specialises in combined Kilimanjaro + safari itineraries and is passionate about sustainable tourism and community development in the Kilimanjaro region.",
-  quote: "When you climb with respect for the mountain and its people, the summit is just the beginning of the reward.",
+type GuideProfile = {
+  name: string;
+  role: string;
+  summits: string | null;
+  experience: string | null;
+  image: string | null;
+  specialties: string[];
+  certifications: string[];
+  bio: string;
+  quote: string | null;
+  isFounder: boolean;
 };
 
-const seniorGuides = [
-  {
-    name: "Sylvester Joachim Mpaju",
-    role: "Senior Mountain Guide",
-    summits: "120+",
-    experience: "11+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Machame Route", "Northern Circuit", "High Altitude Acclimatization"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Advanced Altitude Medicine"],
-    bio: "Sylvester Mpaju is one of our most experienced senior guides with more than 120 summits to his name. He specialises in longer routes like the Northern Circuit where his deep understanding of acclimatization profiles helps climbers adjust gradually and summit strong. Known by climbers for his upbeat energy and encyclopaedic knowledge of Kilimanjaro's geology and ecology.",
-    quote: "Every person who reaches the top carries a different story — I help them write the best chapter.",
-  },
-  {
-    name: "Benedict Tati",
-    role: "Senior Mountain Guide",
-    summits: "90+",
-    experience: "9+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Lemosho Route", "Rongai Route", "Group Expeditions"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Team Leadership"],
-    bio: "Benedict Tati excels at managing large group expeditions where coordination, communication, and individual attention must all coexist. With over 90 summits, he reads the mountain and his climbers with equal precision — adjusting pace, rotating rest stops, and keeping morale high even in challenging weather. His calm leadership style puts first-time climbers at ease.",
-    quote: "A strong team climbs farther than a fast individual. We reach the top together.",
-  },
-  {
-    name: "Paul Tango",
-    role: "Senior Mountain Guide",
-    summits: "85+",
-    experience: "9+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Umbwe Route", "Marangu Route", "Summit Night Strategy"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Night Navigation"],
-    bio: "Paul Tango is the guide climbers want beside them on summit night. With a deep understanding of the psychological and physical demands of the final push to Uhuru Peak, he knows exactly when to encourage, when to slow down, and when to share a story that makes the next hundred metres feel effortless. He has guided more than 85 successful summits across all major routes.",
-    quote: "Summit night is not about strength — it is about believing in each step you take in the dark.",
-  },
-  {
-    name: "Benedict Muro",
-    role: "Senior Mountain Guide",
-    summits: "95+",
-    experience: "10+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Machame Route", "Lemosho Route", "Wildlife & Ecology"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Ecology & Conservation"],
-    bio: "Benedict Muro brings a naturalist's eye to every climb. Beyond guiding climbers safely to the summit, he transforms the trek into an education — pointing out endemic plants in the moorland zone, identifying bird species in the rainforest, and explaining how Kilimanjaro's glaciers have changed over decades. His 95+ summits give him an intimate knowledge of the mountain's moods and seasons.",
-    quote: "Kilimanjaro is not just a mountain to climb — it is a classroom with no walls and the best views on Earth.",
-  },
-  {
-    name: "Abdilay Juma Mickina",
-    role: "Senior Mountain Guide",
-    summits: "75+",
-    experience: "8+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Rongai Route", "Northern Circuit", "Solo Climber Support"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Advanced First Aid"],
-    bio: "Abdilay is the go-to guide for solo travellers and smaller groups who want a deeply personal Kilimanjaro experience. His attentive, one-on-one approach ensures every climber feels supported from gate to summit. With 75+ summits under his belt, he is particularly skilled on the quieter Rongai and Northern Circuit routes where his knowledge of less-travelled paths creates a more intimate mountain experience.",
-    quote: "You do not need a big group to have a big adventure — sometimes the mountain speaks loudest when it is just you and the sky.",
-  },
-  {
-    name: "Sylvester Philemon",
-    role: "Senior Mountain Guide",
-    summits: "80+",
-    experience: "8+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Marangu Route", "Machame Route", "First-Time Climber Coaching"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Fitness Assessment"],
-    bio: "Sylvester Philemon has built a reputation as the guide who turns nervous first-timers into confident summit achievers. He takes time before each climb to assess fitness levels, explain what to expect at each altitude zone, and set realistic daily goals. His patient coaching style and 80+ summits of experience make him the perfect guide for anyone attempting Kilimanjaro for the first time.",
-    quote: "The hardest step is not the last one to the summit — it is the first one at the gate when you decide to try.",
-  },
-  {
-    name: "Innocent Elisante",
-    role: "Senior Mountain Guide",
-    summits: "70+",
-    experience: "7+ years",
-    image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg",
-    specialties: ["Lemosho Route", "Umbwe Route", "Photography & Storytelling"],
-    certifications: ["KINAPA Certified Guide", "Wilderness First Responder", "Mountain Photography"],
-    bio: "Innocent Elisante combines mountain guiding with a gift for photography and storytelling. He knows every viewpoint, golden-hour angle, and dramatic backdrop on Kilimanjaro — ensuring climbers return home with photos as unforgettable as the experience itself. With 70+ summits and a natural warmth that puts everyone at ease, Innocent creates the kind of expedition memories that last a lifetime.",
-    quote: "A photograph captures a moment, but the feeling of standing on the Roof of Africa — that stays in your heart forever.",
-  },
-];
+const FALLBACK_PORTRAIT =
+  "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2025/02/ipananga.jpg";
 
-const allGuides = [founder, ...seniorGuides];
+const getGuides = cache(async function getGuides(): Promise<GuideProfile[]> {
+  try {
+    return await prisma.guide.findMany({
+      where: { isActive: true },
+      orderBy: [{ order: "asc" }, { name: "asc" }],
+      select: {
+        name: true,
+        role: true,
+        summits: true,
+        experience: true,
+        image: true,
+        specialties: true,
+        certifications: true,
+        bio: true,
+        quote: true,
+        isFounder: true,
+      },
+    });
+  } catch {
+    return [];
+  }
+});
 
-const teamStats = [
+const teamStats: { label: string; value: string | null; icon: typeof Mountain }[] = [
   { label: "Combined Summits", value: "800+", icon: Mountain },
   { label: "Years in Operation", value: "15+", icon: Award },
   { label: "Summit Success Rate", value: "93%", icon: Star },
-  { label: "Active Guides", value: "8+", icon: Users },
+  { label: "Active Guides", value: null, icon: Users },
 ];
 
 const guideFaqs = [
@@ -173,13 +124,13 @@ const guideFaqs = [
   },
 ];
 
-function generatePersonSchema(person: typeof founder) {
+function generatePersonSchema(person: GuideProfile) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     name: person.name,
     jobTitle: person.role,
-    image: person.image,
+    image: person.image ?? FALLBACK_PORTRAIT,
     description: person.bio,
     knowsAbout: person.specialties,
     hasCredential: person.certifications.map((cert) => ({
@@ -194,7 +145,11 @@ function generatePersonSchema(person: typeof founder) {
   };
 }
 
-export default function OurGuidesPage() {
+export default async function OurGuidesPage() {
+  const allGuides = await getGuides();
+  const founder = allGuides.find((g) => g.isFounder) ?? allGuides[0];
+  const seniorGuides = allGuides.filter((g) => g !== founder);
+
   return (
     <div className="min-h-screen bg-[var(--surface)]">
       <div className="container mx-auto px-4">
@@ -250,7 +205,7 @@ export default function OurGuidesPage() {
                   <stat.icon className="w-6 h-6 text-[var(--secondary)]" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">{stat.value}</p>
+                  <p className="text-2xl font-bold">{stat.value ?? allGuides.length}</p>
                   <p className="text-xs text-[var(--text-muted)]">{stat.label}</p>
                 </div>
               </div>
@@ -260,6 +215,7 @@ export default function OurGuidesPage() {
       </section>
 
       {/* Founder Featured Section */}
+      {founder && (
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
@@ -268,7 +224,7 @@ export default function OurGuidesPage() {
                 <div className="md:w-2/5 relative">
                   <div className="aspect-[3/4] md:aspect-auto md:h-full relative min-h-[320px]">
                     <Image
-                      src={founder.image}
+                      src={founder.image ?? FALLBACK_PORTRAIT}
                       alt={`${founder.name} - ${founder.role} at Snow Africa Adventure`}
                       fill
                       className="object-cover"
@@ -322,6 +278,7 @@ export default function OurGuidesPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Senior Guides Grid */}
       <section className="py-16 pt-0">
@@ -332,8 +289,8 @@ export default function OurGuidesPage() {
                 <Mountain className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold">Our Senior Mountain Guides</h2>
-                <p className="text-sm text-[var(--text-muted)]">KINAPA-certified &middot; Wilderness First Responders</p>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">Our Guide Team</h2>
+                <p className="text-sm text-[var(--text-muted)]">Kilimanjaro, safari &amp; cultural specialists</p>
               </div>
             </div>
 
@@ -347,7 +304,7 @@ export default function OurGuidesPage() {
                     <div className="w-28 sm:w-32 shrink-0 relative">
                       <div className="h-full min-h-[180px] relative">
                         <Image
-                          src={guide.image}
+                          src={guide.image ?? FALLBACK_PORTRAIT}
                           alt={`${guide.name} - ${guide.role} at Snow Africa Adventure`}
                           fill
                           className="object-cover"

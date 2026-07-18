@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { cache } from "react";
+import NextImage from "next/image";
 import Link from "next/link";
 import {
   Mountain,
@@ -21,10 +23,15 @@ import {
   generateBreadcrumbSchema,
   generateArticleSchema,
 } from "@/lib/seo";
+import { prisma } from "@/lib/prisma";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+
+// Guide profiles are editable in the admin, so revalidate rather than
+// serving a build-time snapshot indefinitely.
+export const revalidate = 300;
 
 export const metadata: Metadata = genMeta({
   title: "Our Kilimanjaro Guides & Team — Meet the Experts",
@@ -33,74 +40,41 @@ export const metadata: Metadata = genMeta({
   url: "/our-kilimanjaro-guides/",
 });
 
-const guides = [
-  {
-    name: "Emmanuel Moshi",
-    role: "Head Guide & Operations Director",
-    years: 18,
-    summits: 620,
-    routes: "All 7 routes",
-    certifications: ["WFR", "KINAPA Lead Guide", "WAFA"],
-    languages: ["English", "Swahili", "German (basic)"],
-    specialty: "High-altitude emergency management, summit night leadership",
-    bio: "Emmanuel has guided climbers from over 40 countries to the Roof of Africa. As Head Guide, he personally trains every member of our team and leads our most challenging expeditions including Crater Camp and Western Breach ascents.",
-  },
-  {
-    name: "Joseph Tarimo",
-    role: "Senior Lead Guide",
-    years: 14,
-    summits: 480,
-    routes: "Lemosho, Machame, Northern Circuit",
-    certifications: ["WFR", "KINAPA Lead Guide"],
-    languages: ["English", "Swahili", "French (basic)"],
-    specialty: "Acclimatization coaching, group morale management",
-    bio: "Joseph is known for his calm leadership during summit nights and his ability to read altitude symptoms early. His acclimatization coaching has contributed to a 95% summit success rate on his 8-day Lemosho expeditions.",
-  },
-  {
-    name: "Francis Kimaro",
-    role: "Senior Lead Guide",
-    years: 12,
-    summits: 410,
-    routes: "Machame, Rongai, Umbwe",
-    certifications: ["WFR", "KINAPA Lead Guide"],
-    languages: ["English", "Swahili"],
-    specialty: "Photography guidance, technical scrambling (Barranco Wall, Western Breach)",
-    bio: "Francis combines his mountain expertise with a passion for photography, helping climbers capture their best summit moments. He specializes in the more technical routes and is our go-to guide for the challenging Umbwe route.",
-  },
-  {
-    name: "Godlisten Massawe",
-    role: "Lead Guide",
-    years: 10,
-    summits: 340,
-    routes: "Lemosho, Machame, Marangu",
-    certifications: ["WFR", "KINAPA Lead Guide"],
-    languages: ["English", "Swahili", "Spanish (basic)"],
-    specialty: "First-time climber mentorship, family groups",
-    bio: "Godlisten has a gift for putting nervous first-time climbers at ease. His patient, encouraging approach makes him the ideal guide for beginners and family groups. He holds our record for the oldest climber successfully guided to the summit — a 74-year-old from Canada.",
-  },
-  {
-    name: "Baraka Lyimo",
-    role: "Lead Guide",
-    years: 9,
-    summits: 290,
-    routes: "All standard routes",
-    certifications: ["WAFA", "KINAPA Lead Guide"],
-    languages: ["English", "Swahili"],
-    specialty: "Corporate team expeditions, large group coordination",
-    bio: "Baraka excels at managing large groups and corporate expeditions, coordinating multiple assistant guides and ensuring every team member reaches their potential. His structured approach and clear communication make complex logistics look effortless.",
-  },
-  {
-    name: "Elisha Msuya",
-    role: "Lead Guide",
-    years: 8,
-    summits: 250,
-    routes: "Lemosho, Northern Circuit, Rongai",
-    certifications: ["WAFA", "KINAPA Lead Guide"],
-    languages: ["English", "Swahili"],
-    specialty: "Wildlife and ecology knowledge, longer expeditions",
-    bio: "Elisha brings the mountain to life with his deep knowledge of Kilimanjaro's ecosystems — from the rainforest blue monkeys to the alpine desert's unique flora. Climbers consistently praise him for transforming the trek into an educational journey.",
-  },
-];
+type KilimanjaroGuide = {
+  name: string;
+  role: string;
+  bio: string;
+  image: string | null;
+  experience: string | null;
+  summits: string | null;
+  specialty: string | null;
+  certifications: string[];
+  languages: string[];
+  routes: string[];
+};
+
+const getGuides = cache(async function getGuides(): Promise<KilimanjaroGuide[]> {
+  try {
+    return await prisma.guide.findMany({
+      where: { isActive: true, isMountainGuide: true },
+      orderBy: [{ order: "asc" }, { name: "asc" }],
+      select: {
+        name: true,
+        role: true,
+        bio: true,
+        image: true,
+        experience: true,
+        summits: true,
+        specialty: true,
+        certifications: true,
+        languages: true,
+        routes: true,
+      },
+    });
+  } catch {
+    return [];
+  }
+});
 
 const safetyProtocols = [
   {
@@ -194,7 +168,9 @@ const faqs = [
   },
 ];
 
-export default function OurKilimanjaroGuidesPage() {
+export default async function OurKilimanjaroGuidesPage() {
+  const guides = await getGuides();
+
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Climbing Kilimanjaro", url: "/climbing-kilimanjaro/" },
@@ -208,7 +184,7 @@ export default function OurKilimanjaroGuidesPage() {
     url: "/our-kilimanjaro-guides/",
     publishedTime: "2026-06-18",
     modifiedTime: "2026-06-18",
-    author: "Emmanuel Moshi",
+    author: "Florent Ipanga",
   });
 
   const faqSchema = generateFAQSchema(faqs);
@@ -368,11 +344,21 @@ export default function OurKilimanjaroGuidesPage() {
                   className="bg-white rounded-2xl p-6 shadow-sm border border-[var(--border)]"
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-xl font-bold shrink-0">
-                      {guide.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
+                    <div className="w-14 h-14 rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-xl font-bold shrink-0 overflow-hidden relative">
+                      {guide.image ? (
+                        <NextImage
+                          src={guide.image}
+                          alt={guide.name}
+                          fill
+                          sizes="56px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        guide.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                      )}
                     </div>
                     <div>
                       <h3 className="font-heading text-lg font-bold text-[var(--primary)]">
@@ -389,31 +375,39 @@ export default function OurKilimanjaroGuidesPage() {
                   </p>
 
                   <div className="grid grid-cols-2 gap-3 text-sm mb-4">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-[var(--text-muted)]" />
-                      <span>
-                        <strong>{guide.years}</strong> years
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Mountain className="w-4 h-4 text-[var(--text-muted)]" />
-                      <span>
-                        <strong>{guide.summits}</strong> summits
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-[var(--text-muted)]" />
-                      <span>{guide.routes}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Languages className="w-4 h-4 text-[var(--text-muted)]" />
-                      <span>{guide.languages[0]}</span>
-                      {guide.languages.length > 1 && (
-                        <span className="text-[var(--text-muted)]">
-                          +{guide.languages.length - 1}
+                    {guide.experience && (
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-[var(--text-muted)]" />
+                        <span>
+                          <strong>{guide.experience}</strong>
                         </span>
-                      )}
-                    </div>
+                      </div>
+                    )}
+                    {guide.summits && (
+                      <div className="flex items-center gap-2">
+                        <Mountain className="w-4 h-4 text-[var(--text-muted)]" />
+                        <span>
+                          <strong>{guide.summits}</strong> summits
+                        </span>
+                      </div>
+                    )}
+                    {guide.routes.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-[var(--text-muted)]" />
+                        <span>{guide.routes.join(", ")}</span>
+                      </div>
+                    )}
+                    {guide.languages.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <Languages className="w-4 h-4 text-[var(--text-muted)]" />
+                        <span>{guide.languages[0]}</span>
+                        {guide.languages.length > 1 && (
+                          <span className="text-[var(--text-muted)]">
+                            +{guide.languages.length - 1}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-wrap gap-1.5">

@@ -6,30 +6,33 @@ export const dynamic = "force-dynamic";
 
 const LOGO_KEYS = ["site.logoUrl", "site.logoDarkUrl"] as const;
 
-const CERTIFICATION_ENTRIES = [
-  { key: "about.commitment.logo1", alt: "TATO Licensed Operator" },
-  { key: "about.commitment.logo2", alt: "KPAP Certified Partner" },
-  { key: "about.commitment.logo3", alt: "IMEC International Mountain Explorers Connection" },
-  { key: "about.commitment.logo4", alt: "Certification" },
-  { key: "about.commitment.logo5", alt: "Certification" },
-] as const;
+// Footer logos come from the Logo table. The footer is a client component fed
+// by the theme provider, so they are resolved here rather than via <LogoStrip>.
+async function getFooterLogos() {
+  try {
+    const logos = await prisma.logo.findMany({
+      where: { isActive: true, placements: { has: "footer" } },
+      orderBy: [{ order: "asc" }, { name: "asc" }],
+      select: { image: true, name: true },
+    });
+    return logos.map((l) => ({ url: l.image, alt: l.name }));
+  } catch {
+    return [];
+  }
+}
 
 // GET - Fetch logo settings
 export async function GET() {
   try {
-    const certKeys = CERTIFICATION_ENTRIES.map((c) => c.key);
-    const settings = await prisma.siteSetting.findMany({
-      where: { key: { in: [...LOGO_KEYS, ...certKeys] } },
-    });
+    const [settings, certificationLogos] = await Promise.all([
+      prisma.siteSetting.findMany({ where: { key: { in: [...LOGO_KEYS] } } }),
+      getFooterLogos(),
+    ]);
 
     const result: Record<string, string> = {};
     settings.forEach((s) => {
       result[s.key] = s.value;
     });
-
-    const certificationLogos = CERTIFICATION_ENTRIES
-      .filter((c) => result[c.key])
-      .map((c) => ({ url: result[c.key], alt: c.alt }));
 
     return NextResponse.json({
       logoUrl: result["site.logoUrl"] || null,

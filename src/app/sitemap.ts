@@ -19,6 +19,7 @@ const RESERVED_SLUGS = new Set([
   "best-tanzania-tour-operator",
   "best-kilimanjaro-tour-operators",
   "our-guides",
+  "mountain-trekking",
   "climbing-kilimanjaro",
   "best-time-to-climb-kilimanjaro",
   "kilimanjaro-prices",
@@ -246,6 +247,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/our-guides/`,
       lastModified: new Date("2026-03-04"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/mountain-trekking/`,
+      lastModified: new Date("2026-07-18"),
       changeFrequency: "monthly",
       priority: 0.8,
     },

@@ -36,6 +36,8 @@ import {
   Link2,
   Inbox,
   ChevronDown,
+  UserCircle,
+  BadgeCheck,
 } from "lucide-react";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { clsx } from "clsx";
@@ -94,6 +96,8 @@ const navGroups: NavGroup[] = [
       { href: "/admin/day-trips", label: "Day Trips", icon: Sun, minRole: AdminRole.EDITOR },
       { href: "/admin/blog", label: "Blog Posts", icon: FileText, minRole: AdminRole.EDITOR },
       { href: "/admin/reviews", label: "Reviews", icon: Star, minRole: AdminRole.EDITOR },
+      { href: "/admin/guides", label: "Guides", icon: UserCircle, minRole: AdminRole.EDITOR },
+      { href: "/admin/logos", label: "Logos", icon: BadgeCheck, minRole: AdminRole.EDITOR },
     ],
   },
   {
