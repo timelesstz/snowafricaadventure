@@ -12,6 +12,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import CommissionStatusBadge from "@/components/admin/CommissionStatusBadge";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 import {
   AdminPageHeader,
   StatCard,
@@ -36,6 +37,7 @@ async function getDashboardStats() {
     newInquiries,
     contactedInquiries,
     convertedInquiries,
+    staleNewInquiries,
     upcomingDepartures,
     pendingClimberTokens,
   ] = await Promise.all([
@@ -63,6 +65,9 @@ async function getDashboardStats() {
     prisma.inquiry.count({ where: { status: "new" } }),
     prisma.inquiry.count({ where: { status: "contacted" } }),
     prisma.inquiry.count({ where: { status: "converted" } }),
+    prisma.inquiry.count({
+      where: { status: "new", createdAt: { lt: new Date(now.getTime() - 48 * 3_600_000) } },
+    }),
     prisma.groupDeparture.count({
       where: {
         status: { in: ["OPEN", "LIMITED", "GUARANTEED"] },
@@ -90,6 +95,7 @@ async function getDashboardStats() {
     newInquiriesCount: newInquiries,
     contactedInquiriesCount: contactedInquiries,
     convertedInquiriesCount: convertedInquiries,
+    staleNewInquiriesCount: staleNewInquiries,
     upcomingDeparturesCount: upcomingDepartures,
     pendingClimberTokens,
     monthLabel: now.toLocaleDateString("en-US", { month: "long" }),
@@ -140,12 +146,73 @@ async function getRecentCommissions() {
   });
 }
 
+async function getOpenLeads() {
+  return prisma.inquiry.findMany({
+    where: { status: { in: ["new", "contacted"] } },
+    orderBy: { createdAt: "asc" },
+    take: 6,
+    select: {
+      id: true,
+      fullName: true,
+      email: true,
+      type: true,
+      tripType: true,
+      status: true,
+      createdAt: true,
+    },
+  });
+}
+
+async function getNextDepartures() {
+  const departures = await prisma.groupDeparture.findMany({
+    where: {
+      status: { in: ["OPEN", "LIMITED", "GUARANTEED", "FULL"] },
+      arrivalDate: { gte: new Date() },
+    },
+    orderBy: { arrivalDate: "asc" },
+    take: 6,
+    select: {
+      id: true,
+      arrivalDate: true,
+      status: true,
+      maxParticipants: true,
+      route: { select: { title: true } },
+      bookings: {
+        where: { status: { in: SPOT_HOLDING_STATUSES } },
+        select: { totalClimbers: true },
+      },
+    },
+  });
+
+  return departures.map((d) => {
+    const booked = countBookedSpots(d.bookings);
+    return {
+      id: d.id,
+      routeTitle: d.route.title,
+      arrivalDate: d.arrivalDate,
+      status: d.status,
+      booked,
+      max: d.maxParticipants,
+      fillPercent: d.maxParticipants > 0 ? Math.round((booked / d.maxParticipants) * 100) : 0,
+    };
+  });
+}
+
+function leadAge(createdAt: Date): { label: string; urgent: boolean } {
+  const hours = Math.floor((Date.now() - createdAt.getTime()) / 3_600_000);
+  if (hours < 24) return { label: `${hours}h`, urgent: false };
+  return { label: `${Math.floor(hours / 24)}d`, urgent: hours >= 48 };
+}
+
 export default async function AdminDashboard() {
-  const [stats, trend, recentCommissions] = await Promise.all([
-    getDashboardStats(),
-    getBookingsTrend(),
-    getRecentCommissions(),
-  ]);
+  const [stats, trend, recentCommissions, openLeads, nextDepartures] =
+    await Promise.all([
+      getDashboardStats(),
+      getBookingsTrend(),
+      getRecentCommissions(),
+      getOpenLeads(),
+      getNextDepartures(),
+    ]);
 
   const actionItems = [
     stats.pendingCommissionsCount > 0 && {
@@ -155,10 +222,10 @@ export default async function AdminDashboard() {
       tone: "warning" as const,
     },
     stats.newInquiriesCount > 0 && {
-      label: `${stats.newInquiriesCount} new inquir${stats.newInquiriesCount === 1 ? "y" : "ies"} awaiting response`,
+      label: `${stats.newInquiriesCount} new inquir${stats.newInquiriesCount === 1 ? "y" : "ies"} awaiting response${stats.staleNewInquiriesCount > 0 ? ` — ${stats.staleNewInquiriesCount} unanswered for over 48h` : ""}`,
       amount: undefined,
       href: "/admin/inquiries?status=new",
-      tone: "info" as const,
+      tone: stats.staleNewInquiriesCount > 0 ? ("warning" as const) : ("info" as const),
     },
     stats.pendingClimberTokens > 0 && {
       label: `${stats.pendingClimberTokens} climber detail${stats.pendingClimberTokens === 1 ? "" : "s"} not yet submitted`,
@@ -303,6 +370,133 @@ export default async function AdminDashboard() {
               percent={pct(stats.convertedInquiriesCount)}
               color="bg-green-500"
             />
+          </div>
+        </div>
+      </div>
+
+      {/* Daily ops: open leads + next departures */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <div className="bg-white rounded-lg shadow-sm border border-slate-200">
+          <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+            <h2 className="text-h3">Open leads</h2>
+            <Link
+              href="/admin/inquiries?status=new"
+              className="text-sm text-amber-600 hover:text-amber-700 flex items-center gap-1"
+            >
+              View all <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="p-4">
+            {openLeads.length === 0 ? (
+              <p className="text-slate-500 text-center py-8">
+                No open leads — all inquiries handled
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {openLeads.map((lead) => {
+                  const age = leadAge(lead.createdAt);
+                  return (
+                    <li key={lead.id}>
+                      <Link
+                        href={`/admin/inquiries/${lead.id}`}
+                        className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                      >
+                        <div className="min-w-0">
+                          <p className="font-medium text-slate-900 truncate">
+                            {lead.fullName}
+                          </p>
+                          <p className="text-sm text-slate-500 truncate">
+                            {lead.tripType || lead.type} • {lead.email}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0 ml-3">
+                          <span
+                            className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                              age.urgent
+                                ? "bg-red-100 text-red-700"
+                                : "bg-slate-200 text-slate-600"
+                            }`}
+                            title={`Waiting ${age.label}`}
+                          >
+                            {age.label}
+                          </span>
+                          <span
+                            className={`text-xs px-2 py-1 rounded-full ${
+                              lead.status === "new"
+                                ? "bg-blue-100 text-blue-700"
+                                : "bg-yellow-100 text-yellow-700"
+                            }`}
+                          >
+                            {lead.status}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm border border-slate-200">
+          <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+            <h2 className="text-h3">Next departures</h2>
+            <Link
+              href="/admin/departures"
+              className="text-sm text-amber-600 hover:text-amber-700 flex items-center gap-1"
+            >
+              View all <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="p-4">
+            {nextDepartures.length === 0 ? (
+              <p className="text-slate-500 text-center py-8">
+                No upcoming departures
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {nextDepartures.map((dep) => (
+                  <li key={dep.id}>
+                    <Link
+                      href={`/admin/departures/${dep.id}`}
+                      className="block p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                    >
+                      <div className="flex items-center justify-between mb-1.5">
+                        <p className="font-medium text-slate-900 truncate">
+                          {dep.routeTitle}
+                        </p>
+                        <span className="text-sm text-slate-500 shrink-0 ml-3">
+                          {dep.arrivalDate.toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="h-2 bg-slate-200 rounded-full overflow-hidden flex-1">
+                          <div
+                            className={`h-full rounded-full ${
+                              dep.fillPercent >= 100
+                                ? "bg-red-500"
+                                : dep.fillPercent >= 70
+                                  ? "bg-amber-500"
+                                  : "bg-green-500"
+                            }`}
+                            style={{ width: `${Math.min(dep.fillPercent, 100)}%` }}
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <span className="text-xs text-slate-600 shrink-0">
+                          {dep.booked}/{dep.max} ({dep.fillPercent}%)
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>

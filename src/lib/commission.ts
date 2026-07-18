@@ -7,6 +7,7 @@
 import { prisma } from "./prisma";
 import { Prisma } from "@prisma/client";
 import { sendPartnerCommissionEmail } from "./email/send";
+import { CommissionNotifications } from "./notifications";
 import type { PartnerCommissionEmailData } from "./email/templates";
 
 export type TripType = "kilimanjaro" | "safari" | "daytrip" | "zanzibar";
@@ -98,6 +99,14 @@ export async function createCommission({
   console.log(
     `Commission created: $${commissionAmount.toFixed(2)} (${rate}% of $${amount}) for ${tripType}`
   );
+
+  // In-app notification (best-effort — createNotification never throws)
+  await CommissionNotifications.commissionEarned({
+    commissionId: commission.id,
+    partnerName: partner.name,
+    amount: commissionAmount,
+    bookingId,
+  });
 
   // Send email notification to partner (non-blocking)
   if (partner.contactEmail) {

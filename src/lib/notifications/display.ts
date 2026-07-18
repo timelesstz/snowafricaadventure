@@ -128,7 +128,8 @@ export function linkForNotification(notification: {
     case "LOW_AVAILABILITY":
       return data.departureId ? `/admin/departures/${data.departureId}` : null;
     case "COMMISSION_EARNED":
-      return data.commissionId ? `/admin/commissions/${data.commissionId}` : null;
+      // No commission detail page exists — link to the list
+      return "/admin/commissions";
     default:
       return null;
   }

@@ -84,9 +84,32 @@ const items: PaletteItem[] = [
   { id: "new-redirect", label: "New redirect", href: "/admin/redirects/new", icon: Plus, keywords: "create add", group: "Create" },
 ];
 
+interface CustomerResults {
+  bookings: {
+    id: string;
+    leadName: string;
+    leadEmail: string;
+    status: string;
+    routeTitle: string;
+    arrivalDate: string;
+  }[];
+  inquiries: {
+    id: string;
+    fullName: string;
+    email: string;
+    type: string;
+    tripType: string | null;
+    status: string;
+  }[];
+}
+
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [customers, setCustomers] = useState<CustomerResults>({
+    bookings: [],
+    inquiries: [],
+  });
   const router = useRouter();
 
   useEffect(() => {
@@ -99,6 +122,27 @@ export function CommandPalette() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  // Debounced customer lookup — searches bookings and inquiries by name/email
+  useEffect(() => {
+    if (!open || search.trim().length < 2) {
+      setCustomers({ bookings: [], inquiries: [] });
+      return;
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      fetch(`/api/admin/search?q=${encodeURIComponent(search.trim())}`, {
+        signal: controller.signal,
+      })
+        .then((res) => (res.ok ? res.json() : { bookings: [], inquiries: [] }))
+        .then((data: CustomerResults) => setCustomers(data))
+        .catch(() => {});
+    }, 250);
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [open, search]);
 
   const go = (href: string) => {
     setOpen(false);
@@ -134,7 +178,7 @@ export function CommandPalette() {
               autoFocus
               value={search}
               onValueChange={setSearch}
-              placeholder="Search admin pages…"
+              placeholder="Search pages, bookings, inquiries…"
               className="flex-1 py-3 text-sm outline-none placeholder:text-slate-400"
             />
             <kbd className="text-[10px] font-semibold text-slate-400 bg-slate-100 rounded px-1.5 py-0.5">
@@ -145,6 +189,57 @@ export function CommandPalette() {
             <Command.Empty className="py-8 text-center text-sm text-slate-500">
               No matches.
             </Command.Empty>
+            {(customers.bookings.length > 0 ||
+              customers.inquiries.length > 0) && (
+              <Command.Group
+                heading="Customers"
+                className="[&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-slate-400 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5"
+              >
+                {customers.bookings.map((b) => (
+                  <Command.Item
+                    key={`booking-${b.id}`}
+                    value={`booking ${b.leadName} ${b.leadEmail}`}
+                    onSelect={() => go(`/admin/bookings/${b.id}`)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 cursor-pointer aria-selected:bg-amber-50 aria-selected:text-amber-900"
+                  >
+                    <ClipboardList
+                      className="w-4 h-4 text-slate-500"
+                      aria-hidden="true"
+                    />
+                    <span className="min-w-0 flex-1 truncate">
+                      {b.leadName}
+                      <span className="text-slate-400"> — {b.routeTitle}</span>
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase text-slate-400">
+                      Booking
+                    </span>
+                  </Command.Item>
+                ))}
+                {customers.inquiries.map((i) => (
+                  <Command.Item
+                    key={`inquiry-${i.id}`}
+                    value={`inquiry ${i.fullName} ${i.email}`}
+                    onSelect={() => go(`/admin/inquiries/${i.id}`)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 cursor-pointer aria-selected:bg-amber-50 aria-selected:text-amber-900"
+                  >
+                    <MessageSquare
+                      className="w-4 h-4 text-slate-500"
+                      aria-hidden="true"
+                    />
+                    <span className="min-w-0 flex-1 truncate">
+                      {i.fullName}
+                      <span className="text-slate-400">
+                        {" "}
+                        — {i.tripType || i.type}
+                      </span>
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase text-slate-400">
+                      Inquiry
+                    </span>
+                  </Command.Item>
+                ))}
+              </Command.Group>
+            )}
             {Object.entries(groups).map(([name, groupItems]) => (
               <Command.Group
                 key={name}

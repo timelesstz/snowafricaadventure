@@ -6,12 +6,14 @@ import {
   sendBookingStatusUpdateEmail,
   sendInquiryResponseEmail,
 } from "@/lib/email/send";
+import { InquiryNotifications } from "@/lib/notifications";
 import { BookingEmailData, InquiryEmailData } from "@/lib/email/templates";
 
 // POST /api/admin/email - Send email from admin
+// EDITOR-level, matching bookings/[id]/send-email — editors work leads too.
 export async function POST(request: Request) {
   try {
-    await requireRole(AdminRole.ADMIN);
+    await requireRole(AdminRole.EDITOR);
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Unauthorized";
     const status = msg === "Insufficient permissions" ? 403 : 401;
@@ -146,6 +148,14 @@ export async function POST(request: Request) {
           await prisma.inquiry.update({
             where: { id: targetId },
             data: { status: "contacted" },
+          });
+        }
+
+        if (result.success) {
+          await InquiryNotifications.inquiryResponded({
+            inquiryId: inquiry.id,
+            fullName: inquiry.fullName,
+            respondedBy: senderName || "Admin",
           });
         }
 

@@ -6,6 +6,7 @@ import { ZodError } from "zod";
 import { nanoid } from "nanoid";
 import { sendClimberDetailsRequestEmail } from "@/lib/email/send";
 import { adminBookingUpdateSchema } from "@/lib/schemas";
+import { BookingNotifications } from "@/lib/notifications";
 
 // GET /api/admin/bookings/[id] - Get a single booking
 export async function GET(
@@ -166,6 +167,48 @@ export async function PUT(
         climberTokens: true,
       },
     });
+
+    // In-app notifications for payment / status changes (best-effort)
+    const notifications: Promise<unknown>[] = [];
+    if (data.depositPaid && !currentBooking.depositPaid) {
+      notifications.push(
+        BookingNotifications.paymentReceived({
+          bookingId: booking.id,
+          leadName: booking.leadName,
+          amount: Number(booking.depositAmount),
+          paymentType: "deposit",
+        })
+      );
+    }
+    if (data.balancePaid && !currentBooking.balancePaid) {
+      notifications.push(
+        BookingNotifications.paymentReceived({
+          bookingId: booking.id,
+          leadName: booking.leadName,
+          amount: Number(booking.totalPrice) - Number(booking.depositAmount),
+          paymentType: "balance",
+        })
+      );
+    }
+    if (data.status !== undefined && data.status !== currentBooking.status) {
+      notifications.push(
+        data.status === BookingStatus.CANCELLED
+          ? BookingNotifications.bookingCancelled({
+              bookingId: booking.id,
+              leadName: booking.leadName,
+              routeTitle: booking.departure.route.title,
+            })
+          : BookingNotifications.bookingUpdated({
+              bookingId: booking.id,
+              leadName: booking.leadName,
+              oldStatus: currentBooking.status,
+              newStatus: data.status,
+            })
+      );
+    }
+    if (notifications.length > 0) {
+      await Promise.allSettled(notifications);
+    }
 
     // Generate climber tokens if deposit was just paid and there are multiple climbers
     if (shouldGenerateTokens && booking.totalClimbers > 1) {

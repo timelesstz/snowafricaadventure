@@ -16,6 +16,7 @@ import {
 import { InquiryStatusBadge } from "@/components/admin/inquiries/InquiryStatusBadge";
 import { InquiryTypeBadge } from "@/components/admin/inquiries/InquiryTypeBadge";
 import { InquiryActions } from "@/components/admin/inquiries/InquiryActions";
+import { ConvertToBookingButton } from "@/components/admin/inquiries/ConvertToBookingButton";
 import { InquiryEmailForm } from "@/components/admin/inquiries/InquiryEmailForm";
 import { InquiryEditForm } from "@/components/admin/inquiries/InquiryEditForm";
 
@@ -208,11 +209,13 @@ export default async function InquiryDetailPage({
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Email Form */}
-          <InquiryEmailForm
-            inquiryId={inquiry.id}
-            recipientName={inquiry.fullName}
-            recipientEmail={inquiry.email}
-          />
+          <div id="reply-form">
+            <InquiryEmailForm
+              inquiryId={inquiry.id}
+              recipientName={inquiry.fullName}
+              recipientEmail={inquiry.email}
+            />
+          </div>
 
           {/* Actions */}
           <InquiryActions inquiry={inquiry} />
@@ -261,11 +264,25 @@ export default async function InquiryDetailPage({
             </h2>
             <div className="space-y-3">
               <a
-                href={`mailto:${inquiry.email}?subject=Re: Your ${inquiry.type} inquiry`}
+                href="#reply-form"
                 className="flex items-center gap-2 w-full px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors justify-center"
               >
                 <Mail className="w-4 h-4" />
-                Send Email
+                Reply by Email
+              </a>
+              <ConvertToBookingButton
+                inquiryId={inquiry.id}
+                fullName={inquiry.fullName}
+                defaultClimbers={(inquiry.numAdults || 1) + (inquiry.numChildren || 0)}
+                isConverted={inquiry.status === "converted"}
+              />
+              <a
+                href={`mailto:${inquiry.email}?subject=Re: Your ${inquiry.type} inquiry`}
+                className="flex items-center gap-2 w-full px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors justify-center"
+                title="Opens your own mail app — the reply won't be logged here, so remember to mark the inquiry as Contacted"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Open in Mail App
               </a>
               {inquiry.phone && (
                 <a
