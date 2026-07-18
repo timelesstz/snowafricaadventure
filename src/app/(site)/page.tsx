@@ -272,8 +272,12 @@ async function getHomePageData() {
 
     return { routes, safaris, blogPosts, featuredDeparture, featuredReviews };
   } catch (error) {
+    // Rethrow rather than returning empties. Returning them renders a 200
+    // homepage with no routes, no safaris and no testimonials — indistinguishable
+    // to a crawler from a site that genuinely has no products. Failing loudly
+    // surfaces the error boundary and returns a 5xx instead.
     console.error("[Homepage] Failed to fetch data:", error);
-    return { routes: [], safaris: [], blogPosts: [], featuredDeparture: null, featuredReviews: [] };
+    throw error;
   }
 }
 

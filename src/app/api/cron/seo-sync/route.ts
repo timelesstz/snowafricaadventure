@@ -14,7 +14,17 @@ export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
 
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  // Fail closed: a missing secret must not skip the check and leave this
+  // endpoint world-callable. Matches the seo-snapshot cron.
+  if (!cronSecret) {
+    console.error("CRON_SECRET is not set — refusing to run unprotected cron");
+    return NextResponse.json(
+      { error: "CRON_SECRET not configured" },
+      { status: 500 }
+    );
+  }
+
+  if (authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

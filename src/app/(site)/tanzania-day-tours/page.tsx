@@ -21,7 +21,10 @@ async function getDayTrips() {
       orderBy: { title: "asc" },
     });
     return trips;
-  } catch {
+  } catch (error) {
+    // Still degrades to the "coming soon" empty state rather than failing —
+    // but an outage must at least leave a trace in the logs.
+    console.error("[DayTours] Failed to fetch day trips:", error);
     return [];
   }
 }

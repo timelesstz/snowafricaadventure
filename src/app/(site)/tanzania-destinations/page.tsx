@@ -64,7 +64,10 @@ async function getDestinations() {
       orderBy: { name: "asc" },
     });
     return destinations;
-  } catch {
+  } catch (error) {
+    // Still degrades to the "coming soon" empty state rather than failing —
+    // but an outage must at least leave a trace in the logs.
+    console.error("[Destinations] Failed to fetch destinations:", error);
     return [];
   }
 }

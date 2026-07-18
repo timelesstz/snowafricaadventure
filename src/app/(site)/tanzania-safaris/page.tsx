@@ -51,6 +51,10 @@ export const metadata: Metadata = genMeta({
   url: "/tanzania-safaris/",
 });
 
+// Always read packages straight from the database so admin edits (pricing,
+// activation, new tours) appear immediately rather than after a cache window.
+export const dynamic = "force-dynamic";
+
 const LAST_UPDATED = "April 2026";
 
 const TOC_ITEMS = [
@@ -89,6 +93,7 @@ const TESTIMONIALS = [
 const PARKS_IN_FOCUS = [
   {
     name: "Serengeti National Park",
+    shortName: "Serengeti",
     slug: "serengeti-national-park",
     hook: "14,763 km² of endless plains, home to the Great Migration and massive lion prides. Year-round game viewing with legendary Mara River crossings July–October.",
     icon: Sparkles,
@@ -96,6 +101,7 @@ const PARKS_IN_FOCUS = [
   },
   {
     name: "Ngorongoro Crater",
+    shortName: "Ngorongoro",
     slug: "ngorongoro-crater",
     hook: "A UNESCO World Heritage Site — the world's largest intact volcanic caldera, 260 km² holding ~25,000 large mammals including the endangered black rhino.",
     icon: Binoculars,
@@ -103,6 +109,7 @@ const PARKS_IN_FOCUS = [
   },
   {
     name: "Tarangire National Park",
+    shortName: "Tarangire",
     slug: "tarangire-national-park",
     hook: "Famous for its ancient baobab trees, the largest elephant herds in northern Tanzania, and over 550 recorded bird species along the Tarangire River.",
     icon: Compass,
@@ -110,6 +117,7 @@ const PARKS_IN_FOCUS = [
   },
   {
     name: "Lake Manyara National Park",
+    shortName: "Lake Manyara",
     slug: "lake-manyara-national-park",
     hook: "Compact, diverse, and famous for tree-climbing lions. Flamingo-lined alkaline lake, lush groundwater forest, and one of the few parks with night game drives.",
     icon: Waves,
@@ -117,6 +125,7 @@ const PARKS_IN_FOCUS = [
   },
   {
     name: "Arusha National Park",
+    shortName: "Arusha",
     slug: "arusha-national-park",
     hook: "Often overlooked but excellent for walking safaris, canoeing on Momella Lakes, and views of Mount Meru. An ideal first-day safari close to town.",
     icon: Camera,
@@ -173,8 +182,11 @@ async function getSafaris() {
       destinations: safari.destinations.map((d) => d.destination.name),
     }));
   } catch (error) {
+    // Rethrow rather than returning [] — an empty array renders a 200 page with
+    // no packages and an empty ItemList schema, which Google can index as a
+    // legitimately empty page. Failing loudly surfaces the error boundary.
     console.error("[Safaris] Failed to fetch safaris:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -188,6 +200,8 @@ async function getSafariTypes() {
     });
     return types.map((t) => t.type);
   } catch (error) {
+    // Non-fatal: these only populate the type filter dropdown. The package
+    // grid still renders without them, so degrade rather than fail the page.
     console.error("[Safaris] Failed to fetch safari types:", error);
     return [];
   }
@@ -330,7 +344,7 @@ export default async function SafarisPage() {
       </section>
 
       {/* Trust Badges */}
-      <section className="bg-white py-6 border-b border-[var(--border)]">
+      <section className="bg-white py-8 border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
             <div className="flex items-center gap-3">
@@ -373,34 +387,6 @@ export default async function SafarisPage() {
         </div>
       </section>
 
-      {/* Testimonial Strip */}
-      <section className="py-12 bg-white border-b border-[var(--border)]">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {TESTIMONIALS.map((t) => (
-              <figure
-                key={t.author}
-                className="bg-[var(--surface)] rounded-2xl p-6 relative"
-              >
-                <Quote className="w-8 h-8 text-[var(--secondary)]/30 absolute top-4 right-4" />
-                <div className="flex items-center gap-1 mb-3">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  ))}
-                </div>
-                <blockquote className="text-[var(--text)] leading-relaxed mb-4">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="text-sm">
-                  <p className="font-semibold">{t.author}</p>
-                  <p className="text-[var(--text-muted)]">{t.location} · {t.trip}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* TOC */}
       <section className="py-10 bg-[var(--surface)] border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
@@ -425,8 +411,18 @@ export default async function SafarisPage() {
         </div>
       </section>
 
+      {/* Packages — surfaced directly after the nav band so the product is the
+          first thing below the fold rather than sitting under the long-form copy. */}
+      <section id="packages" className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <Suspense fallback={<SafarisSkeleton />}>
+            <SafarisPageClient safaris={safaris} types={types} />
+          </Suspense>
+        </div>
+      </section>
+
       {/* SEO Intro — targets "Tanzania safaris" head term */}
-      <section className="py-12 bg-white border-b border-[var(--border)]">
+      <section className="py-16 md:py-20 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
@@ -453,17 +449,8 @@ export default async function SafarisPage() {
         </div>
       </section>
 
-      {/* Main Content with Client-Side Filtering */}
-      <section id="packages" className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <Suspense fallback={<SafarisSkeleton />}>
-            <SafarisPageClient safaris={safaris} types={types} />
-          </Suspense>
-        </div>
-      </section>
-
       {/* Safari Styles — clickable spoke links */}
-      <section id="styles" className="py-16 bg-white">
+      <section id="styles" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="section-label justify-center">Choose Your Style</span>
@@ -631,7 +618,7 @@ export default async function SafarisPage() {
       </section>
 
       {/* Parks in Focus */}
-      <section id="parks" className="py-16 bg-[var(--surface)]">
+      <section id="parks" className="py-16 md:py-20 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <span className="section-label justify-center">Northern Circuit</span>
@@ -643,12 +630,14 @@ export default async function SafarisPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {/* Flex-wrap rather than a grid: there are 5 parks, so a 3-column
+              grid strands the last two on a left-aligned orphan row. */}
+          <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
             {PARKS_IN_FOCUS.map((park) => (
               <Link
                 key={park.slug}
                 href={`/tanzania-destinations/${park.slug}/`}
-                className="group bg-white rounded-2xl p-6 border border-[var(--border)] hover:border-[var(--secondary)] hover:shadow-lg transition-all flex flex-col"
+                className="group w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] bg-white rounded-2xl p-6 border border-[var(--border)] hover:border-[var(--secondary)] hover:shadow-lg transition-all flex flex-col"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-[var(--surface)] flex items-center justify-center">
@@ -663,7 +652,7 @@ export default async function SafarisPage() {
                   {park.hook}
                 </p>
                 <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[var(--primary)] group-hover:gap-2 transition-all">
-                  Explore {park.name.split(" ")[0]}
+                  Explore {park.shortName}
                   <ArrowRight className="w-4 h-4" />
                 </span>
               </Link>
@@ -676,8 +665,42 @@ export default async function SafarisPage() {
         </div>
       </section>
 
+      {/* Testimonial Strip — social proof after the packages, not before them */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="section-label justify-center">Traveller Stories</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mt-3">
+              What Our Guests Say
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {TESTIMONIALS.map((t) => (
+              <figure
+                key={t.author}
+                className="bg-[var(--surface)] rounded-2xl p-6 relative flex flex-col"
+              >
+                <Quote className="w-8 h-8 text-[var(--secondary)]/30 absolute top-4 right-4" />
+                <div className="flex items-center gap-1 mb-3">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <blockquote className="text-[var(--text)] leading-relaxed mb-4 flex-1">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className="text-sm pt-4 border-t border-[var(--border)]">
+                  <p className="font-semibold">{t.author}</p>
+                  <p className="text-[var(--text-muted)]">{t.location} · {t.trip}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)]">
+      <section className="py-16 md:py-20 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
             Can&apos;t Find What You&apos;re Looking For?
@@ -694,7 +717,7 @@ export default async function SafarisPage() {
       </section>
 
       {/* SEO Content — Planning Guide */}
-      <section id="guide" className="py-16 bg-white">
+      <section id="guide" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto prose prose-slate">
             <h2>Tanzania Safari Planning Guide</h2>
@@ -812,7 +835,7 @@ export default async function SafarisPage() {
       </section>
 
       {/* Inquiry Form */}
-      <section id="inquire" className="py-16 bg-[var(--surface)]">
+      <section id="inquire" className="py-16 md:py-20 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
@@ -835,7 +858,7 @@ export default async function SafarisPage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-16 bg-white">
+      <section id="faq" className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">

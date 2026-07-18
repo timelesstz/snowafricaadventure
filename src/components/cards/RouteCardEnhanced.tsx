@@ -45,12 +45,12 @@ export function RouteCardEnhanced({
       <Link
         href={`/trekking/${slug}/`}
         className={cn(
-          "group relative block rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-500",
+          "group relative grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden bg-white border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500",
           className
         )}
       >
         {/* Image */}
-        <div className="relative aspect-[16/9] overflow-hidden">
+        <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[380px] overflow-hidden">
           {featuredImage ? (
             <Image
               src={featuredImage}
@@ -65,9 +65,6 @@ export function RouteCardEnhanced({
             </div>
           )}
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-
           {/* Top Badges */}
           <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
             <span className="px-4 py-2 rounded-full text-sm font-bold bg-[var(--secondary)] text-white shadow-lg">
@@ -81,40 +78,44 @@ export function RouteCardEnhanced({
             )}
           </div>
 
-          {/* Content Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-8">
-            <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-[var(--secondary)] transition-colors">
-              {title}
-            </h3>
-            {overview && (
-              <p className="text-white/80 line-clamp-2 mb-5 max-w-2xl">{overview}</p>
-            )}
-
-            {/* Stats Row */}
-            <div className="flex flex-wrap gap-6 text-white/90">
-              <span className="flex items-center gap-2">
-                <Clock className="w-5 h-5" />
-                <span className="font-medium">{duration}</span>
-              </span>
-              <span className={cn("flex items-center gap-2 px-3 py-1 rounded-full", difficulty.bg)}>
-                <span className={cn("font-medium", difficulty.color)}>{physicalRating}</span>
-              </span>
-              {maxPeople && (
-                <span className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  <span>Max {maxPeople} people</span>
-                </span>
-              )}
-            </div>
-          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="p-6 flex items-center justify-between bg-gradient-to-r from-[var(--surface)] to-white">
-          <div className="flex items-center gap-4">
+        {/* Content */}
+        <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)] mb-3">
+            Featured Route
+          </span>
+
+          <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-3 group-hover:text-[var(--secondary)] transition-colors">
+            {title}
+          </h3>
+          {overview && (
+            <p className="text-[var(--text-muted)] leading-relaxed line-clamp-3 mb-6">
+              {overview}
+            </p>
+          )}
+
+          {/* Stats Row */}
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[var(--text-muted)] mb-6">
+            <span className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-[var(--secondary)]" />
+              <span className="font-medium">{duration}</span>
+            </span>
+            <span className={cn("flex items-center gap-2 px-3 py-1 rounded-full", difficulty.bg)}>
+              <span className={cn("font-medium", difficulty.color)}>{physicalRating}</span>
+            </span>
+            {maxPeople && (
+              <span className="flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-[var(--secondary)]" />
+                <span>Max {maxPeople} people</span>
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[var(--border)]">
             {/* Difficulty Meter */}
-            <div className="flex flex-col items-center">
-              <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1">Difficulty</span>
+            <div className="flex flex-col">
+              <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1.5">Difficulty</span>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((level) => (
                   <div
@@ -127,13 +128,13 @@ export function RouteCardEnhanced({
                 ))}
               </div>
             </div>
-          </div>
-          <span className="inline-flex items-center gap-2 text-[var(--primary)] font-semibold group-hover:gap-3 transition-all">
-            Start Your Journey
-            <span className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white group-hover:bg-[var(--primary-dark)] transition-colors">
-              →
+            <span className="inline-flex items-center gap-2 text-[var(--primary)] font-semibold group-hover:gap-3 transition-all shrink-0">
+              Start Your Journey
+              <span className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white group-hover:bg-[var(--primary-dark)] transition-colors">
+                →
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       </Link>
     );

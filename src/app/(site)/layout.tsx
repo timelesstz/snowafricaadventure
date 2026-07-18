@@ -10,7 +10,10 @@ export default function SiteLayout({
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">{children}</main>
-      <Footer />
+      {/* Year resolved on the server so the client never re-derives it — a
+          client-side new Date() can disagree with the server across a New
+          Year boundary and trigger a hydration mismatch. */}
+      <Footer currentYear={new Date().getFullYear()} />
     </div>
   );
 }

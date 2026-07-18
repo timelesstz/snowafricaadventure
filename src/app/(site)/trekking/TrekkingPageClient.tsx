@@ -207,25 +207,16 @@ export function TrekkingPageClient({ routes, difficulties }: TrekkingPageClientP
           </div>
         ) : viewMode === "grid" ? (
           <div className="space-y-8">
-            {/* Featured Route */}
+            {/* Featured Route — the featured variant stacks on mobile and
+                splits into two columns from md up, so it no longer needs a
+                second hidden copy for small screens. That duplicate also
+                emitted a second crawlable link for this route. */}
             {featuredRoute && filteredAndSortedRoutes.length > 1 && (
-              <RouteCardEnhanced
-                {...featuredRoute}
-                variant="featured"
-                className="hidden xl:block"
-              />
+              <RouteCardEnhanced {...featuredRoute} variant="featured" />
             )}
 
             {/* Routes Grid */}
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {/* On smaller screens, show featured in grid */}
-              {featuredRoute && filteredAndSortedRoutes.length > 1 && (
-                <RouteCardEnhanced
-                  {...featuredRoute}
-                  variant="default"
-                  className="xl:hidden"
-                />
-              )}
               {/* If only one result, show it in grid */}
               {filteredAndSortedRoutes.length === 1 && featuredRoute && (
                 <RouteCardEnhanced

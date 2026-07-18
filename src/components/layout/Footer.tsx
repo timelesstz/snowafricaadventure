@@ -14,8 +14,7 @@ import {
 import { SITE_CONFIG, FOOTER_NAV, PARTNER_INFO } from "@/lib/constants";
 import { useTheme } from "@/components/theme-provider";
 
-export function Footer() {
-  const currentYear = new Date().getFullYear();
+export function Footer({ currentYear }: { currentYear: number }) {
   const { logo } = useTheme();
 
   return (

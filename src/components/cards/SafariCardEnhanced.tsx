@@ -37,26 +37,31 @@ export function SafariCardEnhanced({
   variant = "default",
   className,
 }: SafariCardEnhancedProps) {
+  // Keyed lowercase — the DB stores "Mid-range" while callers have used
+  // "Mid-Range", and an exact-match lookup silently fell through to the default.
   const typeStyles: Record<string, { bg: string; text: string; border: string }> = {
-    Luxury: { bg: "bg-amber-500", text: "text-white", border: "border-amber-500" },
-    "Mid-Range": { bg: "bg-emerald-500", text: "text-white", border: "border-emerald-500" },
-    Budget: { bg: "bg-blue-500", text: "text-white", border: "border-blue-500" },
+    luxury: { bg: "bg-amber-500", text: "text-white", border: "border-amber-500" },
+    "mid-range": { bg: "bg-emerald-500", text: "text-white", border: "border-emerald-500" },
+    budget: { bg: "bg-blue-500", text: "text-white", border: "border-blue-500" },
   };
 
-  const typeStyle = typeStyles[type] || typeStyles["Mid-Range"];
+  const typeStyle = typeStyles[type?.toLowerCase()] || typeStyles["mid-range"];
   const ratingNum = typeof rating === "string" ? parseFloat(rating) : rating;
 
   if (variant === "featured") {
     return (
+      // Side-by-side on desktop: a full-bleed 16/10 image spanned the whole
+      // container and made this card ~1000px tall, pushing the rest of the
+      // grid below the fold. The split caps it at the image column's height.
       <Link
         href={`/tanzania-safaris/${slug}/`}
         className={cn(
-          "group relative block rounded-2xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500",
+          "group relative grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden bg-white border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500",
           className
         )}
       >
         {/* Image */}
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[400px] overflow-hidden">
           {featuredImage ? (
             <Image
               src={featuredImage}
@@ -64,15 +69,13 @@ export function SafariCardEnhanced({
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"
               sizes="(max-width: 768px) 100vw, 50vw"
+              priority
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] flex items-center justify-center">
               <Camera className="w-20 h-20 text-white/30" />
             </div>
           )}
-
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
           {/* Type Badge */}
           <div className="absolute top-4 left-4">
@@ -88,41 +91,45 @@ export function SafariCardEnhanced({
               <span className="font-bold text-sm">{ratingNum.toFixed(1)}</span>
             </div>
           )}
-
-          {/* Content Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-6">
-            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[var(--secondary)] transition-colors">
-              {title}
-            </h3>
-            {overview && (
-              <p className="text-white/80 text-sm line-clamp-2 mb-4">{overview}</p>
-            )}
-
-            {/* Stats Row */}
-            <div className="flex flex-wrap gap-4 text-white/90 text-sm">
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" />
-                {duration}
-              </span>
-              {parksCount && parksCount > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4" />
-                  {parksCount} Parks
-                </span>
-              )}
-              {gameDrives && gameDrives > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Camera className="w-4 h-4" />
-                  {gameDrives} Game Drives
-                </span>
-              )}
-            </div>
-          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="p-5 flex items-center justify-between bg-gradient-to-r from-[var(--surface)] to-white">
-          <div>
+        {/* Content */}
+        <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)] mb-3">
+            Featured Safari
+          </span>
+
+          <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-3 group-hover:text-[var(--secondary)] transition-colors">
+            {title}
+          </h3>
+
+          {overview && (
+            <p className="text-[var(--text-muted)] leading-relaxed line-clamp-3 mb-6">
+              {overview}
+            </p>
+          )}
+
+          {/* Stats Row */}
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--text-muted)] mb-6">
+            <span className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-[var(--secondary)]" />
+              {duration}
+            </span>
+            {parksCount && parksCount > 0 && (
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-[var(--secondary)]" />
+                {parksCount} Parks
+              </span>
+            )}
+            {gameDrives && gameDrives > 0 && (
+              <span className="flex items-center gap-1.5">
+                <Camera className="w-4 h-4 text-[var(--secondary)]" />
+                {gameDrives} Game Drives
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[var(--border)]">
             {priceFrom && (
               <div className="flex items-baseline gap-1">
                 <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">From</span>
@@ -130,13 +137,13 @@ export function SafariCardEnhanced({
                 <span className="text-xs text-[var(--text-muted)]">/ person</span>
               </div>
             )}
-          </div>
-          <span className="inline-flex items-center gap-2 text-[var(--secondary)] font-semibold group-hover:gap-3 transition-all">
-            Explore Safari
-            <span className="w-8 h-8 rounded-full bg-[var(--secondary)] flex items-center justify-center text-white group-hover:bg-[var(--secondary-dark)] transition-colors">
-              →
+            <span className="inline-flex items-center gap-2 text-[var(--secondary)] font-semibold group-hover:gap-3 transition-all shrink-0">
+              Explore Safari
+              <span className="w-8 h-8 rounded-full bg-[var(--secondary)] flex items-center justify-center text-white group-hover:bg-[var(--secondary-dark)] transition-colors">
+                →
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       </Link>
     );

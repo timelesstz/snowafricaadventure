@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useSyncExternalStore } from "react";
 import { format, differenceInDays } from "date-fns";
 import { AvailabilityBadge, SocialProofBadge } from "@/components/ui/Badge";
 import { ShareButton } from "@/components/social/ShareButtons";
@@ -48,6 +48,17 @@ const MONTH_NAMES = [
 ];
 
 export function DeparturesTable({ departures, year, onSelectDeparture }: DeparturesTableProps) {
+  // "Departs in N days" depends on the current time, which differs between the
+  // server (UTC) and the browser (local). Because it also gates whether the
+  // element renders at all, an SSR value causes a node-count hydration
+  // mismatch — so render it only after hydration. useSyncExternalStore is used
+  // rather than a mount flag so no setState runs inside an effect.
+  const isHydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
   // Filter state
   const [selectedRoutes, setSelectedRoutes] = useState<Set<string>>(new Set());
   const [selectedMonths, setSelectedMonths] = useState<Set<number>>(new Set());
@@ -488,11 +499,15 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                             availableSpots={dep.availableSpots}
                           />
                         </div>
-                        {dep.availableSpots > 0 && differenceInDays(new Date(dep.arrivalDate), new Date()) <= 60 && differenceInDays(new Date(dep.arrivalDate), new Date()) > 0 && (
-                          <span className="text-[10px] text-[var(--secondary-dark)] font-medium">
-                            Departs in {differenceInDays(new Date(dep.arrivalDate), new Date())} days
-                          </span>
-                        )}
+                        {isHydrated && dep.availableSpots > 0 && (() => {
+                          const daysUntil = differenceInDays(new Date(dep.arrivalDate), new Date());
+                          if (daysUntil <= 0 || daysUntil > 60) return null;
+                          return (
+                            <span className="text-[10px] text-[var(--secondary-dark)] font-medium">
+                              Departs in {daysUntil} {daysUntil === 1 ? "day" : "days"}
+                            </span>
+                          );
+                        })()}
                       </div>
                     </td>
                     <td className="px-3 py-2">
