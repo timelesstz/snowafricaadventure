@@ -166,10 +166,21 @@ export default async function RoutePage({ params }: PageProps) {
   }[] | null) || [];
   const faqs = (route.faqs as { question: string; answer: string }[] | null) || [];
 
-  // Get lowest departure price for display
-  const lowestPrice = departures.length > 0
-    ? Math.min(...departures.map(d => d.price))
-    : 1950; // Default price
+  // "From" price: lowest group-departure price if any exist, otherwise the
+  // cheapest editable pricing tier (usually the largest-group tier). Falls back
+  // to a fixed default only when a route has neither — so the hero number stays
+  // in sync with the pricing table an admin edits under Trekking Routes.
+  const tierPrices = (
+    (route.pricingTiers as { price?: number }[] | null) || []
+  )
+    .map((t) => Number(t?.price))
+    .filter((p) => Number.isFinite(p) && p > 0);
+  const lowestPrice =
+    departures.length > 0
+      ? Math.min(...departures.map((d) => d.price))
+      : tierPrices.length > 0
+        ? Math.min(...tierPrices)
+        : 1950; // Last-resort default when no departures and no tiers
 
   // Generate schemas
   const tripSchema = generateTripSchema({
