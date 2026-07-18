@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { LogoStrip } from "@/components/logos/LogoStrip";
 import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { TripAdvisorCOE } from "@/components/reviews/TripAdvisorCOE";
@@ -79,35 +80,6 @@ function getWhyUsItems(talaLicense: string) {
   ];
 }
 
-const FALLBACK_REVIEWS = [
-  {
-    id: "fallback-1",
-    authorName: "Sarah M.",
-    content: "Snow Africa made our Kilimanjaro dream come true. The guides were incredibly professional and encouraging. We felt safe every step of the way to the summit.",
-    rating: 5,
-    tripType: "Kilimanjaro Trek",
-    source: "TripAdvisor",
-    title: "Summit dream come true",
-  },
-  {
-    id: "fallback-2",
-    authorName: "James & Lisa K.",
-    content: "Our 7-day Serengeti and Ngorongoro safari exceeded all expectations. The wildlife sightings were extraordinary and our guide knew exactly where to find the animals.",
-    rating: 5,
-    tripType: "Wildlife Safari",
-    source: "TripAdvisor",
-    title: "Best safari experience ever",
-  },
-  {
-    id: "fallback-3",
-    authorName: "Michael R.",
-    content: "From the moment we landed in Arusha to the last day on Zanzibar, everything was perfectly organized. Transparent pricing, no hidden fees, and genuine care for our experience.",
-    rating: 5,
-    tripType: "Safari & Beach",
-    source: "Google",
-    title: "Perfectly organized from start to finish",
-  },
-];
 
 const destinations = [
   {
@@ -150,25 +122,13 @@ const destinations = [
   },
 ];
 
-const CERTIFICATION_ENTRIES = [
-  { key: "about.commitment.logo1", alt: "TATO Licensed Operator" },
-  { key: "about.commitment.logo2", alt: "KPAP Certified Partner" },
-  { key: "about.commitment.logo3", alt: "IMEC International Mountain Explorers Connection" },
-  { key: "about.commitment.logo4", alt: "Certification" },
-  { key: "about.commitment.logo5", alt: "Certification" },
-] as const;
+
 
 // Fetch homepage settings from database
 async function getHomepageSettings() {
   try {
-    const certKeys = CERTIFICATION_ENTRIES.map(c => c.key);
-    const settings = await prisma.siteSetting.findMany({
-      where: {
-        OR: [
-          { key: { startsWith: "homepage." } },
-          { key: { in: certKeys } },
-        ],
-      },
+        const settings = await prisma.siteSetting.findMany({
+      where: { key: { startsWith: "homepage." } },
     });
 
     const settingsMap: Record<string, string> = {};
@@ -205,9 +165,6 @@ async function getHomepageSettings() {
         reviews: parseInt(settingsMap["homepage.tripadvisor.reviews"]) || DEFAULT_COMPANY_INFO.tripAdvisor.reviews,
         url: settingsMap["homepage.tripadvisor.url"] || DEFAULT_COMPANY_INFO.tripAdvisor.url,
       },
-      certificationLogos: CERTIFICATION_ENTRIES
-        .filter(c => settingsMap[c.key])
-        .map(c => ({ url: settingsMap[c.key], alt: c.alt })),
     };
   } catch (error) {
     console.error("[Homepage] Failed to fetch settings:", error);
@@ -217,7 +174,6 @@ async function getHomepageSettings() {
       company: DEFAULT_COMPANY_INFO,
       registration: DEFAULT_COMPANY_INFO.registration,
       tripAdvisor: DEFAULT_COMPANY_INFO.tripAdvisor,
-      certificationLogos: [],
     };
   }
 }
@@ -326,7 +282,7 @@ export default async function HomePage() {
     getHomepageSettings(),
   ]);
 
-  const { hero, stats, company, registration, tripAdvisor, certificationLogos } = homepageSettings;
+  const { hero, stats, company, registration, tripAdvisor } = homepageSettings;
   const whyUsItems = getWhyUsItems(registration.talaLicense);
 
   // Split routes for display
@@ -468,20 +424,9 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-          {certificationLogos.length > 0 && (
-            <div className="flex justify-center items-center gap-8 mt-6 pt-5 border-t border-slate-200/60">
-              {certificationLogos.map((cert, i) => (
-                <Image
-                  key={i}
-                  src={cert.url}
-                  alt={cert.alt}
-                  width={100}
-                  height={48}
-                  className="h-10 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
-                />
-              ))}
-            </div>
-          )}
+          <div className="mt-6 pt-5 border-t border-slate-200/60">
+            <LogoStrip placement="homepage" variant="plain" />
+          </div>
         </div>
       </div>
 
@@ -745,9 +690,12 @@ export default async function HomePage() {
             <h2>Real Stories, Real Adventures</h2>
           </div>
 
-          {/* Featured Reviews Grid */}
+          {/* Featured Reviews Grid — real reviews only (synced from TripAdvisor
+              or flagged featured in admin). No cards render until real reviews
+              exist; the TripAdvisor badge below always shows the real score. */}
+          {featuredReviews.length > 0 && (
           <div className="testimonials-grid">
-            {(featuredReviews.length > 0 ? featuredReviews : FALLBACK_REVIEWS).slice(0, 6).map((review, i) => (
+            {featuredReviews.slice(0, 6).map((review, i) => (
               <div key={review.id || i} className="testimonial-card">
                 <div className="testimonial-stars">
                   {[...Array(review.rating)].map((_, j) => (
@@ -766,6 +714,7 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
+          )}
 
           <div className="testimonials-footer">
             <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-inline">

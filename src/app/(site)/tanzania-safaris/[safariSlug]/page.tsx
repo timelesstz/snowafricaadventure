@@ -15,7 +15,7 @@ import { PublicGallery } from "@/components/ui/PublicGallery";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { TrustBadgeStrip } from "@/components/ui/TrustBadgeStrip";
 import type { DayItinerary } from "@/components/tours/types";
-import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema, generateReviewSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateTripSchema, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import { findRelatedBlogPosts } from "@/lib/related-content";
@@ -130,13 +130,13 @@ export default async function SafariPage({ params }: PageProps) {
     price: priceFrom,
   });
 
+  // No aggregateRating/review markup: there is no per-safari review data, and
+  // emitting fabricated ratings/reviews violates Google's review-snippet policy.
   const productSchema = generateProductSchema({
     name: safari.title,
     description: safari.overview.slice(0, 300),
     url: `/tanzania-safaris/${safari.slug}/`,
     price: priceFrom,
-    ratingValue: 4.9,
-    reviewCount: 47,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -144,12 +144,6 @@ export default async function SafariPage({ params }: PageProps) {
     { name: "Tanzania Safaris", url: "/tanzania-safaris/" },
     { name: safari.title, url: `/tanzania-safaris/${safari.slug}/` },
   ]);
-
-  const reviewSchemas = [
-    { author: "Michael R.", datePublished: "2025-10-08", reviewBody: "Incredible wildlife encounters on every game drive. Our guide spotted leopards, lions, and elephants within the first day. Snow Africa delivered beyond expectations.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
-    { author: "Lisa T.", datePublished: "2025-12-14", reviewBody: "From the moment we landed, everything was perfectly arranged. The lodges were spectacular and our guide's knowledge of animal behavior was remarkable.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
-    { author: "David H.", datePublished: "2026-02-28", reviewBody: "Third safari with Snow Africa and they never disappoint. Authentic experience with a locally owned company that genuinely cares about conservation.", ratingValue: 5, itemReviewed: { name: safari.title, type: "TouristTrip" } },
-  ].map(generateReviewSchema);
 
   // Fetch related blog posts
   const destinationNames = safari.destinations.map((d) => d.destination.name);
@@ -169,7 +163,7 @@ export default async function SafariPage({ params }: PageProps) {
   return (
     <div>
       {/* Schema markup */}
-      <MultiJsonLd schemas={[tripSchema, productSchema, breadcrumbSchema, ...reviewSchemas]} />
+      <MultiJsonLd schemas={[tripSchema, productSchema, breadcrumbSchema]} />
 
       {/* Analytics: Track item view */}
       <ViewItemTracker
