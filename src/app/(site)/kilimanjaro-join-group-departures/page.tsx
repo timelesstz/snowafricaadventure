@@ -370,7 +370,7 @@ export default async function GroupDeparturesPage() {
                 Full Moon Climbs: Summit Under the Stars
               </h3>
               <p>
-                Among our most popular group departures are our Full Moon climbs, where the summit push coincides with a full or near-full moon. Reaching Stella Point and Uhuru Peak by moonlight — with the glaciers glowing silver and the curvature of the Earth visible on the horizon — is an experience that transcends description. We schedule several full moon departures each year across both the Lemosho and Machame routes. Check the departure calendar for upcoming full moon dates and book early, as these sell out months in advance.
+                Among our most popular group departures are our Full Moon climbs, where the summit push coincides with a full or near-full moon. Reaching Stella Point and Uhuru Peak by moonlight — with the glaciers glowing silver and the curvature of the Earth visible on the horizon — is an experience that transcends description. We schedule several full moon departures each year across the Lemosho, Machame, and Northern Circuit routes. Check the departure calendar for upcoming full moon dates and book early, as these sell out months in advance.
               </p>
 
               <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
@@ -483,7 +483,8 @@ export default async function GroupDeparturesPage() {
                   <th className="px-3 py-2 text-left">Duration</th>
                   <th className="px-3 py-2 text-left">Difficulty</th>
                   <th className="px-3 py-2 text-left">Success Rate</th>
-                  <th className="px-3 py-2 text-left">Price (PP)</th>
+                  <th className="px-3 py-2 text-left">2026 Price (PP)</th>
+                  <th className="px-3 py-2 text-left">2027 Price (PP)</th>
                 </tr>
               </thead>
               <tbody>
@@ -500,6 +501,7 @@ export default async function GroupDeparturesPage() {
                   <td className="px-3 py-2">Moderate</td>
                   <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%</td>
                   <td className="px-3 py-2 font-semibold">$2,680</td>
+                  <td className="px-3 py-2 font-semibold">$2,860</td>
                 </tr>
                 <tr className="border-b bg-[var(--surface)]">
                   <td className="px-3 py-2 font-medium">
@@ -514,20 +516,22 @@ export default async function GroupDeparturesPage() {
                   <td className="px-3 py-2">Challenging</td>
                   <td className="px-3 py-2 text-[var(--primary)] font-semibold">93%</td>
                   <td className="px-3 py-2 font-semibold">$2,440</td>
+                  <td className="px-3 py-2 font-semibold">$2,580</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 font-medium">
                     <Link
-                      href="/trekking/6-days-rongai-route/"
+                      href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"
                       className="text-[var(--primary)] hover:underline"
                     >
-                      6-Day Rongai
+                      9-Day Northern Circuit
                     </Link>
                   </td>
-                  <td className="px-3 py-2">6 Days</td>
+                  <td className="px-3 py-2">9 Days</td>
                   <td className="px-3 py-2">Moderate</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">90%</td>
-                  <td className="px-3 py-2 font-semibold">$2,390</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%+</td>
+                  <td className="px-3 py-2 font-semibold">$2,995</td>
+                  <td className="px-3 py-2 font-semibold">$3,100</td>
                 </tr>
               </tbody>
             </table>
@@ -573,15 +577,15 @@ export default async function GroupDeparturesPage() {
             </div>
             <div className="bg-white border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-heading text-xl font-bold mb-3">
-                6-Day Rongai Route
+                9-Day Northern Circuit Route
               </h3>
               <p className="text-[var(--text-muted)] text-sm mb-4">
-                Approach from the quieter north side near the Kenyan border. Less
-                crowded with a gradual ascent. Ideal for those seeking a more
-                remote wilderness experience.
+                The longest and quietest route, circling the mountain&apos;s
+                remote northern slopes. Unmatched acclimatization gives it our
+                highest success rate — the ultimate Kilimanjaro experience.
               </p>
               <Link
-                href="/trekking/6-days-rongai-route/"
+                href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"
                 className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-medium text-sm"
               >
                 Learn More →
