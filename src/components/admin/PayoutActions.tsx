@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MoreHorizontal, Check, DollarSign, X, Trash2 } from "lucide-react";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 
 export default function PayoutActions({
   id,
@@ -12,6 +13,7 @@ export default function PayoutActions({
   status: string;
 }) {
   const router = useRouter();
+  const { confirm, confirmDialog } = useConfirm();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -41,7 +43,13 @@ export default function PayoutActions({
   };
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this payout?")) return;
+    const ok = await confirm({
+      title: "Delete payout",
+      description: "Are you sure you want to delete this payout?",
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setLoading(true);
     try {
@@ -62,6 +70,7 @@ export default function PayoutActions({
 
   return (
     <div className="relative">
+      {confirmDialog}
       <button
         onClick={() => setOpen(!open)}
         disabled={loading}

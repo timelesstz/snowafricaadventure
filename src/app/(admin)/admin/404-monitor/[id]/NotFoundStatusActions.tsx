@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { NotFoundStatus } from "@prisma/client";
 import { Loader2, Check, X, Trash2 } from "lucide-react";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 
 interface NotFoundStatusActionsProps {
   id: string;
@@ -17,6 +18,7 @@ export function NotFoundStatusActions({
   hasRedirect,
 }: NotFoundStatusActionsProps) {
   const router = useRouter();
+  const { confirm, confirmDialog } = useConfirm();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,9 +47,14 @@ export function NotFoundStatusActions({
   };
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this 404 entry and all its hits? This action cannot be undone.")) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Delete 404 entry",
+      description:
+        "Are you sure you want to delete this 404 entry and all its hits? This action cannot be undone.",
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setLoading(true);
     setError(null);
@@ -71,6 +78,7 @@ export function NotFoundStatusActions({
 
   return (
     <div className="space-y-4">
+      {confirmDialog}
       {error && (
         <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
           {error}

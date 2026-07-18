@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { DepartureStatus, RotationMode } from "@prisma/client";
 import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
+import { DepartureNotifications } from "@/lib/notifications";
 
 export interface RotationResult {
   success: boolean;
@@ -123,6 +124,7 @@ async function updateDepartureStatuses(): Promise<
       status: true,
       maxParticipants: true,
       isGuaranteed: true,
+      route: { select: { title: true } },
       bookings: {
         where: {
           status: { in: SPOT_HOLDING_STATUSES },
@@ -168,6 +170,24 @@ async function updateDepartureStatuses(): Promise<
         oldStatus: departure.status,
         newStatus,
       });
+
+      // In-app alerts on availability transitions (best-effort). These fire
+      // only on the transition itself, so they can't repeat day to day.
+      if (newStatus === DepartureStatus.FULL) {
+        await DepartureNotifications.departureFull({
+          departureId: departure.id,
+          routeTitle: departure.route.title,
+        }).catch((e) => console.error("departureFull notification failed:", e));
+      } else if (
+        newStatus === DepartureStatus.LIMITED &&
+        departure.status === DepartureStatus.OPEN
+      ) {
+        await DepartureNotifications.lowAvailability({
+          departureId: departure.id,
+          routeTitle: departure.route.title,
+          spotsRemaining,
+        }).catch((e) => console.error("lowAvailability notification failed:", e));
+      }
     }
   }
 

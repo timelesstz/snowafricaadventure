@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { Fingerprint, Eye, EyeOff, CheckCircle, XCircle } from "lucide-react";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 
 interface PinSettingsProps {
   hasPin: boolean;
 }
 
 export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
+  const { confirm, confirmDialog } = useConfirm();
   const [hasPin, setHasPin] = useState(initialHasPin);
   const [isEditing, setIsEditing] = useState(false);
   const [pin, setPin] = useState("");
@@ -60,7 +62,13 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
   };
 
   const handleRemovePin = async () => {
-    if (!confirm("Are you sure you want to remove your PIN?")) return;
+    const ok = await confirm({
+      title: "Remove PIN",
+      description: "Are you sure you want to remove your PIN?",
+      confirmLabel: "Remove PIN",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setLoading(true);
     setMessage(null);
@@ -86,6 +94,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+      {confirmDialog}
       <div className="flex items-center gap-4 mb-4">
         <div className="p-3 bg-amber-100 rounded-lg">
           <Fingerprint className="w-6 h-6 text-amber-600" />

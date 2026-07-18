@@ -30,6 +30,7 @@ import {
   linkForNotification,
   PRIORITY_BADGE,
 } from "@/lib/notifications/display";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 
 interface Notification {
   id: string;
@@ -47,6 +48,7 @@ type ReadFilter = "all" | "unread" | "read";
 const PAGE_SIZE = 25;
 
 export default function NotificationsClient() {
+  const { confirm, confirmDialog } = useConfirm();
   const [items, setItems] = useState<Notification[]>([]);
   const [total, setTotal] = useState(0);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -156,7 +158,13 @@ export default function NotificationsClient() {
   const bulkDelete = async () => {
     const ids = Array.from(selected);
     if (ids.length === 0) return;
-    if (!window.confirm(`Delete ${ids.length} notification(s)?`)) return;
+    const ok = await confirm({
+      title: "Delete notifications",
+      description: `Delete ${ids.length} notification(s)? This cannot be undone.`,
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
     try {
       const res = await fetch("/api/admin/notifications", {
         method: "POST",
@@ -218,6 +226,7 @@ export default function NotificationsClient() {
 
   return (
     <div>
+      {confirmDialog}
       <AdminPageHeader
         title="Notifications"
         description={

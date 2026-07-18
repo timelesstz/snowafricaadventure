@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { BookingStatusBadge } from "@/components/admin/bookings/BookingStatusBadge";
 import { PaymentStatus } from "@/components/admin/bookings/PaymentStatus";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 import { BookingStatus, EmailStatus } from "@prisma/client";
 
 interface ClimberDetail {
@@ -165,6 +166,7 @@ export default function BookingDetailPage() {
   const router = useRouter();
   const params = useParams();
   const id = params.id as string;
+  const { confirm, confirmDialog } = useConfirm();
 
   const [booking, setBooking] = useState<Booking | null>(null);
   const [loading, setLoading] = useState(true);
@@ -528,9 +530,12 @@ export default function BookingDetailPage() {
       formData.status !== initialFormData.status;
 
     if (becomingDestructive) {
-      const ok = confirm(
-        `Change status to ${formData.status}? This will stamp a cancellation timestamp and may affect commission tracking.`
-      );
+      const ok = await confirm({
+        title: "Change booking status",
+        description: `Change status to ${formData.status}? This will stamp a cancellation timestamp and may affect commission tracking.`,
+        confirmLabel: "Change status",
+        tone: "danger",
+      });
       if (!ok) return;
     }
 
@@ -560,12 +565,17 @@ export default function BookingDetailPage() {
     } finally {
       setSaving(false);
     }
-  }, [formData, initialFormData, id, isDirty]);
+  }, [formData, initialFormData, id, isDirty, confirm]);
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this booking? This action cannot be undone.")) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Delete booking",
+      description:
+        "Are you sure you want to delete this booking? This action cannot be undone.",
+      confirmLabel: "Delete booking",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setSaving(true);
     try {
@@ -642,6 +652,7 @@ export default function BookingDetailPage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
+      {confirmDialog}
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div className="flex items-start gap-4">

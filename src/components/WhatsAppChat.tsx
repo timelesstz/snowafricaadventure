@@ -78,6 +78,10 @@ export default function WhatsAppChat() {
   // no synchronous setState runs inside the effect.
   const [timedOut, setTimedOut] = useState(false);
   const pulse = !hasInteracted && !timedOut;
+  // Stamped when the panel is first opened rather than during render — the
+  // server formats in UTC while the browser uses local time, so rendering it
+  // on the server causes a hydration mismatch.
+  const [sentAt, setSentAt] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => setTimedOut(true), 8000);
@@ -87,7 +91,12 @@ export default function WhatsAppChat() {
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev);
     if (!hasInteracted) setHasInteracted(true);
-  }, [hasInteracted]);
+    if (!sentAt) {
+      setSentAt(
+        new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      );
+    }
+  }, [hasInteracted, sentAt]);
 
   const logWhatsApp = useCallback((action: string, label: string, message?: string) => {
     trackContactClick({ method: "whatsapp", location: pathname || "/" });
@@ -161,7 +170,7 @@ export default function WhatsAppChat() {
                 Pick a question below to get started:
               </p>
               <div className="mt-1.5 text-right text-[10px] text-gray-400">
-                {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                {sentAt}
               </div>
             </div>
 

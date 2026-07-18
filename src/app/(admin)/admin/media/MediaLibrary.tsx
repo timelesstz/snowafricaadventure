@@ -25,6 +25,7 @@ import { clsx } from "clsx";
 import Link from "next/link";
 import MediaUploader from "@/components/admin/MediaUploader";
 import type { MediaUsage } from "@/lib/media-usage";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 
 interface Media {
   id: string;
@@ -148,6 +149,7 @@ const initialR2Filters: R2FilterState = {
 };
 
 export default function MediaLibrary() {
+  const { confirm, confirmDialog } = useConfirm();
   // Database tab state
   const [media, setMedia] = useState<Media[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
@@ -246,9 +248,13 @@ export default function MediaLibrary() {
   };
 
   const handleDeleteOrphaned = async () => {
-    if (!confirm(`Delete all ${stats?.orphanedCount || 0} orphaned images? This cannot be undone.`)) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Delete orphaned images",
+      description: `Delete all ${stats?.orphanedCount || 0} orphaned images? This cannot be undone.`,
+      confirmLabel: "Delete all",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setDeleting(true);
     try {
@@ -278,9 +284,13 @@ export default function MediaLibrary() {
   const handleDeleteSelected = async () => {
     if (selectedIds.size === 0) return;
     if (inUseSelectedCount > 0 && !forceDeleteBulk) return;
-    if (!confirm(`Delete ${selectedIds.size} selected images? This cannot be undone.`)) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Delete selected images",
+      description: `Delete ${selectedIds.size} selected images? This cannot be undone.`,
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setDeleting(true);
     try {
@@ -404,9 +414,13 @@ export default function MediaLibrary() {
 
   const handleDeleteR2Selected = async () => {
     if (r2SelectedKeys.size === 0) return;
-    if (!confirm(`Delete ${r2SelectedKeys.size} images from R2? This cannot be undone.`)) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Delete images from R2",
+      description: `Delete ${r2SelectedKeys.size} images from R2? This cannot be undone.`,
+      confirmLabel: "Delete",
+      tone: "danger",
+    });
+    if (!ok) return;
 
     setDeleting(true);
     try {
@@ -458,6 +472,7 @@ export default function MediaLibrary() {
 
   return (
     <div className="space-y-4">
+      {confirmDialog}
       {/* Stats Cards */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1312,7 +1327,13 @@ export default function MediaLibrary() {
                 type="button"
                 disabled={mediaUsage.length > 0 && !forceDeleteSingle}
                 onClick={async () => {
-                  if (!confirm("Delete this image? This cannot be undone.")) return;
+                  const ok = await confirm({
+                    title: "Delete image",
+                    description: "Delete this image? This cannot be undone.",
+                    confirmLabel: "Delete",
+                    tone: "danger",
+                  });
+                  if (!ok) return;
                   try {
                     await fetch(`/api/admin/media/${selectedMedia.id}`, {
                       method: "DELETE",

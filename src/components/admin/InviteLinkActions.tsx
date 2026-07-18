@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { useConfirm } from "@/components/admin/ui/useConfirm";
 
 export function InviteLinkActions({
   id,
@@ -12,11 +13,19 @@ export function InviteLinkActions({
   isActive: boolean;
 }) {
   const router = useRouter();
+  const { confirm, confirmDialog } = useConfirm();
   const [loading, setLoading] = useState(false);
 
   const toggle = async () => {
-    if (isActive && !confirm("Revoke this invite link? Guests will no longer be able to use it.")) {
-      return;
+    if (isActive) {
+      const ok = await confirm({
+        title: "Revoke invite link",
+        description:
+          "Revoke this invite link? Guests will no longer be able to use it.",
+        confirmLabel: "Revoke",
+        tone: "danger",
+      });
+      if (!ok) return;
     }
     setLoading(true);
     try {
@@ -37,18 +46,21 @@ export function InviteLinkActions({
   };
 
   return (
-    <button
-      onClick={toggle}
-      disabled={loading}
-      aria-label={isActive ? "Revoke invite link" : "Reactivate invite link"}
-      className={`inline-flex items-center gap-1 px-3 py-1 text-sm rounded-lg disabled:opacity-50 ${
-        isActive
-          ? "bg-red-50 text-red-700 hover:bg-red-100"
-          : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-      }`}
-    >
-      {loading && <Loader2 className="w-3 h-3 animate-spin" />}
-      {isActive ? "Revoke" : "Reactivate"}
-    </button>
+    <>
+      {confirmDialog}
+      <button
+        onClick={toggle}
+        disabled={loading}
+        aria-label={isActive ? "Revoke invite link" : "Reactivate invite link"}
+        className={`inline-flex items-center gap-1 px-3 py-1 text-sm rounded-lg disabled:opacity-50 ${
+          isActive
+            ? "bg-red-50 text-red-700 hover:bg-red-100"
+            : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+        }`}
+      >
+        {loading && <Loader2 className="w-3 h-3 animate-spin" />}
+        {isActive ? "Revoke" : "Reactivate"}
+      </button>
+    </>
   );
 }
