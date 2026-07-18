@@ -17,8 +17,10 @@ interface InquiryActionsProps {
 const statuses = [
   { value: "new", label: "New", description: "Not yet reviewed" },
   { value: "contacted", label: "Contacted", description: "Reached out to customer" },
+  { value: "in_progress", label: "In Progress", description: "Actively planning with customer" },
   { value: "converted", label: "Converted", description: "Became a booking" },
   { value: "closed", label: "Closed", description: "No further action needed" },
+  { value: "spam", label: "Spam", description: "Not a genuine inquiry" },
 ];
 
 export function InquiryActions({ inquiry }: InquiryActionsProps) {

@@ -32,6 +32,20 @@ async function getInquiry(id: string) {
   return inquiry;
 }
 
+async function getEmailHistory(email: string) {
+  return prisma.emailLog.findMany({
+    where: { recipient: { contains: email, mode: "insensitive" } },
+    orderBy: { createdAt: "desc" },
+    take: 5,
+    select: {
+      id: true,
+      subject: true,
+      status: true,
+      createdAt: true,
+    },
+  });
+}
+
 function formatDateTime(date: Date) {
   return new Date(date).toLocaleString("en-US", {
     weekday: "long",
@@ -60,6 +74,7 @@ export default async function InquiryDetailPage({
 }) {
   const { id } = await params;
   const inquiry = await getInquiry(id);
+  const emailHistory = await getEmailHistory(inquiry.email);
 
   return (
     <div className="space-y-6">
@@ -255,6 +270,51 @@ export default async function InquiryDetailPage({
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Email history */}
+          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+            <h2 className="text-lg font-semibold text-slate-900 mb-4">
+              Email History
+            </h2>
+            {emailHistory.length === 0 ? (
+              <p className="text-sm text-slate-500">
+                No emails sent to this lead yet.
+              </p>
+            ) : (
+              <ul className="space-y-3">
+                {emailHistory.map((log) => (
+                  <li key={log.id} className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <Link
+                        href={`/admin/email-log/${log.id}`}
+                        className="text-sm font-medium text-slate-900 hover:text-amber-700 line-clamp-1"
+                      >
+                        {log.subject}
+                      </Link>
+                      <p className="text-xs text-slate-500">
+                        {new Date(log.createdAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </p>
+                    </div>
+                    <span
+                      className={`shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full ${
+                        log.status === "SENT"
+                          ? "bg-green-100 text-green-700"
+                          : log.status === "FAILED"
+                            ? "bg-red-100 text-red-700"
+                            : "bg-slate-100 text-slate-600"
+                      }`}
+                    >
+                      {log.status}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           {/* Quick Actions */}

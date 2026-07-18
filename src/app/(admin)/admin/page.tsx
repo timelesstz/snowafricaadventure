@@ -251,7 +251,7 @@ export default async function AdminDashboard() {
     <div>
       <AdminPageHeader
         title="Dashboard"
-        description="Platform health, partner commissions, and what needs attention today."
+        description="Today's leads, upcoming departures, and what needs attention."
       />
 
       {/* Action required */}

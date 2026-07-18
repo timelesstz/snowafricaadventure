@@ -69,6 +69,17 @@ const topLevelItems: NavItem[] = [
 
 const navGroups: NavGroup[] = [
   {
+    // First group — this is the daily work of a tour operator
+    id: "bookings",
+    label: "Bookings",
+    items: [
+      { href: "/admin/inquiries?status=new", label: "Open Leads", icon: AlertTriangle, minRole: AdminRole.EDITOR },
+      { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquare, minRole: AdminRole.EDITOR },
+      { href: "/admin/bookings", label: "Bookings", icon: ClipboardList, minRole: AdminRole.EDITOR },
+      { href: "/admin/departures", label: "Departures", icon: CalendarDays, minRole: AdminRole.EDITOR },
+    ],
+  },
+  {
     id: "content",
     label: "Content",
     items: [
@@ -83,16 +94,6 @@ const navGroups: NavGroup[] = [
       { href: "/admin/day-trips", label: "Day Trips", icon: Sun, minRole: AdminRole.EDITOR },
       { href: "/admin/blog", label: "Blog Posts", icon: FileText, minRole: AdminRole.EDITOR },
       { href: "/admin/reviews", label: "Reviews", icon: Star, minRole: AdminRole.EDITOR },
-    ],
-  },
-  {
-    id: "bookings",
-    label: "Bookings",
-    items: [
-      { href: "/admin/inquiries?status=new", label: "Open Leads", icon: AlertTriangle, minRole: AdminRole.EDITOR },
-      { href: "/admin/departures", label: "Departures", icon: CalendarDays, minRole: AdminRole.EDITOR },
-      { href: "/admin/bookings", label: "Bookings", icon: ClipboardList, minRole: AdminRole.EDITOR },
-      { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquare, minRole: AdminRole.EDITOR },
     ],
   },
   {

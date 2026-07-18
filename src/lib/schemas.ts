@@ -256,7 +256,7 @@ const departureStatusEnum = z.enum([
   "COMPLETED",
 ]);
 
-export const adminDepartureCreateSchema = z.object({
+const departureBaseSchema = z.object({
   routeId: z.string().min(1).max(50),
   arrivalDate: z.coerce.date(),
   startDate: z.coerce.date(),
@@ -278,7 +278,70 @@ export const adminDepartureCreateSchema = z.object({
   publicNotes: z.string().max(5000).nullable().optional(),
 });
 
-export const adminDepartureUpdateSchema = adminDepartureCreateSchema.partial();
+// Cross-field checks apply only when both sides are present, so the same
+// validator works for the full create schema and the partial update schema.
+function validateDepartureCrossFields(
+  data: Partial<z.infer<typeof departureBaseSchema>>,
+  ctx: z.RefinementCtx
+) {
+  const orderedDates: [keyof typeof data, keyof typeof data][] = [
+    ["arrivalDate", "startDate"],
+    ["startDate", "summitDate"],
+    ["summitDate", "endDate"],
+  ];
+  for (const [earlier, later] of orderedDates) {
+    const a = data[earlier];
+    const b = data[later];
+    if (a instanceof Date && b instanceof Date && a > b) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: [later],
+        message: `${String(later)} must not be before ${String(earlier)}`,
+      });
+    }
+  }
+  if (
+    data.minParticipants !== undefined &&
+    data.maxParticipants !== undefined &&
+    data.minParticipants > data.maxParticipants
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["minParticipants"],
+      message: "minParticipants cannot exceed maxParticipants",
+    });
+  }
+  if (
+    data.earlyBirdPrice != null &&
+    data.price !== undefined &&
+    data.earlyBirdPrice > data.price
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["earlyBirdPrice"],
+      message: "Early-bird price cannot exceed the regular price",
+    });
+  }
+  if (
+    data.earlyBirdUntil != null &&
+    data.startDate instanceof Date &&
+    data.earlyBirdUntil > data.startDate
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["earlyBirdUntil"],
+      message: "Early-bird deadline must be before the start date",
+    });
+  }
+}
+
+export const adminDepartureCreateSchema = departureBaseSchema.superRefine(
+  validateDepartureCrossFields
+);
+
+export const adminDepartureUpdateSchema = departureBaseSchema
+  .partial()
+  .superRefine(validateDepartureCrossFields);
 
 export type AdminDepartureCreateData = z.infer<typeof adminDepartureCreateSchema>;
 export type AdminDepartureUpdateData = z.infer<typeof adminDepartureUpdateSchema>;

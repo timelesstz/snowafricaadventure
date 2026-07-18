@@ -133,6 +133,7 @@ export default async function InquiriesPage({
     { value: "all", label: "All Statuses" },
     { value: "new", label: "New" },
     { value: "contacted", label: "Contacted" },
+    { value: "in_progress", label: "In Progress" },
     { value: "converted", label: "Converted" },
     { value: "closed", label: "Closed" },
     { value: "spam", label: "Spam (flagged)" },

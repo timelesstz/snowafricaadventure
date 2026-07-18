@@ -80,12 +80,19 @@ async function getDeparturesByYear(year: number) {
 
     return departures.map((dep) => {
       const bookedSpots = countBookedSpots(dep.bookings);
+      const earlyBirdActive =
+        dep.earlyBirdPrice != null &&
+        dep.earlyBirdUntil != null &&
+        dep.earlyBirdUntil > new Date() &&
+        Number(dep.earlyBirdPrice) > 0 &&
+        Number(dep.earlyBirdPrice) < Number(dep.price);
       return {
         id: dep.id,
         route: { name: dep.route.title, slug: dep.route.slug },
         arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
         endDate: dep.endDate.toISOString().split("T")[0],
         price: Number(dep.price),
+        earlyBirdPrice: earlyBirdActive ? Number(dep.earlyBirdPrice) : null,
         maxParticipants: dep.maxParticipants,
         bookedSpots,
         availableSpots: dep.maxParticipants - bookedSpots,

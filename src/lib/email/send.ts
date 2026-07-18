@@ -48,6 +48,7 @@ export async function sendBookingInquiryEmails(
     subject: `Booking Inquiry Received - ${data.routeTitle}`,
     html: bookingInquiryReceived(data),
     bcc: NOTIFICATION_EMAILS,
+    type: "booking",
   });
 
   const adminResult = await sendAdminNotificationWithRetry(
@@ -75,6 +76,7 @@ export async function sendBookingConfirmedEmail(
     to: data.leadEmail,
     subject: `Booking Confirmed! - ${data.routeTitle}`,
     html: bookingConfirmed(data),
+    type: "booking",
   });
 }
 
@@ -90,6 +92,7 @@ export async function sendBookingStatusUpdateEmail(
     to: data.leadEmail,
     subject: `Booking Update - ${data.routeTitle}`,
     html: bookingStatusUpdate(data, previousStatus, message),
+    type: "booking",
   });
 }
 
@@ -106,6 +109,7 @@ export async function sendPaymentReminderEmail(
     to: data.leadEmail,
     subject: `Payment Reminder - ${data.routeTitle}`,
     html: paymentReminder(data, dueDate, amountDue, isDeposit),
+    type: "payment-reminder",
   });
 }
 
@@ -138,6 +142,7 @@ export async function sendInquiryReceivedEmails(
     subject: `Thank you for your ${typeLabels[data.type] || ""} inquiry`,
     html: inquiryReceived(data),
     bcc: NOTIFICATION_EMAILS,
+    type: "inquiry",
   });
 
   const adminResult = await sendAdminNotificationWithRetry(
@@ -167,6 +172,7 @@ export async function sendInquiryResponseEmail(
     to: data.email,
     subject: `Re: Your ${data.type} inquiry - Snow Africa Adventure`,
     html: inquiryResponse(data, responseMessage, senderName),
+    type: "inquiry",
   });
 }
 
@@ -188,6 +194,7 @@ export async function sendPartnerCommissionEmail(
     to: recipients,
     subject: `New Commission Earned: $${data.commissionAmount.toLocaleString()} - ${data.routeTitle}`,
     html: partnerNewCommission(data),
+    type: "commission",
   });
 }
 
@@ -206,12 +213,14 @@ export async function sendClimberDetailsRequestEmail(
       to: data.leadEmail,
       subject: `Collect Your Group's Details - ${data.routeName}`,
       html: climberDetailsRequestToLead(data),
+      type: "climber-details",
     });
   } else if (data.type === "individual" && data.recipientEmail) {
     return sendEmail({
       to: data.recipientEmail,
       subject: `Complete Your Kilimanjaro Trek Details - ${data.routeName}`,
       html: climberDetailsRequestIndividual(data),
+      type: "climber-details",
     });
   }
   return { success: false, error: "Invalid email type or missing recipient" };
@@ -244,6 +253,7 @@ export async function sendClimberDetailsReminderEmail(
     to: recipientEmail,
     subject,
     html: climberDetailsReminder(data),
+    type: "climber-details",
   });
 }
 

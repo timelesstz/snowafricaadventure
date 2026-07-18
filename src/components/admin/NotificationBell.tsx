@@ -83,17 +83,23 @@ export default function NotificationBell({
         ? data.notifications.filter((n) => !muted.has(n.type))
         : data.notifications;
       setNotifications(visible);
-      setUnreadCount(data.unreadCount);
+      // With muted types the badge must match what the dropdown can show,
+      // so count unread from the visible (fetched) set instead of the global
+      // server count — otherwise the badge points at items the user hid.
+      const effectiveUnread = muted.size
+        ? visible.filter((n) => !n.isRead).length
+        : data.unreadCount;
+      setUnreadCount(effectiveUnread);
 
       if (
         prevUnreadRef.current !== null &&
-        data.unreadCount > prevUnreadRef.current
+        effectiveUnread > prevUnreadRef.current
       ) {
         setPulse(true);
         playChime();
         window.setTimeout(() => setPulse(false), 2000);
       }
-      prevUnreadRef.current = data.unreadCount;
+      prevUnreadRef.current = effectiveUnread;
     } catch (error) {
       console.error("Failed to fetch notifications:", error);
     }

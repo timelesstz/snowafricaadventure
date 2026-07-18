@@ -71,6 +71,9 @@ export interface SendEmailOptions {
   html: string;
   replyTo?: string;
   bcc?: string | string[];
+  /** EmailLog type column (e.g. "booking", "inquiry", "payment-reminder").
+   * Falls back to subject-based inference when omitted. */
+  type?: string;
 }
 
 export interface EmailResult {
@@ -86,12 +89,16 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
   const recipient = Array.isArray(options.to) ? options.to.join(", ") : options.to;
 
   // Log email as pending
+  const subjectLower = options.subject.toLowerCase();
   const logResult = await logEmailPending({
     recipient,
     subject: options.subject,
-    type: options.subject.includes("Booking") ? "booking" :
-          options.subject.includes("Inquiry") ? "inquiry" :
-          options.subject.includes("Admin") ? "admin" : "general",
+    type:
+      options.type ??
+      (subjectLower.includes("booking") ? "booking" :
+        subjectLower.includes("inquiry") ? "inquiry" :
+        subjectLower.includes("admin") ? "admin" :
+        subjectLower.includes("payment") ? "payment-reminder" : "general"),
     metadata: { replyTo: options.replyTo },
   });
 

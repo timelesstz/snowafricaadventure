@@ -25,6 +25,8 @@ interface Departure {
   arrivalDate: string;
   endDate: string;
   price: number;
+  /** Active discounted price (set only while the early-bird deadline is in the future) */
+  earlyBirdPrice?: number | null;
   maxParticipants: number;
   bookedSpots: number;
   availableSpots: number;
@@ -462,7 +464,17 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                       {format(new Date(dep.endDate), "MMM d, yyyy")}
                     </td>
                     <td className="px-3 py-2 font-semibold text-[var(--primary-dark)] whitespace-nowrap">
-                      {formatPrice(dep.price)}
+                      {dep.earlyBirdPrice ? (
+                        <span className="flex flex-col leading-tight">
+                          <span>{formatPrice(dep.earlyBirdPrice)}</span>
+                          <span className="text-[10px] font-normal text-[var(--text-light)]">
+                            <s>{formatPrice(dep.price)}</s>{" "}
+                            <span className="text-green-700 font-medium">Early bird</span>
+                          </span>
+                        </span>
+                      ) : (
+                        formatPrice(dep.price)
+                      )}
                     </td>
                     <td className="px-3 py-2">
                       <div className="flex flex-col gap-1">
@@ -564,7 +576,16 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
 
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-bold text-[var(--primary-dark)]">
-                    {formatPrice(dep.price)}
+                    {dep.earlyBirdPrice ? (
+                      <>
+                        {formatPrice(dep.earlyBirdPrice)}{" "}
+                        <span className="text-xs font-normal text-[var(--text-light)]">
+                          <s>{formatPrice(dep.price)}</s>
+                        </span>
+                      </>
+                    ) : (
+                      formatPrice(dep.price)
+                    )}
                   </span>
                   <div className="flex items-center gap-1.5">
                     {dep.availableSpots > 0 ? (
