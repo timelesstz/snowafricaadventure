@@ -815,10 +815,10 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "balloon safari Serengeti", href: "/balloon-safari-serengeti/", priority: 2 },
     { phrase: "balloon safari", href: "/balloon-safari-serengeti/", priority: 2 },
     { phrase: "hot air balloon safari", href: "/balloon-safari-serengeti/", priority: 2 },
-    { phrase: "group safari Tanzania", href: "/group-safari-tanzania/", priority: 2 },
-    { phrase: "group safari", href: "/group-safari-tanzania/", priority: 2 },
-    { phrase: "joining safari", href: "/group-safari-tanzania/", priority: 3 },
-    { phrase: "shared safari", href: "/group-safari-tanzania/", priority: 3 },
+    { phrase: "group safari Tanzania", href: "/tanzania-safaris/", priority: 2 },
+    { phrase: "group safari", href: "/tanzania-safaris/", priority: 2 },
+    { phrase: "joining safari", href: "/tanzania-safaris/", priority: 3 },
+    { phrase: "shared safari", href: "/tanzania-safaris/", priority: 3 },
 
     // Zanzibar content cluster
     { phrase: "Zanzibar travel guide", href: "/zanzibar-travel-guide/", priority: 2 },

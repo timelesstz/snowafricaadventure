@@ -90,7 +90,7 @@ export default function SearchPage() {
               <h3 className="font-heading font-semibold mb-3 text-[var(--primary)]">Safaris</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/tanzania-destinations/serengeti-national-park/" className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">Serengeti National Park</Link></li>
-                <li><Link href="/tanzania-destinations/ngorongoro-crater/" className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">Ngorongoro Crater</Link></li>
+                <li><Link href="/tanzania-destinations/ngorongoro-conservation-area/" className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">Ngorongoro Crater</Link></li>
                 <li><Link href="/tanzania-destinations/tarangire-national-park/" className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">Tarangire National Park</Link></li>
                 <li><Link href="/tanzania-safaris/" className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">All Safari Packages</Link></li>
                 <li><Link href="/tailor-made-safari/" className="text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors">Tailor-Made Safaris</Link></li>

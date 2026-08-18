@@ -310,6 +310,72 @@ const nextConfig: NextConfig = {
         destination: "/trekking/",
         permanent: true,
       },
+
+      // =====================================================
+      // SEO AUDIT (2026-08-18) — dead internal-link targets found via
+      // Ubersuggest crawl. Source links were fixed in the content itself;
+      // these redirects cover any already-indexed URLs / external backlinks.
+      // =====================================================
+      {
+        source: "/group-departure/",
+        destination: "/kilimanjaro-join-group-departures/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-lemosho-route/",
+        destination: "/kilimanjaro-lemosho-route-guide/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-machame-route/",
+        destination: "/kilimanjaro-machame-route-guide/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-rongai-route/",
+        destination: "/kilimanjaro-rongai-route-guide/",
+        permanent: true,
+      },
+      {
+        source: "/kilimanjaro-routes/",
+        destination: "/kilimanjaro-climbing-routes/",
+        permanent: true,
+      },
+      {
+        source: "/trekking/9-days-northern-circuit-route/",
+        destination: "/trekking/9-day-northern-circuit-route-kilimanjaro-guide/",
+        permanent: true,
+      },
+      {
+        source: "/zanzibar-best-time-to-visit/",
+        destination: "/best-time-visit-zanzibar/",
+        permanent: true,
+      },
+      {
+        source: "/zanzibar-diving-guide/",
+        destination: "/zanzibar-diving-snorkelling/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-destinations/ngorongoro-crater/",
+        destination: "/tanzania-destinations/ngorongoro-conservation-area/",
+        permanent: true,
+      },
+      {
+        source: "/group-safari-tanzania/",
+        destination: "/tanzania-safaris/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-destinations/kilimanjaro-national-park/",
+        destination: "/mount-kilimanjaro/",
+        permanent: true,
+      },
+      {
+        source: "/tanzania-destinations/zanzibar/",
+        destination: "/zanzibar/",
+        permanent: true,
+      },
       {
         source: "/safari-photography-tips/",
         destination: "/photography-safari-tanzania/",
