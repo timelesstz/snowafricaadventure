@@ -327,7 +327,129 @@ export default async function GroupDeparturesPage() {
         </section>
       )}
 
-      {/* Why Join a Group Climb — SEO Content */}
+      {/* Reviews Section — trust signal right after the booking table */}
+      <section className="py-12 bg-[var(--primary)] text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-heading text-3xl font-bold mb-8">
+            What Our Climbers Say
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div>
+              <blockquote className="text-lg italic mb-3">
+                &quot;An incredible experience! The crew was amazing and our guides made sure everyone reached the summit safely. Highly recommend the Lemosho route.&quot;
+              </blockquote>
+              <p className="text-[var(--primary-light)] text-sm">
+                — Sarah M., United Kingdom (January 2025)
+              </p>
+            </div>
+            <div>
+              <blockquote className="text-lg italic mb-3">
+                &quot;I joined as a solo traveller and left with friends for life. The group dynamic was the highlight — we pushed each other through the tough moments and celebrated together at the summit.&quot;
+              </blockquote>
+              <p className="text-[var(--primary-light)] text-sm">
+                — Marcus K., Germany (March 2025)
+              </p>
+            </div>
+            <div>
+              <blockquote className="text-lg italic mb-3">
+                &quot;At 58, I wasn&apos;t sure I could do it. Emmanuel and the team believed in me when I didn&apos;t believe in myself. Standing on Uhuru Peak was the proudest moment of my life.&quot;
+              </blockquote>
+              <p className="text-[var(--primary-light)] text-sm">
+                — Linda T., Australia (July 2025)
+              </p>
+            </div>
+          </div>
+          <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="mt-8 flex items-center justify-center gap-1 text-[var(--secondary)] text-2xl hover:opacity-80 transition-opacity">
+            ★★★★★
+            <span className="text-white text-base ml-2">
+              4.9/5 on TripAdvisor
+            </span>
+          </a>
+        </div>
+      </section>
+
+      {/* Route Comparison — each route's one-line highlight folded into the
+          table itself instead of a separate, redundant card grid below it */}
+      <section className="py-12 bg-[var(--surface)]">
+        <div className="container mx-auto px-4">
+          <h2 className="font-heading text-3xl font-bold text-center mb-8">
+            Route Comparison
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full bg-white rounded-lg overflow-hidden shadow text-sm">
+              <thead>
+                <tr className="bg-[var(--primary-dark)] text-white">
+                  <th className="px-3 py-2 text-left">Route</th>
+                  <th className="px-3 py-2 text-left">Duration</th>
+                  <th className="px-3 py-2 text-left">Difficulty</th>
+                  <th className="px-3 py-2 text-left">Success Rate</th>
+                  <th className="px-3 py-2 text-left">2026 Price (PP)</th>
+                  <th className="px-3 py-2 text-left">2027 Price (PP)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b">
+                  <td className="px-3 py-2 font-medium">
+                    <Link
+                      href="/trekking/8-days-lemosho-route/"
+                      className="text-[var(--primary)] hover:underline"
+                    >
+                      8-Day Lemosho
+                    </Link>
+                    <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
+                      Our most popular route — the extra day gives our highest success rate, through pristine rainforest.
+                    </p>
+                  </td>
+                  <td className="px-3 py-2">8 Days</td>
+                  <td className="px-3 py-2">Moderate</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%</td>
+                  <td className="px-3 py-2 font-semibold">$2,680</td>
+                  <td className="px-3 py-2 font-semibold">$2,860</td>
+                </tr>
+                <tr className="border-b bg-[var(--surface)]">
+                  <td className="px-3 py-2 font-medium">
+                    <Link
+                      href="/trekking/7-days-machame-route/"
+                      className="text-[var(--primary)] hover:underline"
+                    >
+                      7-Day Machame
+                    </Link>
+                    <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
+                      The classic &quot;Whiskey Route&quot; — stunning scenery and the famous Barranco Wall.
+                    </p>
+                  </td>
+                  <td className="px-3 py-2">7 Days</td>
+                  <td className="px-3 py-2">Challenging</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">93%</td>
+                  <td className="px-3 py-2 font-semibold">$2,440</td>
+                  <td className="px-3 py-2 font-semibold">$2,580</td>
+                </tr>
+                <tr>
+                  <td className="px-3 py-2 font-medium">
+                    <Link
+                      href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"
+                      className="text-[var(--primary)] hover:underline"
+                    >
+                      9-Day Northern Circuit
+                    </Link>
+                    <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
+                      The longest and quietest route, circling the mountain&apos;s remote northern slopes.
+                    </p>
+                  </td>
+                  <td className="px-3 py-2">9 Days</td>
+                  <td className="px-3 py-2">Moderate</td>
+                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%+</td>
+                  <td className="px-3 py-2 font-semibold">$2,995</td>
+                  <td className="px-3 py-2 font-semibold">$3,100</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Join a Group Climb — SEO Content. Trimmed to what the FAQ below
+          doesn't already cover (inclusions, payment, success rate live there). */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -353,26 +475,6 @@ export default async function GroupDeparturesPage() {
               </p>
 
               <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Expert Guides with a 95%+ Summit Success Rate
-              </h3>
-              <p>
-                Every Snow Africa Adventure group departure is led by KINAPA-certified professional guides with a minimum of five years&apos; experience on Kilimanjaro. Our lead guides carry emergency oxygen, wilderness first aid certification, and comprehensive knowledge of every route&apos;s acclimatization profile. Our 95%+ summit success rate across all group departures is among the highest in the industry — a testament to our guides&apos; ability to manage pace, monitor altitude symptoms, and make smart decisions under pressure.
-              </p>
-              <p>
-                Our guide-to-climber ratio ensures individual attention throughout the climb. No one gets left behind or rushed ahead. Our guides adjust the pace each day to the needs of the group, following the core acclimatization principle of &quot;climb high, sleep low.&quot; We also carry pulse oximeters for every climber, monitoring oxygen saturation at each camp to catch any altitude-related issues early.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                What Is Included in Every Group Departure?
-              </h3>
-              <p>
-                Our group departure price is all-inclusive, covering everything you need from the moment you land in Arusha to the moment we drop you back at the airport. Included in every departure: two nights&apos; pre-climb accommodation in Arusha, all Kilimanjaro National Park fees (which have increased significantly in recent years), professional lead guides and assistant guides, a full portering team, a mountain cook preparing three hot meals per day plus snacks, all camping equipment (tents, sleeping mats, dining tent, toilet tent), emergency oxygen, and private airport transfers.
-              </p>
-              <p>
-                The only items not included are your personal trekking gear, flights, visa, travel insurance, and tips for the mountain crew. We provide a comprehensive pre-departure gear list and can advise on rental options in Arusha for items like trekking poles, sleeping bags, and gaiters if you prefer not to purchase.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
                 Who Are Group Departures Ideal For?
               </h3>
               <p>
@@ -387,13 +489,6 @@ export default async function GroupDeparturesPage() {
               </h3>
               <p>
                 Among our most popular group departures are our Full Moon climbs, where the summit push coincides with a full or near-full moon. Reaching Stella Point and Uhuru Peak by moonlight — with the glaciers glowing silver and the curvature of the Earth visible on the horizon — is an experience that transcends description. We schedule several full moon departures each year across the Lemosho, Machame, and Northern Circuit routes. Check the departure calendar for upcoming full moon dates and book early, as these sell out months in advance.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Flexible Booking and Payment
-              </h3>
-              <p>
-                Securing your spot on a group departure requires only a 10% deposit, with the remaining balance due 60 days before your arrival date. This makes it easy to commit to your Kilimanjaro adventure well in advance while keeping your cash flow flexible. We accept international bank transfers, credit cards, and other secure payment methods. If you need to change your departure date after booking, we will do our best to accommodate you on another available departure, subject to availability.
               </p>
             </div>
           </div>
@@ -439,173 +534,6 @@ export default async function GroupDeparturesPage() {
               <p>
                 After descending to the final gate, you receive your official summit certificate and celebrate with your team — tipping ceremony, group photos, and the satisfaction of having conquered Africa&apos;s highest peak. We transfer you back to your Arusha hotel for a well-earned hot shower and celebration dinner.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews Section */}
-      <section className="py-12 bg-[var(--primary)] text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold mb-8">
-            What Our Climbers Say
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div>
-              <blockquote className="text-lg italic mb-3">
-                &quot;An incredible experience! The crew was amazing and our guides made sure everyone reached the summit safely. Highly recommend the Lemosho route.&quot;
-              </blockquote>
-              <p className="text-[var(--primary-light)] text-sm">
-                — Sarah M., United Kingdom (January 2025)
-              </p>
-            </div>
-            <div>
-              <blockquote className="text-lg italic mb-3">
-                &quot;I joined as a solo traveller and left with friends for life. The group dynamic was the highlight — we pushed each other through the tough moments and celebrated together at the summit.&quot;
-              </blockquote>
-              <p className="text-[var(--primary-light)] text-sm">
-                — Marcus K., Germany (March 2025)
-              </p>
-            </div>
-            <div>
-              <blockquote className="text-lg italic mb-3">
-                &quot;At 58, I wasn&apos;t sure I could do it. Emmanuel and the team believed in me when I didn&apos;t believe in myself. Standing on Uhuru Peak was the proudest moment of my life.&quot;
-              </blockquote>
-              <p className="text-[var(--primary-light)] text-sm">
-                — Linda T., Australia (July 2025)
-              </p>
-            </div>
-          </div>
-          <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="mt-8 flex items-center justify-center gap-1 text-[var(--secondary)] text-2xl hover:opacity-80 transition-opacity">
-            ★★★★★
-            <span className="text-white text-base ml-2">
-              4.9/5 on TripAdvisor
-            </span>
-          </a>
-        </div>
-      </section>
-
-      {/* Route Comparison */}
-      <section className="py-12 bg-[var(--surface)]">
-        <div className="container mx-auto px-4">
-          <h2 className="font-heading text-3xl font-bold text-center mb-8">
-            Route Comparison
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-lg overflow-hidden shadow text-sm">
-              <thead>
-                <tr className="bg-[var(--primary-dark)] text-white">
-                  <th className="px-3 py-2 text-left">Route</th>
-                  <th className="px-3 py-2 text-left">Duration</th>
-                  <th className="px-3 py-2 text-left">Difficulty</th>
-                  <th className="px-3 py-2 text-left">Success Rate</th>
-                  <th className="px-3 py-2 text-left">2026 Price (PP)</th>
-                  <th className="px-3 py-2 text-left">2027 Price (PP)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b">
-                  <td className="px-3 py-2 font-medium">
-                    <Link
-                      href="/trekking/8-days-lemosho-route/"
-                      className="text-[var(--primary)] hover:underline"
-                    >
-                      8-Day Lemosho
-                    </Link>
-                  </td>
-                  <td className="px-3 py-2">8 Days</td>
-                  <td className="px-3 py-2">Moderate</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%</td>
-                  <td className="px-3 py-2 font-semibold">$2,680</td>
-                  <td className="px-3 py-2 font-semibold">$2,860</td>
-                </tr>
-                <tr className="border-b bg-[var(--surface)]">
-                  <td className="px-3 py-2 font-medium">
-                    <Link
-                      href="/trekking/7-days-machame-route/"
-                      className="text-[var(--primary)] hover:underline"
-                    >
-                      7-Day Machame
-                    </Link>
-                  </td>
-                  <td className="px-3 py-2">7 Days</td>
-                  <td className="px-3 py-2">Challenging</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">93%</td>
-                  <td className="px-3 py-2 font-semibold">$2,440</td>
-                  <td className="px-3 py-2 font-semibold">$2,580</td>
-                </tr>
-                <tr>
-                  <td className="px-3 py-2 font-medium">
-                    <Link
-                      href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"
-                      className="text-[var(--primary)] hover:underline"
-                    >
-                      9-Day Northern Circuit
-                    </Link>
-                  </td>
-                  <td className="px-3 py-2">9 Days</td>
-                  <td className="px-3 py-2">Moderate</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%+</td>
-                  <td className="px-3 py-2 font-semibold">$2,995</td>
-                  <td className="px-3 py-2 font-semibold">$3,100</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Route Descriptions */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white border border-[var(--border)] rounded-lg p-6">
-              <h3 className="font-heading text-xl font-bold mb-3">
-                8-Day Lemosho Route
-              </h3>
-              <p className="text-[var(--text-muted)] text-sm mb-4">
-                Our most popular route for group climbs. The extra day allows
-                excellent acclimatization, resulting in our highest success rate.
-                Scenic approach through pristine rainforest.
-              </p>
-              <Link
-                href="/trekking/8-days-lemosho-route/"
-                className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-medium text-sm"
-              >
-                Learn More →
-              </Link>
-            </div>
-            <div className="bg-white border border-[var(--border)] rounded-lg p-6">
-              <h3 className="font-heading text-xl font-bold mb-3">
-                7-Day Machame Route
-              </h3>
-              <p className="text-[var(--text-muted)] text-sm mb-4">
-                The classic &quot;Whiskey Route&quot; known for its stunning scenery
-                and the famous Barranco Wall. A challenging but rewarding climb
-                with diverse landscapes.
-              </p>
-              <Link
-                href="/trekking/7-days-machame-route/"
-                className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-medium text-sm"
-              >
-                Learn More →
-              </Link>
-            </div>
-            <div className="bg-white border border-[var(--border)] rounded-lg p-6">
-              <h3 className="font-heading text-xl font-bold mb-3">
-                9-Day Northern Circuit Route
-              </h3>
-              <p className="text-[var(--text-muted)] text-sm mb-4">
-                The longest and quietest route, circling the mountain&apos;s
-                remote northern slopes. Unmatched acclimatization gives it our
-                highest success rate — the ultimate Kilimanjaro experience.
-              </p>
-              <Link
-                href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"
-                className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-medium text-sm"
-              >
-                Learn More →
-              </Link>
             </div>
           </div>
         </div>
