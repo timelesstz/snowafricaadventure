@@ -15,6 +15,8 @@ import { BlogContentClient } from "@/components/blog/BlogContentClient";
 import { AuthorBio } from "@/components/blog/AuthorBio";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
+export const revalidate = 300;
+
 interface PageProps {
   params: Promise<{ postSlug: string }>;
 }

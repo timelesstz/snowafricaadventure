@@ -16,6 +16,8 @@ export const metadata: Metadata = genMeta({
   url: "/blog/",
 });
 
+export const revalidate = 300;
+
 async function getPosts() {
   try {
     const posts = await prisma.blogPost.findMany({

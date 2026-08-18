@@ -7,6 +7,8 @@ import { BlogCard } from "@/components/cards/BlogCard";
 import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
+export const revalidate = 300;
+
 interface Props {
   params: Promise<{ categorySlug: string }>;
 }
