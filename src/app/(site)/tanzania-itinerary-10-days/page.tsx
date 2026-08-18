@@ -19,7 +19,7 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
-  title: "10-Day Tanzania Itinerary: Safari, Kilimanjaro & Zanzibar (2026/2027)",
+  title: "10-Day Tanzania Itinerary",
   description:
     "Three proven 10-day Tanzania itineraries with day-by-day plans and real prices: Big Five safari + Zanzibar beach, Kilimanjaro climb + safari, or the full Northern Circuit. Built by a local Tanzanian operator.",
   url: "/tanzania-itinerary-10-days/",

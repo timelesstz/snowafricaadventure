@@ -6,7 +6,7 @@ import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchem
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
-  title: "Wildlife Safaris Tanzania 2026 - See the Big Five & Great Migration",
+  title: "Wildlife Safaris Tanzania 2026",
   description:
     "Tanzania wildlife safaris offer unmatched biodiversity — 4 million animals, the Great Migration, the Big Five, and 1,100 bird species. Expert naturalist guides. Prices from $1,800. Book now.",
   url: "/wildlife-safaris-tanzania/",
