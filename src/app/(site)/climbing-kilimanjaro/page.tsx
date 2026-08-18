@@ -22,7 +22,7 @@ import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SuccessCalculator, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Climbing Kilimanjaro: The Complete Guide (2026)",
+  title: "Climbing Kilimanjaro Guide",
   description:
     "Plan your Kilimanjaro climb: 6 routes compared, real costs ($1,850–$3,200), 12-week training plan, packing list, summit night breakdown, and how to choose the right route. 93% success rate with Snow Africa.",
   url: "/climbing-kilimanjaro/",
@@ -167,7 +167,7 @@ export default async function ClimbingKilimanjaroPage() {
           ]),
           generateFAQSchema(kilimanjaroFaqs),
           generateArticleSchema({
-            title: "Climbing Kilimanjaro: The Complete Guide (2026)",
+            title: "Climbing Kilimanjaro Guide",
             description: "Plan your Kilimanjaro climb: 6 routes compared, real costs ($1,850–$3,200), 12-week training plan, packing list, summit night breakdown, and how to choose the right route.",
             url: "/climbing-kilimanjaro/",
             image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",

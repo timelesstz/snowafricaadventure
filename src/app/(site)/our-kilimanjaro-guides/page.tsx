@@ -34,7 +34,7 @@ import { FaqAccordion } from "@/components/ui/FaqAccordion";
 export const revalidate = 300;
 
 export const metadata: Metadata = genMeta({
-  title: "Our Kilimanjaro Guides & Team",
+  title: "Meet Our Kilimanjaro Guides",
   description:
     "Meet the Snow Africa Adventure guide team: WFR-certified lead guides with 10+ years and 500+ summits each. KPAP-partnered porter welfare, safety protocols, and why our crew makes the difference.",
   url: "/our-kilimanjaro-guides/",
@@ -178,7 +178,7 @@ export default async function OurKilimanjaroGuidesPage() {
   ]);
 
   const articleSchema = generateArticleSchema({
-    title: "Our Kilimanjaro Guides & Team",
+    title: "Meet Our Kilimanjaro Guides",
     description:
       "Meet the Snow Africa Adventure guide team. WFR-certified lead guides with decades of experience and hundreds of successful summits.",
     url: "/our-kilimanjaro-guides/",
