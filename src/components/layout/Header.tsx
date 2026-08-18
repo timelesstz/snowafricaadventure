@@ -121,6 +121,11 @@ export function Header() {
               </a>
             </div>
 
+            {/* Brand Slogan */}
+            <div className="hidden md:block text-[10px] sm:text-xs font-medium tracking-wide text-white/90 italic">
+              YOU&apos;RE MORE THAN A GUEST, YOU&apos;RE FAMILY
+            </div>
+
             {/* Top Nav Links */}
             <nav className="hidden md:flex items-center gap-0.5">
               {TOP_NAV.map((item) => (
