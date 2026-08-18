@@ -237,16 +237,24 @@ export function Footer({ currentYear }: { currentYear: number }) {
               Accredited & Trusted
             </span>
             {logo.certificationLogos.length > 0 && (
-              <div className="flex flex-wrap justify-center items-center gap-6">
+              <div className="flex flex-wrap justify-center items-center gap-3">
+                {/* White card behind each logo — several partner logos are opaque
+                    JPEGs with no transparency, so a brightness/invert filter (which
+                    only works on transparent PNGs) collapsed them into solid gray
+                    boxes. A white backing works for any source format. */}
                 {logo.certificationLogos.map((cert, i) => (
-                  <Image
+                  <div
                     key={i}
-                    src={cert.url}
-                    alt={cert.alt}
-                    width={100}
-                    height={48}
-                    className="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
-                  />
+                    className="bg-white rounded-md px-3 py-2 opacity-80 hover:opacity-100 transition-opacity"
+                  >
+                    <Image
+                      src={cert.url}
+                      alt={cert.alt}
+                      width={100}
+                      height={48}
+                      className="h-8 md:h-10 w-auto object-contain"
+                    />
+                  </div>
                 ))}
               </div>
             )}
