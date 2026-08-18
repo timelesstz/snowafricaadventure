@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { DeparturesBookingSection } from "@/components/departures/DeparturesBookingSection";
 import { generateMetadata as genMeta, generateEventSchema, generateAggregateRatingSchema, generateFAQSchema } from "@/lib/seo";
@@ -287,12 +288,14 @@ export default async function GroupDeparturesPage() {
       {/* 2026 + 2027 Departures + Booking Form — PRIMARY CONTENT */}
       <div id="departures">
         {allDepartures.length > 0 && (
-          <DeparturesBookingSection
-            yearGroups={[
-              { year: 2026, departures: departures2026 },
-              { year: 2027, departures: departures2027 },
-            ].filter((group) => group.departures.length > 0)}
-          />
+          <Suspense fallback={null}>
+            <DeparturesBookingSection
+              yearGroups={[
+                { year: 2026, departures: departures2026 },
+                { year: 2027, departures: departures2027 },
+              ].filter((group) => group.departures.length > 0)}
+            />
+          </Suspense>
         )}
       </div>
 
