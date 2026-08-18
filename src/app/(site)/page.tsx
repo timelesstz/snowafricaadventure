@@ -5,7 +5,6 @@ import { LogoStrip } from "@/components/logos/LogoStrip";
 import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { TripAdvisorCOE } from "@/components/reviews/TripAdvisorCOE";
-import { TripAdvisorWidget } from "@/components/reviews/TripAdvisorWidget";
 import { generateMetadata as genMeta, generateItemListSchema, generateAggregateRatingSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -721,10 +720,9 @@ export default async function HomePage() {
           </div>
           )}
 
-          {/* Full live review stream from TripAdvisor via Trustindex. Renders
-              only once NEXT_PUBLIC_TRUSTINDEX_WIDGET_ID is set (self-hides
-              otherwise), so it shows every review, not just the featured few. */}
-          <TripAdvisorWidget variant="full" className="mt-8" />
+          {/* Trustindex widget disabled — the connected account's trial expired,
+              so it was rendering a "buy a subscription" upsell instead of
+              reviews. Re-enable once the account is on a paid plan. */}
 
           <div className="testimonials-footer">
             <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-inline">

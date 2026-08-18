@@ -9,10 +9,12 @@ export default async function Icon() {
   let logoUrl: string | null = null;
 
   try {
-    const setting = await prisma.siteSetting.findUnique({
-      where: { key: "site.logoUrl" },
+    const settings = await prisma.siteSetting.findMany({
+      where: { key: { in: ["site.faviconUrl", "site.logoUrl"] } },
     });
-    logoUrl = setting?.value || null;
+    const favicon = settings.find((s) => s.key === "site.faviconUrl");
+    const logo = settings.find((s) => s.key === "site.logoUrl");
+    logoUrl = favicon?.value || logo?.value || null;
   } catch (error) {
     console.error("Failed to fetch logo from database:", error);
   }
