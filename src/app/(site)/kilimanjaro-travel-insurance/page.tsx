@@ -29,7 +29,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Travel Insurance: What You Need",
+  title: "Kilimanjaro Travel Insurance",
   description:
     "Essential Kilimanjaro travel insurance guide: coverage for 6,000m altitude, emergency evacuation, trip cancellation. What to look for and recommended providers.",
   url: "/kilimanjaro-travel-insurance/",
@@ -331,7 +331,7 @@ export default function KilimanjaroTravelInsurancePage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Travel Insurance: What You Need",
+            title: "Kilimanjaro Travel Insurance",
             description:
               "Essential Kilimanjaro travel insurance guide: coverage for 6,000m altitude, emergency evacuation, trip cancellation. What to look for and recommended providers.",
             url: "/kilimanjaro-travel-insurance/",

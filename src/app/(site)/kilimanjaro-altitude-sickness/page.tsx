@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Altitude Sickness: Prevention & Treatment",
+  title: "Kilimanjaro Altitude Sickness",
   description:
     "Complete guide to altitude sickness on Kilimanjaro from guides with 800+ summits. Symptoms, prevention, Diamox protocol, acclimatization strategies, and when to descend.",
   url: "/kilimanjaro-altitude-sickness/",
@@ -352,7 +352,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Altitude Sickness: Prevention & Treatment",
+            title: "Kilimanjaro Altitude Sickness",
             description:
               "Complete guide to altitude sickness on Kilimanjaro from guides with 800+ summits. Symptoms, prevention, Diamox protocol, acclimatization strategies, and when to descend.",
             url: "/kilimanjaro-altitude-sickness/",

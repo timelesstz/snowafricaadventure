@@ -32,7 +32,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Training Plan: 12-Week Preparation Guide",
+  title: "Kilimanjaro Training Plan",
   description:
     "12-week Kilimanjaro training plan from guides with 800+ summits. Weekly schedules for hiking, cardio, strength, and mental prep. Works for all fitness levels.",
   url: "/kilimanjaro-training-plan/",
@@ -370,7 +370,7 @@ export default function KilimanjaroTrainingPlanPage() {
             ],
           }),
           generateArticleSchema({
-            title: "Kilimanjaro Training Plan: 12-Week Preparation Guide",
+            title: "Kilimanjaro Training Plan",
             description:
               "12-week Kilimanjaro training plan from guides with 800+ summits. Weekly schedules for hiking, cardio, strength, and mental prep. Works for all fitness levels.",
             url: "/kilimanjaro-training-plan/",

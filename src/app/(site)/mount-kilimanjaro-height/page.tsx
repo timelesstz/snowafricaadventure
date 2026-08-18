@@ -25,7 +25,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Height: 5 Zones From Base to Summit",
+  title: "Kilimanjaro Height",
   description:
     "Kilimanjaro is 19,341 ft (5,895m) — but the climb passes through 5 wildly different worlds. See what each altitude zone looks and feels like.",
   url: "/mount-kilimanjaro-height/",

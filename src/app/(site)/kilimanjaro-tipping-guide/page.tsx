@@ -28,7 +28,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Tipping Guide: How Much to Tip",
+  title: "Kilimanjaro Tipping Guide",
   description:
     "How much to tip on Kilimanjaro: $200-$250 per climber recommended. Breakdown for guides, assistant guides, cooks, and porters. Tipping etiquette and ceremony.",
   url: "/kilimanjaro-tipping-guide/",
@@ -256,7 +256,7 @@ export default function KilimanjaroTippingGuidePage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Tipping Guide: How Much to Tip",
+            title: "Kilimanjaro Tipping Guide",
             description:
               "How much to tip on Kilimanjaro: $200-$250 per climber recommended. Breakdown for guides, assistant guides, cooks, and porters. Tipping etiquette and ceremony.",
             url: "/kilimanjaro-tipping-guide/",

@@ -18,7 +18,7 @@ import { RouteCard } from "@/components/cards/RouteCard";
 export const revalidate = 300;
 
 export const metadata: Metadata = genMeta({
-  title: "Mountain Trekking in Tanzania — Mount Meru & Ol Doinyo Lengai",
+  title: "Mountain Trekking in Tanzania",
   description:
     "Trek Tanzania's other great mountains. Climb Mount Meru (4,562m), the country's second-highest peak, or summit the active volcano Ol Doinyo Lengai. Expert local guides from Arusha.",
   url: "/mountain-trekking/",

@@ -32,7 +32,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Tanzania Visa for Kilimanjaro: Requirements 2026",
+  title: "Tanzania Visa for Kilimanjaro",
   description:
     "Tanzania visa guide for Kilimanjaro climbers: e-Visa application, $50 fee, requirements by nationality, visa on arrival options. Step-by-step application process.",
   url: "/kilimanjaro-visa-tanzania/",
@@ -370,7 +370,7 @@ export default function KilimanjaroVisaTanzaniaPage() {
             ],
           }),
           generateArticleSchema({
-            title: "Tanzania Visa for Kilimanjaro: Requirements 2026",
+            title: "Tanzania Visa for Kilimanjaro",
             description:
               "Tanzania visa guide for Kilimanjaro climbers: e-Visa application, $50 fee, requirements by nationality, visa on arrival options. Step-by-step application process.",
             url: "/kilimanjaro-visa-tanzania/",

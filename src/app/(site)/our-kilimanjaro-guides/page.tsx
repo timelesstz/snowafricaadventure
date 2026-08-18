@@ -34,7 +34,7 @@ import { FaqAccordion } from "@/components/ui/FaqAccordion";
 export const revalidate = 300;
 
 export const metadata: Metadata = genMeta({
-  title: "Our Kilimanjaro Guides & Team — Meet the Experts",
+  title: "Our Kilimanjaro Guides & Team",
   description:
     "Meet the Snow Africa Adventure guide team: WFR-certified lead guides with 10+ years and 500+ summits each. KPAP-partnered porter welfare, safety protocols, and why our crew makes the difference.",
   url: "/our-kilimanjaro-guides/",

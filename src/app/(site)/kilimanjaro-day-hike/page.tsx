@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Day Hike: Trek Without the Summit",
+  title: "Kilimanjaro Day Hike",
   description:
     "Kilimanjaro day hike options: trek through the rainforest to Mandara Hut (2,720m) on Marangu or Shira Plateau on Lemosho. No camping required. From $150 per person.",
   url: "/kilimanjaro-day-hike/",
@@ -385,7 +385,7 @@ export default function KilimanjaroDayHikePage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Day Hike: Trek Without the Summit",
+            title: "Kilimanjaro Day Hike",
             description:
               "Kilimanjaro day hike options: trek through the rainforest to Mandara Hut (2,720m) on Marangu or Shira Plateau on Lemosho. No camping required. From $150 per person.",
             url: "/kilimanjaro-day-hike/",

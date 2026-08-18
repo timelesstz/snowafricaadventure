@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Records: Fastest Climbs & Firsts",
+  title: "Kilimanjaro Records",
   description:
     "Kilimanjaro records: fastest ascent (4h 56m), youngest summiter (6 years), oldest (89 years), most summits, first ascent in 1889. Complete records archive.",
   url: "/kilimanjaro-records/",
@@ -374,7 +374,7 @@ export default function KilimanjaroRecordsPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Records: Fastest Climbs & Firsts",
+            title: "Kilimanjaro Records",
             description:
               "Kilimanjaro records: fastest ascent (4h 56m), youngest summiter (6 years), oldest (89 years), most summits, first ascent in 1889. Complete records archive.",
             url: "/kilimanjaro-records/",

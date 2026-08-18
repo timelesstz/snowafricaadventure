@@ -32,7 +32,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Is Kilimanjaro Safe? Complete Safety Guide 2026",
+  title: "Is Kilimanjaro Safe?",
   description:
     "Is climbing Kilimanjaro safe? With experienced guides, proper acclimatization, and emergency protocols, the fatality rate is just 0.03%. Full safety breakdown from 800+ summit expeditions.",
   url: "/kilimanjaro-safety/",
@@ -384,7 +384,7 @@ export default function KilimanjaroSafetyPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Is Kilimanjaro Safe? Complete Safety Guide 2026",
+            title: "Is Kilimanjaro Safe?",
             description:
               "Is climbing Kilimanjaro safe? With experienced guides, proper acclimatization, and emergency protocols, the fatality rate is just 0.03%. Full safety breakdown from 800+ summit expeditions.",
             url: "/kilimanjaro-safety/",

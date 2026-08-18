@@ -30,7 +30,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Food & Meals: What You Eat Daily",
+  title: "Kilimanjaro Food & Meals",
   description:
     "What do you eat on Kilimanjaro? Full meal guide: 4,000-5,000 calories daily, hot breakfasts, packed lunches, 3-course dinners. Sample menus from our mountain kitchen.",
   url: "/kilimanjaro-food-meals/",
@@ -433,7 +433,7 @@ export default function KilimanjaroFoodMealsPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Food & Meals: What You Eat Daily",
+            title: "Kilimanjaro Food & Meals",
             description:
               "What do you eat on Kilimanjaro? Full meal guide: 4,000-5,000 calories daily, hot breakfasts, packed lunches, 3-course dinners. Sample menus from our mountain kitchen.",
             url: "/kilimanjaro-food-meals/",

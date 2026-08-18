@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Mount Kilimanjaro: Complete Climber's Guide (2026)",
+  title: "Mount Kilimanjaro Guide",
   description:
     "Everything on Mount Kilimanjaro — 5,895m height, 7 routes, costs from $2,000, 65%+ success rates, and the best months to climb. From Arusha-based KPAP guides.",
   url: "/mount-kilimanjaro/",
@@ -194,7 +194,7 @@ export default function MountKilimanjaroPage() {
             },
           ]),
           generateArticleSchema({
-            title: "Mount Kilimanjaro: Complete Climber's Guide (2026)",
+            title: "Mount Kilimanjaro Guide",
             description:
               "Complete guide to Mount Kilimanjaro — height, routes, costs, success rates, and best times to climb Africa's highest peak.",
             url: "/mount-kilimanjaro/",

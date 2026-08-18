@@ -32,7 +32,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Age Limits: Minimum & Maximum Age",
+  title: "Kilimanjaro Age Limits",
   description:
     "Kilimanjaro age requirements: minimum 10 years old (KINAPA rule), no official maximum. Oldest summiter was 89. Age-specific tips for children, teens, and seniors.",
   url: "/kilimanjaro-age-limits/",
@@ -236,7 +236,7 @@ export default function KilimanjaroAgeLimitsPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Age Limits: Minimum & Maximum Age",
+            title: "Kilimanjaro Age Limits",
             description:
               "Kilimanjaro age requirements: minimum 10 years old (KINAPA rule), no official maximum. Oldest summiter was 89. Age-specific tips for children, teens, and seniors.",
             url: "/kilimanjaro-age-limits/",

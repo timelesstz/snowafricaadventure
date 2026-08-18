@@ -6,7 +6,7 @@ import SearchClient from "./SearchClient";
 
 export const metadata: Metadata = {
   ...genMeta({
-    title: "Search Kilimanjaro Treks & Tanzania Safaris",
+    title: "Search Treks & Safaris",
     description:
       "Search and find Kilimanjaro trekking routes, Tanzania safari packages, national park destinations, and expert travel guides. Plan your Tanzania adventure.",
     url: "/search/",

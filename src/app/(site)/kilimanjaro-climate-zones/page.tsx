@@ -29,7 +29,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Climate Zones: 5 Worlds in One Mountain",
+  title: "Kilimanjaro Climate Zones",
   description:
     "Kilimanjaro's 5 climate zones from tropical rainforest to arctic summit. Temperature, wildlife, vegetation, and what to expect in each zone. Detailed elevation guide.",
   url: "/kilimanjaro-climate-zones/",
@@ -416,7 +416,7 @@ export default function KilimanjaroClimateZonesPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Climate Zones: 5 Worlds in One Mountain",
+            title: "Kilimanjaro Climate Zones",
             description:
               "Kilimanjaro's 5 climate zones from tropical rainforest to arctic summit. Temperature, wildlife, vegetation, and what to expect in each zone. Detailed elevation guide.",
             url: "/kilimanjaro-climate-zones/",

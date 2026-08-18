@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Airport Guide: JRO Arrivals & Transfers",
+  title: "Kilimanjaro Airport Guide",
   description:
     "Complete Kilimanjaro International Airport (JRO) guide: airlines, arrival process, visa on arrival, airport transfers to Moshi and Arusha, and what to expect.",
   url: "/kilimanjaro-airport-guide/",
@@ -293,7 +293,7 @@ export default function KilimanjaroAirportGuidePage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Airport Guide: JRO Arrivals & Transfers",
+            title: "Kilimanjaro Airport Guide",
             description:
               "Complete Kilimanjaro International Airport (JRO) guide: airlines, arrival process, visa on arrival, airport transfers to Moshi and Arusha, and what to expect.",
             url: "/kilimanjaro-airport-guide/",

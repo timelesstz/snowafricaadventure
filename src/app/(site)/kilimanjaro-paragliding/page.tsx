@@ -30,7 +30,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Paragliding: Fly From the Summit",
+  title: "Kilimanjaro Paragliding",
   description:
     "Can you paraglide off Kilimanjaro? Yes — experienced pilots have launched from near the summit. Requirements, logistics, permits, and how to arrange this extreme adventure.",
   url: "/kilimanjaro-paragliding/",
@@ -237,7 +237,7 @@ export default function KilimanjaroParaglidingPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Paragliding: Fly From the Summit",
+            title: "Kilimanjaro Paragliding",
             description:
               "Can you paraglide off Kilimanjaro? Yes — experienced pilots have launched from near the summit. Requirements, logistics, permits, and how to arrange this extreme adventure.",
             url: "/kilimanjaro-paragliding/",

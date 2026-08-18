@@ -30,7 +30,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase, SuccessCalculator } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Can Beginners Climb Kilimanjaro? Yes — Here's How",
+  title: "Can Beginners Climb Kilimanjaro? Yes",
   description:
     "Yes, beginners climb Kilimanjaro every year. No mountaineering experience needed. Choose a 7+ day route, train for 3 months, and use an experienced operator. Guide from 800+ summit team.",
   url: "/can-beginners-climb-kilimanjaro/",
@@ -364,7 +364,7 @@ export default function CanBeginnersClimbKilimanjaroPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Can Beginners Climb Kilimanjaro? Yes — Here's How",
+            title: "Can Beginners Climb Kilimanjaro? Yes",
             description:
               "Yes, beginners climb Kilimanjaro every year. No mountaineering experience needed. Choose a 7+ day route, train for 3 months, and use an experienced operator.",
             url: "/can-beginners-climb-kilimanjaro/",

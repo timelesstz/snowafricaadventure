@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Honeymoon: Summit Together in 2026",
+  title: "Kilimanjaro Honeymoon",
   description:
     "Plan a Kilimanjaro honeymoon adventure: romantic summit experience, private treks for couples, safari combo packages, best routes for couples, and Zanzibar extension.",
   url: "/kilimanjaro-honeymoon/",
@@ -272,7 +272,7 @@ export default function KilimanjaroHoneymoonPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Honeymoon: Summit Together in 2026",
+            title: "Kilimanjaro Honeymoon",
             description:
               "Plan a Kilimanjaro honeymoon adventure: romantic summit experience, private treks for couples, safari combo packages, best routes for couples, and Zanzibar extension.",
             url: "/kilimanjaro-honeymoon/",

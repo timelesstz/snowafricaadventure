@@ -45,7 +45,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = genMeta({
-  title: "Tanzania Safaris: Compare Packages & Prices (2026-2027)",
+  title: "Tanzania Safaris",
   description:
     "Compare Tanzania safari packages from $250/day. Serengeti, Ngorongoro Crater, Tarangire — camping to luxury lodges. Great Migration dates, Big Five parks, honest pricing from a local operator.",
   url: "/tanzania-safaris/",

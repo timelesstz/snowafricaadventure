@@ -27,7 +27,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Map: Routes, Camps & Gates Guide",
+  title: "Kilimanjaro Map",
   description:
     "Interactive Kilimanjaro map guide: all 7 routes, 40+ camps, gate locations, summit approaches. Elevation profiles and route comparisons with detailed descriptions.",
   url: "/kilimanjaro-map/",
@@ -320,7 +320,7 @@ export default function KilimanjaroMapPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Map: Routes, Camps & Gates Guide",
+            title: "Kilimanjaro Map",
             description:
               "Interactive Kilimanjaro map guide: all 7 routes, 40+ camps, gate locations, summit approaches. Elevation profiles and route comparisons with detailed descriptions.",
             url: "/kilimanjaro-map/",

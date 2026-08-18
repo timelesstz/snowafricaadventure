@@ -29,7 +29,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Women Climbing Kilimanjaro: Complete Guide 2026",
+  title: "Women Climbing Kilimanjaro",
   description:
     "Everything women need to know about climbing Kilimanjaro: safety, fitness tips, what to pack, hygiene on the mountain, solo female travel, and women-only group departures.",
   url: "/kilimanjaro-women-climbing/",
@@ -302,7 +302,7 @@ export default function KilimanjaroWomenClimbingPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Women Climbing Kilimanjaro: Complete Guide 2026",
+            title: "Women Climbing Kilimanjaro",
             description:
               "Everything women need to know about climbing Kilimanjaro: safety, fitness tips, what to pack, hygiene on the mountain, solo female travel, and women-only group departures.",
             url: "/kilimanjaro-women-climbing/",

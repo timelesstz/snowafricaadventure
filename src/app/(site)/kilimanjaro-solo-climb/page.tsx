@@ -29,7 +29,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Climbing Kilimanjaro Solo: Guide for Solo Trekkers",
+  title: "Climbing Kilimanjaro Solo",
   description:
     "Can you climb Kilimanjaro solo? Not unguided — but solo travellers thrive on group departures. Costs, safety, meeting fellow climbers, and booking as a single traveller.",
   url: "/kilimanjaro-solo-climb/",
@@ -260,7 +260,7 @@ export default function KilimanjaroSoloClimbPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Climbing Kilimanjaro Solo: Guide for Solo Trekkers",
+            title: "Climbing Kilimanjaro Solo",
             description:
               "Can you climb Kilimanjaro solo? Not unguided — but solo travellers thrive on group departures. Costs, safety, meeting fellow climbers, and booking as a single traveller.",
             url: "/kilimanjaro-solo-climb/",

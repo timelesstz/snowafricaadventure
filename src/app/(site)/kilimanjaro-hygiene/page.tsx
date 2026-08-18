@@ -29,7 +29,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Hygiene: Toilets, Showers & Staying Clean",
+  title: "Kilimanjaro Hygiene",
   description:
     "What are toilets like on Kilimanjaro? Guide to hygiene on the mountain: toilet types, washing, hand sanitiser, dental care, and staying clean during your 5-9 day trek.",
   url: "/kilimanjaro-hygiene/",
@@ -158,7 +158,7 @@ export default function KilimanjaroHygienePage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Hygiene: Toilets, Showers & Staying Clean",
+            title: "Kilimanjaro Hygiene",
             description:
               "What are toilets like on Kilimanjaro? Guide to hygiene on the mountain: toilet types, washing, hand sanitiser, dental care, and staying clean during your 5-9 day trek.",
             url: "/kilimanjaro-hygiene/",

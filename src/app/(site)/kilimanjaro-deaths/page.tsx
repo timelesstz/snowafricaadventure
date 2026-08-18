@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Deaths on Kilimanjaro: Statistics & Risk Factors",
+  title: "Deaths on Kilimanjaro",
   description:
     "Kilimanjaro death statistics: 3-10 fatalities per year among 35,000+ climbers (0.03% rate). Causes, risk factors, and how to minimise danger. Data from KINAPA and local operators.",
   url: "/kilimanjaro-deaths/",
@@ -399,7 +399,7 @@ export default function KilimanjaroDeathsPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Deaths on Kilimanjaro: Statistics & Risk Factors",
+            title: "Deaths on Kilimanjaro",
             description:
               "Kilimanjaro death statistics: 3-10 fatalities per year among 35,000+ climbers (0.03% rate). Causes, risk factors, and how to minimise danger. Data from KINAPA and local operators.",
             url: "/kilimanjaro-deaths/",

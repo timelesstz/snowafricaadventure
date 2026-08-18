@@ -31,7 +31,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Weather: Month-by-Month Forecast",
+  title: "Kilimanjaro Weather",
   description:
     "Kilimanjaro weather by month: temperatures from 25°C at the gate to -20°C at the summit. Rainfall data, best months to climb, and what to pack for each season.",
   url: "/kilimanjaro-weather/",
@@ -401,7 +401,7 @@ export default function KilimanjaroWeatherPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Weather: Month-by-Month Forecast",
+            title: "Kilimanjaro Weather",
             description:
               "Kilimanjaro weather by month: temperatures from 25°C at the gate to -20°C at the summit. Rainfall data, best months to climb, and what to pack for each season.",
             url: "/kilimanjaro-weather/",

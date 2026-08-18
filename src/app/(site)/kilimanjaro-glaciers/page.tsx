@@ -30,7 +30,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Glaciers: Why They're Disappearing",
+  title: "Kilimanjaro Glaciers",
   description:
     "Kilimanjaro's glaciers have lost 85%+ of their ice since 1912. Learn about the Furtwängler Glacier, Northern Icefield, and why scientists predict ice-free by 2040.",
   url: "/kilimanjaro-glaciers/",
@@ -241,7 +241,7 @@ export default function KilimanjaroGlaciersPage() {
           ]),
           generateFAQSchema(faqs),
           generateArticleSchema({
-            title: "Kilimanjaro Glaciers: Why They're Disappearing",
+            title: "Kilimanjaro Glaciers",
             description:
               "Kilimanjaro's glaciers have lost 85%+ of their ice since 1912. Learn about the Furtwängler Glacier, Northern Icefield, and why scientists predict ice-free by 2040.",
             url: "/kilimanjaro-glaciers/",
