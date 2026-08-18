@@ -288,7 +288,14 @@ export default async function GroupDeparturesPage() {
       {/* 2026 + 2027 Departures + Booking Form — PRIMARY CONTENT */}
       <div id="departures">
         {allDepartures.length > 0 && (
-          <Suspense fallback={null}>
+          <Suspense
+            fallback={
+              <div className="py-12 container mx-auto px-4">
+                <div className="h-9 w-48 bg-[var(--surface)] rounded-lg animate-pulse mb-8" />
+                <div className="h-[480px] bg-[var(--surface)] rounded-lg animate-pulse" />
+              </div>
+            }
+          >
             <DeparturesBookingSection
               yearGroups={[
                 { year: 2026, departures: departures2026 },

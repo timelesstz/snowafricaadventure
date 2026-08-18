@@ -499,15 +499,16 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                             availableSpots={dep.availableSpots}
                           />
                         </div>
-                        {isHydrated && dep.availableSpots > 0 && (() => {
-                          const daysUntil = differenceInDays(new Date(dep.arrivalDate), new Date());
-                          if (daysUntil <= 0 || daysUntil > 60) return null;
-                          return (
-                            <span className="text-[10px] text-[var(--secondary-dark)] font-medium">
-                              Departs in {daysUntil} {daysUntil === 1 ? "day" : "days"}
-                            </span>
-                          );
-                        })()}
+                        {/* Fixed height reserved up front so the text appearing post-hydration
+                            doesn't shift the row (CLS) — same element renders on server and
+                            client, only its text content is filled in after hydration. */}
+                        <span className="text-[10px] text-[var(--secondary-dark)] font-medium block h-[14px]">
+                          {isHydrated && dep.availableSpots > 0 && (() => {
+                            const daysUntil = differenceInDays(new Date(dep.arrivalDate), new Date());
+                            if (daysUntil <= 0 || daysUntil > 60) return null;
+                            return `Departs in ${daysUntil} ${daysUntil === 1 ? "day" : "days"}`;
+                          })()}
+                        </span>
                       </div>
                     </td>
                     <td className="px-3 py-2">
