@@ -525,7 +525,7 @@ async function main() {
     create: {
       slug: "kilimanjaro-packing-mistakes",
       title: "15 Common Kilimanjaro Packing Mistakes (And How to Avoid Them)",
-      metaTitle: "15 Kilimanjaro Packing Mistakes to Avoid",
+      metaTitle: "15 Kilimanjaro Packing Mistakes",
       metaDescription:
         "The 15 most common Kilimanjaro packing mistakes — wrong sleeping bag, cotton base layers, no gaiters, insufficient batteries, and more. How to avoid them all.",
       excerpt:
@@ -538,7 +538,7 @@ async function main() {
     },
     update: {
       title: "15 Common Kilimanjaro Packing Mistakes (And How to Avoid Them)",
-      metaTitle: "15 Kilimanjaro Packing Mistakes to Avoid",
+      metaTitle: "15 Kilimanjaro Packing Mistakes",
       metaDescription:
         "The 15 most common Kilimanjaro packing mistakes — wrong sleeping bag, cotton base layers, no gaiters, insufficient batteries, and more. How to avoid them all.",
       excerpt:

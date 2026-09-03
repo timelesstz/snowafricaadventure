@@ -363,7 +363,7 @@ async function main() {
     {
       slug: "lake-manyara-national-park-guide",
       title: "Lake Manyara National Park: Home of the Tree-Climbing Lions",
-      metaTitle: "Lake Manyara National Park Guide (2026)",
+      metaTitle: "Lake Manyara National Park Guide",
       metaDescription:
         "Complete Lake Manyara safari guide — tree-climbing lions, 400+ bird species, night game drives, canopy walk. Park fees, best time, and how to combine with Tarangire.",
       excerpt:

@@ -468,7 +468,7 @@ const posts = [
   {
     slug: "kilimanjaro-first-aid-kit",
     title: "Kilimanjaro First Aid Kit: What to Pack for Medical Emergencies",
-    metaTitle: "Kilimanjaro First Aid Kit Checklist 2026",
+    metaTitle: "Kilimanjaro First Aid Kit Checklist",
     metaDescription:
       "Complete first aid kit checklist for Kilimanjaro. What medications to bring, blister treatment, altitude sickness remedies, wound care, and what your operator carries for emergencies.",
     excerpt:

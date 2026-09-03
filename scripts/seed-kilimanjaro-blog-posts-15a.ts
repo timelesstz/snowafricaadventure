@@ -383,7 +383,7 @@ async function main() {
       excerpt:
         "How oxygen drops from 100% to 49% as you climb Kilimanjaro — SpO2 readings at each camp, pulse oximeters, acclimatization, supplemental oxygen policy, and warning signs guides monitor.",
       content: post1Content,
-      metaTitle: "Kilimanjaro Oxygen Levels by Elevation (2026 Guide)",
+      metaTitle: "Kilimanjaro Oxygen Levels & Altitude",
       metaDescription:
         "Oxygen levels at every Kilimanjaro camp: effective O2 percentage, SpO2 readings, pulse oximeter advice, how your body adapts, supplemental oxygen policy, and warning signs of dangerous levels.",
     },

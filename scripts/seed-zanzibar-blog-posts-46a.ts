@@ -547,7 +547,7 @@ async function main() {
       excerpt:
         "The 20 best things to do in Zanzibar with real prices and practical details. Stone Town walking tours, Mnemba snorkelling, spice tours, dhow cruises, kite surfing in Paje, Safari Blue, Prison Island, The Rock Restaurant, and more from our team on the ground.",
       content: thingsToDoContent,
-      metaTitle: "Things to Do in Zanzibar | 20 Best 2026",
+      metaTitle: "20 Best Things to Do in Zanzibar",
       metaDescription:
         "20 best things to do in Zanzibar with prices. Stone Town tours, snorkelling, spice tours, dhow cruises, kite surfing, Safari Blue, and more.",
       featuredImage: FEATURED_IMAGE,
@@ -560,7 +560,7 @@ async function main() {
       excerpt:
         "The 20 best things to do in Zanzibar with real prices and practical details. Stone Town walking tours, Mnemba snorkelling, spice tours, dhow cruises, kite surfing in Paje, Safari Blue, Prison Island, The Rock Restaurant, and more from our team on the ground.",
       content: thingsToDoContent,
-      metaTitle: "Things to Do in Zanzibar | 20 Best 2026",
+      metaTitle: "20 Best Things to Do in Zanzibar",
       metaDescription:
         "20 best things to do in Zanzibar with prices. Stone Town tours, snorkelling, spice tours, dhow cruises, kite surfing, Safari Blue, and more.",
       featuredImage: FEATURED_IMAGE,

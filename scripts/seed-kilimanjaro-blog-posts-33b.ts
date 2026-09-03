@@ -294,7 +294,7 @@ async function main() {
     update: {
       title: "Kilimanjaro Lemosho Route: The Complete Guide",
       content: post1Content,
-      metaTitle: "Kilimanjaro Lemosho Route: Complete Guide",
+      metaTitle: "Kilimanjaro Lemosho Route Guide",
       metaDescription:
         "Plan your Lemosho Route climb with our day-by-day itinerary, camp details, 93-95% success rate data, and honest advice from 800+ Kilimanjaro expeditions.",
       excerpt:
@@ -307,7 +307,7 @@ async function main() {
       slug: "kilimanjaro-lemosho-route-guide",
       title: "Kilimanjaro Lemosho Route: The Complete Guide",
       content: post1Content,
-      metaTitle: "Kilimanjaro Lemosho Route: Complete Guide",
+      metaTitle: "Kilimanjaro Lemosho Route Guide",
       metaDescription:
         "Plan your Lemosho Route climb with our day-by-day itinerary, camp details, 93-95% success rate data, and honest advice from 800+ Kilimanjaro expeditions.",
       excerpt:

@@ -633,7 +633,7 @@ async function main() {
       excerpt:
         "The definitive Zanzibar food guide covering must-try dishes, Forodhani Gardens night market, best restaurants by area, street food, seafood, spice-infused cooking, tropical fruits, drinks, cooking classes, dietary restrictions, and budget tips. Real prices and insider recommendations.",
       content: foodGuideContent,
-      metaTitle: "Zanzibar Food Guide | What & Where to Eat",
+      metaTitle: "Zanzibar Food Guide: What to Eat",
       metaDescription:
         "Zanzibar food guide with must-try dishes, Forodhani night market tips, best restaurants by area, street food prices, seafood, cooking classes, and budget tips.",
       featuredImage: FEATURED_IMAGE,
@@ -646,7 +646,7 @@ async function main() {
       excerpt:
         "The definitive Zanzibar food guide covering must-try dishes, Forodhani Gardens night market, best restaurants by area, street food, seafood, spice-infused cooking, tropical fruits, drinks, cooking classes, dietary restrictions, and budget tips. Real prices and insider recommendations.",
       content: foodGuideContent,
-      metaTitle: "Zanzibar Food Guide | What & Where to Eat",
+      metaTitle: "Zanzibar Food Guide: What to Eat",
       metaDescription:
         "Zanzibar food guide with must-try dishes, Forodhani night market tips, best restaurants by area, street food prices, seafood, cooking classes, and budget tips.",
       featuredImage: FEATURED_IMAGE,

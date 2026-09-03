@@ -19,7 +19,7 @@ interface BlogUpdate {
 const updates: BlogUpdate[] = [
   {
     slug: "2025-best-time-to-climb-mount-kilimanjaro",
-    metaTitle: "Best Time to Climb Kilimanjaro 2026-2027 | Season Guide",
+    metaTitle: "Best Time to Climb Kilimanjaro 2026",
     metaDescription:
       "Updated 2026-2027 Kilimanjaro climbing seasons. Dry seasons (Jan-Mar, Jun-Oct) offer 90%+ success rates. Weather data, crowd levels & booking tips.",
     title: "Best Time to Climb Kilimanjaro 2026-2027 | Season Guide",
@@ -37,7 +37,7 @@ const updates: BlogUpdate[] = [
   },
   {
     slug: "top-kilimanjaro-adventure-packages-2025",
-    metaTitle: "Kilimanjaro Packages 2026 | Best Routes & All-Inclusive Deals",
+    metaTitle: "Best Kilimanjaro Packages 2026",
     title: "Top Kilimanjaro Adventure Packages 2026",
   },
   {

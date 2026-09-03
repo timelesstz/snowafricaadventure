@@ -402,7 +402,7 @@ async function main() {
     {
       slug: "serengeti-great-migration-guide",
       title: "Serengeti Great Migration: Complete Guide to Nature's Greatest Show",
-      metaTitle: "Serengeti Great Migration Guide (2026)",
+      metaTitle: "Serengeti Great Migration Guide",
       metaDescription:
         "Month-by-month guide to the Great Migration — 1.5M wildebeest, river crossings, calving season, best camps. From a Moshi-based guide with 15 years experience.",
       excerpt:

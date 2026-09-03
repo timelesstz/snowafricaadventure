@@ -540,7 +540,7 @@ async function main() {
       excerpt:
         "Complete guide to diving and snorkelling in Zanzibar. Mnemba Atoll, Chumbe Island, Pemba Island, dive operators (One Ocean, Zanzibar Dive Centre), PADI courses ($80-$500), best season, marine life (turtles, dolphins, whales), and conservation rules from a Zanzibar operator.",
       content: divingContent,
-      metaTitle: "Zanzibar Diving & Snorkelling Guide 2026",
+      metaTitle: "Zanzibar Diving & Snorkelling Guide",
       metaDescription:
         "Zanzibar diving and snorkelling guide. Mnemba Atoll, Chumbe Island, PADI courses, dive operators, best season, turtles, dolphins, prices and tips.",
       featuredImage: FEATURED_IMAGE,
@@ -554,7 +554,7 @@ async function main() {
       excerpt:
         "Complete guide to diving and snorkelling in Zanzibar. Mnemba Atoll, Chumbe Island, Pemba Island, dive operators (One Ocean, Zanzibar Dive Centre), PADI courses ($80-$500), best season, marine life (turtles, dolphins, whales), and conservation rules from a Zanzibar operator.",
       content: divingContent,
-      metaTitle: "Zanzibar Diving & Snorkelling Guide 2026",
+      metaTitle: "Zanzibar Diving & Snorkelling Guide",
       metaDescription:
         "Zanzibar diving and snorkelling guide. Mnemba Atoll, Chumbe Island, PADI courses, dive operators, best season, turtles, dolphins, prices and tips.",
       featuredImage: FEATURED_IMAGE,

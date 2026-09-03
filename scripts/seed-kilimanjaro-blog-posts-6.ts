@@ -545,7 +545,7 @@ async function main() {
     create: {
       slug: "kilimanjaro-crater-camp",
       title: "Crater Camp: Sleeping at 5,729m Inside Kilimanjaro's Caldera",
-      metaTitle: "Kilimanjaro Crater Camp: Sleep at 5,729m",
+      metaTitle: "Kilimanjaro Crater Camp at 5,729m",
       metaDescription:
         "Crater Camp on Kilimanjaro at 5,729m — itinerary, requirements, what to expect, cost, and why sleeping inside the caldera next to Furtwängler Glacier is the ultimate mountain experience.",
       excerpt:
@@ -558,7 +558,7 @@ async function main() {
     },
     update: {
       title: "Crater Camp: Sleeping at 5,729m Inside Kilimanjaro's Caldera",
-      metaTitle: "Kilimanjaro Crater Camp: Sleep at 5,729m",
+      metaTitle: "Kilimanjaro Crater Camp at 5,729m",
       metaDescription:
         "Crater Camp on Kilimanjaro at 5,729m — itinerary, requirements, what to expect, cost, and why sleeping inside the caldera next to Furtwängler Glacier is the ultimate mountain experience.",
       excerpt:

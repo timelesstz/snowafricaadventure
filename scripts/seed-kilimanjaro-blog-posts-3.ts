@@ -772,7 +772,7 @@ async function main() {
     create: {
       slug: "first-person-to-climb-kilimanjaro",
       title: "First Person to Climb Kilimanjaro: The Full History",
-      metaTitle: "First to Climb Kilimanjaro: Full History",
+      metaTitle: "First Person to Climb Kilimanjaro",
       metaDescription:
         "Hans Meyer, Ludwig Purtscheller, and Chagga guide Yohani Kinyala Lauwo made the first Kilimanjaro summit in 1889. The full story of failed attempts and colonial context.",
       excerpt:
@@ -785,7 +785,7 @@ async function main() {
     },
     update: {
       title: "First Person to Climb Kilimanjaro: The Full History",
-      metaTitle: "First to Climb Kilimanjaro: Full History",
+      metaTitle: "First Person to Climb Kilimanjaro",
       metaDescription:
         "Hans Meyer, Ludwig Purtscheller, and Chagga guide Yohani Kinyala Lauwo made the first Kilimanjaro summit in 1889. The full story of failed attempts and colonial context.",
       excerpt:

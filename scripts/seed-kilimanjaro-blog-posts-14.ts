@@ -364,7 +364,7 @@ async function main() {
       excerpt:
         "Everything couples need to know about climbing Kilimanjaro together — tent logistics, fitness mismatches, relationship dynamics at altitude, best routes, and practical tips.",
       content: post1Content,
-      metaTitle: "Climbing Kilimanjaro as a Couple: Complete Guide (2026)",
+      metaTitle: "Climbing Kilimanjaro as a Couple",
       metaDescription:
         "Couples guide to Kilimanjaro: shared tent logistics, handling different fitness levels, altitude effects on relationships, best routes, and tips from guides who've seen it all.",
     },
@@ -374,7 +374,7 @@ async function main() {
       excerpt:
         "What photography gear to bring to Kilimanjaro — phone setups, mirrorless cameras, GoPro mounts, drone rules, protecting gear from cold and dust, and battery strategy.",
       content: post2Content,
-      metaTitle: "Kilimanjaro Camera Gear Guide: What to Bring (2026)",
+      metaTitle: "Best Camera Gear for Kilimanjaro",
       metaDescription:
         "Best camera gear for Kilimanjaro: phone vs mirrorless vs GoPro, protecting from cold/dust, battery strategy, drone ban, and weight recommendations by photographer level.",
     },
@@ -384,7 +384,7 @@ async function main() {
       excerpt:
         "Why 10% of climbers return to Kilimanjaro — new routes, different seasons, bringing someone along, and what changes (and what doesn't) on your second climb.",
       content: post3Content,
-      metaTitle: "Climbing Kilimanjaro Again: Repeat Climber Guide",
+      metaTitle: "Climbing Kilimanjaro Again: A Guide",
       metaDescription:
         "Returning to Kilimanjaro? New routes, different seasons, what changes on your second climb, route recommendations for repeat climbers, and Crater Camp options.",
     },
@@ -394,7 +394,7 @@ async function main() {
       excerpt:
         "How to plan a corporate Kilimanjaro climb — group sizes, route selection, fitness requirements, budget, leadership debrief framework, and charity integration.",
       content: post4Content,
-      metaTitle: "Corporate Kilimanjaro Climb: Team Building Guide (2026)",
+      metaTitle: "Kilimanjaro Corporate Team Building",
       metaDescription:
         "Plan a corporate Kilimanjaro team building trip: group sizes 4-30+, route selection, fitness requirements, budget ($50-80K for 10 people), and leadership debrief.",
     },

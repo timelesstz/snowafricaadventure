@@ -484,7 +484,7 @@ const posts = [
     slug: "kilimanjaro-vs-aconcagua",
     title:
       "Kilimanjaro vs Aconcagua: Which Mountain Should You Climb?",
-    metaTitle: "Kilimanjaro vs Aconcagua: Full Comparison",
+    metaTitle: "Kilimanjaro vs Aconcagua Compared",
     metaDescription:
       "Kilimanjaro vs Aconcagua comparison: altitude, difficulty, duration, cost, success rates, fitness requirements, and which Seven Summits peak to climb first.",
     excerpt:

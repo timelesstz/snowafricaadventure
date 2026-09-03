@@ -558,7 +558,7 @@ async function main() {
     create: {
       slug: "kilimanjaro-uhuru-peak",
       title: "Uhuru Peak: Standing on the Roof of Africa at 5,895m",
-      metaTitle: "Uhuru Peak: Africa's Highest Point Guide",
+      metaTitle: "Uhuru Peak: Africa's Highest Point",
       metaDescription:
         "What is Uhuru Peak like? The summit sign, glaciers, sunrise views, history, photography tips, and what it feels like to stand at 5,895m — Africa's highest point.",
       excerpt:
@@ -571,7 +571,7 @@ async function main() {
     },
     update: {
       title: "Uhuru Peak: Standing on the Roof of Africa at 5,895m",
-      metaTitle: "Uhuru Peak: Africa's Highest Point Guide",
+      metaTitle: "Uhuru Peak: Africa's Highest Point",
       metaDescription:
         "What is Uhuru Peak like? The summit sign, glaciers, sunrise views, history, photography tips, and what it feels like to stand at 5,895m — Africa's highest point.",
       excerpt:

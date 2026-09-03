@@ -547,7 +547,7 @@ async function main() {
     create: {
       slug: "kilimanjaro-acclimatization",
       title: "Kilimanjaro Acclimatization: The Science Behind Summit Success",
-      metaTitle: "Kilimanjaro Acclimatization Guide (2026)",
+      metaTitle: "Kilimanjaro Acclimatization Guide",
       metaDescription:
         "How acclimatization works on Kilimanjaro — the science, route comparisons, climb-high-sleep-low strategy, altitude sickness recognition, and practical tips for summit success.",
       excerpt:
@@ -560,7 +560,7 @@ async function main() {
     },
     update: {
       title: "Kilimanjaro Acclimatization: The Science Behind Summit Success",
-      metaTitle: "Kilimanjaro Acclimatization Guide (2026)",
+      metaTitle: "Kilimanjaro Acclimatization Guide",
       metaDescription:
         "How acclimatization works on Kilimanjaro — the science, route comparisons, climb-high-sleep-low strategy, altitude sickness recognition, and practical tips for summit success.",
       excerpt:

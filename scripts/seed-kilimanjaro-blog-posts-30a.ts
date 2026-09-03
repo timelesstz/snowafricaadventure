@@ -375,7 +375,7 @@ const posts = [
     slug: "climbing-kilimanjaro-in-december",
     title:
       "Climbing Kilimanjaro in December: Holiday Season Climbing Guide",
-    metaTitle: "Climbing Kilimanjaro in December: Guide",
+    metaTitle: "Climbing Kilimanjaro in December",
     metaDescription:
       "December Kilimanjaro guide: weather after short rains, Christmas and New Year summit traditions, best routes, pricing, and booking tips from 800+ expeditions.",
     excerpt:

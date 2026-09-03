@@ -15,7 +15,10 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   ...genMeta({
-    title: "Kilimanjaro Group Departures 2026-2027",
+    // Kept to 33 chars so the layout's " | Snow Africa Adventure" suffix still
+    // fits inside Google's ~60 char title cutoff. The OG/Twitter titles below
+    // are not SERP-truncated and keep the fuller "2026-2027" range.
+    title: "Kilimanjaro Group Departures 2026",
     description:
       "Join our scheduled Kilimanjaro group climbs with fixed departure dates. Share the adventure with fellow climbers and save. Book your spot today!",
     url: "/kilimanjaro-join-group-departures/",

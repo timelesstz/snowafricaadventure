@@ -413,7 +413,7 @@ async function main() {
     {
       slug: "tanzania-safari-packing-list",
       title: "Tanzania Safari Packing List: What to Bring on Your Game Drive",
-      metaTitle: "Safari Packing List | What to Bring (2026 Guide)",
+      metaTitle: "Tanzania Safari Packing List",
       metaDescription:
         "Complete Tanzania safari packing list from 15 years of guiding. Clothing, camera gear, health essentials, and what NOT to pack for your game drive.",
       excerpt:

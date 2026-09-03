@@ -364,7 +364,7 @@ const posts = [
   {
     slug: "climbing-kilimanjaro-in-may",
     title: "Climbing Kilimanjaro in May: Rainy Season Realities & Late-May Window",
-    metaTitle: "Climbing Kilimanjaro in May: Honest Guide",
+    metaTitle: "Climbing Kilimanjaro in May",
     metaDescription:
       "Is May good for Kilimanjaro? Late May offers solitude, low prices & 78-85% success rates on the Rongai Route. Expert guide with weather data & packing tips.",
     excerpt:
@@ -382,7 +382,7 @@ const posts = [
   {
     slug: "climbing-kilimanjaro-in-june",
     title: "Climbing Kilimanjaro in June: The Insider's Best-Value Month",
-    metaTitle: "Climbing Kilimanjaro in June: Best Value",
+    metaTitle: "Climbing Kilimanjaro in June",
     metaDescription:
       "June on Kilimanjaro: dry-season conditions, 85-90% success rates, 40-60% fewer crowds & 10-15% lower prices. Why experienced climbers choose June over July.",
     excerpt:

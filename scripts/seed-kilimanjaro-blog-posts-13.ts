@@ -513,7 +513,7 @@ async function main() {
       excerpt:
         "From rainforest orchids to giant groundsels to summit lichens — the remarkable plants of Kilimanjaro's five climate zones, endemic species, and photography tips.",
       content: post2Content,
-      metaTitle: "Kilimanjaro Flora: Plants by Climate Zone (Guide)",
+      metaTitle: "Kilimanjaro Plants & Flora by Zone",
       metaDescription:
         "Kilimanjaro plant life guide: rainforest orchids, giant groundsels, giant lobelias, everlasting flowers, endemic species, and botanical photography tips by zone.",
     },
@@ -523,7 +523,7 @@ async function main() {
       excerpt:
         "A realistic day-by-day diary of climbing Kilimanjaro via the Lemosho route — what you see, feel, eat, and experience from gate to summit to descent.",
       content: post3Content,
-      metaTitle: "Kilimanjaro Diary: Day-by-Day Experience (Lemosho)",
+      metaTitle: "Kilimanjaro Lemosho Day-by-Day Diary",
       metaDescription:
         "What climbing Kilimanjaro actually feels like: day-by-day diary covering the rainforest, Barranco Wall, summit night, sunrise, and descent — emotions, food, and camp life.",
     },

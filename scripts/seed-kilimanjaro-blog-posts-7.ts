@@ -470,7 +470,7 @@ async function main() {
     create: {
       slug: "kilimanjaro-umbwe-route",
       title: "The Umbwe Route: Kilimanjaro's Most Challenging Climb",
-      metaTitle: "Umbwe Route: Kilimanjaro's Steepest Route",
+      metaTitle: "Umbwe Route: Kilimanjaro's Steepest",
       metaDescription:
         "Umbwe route guide — Kilimanjaro's steepest and most direct path. Itinerary, difficulty assessment, who should climb it, and why experienced trekkers choose Umbwe.",
       excerpt:
@@ -483,7 +483,7 @@ async function main() {
     },
     update: {
       title: "The Umbwe Route: Kilimanjaro's Most Challenging Climb",
-      metaTitle: "Umbwe Route: Kilimanjaro's Steepest Route",
+      metaTitle: "Umbwe Route: Kilimanjaro's Steepest",
       metaDescription:
         "Umbwe route guide — Kilimanjaro's steepest and most direct path. Itinerary, difficulty assessment, who should climb it, and why experienced trekkers choose Umbwe.",
       excerpt:
