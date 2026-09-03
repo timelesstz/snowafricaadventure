@@ -114,6 +114,15 @@ const SAFARI_FIXES = [
   { slug: "10-day-adventure-in-tanzania-safari-zanzibar", from: "10 Days Tanzania Safari & Zanzibar Beach", to: "10-Day Tanzania Safari & Zanzibar" },
 ];
 
+/**
+ * Duplicate-title fix. Two distinct 6-day Northern Circuit packages shared the
+ * same rendered <title>; the "-central-north" variant is the one that covers
+ * both Central and North Serengeti, so its title now says so.
+ */
+const SAFARI_DEDUPE_FIXES = [
+  { slug: "6-days-safari-to-tarangire-ngorongoro-serengeti-central-north", from: "6-Day Northern Circuit Safari", to: "6-Day Central & North Serengeti" },
+];
+
 const TREKKING_FIXES = [
   { slug: "9-day-northern-circuit-route-kilimanjaro-guide", from: "9 Days Northern Circuit route Kilimanjaro", to: "9-Day Northern Circuit Kilimanjaro" },
 ];
@@ -187,6 +196,7 @@ async function main() {
   await fixMetaTitles(META_TITLE_FIXES);
   await fixMetaTitles(META_TITLE_FIXES_2);
   await fixMetaTitles(SAFARI_FIXES, prisma.safariPackage, "safariPackage");
+  await fixMetaTitles(SAFARI_DEDUPE_FIXES, prisma.safariPackage, "safariPackage");
   await fixMetaTitles(TREKKING_FIXES, prisma.trekkingRoute, "trekkingRoute");
   await fixMetaTitles(DAYTRIP_FIXES, prisma.dayTrip, "dayTrip");
   await prisma.$disconnect();
