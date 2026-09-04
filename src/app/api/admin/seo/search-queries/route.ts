@@ -2,6 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireRole } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
+/**
+ * Aggregating a month of Search Console rows takes a few seconds, and these
+ * routes previously inherited Vercel's 10s default — fine when the table held
+ * a couple of thousand rows, but the request started dying mid-query once the
+ * history was backfilled. The work itself measures under 3s; the ceiling was
+ * the problem.
+ */
+export const maxDuration = 60;
+
 export async function GET(request: NextRequest) {
   try {
     await requireRole("VIEWER");
