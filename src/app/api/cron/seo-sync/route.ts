@@ -36,6 +36,26 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // Optional explicit backfill range: ?start=YYYY-MM-DD&end=YYYY-MM-DD
+  //
+  // The rolling window can only ever reach back a few days, so it cannot repair
+  // history. Rather than require the service-account key on a developer
+  // machine, this lets the deployed endpoint be driven a chunk at a time — each
+  // call small enough to finish inside the function's time budget. Every write
+  // is an upsert, so chunks may overlap and be re-run safely.
+  const url = new URL(request.url);
+  const rangeStart = url.searchParams.get("start");
+  const rangeEnd = url.searchParams.get("end");
+  const isBackfill = Boolean(rangeStart && rangeEnd);
+
+  const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+  if ((rangeStart || rangeEnd) && !(ISO_DATE.test(rangeStart ?? "") && ISO_DATE.test(rangeEnd ?? ""))) {
+    return NextResponse.json(
+      { error: "start and end must both be supplied as YYYY-MM-DD" },
+      { status: 400 }
+    );
+  }
+
   if (!isGoogleConfigured()) {
     return NextResponse.json({
       skipped: true,
@@ -65,13 +85,18 @@ export async function GET(request: Request) {
   if (gscSiteUrl) {
     const syncLog = await prisma.seoSyncLog.create({ data: { source: "GSC" } });
     try {
-      const syncDays = await getNumericSetting("gsc_sync_days", 5);
-      const endDate = new Date();
-      const startDate = new Date(endDate.getTime() - syncDays * 24 * 60 * 60 * 1000);
-      const dateRange = {
-        startDate: startDate.toISOString().split("T")[0],
-        endDate: endDate.toISOString().split("T")[0],
-      };
+      let dateRange: { startDate: string; endDate: string };
+      if (isBackfill) {
+        dateRange = { startDate: rangeStart as string, endDate: rangeEnd as string };
+      } else {
+        const syncDays = await getNumericSetting("gsc_sync_days", 5);
+        const endDate = new Date();
+        const startDate = new Date(endDate.getTime() - syncDays * 24 * 60 * 60 * 1000);
+        dateRange = {
+          startDate: startDate.toISOString().split("T")[0],
+          endDate: endDate.toISOString().split("T")[0],
+        };
+      }
 
       let recordCount = 0;
 
@@ -165,7 +190,10 @@ export async function GET(request: Request) {
   const ga4LooksLikeMeasurementId =
     !!ga4PropertyId && !/^\d+$/.test(ga4PropertyId.replace(/^properties\//, ""));
 
-  if (ga4PropertyId && ga4LooksLikeMeasurementId) {
+  if (isBackfill) {
+    // Backfill is about Search Console history; leave GA4 to the daily run.
+    results.ga4 = { status: "skipped", records: 0 };
+  } else if (ga4PropertyId && ga4LooksLikeMeasurementId) {
     results.ga4 = { status: "misconfigured", records: 0 };
     await prisma.seoSyncLog.create({
       data: {
@@ -243,5 +271,5 @@ export async function GET(request: Request) {
   }
 
   console.log("SEO sync cron completed:", results);
-  return NextResponse.json({ success: true, results });
+  return NextResponse.json({ success: true, mode: isBackfill ? "backfill" : "rolling", range: isBackfill ? `${rangeStart}..${rangeEnd}` : undefined, results });
 }
