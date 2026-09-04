@@ -16,7 +16,7 @@ import {
   CreditCard,
   Backpack,
 } from "lucide-react";
-import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateProductSchema, generateAggregateRatingSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateProductSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
@@ -245,12 +245,6 @@ export default function KilimanjaroPricesPage() {
             sku: "KILI-LEMOSHO-8D",
             ratingValue: 4.9,
             reviewCount: 387,
-          }),
-          generateAggregateRatingSchema({
-            ratingValue: 4.9,
-            reviewCount: 387,
-            itemName: "Snow Africa Adventure — Kilimanjaro Climbing Packages",
-            itemType: "TourOperator",
           }),
         ]}
       />

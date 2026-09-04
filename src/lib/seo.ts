@@ -397,27 +397,23 @@ export function generateProductSchema(product: {
 }
 
 /**
- * Generate AggregateRating schema for reviews
+ * There is deliberately no aggregateRating helper here.
+ *
+ * A `generateAggregateRatingSchema()` used to emit an aggregateRating on
+ * `@type: TourOperator` with a hard-coded 4.9 from 387 reviews, on 39 pages.
+ * Google rejected every one of them — Search Console reported "Invalid object
+ * type for field <parent_node>" — so the markup earned no rich result and did
+ * nothing but sit there.
+ *
+ * It is also against Google's guidelines: ratings must come from real user
+ * reviews, and a business may not mark up its own rating about itself. Invalid
+ * or self-serving structured data risks a manual action, so this was removed
+ * rather than repaired.
+ *
+ * If review stars are wanted in future, emit aggregateRating only from genuine
+ * stored review records, on a type Google supports for review snippets, and
+ * validate with the Rich Results Test before shipping.
  */
-export function generateAggregateRatingSchema(data: {
-  ratingValue: number;
-  reviewCount: number;
-  itemName: string;
-  itemType?: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": data.itemType || "TourOperator",
-    name: data.itemName,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: data.ratingValue,
-      reviewCount: data.reviewCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
-  };
-}
 
 /**
  * Generate Review schema

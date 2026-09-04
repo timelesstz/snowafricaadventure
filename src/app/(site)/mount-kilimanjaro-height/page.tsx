@@ -18,7 +18,6 @@ import {
   generateBreadcrumbSchema,
   generateFAQSchema,
   generateArticleSchema,
-  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -254,7 +253,6 @@ export default function MountKilimanjaroHeightPage() {
             authorRole: "Director Timeless International",
             authorCredentials: ["200+ Kilimanjaro Summits", "15+ Years Guiding Experience", "TATO Licensed Guide", "Wilderness First Responder"],
           }),
-          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 

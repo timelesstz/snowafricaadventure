@@ -17,7 +17,7 @@ import {
   BookOpen,
   Thermometer,
 } from "lucide-react";
-import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema, generateAggregateRatingSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SuccessCalculator, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
@@ -183,12 +183,6 @@ export default async function ClimbingKilimanjaroPage() {
             description: route.notes,
             position: i + 1,
           }))),
-          generateAggregateRatingSchema({
-            ratingValue: 4.9,
-            reviewCount: 387,
-            itemName: "Snow Africa Adventure — Kilimanjaro Climbing",
-            itemType: "TouristAttraction",
-          }),
         ]}
       />
 

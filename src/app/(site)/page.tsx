@@ -5,7 +5,7 @@ import { LogoStrip } from "@/components/logos/LogoStrip";
 import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { TripAdvisorCOE } from "@/components/reviews/TripAdvisorCOE";
-import { generateMetadata as genMeta, generateItemListSchema, generateAggregateRatingSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateItemListSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SITE_CONFIG } from "@/lib/constants";
 import { generateBlurPlaceholder } from "@/lib/utils";
@@ -306,16 +306,10 @@ export default async function HomePage() {
     }))
   );
 
-  const ratingSchema = generateAggregateRatingSchema({
-    ratingValue: 4.9,
-    reviewCount: tripAdvisor.reviews,
-    itemName: SITE_CONFIG.name,
-    itemType: "TourOperator",
-  });
 
   return (
     <div className="homepage-hybrid">
-      <MultiJsonLd schemas={[routesListSchema, ratingSchema]} />
+      <MultiJsonLd schemas={[routesListSchema]} />
 
       {/* ============================================
           HERO - Immersive Fullscreen with Stats Bar

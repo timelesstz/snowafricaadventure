@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { generateMetadata as genMeta, generateFAQSchema, generateBreadcrumbSchema, generateVideoSchema, generateItemListSchema, generateHowToSchema, generateAggregateRatingSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateFAQSchema, generateBreadcrumbSchema, generateVideoSchema, generateItemListSchema, generateHowToSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import prisma from "@/lib/prisma";
@@ -704,12 +704,6 @@ export default async function TrekkingPage() {
             thumbnailUrl: "https://cdn.snowafricaadventure.com/images/kilimanjaro-summit-thumbnail.jpg",
             uploadDate: "2025-06-15",
             duration: "PT8M30S",
-          }),
-          generateAggregateRatingSchema({
-            ratingValue: 4.9,
-            reviewCount: 387,
-            itemName: "Snow Africa Adventure — Kilimanjaro Trekking",
-            itemType: "TourOperator",
           }),
         ]} />
       </section>

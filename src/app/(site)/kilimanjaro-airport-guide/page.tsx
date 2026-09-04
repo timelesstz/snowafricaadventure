@@ -24,7 +24,6 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
-  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -310,7 +309,6 @@ export default function KilimanjaroAirportGuidePage() {
               "Local Moshi Resident",
             ],
           }),
-          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 

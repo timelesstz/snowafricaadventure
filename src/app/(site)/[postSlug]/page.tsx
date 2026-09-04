@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, Tag, ChevronRight, Mountain, MapPin, BookOpen } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema, generateAggregateRatingSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
 import { AUTHOR_PROFILES } from "@/lib/constants";
 import { formatDate, normalizeImageUrl, getCategoryFallbackImage } from "@/lib/utils";
 import prisma from "@/lib/prisma";
@@ -315,20 +315,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateFAQSchema(post.faqs)),
-          }}
-        />
-      )}
-      {isKilimanjaroPost && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              generateAggregateRatingSchema({
-                ratingValue: 4.9,
-                reviewCount: 312,
-                itemName: "Snow Africa Adventure — Kilimanjaro Treks",
-              })
-            ),
           }}
         />
       )}

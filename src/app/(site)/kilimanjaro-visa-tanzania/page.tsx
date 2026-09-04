@@ -24,7 +24,6 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
-  generateAggregateRatingSchema,
   generateHowToSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
@@ -387,7 +386,6 @@ export default function KilimanjaroVisaTanzaniaPage() {
               "Wilderness First Responder",
             ],
           }),
-          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 

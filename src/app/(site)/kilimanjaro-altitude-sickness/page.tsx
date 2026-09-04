@@ -23,7 +23,6 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateArticleSchema,
-  generateAggregateRatingSchema,
   generateHowToSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
@@ -369,7 +368,6 @@ export default function KilimanjaroAltitudeSicknessPage() {
               "Wilderness First Responder",
             ],
           }),
-          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
           generateHowToSchema({
             name: "How to Prevent Altitude Sickness on Kilimanjaro",
             description: "Step-by-step prevention strategy for acute mountain sickness (AMS) when climbing Mount Kilimanjaro.",

@@ -8,7 +8,6 @@ import {
   generateBreadcrumbSchema,
   generateVideoSchema,
   generateItemListSchema,
-  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -228,12 +227,6 @@ export default async function SafarisPage() {
           image: safari.featuredImage || undefined,
           price: safari.priceFrom || undefined,
         }))),
-        generateAggregateRatingSchema({
-          ratingValue: 4.9,
-          reviewCount: 115,
-          itemName: SITE_CONFIG.name,
-          itemType: "TourOperator",
-        }),
       ]} />
 
       {/* Hero Section - Immersive */}

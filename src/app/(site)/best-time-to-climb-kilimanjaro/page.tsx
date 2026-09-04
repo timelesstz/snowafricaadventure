@@ -19,7 +19,6 @@ import {
   generateBreadcrumbSchema,
   generateFAQSchema,
   generateArticleSchema,
-  generateAggregateRatingSchema,
 } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -306,7 +305,6 @@ export default function BestTimeToClimbKilimanjaroPage() {
             publishedTime: "2026-03-04",
             modifiedTime: "2026-06-18",
           }),
-          generateAggregateRatingSchema({ ratingValue: 4.9, reviewCount: 387, itemName: "Snow Africa Adventure — Kilimanjaro Climbing" }),
         ]}
       />
 

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import { DeparturesBookingSection } from "@/components/departures/DeparturesBookingSection";
-import { generateMetadata as genMeta, generateEventSchema, generateAggregateRatingSchema, generateFAQSchema } from "@/lib/seo";
+import { generateMetadata as genMeta, generateEventSchema,generateFAQSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
 import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
@@ -137,13 +137,6 @@ export default async function GroupDeparturesPage() {
     })
   );
 
-  // Aggregate rating for the company
-  const ratingSchema = generateAggregateRatingSchema({
-    ratingValue: 4.9,
-    reviewCount: 156,
-    itemName: SITE_CONFIG.name,
-    itemType: "TourOperator",
-  });
 
   // FAQ Schema for the page
   const faqSchema = generateFAQSchema([
@@ -203,7 +196,6 @@ export default async function GroupDeparturesPage() {
     <div>
       {/* Schema markup */}
       <MultiJsonLd schemas={eventSchemas} />
-      <JsonLd data={ratingSchema} />
       <JsonLd data={faqSchema} />
 
       {/* Hero */}
