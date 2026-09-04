@@ -31,9 +31,11 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
 
 export const metadata: Metadata = genMeta({
-  title: "Kilimanjaro Age Limits",
+  // Searchers arrive asking "how old do you have to be to climb Kilimanjaro",
+  // so the title leads with the answer rather than the topic.
+  title: "Kilimanjaro Age Limits: 10 and Up",
   description:
-    "Kilimanjaro age requirements: minimum 10 years old (KINAPA rule), no official maximum. Oldest summiter was 89. Age-specific tips for children, teens, and seniors.",
+    "Minimum age is 10 (KINAPA rule); there is no maximum — the oldest summiter was 89. Which routes suit children, teens, and climbers over 60, and what each needs.",
   url: "/kilimanjaro-age-limits/",
 });
 

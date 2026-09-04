@@ -5,10 +5,33 @@ import type { Recommendation } from "./types";
 const COMMERCIAL_PATH =
   /(operator|compan|price|cost|budget|book|package|tour|safari|climb|trek|route|itinerar|holiday|departure|guide)/i;
 
-/** Question and comparison pages — high impressions, low commercial value,
- *  and the ones Google most often answers without sending a click. */
-const INFORMATIONAL_PATH =
-  /(-vs-|versus|snow|height|tall|deaths|facts|festival|lion|tiger|meaning|history|sunrise|nightlife|why-|is-there|are-there|first-person)/i;
+/**
+ * Queries Google usually answers in the results itself — a yes/no, a number,
+ * a comparison — so the searcher never needs to click through.
+ *
+ * Judged on the query rather than the URL. An earlier version pattern-matched
+ * the slug, which was wrong in both directions: it wrote off /tanzania-festival/
+ * as trivia when festival-goers do have to open something to plan around it,
+ * and it waved through /is-lion-hunting-legal-in-africa/ as a quick win when
+ * that question is answered in the result itself.
+ */
+const QUESTION_OPENERS = [
+  "is", "are", "was", "were", "do", "does", "did", "can", "when", "why", "who",
+  "how many", "how much", "how tall", "how high", "how old", "how long",
+];
+
+/** True when Google most likely answered this query in the results itself. */
+function isZeroClickQuery(query: string): boolean {
+  const q = query.trim().toLowerCase();
+  const words = q.split(/\s+/);
+  if (words.includes("vs") || words.includes("versus")) return true;
+  return QUESTION_OPENERS.some(
+    (opener) => q === opener || q.startsWith(opener + " ")
+  );
+}
+
+/** Fallback for pages whose queries Search Console will not name. */
+const INFORMATIONAL_PATH = /(-vs-|versus|height|tall|deaths|facts|meaning)/i;
 
 /**
  * Generate SEO recommendations based on stored data.
@@ -45,6 +68,45 @@ export async function generateRecommendations(): Promise<Recommendation[]> {
     take: 80,
   });
 
+  // A page's average position is averaged across every query it appeared for,
+  // including incidental ones. /kilimanjaro-age-limits/ reads as position 6
+  // because it brushes past "kilimanjaro" and "ngorongoro crater" at position
+  // 3 — while the question that page actually answers, "how old do you have to
+  // be to climb kilimanjaro", sits at 23. Rewriting a title for a page-one
+  // ranking it does not really hold is wasted work, so each recommendation
+  // carries the position of the query genuinely driving it.
+  const candidatePages = lowCtrPages
+    .map((r) => r.page)
+    .filter((page) => !page.includes("#"));
+
+  const queryRows = candidatePages.length
+    ? await prisma.gscSearchQuery.groupBy({
+        by: ["page", "query"],
+        where: { page: { in: candidatePages }, date: { gte: thirtyDaysAgo } },
+        _sum: { impressions: true },
+        _avg: { position: true },
+        orderBy: { _sum: { impressions: "desc" } },
+        take: 1000,
+      })
+    : [];
+
+  // groupBy is already impressions-descending, so the first row per page wins.
+  const topQuery = new Map<string, { query: string; position: number }>();
+  const knownImpressions = new Map<string, number>();
+  for (const row of queryRows) {
+    // `page` is nullable on GscSearchQuery; rows without one tell us nothing.
+    if (!row.page) continue;
+    knownImpressions.set(
+      row.page,
+      (knownImpressions.get(row.page) ?? 0) + (row._sum.impressions || 0)
+    );
+    if (topQuery.has(row.page)) continue;
+    topQuery.set(row.page, {
+      query: row.query,
+      position: row._avg.position || 0,
+    });
+  }
+
   for (const row of lowCtrPages) {
     // Anchor fragments are sections of a page, not pages. Nothing about them
     // is separately editable, so they are never actionable.
@@ -65,7 +127,21 @@ export async function generateRecommendations(): Promise<Recommendation[]> {
       // question-shaped pages often lose the click to Google answering inline,
       // which no rewrite fixes. Say so rather than promising a win.
       if (ctr >= 0.02) continue;
-      const zeroClickRisk = INFORMATIONAL_PATH.test(path);
+      const top = topQuery.get(row.page);
+      // Either signal is enough. A comparison page stays a comparison page even
+      // when the query bringing it impressions is the bare mountain name —
+      // /kilimanjaro-vs-aconcagua/ ranks for "aconcagua", but those searchers
+      // want Aconcagua, not a comparison, and no title fixes that.
+      const zeroClickRisk =
+        INFORMATIONAL_PATH.test(path) ||
+        (top ? isZeroClickQuery(top.query) : false);
+      // Google withholds low-volume queries, so the rows we have rarely explain
+      // every impression. When they explain almost none of them, we genuinely
+      // do not know what this page ranks for, and naming a "driving query"
+      // would be a guess. When the one query we can see is itself buried, the
+      // page-one average is an artifact of incidental appearances.
+      const coverage = (knownImpressions.get(row.page) ?? 0) / impressions;
+      const misleading = coverage < 0.25 || Boolean(top && top.position > 15);
       recommendations.push({
         id: `low-ctr-${row.page}`,
         severity: commercial ? "critical" : "warning",
@@ -73,16 +149,23 @@ export async function generateRecommendations(): Promise<Recommendation[]> {
         title: zeroClickRisk
           ? "Ranks on page one but the answer is given in the results"
           : "Ranks on page one but few people click",
-        description: zeroClickRisk
-          ? `Position ${position.toFixed(0)} with ${impressions.toLocaleString()} impressions and only ${pct}% CTR. This is a question-style page, so Google likely answers it directly in the results and the searcher never needs to visit. Rewriting the title rarely recovers those clicks.`
-          : `Position ${position.toFixed(0)} with ${impressions.toLocaleString()} impressions and only ${pct}% CTR. At this rank the snippet is the most likely cause.`,
-        action: zeroClickRisk
-          ? "Only worth effort if this audience can be converted — otherwise deprioritise in favour of commercial pages."
-          : "Rewrite the title and meta description to state the specific benefit and match the search intent.",
+        description: misleading
+          ? `The page averages position ${position.toFixed(0)}, but that average is spread thin. Search Console names queries for only ${(coverage * 100).toFixed(0)}% of these impressions${top ? `, the largest being "${top.query}" at position ${top.position.toFixed(0)}` : ""} — so the page-one average comes mostly from incidental appearances, and a snippet rewrite has little to bite on.`
+          : zeroClickRisk
+            ? `Position ${position.toFixed(0)} with ${impressions.toLocaleString()} impressions and only ${pct}% CTR. The query driving it${top ? `, "${top.query}",` : ""} is the kind Google answers in the results itself, so most of these people were never going to click. A rewrite rarely recovers them.`
+            : `Position ${position.toFixed(0)} with ${impressions.toLocaleString()} impressions and only ${pct}% CTR, driven mainly by "${top?.query ?? "unknown"}". At this rank the snippet is the most likely cause.`,
+        action: misleading
+          ? "Find the query you actually want this page to win, then build for it. A title rewrite is not the lever here."
+          : zeroClickRisk
+            ? "Only worth effort if this audience can be converted — otherwise deprioritise in favour of commercial pages."
+            : "Rewrite the title and meta description so they answer the driving query in the searcher's own words.",
         affectedUrl: row.page,
         metric: `${pct}% CTR at position ${position.toFixed(0)}`,
-        estimatedClicks: zeroClickRisk ? 0 : Math.round(impressions * 0.03 - clicks),
-        effort: "low",
+        estimatedClicks:
+          zeroClickRisk || misleading
+            ? 0
+            : Math.max(0, Math.round(impressions * 0.03 - clicks)),
+        effort: misleading ? "high" : "low",
         commercial,
         position,
         impressions,
