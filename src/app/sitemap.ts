@@ -26,6 +26,7 @@ const RESERVED_SLUGS = new Set([
   "kilimanjaro-climbing-gear",
   "kilimanjaro-climbing-companies",
   "mount-kilimanjaro-height",
+  "mount-kenya",
   "how-hard-is-kilimanjaro",
   "can-beginners-climb-kilimanjaro",
   "kilimanjaro-altitude-sickness",
@@ -447,6 +448,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/mount-kenya/`,
+      lastModified: new Date("2026-09-04"),
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/climb-kilimanjaro-from-usa/`,

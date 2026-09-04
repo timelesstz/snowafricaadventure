@@ -237,11 +237,7 @@ const nextConfig: NextConfig = {
         destination: "/trekking/3-days-oldoinyo-lengai-climbing/",
         permanent: true,
       },
-      {
-        source: "/mount-kenya/",
-        destination: "/trekking/",
-        permanent: false,
-      },
+      // /mount-kenya/ is now a real page — see src/app/(site)/mount-kenya/
 
       // =====================================================
       // DUPLICATE CONTENT CONSOLIDATION
