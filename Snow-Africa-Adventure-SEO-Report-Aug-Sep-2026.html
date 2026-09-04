@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SEO &amp; Website Performance Report — Snow Africa Adventure</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+  @page :first { margin: 0; }
+
+  :root{
+    --red:#C00000;
+    --red-dk:#8E0000;
+    --red-tint:#FBEDED;
+    --ink:#14161A;
+    --body:#3A4048;
+    --mute:#767C86;
+    --line:#E2E5EA;
+    --bg-soft:#F7F8FA;
+    --green:#1D7A45;
+    --green-tint:#EAF5EF;
+    --amber:#96601A;
+    --amber-tint:#FCF3E4;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{
+    margin:0; padding:0;
+    font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    font-size:8.9pt; line-height:1.42; color:var(--body);
+    background:#fff;
+  }
+  h1,h2,h3,h4{color:var(--ink); margin:0; font-weight:700; line-height:1.22;}
+  p{margin:0 0 6pt;}
+  strong{color:var(--ink); font-weight:600;}
+  .page{page-break-after:always;}
+  .page:last-child{page-break-after:auto;}
+  .avoid{page-break-inside:avoid;}
+
+  /* ---------- COVER ---------- */
+  .cover{
+    height:297mm; width:210mm; position:relative;
+    background:#fff; page-break-after:always; overflow:hidden;
+  }
+  .cover-bar{height:13mm; background:var(--red);}
+  .cover-body{padding:26mm 22mm 0 22mm;}
+  .cover-logo{width:62mm; display:block; margin-bottom:26mm;}
+  .cover-kicker{
+    font-size:8.4pt; letter-spacing:.20em; text-transform:uppercase;
+    color:var(--red); font-weight:700; margin-bottom:7mm;
+  }
+  .cover h1{font-size:31pt; letter-spacing:-.015em; margin-bottom:5mm;}
+  .cover .sub{font-size:13pt; color:var(--body); font-weight:400; margin-bottom:14mm;}
+  .rule{height:3px; width:34mm; background:var(--red); margin-bottom:12mm;}
+  .cover-meta{display:flex; gap:14mm; flex-wrap:wrap; margin-bottom:4mm;}
+  .cover-meta div{min-width:46mm;}
+  .cover-meta dt{
+    font-size:7.6pt; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--mute); font-weight:700; margin-bottom:2mm;
+  }
+  .cover-meta dd{margin:0; font-size:10.6pt; color:var(--ink); font-weight:600;}
+  .cover-foot{
+    position:absolute; left:22mm; right:22mm; bottom:16mm;
+    border-top:1px solid var(--line); padding-top:5mm;
+    display:flex; justify-content:space-between; align-items:flex-end; gap:10mm;
+  }
+  .cover-foot .who{font-size:9pt; color:var(--body);}
+  .cover-foot .who b{display:block; color:var(--ink); font-size:10pt;}
+  .cover-mark{width:13mm; opacity:.92;}
+
+  /* ---------- SECTION CHROME ---------- */
+  .sec-head{
+    display:flex; align-items:baseline; gap:5mm;
+    border-bottom:2px solid var(--red); padding-bottom:2.2mm; margin-bottom:4.4mm;
+  }
+  .sec-num{
+    font-size:8pt; font-weight:700; color:#fff; background:var(--red);
+    padding:1.1mm 2.4mm; border-radius:2px; letter-spacing:.06em;
+  }
+  .sec-head h2{font-size:15.5pt; letter-spacing:-.01em;}
+  .lede{font-size:9.5pt; color:var(--body); margin-bottom:4mm; max-width:165mm;}
+
+  /* ---------- KPI CARDS ---------- */
+  .kpis{display:flex; flex-wrap:wrap; gap:3mm; margin-bottom:4.8mm;}
+  .kpi{
+    flex:1 1 0; min-width:36mm; border:1px solid var(--line);
+    border-top:3px solid var(--red); border-radius:3px;
+    padding:3.2mm 3.2mm 3.4mm; background:#fff;
+  }
+  .kpi .v{font-size:17pt; font-weight:700; color:var(--ink); line-height:1.05; letter-spacing:-.02em;}
+  .kpi .v small{font-size:10pt; font-weight:600; color:var(--mute); letter-spacing:0;}
+  .kpi .l{
+    font-size:7.5pt; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--mute); font-weight:700; margin-top:2.2mm;
+  }
+  .kpi .n{font-size:8.2pt; color:var(--body); margin-top:1.6mm; line-height:1.35;}
+  .kpi.good{border-top-color:var(--green);}
+  .kpi.good .v{color:var(--green);}
+
+  /* ---------- TABLES ---------- */
+  table{width:100%; border-collapse:collapse; font-size:8.4pt; margin-bottom:3.6mm;}
+  caption{
+    caption-side:top; text-align:left; font-size:8pt; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--mute); font-weight:700; padding-bottom:1.7mm;
+  }
+  th{
+    text-align:left; font-size:7.7pt; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink); font-weight:700; border-bottom:1.6px solid var(--ink);
+    padding:1.9mm 2mm; background:var(--bg-soft);
+  }
+  td{padding:1.7mm 2mm; border-bottom:1px solid var(--line); vertical-align:top;}
+  tbody tr:nth-child(even) td{background:#FCFCFD;}
+  .num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .kw{font-weight:600; color:var(--ink);}
+  .up{color:var(--green); font-weight:700; white-space:nowrap;}
+  .down{color:var(--red); font-weight:700; white-space:nowrap;}
+  .flat{color:var(--mute); font-weight:600;}
+  .pill{
+    display:inline-block; font-size:7.4pt; font-weight:700; letter-spacing:.05em;
+    padding:.7mm 2mm; border-radius:2px; text-transform:uppercase;
+  }
+  .pill-new{background:var(--green-tint); color:var(--green);}
+  .pill-out{background:var(--red-tint); color:var(--red-dk);}
+  .pill-hold{background:var(--bg-soft); color:var(--mute);}
+
+  /* ---------- CALLOUTS ---------- */
+  .note{
+    border-left:3px solid var(--red); background:var(--red-tint);
+    padding:2.8mm 3.6mm; border-radius:0 3px 3px 0; margin-bottom:3.4mm; font-size:8.7pt;
+  }
+  .note h4{font-size:9.1pt; margin-bottom:1.2mm;}
+  .note.pos{border-left-color:var(--green); background:var(--green-tint);}
+  .note.warn{border-left-color:var(--amber); background:var(--amber-tint);}
+  .note p:last-child{margin-bottom:0;}
+
+  /* ---------- WORK LIST ---------- */
+  .work{margin-bottom:4mm;}
+  .work-grp{margin-bottom:3.6mm; page-break-inside:avoid;}
+  .work-grp h4{
+    font-size:9pt; color:var(--ink); margin-bottom:1.8mm;
+    padding-bottom:1.4mm; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .work-grp h4 span{font-size:7.6pt; color:var(--mute); font-weight:700; letter-spacing:.1em;}
+  .work-grp ul{margin:0; padding-left:4.6mm;}
+  .work-grp li{margin-bottom:1.1mm; font-size:8.5pt;}
+  .work-grp li b{color:var(--ink); font-weight:600;}
+
+  /* ---------- CHART ---------- */
+  .chart{border:1px solid var(--line); border-radius:3px; padding:3.4mm; margin-bottom:4.4mm; background:#fff;}
+  .chart h4{font-size:9.4pt; margin-bottom:1mm;}
+  .chart .cap{font-size:7.9pt; color:var(--mute); margin-bottom:2.4mm;}
+
+  /* ---------- FOOTER ---------- */
+  .foot{
+    margin-top:5mm; padding-top:2.4mm; border-top:1px solid var(--line);
+    font-size:7.8pt; color:var(--mute); display:flex; justify-content:space-between;
+  }
+  .page:last-child .foot{margin-top:2.5mm;}
+  .dense td{padding:1.25mm 2mm;}
+  .dense th{padding:1.5mm 2mm;}
+  .tight table{margin-bottom:2.6mm;}
+  .tight caption{padding-bottom:1.1mm;}
+  .two{display:flex; gap:6mm;}
+  .two > *{flex:1 1 0; min-width:0;}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-body">
+    <img class="cover-logo" src="__LOGO_WORDMARK__" alt="Timeless">
+    <div class="cover-kicker">Monthly Performance Report</div>
+    <h1>SEO &amp; Website<br>Performance Review</h1>
+    <div class="sub">Snow Africa Adventure — snowafricaadventure.com</div>
+    <div class="rule"></div>
+    <div class="cover-meta">
+      <div><dt>Reporting period</dt><dd>4 Aug — 3 Sep 2026</dd></div>
+      <div><dt>Prepared for</dt><dd>The Owner / Directors</dd></div>
+      <div><dt>Issued</dt><dd>3 September 2026</dd></div>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <div class="who">
+      <b>Timeless International</b>
+      Development &amp; Digital Marketing Partner
+    </div>
+    <img class="cover-mark" src="__LOGO_MARK__" alt="">
+  </div>
+</section>
+
+<!-- ============ 1. EXECUTIVE SUMMARY ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Executive summary</h2></div>
+
+  <p class="lede">Over the last 30 days we shipped <strong>14 releases</strong> focused on technical SEO and
+  front-end quality. Search visibility moved in the right direction: the average position of tracked keywords
+  improved and the site's indexed keyword footprint grew by nearly a quarter. The site's technical health is
+  now effectively clean.</p>
+
+  <div class="kpis">
+    <div class="kpi good">
+      <div class="v">43.0</div>
+      <div class="l">Avg. position</div>
+      <div class="n">Improved from 45.1 — a gain of 2.1 places</div>
+    </div>
+    <div class="kpi good">
+      <div class="v">22 <small>/ 12</small></div>
+      <div class="l">Up / Down</div>
+      <div class="n">22 keywords rose, 12 fell, 37 unchanged</div>
+    </div>
+    <div class="kpi good">
+      <div class="v">783</div>
+      <div class="l">Indexed keywords</div>
+      <div class="n">Up from 632 in July — a 23.9% increase</div>
+    </div>
+    <div class="kpi good">
+      <div class="v">99.6<small>/100</small></div>
+      <div class="l">Site health</div>
+      <div class="n">722 pages crawled, 0 broken links</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:11pt;margin-bottom:3mm;">What this means</h3>
+
+  <div class="note pos avoid">
+    <h4>The positive</h4>
+    <p>Momentum is real but early. The keyword footprint grew from 512 (June) to 783 (August) — the site is
+    being found for substantially more searches than three months ago. One keyword entered the <strong>top 3</strong>
+    for the first time in this tracking set, and six keywords that were not ranking at all have entered the
+    top 100. The group-departures cluster is the standout: <em>"kilimanjaro joining group departures"</em>
+    climbed from position 13 to <strong>position 2</strong>.</p>
+  </div>
+
+  <div class="note warn avoid">
+    <h4>The honest caveat</h4>
+    <p>Two more keywords fell out of the top 100 than entered it (45 not ranking, up from 43), and eight
+    keywords dropped out entirely — including <em>"tanzania camping safari"</em>, which was at position 17.
+    Average position improved because the keywords that <em>are</em> ranking moved up, not because more
+    keywords started ranking. Both things are true at once, and the second one needs attention.</p>
+  </div>
+
+  <div class="note avoid">
+    <h4>Where the bookings actually are</h4>
+    <p>Domain Authority is <strong>12</strong>, against 33–47 for the competitors we share most keywords with.
+    That gap does block the big informational terms. But it does <strong>not</strong> block the keywords that
+    actually produce bookings: on "best kilimanjaro companies" a <strong>DA-14</strong> site ranks second and a
+    <strong>DA-5</strong> site ranks seventh, ahead of Reddit and two DA-50 operators.</p>
+    <p>There is a cluster of roughly <strong>1,100 searches a month</strong> around choosing a Kilimanjaro
+    operator, where advertisers pay <strong>$15–20 per click</strong> and difficulty is low. You already have
+    pages for it. They currently rank for nothing. This is the single clearest commercial opportunity on the
+    site and is set out in Sections 06 and 07.</p>
+  </div>
+
+  <div class="note warn avoid">
+    <h4>Two findings that outrank everything else</h4>
+    <p><strong>Google has never crawled 293 of your pages</strong>, including the commercial ones. The blog
+    archive had no pagination, so 271 of 291 articles had no inbound link. Fixed this period &mdash; Section 08.</p>
+    <p><strong>33 of 35 enquiries have never been actioned</strong>, among them roughly $15,000&ndash;22,000 of
+    identified revenue still waiting for a reply. Section 09.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 1</span></div>
+</section>
+
+<!-- ============ 2. WORK COMPLETED ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Work completed this period</h2></div>
+
+  <p class="lede">14 releases across two working sessions (18 August and 3 September), totalling
+  <strong>80 files changed</strong> and <strong>3,158 lines added</strong>. Every item below is a shipped,
+  deployed change verified live on the production site.</p>
+
+  <div class="work">
+    <div class="work-grp">
+      <h4>Search engine optimisation <span>8 RELEASES</span></h4>
+      <ul>
+        <li><b>Page title overhaul.</b> 72 page titles were being truncated by Google because they exceeded the
+        ~60-character display limit. All were rewritten to fit — 30 in August (28 static pages plus 2 found on a
+        deeper recrawl), then 42 more in September covering blog articles, safari packages, trekking routes and
+        day trips.</li>
+        <li><b>Duplicate title tags eliminated.</b> Pages competing against each other in search results for the
+        same title were given distinct, specific titles.</li>
+        <li><b>Double-branding bug fixed.</b> Ten titles rendered as "… | Snow Africa Adventure | Snow Africa
+        Adventure", wasting display space in results. Corrected to a single brand mention.</li>
+        <li><b>12 broken internal links repaired.</b> Flagged by audit; all now resolve, so link equity flows
+        correctly and visitors no longer hit dead ends.</li>
+        <li><b>Blog page refresh restored.</b> Blog listing, article and category pages were serving stale
+        cached versions; revalidation was fixed so new content appears promptly.</li>
+      </ul>
+    </div>
+
+    <div class="work-grp">
+      <h4>User experience &amp; front-end <span>4 RELEASES</span></h4>
+      <ul>
+        <li><b>Layout shift eliminated</b> on the group-departures page — content no longer jumps as the page
+        loads. This is a ranking factor (Core Web Vitals) as well as a usability issue.</li>
+        <li><b>Broken certification logos fixed</b> in the footer, which were rendering as grey boxes and
+        undermining trust signals (KPAP, TATO and similar credentials).</li>
+        <li><b>Expired review widget removed.</b> A lapsed Trustindex widget was loading on every page; removed,
+        and the site favicon was refreshed.</li>
+        <li><b>Brand slogan added to the header</b>, and the hero badge styling was cleaned up.</li>
+      </ul>
+    </div>
+
+    <div class="work-grp">
+      <h4>Content structure <span>2 RELEASES</span></h4>
+      <ul>
+        <li><b>Group-departures page restructured</b> — content reordered and de-duplicated so the booking
+        information reads in a logical sequence.</li>
+        <li><b>Rendering fault repaired</b> that could break the departures page under certain navigation
+        conditions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note pos avoid">
+    <h4>Independently verified</h4>
+    <p>After the work, an independent Ubersuggest crawl of <strong>722 pages</strong> returned a health score of
+    <strong>99.61 / 100</strong> with <strong>zero</strong> long titles, zero empty titles, zero missing H1 tags,
+    zero broken links and zero 4xx errors. We separately checked all 703 URLs in the sitemap by hand and reached
+    the same result.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 2</span></div>
+</section>
+
+<!-- ============ 3. SITE HEALTH ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Technical site health</h2></div>
+
+  <p class="lede">Full-site crawl completed 3 September 2026. Health score <strong>99.61 / 100</strong>
+  across 722 pages.</p>
+
+  <table class="avoid">
+    <caption>Audit results — errors and warnings</caption>
+    <thead>
+      <tr><th>Check</th><th class="num">Issues</th><th>Status</th><th>Impact</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">Long title tags</td><td class="num">0</td><td><span class="pill pill-new">Resolved</span></td><td>Was the reported issue — 70 fixed</td></tr>
+      <tr><td class="kw">Duplicate title tags</td><td class="num">0</td><td><span class="pill pill-new">Resolved</span></td><td>Fixed during this period</td></tr>
+      <tr><td class="kw">Empty title tags</td><td class="num">0</td><td><span class="pill pill-new">Clean</span></td><td>—</td></tr>
+      <tr><td class="kw">Missing H1 headings</td><td class="num">0</td><td><span class="pill pill-new">Clean</span></td><td>—</td></tr>
+      <tr><td class="kw">Duplicate meta descriptions</td><td class="num">0</td><td><span class="pill pill-new">Clean</span></td><td>—</td></tr>
+      <tr><td class="kw">Broken links</td><td class="num">0</td><td><span class="pill pill-new">Resolved</span></td><td>12 repaired this period</td></tr>
+      <tr><td class="kw">4xx error pages</td><td class="num">0</td><td><span class="pill pill-new">Clean</span></td><td>—</td></tr>
+      <tr><td class="kw">Slow-loading pages</td><td class="num">0</td><td><span class="pill pill-new">Clean</span></td><td>—</td></tr>
+      <tr><td class="kw">Non-SEO-friendly URLs</td><td class="num">4</td><td><span class="pill pill-hold">Open</span></td><td>Low — needs redirects to fix safely</td></tr>
+      <tr><td class="kw">Temporary (307) redirect</td><td class="num">1</td><td><span class="pill pill-hold">Open</span></td><td>Low — passes no link equity</td></tr>
+    </tbody>
+  </table>
+
+  <div class="two">
+    <div class="note avoid">
+      <h4>Remaining item — long URLs (4)</h4>
+      <p>Four pages have unwieldy URLs, the worst being a porters article with a 96-character path. Renaming
+      these requires permanent redirects to avoid losing their existing rankings, so we have deliberately
+      <strong>not</strong> changed them without your sign-off.</p>
+    </div>
+    <div class="note avoid">
+      <h4>Remaining item — 307 redirect (1)</h4>
+      <p>The <em>/mount-kenya/</em> page uses a temporary rather than permanent redirect, so it passes no
+      ranking value to its destination. Low risk to fix; scheduled for the next cycle.</p>
+    </div>
+  </div>
+
+  <div class="note warn avoid">
+    <h4>Worth knowing — crawler throttling</h4>
+    <p>262 of the 722 pages returned a "blocked" response to the audit crawler, while all 703 sitemap URLs
+    responded normally to our own checks. This is the hosting platform rate-limiting automated crawlers under
+    load. It is not currently affecting Google, but it is worth monitoring — aggressive throttling can slow
+    how quickly new content gets indexed.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 3</span></div>
+</section>
+
+<!-- ============ 4. KEYWORD PERFORMANCE ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Keyword performance</h2></div>
+
+  <p class="lede">71 tracked keywords, United States / desktop, measured 4 August against 1 September 2026.</p>
+
+  <div class="kpis">
+    <div class="kpi good"><div class="v">22</div><div class="l">Improved</div><div class="n">Including 6 new entries</div></div>
+    <div class="kpi"><div class="v">37</div><div class="l">Unchanged</div><div class="n">No movement</div></div>
+    <div class="kpi"><div class="v">12</div><div class="l">Declined</div><div class="n">Including 8 drop-outs</div></div>
+    <div class="kpi good"><div class="v">1</div><div class="l">In top 3</div><div class="n">Up from zero</div></div>
+  </div>
+
+  <div class="chart avoid">
+    <h4>Average position trend</h4>
+    <div class="cap">Lower is better. Position dipped mid-month, then recovered strongly following the 18 August release batch.</div>
+    <svg viewBox="0 0 640 150" style="width:100%;height:34mm;display:block;" role="img" aria-label="Average position trend chart">
+      <line x1="42" y1="14" x2="620" y2="14" stroke="#E2E5EA" stroke-width="1"/>
+      <line x1="42" y1="52" x2="620" y2="52" stroke="#E2E5EA" stroke-width="1"/>
+      <line x1="42" y1="90" x2="620" y2="90" stroke="#E2E5EA" stroke-width="1"/>
+      <line x1="42" y1="128" x2="620" y2="128" stroke="#C9CDD4" stroke-width="1"/>
+      <text x="36" y="17" font-size="10" fill="#767C86" text-anchor="end">42</text>
+      <text x="36" y="55" font-size="10" fill="#767C86" text-anchor="end">44</text>
+      <text x="36" y="93" font-size="10" fill="#767C86" text-anchor="end">46</text>
+      <text x="36" y="131" font-size="10" fill="#767C86" text-anchor="end">48</text>
+      <!-- 45.11, 47.58, 46.29, 43.27, 42.96  -> y = 14 + (v-42)*19 -->
+      <polyline points="80,73 215,120 350,95 485,38 620,32"
+                fill="none" stroke="#C00000" stroke-width="2.6"
+                stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="80"  cy="73"  r="4" fill="#C00000"/>
+      <circle cx="215" cy="120" r="4" fill="#C00000"/>
+      <circle cx="350" cy="95"  r="4" fill="#C00000"/>
+      <circle cx="485" cy="38"  r="4" fill="#C00000"/>
+      <circle cx="620" cy="32"  r="4.8" fill="#C00000"/>
+      <text x="80"  y="147" font-size="10" fill="#767C86" text-anchor="middle">4 Aug</text>
+      <text x="215" y="147" font-size="10" fill="#767C86" text-anchor="middle">11 Aug</text>
+      <text x="350" y="147" font-size="10" fill="#767C86" text-anchor="middle">18 Aug</text>
+      <text x="485" y="147" font-size="10" fill="#767C86" text-anchor="middle">25 Aug</text>
+      <text x="620" y="147" font-size="10" fill="#767C86" text-anchor="middle">1 Sep</text>
+      <text x="80"  y="64" font-size="10" fill="#14161A" text-anchor="middle" font-weight="bold">45.1</text>
+      <text x="620" y="23" font-size="10" fill="#14161A" text-anchor="middle" font-weight="bold">43.0</text>
+    </svg>
+  </div>
+
+  <table class="avoid">
+    <caption>Winning keywords — largest gains</caption>
+    <thead>
+      <tr><th>Keyword</th><th class="num">Volume</th><th class="num">4 Aug</th><th class="num">1 Sep</th><th class="num">Change</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">group climb kilimanjaro</td><td class="num">—</td><td class="num">53</td><td class="num">31</td><td class="num up">▲ 22</td></tr>
+      <tr><td class="kw">how high is mount kilimanjaro</td><td class="num">2,400</td><td class="num">61</td><td class="num">41</td><td class="num up">▲ 20</td></tr>
+      <tr><td class="kw">kilimanjaro group climb</td><td class="num">30</td><td class="num">54</td><td class="num">34</td><td class="num up">▲ 20</td></tr>
+      <tr><td class="kw">mount kilimanjaro lemosho route</td><td class="num">480</td><td class="num">81</td><td class="num">62</td><td class="num up">▲ 19</td></tr>
+      <tr><td class="kw">kilimanjaro lemosho route 8 days</td><td class="num">20</td><td class="num">54</td><td class="num">35</td><td class="num up">▲ 19</td></tr>
+      <tr><td class="kw">kilimanjaro group trek</td><td class="num">10</td><td class="num">48</td><td class="num">31</td><td class="num up">▲ 17</td></tr>
+      <tr><td class="kw">kilimanjaro joining group departures</td><td class="num">—</td><td class="num">13</td><td class="num">2</td><td class="num up">▲ 11</td></tr>
+      <tr><td class="kw">walking safari on ngorongoro highlands</td><td class="num">—</td><td class="num">89</td><td class="num">79</td><td class="num up">▲ 10</td></tr>
+      <tr><td class="kw">kilimanjaro peak height</td><td class="num">9,900</td><td class="num">44</td><td class="num">36</td><td class="num up">▲ 8</td></tr>
+      <tr><td class="kw">climbing mount kilimanjaro 2026</td><td class="num">—</td><td class="num">35</td><td class="num">27</td><td class="num up">▲ 8</td></tr>
+      <tr><td class="kw">lemosho route 8 days</td><td class="num">50</td><td class="num">50</td><td class="num">42</td><td class="num up">▲ 8</td></tr>
+      <tr><td class="kw">kilimanjaro rongai route 6 days</td><td class="num">30</td><td class="num">54</td><td class="num">49</td><td class="num up">▲ 5</td></tr>
+      <tr><td class="kw">kilimanjaro join group departures</td><td class="num">—</td><td class="num">10</td><td class="num">6</td><td class="num up">▲ 4</td></tr>
+      <tr><td class="kw">6 days rongai route</td><td class="num">—</td><td class="num">46</td><td class="num">42</td><td class="num up">▲ 4</td></tr>
+      <tr><td class="kw">how high is kilimanjaro</td><td class="num">2,400</td><td class="num">48</td><td class="num">45</td><td class="num up">▲ 3</td></tr>
+      <tr><td class="kw">mount kilimanjaro height</td><td class="num">8,100</td><td class="num">51</td><td class="num">50</td><td class="num up">▲ 1</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 4</span></div>
+</section>
+
+<!-- ============ 5. NEW + LOSING ============ -->
+<section class="page tight">
+  <div class="sec-head"><span class="sec-num">05</span><h2>New entries &amp; declining keywords</h2></div>
+
+  <table class="avoid">
+    <caption>New entries — not ranking in August, ranking now</caption>
+    <thead>
+      <tr><th>Keyword</th><th class="num">Volume</th><th class="num">4 Aug</th><th class="num">1 Sep</th><th>Landing page</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">kilimanjaro group climbs</td><td class="num">30</td><td class="num flat">—</td><td class="num up">26</td><td>/kilimanjaro-group-climbs/</td></tr>
+      <tr><td class="kw">kilimanjaro prices</td><td class="num">50</td><td class="num flat">—</td><td class="num up">31</td><td>/kilimanjaro-cost-breakdown/</td></tr>
+      <tr><td class="kw">best time climb mount kilimanjaro</td><td class="num">—</td><td class="num flat">—</td><td class="num up">40</td><td>/best-time-to-climb-mount-kilimanjaro/</td></tr>
+      <tr><td class="kw">height of kilimanjaro mountain</td><td class="num">9,900</td><td class="num flat">—</td><td class="num up">46</td><td>/mount-kilimanjaro-height/</td></tr>
+      <tr><td class="kw">mt kilimanjaro height</td><td class="num">8,100</td><td class="num flat">—</td><td class="num up">54</td><td>/mount-kilimanjaro-height/</td></tr>
+      <tr><td class="kw">lemosho route kilimanjaro</td><td class="num">480</td><td class="num flat">—</td><td class="num up">61</td><td>/kilimanjaro-lemosho-route-guide/</td></tr>
+    </tbody>
+  </table>
+
+  <table class="avoid">
+    <caption>Losing keywords — positions declined</caption>
+    <thead>
+      <tr><th>Keyword</th><th class="num">Volume</th><th class="num">4 Aug</th><th class="num">1 Sep</th><th class="num">Change</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">kilimanjaro climbing gear</td><td class="num">210</td><td class="num">50</td><td class="num">86</td><td class="num down">▼ 36</td></tr>
+      <tr><td class="kw">wildlife safaris tanzania</td><td class="num">880</td><td class="num">33</td><td class="num">41</td><td class="num down">▼ 8</td></tr>
+      <tr><td class="kw">marangu route</td><td class="num">210</td><td class="num">57</td><td class="num">60</td><td class="num down">▼ 3</td></tr>
+      <tr><td class="kw">kilimanjaro rongai route</td><td class="num">40</td><td class="num">57</td><td class="num">60</td><td class="num down">▼ 3</td></tr>
+    </tbody>
+  </table>
+
+  <table class="avoid">
+    <caption>Dropped out of the top 100 — priority recovery list</caption>
+    <thead>
+      <tr><th>Keyword</th><th class="num">Volume</th><th class="num">Was</th><th class="num">Now</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">tanzania camping safari</td><td class="num">170</td><td class="num">17</td><td class="num down">Out</td><td><span class="pill pill-out">High</span></td></tr>
+      <tr><td class="kw">ultimate kilimanjaro packing list</td><td class="num">30</td><td class="num">21</td><td class="num down">Out</td><td><span class="pill pill-out">High</span></td></tr>
+      <tr><td class="kw">kpap membership companies</td><td class="num">—</td><td class="num">24</td><td class="num down">Out</td><td><span class="pill pill-hold">Medium</span></td></tr>
+      <tr><td class="kw">7 days safari including serval wildlife</td><td class="num">—</td><td class="num">30</td><td class="num down">Out</td><td><span class="pill pill-hold">Medium</span></td></tr>
+      <tr><td class="kw">kilimanjaro machame route 7 days</td><td class="num">30</td><td class="num">37</td><td class="num down">Out</td><td><span class="pill pill-hold">Medium</span></td></tr>
+      <tr><td class="kw">8 days lemosho route</td><td class="num">70</td><td class="num">41</td><td class="num down">Out</td><td><span class="pill pill-hold">Medium</span></td></tr>
+      <tr><td class="kw">tanzania tour operators</td><td class="num">70</td><td class="num">54</td><td class="num down">Out</td><td><span class="pill pill-hold">Medium</span></td></tr>
+      <tr><td class="kw">kilimanjaro climbing companies</td><td class="num">210</td><td class="num">57</td><td class="num down">Out</td><td><span class="pill pill-out">High</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="note warn avoid">
+    <h4>Reading the declines honestly</h4>
+    <p><strong>"Tanzania camping safari"</strong> (was 17) and <strong>"ultimate kilimanjaro packing list"</strong> (was 21) were close to page-two visibility and are now outside the top 100 — usually a sign a competitor published something stronger, or the page lost internal link support. Both will be rebuilt next cycle.</p>
+    <p><strong>"Kilimanjaro climbing companies" is the one to watch.</strong> It looks minor at 57, but it targets the operator-selection cluster in Section 07 — the site's highest commercial-value keywords — so its recovery is recommendation 2, not a routine fix. The other five sat at 24–57, where positions fluctuate routinely.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 5</span></div>
+</section>
+
+<!-- ============ 6. POSITIONING ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Competitive positioning</h2></div>
+
+  <p class="lede">The eight sites below compete with Snow Africa Adventure for the largest number of shared
+  keywords. This is the clearest picture of where the business actually stands in search.</p>
+
+  <table class="avoid">
+    <caption>Competitive landscape — organic search</caption>
+    <thead>
+      <tr><th>Domain</th><th class="num">Domain Authority</th><th class="num">Organic keywords</th><th class="num">Backlinks</th><th class="num">Shared keywords</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">climbing-kilimanjaro.com</td><td class="num">47</td><td class="num">15,202</td><td class="num">21,975</td><td class="num">369</td></tr>
+      <tr><td class="kw">altezzatravel.com</td><td class="num">41</td><td class="num">20,492</td><td class="num">270,139</td><td class="num">373</td></tr>
+      <tr><td class="kw">climbkilimanjaroguide.com</td><td class="num">38</td><td class="num">2,066</td><td class="num">43,006</td><td class="num">193</td></tr>
+      <tr><td class="kw">iantaylortrekking.com</td><td class="num">37</td><td class="num">11,134</td><td class="num">62,869</td><td class="num">171</td></tr>
+      <tr><td class="kw">tusker.com</td><td class="num">36</td><td class="num">563</td><td class="num">33,272</td><td class="num">96</td></tr>
+      <tr><td class="kw">followalice.com</td><td class="num">33</td><td class="num">11,439</td><td class="num">8,694</td><td class="num">299</td></tr>
+      <tr><td class="kw">zaratanzaniaadventures.com</td><td class="num">20</td><td class="num">12,137</td><td class="num">11,570</td><td class="num">257</td></tr>
+      <tr><td class="kw">hike-kilimanjaro.com</td><td class="num">14</td><td class="num">817</td><td class="num">195</td><td class="num">159</td></tr>
+      <tr style="background:var(--red-tint) !important;">
+        <td class="kw" style="color:var(--red-dk);">snowafricaadventure.com</td>
+        <td class="num" style="color:var(--red-dk);font-weight:700;">12</td>
+        <td class="num" style="color:var(--red-dk);font-weight:700;">783</td>
+        <td class="num" style="color:var(--red-dk);font-weight:700;">1,127</td>
+        <td class="num">—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note avoid">
+    <h4>Where the business actually stands</h4>
+    <p>Snow Africa Adventure has the <strong>lowest Domain Authority in its own competitive set</strong> and by
+    far the fewest backlinks — 1,127 against 8,694 for the next-smallest serious competitor and 270,139 for
+    Altezza. This is not a content problem. The site now has 291 published articles and a near-perfect technical
+    score; the pages are there and they are sound.</p>
+    <p>The obvious conclusion would be that authority alone decides everything. Checking the actual search
+    results shows that is <strong>only half true</strong> — and the half that is false is the commercially
+    important half.</p>
+  </div>
+
+  <div class="note pos avoid">
+    <h4>Authority blocks some keywords — but not the ones that sell</h4>
+    <p>We examined the live results page for three keyword types. On informational terms, authority dominates:
+    for <em>"best time to climb Kilimanjaro"</em> the lowest-authority site in the top 17 is DA 36, Reddit holds
+    position 2, and an AI Overview sits above everything.</p>
+    <p>On <strong>operator-selection</strong> terms the picture reverses completely. For
+    <em>"best kilimanjaro companies"</em>, a <strong>DA-14</strong> site ranks <strong>second</strong> — ahead
+    of Reddit (DA 92), Facebook (DA 96) and two DA-50 operators — and a <strong>DA-5</strong> site ranks
+    seventh. At DA 12, Snow Africa Adventure is squarely inside that range <em>today</em>, with no new links
+    required.</p>
+  </div>
+
+  <div class="note warn avoid">
+    <h4>Two conclusions that follow</h4>
+    <p><strong>Head terms remain out of reach.</strong> "Tanzania safaris" (12,100/month) and "climbing
+    kilimanjaro" (6,600/month) are not realistically winnable in the next 6–12 months. We would rather say so
+    than report against targets that cannot be met.</p>
+    <p><strong>Position on the page matters more than the page itself.</strong> Across every results page we
+    examined, position 2 drew 23–278 clicks while positions 6–15 drew between 0 and 4. Reaching page one is not
+    the goal — reaching the <strong>top three</strong> is. This is why the group-departures result (position 2)
+    is worth more than a dozen rankings in the thirties.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 6</span></div>
+</section>
+
+<!-- ============ 7. OPPORTUNITY ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Where the bookings are</h2></div>
+
+  <p class="lede">Search volume is a poor guide to revenue. What follows ranks opportunities by
+  <strong>commercial intent</strong> — measured by what advertisers actually pay per click — filtered to what
+  is winnable at the site's current authority.</p>
+
+  <table class="avoid">
+    <caption>The operator-selection cluster — highest commercial value on the site</caption>
+    <thead>
+      <tr><th>Keyword</th><th class="num">Searches / mo</th><th class="num">Cost per click</th><th class="num">Difficulty</th><th class="num">Current position</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">kilimanjaro tour operator</td><td class="num">480</td><td class="num up">$19.68</td><td class="num">19</td><td class="num down">Not ranking</td></tr>
+      <tr><td class="kw">best kilimanjaro tour operator</td><td class="num">480</td><td class="num up">$15.10</td><td class="num">17</td><td class="num down">Not ranking</td></tr>
+      <tr><td class="kw">best kilimanjaro companies</td><td class="num">90</td><td class="num up">$16.51</td><td class="num">24</td><td class="num down">Not ranking</td></tr>
+      <tr><td class="kw">kilimanjaro trekking company</td><td class="num">30</td><td class="num up">$11.38</td><td class="num">29</td><td class="num down">Not ranking</td></tr>
+      <tr><td class="kw">climbing kilimanjaro tour operator</td><td class="num">20</td><td class="num">—</td><td class="num">10</td><td class="num down">Not ranking</td></tr>
+      <tr style="background:var(--green-tint) !important;">
+        <td class="kw" style="color:var(--green);">Cluster total</td>
+        <td class="num" style="color:var(--green);font-weight:700;">~1,100</td>
+        <td class="num" style="color:var(--green);font-weight:700;">$15–20</td>
+        <td class="num" style="color:var(--green);font-weight:700;">Low</td>
+        <td class="num" style="color:var(--green);font-weight:700;">0 ranking</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note pos avoid">
+    <h4>Why this is the priority</h4>
+    <p>Advertisers pay roughly <strong>$20 a click</strong> for "kilimanjaro tour operator" because the person
+    searching it is choosing who to hand $2,000–4,000 to. Google classifies the intent as
+    <strong>Commercial</strong>. Difficulty is 17–24, which is low — and as Section 06 showed, sites at DA 5 and
+    DA 14 already rank here.</p>
+    <p>You have three pages built for exactly this cluster —
+    <em>/best-kilimanjaro-tour-operators/</em> (4,175 words), <em>/kilimanjaro-climbing-companies/</em>
+    (3,243 words) and <em>/best-tanzania-tour-operator/</em>. They are substantial and internally linked.
+    <strong>All three currently rank for nothing in the United States.</strong> The asset exists; the
+    visibility does not.</p>
+  </div>
+
+  <div class="note avoid">
+    <h4>What the sites that win are doing differently</h4>
+    <p>Operators who rank for these terms do it with their <strong>homepage</strong>, titled as a company, not
+    with a "best operators" article: <em>"Home — Best Kilimanjaro Company"</em> (DA 5, position 7),
+    <em>"The #1 Guide Company for Climbing Kilimanjaro"</em> (position 8), <em>"Climb Kilimanjaro with Local
+    Experts | 98.8% Success"</em> (DA 30, position 9). Each pairs the category word with a credibility claim.</p>
+    <p>The Snow Africa homepage is titled <em>"Tanzania Safaris &amp; Kilimanjaro Treks"</em> — no
+    "operator", no "company", no proof point. The phrase "locally owned Tanzania tour operator" appears only in
+    the meta description, which carries no ranking weight. That is a low-effort, high-leverage fix.</p>
+    <p>Separately: the one site beating everyone at position 2 is an <strong>independent reviewer</strong>, not
+    an operator. A tour operator publishing its own "best tour operators" list faces an inherent credibility
+    problem for that query — which may explain why the existing pages have not taken hold. Being
+    <em>listed</em> on independent review sites is likely to outperform writing our own.</p>
+  </div>
+
+  <table class="avoid">
+    <caption>High volume, low return — deliberately deprioritised</caption>
+    <thead>
+      <tr><th>Cluster</th><th class="num">Searches / mo</th><th class="num">Lowest DA in top 10</th><th>Why we are not chasing it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="kw">"best time to climb kilimanjaro"</td><td class="num">880</td><td class="num">36</td><td>AI Overview at the top; Reddit at position 2 takes 278 clicks. Position 5 earns 4 clicks.</td></tr>
+      <tr><td class="kw">"kilimanjaro cost / price"</td><td class="num">880</td><td class="num">32</td><td>Reddit again at position 2 with 278 clicks. Requires roughly DA 32+ to compete.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 7</span></div>
+</section>
+
+<!-- ============ 08. WHY THE PAGES DON'T RANK ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Why the pages don&rsquo;t rank</h2></div>
+
+  <p class="lede">Search Console access was obtained after the first draft of this report, and it changes
+  the diagnosis. The pages are not losing to competitors. <strong>Google has never read them.</strong></p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">353</div><div class="l">Pages indexed</div><div class="n">Eligible to appear in search</div></div>
+    <div class="kpi"><div class="v">790</div><div class="l">Not indexed</div><div class="n">More than twice the indexed count</div></div>
+    <div class="kpi"><div class="v">293</div><div class="l">Never crawled</div><div class="n">Found, but never fetched by Google</div></div>
+    <div class="kpi"><div class="v">271</div><div class="l">Unlinked posts</div><div class="n">Of 291 published articles</div></div>
+  </div>
+
+  <div class="note avoid">
+    <h4>What Search Console reports</h4>
+    <p>293 pages sit under &ldquo;Discovered &mdash; currently not indexed&rdquo; with a last-crawl date of
+    <strong>N/A</strong>. These are commercial pages: the Kilimanjaro tour-operator guide, African safaris,
+    Big Five Tanzania, budget safaris, climbing from the USA. Inspecting the operator page directly returns
+    <em>&ldquo;URL is not on Google&rdquo;</em> and, critically,
+    <strong>&ldquo;Referring page: None detected&rdquo;</strong>.</p>
+    <p>Google found these pages in the sitemap, saw nothing on the site linking to them, judged them
+    unimportant and never spent the crawl budget. The 4,175-word operator guide has never been fetched.</p>
+  </div>
+
+  <div class="note warn avoid">
+    <h4>The cause: the blog archive had no pagination</h4>
+    <p>The blog index listed only the 20 most recent posts and offered no way to reach the rest &mdash; no
+    page 2, no &ldquo;load more&rdquo;. <strong>271 of 291 published articles had no inbound link anywhere on
+    the site.</strong> Years of content was invisible to Google, not because it was poor, but because nothing
+    pointed at it.</p>
+  </div>
+
+  <div class="note pos avoid">
+    <h4>Fixed during this period</h4>
+    <p>The archive is now paginated across 15 pages, verified to expose <strong>311 post links</strong> &mdash;
+    every published article is reachable. Six commercial pages that had no inbound link at all, including one
+    already earning 1,947 monthly impressions at position 8.6, were added to the site-wide footer. Indexing was
+    requested directly in Search Console for the highest-value pages.</p>
+    <p>Recovery is not immediate. Google must re-crawl, follow the new links and reassess:
+    <strong>expect 2&ndash;6 weeks</strong>, and some pages may still not be crawled at this domain authority.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International &mdash; Snow Africa Adventure</span><span>Page 8</span></div>
+</section>
+
+<!-- ============ 09. THE LEADS YOU ALREADY HAVE ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">09</span><h2>The leads you already have</h2></div>
+
+  <p class="lede">Everything else in this report concerns getting more visitors. This section concerns the
+  enquiries the website has <strong>already delivered</strong>, and it is the most commercially urgent page
+  in the document.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">35</div><div class="l">Enquiries received</div><div class="n">Since January 2026</div></div>
+    <div class="kpi"><div class="v" style="color:var(--red);">33</div><div class="l">Never actioned</div><div class="n">Still marked &ldquo;new&rdquo;, never opened</div></div>
+    <div class="kpi"><div class="v">2</div><div class="l">Ever contacted</div><div class="n">Across the whole period</div></div>
+    <div class="kpi"><div class="v" style="color:var(--red);">0</div><div class="l">Confirmed bookings</div><div class="n">No deposit ever recorded</div></div>
+  </div>
+
+  <table class="avoid">
+    <caption>Genuine enquiries awaiting a reply</caption>
+    <thead><tr><th>Received</th><th>From</th><th>What they asked for</th><th class="num">Waiting</th><th class="num">Est. value</th></tr></thead>
+    <tbody>
+      <tr><td class="kw">12 Jul</td><td>United States</td><td>Prices for a 7-day Machame climb, party of two, wanting to <em>join a group departure</em>, any date after 30 Nov</td><td class="num down">53 days</td><td class="num">$4,000&ndash;5,000</td></tr>
+      <tr><td class="kw">10 Aug</td><td>Poland</td><td>Custom quote: Lemosho 8 days, 2&ndash;4 people at $2,890 per person</td><td class="num down">25 days</td><td class="num">$5,800&ndash;11,600</td></tr>
+      <tr><td class="kw">21 Jul</td><td>Canada</td><td>Detailed question about a partial ascent &mdash; needs a considered reply</td><td class="num down">44 days</td><td class="num">consultative</td></tr>
+      <tr><td class="kw">Mar 2026</td><td>Netherlands</td><td>Booking for 2 climbers &mdash; still unpaid, still marked enquiry</td><td class="num down">5.5 months</td><td class="num">$5,360</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note avoid">
+    <h4>Roughly $15,000&ndash;22,000 of identified revenue is sitting unanswered</h4>
+    <p>The notifications are working. 111 alert emails were delivered successfully to
+    info@snowafricaadventure.com, the director&rsquo;s Gmail and by SMS, and an administrator signed in to the
+    dashboard on 1 September. The alerts arrive; the enquiries are not worked.</p>
+    <p>The July enquiry is the most striking: two people asking explicitly to <em>join a group departure</em>
+    &mdash; precisely the product that now ranks second on Google. The SEO worked, the lead arrived, and no one
+    replied.</p>
+  </div>
+
+  <div class="note warn avoid">
+    <h4>Two qualifications, stated plainly</h4>
+    <p>If replies are being sent by email or WhatsApp without updating the dashboard, the database cannot see
+    them. That said, no confirmed booking or deposit has ever been recorded, which suggests otherwise.</p>
+    <p>A daily follow-up digest existed but had never once run &mdash; the scheduled jobs were not executing.
+    That was repaired during this period and the first digest, listing 25 outstanding enquiries, has been sent.
+    It guarantees you are <em>told</em>; it cannot make anyone reply.</p>
+  </div>
+
+  <div class="foot"><span>Timeless International &mdash; Snow Africa Adventure</span><span>Page 9</span></div>
+</section>
+
+<!-- ============ 10. RECOMMENDATIONS ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Recommended next 30 days</h2></div>
+
+  <p class="lede">In priority order, weighted by likely commercial return rather than ease.</p>
+
+  <table class="avoid">
+    <caption>Proposed work plan</caption>
+    <thead>
+      <tr><th style="width:7%;">#</th><th>Action</th><th style="width:20%;">Why it matters</th><th style="width:13%;">Effort</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--green-tint) !important;">
+        <td class="num kw" style="color:var(--green);">1</td>
+        <td><b>Reposition the homepage for "kilimanjaro tour operator".</b> Put the category word and a credibility proof point — summit success rate, years operating, KPAP status — into the page title and main heading, matching the pattern used by every operator currently ranking.</td>
+        <td>Targets a $19.68-per-click term at difficulty 19, using the exact format proven to work at DA 5–14.</td>
+        <td>Low</td>
+      </tr>
+      <tr>
+        <td class="num kw">2</td>
+        <td><b>Relaunch the three operator-selection pages.</b> Rebuild <em>/kilimanjaro-climbing-companies/</em> (was position 57, now outside the top 100), plus the two sibling pages, with genuine comparison substance and stronger internal linking from the Kilimanjaro hub pages.</td>
+        <td>~1,100 searches/month at $15–20 per click, and the pages already exist.</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td class="num kw">3</td>
+        <td><b>Pursue independent operator listings.</b> The site beating everyone for "best kilimanjaro companies" is a third-party reviewer. Target inclusion in those round-ups, plus KPAP, TATO and SafariBookings profiles.</td>
+        <td>Being listed by an independent voice outperforms self-published "best operator" pages.</td>
+        <td>Medium / ongoing</td>
+      </tr>
+      <tr>
+        <td class="num kw">4</td>
+        <td><b>Recover the two lost pages.</b> Diagnose and rebuild "tanzania camping safari" (was 17) and "ultimate kilimanjaro packing list" (was 21), including competitor comparison and internal link support.</td>
+        <td>Both were within reach of page-two traffic and are now invisible.</td>
+        <td>Low</td>
+      </tr>
+      <tr>
+        <td class="num kw">5</td>
+        <td><b>Extend the group-departures cluster.</b> It holds positions 2 and 6 — the clearest proof of what works. Expand into adjacent terms: dates, group sizes, joining options, private vs. group.</td>
+        <td>Already winning, and top-three placement is where the clicks actually are.</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td class="num kw">6</td>
+        <td><b>Begin steady authority building</b> — Tanzania tourism directories, guest articles, and digital PR around the porter-welfare credentials.</td>
+        <td>Still needed to reach the larger informational terms, but no longer the first move.</td>
+        <td>High / ongoing</td>
+      </tr>
+      <tr>
+        <td class="num kw">7</td>
+        <td><b>Close the two open technical items</b> — the 307 redirect and, with your approval, the four long URLs (with permanent redirects in place).</td>
+        <td>Completes the technical foundation.</td>
+        <td>Low</td>
+      </tr>
+      <tr>
+        <td class="num kw">8</td>
+        <td><b>Act on the Search Console data now flowing.</b> Search Console was already connected but had not synced since April; that is repaired and 992 records imported. Review crawl and coverage monthly.</td>
+        <td>Replaces third-party estimates with Google's own measured figures.</td>
+        <td>Low</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note avoid">
+    <h4>A note on expectations</h4>
+    <p>Items 1 and 2 are the fastest route to commercially useful traffic, because the pages already exist and
+    the target keywords are low-difficulty. Even so, repositioning takes <strong>4–8 weeks</strong> to settle
+    in the rankings, and top-three placement is not guaranteed.</p>
+    <p>Item 6, authority building, typically takes <strong>3–6 months</strong> to show. It has moved down the
+    list because the operator-selection cluster does not require it — not because it stopped mattering.</p>
+    <p><strong>Corrected figure:</strong> Search Console now supplies Google's own numbers rather than a
+    third-party estimate, and they are lower. Actual organic clicks run at <strong>7–26 per month</strong>
+    against roughly 2,400 impressions — a click-through rate under 1%, because the average position is about
+    43. The site is shown in search; almost nobody clicks a result that far down. We would rather correct this openly than let a friendlier estimate stand.</p>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 10</span></div>
+</section>
+
+<!-- ============ 9. METHODOLOGY ============ -->
+<section class="page dense">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Methodology &amp; data sources</h2></div>
+
+  <p class="lede">So that every figure in this report can be traced and independently checked.</p>
+
+  <table class="avoid">
+    <caption>Sources</caption>
+    <thead><tr><th style="width:30%;">Figure</th><th>Source &amp; method</th></tr></thead>
+    <tbody>
+      <tr><td class="kw">Keyword positions</td><td>Ubersuggest rank tracking, active since May 2024. 71 keywords, <strong>US / desktop</strong>, comparing the 4 August and 1 September 2026 collections.</td></tr>
+      <tr><td class="kw">Average position</td><td>Mean position of ranking keywords; non-ranking excluded.</td></tr>
+      <tr><td class="kw">Indexed keyword count</td><td>Ubersuggest domain index, US. June 512 → July 632 → August 783.</td></tr>
+      <tr><td class="kw">Domain Authority &amp; backlinks</td><td>Ubersuggest domain metrics. DA is a third-party 0–100 estimate, not a Google metric.</td></tr>
+      <tr><td class="kw">Competitor set</td><td>Ubersuggest competitor analysis by shared keyword count. Two irrelevant results (nasa.gov, our-ancestories.com) were excluded as non-competitors.</td></tr>
+      <tr><td class="kw">Opportunity keywords</td><td>Ubersuggest keyword research plus the project's 680-candidate opportunity list, filtered to commercial intent and reachable difficulty.</td></tr>
+      <tr><td class="kw">Cost per click</td><td>Ubersuggest CPC — a <strong>proxy for commercial intent</strong>, not a measure of what the traffic will earn.</td></tr>
+      <tr><td class="kw">Search results analysis</td><td>Live results pages for three keywords, with each ranking site's authority and click estimate — the evidence behind Sections 06–07.</td></tr>
+      <tr><td class="kw">Site health &amp; audit</td><td>Ubersuggest site audit, full crawl of 722 pages, 3 September 2026.</td></tr>
+      <tr><td class="kw">Title verification</td><td>All 703 sitemap URLs fetched directly and every rendered title measured. Both methods agree.</td></tr>
+      <tr><td class="kw">Indexing &amp; crawl data</td><td>Google Search Console, read directly on 4 September 2026 — Page Indexing, URL Inspection, Sitemaps and Manual Actions. Google's own data, not an estimate.</td></tr>
+      <tr><td class="kw">Enquiry &amp; booking data</td><td>The production database: every Inquiry and Booking since January 2026, with notification delivery cross-checked against the email log.</td></tr>
+      <tr><td class="kw">Work completed</td><td>Version control history, 4 August – 4 September 2026. Every change verified live in production.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note warn avoid">
+    <h4>Limitations you should be aware of</h4>
+    <p><strong>Correction issued.</strong> An earlier draft of this report advised connecting Search Console. It was already connected; it simply had not synced since April. With the sync repaired, the traffic figures in Sections 08 and 10 are Google's own measured data, and they are lower than the third-party estimates quoted elsewhere. Where the two disagree, believe Search Console.</p>
+    <p><strong>Rank data covers one market</strong> — US desktop. The UK, Australia, Canada and Japan are tracked but not included here.</p>
+    <p><strong>Correlation, not proof.</strong> Ranking gains follow the work chronologically, but Google does not disclose why positions change — algorithm updates, competitor activity and seasonality all contribute. We report what moved, not what caused it.</p>
+    <p><strong>Section 07 is a judgement, not a forecast.</strong> The volumes, costs per click, difficulty scores and competitor authority figures are measured; the conclusion we draw from them is our professional reading. No position or booking volume is promised, because neither can be guaranteed.</p>
+  </div>
+
+  <div style="margin-top:1.5mm; padding-top:2mm; border-top:2px solid var(--red); display:flex; justify-content:space-between; align-items:flex-end;">
+    <div>
+      <div style="font-size:10.4pt; color:var(--ink); font-weight:700;">Timeless International</div>
+      <div style="font-size:9pt; color:var(--mute);">Development &amp; Digital Marketing Partner</div>
+      <div style="font-size:9pt; color:var(--mute); margin-top:2mm;">Report issued 3 September 2026 · Next review 3 October 2026</div>
+    </div>
+    <img src="__LOGO_MARK__" alt="" style="width:14mm;">
+  </div>
+
+  <div class="foot"><span>Timeless International — Snow Africa Adventure</span><span>Page 11</span></div>
+</section>
+
+</body>
+</html>
