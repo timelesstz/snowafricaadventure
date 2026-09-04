@@ -31,11 +31,17 @@ export async function GET(request: NextRequest) {
       take: limit,
     });
 
-    const totalResult = await prisma.gscPageMetric.groupBy({
-      by: ["page"],
-      where,
-      _count: true,
-    });
+    // Total distinct pages, for pagination. See the note in
+    // api/admin/seo/search-queries: the previous unbounded groupBy fetched
+    // every distinct page just to read .length, and stopped responding once
+    // the backfilled history grew the window.
+    const totalRows = await prisma.$queryRaw<{ count: bigint }[]>`
+      SELECT COUNT(DISTINCT "page") AS count
+      FROM "GscPageMetric"
+      WHERE "date" >= ${startDate}
+        AND (${search} = '' OR "page" ILIKE ${`%${search}%`})
+    `;
+    const total = Number(totalRows[0]?.count ?? 0);
 
     return NextResponse.json({
       pages: pages.map((p) => ({
@@ -45,7 +51,7 @@ export async function GET(request: NextRequest) {
         ctr: Math.round((p._avg.ctr || 0) * 10000) / 100,
         position: Math.round((p._avg.position || 0) * 10) / 10,
       })),
-      total: totalResult.length,
+      total,
       page,
       limit,
     });

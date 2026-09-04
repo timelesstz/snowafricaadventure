@@ -65,12 +65,21 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Get total count for pagination
-    const totalResult = await prisma.gscSearchQuery.groupBy({
-      by: ["query"],
-      where,
-      _count: true,
-    });
+    // Total distinct queries, for pagination.
+    //
+    // This used to be a groupBy with no take, which fetched every distinct
+    // query in the window purely to read .length. That was survivable when the
+    // table held a couple of thousand rows; after the Search Console history
+    // was backfilled the 28-day window holds ~19,000 rows across several
+    // thousand distinct queries, and the request simply hung. COUNT(DISTINCT)
+    // does the same job in the database and returns one number.
+    const totalRows = await prisma.$queryRaw<{ count: bigint }[]>`
+      SELECT COUNT(DISTINCT "query") AS count
+      FROM "GscSearchQuery"
+      WHERE "date" >= ${startDate}
+        AND (${search} = '' OR "query" ILIKE ${`%${search}%`})
+    `;
+    const total = Number(totalRows[0]?.count ?? 0);
 
     // Time series for the period
     const timeSeries = await prisma.gscSearchQuery.groupBy({
@@ -90,7 +99,7 @@ export async function GET(request: NextRequest) {
         position: Math.round((q._avg.position || 0) * 10) / 10,
         topPage: queryPageMap.get(q.query) || null,
       })),
-      total: totalResult.length,
+      total,
       page,
       limit,
       timeSeries: timeSeries.map((t) => ({
