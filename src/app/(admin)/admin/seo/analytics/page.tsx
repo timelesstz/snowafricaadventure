@@ -48,7 +48,7 @@ export default function AnalyticsPage() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`/api/admin/seo/organic-traffic?days=${days}`)
+    fetch(`/api/admin/seo/organic-traffic/?days=${days}`)
       .then(async (res) => {
         if (!cancelled && res.ok) setData(await res.json());
       })

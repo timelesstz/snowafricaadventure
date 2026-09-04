@@ -66,7 +66,7 @@ export default function KeywordsPage() {
 
   const handleDelete = async (id: string) => {
     try {
-      await fetch(`/api/admin/seo/keywords?id=${id}`, { method: "DELETE" });
+      await fetch(`/api/admin/seo/keywords/?id=${id}`, { method: "DELETE" });
       fetchKeywords();
     } catch (error) {
       console.error("Failed to delete keyword:", error);

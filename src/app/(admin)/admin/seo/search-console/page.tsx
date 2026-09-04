@@ -211,12 +211,18 @@ export default function SearchConsolePage() {
           search,
           limit: "100",
         });
-        const res = await fetch(`/api/admin/seo/search-queries?${params}`);
+        // Both requests in parallel, and with the trailing slash the app
+        // already enforces. Awaiting them in sequence meant paying for each
+        // round trip twice over — every slashless URL costs an extra 308 hop —
+        // which is what made this tab take the best part of a minute to paint
+        // once the Search Console history was backfilled.
+        const [res, pRes] = await Promise.all([
+          fetch(`/api/admin/seo/search-queries/?${params}`),
+          fetch(
+            `/api/admin/seo/page-metrics/?days=${days}&search=${search}&limit=100`
+          ),
+        ]);
         if (!cancelled && res.ok) setData(await res.json());
-
-        const pRes = await fetch(
-          `/api/admin/seo/page-metrics?days=${days}&search=${search}&limit=100`
-        );
         if (!cancelled && pRes.ok) setPageData(await pRes.json());
       } catch (error) {
         console.error("Failed to fetch search console data:", error);
