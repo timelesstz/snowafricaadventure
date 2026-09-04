@@ -76,6 +76,50 @@ export default function RecommendationCard({
               {recommendation.metric}
             </p>
           )}
+
+          {/* The concrete next step. Without this a recommendation only
+              restates the problem. */}
+          {recommendation.action && (
+            <p className="text-sm text-slate-700 mt-2">
+              <span className="font-semibold">Do this: </span>
+              {recommendation.action}
+            </p>
+          )}
+
+          {/* Supporting numbers, so the advice can be judged rather than
+              taken on trust. */}
+          <div className="flex flex-wrap gap-2 mt-2">
+            {recommendation.commercial && (
+              <span className="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-700">
+                Commercial intent
+              </span>
+            )}
+            {typeof recommendation.position === "number" && (
+              <span className="px-2 py-0.5 rounded text-xs bg-white/70 text-slate-600 border border-slate-200">
+                Position {recommendation.position.toFixed(0)}
+              </span>
+            )}
+            {typeof recommendation.impressions === "number" && (
+              <span className="px-2 py-0.5 rounded text-xs bg-white/70 text-slate-600 border border-slate-200">
+                {recommendation.impressions.toLocaleString()} impressions
+              </span>
+            )}
+            {typeof recommendation.clicks === "number" && (
+              <span className="px-2 py-0.5 rounded text-xs bg-white/70 text-slate-600 border border-slate-200">
+                {recommendation.clicks} clicks
+              </span>
+            )}
+            {!!recommendation.estimatedClicks && recommendation.estimatedClicks > 0 && (
+              <span className="px-2 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-700">
+                ~+{recommendation.estimatedClicks} clicks/mo if fixed
+              </span>
+            )}
+            {recommendation.effort && (
+              <span className="px-2 py-0.5 rounded text-xs bg-white/70 text-slate-600 border border-slate-200">
+                {recommendation.effort} effort
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

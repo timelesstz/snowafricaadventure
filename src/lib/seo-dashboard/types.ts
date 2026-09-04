@@ -85,6 +85,18 @@ export interface Recommendation {
   description: string;
   affectedUrl?: string;
   metric?: string;
+
+  /** The concrete next step, not a restatement of the problem. */
+  action?: string;
+  /** Rough extra clicks per month if acted on — used for ordering. */
+  estimatedClicks?: number;
+  effort?: "low" | "medium" | "high";
+  /** Search-intent signal: commercial pages are worth more than trivia. */
+  commercial?: boolean;
+  /** Supporting numbers, so advice can be judged rather than taken on faith. */
+  position?: number;
+  impressions?: number;
+  clicks?: number;
 }
 
 export interface KeywordWithPosition {
