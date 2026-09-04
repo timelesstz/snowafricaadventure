@@ -3,11 +3,14 @@
  * =============================================
  * Use these functions to track custom events throughout the application.
  *
- * CONFIGURED MEASUREMENT IDs:
- * - G-56M3GQC18Q (Primary - set via NEXT_PUBLIC_GA_ID)
- * - G-W0CEF6KK96 (Secondary - set via NEXT_PUBLIC_GA_ID_SECONDARY)
+ * CONFIGURED MEASUREMENT ID:
+ * - G-56M3GQC18Q (set via NEXT_PUBLIC_GA_ID) -> GA4 property 362089674
  *
- * Events are automatically sent to ALL configured GA4 properties.
+ * A second property (G-W0CEF6KK96) was tagged until September 2026. It was
+ * removed so that reporting has a single source of truth; see the note in
+ * components/analytics/GoogleAnalytics.tsx.
+ *
+ * Events are sent to every ID in GA_MEASUREMENT_IDS.
  */
 
 declare global {

@@ -4,10 +4,18 @@ import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, Suspense } from "react";
 
-// Support multiple GA4 Measurement IDs
+// Supports multiple GA4 Measurement IDs, but only one is configured.
+//
+// The site used to tag a second property as well (G-W0CEF6KK96, property
+// 371525652). That duplicated every event into a property nobody reported
+// from, and left two properties both showing live traffic for the same site,
+// which made it impossible to tell which one to trust. Reporting now runs off
+// property 362089674 (G-56M3GQC18Q), which is what the SEO dashboard reads.
+//
+// NEXT_PUBLIC_GA_ID_SECONDARY is deliberately no longer read. Adding an ID
+// back here is all that is needed to resume dual-tagging.
 const GA_MEASUREMENT_IDS = [
-  process.env.NEXT_PUBLIC_GA_ID,           // Primary: G-56M3GQC18Q
-  process.env.NEXT_PUBLIC_GA_ID_SECONDARY, // Secondary: G-W0CEF6KK96
+  process.env.NEXT_PUBLIC_GA_ID, // Primary: G-56M3GQC18Q -> property 362089674
 ].filter(Boolean) as string[];
 
 // Primary ID for gtag script loading
