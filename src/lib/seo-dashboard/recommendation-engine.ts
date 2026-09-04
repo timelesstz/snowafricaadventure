@@ -1,6 +1,22 @@
 import prisma from "@/lib/prisma";
 import type { Recommendation } from "./types";
 
+/**
+ * Trivia that happens to contain a commercial word. "first person to climb
+ * Kilimanjaro" is a history question, not a booking intent, but it matched on
+ * "climb" and was shown with a Commercial intent badge.
+ */
+const TRIVIA_PATH = /(first-person|history-of|who-was|who-were|-facts|oldest-|youngest-)/i;
+
+/**
+ * Vulnerability scans, not lost visitors. The site is a WordPress migration,
+ * so these get probed constantly — but /wp-admin/ was never a page a reader
+ * could reach, and the dashboard was advising a 301 redirect for it. There is
+ * nothing to redirect to and nothing to recover.
+ */
+const BOT_PROBE =
+  /(^\/wp-admin|^\/wp-login|^\/xmlrpc|^\/wp-includes|\.php$|^\/\.env|^\/\.git|^\/phpmyadmin|^\/administrator|^\/vendor\/|^\/cgi-bin)/i;
+
 /** Paths whose visitors could plausibly book something. */
 const COMMERCIAL_PATH =
   /(operator|compan|price|cost|budget|book|package|tour|safari|climb|trek|route|itinerar|holiday|departure|guide)/i;
@@ -119,7 +135,10 @@ export async function generateRecommendations(): Promise<Recommendation[]> {
     if (impressions < 200) continue;
 
     const path = row.page.replace(/^https?:\/\/[^/]+/, "");
-    const commercial = COMMERCIAL_PATH.test(path) && !INFORMATIONAL_PATH.test(path);
+    const commercial =
+      COMMERCIAL_PATH.test(path) &&
+      !INFORMATIONAL_PATH.test(path) &&
+      !TRIVIA_PATH.test(path);
     const pct = (ctr * 100).toFixed(1);
 
     if (position <= 10) {
@@ -144,7 +163,12 @@ export async function generateRecommendations(): Promise<Recommendation[]> {
       const misleading = coverage < 0.25 || Boolean(top && top.position > 15);
       recommendations.push({
         id: `low-ctr-${row.page}`,
-        severity: commercial ? "critical" : "warning",
+        // Critical is reserved for a commercial page that genuinely holds page
+        // one and still is not clicked — the case where a snippet rewrite pays
+        // off the same day. A page whose average is an artifact does not
+        // qualify, however commercial it is: its own card says the rewrite is
+        // not the lever, so flagging it critical contradicted the advice.
+        severity: commercial && !misleading ? "critical" : "warning",
         category: "CTR Optimization",
         title: zeroClickRisk
           ? "Ranks on page one but the answer is given in the results"
@@ -388,7 +412,24 @@ export async function generateRecommendations(): Promise<Recommendation[]> {
     take: 10,
   });
 
+  // Every 404 the dashboard was flagging turned out to be already fixed —
+  // four had redirects sitting in next.config.ts and one was a live page —
+  // because nothing marks a NotFoundUrl resolved when the redirect lands.
+  // Redirects created through the admin at least can be cross-checked here.
+  const existingRedirects = new Set(
+    (
+      await prisma.redirect.findMany({
+        where: { isActive: true },
+        select: { sourceUrl: true },
+      })
+    ).map((r) => r.sourceUrl)
+  );
+
   for (const nf of high404s) {
+    // A scanner hitting /wp-admin/ 7 times is not lost traffic to recover.
+    if (BOT_PROBE.test(nf.url)) continue;
+    if (existingRedirects.has(nf.url)) continue;
+
     recommendations.push({
       id: `404-${nf.id}`,
       severity: nf.hitCount >= 20 ? "critical" : "warning",
