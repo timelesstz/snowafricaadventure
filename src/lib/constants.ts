@@ -97,12 +97,21 @@ export const TOP_NAV = [
  * Footer navigation groups
  */
 export const FOOTER_NAV = {
+  // Note: these lists double as the site's internal-link backbone. Search
+  // Console showed commercial pages sitting in "Discovered - currently not
+  // indexed" with "Referring page: None detected" — Google had found them in
+  // the sitemap but saw nothing linking to them, so it never crawled them.
+  // A footer link puts every one of them one hop from every page on the site.
   safaris: {
     title: "Safari & Tours",
     links: [
       { label: "All Safari Packages", href: "/tanzania-safaris/" },
       { label: "Tailor-Made Safaris", href: "/tailor-made-safari/" },
       { label: "Tanzania Destinations", href: "/tanzania-destinations/" },
+      { label: "Wildlife Safaris", href: "/wildlife-safaris-tanzania/" },
+      { label: "10-Day Tanzania Itinerary", href: "/tanzania-itinerary-10-days/" },
+      { label: "Safaris from the UK", href: "/tanzania-safari-from-uk/" },
+      { label: "Best Tanzania Tour Operator", href: "/best-tanzania-tour-operator/" },
     ],
   },
   kilimanjaro: {
@@ -120,6 +129,8 @@ export const FOOTER_NAV = {
       { label: "Safety & Health", href: "/kilimanjaro-safety/" },
       { label: "Success Rates", href: "/kilimanjaro-success-rates/" },
       { label: "Mount Kilimanjaro", href: "/mount-kilimanjaro/" },
+      { label: "Best Tour Operators", href: "/best-kilimanjaro-tour-operators/" },
+      { label: "Climbing Companies", href: "/kilimanjaro-climbing-companies/" },
     ],
   },
   company: {

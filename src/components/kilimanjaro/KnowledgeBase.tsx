@@ -9,6 +9,10 @@ const COLUMNS = [
       { href: "/best-time-to-climb-kilimanjaro/", label: "Best Time to Climb" },
       { href: "/kilimanjaro-prices/", label: "Prices & Costs" },
       { href: "/kilimanjaro-join-group-departures/", label: "Group Departures" },
+      // Choosing an operator is the highest commercial-intent step in the
+      // journey, and these pages had no inbound links Google could see.
+      { href: "/best-kilimanjaro-tour-operators/", label: "Choosing a Tour Operator" },
+      { href: "/kilimanjaro-climbing-companies/", label: "Climbing Companies Compared" },
       { href: "/kilimanjaro-visa-tanzania/", label: "Tanzania Visa" },
       { href: "/kilimanjaro-airport-guide/", label: "Airport & Transfers" },
       { href: "/kilimanjaro-travel-insurance/", label: "Travel Insurance" },
