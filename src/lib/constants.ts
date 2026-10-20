@@ -169,6 +169,12 @@ export const SAFARI_TYPES = ["Budget", "Mid-range", "Luxury"] as const;
 export const DESTINATION_CIRCUITS = ["Northern", "Southern", "Western"] as const;
 
 /**
+ * Booking deposit (share of total price due at booking).
+ * Balance is due 2 weeks before departure. Keep in sync with /terms-and-conditions/.
+ */
+export const DEPOSIT_RATE = 0.2;
+
+/**
  * Physical ratings for routes
  */
 export const PHYSICAL_RATINGS = [

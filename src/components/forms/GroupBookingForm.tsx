@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { format } from "date-fns";
 import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp, Info } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
-import { PHONE_PREFIXES } from "@/lib/constants";
+import { PHONE_PREFIXES, DEPOSIT_RATE } from "@/lib/constants";
 import { AvailabilityBadge } from "@/components/ui/Badge";
 import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout, trackPurchase, trackSelectDeparture } from "@/lib/analytics";
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
@@ -173,7 +173,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
   const maxClimbers = Math.min(availableSpots, 10);
   const pricePerPerson = departure.price;
   const totalPrice = pricePerPerson * totalClimbers;
-  const depositAmount = Math.round(totalPrice * 0.1);
+  const depositAmount = Math.round(totalPrice * DEPOSIT_RATE);
   const balanceAmount = totalPrice - depositAmount;
 
   const handleStage1Submit = (e: React.FormEvent) => {
@@ -377,7 +377,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
             <li className="flex gap-3">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm">2</span>
               <div>
-                <p className="font-medium">Pay your 10% deposit</p>
+                <p className="font-medium">Pay your 20% deposit</p>
                 <p className="text-sm text-[var(--text-muted)]">
                   Secure your spot with just {formatPrice(bookingResult.summary.depositAmount)}.
                 </p>
@@ -484,7 +484,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         </div>
         <div className="border-t border-[var(--border)] pt-2">
           <div className="flex justify-between text-[var(--primary-dark)]">
-            <span className="font-medium">10% Deposit (due now)</span>
+            <span className="font-medium">20% Deposit (due now)</span>
             <span className="font-bold">{formatPrice(depositAmount)}</span>
           </div>
           <div className="flex justify-between text-[var(--text-muted)]">
@@ -582,7 +582,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           {/* Deposit */}
           <div className="flex justify-between items-center">
             <div>
-              <p className="font-medium text-[var(--primary-dark)]">10% Deposit</p>
+              <p className="font-medium text-[var(--primary-dark)]">20% Deposit</p>
               <p className="text-xs text-[var(--text-muted)]">Due now to secure spot</p>
             </div>
             <span className="text-lg font-bold text-[var(--primary-dark)]">{formatPrice(depositAmount)}</span>
@@ -609,7 +609,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         {/* Info */}
         <div className="bg-[var(--surface)] rounded-lg p-3 mt-4">
           <p className="text-xs text-[var(--text-muted)]">
-            <strong className="text-[var(--text)]">Secure your spot today!</strong> Pay just 10% now. Full balance due 2 weeks before arrival.
+            <strong className="text-[var(--text)]">Secure your spot today!</strong> Pay just 20% now. Full balance due 2 weeks before arrival.
           </p>
         </div>
       </div>
@@ -940,7 +940,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
               <p className="text-xs text-center text-[var(--text-muted)]">
                 By booking you agree to our{" "}
                 <Link href="/terms-and-conditions/" className="underline hover:text-[var(--text)]">terms</Link>.
-                A 10% deposit secures your spot. Full balance is due 2 weeks before arrival.
+                A 20% deposit secures your spot. Full balance is due 2 weeks before arrival.
                 Your data is protected under our{" "}
                 <Link href="/privacy-policy/" className="underline hover:text-[var(--text)]">privacy policy</Link>.
               </p>

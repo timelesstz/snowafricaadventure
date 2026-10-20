@@ -178,7 +178,7 @@ const priceFaqs = [
   {
     question: "Can I pay for my Kilimanjaro climb in instalments?",
     answer:
-      "Yes. Snow Africa Adventure accepts a 30% deposit at booking with the balance due 60 days before your climb date. We accept bank transfers, credit cards, and PayPal. For group departures, early booking with a deposit secures your spot and locks in the current price.",
+      "Yes. Snow Africa Adventure accepts a 20% deposit at booking with the balance due 2 weeks before your climb date. We accept bank transfers, credit cards, and PayPal. For group departures, early booking with a deposit secures your spot and locks in the current price.",
   },
   {
     question: "What currency should I bring to Tanzania?",
@@ -797,7 +797,7 @@ export default function KilimanjaroPricesPage() {
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Book Early for Best Rates</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-3">
-                  Prices tend to increase closer to peak season as availability tightens. Booking 3–6 months ahead locks in current rates and guarantees your preferred dates. A 30% deposit is all you need to secure your spot.
+                  Prices tend to increase closer to peak season as availability tightens. Booking 3–6 months ahead locks in current rates and guarantees your preferred dates. A 20% deposit is all you need to secure your spot.
                 </p>
                 <Link href="/contact-us/" className="text-sm font-semibold text-[var(--secondary)] hover:underline inline-flex items-center gap-1">
                   Get a quote <ArrowRight className="w-3.5 h-3.5" />

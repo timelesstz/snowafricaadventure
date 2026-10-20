@@ -20,7 +20,7 @@ export default function TermsPage() {
             Terms and Conditions
           </h1>
           <p className="text-[var(--text-light)]">
-            Last updated: January 2025
+            Last updated: October 2026
           </p>
         </div>
       </section>
@@ -43,17 +43,17 @@ export default function TermsPage() {
             </p>
             <ul>
               <li>
-                Kilimanjaro climbs: 10% deposit required at booking, balance due
-                30 days before departure
+                Kilimanjaro climbs: 20% deposit required at booking, balance due
+                2 weeks before departure
               </li>
               <li>
-                Safari packages: 30% deposit required at booking, balance due 30
-                days before departure
+                Safari packages: 20% deposit required at booking, balance due 2
+                weeks before departure
               </li>
               <li>Day trips: Full payment required at booking</li>
               <li>
-                Group departures: 10% deposit to secure your spot, balance due
-                45 days before departure
+                Group departures: 20% deposit to secure your spot, balance due 2
+                weeks before departure
               </li>
             </ul>
 

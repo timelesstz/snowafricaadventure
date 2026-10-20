@@ -148,7 +148,7 @@ export default async function GroupDeparturesPage() {
     {
       question: "What is the deposit and payment schedule?",
       answer:
-        "A 10% deposit secures your spot. The remaining balance is due 2 weeks before your departure date.",
+        "A 20% deposit secures your spot. The remaining balance is due 2 weeks before your departure date.",
     },
     {
       question: "What happens if a departure doesn't reach minimum numbers?",
@@ -264,7 +264,7 @@ export default async function GroupDeparturesPage() {
               </div>
               <h3 className="font-semibold mb-1">Book Your Spot</h3>
               <p className="text-sm text-[var(--text-muted)]">
-                Secure with 10% deposit. Balance due 60 days before
+                Secure with 20% deposit. Balance due 2 weeks before
               </p>
             </div>
             <div className="text-center">
@@ -614,8 +614,8 @@ export default async function GroupDeparturesPage() {
                 What is the deposit and payment schedule?
               </summary>
               <div className="px-4 pb-4 text-[var(--text-muted)]">
-                A 10% deposit secures your spot. The remaining balance is due 60
-                days before your departure date.
+                A 20% deposit secures your spot. The remaining balance is due 2
+                weeks before your departure date.
               </div>
             </details>
             <details className="bg-[var(--surface)] rounded-lg group">

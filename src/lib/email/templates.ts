@@ -109,7 +109,7 @@ export function bookingInquiryReceived(data: BookingEmailData): string {
         </tr>
         <tr>
           <td class="info-label">Deposit Required:</td>
-          <td class="info-value">$${data.depositAmount.toLocaleString()} (10%)</td>
+          <td class="info-value">$${data.depositAmount.toLocaleString()} (20%)</td>
         </tr>
       </table>
     </div>
@@ -174,7 +174,7 @@ export function bookingConfirmed(data: BookingEmailData): string {
         <li>Review your packing list (attached)</li>
         <li>Ensure all climbers have valid travel insurance</li>
         <li>Complete any required vaccinations</li>
-        <li>Pay your balance 30 days before departure</li>
+        <li>Pay your balance 2 weeks before departure</li>
       </ol>
     </div>
 

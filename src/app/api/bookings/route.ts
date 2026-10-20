@@ -11,6 +11,7 @@ import { BookingNotifications } from "@/lib/notifications";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { extractVisitorData } from "@/lib/visitor-tracking";
 import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
+import { DEPOSIT_RATE } from "@/lib/constants";
 
 // Climber schema - now supports partial data for non-lead climbers
 const climberSchema = z.object({
@@ -121,7 +122,7 @@ export async function POST(request: NextRequest) {
     // Calculate pricing
     const pricePerPerson = Number(departure.price);
     const totalPrice = pricePerPerson * totalClimbers;
-    const depositAmount = Math.round(totalPrice * 0.1); // 10% deposit
+    const depositAmount = Math.round(totalPrice * DEPOSIT_RATE);
 
     // Extract visitor tracking from request headers
     const visitor = extractVisitorData(request);

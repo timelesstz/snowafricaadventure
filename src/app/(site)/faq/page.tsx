@@ -40,7 +40,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: "What payment methods do you accept?",
         answer:
-          "We accept bank transfers (SWIFT), credit/debit cards (Visa, Mastercard), PayPal, and mobile money (M-Pesa for local payments). A 30% deposit secures your booking for all safaris and a 10% deposit secures your booking for all Kilimanjaro/trekking routes, with the balance due 30 days before departure.",
+          "We accept bank transfers (SWIFT), credit/debit cards (Visa, Mastercard), PayPal, and mobile money (M-Pesa for local payments). A 20% deposit secures your booking for all safaris and Kilimanjaro/trekking routes, with the balance due 2 weeks before departure.",
       },
       {
         question: "Can I customize my itinerary?",

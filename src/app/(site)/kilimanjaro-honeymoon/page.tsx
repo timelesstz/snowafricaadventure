@@ -246,7 +246,7 @@ const faqs = [
   {
     question: "How do we book a Kilimanjaro honeymoon with Snow Africa?",
     answer:
-      "Contact us through our enquiry form or email with your preferred dates, route preference, and any add-ons (safari, Zanzibar, honeymoon package). We will build a custom itinerary around your honeymoon timeline and budget. A 30% deposit secures your booking, with the balance due 60 days before your climb date. We handle everything: airport transfers, hotel in Moshi, park permits, equipment, guides, porters, and any post-climb extensions. Most couples book 4–6 months in advance to secure their preferred dates.",
+      "Contact us through our enquiry form or email with your preferred dates, route preference, and any add-ons (safari, Zanzibar, honeymoon package). We will build a custom itinerary around your honeymoon timeline and budget. A 20% deposit secures your booking, with the balance due 2 weeks before your climb date. We handle everything: airport transfers, hotel in Moshi, park permits, equipment, guides, porters, and any post-climb extensions. Most couples book 4–6 months in advance to secure their preferred dates.",
   },
 ];
 

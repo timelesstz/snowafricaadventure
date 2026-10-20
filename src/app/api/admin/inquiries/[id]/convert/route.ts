@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { AdminRole, BookingStatus } from "@prisma/client";
 import { z, ZodError } from "zod";
+import { DEPOSIT_RATE } from "@/lib/constants";
 
 const convertSchema = z.object({
   departureId: z.string().min(1, "Departure is required"),
@@ -70,7 +71,7 @@ export async function POST(
         climberDetails,
         pricePerPerson,
         totalPrice,
-        depositAmount: Math.round(totalPrice * 0.1),
+        depositAmount: Math.round(totalPrice * DEPOSIT_RATE),
         status: BookingStatus.INQUIRY,
         notes: `Converted from inquiry ${inquiry.id}${inquiry.additionalInfo ? `\n\nOriginal message:\n${inquiry.additionalInfo}` : ""}`,
         source: "inquiry-conversion",

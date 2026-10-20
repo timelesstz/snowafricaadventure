@@ -1222,7 +1222,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 step: 3,
                 title: "Secure Your Spot with a Deposit",
                 description:
-                  "Pay a 30% deposit by bank transfer, credit card, or PayPal to confirm your booking. The remaining 70% is due 60 days before your climb start date. We send a detailed confirmation email with your itinerary, packing list, and training guide.",
+                  "Pay a 20% deposit by bank transfer, credit card, or PayPal to confirm your booking. The remaining 80% is due 2 weeks before your climb start date. We send a detailed confirmation email with your itinerary, packing list, and training guide.",
               },
               {
                 step: 4,

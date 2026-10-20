@@ -310,7 +310,7 @@ const whyBookDirect = [
     icon: Clock,
     title: "Flexible Payment Terms",
     description:
-      "Pay a 30% deposit to confirm your booking, with the balance due 60 days before travel. We accept bank transfers in GBP, USD, or EUR, as well as credit card payments. No surcharges for card payments.",
+      "Pay a 20% deposit to confirm your booking, with the balance due 2 weeks before travel. We accept bank transfers in GBP, USD, or EUR, as well as credit card payments. No surcharges for card payments.",
   },
 ];
 
