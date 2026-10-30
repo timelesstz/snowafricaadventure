@@ -276,6 +276,24 @@ export function Footer({ currentYear }: { currentYear: number }) {
               <span className="h-1 w-1 rounded-full bg-white/20" />
               <span>IMEC Partner</span>
             </div>
+            {/* KAYAK Arusha city-guide badge. Plain <img>: KAYAK's CDN rejects
+                server-side fetches, so next/image optimisation would 400. */}
+            <a
+              href="https://www.kayak.co.uk/Arusha.21939.guide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://content.r9cdn.net/frontier/assets/D3QWX7t9ZP.png"
+                alt="Featured in the KAYAK Arusha travel guide"
+                height={150}
+                loading="lazy"
+                decoding="async"
+                className="h-24 md:h-28 w-auto"
+              />
+            </a>
           </div>
         </div>
       </div>
