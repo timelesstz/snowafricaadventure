@@ -33,7 +33,7 @@ const priceTiers = [
     label: "Budget",
     range: "$1,850 – $2,500",
     icon: DollarSign,
-    color: "bg-blue-100 text-blue-700",
+    color: "bg-slate-100 text-slate-700",
     description:
       "5–6 day Marangu or Rongai routes with shared group departures. Standard tents, group meals, and experienced guides.",
     features: ["Shared group vehicle", "Standard camping", "Group meals", "English guide"],
@@ -52,7 +52,7 @@ const priceTiers = [
     label: "Premium",
     range: "$3,500 – $4,500+",
     icon: Mountain,
-    color: "bg-emerald-100 text-emerald-700",
+    color: "bg-acacia-100 text-acacia-700",
     description:
       "8–9 day Lemosho or Northern Circuit routes. Fully private expedition, luxury equipment, and dedicated personal guide.",
     features: ["Fully private tour", "Luxury camping gear", "Private chef", "Lead guide + assistant"],
@@ -365,7 +365,7 @@ export default function KilimanjaroPricesPage() {
                   <ul className="space-y-2">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+                        <Check className="w-4 h-4 text-acacia-500 shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -413,7 +413,7 @@ export default function KilimanjaroPricesPage() {
                     <td className="px-5 py-4 text-[var(--text-muted)]">{row.difficulty}</td>
                     <td className="px-5 py-4 font-bold text-[var(--secondary-dark)]">{row.priceFrom}</td>
                     <td className="px-5 py-4">
-                      <span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold">
+                      <span className="px-2 py-1 bg-acacia-100 text-acacia-700 rounded-full text-xs font-semibold">
                         {row.success}
                       </span>
                     </td>
@@ -482,14 +482,14 @@ export default function KilimanjaroPricesPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div>
               <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                <Check className="w-5 h-5 text-emerald-500" />
+                <Check className="w-5 h-5 text-acacia-500" />
                 Included in All Packages
               </h3>
               <ul className="space-y-3">
                 {included.map((item) => (
                   <li key={item} className="flex items-start gap-3 bg-white border border-[var(--border)] rounded-lg p-3 shadow-sm">
-                    <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                    <div className="w-6 h-6 bg-acacia-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-acacia-600" />
                     </div>
                     <span className="text-sm text-[var(--text)]">{item}</span>
                   </li>
@@ -740,8 +740,8 @@ export default function KilimanjaroPricesPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="w-5 h-5 text-emerald-700" />
+                <div className="w-10 h-10 bg-acacia-100 rounded-lg flex items-center justify-center mb-4">
+                  <Users className="w-5 h-5 text-acacia-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Join a Group Departure</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-3">
@@ -753,8 +753,8 @@ export default function KilimanjaroPricesPage() {
               </div>
 
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <TrendingUp className="w-5 h-5 text-blue-700" />
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
+                  <TrendingUp className="w-5 h-5 text-slate-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Climb in Shoulder Season</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-3">
@@ -779,8 +779,8 @@ export default function KilimanjaroPricesPage() {
               </div>
 
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Lightbulb className="w-5 h-5 text-purple-700" />
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
+                  <Lightbulb className="w-5 h-5 text-slate-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Choose a Shorter Route (With Caution)</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-3">
@@ -792,8 +792,8 @@ export default function KilimanjaroPricesPage() {
               </div>
 
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center mb-4">
-                  <CreditCard className="w-5 h-5 text-rose-700" />
+                <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                  <CreditCard className="w-5 h-5 text-red-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Book Early for Best Rates</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-3">
@@ -805,8 +805,8 @@ export default function KilimanjaroPricesPage() {
               </div>
 
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                  <Backpack className="w-5 h-5 text-teal-700" />
+                <div className="w-10 h-10 bg-acacia-100 rounded-lg flex items-center justify-center mb-4">
+                  <Backpack className="w-5 h-5 text-acacia-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Rent Gear Instead of Buying</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-3">

@@ -48,7 +48,7 @@ const tippingRates = [
     description:
       "Assistant guides walk with the group, carry first aid kits and emergency oxygen, help with daily health checks, and ensure no climber falls behind. Most expeditions have 1-2 assistant guides depending on group size.",
     icon: Shield,
-    color: "bg-blue-100 text-blue-700",
+    color: "bg-slate-100 text-slate-700",
   },
   {
     role: "Cook",
@@ -56,7 +56,7 @@ const tippingRates = [
     description:
       "The cook prepares three meals a day plus snacks at altitude, working in challenging conditions with limited equipment. A good mountain cook is the unsung hero of every successful climb — proper nutrition is critical above 4,000m.",
     icon: Heart,
-    color: "bg-emerald-100 text-emerald-700",
+    color: "bg-acacia-100 text-acacia-700",
   },
   {
     role: "Porter",
@@ -64,7 +64,7 @@ const tippingRates = [
     description:
       "Porters carry up to 20kg each — your gear, camping equipment, food, and water. A typical climb requires 3-4 porters per climber. They trek the same mountain you do, often moving faster to set up camp before you arrive.",
     icon: Users,
-    color: "bg-purple-100 text-purple-700",
+    color: "bg-slate-100 text-slate-700",
   },
 ];
 
@@ -309,7 +309,7 @@ export default function KilimanjaroTippingGuidePage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 Budget <strong>$200 to $250 per climber</strong> for tips. This is split among your lead guide, assistant guides, cook, and porters. Tips are given in a <strong>ceremony on the last day</strong> of the trek and are a <strong>significant part of the crew&apos;s income</strong> — for porters, tips can double or triple their base wage. Bring <strong>small US dollar bills</strong> ($1, $5, $10, $20) and prepare envelopes labelled by role before the ceremony.
@@ -389,14 +389,14 @@ export default function KilimanjaroTippingGuidePage() {
                       <td className="px-5 py-3 font-medium">{item.role}</td>
                       <td className="px-5 py-3">{item.rate}</td>
                       <td className="px-5 py-3">{item.days}</td>
-                      <td className="px-5 py-3 font-bold text-emerald-700">{item.total}</td>
+                      <td className="px-5 py-3 font-bold text-acacia-700">{item.total}</td>
                     </tr>
                   ))}
-                  <tr className="border-t-2 border-[var(--primary)] bg-emerald-50">
+                  <tr className="border-t-2 border-[var(--primary)] bg-acacia-50">
                     <td className="px-5 py-4 font-bold text-lg" colSpan={3}>
                       Total for Entire Crew
                     </td>
-                    <td className="px-5 py-4 font-bold text-lg text-emerald-700">
+                    <td className="px-5 py-4 font-bold text-lg text-acacia-700">
                       {exampleBudget.totalPerGroup}
                     </td>
                   </tr>
@@ -438,8 +438,8 @@ export default function KilimanjaroTippingGuidePage() {
               </div>
 
               <div className="flex items-start gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
-                  <HandCoins className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center shrink-0">
+                  <HandCoins className="w-6 h-6 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Tips Double Their Income</h3>
@@ -450,8 +450,8 @@ export default function KilimanjaroTippingGuidePage() {
               </div>
 
               <div className="flex items-start gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
-                  <Shield className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
+                  <Shield className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">KPAP &amp; Fair Wage Advocacy</h3>
@@ -462,8 +462,8 @@ export default function KilimanjaroTippingGuidePage() {
               </div>
 
               <div className="flex items-start gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
-                  <Heart className="w-6 h-6 text-purple-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
+                  <Heart className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Cultural Significance</h3>
@@ -552,8 +552,8 @@ export default function KilimanjaroTippingGuidePage() {
                 key={tip.title}
                 className="flex gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
-                  <tip.icon className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center shrink-0">
+                  <tip.icon className="w-6 h-6 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">{tip.title}</h3>
@@ -637,33 +637,33 @@ export default function KilimanjaroTippingGuidePage() {
                 </ul>
               </div>
 
-              <div className="bg-emerald-50 rounded-xl p-6 border-2 border-emerald-200">
+              <div className="bg-acacia-50 rounded-xl p-6 border-2 border-acacia-200">
                 <h3 className="font-heading font-bold text-lg mb-3">Premium Operator</h3>
                 <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-600 font-bold mt-0.5">-</span>
+                    <span className="text-acacia-600 font-bold mt-0.5">-</span>
                     Larger crew: 1 guide, 2 assistants, 1 cook, 5-6 porters
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-600 font-bold mt-0.5">-</span>
+                    <span className="text-acacia-600 font-bold mt-0.5">-</span>
                     Total tip for 8-day climb: ~$800-$900
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-600 font-bold mt-0.5">-</span>
+                    <span className="text-acacia-600 font-bold mt-0.5">-</span>
                     Per climber (group of 4): ~$200-$225
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-600 font-bold mt-0.5">-</span>
+                    <span className="text-acacia-600 font-bold mt-0.5">-</span>
                     Better equipment, more comfort, higher safety standards
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
-                <strong>Key point:</strong> The per-day, per-person tip rate is the same regardless of operator tier. What changes is the crew size. A premium operator with more porters and assistant guides means a higher total tip, but each crew member receives the same fair rate. Never reduce individual rates to save money — adjust your overall climb budget to account for the crew your operator provides. See our <Link href="/kilimanjaro-prices/" className="text-blue-600 hover:underline font-semibold">Kilimanjaro price breakdown</Link> for full cost planning.
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
+                <strong>Key point:</strong> The per-day, per-person tip rate is the same regardless of operator tier. What changes is the crew size. A premium operator with more porters and assistant guides means a higher total tip, but each crew member receives the same fair rate. Never reduce individual rates to save money — adjust your overall climb budget to account for the crew your operator provides. See our <Link href="/kilimanjaro-prices/" className="text-slate-600 hover:underline font-semibold">Kilimanjaro price breakdown</Link> for full cost planning.
               </p>
             </div>
           </div>

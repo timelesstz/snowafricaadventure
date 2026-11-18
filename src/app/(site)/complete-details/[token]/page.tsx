@@ -144,8 +144,8 @@ export default function CompleteDetailsPage() {
     return (
       <div className="min-h-screen bg-[var(--surface)] py-12 px-4">
         <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-sm border border-[var(--border)] p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Check className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-acacia-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Check className="w-8 h-8 text-acacia-600" />
           </div>
           <h1 className="font-heading text-2xl font-bold text-[var(--text)] mb-2">
             Already Submitted
@@ -194,8 +194,8 @@ export default function CompleteDetailsPage() {
     return (
       <div className="min-h-screen bg-[var(--surface)] py-12 px-4">
         <div className="max-w-lg mx-auto bg-white rounded-2xl shadow-sm border border-[var(--border)] p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Check className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-acacia-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Check className="w-8 h-8 text-acacia-600" />
           </div>
           <h1 className="font-heading text-2xl font-bold text-[var(--text)] mb-2">
             Details Submitted!

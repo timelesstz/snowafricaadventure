@@ -480,7 +480,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                           <span>{formatPrice(dep.earlyBirdPrice)}</span>
                           <span className="text-[10px] font-normal text-[var(--text-light)]">
                             <s>{formatPrice(dep.price)}</s>{" "}
-                            <span className="text-green-700 font-medium">Early bird</span>
+                            <span className="text-acacia-700 font-medium">Early bird</span>
                           </span>
                         </span>
                       ) : (

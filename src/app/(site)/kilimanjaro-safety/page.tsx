@@ -43,9 +43,9 @@ const safetyStats = [
     label: "Fatality Rate",
     detail:
       "Approximately 3-10 deaths per ~35,000 climbers annually. Lower than the fatality rate for driving a car in most countries.",
-    color: "bg-emerald-100 text-emerald-700",
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
+    color: "bg-acacia-100 text-acacia-700",
+    iconBg: "bg-acacia-100",
+    iconColor: "text-acacia-600",
   },
   {
     stat: "~5%",
@@ -61,9 +61,9 @@ const safetyStats = [
     label: "Success Rate (8-Day Routes)",
     detail:
       "The overall average is 65%, but climbers on 8-day routes with reputable operators achieve summit rates above 93%.",
-    color: "bg-emerald-100 text-emerald-700",
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
+    color: "bg-acacia-100 text-acacia-700",
+    iconBg: "bg-acacia-100",
+    iconColor: "text-acacia-600",
   },
   {
     stat: "~75%",
@@ -79,9 +79,9 @@ const safetyStats = [
     label: "Technical Climbing Required",
     detail:
       "No ropes, no ice axes, no technical climbing equipment needed on any standard route. Kilimanjaro is a trek, not a technical climb.",
-    color: "bg-blue-100 text-blue-700",
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-600",
+    color: "bg-slate-100 text-slate-700",
+    iconBg: "bg-slate-100",
+    iconColor: "text-slate-600",
   },
 ];
 
@@ -200,7 +200,7 @@ const routeSafetyComparison = [
     days: "7-8",
     difficulty: "Moderate",
     safetyRating: "Excellent",
-    ratingColor: "bg-emerald-100 text-emerald-700",
+    ratingColor: "bg-acacia-100 text-acacia-700",
     slug: "8-days-lemosho-route",
     hazards:
       "Best acclimatization profile. Low traffic on early stages. Barranco Wall on day 4-5 when climbers are well-adjusted.",
@@ -221,7 +221,7 @@ const routeSafetyComparison = [
     days: "9",
     difficulty: "Moderate",
     safetyRating: "Best",
-    ratingColor: "bg-emerald-100 text-emerald-700",
+    ratingColor: "bg-acacia-100 text-acacia-700",
     hazards:
       "Longest route with best acclimatization. Very low traffic. Remote — evacuation takes longer from the north side.",
   },
@@ -437,7 +437,7 @@ export default function KilimanjaroSafetyPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 <strong>Yes, Kilimanjaro is safe</strong> when you climb with experienced guides, choose a <strong>7+ day route</strong>, and follow proper acclimatization protocols. The fatality rate is approximately <strong>0.03%</strong> — lower than driving a car. No ropes, no ice axes, no technical climbing required. With twice-daily health monitoring, emergency oxygen on every expedition, and Wilderness First Responder certified guides, the mountain is well-managed and should not deter you from climbing. We strongly recommend starting a <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline font-semibold">structured training plan</Link> 8-12 weeks before departure and securing <Link href="/kilimanjaro-travel-insurance/" className="text-[var(--primary)] hover:underline font-semibold">travel insurance that covers high-altitude trekking</Link>.
@@ -575,17 +575,17 @@ export default function KilimanjaroSafetyPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Green Flags */}
-              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
+              <div className="bg-acacia-50 border border-acacia-200 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-emerald-600" />
+                  <div className="w-10 h-10 rounded-xl bg-acacia-100 flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 text-acacia-600" />
                   </div>
                   <h3 className="font-heading font-bold text-lg">What to Look For</h3>
                 </div>
                 <ul className="space-y-3">
                   {operatorChecklist.greenFlags.map((flag) => (
                     <li key={flag} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                      <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                       {flag}
                     </li>
                   ))}
@@ -611,7 +611,7 @@ export default function KilimanjaroSafetyPage() {
               </div>
             </div>
 
-            <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div className="mt-8 bg-slate-50 border border-slate-200 rounded-xl p-6">
               <h3 className="font-semibold text-lg mb-3">Why Local Operators Matter</h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-3">
                 International travel agencies that sell Kilimanjaro treks almost always subcontract to a local Tanzanian operator. You pay a premium, and the agency takes a 30-50% commission before a single dollar reaches the mountain. This means less money for guide wages, food quality, equipment maintenance, and safety provisions.
@@ -657,7 +657,7 @@ export default function KilimanjaroSafetyPage() {
                   <tr
                     key={route.route}
                     className={`border-t border-[var(--border)] ${
-                      route.recommended ? "bg-emerald-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
+                      route.recommended ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
                     }`}
                   >
                     <td className="px-4 py-3 font-medium">
@@ -669,7 +669,7 @@ export default function KilimanjaroSafetyPage() {
                         route.route
                       )}
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Recommended
                         </span>
                       )}
@@ -719,15 +719,15 @@ export default function KilimanjaroSafetyPage() {
                   className="bg-[var(--surface)] rounded-2xl border border-[var(--border)] p-6"
                 >
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                      <section.icon className="w-6 h-6 text-blue-600" />
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center">
+                      <section.icon className="w-6 h-6 text-slate-600" />
                     </div>
                     <h3 className="font-heading font-bold text-lg">{section.title}</h3>
                   </div>
                   <ul className="space-y-3">
                     {section.items.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                        <CheckCircle className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}

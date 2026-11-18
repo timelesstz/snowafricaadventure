@@ -101,8 +101,8 @@ const altitudeZones = [
     range: "1,800 – 2,800m",
     name: "Forest Zone",
     oxygen: "~80% of sea level",
-    color: "text-emerald-400",
-    borderColor: "border-emerald-400/30",
+    color: "text-acacia-400",
+    borderColor: "border-acacia-400/30",
     description:
       "Starting elevation for most routes. No altitude effects. Body functions normally. Lush rainforest with warm, humid conditions.",
   },
@@ -271,7 +271,7 @@ const routeAcclimatization = [
     route: "Lemosho 8-Day",
     days: 8,
     profile: "Excellent",
-    profileColor: "bg-emerald-100 text-emerald-700",
+    profileColor: "bg-acacia-100 text-acacia-700",
     successRate: "93%",
     slug: "8-days-lemosho-route",
     notes: "Best climb-high-sleep-low profile. Our top recommendation.",
@@ -281,7 +281,7 @@ const routeAcclimatization = [
     route: "Northern Circuit 9-Day",
     days: 9,
     profile: "Best",
-    profileColor: "bg-emerald-100 text-emerald-700",
+    profileColor: "bg-acacia-100 text-acacia-700",
     successRate: "95%",
     notes: "Longest route — best acclimatization of any Kilimanjaro route.",
   },
@@ -580,8 +580,8 @@ export default function KilimanjaroAltitudeSicknessPage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                    <strategy.icon className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center">
+                    <strategy.icon className="w-6 h-6 text-acacia-600" />
                   </div>
                 </div>
                 <div>
@@ -609,8 +609,8 @@ export default function KilimanjaroAltitudeSicknessPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Pill className="w-7 h-7 text-blue-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Pill className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -659,11 +659,11 @@ export default function KilimanjaroAltitudeSicknessPage() {
                 </ul>
               </div>
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-                <Stethoscope className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+                <Stethoscope className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
                 <div>
-                  <p className="text-emerald-800 text-sm font-semibold mb-1">Our Guides&apos; Perspective</p>
-                  <p className="text-emerald-800 text-sm">
+                  <p className="text-acacia-800 text-sm font-semibold mb-1">Our Guides&apos; Perspective</p>
+                  <p className="text-acacia-800 text-sm">
                     From our experience guiding 800+ Kilimanjaro summits, climbers who take Diamox prophylactically tend to report fewer and milder AMS symptoms, sleep better at altitude, and maintain higher SpO2 readings. We do not push Diamox on anyone — it is a personal decision best made with your doctor — but we encourage climbers to at least obtain a prescription and carry it as a backup.
                   </p>
                 </div>
@@ -737,7 +737,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
                   <tr
                     key={route.route}
                     className={`border-t border-[var(--border)] ${
-                      route.recommended ? "bg-emerald-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
+                      route.recommended ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
                     }`}
                   >
                     <td className="px-4 py-3 font-medium">
@@ -749,7 +749,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
                         route.route
                       )}
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Recommended
                         </span>
                       )}
@@ -760,7 +760,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
                         {route.profile}
                       </span>
                     </td>
-                    <td className="px-4 py-3 font-bold text-emerald-700">{route.successRate}</td>
+                    <td className="px-4 py-3 font-bold text-acacia-700">{route.successRate}</td>
                     <td className="px-4 py-3 text-xs text-[var(--text-muted)] hidden md:table-cell">
                       {route.notes}
                     </td>

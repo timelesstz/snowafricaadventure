@@ -279,8 +279,8 @@ export function ShareButtons({
               >
                 {copied ? (
                   <>
-                    <CheckIcon className="w-4 h-4 text-green-600" />
-                    <span className="text-green-600">Copied!</span>
+                    <CheckIcon className="w-4 h-4 text-acacia-600" />
+                    <span className="text-acacia-600">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -352,7 +352,7 @@ export function ShareButtons({
           type="button"
           onClick={handleCopyLink}
           className={`${buttonSize} rounded-full hover:bg-[var(--surface)] transition-colors ${
-            copied ? "text-green-600" : "text-[var(--text-muted)]"
+            copied ? "text-acacia-600" : "text-[var(--text-muted)]"
           }`}
           title={copied ? "Copied!" : "Copy Link"}
         >
@@ -402,7 +402,7 @@ export function ShareButtons({
         onClick={handleCopyLink}
         className={`${buttonSize} rounded-full ${
           copied
-            ? "bg-green-600 text-white"
+            ? "bg-acacia-600 text-white"
             : "bg-[var(--surface)] hover:bg-[var(--muted)] text-[var(--text-muted)]"
         } transition-colors`}
         title={copied ? "Copied!" : "Copy Link"}

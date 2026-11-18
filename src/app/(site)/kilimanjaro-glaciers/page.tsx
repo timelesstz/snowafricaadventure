@@ -39,8 +39,8 @@ const majorGlaciers = [
   {
     name: "Northern Icefield",
     status: "Largest remaining",
-    color: "text-sky-400",
-    borderColor: "border-sky-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     description:
       "The most extensive remaining ice mass on Kilimanjaro, located on the northern slopes of Kibo near the crater rim. Once a continuous sheet, it has fractured into several distinct segments. Visible from the Rongai and Northern Circuit routes during the final summit approach. Estimated to contain roughly 40% of Kilimanjaro's remaining ice volume.",
   },
@@ -55,32 +55,32 @@ const majorGlaciers = [
   {
     name: "Eastern Icefield",
     status: "Severely diminished",
-    color: "text-blue-400",
-    borderColor: "border-blue-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     description:
       "Once a significant ice mass on Kilimanjaro's eastern face, this icefield has lost the majority of its volume over the past century. It includes remnants of the historically documented Ratzel and Credner glaciers. Researchers use it as a key indicator of overall retreat rates because of its high sun exposure.",
   },
   {
     name: "Furtwängler Glacier",
     status: "Most famous, critically small",
-    color: "text-indigo-400",
-    borderColor: "border-indigo-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     description:
       "Situated on the summit plateau inside the crater, the Furtwängler Glacier is the most visited ice formation on Kilimanjaro. Named after the German mountaineer Walter Furtwängler who summited in 1912, it once covered the entire crater floor. Today it stands as a solitary ice block roughly 60 metres across, reduced by over 80% since the year 2000. Every summit trekker can walk right past it.",
   },
   {
     name: "Rebmann Glacier",
     status: "Named after missionary Johannes Rebmann",
-    color: "text-violet-400",
-    borderColor: "border-violet-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     description:
       "Named after the German missionary who first reported snow on Kilimanjaro to European audiences in 1848 — a claim initially ridiculed by London geographers. The Rebmann Glacier clings to the southwestern slopes and has lost dramatic vertical ice cliffs that once defined the Western Breach approach. Its retreat is visible to climbers ascending via the Arrow Glacier camp.",
   },
   {
     name: "Decken Glacier",
     status: "Historical ice, now fragmentary",
-    color: "text-purple-400",
-    borderColor: "border-purple-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     description:
       "Named after Baron Karl Klaus von der Decken, the first European to attempt Kilimanjaro's summit in 1861. The Decken Glacier once merged with the Rebmann Glacier to form a continuous ice wall visible from Barranco Camp. The two have separated entirely, and the Decken Glacier now survives as isolated remnants on the southwestern crater wall.",
   },
@@ -294,7 +294,7 @@ export default function KilimanjaroGlaciersPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-sky-50 border-2 border-sky-200 rounded-2xl p-8">
+            <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 Kilimanjaro&apos;s glaciers have <strong>shrunk by over 85% since 1912</strong>. Scientists estimate the remaining ice &mdash; including the famous <strong>Furtw&auml;ngler Glacier</strong> and <strong>Northern Icefield</strong> &mdash; could disappear entirely by <strong>2040</strong>. Climate change, reduced snowfall, and increased sublimation are the primary drivers. You can still see and photograph these glaciers today, but the window is narrowing.
@@ -385,7 +385,7 @@ export default function KilimanjaroGlaciersPage() {
                       <span
                         className={`text-xs px-2 py-1 rounded-full font-bold ${
                           row.loss === "—"
-                            ? "bg-sky-100 text-sky-700"
+                            ? "bg-slate-100 text-slate-700"
                             : row.loss === "100%"
                               ? "bg-red-100 text-red-700"
                               : "bg-amber-100 text-amber-700"
@@ -435,8 +435,8 @@ export default function KilimanjaroGlaciersPage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                  <div className="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center">
-                    <cause.icon className="w-6 h-6 text-sky-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <cause.icon className="w-6 h-6 text-slate-600" />
                   </div>
                 </div>
                 <div>
@@ -469,8 +469,8 @@ export default function KilimanjaroGlaciersPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <Eye className="w-7 h-7 text-emerald-600" />
+              <div className="w-14 h-14 rounded-xl bg-acacia-100 flex items-center justify-center">
+                <Eye className="w-7 h-7 text-acacia-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -489,8 +489,8 @@ export default function KilimanjaroGlaciersPage() {
                 <h3 className="font-semibold text-lg mb-4">What You Will See at the Summit</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center shrink-0 mt-0.5">
-                      <Snowflake className="w-4 h-4 text-sky-600" />
+                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                      <Snowflake className="w-4 h-4 text-slate-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">Vertical Ice Walls (Crater Rim)</h4>
@@ -500,8 +500,8 @@ export default function KilimanjaroGlaciersPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center shrink-0 mt-0.5">
-                      <Snowflake className="w-4 h-4 text-sky-600" />
+                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                      <Snowflake className="w-4 h-4 text-slate-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">Furtw&auml;ngler Glacier (Crater Floor)</h4>
@@ -511,8 +511,8 @@ export default function KilimanjaroGlaciersPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center shrink-0 mt-0.5">
-                      <Snowflake className="w-4 h-4 text-sky-600" />
+                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                      <Snowflake className="w-4 h-4 text-slate-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">Northern Icefield (Northern Routes)</h4>
@@ -524,11 +524,11 @@ export default function KilimanjaroGlaciersPage() {
                 </div>
               </div>
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-                <Mountain className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+                <Mountain className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
                 <div>
-                  <p className="text-emerald-800 text-sm font-semibold mb-1">Our Guides&apos; Perspective</p>
-                  <p className="text-emerald-800 text-sm">
+                  <p className="text-acacia-800 text-sm font-semibold mb-1">Our Guides&apos; Perspective</p>
+                  <p className="text-acacia-800 text-sm">
                     Emmanuel has guided over 200 summits and has watched the glaciers recede year by year. &ldquo;When I started guiding in 2010, the ice walls along the crater rim were noticeably taller and the Furtw&auml;ngler Glacier was significantly larger. Every season the change is visible. I tell every climber: take your time at the summit. Look at the ice. Photograph it. Because what you see today will not be here in 15 years.&rdquo;
                   </p>
                 </div>
@@ -678,7 +678,7 @@ export default function KilimanjaroGlaciersPage() {
               <div
                 key={route.route}
                 className={`bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)] ${
-                  route.recommended ? "ring-2 ring-emerald-300" : ""
+                  route.recommended ? "ring-2 ring-acacia-300" : ""
                 }`}
               >
                 <div className="flex items-start justify-between gap-4 mb-3">
@@ -691,7 +691,7 @@ export default function KilimanjaroGlaciersPage() {
                         {route.route}
                       </Link>
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Best Overall
                         </span>
                       )}
@@ -700,7 +700,7 @@ export default function KilimanjaroGlaciersPage() {
                       <strong>Glacier views:</strong> {route.views}
                     </p>
                   </div>
-                  <span className="text-xs bg-sky-100 text-sky-700 px-3 py-1 rounded-full font-bold shrink-0">
+                  <span className="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-bold shrink-0">
                     {route.highlight}
                   </span>
                 </div>

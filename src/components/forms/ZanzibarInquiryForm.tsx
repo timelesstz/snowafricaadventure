@@ -298,8 +298,8 @@ export function ZanzibarInquiryForm() {
 
   if (submitted) {
     return (
-      <div className="bg-gradient-to-br from-cyan-50 to-blue-50 border border-cyan-200 rounded-xl p-8 text-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
+      <div className="bg-gradient-to-br from-cyan-50 to-slate-50 border border-cyan-200 rounded-xl p-8 text-center">
+        <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-slate-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
           <CheckCircle2 className="w-8 h-8 text-white" />
         </div>
         <h3 className="font-heading font-bold text-2xl text-slate-900 mb-2">

@@ -75,7 +75,7 @@ const gearCategories = [
   {
     icon: <BedDouble className="w-6 h-6" />,
     title: "Sleeping",
-    color: "bg-sky-100 text-sky-700",
+    color: "bg-slate-100 text-slate-700",
     items: [
       "Sleeping bag rated to -15°C (four-season)",
       "Sleeping bag silk or fleece liner for extra warmth",
@@ -85,7 +85,7 @@ const gearCategories = [
   {
     icon: <Backpack className="w-6 h-6" />,
     title: "Trekking Essentials",
-    color: "bg-green-100 text-green-700",
+    color: "bg-acacia-100 text-acacia-700",
     items: [
       "Trekking poles × 2 (with spare snow baskets)",
       "Day pack 20–25L (carried by you)",
@@ -99,7 +99,7 @@ const gearCategories = [
   {
     icon: <HeartPulse className="w-6 h-6" />,
     title: "Health & Safety",
-    color: "bg-rose-100 text-rose-700",
+    color: "bg-red-100 text-red-700",
     items: [
       "Pulse oximeter (monitor blood-oxygen levels)",
       "Diamox (acetazolamide) — consult a doctor before travel",
@@ -114,7 +114,7 @@ const gearCategories = [
   {
     icon: <FileText className="w-6 h-6" />,
     title: "Documents & Tech",
-    color: "bg-purple-100 text-purple-700",
+    color: "bg-slate-100 text-slate-700",
     items: [
       "Passport and travel insurance documents (copies)",
       "Camera or phone with protective case",
@@ -151,7 +151,7 @@ const climateZones = [
     zone: "Rainforest",
     elevation: "1,800–2,800m",
     temp: "15–25°C",
-    color: "bg-emerald-100 text-emerald-800 border-emerald-200",
+    color: "bg-acacia-100 text-acacia-800 border-acacia-200",
     gear: [
       "Lightweight moisture-wicking base layer",
       "Rain jacket — daily afternoon showers are guaranteed",
@@ -165,7 +165,7 @@ const climateZones = [
     zone: "Moorland",
     elevation: "2,800–4,000m",
     temp: "5–15°C",
-    color: "bg-lime-100 text-lime-800 border-lime-200",
+    color: "bg-acacia-100 text-acacia-800 border-acacia-200",
     gear: [
       "Fleece mid-layer or lightweight insulation jacket",
       "Wind-resistant shell layer",
@@ -193,7 +193,7 @@ const climateZones = [
     zone: "Summit Zone",
     elevation: "5,000–5,895m",
     temp: "-15°C to -25°C",
-    color: "bg-sky-100 text-sky-800 border-sky-200",
+    color: "bg-slate-100 text-slate-800 border-slate-200",
     gear: [
       "Full summit kit: every layer you own",
       "Balaclava covering all exposed skin",
@@ -558,7 +558,7 @@ export default function KilimanjaroClimbingGearPage() {
                 <ul className="p-5 space-y-2">
                   {cat.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                      <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}

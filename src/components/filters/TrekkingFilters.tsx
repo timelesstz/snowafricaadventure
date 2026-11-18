@@ -21,8 +21,8 @@ interface TrekkingFiltersProps {
 }
 
 const difficultyColors: Record<string, { bg: string; text: string; activeBg: string }> = {
-  Easy: { bg: "bg-emerald-100", text: "text-emerald-700", activeBg: "bg-emerald-500" },
-  Moderate: { bg: "bg-blue-100", text: "text-blue-700", activeBg: "bg-blue-500" },
+  Easy: { bg: "bg-acacia-100", text: "text-acacia-700", activeBg: "bg-acacia-500" },
+  Moderate: { bg: "bg-slate-100", text: "text-slate-700", activeBg: "bg-slate-500" },
   Challenging: { bg: "bg-amber-100", text: "text-amber-700", activeBg: "bg-amber-500" },
   Difficult: { bg: "bg-orange-100", text: "text-orange-700", activeBg: "bg-orange-500" },
   Strenuous: { bg: "bg-red-100", text: "text-red-700", activeBg: "bg-red-500" },

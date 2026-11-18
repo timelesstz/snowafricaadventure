@@ -64,7 +64,7 @@ const routeSuccessRates = [
     nickname: "Best Overall",
     durations: [
       { days: 7, rate: 78, color: "bg-amber-500" },
-      { days: 8, rate: 90, color: "bg-emerald-500" },
+      { days: 8, rate: 90, color: "bg-acacia-500" },
     ],
     slug: "8-days-lemosho-route",
     recommended: true,
@@ -75,8 +75,8 @@ const routeSuccessRates = [
     route: "Rongai",
     nickname: "North Approach",
     durations: [
-      { days: 6, rate: 65, color: "bg-yellow-500" },
-      { days: 7, rate: 80, color: "bg-lime-500" },
+      { days: 6, rate: 65, color: "bg-amber-500" },
+      { days: 7, rate: 80, color: "bg-acacia-500" },
     ],
     slug: "6-days-rongai-route",
     notes:
@@ -85,7 +85,7 @@ const routeSuccessRates = [
   {
     route: "Northern Circuit",
     nickname: "Longest Route",
-    durations: [{ days: 9, rate: 95, color: "bg-emerald-600" }],
+    durations: [{ days: 9, rate: 95, color: "bg-acacia-600" }],
     notes:
       "The longest route on Kilimanjaro and the one with the highest success rate. Nine days of gradual ascent, circumnavigating the mountain, gives your body the maximum possible time to acclimatize. The trade-off is cost — more days means higher park fees.",
   },
@@ -94,7 +94,7 @@ const routeSuccessRates = [
     nickname: "Steepest Route",
     durations: [
       { days: 5, rate: 50, color: "bg-orange-500" },
-      { days: 6, rate: 60, color: "bg-yellow-500" },
+      { days: 6, rate: 60, color: "bg-amber-500" },
     ],
     notes:
       "The steepest and most direct route to the summit. Rapid altitude gain leaves little room for acclimatization. Only recommended for experienced high-altitude trekkers who know how their body responds to altitude. We rarely recommend this route.",
@@ -106,7 +106,7 @@ const successFactors = [
     icon: Clock,
     title: "Route Choice and Duration",
     importance: "Most Important",
-    importanceColor: "bg-emerald-100 text-emerald-700",
+    importanceColor: "bg-acacia-100 text-acacia-700",
     description:
       "This is the single biggest factor. Choosing a 7+ day route instead of a 5-day route can nearly triple your success rate — from 27% to 78% or higher. Every extra day on the mountain gives your body approximately 10-15% better odds of reaching the summit. The difference between a 5-day Marangu climb and an 8-day Lemosho climb is not just comfort — it is the difference between a coin flip and near-certainty. Budget operators push shorter routes because they are cheaper, but the savings come at the cost of your summit chances.",
   },
@@ -122,7 +122,7 @@ const successFactors = [
     icon: Brain,
     title: "Acclimatization Profile",
     importance: "Important — Partially Genetic",
-    importanceColor: "bg-blue-100 text-blue-700",
+    importanceColor: "bg-slate-100 text-slate-700",
     description:
       "How efficiently your body produces red blood cells and adjusts breathing patterns in response to lower oxygen is partly determined by genetics. Some people acclimatize quickly and feel strong at 5,000m. Others struggle at 4,000m despite identical preparation. You cannot change your genetics, but you can give your body the best possible chance by choosing a route with a strong climb-high-sleep-low profile. If you have no high-altitude experience, assume you are an average acclimatizer and choose a longer route.",
   },
@@ -138,7 +138,7 @@ const successFactors = [
     icon: Heart,
     title: "Mental Preparation",
     importance: "Important",
-    importanceColor: "bg-purple-100 text-purple-700",
+    importanceColor: "bg-slate-100 text-slate-700",
     description:
       "Summit night is where most climbers fail — and it is as much a mental challenge as a physical one. You start at midnight, climb for 6-8 hours in freezing darkness, and every step above 5,500m feels like walking through treacle. Many physically capable climbers turn around simply because they lose the mental battle. Knowing what to expect, having a personal 'why' that keeps you moving, and trusting your guide's judgement are all critical. Climbers who have researched what summit night feels like are significantly less likely to panic and quit.",
   },
@@ -393,7 +393,7 @@ export default function KilimanjaroSuccessRatesPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">
                 The Quick Answer
               </h2>
@@ -497,8 +497,8 @@ export default function KilimanjaroSuccessRatesPage() {
                 </div>
               </div>
               <div className="flex items-start gap-4 bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
-                  <BarChart3 className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center shrink-0">
+                  <BarChart3 className="w-5 h-5 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
@@ -540,7 +540,7 @@ export default function KilimanjaroSuccessRatesPage() {
                 key={route.route}
                 className={`bg-white rounded-2xl border shadow-sm overflow-hidden ${
                   route.recommended
-                    ? "border-emerald-300 ring-2 ring-emerald-100"
+                    ? "border-acacia-300 ring-2 ring-acacia-100"
                     : "border-[var(--border)]"
                 }`}
               >
@@ -559,7 +559,7 @@ export default function KilimanjaroSuccessRatesPage() {
                       )}
                     </h3>
                     {route.recommended && (
-                      <span className="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-bold">
+                      <span className="text-xs bg-acacia-100 text-acacia-700 px-3 py-1 rounded-full font-bold">
                         Our Top Pick
                       </span>
                     )}
@@ -655,42 +655,42 @@ export default function KilimanjaroSuccessRatesPage() {
                     route: "Rongai",
                     days: "6",
                     rate: "65%",
-                    rateColor: "text-yellow-600",
+                    rateColor: "text-amber-600",
                     verdict: "Average",
-                    verdictColor: "bg-yellow-100 text-yellow-700",
+                    verdictColor: "bg-amber-100 text-amber-700",
                   },
                   {
                     route: "Rongai",
                     days: "7",
                     rate: "80%",
-                    rateColor: "text-lime-600",
+                    rateColor: "text-acacia-600",
                     verdict: "Good",
-                    verdictColor: "bg-lime-100 text-lime-700",
+                    verdictColor: "bg-acacia-100 text-acacia-700",
                   },
                   {
                     route: "Lemosho",
                     days: "7",
                     rate: "78%",
-                    rateColor: "text-lime-600",
+                    rateColor: "text-acacia-600",
                     verdict: "Good",
-                    verdictColor: "bg-lime-100 text-lime-700",
+                    verdictColor: "bg-acacia-100 text-acacia-700",
                   },
                   {
                     route: "Lemosho",
                     days: "8",
                     rate: "90%",
-                    rateColor: "text-emerald-600",
+                    rateColor: "text-acacia-600",
                     verdict: "Excellent",
-                    verdictColor: "bg-emerald-100 text-emerald-700",
+                    verdictColor: "bg-acacia-100 text-acacia-700",
                     highlight: true,
                   },
                   {
                     route: "Northern Circuit",
                     days: "9",
                     rate: "95%",
-                    rateColor: "text-emerald-600",
+                    rateColor: "text-acacia-600",
                     verdict: "Best available",
-                    verdictColor: "bg-emerald-100 text-emerald-700",
+                    verdictColor: "bg-acacia-100 text-acacia-700",
                     highlight: true,
                   },
                   {
@@ -705,7 +705,7 @@ export default function KilimanjaroSuccessRatesPage() {
                     route: "Umbwe",
                     days: "6",
                     rate: "60%",
-                    rateColor: "text-yellow-600",
+                    rateColor: "text-amber-600",
                     verdict: "Experts only",
                     verdictColor: "bg-red-100 text-red-700",
                   },
@@ -714,7 +714,7 @@ export default function KilimanjaroSuccessRatesPage() {
                     key={`${row.route}-${row.days}`}
                     className={`border-t border-[var(--border)] ${
                       row.highlight
-                        ? "bg-emerald-50"
+                        ? "bg-acacia-50"
                         : i % 2 === 0
                           ? "bg-white"
                           : "bg-[var(--surface)]"
@@ -902,9 +902,9 @@ export default function KilimanjaroSuccessRatesPage() {
               </div>
             </div>
 
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-6">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-6">
               <h3 className="font-heading font-bold text-lg mb-3 flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                <CheckCircle2 className="w-5 h-5 text-acacia-600" />
                 What Honest Operators Report
               </h3>
               <p className="text-[var(--text-muted)] leading-relaxed mb-4">
@@ -915,7 +915,7 @@ export default function KilimanjaroSuccessRatesPage() {
                 use longer routes and experienced guides) but lower than the
                 implausible 98-99% claims.
               </p>
-              <div className="bg-white rounded-xl p-5 border border-emerald-200">
+              <div className="bg-white rounded-xl p-5 border border-acacia-200">
                 <div className="flex items-center gap-3 mb-2">
                   <Award className="w-6 h-6 text-[var(--secondary)]" />
                   <span className="font-bold text-lg">
@@ -1006,8 +1006,8 @@ export default function KilimanjaroSuccessRatesPage() {
                 className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)] hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
-                    <tip.icon className="w-5 h-5 text-emerald-600" />
+                  <div className="w-10 h-10 bg-acacia-100 rounded-xl flex items-center justify-center">
+                    <tip.icon className="w-5 h-5 text-acacia-600" />
                   </div>
                   <span className="text-sm font-bold text-[var(--primary)]/40">
                     {String(i + 1).padStart(2, "0")}

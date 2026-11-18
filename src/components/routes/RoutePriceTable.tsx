@@ -178,7 +178,7 @@ function CustomQuoteModal({
               </div>
             </div>
             {selectedTier.savings && (
-              <span className="bg-emerald-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold">
+              <span className="bg-acacia-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold">
                 Save ${selectedTier.savings.toLocaleString()}
               </span>
             )}
@@ -187,7 +187,7 @@ function CustomQuoteModal({
 
         {submitted ? (
           <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
+            <div className="w-16 h-16 bg-gradient-to-br from-acacia-400 to-acacia-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
               <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
@@ -474,7 +474,7 @@ export function RoutePriceTable({
                 {/* Savings + Arrow */}
                 <div className="flex items-center gap-3">
                   {tier.savings ? (
-                    <span className="inline-block bg-emerald-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold">
+                    <span className="inline-block bg-acacia-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold">
                       Save ${tier.savings.toLocaleString()}
                     </span>
                   ) : (
@@ -489,19 +489,19 @@ export function RoutePriceTable({
             <div className="bg-[var(--surface)] px-8 py-6 flex flex-wrap justify-between items-center gap-4">
               <div className="flex flex-wrap gap-4 text-sm text-[var(--text-muted)]">
                 <span className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-emerald-500" />
+                  <Check className="w-4 h-4 text-acacia-500" />
                   Park fees included
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-emerald-500" />
+                  <Check className="w-4 h-4 text-acacia-500" />
                   All meals
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-emerald-500" />
+                  <Check className="w-4 h-4 text-acacia-500" />
                   Expert guides
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Check className="w-4 h-4 text-emerald-500" />
+                  <Check className="w-4 h-4 text-acacia-500" />
                   Camping equipment
                 </span>
               </div>

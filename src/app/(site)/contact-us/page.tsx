@@ -23,8 +23,8 @@ const contactMethods = [
     value: SITE_CONFIG.phone,
     subtitle: "Instant response",
     href: `https://wa.me/${SITE_CONFIG.phone.replace(/[^0-9]/g, "")}`,
-    iconColor: "text-green-600",
-    iconBg: "bg-green-100",
+    iconColor: "text-acacia-600",
+    iconBg: "bg-acacia-100",
   },
   {
     icon: Mail,
@@ -41,8 +41,8 @@ const contactMethods = [
     value: SITE_CONFIG.phone,
     subtitle: "Mon-Sat: 8AM-6PM EAT",
     href: `tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`,
-    iconColor: "text-blue-600",
-    iconBg: "bg-blue-100",
+    iconColor: "text-slate-600",
+    iconBg: "bg-slate-100",
   },
 ];
 

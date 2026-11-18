@@ -151,7 +151,7 @@ const routeRecommendations = [
     route: "Lemosho 8-Day",
     days: 8,
     profile: "Excellent",
-    profileColor: "bg-emerald-100 text-emerald-700",
+    profileColor: "bg-acacia-100 text-acacia-700",
     successRate: "93%",
     slug: "8-days-lemosho-route",
     notes: "Best acclimatization profile. Scenic western approach. Our top recommendation for all climbers, including first-time women trekkers.",
@@ -170,7 +170,7 @@ const routeRecommendations = [
     route: "Northern Circuit 9-Day",
     days: 9,
     profile: "Best",
-    profileColor: "bg-emerald-100 text-emerald-700",
+    profileColor: "bg-acacia-100 text-acacia-700",
     successRate: "95%",
     notes: "Longest route with the best acclimatization of any Kilimanjaro route. Quietest trail. Ideal if time allows.",
   },
@@ -358,7 +358,7 @@ export default function KilimanjaroWomenClimbingPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">
                 The Quick Answer
               </h2>
@@ -527,8 +527,8 @@ export default function KilimanjaroWomenClimbingPage() {
                 className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center">
-                    <Backpack className="w-5 h-5 text-pink-600" />
+                  <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <Backpack className="w-5 h-5 text-slate-600" />
                   </div>
                   <h3 className="font-heading font-bold">{gear.item}</h3>
                 </div>
@@ -569,8 +569,8 @@ export default function KilimanjaroWomenClimbingPage() {
                 key={topic.title}
                 className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm"
               >
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                  <topic.icon className="w-6 h-6 text-purple-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <topic.icon className="w-6 h-6 text-slate-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-3">
                   {topic.title}
@@ -603,8 +603,8 @@ export default function KilimanjaroWomenClimbingPage() {
                 key={point.title}
                 className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <point.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <point.icon className="w-6 h-6 text-slate-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-3">
                   {point.title}
@@ -732,9 +732,9 @@ export default function KilimanjaroWomenClimbingPage() {
               best, and who can speak to the physical and emotional challenges
               of the climb from a woman&apos;s perspective.
             </p>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
-              <p className="text-emerald-800 text-sm">
+            <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
+              <p className="text-acacia-800 text-sm">
                 <strong>Supporting women in mountain tourism:</strong> When you
                 climb with Snow Africa, a portion of your trek fee supports
                 local community initiatives, including programmes that train and
@@ -818,7 +818,7 @@ export default function KilimanjaroWomenClimbingPage() {
                     key={route.route}
                     className={`border-t border-[var(--border)] ${
                       route.recommended
-                        ? "bg-emerald-50"
+                        ? "bg-acacia-50"
                         : i % 2 === 0
                           ? "bg-white"
                           : "bg-[var(--surface)]"
@@ -836,7 +836,7 @@ export default function KilimanjaroWomenClimbingPage() {
                         route.route
                       )}
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Recommended
                         </span>
                       )}
@@ -849,7 +849,7 @@ export default function KilimanjaroWomenClimbingPage() {
                         {route.profile}
                       </span>
                     </td>
-                    <td className="px-4 py-3 font-bold text-emerald-700">
+                    <td className="px-4 py-3 font-bold text-acacia-700">
                       {route.successRate}
                     </td>
                     <td className="px-4 py-3 text-xs text-[var(--text-muted)] hidden md:table-cell">

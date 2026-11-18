@@ -319,9 +319,9 @@ export default function KilimanjaroParaglidingPage() {
             <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
               What has not changed is the rarity. TANAPA treats each application individually, the weather window is narrow, and the pilot qualifications required are genuinely elite. In any given year, the number of successful paragliding descents from Kilimanjaro can likely be counted on one hand — if any occur at all. This is not an activity that has been commercialised or made routine, and that exclusivity is part of its appeal.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
                 <strong>Notable record:</strong> Kilimanjaro paragliding flights have been featured in multiple adventure documentaries and are considered among the most challenging non-competitive paragliding flights in the world due to the combination of extreme altitude launch, rapidly changing air density, and the sheer vertical descent involved.
               </p>
             </div>
@@ -357,8 +357,8 @@ export default function KilimanjaroParaglidingPage() {
                   className="bg-white rounded-xl border border-[var(--border)] p-5"
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                      <detail.icon className="w-5 h-5 text-blue-600" />
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+                      <detail.icon className="w-5 h-5 text-slate-600" />
                     </div>
                     <div>
                       <p className="text-xs text-[var(--text-muted)]">{detail.label}</p>
@@ -392,8 +392,8 @@ export default function KilimanjaroParaglidingPage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <req.icon className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <req.icon className="w-6 h-6 text-slate-600" />
                   </div>
                 </div>
                 <div>
@@ -563,13 +563,13 @@ export default function KilimanjaroParaglidingPage() {
                     className={`border-t border-[var(--border)] ${i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"}`}
                   >
                     <td className="px-4 py-3 font-medium">{row.item}</td>
-                    <td className="px-4 py-3 font-bold text-emerald-700">{row.cost}</td>
+                    <td className="px-4 py-3 font-bold text-acacia-700">{row.cost}</td>
                     <td className="px-4 py-3 text-xs text-[var(--text-muted)] hidden md:table-cell">{row.note}</td>
                   </tr>
                 ))}
-                <tr className="border-t-2 border-[var(--primary)] bg-emerald-50">
+                <tr className="border-t-2 border-[var(--primary)] bg-acacia-50">
                   <td className="px-4 py-3 font-bold">Total Estimated Budget</td>
-                  <td className="px-4 py-3 font-bold text-emerald-700 text-lg">$5,000 – $8,000+</td>
+                  <td className="px-4 py-3 font-bold text-acacia-700 text-lg">$5,000 – $8,000+</td>
                   <td className="px-4 py-3 text-xs text-[var(--text-muted)] hidden md:table-cell">Varies by operator, route, group size</td>
                 </tr>
               </tbody>
@@ -599,8 +599,8 @@ export default function KilimanjaroParaglidingPage() {
                 className="bg-white rounded-2xl border border-[var(--border)] shadow-sm overflow-hidden"
               >
                 <div className="p-6">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                    <Wind className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                    <Wind className="w-6 h-6 text-acacia-600" />
                   </div>
                   <h3 className="font-heading font-bold text-lg mb-3">{alt.title}</h3>
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">
@@ -608,12 +608,12 @@ export default function KilimanjaroParaglidingPage() {
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-blue-500" />
+                      <Users className="w-4 h-4 text-slate-500" />
                       <span className="text-xs text-[var(--text-muted)]">{alt.suitable}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <DollarSign className="w-4 h-4 text-emerald-500" />
-                      <span className="text-xs font-bold text-emerald-700">{alt.cost}</span>
+                      <DollarSign className="w-4 h-4 text-acacia-500" />
+                      <span className="text-xs font-bold text-acacia-700">{alt.cost}</span>
                     </div>
                   </div>
                 </div>
@@ -642,11 +642,11 @@ export default function KilimanjaroParaglidingPage() {
             <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
               But be honest with yourself. If you hold a P2 rating and 50 hours of flying time, this is not the flight to push your boundaries. If you have never flown above 3,000 metres, Kilimanjaro is not the place to find out how you handle thin air. If you cannot afford the insurance, you cannot afford the risk. This experience rewards those who approach it with respect, preparation, and the genuine ability to execute safely. For those pilots — it is absolutely worth it.
             </p>
-            <div className="flex items-start gap-3 bg-emerald-50 border border-emerald-200 rounded-xl p-5">
-              <Camera className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+            <div className="flex items-start gap-3 bg-acacia-50 border border-acacia-200 rounded-xl p-5">
+              <Camera className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
               <div>
-                <p className="text-emerald-800 text-sm font-semibold mb-1">The Footage Is Incredible</p>
-                <p className="text-emerald-800 text-sm">
+                <p className="text-acacia-800 text-sm font-semibold mb-1">The Footage Is Incredible</p>
+                <p className="text-acacia-800 text-sm">
                   Mount a GoPro on your helmet or wing, and you will capture footage that no amount of money can buy through any other means. The transition from glacial ice to tropical forest in a single continuous shot is visually stunning and has powered multiple award-winning adventure documentaries. For content creators and filmmakers, this angle on Kilimanjaro is unmatched.
                 </p>
               </div>

@@ -414,7 +414,7 @@ export default async function OurKilimanjaroGuidesPage() {
                     {guide.certifications.map((cert) => (
                       <span
                         key={cert}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-xs font-medium"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-acacia-50 text-acacia-700 rounded text-xs font-medium"
                       >
                         <GraduationCap className="w-3 h-3" />
                         {cert}
@@ -447,7 +447,7 @@ export default async function OurKilimanjaroGuidesPage() {
                   key={protocol.title}
                   className="flex gap-4 p-5 bg-[var(--surface)] rounded-xl"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-acacia-100 text-acacia-600 flex items-center justify-center shrink-0">
                     <protocol.icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -515,7 +515,7 @@ export default async function OurKilimanjaroGuidesPage() {
                 },
               ].map((item) => (
                 <div key={item.title} className="flex gap-3 items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-acacia-600 mt-0.5 shrink-0" />
                   <div>
                     <h4 className="font-semibold text-[var(--primary)]">
                       {item.title}

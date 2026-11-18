@@ -104,7 +104,7 @@ const bestRoutesForSolo = [
   {
     route: "Lemosho 8-Day",
     soloRating: "Best",
-    ratingColor: "bg-emerald-100 text-emerald-700",
+    ratingColor: "bg-acacia-100 text-acacia-700",
     reason:
       "Most popular premium route — attracts the most group departures and fellow travellers. Excellent acclimatization profile with 93% success rate. Our top recommendation for solo climbers.",
     slug: "8-days-lemosho-route",
@@ -113,7 +113,7 @@ const bestRoutesForSolo = [
   {
     route: "Machame 7-Day",
     soloRating: "Excellent",
-    ratingColor: "bg-emerald-100 text-emerald-700",
+    ratingColor: "bg-acacia-100 text-acacia-700",
     reason:
       "The most popular route on Kilimanjaro — you will encounter many other groups on the trail. Known as the Whiskey Route for its challenging and rewarding profile. Great for meeting fellow climbers.",
     slug: "7-days-machame-route",
@@ -339,9 +339,9 @@ export default function KilimanjaroSoloClimbPage() {
             <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
               Every month, we welcome solo travellers from around the world who join our <Link href="/kilimanjaro-join-group-departures/" className="text-[var(--primary)] hover:underline font-medium">scheduled group departures</Link>. You arrive as a single booking and leave as part of a team that has shared one of the most challenging and rewarding experiences of their lives. The mountain has a way of turning strangers into friends remarkably quickly.
             </p>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-              <Shield className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
-              <p className="text-emerald-800 text-sm">
+            <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+              <Shield className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
+              <p className="text-acacia-800 text-sm">
                 <strong>Your guide team includes:</strong> A certified lead guide, 1-2 assistant guides (depending on group size), a cook, and approximately 3 porters per climber. On a group departure, the full support team can be 20-30+ people. You are never truly alone on Kilimanjaro.
               </p>
             </div>
@@ -411,8 +411,8 @@ export default function KilimanjaroSoloClimbPage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                    <benefit.icon className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center">
+                    <benefit.icon className="w-6 h-6 text-acacia-600" />
                   </div>
                 </div>
                 <div>
@@ -484,18 +484,18 @@ export default function KilimanjaroSoloClimbPage() {
               One of the biggest concerns for solo travellers is cost. The good news: joining a <Link href="/kilimanjaro-join-group-departures/" className="text-[var(--primary)] hover:underline font-semibold">group departure</Link> is the <strong>most affordable way to climb Kilimanjaro</strong>. Fixed costs — guide team salaries, vehicle hire, cooking equipment, park gate fees — are shared across the group rather than shouldered by one person. For a full breakdown, see our <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline font-semibold">Kilimanjaro pricing guide</Link>.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
-                <DollarSign className="w-8 h-8 text-emerald-600 mb-3" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-6">
+                <DollarSign className="w-8 h-8 text-acacia-600 mb-3" />
                 <h3 className="font-heading font-bold text-lg mb-2">Group Departure</h3>
-                <p className="text-2xl font-bold text-emerald-700 mb-2">From $2,150</p>
+                <p className="text-2xl font-bold text-acacia-700 mb-2">From $2,150</p>
                 <p className="text-sm text-[var(--text-muted)]">
                   Per person for a 7-day Lemosho route. Includes park fees, guide team, all meals, camping gear, and airport transfers. No hidden costs.
                 </p>
               </div>
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                <DollarSign className="w-8 h-8 text-blue-600 mb-3" />
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <DollarSign className="w-8 h-8 text-slate-600 mb-3" />
                 <h3 className="font-heading font-bold text-lg mb-2">Private Solo Climb</h3>
-                <p className="text-2xl font-bold text-blue-700 mb-2">From $3,200+</p>
+                <p className="text-2xl font-bold text-slate-700 mb-2">From $3,200+</p>
                 <p className="text-sm text-[var(--text-muted)]">
                   Same inclusions as a group climb, but with a dedicated guide team exclusively for you. Choose any start date and customise the itinerary.
                 </p>
@@ -570,8 +570,8 @@ export default function KilimanjaroSoloClimbPage() {
             </p>
             <div className="space-y-4 mb-6">
               <div className="flex items-start gap-3 bg-[var(--surface)] rounded-xl p-5">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <MessageCircle className="w-4 h-4 text-blue-600" />
+                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <MessageCircle className="w-4 h-4 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Before the Climb: WhatsApp Group</h3>
@@ -588,8 +588,8 @@ export default function KilimanjaroSoloClimbPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-[var(--surface)] rounded-xl p-5">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Mountain className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Mountain className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Summit Night: The Unbreakable Bond</h3>
@@ -597,8 +597,8 @@ export default function KilimanjaroSoloClimbPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-[var(--surface)] rounded-xl p-5">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Globe className="w-4 h-4 text-purple-600" />
+                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Globe className="w-4 h-4 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">After the Climb: Friends for Life</h3>
@@ -635,7 +635,7 @@ export default function KilimanjaroSoloClimbPage() {
                   <tr
                     key={route.route}
                     className={`border-t border-[var(--border)] ${
-                      route.recommended ? "bg-emerald-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
+                      route.recommended ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
                     }`}
                   >
                     <td className="px-4 py-3 font-medium">
@@ -647,7 +647,7 @@ export default function KilimanjaroSoloClimbPage() {
                         route.route
                       )}
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Top Pick
                         </span>
                       )}
@@ -700,7 +700,7 @@ export default function KilimanjaroSoloClimbPage() {
                 <ul className="space-y-3">
                   {section.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                      <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}

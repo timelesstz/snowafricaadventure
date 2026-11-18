@@ -315,7 +315,7 @@ export default function TanzaniaItinerary10DaysPage() {
                   key={item}
                   className="flex items-center gap-3 bg-white border border-[var(--border)] rounded-lg px-4 py-3"
                 >
-                  <Check className="w-5 h-5 text-green-600 shrink-0" />
+                  <Check className="w-5 h-5 text-acacia-600 shrink-0" />
                   <span className="text-sm">{item}</span>
                 </div>
               ))}

@@ -80,15 +80,15 @@ function calculateSuccess(
 
   if (percentage >= 90) {
     label = "Excellent";
-    color = "text-emerald-700";
-    bgColor = "bg-emerald-50 border-emerald-200";
+    color = "text-acacia-700";
+    bgColor = "bg-acacia-50 border-acacia-200";
     recommendation = "Your profile is ideal for this route. With proper preparation and acclimatization, you have an excellent chance of reaching Uhuru Peak.";
     routeSuggestion = "8 Days Lemosho Route";
     routeSlug = "8-days-lemosho-route";
   } else if (percentage >= 80) {
     label = "Very Good";
-    color = "text-blue-700";
-    bgColor = "bg-blue-50 border-blue-200";
+    color = "text-slate-700";
+    bgColor = "bg-slate-50 border-slate-200";
     recommendation = "Strong chances of success. Consider adding an extra acclimatization day if your schedule allows — it makes a noticeable difference.";
     routeSuggestion = "8 Days Lemosho Route";
     routeSlug = "8-days-lemosho-route";
@@ -269,7 +269,7 @@ export function SuccessCalculator() {
 
               <div className="bg-white/60 rounded-lg p-4 mb-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                  <CheckCircle className="w-4 h-4 text-acacia-600" />
                   <p className="font-semibold text-sm">Recommended Route</p>
                 </div>
                 <Link

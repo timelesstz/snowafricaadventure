@@ -41,8 +41,8 @@ export function SafariCardEnhanced({
   // "Mid-Range", and an exact-match lookup silently fell through to the default.
   const typeStyles: Record<string, { bg: string; text: string; border: string }> = {
     luxury: { bg: "bg-amber-500", text: "text-white", border: "border-amber-500" },
-    "mid-range": { bg: "bg-emerald-500", text: "text-white", border: "border-emerald-500" },
-    budget: { bg: "bg-blue-500", text: "text-white", border: "border-blue-500" },
+    "mid-range": { bg: "bg-acacia-500", text: "text-white", border: "border-acacia-500" },
+    budget: { bg: "bg-slate-500", text: "text-white", border: "border-slate-500" },
   };
 
   const typeStyle = typeStyles[type?.toLowerCase()] || typeStyles["mid-range"];

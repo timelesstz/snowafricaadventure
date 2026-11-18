@@ -72,6 +72,21 @@
   --color-border: var(--border);
   --font-sans: var(--font-sora);
   --font-heading: var(--font-outfit);
+
+  /* Acacia — the brand's only green: muted savanna foliage.
+     Used for positive/success states and nature cues, alongside
+     slate (primary) and amber (secondary). Replaces emerald/green/teal/lime. */
+  --color-acacia-50: #f4f7f1;
+  --color-acacia-100: #e5ecdd;
+  --color-acacia-200: #ccdabe;
+  --color-acacia-300: #a9c196;
+  --color-acacia-400: #85a56f;
+  --color-acacia-500: #668a52;
+  --color-acacia-600: #4f6e3f;
+  --color-acacia-700: #3f5733;
+  --color-acacia-800: #34462c;
+  --color-acacia-900: #2c3b26;
+  --color-acacia-950: #161f12;
 }
 
 body {

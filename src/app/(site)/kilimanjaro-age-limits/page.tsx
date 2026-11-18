@@ -81,7 +81,7 @@ const medicalConsiderations = [
   {
     ageRange: "Children (10-15)",
     icon: Baby,
-    color: "bg-blue-100 text-blue-600",
+    color: "bg-slate-100 text-slate-600",
     considerations: [
       "Children may not communicate altitude symptoms clearly — guides must monitor proactively",
       "Higher metabolic rate means faster dehydration — enforce strict hydration schedules",
@@ -93,7 +93,7 @@ const medicalConsiderations = [
   {
     ageRange: "Teenagers (16-19)",
     icon: GraduationCap,
-    color: "bg-purple-100 text-purple-600",
+    color: "bg-slate-100 text-slate-600",
     considerations: [
       "Adolescent invincibility mindset — teens may underreport symptoms to avoid slowing the group",
       "Rapid growth phases can affect coordination on rocky terrain",
@@ -312,18 +312,18 @@ export default function KilimanjaroAgeLimitsPage() {
               Kilimanjaro&apos;s age policy is set by <strong>KINAPA (Kilimanjaro National Park Authority)</strong>, the government body that manages Tanzania&apos;s highest peak. The rules are straightforward but strictly enforced at every gate.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <Baby className="w-6 h-6 text-blue-600" />
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <Baby className="w-6 h-6 text-slate-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2">Minimum Age: 10 Years</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                   Children must be at least 10 years old on the date they enter the park. This is verified at the gate with passport or birth certificate. No exceptions are granted. Children aged 10-15 pay reduced park fees (approximately 50% of adult rates). A parent or legal guardian must accompany any climber under 18.
                 </p>
               </div>
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-emerald-600" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-6">
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                  <Users className="w-6 h-6 text-acacia-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2">Maximum Age: None</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -346,8 +346,8 @@ export default function KilimanjaroAgeLimitsPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Baby className="w-7 h-7 text-blue-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Baby className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -363,8 +363,8 @@ export default function KilimanjaroAgeLimitsPage() {
 
             <div className="space-y-4 mb-6">
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Shield className="w-4 h-4 text-blue-600" />
+                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Shield className="w-4 h-4 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Parent or Guardian Required</h3>
@@ -381,8 +381,8 @@ export default function KilimanjaroAgeLimitsPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <MapPin className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Route Selection for Children</h3>
@@ -390,8 +390,8 @@ export default function KilimanjaroAgeLimitsPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <Clock className="w-4 h-4 text-purple-600" />
+                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <Clock className="w-4 h-4 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Summit Night Considerations</h3>
@@ -400,11 +400,11 @@ export default function KilimanjaroAgeLimitsPage() {
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Heart className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Heart className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
               <div>
-                <p className="text-blue-800 text-sm font-semibold mb-1">Our Recommendation</p>
-                <p className="text-blue-800 text-sm">
+                <p className="text-slate-800 text-sm font-semibold mb-1">Our Recommendation</p>
+                <p className="text-slate-800 text-sm">
                   While the legal minimum is 10, we recommend children be at least 12 before attempting Kilimanjaro. Between 10 and 12, the physical and psychological demands of summit night are significant. If your child is 10-11 and very motivated, we are happy to discuss their readiness on a case-by-case basis. Every child is different — some 10-year-olds are more capable than some adults.
                 </p>
               </div>
@@ -418,8 +418,8 @@ export default function KilimanjaroAgeLimitsPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center">
-                <GraduationCap className="w-7 h-7 text-purple-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <GraduationCap className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -439,8 +439,8 @@ export default function KilimanjaroAgeLimitsPage() {
               The main consideration is <strong>psychological preparation</strong>. Summit night is a grinding, uncomfortable experience — 6 to 8 hours of hiking in darkness, sub-zero temperatures, and extreme altitude. Teens who understand what to expect and are internally motivated (not just climbing because their parents want them to) perform exceptionally well. Those who are unprepared or reluctant may struggle with the mental game more than the physical.
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
-                <Dumbbell className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-4 text-center">
+                <Dumbbell className="w-6 h-6 text-acacia-600 mx-auto mb-2" />
                 <p className="font-semibold text-sm">Physical Fitness</p>
                 <p className="text-xs text-[var(--text-muted)]">Rapid recovery, high energy, strong endurance for long hiking days</p>
               </div>
@@ -449,8 +449,8 @@ export default function KilimanjaroAgeLimitsPage() {
                 <p className="font-semibold text-sm">Acclimatization</p>
                 <p className="text-xs text-[var(--text-muted)]">Good adaptation to altitude with proper route selection (7+ days)</p>
               </div>
-              <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
-                <Heart className="w-6 h-6 text-purple-600 mx-auto mb-2" />
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+                <Heart className="w-6 h-6 text-slate-600 mx-auto mb-2" />
                 <p className="font-semibold text-sm">Motivation</p>
                 <p className="text-xs text-[var(--text-muted)]">Self-motivated teens are among our most successful climbers</p>
               </div>
@@ -482,19 +482,19 @@ export default function KilimanjaroAgeLimitsPage() {
               <h3 className="font-heading font-bold text-lg mb-3">Key Advice for This Age Group</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                   <span>Do not let fitness breed overconfidence — <Link href="/kilimanjaro-altitude-sickness/" className="text-[var(--primary)] hover:underline">altitude sickness</Link> does not care about your gym routine</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                   <span>Choose a 7+ day route even if you feel &quot;fit enough&quot; for shorter options</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                   <span>Follow a structured <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline">training plan</Link> — hiking fitness is different from gym fitness</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                   <span>This is the ideal age to attempt the more challenging routes like Machame or Lemosho if you want variety and scenery</span>
                 </li>
               </ul>
@@ -521,23 +521,23 @@ export default function KilimanjaroAgeLimitsPage() {
             </p>
 
             <div className="grid md:grid-cols-2 gap-4 mb-6">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
-                <h3 className="font-semibold mb-2 text-emerald-800">What Works in Your Favour</h3>
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5">
+                <h3 className="font-semibold mb-2 text-acacia-800">What Works in Your Favour</h3>
                 <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-sm text-emerald-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-acacia-700">
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Patience — you are less likely to rush or ignore symptoms
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-emerald-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-acacia-700">
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Experience — many 50+ climbers have years of hiking experience
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-emerald-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-acacia-700">
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Mental toughness — you have faced hard things before
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-emerald-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-acacia-700">
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Financial comfort — you can afford the longer, better routes
                   </li>
                 </ul>
@@ -726,7 +726,7 @@ export default function KilimanjaroAgeLimitsPage() {
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {row.recommended.map((r) => (
-                          <span key={r} className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium">
+                          <span key={r} className="text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-medium">
                             {r}
                           </span>
                         ))}

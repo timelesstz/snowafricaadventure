@@ -29,8 +29,8 @@ export default function SearchPage() {
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link href="/trekking/" className="group bg-white rounded-lg border border-[var(--border)] p-6 hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
-                <Mountain className="w-6 h-6 text-emerald-600" />
+              <div className="w-12 h-12 rounded-full bg-acacia-50 flex items-center justify-center mb-4">
+                <Mountain className="w-6 h-6 text-acacia-600" />
               </div>
               <h3 className="font-heading font-bold text-lg mb-2 group-hover:text-[var(--primary)] transition-colors">Kilimanjaro Treks</h3>
               <p className="text-sm text-[var(--text-muted)]">
@@ -56,8 +56,8 @@ export default function SearchPage() {
               </p>
             </Link>
             <Link href="/zanzibar/" className="group bg-white rounded-lg border border-[var(--border)] p-6 hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-                <MapPin className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mb-4">
+                <MapPin className="w-6 h-6 text-slate-600" />
               </div>
               <h3 className="font-heading font-bold text-lg mb-2 group-hover:text-[var(--primary)] transition-colors">Zanzibar Beach</h3>
               <p className="text-sm text-[var(--text-muted)]">

@@ -63,7 +63,7 @@ const difficultyFactors = [
     icon: TrendingUp,
     title: "Technical Difficulty",
     rating: "Easy",
-    ratingColor: "text-emerald-600 bg-emerald-50",
+    ratingColor: "text-acacia-600 bg-acacia-50",
     description:
       "Kilimanjaro requires zero technical climbing skills. No ropes, harnesses, crampons, or ice axes needed. The Barranco Wall on the Machame/Lemosho routes involves hands-on scrambling but is not technical. It is a walk-up mountain.",
   },
@@ -398,7 +398,7 @@ export default function HowHardIsKilimanjaroPage() {
                       <span className={`px-2 py-1 rounded-full text-xs font-bold ${
                         r.difficulty.includes("Very") ? "bg-red-100 text-red-700" :
                         r.difficulty.includes("Challenging") ? "bg-orange-100 text-orange-700" :
-                        "bg-emerald-100 text-emerald-700"
+                        "bg-acacia-100 text-acacia-700"
                       }`}>
                         {r.difficulty}
                       </span>
@@ -435,8 +435,8 @@ export default function HowHardIsKilimanjaroPage() {
                 { title: "Join a group climb", desc: "Group climbs provide built-in motivation on summit night and save 15–30% vs private climbs.", link: "/kilimanjaro-group-climbs/" },
               ].map((tip) => (
                 <div key={tip.title} className="flex gap-4 bg-[var(--surface)] rounded-xl p-5">
-                  <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-1">
-                    <Check className="w-4 h-4 text-emerald-600" />
+                  <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-4 h-4 text-acacia-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">{tip.title}</h3>
@@ -492,7 +492,7 @@ export default function HowHardIsKilimanjaroPage() {
                     <td className="px-4 py-3">4,215m</td>
                     <td className="px-4 py-3">4</td>
                     <td className="px-4 py-3">No</td>
-                    <td className="px-4 py-3"><span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full font-bold">Moderate</span></td>
+                    <td className="px-4 py-3"><span className="px-2 py-1 bg-acacia-100 text-acacia-700 text-xs rounded-full font-bold">Moderate</span></td>
                   </tr>
                   <tr className="border-t border-[var(--border)]">
                     <td className="px-4 py-3">Mont Blanc</td>
@@ -575,7 +575,7 @@ export default function HowHardIsKilimanjaroPage() {
                   elevation: "4,800m → 5,895m (+1,095m gain)",
                   hours: "10–13 hours total",
                   challenge: "The Northern Circuit summit night starts from School Hut (4,800m) — 100m higher than Barafu — so the actual climb is shorter: roughly 1,095m of gain. After 7 days of gradual acclimatization circling the mountain, your body has adapted better than on any other route. The physical challenge remains significant (freezing cold, thin air, steep scree), but this is statistically the &quot;easiest&quot; summit night because altitude symptoms are minimized.",
-                  badgeColor: "bg-emerald-100 text-emerald-700",
+                  badgeColor: "bg-acacia-100 text-acacia-700",
                 },
                 {
                   route: "Umbwe Route",
@@ -682,10 +682,10 @@ export default function HowHardIsKilimanjaroPage() {
                     <div className="flex-1">
                       <h3 className="font-heading text-lg font-bold mb-3">{reason.title}</h3>
                       <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-3">{reason.explanation}</p>
-                      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-3">
+                      <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-4 mb-3">
                         <div className="flex items-start gap-2">
-                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <p className="text-sm text-emerald-800"><strong>How to avoid it:</strong> {reason.prevention}</p>
+                          <Check className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
+                          <p className="text-sm text-acacia-800"><strong>How to avoid it:</strong> {reason.prevention}</p>
                         </div>
                       </div>
                       <Link href={reason.link} className="text-sm text-[var(--primary)] hover:underline inline-flex items-center gap-1">
@@ -725,9 +725,9 @@ export default function HowHardIsKilimanjaroPage() {
                   altitude: "2,100m → 2,895m",
                   hours: "3-4 hours",
                   difficulty: "Easy",
-                  badgeColor: "bg-emerald-100 text-emerald-700",
+                  badgeColor: "bg-acacia-100 text-acacia-700",
                   barWidth: "w-[20%]",
-                  barColor: "bg-emerald-500",
+                  barColor: "bg-acacia-500",
                   description: "Gentle forest walk through lush montane rainforest. Muddy trails, birdsong, colobus monkeys overhead. Feels like a nature hike. Most climbers feel great — the altitude is barely noticeable.",
                 },
                 {
@@ -736,9 +736,9 @@ export default function HowHardIsKilimanjaroPage() {
                   altitude: "2,895m → 3,850m",
                   hours: "5-7 hours",
                   difficulty: "Easy–Moderate",
-                  badgeColor: "bg-emerald-100 text-emerald-700",
+                  badgeColor: "bg-acacia-100 text-acacia-700",
                   barWidth: "w-[35%]",
-                  barColor: "bg-emerald-500",
+                  barColor: "bg-acacia-500",
                   description: "Transition into open moorland with incredible views of Shira Plateau. Longer day with noticeable altitude gain. Some climbers get their first mild headache — drink extra water and walk slowly.",
                 },
                 {
@@ -791,9 +791,9 @@ export default function HowHardIsKilimanjaroPage() {
                   altitude: "3,100m → 1,640m",
                   hours: "2-3 hours",
                   difficulty: "Easy",
-                  badgeColor: "bg-emerald-100 text-emerald-700",
+                  badgeColor: "bg-acacia-100 text-acacia-700",
                   barWidth: "w-[15%]",
-                  barColor: "bg-emerald-500",
+                  barColor: "bg-acacia-500",
                   description: "Gentle descent through rainforest back to the gate. Your legs are tired but your spirit is soaring. Certificate ceremony at the gate. The oxygen-rich air at low altitude feels like breathing for the first time. Celebratory lunch and transfer to your hotel.",
                 },
               ].map((item) => (

@@ -267,7 +267,7 @@ export default async function OurGuidesPage() {
 
                   <div className="flex flex-wrap gap-2">
                     {founder.certifications.map((cert) => (
-                      <span key={cert} className="px-3 py-1.5 bg-emerald-50 text-emerald-700 text-xs rounded-full font-medium">
+                      <span key={cert} className="px-3 py-1.5 bg-acacia-50 text-acacia-700 text-xs rounded-full font-medium">
                         {cert}
                       </span>
                     ))}
@@ -362,8 +362,8 @@ export default async function OurGuidesPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-emerald-600" />
+              <div className="w-16 h-16 rounded-2xl bg-acacia-100 flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-acacia-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Safety First</h3>
               <p className="text-sm text-[var(--text-muted)]">
@@ -380,8 +380,8 @@ export default async function OurGuidesPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-8 h-8 text-slate-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">100% Local</h3>
               <p className="text-sm text-[var(--text-muted)]">

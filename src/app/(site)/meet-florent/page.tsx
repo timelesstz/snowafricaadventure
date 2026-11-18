@@ -387,7 +387,7 @@ export default async function MeetFlorentPage() {
                       key={item}
                       className="flex items-start gap-2 text-sm text-slate-600"
                     >
-                      <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -421,7 +421,7 @@ export default async function MeetFlorentPage() {
                       key={item}
                       className="flex items-start gap-2 text-sm text-slate-600"
                     >
-                      <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -455,7 +455,7 @@ export default async function MeetFlorentPage() {
                       key={item}
                       className="flex items-start gap-2 text-sm text-slate-600"
                     >
-                      <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -488,7 +488,7 @@ export default async function MeetFlorentPage() {
                       key={item}
                       className="flex items-start gap-2 text-sm text-slate-600"
                     >
-                      <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}

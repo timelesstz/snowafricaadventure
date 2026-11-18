@@ -85,7 +85,7 @@ const routes = [
     tagline: "Highest success rate. Our most recommended route.",
     body: "Approaches from the west through remote rainforest, crosses the Shira Plateau, and joins the southern circuit for summit night. The 8-day version gives the acclimatisation most climbers need — we see a 90%+ summit rate on this itinerary versus ~65% on shorter routes. Scenery is the best on the mountain.",
     difficulty: "Moderate — long but gradual",
-    tone: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    tone: "bg-acacia-50 text-acacia-700 border-acacia-200",
   },
   {
     name: "Machame (7 days)",
@@ -101,7 +101,7 @@ const routes = [
     tagline: "The \"Coca-Cola Route\" — the only route with hut accommodation.",
     body: "The oldest and most-trafficked route, and the only one where you sleep in bunked huts rather than tents. A 6-day Marangu climb is the shortest standard option, which also means the lowest success rate on the mountain. Good for climbers prioritising comfort over scenery.",
     difficulty: "Easy to moderate (short)",
-    tone: "bg-sky-50 text-sky-700 border-sky-200",
+    tone: "bg-slate-50 text-slate-700 border-slate-200",
   },
   {
     name: "Rongai (6-7 days)",
@@ -109,7 +109,7 @@ const routes = [
     tagline: "The only approach from the north. Drier and quieter.",
     body: "Starts on the rain-shadow (Kenyan) side of Kilimanjaro, so it gets significantly less rainfall than southern routes. Traffic is light even in peak season. The 7-day version is the one we recommend — summit approach follows Kibo Hut's steep scree, identical to Marangu summit night.",
     difficulty: "Moderate",
-    tone: "bg-blue-50 text-blue-700 border-blue-200",
+    tone: "bg-slate-50 text-slate-700 border-slate-200",
   },
   {
     name: "Umbwe (6 days)",
@@ -117,7 +117,7 @@ const routes = [
     tagline: "The steepest, shortest, and most demanding route.",
     body: "A direct, aggressive climb up the southern flank. Fit, experienced trekkers only — day two gains 1,200m of elevation. Few operators offer it because acclimatisation is poor and success rates are lower than Lemosho or Machame. Choose it only if you know you acclimatise fast.",
     difficulty: "Hard",
-    tone: "bg-purple-50 text-purple-700 border-purple-200",
+    tone: "bg-slate-50 text-slate-700 border-slate-200",
   },
   {
     name: "Northern Circuit (9 days)",
@@ -125,7 +125,7 @@ const routes = [
     tagline: "The longest route — highest success, fewest crowds.",
     body: "Loops around the north of the mountain before summit night, adding two extra acclimatisation days over standard Lemosho. Almost no one else uses it. Our records show the highest single-route summit rate (near 95%) with the lowest altitude-sickness rate. Best choice if you have the time and budget.",
     difficulty: "Moderate — long",
-    tone: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    tone: "bg-slate-50 text-slate-700 border-slate-200",
   },
   {
     name: "Mount Meru (3-4 days)",
@@ -133,7 +133,7 @@ const routes = [
     tagline: "Not Kilimanjaro — but the perfect acclimatisation climb before it.",
     body: "Tanzania's second-highest peak (4,566m) inside Arusha National Park. A 3-4 day Meru climb before Kilimanjaro increases summit success on Kili by a measurable margin and adds a fantastic wildlife-rich trek with buffalo, giraffe, and colobus monkeys on the lower slopes.",
     difficulty: "Challenging",
-    tone: "bg-teal-50 text-teal-700 border-teal-200",
+    tone: "bg-acacia-50 text-acacia-700 border-acacia-200",
   },
 ];
 
@@ -582,8 +582,8 @@ export default function MountKilimanjaroPage() {
               ones are when you climb:
             </p>
             <div className="grid md:grid-cols-2 gap-4 mb-6">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
-                <p className="text-xs font-semibold text-emerald-700 uppercase tracking-wide mb-2">
+              <div className="bg-acacia-50 border border-acacia-200 rounded-2xl p-5">
+                <p className="text-xs font-semibold text-acacia-700 uppercase tracking-wide mb-2">
                   Primary dry season
                 </p>
                 <p className="font-heading text-xl font-bold mb-2">
@@ -731,7 +731,7 @@ export default function MountKilimanjaroPage() {
                   <span className="text-sm">7-day Machame / Rongai</span>
                   <span className="font-semibold">~75-85%</span>
                 </div>
-                <div className="flex justify-between items-center bg-emerald-50 -mx-6 px-6 py-2 font-semibold text-emerald-700">
+                <div className="flex justify-between items-center bg-acacia-50 -mx-6 px-6 py-2 font-semibold text-acacia-700">
                   <span className="text-sm">8-day Lemosho (our recommendation)</span>
                   <span>~90%+</span>
                 </div>

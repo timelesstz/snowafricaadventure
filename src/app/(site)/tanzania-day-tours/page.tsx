@@ -224,7 +224,7 @@ export default async function DayTripsPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="https://wa.me/255123456789"
-              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              className="inline-flex items-center gap-2 bg-acacia-500 hover:bg-acacia-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               <span>WhatsApp Us</span>
             </a>

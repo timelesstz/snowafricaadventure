@@ -24,7 +24,7 @@ export function Badge({
           "bg-[var(--surface)] text-[var(--primary-dark)]": variant === "success",
           "bg-[var(--secondary-light)] text-[var(--secondary-dark)]": variant === "warning",
           "bg-red-100 text-red-700": variant === "danger",
-          "bg-blue-100 text-blue-700": variant === "info",
+          "bg-slate-100 text-slate-700": variant === "info",
         },
         className
       )}

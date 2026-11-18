@@ -291,7 +291,7 @@ export default function ManageClimbersPage() {
                   <span className="text-[var(--text-muted)]">Progress:</span>
                   <div className="flex-1 h-2 bg-[var(--surface)] rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-green-500 transition-all"
+                      className="h-full bg-acacia-500 transition-all"
                       style={{
                         width: `${(booking.completedCount / booking.totalClimbers) * 100}%`,
                       }}
@@ -333,7 +333,7 @@ export default function ManageClimbersPage() {
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center ${
                       climber.isComplete
-                        ? "bg-green-100 text-green-600"
+                        ? "bg-acacia-100 text-acacia-600"
                         : "bg-amber-100 text-amber-600"
                     }`}
                   >
@@ -621,9 +621,9 @@ export default function ManageClimbersPage() {
         </div>
 
         {/* Help text */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-medium text-blue-800 mb-1">Need help?</h4>
-          <p className="text-sm text-blue-700">
+        <div className="mt-6 bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <h4 className="font-medium text-slate-800 mb-1">Need help?</h4>
+          <p className="text-sm text-slate-700">
             You can either fill in the details for each climber yourself, or share their unique links so they can fill in their own information. Contact us if you have any questions.
           </p>
         </div>

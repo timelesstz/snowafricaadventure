@@ -112,7 +112,7 @@ const beginnerRoutes = [
     difficulty: "Moderate-Challenging",
     difficultyColor: "bg-amber-100 text-amber-700",
     recommendation: "Our Top Pick for Beginners",
-    recommendationColor: "bg-emerald-600",
+    recommendationColor: "bg-acacia-600",
     pros: [
       "Best acclimatization profile of any route",
       "Spectacular scenery through 5 climate zones",
@@ -134,7 +134,7 @@ const beginnerRoutes = [
     difficulty: "Challenging",
     difficultyColor: "bg-orange-100 text-orange-700",
     recommendation: "Best Value for Beginners",
-    recommendationColor: "bg-blue-600",
+    recommendationColor: "bg-slate-600",
     pros: [
       "Excellent acclimatization on 7-day version",
       "\"Walk high, sleep low\" profile aids altitude adaptation",
@@ -155,7 +155,7 @@ const beginnerRoutes = [
     days: 6,
     successRate: "70-75%",
     difficulty: "Moderate",
-    difficultyColor: "bg-emerald-100 text-emerald-700",
+    difficultyColor: "bg-acacia-100 text-acacia-700",
     recommendation: "Easiest Terrain, But Fewer Days",
     recommendationColor: "bg-amber-600",
     pros: [
@@ -420,7 +420,7 @@ export default function CanBeginnersClimbKilimanjaroPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">
                 The Short Answer: Yes
               </h2>
@@ -567,7 +567,7 @@ export default function CanBeginnersClimbKilimanjaroPage() {
                   </p>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <p className="font-semibold text-sm text-emerald-700 mb-2">
+                      <p className="font-semibold text-sm text-acacia-700 mb-2">
                         Pros
                       </p>
                       <ul className="space-y-2">
@@ -576,7 +576,7 @@ export default function CanBeginnersClimbKilimanjaroPage() {
                             key={pro}
                             className="flex items-start gap-2 text-sm text-[var(--text-muted)]"
                           >
-                            <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                            <Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                             {pro}
                           </li>
                         ))}
@@ -710,8 +710,8 @@ export default function CanBeginnersClimbKilimanjaroPage() {
                   key={item.title}
                   className="flex gap-4 bg-[var(--surface)] rounded-xl p-5"
                 >
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                    <span className="text-sm font-bold text-emerald-700">
+                  <div className="w-10 h-10 rounded-full bg-acacia-100 flex items-center justify-center shrink-0">
+                    <span className="text-sm font-bold text-acacia-700">
                       {i + 1}
                     </span>
                   </div>

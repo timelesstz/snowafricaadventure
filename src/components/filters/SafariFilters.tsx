@@ -174,8 +174,8 @@ export function SafariFilters({
                   ? type === "Luxury"
                     ? "bg-amber-500 text-white shadow-lg"
                     : type === "Budget"
-                    ? "bg-blue-500 text-white shadow-lg"
-                    : "bg-emerald-500 text-white shadow-lg"
+                    ? "bg-slate-500 text-white shadow-lg"
+                    : "bg-acacia-500 text-white shadow-lg"
                   : "bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--muted)]"
               )}
             >

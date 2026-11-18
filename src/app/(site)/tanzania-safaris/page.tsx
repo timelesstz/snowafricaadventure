@@ -311,7 +311,7 @@ export default async function SafarisPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-semibold transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-acacia-500 hover:bg-acacia-400 text-white font-semibold transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
@@ -459,15 +459,15 @@ export default async function SafarisPage() {
             {/* Camping */}
             <Link
               href="/tanzania-camping-safaris/"
-              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-sky-400 transition-all hover:shadow-lg flex flex-col"
+              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-slate-400 transition-all hover:shadow-lg flex flex-col"
             >
               <div className="absolute -top-4 left-6">
-                <span className="px-4 py-1.5 bg-sky-500 text-white rounded-full text-sm font-bold shadow-sm">
+                <span className="px-4 py-1.5 bg-slate-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Budget
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-sky-100 transition-colors">
-                <Tent className="w-7 h-7 text-sky-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-slate-100 transition-colors">
+                <Tent className="w-7 h-7 text-slate-600" />
               </div>
               <h3 className="font-heading text-xl font-bold mb-3">Camping Safari</h3>
               <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
@@ -475,19 +475,19 @@ export default async function SafarisPage() {
               </p>
               <ul className="space-y-2 text-sm mb-5">
                 <li className="flex items-center gap-2">
-                  <Flame className="w-4 h-4 text-sky-500 shrink-0" />
+                  <Flame className="w-4 h-4 text-slate-500 shrink-0" />
                   <span>Campfire evenings</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Tent className="w-4 h-4 text-sky-500 shrink-0" />
+                  <Tent className="w-4 h-4 text-slate-500 shrink-0" />
                   <span>Quality dome tents</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-sky-500 shrink-0" />
+                  <Users className="w-4 h-4 text-slate-500 shrink-0" />
                   <span>Shared campsite facilities</span>
                 </li>
               </ul>
-              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-sky-600 group-hover:gap-2 transition-all">
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-slate-600 group-hover:gap-2 transition-all">
                 Browse camping safaris
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -496,18 +496,18 @@ export default async function SafarisPage() {
             {/* Lodge - Featured */}
             <Link
               href="/tanzania-lodge-safaris/"
-              className="group relative bg-gradient-to-br from-teal-50 to-white rounded-2xl p-8 border-2 border-teal-500 shadow-xl transform md:-translate-y-4 flex flex-col"
+              className="group relative bg-gradient-to-br from-acacia-50 to-white rounded-2xl p-8 border-2 border-acacia-500 shadow-xl transform md:-translate-y-4 flex flex-col"
             >
               <div className="absolute -top-4 left-6 flex items-center gap-2">
-                <span className="px-4 py-1.5 bg-teal-500 text-white rounded-full text-sm font-bold shadow-sm">
+                <span className="px-4 py-1.5 bg-acacia-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Mid-Range
                 </span>
-                <span className="px-3 py-1 bg-white text-teal-600 rounded-full text-xs font-semibold border border-teal-200 shadow-sm">
+                <span className="px-3 py-1 bg-white text-acacia-600 rounded-full text-xs font-semibold border border-acacia-200 shadow-sm">
                   Most Popular
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-teal-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-teal-100 transition-colors">
-                <Hotel className="w-7 h-7 text-teal-600" />
+              <div className="w-14 h-14 rounded-xl bg-acacia-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-acacia-100 transition-colors">
+                <Hotel className="w-7 h-7 text-acacia-600" />
               </div>
               <h3 className="font-heading text-xl font-bold mb-3">Lodge Safari</h3>
               <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
@@ -515,19 +515,19 @@ export default async function SafarisPage() {
               </p>
               <ul className="space-y-2 text-sm mb-5">
                 <li className="flex items-center gap-2">
-                  <Bath className="w-4 h-4 text-teal-500 shrink-0" />
+                  <Bath className="w-4 h-4 text-acacia-500 shrink-0" />
                   <span>Private en-suite bathrooms</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <UtensilsCrossed className="w-4 h-4 text-teal-500 shrink-0" />
+                  <UtensilsCrossed className="w-4 h-4 text-acacia-500 shrink-0" />
                   <span>Full-board restaurant dining</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Waves className="w-4 h-4 text-teal-500 shrink-0" />
+                  <Waves className="w-4 h-4 text-acacia-500 shrink-0" />
                   <span>Swimming pools &amp; lounges</span>
                 </li>
               </ul>
-              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-teal-600 group-hover:gap-2 transition-all">
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-acacia-600 group-hover:gap-2 transition-all">
                 Browse lodge safaris
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -539,7 +539,7 @@ export default async function SafarisPage() {
               className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-amber-400 transition-all hover:shadow-lg flex flex-col"
             >
               <div className="absolute -top-4 left-6">
-                <span className="px-4 py-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-white rounded-full text-sm font-bold shadow-sm">
+                <span className="px-4 py-1.5 bg-gradient-to-r from-amber-500 to-amber-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Luxury
                 </span>
               </div>
@@ -573,15 +573,15 @@ export default async function SafarisPage() {
             {/* Tailor-Made */}
             <Link
               href="/tailor-made-safari/"
-              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-purple-400 transition-all hover:shadow-lg flex flex-col"
+              className="group relative bg-[var(--surface)] rounded-2xl p-8 border-2 border-transparent hover:border-slate-400 transition-all hover:shadow-lg flex flex-col"
             >
               <div className="absolute -top-4 left-6">
-                <span className="px-4 py-1.5 bg-purple-500 text-white rounded-full text-sm font-bold shadow-sm">
+                <span className="px-4 py-1.5 bg-slate-500 text-white rounded-full text-sm font-bold shadow-sm">
                   Tailor-Made
                 </span>
               </div>
-              <div className="w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-purple-100 transition-colors">
-                <Sparkles className="w-7 h-7 text-purple-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-5 mt-2 group-hover:bg-slate-100 transition-colors">
+                <Sparkles className="w-7 h-7 text-slate-600" />
               </div>
               <h3 className="font-heading text-xl font-bold mb-3">Custom Safari</h3>
               <p className="text-[var(--text-muted)] mb-5 leading-relaxed text-sm">
@@ -589,19 +589,19 @@ export default async function SafarisPage() {
               </p>
               <ul className="space-y-2 text-sm mb-5">
                 <li className="flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-purple-500 shrink-0" />
+                  <Compass className="w-4 h-4 text-slate-500 shrink-0" />
                   <span>Private vehicle &amp; guide</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-purple-500 shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-slate-500 shrink-0" />
                   <span>Any accommodation level</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-purple-500 shrink-0" />
+                  <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
                   <span>Combine safari + beach + climb</span>
                 </li>
               </ul>
-              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-purple-600 group-hover:gap-2 transition-all">
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-slate-600 group-hover:gap-2 transition-all">
                 Design your own
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -844,7 +844,7 @@ export default async function SafarisPage() {
               <SafariInquiryForm variant="inline" />
             </div>
             <p className="text-center text-sm text-[var(--text-muted)] mt-6">
-              Prefer to talk? Call <a href={telHref} className="text-[var(--primary)] font-semibold hover:underline">{SITE_CONFIG.phone}</a> or message us on <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-semibold hover:underline">WhatsApp</a>.
+              Prefer to talk? Call <a href={telHref} className="text-[var(--primary)] font-semibold hover:underline">{SITE_CONFIG.phone}</a> or message us on <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="text-acacia-600 font-semibold hover:underline">WhatsApp</a>.
             </p>
           </div>
         </div>

@@ -327,8 +327,8 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     return (
       <div ref={formContainerRef} className="max-w-2xl mx-auto bg-white border border-[var(--border)] rounded-xl p-6 md:p-8">
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Check className="w-10 h-10 text-green-600" />
+          <div className="w-20 h-20 bg-acacia-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Check className="w-10 h-10 text-acacia-600" />
           </div>
           <h3 className="font-heading text-2xl font-bold text-[var(--text)] mb-2">
             Booking Inquiry Submitted!
@@ -853,12 +853,12 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
                 <div className="space-y-4">
                   <div className="flex items-start gap-2">
                     <h3 className="font-heading text-lg font-semibold">Other Climbers</h3>
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Optional</span>
+                    <span className="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full">Optional</span>
                   </div>
 
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex gap-2">
-                    <Info className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-blue-700">
+                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 flex gap-2">
+                    <Info className="w-4 h-4 text-slate-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-slate-700">
                       After your deposit is confirmed, each climber will receive a personal link to complete their details. You can add their names/emails now or share links later.
                     </p>
                   </div>

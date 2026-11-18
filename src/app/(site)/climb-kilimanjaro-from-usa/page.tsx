@@ -304,15 +304,15 @@ export default async function ClimbKilimanjaroFromUSAPage() {
       </section>
 
       {/* Quick Answer Box — Featured Snippet Target */}
-      <section className="py-12 bg-emerald-50">
+      <section className="py-12 bg-acacia-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-white border-2 border-emerald-200 rounded-2xl p-8 shadow-sm">
+          <div className="max-w-3xl mx-auto bg-white border-2 border-acacia-200 rounded-2xl p-8 shadow-sm">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
-                <Plane className="w-6 h-6 text-emerald-700" />
+              <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center shrink-0">
+                <Plane className="w-6 h-6 text-acacia-700" />
               </div>
               <div>
-                <h2 className="font-heading text-xl font-bold text-emerald-900 mb-3">
+                <h2 className="font-heading text-xl font-bold text-acacia-900 mb-3">
                   Quick Answer: How to Climb Kilimanjaro from the USA
                 </h2>
                 <p className="text-[var(--text-muted)] leading-relaxed mb-4">
@@ -328,16 +328,16 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                   6+ months.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="inline-flex items-center gap-1.5 text-sm text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-acacia-700 bg-acacia-50 px-3 py-1 rounded-full">
                     <Check className="w-4 h-4" /> No direct flights — 1 layover
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-sm text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-acacia-700 bg-acacia-50 px-3 py-1 rounded-full">
                     <Check className="w-4 h-4" /> Visa on arrival or e-visa
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-sm text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-acacia-700 bg-acacia-50 px-3 py-1 rounded-full">
                     <Check className="w-4 h-4" /> All prices in USD
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-sm text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-acacia-700 bg-acacia-50 px-3 py-1 rounded-full">
                     <Check className="w-4 h-4" /> No technical skills needed
                   </span>
                 </div>
@@ -371,8 +371,8 @@ export default async function ClimbKilimanjaroFromUSAPage() {
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
                   <div className="flex items-center gap-3 md:w-1/4">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
-                      <Plane className="w-5 h-5 text-blue-700" />
+                    <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                      <Plane className="w-5 h-5 text-slate-700" />
                     </div>
                     <h3 className="font-semibold text-lg">{route.city}</h3>
                   </div>
@@ -402,13 +402,13 @@ export default async function ClimbKilimanjaroFromUSAPage() {
             ))}
           </div>
 
-          <div className="max-w-4xl mx-auto mt-8 bg-blue-50 border border-blue-200 rounded-2xl p-6">
-            <h3 className="font-semibold text-lg mb-3 text-blue-900">
+          <div className="max-w-4xl mx-auto mt-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+            <h3 className="font-semibold text-lg mb-3 text-slate-900">
               Flight Booking Tips for US Travelers
             </h3>
-            <ul className="space-y-2 text-sm text-blue-800">
+            <ul className="space-y-2 text-sm text-slate-800">
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                <Check className="w-4 h-4 text-slate-600 mt-0.5 shrink-0" />
                 <span>
                   <strong>Book 3-6 months ahead</strong> for the best fares.
                   Peak season (June-August, December-January) flights sell out
@@ -416,7 +416,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                <Check className="w-4 h-4 text-slate-600 mt-0.5 shrink-0" />
                 <span>
                   <strong>Consider a long layover</strong> in Amsterdam,
                   Istanbul, or Doha to break up the journey. Some airlines allow
@@ -424,7 +424,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                <Check className="w-4 h-4 text-slate-600 mt-0.5 shrink-0" />
                 <span>
                   <strong>Fly into JRO, not DAR.</strong> Kilimanjaro
                   International Airport (JRO) is 45 minutes from Moshi and 90
@@ -433,7 +433,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                <Check className="w-4 h-4 text-slate-600 mt-0.5 shrink-0" />
                 <span>
                   <strong>Use Google Flights or Skyscanner</strong> to set fare
                   alerts. Prices fluctuate significantly — a $200+ saving is
@@ -441,7 +441,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" />
+                <Check className="w-4 h-4 text-slate-600 mt-0.5 shrink-0" />
                 <span>
                   <strong>Pack a carry-on with essentials.</strong> Checked bags
                   sometimes arrive a day late on multi-connection flights. Keep
@@ -477,33 +477,33 @@ export default async function ClimbKilimanjaroFromUSAPage() {
               <h3 className="font-semibold text-lg mb-3">Tanzania Tourist Visa</h3>
               <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Cost:</strong> $50 USD for single-entry tourist visa
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>E-visa:</strong> Apply online at
                     visa.immigration.go.tz — processing takes 3-10 business days
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Visa on arrival:</strong> Available at JRO airport
                     (bring exact change in USD)
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Validity:</strong> 90 days from date of entry
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Recommendation:</strong> Apply for the e-visa 2-3
                     weeks before your trip to avoid airport queues
@@ -513,41 +513,41 @@ export default async function ClimbKilimanjaroFromUSAPage() {
             </div>
 
             <div className="bg-white border border-[var(--border)] rounded-2xl p-6 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-blue-700" />
+              <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                <Shield className="w-6 h-6 text-slate-700" />
               </div>
               <h3 className="font-semibold text-lg mb-3">Passport Requirements</h3>
               <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Validity:</strong> At least 6 months beyond your
                     entry date into Tanzania
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Blank pages:</strong> At least 2 blank pages required
                     for visa stamps
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Condition:</strong> Must be undamaged — no torn or
                     water-damaged pages
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Copies:</strong> Bring 2 photocopies and a digital
                     photo stored in your email or cloud
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Renewal:</strong> If your passport expires within 8
                     months, renew it before booking flights
@@ -565,28 +565,28 @@ export default async function ClimbKilimanjaroFromUSAPage() {
               </h3>
               <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Yellow Fever:</strong> Required if arriving from an
                     endemic country (not required from the US directly)
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Recommended:</strong> Hepatitis A, Typhoid, Tetanus
                     booster, routine vaccines (MMR, Polio)
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Malaria:</strong> Prophylaxis recommended for
                     pre/post-climb time below 1,800m
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Diamox:</strong> Ask your doctor about altitude
                     medication (Acetazolamide) — many US climbers take it
@@ -594,7 +594,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Timeline:</strong> Visit a travel medicine clinic 6-8
                     weeks before departure
@@ -604,43 +604,43 @@ export default async function ClimbKilimanjaroFromUSAPage() {
             </div>
 
             <div className="bg-white border border-[var(--border)] rounded-2xl p-6 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                <DollarSign className="w-6 h-6 text-emerald-700" />
+              <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                <DollarSign className="w-6 h-6 text-acacia-700" />
               </div>
               <h3 className="font-semibold text-lg mb-3">
                 Money & Currency Tips
               </h3>
               <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>USD widely accepted</strong> for tourism services,
                     hotels, and tour operators
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Bring clean, post-2006 bills</strong> — older or
                     damaged US bills are often refused in Tanzania
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>ATMs available</strong> in Arusha and Moshi (Visa and
                     Mastercard accepted)
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Tip budget:</strong> Bring $500-$700 in small bills
                     ($1, $5, $10, $20) for guide and porter tips
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                   <span>
                     <strong>Notify your bank</strong> before traveling to avoid
                     card blocks on international transactions
@@ -673,8 +673,8 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 tier: "Budget",
                 price: "$1,850 - $2,200",
                 routes: "Marangu (5-6 days), Rongai (6 days)",
-                color: "bg-blue-50 border-blue-200",
-                accent: "text-blue-700",
+                color: "bg-slate-50 border-slate-200",
+                accent: "text-slate-700",
                 features: [
                   "All KINAPA park fees",
                   "Certified mountain guides",
@@ -708,8 +708,8 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 tier: "Premium",
                 price: "$3,200 - $4,500",
                 routes: "Lemosho (8 days), Northern Circuit (9 days)",
-                color: "bg-emerald-50 border-emerald-200",
-                accent: "text-emerald-700",
+                color: "bg-acacia-50 border-acacia-200",
+                accent: "text-acacia-700",
                 features: [
                   "Everything in Most Popular, plus:",
                   "Private expedition (your group only)",
@@ -750,7 +750,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                       key={feature}
                       className="flex items-start gap-2 text-sm"
                     >
-                      <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                      <Check className="w-4 h-4 text-acacia-600 mt-0.5 shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -787,7 +787,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 <p className="text-sm font-semibold text-amber-900 mb-2">
                   Direct with Snow Africa
                 </p>
-                <p className="text-2xl font-bold text-emerald-600 mb-1">
+                <p className="text-2xl font-bold text-acacia-600 mb-1">
                   $1,850 - $4,500
                 </p>
                 <p className="text-xs text-[var(--text-muted)]">
@@ -839,7 +839,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 season: "Winter Break",
                 months: "December - February",
                 icon: Mountain,
-                color: "bg-blue-100 text-blue-700",
+                color: "bg-slate-100 text-slate-700",
                 weather: "Short dry season — warm, occasional showers",
                 pros: [
                   "Short dry season with good conditions",
@@ -857,7 +857,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 season: "Thanksgiving Week",
                 months: "Late November",
                 icon: Clock,
-                color: "bg-emerald-100 text-emerald-700",
+                color: "bg-acacia-100 text-acacia-700",
                 weather: "End of short rains — clearing skies",
                 pros: [
                   "Only need 2-3 days off work",
@@ -891,7 +891,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                   {period.weather}
                 </p>
                 <div className="mb-3">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-acacia-700 mb-2">
                     Advantages
                   </p>
                   <ul className="space-y-1.5">
@@ -900,7 +900,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                         key={pro}
                         className="flex items-start gap-2 text-sm text-[var(--text-muted)]"
                       >
-                        <Check className="w-3.5 h-3.5 text-emerald-600 mt-0.5 shrink-0" />
+                        <Check className="w-3.5 h-3.5 text-acacia-600 mt-0.5 shrink-0" />
                         <span>{pro}</span>
                       </li>
                     ))}
@@ -1131,7 +1131,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                     },
                   ].map((item) => (
                     <div key={item.requirement} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                      <Check className="w-5 h-5 text-acacia-600 mt-0.5 shrink-0" />
                       <div>
                         <p className="font-semibold text-sm">
                           {item.requirement}

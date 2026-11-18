@@ -51,18 +51,18 @@ const keyStats = [
     value: "35,000+",
     sublabel: "attempts per year",
     icon: Users,
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-200",
+    color: "text-slate-600",
+    bgColor: "bg-slate-50",
+    borderColor: "border-slate-200",
   },
   {
     label: "Fatality Rate",
     value: "~0.03%",
     sublabel: "of all climbers",
     icon: BarChart3,
-    color: "text-emerald-600",
-    bgColor: "bg-emerald-50",
-    borderColor: "border-emerald-200",
+    color: "text-acacia-600",
+    bgColor: "bg-acacia-50",
+    borderColor: "border-acacia-200",
   },
   {
     label: "Kilimanjaro vs Everest",
@@ -87,9 +87,9 @@ const keyStats = [
     value: "93%+",
     sublabel: "summit on longer routes",
     icon: TrendingUp,
-    color: "text-emerald-600",
-    bgColor: "bg-emerald-50",
-    borderColor: "border-emerald-200",
+    color: "text-acacia-600",
+    bgColor: "bg-acacia-50",
+    borderColor: "border-acacia-200",
   },
 ];
 
@@ -116,8 +116,8 @@ const causesOfDeath = [
     cause: "Cardiac Events",
     percentage: "~20%",
     icon: Heart,
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
+    color: "text-slate-600",
+    bgColor: "bg-slate-50",
     description:
       "Pre-existing cardiac conditions, sometimes undiagnosed, are aggravated by the combination of extreme altitude, cold temperatures, physical exertion, and dehydration. The reduced oxygen at high altitude forces the heart to work significantly harder. Climbers over 50 or those with a family history of heart disease should obtain a thorough cardiac screening, including a stress test, before attempting Kilimanjaro. Several fatalities on the mountain have involved climbers who had underlying conditions they were unaware of.",
   },
@@ -125,8 +125,8 @@ const causesOfDeath = [
     cause: "Hypothermia and Exposure",
     percentage: "~12%",
     icon: Thermometer,
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
+    color: "text-slate-600",
+    bgColor: "bg-slate-50",
     description:
       "Summit night temperatures regularly drop to -15 to -25 degrees Celsius, with wind chill pushing the effective temperature far lower. Climbers who are inadequately equipped, already weakened by altitude sickness, or who become separated from the group face genuine hypothermia risk. Wet clothing, exhaustion, and poor layering compound the danger. Proper gear, experienced guides who monitor climbers throughout the summit push, and the discipline to turn back if conditions deteriorate are the best defences.",
   },
@@ -223,7 +223,7 @@ const riskComparison = [
     fatalities: "~0.03%",
     notes: "3-10 deaths per 35,000+ climbers/year",
     riskLevel: "Low",
-    riskColor: "bg-emerald-100 text-emerald-700",
+    riskColor: "bg-acacia-100 text-acacia-700",
   },
   {
     activity: "Mount Everest",
@@ -244,14 +244,14 @@ const riskComparison = [
     fatalities: "1.8 per 100,000 dives",
     notes: "Equivalent to ~0.002% per dive session",
     riskLevel: "Low",
-    riskColor: "bg-emerald-100 text-emerald-700",
+    riskColor: "bg-acacia-100 text-acacia-700",
   },
   {
     activity: "Skydiving",
     fatalities: "0.39 per 100,000 jumps",
     notes: "~13 deaths per 3.3 million jumps (US)",
     riskLevel: "Very Low",
-    riskColor: "bg-emerald-100 text-emerald-700",
+    riskColor: "bg-acacia-100 text-acacia-700",
   },
   {
     activity: "Driving (Global)",
@@ -656,7 +656,7 @@ export default function KilimanjaroDeathsPage() {
                     key={item.activity}
                     className={`border-t border-[var(--border)] ${
                       item.activity === "Kilimanjaro"
-                        ? "bg-emerald-50"
+                        ? "bg-acacia-50"
                         : i % 2 === 0
                         ? "bg-white"
                         : "bg-[var(--surface)]"
@@ -665,7 +665,7 @@ export default function KilimanjaroDeathsPage() {
                     <td className="px-4 py-3 font-medium">
                       {item.activity}
                       {item.activity === "Kilimanjaro" && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           This Mountain
                         </span>
                       )}
@@ -742,8 +742,8 @@ export default function KilimanjaroDeathsPage() {
             ))}
           </div>
           <div className="max-w-3xl mx-auto mt-10">
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
-              <h3 className="font-heading font-bold text-lg mb-3 text-emerald-800">Our Safety Protocol on Every Expedition</h3>
+            <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-6">
+              <h3 className="font-heading font-bold text-lg mb-3 text-acacia-800">Our Safety Protocol on Every Expedition</h3>
               <ul className="space-y-3">
                 {[
                   "Twice-daily health assessments using pulse oximeters and the Lake Louise AMS scoring system",
@@ -755,8 +755,8 @@ export default function KilimanjaroDeathsPage() {
                   "Full medical declaration and screening review before departure",
                   "Clear turnaround protocol: guides have absolute authority to initiate descent",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-emerald-800">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <li key={item} className="flex items-start gap-2 text-sm text-acacia-800">
+                    <CheckCircle className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
                     {item}
                   </li>
                 ))}

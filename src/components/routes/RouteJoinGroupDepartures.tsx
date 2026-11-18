@@ -175,13 +175,13 @@ function DepartureCard({
                 className={`w-2 h-2 rounded-full ${
                   i < departure.spotsTaken
                     ? "bg-[var(--text-muted)]"
-                    : "bg-emerald-500"
+                    : "bg-acacia-500"
                 }`}
               />
             ))}
           </div>
           <span className="text-sm text-[var(--text-muted)]">
-            <strong className="text-emerald-600">{spotsLeft} spots</strong>{" "}
+            <strong className="text-acacia-600">{spotsLeft} spots</strong>{" "}
             {spotsLeft === departure.spotsTotal ? "available" : "left"}
           </span>
         </div>

@@ -154,8 +154,8 @@ const gateLocations = [
 const keyCamps = [
   {
     route: "Marangu Route (Hut Route)",
-    color: "text-blue-400",
-    borderColor: "border-blue-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     camps: [
       { name: "Mandara Hut", elevation: "2,720m (8,924ft)", description: "A-frame wooden huts sleeping 60 climbers. Surrounded by montane forest with giant heather. A short side-trip to Maundi Crater offers the first views of Kibo and Mawenzi." },
       { name: "Horombo Hut", elevation: "3,720m (12,205ft)", description: "The largest camp on any route, with huts sleeping up to 120 climbers. Set in the moorland zone with stunning views. The acclimatization day here is critical for success on this route." },
@@ -164,8 +164,8 @@ const keyCamps = [
   },
   {
     route: "Machame &amp; Lemosho Routes (Southern Circuit)",
-    color: "text-emerald-400",
-    borderColor: "border-emerald-400/30",
+    color: "text-acacia-400",
+    borderColor: "border-acacia-400/30",
     camps: [
       { name: "Machame Camp", elevation: "3,020m (9,908ft)", description: "First camp on the Machame Route, nestled at the upper edge of the rainforest where giant heather begins. Tents are pitched on cleared platforms amid moss-draped trees." },
       { name: "Shira Cave / Shira Camp", elevation: "3,750m (12,303ft)", description: "On the Shira Plateau with panoramic views of Kibo. Lemosho trekkers join here after crossing the plateau. The open, wind-exposed camp requires a good sleeping bag." },
@@ -399,9 +399,9 @@ export default function KilimanjaroMapPage() {
             <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
               The mountain passes through <strong>five distinct <Link href="/kilimanjaro-climate-zones/" className="text-[var(--primary)] hover:underline font-semibold">climate zones</Link></strong> — from cultivated farmland and tropical rainforest at the base, through heath and moorland, alpine desert, and finally the arctic summit zone with its remnant glaciers. This vertical transect of ecosystems is one of the reasons Kilimanjaro is so extraordinary: you experience the equivalent of travelling from the equator to the Arctic in a matter of days.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
                 <strong>Climate zones in detail:</strong> Understanding the zones helps you read any Kilimanjaro map. Each zone corresponds to a specific elevation band with distinct vegetation, weather, and trekking conditions.{" "}
                 <Link href="/kilimanjaro-climate-zones/" className="underline font-semibold">
                   Read our full climate zones guide &rarr;
@@ -441,7 +441,7 @@ export default function KilimanjaroMapPage() {
                   <tr
                     key={route.name}
                     className={`border-t border-[var(--border)] ${
-                      route.recommended ? "bg-emerald-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
+                      route.recommended ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
                     }`}
                   >
                     <td className="px-4 py-3 font-medium">
@@ -449,7 +449,7 @@ export default function KilimanjaroMapPage() {
                         {route.name}
                       </Link>
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Top Pick
                         </span>
                       )}
@@ -458,7 +458,7 @@ export default function KilimanjaroMapPage() {
                     <td className="px-4 py-3">{route.days}</td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">{route.difficulty}</td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">{route.scenery}</td>
-                    <td className="px-4 py-3 font-bold text-emerald-700">{route.successRate}</td>
+                    <td className="px-4 py-3 font-bold text-acacia-700">{route.successRate}</td>
                     <td className="px-4 py-3 text-xs text-[var(--text-muted)] hidden lg:table-cell">{route.highlight}</td>
                   </tr>
                 ))}
@@ -494,8 +494,8 @@ export default function KilimanjaroMapPage() {
                 className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
                 <div className="flex items-start gap-4 mb-3">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
-                    <Navigation className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center shrink-0">
+                    <Navigation className="w-6 h-6 text-acacia-600" />
                   </div>
                   <div>
                     <h3 className="font-heading font-bold text-lg">{gate.name}</h3>
@@ -573,8 +573,8 @@ export default function KilimanjaroMapPage() {
 
               <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                    <Flag className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+                    <Flag className="w-5 h-5 text-slate-600" />
                   </div>
                   <h3 className="font-heading font-bold text-lg">Eastern Approach (Kibo Hut)</h3>
                 </div>
@@ -657,8 +657,8 @@ export default function KilimanjaroMapPage() {
                 <div className="flex items-start gap-4">
                   <div className="flex items-center gap-3 shrink-0">
                     <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 text-emerald-600" />
+                    <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-acacia-600" />
                     </div>
                   </div>
                   <div>

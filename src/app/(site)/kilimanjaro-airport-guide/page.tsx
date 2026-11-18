@@ -412,7 +412,7 @@ export default function KilimanjaroAirportGuidePage() {
               >
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="font-heading font-bold text-lg">{airline.name}</h3>
-                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold shrink-0 ml-2">
+                  <span className="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full font-semibold shrink-0 ml-2">
                     {airline.frequency}
                   </span>
                 </div>
@@ -455,8 +455,8 @@ export default function KilimanjaroAirportGuidePage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-3xl font-bold text-[var(--primary)]/20">{item.step}</span>
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <item.icon className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <item.icon className="w-6 h-6 text-slate-600" />
                   </div>
                 </div>
                 <div>
@@ -509,15 +509,15 @@ export default function KilimanjaroAirportGuidePage() {
                 <h3 className="font-semibold text-lg mb-3">Transfer Options to Moshi</h3>
                 <ul className="space-y-3 text-sm text-white/70">
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span><strong className="text-white">Tour operator transfer (recommended):</strong> Included in your package. Private vehicle, driver waiting at arrivals, direct to hotel.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span><strong className="text-white">Pre-booked private taxi:</strong> $40-$60 USD. Arrange through your hotel or a reputable transfer company.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span><strong className="text-white">Shared shuttle:</strong> $15-$20 USD per person. Less frequent, waits for multiple passengers.</span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -579,8 +579,8 @@ export default function KilimanjaroAirportGuidePage() {
                 key={facility.title}
                 className="bg-white rounded-xl border border-[var(--border)] p-6 hover:shadow-md transition-shadow"
               >
-                <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <facility.icon className="w-7 h-7 text-blue-600" />
+                <div className="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <facility.icon className="w-7 h-7 text-slate-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2" dangerouslySetInnerHTML={{ __html: facility.title }} />
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -611,8 +611,8 @@ export default function KilimanjaroAirportGuidePage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-emerald-600" />
+                  <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center">
+                    <CheckCircle className="w-6 h-6 text-acacia-600" />
                   </div>
                 </div>
                 <div>

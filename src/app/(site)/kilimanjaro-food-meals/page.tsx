@@ -251,8 +251,8 @@ const altitudeFood = [
     challenge: "Normal appetite — most climbers eat well",
     strategy:
       "Eat heartily and enjoy the variety. Build energy reserves for higher camps.",
-    color: "text-emerald-400",
-    borderColor: "border-emerald-400/30",
+    color: "text-acacia-400",
+    borderColor: "border-acacia-400/30",
   },
   {
     altitude: "3,000m – 4,000m",
@@ -617,8 +617,8 @@ export default function KilimanjaroFoodMealsPage() {
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
             {dietaryOptions.map((option) => (
               <div key={option.title} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                  <option.icon className="w-7 h-7 text-emerald-600" />
+                <div className="w-14 h-14 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                  <option.icon className="w-7 h-7 text-acacia-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2">{option.title}</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">{option.description}</p>
@@ -708,8 +708,8 @@ export default function KilimanjaroFoodMealsPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                <Droplets className="w-7 h-7 text-blue-400" />
+              <div className="w-14 h-14 rounded-xl bg-slate-500/20 flex items-center justify-center">
+                <Droplets className="w-7 h-7 text-slate-400" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">Hydration on Kilimanjaro</h2>
@@ -746,15 +746,15 @@ export default function KilimanjaroFoodMealsPage() {
             </p>
           </div>
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-            <div className="bg-white border border-emerald-200 rounded-2xl p-6">
+            <div className="bg-white border border-acacia-200 rounded-2xl p-6">
               <h3 className="font-heading font-bold text-lg mb-4 flex items-center gap-2">
-                <Apple className="w-5 h-5 text-emerald-600" />
+                <Apple className="w-5 h-5 text-acacia-600" />
                 Recommended Snacks to Bring
               </h3>
               <ul className="space-y-2.5">
                 {extraSnacks.map((snack) => (
                   <li key={snack} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <span className="text-emerald-500 font-bold shrink-0">&#10003;</span>
+                    <span className="text-acacia-500 font-bold shrink-0">&#10003;</span>
                     {snack}
                   </li>
                 ))}
@@ -814,7 +814,7 @@ export default function KilimanjaroFoodMealsPage() {
                   <tr key={row.aspect} className={`border-t border-[var(--border)] ${i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"}`}>
                     <td className="px-4 py-3 font-medium">{row.aspect}</td>
                     <td className="px-4 py-3 text-red-600">{row.budget}</td>
-                    <td className="px-4 py-3 text-emerald-700">{row.quality}</td>
+                    <td className="px-4 py-3 text-acacia-700">{row.quality}</td>
                   </tr>
                 ))}
               </tbody>

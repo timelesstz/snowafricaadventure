@@ -44,7 +44,7 @@ const monthlyWeather = [
     rainfall: "Low",
     crowds: "Medium",
     recommendation: "Best",
-    recColor: "bg-emerald-100 text-emerald-700",
+    recColor: "bg-acacia-100 text-acacia-700",
     note: "Clear skies, cold summit nights",
   },
   {
@@ -54,7 +54,7 @@ const monthlyWeather = [
     rainfall: "Low",
     crowds: "Medium",
     recommendation: "Best",
-    recColor: "bg-emerald-100 text-emerald-700",
+    recColor: "bg-acacia-100 text-acacia-700",
     note: "Driest month, excellent visibility",
   },
   {
@@ -94,7 +94,7 @@ const monthlyWeather = [
     rainfall: "Low",
     crowds: "Medium",
     recommendation: "Best",
-    recColor: "bg-emerald-100 text-emerald-700",
+    recColor: "bg-acacia-100 text-acacia-700",
     note: "Dry season begins",
   },
   {
@@ -104,7 +104,7 @@ const monthlyWeather = [
     rainfall: "Very Low",
     crowds: "High",
     recommendation: "Best",
-    recColor: "bg-emerald-100 text-emerald-700",
+    recColor: "bg-acacia-100 text-acacia-700",
     note: "Peak season, coldest summit",
   },
   {
@@ -114,7 +114,7 @@ const monthlyWeather = [
     rainfall: "Very Low",
     crowds: "High",
     recommendation: "Best",
-    recColor: "bg-emerald-100 text-emerald-700",
+    recColor: "bg-acacia-100 text-acacia-700",
     note: "Peak season",
   },
   {
@@ -124,7 +124,7 @@ const monthlyWeather = [
     rainfall: "Low",
     crowds: "High",
     recommendation: "Best",
-    recColor: "bg-emerald-100 text-emerald-700",
+    recColor: "bg-acacia-100 text-acacia-700",
     note: "Excellent conditions",
   },
   {
@@ -165,8 +165,8 @@ const climateZones = [
     range: "800 - 1,800m",
     temp: "20-30°C",
     icon: Sun,
-    color: "text-lime-400",
-    borderColor: "border-lime-400/30",
+    color: "text-acacia-400",
+    borderColor: "border-acacia-400/30",
     description:
       "The lowest slopes of Kilimanjaro are home to banana plantations, coffee farms, and small Chagga villages. The air is warm and humid, with temperatures averaging 25°C. Most climbers pass through this zone quickly on the drive to the trailhead, though the Marangu and Rongai routes begin within it. Expect lush green scenery, red earth roads, and the sounds of everyday Tanzanian life.",
   },
@@ -175,8 +175,8 @@ const climateZones = [
     range: "1,800 - 2,800m",
     temp: "15-20°C",
     icon: CloudRain,
-    color: "text-emerald-400",
-    borderColor: "border-emerald-400/30",
+    color: "text-acacia-400",
+    borderColor: "border-acacia-400/30",
     description:
       "Dense, humid montane forest that receives the most rainfall on the mountain — up to 2,000mm annually. Temperatures are mild but the canopy traps moisture, making it feel damp. This is where most rain gear gets its first test. You will hear colobus monkeys crashing through the branches and see moss-draped trees towering overhead. The trail is often muddy and rooted. In our 800+ expeditions, the rainforest day is where we remind climbers: this mountain has five worlds.",
   },
@@ -205,8 +205,8 @@ const climateZones = [
     range: "5,000 - 5,895m",
     temp: "-15 to -25°C",
     icon: Snowflake,
-    color: "text-blue-400",
-    borderColor: "border-blue-400/30",
+    color: "text-slate-400",
+    borderColor: "border-slate-400/30",
     description:
       "The roof of Africa. Glaciers, ice fields, and scree dominate this zone. Temperatures regularly drop to -20°C and below, with wind chill pushing the perceived temperature to -30°C or colder. Oxygen levels are roughly 50% of what you breathe at sea level. The famous glaciers of Kilimanjaro — Furtwangler, Rebmann, and the Southern Icefield — occupy this zone, though they are retreating rapidly. Summit night takes you through this zone in 6-8 hours of darkness.",
   },
@@ -454,7 +454,7 @@ export default function KilimanjaroWeatherPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-8">
+            <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 Kilimanjaro can be climbed year-round, but the <strong>best weather windows are January-March</strong> (dry, cold) and <strong>June-October</strong> (dry, warm). Temperatures range from <strong>25&deg;C at the gate to -20&deg;C at the summit</strong>. You will pass through <strong>5 climate zones</strong> &mdash; from tropical rainforest to arctic summit &mdash; experiencing a 50&deg;C temperature swing in just 5 days of trekking.
@@ -480,9 +480,9 @@ export default function KilimanjaroWeatherPage() {
             <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
               In our 800+ expeditions over 15 years, we have observed that altitude &mdash; not the calendar &mdash; is the primary weather variable. A climber on any given day will experience tropical warmth, temperate mist, alpine chill, and arctic cold within a single trek. The month you choose determines how much rain you encounter in the lower zones, but the cold at the summit is a constant year-round reality.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
                 <strong>Key insight:</strong> Kilimanjaro creates its own weather. The mountain forces warm, moist air upward, causing it to cool and release moisture as rain in the forest zone. By the time air reaches the alpine desert above 4,000m, it is dry. This is why the upper mountain is almost always clear, even when clouds smother the lower slopes.
               </p>
             </div>
@@ -520,7 +520,7 @@ export default function KilimanjaroWeatherPage() {
                     key={m.month}
                     className={`border-t border-[var(--border)] ${
                       m.recommendation === "Best"
-                        ? "bg-emerald-50/50"
+                        ? "bg-acacia-50/50"
                         : i % 2 === 0
                         ? "bg-white"
                         : "bg-[var(--surface)]"
@@ -598,8 +598,8 @@ export default function KilimanjaroWeatherPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Snowflake className="w-7 h-7 text-blue-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Snowflake className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -621,8 +621,8 @@ export default function KilimanjaroWeatherPage() {
               <h3 className="font-heading font-bold text-lg mb-4">Summit Night Layering Strategy</h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-blue-600 font-bold text-sm">1</span>
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-slate-600 font-bold text-sm">1</span>
                   </div>
                   <div>
                     <p className="font-semibold">Base Layer</p>
@@ -630,8 +630,8 @@ export default function KilimanjaroWeatherPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-blue-600 font-bold text-sm">2</span>
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-slate-600 font-bold text-sm">2</span>
                   </div>
                   <div>
                     <p className="font-semibold">Insulation Layer</p>
@@ -639,8 +639,8 @@ export default function KilimanjaroWeatherPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-blue-600 font-bold text-sm">3</span>
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-slate-600 font-bold text-sm">3</span>
                   </div>
                   <div>
                     <p className="font-semibold">Shell Layer</p>
@@ -648,8 +648,8 @@ export default function KilimanjaroWeatherPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-blue-600 font-bold text-sm">4</span>
+                  <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-slate-600 font-bold text-sm">4</span>
                   </div>
                   <div>
                     <p className="font-semibold">Extremities</p>
@@ -687,15 +687,15 @@ export default function KilimanjaroWeatherPage() {
                 className="bg-white rounded-xl border border-[var(--border)] p-6"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                    <Shirt className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+                    <Shirt className="w-5 h-5 text-slate-600" />
                   </div>
                   <h3 className="font-heading font-bold text-lg">{category.category}</h3>
                 </div>
                 <ul className="space-y-2">
                   {category.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                      <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}
@@ -726,9 +726,9 @@ export default function KilimanjaroWeatherPage() {
             </p>
 
             <div className="space-y-4 mb-6">
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Sun className="w-6 h-6 text-emerald-600" />
+                  <Sun className="w-6 h-6 text-acacia-600" />
                   <h3 className="font-heading font-bold text-lg">Dry Season 1: January &ndash; March</h3>
                 </div>
                 <p className="text-[var(--text-muted)] leading-relaxed">
@@ -736,9 +736,9 @@ export default function KilimanjaroWeatherPage() {
                 </p>
               </div>
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Sun className="w-6 h-6 text-emerald-600" />
+                  <Sun className="w-6 h-6 text-acacia-600" />
                   <h3 className="font-heading font-bold text-lg">Dry Season 2: June &ndash; October</h3>
                 </div>
                 <p className="text-[var(--text-muted)] leading-relaxed">
@@ -757,9 +757,9 @@ export default function KilimanjaroWeatherPage() {
                   November offers <strong>fewer crowds and lower prices</strong>. The short rains bring some afternoon showers in the lower zones, but above 4,000m the weather is often fine. If you choose the <Link href="/trekking/6-days-rongai-route/" className="text-[var(--primary)] hover:underline">Rongai Route</Link> from the drier north side, November can be an excellent value option.
                 </p>
               </div>
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
-                  <Users className="w-4 h-4 text-blue-600" />
+                  <Users className="w-4 h-4 text-slate-600" />
                   Book Early
                 </h4>
                 <p className="text-sm text-[var(--text-muted)]">
@@ -791,15 +791,15 @@ export default function KilimanjaroWeatherPage() {
               <div
                 key={route.route}
                 className={`bg-white rounded-xl border ${
-                  route.recommended ? "border-emerald-300 ring-1 ring-emerald-200" : "border-[var(--border)]"
+                  route.recommended ? "border-acacia-300 ring-1 ring-acacia-200" : "border-[var(--border)]"
                 } p-6`}
               >
                 <div className="flex items-start gap-4">
                   <div className={`w-12 h-12 ${
-                    route.recommended ? "bg-emerald-100" : "bg-blue-100"
+                    route.recommended ? "bg-acacia-100" : "bg-slate-100"
                   } rounded-xl flex items-center justify-center shrink-0`}>
                     <route.icon className={`w-6 h-6 ${
-                      route.recommended ? "text-emerald-600" : "text-blue-600"
+                      route.recommended ? "text-acacia-600" : "text-slate-600"
                     }`} />
                   </div>
                   <div>
@@ -809,7 +809,7 @@ export default function KilimanjaroWeatherPage() {
                         {route.approach} Approach
                       </span>
                       {route.recommended && (
-                        <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold">
+                        <span className="text-xs px-2 py-1 rounded-full bg-acacia-100 text-acacia-700 font-bold">
                           Recommended
                         </span>
                       )}

@@ -454,10 +454,10 @@ export default function KilimanjaroTravelInsurancePage() {
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                    item.critical ? "bg-amber-100" : "bg-emerald-100"
+                    item.critical ? "bg-amber-100" : "bg-acacia-100"
                   }`}>
                     <item.icon className={`w-6 h-6 ${
-                      item.critical ? "text-amber-600" : "text-emerald-600"
+                      item.critical ? "text-amber-600" : "text-acacia-600"
                     }`} />
                   </div>
                 </div>
@@ -552,9 +552,9 @@ export default function KilimanjaroTravelInsurancePage() {
                 key={provider.name}
                 className="bg-white rounded-2xl border border-[var(--border)] shadow-sm overflow-hidden"
               >
-                <div className="p-6 border-b border-[var(--border)] bg-emerald-50">
+                <div className="p-6 border-b border-[var(--border)] bg-acacia-50">
                   <h3 className="font-heading font-bold text-xl mb-1">{provider.name}</h3>
-                  <span className="text-xs font-bold px-2 py-1 rounded-full bg-emerald-100 text-emerald-700">
+                  <span className="text-xs font-bold px-2 py-1 rounded-full bg-acacia-100 text-acacia-700">
                     {provider.type}
                   </span>
                 </div>
@@ -618,8 +618,8 @@ export default function KilimanjaroTravelInsurancePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Plane className="w-7 h-7 text-blue-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Plane className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -636,42 +636,42 @@ export default function KilimanjaroTravelInsurancePage() {
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <CheckCircle className="w-6 h-6 text-emerald-600 mb-2" />
+                <CheckCircle className="w-6 h-6 text-acacia-600 mb-2" />
                 <h3 className="font-semibold mb-1">Emergency Air Evacuation</h3>
                 <p className="text-sm text-[var(--text-muted)]">
                   Fixed-wing and helicopter evacuation to the nearest appropriate medical facility in Tanzania or Kenya.
                 </p>
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <CheckCircle className="w-6 h-6 text-emerald-600 mb-2" />
+                <CheckCircle className="w-6 h-6 text-acacia-600 mb-2" />
                 <h3 className="font-semibold mb-1">24/7 Emergency Coordination</h3>
                 <p className="text-sm text-[var(--text-muted)]">
                   Round-the-clock operations centre that coordinates with our guides, local hospitals, and your insurance provider.
                 </p>
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <CheckCircle className="w-6 h-6 text-emerald-600 mb-2" />
+                <CheckCircle className="w-6 h-6 text-acacia-600 mb-2" />
                 <h3 className="font-semibold mb-1">East Africa Coverage</h3>
                 <p className="text-sm text-[var(--text-muted)]">
                   Covers the entire duration of your time in Tanzania and Kenya, including safari extensions and Zanzibar travel.
                 </p>
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <CheckCircle className="w-6 h-6 text-emerald-600 mb-2" />
+                <CheckCircle className="w-6 h-6 text-acacia-600 mb-2" />
                 <h3 className="font-semibold mb-1">Complements Your Insurance</h3>
                 <p className="text-sm text-[var(--text-muted)]">
                   Works alongside your personal travel insurance — not a replacement. Provides the physical evacuation capability that your insurance pays for.
                 </p>
               </div>
             </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-              <Shield className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+            <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+              <Shield className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
               <div>
-                <p className="text-emerald-800 text-sm font-semibold mb-1">Important Note</p>
-                <p className="text-emerald-800 text-sm">
+                <p className="text-acacia-800 text-sm font-semibold mb-1">Important Note</p>
+                <p className="text-acacia-800 text-sm">
                   The Flying Doctor Service is a valuable safety net, but it is <strong>not a substitute for personal travel insurance</strong>. AMREF covers emergency evacuation logistics, but your travel insurance covers the broader costs: hospital treatment, ongoing medical care, trip cancellation, repatriation, gear loss, and personal liability. You need both. For other logistics, see our{" "}
-                  <Link href="/kilimanjaro-visa-tanzania/" className="text-emerald-700 hover:underline font-semibold">Tanzania visa guide</Link> and{" "}
-                  <Link href="/kilimanjaro-airport-guide/" className="text-emerald-700 hover:underline font-semibold">airport arrival guide</Link>.
+                  <Link href="/kilimanjaro-visa-tanzania/" className="text-acacia-700 hover:underline font-semibold">Tanzania visa guide</Link> and{" "}
+                  <Link href="/kilimanjaro-airport-guide/" className="text-acacia-700 hover:underline font-semibold">airport arrival guide</Link>.
                 </p>
               </div>
             </div>
@@ -697,8 +697,8 @@ export default function KilimanjaroTravelInsurancePage() {
                 className="flex gap-5 bg-white rounded-xl p-6 border border-[var(--border)]"
               >
                 <div className="flex items-start gap-4 shrink-0">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                    <span className="text-emerald-700 font-bold text-xl">{item.step}</span>
+                  <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center">
+                    <span className="text-acacia-700 font-bold text-xl">{item.step}</span>
                   </div>
                 </div>
                 <div>

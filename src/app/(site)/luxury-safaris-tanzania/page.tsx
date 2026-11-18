@@ -345,7 +345,7 @@ export default function LuxurySafarisTanzaniaPage() {
                 <ul className="space-y-1.5">
                   {acc.features.map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm text-[var(--text)]">
-                      <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+                      <Check className="w-4 h-4 text-acacia-500 shrink-0" />
                       {f}
                     </li>
                   ))}

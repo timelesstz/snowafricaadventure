@@ -69,9 +69,9 @@ const speedRecords = [
     year: 2018,
     detail:
       "Ultra-runner Fernanda Maciel set the women&apos;s speed record via the Umbwe Route, reaching Uhuru Peak in 7 hours and 8 minutes. Maciel is also known for speed records on Aconcagua and Mont Blanc, placing her among the world&apos;s elite mountain athletes.",
-    color: "bg-rose-50 border-rose-200",
-    iconBg: "bg-rose-100",
-    iconColor: "text-rose-600",
+    color: "bg-red-50 border-red-200",
+    iconBg: "bg-red-100",
+    iconColor: "text-red-600",
   },
   {
     title: "Previous Men&apos;s Record",
@@ -81,9 +81,9 @@ const speedRecords = [
     year: 2010,
     detail:
       "Before Egloff, Spanish ultra-runner Kilian Jornet held the fastest ascent record. Jornet is widely considered the greatest mountain runner in history, holding speed records on peaks including the Matterhorn, Mont Blanc, and Denali.",
-    color: "bg-sky-50 border-sky-200",
-    iconBg: "bg-sky-100",
-    iconColor: "text-sky-600",
+    color: "bg-slate-50 border-slate-200",
+    iconBg: "bg-slate-100",
+    iconColor: "text-slate-600",
   },
 ];
 
@@ -96,8 +96,8 @@ const ageRecords = [
     detail:
       "American Keats Boyd reached Uhuru Peak at the age of seven, making him one of the youngest confirmed male summiters. He climbed with his father via the Machame Route over seven days.",
     icon: Star,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
+    color: "text-slate-600",
+    bg: "bg-slate-50",
   },
   {
     category: "Youngest Female Summiter",
@@ -107,8 +107,8 @@ const ageRecords = [
     detail:
       "Montannah Kenney summited Kilimanjaro at age seven to honour her late grandmother. She climbed the Marangu Route with her mother. Her story was widely covered and inspired young adventurers worldwide.",
     icon: Star,
-    color: "text-pink-600",
-    bg: "bg-pink-50",
+    color: "text-slate-600",
+    bg: "bg-slate-50",
   },
   {
     category: "Youngest Confirmed Summiter",
@@ -129,8 +129,8 @@ const ageRecords = [
     detail:
       "American Fred Distelhorst summited Kilimanjaro at 88, making him one of the oldest known male summiters. His climb demonstrated that age alone does not determine summit capability when fitness, acclimatization, and determination align.",
     icon: Award,
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
+    color: "text-acacia-600",
+    bg: "bg-acacia-50",
   },
   {
     category: "Oldest Female Summiter",
@@ -140,8 +140,8 @@ const ageRecords = [
     detail:
       "Anne Lorimor summited Kilimanjaro at the age of 89, setting what is widely recognised as the record for the oldest woman to reach Uhuru Peak. She climbed to raise awareness for education initiatives and proved that passion has no expiry date.",
     icon: Award,
-    color: "text-purple-600",
-    bg: "bg-purple-50",
+    color: "text-slate-600",
+    bg: "bg-slate-50",
   },
 ];
 
@@ -528,9 +528,9 @@ export default function KilimanjaroRecordsPage() {
             ))}
           </div>
           <div className="max-w-3xl mx-auto mt-8">
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Users className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Users className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
                 <strong>Age requirements:</strong> Tanzania National Parks Authority (TANAPA) officially requires climbers to be at least 10 years old. Enforcement has varied, which is why younger summiters appear in the records. Most reputable operators enforce this minimum. For older climbers, there is no upper age limit — a medical clearance and experienced guide team are what matter most.{" "}
                 <Link href="/can-beginners-climb-kilimanjaro/" className="underline hover:no-underline">
                   Read our beginners guide
@@ -592,8 +592,8 @@ export default function KilimanjaroRecordsPage() {
                 key={record.title}
                 className="bg-[var(--surface)] rounded-xl border border-[var(--border)] p-6 hover:shadow-md transition-shadow"
               >
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                  <record.icon className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                  <record.icon className="w-6 h-6 text-acacia-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-3">{record.title}</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">

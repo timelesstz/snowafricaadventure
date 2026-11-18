@@ -31,9 +31,9 @@ const typeConfig = {
   route: {
     icon: Mountain,
     label: "Kilimanjaro Routes",
-    color: "text-emerald-600",
-    bgColor: "bg-emerald-50",
-    borderColor: "border-emerald-200",
+    color: "text-acacia-600",
+    bgColor: "bg-acacia-50",
+    borderColor: "border-acacia-200",
     basePath: "/trekking",
   },
   safari: {
@@ -111,7 +111,7 @@ function EmptyState({ query }: { query: string }) {
       <div className="flex flex-wrap justify-center gap-3 mt-6">
         <Link
           href="/trekking/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors text-sm font-medium"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-acacia-50 text-acacia-700 hover:bg-acacia-100 transition-colors text-sm font-medium"
         >
           <Mountain className="w-4 h-4" />
           Kilimanjaro Routes

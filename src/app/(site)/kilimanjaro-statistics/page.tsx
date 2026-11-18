@@ -3,22 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Mountain,
-  Globe,
   Users,
   TrendingUp,
   DollarSign,
   Shield,
-  Calendar,
   ArrowRight,
   BarChart3,
-  Heart,
   Thermometer,
   Map,
   Clock,
   TreePine,
-  Award,
   Activity,
-  BookOpen,
 } from "lucide-react";
 import {
   generateMetadata as genMeta,
@@ -37,70 +32,77 @@ export const metadata: Metadata = genMeta({
   url: "/kilimanjaro-statistics/",
 });
 
+const DATA_SOURCES = [
+  {
+    name: "KINAPA (Kilimanjaro National Park Authority)",
+    use: "Park fee structures, visitor numbers, climbing regulations, and official route designations. KINAPA is the governing body for all activities within Kilimanjaro National Park.",
+  },
+  {
+    name: "KPAP (Kilimanjaro Porters Assistance Project)",
+    use: "Porter welfare data, weight regulations, fair wage guidelines, and partner operator compliance records.",
+  },
+  {
+    name: "Peer-Reviewed Research",
+    use: "Glacial data from Thompson et al. (Ohio State University), altitude medicine studies from the Wilderness Medical Society, WHO altitude sickness prevalence data, and Hackett & Roach altitude illness research published in the New England Journal of Medicine.",
+  },
+  {
+    name: "Operator Data (Aggregated)",
+    use: "Success rates, demographic breakdowns, cost ranges, and tipping norms are derived from our own operational data (1,500+ guided climbers) cross-referenced with published data from TATO (Tanzania Association of Tour Operators) member companies.",
+  },
+  {
+    name: "UNESCO & IUCN Reports",
+    use: "World Heritage Site documentation, conservation status assessments, and ecosystem monitoring reports for Kilimanjaro National Park.",
+  },
+];
+
+const RELATED_GUIDES = [
+  { href: "/climbing-kilimanjaro/", title: "Climbing Kilimanjaro", description: "Complete guide", icon: Mountain },
+  { href: "/best-route-to-climb-kilimanjaro/", title: "Best Route Guide", description: "Compare all routes", icon: Map },
+  { href: "/kilimanjaro-altitude-sickness/", title: "Altitude Sickness", description: "Prevention & treatment", icon: Activity },
+  { href: "/kilimanjaro-prices/", title: "Kilimanjaro Prices", description: "Full cost breakdown", icon: DollarSign },
+  { href: "/best-time-to-climb-kilimanjaro/", title: "Best Time to Climb", description: "Month-by-month guide", icon: Clock },
+];
+
 const keyStats = [
   {
     label: "Summit Height",
     value: "5,895m",
     subtext: "19,341 ft",
-    icon: Mountain,
-    color: "bg-blue-100 text-blue-700",
-    iconColor: "text-blue-600",
   },
   {
     label: "Annual Climbers",
     value: "~35,000",
     subtext: "Per year",
-    icon: Users,
-    color: "bg-emerald-100 text-emerald-700",
-    iconColor: "text-emerald-600",
   },
   {
     label: "Overall Success Rate",
     value: "65%",
     subtext: "Industry average",
-    icon: TrendingUp,
-    color: "bg-amber-100 text-amber-700",
-    iconColor: "text-amber-600",
   },
   {
     label: "Number of Routes",
     value: "7",
     subtext: "Official routes",
-    icon: Map,
-    color: "bg-purple-100 text-purple-700",
-    iconColor: "text-purple-600",
   },
   {
     label: "Youngest Summiter",
     value: "6 yrs",
     subtext: "Years old",
-    icon: Heart,
-    color: "bg-pink-100 text-pink-700",
-    iconColor: "text-pink-600",
   },
   {
     label: "Oldest Summiter",
     value: "89 yrs",
     subtext: "Years old",
-    icon: Award,
-    color: "bg-orange-100 text-orange-700",
-    iconColor: "text-orange-600",
   },
   {
     label: "Deaths Per Year",
     value: "~10",
     subtext: "0.03% fatality rate",
-    icon: Shield,
-    color: "bg-red-100 text-red-700",
-    iconColor: "text-red-600",
   },
   {
     label: "Days to Summit",
     value: "5-9",
     subtext: "Depending on route",
-    icon: Calendar,
-    color: "bg-teal-100 text-teal-700",
-    iconColor: "text-teal-600",
   },
 ];
 
@@ -170,8 +172,8 @@ const climateZones = [
     temp: "20-30°C",
     description:
       "The lowest slopes of Kilimanjaro are intensively farmed. Banana, coffee, and maize plantations dominate the landscape. This zone acts as a buffer between the surrounding savanna and the mountain forest. Most trekkers pass through it quickly on the drive to the gate, though the Marangu and Rongai routes give glimpses of local agriculture.",
-    color: "bg-lime-100 text-lime-800",
-    borderColor: "border-lime-300",
+    color: "bg-acacia-100 text-acacia-800",
+    borderColor: "border-acacia-300",
   },
   {
     name: "Rainforest Zone",
@@ -180,8 +182,8 @@ const climateZones = [
     temp: "12-20°C",
     description:
       "Dense montane cloud forest with towering trees, mosses, ferns, and epiphytes. This is the wettest zone on the mountain and home to the greatest biodiversity: blue monkeys, colobus monkeys, bush pigs, duikers, and over 170 bird species. The canopy traps moisture from clouds, creating a perpetually damp environment with muddy trails.",
-    color: "bg-emerald-100 text-emerald-800",
-    borderColor: "border-emerald-300",
+    color: "bg-acacia-100 text-acacia-800",
+    borderColor: "border-acacia-300",
   },
   {
     name: "Heath & Moorland",
@@ -210,17 +212,17 @@ const climateZones = [
     temp: "-15 to -5°C",
     description:
       "Permanent ice and glaciers — though shrinking rapidly. Oxygen levels are roughly 50% of sea level. Wind chill can drive temperatures below -25°C on summit night. No plant or animal life exists at this altitude. The summit zone includes three volcanic cones: Kibo (the highest, dormant), Mawenzi (5,149m, eroded), and Shira (3,962m, collapsed).",
-    color: "bg-sky-100 text-sky-800",
-    borderColor: "border-sky-300",
+    color: "bg-slate-100 text-slate-800",
+    borderColor: "border-slate-300",
   },
 ];
 
 const ageDistribution = [
-  { range: "Under 25", percentage: 8, color: "bg-blue-500" },
-  { range: "25-34", percentage: 35, color: "bg-emerald-500" },
-  { range: "35-44", percentage: 25, color: "bg-amber-500" },
-  { range: "45-54", percentage: 20, color: "bg-orange-500" },
-  { range: "55+", percentage: 12, color: "bg-red-500" },
+  { range: "Under 25", percentage: 8, color: "bg-[var(--primary)]" },
+  { range: "25-34", percentage: 35, color: "bg-[var(--primary)]" },
+  { range: "35-44", percentage: 25, color: "bg-[var(--primary)]" },
+  { range: "45-54", percentage: 20, color: "bg-[var(--primary)]" },
+  { range: "55+", percentage: 12, color: "bg-[var(--primary)]" },
 ];
 
 const topNationalities = [
@@ -248,8 +250,8 @@ const costBreakdown = [
     range: "$2,500 - $3,500",
     includes:
       "Quality camping gear, experienced guides, 7-8 day routes, smaller groups, better food",
-    color: "bg-emerald-50 border-emerald-200",
-    labelColor: "bg-emerald-100 text-emerald-700",
+    color: "bg-acacia-50 border-acacia-200",
+    labelColor: "bg-acacia-100 text-acacia-700",
     recommended: true,
   },
   {
@@ -257,8 +259,8 @@ const costBreakdown = [
     range: "$3,500 - $5,000+",
     includes:
       "Private climbs, top-tier equipment, gourmet meals, private toilet tent, best guides, 8-9 days",
-    color: "bg-blue-50 border-blue-200",
-    labelColor: "bg-blue-100 text-blue-700",
+    color: "bg-slate-50 border-slate-200",
+    labelColor: "bg-slate-100 text-slate-700",
   },
 ];
 
@@ -437,7 +439,7 @@ export default function KilimanjaroStatisticsPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="inline-block px-3 py-1 bg-[var(--secondary)] text-[var(--secondary-foreground)] rounded-full text-xs font-bold uppercase tracking-wider">
               The Definitive Kilimanjaro Data Resource
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -447,7 +449,7 @@ export default function KilimanjaroStatisticsPage() {
               </span>{" "}
               2026
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
+            <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-2xl">
               50+ verified statistics from KINAPA park records, peer-reviewed
               research, and 15 years of operational data from our guides on the
               mountain. The most comprehensive Kilimanjaro data page on the
@@ -463,7 +465,7 @@ export default function KilimanjaroStatisticsPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
+            <div>
               <h2 className="font-heading text-2xl font-bold mb-4">
                 Kilimanjaro at a Glance
               </h2>
@@ -487,10 +489,10 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Key Stats Summary */}
-      <section className="py-16 bg-white">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center mb-8">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-2">
               Key Kilimanjaro Statistics
             </h2>
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
@@ -498,42 +500,29 @@ export default function KilimanjaroStatisticsPage() {
               researcher should know.
             </p>
           </div>
-          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+          <dl className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--border)]">
             {keyStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-[var(--surface)] rounded-2xl p-6 border border-[var(--border)] text-center hover:shadow-md transition-shadow"
-              >
-                <div
-                  className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center mx-auto mb-3`}
-                >
-                  <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
-                </div>
-                <div className="text-3xl md:text-4xl font-bold text-[var(--text)] mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-[var(--text-muted)] mb-1">
-                  {stat.subtext}
-                </div>
-                <div className="text-sm font-semibold text-[var(--text)]">
+              <div key={stat.label} className="flex flex-col bg-white px-5 py-4">
+                <dt className="order-1 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                   {stat.label}
-                </div>
+                </dt>
+                <dd className="order-2 mt-1 font-heading text-2xl font-bold tabular-nums text-[var(--text)]">
+                  {stat.value}
+                </dd>
+                <dd className="order-3 text-xs text-[var(--text-light)]">{stat.subtext}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
       {/* Geographic & Physical Stats */}
-      <section className="py-16 bg-[var(--surface)]">
+      <section className="py-12 md:py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Globe className="w-7 h-7 text-blue-600" />
-              </div>
               <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
                   Geographic &amp; Physical Statistics
                 </h2>
                 <p className="text-[var(--text-muted)] text-sm">
@@ -754,11 +743,11 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Climate Zones */}
-      <section className="py-16 bg-[var(--primary-dark)] text-white">
+      <section className="py-12 md:py-16 bg-[var(--primary-dark)] text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
                 5 Climate Zones of Kilimanjaro
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
@@ -797,10 +786,10 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Success Rate by Route */}
-      <section className="py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
               Success Rate by Route &amp; Duration
             </h2>
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
@@ -831,7 +820,7 @@ export default function KilimanjaroStatisticsPage() {
                     key={route.route}
                     className={`border-t border-[var(--border)] ${
                       route.recommended
-                        ? "bg-emerald-50"
+                        ? "bg-acacia-50"
                         : i % 2 === 0
                           ? "bg-white"
                           : "bg-[var(--surface)]"
@@ -849,7 +838,7 @@ export default function KilimanjaroStatisticsPage() {
                         route.route
                       )}
                       {route.recommended && (
-                        <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
+                        <span className="ml-2 text-xs bg-acacia-100 text-acacia-700 px-2 py-0.5 rounded-full font-bold">
                           Recommended
                         </span>
                       )}
@@ -866,7 +855,7 @@ export default function KilimanjaroStatisticsPage() {
                     <td className="px-4 py-3 text-center">
                       {route.longRate ? (
                         <>
-                          <span className="font-bold text-emerald-700">
+                          <span className="font-bold text-acacia-700">
                             {route.longRate}
                           </span>
                           <span className="text-xs text-[var(--text-muted)] ml-1">
@@ -907,15 +896,12 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Climber Demographics */}
-      <section className="py-16 bg-[var(--surface)]">
+      <section className="py-12 md:py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center">
-                <Users className="w-7 h-7 text-purple-600" />
-              </div>
               <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
                   Climber Demographics
                 </h2>
                 <p className="text-[var(--text-muted)] text-sm">
@@ -969,7 +955,7 @@ export default function KilimanjaroStatisticsPage() {
                         <span className="font-bold">~60%</span>
                       </div>
                       <div className="w-full bg-[var(--surface)] rounded-full h-3">
-                        <div className="bg-blue-500 h-3 rounded-full w-[60%]" />
+                        <div className="bg-slate-500 h-3 rounded-full w-[60%]" />
                       </div>
                     </div>
                     <div className="flex-1">
@@ -980,7 +966,7 @@ export default function KilimanjaroStatisticsPage() {
                         <span className="font-bold">~40%</span>
                       </div>
                       <div className="w-full bg-[var(--surface)] rounded-full h-3">
-                        <div className="bg-pink-500 h-3 rounded-full w-[40%]" />
+                        <div className="bg-slate-500 h-3 rounded-full w-[40%]" />
                       </div>
                     </div>
                   </div>
@@ -1060,15 +1046,12 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Cost Statistics */}
-      <section className="py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <DollarSign className="w-7 h-7 text-emerald-600" />
-              </div>
               <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
                   Cost Statistics
                 </h2>
                 <p className="text-[var(--text-muted)] text-sm">
@@ -1085,7 +1068,7 @@ export default function KilimanjaroStatisticsPage() {
                 >
                   {tier.recommended && (
                     <div className="absolute -top-3 left-4">
-                      <span className="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      <span className="bg-acacia-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                         Most Popular
                       </span>
                     </div>
@@ -1199,15 +1182,12 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Health & Safety Statistics */}
-      <section className="py-16 bg-[var(--surface)]">
+      <section className="py-12 md:py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center">
-                <Activity className="w-7 h-7 text-red-600" />
-              </div>
               <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
                   Health &amp; Safety Statistics
                 </h2>
                 <p className="text-[var(--text-muted)] text-sm">
@@ -1268,7 +1248,7 @@ export default function KilimanjaroStatisticsPage() {
                 <ul className="space-y-3 text-sm text-[var(--text-muted)]">
                   <li className="flex justify-between items-center">
                     <span>Kilimanjaro (5,895m)</span>
-                    <span className="font-semibold text-emerald-600">
+                    <span className="font-semibold text-acacia-600">
                       0.03%
                     </span>
                   </li>
@@ -1303,29 +1283,29 @@ export default function KilimanjaroStatisticsPage() {
                   Risk Reduction Factors
                 </h3>
                 <div className="grid sm:grid-cols-3 gap-4">
-                  <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-200">
-                    <div className="text-2xl font-bold text-emerald-700 mb-1">
+                  <div className="bg-white rounded-lg p-4 border border-[var(--border)]">
+                    <div className="text-2xl font-bold text-acacia-700 mb-1">
                       +15%
                     </div>
-                    <p className="text-sm text-emerald-800">
+                    <p className="text-sm text-acacia-800">
                       Success rate increase from adding 1 extra acclimatization
                       day
                     </p>
                   </div>
-                  <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-200">
-                    <div className="text-2xl font-bold text-emerald-700 mb-1">
+                  <div className="bg-white rounded-lg p-4 border border-[var(--border)]">
+                    <div className="text-2xl font-bold text-acacia-700 mb-1">
                       93%
                     </div>
-                    <p className="text-sm text-emerald-800">
+                    <p className="text-sm text-acacia-800">
                       Our success rate with 7+ day routes and twice-daily health
                       monitoring
                     </p>
                   </div>
-                  <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-200">
-                    <div className="text-2xl font-bold text-emerald-700 mb-1">
+                  <div className="bg-white rounded-lg p-4 border border-[var(--border)]">
+                    <div className="text-2xl font-bold text-acacia-700 mb-1">
                       3-4L
                     </div>
-                    <p className="text-sm text-emerald-800">
+                    <p className="text-sm text-acacia-800">
                       Daily water intake recommended to aid acclimatization and
                       reduce AMS
                     </p>
@@ -1347,11 +1327,11 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Environmental Statistics */}
-      <section className="py-16 bg-[var(--primary-dark)] text-white">
+      <section className="py-12 md:py-16 bg-[var(--primary-dark)] text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
                 Environmental Statistics
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto">
@@ -1395,8 +1375,8 @@ export default function KilimanjaroStatisticsPage() {
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <Shield className="w-8 h-8 text-emerald-400 mb-3" />
-                <div className="text-2xl font-bold text-emerald-400 mb-1">
+                <Shield className="w-8 h-8 text-acacia-400 mb-3" />
+                <div className="text-2xl font-bold text-acacia-400 mb-1">
                   20kg
                 </div>
                 <h3 className="font-semibold text-sm mb-2">
@@ -1410,8 +1390,8 @@ export default function KilimanjaroStatisticsPage() {
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <TreePine className="w-8 h-8 text-emerald-400 mb-3" />
-                <div className="text-2xl font-bold text-emerald-400 mb-1">
+                <TreePine className="w-8 h-8 text-acacia-400 mb-3" />
+                <div className="text-2xl font-bold text-acacia-400 mb-1">
                   2,300mm
                 </div>
                 <h3 className="font-semibold text-sm mb-2">
@@ -1425,8 +1405,8 @@ export default function KilimanjaroStatisticsPage() {
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <Users className="w-8 h-8 text-blue-400 mb-3" />
-                <div className="text-2xl font-bold text-blue-400 mb-1">
+                <Users className="w-8 h-8 text-slate-400 mb-3" />
+                <div className="text-2xl font-bold text-slate-400 mb-1">
                   3-4x
                 </div>
                 <h3 className="font-semibold text-sm mb-2">
@@ -1441,8 +1421,8 @@ export default function KilimanjaroStatisticsPage() {
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <BarChart3 className="w-8 h-8 text-purple-400 mb-3" />
-                <div className="text-2xl font-bold text-purple-400 mb-1">
+                <BarChart3 className="w-8 h-8 text-slate-400 mb-3" />
+                <div className="text-2xl font-bold text-slate-400 mb-1">
                   $50M+
                 </div>
                 <h3 className="font-semibold text-sm mb-2">
@@ -1460,15 +1440,12 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Historical Timeline */}
-      <section className="py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center">
-                <BookOpen className="w-7 h-7 text-amber-600" />
-              </div>
               <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
                   Historical Timeline
                 </h2>
                 <p className="text-[var(--text-muted)] text-sm">
@@ -1503,10 +1480,10 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-[var(--surface)]">
+      <section className="py-12 md:py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold mb-10 text-center">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-8 text-center">
               Frequently Asked Questions
             </h2>
             <div className="space-y-3">
@@ -1543,75 +1520,25 @@ export default function KilimanjaroStatisticsPage() {
               multiple licensed operators, including our own 15 years of
               operational records.
             </p>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 bg-[var(--surface)] rounded-lg p-4">
-                <div className="w-2 h-2 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">
-                    KINAPA (Kilimanjaro National Park Authority)
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    Park fee structures, visitor numbers, climbing regulations,
-                    and official route designations. KINAPA is the governing body
-                    for all activities within Kilimanjaro National Park.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-[var(--surface)] rounded-lg p-4">
-                <div className="w-2 h-2 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">
-                    KPAP (Kilimanjaro Porters Assistance Project)
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    Porter welfare data, weight regulations, fair wage
-                    guidelines, and partner operator compliance records.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-[var(--surface)] rounded-lg p-4">
-                <div className="w-2 h-2 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">
-                    Peer-Reviewed Research
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    Glacial data from Thompson et al. (Ohio State University),
-                    altitude medicine studies from the Wilderness Medical
-                    Society, WHO altitude sickness prevalence data, and Hackett &
-                    Roach altitude illness research published in the New England
-                    Journal of Medicine.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-[var(--surface)] rounded-lg p-4">
-                <div className="w-2 h-2 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">
-                    Operator Data (Aggregated)
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    Success rates, demographic breakdowns, cost ranges, and
-                    tipping norms are derived from our own operational data
-                    (1,500+ guided climbers) cross-referenced with published
-                    data from TATO (Tanzania Association of Tour Operators)
-                    member companies.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 bg-[var(--surface)] rounded-lg p-4">
-                <div className="w-2 h-2 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">
-                    UNESCO &amp; IUCN Reports
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    World Heritage Site documentation, conservation status
-                    assessments, and ecosystem monitoring reports for Kilimanjaro
-                    National Park.
-                  </p>
-                </div>
-              </div>
+            <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
+              <table className="w-full text-sm text-left">
+                <thead className="bg-[var(--surface)] text-[11px] uppercase tracking-wider text-[var(--text-muted)]">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 font-semibold w-1/3">Source</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">What we use it for</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border)]">
+                  {DATA_SOURCES.map((src) => (
+                    <tr key={src.name} className="align-top">
+                      <th scope="row" className="px-4 py-3 font-semibold text-[var(--text)]">
+                        {src.name}
+                      </th>
+                      <td className="px-4 py-3 text-[var(--text-muted)] leading-relaxed">{src.use}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
             <p className="text-xs text-[var(--text-muted)] mt-6 italic">
               Last updated: March 2026. Statistics are reviewed and updated
@@ -1630,64 +1557,31 @@ export default function KilimanjaroStatisticsPage() {
       </section>
 
       {/* Related Guides */}
-      <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
+      <section className="py-12 md:py-16 bg-[var(--surface)] border-t border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading text-xl font-bold mb-6 text-center">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">
               Related Guides
             </h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              <Link
-                href="/climbing-kilimanjaro/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow"
-              >
-                <Mountain className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Climbing Kilimanjaro</p>
-                <p className="text-xs text-[var(--text-muted)]">
-                  Complete guide
-                </p>
-              </Link>
-              <Link
-                href="/best-route-to-climb-kilimanjaro/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow"
-              >
-                <Map className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Best Route Guide</p>
-                <p className="text-xs text-[var(--text-muted)]">
-                  Compare all routes
-                </p>
-              </Link>
-              <Link
-                href="/kilimanjaro-altitude-sickness/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow"
-              >
-                <Activity className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Altitude Sickness</p>
-                <p className="text-xs text-[var(--text-muted)]">
-                  Prevention &amp; treatment
-                </p>
-              </Link>
-              <Link
-                href="/kilimanjaro-prices/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow"
-              >
-                <DollarSign className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Kilimanjaro Prices</p>
-                <p className="text-xs text-[var(--text-muted)]">
-                  Full cost breakdown
-                </p>
-              </Link>
-              <Link
-                href="/best-time-to-climb-kilimanjaro/"
-                className="bg-white rounded-xl p-4 hover:shadow-md transition-shadow"
-              >
-                <Clock className="w-6 h-6 text-[var(--secondary)] mb-2" />
-                <p className="font-semibold text-sm">Best Time to Climb</p>
-                <p className="text-xs text-[var(--text-muted)]">
-                  Month-by-month guide
-                </p>
-              </Link>
-            </div>
+            <ul className="grid sm:grid-cols-2 gap-x-8 border-t border-[var(--border)]">
+              {RELATED_GUIDES.map((guide) => (
+                <li key={guide.href} className="border-b border-[var(--border)]">
+                  <Link
+                    href={guide.href}
+                    className="group flex items-center gap-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--secondary)]"
+                  >
+                    <guide.icon className="w-5 h-5 shrink-0 text-[var(--secondary-dark)]" aria-hidden="true" />
+                    <span className="flex-1">
+                      <span className="block font-semibold text-[var(--text)] group-hover:text-[var(--secondary-dark)] transition-colors">
+                        {guide.title}
+                      </span>
+                      <span className="block text-sm text-[var(--text-muted)]">{guide.description}</span>
+                    </span>
+                    <ArrowRight className="w-4 h-4 shrink-0 text-[var(--text-light)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--secondary-dark)]" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -1695,10 +1589,10 @@ export default function KilimanjaroStatisticsPage() {
       <KnowledgeBase exclude="/kilimanjaro-statistics/" />
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">
           <Mountain className="w-12 h-12 text-[var(--secondary)] mx-auto mb-4" />
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold mb-4">
             Ready to Become a Kilimanjaro Statistic?
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto text-lg">

@@ -422,11 +422,11 @@ export default function TanzaniaSafariFromUKPage() {
       {/* Quick Answer Box */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-emerald-50 border-2 border-emerald-200 rounded-xl p-8">
-            <h2 className="font-heading text-2xl font-bold mb-4 text-emerald-900">
+          <div className="max-w-3xl mx-auto bg-acacia-50 border-2 border-acacia-200 rounded-xl p-8">
+            <h2 className="font-heading text-2xl font-bold mb-4 text-acacia-900">
               Quick Answer: Tanzania Safari from the UK
             </h2>
-            <div className="space-y-3 text-emerald-800">
+            <div className="space-y-3 text-acacia-800">
               <p>
                 <strong>Flights:</strong> No direct flights from the UK. The fastest route is London
                 Heathrow to Kilimanjaro International Airport (JRO) via Amsterdam (KLM) or Istanbul
@@ -504,23 +504,23 @@ export default function TanzaniaSafariFromUKPage() {
             <h3 className="font-semibold text-lg mb-3">Flight Booking Tips for UK Travelers</h3>
             <ul className="space-y-2 text-[var(--text-muted)]">
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                 <span>Book 3-6 months in advance for the best fares. Peak season (July-August, Christmas) flights sell out fast.</span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                 <span>Return flights from London to Kilimanjaro typically cost \u00a3400-\u00a3600 in low season and \u00a3600-\u00a3800 in peak season.</span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                 <span>Use Google Flights or Skyscanner to track prices and set alerts. Midweek departures are usually cheaper.</span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                 <span>Check baggage allowance carefully. Safari luggage in light aircraft is often limited to 15kg in soft bags.</span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                 <span>If connecting via Nairobi, ensure your transit is under 24 hours to avoid needing a Kenyan visa.</span>
               </li>
             </ul>
@@ -544,29 +544,29 @@ export default function TanzaniaSafariFromUKPage() {
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Globe className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                <Globe className="w-6 h-6 text-slate-600" />
               </div>
               <h3 className="font-semibold text-lg mb-3">Tanzania E-Visa</h3>
               <ul className="space-y-2 text-[var(--text-muted)] text-sm">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Apply online at <strong>visa.immigration.go.tz</strong></span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Cost: $50 (approximately \u00a340)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Processing time: 3-10 business days</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Valid for 90 days from date of issue</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Single entry — covers Zanzibar as part of Tanzania</span>
                 </li>
               </ul>
@@ -579,23 +579,23 @@ export default function TanzaniaSafariFromUKPage() {
               <h3 className="font-semibold text-lg mb-3">Passport &amp; Health Requirements</h3>
               <ul className="space-y-2 text-[var(--text-muted)] text-sm">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Passport valid for 6+ months from entry date</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>At least 2 blank passport pages required</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Yellow fever certificate if transiting through an endemic country (e.g., Ethiopia, Kenya 12+ hrs)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Anti-malaria prophylaxis recommended (consult your GP or travel clinic)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>Check NHS Fit for Travel and FCDO advice before departure</span>
                 </li>
               </ul>
@@ -650,30 +650,30 @@ export default function TanzaniaSafariFromUKPage() {
             <h3 className="font-semibold text-lg mb-3">What&apos;s Included in Our Prices</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <h4 className="font-semibold text-sm text-emerald-700 mb-2">Included</h4>
+                <h4 className="font-semibold text-sm text-acacia-700 mb-2">Included</h4>
                 <ul className="space-y-1.5 text-sm text-[var(--text-muted)]">
                   <li className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                     <span>All national park entrance fees</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                     <span>Private 4x4 safari vehicle with pop-up roof</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                     <span>Professional English-speaking guide</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                     <span>All accommodation as specified</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                     <span>Full board meals and drinking water</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                     <span>Airport transfers (JRO/ARK)</span>
                   </li>
                 </ul>
@@ -793,7 +793,7 @@ export default function TanzaniaSafariFromUKPage() {
                   <ul className="space-y-1">
                     {highlights.map((h) => (
                       <li key={h} className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
-                        <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                        <Check className="w-3.5 h-3.5 text-acacia-500 shrink-0" />
                         <span>{h}</span>
                       </li>
                     ))}
@@ -834,7 +834,7 @@ export default function TanzaniaSafariFromUKPage() {
               <h3 className="font-heading text-xl font-bold mb-4">Why UK Travelers Love This Combination</h3>
               <ul className="space-y-3 text-[var(--text-muted)]">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                   <span>
                     <strong>Contrast of experiences</strong> — transition from dusty game drives to
                     white-sand beaches and turquoise Indian Ocean waters. The shift in scenery is
@@ -843,14 +843,14 @@ export default function TanzaniaSafariFromUKPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                   <span>
                     <strong>No additional visa</strong> — Zanzibar is part of Tanzania, so your
                     existing e-visa covers the entire trip. No extra paperwork or costs.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                   <span>
                     <strong>Cultural immersion</strong> — explore Stone Town, a UNESCO World Heritage
                     Site with centuries of Arab, Persian, Indian, and European influence. Spice tours,
@@ -858,7 +858,7 @@ export default function TanzaniaSafariFromUKPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-1 shrink-0" />
                   <span>
                     <strong>Water activities</strong> — snorkelling, diving, kitesurfing, sunset
                     cruises, dolphin tours, and deep-sea fishing. The Mnemba Atoll offers some of
@@ -972,8 +972,8 @@ export default function TanzaniaSafariFromUKPage() {
                 key={provider.name}
                 className="bg-white border border-[var(--border)] rounded-xl p-5 shadow-sm flex items-start gap-4"
               >
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
-                  <Shield className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                  <Shield className="w-5 h-5 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">{provider.name}</h3>
@@ -997,7 +997,7 @@ export default function TanzaniaSafariFromUKPage() {
                 "Personal liability cover",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-acacia-500 mt-0.5 shrink-0" />
                   <span>{item}</span>
                 </div>
               ))}

@@ -277,8 +277,8 @@ export default function KilimanjaroHygienePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Droplets className="w-7 h-7 text-blue-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Droplets className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -301,57 +301,57 @@ export default function KilimanjaroHygienePage() {
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               <div className="bg-white rounded-xl p-5 border border-[var(--border)]">
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
-                  <Droplets className="w-5 h-5 text-blue-500" />
+                  <Droplets className="w-5 h-5 text-slate-500" />
                   Morning Wash Routine
                 </h3>
                 <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Warm water basin delivered to your tent
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Wash face, hands, and neck
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Apply sunscreen and lip balm
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Fresh deodorant and base layer
                   </li>
                 </ul>
               </div>
               <div className="bg-white rounded-xl p-5 border border-[var(--border)]">
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-purple-500" />
+                  <Sparkles className="w-5 h-5 text-slate-500" />
                   Evening Wash Routine
                 </h3>
                 <ul className="space-y-2 text-sm text-[var(--text-muted)]">
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Warm water basin for face, hands, feet
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Full body wipe-down with wet wipes
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Change into clean sleeping clothes
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Moisturise hands and face (altitude dries skin)
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
                 <strong>Pro tip:</strong> That first shower after descending the mountain — back at your hotel in Moshi or Arusha — is universally described as one of the best showers of your life. Seven days of mountain grime washing away is genuinely euphoric. Something to look forward to.
               </p>
             </div>
@@ -364,8 +364,8 @@ export default function KilimanjaroHygienePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <HandMetal className="w-7 h-7 text-emerald-600" />
+              <div className="w-14 h-14 rounded-xl bg-acacia-100 flex items-center justify-center">
+                <HandMetal className="w-7 h-7 text-acacia-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -420,8 +420,8 @@ export default function KilimanjaroHygienePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center">
-                <Sparkles className="w-7 h-7 text-purple-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Sparkles className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -437,8 +437,8 @@ export default function KilimanjaroHygienePage() {
 
             <div className="space-y-4 mb-8">
               <div className="flex gap-4 bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-purple-700 font-bold">1</span>
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="text-slate-700 font-bold">1</span>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Fresh Underwear Daily</h3>
@@ -448,8 +448,8 @@ export default function KilimanjaroHygienePage() {
                 </div>
               </div>
               <div className="flex gap-4 bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-purple-700 font-bold">2</span>
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="text-slate-700 font-bold">2</span>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Dry Shampoo Every 2-3 Days</h3>
@@ -459,8 +459,8 @@ export default function KilimanjaroHygienePage() {
                 </div>
               </div>
               <div className="flex gap-4 bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-purple-700 font-bold">3</span>
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="text-slate-700 font-bold">3</span>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Biodegradable Deodorant</h3>
@@ -470,8 +470,8 @@ export default function KilimanjaroHygienePage() {
                 </div>
               </div>
               <div className="flex gap-4 bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-purple-700 font-bold">4</span>
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="text-slate-700 font-bold">4</span>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Rotate Base Layers</h3>
@@ -481,8 +481,8 @@ export default function KilimanjaroHygienePage() {
                 </div>
               </div>
               <div className="flex gap-4 bg-[var(--surface)] rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                  <span className="text-purple-700 font-bold">5</span>
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center shrink-0">
+                  <span className="text-slate-700 font-bold">5</span>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Foot Care Is Hygiene Too</h3>
@@ -545,8 +545,8 @@ export default function KilimanjaroHygienePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-pink-100 flex items-center justify-center">
-                <Heart className="w-7 h-7 text-pink-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Heart className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -584,8 +584,8 @@ export default function KilimanjaroHygienePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <Backpack className="w-7 h-7 text-emerald-600" />
+              <div className="w-14 h-14 rounded-xl bg-acacia-100 flex items-center justify-center">
+                <Backpack className="w-7 h-7 text-acacia-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -610,18 +610,18 @@ export default function KilimanjaroHygienePage() {
               <ul className="space-y-3">
                 {hygienePackingList.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-acacia-500 shrink-0 mt-0.5" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3 mt-6">
-              <Info className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+            <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3 mt-6">
+              <Info className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
               <div>
-                <p className="text-emerald-800 text-sm font-semibold mb-1">Weight consideration</p>
-                <p className="text-emerald-800 text-sm">
+                <p className="text-acacia-800 text-sm font-semibold mb-1">Weight consideration</p>
+                <p className="text-acacia-800 text-sm">
                   All hygiene items combined should weigh under 1kg. Do not over-pack — travel-size everything. Your porter carries your duffel (max 15kg), so hygiene supplies are a negligible weight addition for a significant comfort improvement.
                 </p>
               </div>

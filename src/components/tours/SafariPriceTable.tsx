@@ -116,7 +116,7 @@ export function SafariPriceTable({
 
               <div className="flex items-center gap-3">
                 {tier.savings ? (
-                  <span className="inline-block bg-emerald-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold">
+                  <span className="inline-block bg-acacia-500 text-white px-2.5 py-1 rounded-full text-xs font-semibold">
                     Save ${tier.savings.toLocaleString()}
                   </span>
                 ) : (
@@ -130,19 +130,19 @@ export function SafariPriceTable({
           <div className="bg-[var(--surface)] px-8 py-6 flex flex-wrap justify-between items-center gap-4">
             <div className="flex flex-wrap gap-4 text-sm text-[var(--text-muted)]">
               <span className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-emerald-500" />
+                <Check className="w-4 h-4 text-acacia-500" />
                 Park fees included
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-emerald-500" />
+                <Check className="w-4 h-4 text-acacia-500" />
                 All meals
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-emerald-500" />
+                <Check className="w-4 h-4 text-acacia-500" />
                 Expert guide
               </span>
               <span className="flex items-center gap-1.5">
-                <Check className="w-4 h-4 text-emerald-500" />
+                <Check className="w-4 h-4 text-acacia-500" />
                 4x4 game drives
               </span>
             </div>

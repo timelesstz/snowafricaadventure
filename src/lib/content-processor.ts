@@ -142,7 +142,7 @@ export function processContent(html: string): string {
   <div class="faq-item border border-stone-200 rounded-xl overflow-hidden bg-white shadow-sm mb-3">
     <button class="faq-button w-full flex items-center justify-between p-5 text-left hover:bg-stone-50 transition-colors" aria-expanded="${isFirst}">
       <span class="font-semibold text-stone-800 pr-4">${decodeHtmlEntities(qa.question)}</span>
-      <svg class="faq-icon w-5 h-5 text-emerald-600 flex-shrink-0 transition-transform duration-200 ${isFirst ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="faq-icon w-5 h-5 text-acacia-600 flex-shrink-0 transition-transform duration-200 ${isFirst ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </button>

@@ -25,13 +25,13 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
   const isBooking = type === "booking";
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-green-50 to-white">
+    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-acacia-50 to-white">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto text-center">
           {/* Success Icon */}
           <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full">
-              <CheckCircle className="w-12 h-12 text-green-500" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-acacia-100 rounded-full">
+              <CheckCircle className="w-12 h-12 text-acacia-500" />
             </div>
           </div>
 

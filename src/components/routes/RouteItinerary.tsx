@@ -397,7 +397,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
     }
 
     .highlight-check {
-      color: #16a34a;
+      color: #4f6e3f;
       font-weight: 700;
       font-size: 14px;
       flex-shrink: 0;
@@ -585,7 +585,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
       border-bottom: 2px solid #e2e8f0;
     }
 
-    .inc-heading.inc-included { color: #16a34a; }
+    .inc-heading.inc-included { color: #4f6e3f; }
     .inc-heading.inc-excluded { color: #dc2626; }
 
     .inc-list {
@@ -623,7 +623,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
 
     .inc-icon.included {
       background: #dcfce7;
-      color: #16a34a;
+      color: #4f6e3f;
     }
 
     .inc-icon.excluded {
@@ -894,10 +894,10 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
               <svg viewBox="0 0 700 120" className="w-full h-full" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="elevGradientLine" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#10b981"/>
+                    <stop offset="0%" stopColor="#668a52"/>
                     <stop offset="50%" stopColor="#F59E0B"/>
                     <stop offset="85%" stopColor="#06b6d4"/>
-                    <stop offset="100%" stopColor="#10b981"/>
+                    <stop offset="100%" stopColor="#668a52"/>
                   </linearGradient>
                   <linearGradient id="elevGradientArea" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="rgba(245, 158, 11, 0.2)"/>
@@ -1001,7 +1001,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
                     <span className={`flex items-center gap-1 px-2 py-1 rounded text-[0.6875rem] font-semibold whitespace-nowrap ml-2 ${
                       isSummit
                         ? "bg-white/15 text-[var(--accent-light)]"
-                        : "bg-[var(--surface)] text-emerald-600"
+                        : "bg-[var(--surface)] text-acacia-600"
                     }`}>
                       <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>

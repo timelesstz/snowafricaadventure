@@ -44,11 +44,11 @@ const visaTypes = [
     fee: "$50 USD",
     bestFor: "Most Kilimanjaro climbers",
     color: "emerald",
-    headerBg: "bg-emerald-50",
-    headerBorder: "border-emerald-200",
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
-    badgeColor: "bg-emerald-100 text-emerald-700",
+    headerBg: "bg-acacia-50",
+    headerBorder: "border-acacia-200",
+    iconBg: "bg-acacia-100",
+    iconColor: "text-acacia-600",
+    badgeColor: "bg-acacia-100 text-acacia-700",
     description:
       "The standard visa for tourists visiting Tanzania. Valid for a single entry and allows stays of up to 90 days. This is the visa type you need for climbing Kilimanjaro, going on safari, or visiting Zanzibar. Available as an e-Visa or on arrival at major entry points.",
   },
@@ -72,11 +72,11 @@ const visaTypes = [
     fee: "$100 USD",
     bestFor: "Repeat visitors or multi-country trips",
     color: "blue",
-    headerBg: "bg-blue-50",
-    headerBorder: "border-blue-200",
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-600",
-    badgeColor: "bg-blue-100 text-blue-700",
+    headerBg: "bg-slate-50",
+    headerBorder: "border-slate-200",
+    iconBg: "bg-slate-100",
+    iconColor: "text-slate-600",
+    badgeColor: "bg-slate-100 text-slate-700",
     description:
       "Allows multiple entries over a 12-month period. Useful if you plan to combine Kilimanjaro with visits to neighbouring Kenya or Uganda and return to Tanzania. Also ideal if you plan to climb Kilimanjaro and return later in the year for a safari or Zanzibar holiday.",
   },
@@ -423,7 +423,7 @@ export default function KilimanjaroVisaTanzaniaPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 Most nationalities need a <strong>tourist visa to enter Tanzania</strong>, costing <strong>$50 USD</strong> for a single-entry visa valid for 90 days. The <strong>e-Visa is the recommended option</strong> — apply online at the official portal (visa.immigration.go.tz) at least 3-4 weeks before your{" "}
@@ -499,8 +499,8 @@ export default function KilimanjaroVisaTanzaniaPage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{item.step}</span>
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <item.icon className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <item.icon className="w-6 h-6 text-slate-600" />
                   </div>
                 </div>
                 <div>
@@ -513,12 +513,12 @@ export default function KilimanjaroVisaTanzaniaPage() {
             ))}
           </div>
           <div className="max-w-4xl mx-auto mt-8">
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-              <p className="text-blue-800 text-sm">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
+              <Info className="w-5 h-5 text-slate-600 shrink-0 mt-1" />
+              <p className="text-slate-800 text-sm">
                 <strong>Pro tip:</strong> Apply for your e-Visa as soon as you book your Kilimanjaro climb — ideally 4-6 weeks in advance. This gives you plenty of buffer time and means one less thing to worry about as your departure date approaches. Use the waiting time to sort your{" "}
-                <Link href="/kilimanjaro-travel-insurance/" className="text-blue-700 hover:underline font-semibold">travel insurance</Link> and{" "}
-                <Link href="/kilimanjaro-climbing-gear/" className="text-blue-700 hover:underline font-semibold">gear list</Link>. If your e-Visa is still processing when you fly, you can obtain a visa on arrival as a backup.
+                <Link href="/kilimanjaro-travel-insurance/" className="text-slate-700 hover:underline font-semibold">travel insurance</Link> and{" "}
+                <Link href="/kilimanjaro-climbing-gear/" className="text-slate-700 hover:underline font-semibold">gear list</Link>. If your e-Visa is still processing when you fly, you can obtain a visa on arrival as a backup.
               </p>
             </div>
           </div>
@@ -547,12 +547,12 @@ export default function KilimanjaroVisaTanzaniaPage() {
               </p>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
-                  <h3 className="font-semibold text-emerald-800 mb-3 flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-emerald-600" />
+                <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5">
+                  <h3 className="font-semibold text-acacia-800 mb-3 flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-acacia-600" />
                     Advantages
                   </h3>
-                  <ul className="space-y-2 text-sm text-emerald-800">
+                  <ul className="space-y-2 text-sm text-acacia-800">
                     <li>No advance planning required</li>
                     <li>Same $50 fee as e-Visa</li>
                     <li>Available even if e-Visa is still processing</li>
@@ -611,14 +611,14 @@ export default function KilimanjaroVisaTanzaniaPage() {
                   <tr
                     key={row.nationality}
                     className={`border-t border-[var(--border)] ${
-                      row.visaRequired === "No" ? "bg-emerald-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
+                      row.visaRequired === "No" ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
                     }`}
                   >
                     <td className="px-4 py-3 font-medium">{row.nationality}</td>
                     <td className="px-4 py-3">
                       <span className={`text-xs px-2 py-1 rounded-full font-bold ${
                         row.visaRequired === "No"
-                          ? "bg-emerald-100 text-emerald-700"
+                          ? "bg-acacia-100 text-acacia-700"
                           : "bg-amber-100 text-amber-700"
                       }`}>
                         {row.visaRequired}
@@ -657,8 +657,8 @@ export default function KilimanjaroVisaTanzaniaPage() {
                 key={doc.document}
                 className="flex gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
-                  <doc.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
+                  <doc.icon className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold mb-2">{doc.document}</h3>
@@ -702,7 +702,7 @@ export default function KilimanjaroVisaTanzaniaPage() {
                 </p>
               </div>
               <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                <div className="text-2xl font-bold text-emerald-400 mb-1">
+                <div className="text-2xl font-bold text-acacia-400 mb-1">
                   Good Condition
                 </div>
                 <h3 className="font-semibold mb-1">No Damage or Wear</h3>
@@ -711,7 +711,7 @@ export default function KilimanjaroVisaTanzaniaPage() {
                 </p>
               </div>
               <div className="bg-white/5 rounded-xl p-6 border border-white/10">
-                <div className="text-2xl font-bold text-blue-400 mb-1">
+                <div className="text-2xl font-bold text-slate-400 mb-1">
                   Biometric Passport
                 </div>
                 <h3 className="font-semibold mb-1">Machine-Readable Recommended</h3>
@@ -771,24 +771,24 @@ export default function KilimanjaroVisaTanzaniaPage() {
                 <h3 className="font-semibold text-lg mb-3">Who Does Not Need It?</h3>
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Travellers flying directly from the US, UK, or continental Europe (non-endemic countries)
                   </li>
                   <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                     Travellers connecting through non-endemic hubs like Dubai, Doha, or Istanbul
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-                <Shield className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+                <Shield className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
                 <div>
-                  <p className="text-emerald-800 text-sm font-semibold mb-1">Our Recommendation</p>
-                  <p className="text-emerald-800 text-sm">
+                  <p className="text-acacia-800 text-sm font-semibold mb-1">Our Recommendation</p>
+                  <p className="text-acacia-800 text-sm">
                     Even if you are flying directly from a non-endemic country and the yellow fever vaccine is not technically required, many travel health specialists recommend getting vaccinated before visiting East Africa. The vaccine provides lifetime protection, eliminates any border complications if your itinerary changes, and protects you against a serious disease. Get vaccinated at least 10 days before travel, as the certificate is only valid from 10 days after vaccination. For more health preparation, read our{" "}
-                  <Link href="/kilimanjaro-altitude-sickness/" className="text-emerald-700 hover:underline font-semibold">altitude sickness guide</Link> and{" "}
-                  <Link href="/kilimanjaro-training-plan/" className="text-emerald-700 hover:underline font-semibold">training plan</Link>.
+                  <Link href="/kilimanjaro-altitude-sickness/" className="text-acacia-700 hover:underline font-semibold">altitude sickness guide</Link> and{" "}
+                  <Link href="/kilimanjaro-training-plan/" className="text-acacia-700 hover:underline font-semibold">training plan</Link>.
                   </p>
                 </div>
               </div>

@@ -351,8 +351,8 @@ export default function KilimanjaroClimbingCompaniesPage() {
                 key={i}
                 className="flex gap-4 bg-white border border-[var(--border)] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 bg-acacia-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-[var(--text)] mb-1">{item.title}</h3>
@@ -464,22 +464,22 @@ export default function KilimanjaroClimbingCompaniesPage() {
             {/* Mid-Range */}
             <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg">Mid-Range</h3>
-                  <p className="text-2xl font-bold text-blue-600">$2,500 – $3,500</p>
+                  <p className="text-2xl font-bold text-slate-600">$2,500 – $3,500</p>
                 </div>
               </div>
               <ul className="space-y-2 text-sm text-[var(--text-muted)]">
-                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> Emergency oxygen &amp; pulse oximeters</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 1:4 or 1:5 guide-to-climber ratio</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> 3 hot meals plus snacks daily</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> KPAP compliant porter treatment</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" /> All park fees included in price</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" /> Emergency oxygen &amp; pulse oximeters</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" /> 1:4 or 1:5 guide-to-climber ratio</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" /> 3 hot meals plus snacks daily</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" /> KPAP compliant porter treatment</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" /> All park fees included in price</li>
               </ul>
-              <p className="mt-4 text-xs text-blue-600 font-semibold uppercase">Good balance of value &amp; quality</p>
+              <p className="mt-4 text-xs text-slate-600 font-semibold uppercase">Good balance of value &amp; quality</p>
             </div>
 
             {/* Premium */}
@@ -488,22 +488,22 @@ export default function KilimanjaroClimbingCompaniesPage() {
                 Snow Africa
               </div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 text-emerald-600" />
+                <div className="w-10 h-10 bg-acacia-100 rounded-full flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg">Premium</h3>
-                  <p className="text-2xl font-bold text-emerald-600">$3,500 – $5,000+</p>
+                  <p className="text-2xl font-bold text-acacia-600">$3,500 – $5,000+</p>
                 </div>
               </div>
               <ul className="space-y-2 text-sm text-[var(--text-muted)]">
-                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> 1:2 or 1:3 guide ratio, senior lead guide</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Chef-cooked meals, dietary accommodations</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Private portable toilet &amp; luxury tents</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> Medical-grade acclimatization monitoring</li>
-                <li className="flex gap-2"><Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" /> KPAP partner, above-minimum porter wages</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" /> 1:2 or 1:3 guide ratio, senior lead guide</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" /> Chef-cooked meals, dietary accommodations</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" /> Private portable toilet &amp; luxury tents</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" /> Medical-grade acclimatization monitoring</li>
+                <li className="flex gap-2"><Check className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" /> KPAP partner, above-minimum porter wages</li>
               </ul>
-              <p className="mt-4 text-xs text-emerald-600 font-semibold uppercase">Best summit odds &amp; experience</p>
+              <p className="mt-4 text-xs text-acacia-600 font-semibold uppercase">Best summit odds &amp; experience</p>
             </div>
           </div>
           <p className="text-center mt-8 text-[var(--text-muted)]">
@@ -531,32 +531,32 @@ export default function KilimanjaroClimbingCompaniesPage() {
           </p>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Direct Booking */}
-            <div className="bg-white border-2 border-emerald-200 rounded-xl p-6 shadow-sm">
+            <div className="bg-white border-2 border-acacia-200 rounded-xl p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <Globe className="w-5 h-5 text-emerald-600" />
+                <div className="w-10 h-10 bg-acacia-100 rounded-full flex items-center justify-center">
+                  <Globe className="w-5 h-5 text-acacia-600" />
                 </div>
-                <h3 className="font-heading font-bold text-xl text-emerald-800">Book Direct with a Local Company</h3>
+                <h3 className="font-heading font-bold text-xl text-acacia-800">Book Direct with a Local Company</h3>
               </div>
               <ul className="space-y-3 text-sm">
                 <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-acacia-500 shrink-0 mt-0.5" />
                   <span><strong>30-50% lower price</strong> — no middleman markup. You pay the operator directly, so every dollar goes toward your climb.</span>
                 </li>
                 <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-acacia-500 shrink-0 mt-0.5" />
                   <span><strong>Direct communication</strong> — email or WhatsApp the actual team organizing your climb. No game of telephone through a third party.</span>
                 </li>
                 <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-acacia-500 shrink-0 mt-0.5" />
                   <span><strong>Full flexibility</strong> — change dates, routes, or add a safari extension without agent approval delays.</span>
                 </li>
                 <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-acacia-500 shrink-0 mt-0.5" />
                   <span><strong>Support the local economy</strong> — your money stays in Tanzania, funding guide salaries, porter wages, and community development.</span>
                 </li>
                 <li className="flex gap-3">
-                  <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-acacia-500 shrink-0 mt-0.5" />
                   <span><strong>Accountability</strong> — you know exactly who is responsible for your climb and can visit their office in Arusha.</span>
                 </li>
               </ul>
@@ -685,7 +685,7 @@ export default function KilimanjaroClimbingCompaniesPage() {
                     <td className="px-5 py-4 font-medium text-[var(--text)]">{row.aspect}</td>
                     <td className="px-5 py-4 text-[var(--text-muted)]">{row.budget}</td>
                     <td className="px-5 py-4 text-[var(--text-muted)]">{row.midRange}</td>
-                    <td className="px-5 py-4 font-medium text-emerald-700">{row.premium}</td>
+                    <td className="px-5 py-4 font-medium text-acacia-700">{row.premium}</td>
                   </tr>
                 ))}
               </tbody>
@@ -713,7 +713,7 @@ export default function KilimanjaroClimbingCompaniesPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
-                  <Heart className="w-6 h-6 text-rose-500" />
+                  <Heart className="w-6 h-6 text-red-500" />
                   <h3 className="font-heading font-bold text-lg">KPAP Standards</h3>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] mb-4">
@@ -779,10 +779,10 @@ export default function KilimanjaroClimbingCompaniesPage() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
             {[
-              { label: "TATO", sublabel: "Tanzania Association of Tour Operators", color: "bg-blue-50 border-blue-200 text-blue-800" },
-              { label: "KINAPA", sublabel: "Kilimanjaro National Park Authority", color: "bg-emerald-50 border-emerald-200 text-emerald-800" },
+              { label: "TATO", sublabel: "Tanzania Association of Tour Operators", color: "bg-slate-50 border-slate-200 text-slate-800" },
+              { label: "KINAPA", sublabel: "Kilimanjaro National Park Authority", color: "bg-acacia-50 border-acacia-200 text-acacia-800" },
               { label: "KPAP", sublabel: "Kilimanjaro Porters Assistance Project", color: "bg-amber-50 border-amber-200 text-amber-800" },
-              { label: "4.9 ★", sublabel: "Google & TripAdvisor Verified Rating", color: "bg-rose-50 border-rose-200 text-rose-800" },
+              { label: "4.9 ★", sublabel: "Google & TripAdvisor Verified Rating", color: "bg-red-50 border-red-200 text-red-800" },
             ].map((cert) => (
               <div
                 key={cert.label}

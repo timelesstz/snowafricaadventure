@@ -419,8 +419,8 @@ export default async function BestTanzaniaTourOperatorPage() {
                   className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-emerald-600" />
+                    <div className="w-6 h-6 bg-acacia-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-acacia-600" />
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">{item.title}</h3>

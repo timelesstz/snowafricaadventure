@@ -105,12 +105,62 @@ async function getFeaturedDeparture() {
   }
 }
 
+// "Which route is right for you?" chooser — stats come from the DB per slug
+const ROUTE_STYLES: {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  featured?: boolean;
+  // showStats: false when the link points at another route's page
+  routes: { label: string; slug: string; showStats?: boolean }[];
+}[] = [
+  {
+    title: "For Beginners",
+    description: "First-time climbers with moderate fitness",
+    icon: Users,
+    routes: [
+      { label: "Marangu Route", slug: "6-days-marangu-route" },
+      { label: "Rongai Route", slug: "7-days-rongai-route" },
+    ],
+  },
+  {
+    title: "Most Popular",
+    description: "Best scenery and acclimatization",
+    icon: Star,
+    featured: true,
+    routes: [
+      { label: "Machame Route", slug: "7-days-machame-route" },
+      { label: "Lemosho Route", slug: "8-days-lemosho-route" },
+    ],
+  },
+  {
+    title: "Highest Success",
+    description: "Best acclimatization profiles",
+    icon: Target,
+    routes: [
+      { label: "Lemosho Route", slug: "8-days-lemosho-route" },
+      { label: "Northern Circuit", slug: "9-day-northern-circuit-route-kilimanjaro-guide" },
+    ],
+  },
+  {
+    title: "For Adventurers",
+    description: "Less crowded, technical challenge",
+    icon: Mountain,
+    routes: [
+      { label: "Umbwe Route", slug: "6-days-umbwe-route" },
+      { label: "Western Breach", slug: "8-days-lemosho-route", showStats: false },
+    ],
+  },
+];
+
 export default async function TrekkingPage() {
   const [routes, difficulties, featuredDeparture] = await Promise.all([
     getRoutes(),
     getDifficulties(),
     getFeaturedDeparture(),
   ]);
+
+  const routeBySlug = new Map(routes.map((r) => [r.slug, r]));
 
   // Sort difficulties by intensity
   const difficultyOrder = ["Easy", "Moderate", "Challenging", "Difficult", "Strenuous"];
@@ -174,7 +224,7 @@ export default async function TrekkingPage() {
                 5,895m Summit
               </span>
               <div className="flex items-center gap-1 text-white/80">
-                <Target className="w-4 h-4 text-emerald-400" />
+                <Target className="w-4 h-4 text-acacia-400" />
                 <span className="text-sm">93% Success Rate</span>
               </div>
             </div>
@@ -207,7 +257,7 @@ export default async function TrekkingPage() {
               </div>
               <div className="text-center">
                 <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center mx-auto mb-2">
-                  <Target className="w-7 h-7 text-emerald-400" />
+                  <Target className="w-7 h-7 text-acacia-400" />
                 </div>
                 <p className="text-2xl font-bold text-white">93%</p>
                 <p className="text-sm text-white/60">Success</p>
@@ -326,79 +376,77 @@ export default async function TrekkingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="bg-emerald-50 rounded-2xl p-6 border-2 border-emerald-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">For Beginners</h3>
-              <p className="text-sm text-[var(--text-muted)] mb-4">
-                First-time climbers with moderate fitness
-              </p>
-              <div className="space-y-2">
-                <Link href="/trekking/6-days-marangu-route/" className="block text-emerald-600 font-medium hover:underline">
-                  Marangu Route →
-                </Link>
-                <Link href="/trekking/7-days-rongai-route/" className="block text-emerald-600 font-medium hover:underline">
-                  Rongai Route →
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-amber-50 rounded-2xl p-6 border-2 border-amber-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center mb-4">
-                <Star className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Most Popular</h3>
-              <p className="text-sm text-[var(--text-muted)] mb-4">
-                Best scenery and acclimatization
-              </p>
-              <div className="space-y-2">
-                <Link href="/trekking/7-days-machame-route/" className="block text-amber-600 font-medium hover:underline">
-                  Machame Route →
-                </Link>
-                <Link href="/trekking/8-days-lemosho-route/" className="block text-amber-600 font-medium hover:underline">
-                  Lemosho Route →
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center mb-4">
-                <Target className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Highest Success</h3>
-              <p className="text-sm text-[var(--text-muted)] mb-4">
-                Best acclimatization profiles
-              </p>
-              <div className="space-y-2">
-                <Link href="/trekking/8-days-lemosho-route/" className="block text-blue-600 font-medium hover:underline">
-                  Lemosho Route →
-                </Link>
-                <Link href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/" className="block text-blue-600 font-medium hover:underline">
-                  Northern Circuit →
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-purple-50 rounded-2xl p-6 border-2 border-purple-200 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center mb-4">
-                <Mountain className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">For Adventurers</h3>
-              <p className="text-sm text-[var(--text-muted)] mb-4">
-                Less crowded, technical challenge
-              </p>
-              <div className="space-y-2">
-                <Link href="/trekking/6-days-umbwe-route/" className="block text-purple-600 font-medium hover:underline">
-                  Umbwe Route →
-                </Link>
-                <Link href="/trekking/8-days-lemosho-route/" className="block text-purple-600 font-medium hover:underline">
-                  Western Breach →
-                </Link>
-              </div>
-            </div>
-          </div>
+          <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 max-w-6xl mx-auto">
+            {ROUTE_STYLES.map((style, i) => {
+              const featured = style.featured;
+              return (
+                <li
+                  key={style.title}
+                  className={`group relative flex flex-col rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-1 ${
+                    featured
+                      ? "bg-[var(--primary-dark)] border-[var(--primary-dark)] text-white shadow-xl shadow-slate-900/15"
+                      : "bg-white border-[var(--border)] hover:border-[var(--secondary)] hover:shadow-lg hover:shadow-slate-900/5"
+                  }`}
+                >
+                  {featured && (
+                    <span className="absolute -top-3 left-6 rounded-full bg-[var(--secondary)] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--secondary-foreground)]">
+                      Our pick
+                    </span>
+                  )}
+                  <div className="flex items-start justify-between mb-5">
+                    <span
+                      className={`flex h-11 w-11 items-center justify-center rounded-xl ${
+                        featured ? "bg-white/10 text-[var(--secondary-light)]" : "bg-[var(--surface-elevated)] text-[var(--primary)]"
+                      }`}
+                    >
+                      <style.icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span
+                      className={`font-heading text-sm font-semibold tabular-nums ${
+                        featured ? "text-white/40" : "text-[var(--text-light)]"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-xl font-bold mb-1.5">{style.title}</h3>
+                  <p className={`text-sm mb-6 ${featured ? "text-slate-300" : "text-[var(--text-muted)]"}`}>
+                    {style.description}
+                  </p>
+                  <ul className={`mt-auto divide-y ${featured ? "divide-white/10 border-t border-white/10" : "divide-[var(--border)] border-t border-[var(--border)]"}`}>
+                    {style.routes.map((r) => {
+                      const data = r.showStats === false ? undefined : routeBySlug.get(r.slug);
+                      const meta = [
+                        data?.durationDays ? `${data.durationDays} days` : null,
+                        data?.successRate ? `${data.successRate}% success` : null,
+                      ].filter(Boolean).join(" · ");
+                      return (
+                        <li key={r.label}>
+                          <Link
+                            href={`/trekking/${r.slug}/`}
+                            className={`flex items-center justify-between gap-3 py-3 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--secondary)] ${
+                              featured ? "hover:text-[var(--secondary-light)]" : "hover:text-[var(--secondary-dark)]"
+                            }`}
+                          >
+                            <span>
+                              <span className="block font-semibold">{r.label}</span>
+                              {meta && (
+                                <span className={`block text-xs ${featured ? "text-slate-400" : "text-[var(--text-muted)]"}`}>
+                                  {meta}
+                                </span>
+                              )}
+                            </span>
+                            <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </section>
 
@@ -520,10 +568,10 @@ export default async function TrekkingPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--border)]">
-                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Machame</td><td className="p-4">7</td><td className="p-4">Moderate-Hard</td><td className="p-4 text-emerald-600 font-semibold">90%+</td><td className="p-4">High</td><td className="p-4">Most climbers</td></tr>
-                  <tr className="hover:bg-[var(--surface)] transition-colors bg-emerald-50/50"><td className="p-4 font-medium">Lemosho</td><td className="p-4">8</td><td className="p-4">Moderate</td><td className="p-4 text-emerald-600 font-semibold">95%+</td><td className="p-4">Low-Medium</td><td className="p-4">Best acclimatization</td></tr>
-                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Rongai</td><td className="p-4">7</td><td className="p-4">Moderate</td><td className="p-4 text-emerald-600 font-semibold">85%+</td><td className="p-4">Low</td><td className="p-4">Rainy season / beginners</td></tr>
-                  <tr className="hover:bg-[var(--surface)] transition-colors bg-emerald-50/50"><td className="p-4 font-medium">Northern Circuit</td><td className="p-4">9</td><td className="p-4">Moderate</td><td className="p-4 text-emerald-600 font-semibold">95%+</td><td className="p-4">Very Low</td><td className="p-4">Ultimate experience</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Machame</td><td className="p-4">7</td><td className="p-4">Moderate-Hard</td><td className="p-4 text-acacia-600 font-semibold">90%+</td><td className="p-4">High</td><td className="p-4">Most climbers</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors bg-acacia-50/50"><td className="p-4 font-medium">Lemosho</td><td className="p-4">8</td><td className="p-4">Moderate</td><td className="p-4 text-acacia-600 font-semibold">95%+</td><td className="p-4">Low-Medium</td><td className="p-4">Best acclimatization</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Rongai</td><td className="p-4">7</td><td className="p-4">Moderate</td><td className="p-4 text-acacia-600 font-semibold">85%+</td><td className="p-4">Low</td><td className="p-4">Rainy season / beginners</td></tr>
+                  <tr className="hover:bg-[var(--surface)] transition-colors bg-acacia-50/50"><td className="p-4 font-medium">Northern Circuit</td><td className="p-4">9</td><td className="p-4">Moderate</td><td className="p-4 text-acacia-600 font-semibold">95%+</td><td className="p-4">Very Low</td><td className="p-4">Ultimate experience</td></tr>
                   <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Marangu</td><td className="p-4">5-6</td><td className="p-4">Moderate</td><td className="p-4">65%</td><td className="p-4">High</td><td className="p-4">Hut accommodation</td></tr>
                   <tr className="hover:bg-[var(--surface)] transition-colors"><td className="p-4 font-medium">Umbwe</td><td className="p-4">6-7</td><td className="p-4">Hard</td><td className="p-4">70%</td><td className="p-4">Very Low</td><td className="p-4">Experienced trekkers</td></tr>
                 </tbody>
@@ -567,9 +615,9 @@ export default async function TrekkingPage() {
                   <p className="font-semibold text-amber-800 mb-1">January to mid-March</p>
                   <p className="text-sm text-amber-700">Less crowded, warmer nights. Great visibility.</p>
                 </div>
-                <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
-                  <p className="font-semibold text-blue-800 mb-1">June to October</p>
-                  <p className="text-sm text-blue-700">Peak season. Clearest skies. Best weather overall.</p>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                  <p className="font-semibold text-slate-800 mb-1">June to October</p>
+                  <p className="text-sm text-slate-700">Peak season. Clearest skies. Best weather overall.</p>
                 </div>
                 <div className="p-4 rounded-xl bg-red-50 border border-red-200">
                   <p className="font-semibold text-red-800 mb-1">Avoid: April &amp; November</p>
@@ -628,7 +676,7 @@ export default async function TrekkingPage() {
                   <span className="px-3 py-1.5 rounded-full bg-white/95 text-[var(--text)] text-xs font-semibold shadow">
                     Climbing Since 2008
                   </span>
-                  <span className="px-3 py-1.5 rounded-full bg-emerald-500/95 text-white text-xs font-semibold shadow">
+                  <span className="px-3 py-1.5 rounded-full bg-acacia-500/95 text-white text-xs font-semibold shadow">
                     93% Success Rate
                   </span>
                 </div>

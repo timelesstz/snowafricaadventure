@@ -306,8 +306,8 @@ export function TailorMadeForm() {
 
   if (submitted) {
     return (
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-8 text-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
+      <div className="bg-gradient-to-br from-acacia-50 to-acacia-50 border border-acacia-200 rounded-xl p-8 text-center">
+        <div className="w-16 h-16 bg-gradient-to-br from-acacia-400 to-acacia-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
           <CheckCircle2 className="w-8 h-8 text-white" />
         </div>
         <h3 className="font-heading font-bold text-2xl text-slate-900 mb-2">
@@ -320,7 +320,7 @@ export function TailorMadeForm() {
         <p className="text-sm text-slate-500 mb-6">
           Expect a detailed proposal within 24-48 hours.
         </p>
-        <div className="pt-6 border-t border-green-200">
+        <div className="pt-6 border-t border-acacia-200">
           <PostSubmissionShare />
         </div>
       </div>
@@ -347,7 +347,7 @@ export function TailorMadeForm() {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                     isCompleted
-                      ? "bg-green-500 text-white"
+                      ? "bg-acacia-500 text-white"
                       : isActive
                       ? "bg-[var(--primary)] text-white ring-4 ring-[var(--primary)]/20"
                       : "bg-slate-200 text-slate-400"
@@ -373,7 +373,7 @@ export function TailorMadeForm() {
         {/* Progress Bar */}
         <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200 -z-0">
           <div
-            className="h-full bg-green-500 transition-all duration-300"
+            className="h-full bg-acacia-500 transition-all duration-300"
             style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
           />
         </div>
@@ -709,7 +709,7 @@ export function TailorMadeForm() {
                 ))}
               </div>
               {selectedDestinations.length > 0 && (
-                <p className="text-sm text-green-600 mt-2">
+                <p className="text-sm text-acacia-600 mt-2">
                   {selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""} selected
                 </p>
               )}

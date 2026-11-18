@@ -63,7 +63,7 @@ const climateZones = [
     temp: "20–30°C",
     description:
       "The fertile lower slopes where the Chagga people grow coffee, bananas, and maize. Rich volcanic soil makes this region incredibly productive. Most climbers pass through this zone by vehicle on their way to the park gate.",
-    color: "bg-green-100 text-green-700",
+    color: "bg-acacia-100 text-acacia-700",
   },
   {
     icon: <TrendingUp className="w-5 h-5" />,
@@ -72,7 +72,7 @@ const climateZones = [
     temp: "12–20°C",
     description:
       "Lush rainforest with towering trees, mosses, and diverse wildlife. Black-and-white colobus monkeys, blue monkeys, and buffalo inhabit this zone. It receives the most rainfall and is often misty — expect muddy trails.",
-    color: "bg-emerald-100 text-emerald-700",
+    color: "bg-acacia-100 text-acacia-700",
   },
   {
     icon: <MapPin className="w-5 h-5" />,
@@ -81,7 +81,7 @@ const climateZones = [
     temp: "5–15°C",
     description:
       "Giant heather and unique endemic species like giant lobelias, groundsels, and the famous Senecio kilimanjari define this otherworldly landscape. Temperatures drop significantly at night and clouds often settle below you.",
-    color: "bg-yellow-100 text-yellow-700",
+    color: "bg-amber-100 text-amber-700",
   },
   {
     icon: <Thermometer className="w-5 h-5" />,
@@ -99,7 +99,7 @@ const climateZones = [
     temp: "-15–-25°C",
     description:
       "Ice fields, glaciers, and sub-zero temperatures characterise the summit zone. Oxygen is roughly 50% of sea level. Uhuru Peak crowns this otherworldly environment — and the glaciers here have lost over 80% of their mass since 1912.",
-    color: "bg-blue-100 text-blue-700",
+    color: "bg-slate-100 text-slate-700",
   },
 ];
 
@@ -176,11 +176,11 @@ const geologicalTimeline = [
 ];
 
 const altitudeEffects = [
-  { elevation: "2,500m (8,200ft)", oxygen: "~75%", effect: "First noticeable breathlessness during exertion. Most trekkers feel fine at rest but notice faster breathing on uphills.", color: "bg-green-50 border-green-200" },
-  { elevation: "3,500m (11,500ft)", oxygen: "~65%", effect: "Headaches become common, especially in the evening. Appetite may dip. Drink at least 3–4 litres of water daily.", color: "bg-yellow-50 border-yellow-200" },
+  { elevation: "2,500m (8,200ft)", oxygen: "~75%", effect: "First noticeable breathlessness during exertion. Most trekkers feel fine at rest but notice faster breathing on uphills.", color: "bg-acacia-50 border-acacia-200" },
+  { elevation: "3,500m (11,500ft)", oxygen: "~65%", effect: "Headaches become common, especially in the evening. Appetite may dip. Drink at least 3–4 litres of water daily.", color: "bg-amber-50 border-amber-200" },
   { elevation: "4,500m (14,800ft)", oxygen: "~55%", effect: "Appetite loss, disrupted sleep, and mild nausea are normal. The body is working hard to acclimatise. Pole pole (slowly, slowly) is essential.", color: "bg-orange-50 border-orange-200" },
   { elevation: "5,500m (18,000ft)", oxygen: "~50%", effect: "Simple tasks like tying bootlaces require deliberate effort. Cold becomes biting. Mental focus narrows — stay hydrated and keep moving.", color: "bg-red-50 border-red-200" },
-  { elevation: "5,895m (19,341ft)", oxygen: "~49%", effect: "Every step demands concentration. Breathing rate roughly doubles compared to sea level. The final push to Uhuru Peak is as much mental as physical.", color: "bg-blue-50 border-blue-200" },
+  { elevation: "5,895m (19,341ft)", oxygen: "~49%", effect: "Every step demands concentration. Breathing rate roughly doubles compared to sea level. The final push to Uhuru Peak is as much mental as physical.", color: "bg-slate-50 border-slate-200" },
 ];
 
 const threePeaksDeepDive = [
@@ -218,7 +218,7 @@ const threePeaksDeepDive = [
       "Both the Lemosho and Shira routes traverse this plateau, offering wide-open moorland scenery and excellent acclimatisation",
       "Shira Cathedral (3,962m) is a prominent rock formation on the plateau’s southern edge, visible from multiple routes",
     ],
-    color: "bg-emerald-50 border-emerald-300",
+    color: "bg-acacia-50 border-acacia-300",
   },
 ];
 
@@ -529,8 +529,8 @@ export default function MountKilimanjaroHeightPage() {
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
-                    <MapPin className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
+                    <MapPin className="w-6 h-6 text-slate-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Modern GPS Surveys — 5,895m</h3>
@@ -542,8 +542,8 @@ export default function MountKilimanjaroHeightPage() {
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
-                    <Info className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
+                    <Info className="w-6 h-6 text-slate-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">The Ice Factor</h3>
@@ -576,7 +576,7 @@ export default function MountKilimanjaroHeightPage() {
                 <div key={cone.name} className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-heading text-xl font-bold">{cone.name}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${cone.status === "Dormant" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700"}`}>
+                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${cone.status === "Dormant" ? "bg-amber-100 text-amber-700" : "bg-acacia-100 text-acacia-700"}`}>
                       {cone.status}
                     </span>
                   </div>

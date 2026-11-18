@@ -377,9 +377,9 @@ export default function BestRouteToClimbKilimanjaroPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-xl bg-emerald-500 flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-xl bg-acacia-500 flex items-center justify-center shrink-0">
                   <Target className="w-7 h-7 text-white" />
                 </div>
                 <div>
@@ -389,24 +389,24 @@ export default function BestRouteToClimbKilimanjaroPage() {
                   </p>
                   <div className="flex flex-wrap gap-6 text-sm">
                     <div className="flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4 text-emerald-600" />
+                      <TrendingUp className="w-4 h-4 text-acacia-600" />
                       <span><strong>90-95%</strong> Success Rate</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-emerald-600" />
+                      <Clock className="w-4 h-4 text-acacia-600" />
                       <span><strong>8 Days</strong> Duration</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 text-emerald-600" />
+                      <Star className="w-4 h-4 text-acacia-600" />
                       <span><strong>5/5</strong> Scenery Rating</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-emerald-600" />
+                      <Users className="w-4 h-4 text-acacia-600" />
                       <span>Low-Medium Traffic</span>
                     </div>
                   </div>
                   <div className="mt-4">
-                    <Link href="/trekking/8-days-lemosho-route/" className="inline-flex items-center gap-2 text-emerald-700 font-semibold hover:underline">
+                    <Link href="/trekking/8-days-lemosho-route/" className="inline-flex items-center gap-2 text-acacia-700 font-semibold hover:underline">
                       View Full Lemosho Route Details <ChevronRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -451,14 +451,14 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 {allRoutes.map((route, i) => (
                   <tr
                     key={route.name}
-                    className={`border-t border-[var(--border)] ${route.verdict === "Top Pick" ? "bg-emerald-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"}`}
+                    className={`border-t border-[var(--border)] ${route.verdict === "Top Pick" ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"}`}
                   >
                     <td className="px-4 py-4">
                       <Link href={`/trekking/${route.slug}/`} className="font-semibold text-[var(--primary)] hover:text-[var(--secondary-dark)] hover:underline">
                         {route.name}
                       </Link>
                       {route.verdict === "Top Pick" && (
-                        <span className="block mt-1 px-2 py-0.5 bg-emerald-500 text-white text-xs rounded-full font-semibold w-fit">
+                        <span className="block mt-1 px-2 py-0.5 bg-acacia-500 text-white text-xs rounded-full font-semibold w-fit">
                           Recommended
                         </span>
                       )}
@@ -471,7 +471,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                             ? "bg-red-100 text-red-700"
                             : route.difficulty === "Challenging" || route.difficulty === "Moderate-Challenging"
                             ? "bg-orange-100 text-orange-700"
-                            : "bg-emerald-100 text-emerald-700"
+                            : "bg-acacia-100 text-acacia-700"
                         }`}
                       >
                         {route.difficulty}
@@ -480,9 +480,9 @@ export default function BestRouteToClimbKilimanjaroPage() {
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-2">
                         <div className="w-12 h-2 bg-[var(--border)] rounded-full overflow-hidden">
-                          <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${route.successNum}%` }} />
+                          <div className="h-full bg-acacia-500 rounded-full" style={{ width: `${route.successNum}%` }} />
                         </div>
-                        <span className="font-medium text-emerald-700">{route.successRate}</span>
+                        <span className="font-medium text-acacia-700">{route.successRate}</span>
                       </div>
                     </td>
                     <td className="px-4 py-4 text-xs">{route.traffic}</td>
@@ -536,7 +536,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 <p className="text-xs text-white/50 mt-1">Good acclimatization</p>
               </div>
               <div className="bg-white/10 rounded-xl p-6 text-center">
-                <p className="text-4xl font-bold text-emerald-400 mb-2">95%</p>
+                <p className="text-4xl font-bold text-acacia-400 mb-2">95%</p>
                 <p className="text-white/70">8-9 day routes</p>
                 <p className="text-xs text-white/50 mt-1">Excellent acclimatization</p>
               </div>
@@ -569,7 +569,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 key={route.name}
                 id={route.name.toLowerCase().replace(/\s+/g, "-")}
                 className={`bg-white border rounded-2xl overflow-hidden shadow-sm ${
-                  route.verdict === "Top Pick" ? "border-emerald-300 ring-2 ring-emerald-100" : "border-[var(--border)]"
+                  route.verdict === "Top Pick" ? "border-acacia-300 ring-2 ring-acacia-100" : "border-[var(--border)]"
                 }`}
               >
                 <div className="p-6 md:p-8">
@@ -580,11 +580,11 @@ export default function BestRouteToClimbKilimanjaroPage() {
                         <span
                           className={`px-3 py-1 text-xs rounded-full font-semibold ${
                             route.verdict === "Top Pick"
-                              ? "bg-emerald-100 text-emerald-700"
+                              ? "bg-acacia-100 text-acacia-700"
                               : route.verdict === "Best Scenery"
                               ? "bg-amber-100 text-amber-700"
                               : route.verdict === "Highest Success"
-                              ? "bg-blue-100 text-blue-700"
+                              ? "bg-slate-100 text-slate-700"
                               : route.verdict === "Most Challenging"
                               ? "bg-red-100 text-red-700"
                               : "bg-gray-100 text-gray-700"
@@ -610,14 +610,14 @@ export default function BestRouteToClimbKilimanjaroPage() {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold text-emerald-700 mb-3 flex items-center gap-2">
+                      <h4 className="font-semibold text-acacia-700 mb-3 flex items-center gap-2">
                         <Shield className="w-4 h-4" /> Pros
                       </h4>
                       <ul className="space-y-2">
                         {route.pros.map((pro) => (
                           <li key={pro} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                            <span className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                              <ArrowRight className="w-3 h-3 text-emerald-600" />
+                            <span className="w-5 h-5 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                              <ArrowRight className="w-3 h-3 text-acacia-600" />
                             </span>
                             {pro}
                           </li>

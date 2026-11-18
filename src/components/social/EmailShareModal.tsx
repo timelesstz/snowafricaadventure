@@ -111,12 +111,12 @@ export function EmailShareModal({
 
         {success ? (
           <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-16 h-16 bg-acacia-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-acacia-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-green-600">Email Sent!</h3>
+            <h3 className="text-lg font-semibold text-acacia-600">Email Sent!</h3>
             <p className="text-[var(--text-muted)] mt-2">
               Your message has been sent successfully.
             </p>

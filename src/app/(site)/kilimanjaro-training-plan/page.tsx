@@ -41,8 +41,8 @@ const fitnessLevels = [
   {
     level: "Beginner",
     description: "Sedentary or light exercise only",
-    color: "bg-blue-600",
-    colorLight: "bg-blue-50 border-blue-200 text-blue-700",
+    color: "bg-slate-600",
+    colorLight: "bg-slate-50 border-slate-200 text-slate-700",
     emphasis:
       "Focus heavily on building a walking base in weeks 1-4. Add 4 extra weeks of base conditioning before starting if you cannot walk briskly for 60 minutes. Your Saturday hikes are the most important session each week.",
     adjustments: [
@@ -56,8 +56,8 @@ const fitnessLevels = [
   {
     level: "Intermediate",
     description: "Regular exercise 2-3 times per week",
-    color: "bg-emerald-600",
-    colorLight: "bg-emerald-50 border-emerald-200 text-emerald-700",
+    color: "bg-acacia-600",
+    colorLight: "bg-acacia-50 border-acacia-200 text-acacia-700",
     emphasis:
       "The 12-week plan as written is designed for you. Focus on progressive overload — gradually increase hike duration, pack weight, and elevation gain each week. The Saturday long hike is non-negotiable.",
     adjustments: [
@@ -71,8 +71,8 @@ const fitnessLevels = [
   {
     level: "Advanced",
     description: "Already active and athletic",
-    color: "bg-purple-600",
-    colorLight: "bg-purple-50 border-purple-200 text-purple-700",
+    color: "bg-slate-600",
+    colorLight: "bg-slate-50 border-slate-200 text-slate-700",
     emphasis:
       "Your cardiovascular base is likely strong. Focus on Kilimanjaro-specific training: long loaded hikes, stair endurance, and mental toughness. Do not skip the plan — fitness does not prevent altitude sickness, and the specific endurance demands are different from most sports.",
     adjustments: [
@@ -246,14 +246,14 @@ const keyExercises = [
   {
     icon: Footprints,
     name: "Hiking with Weighted Pack",
-    color: "bg-emerald-100 text-emerald-700",
+    color: "bg-acacia-100 text-acacia-700",
     why: "The single most specific exercise for Kilimanjaro. Nothing replicates the sustained effort of trekking with a daypack better than actually doing it.",
     how: "Start with 5kg and build to 10kg over 12 weeks. Increase distance from 2 hours to 7-8 hours. Choose hilly terrain whenever possible. Wear the same boots you will use on the mountain.",
   },
   {
     icon: TrendingUp,
     name: "Stair Climbing with Pack",
-    color: "bg-blue-100 text-blue-700",
+    color: "bg-slate-100 text-slate-700",
     why: "Mimics the repetitive uphill movement of summit night and high-altitude trekking. Builds the specific quad and calf endurance you need for the 1,200m summit ascent.",
     how: "Use a staircase, stadium steps, or a stair machine. Add a weighted pack from week 5. Aim for 30-45 minutes continuously. For summit prep, try a 5 AM stair session to simulate early morning exertion.",
   },
@@ -267,21 +267,21 @@ const keyExercises = [
   {
     icon: Heart,
     name: "Running or Cycling (Cardio Base)",
-    color: "bg-rose-100 text-rose-700",
+    color: "bg-red-100 text-red-700",
     why: "Builds the aerobic base that allows your body to operate efficiently when oxygen is limited at altitude. Stronger cardiovascular fitness means your body copes better above 4,000m.",
     how: "Run 3-4 times per week at a conversational pace (you should be able to talk while running). Include one interval session per week from week 5. Cycling and swimming are excellent low-impact alternatives.",
   },
   {
     icon: Flame,
     name: "Core Strength (Planks, Dead Bugs)",
-    color: "bg-purple-100 text-purple-700",
+    color: "bg-slate-100 text-slate-700",
     why: "A strong core stabilises your body over uneven terrain and reduces lower back fatigue when carrying a pack for hours. Core endurance prevents the posture collapse that causes pain on long trekking days.",
     how: "Planks (front and side) 3x30-60s, dead bugs 3x10 each side, bird dogs 3x10 each side, bicycle crunches 3x20. Perform 2-3 times per week after strength sessions.",
   },
   {
     icon: Mountain,
     name: "Incline Treadmill Walking",
-    color: "bg-teal-100 text-teal-700",
+    color: "bg-acacia-100 text-acacia-700",
     why: "When you cannot access hills or trails, a treadmill at 10-15% incline with a weighted pack is the best indoor substitute for uphill hiking. Excellent for building calf and glute endurance.",
     how: "Set the treadmill to 10-15% gradient at a slow pace (4-5 km/h). Walk for 30-60 minutes. Add a daypack from week 3. This is not about speed — it is about sustained uphill effort at a pace you can maintain for hours.",
   },
@@ -423,7 +423,7 @@ export default function KilimanjaroTrainingPlanPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Short Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 Start training <strong>12 weeks before your climb</strong>. Focus on <strong>hiking with elevation gain</strong>, <strong>cardiovascular fitness</strong>, and <strong>leg/core strength</strong>. You don&apos;t need to be an athlete — <strong>consistency beats intensity</strong>. The goal is to comfortably hike 6-8 hours with a 7-10kg daypack on consecutive days. Our guides have seen thousands of climbers succeed with this approach.
@@ -446,8 +446,8 @@ export default function KilimanjaroTrainingPlanPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                <TrendingUp className="w-6 h-6 text-emerald-700" />
+              <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                <TrendingUp className="w-6 h-6 text-acacia-700" />
               </div>
               <h3 className="font-heading text-lg font-bold mb-2">15-20% Higher Success Rate</h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -455,8 +455,8 @@ export default function KilimanjaroTrainingPlanPage() {
               </p>
             </div>
             <div className="bg-white border border-[var(--border)] rounded-2xl p-6 shadow-sm">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-blue-700" />
+              <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                <Shield className="w-6 h-6 text-slate-700" />
               </div>
               <h3 className="font-heading text-lg font-bold mb-2">Prevents Injury & Illness</h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -530,7 +530,7 @@ export default function KilimanjaroTrainingPlanPage() {
                     <ul className="space-y-2">
                       {level.adjustments.map((adj) => (
                         <li key={adj} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                          <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                           <span>{adj}</span>
                         </li>
                       ))}
@@ -559,30 +559,30 @@ export default function KilimanjaroTrainingPlanPage() {
             {/* Phase Cards */}
             <div className="grid md:grid-cols-3 gap-6 mb-16">
               <div className="bg-white rounded-xl border border-[var(--border)] shadow-sm overflow-hidden">
-                <div className="bg-blue-600 text-white p-5">
+                <div className="bg-slate-600 text-white p-5">
                   <div className="text-sm font-semibold opacity-80 mb-1">Phase 1</div>
                   <h3 className="font-heading text-xl font-bold">Foundation</h3>
                   <div className="text-sm opacity-80 mt-1">Weeks 1-4 &middot; 3-4 days/week</div>
                 </div>
                 <div className="p-5 space-y-3">
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     <span>Walking/hiking 30-60 min sessions</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     <span>Weekly hikes building from 1-2 to 3 hours</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     <span>Start with 5-7kg daypack on hikes</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     <span>Light bodyweight strength 2x per week</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     <span>Break in your hiking boots</span>
                   </div>
                 </div>
@@ -619,30 +619,30 @@ export default function KilimanjaroTrainingPlanPage() {
               </div>
 
               <div className="bg-white rounded-xl border border-[var(--border)] shadow-sm overflow-hidden">
-                <div className="bg-emerald-600 text-white p-5">
+                <div className="bg-acacia-600 text-white p-5">
                   <div className="text-sm font-semibold opacity-80 mb-1">Phase 3</div>
                   <h3 className="font-heading text-xl font-bold">Peak</h3>
                   <div className="text-sm opacity-80 mt-1">Weeks 9-12 &middot; 5 days/week</div>
                 </div>
                 <div className="p-5 space-y-3">
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
                     <span>Long hikes: 4-6 hours with 10kg weighted pack</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
                     <span>Back-to-back hiking days simulating trek</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
                     <span>Early morning (5 AM) training sessions</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
                     <span>Mental preparation and visualisation</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-600 shrink-0 mt-0.5" />
                     <span>Taper weeks 11-12: reduce volume 40-50%</span>
                   </div>
                 </div>
@@ -672,9 +672,9 @@ export default function KilimanjaroTrainingPlanPage() {
                 );
                 const phaseColors = {
                   1: {
-                    bg: "bg-blue-600",
+                    bg: "bg-slate-600",
                     label: "Phase 1: Foundation (Weeks 1-4)",
-                    border: "border-blue-200",
+                    border: "border-slate-200",
                   },
                   2: {
                     bg: "bg-orange-600",
@@ -682,9 +682,9 @@ export default function KilimanjaroTrainingPlanPage() {
                     border: "border-orange-200",
                   },
                   3: {
-                    bg: "bg-emerald-600",
+                    bg: "bg-acacia-600",
                     label: "Phase 3: Peak (Weeks 9-12)",
-                    border: "border-emerald-200",
+                    border: "border-acacia-200",
                   },
                 }[phase]!;
 
@@ -885,37 +885,37 @@ export default function KilimanjaroTrainingPlanPage() {
                 <h3 className="font-semibold text-lg mb-4">How to Prepare Your Mind</h3>
                 <ul className="space-y-3 text-sm text-white/70">
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span>
                       <strong className="text-white">Visualise success.</strong> Spend 5 minutes each week imagining yourself reaching Uhuru Peak at sunrise
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span>
                       <strong className="text-white">Break it into small goals.</strong> Do not think about the summit — focus on the next cairn, the next rest stop, the next 10 minutes
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span>
                       <strong className="text-white">Embrace &quot;pole pole.&quot;</strong> Swahili for &quot;slowly, slowly&quot; — the golden rule of Kilimanjaro. Walking slowly preserves energy and helps your body adapt to altitude
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span>
                       <strong className="text-white">Train in discomfort.</strong> Do early morning sessions in cold weather. Hike when tired. Get comfortable being uncomfortable
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span>
                       <strong className="text-white">Develop a mantra.</strong> &quot;One step at a time,&quot; &quot;I can do hard things,&quot; or simply &quot;pole pole&quot; — something to repeat when the mind wants to quit
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                     <span>
                       <strong className="text-white">Know your why.</strong> When everything hurts, a clear personal reason for being there is what keeps you moving forward
                     </span>
@@ -950,8 +950,8 @@ export default function KilimanjaroTrainingPlanPage() {
                 </p>
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Mountain className="w-5 h-5 text-blue-700" />
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
+                  <Mountain className="w-5 h-5 text-slate-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Practice with Trekking Poles</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -959,8 +959,8 @@ export default function KilimanjaroTrainingPlanPage() {
                 </p>
               </div>
               <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
-                  <Dumbbell className="w-5 h-5 text-emerald-700" />
+                <div className="w-10 h-10 bg-acacia-100 rounded-lg flex items-center justify-center mb-4">
+                  <Dumbbell className="w-5 h-5 text-acacia-700" />
                 </div>
                 <h3 className="font-heading text-lg font-bold mb-2">Wear Your Daypack</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -985,8 +985,8 @@ export default function KilimanjaroTrainingPlanPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-blue-700" />
+              <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                <Calendar className="w-6 h-6 text-slate-700" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl font-bold">The Week Before Your Climb</h2>
@@ -1002,42 +1002,42 @@ export default function KilimanjaroTrainingPlanPage() {
                   {
                     icon: CheckCircle,
                     text: "No intense exercise in the final 5-7 days",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Light 20-30 minute walks to stay loose",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Drink 2-3 litres of water per day",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Eat well — carbohydrates and protein",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Sleep as much as possible before travel",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Do not try any new exercises or activities",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Gentle stretching and yoga are fine",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                   {
                     icon: CheckCircle,
                     text: "Pack and check all gear two days before departure",
-                    color: "text-emerald-500",
+                    color: "text-acacia-500",
                   },
                 ].map((item) => (
                   <div

@@ -398,8 +398,8 @@ export default async function TailorMadeSafariPage() {
                 key={i}
                 className="flex items-center gap-3 bg-white p-4 rounded-lg border border-[var(--border)] shadow-sm"
               >
-                <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                  <Check className="w-4 h-4 text-emerald-600" />
+                <div className="w-6 h-6 bg-acacia-100 rounded-full flex items-center justify-center shrink-0">
+                  <Check className="w-4 h-4 text-acacia-600" />
                 </div>
                 <span className="text-[var(--text)]">{item}</span>
               </div>

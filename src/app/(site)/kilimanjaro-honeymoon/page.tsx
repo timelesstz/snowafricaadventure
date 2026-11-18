@@ -151,7 +151,7 @@ const bestTimes = [
   {
     period: "June – October",
     rating: "Best",
-    ratingColor: "bg-emerald-100 text-emerald-700",
+    ratingColor: "bg-acacia-100 text-acacia-700",
     description:
       "The primary dry season. Clear skies, stable weather, and the best summit views. July and August are the busiest months, so book well in advance. September and October offer the same conditions with fewer climbers — ideal for honeymoon couples seeking solitude.",
   },
@@ -352,8 +352,8 @@ export default function KilimanjaroHoneymoonPage() {
                 key={reason.title}
                 className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
-                <div className="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-                  <reason.icon className="w-6 h-6 text-rose-600" />
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                  <reason.icon className="w-6 h-6 text-red-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-3">{reason.title}</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -377,8 +377,8 @@ export default function KilimanjaroHoneymoonPage() {
             </p>
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">93% Summit Success Rate</h3>
@@ -386,8 +386,8 @@ export default function KilimanjaroHoneymoonPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Most Scenic Route on Kilimanjaro</h3>
@@ -395,8 +395,8 @@ export default function KilimanjaroHoneymoonPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Quiet First Few Days</h3>
@@ -404,8 +404,8 @@ export default function KilimanjaroHoneymoonPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[var(--border)]">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-acacia-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Private Departure Flexibility</h3>
@@ -448,8 +448,8 @@ export default function KilimanjaroHoneymoonPage() {
                 key={i}
                 className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]"
               >
-                <div className="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-                  <Sparkles className="w-5 h-5 text-rose-600" />
+                <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                  <Sparkles className="w-5 h-5 text-red-600" />
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2">{extra.title}</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -564,7 +564,7 @@ export default function KilimanjaroHoneymoonPage() {
                     }`}
                   >
                     <td className="px-4 py-3 font-medium">{row.item}</td>
-                    <td className="px-4 py-3 font-bold text-emerald-700">{row.price}</td>
+                    <td className="px-4 py-3 font-bold text-acacia-700">{row.price}</td>
                     <td className="px-4 py-3 text-xs text-[var(--text-muted)] hidden md:table-cell">
                       {row.notes}
                     </td>
@@ -642,8 +642,8 @@ export default function KilimanjaroHoneymoonPage() {
               >
                 <div className="flex items-start gap-4 shrink-0">
                   <span className="text-2xl font-bold text-[var(--primary)]/20">{i + 1}</span>
-                  <div className="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-rose-600" />
+                  <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-red-600" />
                   </div>
                 </div>
                 <div>

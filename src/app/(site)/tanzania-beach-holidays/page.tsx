@@ -341,8 +341,8 @@ export default async function TanzaniaBeachHolidaysPage() {
                     "Days 7-10: Beach relaxation & excursions",
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                        <Check className="w-4 h-4 text-emerald-600" />
+                      <div className="w-6 h-6 bg-acacia-100 rounded-full flex items-center justify-center shrink-0">
+                        <Check className="w-4 h-4 text-acacia-600" />
                       </div>
                       <span className="text-[var(--text)]">{item}</span>
                     </div>
@@ -415,7 +415,7 @@ export default async function TanzaniaBeachHolidaysPage() {
                 <ul className="space-y-2 mb-6">
                   {type.features.map((f) => (
                     <li key={f} className="flex items-center gap-2">
-                      <Check className={`w-4 h-4 shrink-0 ${type.featured ? "text-[var(--secondary)]" : "text-emerald-600"}`} />
+                      <Check className={`w-4 h-4 shrink-0 ${type.featured ? "text-[var(--secondary)]" : "text-acacia-600"}`} />
                       <span className={`text-sm ${type.featured ? "text-white/80" : "text-[var(--text)]"}`}>{f}</span>
                     </li>
                   ))}
@@ -446,13 +446,13 @@ export default async function TanzaniaBeachHolidaysPage() {
             Best Time for Tanzania Beaches
           </h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+            <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-6">
               <div className="flex items-center gap-2 mb-3">
-                <Sun className="w-6 h-6 text-emerald-600" />
-                <h3 className="font-semibold text-emerald-800">Peak Season</h3>
+                <Sun className="w-6 h-6 text-acacia-600" />
+                <h3 className="font-semibold text-acacia-800">Peak Season</h3>
               </div>
-              <p className="text-2xl font-bold text-emerald-700 mb-2">June – October</p>
-              <p className="text-sm text-emerald-700 leading-relaxed">
+              <p className="text-2xl font-bold text-acacia-700 mb-2">June – October</p>
+              <p className="text-sm text-acacia-700 leading-relaxed">
                 Dry, sunny, and calm. Ideal for beaches, diving, and combining with a safari. The busiest and most expensive period.
               </p>
             </div>
@@ -466,13 +466,13 @@ export default async function TanzaniaBeachHolidaysPage() {
                 Warm and mostly clear. Excellent for Nungwi Beach and dolphin tours. Whale shark season begins at Mafia Island in October.
               </p>
             </div>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
               <div className="flex items-center gap-2 mb-3">
-                <Waves className="w-6 h-6 text-blue-600" />
-                <h3 className="font-semibold text-blue-800">Rainy Season</h3>
+                <Waves className="w-6 h-6 text-slate-600" />
+                <h3 className="font-semibold text-slate-800">Rainy Season</h3>
               </div>
-              <p className="text-2xl font-bold text-blue-700 mb-2">March – May</p>
-              <p className="text-sm text-blue-700 leading-relaxed">
+              <p className="text-2xl font-bold text-slate-700 mb-2">March – May</p>
+              <p className="text-sm text-slate-700 leading-relaxed">
                 Long rains — rough seas and heavy downpours. Prices drop significantly and the island is lush and green. Some activities are limited.
               </p>
             </div>
@@ -495,8 +495,8 @@ export default async function TanzaniaBeachHolidaysPage() {
                 key={activity.title}
                 className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <activity.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <activity.icon className="w-6 h-6 text-slate-600" />
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{activity.title}</h3>
                 <p className="text-[var(--text-muted)] text-sm leading-relaxed">{activity.description}</p>

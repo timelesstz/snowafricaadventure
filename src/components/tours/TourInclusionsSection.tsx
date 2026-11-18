@@ -22,14 +22,14 @@ export function TourInclusionsSection({ inclusions, exclusions }: TourInclusions
       <div className="grid md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
         {/* Included */}
         <div className="p-6 lg:p-8 bg-white rounded-sm border border-[var(--border)] shadow-md">
-          <h3 className="flex items-center gap-2 font-heading text-base font-bold text-green-600 mb-6 pb-4 border-b border-[var(--border)]">
+          <h3 className="flex items-center gap-2 font-heading text-base font-bold text-acacia-600 mb-6 pb-4 border-b border-[var(--border)]">
             <Check className="w-6 h-6" />
             Included
           </h3>
           <ul className="space-y-2">
             {inclusions.map((item, index) => (
               <li key={index} className="flex items-start gap-3 py-1.5 text-sm text-[var(--text)]">
-                <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-acacia-500 flex-shrink-0 mt-0.5" />
                 {item}
               </li>
             ))}

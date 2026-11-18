@@ -468,7 +468,7 @@ export default async function ClimbingKilimanjaroPage() {
                             ? "bg-red-100 text-red-700"
                             : route.difficulty === "Challenging" || route.difficulty === "Mod–Challenging"
                             ? "bg-orange-100 text-orange-700"
-                            : "bg-emerald-100 text-emerald-700"
+                            : "bg-acacia-100 text-acacia-700"
                         }`}
                       >
                         {route.difficulty}
@@ -478,11 +478,11 @@ export default async function ClimbingKilimanjaroPage() {
                       <div className="flex items-center gap-2">
                         <div className="w-16 h-2 bg-[var(--border)] rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-emerald-500 rounded-full"
+                            className="h-full bg-acacia-500 rounded-full"
                             style={{ width: route.successRate.split("-")[1] || route.successRate.replace("%", "") }}
                           />
                         </div>
-                        <span className="text-sm font-medium text-emerald-700">{route.successRate}</span>
+                        <span className="text-sm font-medium text-acacia-700">{route.successRate}</span>
                       </div>
                     </td>
                     <td className="px-4 py-4 font-bold text-[var(--secondary-dark)]">{route.price}</td>
@@ -536,7 +536,7 @@ export default async function ClimbingKilimanjaroPage() {
                       <ul className="space-y-1">
                         {phase.tasks.map((task) => (
                           <li key={task} className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
-                            <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                            <Check className="w-4 h-4 text-acacia-600 shrink-0" />
                             {task}
                           </li>
                         ))}

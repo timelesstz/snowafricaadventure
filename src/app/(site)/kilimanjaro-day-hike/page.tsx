@@ -43,7 +43,7 @@ const dayHikeOptions = [
     distance: "16 km round trip",
     duration: "5-6 hours",
     difficulty: "Easy to Moderate",
-    difficultyColor: "bg-emerald-100 text-emerald-700",
+    difficultyColor: "bg-acacia-100 text-acacia-700",
     highlights: [
       "Dense montane rainforest canopy",
       "Colobus monkeys and blue monkeys",
@@ -79,7 +79,7 @@ const dayHikeOptions = [
     distance: "12 km round trip",
     duration: "4-5 hours",
     difficulty: "Easy",
-    difficultyColor: "bg-emerald-100 text-emerald-700",
+    difficultyColor: "bg-acacia-100 text-acacia-700",
     highlights: [
       "Remote northern rainforest",
       "Black-and-white colobus monkeys",
@@ -438,7 +438,7 @@ export default function KilimanjaroDayHikePage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 <strong>Yes, you can day-hike Kilimanjaro without summiting.</strong> The most popular option is the Marangu Route from the park gate (1,879m) to Mandara Hut (2,720m) and back &mdash; a 16 km round trip through pristine rainforest that takes 5-6 hours. You will see colobus monkeys, exotic birds, giant ferns, and walk on the lower slopes of Africa&apos;s highest mountain. <strong>No camping required, no extreme altitude, and suitable for families with children aged 8+.</strong> Return to your hotel in time for dinner.
@@ -497,7 +497,7 @@ export default function KilimanjaroDayHikePage() {
                       <ul className="space-y-1.5">
                         {option.highlights.map((highlight) => (
                           <li key={highlight} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                            <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                            <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                             {highlight}
                           </li>
                         ))}
@@ -571,8 +571,8 @@ export default function KilimanjaroDayHikePage() {
                 key={item.name}
                 className="bg-[var(--surface)] rounded-xl border border-[var(--border)] p-6 hover:shadow-md transition-shadow"
               >
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                  <item.icon className="w-6 h-6 text-acacia-600" />
                 </div>
                 <h3 className="font-semibold mb-2">{item.name}</h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">{item.description}</p>
@@ -621,15 +621,15 @@ export default function KilimanjaroDayHikePage() {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {/* Included */}
-              <div className="bg-emerald-50 rounded-2xl border border-emerald-200 p-6">
+              <div className="bg-acacia-50 rounded-2xl border border-acacia-200 p-6">
                 <h3 className="font-heading font-bold text-lg mb-4 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-emerald-600" />
+                  <CheckCircle className="w-5 h-5 text-acacia-600" />
                   What&apos;s Included
                 </h3>
                 <ul className="space-y-2.5">
                   {whatsIncluded.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                      <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}
@@ -755,8 +755,8 @@ export default function KilimanjaroDayHikePage() {
               </div>
 
               <div className="flex items-start gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
-                  <Mountain className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center shrink-0">
+                  <Mountain className="w-6 h-6 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Pre-Climb Acclimatization Hike</h3>
@@ -773,8 +773,8 @@ export default function KilimanjaroDayHikePage() {
               </div>
 
               <div className="flex items-start gap-4 bg-[var(--surface)] rounded-xl p-6 border border-[var(--border)]">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
-                  <Users className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
+                  <Users className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Family &amp; Group Activity Day</h3>

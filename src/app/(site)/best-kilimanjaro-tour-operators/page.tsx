@@ -43,9 +43,9 @@ const criteria = [
     subtitle: "Tanzania Association of Tour Operators",
     description:
       "TATO membership is the minimum legal requirement for any tour operator in Tanzania. It proves the company is registered with the government, carries proper insurance, and meets baseline industry standards. An operator without a TATO license is operating illegally — full stop. Always ask for the license number and verify it independently. Legitimate operators display their license number on their website, in email footers, and on printed materials. If an operator hesitates or cannot produce a TATO number, walk away immediately.",
-    color: "bg-blue-50 border-blue-200",
-    iconColor: "text-blue-600",
-    iconBg: "bg-blue-100",
+    color: "bg-slate-50 border-slate-200",
+    iconColor: "text-slate-600",
+    iconBg: "bg-slate-100",
   },
   {
     icon: Heart,
@@ -54,9 +54,9 @@ const criteria = [
     subtitle: "Kilimanjaro Porters Assistance Project",
     description:
       "The Kilimanjaro Porters Assistance Project monitors how operators treat their porters — the men and women who carry your gear, set up camp, cook your meals, and make the entire climb possible. KPAP partners commit to fair wages (above the KINAPA minimum), proper clothing and sleeping equipment for porters, load limits under 20kg, and access to medical care. Your climb should never come at the cost of someone else's wellbeing. Operators who are not KPAP members may pay porters as little as $3-5 per day — far below a living wage.",
-    color: "bg-rose-50 border-rose-200",
-    iconColor: "text-rose-600",
-    iconBg: "bg-rose-100",
+    color: "bg-red-50 border-red-200",
+    iconColor: "text-red-600",
+    iconBg: "bg-red-100",
   },
   {
     icon: Mountain,
@@ -65,9 +65,9 @@ const criteria = [
     subtitle: "Kilimanjaro National Park Authority",
     description:
       "Only operators registered with KINAPA are legally authorized to conduct climbs on Mount Kilimanjaro. KINAPA registration means the operator's guides have completed mountain-specific training, passed examinations on altitude sickness management, and hold valid guide identification cards. KINAPA-certified guides understand acclimatization protocols, emergency descent procedures, and mountain-specific first aid. An unregistered operator may send uncertified guides who lack the training to recognize and respond to altitude emergencies — putting your life at risk.",
-    color: "bg-emerald-50 border-emerald-200",
-    iconColor: "text-emerald-600",
-    iconBg: "bg-emerald-100",
+    color: "bg-acacia-50 border-acacia-200",
+    iconColor: "text-acacia-600",
+    iconBg: "bg-acacia-100",
   },
   {
     icon: Award,
@@ -87,9 +87,9 @@ const criteria = [
     subtitle: "TripAdvisor, SafariBookings, Google Reviews",
     description:
       "Reviews are the most transparent indicator of an operator's real performance. Look for operators with at least 50 reviews across multiple platforms — TripAdvisor, SafariBookings, and Google. Read the detailed reviews, not just the star rating. Pay attention to mentions of guide quality, food quality, equipment condition, communication before the trip, and how problems were handled. A cluster of short, generic five-star reviews posted in a short time period is a red flag for purchased reviews. Genuine reviews are detailed, mention specific guides by name, and describe both positives and minor negatives honestly.",
-    color: "bg-purple-50 border-purple-200",
-    iconColor: "text-purple-600",
-    iconBg: "bg-purple-100",
+    color: "bg-slate-50 border-slate-200",
+    iconColor: "text-slate-600",
+    iconBg: "bg-slate-100",
   },
   {
     icon: DollarSign,
@@ -98,9 +98,9 @@ const criteria = [
     subtitle: "Itemized costs, no hidden fees",
     description:
       "A trustworthy operator provides a fully itemized quote that clearly breaks down park fees, rescue fees, camping fees, crew wages, food, equipment, transfers, and any other costs. Hidden fees are one of the most common complaints in the industry — you book at one price, then discover additional charges for oxygen, porter tips, hotel nights, or airport transfers. The best operators publish their pricing openly on their website and include everything except personal gear and optional tips. If an operator cannot provide a written, itemized breakdown before you pay a deposit, that is a serious warning sign.",
-    color: "bg-teal-50 border-teal-200",
-    iconColor: "text-teal-600",
-    iconBg: "bg-teal-100",
+    color: "bg-acacia-50 border-acacia-200",
+    iconColor: "text-acacia-600",
+    iconBg: "bg-acacia-100",
   },
   {
     icon: Users,
@@ -109,9 +109,9 @@ const criteria = [
     subtitle: "1 guide per 2-3 climbers is ideal",
     description:
       "The guide-to-climber ratio directly affects your safety and summit chances. With a 1:2 ratio, your guide can monitor your condition closely, adjust pace individually, and respond immediately to altitude sickness symptoms. Budget operators often run 1:8 or even 1:10 ratios — meaning a single guide is responsible for monitoring ten climbers at different fitness levels in extreme altitude conditions. That is not safe. The ideal ratio is 1:2 for challenging routes like Umbwe and the Western Breach, and 1:3 for standard routes like Machame and Lemosho. Always confirm the ratio before booking.",
-    color: "bg-indigo-50 border-indigo-200",
-    iconColor: "text-indigo-600",
-    iconBg: "bg-indigo-100",
+    color: "bg-slate-50 border-slate-200",
+    iconColor: "text-slate-600",
+    iconBg: "bg-slate-100",
   },
 ];
 
@@ -218,8 +218,8 @@ const costComparison = [
   {
     tier: "Mid-Range Operators",
     range: "$2,000 - $3,000",
-    color: "border-blue-200 bg-blue-50",
-    headerColor: "bg-blue-100 text-blue-800",
+    color: "border-slate-200 bg-slate-50",
+    headerColor: "bg-slate-100 text-slate-800",
     items: [
       "Quality private tents and sleeping mats",
       "Three meals per day plus snacks and hot drinks",
@@ -235,8 +235,8 @@ const costComparison = [
   {
     tier: "Premium Operators",
     range: "$3,500 - $5,000+",
-    color: "border-emerald-200 bg-emerald-50",
-    headerColor: "bg-emerald-100 text-emerald-800",
+    color: "border-acacia-200 bg-acacia-50",
+    headerColor: "bg-acacia-100 text-acacia-800",
     items: [
       "Luxury expedition tents with camp furniture",
       "Chef-prepared multi-course meals with dietary accommodations",
@@ -515,16 +515,16 @@ export default function BestKilimanjaroTourOperatorsPage() {
       {/* Quick Answer Box */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+          <div className="max-w-3xl mx-auto bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                <Check className="w-6 h-6 text-emerald-600" />
+              <div className="w-12 h-12 bg-acacia-100 rounded-full flex items-center justify-center shrink-0">
+                <Check className="w-6 h-6 text-acacia-600" />
               </div>
               <div>
-                <h2 className="font-heading text-xl font-bold text-emerald-900 mb-3">
+                <h2 className="font-heading text-xl font-bold text-acacia-900 mb-3">
                   Quick Answer: What Makes the Best Kilimanjaro Tour Operator?
                 </h2>
-                <p className="text-emerald-800 leading-relaxed">
+                <p className="text-acacia-800 leading-relaxed">
                   The best Kilimanjaro tour operator has a <strong>TATO license</strong>,{" "}
                   <strong>KPAP membership</strong>, a <strong>90%+ summit success rate</strong>,{" "}
                   <strong>transparent pricing</strong> with no hidden fees, and{" "}
@@ -731,7 +731,7 @@ export default function BestKilimanjaroTourOperatorsPage() {
                   <ul className="space-y-2">
                     {emergencyEquipment.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-white/80">
-                        <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <Check className="w-4 h-4 text-acacia-400 shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -824,16 +824,16 @@ export default function BestKilimanjaroTourOperatorsPage() {
               ))}
             </div>
 
-            <div className="mt-8 bg-emerald-50 border border-emerald-200 rounded-xl p-6">
+            <div className="mt-8 bg-acacia-50 border border-acacia-200 rounded-xl p-6">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 bg-acacia-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                  <MessageCircle className="w-4 h-4 text-acacia-600" />
                 </div>
                 <div>
-                  <p className="font-semibold text-emerald-900 mb-1">
+                  <p className="font-semibold text-acacia-900 mb-1">
                     Snow Africa&apos;s answers to all 10 questions
                   </p>
-                  <p className="text-sm text-emerald-800 leading-relaxed">
+                  <p className="text-sm text-acacia-800 leading-relaxed">
                     TATO License: 034263. Guide ratio: 1:2 on all climbs. Emergency equipment:
                     pulse oximeter, oxygen, Gamow bag, satellite phone, helicopter evacuation
                     protocol. Success rate: 93% (Uhuru Peak only). Porter wages: above KPAP

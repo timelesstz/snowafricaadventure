@@ -41,13 +41,13 @@ const climateZones = [
     temperature: "25 – 30°C",
     rainfall: "1,000mm/year",
     color: "emerald",
-    headerBg: "bg-emerald-50",
-    headerBorder: "border-emerald-200",
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
-    badgeColor: "bg-emerald-100 text-emerald-700",
-    borderAccent: "border-emerald-400/30",
-    textAccent: "text-emerald-400",
+    headerBg: "bg-acacia-50",
+    headerBorder: "border-acacia-200",
+    iconBg: "bg-acacia-100",
+    iconColor: "text-acacia-600",
+    badgeColor: "bg-acacia-100 text-acacia-700",
+    borderAccent: "border-acacia-400/30",
+    textAccent: "text-acacia-400",
     icon: Leaf,
     nickname: "The Farmlands",
     description:
@@ -76,13 +76,13 @@ const climateZones = [
     temperature: "15 – 25°C",
     rainfall: "2,000mm/year",
     color: "green",
-    headerBg: "bg-green-50",
-    headerBorder: "border-green-200",
-    iconBg: "bg-green-100",
-    iconColor: "text-green-600",
-    badgeColor: "bg-green-100 text-green-700",
-    borderAccent: "border-green-400/30",
-    textAccent: "text-green-400",
+    headerBg: "bg-acacia-50",
+    headerBorder: "border-acacia-200",
+    iconBg: "bg-acacia-100",
+    iconColor: "text-acacia-600",
+    badgeColor: "bg-acacia-100 text-acacia-700",
+    borderAccent: "border-acacia-400/30",
+    textAccent: "text-acacia-400",
     icon: TreePine,
     nickname: "The Jungle",
     description:
@@ -113,13 +113,13 @@ const climateZones = [
     temperature: "5 – 15°C",
     rainfall: "1,000mm/year",
     color: "violet",
-    headerBg: "bg-violet-50",
-    headerBorder: "border-violet-200",
-    iconBg: "bg-violet-100",
-    iconColor: "text-violet-600",
-    badgeColor: "bg-violet-100 text-violet-700",
-    borderAccent: "border-violet-400/30",
-    textAccent: "text-violet-400",
+    headerBg: "bg-slate-50",
+    headerBorder: "border-slate-200",
+    iconBg: "bg-slate-100",
+    iconColor: "text-slate-600",
+    badgeColor: "bg-slate-100 text-slate-700",
+    borderAccent: "border-slate-400/30",
+    textAccent: "text-slate-400",
     icon: Cloud,
     nickname: "The Moorlands",
     description:
@@ -183,13 +183,13 @@ const climateZones = [
     temperature: "-15 to -25°C",
     rainfall: "Virtually none",
     color: "sky",
-    headerBg: "bg-sky-50",
-    headerBorder: "border-sky-200",
-    iconBg: "bg-sky-100",
-    iconColor: "text-sky-600",
-    badgeColor: "bg-sky-100 text-sky-700",
-    borderAccent: "border-sky-400/30",
-    textAccent: "text-sky-400",
+    headerBg: "bg-slate-50",
+    headerBorder: "border-slate-200",
+    iconBg: "bg-slate-100",
+    iconColor: "text-slate-600",
+    badgeColor: "bg-slate-100 text-slate-700",
+    borderAccent: "border-slate-400/30",
+    textAccent: "text-slate-400",
     icon: Snowflake,
     nickname: "The Roof of Africa",
     description:
@@ -469,7 +469,7 @@ export default function KilimanjaroClimateZonesPage() {
       <section className="py-12 bg-white border-b border-[var(--border)]">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-8">
+            <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
               <p className="text-[var(--text-muted)] leading-relaxed text-lg">
                 Kilimanjaro spans <strong>5 distinct climate zones</strong> &mdash; you walk from tropical rainforest to arctic ice in just 5-9 days. Each zone has unique vegetation, wildlife, temperatures, and challenges. It&apos;s often called <strong>&quot;five worlds in one mountain&quot;</strong> because climbing Kilimanjaro is the ecological equivalent of travelling from the equator to the North Pole. No other place on Earth lets you experience this range of climates on foot in under a week.
@@ -593,12 +593,12 @@ export default function KilimanjaroClimateZonesPage() {
                   </p>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <Camera className="w-5 h-5 text-blue-600" />
-                    <h3 className="font-heading font-bold text-blue-900">Photography Tip</h3>
+                    <Camera className="w-5 h-5 text-slate-600" />
+                    <h3 className="font-heading font-bold text-slate-900">Photography Tip</h3>
                   </div>
-                  <p className="text-sm text-blue-800 leading-relaxed">
+                  <p className="text-sm text-slate-800 leading-relaxed">
                     {zone.photoTip}
                   </p>
                 </div>
@@ -662,7 +662,7 @@ export default function KilimanjaroClimateZonesPage() {
                 <ul className="space-y-2">
                   {zone.items.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                      <ArrowRight className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <ArrowRight className="w-4 h-4 text-acacia-500 shrink-0 mt-0.5" />
                       {item}
                     </li>
                   ))}
@@ -698,13 +698,13 @@ export default function KilimanjaroClimateZonesPage() {
                 key={zone.zone}
                 className="flex gap-5 bg-white rounded-xl p-6 border border-[var(--border)]"
               >
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
-                  <zone.icon className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center shrink-0">
+                  <zone.icon className="w-6 h-6 text-acacia-600" />
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-1">{zone.zone}</h3>
                   <p className="text-sm text-[var(--text-muted)] mb-2">{zone.animals}</p>
-                  <p className="text-sm text-emerald-700 font-medium">
+                  <p className="text-sm text-acacia-700 font-medium">
                     Highlight: {zone.highlight}
                   </p>
                 </div>
@@ -719,8 +719,8 @@ export default function KilimanjaroClimateZonesPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Camera className="w-7 h-7 text-blue-600" />
+              <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center">
+                <Camera className="w-7 h-7 text-slate-600" />
               </div>
               <div>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold">
@@ -737,37 +737,37 @@ export default function KilimanjaroClimateZonesPage() {
                 Kilimanjaro&apos;s five climate zones offer five completely different photographic environments. The challenge is that conditions change rapidly &mdash; the humidity that fogs your lens in the rainforest gives way to blinding UV in the alpine desert, and cold that kills batteries at the summit.
               </p>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                <h3 className="font-semibold text-lg mb-3 text-blue-900">Essential Gear</h3>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <h3 className="font-semibold text-lg mb-3 text-slate-900">Essential Gear</h3>
                 <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-sm text-blue-800">
-                    <Camera className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-slate-800">
+                    <Camera className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     Carry spare batteries in a warm inner pocket &mdash; cold drains them fast above 4,000m
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-blue-800">
-                    <Camera className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-slate-800">
+                    <Camera className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     A waterproof camera bag or dry bag is essential for the rainforest zone
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-blue-800">
-                    <Camera className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-slate-800">
+                    <Camera className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     Wide-angle lens for landscapes, fast lens (f/2.8 or wider) for dark rainforest
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-blue-800">
-                    <Camera className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-slate-800">
+                    <Camera className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     Lightweight tripod for night sky photography in the alpine desert
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-blue-800">
-                    <Camera className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                  <li className="flex items-start gap-2 text-sm text-slate-800">
+                    <Camera className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                     UV filter to protect your lens from intense high-altitude sunlight
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex items-start gap-3">
-                <Sun className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+              <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
+                <Sun className="w-5 h-5 text-acacia-600 shrink-0 mt-1" />
                 <div>
-                  <p className="text-emerald-800 text-sm font-semibold mb-1">Our Guides&apos; Tip</p>
-                  <p className="text-emerald-800 text-sm">
+                  <p className="text-acacia-800 text-sm font-semibold mb-1">Our Guides&apos; Tip</p>
+                  <p className="text-acacia-800 text-sm">
                     The best photographs on Kilimanjaro come from the first and last light of each day. We time our departures and camp arrivals to give you the best chances for golden hour shooting. Tell your guide you are a keen photographer &mdash; they know exactly where to stop for the most powerful compositions in each zone.
                   </p>
                 </div>

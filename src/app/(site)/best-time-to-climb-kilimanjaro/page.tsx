@@ -160,7 +160,7 @@ const seasonCards = [
     icon: <TrendingUp className="w-7 h-7" />,
     title: "Short Dry Season",
     period: "January – March",
-    color: "bg-sky-100 text-sky-700",
+    color: "bg-slate-100 text-slate-700",
     description:
       "An excellent alternative with fewer climbers and competitive pricing. January and February are arguably the clearest months for summit views.",
   },
@@ -176,7 +176,7 @@ const seasonCards = [
     icon: <CloudRain className="w-7 h-7" />,
     title: "Short Rains",
     period: "November",
-    color: "bg-indigo-100 text-indigo-700",
+    color: "bg-slate-100 text-slate-700",
     description:
       "Brief afternoon showers with morning clearings. Trails are green and lush. A feasible option for budget travellers, though summit views can be obscured.",
   },
@@ -262,9 +262,9 @@ function StarRating({ count }: { count: number }) {
 
 function CrowdBadge({ level }: { level: string }) {
   const colorMap: Record<string, string> = {
-    "Very Low": "bg-emerald-100 text-emerald-700",
-    "Low": "bg-green-100 text-green-700",
-    "Low–Medium": "bg-lime-100 text-lime-700",
+    "Very Low": "bg-acacia-100 text-acacia-700",
+    "Low": "bg-acacia-100 text-acacia-700",
+    "Low–Medium": "bg-acacia-100 text-acacia-700",
     "Medium": "bg-amber-100 text-amber-700",
     "Medium–High": "bg-orange-100 text-orange-700",
     "High": "bg-red-100 text-red-700",
@@ -510,8 +510,8 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center">
-                    <Sun className="w-6 h-6 text-sky-600" />
+                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <Sun className="w-6 h-6 text-slate-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Short Dry Season</h3>
@@ -663,8 +663,8 @@ export default function BestTimeToClimbKilimanjaroPage() {
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
-                <div className="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center mb-4">
-                  <Binoculars className="w-6 h-6 text-sky-600" />
+                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4">
+                  <Binoculars className="w-6 h-6 text-slate-600" />
                 </div>
                 <h3 className="font-semibold text-lg mb-1">January &ndash; March</h3>
                 <p className="text-sm text-[var(--secondary)] font-medium mb-3">Calving Season</p>
@@ -683,8 +683,8 @@ export default function BestTimeToClimbKilimanjaroPage() {
                 </p>
               </div>
               <div className="bg-white rounded-xl p-6 border border-[var(--border)] shadow-sm">
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-emerald-600" />
+                <div className="w-12 h-12 bg-acacia-100 rounded-xl flex items-center justify-center mb-4">
+                  <Users className="w-6 h-6 text-acacia-600" />
                 </div>
                 <h3 className="font-semibold text-lg mb-1">December &ndash; January</h3>
                 <p className="text-sm text-[var(--secondary)] font-medium mb-3">Green Season Value</p>
