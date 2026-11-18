@@ -28,10 +28,10 @@ export function Footer({ currentYear }: { currentYear: number }) {
           <span className="text-[10px] tracking-[0.35em] uppercase text-[var(--secondary)]/90 font-medium">
             Tanzania · Since 2008
           </span>
-          <h2 className="font-heading text-2xl md:text-3xl text-white mt-3 max-w-3xl leading-snug">
+          <p className="font-heading text-2xl md:text-3xl text-white mt-3 max-w-3xl leading-snug">
             Handcrafted safaris, summits & shorelines — guided by the people
             who call this land home.
-          </h2>
+          </p>
           <div className="mt-6 flex items-center gap-3">
             <span className="h-px w-10 bg-white/20" />
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)]" />
@@ -114,9 +114,9 @@ export function Footer({ currentYear }: { currentYear: number }) {
 
           {/* Safari & Tours */}
           <div className="md:col-span-2">
-            <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4">
               {FOOTER_NAV.safaris.title}
-            </h3>
+            </p>
             <ul className="space-y-2.5 text-sm">
               {FOOTER_NAV.safaris.links.map((link) => (
                 <li key={link.href}>
@@ -141,9 +141,9 @@ export function Footer({ currentYear }: { currentYear: number }) {
 
           {/* Kilimanjaro */}
           <div className="md:col-span-3">
-            <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4">
               {FOOTER_NAV.kilimanjaro.title}
-            </h3>
+            </p>
             <ul className="space-y-2.5 text-sm">
               {FOOTER_NAV.kilimanjaro.links.map((link) => (
                 <li key={link.href}>
@@ -168,9 +168,9 @@ export function Footer({ currentYear }: { currentYear: number }) {
 
           {/* Company + Follow */}
           <div className="md:col-span-3">
-            <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4">
               {FOOTER_NAV.company.title}
-            </h3>
+            </p>
             <ul className="space-y-2.5 text-sm">
               {FOOTER_NAV.company.links.map((link) => (
                 <li key={link.href}>
@@ -185,9 +185,9 @@ export function Footer({ currentYear }: { currentYear: number }) {
             </ul>
 
             <div className="mt-7">
-              <h4 className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-3">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-3">
                 Follow the Journey
-              </h4>
+              </p>
               <div className="flex gap-2.5">
                 <a
                   href={SITE_CONFIG.social.facebook}

@@ -159,9 +159,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return genMeta({
     // The layout appends " | Snow Africa Adventure", so this stays under 36 characters.
     title: "Tanzania Safari Packages & Prices",
-    description: `Compare ${safaris.length} Tanzania safari packages, ${minDays} to ${maxDays} days, from ${
+    description: `${safaris.length} Tanzania safari packages from ${
       total.from ? usd(total.from) : "a few hundred dollars"
-    } per person. Serengeti, Ngorongoro Crater and Tarangire, camping to luxury, run by a local Arusha operator.`,
+    } per person, ${minDays} to ${maxDays} days. Serengeti, Ngorongoro and Tarangire, camping to luxury, from a local Arusha operator.`,
     url: PAGE_PATH,
   });
 }
