@@ -33,7 +33,7 @@ const DEFAULT_COMPANY_INFO = {
     year: "2026",
   },
   tripAdvisor: {
-    rating: 5,
+    rating: 4.9,
     reviews: 115,
     url: "https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html",
   },
@@ -53,7 +53,10 @@ const DEFAULT_HERO = {
   image: "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
 };
 
-function getWhyUsItems(talaLicense: string) {
+function getWhyUsItems(
+  talaLicense: string,
+  tripAdvisor: { rating: number; reviews: number }
+) {
   return [
     {
       icon: Users,
@@ -74,8 +77,8 @@ function getWhyUsItems(talaLicense: string) {
     },
     {
       icon: Star,
-      title: "115+ Five-Star Reviews",
-      description: "4.9 average rating on TripAdvisor and SafariBookings from verified travelers worldwide. Excellence is our standard.",
+      title: `Rated ${tripAdvisor.rating.toFixed(1)} on TripAdvisor`,
+      description: `From ${tripAdvisor.reviews}+ traveler reviews. Read them before you book, and see what guests say about our guides, vehicles and planning.`,
     },
   ];
 }
@@ -161,7 +164,12 @@ async function getHomepageSettings() {
         trekkingLicense: settingsMap["homepage.registration.trekkingLicense"] || "",
       },
       tripAdvisor: {
-        rating: parseInt(settingsMap["homepage.tripadvisor.rating"]) || DEFAULT_COMPANY_INFO.tripAdvisor.rating,
+        // The decimal score (synced by the TripAdvisor cron), not the rounded
+        // integer, so the badge matches the 4.9 shown in the hero stats.
+        rating:
+          parseFloat(settingsMap["homepage.stats.rating"]) ||
+          parseFloat(settingsMap["homepage.tripadvisor.rating"]) ||
+          DEFAULT_COMPANY_INFO.tripAdvisor.rating,
         reviews: parseInt(settingsMap["homepage.tripadvisor.reviews"]) || DEFAULT_COMPANY_INFO.tripAdvisor.reviews,
         url: settingsMap["homepage.tripadvisor.url"] || DEFAULT_COMPANY_INFO.tripAdvisor.url,
       },
@@ -287,7 +295,7 @@ export default async function HomePage() {
   ]);
 
   const { hero, stats, company, registration, tripAdvisor } = homepageSettings;
-  const whyUsItems = getWhyUsItems(registration.talaLicense);
+  const whyUsItems = getWhyUsItems(registration.talaLicense, tripAdvisor);
 
   // Split routes for display
   const routeList = routes.slice(0, 4);
@@ -387,7 +395,7 @@ export default async function HomePage() {
                 <Award className="w-6 h-6" />
               </div>
               <div className="trust-badge-content">
-                <span className="trust-badge-value">15+ Years</span>
+                <span className="trust-badge-value">{stats[0].value} Years</span>
                 <span className="trust-badge-label">Locally Owned</span>
               </div>
             </div>
@@ -397,8 +405,8 @@ export default async function HomePage() {
                 <Star className="w-6 h-6" fill="currentColor" />
               </div>
               <div className="trust-badge-content">
-                <span className="trust-badge-value">{tripAdvisor.reviews}+</span>
-                <span className="trust-badge-label">5-Star Reviews</span>
+                <span className="trust-badge-value">{tripAdvisor.rating.toFixed(1)}</span>
+                <span className="trust-badge-label">{tripAdvisor.reviews}+ TripAdvisor reviews</span>
               </div>
             </a>
             <div className="trust-badge-divider" />
@@ -473,7 +481,7 @@ export default async function HomePage() {
                       <Star key={i} className="w-4 h-4" fill="currentColor" />
                     ))}
                   </div>
-                  <span className="tripadvisor-rating">{tripAdvisor.rating}.0</span>
+                  <span className="tripadvisor-rating">{tripAdvisor.rating.toFixed(1)}</span>
                   <span className="tripadvisor-text">TripAdvisor</span>
                   <span className="tripadvisor-reviews">{tripAdvisor.reviews}+ Reviews</span>
                 </div>
@@ -490,7 +498,7 @@ export default async function HomePage() {
         <div className="kili-content">
           <span className="section-label">Kilimanjaro Trekking</span>
           <h2>6 Routes to Africa&apos;s Highest Peak</h2>
-          <p>Choose from proven routes to the summit. Our certified guides have summited over 500 times with an industry-leading 93% success rate.</p>
+          <p>Pick a route by days and scenery. Longer routes give your body more time to adjust to the altitude, so more climbers reach the summit.</p>
 
           <ul className="routes-list">
             {routeList.map((route) => (
@@ -685,7 +693,13 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="testimonials-header-minimal">
             <span className="section-label">What Travelers Say</span>
-            <h2>Real Stories, Real Adventures</h2>
+            {/* With no synced reviews to show, don't promise "stories" above an
+                empty grid; point to where the reviews are. */}
+            <h2>
+              {featuredReviews.length > 0
+                ? "Real Stories, Real Adventures"
+                : "Read our reviews on TripAdvisor"}
+            </h2>
           </div>
 
           {/* Featured Reviews Grid — real reviews only (synced from TripAdvisor
@@ -720,7 +734,7 @@ export default async function HomePage() {
 
           <div className="testimonials-footer">
             <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="tripadvisor-inline">
-              <span className="tripadvisor-score">{tripAdvisor.rating}.0</span>
+              <span className="tripadvisor-score">{tripAdvisor.rating.toFixed(1)}</span>
               <div>
                 <div className="tripadvisor-stars-inline">
                   {[...Array(5)].map((_, i) => (
