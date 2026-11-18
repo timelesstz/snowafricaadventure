@@ -33,8 +33,10 @@ const getRoute = cache(async function getRoute(slug: string) {
     });
     return route;
   } catch (error) {
+    // Rethrow: returning null would serve (and ISR-cache) the noindex
+    // not-found page over a live route whenever the database blips.
     console.error("[Route] Failed to fetch route:", error);
-    return null;
+    throw error;
   }
 });
 
@@ -119,7 +121,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const route = await getRoute(routeSlug);
 
   if (!route) {
-    return { title: "Route Not Found" };
+    notFound();
   }
 
   const description = route.metaDescription ||

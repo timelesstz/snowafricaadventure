@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: ["Googlebot", "Bingbot", "DuckDuckBot", "Slurp", "YandexBot"],
         allow: "/",
-        disallow: ["/admin/", "/api/", "/_next/"],
+        disallow: ["/admin/", "/api/"],
       },
       // Good social media bots — allow freely
       {
@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
           "TelegramBot",
         ],
         allow: "/",
-        disallow: ["/admin/", "/api/", "/_next/"],
+        disallow: ["/admin/", "/api/"],
       },
       // AI search bots — allow for GEO/AEO visibility (citations in AI search results)
       {
@@ -33,7 +33,7 @@ export default function robots(): MetadataRoute.Robots {
           "Amazonbot",
         ],
         allow: "/",
-        disallow: ["/admin/", "/api/", "/_next/"],
+        disallow: ["/admin/", "/api/"],
       },
       // AI training-only bots — block (protect content from training)
       {
@@ -66,7 +66,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin/", "/api/", "/_next/"],
+        disallow: ["/admin/", "/api/"],
         crawlDelay: 10,
       },
     ],

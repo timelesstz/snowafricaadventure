@@ -29,8 +29,11 @@ const getDestination = cache(async function getDestination(slug: string) {
       },
     });
     return destination;
-  } catch {
-    return null;
+  } catch (error) {
+    // Rethrow: returning null would serve (and ISR-cache) the noindex
+    // not-found page over a live destination whenever the database blips.
+    console.error("[Destination] Failed to fetch destination:", error);
+    throw error;
   }
 });
 
@@ -61,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { destSlug } = await params;
   const destination = await getDestination(destSlug);
 
-  if (!destination) return {};
+  if (!destination) notFound();
 
   const metaDesc = destination.metaDescription || destination.description.slice(0, 160);
 

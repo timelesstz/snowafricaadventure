@@ -134,8 +134,11 @@ const getPost = cache(async function getPost(slug: string) {
         console.warn(`[getPost] Attempt 1 failed for slug "${slug}", retrying...`, error);
         continue;
       }
+      // Rethrow rather than return null: null renders the not-found page
+      // (noindex), which ISR would cache over a live article. Throwing keeps
+      // the last good version cached and gives a 5xx that crawlers retry.
       console.error(`[getPost] All attempts failed for slug "${slug}":`, error);
-      return null;
+      throw error;
     }
   }
 
@@ -169,8 +172,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { postSlug } = await params;
   const post = await getPost(postSlug);
 
+  // notFound() here, not only in the page: metadata resolves before the
+  // loading.tsx shell streams, so this is what lets the response carry a 404.
   if (!post) {
-    return { title: "Post Not Found" };
+    notFound();
   }
 
   return genMeta({

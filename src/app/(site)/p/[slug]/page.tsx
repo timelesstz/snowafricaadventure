@@ -37,8 +37,9 @@ export default async function CmsPage({ params }: Props) {
       where: { slug },
     });
   } catch (error) {
+    // Rethrow, not notFound(): a database blip must not serve a noindex page.
     console.error("[CMS] Failed to fetch page:", error);
-    notFound();
+    throw error;
   }
 
   if (!page || page.status !== "PUBLISHED") {

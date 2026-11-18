@@ -24,8 +24,11 @@ const getDayTrip = cache(async function getDayTrip(slug: string): Promise<DayTri
       where: { slug },
     });
     return trip;
-  } catch {
-    return null;
+  } catch (error) {
+    // Rethrow: returning null would serve (and ISR-cache) the noindex
+    // not-found page over a live day tour whenever the database blips.
+    console.error("[DayTrip] Failed to fetch day trip:", error);
+    throw error;
   }
 });
 
@@ -45,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const trip = await getDayTrip(slug);
 
-  if (!trip) return {};
+  if (!trip) notFound();
 
   return genMeta({
     title: trip.metaTitle || trip.title,

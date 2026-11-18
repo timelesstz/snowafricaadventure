@@ -44,8 +44,10 @@ const getSafari = cache(async function getSafari(slug: string) {
     });
     return safari;
   } catch (error) {
+    // Rethrow: returning null would serve (and ISR-cache) the noindex
+    // not-found page over a live safari whenever the database blips.
     console.error("[Safari] Failed to fetch safari:", error);
-    return null;
+    throw error;
   }
 });
 
@@ -54,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const safari = await getSafari(safariSlug);
 
   if (!safari) {
-    return { title: "Safari Not Found" };
+    notFound();
   }
 
   const description = safari.metaDescription ||
