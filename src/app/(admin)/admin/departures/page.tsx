@@ -170,7 +170,7 @@ export default async function DeparturesPage() {
           </Link>
           <Link
             href="/admin/departures/new"
-            className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors"
           >
             <Plus className="w-5 h-5" />
             Add Departure
@@ -257,7 +257,7 @@ export default async function DeparturesPage() {
           </p>
           <Link
             href="/admin/departures/new"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors"
           >
             <Plus className="w-5 h-5" />
             Add Departure

@@ -229,7 +229,7 @@ export default function R2BrowserModal({
                     {/* Selected check */}
                     {selectedUrls.has(item.url) && (
                       <div className="absolute top-1.5 right-1.5 p-0.5 bg-amber-500 rounded-full">
-                        <CheckCircle className="w-4 h-4 text-white" />
+                        <CheckCircle className="w-4 h-4 text-[var(--primary-dark)]" />
                       </div>
                     )}
 
@@ -298,7 +298,7 @@ export default function R2BrowserModal({
               <button
                 onClick={handleConfirmMulti}
                 disabled={selectedUrls.size === 0}
-                className="px-4 py-2 text-sm bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50"
+                className="px-4 py-2 text-sm bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 disabled:opacity-50"
               >
                 Add {selectedUrls.size} Image{selectedUrls.size !== 1 ? "s" : ""}
               </button>

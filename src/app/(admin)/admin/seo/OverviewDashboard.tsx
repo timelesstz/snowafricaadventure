@@ -41,7 +41,7 @@ function ConnectCard({
       </div>
       <Link
         href="/admin/seo/settings"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 text-white rounded-lg text-xs font-medium hover:bg-amber-700"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 text-[var(--primary-dark)] rounded-lg text-xs font-medium hover:bg-amber-700"
       >
         <SettingsIcon className="w-3.5 h-3.5" />
         Connect

@@ -232,7 +232,7 @@ export default async function DestinationDetailPage({ params }: Props) {
               {/* Best Time */}
               <div className="bg-[var(--secondary-light)] border border-[var(--secondary)] rounded-lg p-6 mb-6">
                 <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-[var(--secondary-dark)]" />
+                  <Calendar className="w-5 h-5 text-[var(--secondary-ink)]" />
                   Best Time to Visit
                 </h3>
                 <p className="text-[var(--text-muted)]">{bestTimeToVisit}</p>
@@ -243,7 +243,7 @@ export default async function DestinationDetailPage({ params }: Props) {
                 <h3 className="font-semibold text-lg mb-3">
                   Plan Your Visit to {name}
                 </h3>
-                <p className="text-[var(--primary-light)] text-sm mb-4">
+                <p className="text-[var(--on-dark-muted)] text-sm mb-4">
                   Let us create a custom safari itinerary featuring this
                   incredible destination.
                 </p>

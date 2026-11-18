@@ -30,7 +30,7 @@ export function FinalCTA({
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="#book"
-            className="inline-flex items-center justify-center px-10 py-4 bg-[var(--secondary)] text-white font-heading font-semibold text-base rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all"
+            className="inline-flex items-center justify-center px-10 py-4 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold text-base rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all"
           >
             Book Your Safari
           </Link>

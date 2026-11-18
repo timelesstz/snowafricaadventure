@@ -1107,7 +1107,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
         <button
           onClick={handleDownloadPdf}
           disabled={isGeneratingPdf}
-          className="inline-flex items-center gap-2 px-7 py-3.5 bg-white border-2 border-[var(--border)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:border-[var(--secondary)] hover:text-[var(--secondary-dark)] hover:bg-[var(--surface)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-7 py-3.5 bg-white border-2 border-[var(--border)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:border-[var(--secondary)] hover:text-[var(--secondary-ink)] hover:bg-[var(--surface)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isGeneratingPdf ? (
             <svg className="animate-spin" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

@@ -92,7 +92,7 @@ export default function PricingTiersEditor({
           <button
             type="button"
             onClick={loadDefaults}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 text-sm font-medium transition-colors"
           >
             <Plus className="w-4 h-4" />
             Load Default Pricing
@@ -218,7 +218,7 @@ export default function PricingTiersEditor({
           <button
             type="button"
             onClick={addTier}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 text-sm font-medium transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add Tier

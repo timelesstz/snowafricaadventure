@@ -415,7 +415,7 @@ export default function KilimanjaroClimbingGearPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 2026 Packing Guide
               </span>
             </div>
@@ -946,7 +946,7 @@ export default function KilimanjaroClimbingGearPage() {
                 rental in Arusha before your climb, including sleeping bags, poles, and gaiters.
                 Contact us when you book to discuss your requirements. We also provide detailed
                 gear advice as part of your{" "}
-                <Link href="/kilimanjaro-food-meals/" className="text-[var(--secondary)] underline hover:text-[var(--secondary-dark)]">
+                <Link href="/kilimanjaro-food-meals/" className="text-[var(--secondary)] underline hover:text-[var(--secondary-ink)]">
                   pre-climb preparation briefing
                 </Link>.
               </p>

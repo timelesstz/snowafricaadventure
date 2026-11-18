@@ -156,7 +156,7 @@ export default async function DayTripDetailPage({ params }: Props) {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <span className="text-[var(--primary-light)] text-sm">Price per person</span>
+                <span className="text-[var(--on-dark-muted)] text-sm">Price per person</span>
                 <div className="text-3xl font-bold">${price} USD</div>
               </div>
               <div className="flex gap-4">
@@ -181,7 +181,7 @@ export default async function DayTripDetailPage({ params }: Props) {
       {/* Main Content */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Left Column - Main Content */}
             <div className="lg:col-span-2">
               {/* Description */}
@@ -206,7 +206,7 @@ export default async function DayTripDetailPage({ params }: Props) {
                     {trip.highlights.map((h: string, i: number) => (
                       <span
                         key={i}
-                        className="bg-[var(--primary-light)] text-[var(--primary)] px-4 py-2 rounded-full"
+                        className="bg-[var(--primary-tint)] text-[var(--primary)] px-4 py-2 rounded-full"
                       >
                         {h}
                       </span>
@@ -216,7 +216,7 @@ export default async function DayTripDetailPage({ params }: Props) {
               )}
 
               {/* Inclusions/Exclusions */}
-              <div className="grid md:grid-cols-2 gap-8 mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                 {trip.inclusions.length > 0 && (
                   <div>
                     <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
@@ -302,7 +302,7 @@ export default async function DayTripDetailPage({ params }: Props) {
             <h2 className="font-heading text-3xl font-bold text-center mb-8">
               More Day Trips
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {otherTrips.map((t) => (
                 <Link
                   key={t.slug}

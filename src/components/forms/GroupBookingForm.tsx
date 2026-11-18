@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { format } from "date-fns";
-import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Users, Calendar, MapPin, ChevronUp, Info, Moon } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { PHONE_PREFIXES, DEPOSIT_RATE } from "@/lib/constants";
 import { AvailabilityBadge } from "@/components/ui/Badge";
 import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout, trackPurchase, trackSelectDeparture } from "@/lib/analytics";
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
+import { parseCalendarDate } from "@/lib/departure-rules";
 
 interface Departure {
   id: string;
@@ -17,6 +18,8 @@ interface Departure {
   arrivalDate: string;
   endDate: string;
   price: number;
+  /** Active early-bird price, already validated on the server */
+  earlyBirdPrice?: number | null;
   maxParticipants: number;
   bookedSpots: number;
   availableSpots: number;
@@ -104,21 +107,22 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
     if (stage === 0 || stage === "success") {
       setStage(1);
       setError("");
-      // Track departure selection
-      trackSelectDeparture({
-        departureId: departure.id,
-        routeName: departure.route.name,
-        departureDate: departure.arrivalDate,
-        price: departure.price,
-      });
-      // Track begin checkout
-      trackBeginCheckout({
-        itemId: departure.id,
-        itemName: `${departure.route.name} - ${format(new Date(departure.arrivalDate), "MMM d, yyyy")}`,
-        itemCategory: "kilimanjaro",
-        value: departure.price,
-      });
     }
+    // Tracked on every new selection: the form can remount under a different
+    // year list, so this can't depend on the stage reset above.
+    const selectedPrice = departure.earlyBirdPrice ?? departure.price;
+    trackSelectDeparture({
+      departureId: departure.id,
+      routeName: departure.route.name,
+      departureDate: departure.arrivalDate,
+      price: selectedPrice,
+    });
+    trackBeginCheckout({
+      itemId: departure.id,
+      itemName: `${departure.route.name} - ${format(parseCalendarDate(departure.arrivalDate), "MMM d, yyyy")}`,
+      itemCategory: "kilimanjaro",
+      value: selectedPrice,
+    });
   }
 
   // Scroll to confirmation when booking succeeds
@@ -171,7 +175,8 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
 
   const availableSpots = departure.availableSpots;
   const maxClimbers = Math.min(availableSpots, 10);
-  const pricePerPerson = departure.price;
+  // Same rule as the booking API: the active early-bird price, else full price.
+  const pricePerPerson = departure.earlyBirdPrice ?? departure.price;
   const totalPrice = pricePerPerson * totalClimbers;
   const depositAmount = Math.round(totalPrice * DEPOSIT_RATE);
   const balanceAmount = totalPrice - depositAmount;
@@ -331,7 +336,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
             <Check className="w-10 h-10 text-acacia-600" />
           </div>
           <h3 className="font-heading text-2xl font-bold text-[var(--text)] mb-2">
-            Booking Inquiry Submitted!
+            Spot Request Received
           </h3>
           <p className="text-[var(--text-muted)]">
             Reference: <span className="font-mono font-bold text-[var(--primary)]">{bookingResult.bookingRef}</span>
@@ -348,7 +353,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
             <div>
               <span className="text-[var(--text-muted)]">Departure</span>
               <p className="font-medium">
-                {format(new Date(bookingResult.summary.departureDate), "MMM d, yyyy")}
+                {format(parseCalendarDate(bookingResult.summary.departureDate), "MMM d, yyyy")}
               </p>
             </div>
             <div>
@@ -439,14 +444,14 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
             {departure.isFullMoon && (
-              <span title="Full Moon Climb">{String.fromCodePoint(0x1F315)}</span>
+              <span title="Full Moon Climb" className="text-amber-700"><Moon className="w-4 h-4" aria-label="Full moon climb" /></span>
             )}
             <h4 className="font-heading font-bold text-lg">{departure.route.name}</h4>
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--text-muted)]">
             <span className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
-              {format(new Date(departure.arrivalDate), "MMM d")} - {format(new Date(departure.endDate), "MMM d, yyyy")}
+              {format(parseCalendarDate(departure.arrivalDate), "MMM d")} - {format(parseCalendarDate(departure.endDate), "MMM d, yyyy")}
             </span>
             <span className="flex items-center gap-1">
               <MapPin className="w-4 h-4" />
@@ -465,6 +470,9 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         </div>
         <div className="text-right">
           <p className="text-2xl font-bold text-[var(--primary-dark)]">{formatPrice(pricePerPerson)}</p>
+          {departure.earlyBirdPrice != null && (
+            <p className="text-xs text-[var(--text-muted)]"><s>{formatPrice(departure.price)}</s> early bird</p>
+          )}
           <p className="text-xs text-[var(--text-muted)]">per person</p>
         </div>
       </div>
@@ -484,7 +492,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         </div>
         <div className="border-t border-[var(--border)] pt-2">
           <div className="flex justify-between text-[var(--primary-dark)]">
-            <span className="font-medium">20% Deposit (due now)</span>
+            <span className="font-medium">20% deposit (after we confirm)</span>
             <span className="font-bold">{formatPrice(depositAmount)}</span>
           </div>
           <div className="flex justify-between text-[var(--text-muted)]">
@@ -513,7 +521,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           </h3>
           {departure.isFullMoon && (
             <span className="inline-flex items-center gap-1 mt-2 text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full font-medium">
-              {String.fromCodePoint(0x1F315)} Full Moon Summit
+              <Moon className="w-3.5 h-3.5" aria-hidden="true" /> Full Moon Summit
             </span>
           )}
         </div>
@@ -526,7 +534,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           <div>
             <p className="text-sm text-[var(--text-muted)]">Dates</p>
             <p className="font-medium text-[var(--text)]">
-              {format(new Date(departure.arrivalDate), "MMM d")} - {format(new Date(departure.endDate), "MMM d, yyyy")}
+              {format(parseCalendarDate(departure.arrivalDate), "MMM d")} - {format(parseCalendarDate(departure.endDate), "MMM d, yyyy")}
             </p>
           </div>
         </div>
@@ -558,7 +566,12 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         {/* Price */}
         <div className="pt-4 border-t border-[var(--border)]">
           <p className="text-3xl font-bold text-[var(--primary-dark)]">{formatPrice(pricePerPerson)}</p>
-          <p className="text-sm text-[var(--text-muted)]">per person</p>
+          <p className="text-sm text-[var(--text-muted)]">
+            per person
+            {departure.earlyBirdPrice != null && (
+              <> · <s>{formatPrice(departure.price)}</s> <span className="text-acacia-700 font-medium">early bird</span></>
+            )}
+          </p>
         </div>
       </div>
     </div>
@@ -583,7 +596,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
           <div className="flex justify-between items-center">
             <div>
               <p className="font-medium text-[var(--primary-dark)]">20% Deposit</p>
-              <p className="text-xs text-[var(--text-muted)]">Due now to secure spot</p>
+              <p className="text-xs text-[var(--text-muted)]">Paid after we confirm your spot</p>
             </div>
             <span className="text-lg font-bold text-[var(--primary-dark)]">{formatPrice(depositAmount)}</span>
           </div>
@@ -609,7 +622,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         {/* Info */}
         <div className="bg-[var(--surface)] rounded-lg p-3 mt-4">
           <p className="text-xs text-[var(--text-muted)]">
-            <strong className="text-[var(--text)]">Secure your spot today!</strong> Pay just 20% now. Full balance due 2 weeks before arrival.
+            <strong className="text-[var(--text)]">No payment today.</strong> We confirm availability within 24 hours, then a 20% deposit holds your spot. The balance is due 2 weeks before arrival.
           </p>
         </div>
       </div>
@@ -681,6 +694,8 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
                   </label>
                   <div className="flex gap-2">
                     <select
+                      aria-label="Country calling code"
+                      autoComplete="tel-country-code"
                       value={phonePrefix}
                       onChange={(e) => setPhonePrefix(e.target.value)}
                       className="w-24 px-2 py-2.5 border border-[var(--border)] rounded-lg text-sm bg-white focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
@@ -738,7 +753,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
                   ))}
                 </select>
                 {availableSpots <= 3 && (
-                  <p className="text-xs text-amber-600 mt-1">
+                  <p className="text-xs text-amber-800 mt-1">
                     Only {availableSpots} spot{availableSpots !== 1 ? "s" : ""} remaining!
                   </p>
                 )}
@@ -749,7 +764,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--secondary-foreground)] font-heading font-semibold rounded-lg transition-colors"
               >
                 Continue to Climber Details
                 <ArrowRight className="w-5 h-5" />
@@ -922,7 +937,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--secondary-foreground)] font-heading font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-2">
@@ -933,14 +948,14 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
                     Submitting...
                   </span>
                 ) : (
-                  `Book Now — ${formatPrice(depositAmount)} deposit`
+                  "Request my spot (no payment today)"
                 )}
               </button>
 
               <p className="text-xs text-center text-[var(--text-muted)]">
-                By booking you agree to our{" "}
+                By sending this request you agree to our{" "}
                 <Link href="/terms-and-conditions/" className="underline hover:text-[var(--text)]">terms</Link>.
-                A 20% deposit secures your spot. Full balance is due 2 weeks before arrival.
+                Once we confirm, a {formatPrice(depositAmount)} deposit (20%) holds your spot; the balance is due 2 weeks before arrival.
                 Your data is protected under our{" "}
                 <Link href="/privacy-policy/" className="underline hover:text-[var(--text)]">privacy policy</Link>.
               </p>

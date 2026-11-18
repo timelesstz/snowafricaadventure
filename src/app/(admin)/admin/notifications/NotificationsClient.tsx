@@ -248,7 +248,7 @@ export default function NotificationsClient() {
               type="button"
               onClick={markAllRead}
               disabled={unreadCount === 0}
-              className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-sm text-white bg-amber-600 hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-sm text-[var(--primary-dark)] bg-amber-600 hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
             >
               <Check className="h-4 w-4" aria-hidden="true" />
               Mark all read
@@ -286,7 +286,7 @@ export default function NotificationsClient() {
             className={clsx(
               "h-8 px-3 rounded-md text-sm transition-colors",
               readFilter === tab.value
-                ? "bg-amber-600 text-white"
+                ? "bg-amber-600 text-[var(--primary-dark)]"
                 : "text-slate-600 hover:bg-slate-100"
             )}
           >
@@ -374,7 +374,7 @@ export default function NotificationsClient() {
             <button
               type="button"
               onClick={bulkMarkRead}
-              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm text-white bg-amber-600 hover:bg-amber-700"
+              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md text-sm text-[var(--primary-dark)] bg-amber-600 hover:bg-amber-700"
             >
               <Check className="h-4 w-4" aria-hidden="true" />
               Mark read

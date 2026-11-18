@@ -327,7 +327,7 @@ export function SafariInquiryForm({
           {/* Continue Button */}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all mt-2"
+            className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all mt-2"
           >
             Continue
             <ArrowRight className="w-5 h-5" />
@@ -491,7 +491,7 @@ export function SafariInquiryForm({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">

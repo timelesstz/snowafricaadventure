@@ -2,6 +2,26 @@
  * Email templates for Snow Africa Adventure notifications
  */
 
+/** Escape text typed by visitors before it goes into email HTML. */
+export function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/** escapeHtml for optional fields. */
+function esc(value: string | number | null | undefined): string {
+  return value == null ? "" : escapeHtml(String(value));
+}
+
+/** Escape free text and keep its line breaks. */
+function escMultiline(value: string | null | undefined): string {
+  return esc(value).replace(/\r?\n/g, "<br>");
+}
+
 // Base email layout
 function baseLayout(content: string): string {
   return `
@@ -81,7 +101,7 @@ export interface BookingEmailData {
 export function bookingInquiryReceived(data: BookingEmailData): string {
   return baseLayout(`
     <h2>Thank You for Your Booking Inquiry!</h2>
-    <p>Dear ${data.leadName},</p>
+    <p>Dear ${esc(data.leadName)},</p>
     <p>We have received your booking inquiry for climbing Mount Kilimanjaro. Our team will review your request and get back to you within 24 hours.</p>
 
     <div class="info-box">
@@ -133,12 +153,12 @@ export function bookingInquiryReceived(data: BookingEmailData): string {
  */
 export function bookingConfirmed(data: BookingEmailData): string {
   const climbersList = data.climbers
-    ?.map((c, i) => `<li>${c.name}${c.nationality ? ` (${c.nationality})` : ""}</li>`)
+    ?.map((c, i) => `<li>${esc(c.name)}${c.nationality ? ` (${esc(c.nationality)})` : ""}</li>`)
     .join("") || "";
 
   return baseLayout(`
     <h2>Your Booking is Confirmed! <span class="status-badge status-confirmed">CONFIRMED</span></h2>
-    <p>Dear ${data.leadName},</p>
+    <p>Dear ${esc(data.leadName)},</p>
     <p>Great news! Your Kilimanjaro climb has been confirmed. We're excited to have you join us for this incredible adventure!</p>
 
     <div class="info-box">
@@ -201,7 +221,7 @@ export function bookingStatusUpdate(
 
   return baseLayout(`
     <h2>Booking Status Update</h2>
-    <p>Dear ${data.leadName},</p>
+    <p>Dear ${esc(data.leadName)},</p>
     <p>${statusMessages[data.status] || `Your booking status has been updated to: ${data.status}`}</p>
 
     <div class="info-box">
@@ -225,7 +245,7 @@ export function bookingStatusUpdate(
       </table>
     </div>
 
-    ${message ? `<div class="highlight"><strong>Note from our team:</strong><br>${message}</div>` : ""}
+    ${message ? `<div class="highlight"><strong>Note from our team:</strong><br>${escMultiline(message)}</div>` : ""}
 
     <p>If you have any questions about this update, please don't hesitate to contact us.</p>
     <p>Best regards,<br>The Snow Africa Adventure Team</p>
@@ -243,7 +263,7 @@ export function paymentReminder(
 ): string {
   return baseLayout(`
     <h2>${isDeposit ? "Deposit" : "Balance"} Payment Reminder</h2>
-    <p>Dear ${data.leadName},</p>
+    <p>Dear ${esc(data.leadName)},</p>
     <p>This is a friendly reminder that your ${isDeposit ? "deposit" : "balance"} payment for your Kilimanjaro climb is due soon.</p>
 
     <div class="info-box">
@@ -318,7 +338,7 @@ export function inquiryReceived(data: InquiryEmailData): string {
     Customized: "Tailor-Made Safari",
   };
 
-  const tripLabel = data.tripType ? typeLabels[data.tripType] || data.tripType : typeLabels[data.type] || data.type;
+  const tripLabel = esc(data.tripType ? typeLabels[data.tripType] || data.tripType : typeLabels[data.type] || data.type);
 
   return `
 <!DOCTYPE html>
@@ -360,7 +380,7 @@ export function inquiryReceived(data: InquiryEmailData): string {
           <!-- Main content -->
           <tr>
             <td style="padding: 30px 40px 20px;">
-              <h2 style="margin: 0 0 16px; font-size: 24px; font-weight: 700; color: #1e293b; text-align: center;">Thank You, ${data.fullName}!</h2>
+              <h2 style="margin: 0 0 16px; font-size: 24px; font-weight: 700; color: #1e293b; text-align: center;">Thank You, ${esc(data.fullName)}!</h2>
               <p style="margin: 0 0 24px; font-size: 16px; color: #475569; line-height: 1.6; text-align: center;">
                 We've received your inquiry and our team is excited to help you plan your ${tripLabel}. Expect a personalized response within <strong>24 hours</strong>.
               </p>
@@ -399,7 +419,7 @@ export function inquiryReceived(data: InquiryEmailData): string {
                           <span style="font-size: 13px; color: #78350f; font-weight: 600;">Preferred Date</span>
                         </td>
                         <td style="padding: 8px 0; border-bottom: 1px solid #fcd34d; text-align: right;">
-                          <span style="font-size: 14px; color: #1e293b; font-weight: 600;">${data.arrivalDate}</span>
+                          <span style="font-size: 14px; color: #1e293b; font-weight: 600;">${esc(data.arrivalDate)}</span>
                         </td>
                       </tr>
                       ` : ""}
@@ -419,7 +439,7 @@ export function inquiryReceived(data: InquiryEmailData): string {
                           <span style="font-size: 13px; color: #78350f; font-weight: 600;">Country</span>
                         </td>
                         <td style="padding: 8px 0; text-align: right;">
-                          <span style="font-size: 14px; color: #1e293b; font-weight: 600;">${data.nationality}</span>
+                          <span style="font-size: 14px; color: #1e293b; font-weight: 600;">${esc(data.nationality)}</span>
                         </td>
                       </tr>
                       ` : ""}
@@ -427,7 +447,7 @@ export function inquiryReceived(data: InquiryEmailData): string {
                     ${data.message ? `
                     <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #fcd34d;">
                       <p style="margin: 0 0 8px; font-size: 13px; color: #78350f; font-weight: 600;">Your Message:</p>
-                      <p style="margin: 0; font-size: 14px; color: #1e293b; line-height: 1.5; font-style: italic;">"${data.message}"</p>
+                      <p style="margin: 0; font-size: 14px; color: #1e293b; line-height: 1.5; font-style: italic;">"${escMultiline(data.message)}"</p>
                     </div>
                     ` : ""}
                   </td>
@@ -560,14 +580,14 @@ export function inquiryResponse(
 ): string {
   return baseLayout(`
     <h2>Response to Your Inquiry</h2>
-    <p>Dear ${data.fullName},</p>
+    <p>Dear ${esc(data.fullName)},</p>
 
     <div style="background:#f8fafc;padding:16px;border-radius:8px;border-left:4px solid #f59e0b;margin:16px 0;">
-      ${responseMessage.replace(/\n/g, "<br>")}
+      ${escMultiline(responseMessage)}
     </div>
 
     <p>If you have any further questions, please don't hesitate to reply to this email.</p>
-    <p>Best regards,<br>${senderName}<br>Snow Africa Adventure Team</p>
+    <p>Best regards,<br>${esc(senderName)}<br>Snow Africa Adventure Team</p>
   `);
 }
 
@@ -587,11 +607,11 @@ export function adminNewBooking(data: BookingEmailData): string {
       <table>
         <tr>
           <td class="info-label">Name:</td>
-          <td class="info-value">${data.leadName}</td>
+          <td class="info-value">${esc(data.leadName)}</td>
         </tr>
         <tr>
           <td class="info-label">Email:</td>
-          <td class="info-value"><a href="mailto:${data.leadEmail}">${data.leadEmail}</a></td>
+          <td class="info-value"><a href="mailto:${esc(data.leadEmail)}">${esc(data.leadEmail)}</a></td>
         </tr>
       </table>
     </div>
@@ -658,7 +678,7 @@ export function partnerNewCommission(data: PartnerCommissionEmailData): string {
 
   return baseLayout(`
     <h2>New Commission Earned!</h2>
-    <p>Dear ${data.partnerName},</p>
+    <p>Dear ${esc(data.partnerName)},</p>
     <p>Great news! A new booking has been made through the website, and you've earned a commission.</p>
 
     <div class="info-box">
@@ -728,7 +748,7 @@ export function partnerCommissionSummary(data: {
   const commissionsTable = data.commissions.map(c => `
     <tr>
       <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${c.date}</td>
-      <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${c.tripType}</td>
+      <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(c.tripType)}</td>
       <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$${c.bookingAmount.toLocaleString()}</td>
       <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; color: #16a34a; font-weight: 600;">$${c.commissionAmount.toLocaleString()}</td>
     </tr>
@@ -736,7 +756,7 @@ export function partnerCommissionSummary(data: {
 
   return baseLayout(`
     <h2>Monthly Commission Summary</h2>
-    <p>Dear ${data.partnerName},</p>
+    <p>Dear ${esc(data.partnerName)},</p>
     <p>Here's your commission summary for ${data.month} ${data.year}.</p>
 
     <div class="info-box">
@@ -807,14 +827,14 @@ export function adminNewInquiry(data: InquiryEmailData): string {
       <table>
         <tr>
           <td class="info-label">Name:</td>
-          <td class="info-value">${data.fullName}</td>
+          <td class="info-value">${esc(data.fullName)}</td>
         </tr>
         <tr>
           <td class="info-label">Email:</td>
-          <td class="info-value"><a href="mailto:${data.email}">${data.email}</a></td>
+          <td class="info-value"><a href="mailto:${esc(data.email)}">${esc(data.email)}</a></td>
         </tr>
-        ${data.phone ? `<tr><td class="info-label">Phone:</td><td class="info-value">${data.phone}</td></tr>` : ""}
-        ${data.nationality ? `<tr><td class="info-label">Nationality:</td><td class="info-value">${data.nationality}</td></tr>` : ""}
+        ${data.phone ? `<tr><td class="info-label">Phone:</td><td class="info-value">${esc(data.phone)}</td></tr>` : ""}
+        ${data.nationality ? `<tr><td class="info-label">Nationality:</td><td class="info-value">${esc(data.nationality)}</td></tr>` : ""}
       </table>
     </div>
 
@@ -825,12 +845,12 @@ export function adminNewInquiry(data: InquiryEmailData): string {
           <td class="info-label">Type:</td>
           <td class="info-value">${typeLabels[data.type] || data.type}</td>
         </tr>
-        ${data.tripType ? `<tr><td class="info-label">Trip:</td><td class="info-value">${data.tripType}</td></tr>` : ""}
-        ${data.arrivalDate ? `<tr><td class="info-label">Preferred Date:</td><td class="info-value">${data.arrivalDate}</td></tr>` : ""}
+        ${data.tripType ? `<tr><td class="info-label">Trip:</td><td class="info-value">${esc(data.tripType)}</td></tr>` : ""}
+        ${data.arrivalDate ? `<tr><td class="info-label">Preferred Date:</td><td class="info-value">${esc(data.arrivalDate)}</td></tr>` : ""}
         ${data.numAdults ? `<tr><td class="info-label">Adults:</td><td class="info-value">${data.numAdults}</td></tr>` : ""}
         ${data.numChildren ? `<tr><td class="info-label">Children:</td><td class="info-value">${data.numChildren}</td></tr>` : ""}
       </table>
-      ${data.message ? `<h4>Message:</h4><p style="background:#f8fafc;padding:12px;border-radius:4px;">${data.message}</p>` : ""}
+      ${data.message ? `<h4>Message:</h4><p style="background:#f8fafc;padding:12px;border-radius:4px;">${escMultiline(data.message)}</p>` : ""}
     </div>
 
     <a href="${process.env.NEXT_PUBLIC_BASE_URL}/admin/inquiries/${data.inquiryId}" class="button">View Inquiry in Admin</a>
@@ -854,11 +874,11 @@ export function emailShareTemplate(data: EmailShareTemplateData): string {
     <h2>Someone Shared an Adventure With You!</h2>
 
     <div style="background:#f8fafc;padding:16px;border-radius:8px;border-left:4px solid #f59e0b;margin:16px 0;">
-      ${data.message.replace(/\n/g, "<br>")}
+      ${escMultiline(data.message)}
     </div>
 
     <div style="text-align: center; margin: 24px 0;">
-      <a href="${data.shareUrl}" class="button">View Kilimanjaro Departures</a>
+      <a href="${esc(data.shareUrl)}" class="button">View Kilimanjaro Departures</a>
     </div>
 
     <div class="highlight">
@@ -937,24 +957,31 @@ export interface ClimberDetailsReminderData {
  * Departure invite email (when users invite friends to a specific departure)
  */
 export function departureInvite(data: DepartureInviteData): string {
+  // Names and the message are typed by whoever sends the invite, so they are
+  // escaped: otherwise anyone could put their own links and markup into an
+  // email that arrives branded as Snow Africa Adventure.
+  const inviterName = escapeHtml(data.inviterName);
   const greeting = data.inviteeName
-    ? `Dear ${data.inviteeName},`
+    ? `Dear ${escapeHtml(data.inviteeName)},`
     : "Hello!";
+  const personalMessage = data.personalMessage
+    ? escapeHtml(data.personalMessage).replace(/\r?\n/g, "<br>")
+    : "";
 
   return baseLayout(`
     <h2>You're Invited to Climb Kilimanjaro!</h2>
     <p>${greeting}</p>
-    <p><strong>${data.inviterName}</strong> has invited you to join them on an incredible Kilimanjaro adventure with Snow Africa Adventure.</p>
+    <p><strong>${inviterName}</strong> has invited you to join them on an incredible Kilimanjaro adventure with Snow Africa Adventure.</p>
 
-    ${data.personalMessage ? `
+    ${personalMessage ? `
     <div style="background:#fef3c7;padding:16px;border-radius:8px;border-left:4px solid #f59e0b;margin:16px 0;">
-      <strong>Message from ${data.inviterName}:</strong>
-      <p style="margin: 8px 0 0;">"${data.personalMessage}"</p>
+      <strong>Message from ${inviterName}:</strong>
+      <p style="margin: 8px 0 0;">"${personalMessage}"</p>
     </div>
     ` : ""}
 
     <div class="info-box">
-      <h3 style="margin-top: 0;">${data.isFullMoon ? "🌕 " : ""}${data.routeName}</h3>
+      <h3 style="margin-top: 0;">${data.isFullMoon ? "🌕 " : ""}${escapeHtml(data.routeName)}</h3>
       <table>
         <tr>
           <td class="info-label">Dates:</td>
@@ -1000,12 +1027,12 @@ export function climberDetailsRequestToLead(data: ClimberDetailsRequestData): st
   const climberLinks = data.tokens?.map((t) => {
     const name = t.climberName || `Climber ${t.climberIndex + 1}`;
     const url = `${baseUrl}/complete-details/${t.code}`;
-    return `<li style="padding: 8px 0;"><strong>${name}:</strong><br><a href="${url}" style="color:#f59e0b;word-break:break-all;">${url}</a></li>`;
+    return `<li style="padding: 8px 0;"><strong>${esc(name)}:</strong><br><a href="${url}" style="color:#f59e0b;word-break:break-all;">${url}</a></li>`;
   }).join("") || "";
 
   return baseLayout(`
     <h2>Collect Your Group's Details</h2>
-    <p>Dear ${data.leadName},</p>
+    <p>Dear ${esc(data.leadName)},</p>
     <p>Thank you for your deposit! Your Kilimanjaro adventure booking is confirmed. Now we need to collect details for the other climbers in your group.</p>
 
     <div class="info-box">
@@ -1061,12 +1088,12 @@ export function climberDetailsRequestToLead(data: ClimberDetailsRequestData): st
 export function climberDetailsRequestIndividual(data: ClimberDetailsRequestData): string {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://snowafricaadventure.com";
   const formUrl = `${baseUrl}/complete-details/${data.token}`;
-  const greeting = data.recipientName ? `Hi ${data.recipientName},` : "Hello!";
+  const greeting = data.recipientName ? `Hi ${esc(data.recipientName)},` : "Hello!";
 
   return baseLayout(`
     <h2>Complete Your Kilimanjaro Trek Details</h2>
     <p>${greeting}</p>
-    <p><strong>${data.leadName}</strong> has booked you on an incredible Kilimanjaro adventure!</p>
+    <p><strong>${esc(data.leadName)}</strong> has booked you on an incredible Kilimanjaro adventure!</p>
 
     <div class="info-box">
       <h3 style="margin-top: 0;">Trek Details</h3>
@@ -1114,7 +1141,7 @@ export function climberDetailsCompleted(data: ClimberDetailsCompletedData): stri
 
   return baseLayout(`
     <h2>Climber Details Completed</h2>
-    <p><strong>${data.climberName}</strong> has completed their details for booking <strong>${data.bookingRef}</strong>.</p>
+    <p><strong>${esc(data.climberName)}</strong> has completed their details for booking <strong>${data.bookingRef}</strong>.</p>
 
     <div class="info-box">
       <h3 style="margin-top: 0;">Booking Details</h3>
@@ -1160,7 +1187,7 @@ export function climberDetailsCompleted(data: ClimberDetailsCompletedData): stri
 export function climberDetailsReminder(data: ClimberDetailsReminderData): string {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://snowafricaadventure.com";
   const formUrl = `${baseUrl}/complete-details/${data.token}`;
-  const greeting = data.climberName ? `Hi ${data.climberName},` : "Hello!";
+  const greeting = data.climberName ? `Hi ${esc(data.climberName)},` : "Hello!";
 
   const urgentStyle = data.isUrgent
     ? "background:#fef2f2;border-left:4px solid #dc2626;color:#991b1b;"
@@ -1169,7 +1196,7 @@ export function climberDetailsReminder(data: ClimberDetailsReminderData): string
   return baseLayout(`
     <h2>${data.isUrgent ? "Urgent: " : ""}Complete Your Trek Details</h2>
     <p>${greeting}</p>
-    <p>This is a friendly reminder to complete your details for your upcoming Kilimanjaro trek with <strong>${data.leadName}'s</strong> group.</p>
+    <p>This is a friendly reminder to complete your details for your upcoming Kilimanjaro trek with <strong>${esc(data.leadName)}'s</strong> group.</p>
 
     <div class="info-box">
       <h3 style="margin-top: 0;">Trek Details</h3>
@@ -1194,7 +1221,7 @@ export function climberDetailsReminder(data: ClimberDetailsReminderData): string
       <a href="${formUrl}" class="button">Complete My Details Now</a>
     </div>
 
-    <p>If you have any questions, please reply to this email or contact ${data.leadName} directly.</p>
+    <p>If you have any questions, please reply to this email or contact ${esc(data.leadName)} directly.</p>
     <p>See you on the mountain!</p>
     <p>Best regards,<br>The Snow Africa Adventure Team</p>
   `);

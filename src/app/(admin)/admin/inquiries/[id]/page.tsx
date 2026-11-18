@@ -325,7 +325,7 @@ export default async function InquiryDetailPage({
             <div className="space-y-3">
               <a
                 href="#reply-form"
-                className="flex items-center gap-2 w-full px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors justify-center"
+                className="flex items-center gap-2 w-full px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors justify-center"
               >
                 <Mail className="w-4 h-4" />
                 Reply by Email

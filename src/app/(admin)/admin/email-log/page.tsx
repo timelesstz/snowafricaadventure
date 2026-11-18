@@ -276,7 +276,7 @@ export default async function EmailLogPage({
         </select>
         <button
           type="submit"
-          className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 text-sm font-medium"
+          className="px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 text-sm font-medium"
         >
           Filter
         </button>

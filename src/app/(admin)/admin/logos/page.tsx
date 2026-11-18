@@ -28,7 +28,7 @@ export default async function LogosPage() {
         </div>
         <Link
           href="/admin/logos/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700"
         >
           <Plus className="w-4 h-4" />
           Add Logo
@@ -56,7 +56,7 @@ export default async function LogosPage() {
           <p className="text-slate-600">No logos yet.</p>
           <Link
             href="/admin/logos/new"
-            className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700"
           >
             <Plus className="w-4 h-4" />
             Add your first logo

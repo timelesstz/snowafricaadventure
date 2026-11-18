@@ -338,7 +338,7 @@ export default function ContentPerformanceClient({
                 className={clsx(
                   "px-3 py-1.5 text-xs font-medium transition-colors",
                   range === opt.value
-                    ? "bg-amber-600 text-white"
+                    ? "bg-amber-600 text-[var(--primary-dark)]"
                     : "text-slate-600 hover:bg-slate-50"
                 )}
               >

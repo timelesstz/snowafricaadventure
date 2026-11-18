@@ -156,7 +156,7 @@ export default async function BlogPage({
         </div>
         <Link
           href="/admin/blog/new/"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors shadow-sm"
         >
           <Plus className="w-4 h-4" />
           New Post
@@ -270,7 +270,7 @@ export default async function BlogPage({
           </div>
           <button
             type="submit"
-            className="px-5 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm font-medium"
+            className="px-5 py-2.5 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors text-sm font-medium"
           >
             Filter
           </button>
@@ -300,7 +300,7 @@ export default async function BlogPage({
           </p>
           <Link
             href="/admin/blog/new/"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700"
           >
             <Plus className="w-4 h-4" />
             New Post

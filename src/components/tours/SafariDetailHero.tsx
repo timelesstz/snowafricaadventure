@@ -55,7 +55,7 @@ export function SafariDetailHero({
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-[1fr_420px] gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_420px] gap-8 lg:gap-16 items-center">
           {/* Left - Hero Content */}
           <div className="text-white">
             {/* Breadcrumb */}

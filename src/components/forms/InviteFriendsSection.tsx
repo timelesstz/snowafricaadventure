@@ -73,7 +73,7 @@ export function InviteFriendsSection({
         </div>
         <div className="flex items-center gap-2">
           {filledCount > 0 && (
-            <span className="text-xs bg-amber-500 text-white px-2.5 py-1 rounded-full font-medium">
+            <span className="text-xs bg-amber-500 text-[var(--primary-dark)] px-2.5 py-1 rounded-full font-medium">
               {filledCount} invited
             </span>
           )}

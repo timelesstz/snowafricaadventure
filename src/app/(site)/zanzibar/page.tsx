@@ -176,7 +176,7 @@ export default function ZanzibarPage() {
                 key={activity.title}
                 className="flex gap-4 p-6 bg-white border border-[var(--border)] rounded-lg"
               >
-                <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 bg-[var(--primary-tint)] rounded-full flex items-center justify-center shrink-0">
                   <activity.icon className="w-6 h-6 text-[var(--primary)]" />
                 </div>
                 <div>

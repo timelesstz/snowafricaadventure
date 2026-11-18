@@ -362,7 +362,7 @@ export default function TanzaniaSafariFromUKPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 UK Traveler Guide
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -634,7 +634,7 @@ export default function TanzaniaSafariFromUKPage() {
                 className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 <h3 className="font-heading text-xl font-bold mb-1">{tier.level}</h3>
-                <p className="text-2xl font-bold text-[var(--secondary-dark)] mb-1">{tier.gbp}</p>
+                <p className="text-2xl font-bold text-[var(--secondary-ink)] mb-1">{tier.gbp}</p>
                 <p className="text-sm text-[var(--text-muted)] mb-4">{tier.perDay} &bull; 7-day trip</p>
                 <p className="text-sm text-[var(--text-muted)] mb-4">{tier.includes}</p>
                 <div className="pt-3 border-t border-[var(--border)]">
@@ -750,7 +750,7 @@ export default function TanzaniaSafariFromUKPage() {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-[var(--text-muted)]">Price</span>
-                    <span className="font-medium text-[var(--secondary-dark)]">{season.price}</span>
+                    <span className="font-medium text-[var(--secondary-ink)]">{season.price}</span>
                   </div>
                 </div>
               </div>
@@ -786,7 +786,7 @@ export default function TanzaniaSafariFromUKPage() {
                 <h3 className="font-heading text-xl font-bold mb-1">{title}</h3>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-sm text-[var(--text-muted)]">{duration}</span>
-                  <span className="text-sm font-bold text-[var(--secondary-dark)]">{price}</span>
+                  <span className="text-sm font-bold text-[var(--secondary-ink)]">{price}</span>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] mb-4">{description}</p>
                 <div className="pt-3 border-t border-[var(--border)]">
@@ -890,7 +890,7 @@ export default function TanzaniaSafariFromUKPage() {
                 ))}
               </div>
               <div className="mt-4 pt-3 border-t border-[var(--border)]">
-                <p className="text-sm font-semibold text-[var(--secondary-dark)]">From \u00a32,800 per person</p>
+                <p className="text-sm font-semibold text-[var(--secondary-ink)]">From \u00a32,800 per person</p>
                 <p className="text-xs text-[var(--text-muted)]">Based on 2 sharing, mid-range accommodation</p>
               </div>
             </div>
@@ -1045,7 +1045,7 @@ export default function TanzaniaSafariFromUKPage() {
                     <MapPin className="w-3.5 h-3.5" />
                     <span>{test.location}</span>
                   </div>
-                  <p className="text-sm text-[var(--secondary-dark)] font-medium">{test.trip}</p>
+                  <p className="text-sm text-[var(--secondary-ink)] font-medium">{test.trip}</p>
                 </div>
               </div>
             ))}

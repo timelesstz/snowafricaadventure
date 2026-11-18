@@ -40,7 +40,7 @@ export function CredentialsBadges({ variant = "full" }: CredentialsBadgesProps) 
         <ul className="container mx-auto px-4 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-0 md:divide-x md:divide-[var(--border)]">
           {credentials.map((cred) => (
             <li key={cred.label} className="flex items-center gap-2 md:px-6">
-              <cred.icon className="w-4 h-4 shrink-0 text-[var(--secondary-dark)]" aria-hidden="true" />
+              <cred.icon className="w-4 h-4 shrink-0 text-[var(--secondary-ink)]" aria-hidden="true" />
               <span className="text-sm font-semibold text-[var(--text)]">{cred.label}</span>
               <span className="hidden xl:inline text-xs text-[var(--text-muted)]">{cred.sublabel}</span>
             </li>
@@ -59,7 +59,7 @@ export function CredentialsBadges({ variant = "full" }: CredentialsBadgesProps) 
               key={cred.label}
               className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-[var(--border)] bg-white"
             >
-              <cred.icon className="w-5 h-5 shrink-0 text-[var(--secondary-dark)]" aria-hidden="true" />
+              <cred.icon className="w-5 h-5 shrink-0 text-[var(--secondary-ink)]" aria-hidden="true" />
               <div>
                 <p className="font-bold text-sm leading-none text-[var(--text)]">{cred.label}</p>
                 <p className="text-[11px] leading-tight text-[var(--text-muted)] mt-0.5">{cred.sublabel}</p>

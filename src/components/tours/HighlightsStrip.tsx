@@ -44,7 +44,7 @@ export function HighlightsStrip({ highlights = defaultHighlights }: HighlightsSt
         <div className="text-center mt-12">
           <Link
             href="#book"
-            className="inline-flex items-center justify-center px-8 py-4 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all"
           >
             Start Planning Your Safari
           </Link>

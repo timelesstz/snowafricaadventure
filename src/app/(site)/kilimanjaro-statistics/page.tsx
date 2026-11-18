@@ -1570,14 +1570,14 @@ export default function KilimanjaroStatisticsPage() {
                     href={guide.href}
                     className="group flex items-center gap-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--secondary)]"
                   >
-                    <guide.icon className="w-5 h-5 shrink-0 text-[var(--secondary-dark)]" aria-hidden="true" />
+                    <guide.icon className="w-5 h-5 shrink-0 text-[var(--secondary-ink)]" aria-hidden="true" />
                     <span className="flex-1">
-                      <span className="block font-semibold text-[var(--text)] group-hover:text-[var(--secondary-dark)] transition-colors">
+                      <span className="block font-semibold text-[var(--text)] group-hover:text-[var(--secondary-ink)] transition-colors">
                         {guide.title}
                       </span>
                       <span className="block text-sm text-[var(--text-muted)]">{guide.description}</span>
                     </span>
-                    <ArrowRight className="w-4 h-4 shrink-0 text-[var(--text-light)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--secondary-dark)]" aria-hidden="true" />
+                    <ArrowRight className="w-4 h-4 shrink-0 text-[var(--text-light)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--secondary-ink)]" aria-hidden="true" />
                   </Link>
                 </li>
               ))}

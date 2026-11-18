@@ -250,7 +250,7 @@ export default async function AboutPage() {
                     className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100"
                   >
                     <div className="w-14 h-14 bg-amber-500 rounded-xl flex items-center justify-center mb-5">
-                      <Icon className="w-7 h-7 text-white" />
+                      <Icon className="w-7 h-7 text-[var(--primary-dark)]" />
                     </div>
                     <h3 className="font-semibold text-lg mb-3 text-slate-900">
                       {s[`about.offer.service${num}.title`] || DEFAULT_SETTINGS[`about.offer.service${num}.title`]}

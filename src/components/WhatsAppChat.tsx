@@ -225,7 +225,7 @@ export default function WhatsAppChat() {
       >
         <WhatsAppIcon className="h-7 w-7" />
         {pulse && (
-          <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-40" />
+          <span aria-hidden="true" className="wa-pulse pointer-events-none absolute inset-0 rounded-full bg-[#25D366]" />
         )}
       </button>
     </div>

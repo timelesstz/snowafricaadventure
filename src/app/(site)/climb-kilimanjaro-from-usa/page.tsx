@@ -238,7 +238,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
             />
 
             <div className="flex items-center gap-2 mb-4 mt-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 US Travelers Guide
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -731,7 +731,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 } transition-all`}
               >
                 {pkg.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--secondary)] text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] text-xs font-bold rounded-full uppercase tracking-wider">
                     Recommended
                   </div>
                 )}
@@ -940,7 +940,7 @@ export default async function ClimbKilimanjaroFromUSAPage() {
               departures every month — check our{" "}
               <Link
                 href="/kilimanjaro-join-group-departures/"
-                className="text-[var(--primary)] hover:text-[var(--secondary-dark)] underline font-medium"
+                className="text-[var(--primary)] hover:text-[var(--secondary-ink)] underline font-medium"
               >
                 group departure calendar
               </Link>{" "}
@@ -1321,13 +1321,13 @@ export default async function ClimbKilimanjaroFromUSAPage() {
                 <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-200 transition-colors">
                   <guide.icon className="w-6 h-6 text-amber-700" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--secondary-dark)] transition-colors">
+                <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--secondary-ink)] transition-colors">
                   {guide.title}
                 </h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-3">
                   {guide.description}
                 </p>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--primary)] group-hover:text-[var(--secondary-dark)] transition-colors">
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--primary)] group-hover:text-[var(--secondary-ink)] transition-colors">
                   Read guide <ArrowRight className="w-4 h-4" />
                 </span>
               </Link>

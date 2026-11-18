@@ -136,7 +136,7 @@ export default async function MountainTrekkingPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-transparent" />
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold mb-6">
               <Mountain className="w-4 h-4" /> Beyond Kilimanjaro
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
@@ -228,7 +228,7 @@ export default async function MountainTrekkingPage() {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/trekking/"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--secondary)] text-white font-semibold rounded-lg hover:opacity-90"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--secondary)] text-[var(--primary-dark)] font-semibold rounded-lg hover:opacity-90"
               >
                 <Clock className="w-4 h-4" />
                 View Kilimanjaro routes

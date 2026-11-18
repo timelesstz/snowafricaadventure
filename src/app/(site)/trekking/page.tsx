@@ -220,7 +220,7 @@ export default async function TrekkingPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 5,895m Summit
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -426,7 +426,7 @@ export default async function TrekkingPage() {
                           <Link
                             href={`/trekking/${r.slug}/`}
                             className={`flex items-center justify-between gap-3 py-3 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--secondary)] ${
-                              featured ? "hover:text-[var(--secondary-light)]" : "hover:text-[var(--secondary-dark)]"
+                              featured ? "hover:text-[var(--secondary-light)]" : "hover:text-[var(--secondary-ink)]"
                             }`}
                           >
                             <span>

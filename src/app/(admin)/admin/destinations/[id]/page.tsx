@@ -332,7 +332,7 @@ export default async function DestinationEditPage({
           </Link>
           <button
             type="submit"
-            className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700"
+            className="px-6 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700"
           >
             {isNew ? "Create Destination" : "Save Changes"}
           </button>

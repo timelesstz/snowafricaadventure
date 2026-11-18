@@ -270,7 +270,7 @@ export default function PreferencesClient({
                     status === "unsupported" ||
                     !vapidPublicKey
                   }
-                  className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-sm text-white bg-amber-600 hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-sm text-[var(--primary-dark)] bg-amber-600 hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {busy ? (
                     <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">

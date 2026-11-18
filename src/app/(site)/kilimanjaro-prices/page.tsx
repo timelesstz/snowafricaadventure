@@ -271,7 +271,7 @@ export default function KilimanjaroPricesPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 2026 Price Guide
               </span>
             </div>
@@ -351,7 +351,7 @@ export default function KilimanjaroPricesPage() {
                 >
                   {tier.highlighted && (
                     <div className="text-center mb-3">
-                      <span className="px-3 py-1 bg-[var(--secondary)] text-white text-xs font-semibold rounded-full uppercase tracking-wide">
+                      <span className="px-3 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] text-xs font-semibold rounded-full uppercase tracking-wide">
                         Most Popular
                       </span>
                     </div>
@@ -411,7 +411,7 @@ export default function KilimanjaroPricesPage() {
                     <td className="px-5 py-4 font-medium text-[var(--text)]">{row.route}</td>
                     <td className="px-5 py-4 text-[var(--text-muted)]">{row.days}</td>
                     <td className="px-5 py-4 text-[var(--text-muted)]">{row.difficulty}</td>
-                    <td className="px-5 py-4 font-bold text-[var(--secondary-dark)]">{row.priceFrom}</td>
+                    <td className="px-5 py-4 font-bold text-[var(--secondary-ink)]">{row.priceFrom}</td>
                     <td className="px-5 py-4">
                       <span className="px-2 py-1 bg-acacia-100 text-acacia-700 rounded-full text-xs font-semibold">
                         {row.success}
@@ -455,7 +455,7 @@ export default function KilimanjaroPricesPage() {
                       {row.note}
                     </span>
                   </div>
-                  <span className="font-bold text-[var(--secondary-dark)] whitespace-nowrap">{row.amount}</span>
+                  <span className="font-bold text-[var(--secondary-ink)] whitespace-nowrap">{row.amount}</span>
                 </div>
               ))}
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-5 py-4 bg-[var(--primary-dark)] text-white">
@@ -635,7 +635,7 @@ export default function KilimanjaroPricesPage() {
                         cost.item
                       )}
                     </h3>
-                    <span className="font-bold text-[var(--secondary-dark)] whitespace-nowrap text-sm">{cost.cost}</span>
+                    <span className="font-bold text-[var(--secondary-ink)] whitespace-nowrap text-sm">{cost.cost}</span>
                   </div>
                   <p className="text-sm text-[var(--text-muted)]">{cost.note}</p>
                 </div>
@@ -694,7 +694,7 @@ export default function KilimanjaroPricesPage() {
                       <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.camping}</td>
                       <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.rescue}</td>
                       <td className="px-4 py-3 text-right text-[var(--text-muted)]">${row.crew}</td>
-                      <td className="px-4 py-3 text-right font-bold text-[var(--secondary-dark)]">${row.total}</td>
+                      <td className="px-4 py-3 text-right font-bold text-[var(--secondary-ink)]">${row.total}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -703,15 +703,15 @@ export default function KilimanjaroPricesPage() {
 
             <div className="grid sm:grid-cols-3 gap-4 mb-6">
               <div className="bg-white border border-[var(--border)] rounded-lg p-4 text-center">
-                <p className="text-2xl font-bold text-[var(--secondary-dark)]">$70</p>
+                <p className="text-2xl font-bold text-[var(--secondary-ink)]">$70</p>
                 <p className="text-sm text-[var(--text-muted)]">Entry fee per day</p>
               </div>
               <div className="bg-white border border-[var(--border)] rounded-lg p-4 text-center">
-                <p className="text-2xl font-bold text-[var(--secondary-dark)]">$50</p>
+                <p className="text-2xl font-bold text-[var(--secondary-ink)]">$50</p>
                 <p className="text-sm text-[var(--text-muted)]">Camping fee per night</p>
               </div>
               <div className="bg-white border border-[var(--border)] rounded-lg p-4 text-center">
-                <p className="text-2xl font-bold text-[var(--secondary-dark)]">$20</p>
+                <p className="text-2xl font-bold text-[var(--secondary-ink)]">$20</p>
                 <p className="text-sm text-[var(--text-muted)]">Rescue fee (flat rate)</p>
               </div>
             </div>

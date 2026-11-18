@@ -253,7 +253,7 @@ export function InquiryForm({
                 name="phonePrefix"
                 ref={phonePrefixRef}
                 aria-label="Phone country code"
-                className="w-[92px] px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
+                className="w-[104px] shrink-0 pl-3 pr-7 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-base transition-all outline-none bg-white"
               >
                 {PHONE_PREFIXES.map((prefix) => (
                   <option key={prefix.code} value={prefix.code}>
@@ -261,13 +261,23 @@ export function InquiryForm({
                   </option>
                 ))}
               </select>
-              <input type="tel" id={fid("phone")} name="phone" autoComplete="tel-national" className={`flex-1 min-w-0 ${inputClass}`} />
+              <input
+                type="tel"
+                id={fid("phone")}
+                name="phone"
+                inputMode="tel"
+                autoComplete="tel-national"
+                placeholder="712 345 678"
+                className={`flex-1 min-w-0 ${inputClass}`}
+              />
             </div>
           </div>
-          <div className="grid grid-cols-[1fr_96px] gap-3">
+          {/* minmax(0,1fr): the date input's intrinsic width would otherwise
+              push the count field past the card edge on narrow phones. */}
+          <div className="grid grid-cols-[minmax(0,1fr)_104px] gap-3">
             <div>
               <label htmlFor={fid("arrivalDate")} className="block text-sm font-medium text-slate-700 mb-1">
-                Start date
+                Start date <span className="font-normal text-slate-500">(optional)</span>
               </label>
               <input
                 type="date"
@@ -279,7 +289,7 @@ export function InquiryForm({
             </div>
             <div>
               <label htmlFor={fid("numAdults")} className="block text-sm font-medium text-slate-700 mb-1">
-                Climbers
+                {tripType === "Kilimanjaro" ? "Climbers" : "Travellers"}
               </label>
               <input type="number" id={fid("numAdults")} name="numAdults" min="1" max="100" defaultValue="2" inputMode="numeric" className={inputClass} />
             </div>

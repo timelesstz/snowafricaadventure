@@ -203,7 +203,7 @@ export default async function ClimbingKilimanjaroPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Kilimanjaro Treks
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -449,11 +449,11 @@ export default async function ClimbingKilimanjaroPage() {
                   >
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-2">
-                        <Link href={`/trekking/${route.slug}/`} className="font-semibold text-[var(--primary)] hover:text-[var(--secondary-dark)] hover:underline transition-colors">
+                        <Link href={`/trekking/${route.slug}/`} className="font-semibold text-[var(--primary)] hover:text-[var(--secondary-ink)] hover:underline transition-colors">
                           {route.name}
                         </Link>
                         {route.featured && (
-                          <span className="px-2 py-0.5 bg-[var(--secondary)] text-white text-xs rounded-full font-semibold">
+                          <span className="px-2 py-0.5 bg-[var(--secondary)] text-[var(--primary-dark)] text-xs rounded-full font-semibold">
                             Recommended
                           </span>
                         )}
@@ -485,7 +485,7 @@ export default async function ClimbingKilimanjaroPage() {
                         <span className="text-sm font-medium text-acacia-700">{route.successRate}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-4 font-bold text-[var(--secondary-dark)]">{route.price}</td>
+                    <td className="px-4 py-4 font-bold text-[var(--secondary-ink)]">{route.price}</td>
                   </tr>
                 ))}
               </tbody>

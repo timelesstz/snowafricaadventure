@@ -53,7 +53,7 @@ export function SafariPriceTable({
     <section className="py-20 bg-gradient-to-b from-[var(--surface)] to-white" id="pricing">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 bg-[var(--secondary)]/10 text-[var(--secondary-dark)] px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <span className="inline-flex items-center gap-2 bg-[var(--secondary)]/10 text-[var(--secondary-ink)] px-4 py-2 rounded-full text-sm font-semibold mb-4">
             <DollarSign className="w-4 h-4" />
             Group Pricing
           </span>

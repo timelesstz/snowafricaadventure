@@ -1040,6 +1040,30 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // URLs still requested in the 404 monitor (Nov 2026): old WordPress
+      // paths, mistyped links and backlinks pointing at pages that now live
+      // under a different slug. Each destination was checked live.
+      ...[
+        ["/lemosho-route-guide/", "/kilimanjaro-lemosho-route-guide/"],
+        ["/kilimanjaro-routes/lemosho/", "/kilimanjaro-lemosho-route-guide/"],
+        ["/trekking/9-day-northern-circuit-route/", "/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"],
+        ["/routes.html", "/kilimanjaro-climbing-routes/"],
+        ["/luxury-climb-packages/", "/trekking/"],
+        ["/all-group-tours/", "/kilimanjaro-join-group-departures/"],
+        ["/kilimanjaro-2025/", "/kilimanjaro-join-group-departures/"],
+        ["/tanzania-safaris/6-days-tanzania-lodge-safari-northern-circuit/", "/tanzania-safaris/6-day-lodge-safari-northern-circuit/"],
+        ["/6-day-migration-safari-ndutu-manyara-sere-/", "/tanzania-safaris/6-days-tanzania-migration-serengeti-ngorongoro-crater-tarangire/"],
+        ["/safari6.html", "/tanzania-safaris/"],
+        ["/ngorongoro-crater-day-tour/", "/tanzania-day-tours/ngorongoro-crater-day-trip/"],
+        ["/selous-national-park/", "/tanzania-destinations/selous-game-reserve/"],
+        ["/selous-canoe-safari-tanzania/licenses/:path*", "/selous-canoe-safari-tanzania/"],
+        ["/maasai-homestays-authentic-cultural-immersion-experiences/", "/maasai-homestay-tanzania/"],
+        ["/about/", "/about-us/"],
+        ["/our-team/", "/our-guides/"],
+        ["/team/", "/our-guides/"],
+        ["/privacy/", "/privacy-policy/"],
+        ["/terms-of-service/", "/terms-and-conditions/"],
+      ].map(([source, destination]) => ({ source, destination, permanent: true })),
     ];
   },
 };

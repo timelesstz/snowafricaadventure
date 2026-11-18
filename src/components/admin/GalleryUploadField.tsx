@@ -247,7 +247,7 @@ export default function GalleryUploadField({
                 </span>
                 {featuredUrl === url && (
                   <span
-                    className="px-1.5 py-0.5 bg-amber-500 text-white text-[10px] font-semibold rounded inline-flex items-center gap-0.5"
+                    className="px-1.5 py-0.5 bg-amber-500 text-[var(--primary-dark)] text-[10px] font-semibold rounded inline-flex items-center gap-0.5"
                     title="Currently the featured image"
                   >
                     <Star className="w-3 h-3 fill-current" />

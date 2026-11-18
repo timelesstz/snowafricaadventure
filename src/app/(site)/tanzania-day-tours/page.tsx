@@ -172,7 +172,7 @@ export default async function DayTripsPage() {
           </h2>
           <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[var(--primary-tint)] rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="w-8 h-8 text-[var(--primary)]" />
               </div>
               <h3 className="font-semibold mb-2">Hotel Pickup</h3>
@@ -181,7 +181,7 @@ export default async function DayTripsPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[var(--primary-tint)] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-[var(--primary)]" />
               </div>
               <h3 className="font-semibold mb-2">Expert Guide</h3>
@@ -190,7 +190,7 @@ export default async function DayTripsPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[var(--primary-tint)] rounded-full flex items-center justify-center mx-auto mb-4">
                 <DollarSign className="w-8 h-8 text-[var(--primary)]" />
               </div>
               <h3 className="font-semibold mb-2">All Fees</h3>
@@ -199,7 +199,7 @@ export default async function DayTripsPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[var(--primary-tint)] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-8 h-8 text-[var(--primary)]" />
               </div>
               <h3 className="font-semibold mb-2">Flexible Times</h3>
@@ -217,7 +217,7 @@ export default async function DayTripsPage() {
           <h2 className="font-heading text-3xl font-bold mb-4">
             Ready for an Adventure?
           </h2>
-          <p className="text-[var(--primary-light)] mb-6 max-w-2xl mx-auto">
+          <p className="text-[var(--on-dark-muted)] mb-6 max-w-2xl mx-auto">
             Most day trips can be arranged with just 24 hours notice. Contact us
             to check availability and book your excursion.
           </p>

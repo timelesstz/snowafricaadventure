@@ -24,6 +24,10 @@ function decodeHtmlEntities(text: string): string {
     .replace(/&nbsp;/g, " ");
 }
 
+function slugifyHeading(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+}
+
 export function processContent(html: string): string {
   let content = html;
 
@@ -65,6 +69,16 @@ export function processContent(html: string): string {
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
       if (attrs.includes('id=')) return match; // Already has ID
       return `<h3${attrs} id="${id}">${text}</h3>`;
+    }
+  );
+
+  // Section h2s get IDs too, so the table of contents can link to them
+  content = content.replace(
+    /<h2([^>]*)>([^<]+)<\/h2>/gi,
+    (match, attrs, text) => {
+      if (attrs.includes('id=')) return match;
+      const id = slugifyHeading(decodeHtmlEntities(text));
+      return id ? `<h2${attrs} id="${id}">${text}</h2>` : match;
     }
   );
 
@@ -170,36 +184,32 @@ export function processContent(html: string): string {
   return content;
 }
 
-/**
- * Generate table of contents from content
- * Extracts h3 headings (both numbered and non-numbered)
- */
-export function generateTableOfContents(html: string): Array<{ id: string; text: string; number?: string }> {
-  const toc: Array<{ id: string; text: string; number?: string }> = [];
+export interface TocItem {
+  id: string;
+  text: string;
+  level: 2 | 3;
+  number?: string;
+}
 
-  // Match h3 tags with numbered-heading class (processed headings)
-  const numberedRegex = /<h3[^>]*class="numbered-heading"[^>]*id="([^"]*)"[^>]*><span class="heading-number">(\d+)<\/span>([^<]+)<\/h3>/gi;
+/**
+ * Generate the table of contents from processed content: every h2 and h3
+ * that has an id, in reading order.
+ */
+export function generateTableOfContents(html: string): TocItem[] {
+  const toc: TocItem[] = [];
+  const headingRegex = /<h([23])\b([^>]*)>([\s\S]*?)<\/h\1>/gi;
   let match;
 
-  while ((match = numberedRegex.exec(html)) !== null) {
-    toc.push({
-      id: match[1],
-      number: match[2],
-      text: decodeHtmlEntities(match[3].trim())
-    });
-  }
-
-  // Also match regular h3 tags with IDs (non-numbered)
-  const regularRegex = /<h3[^>]*id="([^"]*)"[^>]*>([^<]+)<\/h3>/gi;
-
-  while ((match = regularRegex.exec(html)) !== null) {
-    // Skip if it's a numbered heading (already captured above)
-    if (!match[0].includes('numbered-heading')) {
-      toc.push({
-        id: match[1],
-        text: decodeHtmlEntities(match[2].trim())
-      });
-    }
+  while ((match = headingRegex.exec(html)) !== null) {
+    const id = match[2].match(/\bid="([^"]+)"/)?.[1];
+    if (!id) continue;
+    const inner = match[3];
+    const number = inner.match(/<span class="heading-number">(\d+)<\/span>/)?.[1];
+    const text = decodeHtmlEntities(
+      inner.replace(/<span class="heading-number">\d+<\/span>/, "").replace(/<[^>]+>/g, "").trim()
+    );
+    if (!text) continue;
+    toc.push({ id, text, level: match[1] === "2" ? 2 : 3, number });
   }
 
   return toc;

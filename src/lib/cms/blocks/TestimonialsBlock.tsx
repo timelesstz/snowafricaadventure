@@ -44,7 +44,7 @@ export function TestimonialsBlock({ sectionLabel, heading, testimonials }: Testi
                 <p className="font-semibold">{test.author}</p>
                 <p className="text-sm text-[var(--text-muted)]">{test.location}</p>
                 {test.trip && (
-                  <p className="text-sm text-[var(--secondary-dark)] font-medium">{test.trip}</p>
+                  <p className="text-sm text-[var(--secondary-ink)] font-medium">{test.trip}</p>
                 )}
               </div>
             </div>

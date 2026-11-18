@@ -265,7 +265,7 @@ export default function KilimanjaroClimbingCompaniesPage() {
 
           <div className="max-w-2xl">
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="px-3 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-3 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 TATO Licensed
               </span>
               <span className="px-3 py-1.5 bg-white/20 text-white rounded-full text-sm font-semibold">

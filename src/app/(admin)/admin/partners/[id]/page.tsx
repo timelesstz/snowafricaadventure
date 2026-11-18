@@ -137,7 +137,7 @@ export default async function PartnerDetailPage({ params }: PageProps) {
         </div>
         <Link
           href={`/admin/partners/${id}/edit`}
-          className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors"
         >
           <Pencil className="w-4 h-4" />
           Edit Partner

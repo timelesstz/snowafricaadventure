@@ -666,8 +666,8 @@ export default function ThemeSettingsPage() {
               </label>
               <select
                 value={theme.headingFont}
-                onChange={(e) => updateTheme("headingFont", e.target.value)}
-                className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent"
+                disabled
+                className="w-full px-4 py-2 border border-[var(--border)] rounded-lg bg-slate-50 text-slate-500 cursor-not-allowed"
               >
                 {fontOptions.map((font) => (
                   <option key={font.value} value={font.value}>
@@ -682,8 +682,8 @@ export default function ThemeSettingsPage() {
               </label>
               <select
                 value={theme.bodyFont}
-                onChange={(e) => updateTheme("bodyFont", e.target.value)}
-                className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] focus:border-transparent"
+                disabled
+                className="w-full px-4 py-2 border border-[var(--border)] rounded-lg bg-slate-50 text-slate-500 cursor-not-allowed"
               >
                 {fontOptions.map((font) => (
                   <option key={font.value} value={font.value}>

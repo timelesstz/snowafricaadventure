@@ -1,11 +1,14 @@
 import { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
+import { ArrowDown, BadgeCheck, Moon, Star, Users } from "lucide-react";
 import { DeparturesBookingSection } from "@/components/departures/DeparturesBookingSection";
+import { NextGroupsStrip } from "@/components/departures/NextGroupsStrip";
 import { generateMetadata as genMeta, generateEventSchema,generateFAQSchema } from "@/lib/seo";
 import { JsonLd, MultiJsonLd } from "@/components/seo/JsonLd";
 import prisma from "@/lib/prisma";
-import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
+import { countBookedSpots, seatDisplayBookingWhere } from "@/lib/booking-spots";
+import { activeEarlyBirdPrice, startOfTodayUTC } from "@/lib/departure-rules";
+import { formatPrice } from "@/lib/utils";
 import { SITE_CONFIG, PARTNER_INFO } from "@/lib/constants";
 import { ShareButtons } from "@/components/social/ShareButtons";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
   }),
   openGraph: {
     title: "Kilimanjaro Group Departures 2026-2027",
-    description: "Join scheduled Kilimanjaro group climbs with expert local guides. 95%+ summit success rate, small groups (max 10), full moon climbs available.",
+    description: "Join scheduled Kilimanjaro group climbs with expert local guides. 93% summit success rate, small groups (max 10), full moon climbs available.",
     url: `${SITE_CONFIG.url}/kilimanjaro-join-group-departures/`,
     siteName: SITE_CONFIG.name,
     images: [
@@ -42,91 +45,151 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Kilimanjaro Group Departures 2026-2027",
-    description: "Join scheduled Kilimanjaro group climbs. Expert guides, 95%+ success rate, full moon climbs available.",
+    description: "Join scheduled Kilimanjaro group climbs. Expert guides, 93% summit success rate, full moon climbs available.",
     images: [`${SITE_CONFIG.url}/images/kilimanjaro-group-climb-og.jpg`],
   },
 };
 
+type PageDeparture = Awaited<ReturnType<typeof getDeparturesByYear>>[number];
+
 // Fetch departures from database
 async function getDeparturesByYear(year: number) {
+  // Only show departures that haven't started yet — the rotation cron marks
+  // ended ones COMPLETED, but this filter keeps the page correct even if it stalls.
+  // FULL departures are included so they render as "Sold out" rows instead
+  // of vanishing from the page.
+  const departures = await prisma.groupDeparture.findMany({
+    where: {
+      year,
+      status: { in: ["OPEN", "LIMITED", "GUARANTEED", "FULL"] },
+      arrivalDate: { gt: startOfTodayUTC() },
+    },
+    include: {
+      route: {
+        select: {
+          title: true,
+          slug: true,
+          durationDays: true,
+          physicalRating: true,
+          successRate: true,
+        },
+      },
+      bookings: {
+        where: seatDisplayBookingWhere(),
+        select: {
+          totalClimbers: true,
+        },
+      },
+    },
+    orderBy: { arrivalDate: "asc" },
+  });
+
+  return departures.map((dep) => {
+    const bookedSpots = countBookedSpots(dep.bookings);
+    // A departure marked FULL by staff is sold out even if seats look free.
+    const availableSpots =
+      dep.status === "FULL" ? 0 : Math.max(0, dep.maxParticipants - bookedSpots);
+    return {
+      id: dep.id,
+      route: { name: dep.route.title, slug: dep.route.slug },
+      routeFacts: {
+        durationDays: dep.route.durationDays,
+        physicalRating: dep.route.physicalRating,
+        successRate: dep.route.successRate,
+      },
+      arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
+      endDate: dep.endDate.toISOString().split("T")[0],
+      price: Number(dep.price),
+      earlyBirdPrice: activeEarlyBirdPrice(dep),
+      maxParticipants: dep.maxParticipants,
+      bookedSpots,
+      availableSpots,
+      isFullMoon: dep.isFullMoon,
+      status: dep.status,
+    };
+  });
+}
+
+/**
+ * A database error during ISR regeneration must not be cached as an empty
+ * page: rethrowing keeps the last good version live. Only the build itself
+ * falls back to the empty state, so a database blip can't fail a deploy.
+ */
+async function loadDepartures(year: number): Promise<{ departures: PageDeparture[]; failed: boolean }> {
   try {
-    // Only show departures that haven't started yet — the rotation cron marks
-    // ended ones COMPLETED, but this filter keeps the page correct even if it stalls
-    const today = new Date();
-    today.setUTCHours(0, 0, 0, 0);
-
-    // FULL departures are included so they render as "Sold Out" rows instead
-    // of vanishing from the page.
-    const departures = await prisma.groupDeparture.findMany({
-      where: {
-        year,
-        status: { in: ["OPEN", "LIMITED", "GUARANTEED", "FULL"] },
-        arrivalDate: { gte: today },
-      },
-      include: {
-        route: {
-          select: {
-            title: true,
-            slug: true,
-          },
-        },
-        bookings: {
-          where: {
-            status: { in: SPOT_HOLDING_STATUSES },
-          },
-          select: {
-            totalClimbers: true,
-          },
-        },
-      },
-      orderBy: { arrivalDate: "asc" },
-    });
-
-    return departures.map((dep) => {
-      const bookedSpots = countBookedSpots(dep.bookings);
-      const earlyBirdActive =
-        dep.earlyBirdPrice != null &&
-        dep.earlyBirdUntil != null &&
-        dep.earlyBirdUntil > new Date() &&
-        Number(dep.earlyBirdPrice) > 0 &&
-        Number(dep.earlyBirdPrice) < Number(dep.price);
-      return {
-        id: dep.id,
-        route: { name: dep.route.title, slug: dep.route.slug },
-        arrivalDate: dep.arrivalDate.toISOString().split("T")[0],
-        endDate: dep.endDate.toISOString().split("T")[0],
-        price: Number(dep.price),
-        earlyBirdPrice: earlyBirdActive ? Number(dep.earlyBirdPrice) : null,
-        maxParticipants: dep.maxParticipants,
-        bookedSpots,
-        availableSpots: dep.maxParticipants - bookedSpots,
-        isFullMoon: dep.isFullMoon,
-        status: dep.status,
-      };
-    });
+    return { departures: await getDeparturesByYear(year), failed: false };
   } catch (error) {
-    console.error("[GroupDepartures] Failed to fetch departures:", error);
-    return [];
+    console.error(`[GroupDepartures] Failed to fetch ${year} departures:`, error);
+    if (process.env.NEXT_PHASE !== "phase-production-build") throw error;
+    return { departures: [], failed: true };
   }
 }
 
+/** One comparison row per route, priced from the live departures. */
+function summariseRoutes(departures: PageDeparture[]) {
+  const rows = new Map<
+    string,
+    {
+      slug: string;
+      name: string;
+      durationDays: number;
+      physicalRating: string | null;
+      successRate: number | null;
+      fromPrice: Map<number, number>;
+    }
+  >();
+  for (const dep of departures) {
+    const row =
+      rows.get(dep.route.slug) ??
+      {
+        slug: dep.route.slug,
+        name: dep.route.name,
+        ...dep.routeFacts,
+        fromPrice: new Map<number, number>(),
+      };
+    const year = Number(dep.arrivalDate.slice(0, 4));
+    const price = dep.earlyBirdPrice ?? dep.price;
+    row.fromPrice.set(year, Math.min(row.fromPrice.get(year) ?? Infinity, price));
+    rows.set(dep.route.slug, row);
+  }
+  return [...rows.values()].sort((a, b) => a.durationDays - b.durationDays);
+}
+
+const ROUTE_NOTES: Record<string, string> = {
+  "8-days-lemosho-route":
+    "Our most popular route. The extra day helps acclimatisation, and it starts in quiet western rainforest.",
+  "7-days-machame-route":
+    "The classic \"Whiskey Route\": big scenery and the Barranco Wall scramble.",
+  "9-day-northern-circuit-route-kilimanjaro-guide":
+    "The longest and quietest route, circling the remote northern slopes.",
+};
+
 export default async function GroupDeparturesPage() {
   // Fetch real data from database
-  const [departures2026, departures2027] = await Promise.all([
-    getDeparturesByYear(2026),
-    getDeparturesByYear(2027),
+  const [result2026, result2027] = await Promise.all([
+    loadDepartures(2026),
+    loadDepartures(2027),
   ]);
+  const departures2026 = result2026.departures;
+  const departures2027 = result2027.departures;
+  const loadFailed = result2026.failed || result2027.failed;
 
-  // Generate Event schemas for featured departures
   const allDepartures = [...departures2026, ...departures2027];
-  const eventSchemas = allDepartures.slice(0, 10).map((dep) =>
+  const routeRows = summariseRoutes(allDepartures);
+  const priceYears = [...new Set(allDepartures.map((d) => Number(d.arrivalDate.slice(0, 4))))].sort();
+  const maxGroupSize = allDepartures.length
+    ? Math.max(...allDepartures.map((d) => d.maxParticipants))
+    : 10;
+
+  // Event schema for every listed departure, at the price a climber pays today.
+  const eventSchemas = allDepartures.map((dep) =>
     generateEventSchema({
       name: `${dep.route.name} - Kilimanjaro Group Climb`,
       description: `Join our scheduled ${dep.route.name} group climb. Share the adventure with fellow climbers from around the world.`,
       url: `/kilimanjaro-join-group-departures/`,
       startDate: dep.arrivalDate,
       endDate: dep.endDate,
-      price: dep.price,
+      price: dep.earlyBirdPrice ?? dep.price,
       availability:
         dep.availableSpots === 0
           ? "SoldOut"
@@ -136,7 +199,6 @@ export default async function GroupDeparturesPage() {
       maxAttendees: dep.maxParticipants,
     })
   );
-
 
   // FAQ Schema for the page
   const faqSchema = generateFAQSchema([
@@ -168,7 +230,7 @@ export default async function GroupDeparturesPage() {
     {
       question: "What is the summit success rate for group departures?",
       answer:
-        "Our group departures achieve a 95%+ summit success rate across all routes. This is significantly higher than the industry average of 65-70%, thanks to our experienced guides, proper acclimatization schedules, and small group sizes that allow individual attention.",
+        "93% of our climbers reach the summit across all routes, against an industry average of 65-70%. Longer routes do better: see the route comparison above for each route. The difference comes from experienced guides, proper acclimatization schedules, and small groups that allow individual attention.",
     },
     {
       question: "Can I join a group climb as a solo traveller?",
@@ -199,47 +261,50 @@ export default async function GroupDeparturesPage() {
       <JsonLd data={faqSchema} />
 
       {/* Hero */}
-      <section
-        className="text-white py-16 md:py-20"
-        style={{
-          background: "linear-gradient(to bottom right, var(--primary-dark), var(--primary-dark))",
-        }}
-      >
+      <section className="bg-[var(--primary-dark)] text-white pt-12 pb-10 md:pt-16 md:pb-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="text-[var(--secondary)] text-sm font-semibold uppercase tracking-wider">
-              2026–2027 Season
-            </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold mt-2 mb-4">
-              Kilimanjaro Group Departures
-            </h1>
-            <p className="text-xl text-white/80 leading-relaxed">
-              Join our scheduled group climbs with fixed departure dates. Share the adventure with fellow climbers from around the world.
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <div className="bg-white/10 px-4 py-2 rounded text-sm">
-                {String.fromCodePoint(0x1F315)} Full Moon climbs available
-              </div>
-              <div className="bg-white/10 px-4 py-2 rounded text-sm">
-                {String.fromCodePoint(0x1F465)} Small groups (max 10)
-              </div>
-              <div className="bg-white/10 px-4 py-2 rounded text-sm">
-                {String.fromCodePoint(0x2713)} Expert local guides
-              </div>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div className="max-w-2xl">
+              <span className="text-[var(--secondary)] text-sm font-semibold uppercase tracking-wider">
+                {priceYears.length > 1 ? `${priceYears[0]}–${priceYears[priceYears.length - 1]}` : priceYears[0] ?? "2026–2027"} season
+              </span>
+              <h1 className="font-heading text-4xl md:text-5xl font-bold mt-2 mb-4 text-balance">
+                Kilimanjaro Group Departures
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+                Fixed dates and small teams. Pick a date, join climbers from around the world, and summit together.
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
+                <li className="inline-flex items-center gap-2">
+                  <Users className="w-4 h-4 text-[var(--secondary)]" aria-hidden="true" />
+                  Groups of {maxGroupSize} or fewer
+                </li>
+                <li className="inline-flex items-center gap-2">
+                  <Moon className="w-4 h-4 text-[var(--secondary)]" aria-hidden="true" />
+                  Full moon summit dates
+                </li>
+                <li className="inline-flex items-center gap-2">
+                  <BadgeCheck className="w-4 h-4 text-[var(--secondary)]" aria-hidden="true" />
+                  Expert local guides
+                </li>
+              </ul>
             </div>
-            <div className="mt-6">
+            <div className="flex flex-col items-start gap-4 lg:items-end">
               <a
                 href="#departures"
-                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-3 rounded-lg font-bold text-lg transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--secondary-foreground)] px-6 py-3 rounded-lg font-semibold transition-colors"
               >
-                View Departure Dates & Prices
+                See all dates and prices
+                <ArrowDown className="w-4 h-4" aria-hidden="true" />
               </a>
-            </div>
-            <div className="mt-4 flex items-center justify-center gap-3">
-              <span className="text-sm text-white/70">Share this page:</span>
-              <ShareButtons variant="icons-only" size="sm" />
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-white/70">Share:</span>
+                <ShareButtons variant="icons-only" size="sm" />
+              </div>
             </div>
           </div>
+
+          <NextGroupsStrip departures={allDepartures} />
         </div>
       </section>
 
@@ -250,8 +315,8 @@ export default async function GroupDeparturesPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-xl font-bold">1</span>
+              <div className="w-12 h-12 border-2 border-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl font-bold text-[var(--primary)]">1</span>
               </div>
               <h3 className="font-semibold mb-1">Choose Your Date</h3>
               <p className="text-sm text-[var(--text-muted)]">
@@ -259,17 +324,17 @@ export default async function GroupDeparturesPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-xl font-bold">2</span>
+              <div className="w-12 h-12 border-2 border-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl font-bold text-[var(--primary)]">2</span>
               </div>
-              <h3 className="font-semibold mb-1">Book Your Spot</h3>
+              <h3 className="font-semibold mb-1">Request Your Spot</h3>
               <p className="text-sm text-[var(--text-muted)]">
-                Secure with 20% deposit. Balance due 2 weeks before
+                No payment today. After we confirm, a 20% deposit holds it
               </p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-xl font-bold">3</span>
+              <div className="w-12 h-12 border-2 border-[var(--primary)] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl font-bold text-[var(--primary)]">3</span>
               </div>
               <h3 className="font-semibold mb-1">Join Your Group</h3>
               <p className="text-sm text-[var(--text-muted)]">
@@ -282,22 +347,44 @@ export default async function GroupDeparturesPage() {
 
       {/* 2026 + 2027 Departures + Booking Form — PRIMARY CONTENT */}
       <div id="departures">
-        {allDepartures.length > 0 && (
-          <Suspense
-            fallback={
-              <div className="py-12 container mx-auto px-4">
-                <div className="h-9 w-48 bg-[var(--surface)] rounded-lg animate-pulse mb-8" />
-                <div className="h-[480px] bg-[var(--surface)] rounded-lg animate-pulse" />
+        {allDepartures.length > 0 ? (
+          <DeparturesBookingSection
+            yearGroups={[
+              { year: 2026, departures: departures2026 },
+              { year: 2027, departures: departures2027 },
+            ].filter((group) => group.departures.length > 0)}
+          />
+        ) : (
+          <section className="py-12" id="booking-form">
+            <div className="container mx-auto px-4">
+              <div className="max-w-2xl mx-auto bg-white border border-[var(--border)] rounded-xl p-8 text-center">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">
+                  {loadFailed ? "Departure dates are loading slowly" : "New dates are being scheduled"}
+                </h2>
+                <p className="text-[var(--text-muted)] mb-6">
+                  {loadFailed
+                    ? "We couldn't load the live departure list just now. Tell us your preferred month and route and we'll send you the open dates and prices."
+                    : "There are no open group dates right now. Tell us your preferred month and route and we'll send you dates as soon as they're published."}
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <Link
+                    href="/contact-us/"
+                    className="inline-flex items-center min-h-11 px-6 rounded-lg bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--secondary-foreground)] font-semibold transition-colors"
+                  >
+                    Ask for dates
+                  </Link>
+                  <a
+                    href={`https://wa.me/${SITE_CONFIG.phone.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center min-h-11 px-6 rounded-lg border border-[var(--border)] font-semibold hover:border-[var(--secondary)] transition-colors"
+                  >
+                    WhatsApp us
+                  </a>
+                </div>
               </div>
-            }
-          >
-            <DeparturesBookingSection
-              yearGroups={[
-                { year: 2026, departures: departures2026 },
-                { year: 2027, departures: departures2027 },
-              ].filter((group) => group.departures.length > 0)}
-            />
-          </Suspense>
+            </div>
+          </section>
         )}
       </div>
 
@@ -313,7 +400,7 @@ export default async function GroupDeparturesPage() {
               Contact us to express your interest and be the first to know when dates are released.
             </p>
             <Link
-              href="#booking-form"
+              href="/contact-us/"
               className="inline-block bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Register Your Interest
@@ -333,7 +420,7 @@ export default async function GroupDeparturesPage() {
               <blockquote className="text-lg italic mb-3">
                 &quot;An incredible experience! The crew was amazing and our guides made sure everyone reached the summit safely. Highly recommend the Lemosho route.&quot;
               </blockquote>
-              <p className="text-[var(--primary-light)] text-sm">
+              <p className="text-white/80 text-sm">
                 — Sarah M., United Kingdom (January 2025)
               </p>
             </div>
@@ -341,7 +428,7 @@ export default async function GroupDeparturesPage() {
               <blockquote className="text-lg italic mb-3">
                 &quot;I joined as a solo traveller and left with friends for life. The group dynamic was the highlight — we pushed each other through the tough moments and celebrated together at the summit.&quot;
               </blockquote>
-              <p className="text-[var(--primary-light)] text-sm">
+              <p className="text-white/80 text-sm">
                 — Marcus K., Germany (March 2025)
               </p>
             </div>
@@ -349,13 +436,17 @@ export default async function GroupDeparturesPage() {
               <blockquote className="text-lg italic mb-3">
                 &quot;At 58, I wasn&apos;t sure I could do it. Emmanuel and the team believed in me when I didn&apos;t believe in myself. Standing on Uhuru Peak was the proudest moment of my life.&quot;
               </blockquote>
-              <p className="text-[var(--primary-light)] text-sm">
+              <p className="text-white/80 text-sm">
                 — Linda T., Australia (July 2025)
               </p>
             </div>
           </div>
           <a href="https://www.tripadvisor.com/Attraction_Review-g297913-d15336338-Reviews-Snow_Africa_Adventures-Arusha_Arusha_Region.html" target="_blank" rel="noopener noreferrer" className="mt-8 flex items-center justify-center gap-1 text-[var(--secondary)] text-2xl hover:opacity-80 transition-opacity">
-            ★★★★★
+            <span className="inline-flex gap-0.5" role="img" aria-label="5 out of 5 stars">
+              {Array.from({ length: 5 }, (_, i) => (
+                <Star key={i} className="w-5 h-5 fill-current" aria-hidden="true" />
+              ))}
+            </span>
             <span className="text-white text-base ml-2">
               4.9/5 on TripAdvisor
             </span>
@@ -363,6 +454,8 @@ export default async function GroupDeparturesPage() {
         </div>
       </section>
 
+      {routeRows.length > 0 && (
+      <>
       {/* Route Comparison — each route's one-line highlight folded into the
           table itself instead of a separate, redundant card grid below it */}
       <section className="py-12 bg-[var(--surface)]">
@@ -370,166 +463,167 @@ export default async function GroupDeparturesPage() {
           <h2 className="font-heading text-3xl font-bold text-center mb-8">
             Route Comparison
           </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-lg overflow-hidden shadow text-sm">
+          <div className="overflow-x-auto rounded-xl border border-[var(--border)] bg-white">
+            <table className="w-full text-sm">
+              <caption className="sr-only">
+                Group departure routes with duration, difficulty, summit success rate and starting price per person
+              </caption>
               <thead>
                 <tr className="bg-[var(--primary-dark)] text-white">
-                  <th className="px-3 py-2 text-left">Route</th>
-                  <th className="px-3 py-2 text-left">Duration</th>
-                  <th className="px-3 py-2 text-left">Difficulty</th>
-                  <th className="px-3 py-2 text-left">Success Rate</th>
-                  <th className="px-3 py-2 text-left">2026 Price (PP)</th>
-                  <th className="px-3 py-2 text-left">2027 Price (PP)</th>
+                  <th scope="col" className="px-3 py-2 text-left">Route</th>
+                  <th scope="col" className="px-3 py-2 text-left">Duration</th>
+                  <th scope="col" className="px-3 py-2 text-left">Difficulty</th>
+                  <th scope="col" className="px-3 py-2 text-left">Success Rate</th>
+                  {priceYears.map((year) => (
+                    <th key={year} scope="col" className="px-3 py-2 text-left">
+                      {year} from (pp)
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b">
-                  <td className="px-3 py-2 font-medium">
-                    <Link
-                      href="/trekking/8-days-lemosho-route/"
-                      className="text-[var(--primary)] hover:underline"
-                    >
-                      8-Day Lemosho
-                    </Link>
-                    <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
-                      Our most popular route — the extra day gives our highest success rate, through pristine rainforest.
-                    </p>
-                  </td>
-                  <td className="px-3 py-2">8 Days</td>
-                  <td className="px-3 py-2">Moderate</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%</td>
-                  <td className="px-3 py-2 font-semibold">$2,680</td>
-                  <td className="px-3 py-2 font-semibold">$2,860</td>
-                </tr>
-                <tr className="border-b bg-[var(--surface)]">
-                  <td className="px-3 py-2 font-medium">
-                    <Link
-                      href="/trekking/7-days-machame-route/"
-                      className="text-[var(--primary)] hover:underline"
-                    >
-                      7-Day Machame
-                    </Link>
-                    <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
-                      The classic &quot;Whiskey Route&quot; — stunning scenery and the famous Barranco Wall.
-                    </p>
-                  </td>
-                  <td className="px-3 py-2">7 Days</td>
-                  <td className="px-3 py-2">Challenging</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">93%</td>
-                  <td className="px-3 py-2 font-semibold">$2,440</td>
-                  <td className="px-3 py-2 font-semibold">$2,580</td>
-                </tr>
-                <tr>
-                  <td className="px-3 py-2 font-medium">
-                    <Link
-                      href="/trekking/9-day-northern-circuit-route-kilimanjaro-guide/"
-                      className="text-[var(--primary)] hover:underline"
-                    >
-                      9-Day Northern Circuit
-                    </Link>
-                    <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
-                      The longest and quietest route, circling the mountain&apos;s remote northern slopes.
-                    </p>
-                  </td>
-                  <td className="px-3 py-2">9 Days</td>
-                  <td className="px-3 py-2">Moderate</td>
-                  <td className="px-3 py-2 text-[var(--primary)] font-semibold">95%+</td>
-                  <td className="px-3 py-2 font-semibold">$2,995</td>
-                  <td className="px-3 py-2 font-semibold">$3,100</td>
-                </tr>
+                {routeRows.map((row, i) => (
+                  <tr
+                    key={row.slug}
+                    className={`border-b border-[var(--border)] last:border-0 ${i % 2 ? "bg-[var(--surface)]" : ""}`}
+                  >
+                    <td className="px-3 py-2 font-medium">
+                      <Link href={`/trekking/${row.slug}/`} className="text-[var(--primary)] hover:underline">
+                        {row.name}
+                      </Link>
+                      {ROUTE_NOTES[row.slug] && (
+                        <p className="font-normal text-xs text-[var(--text-muted)] mt-0.5">
+                          {ROUTE_NOTES[row.slug]}
+                        </p>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 whitespace-nowrap">{row.durationDays} days</td>
+                    <td className="px-3 py-2">{row.physicalRating ?? "—"}</td>
+                    <td className="px-3 py-2 font-semibold">
+                      {row.successRate != null ? `${row.successRate}%` : "—"}
+                    </td>
+                    {priceYears.map((year) => {
+                      const price = row.fromPrice.get(year);
+                      return (
+                        <td key={year} className="px-3 py-2 font-semibold whitespace-nowrap">
+                          {price != null ? formatPrice(price) : "—"}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
+      </>
+      )}
+
       {/* Why Join a Group Climb — SEO Content. Trimmed to what the FAQ below
           doesn't already cover (inclusions, payment, success rate live there). */}
-      <section className="py-16">
+      <section className="py-12 md:py-14" aria-labelledby="why-group-heading">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold mb-6">
-              Why Join a Kilimanjaro Group Climb?
-            </h2>
-            <div className="prose prose-slate prose-lg max-w-none space-y-4 text-[var(--text-muted)]">
-              <p>
-                Climbing Mount Kilimanjaro — Africa&apos;s highest peak at 5,895 metres above sea level — is one of the most transformative experiences a traveller can undertake. Whether you&apos;re a seasoned trekker or embarking on your first high-altitude adventure, joining one of Snow Africa Adventure&apos;s scheduled group departures offers an unbeatable combination of value, camaraderie, and expert support that makes your Kilimanjaro dream both achievable and unforgettable.
-              </p>
-              <p>
-                Group climbing is ideal for solo travellers, couples, and small groups of friends who want the full Kilimanjaro experience without the premium cost of a private expedition. By sharing logistics, guides, and camping equipment with a small group of like-minded adventurers, you dramatically reduce the per-person cost while gaining something money can&apos;t buy: the shared energy, motivation, and friendship that comes from tackling Africa&apos;s greatest challenge together. Read our full <Link href="/kilimanjaro-group-climbs/" className="text-[var(--secondary)] font-semibold hover:underline">Kilimanjaro group climbs guide</Link> for a detailed breakdown of costs, routes, and what to expect.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                The Social Advantage of Group Climbing
-              </h3>
-              <p>
-                Many of our climbers arrive as strangers and leave as lifelong friends. There is something uniquely bonding about the shared experience of altitude sickness, pre-dawn summit pushes, and the indescribable emotion of standing at Uhuru Peak with the African continent spread out far below. Group departures create an instant community — a team of people who push each other forward on hard days and celebrate together on summit morning.
-              </p>
-              <p>
-                Solo travellers in particular benefit enormously from the group dynamic. Rather than facing the mountain&apos;s psychological challenges alone, you&apos;re embedded in a small team with your own guides, porters, and cook. The mountain becomes a shared project, and your fellow climbers become your support network for the days ahead. Past clients regularly tell us that the friendships made on Kilimanjaro became some of the most meaningful relationships of their travels.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Who Are Group Departures Ideal For?
-              </h3>
-              <p>
-                Group departures are perfectly suited for solo adventurers looking to share costs and connect with other climbers, couples wanting a structured adventure without the logistics of planning a private expedition, friends or colleagues in groups of two to four who want to join a larger team, and budget-conscious travellers who want a premium experience at a significantly lower price point than a private climb.
-              </p>
-              <p>
-                Our groups are deliberately small — a maximum of ten climbers per departure — ensuring an intimate experience that feels nothing like the large commercial groups sometimes seen on popular routes like Marangu. With a maximum of ten people, you get the benefits of group pricing while maintaining the personal attention and flexibility of a near-private experience.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Full Moon Climbs: Summit Under the Stars
-              </h3>
-              <p>
-                Among our most popular group departures are our Full Moon climbs, where the summit push coincides with a full or near-full moon. Reaching Stella Point and Uhuru Peak by moonlight — with the glaciers glowing silver and the curvature of the Earth visible on the horizon — is an experience that transcends description. We schedule several full moon departures each year across the Lemosho, Machame, and Northern Circuit routes. Check the departure calendar for upcoming full moon dates and book early, as these sell out months in advance.
+          <div className="max-w-5xl mx-auto">
+            <div className="max-w-2xl">
+              <h2 id="why-group-heading" className="font-heading text-2xl md:text-3xl font-bold">
+                Why Join a Kilimanjaro Group Climb?
+              </h2>
+              <p className="mt-3 text-[var(--text-muted)] leading-relaxed">
+                You get the full climb to Uhuru Peak (5,895 m) for less than a private trip, because
+                guides, crew and camping gear are shared across the team. Our{" "}
+                <Link
+                  href="/kilimanjaro-group-climbs/"
+                  className="font-medium text-[var(--text)] underline decoration-[var(--secondary)] decoration-2 underline-offset-4 hover:decoration-[var(--text)]"
+                >
+                  group climbs guide
+                </Link>{" "}
+                covers costs and routes in detail.
               </p>
             </div>
+
+            <dl className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-3 border-t border-[var(--border)] pt-6">
+              <div>
+                <dt className="flex items-center gap-2 font-heading font-semibold text-[var(--text)]">
+                  <Users className="w-4 h-4 text-[var(--text-muted)]" aria-hidden="true" />
+                  A team on the hard days
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                  Many climbers arrive as strangers and leave as friends. The group pushes each other
+                  through the long days and summit night. Solo climbers aren&apos;t alone with the
+                  mountain, and still have their own guides, porters and cook.
+                </dd>
+              </div>
+              <div>
+                <dt className="flex items-center gap-2 font-heading font-semibold text-[var(--text)]">
+                  <BadgeCheck className="w-4 h-4 text-[var(--text-muted)]" aria-hidden="true" />
+                  Who it suits
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                  Solo travellers sharing costs, couples who don&apos;t want to plan a private
+                  trip, and two to four friends joining a bigger team. Groups stop at{" "}
+                  {maxGroupSize} climbers, so it still feels close to private.
+                </dd>
+              </div>
+              <div>
+                <dt className="flex items-center gap-2 font-heading font-semibold text-[var(--text)]">
+                  <Moon className="w-4 h-4 text-[var(--text-muted)]" aria-hidden="true" />
+                  Full moon summits
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                  Some dates time summit night with a full or near-full moon, so you reach Stella
+                  Point and Uhuru by moonlight. We run them on Lemosho, Machame and the Northern
+                  Circuit. They fill first, so book early.
+                </dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>
 
       {/* Day-by-Day Overview */}
-      <section className="py-12 bg-[var(--surface)]">
+      <section className="py-12 md:py-14 bg-[var(--surface)]" aria-labelledby="expect-heading">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading text-3xl font-bold mb-6">
-              What to Expect: Your Kilimanjaro Group Climb Journey
-            </h2>
-            <div className="prose prose-slate prose-lg max-w-none space-y-4 text-[var(--text-muted)]">
-              <p>
-                From the moment you arrive in Arusha to the day you descend from the mountain, every detail of your group climb is managed by our team. Here is what a typical group departure looks like:
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Arrival & Pre-Climb Briefing
-              </h3>
-              <p>
-                You arrive in Arusha and we transfer you to your hotel, where you meet your fellow climbers over dinner. The following morning, our lead guide conducts a thorough gear check and briefing, covering everything from altitude awareness to daily schedules and summit night expectations. This is your chance to ask questions, finalize any gear rentals, and get to know the team who will be by your side for the next week.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                On the Mountain: Daily Routine
-              </h3>
-              <p>
-                Each morning begins with a wake-up call, hot drinks, and breakfast in the dining tent. After packing, you hike for 5-8 hours at a gentle pace — &quot;pole pole&quot; (slowly slowly) in Swahili — with regular rest stops for water, snacks, and photography. Your porters move ahead to set up the next camp, so when you arrive you&apos;re welcomed with popcorn, tea, and hot wash water. Evenings are spent sharing stories, playing cards, and watching the stars at altitude before an early night.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Summit Night: The Final Push
-              </h3>
-              <p>
-                The summit attempt begins around midnight from the high camp. You&apos;ll climb through the darkness with your headlamp illuminating the trail, stopping frequently for hot drinks and rest. As dawn approaches, the sky begins to glow and the first rays of sunrise hit the glaciers — an unforgettable sight. By 6-8 AM, you reach Uhuru Peak at 5,895m. After celebrating, photographs, and soaking in the views, you begin the long descent to your base camp, arriving by late afternoon.
-              </p>
-
-              <h3 className="font-heading text-2xl font-bold text-[var(--text)] mt-8 mb-3">
-                Post-Climb Celebration
-              </h3>
-              <p>
-                After descending to the final gate, you receive your official summit certificate and celebrate with your team — tipping ceremony, group photos, and the satisfaction of having conquered Africa&apos;s highest peak. We transfer you back to your Arusha hotel for a well-earned hot shower and celebration dinner.
+          <div className="max-w-5xl mx-auto">
+            <div className="max-w-2xl">
+              <h2 id="expect-heading" className="font-heading text-2xl md:text-3xl font-bold">
+                What to Expect: Your Kilimanjaro Group Climb Journey
+              </h2>
+              <p className="mt-3 text-[var(--text-muted)] leading-relaxed">
+                Our team handles every detail from the day you land in Arusha to the day you come
+                down. A typical group departure runs like this.
               </p>
             </div>
+
+            <ol className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  title: "Arrival and briefing",
+                  text: "We collect you in Arusha and you meet the group over dinner. Next morning the lead guide checks your gear and walks you through altitude, the daily plan and summit night. Rent anything you're missing then.",
+                },
+                {
+                  title: "Days on the mountain",
+                  text: "Breakfast in the dining tent, then 5 to 8 hours of walking “pole pole” (slowly, slowly) with breaks for water and photos. Porters go ahead, so camp is up with tea, popcorn and hot wash water when you arrive.",
+                },
+                {
+                  title: "Summit night",
+                  text: "You leave high camp around midnight by headlamp, stopping often for hot drinks. Sunrise lights the glaciers, and most climbers reach Uhuru Peak (5,895 m) between 6 and 8 AM, then descend to camp by late afternoon.",
+                },
+                {
+                  title: "Back in Arusha",
+                  text: "At the gate you get your summit certificate, then the tipping ceremony and group photos. We drive you back to your hotel for a hot shower and a celebration dinner.",
+                },
+              ].map((step, i) => (
+                <li key={step.title} className="border-t-2 border-[var(--text)] pt-4">
+                  <span className="font-heading text-sm font-semibold text-[var(--text-muted)] tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-1 font-heading font-semibold text-[var(--text)]">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{step.text}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
@@ -653,7 +747,7 @@ export default async function GroupDeparturesPage() {
                 What is the summit success rate for group departures?
               </summary>
               <div className="px-4 pb-4 text-[var(--text-muted)]">
-                Our group departures achieve a 95%+ summit success rate across all routes. This is significantly higher than the industry average of 65-70%, thanks to our experienced guides, proper acclimatization schedules, and small group sizes that allow individual attention.
+                93% of our climbers reach the summit across all routes, against an industry average of 65-70%. Longer routes do better: see the route comparison above for each route. The difference comes from experienced guides, proper acclimatization schedules, and small groups that allow individual attention.
               </div>
             </details>
             <details className="bg-[var(--surface)] rounded-lg group">

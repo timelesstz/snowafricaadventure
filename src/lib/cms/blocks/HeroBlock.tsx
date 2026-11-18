@@ -57,7 +57,7 @@ export function HeroBlock({
       >
         <div className={`max-w-2xl flex flex-col ${align} ${textAlign === "center" ? "mx-auto" : ""}`}>
           {badgeText && (
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold inline-block mb-4 w-fit">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold inline-block mb-4 w-fit">
               {badgeText}
             </span>
           )}

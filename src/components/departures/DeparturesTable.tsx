@@ -6,6 +6,7 @@ import { AvailabilityBadge, SocialProofBadge } from "@/components/ui/Badge";
 import { ShareButton } from "@/components/social/ShareButtons";
 import { InviteFriendsModal } from "@/components/forms/InviteFriendsModal";
 import { formatPrice } from "@/lib/utils";
+import { parseCalendarDate } from "@/lib/departure-rules";
 import { type DepartureShareData } from "@/lib/share";
 import { trackAddToCart } from "@/lib/analytics";
 import {
@@ -42,6 +43,8 @@ interface DeparturesTableProps {
   onSelectDeparture?: (departure: Departure) => void;
 }
 
+const COLLAPSED_ROWS = 12;
+
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
@@ -66,6 +69,11 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
   const [availabilityFilter, setAvailabilityFilter] = useState<"all" | "available" | "limited">("all");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  // Long seasons (48 dates in 2027) are collapsed to the first rows so the
+  // booking form below stays reachable. Hidden rows stay in the HTML for
+  // crawlers; filtering always shows every match.
+  const [showAll, setShowAll] = useState(false);
+
   // Invite modal state
   const [inviteModalDeparture, setInviteModalDeparture] = useState<DepartureShareData | null>(null);
 
@@ -80,7 +88,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
   const availableMonths = useMemo(() => {
     const months = new Set<number>();
     departures.forEach((d) => {
-      months.add(new Date(d.arrivalDate).getMonth());
+      months.add(parseCalendarDate(d.arrivalDate).getMonth());
     });
     return Array.from(months).sort((a, b) => a - b);
   }, [departures]);
@@ -98,7 +106,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
   const monthCounts = useMemo(() => {
     const counts: Record<number, number> = {};
     departures.forEach((d) => {
-      const m = new Date(d.arrivalDate).getMonth();
+      const m = parseCalendarDate(d.arrivalDate).getMonth();
       counts[m] = (counts[m] || 0) + 1;
     });
     return counts;
@@ -109,7 +117,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
     return departures.filter((d) => {
       if (selectedRoutes.size > 0 && !selectedRoutes.has(d.route.slug)) return false;
       if (selectedMonths.size > 0) {
-        const month = new Date(d.arrivalDate).getMonth();
+        const month = parseCalendarDate(d.arrivalDate).getMonth();
         if (!selectedMonths.has(month)) return false;
       }
       if (fullMoonOnly && !d.isFullMoon) return false;
@@ -125,6 +133,10 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
     (selectedMonths.size > 0 ? 1 : 0) +
     (fullMoonOnly ? 1 : 0) +
     (availabilityFilter !== "all" ? 1 : 0);
+
+  const collapsed =
+    !showAll && activeFilterCount === 0 && filteredDepartures.length > COLLAPSED_ROWS;
+  const isRowHidden = (index: number) => collapsed && index >= COLLAPSED_ROWS;
 
   const clearAllFilters = () => {
     setSelectedRoutes(new Set());
@@ -237,7 +249,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                 onClick={() => toggleMonth(month)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   isSelected
-                    ? "bg-[var(--secondary)] text-white shadow-sm"
+                    ? "bg-[var(--secondary)] text-[var(--secondary-foreground)] shadow-sm"
                     : "bg-[var(--surface)] text-[var(--text-muted)] hover:bg-border hover:text-[var(--text)]"
                 }`}
               >
@@ -331,7 +343,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
             <Filter className="w-4 h-4" />
             Filters
             {activeFilterCount > 0 && (
-              <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[var(--secondary)] rounded-full">
+              <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-[var(--secondary-foreground)] bg-[var(--secondary)] rounded-full">
                 {activeFilterCount}
               </span>
             )}
@@ -351,7 +363,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(false)}
-                className="w-full py-2.5 bg-[var(--secondary)] text-white rounded-lg font-medium text-sm hover:bg-[var(--secondary-dark)] transition-colors"
+                className="w-full py-2.5 bg-[var(--secondary)] text-[var(--secondary-foreground)] rounded-lg font-medium text-sm hover:bg-[var(--secondary-dark)] transition-colors"
               >
                 Show {filteredDepartures.length} departures
               </button>
@@ -361,7 +373,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
       </div>
 
       {/* Desktop: Sidebar + Table layout */}
-      <div className="flex gap-8">
+      <div className="flex gap-6 xl:gap-8">
         {/* Sticky Sidebar - Desktop only */}
         <aside className="hidden lg:block w-[260px] shrink-0">
           <div className="sticky top-24 bg-white border border-[var(--border)] rounded-xl p-5 shadow-sm max-h-[calc(100vh-120px)] overflow-y-auto">
@@ -403,7 +415,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                 ))}
               {fullMoonOnly && (
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[var(--secondary)]/10 text-[var(--secondary-dark)] rounded-full text-xs font-medium">
-                  {String.fromCodePoint(0x1F315)} Full Moon
+                  <Moon className="w-3.5 h-3.5" aria-hidden="true" /> Full Moon
                   <button type="button" onClick={() => setFullMoonOnly(false)} className="hover:text-red-500" aria-label="Remove Full Moon filter">
                     <X className="w-3 h-3" />
                   </button>
@@ -433,136 +445,129 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
           )}
 
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto">
+          <div className="hidden md:block overflow-x-auto rounded-xl border border-[var(--border)] bg-white">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-[var(--primary-dark)] text-white">
-                  <th className="text-left px-3 py-2 font-semibold">Route</th>
-                  <th className="text-left px-3 py-2 font-semibold">Arrival</th>
-                  <th className="text-left px-3 py-2 font-semibold">End</th>
-                  <th className="text-left px-3 py-2 font-semibold">Price</th>
-                  <th className="text-left px-3 py-2 font-semibold">Availability</th>
-                  <th className="text-left px-3 py-2 font-semibold">Action</th>
+                <tr className="bg-[var(--primary-dark)] text-white text-left">
+                  <th scope="col" className="px-4 py-2.5 font-semibold">Route</th>
+                  <th scope="col" className="px-4 py-2.5 font-semibold">Dates</th>
+                  <th scope="col" className="px-4 py-2.5 font-semibold">Price</th>
+                  <th scope="col" className="px-4 py-2.5 font-semibold">Availability</th>
                 </tr>
               </thead>
-              <tbody>
-                {filteredDepartures.map((dep, index) => (
-                  <tr
-                    key={dep.id}
-                    className={`border-b hover:bg-[var(--surface)] ${
-                      index % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"
-                    }`}
-                  >
-                    <td className="px-3 py-2">
-                      <div className="font-medium">
-                        {dep.isFullMoon && (
-                          <span className="mr-1" title="Full Moon Climb">
-                            {String.fromCodePoint(0x1F315)}
-                          </span>
-                        )}
-                        {dep.route.name}
-                      </div>
-                      {dep.isFullMoon && (
-                        <span className="text-xs text-[var(--secondary-dark)]">
-                          Full Moon Summit
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      {format(new Date(dep.arrivalDate), "MMM d, yyyy")}
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      {format(new Date(dep.endDate), "MMM d, yyyy")}
-                    </td>
-                    <td className="px-3 py-2 font-semibold text-[var(--primary-dark)] whitespace-nowrap">
-                      {dep.earlyBirdPrice ? (
-                        <span className="flex flex-col leading-tight">
-                          <span>{formatPrice(dep.earlyBirdPrice)}</span>
-                          <span className="text-[10px] font-normal text-[var(--text-light)]">
-                            <s>{formatPrice(dep.price)}</s>{" "}
-                            <span className="text-acacia-700 font-medium">Early bird</span>
-                          </span>
-                        </span>
-                      ) : (
-                        formatPrice(dep.price)
-                      )}
-                    </td>
-                    <td className="px-3 py-2">
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1.5">
-                          <AvailabilityBadge
-                            available={dep.availableSpots}
-                            total={dep.maxParticipants}
-                          />
-                          <SocialProofBadge
-                            bookedSpots={dep.bookedSpots}
-                            availableSpots={dep.availableSpots}
-                          />
+              <tbody className="divide-y divide-[var(--border)]">
+                {filteredDepartures.map((dep, index) => {
+                  const arrival = parseCalendarDate(dep.arrivalDate);
+                  const end = parseCalendarDate(dep.endDate);
+                  const joinLabel = `Join ${dep.route.name} departing ${format(arrival, "MMM d, yyyy")}`;
+                  return (
+                    <tr
+                      key={dep.id}
+                      className={`align-middle hover:bg-[var(--surface)] ${isRowHidden(index) ? "hidden" : ""}`}
+                    >
+                      <td className="px-4 py-3 min-w-[11rem]">
+                        <div className="font-heading font-semibold text-[15px] leading-snug text-[var(--text)]">
+                          {dep.route.name}
                         </div>
-                        {/* Fixed height reserved up front so the text appearing post-hydration
-                            doesn't shift the row (CLS) — same element renders on server and
-                            client, only its text content is filled in after hydration. */}
-                        <span className="text-[10px] text-[var(--secondary-dark)] font-medium block h-[14px]">
+                        {/* Fixed height so the countdown, filled in after hydration,
+                            doesn't shift the row (CLS). */}
+                        <span className="mt-0.5 block h-4 text-xs font-medium text-amber-800">
                           {isHydrated && dep.availableSpots > 0 && (() => {
-                            const daysUntil = differenceInDays(new Date(dep.arrivalDate), new Date());
+                            const daysUntil = differenceInDays(arrival, new Date());
                             if (daysUntil <= 0 || daysUntil > 60) return null;
                             return `Departs in ${daysUntil} ${daysUntil === 1 ? "day" : "days"}`;
                           })()}
                         </span>
-                      </div>
-                    </td>
-                    <td className="px-3 py-2">
-                      <div className="flex items-center gap-1.5">
-                        {dep.availableSpots > 0 ? (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              trackAddToCart({
-                                itemId: dep.id,
-                                itemName: dep.route.name,
-                                itemCategory: "kilimanjaro",
-                                price: dep.price,
-                              });
-                              onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id);
-                            }}
-                            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-3 py-1.5 rounded font-medium text-xs transition-colors cursor-pointer"
-                          >
-                            JOIN NOW
-                          </button>
-                        ) : (
-                          <span className="text-[var(--text-light)] text-xs">Sold Out</span>
+                        {dep.isFullMoon && (
+                          <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-amber-800">
+                            <Moon className="w-3.5 h-3.5" aria-hidden="true" /> Full moon summit
+                          </span>
                         )}
-                        <ShareButton
-                          departure={departureToShareData(dep)}
-                          onInviteClick={() =>
-                            setInviteModalDeparture(departureToShareData(dep))
-                          }
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="font-medium text-[var(--text)]">{format(arrival, "EEE, MMM d, yyyy")}</div>
+                        <div className="text-xs text-[var(--text-muted)]">to {format(end, "EEE, MMM d, yyyy")}</div>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="font-semibold text-[var(--primary-dark)]">
+                          {formatPrice(dep.earlyBirdPrice ?? dep.price)}
+                        </div>
+                        <div className="text-xs text-[var(--text-muted)]">
+                          {dep.earlyBirdPrice ? (
+                            <>
+                              <s>{formatPrice(dep.price)}</s>{" "}
+                              <span className="text-acacia-700 font-medium">Early bird</span>
+                            </>
+                          ) : (
+                            "per person"
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                          <div className="flex flex-col gap-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              <AvailabilityBadge available={dep.availableSpots} total={dep.maxParticipants} />
+                              <SocialProofBadge bookedSpots={dep.bookedSpots} availableSpots={dep.availableSpots} />
+                            </div>
+                            <span className="text-xs text-[var(--text-muted)] whitespace-nowrap">
+                              {dep.availableSpots > 0
+                                ? `${dep.availableSpots} of ${dep.maxParticipants} seats left`
+                                : null}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            {dep.availableSpots > 0 ? (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  trackAddToCart({
+                                    itemId: dep.id,
+                                    itemName: dep.route.name,
+                                    itemCategory: "kilimanjaro",
+                                    price: dep.price,
+                                  });
+                                  onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id);
+                                }}
+                                aria-label={joinLabel}
+                                className="inline-flex items-center justify-center min-h-10 whitespace-nowrap bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--secondary-foreground)] px-5 rounded-lg font-semibold text-sm transition-colors cursor-pointer"
+                              >
+                                Join
+                              </button>
+                            ) : (
+                              <span className="text-[var(--text-muted)] text-xs font-medium">Sold out</span>
+                            )}
+                            <ShareButton
+                              departure={departureToShareData(dep)}
+                              onInviteClick={() => setInviteModalDeparture(departureToShareData(dep))}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
 
           {/* Mobile Cards */}
           <div className="md:hidden space-y-3">
-            {filteredDepartures.map((dep) => (
+            {filteredDepartures.map((dep, index) => (
               <div
                 key={dep.id}
-                className="bg-white border border-[var(--border)] rounded-lg p-3"
+                className={`bg-white border border-[var(--border)] rounded-lg p-3 ${isRowHidden(index) ? "hidden" : ""}`}
               >
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="font-semibold text-sm">
                       {dep.isFullMoon && (
-                        <span className="mr-1">{String.fromCodePoint(0x1F315)}</span>
+                        <span className="mr-1 inline-flex align-[-2px] text-amber-700"><Moon className="w-3.5 h-3.5" aria-label="Full moon climb" /></span>
                       )}
                       {dep.route.name}
                     </h3>
                     {dep.isFullMoon && (
-                      <span className="text-[10px] text-[var(--secondary-dark)]">
+                      <span className="text-xs text-amber-800">
                         Full Moon Summit
                       </span>
                     )}
@@ -581,12 +586,12 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
 
                 <div className="grid grid-cols-2 gap-1 text-xs text-[var(--text-muted)] mb-3">
                   <div>
-                    <span className="text-[var(--text-light)]">Arrival:</span>{" "}
-                    {format(new Date(dep.arrivalDate), "MMM d, yyyy")}
+                    <span className="text-[var(--text-muted)] font-medium">Arrival:</span>{" "}
+                    {format(parseCalendarDate(dep.arrivalDate), "MMM d, yyyy")}
                   </div>
                   <div>
-                    <span className="text-[var(--text-light)]">End:</span>{" "}
-                    {format(new Date(dep.endDate), "MMM d, yyyy")}
+                    <span className="text-[var(--text-muted)] font-medium">End:</span>{" "}
+                    {format(parseCalendarDate(dep.endDate), "MMM d, yyyy")}
                   </div>
                 </div>
 
@@ -595,7 +600,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                     {dep.earlyBirdPrice ? (
                       <>
                         {formatPrice(dep.earlyBirdPrice)}{" "}
-                        <span className="text-xs font-normal text-[var(--text-light)]">
+                        <span className="text-xs font-normal text-[var(--text-muted)]">
                           <s>{formatPrice(dep.price)}</s>
                         </span>
                       </>
@@ -616,12 +621,13 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
                           });
                           onSelectDeparture ? onSelectDeparture(dep) : scrollToBookingForm(dep.id);
                         }}
-                        className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--foreground)] px-3 py-1.5 rounded font-medium text-xs transition-colors cursor-pointer"
+                        aria-label={`Join ${dep.route.name} departing ${format(parseCalendarDate(dep.arrivalDate), "MMM d, yyyy")}`}
+                        className="inline-flex items-center justify-center min-h-11 whitespace-nowrap bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--secondary-foreground)] px-5 rounded-lg font-semibold text-sm transition-colors cursor-pointer"
                       >
-                        JOIN NOW
+                        Join
                       </button>
                     ) : (
-                      <span className="text-[var(--text-light)] text-xs">Sold Out</span>
+                      <span className="text-[var(--text-muted)] text-xs font-medium">Sold out</span>
                     )}
                     <ShareButton
                       departure={departureToShareData(dep)}
@@ -635,6 +641,19 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
             ))}
           </div>
 
+          {collapsed && (
+            <div className="mt-4 text-center">
+              <button
+                type="button"
+                onClick={() => setShowAll(true)}
+                className="inline-flex items-center gap-2 min-h-11 px-5 rounded-lg border border-[var(--border)] bg-white text-sm font-semibold text-[var(--text)] hover:border-[var(--secondary)] transition-colors"
+              >
+                Show all {filteredDepartures.length} {year} departures
+                <ChevronDown className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </div>
+          )}
+
           {filteredDepartures.length === 0 && (
             <div className="text-center py-16 bg-white border border-[var(--border)] rounded-lg">
               <CalendarDays className="w-12 h-12 text-[var(--text-light)] mx-auto mb-3" />
@@ -647,7 +666,7 @@ export function DeparturesTable({ departures, year, onSelectDeparture }: Departu
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--secondary)] text-white rounded-lg text-sm font-medium hover:bg-[var(--secondary-dark)] transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--secondary)] text-[var(--secondary-foreground)] rounded-lg text-sm font-medium hover:bg-[var(--secondary-dark)] transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 Clear all filters

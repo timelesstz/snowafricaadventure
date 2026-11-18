@@ -127,7 +127,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-medium"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-[var(--primary-dark)] rounded-lg hover:bg-amber-600 transition-colors font-medium"
             >
               Explore More
               <ArrowRight className="w-5 h-5" />

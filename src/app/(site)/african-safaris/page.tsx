@@ -196,7 +196,7 @@ export default function AfricanSafarisPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Tanzania&apos;s Finest Wildlife
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -310,13 +310,13 @@ export default function AfricanSafarisPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <span className="absolute top-3 left-3 px-2 py-1 bg-[var(--secondary)] text-white text-xs font-semibold rounded-full">
+                  <span className="absolute top-3 left-3 px-2 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] text-xs font-semibold rounded-full">
                     {dest.tag}
                   </span>
                 </div>
                 <div className="p-5">
                   <h3 className="font-heading text-xl font-bold mb-1">{dest.name}</h3>
-                  <p className="text-sm text-[var(--secondary-dark)] font-medium mb-2">{dest.tagline}</p>
+                  <p className="text-sm text-[var(--secondary-ink)] font-medium mb-2">{dest.tagline}</p>
                   <p className="text-sm text-[var(--text-muted)]">{dest.description}</p>
                 </div>
               </div>
@@ -359,7 +359,7 @@ export default function AfricanSafarisPage() {
                 <p className="text-sm text-[var(--text-muted)] mb-4">{description}</p>
                 <div className="flex items-center justify-between pt-3 border-t border-[var(--border)]">
                   <span className="text-xs text-[var(--text-muted)]">{duration}</span>
-                  <span className="text-sm font-bold text-[var(--secondary-dark)]">From {priceFrom}/pp</span>
+                  <span className="text-sm font-bold text-[var(--secondary-ink)]">From {priceFrom}/pp</span>
                 </div>
               </div>
             ))}
@@ -443,7 +443,7 @@ export default function AfricanSafarisPage() {
                 <div className="border-t border-[var(--border)] pt-4">
                   <p className="font-semibold">{test.author}</p>
                   <p className="text-sm text-[var(--text-muted)]">{test.location}</p>
-                  <p className="text-sm text-[var(--secondary-dark)] font-medium">{test.trip}</p>
+                  <p className="text-sm text-[var(--secondary-ink)] font-medium">{test.trip}</p>
                 </div>
               </div>
             ))}

@@ -1,12 +1,21 @@
 import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { AdminRole, BookingStatus, Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 import { nanoid } from "nanoid";
 import { sendClimberDetailsRequestEmail } from "@/lib/email/send";
 import { adminBookingUpdateSchema } from "@/lib/schemas";
 import { BookingNotifications } from "@/lib/notifications";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
+
+/** Thrown inside the update transaction when a change would overbook a departure. */
+class SeatLimitError extends Error {
+  constructor(public available: number, public max: number) {
+    super("Not enough seats on this departure");
+  }
+}
 
 // GET /api/admin/bookings/[id] - Get a single booking
 export async function GET(
@@ -93,7 +102,13 @@ export async function PUT(
     // Get current booking for status change tracking
     const currentBooking = await prisma.booking.findUnique({
       where: { id },
-      select: { status: true, depositPaid: true, balancePaid: true },
+      select: {
+        status: true,
+        depositPaid: true,
+        balancePaid: true,
+        totalClimbers: true,
+        departureId: true,
+      },
     });
 
     if (!currentBooking) {
@@ -154,18 +169,52 @@ export async function PUT(
       }
     }
 
-    const booking = await prisma.booking.update({
-      where: { id },
-      data: updateData,
-      include: {
-        departure: {
-          include: {
-            route: { select: { title: true, slug: true } },
+    // Seats are only taken when a booking reaches a seat-holding status
+    // (deposit paid / confirmed / completed). Check capacity whenever this
+    // change makes a booking hold seats or hold more of them, inside the same
+    // transaction as the update, so two edits can't both take the last seats.
+    const holdsSeats = (status: BookingStatus) => SPOT_HOLDING_STATUSES.includes(status);
+    const nextStatus = (data.status ?? currentBooking.status) as BookingStatus;
+    const nextClimbers = data.totalClimbers ?? currentBooking.totalClimbers;
+    const takesMoreSeats =
+      holdsSeats(nextStatus) &&
+      (!holdsSeats(currentBooking.status) || nextClimbers > currentBooking.totalClimbers);
+
+    const booking = await prisma.$transaction(async (tx) => {
+      if (takesMoreSeats && currentBooking.departureId) {
+        const departure = await tx.groupDeparture.findUnique({
+          where: { id: currentBooking.departureId },
+          select: { maxParticipants: true },
+        });
+        if (departure) {
+          const otherHeld = await tx.booking.findMany({
+            where: {
+              departureId: currentBooking.departureId,
+              status: { in: SPOT_HOLDING_STATUSES },
+              id: { not: id },
+            },
+            select: { totalClimbers: true },
+          });
+          const available = departure.maxParticipants - countBookedSpots(otherHeld);
+          if (nextClimbers > available) {
+            throw new SeatLimitError(Math.max(0, available), departure.maxParticipants);
+          }
+        }
+      }
+
+      return tx.booking.update({
+        where: { id },
+        data: updateData,
+        include: {
+          departure: {
+            include: {
+              route: { select: { title: true, slug: true } },
+            },
           },
+          commission: true,
+          climberTokens: true,
         },
-        commission: true,
-        climberTokens: true,
-      },
+      });
     });
 
     // In-app notifications for payment / status changes (best-effort)
@@ -292,8 +341,18 @@ export async function PUT(
       }
     }
 
+    // A status change can free or take seats shown on the public page.
+    revalidatePath("/kilimanjaro-join-group-departures/");
     return NextResponse.json(booking);
   } catch (error) {
+    if (error instanceof SeatLimitError) {
+      return NextResponse.json(
+        {
+          error: `Only ${error.available} of ${error.max} seats are free on this departure. Raise the departure's capacity or move this booking before marking it paid or confirmed.`,
+        },
+        { status: 409 }
+      );
+    }
     if (error instanceof ZodError) {
       return NextResponse.json(
         { error: "Validation failed", issues: error.issues },

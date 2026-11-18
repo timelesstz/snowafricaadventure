@@ -139,7 +139,7 @@ export function SafariCardEnhanced({
             )}
             <span className="inline-flex items-center gap-2 text-[var(--secondary)] font-semibold group-hover:gap-3 transition-all shrink-0">
               Explore Safari
-              <span className="w-8 h-8 rounded-full bg-[var(--secondary)] flex items-center justify-center text-white group-hover:bg-[var(--secondary-dark)] transition-colors">
+              <span className="w-8 h-8 rounded-full bg-[var(--secondary)] flex items-center justify-center text-[var(--primary-dark)] group-hover:bg-[var(--secondary-dark)] transition-colors">
                 →
               </span>
             </span>
@@ -337,7 +337,7 @@ export function SafariCardEnhanced({
           ) : (
             <span className="text-sm text-[var(--text-muted)]">Get Quote</span>
           )}
-          <span className="w-10 h-10 rounded-full bg-[var(--secondary)] flex items-center justify-center text-white group-hover:bg-[var(--secondary-dark)] group-hover:scale-110 transition-all shadow-lg">
+          <span className="w-10 h-10 rounded-full bg-[var(--secondary)] flex items-center justify-center text-[var(--primary-dark)] group-hover:bg-[var(--secondary-dark)] group-hover:scale-110 transition-all shadow-lg">
             →
           </span>
         </div>

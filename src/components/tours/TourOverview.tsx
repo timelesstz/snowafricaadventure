@@ -43,7 +43,7 @@ export function TourOverview({
   return (
     <section id="overview" className="py-16 lg:py-20">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-12 lg:gap-16">
           {/* Main Content */}
           <div className="max-w-[720px]">
             <span className="inline-block font-heading text-xs font-bold uppercase tracking-widest text-[var(--secondary)] pb-2 mb-4 border-b-2 border-[var(--border)]">
@@ -88,7 +88,7 @@ export function TourOverview({
               </div>
               <Link
                 href="#book"
-                className="inline-flex items-center justify-center px-8 py-3.5 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 transition-all whitespace-nowrap"
+                className="inline-flex items-center justify-center px-8 py-3.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 transition-all whitespace-nowrap"
               >
                 Book Now
               </Link>

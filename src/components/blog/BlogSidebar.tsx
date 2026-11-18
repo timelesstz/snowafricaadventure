@@ -24,7 +24,7 @@ export function BlogSidebar({
               <li key={cat.slug}>
                 <Link
                   href={`/category/${cat.slug}/`}
-                  className="flex items-center justify-between py-2 px-3 rounded-lg text-[var(--text)] hover:bg-[var(--primary-light)] hover:text-[var(--primary-dark)] transition-colors"
+                  className="flex items-center justify-between py-2 px-3 rounded-lg text-[var(--text)] hover:bg-[var(--primary-tint)] hover:text-[var(--primary-dark)] transition-colors"
                 >
                   <span>{cat.name}</span>
                   <span className="text-xs bg-[var(--muted)] px-2 py-1 rounded-full text-[var(--text-muted)]">
@@ -45,13 +45,13 @@ export function BlogSidebar({
           </div>
           <h3 className="font-heading text-xl font-bold">Climb Kilimanjaro</h3>
         </div>
-        <p className="text-[var(--primary-light)] text-sm mb-5 leading-relaxed">
+        <p className="text-[var(--on-dark-muted)] text-sm mb-5 leading-relaxed">
           Ready for the adventure of a lifetime? Join our expert guides on
           Africa&apos;s highest peak.
         </p>
         <Link
           href="/trekking/"
-          className="flex items-center justify-center gap-2 bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-light)] transition-colors"
+          className="flex items-center justify-center gap-2 bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-tint)] transition-colors"
         >
           View Routes
           <ArrowRight className="w-4 h-4" />
@@ -72,7 +72,7 @@ export function BlogSidebar({
         </p>
         <Link
           href="/tanzania-safaris/"
-          className="flex items-center justify-center gap-2 bg-white text-[var(--secondary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
+          className="flex items-center justify-center gap-2 bg-white text-[var(--secondary-ink)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
         >
           View Safaris
           <ArrowRight className="w-4 h-4" />

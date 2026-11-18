@@ -149,6 +149,7 @@ export function EmailShareModal({
                 id="subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
+                maxLength={120}
                 className="w-full px-3 py-2 border border-[var(--border)] rounded-md focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)]"
                 required
               />
@@ -163,6 +164,7 @@ export function EmailShareModal({
                 id="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                maxLength={2000}
                 rows={8}
                 className="w-full px-3 py-2 border border-[var(--border)] rounded-md focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)]"
                 required

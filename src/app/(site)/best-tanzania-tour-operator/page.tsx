@@ -185,7 +185,7 @@ export default async function BestTanzaniaTourOperatorPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 TATO Licensed
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -317,7 +317,7 @@ export default async function BestTanzaniaTourOperatorPage() {
                 <div className="mt-6 p-5 bg-white/5 border border-white/10 rounded-xl">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 bg-[var(--secondary)] rounded-full flex items-center justify-center">
-                      <Mountain className="w-6 h-6 text-white" />
+                      <Mountain className="w-6 h-6 text-[var(--primary-dark)]" />
                     </div>
                     <div>
                       <p className="font-bold text-lg">Emmanuel Moshi</p>
@@ -368,7 +368,7 @@ export default async function BestTanzaniaTourOperatorPage() {
                 <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-200 transition-colors">
                   <service.icon className="w-6 h-6 text-amber-600" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--secondary-dark)] transition-colors">
+                <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--secondary-ink)] transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">{service.description}</p>
@@ -460,7 +460,7 @@ export default async function BestTanzaniaTourOperatorPage() {
                 <div className="border-t border-[var(--border)] pt-4">
                   <p className="font-semibold">{t.author}</p>
                   <p className="text-sm text-[var(--text-muted)]">{t.location}</p>
-                  <p className="text-sm text-[var(--secondary-dark)] font-medium">{t.trip}</p>
+                  <p className="text-sm text-[var(--secondary-ink)] font-medium">{t.trip}</p>
                 </div>
               </div>
             ))}

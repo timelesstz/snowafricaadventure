@@ -287,6 +287,7 @@ export function InviteFriendsModal({
                 value={personalMessage}
                 onChange={(e) => setPersonalMessage(e.target.value)}
                 rows={3}
+                maxLength={500}
                 placeholder="Add a personal note to your invitation..."
                 className="w-full px-3 py-2 border border-[var(--border)] rounded-md focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] text-sm"
               />

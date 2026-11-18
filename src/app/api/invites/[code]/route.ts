@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
+import { countBookedSpots, seatDisplayBookingWhere } from "@/lib/booking-spots";
 
 interface RouteParams {
   params: Promise<{ code: string }>;
@@ -25,9 +25,7 @@ export async function GET(
               },
             },
             bookings: {
-              where: {
-                status: { in: SPOT_HOLDING_STATUSES },
-              },
+              where: seatDisplayBookingWhere(),
               select: {
                 totalClimbers: true,
               },
@@ -78,7 +76,7 @@ export async function GET(
         arrivalDate: dep.arrivalDate.toISOString(),
         endDate: dep.endDate.toISOString(),
         price: Number(dep.price),
-        availableSpots: dep.maxParticipants - bookedSpots,
+        availableSpots: Math.max(0, dep.maxParticipants - bookedSpots),
         isFullMoon: dep.isFullMoon,
         status: dep.status,
       };
