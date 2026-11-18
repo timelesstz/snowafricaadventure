@@ -277,7 +277,7 @@ export function InquiryForm({
           <div className="grid grid-cols-[minmax(0,1fr)_104px] gap-3">
             <div>
               <label htmlFor={fid("arrivalDate")} className="block text-sm font-medium text-slate-700 mb-1">
-                Start date <span className="font-normal text-slate-500">(optional)</span>
+                Start date
               </label>
               <input
                 type="date"

@@ -1695,7 +1695,7 @@ img {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: white;
+  color: var(--primary-dark);
 }
 
 .why-item h3 {
@@ -2092,6 +2092,12 @@ img {
 .contact-step span {
   color: rgba(255,255,255,0.9);
   padding-top: 0.25rem;
+}
+
+/* Amber circle: dark numeral (white on amber is 2.1:1) */
+.contact-step .contact-step-number {
+  color: var(--primary-dark);
+  padding-top: 0;
 }
 
 .contact-phone {
