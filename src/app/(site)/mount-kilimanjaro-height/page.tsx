@@ -273,7 +273,7 @@ export default function MountKilimanjaroHeightPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Africa&apos;s Highest Peak
               </span>
             </div>
@@ -315,7 +315,7 @@ export default function MountKilimanjaroHeightPage() {
       {/* Featured Snippet Target — direct answer for "how high is kilimanjaro in feet" */}
       <section className="py-8 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
-          <p className="text-lg text-[var(--text)] leading-relaxed">
+          <p className="text-base text-[var(--text)] leading-relaxed">
             <strong>Mount Kilimanjaro is 19,341 feet (5,895 metres) tall.</strong> Its summit, Uhuru Peak, is the highest point in Africa and the tallest free-standing mountain on Earth. Kilimanjaro rises from the Tanzanian plains near Moshi at around 900 metres (2,953 ft) to its ice-capped peak, passing through five distinct climate zones — from tropical rainforest to arctic conditions — in just 35 kilometres.
           </p>
         </div>
@@ -351,7 +351,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Mount Kilimanjaro&apos;s Altitude Compared to the World&apos;s Highest Peaks
             </h2>
-            <p className="text-[var(--text-muted)] mb-8 text-lg">
+            <p className="text-[var(--text-muted)] mb-8 text-base">
               At 5,895 metres (19,341 ft), Kilimanjaro stands among Earth&apos;s elite summits. With a topographic prominence of 5,885m — the fourth highest of any peak on the planet — it towers above the Alps, the Andes south of Aconcagua, and every mountain in Europe. Here is how Kilimanjaro&apos;s height compares to other notable peaks around the world:
             </p>
             <div className="overflow-x-auto rounded-xl border border-[var(--border)] shadow-sm">
@@ -391,7 +391,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Five Climate Zones of Mount Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-10 text-base">
               Climbing Kilimanjaro is like travelling from the equator to the Arctic — the mountain&apos;s altitude spans <Link href="/kilimanjaro-climate-zones/" className="text-[var(--secondary)] hover:underline">five distinct ecological zones</Link>, each with unique flora, fauna, and weather conditions.
             </p>
             <div className="space-y-4">
@@ -477,7 +477,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Geological History of Mount Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-10 text-base">
               Kilimanjaro&apos;s story spans millions of years — from its volcanic birth on the East African Rift to the first human summit and today&apos;s climate crisis. Understanding its geology puts the mountain&apos;s sheer scale into perspective.
             </p>
             <div className="relative">
@@ -568,7 +568,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Kilimanjaro&apos;s Three Volcanic Cones
             </h2>
-            <p className="text-[var(--text-muted)] mb-8 text-lg">
+            <p className="text-[var(--text-muted)] mb-8 text-base">
               Kilimanjaro is a stratovolcano comprised of three distinct volcanic cones formed at different times. Only Kibo — the highest — retains any volcanic activity, with fumaroles still emitting gases inside its crater.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
@@ -599,7 +599,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Kilimanjaro&apos;s Three Peaks: A Closer Look
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-10 text-base">
               Each of Kilimanjaro&apos;s volcanic cones has a distinct character, age, and climbing significance. Together they form one of the most geologically fascinating mountains on the planet, visible on the <Link href="/kilimanjaro-map/" className="text-[var(--secondary)] hover:underline">Kilimanjaro route map</Link>.
             </p>
             <div className="space-y-6">
@@ -639,7 +639,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Kilimanjaro&apos;s Disappearing Glaciers
             </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed mb-6">
               Kilimanjaro&apos;s iconic <Link href="/is-there-snow-in-africa-mountains/" className="text-[var(--secondary)] hover:underline">snow cap</Link> has been rapidly diminishing. Over 80% of the ice that existed when it was first surveyed in 1912 has now melted, and scientists estimate the <Link href="/kilimanjaro-glaciers/" className="text-[var(--secondary)] hover:underline">remaining glaciers</Link> could disappear entirely by 2040–2050.
             </p>
             <div className="grid sm:grid-cols-3 gap-4">
@@ -670,7 +670,7 @@ export default function MountKilimanjaroHeightPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Altitude Effects at Each Height on Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-10 text-base">
               As you ascend Kilimanjaro, the air thins progressively. Understanding what your body experiences at each elevation helps you prepare mentally and recognise the signs of <Link href="/kilimanjaro-altitude-sickness/" className="text-[var(--secondary)] hover:underline">altitude sickness</Link> early.
             </p>
             <div className="space-y-4">

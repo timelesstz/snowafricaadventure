@@ -286,7 +286,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
         <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
           Your Safari Journey
         </h2>
-        <p className="text-white/70 text-lg leading-relaxed">
+        <p className="text-white/70 text-base leading-relaxed">
           From Arusha to the Serengeti - {itinerary.length} days of unforgettable wildlife encounters
         </p>
       </div>
@@ -310,7 +310,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
               <div
                 key={day.day}
                 className={`
-                  grid lg:grid-cols-[1fr_60px_1fr] gap-4 lg:gap-0 items-center relative
+                  grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_60px_minmax(0,1fr)] gap-4 lg:gap-0 items-center relative
                 `}
               >
                 {/* Image - Order changes based on even/odd */}
@@ -372,7 +372,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
 
                     {/* Featured Badge */}
                     {isFeatured && (
-                      <span className="absolute -top-3 left-6 font-heading text-[11px] font-bold uppercase tracking-wide text-white bg-[var(--secondary)] px-2.5 py-1 rounded-sm">
+                      <span className="absolute -top-3 left-6 font-heading text-[11px] font-bold uppercase tracking-wide text-[var(--primary-dark)] bg-[var(--secondary)] px-2.5 py-1 rounded-sm">
                         Safari Highlight
                       </span>
                     )}
@@ -435,7 +435,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
                         {day.highlights.map((highlight, hIndex) => (
                           <span
                             key={hIndex}
-                            className="inline-flex items-center gap-1 text-xs font-medium text-[var(--secondary-dark)] bg-[var(--secondary)]/10 px-2 py-1 rounded-sm"
+                            className="inline-flex items-center gap-1 text-xs font-medium text-[var(--secondary-ink)] bg-[var(--secondary)]/10 px-2 py-1 rounded-sm"
                           >
                             <span className="w-1 h-1 bg-[var(--secondary)] rounded-full" />
                             {highlight}
@@ -446,7 +446,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
 
                     {/* Click to expand/collapse indicator */}
                     <button
-                      className="flex items-center gap-1 text-xs font-semibold text-[var(--secondary)] hover:text-[var(--secondary-dark)] transition-colors"
+                      className="flex items-center gap-1 text-xs font-semibold text-[var(--secondary)] hover:text-[var(--secondary-ink)] transition-colors"
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleDay(day.day);
@@ -510,7 +510,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="#book"
-              className="inline-flex items-center justify-center px-8 py-3.5 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center justify-center px-8 py-3.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 transition-all"
             >
               Check Availability
             </Link>

@@ -336,7 +336,7 @@ export default function KilimanjaroWomenClimbingPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Women&apos;s Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -362,7 +362,7 @@ export default function KilimanjaroWomenClimbingPage() {
               <h2 className="font-heading text-2xl font-bold mb-4">
                 The Quick Answer
               </h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Kilimanjaro is{" "}
                 <strong>incredibly popular with women climbers</strong> —
                 approximately <strong>40% of all Kilimanjaro trekkers are women</strong>,
@@ -384,14 +384,14 @@ export default function KilimanjaroWomenClimbingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Women on Kilimanjaro: The Reality
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Let us be direct: climbing Kilimanjaro as a woman is{" "}
               <strong>not fundamentally different from climbing it as a man</strong>.
               The altitude affects everyone. The training requirements are the
               same. The routes are the same. The summit success rates are the
               same. The mountain does not discriminate.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               What is different is the practical detail — and that is exactly what
               this guide covers. Managing your period at 4,600 metres, using a
               toilet tent in sub-zero temperatures, packing the right sports bra,
@@ -399,7 +399,7 @@ export default function KilimanjaroWomenClimbingPage() {
               solo female traveller in Tanzania. These are legitimate questions
               that deserve honest, specific answers.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The women we guide come from every background — corporate
               executives, teachers, students, retirees, mothers, grandmothers.
               Some are experienced hikers; others have never slept in a tent. Ages
@@ -408,7 +408,7 @@ export default function KilimanjaroWomenClimbingPage() {
               through summit night with more grit than anyone around them — and
               break down in joyful tears at Uhuru Peak.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro is{" "}
               <strong>
                 one of the most empowering experiences a woman can have
@@ -457,14 +457,14 @@ export default function KilimanjaroWomenClimbingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Physical Preparation
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The training programme for women climbing Kilimanjaro is{" "}
               <strong>identical to the programme for men</strong>. There is no
               need for a gender-specific approach. Your body needs to be
               prepared for 5-8 hours of daily hiking over consecutive days at
               altitude, carrying a small daypack on steep, uneven terrain.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               A 12-week training plan focused on three pillars works best:{" "}
               <strong>cardiovascular endurance</strong> (hiking, running, cycling),{" "}
               <strong>leg and core strength</strong> (squats, lunges, step-ups),
@@ -474,7 +474,7 @@ export default function KilimanjaroWomenClimbingPage() {
               simulates the cumulative fatigue of multi-day trekking far better
               than any gym session.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Remember: physical fitness does not prevent altitude sickness.
               Marathon runners and ultra-fit athletes get AMS at the same rate
               as moderately fit hikers. Fitness helps you cope with the physical
@@ -707,14 +707,14 @@ export default function KilimanjaroWomenClimbingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Female Guides on Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro guiding has been a male-dominated profession for
               decades, but that is changing. A growing number of{" "}
               <strong>Tanzanian women are training and working as mountain guides
               and porters</strong>, breaking barriers and inspiring the next
               generation.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Organisations like the Kilimanjaro Porters Assistance Project
               (KPAP) have been instrumental in supporting women in the mountain
               tourism industry. Female porters carry the same loads as their
@@ -722,7 +722,7 @@ export default function KilimanjaroWomenClimbingPage() {
               same skill and authority. Their presence on the mountain is
               growing, and we actively support this shift.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               For women-only departures, we can arrange{" "}
               <strong>female assistant guides</strong> who understand the
               specific needs and concerns of female climbers from personal

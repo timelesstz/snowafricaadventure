@@ -419,7 +419,7 @@ export default function KilimanjaroDayHikePage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Day Trip Experience
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -440,7 +440,7 @@ export default function KilimanjaroDayHikePage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 <strong>Yes, you can day-hike Kilimanjaro without summiting.</strong> The most popular option is the Marangu Route from the park gate (1,879m) to Mandara Hut (2,720m) and back &mdash; a 16 km round trip through pristine rainforest that takes 5-6 hours. You will see colobus monkeys, exotic birds, giant ferns, and walk on the lower slopes of Africa&apos;s highest mountain. <strong>No camping required, no extreme altitude, and suitable for families with children aged 8+.</strong> Return to your hotel in time for dinner.
               </p>
             </div>
@@ -731,7 +731,7 @@ export default function KilimanjaroDayHikePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Combining Your Day Hike with a Safari or Full Climb
             </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed mb-6">
               A Kilimanjaro day hike works brilliantly as part of a broader Tanzania itinerary. Most of our guests combine it with one of these experiences:
             </p>
 

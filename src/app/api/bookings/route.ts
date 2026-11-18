@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { after } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { BookingStatus } from "@prisma/client";
-import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
+import { BOT_FLAG_PREFIX, SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
 import { sendBookingInquiryEmails } from "@/lib/email/send";
 import { BookingEmailData } from "@/lib/email/templates";
 import { createCommission, determineTripType } from "@/lib/commission";
@@ -12,6 +13,7 @@ import { subscribeToNewsletter } from "@/lib/newsletter";
 import { extractVisitorData } from "@/lib/visitor-tracking";
 import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
 import { DEPOSIT_RATE } from "@/lib/constants";
+import { effectivePrice, isDepartureBookable } from "@/lib/departure-rules";
 
 // Climber schema - now supports partial data for non-lead climbers
 const climberSchema = z.object({
@@ -93,6 +95,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Stale tabs, old share links and direct POSTs must not book a departure
+    // that is cancelled, full, completed or already under way.
+    if (!isDepartureBookable(departure)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "This departure is no longer open for booking. Please choose another date or contact us.",
+        },
+        { status: 409 }
+      );
+    }
+
     // Check availability against seats actually held (paid/confirmed) so the
     // check agrees with what the public page displays.
     const existingBookings = await prisma.booking.findMany({
@@ -120,7 +135,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Calculate pricing
-    const pricePerPerson = Number(departure.price);
+    // Same rule as the public page and form: the active early-bird price,
+    // else the full price, so the quote matches what the climber saw.
+    const pricePerPerson = effectivePrice(departure);
     const totalPrice = pricePerPerson * totalClimbers;
     const depositAmount = Math.round(totalPrice * DEPOSIT_RATE);
 
@@ -141,7 +158,7 @@ export async function POST(request: NextRequest) {
         status: BookingStatus.INQUIRY,
         climberDetails: validatedData.climbers,
         notes: honeypotTripped
-          ? `[FLAGGED: possible bot — hidden form field was filled]${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
+          ? `${BOT_FLAG_PREFIX}: possible bot — hidden form field was filled]${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
           : validatedData.specialRequests || null,
         source: validatedData.partnerCode ? 'referral' : 'website',
         // Server-side tracking
@@ -181,12 +198,14 @@ export async function POST(request: NextRequest) {
         month: "long",
         day: "numeric",
         year: "numeric",
+        timeZone: "UTC",
       }),
       summitDate: departure.summitDate.toLocaleDateString("en-US", {
         weekday: "long",
         month: "long",
         day: "numeric",
         year: "numeric",
+        timeZone: "UTC",
       }),
       totalClimbers: booking.totalClimbers,
       totalPrice: Number(booking.totalPrice),
@@ -197,6 +216,10 @@ export async function POST(request: NextRequest) {
         nationality: c.nationality,
       })),
     };
+
+    // Requests count toward the seats-left shown on the page, so refresh it now
+    // instead of waiting for the 60-second revalidation.
+    revalidatePath("/kilimanjaro-join-group-departures/");
 
     // Commission, newsletter, emails, and notification all run after the
     // response is sent — after() keeps the serverless function alive

@@ -307,7 +307,7 @@ export default async function InquiriesPage({
         </div>
         <button
           type="submit"
-          className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+          className="px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
         >
           Filter
         </button>

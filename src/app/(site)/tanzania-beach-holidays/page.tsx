@@ -176,7 +176,7 @@ export default async function TanzaniaBeachHolidaysPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Beach Holidays
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -262,7 +262,7 @@ export default async function TanzaniaBeachHolidaysPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <span className="px-3 py-1 bg-[var(--secondary)] text-white text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] text-xs font-semibold rounded-full">
                       {dest.tagline}
                     </span>
                   </div>
@@ -403,7 +403,7 @@ export default async function TanzaniaBeachHolidaysPage() {
                   </span>
                 )}
                 <h3 className="font-heading font-bold text-xl mb-1">{type.tier}</h3>
-                <p className={`text-3xl font-bold mb-1 ${type.featured ? "text-[var(--secondary)]" : "text-[var(--secondary-dark)]"}`}>
+                <p className={`text-3xl font-bold mb-1 ${type.featured ? "text-[var(--secondary)]" : "text-[var(--secondary-ink)]"}`}>
                   {type.price}
                 </p>
                 <p className={`text-sm mb-4 ${type.featured ? "text-white/70" : "text-[var(--text-muted)]"}`}>

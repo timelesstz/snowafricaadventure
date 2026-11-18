@@ -192,7 +192,7 @@ export default function KilimanjaroHygienePage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Mountain Life Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -213,7 +213,7 @@ export default function KilimanjaroHygienePage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Hygiene on Kilimanjaro is <strong>basic but manageable</strong>. Every camp has shared long-drop toilets. There are <strong>no showers</strong> — you wash with a warm water basin provided by your crew each morning and evening. <strong>Wet wipes and hand sanitiser are essential</strong>. You will not feel properly clean for 5-9 days, but with the right products and routine, you can stay comfortable. A <strong>private portable toilet</strong> is the single best comfort upgrade you can add to your trek.
               </p>
             </div>
@@ -237,10 +237,10 @@ export default function KilimanjaroHygienePage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Let&apos;s address the question everyone asks but few travel companies answer honestly: <strong>what are the toilets actually like on Kilimanjaro?</strong> Every established camp has shared pit latrines maintained by the Kilimanjaro National Park Authority (KINAPA). These are long-drop toilets — essentially a deep hole in the ground with a wooden or concrete structure around it for privacy. There is no flushing mechanism, no running water, and no lighting.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               The quality and cleanliness of these shared facilities varies dramatically depending on the camp, the route, the season, and how many trekkers are sharing them. During peak season on the Machame and Marangu routes, hundreds of climbers may share the same small number of latrines at a single camp. Lower-traffic routes like Lemosho and Rongai — which pass through quieter <Link href="/kilimanjaro-climate-zones/" className="text-[var(--primary)] hover:underline font-semibold">climate zones</Link> — tend to have less-used and therefore cleaner facilities.
             </p>
 
@@ -288,13 +288,13 @@ export default function KilimanjaroHygienePage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               There are <strong>no showers on Kilimanjaro</strong> — not at any camp, on any route, at any price point. This surprises some climbers, particularly those who have trekked in regions with more developed infrastructure. On Kilimanjaro, every drop of water must be carried up the mountain or collected from streams and purified.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               What our crew provides instead is a <strong>warm water washing basin</strong> — a bowl of heated water delivered to your tent vestibule each morning and evening. This is your opportunity to wash your face, hands, neck, feet, and underarms. It is not a shower, but it is surprisingly refreshing after a long day of trekking. Many climbers describe the evening wash as one of the small luxuries they look forward to at camp.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               To supplement the basin wash, <strong>biodegradable wet wipes are the single most important hygiene item</strong> in your pack — include them alongside the essentials on your <Link href="/kilimanjaro-climbing-gear/" className="text-[var(--primary)] hover:underline font-semibold">Kilimanjaro gear checklist</Link>. Use them for a full body wipe-down in the privacy of your tent. They remove sweat, sunscreen, and trail dust far more effectively than the basin alone. Budget 5-6 wipes per day for a thorough clean, and pack used wipes into ziplock bags for proper disposal.
             </p>
 
@@ -375,13 +375,13 @@ export default function KilimanjaroHygienePage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               If you take one thing from this guide, make it this: <strong>hand hygiene is the single most critical health practice on Kilimanjaro</strong>. Gastrointestinal illness — diarrhoea, vomiting, stomach cramps — is actually more common than severe altitude sickness and is a more frequent cause of failed summit attempts. The culprit is almost always <strong>faecal-oral transmission</strong> from inadequate hand washing after using the shared latrines.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Our crew sets up a <strong>hand-washing station with warm water and soap</strong> at camp before every <Link href="/kilimanjaro-food-meals/" className="text-[var(--primary)] hover:underline font-semibold">meal on the mountain</Link>. Use it every single time — no exceptions. Between meals and on the trail, use antibacterial hand sanitiser with at least 60% alcohol content. Apply it after every toilet visit, before eating trail snacks, after blowing your nose, and after touching shared surfaces like cabin doors on the Marangu route.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Bring at least <strong>200ml of hand sanitiser</strong> for a 7-day trek — more than you think you need. Decant it into a small bottle that clips to your daypack harness so it is always within reach. Do not share water bottles with other climbers, and avoid touching your face on the trail. These simple habits are more protective than any medication you can carry.
             </p>
 
@@ -402,13 +402,13 @@ export default function KilimanjaroHygienePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Dental Care on the Mountain
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Dental hygiene is easy to neglect when you are exhausted at the end of a trekking day, but brushing your teeth twice daily is important — not just for oral health, but because a <strong>clean mouth reduces the bacterial load</strong> that can contribute to respiratory infections at altitude. Cold, dry air already irritates your throat and airways; a mouth full of bacteria makes this worse.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Use a small amount of the warm water from your basin to brush. Spit toothpaste away from water sources and trails — the Leave No Trace principle applies to dental care too. At higher camps where water is more precious and temperatures drop below freezing at night, keep your toothbrush and toothpaste inside your sleeping bag to prevent them from freezing solid.
             </p>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               If you wear a retainer or mouthguard at night, bring it. Altitude sleep is already disrupted — familiar comfort items help. If you have any dental concerns, visit your dentist before your trip. A toothache at 4,600 metres with no dental care available is a genuinely miserable experience, and it has caused climbers to descend early.
             </p>
           </div>
@@ -431,7 +431,7 @@ export default function KilimanjaroHygienePage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Let&apos;s be honest: you will not smell great on Kilimanjaro. Neither will anyone else. After the first two days, everyone on the mountain has accepted this reality, and it ceases to matter. But there are practical strategies that make a genuine difference to how <strong>comfortable</strong> you feel, even if you cannot achieve true cleanliness.
             </p>
 
@@ -509,13 +509,13 @@ export default function KilimanjaroHygienePage() {
               </p>
             </div>
 
-            <p className="text-white/80 text-lg mb-6 leading-relaxed">
+            <p className="text-white/80 text-base mb-6 leading-relaxed">
               We offer a <strong>private portable chemical toilet</strong> as an add-on for any Kilimanjaro trek. This is a proper toilet seat mounted on a portable base with a chemical holding tank, housed in its own <strong>dedicated privacy tent</strong> that is set up and taken down at each camp by a designated porter.
             </p>
-            <p className="text-white/80 text-lg mb-6 leading-relaxed">
+            <p className="text-white/80 text-base mb-6 leading-relaxed">
               How it works: a porter carries the toilet and tent as part of the group&apos;s equipment. When you arrive at camp, the toilet tent is erected near your sleeping tent but at a respectful distance from the dining area. The chemical tank is emptied and cleaned daily by the designated porter using environmentally safe chemicals. The toilet tent has a zip-close door and is exclusively for your use (or your group&apos;s use if you are travelling together).
             </p>
-            <p className="text-white/80 text-lg mb-8 leading-relaxed">
+            <p className="text-white/80 text-base mb-8 leading-relaxed">
               The cost is typically <strong>$80-$150 for the entire trek</strong>, depending on the number of days and the route. This covers the equipment, the porter&apos;s wage, and all waste management. Relative to the total cost of a Kilimanjaro trek, it is a modest upgrade that delivers an outsized improvement in comfort — particularly during freezing nights at high camps when the alternative is a 100-metre walk to a shared latrine in the dark.
             </p>
 
@@ -556,16 +556,16 @@ export default function KilimanjaroHygienePage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Managing menstruation on Kilimanjaro is straightforward with preparation. The most important thing to know is that <strong>altitude and intense physical exertion can disrupt your menstrual cycle</strong> — periods may arrive early, late, be heavier than normal, or skip entirely. Bring supplies regardless of your expected timing.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               A <strong>menstrual cup</strong> is the most practical option for the mountain. It can be worn for up to 12 hours, creates no waste, requires only a rinse with clean water (which you can request from the crew), and eliminates the need to carry and dispose of used products. If you prefer pads or tampons, bring more than you think you need and carry ziplock bags for used products — there are no waste bins in the latrines.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The <strong>private portable toilet</strong> is particularly valuable for women managing their periods, as it provides complete privacy for changing menstrual products without the time pressure and discomfort of shared latrines. Our female guides have extensive experience supporting women on the mountain and are approachable about any concerns — nothing surprises them, and nothing is too personal to ask.
             </p>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               For more detailed advice on climbing Kilimanjaro as a woman — covering fitness, clothing, safety, and the social experience — see our dedicated{" "}
               <Link
                 href="/kilimanjaro-women-climbing/"
@@ -595,7 +595,7 @@ export default function KilimanjaroHygienePage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               Pack these items in a dedicated waterproof bag within your duffel. Keep hand sanitiser, toilet paper, and a small pack of wet wipes in your daypack for access during the trekking day. For a complete gear list beyond hygiene, see our full{" "}
               <Link
                 href="/kilimanjaro-climbing-gear/"

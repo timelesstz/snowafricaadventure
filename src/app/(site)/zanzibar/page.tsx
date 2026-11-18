@@ -123,7 +123,7 @@ export default function ZanzibarPage() {
             <h2 className="font-heading text-3xl font-bold mb-4">
               The Spice Island Awaits
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               Just a short flight from Arusha or the Serengeti, Zanzibar offers
               the perfect contrast to your safari adventure. Relax on powder-white
               beaches, explore the historic Stone Town, dive crystal-clear waters,
@@ -176,7 +176,7 @@ export default function ZanzibarPage() {
                 key={activity.title}
                 className="flex gap-4 p-6 bg-white border border-[var(--border)] rounded-lg"
               >
-                <div className="w-12 h-12 bg-[var(--primary-light)] rounded-full flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 bg-[var(--primary-tint)] rounded-full flex items-center justify-center shrink-0">
                   <activity.icon className="w-6 h-6 text-[var(--primary)]" />
                 </div>
                 <div>

@@ -201,7 +201,7 @@ export default function HowHardIsKilimanjaroPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Honest Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -222,7 +222,7 @@ export default function HowHardIsKilimanjaroPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Short Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Kilimanjaro is a <strong>physically demanding, non-technical high-altitude trek</strong>. You don&apos;t need climbing skills — no ropes or harnesses. The real challenges are <strong>altitude (50% oxygen at the summit)</strong>, <strong>extreme cold (-20°C on summit night)</strong>, and <strong>mental determination during the midnight summit push</strong>. With proper preparation and a 7+ day route, most fit adults can reach the top. Our summit success rate is 93%.
               </p>
             </div>

@@ -552,7 +552,11 @@ export default function BookingDetailPage() {
         body: JSON.stringify({ ...formData, totalPrice }),
       });
 
-      if (!response.ok) throw new Error("Failed to update booking");
+      if (!response.ok) {
+        // Show the server's reason (e.g. the departure has no free seats)
+        const body = await response.json().catch(() => null);
+        throw new Error(body?.error || "Failed to update booking");
+      }
 
       const updated = await response.json();
       setBooking(updated);
@@ -560,8 +564,8 @@ export default function BookingDetailPage() {
       setSuccess("Booking updated successfully");
       setTimeout(() => setSuccess(""), 3000);
       fetchEmailLogs();
-    } catch {
-      setError("Failed to update booking");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update booking");
     } finally {
       setSaving(false);
     }

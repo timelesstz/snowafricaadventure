@@ -22,7 +22,7 @@ export default async function CmsPagesListPage() {
         </div>
         <Link
           href="/admin/pages/new/"
-          className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+          className="flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] px-4 py-2 rounded-lg font-medium transition-colors"
         >
           <Plus className="w-4 h-4" />
           New Page
@@ -38,7 +38,7 @@ export default async function CmsPagesListPage() {
           <p className="text-slate-500 mb-6">Create your first CMS page to get started.</p>
           <Link
             href="/admin/pages/new/"
-            className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] px-6 py-3 rounded-lg font-medium transition-colors"
           >
             <Plus className="w-5 h-5" />
             Create First Page

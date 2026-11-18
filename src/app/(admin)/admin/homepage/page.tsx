@@ -461,7 +461,7 @@ export default async function HomepageSettingsPage({
         <div className="flex justify-end">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors"
           >
             <Save className="w-5 h-5" />
             Save All Settings

@@ -9,7 +9,7 @@ import {
 } from "@/components/filters/SafariFilterSidebar";
 import { Pagination } from "@/components/ui/Pagination";
 import { getPageBounds } from "@/lib/pagination";
-import { LayoutGrid, List, ChevronDown } from "lucide-react";
+import { LayoutGrid, List, ChevronDown, SearchX } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Safari {
@@ -23,7 +23,7 @@ interface Safari {
   featuredImage: string | null;
   gameDrives: number;
   parksCount: number;
-  rating: number | null;
+  rating?: number | null;
   highlights: string[];
   destinations: string[];
 }
@@ -222,10 +222,10 @@ export function SafarisPageClient({ safaris, types }: SafarisPageClientProps) {
 
         {sortedSafaris.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl border border-[var(--border)]">
-            <div className="text-6xl mb-4">🦁</div>
-            <h3 className="text-xl font-semibold mb-2">No safaris found</h3>
+            <SearchX className="mx-auto mb-4 h-10 w-10 text-[var(--text-light)]" aria-hidden="true" />
+            <h3 className="text-xl font-semibold mb-2">No safaris match these filters</h3>
             <p className="text-[var(--text-muted)] mb-4">
-              Try adjusting your filters or search terms
+              Widen the price or length range, or tell us what you want and we&apos;ll plan it.
             </p>
             <button
               onClick={clearFilters}

@@ -42,7 +42,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
 
           {isBooking ? (
             <>
-              <p className="text-lg text-slate-600 mb-2">
+              <p className="text-base text-slate-600 mb-2">
                 Your booking inquiry has been received.
               </p>
               {ref && (
@@ -52,7 +52,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
               )}
             </>
           ) : (
-            <p className="text-lg text-slate-600 mb-6">
+            <p className="text-base text-slate-600 mb-6">
               Your inquiry has been successfully submitted.
             </p>
           )}
@@ -127,7 +127,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-medium"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-[var(--primary-dark)] rounded-lg hover:bg-amber-600 transition-colors font-medium"
             >
               Explore More
               <ArrowRight className="w-5 h-5" />

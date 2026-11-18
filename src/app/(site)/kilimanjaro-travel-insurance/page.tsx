@@ -365,7 +365,7 @@ export default function KilimanjaroTravelInsurancePage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Essential Planning Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -386,7 +386,7 @@ export default function KilimanjaroTravelInsurancePage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Travel insurance is essential for Kilimanjaro — <strong>we require it for all climbers</strong>. You need a policy that covers <strong>high-altitude trekking to at least 6,000m</strong>, emergency helicopter evacuation, trip cancellation, and medical expenses. <strong>Standard travel insurance does NOT cover Kilimanjaro</strong> — you need a specific adventure or mountaineering policy. Budget $80 to $300 for a comprehensive policy that could save you $50,000+ in an emergency. Already sorted? Start planning your{" "}
                 <Link href="/best-route-to-climb-kilimanjaro/" className="text-[var(--primary)] hover:underline font-semibold">route</Link> and{" "}
                 <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline font-semibold">training</Link>.
@@ -403,13 +403,13 @@ export default function KilimanjaroTravelInsurancePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Why You Need Kilimanjaro Travel Insurance
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro travel insurance is not optional — it is a fundamental part of responsible climb preparation. We have seen what happens when climbers arrive without adequate cover, and it creates unnecessary stress, delays, and financial hardship at the worst possible moment.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Emergency helicopter evacuation from Kilimanjaro costs <strong>$3,000 to $5,000 or more</strong>, depending on the pickup altitude and weather conditions. Hospital treatment at Kilimanjaro Christian Medical Centre (KCMC) in Moshi is not free for foreign nationals. A multi-day hospital stay with specialist treatment can run into thousands of dollars. Medical repatriation to Europe or North America — flying home with a medical escort — can cost <strong>$10,000 to $30,000</strong>.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Beyond medical emergencies, your Kilimanjaro trip represents a significant financial investment. Between flights, the climb itself, accommodation, and{" "}
                 <Link href="/kilimanjaro-climbing-gear/" className="text-[var(--primary)] hover:underline font-semibold">gear</Link>, most climbers have $4,000 to $10,000 committed. See our{" "}
                 <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline font-semibold">full cost breakdown</Link>{" "}for a realistic budget. Trip cancellation insurance protects that investment if illness, injury, a family emergency, or other unforeseen events prevent you from travelling.
@@ -420,7 +420,7 @@ export default function KilimanjaroTravelInsurancePage() {
                 <strong>We require proof of adequate travel insurance from every climber before the trek begins.</strong> This is not a suggestion — it is a condition of climbing with Snow Africa Adventure. Climbers without insurance that meets our minimum requirements will not be permitted to start the trek. This policy exists to protect you and your fellow climbers.
               </p>
             </div>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               For a comprehensive overview of the risks and how we manage them on the mountain, read our{" "}
               <Link href="/kilimanjaro-safety/" className="text-[var(--primary)] hover:underline font-semibold">
                 Kilimanjaro safety guide
@@ -487,7 +487,7 @@ export default function KilimanjaroTravelInsurancePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Common Policy Exclusions to Watch For
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               These are the exclusions that catch Kilimanjaro climbers off guard. Read your policy document carefully — not just the marketing summary — and look specifically for these red flags.
             </p>
             <div className="space-y-4">
@@ -628,10 +628,10 @@ export default function KilimanjaroTravelInsurancePage() {
                 <p className="text-[var(--text-muted)] text-sm">Included with every Snow Africa climb</p>
               </div>
             </div>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Snow Africa Adventure includes registration with the <strong>AMREF Flying Doctor Service</strong> on every Kilimanjaro climb at no additional cost. AMREF operates the largest air ambulance network in East Africa, providing emergency air evacuation across Tanzania and Kenya.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The Flying Doctor Service provides an additional layer of evacuation support alongside your personal travel insurance. If you need emergency air evacuation, AMREF can deploy a fixed-wing air ambulance or helicopter to transfer you to the nearest appropriate medical facility — typically KCMC in Moshi or a specialist hospital in Nairobi.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">

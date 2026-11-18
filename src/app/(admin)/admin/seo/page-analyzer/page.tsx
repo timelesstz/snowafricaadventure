@@ -94,7 +94,7 @@ export default function PageAnalyzerPage() {
             type="button"
             onClick={handleAudit}
             disabled={loading || !url.trim()}
-            className="px-5 py-2.5 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-5 py-2.5 bg-amber-600 text-[var(--primary-dark)] text-sm font-medium rounded-lg hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             {loading ? (
               <>

@@ -326,7 +326,8 @@ describe("Email Content Validation", () => {
     };
     const html = bookingInquiryReceived(specialData);
 
-    // Should contain the name (HTML escaping is handled by the browser)
-    expect(html).toContain("John O'Brien & Jane");
+    // Escaped, so it shows as typed and can't inject markup
+    expect(html).toContain("John O&#39;Brien &amp; Jane");
+    expect(html).not.toContain("John O'Brien & Jane");
   });
 });

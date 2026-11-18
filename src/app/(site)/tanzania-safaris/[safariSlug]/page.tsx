@@ -114,14 +114,10 @@ export default async function SafariPage({ params }: PageProps) {
   // Use stats from database (handle Prisma Decimal type)
   const parksCount = safari.parksCount;
   const gameDrives = safari.gameDrives;
-  const rating = safari.rating ? parseFloat(safari.rating.toString()) : 4.9;
-
-  // Generate badges
-  const badges = [
-    safari.type === 'Luxury' ? 'Luxury Lodges' : safari.type,
-    'Best Seller',
-    'Big Five Guaranteed'
-  ].filter(Boolean);
+  // No per-package rating, "Best Seller" or "Big Five Guaranteed" badge: every
+  // package held the same 4.9 default and both badges were shown on all of
+  // them, and wildlife sightings can't be guaranteed.
+  const badges = [safari.type === 'Luxury' ? 'Luxury Lodges' : safari.type].filter(Boolean);
 
   // Generate schemas
   const tripSchema = generateTripSchema({
@@ -184,7 +180,6 @@ export default async function SafariPage({ params }: PageProps) {
         duration={durationDays}
         parks={parksCount}
         gameDrives={gameDrives}
-        rating={rating}
         safariSlug={safari.slug}
       />
 

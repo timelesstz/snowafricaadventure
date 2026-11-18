@@ -150,7 +150,7 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
           } p-8`}>
             <div className="max-w-lg">
               {badgeText && (
-                <span className="inline-block px-3 py-1 bg-amber-500 text-white rounded-full text-xs font-semibold mb-2">
+                <span className="inline-block px-3 py-1 bg-amber-500 text-[var(--primary-dark)] rounded-full text-xs font-semibold mb-2">
                   {badgeText}
                 </span>
               )}
@@ -537,7 +537,7 @@ export function HeroEditorForm({ hero, action }: HeroEditorFormProps) {
       <div className="flex items-center gap-4">
         <button
           type="submit"
-          className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-colors shadow-sm"
+          className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] font-semibold rounded-lg transition-colors shadow-sm"
         >
           Save Hero
         </button>

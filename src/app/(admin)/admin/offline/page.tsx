@@ -28,7 +28,7 @@ export default function AdminOfflinePage() {
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors"
+          className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] font-medium rounded-lg transition-colors"
         >
           Try Again
         </button>

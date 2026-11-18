@@ -224,7 +224,7 @@ export default function CompleteDetailsPage() {
 
           <Link
             href={`/kilimanjaro-trekking/${tokenData?.booking.routeSlug}/`}
-            className="inline-block mt-6 px-6 py-3 bg-[var(--secondary)] text-white rounded-lg font-medium hover:bg-[var(--secondary-dark)] transition-colors"
+            className="inline-block mt-6 px-6 py-3 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-lg font-medium hover:bg-[var(--secondary-dark)] transition-colors"
           >
             Learn More About Your Route
           </Link>
@@ -441,7 +441,7 @@ export default function CompleteDetailsPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white font-heading font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-6 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] font-heading font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {submitting ? (
                 <>

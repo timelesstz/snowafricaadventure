@@ -13,7 +13,6 @@ interface SafariDetailHeroProps {
   duration: number;
   parks: number;
   gameDrives: number;
-  rating: number;
   safariSlug: string;
 }
 
@@ -25,7 +24,6 @@ export function SafariDetailHero({
   duration,
   parks,
   gameDrives,
-  rating,
   safariSlug,
 }: SafariDetailHeroProps) {
   return (
@@ -55,7 +53,7 @@ export function SafariDetailHero({
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-[1fr_420px] gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_420px] gap-8 lg:gap-16 items-center">
           {/* Left - Hero Content */}
           <div className="text-white">
             {/* Breadcrumb */}
@@ -113,12 +111,11 @@ export function SafariDetailHero({
             )}
 
             {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-6 border-y border-white/15 mb-8">
+            <div className="grid grid-cols-3 gap-6 py-6 border-y border-white/15 mb-8">
               {[
                 { value: duration, label: 'Days' },
                 { value: parks, label: 'Parks' },
                 { value: gameDrives, label: 'Game Drives' },
-                { value: rating, label: 'Rating' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="font-heading text-2xl sm:text-3xl font-extrabold text-[var(--secondary)] tracking-tight">
@@ -141,25 +138,18 @@ export function SafariDetailHero({
           </div>
 
           {/* Right - Inquiry Card (No Pricing) */}
-          <div className="bg-white rounded-sm overflow-hidden shadow-2xl">
-            {/* Top Accent */}
-            <div
-              className="h-1"
-              style={{ background: 'linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%)' }}
-            />
+          <div className="w-full max-w-[420px] justify-self-center lg:justify-self-end bg-white rounded-sm overflow-hidden shadow-2xl border-t-2 border-[var(--secondary)]">
+            <div className="p-5">
+              {/* Quote Header */}
+              <div className="mb-4">
+                <h2 className="font-heading text-xl font-bold text-[var(--text)] tracking-tight">
+                  Request a Quote
+                </h2>
+                <p className="text-sm text-[var(--text-muted)]">
+                  Tailored to your dates and group size
+                </p>
+              </div>
 
-            {/* Quote Header */}
-            <div className="text-center p-6 border-b border-[var(--border)]">
-              <h2 className="font-heading text-2xl font-extrabold text-[var(--text)] tracking-tight mb-1">
-                Request a Quote
-              </h2>
-              <p className="text-[15px] text-[var(--text-muted)]">
-                Tailored to your group size
-              </p>
-            </div>
-
-            {/* Form */}
-            <div className="p-6">
               <SafariInquiryForm
                 safariSlug={safariSlug}
                 safariTitle={title}
@@ -168,18 +158,18 @@ export function SafariDetailHero({
             </div>
 
             {/* Features */}
-            <div className="px-6 pb-6 pt-2 border-t border-[var(--border)] space-y-2">
+            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1 border-t border-[var(--border)] bg-[var(--surface)] px-5 py-3">
               {[
                 'Free cancellation up to 30 days',
-                'Expert local guides',
-                'Customizable itinerary',
+                'Local guides',
+                'Flexible itinerary',
               ].map((feature) => (
-                <div key={feature} className="flex items-center gap-2 text-[13px] text-[var(--text-muted)]">
-                  <Check className="w-4 h-4 text-acacia-500" />
+                <li key={feature} className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                  <Check className="w-3.5 h-3.5 text-acacia-600" aria-hidden="true" />
                   {feature}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

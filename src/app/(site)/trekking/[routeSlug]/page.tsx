@@ -472,7 +472,7 @@ export default async function RoutePage({ params }: PageProps) {
                     </a>
                     <a
                       href="#departures"
-                      className="block text-center mt-3 text-[var(--primary)] font-medium hover:text-[var(--secondary-dark)] transition-colors"
+                      className="block text-center mt-3 text-[var(--primary)] font-medium hover:text-[var(--secondary-ink)] transition-colors"
                     >
                       See Departures →
                     </a>

@@ -34,7 +34,7 @@ export function ResendButton({ emailId }: { emailId: string }) {
       <button
         onClick={handleResend}
         disabled={loading}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[var(--primary-dark)] bg-amber-600 rounded-lg hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (
           <Loader2 className="w-3.5 h-3.5 animate-spin" />

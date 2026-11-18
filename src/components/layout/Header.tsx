@@ -181,10 +181,11 @@ export function Header() {
               ref={navRef}
               className="hidden lg:flex items-center"
             >
-              {/* Home */}
+              {/* Home: the logo already links home, so this link only shows
+                  from xl up, where there is room for it on one line. */}
               <Link
                 href="/"
-                className="px-3 xl:px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)] rounded-md transition-colors font-medium"
+                className="hidden xl:block whitespace-nowrap px-2 xl:px-3 2xl:px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)] rounded-md transition-colors font-medium"
               >
                 Home
               </Link>
@@ -200,7 +201,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "flex items-center gap-1 px-3 xl:px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                      "flex items-center gap-1 whitespace-nowrap px-2 xl:px-3 2xl:px-4 py-2 text-sm font-medium rounded-md transition-colors",
                       openMega === item.label
                         ? "text-[var(--primary)] bg-[var(--surface)]"
                         : "text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)]"
@@ -237,7 +238,7 @@ export function Header() {
                               className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-[var(--surface)] transition-colors group"
                               onClick={() => setOpenMega(null)}
                             >
-                              <div className="mt-0.5 p-1.5 rounded-md bg-[var(--surface)] group-hover:bg-[var(--primary-light)] transition-colors">
+                              <div className="mt-0.5 p-1.5 rounded-md bg-[var(--surface)] group-hover:bg-[var(--primary-tint)] transition-colors">
                                 <Icon className="h-4 w-4 text-[var(--primary)]" />
                               </div>
                               <div>
@@ -262,7 +263,7 @@ export function Header() {
               {/* Join Group Climb — Highlighted */}
               <Link
                 href={GROUP_CLIMB_NAV.href}
-                className="flex items-center gap-1.5 mx-1 px-3 xl:px-4 py-1.5 text-sm font-semibold rounded-md transition-all bg-[var(--secondary)]/10 text-[var(--secondary-dark,#b8860b)] border border-[var(--secondary)]/30 hover:bg-[var(--secondary)] hover:text-white hover:border-[var(--secondary)]"
+                className="flex items-center gap-1.5 whitespace-nowrap mx-1 px-2.5 xl:px-3 2xl:px-4 py-1.5 text-sm font-semibold rounded-md transition-all bg-[var(--secondary)]/10 text-[var(--secondary-ink)] border border-[var(--secondary)]/30 hover:bg-[var(--secondary)] hover:text-[var(--primary-dark)] hover:border-[var(--secondary)]"
               >
                 <Users className="h-3.5 w-3.5" />
                 {GROUP_CLIMB_NAV.label}
@@ -273,7 +274,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="px-3 xl:px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)] rounded-md transition-colors font-medium whitespace-nowrap"
+                  className="px-2 xl:px-3 2xl:px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--surface)] rounded-md transition-colors font-medium whitespace-nowrap"
                 >
                   {item.label}
                 </Link>
@@ -284,7 +285,7 @@ export function Header() {
             <div className="flex items-center gap-1 sm:gap-2">
               <Link
                 href="/tailor-made-safari/"
-                className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white px-2.5 py-1.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-md font-semibold transition-colors text-xs sm:text-sm"
+                className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-2.5 py-1.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 whitespace-nowrap rounded-md font-semibold transition-colors text-xs sm:text-sm"
               >
                 Plan Your Trip
               </Link>
@@ -391,7 +392,7 @@ export function Header() {
             <Link
               href={GROUP_CLIMB_NAV.href}
               onClick={closeMobile}
-              className="flex items-center gap-2 mx-1 mt-1 px-3 py-3 bg-[var(--secondary)]/10 text-[var(--secondary-dark,#b8860b)] hover:bg-[var(--secondary)]/20 rounded-lg font-semibold transition-colors border border-[var(--secondary)]/20"
+              className="flex items-center gap-2 mx-1 mt-1 px-3 py-3 bg-[var(--secondary)]/10 text-[var(--secondary-ink)] hover:bg-[var(--secondary)]/20 rounded-lg font-semibold transition-colors border border-[var(--secondary)]/20"
             >
               <Users className="h-4 w-4" />
               {GROUP_CLIMB_NAV.label}
@@ -434,7 +435,7 @@ export function Header() {
               <Link
                 href="/tailor-made-safari/"
                 onClick={closeMobile}
-                className="block text-center bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-white px-5 py-3 rounded-lg font-semibold transition-colors"
+                className="block text-center bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-5 py-3 rounded-lg font-semibold transition-colors"
               >
                 Plan Your Trip
               </Link>

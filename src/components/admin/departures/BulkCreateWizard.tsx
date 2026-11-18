@@ -270,7 +270,7 @@ export function BulkCreateWizard({ routes }: BulkCreateWizardProps) {
             <button
               onClick={() => setStep(2)}
               disabled={!routeId || !startDateRange || !endDateRange}
-              className="flex items-center gap-2 px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
             >
               Next
               <ArrowRight className="w-4 h-4" />
@@ -377,7 +377,7 @@ export function BulkCreateWizard({ routes }: BulkCreateWizardProps) {
             <button
               onClick={handleGeneratePreview}
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
             >
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

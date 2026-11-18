@@ -172,7 +172,7 @@ export function SafariFilters({
                 "px-4 py-2 rounded-full text-sm font-medium transition-all",
                 selectedType === type
                   ? type === "Luxury"
-                    ? "bg-amber-500 text-white shadow-lg"
+                    ? "bg-amber-500 text-[var(--primary-dark)] shadow-lg"
                     : type === "Budget"
                     ? "bg-slate-500 text-white shadow-lg"
                     : "bg-acacia-500 text-white shadow-lg"

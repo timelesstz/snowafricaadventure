@@ -57,7 +57,7 @@ export function TourDetailHero({
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-[1fr_420px] gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_420px] gap-8 lg:gap-16 items-center">
           {/* Left - Hero Content */}
           <div className="text-white">
             {/* Breadcrumb */}
@@ -159,7 +159,7 @@ export function TourDetailHero({
                 </span>
                 <span className="text-[15px] text-[var(--text-muted)]">/ person</span>
               </div>
-              <div className="flex items-center justify-center gap-2 mt-4 px-4 py-2 bg-[var(--secondary)]/10 rounded-sm text-[13px] text-[var(--secondary-dark)] font-medium">
+              <div className="flex items-center justify-center gap-2 mt-4 px-4 py-2 bg-[var(--secondary)]/10 rounded-sm text-[13px] text-[var(--secondary-ink)] font-medium">
                 <Clock className="w-4 h-4" />
                 Only {spotsLeft} spots left for February 2025
               </div>
@@ -217,7 +217,7 @@ export function TourDetailHero({
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all mt-2"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--secondary)]/25 transition-all mt-2"
                 >
                   <Calendar className="w-5 h-5" />
                   Check Availability

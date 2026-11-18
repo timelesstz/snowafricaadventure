@@ -138,7 +138,7 @@ export default async function ContactPage() {
       {/* Main Contact Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Contact Info */}
             <div className="lg:col-span-2 space-y-8">
               <div>
@@ -333,7 +333,7 @@ export default async function ContactPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/faq/"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 rounded-lg text-white font-medium hover:bg-amber-600 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 rounded-lg text-[var(--primary-dark)] font-medium hover:bg-amber-600 transition-colors"
               >
                 Read More FAQs
                 <ArrowRight className="w-4 h-4" />

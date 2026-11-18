@@ -345,7 +345,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Route Guide 2026
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -454,7 +454,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                     className={`border-t border-[var(--border)] ${route.verdict === "Top Pick" ? "bg-acacia-50" : i % 2 === 0 ? "bg-white" : "bg-[var(--surface)]"}`}
                   >
                     <td className="px-4 py-4">
-                      <Link href={`/trekking/${route.slug}/`} className="font-semibold text-[var(--primary)] hover:text-[var(--secondary-dark)] hover:underline">
+                      <Link href={`/trekking/${route.slug}/`} className="font-semibold text-[var(--primary)] hover:text-[var(--secondary-ink)] hover:underline">
                         {route.name}
                       </Link>
                       {route.verdict === "Top Pick" && (
@@ -494,7 +494,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                       </div>
                     </td>
                     <td className="px-4 py-4 text-xs">{route.accommodation}</td>
-                    <td className="px-4 py-4 font-bold text-[var(--secondary-dark)]">{route.price}</td>
+                    <td className="px-4 py-4 font-bold text-[var(--secondary-ink)]">{route.price}</td>
                     <td className="px-4 py-4 text-xs text-[var(--text-muted)]">{route.bestFor}</td>
                   </tr>
                 ))}
@@ -521,7 +521,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                 <p className="text-white/60 text-sm">Based on our guiding data from 800+ summits</p>
               </div>
             </div>
-            <p className="text-white/80 leading-relaxed mb-8 text-lg">
+            <p className="text-white/80 leading-relaxed mb-8 text-base">
               The single most important factor in reaching the summit is <strong className="text-white">how many days you spend on the mountain</strong>. More days means better acclimatization, which directly reduces altitude sickness risk. Our data shows:
             </p>
             <div className="grid md:grid-cols-3 gap-6">
@@ -601,7 +601,7 @@ export default function BestRouteToClimbKilimanjaroPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-[var(--secondary-dark)]">{route.price}</p>
+                      <p className="text-2xl font-bold text-[var(--secondary-ink)]">{route.price}</p>
                       <p className="text-xs text-[var(--text-muted)]">per person (group of 2)</p>
                     </div>
                   </div>

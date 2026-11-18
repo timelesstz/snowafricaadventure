@@ -77,7 +77,7 @@ export function RouteQuickNav({
                 onClick={() => scrollToSection(item.id)}
                 className={`px-6 py-4 text-[0.9375rem] font-medium whitespace-nowrap border-b-[3px] transition-all ${
                   activeSection === item.id
-                    ? "border-[var(--secondary)] text-[var(--secondary-dark)]"
+                    ? "border-[var(--secondary)] text-[var(--secondary-ink)]"
                     : "border-transparent text-[var(--text-muted)] hover:text-[var(--primary)]"
                 }`}
               >

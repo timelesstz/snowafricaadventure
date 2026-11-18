@@ -175,7 +175,7 @@ export default function TanzaniaCampingSafarisPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Budget Adventure
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -190,7 +190,7 @@ export default function TanzaniaCampingSafarisPage() {
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               Sleep Under African Stars — The Ultimate Bush Experience
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Wake to lion roars outside your tent. Watch elephants pass at dawn. Experience
               Tanzania&apos;s raw, unfiltered wilderness on a camping safari — the most authentic
               way to explore Africa.
@@ -243,7 +243,7 @@ export default function TanzaniaCampingSafarisPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 mt-2">
               What is a Tanzania Camping Safari?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               A camping safari places you at the heart of Africa&apos;s wilderness — not behind
               lodge walls but directly under the canopy of the African sky. You sleep where the
               animals roam, eat beside crackling campfires, and experience nature without any barrier
@@ -310,7 +310,7 @@ export default function TanzaniaCampingSafarisPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 bg-[var(--secondary)] text-white rounded-full text-xs font-semibold">
+                    <span className="px-3 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-xs font-semibold">
                       {type.label}
                     </span>
                   </div>

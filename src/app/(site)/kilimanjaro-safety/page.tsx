@@ -418,7 +418,7 @@ export default function KilimanjaroSafetyPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Safety &amp; Health Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -439,7 +439,7 @@ export default function KilimanjaroSafetyPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 <strong>Yes, Kilimanjaro is safe</strong> when you climb with experienced guides, choose a <strong>7+ day route</strong>, and follow proper acclimatization protocols. The fatality rate is approximately <strong>0.03%</strong> — lower than driving a car. No ropes, no ice axes, no technical climbing required. With twice-daily health monitoring, emergency oxygen on every expedition, and Wilderness First Responder certified guides, the mountain is well-managed and should not deter you from climbing. We strongly recommend starting a <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline font-semibold">structured training plan</Link> 8-12 weeks before departure and securing <Link href="/kilimanjaro-travel-insurance/" className="text-[var(--primary)] hover:underline font-semibold">travel insurance that covers high-altitude trekking</Link>.
               </p>
             </div>
@@ -484,7 +484,7 @@ export default function KilimanjaroSafetyPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               The Real Risks on Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               We do not sugarcoat risk. After guiding climbers on this mountain for over 15 years, we know exactly what can go wrong, how often it happens, and — most importantly — how to prevent it. Here are the genuine risks, ranked by severity.
             </p>
           </div>
@@ -758,7 +758,7 @@ export default function KilimanjaroSafetyPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               What Makes Kilimanjaro Safer Than Most High-Altitude Mountains
             </h2>
-            <p className="text-white/80 text-lg leading-relaxed mb-8">
+            <p className="text-white/80 text-base leading-relaxed mb-8">
               Kilimanjaro&apos;s safety record is not accidental. Several structural factors make it inherently safer than comparable high-altitude objectives, and understanding these factors should give you confidence in your decision to climb.
             </p>
             <div className="space-y-4">

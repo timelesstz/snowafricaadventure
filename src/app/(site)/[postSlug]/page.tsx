@@ -3,7 +3,9 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, User, ArrowLeft, Clock, Tag, ChevronRight, Mountain, MapPin, BookOpen } from "lucide-react";
+import { Calendar, User, ArrowLeft, Clock, Tag } from "lucide-react";
+import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { SidebarTrips } from "@/components/blog/SidebarTrips";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
 import { AUTHOR_PROFILES } from "@/lib/constants";
@@ -13,6 +15,8 @@ import { processContent, generateTableOfContents, injectInternalLinks } from "@/
 import { getInternalLinkMap } from "@/lib/internal-link-map";
 import { BlogContentClient } from "@/components/blog/BlogContentClient";
 import { AuthorBio } from "@/components/blog/AuthorBio";
+import { PlanYourTrip } from "@/components/blog/PlanYourTrip";
+import { ArticleToc } from "@/components/blog/ArticleToc";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
 export const revalidate = 300;
@@ -145,29 +149,6 @@ const getPost = cache(async function getPost(slug: string) {
   return null;
 });
 
-// Fetch categories with post counts
-async function getCategories() {
-  try {
-    const categories = await prisma.category.findMany({
-      include: {
-        _count: { select: { posts: true } },
-      },
-      orderBy: { name: "asc" },
-    });
-
-    return categories
-      .filter((cat) => cat._count.posts > 0)
-      .map((cat) => ({
-        name: cat.name,
-        slug: cat.slug,
-        count: cat._count.posts,
-      }));
-  } catch (error) {
-    console.error("[getCategories] Failed to fetch categories:", error);
-    return [];
-  }
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { postSlug } = await params;
   const post = await getPost(postSlug);
@@ -197,7 +178,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  // Fetch related posts and categories in parallel
+  // Fetch related posts (same categories first, then recent)
   let relatedPostsData: {
     slug: string;
     title: string;
@@ -206,7 +187,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     publishedAt: Date | null;
     featuredImage: string | null;
   }[] = [];
-  let categories: { name: string; slug: string; count: number }[] = [];
 
   try {
     // Get category slugs for current post to find related content
@@ -239,8 +219,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       },
     });
 
-    [relatedPostsData, categories] = await Promise.all([
-      relatedQuery.then(async (posts) => {
+    relatedPostsData = await relatedQuery.then(async (posts) => {
         // If not enough category-matched posts, fill with recent posts
         if (posts.length < 3) {
           const existingSlugs = [post.slug, ...posts.map((p) => p.slug)];
@@ -263,11 +242,9 @@ export default async function BlogPostPage({ params }: PageProps) {
           return [...posts, ...filler];
         }
         return posts;
-      }),
-      getCategories(),
-    ]);
+      });
   } catch (error) {
-    console.error("[BlogPostPage] Failed to fetch related posts/categories:", error);
+    console.error("[BlogPostPage] Failed to fetch related posts:", error);
   }
 
   const relatedPosts = relatedPostsData.map((p) => ({
@@ -326,69 +303,72 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       {/* Hero Section with Featured Image */}
       <section className="relative">
-        {/* Featured Image Background */}
-        <div className="relative h-[40vh] min-h-[400px] md:h-[50vh] lg:h-[60vh]">
+        {/* The hero grows with its content, so long titles never spill out
+            of a fixed-height box on small screens. */}
+        <div className="relative isolate flex min-h-[420px] items-end md:min-h-[50vh] lg:min-h-[60vh]">
           <Image
-              src={post.featuredImage || getCategoryFallbackImage(post.categories)}
-              alt={post.title}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority
-            />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+            src={post.featuredImage || getCategoryFallbackImage(post.categories)}
+            alt={post.title}
+            fill
+            sizes="100vw"
+            className="-z-10 object-cover"
+            priority
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/45 to-black/25" />
 
-          {/* Content */}
-          <div className="absolute inset-0 flex items-end">
-            <div className="container mx-auto px-4 pb-8 md:pb-12">
-              {/* Breadcrumbs */}
-              <div className="mb-4">
-                <Breadcrumbs
-                  items={[{ label: "Blog", href: "/blog/" }, { label: post.title }]}
-                />
+          <div className="container mx-auto grid items-end gap-8 px-4 pb-10 pt-16 md:pb-14 lg:grid-cols-12 lg:gap-10 lg:py-14">
+            <div className="min-w-0 lg:col-span-7 xl:col-span-8">
+            <div className="mb-4">
+              <Breadcrumbs
+                tone="dark"
+                items={[{ label: "Blog", href: "/blog/" }, { label: post.title }]}
+              />
+            </div>
+
+            {post.categories.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-2">
+                {post.categories.map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    href={`/category/${cat.slug}/`}
+                    className="rounded-full bg-white/15 px-3 py-1 text-xs font-medium uppercase tracking-wider text-white ring-1 ring-inset ring-white/25 backdrop-blur-sm transition-colors hover:bg-white/25"
+                  >
+                    {cat.name}
+                  </Link>
+                ))}
               </div>
+            )}
 
-              {/* Categories */}
-              {post.categories.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.categories.map((cat) => (
-                    <Link
-                      key={cat.slug}
-                      href={`/category/${cat.slug}/`}
-                      className="text-xs font-medium uppercase tracking-wider bg-[var(--primary)] text-white px-3 py-1 rounded-full hover:bg-[var(--primary-dark)] transition-colors"
-                    >
-                      {cat.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
+            <h1 className="max-w-4xl text-balance font-heading text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl xl:text-6xl">
+              {post.title}
+            </h1>
 
-              {/* Title */}
-              <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white max-w-4xl leading-tight">
-                {post.title}
-              </h1>
-
-              {/* Meta Info */}
-              <div className="flex flex-wrap items-center gap-4 md:gap-6 mt-6 text-white/90">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center">
-                    <User className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{post.author}</p>
-                    <p className="text-xs text-white/70">Author</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Calendar className="w-4 h-4" />
-                  <span>{formatDate(post.publishedAt)}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Clock className="w-4 h-4" />
-                  <span>{post.readingTime} min read</span>
-                </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/90">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/25">
+                  <User className="h-4 w-4 text-white" aria-hidden="true" />
+                </span>
+                <span className="font-medium">{post.author}</span>
               </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-white/70" aria-hidden="true" />
+                <span>{formatDate(post.publishedAt)}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-white/70" aria-hidden="true" />
+                <span>{post.readingTime} min read</span>
+              </div>
+            </div>
+            </div>
+
+            {/* Quick quote beside the title: three short steps, so a reader
+                who already knows what they want can ask without scrolling. */}
+            <div id="quick-quote" className="scroll-mt-28 lg:col-span-5 xl:col-span-4">
+              <QuickQuoteForm
+                relatedTo={post.title}
+                defaultTrip={isKilimanjaroPost ? "Kilimanjaro" : "Wildlife Safari"}
+                formId="article-hero"
+              />
             </div>
           </div>
         </div>
@@ -399,10 +379,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Article Content */}
-            <div className="lg:col-span-8">
+            {/* min-w-0: without it, wide tables in the article stretch this
+                grid column past the phone screen and the whole page scrolls
+                sideways. */}
+            <div className="min-w-0 lg:col-span-8">
               {/* Excerpt/Intro */}
               {post.excerpt && (
-                <p className="text-xl md:text-2xl text-[var(--text-muted)] leading-relaxed mb-8 font-light border-l-4 border-[var(--primary)] pl-6">
+                <p className="text-lg text-[var(--text-muted)] leading-relaxed mb-8 font-light border-l-4 border-[var(--primary)] pl-6">
                   {post.excerpt}
                 </p>
               )}
@@ -415,6 +398,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </div>
+
+              <PlanYourTrip
+                kind={isKilimanjaroPost ? "kilimanjaro" : "safari"}
+                postTitle={post.title}
+              />
 
               {/* Tags */}
               {post.tags.length > 0 && (
@@ -491,166 +479,19 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
             </div>
 
-            {/* Sidebar */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-24 space-y-6">
-                {/* Table of Contents */}
-                {post.tableOfContents.length > 0 && (
-                  <div className="bg-white rounded-2xl p-6 shadow-sm border border-[var(--muted)]">
-                    <h3 className="font-semibold text-[var(--text)] mb-4 flex items-center gap-2">
-                      <span className="w-8 h-8 bg-[var(--primary-light)] rounded-lg flex items-center justify-center">
-                        <BookOpen className="w-4 h-4 text-[var(--primary)]" />
-                      </span>
-                      In This Article
-                    </h3>
-                    <nav className="space-y-1">
-                      {post.tableOfContents.map((item, index) => (
-                        <a
-                          key={item.id}
-                          href={`#${item.id}`}
-                          className="flex items-start gap-3 py-2 px-3 rounded-lg text-sm text-[var(--text-muted)] hover:bg-[var(--primary-light)] hover:text-[var(--primary-dark)] transition-colors group"
-                        >
-                          {item.number && (
-                            <span className="flex-shrink-0 w-6 h-6 bg-[var(--muted)] group-hover:bg-[var(--primary-light)] rounded text-xs font-medium flex items-center justify-center text-[var(--text-muted)] group-hover:text-[var(--primary)]">
-                              {item.number}
-                            </span>
-                          )}
-                          <span className="line-clamp-2">{item.text}</span>
-                        </a>
-                      ))}
-                    </nav>
-                  </div>
-                )}
+            {/* Sidebar: a compact table of contents and one trip card, sized
+                to fit inside the sticky area so nothing gets cut off. Phones
+                get the Plan-your-trip block under the article instead. */}
+            <aside className="hidden lg:col-span-4 lg:block">
+              {/* Capped to the screen: the TOC list scrolls inside, the trip
+                  card below always stays whole. */}
+              <div className="sticky top-28 flex max-h-[calc(100vh-8rem)] flex-col gap-5">
+                <div className="flex min-h-0 flex-col">
 
-                {/* Primary CTA - contextual based on post content */}
-                {isKilimanjaroPost ? (
-                  <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white rounded-2xl p-6 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <Mountain className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-heading text-xl font-bold">
-                        Climb Kilimanjaro
-                      </h3>
-                    </div>
-                    <p className="text-[var(--primary-light)] text-sm mb-5 leading-relaxed">
-                      Ready for the adventure of a lifetime? Join our expert guides on Africa&apos;s highest peak.
-                    </p>
-                    <Link
-                      href="/trekking/"
-                      className="block text-center bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-light)] transition-colors"
-                    >
-                      View Routes
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] text-white rounded-2xl p-6 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <MapPin className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-heading text-xl font-bold">
-                        Tanzania Safari
-                      </h3>
-                    </div>
-                    <p className="text-[var(--secondary-light)] text-sm mb-5 leading-relaxed">
-                      Explore the Serengeti, Ngorongoro Crater, and more with our expert-led safaris.
-                    </p>
-                    <Link
-                      href="/tanzania-safaris/"
-                      className="block text-center bg-white text-[var(--secondary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
-                    >
-                      View Safaris
-                    </Link>
-                  </div>
-                )}
-
-                {/* Categories */}
-                <div className="bg-white rounded-2xl p-6 shadow-sm">
-                  <h3 className="font-semibold text-[var(--text)] mb-4 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-[var(--muted)] rounded-lg flex items-center justify-center">
-                      <Tag className="w-4 h-4 text-[var(--text-muted)]" />
-                    </span>
-                    Categories
-                  </h3>
-                  <ul className="space-y-2">
-                    {categories.map((cat) => (
-                      <li key={cat.slug}>
-                        <Link
-                          href={`/category/${cat.slug}/`}
-                          className="flex items-center justify-between py-2 px-3 rounded-lg text-[var(--text-muted)] hover:bg-[var(--primary-light)] hover:text-[var(--primary-dark)] transition-colors group"
-                        >
-                          <span>{cat.name}</span>
-                          <span className="text-xs bg-[var(--muted)] group-hover:bg-[var(--primary-light)] px-2 py-1 rounded-full">
-                            {cat.count}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                <ArticleToc items={post.tableOfContents} />
                 </div>
 
-                {/* Secondary CTA - the opposite of the primary */}
-                {isKilimanjaroPost ? (
-                  <div className="bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] text-white rounded-2xl p-6 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <MapPin className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-heading text-xl font-bold">
-                        Tanzania Safari
-                      </h3>
-                    </div>
-                    <p className="text-[var(--secondary-light)] text-sm mb-5 leading-relaxed">
-                      Combine your climb with a wildlife safari through Tanzania&apos;s iconic parks.
-                    </p>
-                    <Link
-                      href="/tanzania-safaris/"
-                      className="block text-center bg-white text-[var(--secondary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--secondary-light)] transition-colors"
-                    >
-                      View Safaris
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] text-white rounded-2xl p-6 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <Mountain className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-heading text-xl font-bold">
-                        Climb Kilimanjaro
-                      </h3>
-                    </div>
-                    <p className="text-[var(--primary-light)] text-sm mb-5 leading-relaxed">
-                      Add Africa&apos;s highest peak to your Tanzania adventure.
-                    </p>
-                    <Link
-                      href="/trekking/"
-                      className="block text-center bg-white text-[var(--primary-dark)] px-5 py-3 rounded-xl font-semibold hover:bg-[var(--primary-light)] transition-colors"
-                    >
-                      View Routes
-                    </Link>
-                  </div>
-                )}
-
-                {/* Group Departures */}
-                {isKilimanjaroPost && (
-                <div className="bg-white rounded-2xl p-6 shadow-sm border-2 border-dashed border-[var(--border)]">
-                  <h3 className="font-semibold text-[var(--text)] mb-2">
-                    Join a Group Climb
-                  </h3>
-                  <p className="text-sm text-[var(--text-muted)] mb-4">
-                    Fixed departure dates with fellow adventurers from around the world.
-                  </p>
-                  <Link
-                    href="/kilimanjaro-join-group-departures/"
-                    className="inline-flex items-center text-[var(--primary)] hover:text-[var(--primary-dark)] text-sm font-medium group"
-                  >
-                    View 2026 Dates
-                    <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
-                )}
+                <SidebarTrips kind={isKilimanjaroPost ? "kilimanjaro" : "safari"} />
               </div>
             </aside>
           </div>

@@ -108,7 +108,7 @@ export default async function DestinationsPage() {
             <h2 className="font-heading text-3xl font-bold mb-4">
               Explore East Africa&apos;s Crown Jewels
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               Tanzania is blessed with an extraordinary diversity of landscapes
               and wildlife. Our safaris take you through the famous Northern
               Circuit, home to some of the world&apos;s most celebrated national
@@ -123,7 +123,7 @@ export default async function DestinationsPage() {
         <div className="container mx-auto px-4">
           {displayDestinations.length === 0 ? (
             <div className="col-span-full text-center py-16">
-              <p className="text-[var(--text-muted)] text-lg">
+              <p className="text-[var(--text-muted)] text-base">
                 Destinations coming soon. Browse our safari packages in the meantime.
               </p>
               <Link
@@ -322,10 +322,10 @@ export default async function DestinationsPage() {
               <h2 className="font-heading text-3xl font-bold mb-4">
                 The Northern Safari Circuit
               </h2>
-              <p className="text-[var(--primary-light)] mb-4">
+              <p className="text-[var(--on-dark-muted)] mb-4">
                 The Northern Circuit is Tanzania&apos;s most popular safari region, centred around the city of Arusha — the &quot;safari capital&quot; of East Africa. This circuit connects four of Tanzania&apos;s most celebrated parks: Tarangire, Lake Manyara, Ngorongoro, and the Serengeti. All are accessible by road from Arusha within 3-4 hours, making multi-park itineraries easy to arrange.
               </p>
-              <p className="text-[var(--primary-light)] mb-6">
+              <p className="text-[var(--on-dark-muted)] mb-6">
                 Most safaris begin in Arusha and follow a logical loop: Tarangire first for elephant herds and baobabs, then Lake Manyara for tree-climbing lions, Ngorongoro Crater for the Big Five in one day, and finally the Serengeti for the Great Migration. A typical Northern Circuit safari takes 5-10 days.
               </p>
               <ul className="space-y-3">
@@ -354,7 +354,7 @@ export default async function DestinationsPage() {
             <div className="bg-white/10 rounded-lg aspect-video flex items-center justify-center">
               <div className="text-center">
                 <span className="text-4xl mb-2 block">🗺️</span>
-                <p className="text-[var(--primary-light)]">Interactive Map</p>
+                <p className="text-[var(--on-dark-muted)]">Interactive Map</p>
               </div>
             </div>
           </div>
@@ -571,7 +571,7 @@ export default async function DestinationsPage() {
             </Link>
             <Link
               href="/tanzania-safaris/"
-              className="inline-block bg-white border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary-light)] px-8 py-3 rounded-lg font-semibold transition-colors"
+              className="inline-block bg-white border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary-tint)] px-8 py-3 rounded-lg font-semibold transition-colors"
             >
               View Safari Packages
             </Link>

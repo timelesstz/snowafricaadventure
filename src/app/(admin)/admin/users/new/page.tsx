@@ -149,7 +149,7 @@ export default function NewUserPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 text-white px-6 py-2 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 text-[var(--primary-dark)] px-6 py-2 rounded-lg transition-colors"
             >
               {isSubmitting ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

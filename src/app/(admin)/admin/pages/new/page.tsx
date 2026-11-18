@@ -95,7 +95,7 @@ export default async function NewCmsPage() {
           <div className="flex gap-3">
             <button
               type="submit"
-              className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] font-semibold rounded-lg transition-colors"
             >
               Create & Open Editor
             </button>

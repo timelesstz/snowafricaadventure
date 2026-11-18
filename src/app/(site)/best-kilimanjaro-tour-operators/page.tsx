@@ -452,7 +452,7 @@ export default function BestKilimanjaroTourOperatorsPage() {
             />
 
             <div className="flex flex-wrap items-center gap-2 mb-4 mt-4">
-              <span className="px-3 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-3 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Updated March 2026
               </span>
               <span className="px-3 py-1.5 bg-white/20 text-white rounded-full text-sm font-semibold">
@@ -896,7 +896,7 @@ export default function BestKilimanjaroTourOperatorsPage() {
                 href={guide.href}
                 className="group bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow hover:border-[var(--secondary)]"
               >
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--secondary-dark)] transition-colors">
+                <h3 className="font-semibold text-lg mb-2 group-hover:text-[var(--secondary-ink)] transition-colors">
                   {guide.title}
                 </h3>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">

@@ -399,7 +399,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Health &amp; Safety Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -420,7 +420,7 @@ export default function KilimanjaroAltitudeSicknessPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 About <strong>75% of climbers experience some altitude symptoms</strong> on Kilimanjaro. Most are mild — headache, nausea, fatigue. <strong>Serious illness (HACE/HAPE) is rare</strong> when you choose a <strong>7+ day route</strong> and listen to your guides. With proper acclimatization, hydration, and experienced guide monitoring, altitude sickness is manageable and should not deter you from climbing.
               </p>
             </div>
@@ -435,13 +435,13 @@ export default function KilimanjaroAltitudeSicknessPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               What Is Altitude Sickness?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Altitude sickness — medically known as <strong>Acute Mountain Sickness (AMS)</strong> — is your body&apos;s reaction to reduced oxygen at higher elevations. At sea level, each breath delivers a full dose of oxygen. At Kilimanjaro&apos;s summit (5,895m), the air pressure is roughly half that at sea level, meaning each breath delivers only about <strong>50% of the oxygen</strong> your body is accustomed to.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               This oxygen deficit triggers a cascade of physiological responses: faster breathing, increased heart rate, altered fluid balance. Your brain — the organ most sensitive to oxygen deprivation — can begin to swell, causing the headaches and confusion associated with severe AMS.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               There are three forms of altitude illness, each progressively more serious:
             </p>
             <div className="space-y-4 mb-6">

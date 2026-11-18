@@ -220,7 +220,7 @@ export default async function TrekkingPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 5,895m Summit
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -426,7 +426,7 @@ export default async function TrekkingPage() {
                           <Link
                             href={`/trekking/${r.slug}/`}
                             className={`flex items-center justify-between gap-3 py-3 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--secondary)] ${
-                              featured ? "hover:text-[var(--secondary-light)]" : "hover:text-[var(--secondary-dark)]"
+                              featured ? "hover:text-[var(--secondary-light)]" : "hover:text-[var(--secondary-ink)]"
                             }`}
                           >
                             <span>
@@ -500,19 +500,21 @@ export default async function TrekkingPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* Open ruled grid: a hairline above each item instead of boxes,
+              icon inline with the title, description at full column width. */}
+          <ul className="mx-auto grid max-w-6xl gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {INCLUSIONS.map((item) => (
-              <div key={item.title} className="flex gap-4 p-5 rounded-xl bg-[var(--surface)] border border-[var(--border)]">
-                <div className="w-11 h-11 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-[var(--primary)]" />
+              <li key={item.title} className="border-t border-[var(--border)] pt-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary-tint)]">
+                    <item.icon className="h-[18px] w-[18px] text-[var(--secondary-ink)]" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-heading text-base font-semibold leading-snug text-[var(--text)]">{item.title}</h3>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{item.title}</h3>
-                  <p className="text-sm text-[var(--text-muted)]">{item.description}</p>
-                </div>
-              </div>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{item.description}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -696,22 +698,23 @@ export default async function TrekkingPage() {
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {/* Same ruled grid as "What's Included"; 2x2 so the longer
+                  descriptions get a readable line length. */}
+              <ul className="mx-auto grid max-w-5xl gap-x-12 gap-y-10 sm:grid-cols-2">
                 {SAFETY_STANDARDS.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-2xl bg-[var(--surface)] border border-[var(--border)] p-6 hover:shadow-lg transition-shadow"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center mb-4">
-                      <item.icon className="w-6 h-6 text-[var(--primary)]" />
+                  <li key={item.title} className="border-t border-[var(--border)] pt-6">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary-tint)]">
+                        <item.icon className="h-[18px] w-[18px] text-[var(--secondary-ink)]" aria-hidden="true" />
+                      </span>
+                      <h4 className="font-heading text-base font-semibold leading-snug text-[var(--text)]">{item.title}</h4>
                     </div>
-                    <h4 className="font-semibold text-base mb-2">{item.title}</h4>
-                    <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
                       {item.description}
                     </p>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </div>

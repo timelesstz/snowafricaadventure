@@ -147,7 +147,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
           <div className="flex gap-3">
             <button
               onClick={() => setIsEditing(true)}
-              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-md transition-colors"
+              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] font-medium rounded-md transition-colors"
             >
               {hasPin ? "Change PIN" : "Set PIN"}
             </button>
@@ -229,7 +229,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-md transition-colors disabled:opacity-50"
+              className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] font-medium rounded-md transition-colors disabled:opacity-50"
             >
               {loading ? "Saving..." : "Save PIN"}
             </button>

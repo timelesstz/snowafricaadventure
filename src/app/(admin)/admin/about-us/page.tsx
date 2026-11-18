@@ -740,7 +740,7 @@ export default function AboutUsSettingsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saving ? (
               <>

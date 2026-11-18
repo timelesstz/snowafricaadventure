@@ -435,7 +435,7 @@ export default function KilimanjaroWeatherPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Weather &amp; Climate Guide
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -456,7 +456,7 @@ export default function KilimanjaroWeatherPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Kilimanjaro can be climbed year-round, but the <strong>best weather windows are January-March</strong> (dry, cold) and <strong>June-October</strong> (dry, warm). Temperatures range from <strong>25&deg;C at the gate to -20&deg;C at the summit</strong>. You will pass through <strong>5 climate zones</strong> &mdash; from tropical rainforest to arctic summit &mdash; experiencing a 50&deg;C temperature swing in just 5 days of trekking.
               </p>
             </div>
@@ -471,13 +471,13 @@ export default function KilimanjaroWeatherPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Understanding Kilimanjaro&apos;s Weather
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro sits just 3 degrees south of the equator in northern Tanzania, yet its summit is permanently below freezing. This extraordinary range &mdash; from equatorial heat to arctic cold &mdash; is what makes Kilimanjaro&apos;s weather unique among the world&apos;s great mountains. Unlike the Himalayas or Andes, where weather systems can shut down an entire mountain for weeks, Kilimanjaro&apos;s equatorial position means it does not experience the prolonged storms or jet-stream disruptions that plague higher-latitude peaks.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Instead, Kilimanjaro&apos;s weather is governed by two primary factors: <strong>altitude</strong> and <strong>seasonality</strong>. As you climb, the temperature drops by approximately 6.5&deg;C for every 1,000 metres of elevation gained. This means you lose roughly 33&deg;C between the gate (1,800m) and the summit (5,895m). Seasonality determines rainfall: Tanzania has two rainy seasons &mdash; the <strong>long rains</strong> (masika) from March to May, and the <strong>short rains</strong> (vuli) in November.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               In our 800+ expeditions over 15 years, we have observed that altitude &mdash; not the calendar &mdash; is the primary weather variable. A climber on any given day will experience tropical warmth, temperate mist, alpine chill, and arctic cold within a single trek. The month you choose determines how much rain you encounter in the lower zones, but the cold at the summit is a constant year-round reality.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
@@ -609,11 +609,11 @@ export default function KilimanjaroWeatherPage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Summit night is the defining weather experience on Kilimanjaro. You depart camp between 11 PM and midnight, stepping into darkness and biting cold. The temperature at Barafu Camp (4,673m) or Kibo Hut (4,720m) at departure is typically <strong>-10 to -15&deg;C</strong>. As you ascend through the night, temperatures drop further, reaching <strong>-15 to -25&deg;C</strong> at the crater rim (5,685m) and Uhuru Peak (5,895m).
             </p>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Wind is the hidden variable. Even a moderate 20 km/h breeze at -20&deg;C creates a wind chill of approximately -30&deg;C. On the exposed sections of the crater rim, between Stella Point and Uhuru Peak, there is no shelter from the wind. In our experience, this 45-minute traverse is the coldest part of any Kilimanjaro expedition.
             </p>
 
@@ -721,7 +721,7 @@ export default function KilimanjaroWeatherPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Best Time to Climb Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro has two primary dry seasons that offer the best climbing conditions. The choice between them comes down to your priorities: weather, crowds, and budget.
             </p>
 
@@ -768,7 +768,7 @@ export default function KilimanjaroWeatherPage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               For a deeper analysis of every month with pricing data, crowd levels, and route recommendations, see our <Link href="/best-time-to-climb-kilimanjaro/" className="text-[var(--primary)] hover:underline font-semibold">complete best time to climb Kilimanjaro guide</Link>.
             </p>
           </div>
@@ -846,13 +846,13 @@ export default function KilimanjaroWeatherPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Kilimanjaro&apos;s Glaciers &amp; Climate Change
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               When Hans Meyer made the first recorded ascent of Kilimanjaro in 1889, the summit was covered by an estimated 12 square kilometres of ice. Today, less than 1.5 square kilometres remain. The glaciers &mdash; Furtwangler, Rebmann, Decken, and the Southern Icefield &mdash; have lost over 85% of their mass, and scientists project they will disappear entirely between 2040 and 2050.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               For climbers, this means two things. First, the iconic ice walls and glacier formations that appear in classic Kilimanjaro photographs are shrinking every year. Climbing Kilimanjaro now, while glaciers still frame the summit, offers a view that future generations will never see. Second, the retreat of glaciers is changing local weather patterns. Less ice means less moisture recycling at the summit, contributing to drier conditions in the alpine desert zone.
             </p>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               From our base in Moshi, where the mountain dominates the skyline, the change is visible decade over decade. The snow cap that once persisted year-round now comes and goes with the seasons. Our guides who have climbed for 15+ years describe summit ice formations that no longer exist. If seeing Kilimanjaro&apos;s glaciers is part of your motivation for climbing, the best time is now.
             </p>
           </div>

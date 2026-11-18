@@ -247,7 +247,7 @@ export default function FAQPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact-us/"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 rounded-lg text-white font-medium hover:bg-amber-600 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 rounded-lg text-[var(--primary-dark)] font-medium hover:bg-amber-600 transition-colors"
               >
                 Contact Us
               </Link>

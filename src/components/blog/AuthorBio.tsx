@@ -21,7 +21,7 @@ export function AuthorBio({ authorName }: AuthorBioProps) {
             <h3 className="font-semibold text-lg text-[var(--text)]">
               {profile.name}
             </h3>
-            <span className="text-xs bg-[var(--primary-light)] text-[var(--primary-dark)] px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs bg-[var(--primary-tint)] text-[var(--primary-dark)] px-2 py-0.5 rounded-full font-medium">
               {profile.role}
             </span>
           </div>

@@ -215,7 +215,7 @@ export default async function AboutPage() {
                 <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 text-slate-900">
                   {s["about.story.title"]}
                 </h2>
-                <p className="text-slate-600 leading-relaxed text-lg">
+                <p className="text-slate-600 leading-relaxed text-base">
                   {s["about.story.content"]}
                 </p>
               </div>
@@ -250,7 +250,7 @@ export default async function AboutPage() {
                     className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100"
                   >
                     <div className="w-14 h-14 bg-amber-500 rounded-xl flex items-center justify-center mb-5">
-                      <Icon className="w-7 h-7 text-white" />
+                      <Icon className="w-7 h-7 text-[var(--primary-dark)]" />
                     </div>
                     <h3 className="font-semibold text-lg mb-3 text-slate-900">
                       {s[`about.offer.service${num}.title`] || DEFAULT_SETTINGS[`about.offer.service${num}.title`]}
@@ -306,7 +306,7 @@ export default async function AboutPage() {
                 <h2 className={`font-heading text-3xl md:text-4xl font-bold mb-6 text-slate-900 ${!s["about.commitment.image"] ? "text-center" : ""}`}>
                   {s["about.commitment.title"]}
                 </h2>
-                <p className={`text-lg text-slate-600 leading-relaxed ${!s["about.commitment.image"] ? "text-center" : ""}`}>
+                <p className={`text-base text-slate-600 leading-relaxed ${!s["about.commitment.image"] ? "text-center" : ""}`}>
                   {s["about.commitment.content"]}
                 </p>
                 <p className={`mt-4 ${!s["about.commitment.image"] ? "text-center" : ""}`}>
@@ -507,7 +507,7 @@ export default async function AboutPage() {
             <p className="text-xl text-white/90 mb-6 leading-relaxed">
               {s["about.cta.content"]}
             </p>
-            <p className="text-white/70 mb-10 italic text-lg">
+            <p className="text-white/70 mb-10 italic text-base">
               {s["about.cta.tagline"]}
             </p>
             <Link

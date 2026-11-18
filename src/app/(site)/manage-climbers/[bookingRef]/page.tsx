@@ -427,7 +427,7 @@ export default function ManageClimbersPage() {
                       <div className="flex flex-wrap gap-2">
                         <button
                           onClick={() => handleStartEdit(climber)}
-                          className="flex items-center gap-2 px-4 py-2 bg-[var(--secondary)] text-white rounded-lg text-sm font-medium hover:bg-[var(--secondary-dark)] transition-colors"
+                          className="flex items-center gap-2 px-4 py-2 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-lg text-sm font-medium hover:bg-[var(--secondary-dark)] transition-colors"
                         >
                           <Edit2 className="w-4 h-4" />
                           Fill Details
@@ -598,7 +598,7 @@ export default function ManageClimbersPage() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="px-4 py-2 bg-[var(--secondary)] text-white rounded-lg text-sm font-medium hover:bg-[var(--secondary-dark)] transition-colors disabled:opacity-50 flex items-center gap-2"
+                        className="px-4 py-2 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-lg text-sm font-medium hover:bg-[var(--secondary-dark)] transition-colors disabled:opacity-50 flex items-center gap-2"
                       >
                         {submitting ? (
                           <>

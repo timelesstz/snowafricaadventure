@@ -415,7 +415,7 @@ export default function KilimanjaroClimbingGearPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 2026 Packing Guide
               </span>
             </div>
@@ -461,7 +461,7 @@ export default function KilimanjaroClimbingGearPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Why Your Kilimanjaro Climbing Gear Can Make or Break Your Summit
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               At 5,895 metres, Kilimanjaro&apos;s summit zone is an arctic environment even
               on a clear summer day. Temperatures can plunge below -20&deg;C at night, oxygen
               levels are roughly half those at sea level, and weather changes rapidly.
@@ -469,13 +469,13 @@ export default function KilimanjaroClimbingGearPage() {
               is the difference between a successful summit and turning back. Many climbers who
               fail do so not because of fitness, but because of inadequate gear.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The three-layer clothing system is the foundation of every successful Kilimanjaro
               climb: a moisture-wicking base layer to keep sweat off your skin, an insulating
               mid-layer to retain body heat, and a waterproof outer shell to block wind and rain.
               Every item below is chosen with this principle in mind.
             </p>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               Kilimanjaro passes through{" "}
               <Link href="/kilimanjaro-climate-zones/" className="text-[var(--primary)] underline hover:text-[var(--primary-dark)]">
                 five distinct climate zones
@@ -812,7 +812,7 @@ export default function KilimanjaroClimbingGearPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Kilimanjaro Gear Hire in Arusha: What to Rent Locally
             </h2>
-            <p className="text-[var(--text-muted)] mb-8 text-lg">
+            <p className="text-[var(--text-muted)] mb-8 text-base">
               If you are travelling light or have limited luggage allowance, several pieces of
               Kilimanjaro gear can be hired locally in Arusha. Snow Africa Adventure can arrange
               quality rentals on your behalf before your climb begins.
@@ -912,7 +912,7 @@ export default function KilimanjaroClimbingGearPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               What NOT to Pack for Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] mb-8 text-lg">
+            <p className="text-[var(--text-muted)] mb-8 text-base">
               Every unnecessary kilo in your kilimanjaro climbing gear costs energy at altitude. Here is what experienced Kilimanjaro guides recommend leaving at home or in your hotel in Arusha:
             </p>
             <div className="space-y-3">
@@ -946,7 +946,7 @@ export default function KilimanjaroClimbingGearPage() {
                 rental in Arusha before your climb, including sleeping bags, poles, and gaiters.
                 Contact us when you book to discuss your requirements. We also provide detailed
                 gear advice as part of your{" "}
-                <Link href="/kilimanjaro-food-meals/" className="text-[var(--secondary)] underline hover:text-[var(--secondary-dark)]">
+                <Link href="/kilimanjaro-food-meals/" className="text-[var(--secondary)] underline hover:text-[var(--secondary-ink)]">
                   pre-climb preparation briefing
                 </Link>.
               </p>

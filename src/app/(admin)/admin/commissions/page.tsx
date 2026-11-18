@@ -140,7 +140,7 @@ export default async function CommissionsPage({
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
             href="/api/admin/commissions/export"
-            className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 transition-colors"
           >
             <Download className="w-5 h-5" />
             Export CSV

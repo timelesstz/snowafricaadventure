@@ -28,7 +28,7 @@ export default function TermsPage() {
       {/* Content */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto prose prose-slate prose-lg">
+          <div className="max-w-3xl mx-auto prose prose-slate">
             <p className="lead">
               These terms and conditions govern your use of Snow Africa
               Adventure services and website. By booking with us, you agree to

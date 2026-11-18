@@ -298,7 +298,7 @@ export default function MountKilimanjaroPage() {
       {/* About the mountain */}
       <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto prose prose-lg">
+          <div className="max-w-3xl mx-auto prose">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 flex items-center gap-3">
               <TreePine className="w-8 h-8 text-[var(--primary)]" />
               About the mountain

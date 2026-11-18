@@ -140,7 +140,7 @@ export function PuckEditorWrapper({
           </button>
           <button
             disabled={saving}
-            className="flex items-center gap-1.5 px-4 py-1.5 text-sm bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-4 py-1.5 text-sm bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] rounded-lg font-medium transition-colors disabled:opacity-50"
           >
             {saving ? (
               <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">

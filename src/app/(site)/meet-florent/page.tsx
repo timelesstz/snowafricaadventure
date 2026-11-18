@@ -280,7 +280,7 @@ export default async function MeetFlorentPage() {
               From the Foothills of Kilimanjaro to Building a Dream
             </h2>
 
-            <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed space-y-6">
+            <div className="prose max-w-none text-slate-600 leading-relaxed space-y-6">
               <p>
                 Growing up in Tanzania, I was surrounded by a landscape that
                 most people only see in documentaries. The snow-capped peak of
@@ -510,7 +510,7 @@ export default async function MeetFlorentPage() {
               Tourism That Gives Back
             </h2>
 
-            <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed space-y-6">
+            <div className="prose max-w-none text-slate-600 leading-relaxed space-y-6">
               <p>
                 When I started Snow Africa Adventure, I made a promise to myself
                 and to my community: this company would be different. Tourism in
@@ -712,7 +712,7 @@ export default async function MeetFlorentPage() {
               A Day with Florent&apos;s Team
             </h2>
 
-            <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed space-y-6">
+            <div className="prose max-w-none text-slate-600 leading-relaxed space-y-6">
               <p>
                 What does it actually feel like to go on safari or trek with
                 us? Whether you are on a game drive across the Serengeti or
@@ -881,7 +881,7 @@ export default async function MeetFlorentPage() {
               a bespoke Tanzania itinerary, we are here to make it happen. Every
               trip is personally designed by our team in Arusha.
             </p>
-            <p className="text-white/70 mb-10 italic text-lg">
+            <p className="text-white/70 mb-10 italic text-base">
               No middlemen. No mass-market packages. Just real people creating
               real adventures in Tanzania.
             </p>

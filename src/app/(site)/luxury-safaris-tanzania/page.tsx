@@ -193,7 +193,7 @@ export default function LuxurySafarisTanzaniaPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Premium Experiences
               </span>
               <div className="flex items-center gap-1 text-white/80">
@@ -208,7 +208,7 @@ export default function LuxurySafarisTanzaniaPage() {
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               Uncompromising Excellence in the African Wild
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Private game drives at dawn. A candlelit dinner on the Serengeti plains. Your own plunge
               pool overlooking the endless African horizon. Tanzania&apos;s finest luxury safaris — crafted
               for those who refuse to compromise.
@@ -261,7 +261,7 @@ export default function LuxurySafarisTanzaniaPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 mt-2">
               What Makes a Luxury Safari in Tanzania?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               True luxury Tanzania safaris are not simply about expensive accommodation. They deliver
               exclusivity — private game drives in luxury tented camps Tanzania, personalised service,
               and access to 5-star safari experiences unavailable to standard travellers. A private
@@ -331,15 +331,15 @@ export default function LuxurySafarisTanzaniaPage() {
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-10">
             Luxury Accommodation Types
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {accommodationTypes.map((acc) => (
               <div
                 key={acc.title}
                 className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-semibold text-lg">{acc.title}</h3>
-                  <span className="text-sm font-bold text-[var(--secondary)] shrink-0 ml-2">{acc.price}</span>
+                <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1 mb-3">
+                  <h3 className="font-semibold text-lg min-w-0 break-words">{acc.title}</h3>
+                  <span className="text-sm font-bold text-[var(--secondary)] shrink-0">{acc.price}</span>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] mb-4">{acc.description}</p>
                 <ul className="space-y-1.5">
@@ -372,7 +372,7 @@ export default function LuxurySafarisTanzaniaPage() {
                 className="flex items-center gap-3 bg-white/5 border border-white/10 p-4 rounded-lg"
               >
                 <div className="w-6 h-6 bg-[var(--secondary)] rounded-full flex items-center justify-center shrink-0">
-                  <Check className="w-4 h-4 text-white" />
+                  <Check className="w-4 h-4 text-[var(--primary-dark)]" />
                 </div>
                 <span className="text-white/90 text-sm">{item}</span>
               </div>
@@ -449,7 +449,7 @@ export default function LuxurySafarisTanzaniaPage() {
                 <div className="border-t border-[var(--border)] pt-4">
                   <p className="font-semibold">{test.author}</p>
                   <p className="text-sm text-[var(--text-muted)]">{test.location}</p>
-                  <p className="text-sm text-[var(--secondary-dark)] font-medium">{test.trip}</p>
+                  <p className="text-sm text-[var(--secondary-ink)] font-medium">{test.trip}</p>
                 </div>
               </div>
             ))}

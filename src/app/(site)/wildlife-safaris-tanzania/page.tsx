@@ -6,15 +6,17 @@ import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchem
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
-  title: "Wildlife Safaris Tanzania 2026",
+  // Wildlife intent (what you'll see, where and when). Package and price
+  // searches belong to /tanzania-safaris/, so this page doesn't compete for them.
+  title: "Tanzania Wildlife: Where to See It",
   description:
-    "Tanzania wildlife safaris offer unmatched biodiversity — 4 million animals, the Great Migration, the Big Five, and 1,100 bird species. Expert naturalist guides. Prices from $1,800. Book now.",
+    "Where to see the Big Five, the Great Migration and Tanzania's 1,100 bird species: which park suits each animal, and the best months to see them.",
   url: "/wildlife-safaris-tanzania/",
 });
 
 const statsBoxes = [
   { stat: "4M+", label: "Wild Animals", sub: "Across all parks" },
-  { stat: "14", label: "National Parks", sub: "World-class ecosystems" },
+  { stat: "22", label: "National Parks", sub: "World-class ecosystems" },
   { stat: "500+", label: "Bird Species", sub: "In the Serengeti alone" },
   { stat: "1.5M", label: "Wildebeest", sub: "In the Great Migration" },
 ];
@@ -200,22 +202,22 @@ export default function WildlifeSafarisTanzaniaPage() {
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Expert Naturalist Guides
               </span>
               <div className="flex items-center gap-1 text-white/80">
                 <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                <span className="text-sm">4.9 Rating &bull; 14 National Parks</span>
+                <span className="text-sm">4.9 on TripAdvisor &bull; 22 National Parks</span>
               </div>
             </div>
 
             <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
-              Wildlife Safaris Tanzania
+              Tanzania Wildlife and Where to See It
             </h1>
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               4 Million Animals. 1,100 Bird Species. One Extraordinary Destination.
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Tanzania hosts the greatest concentration of wildlife on Earth. From the Big Five to the
               Great Migration to 1,100 species of birds — no other destination on the planet comes close.
               Expert naturalist guides unlock every detail of this living, breathing wilderness.
@@ -384,7 +386,7 @@ export default function WildlifeSafarisTanzaniaPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute bottom-3 left-3">
-                    <span className="px-3 py-1 bg-[var(--secondary)] text-white rounded-full text-xs font-semibold">
+                    <span className="px-3 py-1 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-xs font-semibold">
                       {park.highlight}
                     </span>
                   </div>

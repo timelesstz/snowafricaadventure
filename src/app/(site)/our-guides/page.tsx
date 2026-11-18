@@ -181,7 +181,7 @@ export default async function OurGuidesPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
                 Meet the Team
               </span>
             </div>
@@ -240,7 +240,7 @@ export default async function OurGuidesPage() {
 
                 <div className="md:w-3/5 p-6 md:p-10">
                   <div className="hidden md:block mb-1">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary-dark)]">{founder.role}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary-ink)]">{founder.role}</p>
                     <h2 className="font-heading text-3xl font-bold mt-1">{founder.name}</h2>
                   </div>
 
@@ -315,7 +315,7 @@ export default async function OurGuidesPage() {
 
                     <div className="flex-1 p-4 sm:p-5 min-w-0">
                       <h3 className="font-heading text-lg font-bold leading-tight">{guide.name}</h3>
-                      <p className="text-xs text-[var(--secondary-dark)] font-medium mt-0.5">{guide.role}</p>
+                      <p className="text-xs text-[var(--secondary-ink)] font-medium mt-0.5">{guide.role}</p>
 
                       <div className="flex gap-4 mt-3 mb-3 text-sm">
                         <div>

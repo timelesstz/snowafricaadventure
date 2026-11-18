@@ -322,7 +322,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
         >
           <div className={`max-w-2xl flex flex-col ${alignmentClasses}`}>
             {hero.badgeText && (
-              <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold inline-block mb-4 w-fit">
+              <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold inline-block mb-4 w-fit">
                 {hero.badgeText}
               </span>
             )}

@@ -42,7 +42,7 @@ export default async function UsersPage() {
   const addUserButton = (
     <Link
       href="/admin/users/new"
-      className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+      className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-[var(--primary-dark)] rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
     >
       <UserPlus className="w-4 h-4" aria-hidden="true" />
       Add User

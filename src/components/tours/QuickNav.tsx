@@ -70,7 +70,7 @@ export function QuickNav({ priceFrom }: QuickNavProps) {
           <div className="py-3">
             <Link
               href="#book"
-              className="inline-flex items-center justify-center px-6 py-2.5 bg-[var(--secondary)] text-white font-heading text-sm font-semibold rounded-sm hover:bg-[var(--secondary-dark)] transition-colors"
+              className="inline-flex items-center justify-center px-6 py-2.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading text-sm font-semibold rounded-sm hover:bg-[var(--secondary-dark)] transition-colors"
             >
               Book This Safari
             </Link>
@@ -95,7 +95,7 @@ export function QuickNav({ priceFrom }: QuickNavProps) {
             )}
             <Link
               href="#book"
-              className="px-6 py-2.5 bg-[var(--secondary)] text-white font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] transition-colors text-sm whitespace-nowrap"
+              className="px-6 py-2.5 bg-[var(--secondary)] text-[var(--primary-dark)] font-heading font-semibold rounded-sm hover:bg-[var(--secondary-dark)] transition-colors text-sm whitespace-nowrap"
             >
               Book This Safari
             </Link>

@@ -306,7 +306,7 @@ export default function KilimanjaroHoneymoonPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Couples &amp; Honeymoon
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -327,7 +327,7 @@ export default function KilimanjaroHoneymoonPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 A Kilimanjaro honeymoon is the <strong>ultimate alternative to a traditional beach holiday</strong>. You and your partner climb Africa&apos;s highest mountain together on a <strong>private trek with your own guide team</strong>, share upgraded tents, enjoy a celebration dinner at summit camp, and toast with champagne at Uhuru Peak at sunrise. Most couples combine it with a <strong>3&ndash;5 day safari</strong> and a <strong>Zanzibar beach extension</strong> for the complete East African honeymoon. The <Link href="/best-route-to-climb-kilimanjaro/" className="text-[var(--primary)] hover:underline font-semibold">best route</Link> for couples is the <strong>8-day Lemosho</strong> (93% summit success rate), and the <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline font-semibold">total cost</Link> for two people ranges from <strong>$10,000&ndash;$20,000</strong> depending on add-ons.
               </p>
             </div>
@@ -372,7 +372,7 @@ export default function KilimanjaroHoneymoonPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Best Route for Couples: Lemosho 8-Day
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               We recommend the <strong>8-day Lemosho Route</strong> for almost every honeymoon couple. Here is why it stands above the other options:
             </p>
             <div className="space-y-4 mb-8">
@@ -516,13 +516,13 @@ export default function KilimanjaroHoneymoonPage() {
                 <p className="text-[var(--text-muted)] text-sm">The ultimate contrast: glaciers to beach</p>
               </div>
             </div>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The classic East African honeymoon combination: climb the highest mountain on the continent, then fly to the white sand beaches of Zanzibar. Within 24 hours, you go from snow and glaciers at 5,895 metres to turquoise Indian Ocean water and swaying palm trees. The physical and sensory contrast is extraordinary &mdash; and your body will thank you for the recovery time.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Most honeymoon couples spend <strong>3&ndash;5 days on Zanzibar</strong> after their climb. The island offers everything you would want from a beach honeymoon: world-class snorkelling and diving, spice plantation tours, Stone Town&apos;s historic alleyways, sunset dhow cruises, and some of the most beautiful boutique hotels in East Africa. After the intensity of Kilimanjaro, lying on a beach reading a book while your muscles recover feels like absolute paradise.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               We arrange the <strong>internal flight from Kilimanjaro Airport to Zanzibar</strong> (about 1 hour) and can book your beach accommodation to match your budget and style &mdash; from charming budget guesthouses to ultra-luxury private-pool villas. The flight costs approximately $150&ndash;$250 per person.
             </p>
             <div className="bg-cyan-50 border border-cyan-200 rounded-xl p-5 flex items-start gap-3">
@@ -591,7 +591,7 @@ export default function KilimanjaroHoneymoonPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Best Time for a Honeymoon Climb
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               Timing your Kilimanjaro honeymoon around the dry seasons gives you the best weather, clearest views, and safest conditions. For a detailed month-by-month breakdown, see our <Link href="/best-time-to-climb-kilimanjaro/" className="text-[var(--primary)] hover:underline font-semibold">best time to climb Kilimanjaro</Link> guide. Avoid April, May, and November &mdash; these are the rainy seasons when trails are muddy, cloud cover hides the views, and summit success rates drop.
             </p>
             <div className="space-y-4">

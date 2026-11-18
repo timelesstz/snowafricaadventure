@@ -271,7 +271,7 @@ export default function KilimanjaroParaglidingPage() {
         </div>
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-3xl">
-            <span className="px-4 py-1.5 bg-[var(--secondary)] text-white rounded-full text-sm font-semibold">
+            <span className="px-4 py-1.5 bg-[var(--secondary)] text-[var(--primary-dark)] rounded-full text-sm font-semibold">
               Extreme Adventure
             </span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mt-4 mb-6 leading-tight">
@@ -292,7 +292,7 @@ export default function KilimanjaroParaglidingPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 <strong>Yes, you can paraglide off Kilimanjaro</strong> — but it is exceptionally rare and demands serious preparation. Fewer than 50 documented flights have been completed from near the summit. You need <strong>advanced paragliding certification</strong>, a <strong>TANAPA Special Activity Permit</strong> applied for 6+ months ahead, your own high-altitude rated equipment, and a budget of <strong>$5,000-$8,000+</strong>. The flight itself lasts 30-60 minutes and replaces a gruelling 2-day descent on foot. It is a once-in-a-lifetime experience — but only for pilots who genuinely have the skills, preparation, and risk tolerance to attempt it safely.
               </p>
             </div>
@@ -307,16 +307,16 @@ export default function KilimanjaroParaglidingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               History of Kilimanjaro Paragliding
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Paragliding from Kilimanjaro is not a new concept, but it remains extraordinarily uncommon. The first documented paragliding descents from the mountain date back to the early 2000s, when a small number of European pilots — most with extensive Alpine flying experience and a rigorous <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline font-semibold">physical training plan</Link> — obtained special permission from Tanzanian authorities to attempt flights from the summit zone.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               In 2005, a team of Austrian pilots completed one of the earliest widely reported flights, launching from Stella Point (5,756m) and landing near the Marangu Gate after approximately 45 minutes of flight. Their footage, showing the transition from glacial ice fields through alpine desert, moorland, and rainforest, brought international attention to the possibility.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Since then, a handful of pilots have repeated the feat. In 2012, a French expedition launched from close to Uhuru Peak itself, achieving what is believed to be the highest paragliding launch point on the mountain. More recently, pilots have used the flight to set personal records or raise funds for conservation causes — the dramatic footage proving irresistible for documentary filmmakers and sponsors.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               What has not changed is the rarity. TANAPA treats each application individually, the weather window is narrow, and the pilot qualifications required are genuinely elite. In any given year, the number of successful paragliding descents from Kilimanjaro can likely be counted on one hand — if any occur at all. This is not an activity that has been commercialised or made routine, and that exclusivity is part of its appeal.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
@@ -336,16 +336,16 @@ export default function KilimanjaroParaglidingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               How Kilimanjaro Paragliding Works
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The process combines a standard Kilimanjaro summit climb with a paragliding departure on summit day. You climb the mountain exactly as every other trekker does — spending 7-8 days ascending through the rainforest, moorland, alpine desert, and arctic zones. Your porters carry your paragliding equipment alongside the usual camping and climbing gear.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               On summit night, you depart for the peak between midnight and 2 AM, just like every other climber. You reach the summit — typically Stella Point (5,756m) or Uhuru Peak (5,895m) — at dawn. This is where your experience diverges from the standard itinerary.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Instead of beginning the long walk down, you assess conditions. If the wind, visibility, and thermals are favourable, you unpack your wing, lay it out on the volcanic scree, clip into your harness, and launch. The launch site is steep and exposed — volcanic loose rock at nearly 6,000 metres. There is no flat runway. You inflate your wing and run downhill until the air catches.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               Once airborne, you fly south or south-east, descending through all five of Kilimanjaro&apos;s climate zones in a single continuous flight. The glaciers and crater rim fall away behind you. The scree gives way to desert, then moorland, then dense forest canopy below your feet. You land in a pre-designated clearing near the base of the mountain, where a vehicle and your team are waiting. The entire flight — covering what takes other climbers two full days of painful downhill trekking — is over in 30 to 60 minutes.
             </p>
 
@@ -454,7 +454,7 @@ export default function KilimanjaroParaglidingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Logistics &amp; Planning
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Arranging a Kilimanjaro paragliding expedition is nothing like booking a standard trek. The planning timeline is measured in months, not weeks, and the coordination between your climbing operator, TANAPA, and your own preparation requires meticulous attention.
             </p>
 
@@ -630,16 +630,16 @@ export default function KilimanjaroParaglidingPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Is Kilimanjaro Paragliding Worth It?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               If you have the skills, the patience for the logistics, and the budget — this is among the most extraordinary adventure experiences available on Earth. Flying from the summit of Africa&apos;s highest peak through five distinct climate zones, covering a 4,000-metre altitude drop in under an hour, produces footage and memories that no other experience can match.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The view from a paraglider at 5,800 metres is fundamentally different from the view at the summit on foot. You see the mountain from above, the glaciers retreating behind you, the curvature of the crater rim, and the vast plains of Tanzania stretching to the horizon. The silence — broken only by the whisper of wind through your lines — contrasts viscerally with the gasping, exhausting final hours of the summit push.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               You also skip the descent. Two days of knee-punishing, toe-bruising downhill walking — the part of Kilimanjaro that every climber dreads — replaced by 30-60 minutes of flight. For experienced paragliders, this alone justifies the additional cost and complexity.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               But be honest with yourself. If you hold a P2 rating and 50 hours of flying time, this is not the flight to push your boundaries. If you have never flown above 3,000 metres, Kilimanjaro is not the place to find out how you handle thin air. If you cannot afford the insurance, you cannot afford the risk. This experience rewards those who approach it with respect, preparation, and the genuine ability to execute safely. For those pilots — it is absolutely worth it.
             </p>
             <div className="flex items-start gap-3 bg-acacia-50 border border-acacia-200 rounded-xl p-5">

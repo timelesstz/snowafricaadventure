@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
       {/* Content */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto prose prose-slate prose-lg">
+          <div className="max-w-3xl mx-auto prose prose-slate">
             <p className="lead">
               At Snow Africa Adventure, we are committed to protecting your
               privacy and ensuring the security of your personal information.

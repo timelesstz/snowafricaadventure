@@ -22,7 +22,7 @@ export function Badge({
           "px-3 py-1 text-sm": size === "md",
           "bg-[var(--muted)] text-[var(--text-muted)]": variant === "default",
           "bg-[var(--surface)] text-[var(--primary-dark)]": variant === "success",
-          "bg-[var(--secondary-light)] text-[var(--secondary-dark)]": variant === "warning",
+          "bg-[var(--secondary-light)] text-[var(--secondary-ink)]": variant === "warning",
           "bg-red-100 text-red-700": variant === "danger",
           "bg-slate-100 text-slate-700": variant === "info",
         },
@@ -83,7 +83,7 @@ export function SocialProofBadge({
   if (percentFilled >= 50 && availableSpots > 0) {
     return (
       <span className={cn(
-        "text-xs text-[var(--secondary-dark)] font-medium animate-pulse",
+        "text-xs text-[var(--secondary-ink)] font-medium animate-pulse",
         className
       )}>
         Filling Fast

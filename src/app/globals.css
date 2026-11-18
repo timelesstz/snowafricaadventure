@@ -10,6 +10,17 @@
   --primary-dark: #1e293b;
   --primary-light: #475569;
   --primary-foreground: #ffffff;
+  /* --primary-light is a mid slate (gradients, hover on solid buttons).
+     Use these for pale tint surfaces and for secondary text on dark panels. */
+  --primary-tint: #f1f5f9;
+  --on-dark-muted: #cbd5e1;
+  /* Long-form list rhythm (blog articles and .prose pages) */
+  /* Amber for text on light surfaces: --secondary-dark is only ~3.2:1 on
+     white, this is 5.0:1 (WCAG AA). White text on amber fails (2.1:1), so
+     amber fills carry --primary-dark text instead. */
+  --secondary-ink: #b45309;
+  --list-leading: 1.6;
+  --list-gap: 0.375rem;
 
   /* Secondary - Amber */
   --secondary: #F59E0B;
@@ -95,7 +106,20 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Typography */
+/* Typography — the site has exactly two faces:
+   Outfit (--font-heading) for headings, Sora (--font-sans) for everything else.
+   Set here once so no heading can fall back to the browser default. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+  }
+}
+
 .font-heading {
   font-family: var(--font-heading), system-ui, sans-serif;
 }
@@ -262,140 +286,291 @@ img {
    Blog Content Styles
    ======================================== */
 
-/* Base blog content container */
+/* Article typography: "field notes". Hierarchy comes from type and space,
+   not boxes. Slate ink, amber as the single accent, hairline dividers. */
 .blog-content {
+  --ink: var(--text);
+  --body: #334155;
+  --quiet: var(--text-muted);
+  --rule: var(--border);
   max-width: 100%;
   overflow-wrap: break-word;
-  word-break: break-word;
+  font-size: 1rem; /* 16px: Sora is wide, larger sizes read oversized */
+  color: var(--body);
 }
 
-/* Numbered Headings (both h2 and h3) */
-.blog-content h2.numbered-heading,
-.blog-content h3.numbered-heading {
+.blog-content > p,
+.blog-content > ul,
+.blog-content > ol,
+.blog-content > h2,
+.blog-content > h3,
+.blog-content > blockquote,
+.blog-content > .pull-quote {
+  max-width: 68ch;
+}
+
+/* Headings use the brand heading font. The old rules pointed at an
+   undefined --font-serif and fell back to Georgia. */
+.blog-content h2,
+.blog-content h3 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  scroll-margin-top: 7rem;
+}
+
+.blog-content h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 700;
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.blog-content > h2:first-child,
+.blog-content > p:first-child + h2 {
+  margin-top: 2.5rem;
+}
+
+.blog-content h3 {
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 600;
+  margin: 2.25rem 0 0.75rem;
+}
+
+.blog-content h2 + h3 {
+  margin-top: 1.5rem;
+}
+
+.blog-content .numbered-heading {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #1c1917;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e7e5e4;
 }
 
-.blog-content h2.numbered-heading .heading-number,
-.blog-content h3.numbered-heading .heading-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  color: white;
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 0.5rem;
+.blog-content .numbered-heading .heading-number {
   flex-shrink: 0;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--secondary-dark);
 }
 
-/* Regular h3 headings (without numbers) */
-.blog-content h3:not(.numbered-heading) {
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1c1917;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  border-left: 4px solid var(--primary);
+/* Body */
+.blog-content p {
+  line-height: 1.8;
+  margin: 0 0 1.25rem;
 }
 
-/* Main article h2 */
-.blog-content h2:not(.numbered-heading) {
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1c1917;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 3px solid var(--primary);
+.blog-content > p:first-of-type {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink);
 }
 
-/* Section Dividers */
-.blog-content .section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #d6d3d1 20%, #d6d3d1 80%, transparent);
-  margin: 3rem 0;
+.blog-content strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 
-/* Definition Lists */
+.blog-content a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--secondary);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+.blog-content a:hover {
+  color: var(--secondary-dark);
+  text-decoration-color: var(--secondary-dark);
+}
+
+.blog-content a:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Lists */
+.blog-content ul,
+.blog-content ol {
+  list-style: none;
+  margin: 1.25rem 0 1.75rem;
+  padding: 0;
+}
+
+/* List rhythm: items sit closer together than paragraphs, so a list reads
+   as one block. Shared with .prose below (--list-leading / --list-gap). */
+.blog-content li {
+  position: relative;
+  line-height: var(--list-leading);
+  margin-bottom: var(--list-gap);
+}
+
+.blog-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* Imported WordPress lists often wrap item text in <p>, which added a full
+   paragraph margin under every bullet. */
+.blog-content li > p {
+  margin: 0;
+  line-height: inherit;
+}
+
+.blog-content li > ul,
+.blog-content li > ol {
+  margin: var(--list-gap) 0 0;
+}
+
+.blog-content ul > li {
+  padding-left: 1.5rem;
+}
+
+/* Dot centred on the first line: half the line height minus half the dot */
+.blog-content ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: calc(var(--list-leading) * 0.5em - 3px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-light);
+}
+
+.blog-content ol {
+  counter-reset: list-counter;
+}
+
+.blog-content ol > li {
+  padding-left: 2rem;
+  counter-increment: list-counter;
+}
+
+.blog-content ol > li::before {
+  content: counter(list-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--secondary-dark);
+}
+
+/* Key-value rows. Each list item wraps one .definition-list, so the whole
+   list renders as a quiet two-column fact sheet: no bullets, no cards. */
+.blog-content ul:has(> li > .definition-list) {
+  border-top: 1px solid var(--rule);
+}
+
+.blog-content li:has(> .definition-list) {
+  padding: 0;
+  margin: 0;
+}
+
+.blog-content li:has(> .definition-list)::before {
+  content: none;
+}
+
 .blog-content .definition-list {
-  background: linear-gradient(135deg, var(--surface) 0%, #ecfdf5 100%);
-  border-radius: 1rem;
-  padding: 1.5rem;
+  margin: 0;
+}
+
+.blog-content > .definition-list {
   margin: 1.5rem 0;
-  border: 1px solid var(--border);
+  border-top: 1px solid var(--rule);
 }
 
 .blog-content .definition-item {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px dashed var(--border);
-}
-
-.blog-content .definition-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.blog-content .definition-item:first-child {
-  padding-top: 0;
+  display: grid;
+  grid-template-columns: minmax(7rem, 30%) 1fr;
+  gap: 0.25rem 1.5rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.6;
 }
 
 .blog-content .definition-term {
-  font-weight: 700;
-  color: var(--primary);
-  min-width: 80px;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .blog-content .definition-value {
-  color: #1c1917;
-  font-weight: 500;
+  color: var(--body);
 }
 
-/* Term Highlights (e.g., Kibo – description) */
 .blog-content .term-highlight {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .blog-content .term-description {
-  color: #57534e;
+  color: var(--quiet);
 }
 
-/* Data Tables - style all tables in blog content */
-.blog-content table,
-.blog-content .table-wrapper table,
-.blog-content .data-table {
+/* Tables: hairlines, quiet header, scroll inside their own frame */
+.blog-content table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9375rem;
   margin: 2rem 0;
-  border-radius: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive tables — horizontal scroll on mobile */
+.blog-content table th {
+  background: var(--surface);
+  color: var(--quiet);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.blog-content table th strong {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.blog-content table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--body);
+  vertical-align: top;
+}
+
+.blog-content table td:first-child {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.blog-content table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-content .table-wrapper,
+.blog-content [class*="tableContainer"],
+.blog-content [class*="tableWrapper"] {
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+.blog-content .table-wrapper table {
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .blog-content table {
     display: block;
@@ -407,260 +582,85 @@ img {
   .blog-content table tbody {
     display: table;
     width: 100%;
-    min-width: 600px;
+    min-width: 560px;
   }
 
   .blog-content table th,
   .blog-content table td {
     padding: 0.75rem 0.875rem;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
-
-  .blog-content table th:first-child,
-  .blog-content table td:first-child {
-    white-space: normal;
-    min-width: 120px;
+    font-size: 0.875rem;
   }
 }
 
-.blog-content table thead,
-.blog-content .data-table thead {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+/* Quotes */
+.blog-content .pull-quote {
+  margin: 2.5rem 0;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  border-left: 2px solid var(--secondary);
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--ink);
 }
 
-.blog-content table th,
-.blog-content .data-table th {
-  color: white !important;
-  font-weight: 600;
-  text-align: left;
-  padding: 1rem 1.25rem;
-}
-
-.blog-content table th strong {
-  color: white !important;
-  font-weight: 600;
-}
-
-.blog-content table tbody tr,
-.blog-content .data-table tbody tr {
-  background: white;
-  transition: background 0.2s;
-}
-
-.blog-content table tbody tr:nth-child(even),
-.blog-content .data-table tbody tr:nth-child(even) {
-  background: #fafaf9;
-}
-
-.blog-content table tbody tr:hover,
-.blog-content .data-table tbody tr:hover {
-  background: var(--surface);
-}
-
-.blog-content table td,
-.blog-content .data-table td {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid #e7e5e4;
-  color: #44403c;
-}
-
-.blog-content table tbody tr:last-child td,
-.blog-content .data-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Table container wrapper styling */
-.blog-content [class*="tableContainer"],
-.blog-content [class*="tableWrapper"],
-.blog-content .table-wrapper {
-  overflow-x: auto;
+.blog-content blockquote {
   margin: 2rem 0;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  border-left: 2px solid var(--rule);
+  color: var(--quiet);
 }
 
-/* Content Figures */
+.blog-content blockquote p:last-child,
+.blog-content .pull-quote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Media */
+.blog-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto;
+  border-radius: 0.75rem;
+}
+
 .blog-content .content-figure {
-  margin: 2rem 0;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  margin: 2.5rem 0;
 }
 
 .blog-content .content-figure img {
   width: 100%;
-  height: auto;
-  display: block;
+  margin: 0;
 }
 
 .blog-content .content-figure figcaption {
-  background: #f5f5f4;
-  padding: 0.75rem 1rem;
+  margin-top: 0.625rem;
   font-size: 0.875rem;
-  color: #78716c;
-  text-align: center;
-  font-style: italic;
+  color: var(--quiet);
 }
 
-/* Pull Quotes */
-.blog-content .pull-quote {
-  position: relative;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-  border-left: 4px solid var(--secondary);
-  border-radius: 0 1rem 1rem 0;
-  padding: 1.5rem 2rem;
-  margin: 2rem 0;
-  font-size: 1.125rem;
-  font-style: italic;
-  color: #78350f;
-}
-
-.blog-content .pull-quote::before {
-  content: '"';
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  font-size: 4rem;
-  color: var(--secondary);
-  opacity: 0.3;
-  font-family: Georgia, serif;
-  line-height: 1;
-}
-
-/* Enhanced Prose Styles */
-.blog-content p {
-  line-height: 1.8;
-  margin-bottom: 1.25rem;
-  color: #44403c;
-}
-
-.blog-content strong {
-  color: #1c1917;
-  font-weight: 600;
-}
-
-.blog-content ul,
-.blog-content ol {
-  margin: 1.5rem 0;
-  padding-left: 0;
-}
-
-.blog-content ul {
-  list-style: none;
-}
-
-.blog-content ul li {
-  position: relative;
-  padding-left: 1.75rem;
-  margin-bottom: 0.75rem;
-  color: #44403c;
-  line-height: 1.7;
-}
-
-.blog-content ul li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.65rem;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  border-radius: 50%;
-}
-
-.blog-content ol {
-  counter-reset: list-counter;
-  list-style: none;
-}
-
-.blog-content ol li {
-  position: relative;
-  padding-left: 2.5rem;
-  margin-bottom: 0.75rem;
-  color: #44403c;
-  line-height: 1.7;
-  counter-increment: list-counter;
-}
-
-.blog-content ol li::before {
-  content: counter(list-counter);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1.75rem;
-  height: 1.75rem;
-  background: var(--surface);
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-}
-
-/* Links in content */
-.blog-content a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  transition: all 0.2s;
-}
-
-.blog-content a:hover {
-  color: var(--primary-light);
-  border-bottom-color: var(--primary-light);
-}
-
-/* Blockquotes */
-.blog-content blockquote {
-  background: var(--surface);
-  border-left: 4px solid var(--primary);
-  border-radius: 0 1rem 1rem 0;
-  padding: 1.5rem 2rem;
-  margin: 2rem 0;
-  font-size: 1.1rem;
-  color: #1c1917;
-}
-
-.blog-content blockquote p {
-  margin-bottom: 0;
-}
-
-/* Images */
-.blog-content img {
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  margin: 2rem auto;
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* Horizontal Rules */
-.blog-content hr {
+.blog-content hr,
+.blog-content .section-divider {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d6d3d1 20%, #d6d3d1 80%, transparent);
+  background: var(--rule);
   margin: 3rem 0;
 }
 
-/* Code blocks if any */
 .blog-content code {
-  background: #f5f5f4;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.375rem;
+  background: var(--surface-elevated);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
   font-size: 0.9em;
-  color: #c2410c;
+  color: var(--ink);
 }
 
 .blog-content pre {
-  background: #1c1917;
-  color: #fafaf9;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  background: var(--primary-dark);
+  color: #f8fafc;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
   overflow-x: auto;
   margin: 2rem 0;
 }
@@ -671,41 +671,31 @@ img {
   color: inherit;
 }
 
-/* First paragraph emphasis */
-.blog-content > p:first-of-type {
-  font-size: 1.125rem;
-  color: #1c1917;
-  line-height: 1.9;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .blog-content h2.numbered-heading {
-    font-size: 1.5rem;
+@media (max-width: 640px) {
+  .blog-content {
+    font-size: 1rem;
   }
 
-  .blog-content h2.numbered-heading .heading-number {
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.875rem;
+  .blog-content h2 {
+    font-size: 1.3125rem;
+    margin-top: 2.75rem;
+    padding-top: 2rem;
   }
 
-  .blog-content .definition-list {
-    padding: 1rem;
+  .blog-content h3 {
+    font-size: 1.0625rem;
+  }
+
+  .blog-content > p:first-of-type {
+    font-size: 1rem;
   }
 
   .blog-content .definition-item {
-    flex-direction: column;
-    gap: 0.25rem;
+    grid-template-columns: 1fr;
   }
 
-  .blog-content .data-table {
-    font-size: 0.875rem;
-  }
-
-  .blog-content .data-table th,
-  .blog-content .data-table td {
-    padding: 0.75rem 1rem;
+  .blog-content .pull-quote {
+    font-size: 1.125rem;
   }
 }
 
@@ -729,7 +719,7 @@ img {
 
 .btn-primary {
   background: var(--secondary);
-  color: white;
+  color: var(--primary-dark);
   font-size: 1.125rem;
   padding: 1.125rem 2.5rem;
   box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
@@ -774,7 +764,7 @@ img {
 
 .badge-secondary {
   background: var(--secondary);
-  color: white;
+  color: var(--primary-dark);
 }
 
 /* Section Label */
@@ -944,13 +934,92 @@ img {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  animation: bounce 2s infinite;
+  animation: scroll-hint-bounce 2s infinite;
   z-index: 3;
 }
 
-@keyframes bounce {
+@keyframes scroll-hint-bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* Same list rhythm for every .prose block (destinations, day tours, safari
+   and Kilimanjaro guides, legal pages). The typography plugin's default is
+   line-height 1.75 plus ~0.5em above and below each item. These selectors
+   are unlayered, so they beat the plugin's layered rules; not-prose areas
+   stay untouched. Written as [class~="prose"] because Tailwind drops plain
+   CSS rules that start with one of its own class names (.prose). */
+[class~="prose"] li:not([class]):not(:where(.not-prose *)) {
+  margin-top: 0;
+  margin-bottom: var(--list-gap);
+  line-height: var(--list-leading);
+}
+
+[class~="prose"] li:not([class]):last-child:not(:where(.not-prose *)) {
+  margin-bottom: 0;
+}
+
+[class~="prose"] li:not([class]) > p:not(:where(.not-prose *)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+[class~="prose"] :is(ul, ol):not([class]):not(:where(.not-prose *)) {
+  margin-top: 1em;
+  margin-bottom: 1.25em;
+}
+
+[class~="prose"] li > :is(ul, ol):not([class]):not(:where(.not-prose *)) {
+  margin-top: var(--list-gap);
+  margin-bottom: 0;
+}
+
+/* WhatsApp button pulse. Tailwind's animate-ping scales to 2x, which pushed
+   the ring past the right edge on phones and made the page scroll sideways. */
+@keyframes wa-pulse {
+  0% { transform: scale(1); opacity: 0.45; }
+  80%, 100% { transform: scale(1.35); opacity: 0; }
+}
+
+.wa-pulse {
+  animation: wa-pulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-pulse { animation: none; }
+}
+
+/* ============================================
+   PARALLAX BAND
+   Image drifts slower than the page. Scroll-driven, so no JS; browsers
+   without animation-timeline keep the static image. Off for reduced motion.
+   ============================================ */
+.parallax-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.parallax-band__media {
+  position: absolute;
+  inset: -12% 0;
+  will-change: transform;
+}
+
+@supports (animation-timeline: view()) {
+  .parallax-band__media {
+    animation: parallax-drift linear both;
+    animation-timeline: view();
+  }
+}
+
+@keyframes parallax-drift {
+  from { transform: translate3d(0, -6%, 0); }
+  to { transform: translate3d(0, 6%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-band__media { animation: none; }
 }
 
 /* ============================================
@@ -998,7 +1067,7 @@ img {
 
 .trust-badge:hover .trust-badge-icon {
   background: var(--secondary);
-  color: white;
+  color: var(--primary-dark);
   transform: scale(1.05);
 }
 
@@ -1322,13 +1391,13 @@ img {
 }
 
 .departures-cta h3 {
-  color: white;
+  color: var(--primary-dark);
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .departures-cta p {
-  color: rgba(255,255,255,0.9);
+  color: var(--primary-dark);
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
@@ -1377,7 +1446,7 @@ img {
   top: 1rem;
   left: 1rem;
   background: var(--secondary);
-  color: white;
+  color: var(--primary-dark);
   padding: 0.375rem 0.875rem;
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -1659,7 +1728,7 @@ img {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: white;
+  color: var(--primary-dark);
 }
 
 .why-item h3 {
@@ -2056,6 +2125,12 @@ img {
 .contact-step span {
   color: rgba(255,255,255,0.9);
   padding-top: 0.25rem;
+}
+
+/* Amber circle: dark numeral (white on amber is 2.1:1) */
+.contact-step .contact-step-number {
+  color: var(--primary-dark);
+  padding-top: 0;
 }
 
 .contact-phone {
@@ -2475,28 +2550,6 @@ img {
   .contact-step {
     gap: 0.75rem;
     margin-bottom: 0.75rem;
-  }
-
-  /* Blog content mobile */
-  .blog-content .pull-quote {
-    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-    font-size: 1rem;
-    margin: 1.5rem 0;
-  }
-
-  .blog-content blockquote {
-    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-    font-size: 1rem;
-    margin: 1.5rem 0;
-  }
-
-  .blog-content h2:not(.numbered-heading) {
-    font-size: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .blog-content h3:not(.numbered-heading) {
-    font-size: 1.25rem;
   }
 
   /* About intro mobile */

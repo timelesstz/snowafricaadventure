@@ -15,7 +15,7 @@ export default function NotFound() {
       <div className="container mx-auto px-4 py-16 text-center">
         {/* 404 Illustration */}
         <div className="relative mb-8">
-          <div className="text-[180px] font-bold text-slate-100 leading-none select-none">
+          <div className="text-[120px] sm:text-[180px] font-bold text-slate-100 leading-none select-none">
             404
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -36,7 +36,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-medium"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-[var(--primary-dark)] rounded-lg hover:bg-amber-600 transition-colors font-medium"
           >
             <Home className="w-5 h-5" />
             Back to Home

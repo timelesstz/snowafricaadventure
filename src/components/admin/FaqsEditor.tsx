@@ -65,7 +65,7 @@ export default function FaqsEditor({
           <button
             type="button"
             onClick={addFaq}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 text-sm font-medium"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 text-[var(--primary-dark)] rounded-lg hover:bg-amber-700 text-sm font-medium"
           >
             <Plus className="w-4 h-4" />
             Add First FAQ

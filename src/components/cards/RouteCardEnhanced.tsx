@@ -67,7 +67,7 @@ export function RouteCardEnhanced({
 
           {/* Top Badges */}
           <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-            <span className="px-4 py-2 rounded-full text-sm font-bold bg-[var(--secondary)] text-white shadow-lg">
+            <span className="px-4 py-2 rounded-full text-sm font-bold bg-[var(--secondary)] text-[var(--primary-dark)] shadow-lg">
               Most Popular
             </span>
             {successRate && (
