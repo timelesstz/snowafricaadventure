@@ -276,24 +276,47 @@ export function Footer({ currentYear }: { currentYear: number }) {
               <span className="h-1 w-1 rounded-full bg-white/20" />
               <span>IMEC Partner</span>
             </div>
-            {/* KAYAK Arusha city-guide badge. Plain <img>: KAYAK's CDN rejects
-                server-side fetches, so next/image optimisation would 400. */}
-            <a
-              href="https://www.kayak.co.uk/Arusha.21939.guide"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-80 hover:opacity-100 transition-opacity"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://content.r9cdn.net/frontier/assets/D3QWX7t9ZP.png"
-                alt="Featured in the KAYAK Arusha travel guide"
-                height={150}
-                loading="lazy"
-                decoding="async"
-                className="h-24 md:h-28 w-auto"
-              />
-            </a>
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+              {/* KAYAK Arusha city-guide badge. Plain <img>: KAYAK's CDN rejects
+                  server-side fetches, so next/image optimisation would 400. */}
+              <a
+                href="https://www.kayak.co.uk/Arusha.21939.guide"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-80 hover:opacity-100 transition-opacity"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://content.r9cdn.net/frontier/assets/D3QWX7t9ZP.png"
+                  alt="Featured in the KAYAK Arusha travel guide"
+                  height={150}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-24 md:h-28 w-auto"
+                />
+              </a>
+              {/* Petit Futé "Recommended establishment" plaque. Static copy of
+                  what their widget script (pro.petitfute.com/.../1155375) injects,
+                  so no third-party JS runs on every page. The "current" plaque
+                  URL follows the year Petit Futé is issuing. */}
+              <a
+                href="https://www.petitfute.com/v42085-arusha/c1122-voyage-transports/c747-tours-operateurs/c1161-tour-operateur-specialise/2197791-snow-africa-adventures.html#xtor=AL-215"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-80 hover:opacity-100 transition-opacity"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://www.petitfute.com/medias/plaque/current/plaque.jpg"
+                  alt="Snow Africa Adventures, recommended by Petit Futé"
+                  width={100}
+                  height={159}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-24 md:h-28 w-auto rounded-md"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>
