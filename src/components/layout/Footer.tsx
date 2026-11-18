@@ -26,7 +26,7 @@ export function Footer({ currentYear }: { currentYear: number }) {
       <div className="container mx-auto px-4 pt-12 pb-8">
         <div className="flex flex-col items-center text-center">
           <span className="text-[10px] tracking-[0.35em] uppercase text-[var(--secondary)]/90 font-medium">
-            Tanzania · Since 2013
+            Tanzania · Since 2008
           </span>
           <h2 className="font-heading text-2xl md:text-3xl text-white mt-3 max-w-3xl leading-snug">
             Handcrafted safaris, summits & shorelines — guided by the people

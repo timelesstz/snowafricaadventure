@@ -23,7 +23,7 @@ interface Safari {
   featuredImage: string | null;
   gameDrives: number;
   parksCount: number;
-  rating: number | null;
+  rating?: number | null;
   highlights: string[];
   destinations: string[];
 }

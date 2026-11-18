@@ -13,7 +13,6 @@ interface SafariDetailHeroProps {
   duration: number;
   parks: number;
   gameDrives: number;
-  rating: number;
   safariSlug: string;
 }
 
@@ -25,7 +24,6 @@ export function SafariDetailHero({
   duration,
   parks,
   gameDrives,
-  rating,
   safariSlug,
 }: SafariDetailHeroProps) {
   return (
@@ -113,12 +111,11 @@ export function SafariDetailHero({
             )}
 
             {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-6 border-y border-white/15 mb-8">
+            <div className="grid grid-cols-3 gap-6 py-6 border-y border-white/15 mb-8">
               {[
                 { value: duration, label: 'Days' },
                 { value: parks, label: 'Parks' },
                 { value: gameDrives, label: 'Game Drives' },
-                { value: rating, label: 'Rating' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="font-heading text-2xl sm:text-3xl font-extrabold text-[var(--secondary)] tracking-tight">

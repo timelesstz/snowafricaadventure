@@ -14,7 +14,7 @@ import prisma from "@/lib/prisma";
 export const metadata: Metadata = genMeta({
   title: "Tanzania Safaris & Kilimanjaro Treks",
   description:
-    "Locally owned Tanzania tour operator offering Kilimanjaro treks, wildlife safaris, and Zanzibar beach holidays. Expert guides, competitive prices, and authentic experiences since 2010.",
+    "Locally owned Tanzania tour operator offering Kilimanjaro treks, wildlife safaris, and Zanzibar beach holidays. Expert guides, competitive prices, and authentic experiences since 2008.",
   url: "/",
 });
 
@@ -58,7 +58,7 @@ function getWhyUsItems(talaLicense: string) {
     {
       icon: Users,
       title: "100% Locally Owned",
-      description: "Based in Arusha since 2010. Your money supports local families and communities directly. No middlemen, no overseas offices.",
+      description: "Based in Arusha since 2008. Your money supports local families and communities directly. No middlemen, no overseas offices.",
     },
     {
       icon: Shield,

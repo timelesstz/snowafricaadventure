@@ -15,9 +15,11 @@ import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchem
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = genMeta({
-  title: "African Safaris Tanzania 2026",
+  // "Which African country?" intent. Package and price searches belong to
+  // /tanzania-safaris/, so this page doesn't compete for them.
+  title: "Why Tanzania for an African Safari",
   description:
-    "Experience the best African safaris in Tanzania — home of the Serengeti, Ngorongoro Crater, and the Great Migration. Budget to luxury options. Expert local guides. Book your African safari adventure today.",
+    "Choosing where to go on an African safari? What Tanzania offers over other countries: the Serengeti, the Ngorongoro Crater, the Great Migration and quieter parks with fewer vehicles.",
   url: "/african-safaris/",
 });
 
@@ -201,13 +203,13 @@ export default function AfricanSafarisPage() {
               </span>
               <div className="flex items-center gap-1 text-white/80">
                 <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                <span className="text-sm">4.9 Rated &bull; 115+ Reviews</span>
+                <span className="text-sm">4.9 on TripAdvisor</span>
               </div>
             </div>
 
             <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              African Safaris —{" "}
-              <span className="text-[var(--secondary)]">Tanzania&apos;s Wildlife Wilderness</span>
+              Why Tanzania for{" "}
+              <span className="text-[var(--secondary)]">Your African Safari</span>
             </h1>
 
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
