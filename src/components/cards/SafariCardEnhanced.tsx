@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MapPin, Camera, Star, Users, Sparkles } from "lucide-react";
+import { Clock, MapPin, Camera, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatPrice } from "@/lib/utils";
 
@@ -248,97 +248,104 @@ export function SafariCardEnhanced({
     );
   }
 
-  // Default card
+  // Default card: one decision per card. Length, parks and drives sit in a
+  // labelled row, the full summary is shown (up to three lines), and every
+  // destination is listed so nothing is cut off mid-name.
   return (
     <Link
       href={`/tanzania-safaris/${slug}/`}
       className={cn(
-        "group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col",
+        "group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--secondary)] focus-visible:ring-offset-2",
         className
       )}
     >
-      {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      {/* Image */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface)]">
         {featuredImage ? (
           <Image
             src={featuredImage}
             alt={title}
             fill
-            className="object-cover group-hover:scale-110 transition-transform duration-700"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-[var(--secondary)] to-[var(--secondary-dark)] flex items-center justify-center">
-            <Camera className="w-16 h-16 text-white/30" />
+            <Camera className="w-16 h-16 text-white/30" aria-hidden="true" />
           </div>
         )}
-
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-          <span className={cn(
-            "px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm",
-            typeStyle.bg, typeStyle.text
-          )}>
-            {type}
-          </span>
-          {ratingNum && (
-            <div className="flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-lg">
-              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-              <span className="font-bold text-xs">{ratingNum.toFixed(1)}</span>
-            </div>
+        <span
+          className={cn(
+            "absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold shadow-md",
+            typeStyle.bg,
+            typeStyle.text
           )}
-        </div>
-
-        {/* Bottom Stats Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-          <div className="flex items-center gap-3 text-white/90 text-xs">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
-              {duration}
-            </span>
-            {parksCount && parksCount > 0 && (
-              <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5" />
-                {parksCount} Parks
-              </span>
-            )}
-          </div>
-        </div>
+        >
+          {type}
+        </span>
       </div>
 
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-bold text-lg text-[var(--text)] group-hover:text-[var(--primary)] transition-colors mb-2 line-clamp-2">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--secondary-ink)]">
+          <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+          {duration}
+        </p>
+
+        <h3 className="mt-2 font-heading text-xl font-bold leading-snug text-[var(--text)] transition-colors group-hover:text-[var(--primary)]">
           {title}
         </h3>
 
         {overview && (
-          <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-4">{overview}</p>
+          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-[var(--text-muted)]">{overview}</p>
         )}
 
-        {/* Destinations */}
+        {(parksCount || gameDrives) ? (
+          <dl className="mt-5 grid grid-cols-2 gap-3 rounded-xl bg-[var(--surface)] p-3 text-center">
+            {parksCount && parksCount > 0 ? (
+              <div>
+                <dt className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Parks</dt>
+                <dd className="font-heading text-lg font-bold tabular-nums">{parksCount}</dd>
+              </div>
+            ) : null}
+            {gameDrives && gameDrives > 0 ? (
+              <div>
+                <dt className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Game drives</dt>
+                <dd className="font-heading text-lg font-bold tabular-nums">{gameDrives}</dd>
+              </div>
+            ) : null}
+          </dl>
+        ) : null}
+
         {destinations && destinations.length > 0 && (
-          <div className="flex items-center gap-1 mb-4 text-xs text-[var(--text-light)]">
-            <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="line-clamp-1">{destinations.slice(0, 3).join(" • ")}</span>
-          </div>
+          <p className="mt-4 flex gap-1.5 text-xs leading-relaxed text-[var(--text-muted)]">
+            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--secondary)]" aria-hidden="true" />
+            <span>{destinations.join(" · ")}</span>
+          </p>
         )}
 
         {/* Price & CTA */}
-        <div className="mt-auto pt-4 border-t border-[var(--border)] flex items-center justify-between">
+        <div className="mt-auto flex items-end justify-between gap-4 border-t border-[var(--border)] pt-5">
           {priceFrom ? (
             <div className="flex flex-col">
-              <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">From</span>
-              <span className="text-xl font-bold text-[var(--primary)]">{formatPrice(priceFrom)}</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                From, per person
+              </span>
+              <span className="font-heading text-2xl font-bold text-[var(--primary)] tabular-nums">
+                {formatPrice(priceFrom)}
+              </span>
             </div>
           ) : (
-            <span className="text-sm text-[var(--text-muted)]">Get Quote</span>
+            <span className="text-sm font-semibold text-[var(--text-muted)]">Get a quote</span>
           )}
-          <span className="w-10 h-10 rounded-full bg-[var(--secondary)] flex items-center justify-center text-[var(--primary-dark)] group-hover:bg-[var(--secondary-dark)] group-hover:scale-110 transition-all shadow-lg">
-            →
+          <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--secondary-ink)] group-hover:underline">
+            View itinerary
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--secondary)] text-[var(--primary-dark)] transition-transform group-hover:translate-x-0.5"
+            >
+              →
+            </span>
           </span>
         </div>
       </div>

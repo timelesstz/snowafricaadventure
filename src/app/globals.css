@@ -990,6 +990,39 @@ img {
 }
 
 /* ============================================
+   PARALLAX BAND
+   Image drifts slower than the page. Scroll-driven, so no JS; browsers
+   without animation-timeline keep the static image. Off for reduced motion.
+   ============================================ */
+.parallax-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.parallax-band__media {
+  position: absolute;
+  inset: -12% 0;
+  will-change: transform;
+}
+
+@supports (animation-timeline: view()) {
+  .parallax-band__media {
+    animation: parallax-drift linear both;
+    animation-timeline: view();
+  }
+}
+
+@keyframes parallax-drift {
+  from { transform: translate3d(0, -6%, 0); }
+  to { transform: translate3d(0, 6%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-band__media { animation: none; }
+}
+
+/* ============================================
    TRUST BADGES
    ============================================ */
 .trust-badges {

@@ -302,6 +302,7 @@ export function SafariInquiryForm({
             <div className="flex gap-2">
               <select
                 name="phonePrefix"
+                aria-label="Country code"
                 value={formData.phonePrefix}
                 onChange={handleChange}
                 className="w-24 px-2 py-3 border border-[var(--border)] rounded-sm font-sans text-[14px] text-[var(--text)] bg-white focus:outline-none focus:border-[var(--secondary)] focus:ring-2 focus:ring-[var(--secondary)]/15 transition-all"

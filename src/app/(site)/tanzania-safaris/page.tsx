@@ -66,7 +66,8 @@ const getSafaris = cache(async () => {
         featuredImage: true,
         gameDrives: true,
         parksCount: true,
-        rating: true,
+        // `rating` is left out on purpose: every package holds the same 4.9
+        // default, not a score from real reviews of that trip.
         highlights: true,
         destinations: {
           select: { destination: { select: { name: true } } },
@@ -79,7 +80,6 @@ const getSafaris = cache(async () => {
     return safaris.map((safari) => ({
       ...safari,
       priceFrom: safari.priceFrom ? Number(safari.priceFrom) : null,
-      rating: safari.rating ? Number(safari.rating) : null,
       destinations: safari.destinations.map((d) => d.destination.name),
     }));
   } catch (error) {
@@ -385,7 +385,7 @@ export default async function SafarisPage() {
               id="safaris-heading"
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white"
             >
-              Tanzania Safari Packages
+              Tanzania Safari Packages &amp; Prices
             </h1>
             <p className="mt-5 text-lg md:text-xl leading-relaxed text-white/90">
               {safaris.length} safaris through the Serengeti, Ngorongoro Crater and Tarangire, from{" "}
@@ -492,59 +492,53 @@ export default async function SafarisPage() {
               </p>
             </div>
 
-            <div className="mt-8 overflow-x-auto">
-              <table className="w-full min-w-[40rem] text-left text-sm">
-                <caption className="sr-only">
-                  Tanzania safari prices by style, per person, from our current packages
-                </caption>
-                <thead>
-                  <tr className="border-b-2 border-[var(--text)] text-xs uppercase tracking-wider text-[var(--text-muted)]">
-                    <th scope="col" className="py-3 pr-4 font-semibold">Style</th>
-                    <th scope="col" className="py-3 pr-4 font-semibold">Where you sleep</th>
-                    <th scope="col" className="py-3 pr-4 font-semibold">Packages</th>
-                    <th scope="col" className="py-3 pr-4 font-semibold">From</th>
-                    <th scope="col" className="py-3 font-semibold">Per day</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {summary.byStyle.map((style) => (
-                    <tr key={style.type} className="border-b border-[var(--border)] align-top">
-                      <th scope="row" className="py-4 pr-4 font-heading text-base font-semibold">
-                        <Link href={style.href} className={linkClass}>
-                          {style.name}
-                        </Link>
-                      </th>
-                      <td className="py-4 pr-4 text-[var(--text-muted)] leading-relaxed">{style.sleep}</td>
-                      <td className="py-4 pr-4 tabular-nums">{style.count}</td>
-                      <td className="py-4 pr-4 tabular-nums font-semibold">
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {summary.byStyle.map((style) => (
+                <li
+                  key={style.type}
+                  className="flex flex-col rounded-2xl border border-[var(--border)] border-t-4 border-t-[var(--secondary)] bg-white p-5"
+                >
+                  <h3 className="font-heading text-lg font-semibold">
+                    <Link href={style.href} className={linkClass}>
+                      {style.name}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{style.sleep}</p>
+                  <dl className="mt-auto grid grid-cols-2 gap-3 border-t border-[var(--border)] pt-4 mt-5">
+                    <div>
+                      <dt className="text-xs uppercase tracking-wider text-[var(--text-muted)]">From</dt>
+                      <dd className="mt-1 font-heading text-xl font-bold tabular-nums">
                         {style.from ? usd(style.from) : "On request"}
-                      </td>
-                      <td className="py-4 tabular-nums text-[var(--text-muted)]">
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs uppercase tracking-wider text-[var(--text-muted)]">Per day</dt>
+                      <dd className="mt-1 text-sm font-semibold tabular-nums">
                         {style.perDayMin
                           ? style.perDayMin === style.perDayMax
                             ? `about ${usd(style.perDayMin)}`
                             : `${usd(style.perDayMin)}–${usd(style.perDayMax as number)}`
                           : "–"}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr className="border-b border-[var(--border)] align-top">
-                    <th scope="row" className="py-4 pr-4 font-heading text-base font-semibold">
-                      <Link href="/tailor-made-safari/" className={linkClass}>
-                        Tailor-made
-                      </Link>
-                    </th>
-                    <td className="py-4 pr-4 text-[var(--text-muted)] leading-relaxed">
-                      Any mix of the above, with a private vehicle and your own dates.
-                    </td>
-                    <td className="py-4 pr-4">–</td>
-                    <td colSpan={2} className="py-4 text-[var(--text-muted)]">
-                      Priced on request
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                      </dd>
+                    </div>
+                  </dl>
+                  <p className="mt-3 text-xs text-[var(--text-light)]">
+                    {style.count} {style.count === 1 ? "package" : "packages"}
+                  </p>
+                </li>
+              ))}
+              <li className="flex flex-col rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)] p-5">
+                <h3 className="font-heading text-lg font-semibold">
+                  <Link href="/tailor-made-safari/" className={linkClass}>
+                    Tailor-made
+                  </Link>
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                  Any mix of the above, with a private vehicle and your own dates.
+                </p>
+                <p className="mt-auto pt-5 text-sm font-semibold">Priced on request</p>
+              </li>
+            </ul>
             <p className="mt-4 text-xs text-[var(--text-light)]">
               Per person sharing, from today&apos;s package prices. Park fees alone are roughly $70 to
               $82 per person per day in the main parks, so longer trips cost less per day.
@@ -630,27 +624,15 @@ export default async function SafarisPage() {
               Serengeti and Kenya&apos;s Maasai Mara. The timing shifts with the rains each year, so
               we place your camp where the herds are when you travel.
             </p>
-            <div className="mt-5 overflow-x-auto">
-              <table className="w-full min-w-[36rem] text-left text-sm">
-                <caption className="sr-only">Great Migration location by month</caption>
-                <thead>
-                  <tr className="border-b-2 border-[var(--text)] text-xs uppercase tracking-wider text-[var(--text-muted)]">
-                    <th scope="col" className="py-3 pr-4 font-semibold">Months</th>
-                    <th scope="col" className="py-3 pr-4 font-semibold">Where</th>
-                    <th scope="col" className="py-3 font-semibold">What happens</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {MIGRATION.map((row) => (
-                    <tr key={row.months} className="border-b border-[var(--border)]">
-                      <th scope="row" className="py-3 pr-4 font-semibold whitespace-nowrap">{row.months}</th>
-                      <td className="py-3 pr-4">{row.where}</td>
-                      <td className="py-3 text-[var(--text-muted)]">{row.what}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ol className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+              {MIGRATION.map((row) => (
+                <li key={row.months} className="rounded-xl border border-[var(--border)] bg-white p-4">
+                  <p className="font-heading text-sm font-semibold">{row.months}</p>
+                  <p className="mt-1 text-sm font-medium">{row.where}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{row.what}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
@@ -726,6 +708,31 @@ export default async function SafarisPage() {
                 </div>
               </dl>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Parallax CTA band */}
+      <section className="parallax-band text-white" aria-labelledby="safari-cta-heading">
+        <div className="parallax-band__media" aria-hidden="true">
+          <Image src={SAFARI_HERO_IMAGE} alt="" fill sizes="100vw" className="object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/65 to-black/45" />
+        <div className="relative container mx-auto px-4 py-16 md:py-24 text-center">
+          <h2 id="safari-cta-heading" className="font-heading text-3xl md:text-4xl font-bold leading-tight">
+            Ready to see the Serengeti?
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base md:text-lg leading-relaxed text-white/90">
+            Tell us your dates and group size. We reply within 24 hours with a plan built around your trip.
+          </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+            <a href="#inquire" className="btn btn-primary">Get a free quote</a>
+            <Link
+              href="/tailor-made-safari/"
+              className="btn bg-white/10 border border-white/60 text-white hover:bg-white/20"
+            >
+              Build a tailor-made safari
+            </Link>
           </div>
         </div>
       </section>
