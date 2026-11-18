@@ -501,9 +501,12 @@ export default async function RoutePage({ params }: PageProps) {
                     <blockquote className="text-center text-[var(--text-muted)] italic text-sm mb-4 px-2 border-l-0">
                       &ldquo;{route.guideQuote || "The mountain teaches patience and rewards determination. Every step is a story."}&rdquo;
                     </blockquote>
-                    <button className="w-full py-3 border-2 border-[var(--primary)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all">
+                    <a
+                      href="#inquiry-form"
+                      className="block w-full py-3 text-center border-2 border-[var(--primary)] text-[var(--primary)] font-heading font-semibold rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all"
+                    >
                       Ask {(route.guideName || "Florent").split(" ")[0]} a Question
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Wrench, Users, Zap, Star } from "lucide-react";
+import { InquiryForm } from "@/components/forms/InquiryForm";
 
 interface RouteHeroProps {
   title: string;
@@ -26,31 +27,35 @@ export function RouteHero({
   image = "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/07/kilitrekkers.webp",
 }: RouteHeroProps) {
   return (
-    <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
+    <section className="relative overflow-hidden bg-slate-800">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
           src={image}
           alt={title}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />
       </div>
 
-      {/* Gradient Overlay */}
+      {/* Overlay: even on small screens (text spans the full width), a
+          left-to-right gradient on desktop where the form card sits right. */}
+      <div className="absolute inset-0 pointer-events-none bg-slate-900/75 lg:hidden" />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none hidden lg:block"
         style={{
           background:
-            "linear-gradient(to right, rgba(30, 41, 59, 0.9) 0%, rgba(30, 41, 59, 0.7) 40%, rgba(30, 41, 59, 0.4) 100%)",
+            "linear-gradient(to right, rgba(30, 41, 59, 0.92) 0%, rgba(30, 41, 59, 0.75) 45%, rgba(30, 41, 59, 0.45) 100%)",
         }}
       />
 
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 lg:py-16 grid lg:grid-cols-[minmax(0,1fr)_400px] gap-8 lg:gap-12 items-end lg:min-h-[620px]">
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16 z-10">
+      <div>
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-white/70 text-sm mb-4">
+        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-white/75 text-sm mb-4">
           <Link href="/" className="hover:text-[var(--secondary)] transition-colors">
             Home
           </Link>
@@ -75,7 +80,7 @@ export function RouteHero({
 
         {/* Subtitle */}
         {subtitle && (
-          <p className="text-lg text-white/80 max-w-2xl mb-6">{subtitle}</p>
+          <p className="text-base sm:text-lg text-white/85 max-w-2xl mb-6 line-clamp-3 sm:line-clamp-none">{subtitle}</p>
         )}
 
         {/* Stats */}
@@ -101,6 +106,18 @@ export function RouteHero({
             label="Summit"
           />
         </div>
+      </div>
+
+      {/* Lead capture */}
+      <div id="hero-quote" className="scroll-mt-24">
+        <InquiryForm
+          variant="hero"
+          relatedTo={title}
+          tripType="Kilimanjaro"
+          heroTitle="Get your free climb quote"
+          heroSubtitle={`Your price, dates and a day-by-day plan for the ${title}, sent within 24 hours.`}
+        />
+      </div>
       </div>
     </section>
   );

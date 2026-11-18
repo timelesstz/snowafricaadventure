@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useId } from "react";
 import { Button } from "@/components/ui/Button";
 import { TRIP_TYPES, PHONE_PREFIXES, COUNTRY_TO_PREFIX } from "@/lib/constants";
 import { COUNTRIES, REFERRAL_SOURCES } from "@/lib/countries";
@@ -16,6 +16,9 @@ interface InquiryFormProps {
   tripType?: string;
   variant?: "sidebar" | "full" | "hero";
   showInviteSection?: boolean;
+  /** Hero variant only: card heading and one-line offer under it. */
+  heroTitle?: string;
+  heroSubtitle?: string;
 }
 
 export function InquiryForm({
@@ -23,7 +26,13 @@ export function InquiryForm({
   tripType,
   variant = "sidebar",
   showInviteSection = false,
+  heroTitle = "Start Planning Your Adventure",
+  heroSubtitle,
 }: InquiryFormProps) {
+  // Pages can render more than one form (e.g. hero + full), so every field id
+  // is scoped to this instance to keep ids unique and labels correctly linked.
+  const uid = useId();
+  const fid = (name: string) => `${uid}-${name}`;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -149,7 +158,7 @@ export function InquiryForm({
     } finally {
       setIsSubmitting(false);
     }
-  }, [relatedTo, tripType, inviteFriends]);
+  }, [relatedTo, tripType, inviteFriends, variant]);
 
   if (submitted) {
     return (
@@ -187,41 +196,110 @@ export function InquiryForm({
 
   const isHero = variant === "hero";
   const isFull = variant === "full";
-  const showInvite = showInviteSection || tripType === "Kilimanjaro" || isFull;
+  // The hero form is a short lead capture: no invite or referral extras.
+  const showInvite =
+    !isHero && (showInviteSection || tripType === "Kilimanjaro" || isFull);
+  const inputClass =
+    "w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white";
 
   return (
     <form
       onSubmit={handleSubmit}
       data-form-id={`inquiry-${variant}`}
-      className={`space-y-5 ${isHero ? "bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-xl" : ""}`}
+      aria-labelledby={isHero ? fid("heroTitle") : undefined}
+      className={isHero ? "space-y-4 bg-white p-5 sm:p-6 rounded-2xl shadow-2xl" : "space-y-5"}
     >
       {isHero && (
-        <h3 className="font-heading font-bold text-xl text-slate-900 mb-4">
-          Start Planning Your Adventure
-        </h3>
+        <div>
+          <h2
+            id={fid("heroTitle")}
+            className="font-heading font-bold text-xl text-slate-900 leading-snug"
+          >
+            {heroTitle}
+          </h2>
+          {heroSubtitle && (
+            <p className="mt-1 text-sm text-slate-600">{heroSubtitle}</p>
+          )}
+        </div>
       )}
 
       {/* Error Message */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
           {error}
         </div>
       )}
 
+      {isHero ? (
+        <div className="space-y-3">
+          <div>
+            <label htmlFor={fid("fullName")} className="block text-sm font-medium text-slate-700 mb-1">
+              Full name <span className="text-red-600" aria-hidden="true">*</span>
+            </label>
+            <input type="text" id={fid("fullName")} name="fullName" required minLength={2} autoComplete="name" className={inputClass} />
+          </div>
+          <div>
+            <label htmlFor={fid("email")} className="block text-sm font-medium text-slate-700 mb-1">
+              Email <span className="text-red-600" aria-hidden="true">*</span>
+            </label>
+            <input type="email" id={fid("email")} name="email" required autoComplete="email" className={inputClass} />
+          </div>
+          <div>
+            <label htmlFor={fid("phone")} className="block text-sm font-medium text-slate-700 mb-1">
+              WhatsApp <span className="font-normal text-slate-500">(optional)</span>
+            </label>
+            <div className="flex gap-2">
+              <select
+                name="phonePrefix"
+                ref={phonePrefixRef}
+                aria-label="Phone country code"
+                className="w-[92px] px-2 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all outline-none bg-white"
+              >
+                {PHONE_PREFIXES.map((prefix) => (
+                  <option key={prefix.code} value={prefix.code}>
+                    {prefix.code}
+                  </option>
+                ))}
+              </select>
+              <input type="tel" id={fid("phone")} name="phone" autoComplete="tel-national" className={`flex-1 min-w-0 ${inputClass}`} />
+            </div>
+          </div>
+          <div className="grid grid-cols-[1fr_96px] gap-3">
+            <div>
+              <label htmlFor={fid("arrivalDate")} className="block text-sm font-medium text-slate-700 mb-1">
+                Start date
+              </label>
+              <input
+                type="date"
+                id={fid("arrivalDate")}
+                name="arrivalDate"
+                min={new Date().toISOString().split("T")[0]}
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor={fid("numAdults")} className="block text-sm font-medium text-slate-700 mb-1">
+                Climbers
+              </label>
+              <input type="number" id={fid("numAdults")} name="numAdults" min="1" max="100" defaultValue="2" inputMode="numeric" className={inputClass} />
+            </div>
+          </div>
+        </div>
+      ) : (
       <div className="space-y-4">
         {/* Row 1: Full Name + Email (side by side) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Name */}
           <div>
             <label
-              htmlFor="fullName"
+              htmlFor={fid("fullName")}
               className="block text-sm font-medium text-slate-700 mb-1.5"
             >
               Full Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              id="fullName"
+              id={fid("fullName")}
               name="fullName"
               required
               className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
@@ -232,14 +310,14 @@ export function InquiryForm({
           {/* Email */}
           <div>
             <label
-              htmlFor="email"
+              htmlFor={fid("email")}
               className="block text-sm font-medium text-slate-700 mb-1.5"
             >
               Email Address <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
-              id="email"
+              id={fid("email")}
               name="email"
               required
               className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
@@ -253,13 +331,13 @@ export function InquiryForm({
           {/* Country */}
           <div>
             <label
-              htmlFor="country"
+              htmlFor={fid("country")}
               className="block text-sm font-medium text-slate-700 mb-1.5"
             >
               Country <span className="text-red-500">*</span>
             </label>
             <select
-              id="country"
+              id={fid("country")}
               name="country"
               required
               onChange={handleCountryChange}
@@ -284,13 +362,13 @@ export function InquiryForm({
           {!tripType ? (
             <div>
               <label
-                htmlFor="tripType"
+                htmlFor={fid("tripType")}
                 className="block text-sm font-medium text-slate-700 mb-1.5"
               >
                 Trip Type <span className="text-red-500">*</span>
               </label>
               <select
-                id="tripType"
+                id={fid("tripType")}
                 name="tripType"
                 required
                 className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none bg-white"
@@ -307,14 +385,14 @@ export function InquiryForm({
             /* If tripType is preset, show Arrival Date here instead */
             <div>
               <label
-                htmlFor="arrivalDate"
+                htmlFor={fid("arrivalDate")}
                 className="block text-sm font-medium text-slate-700 mb-1.5"
               >
                 Preferred Travel Date
               </label>
               <input
                 type="date"
-                id="arrivalDate"
+                id={fid("arrivalDate")}
                 name="arrivalDate"
                 min={new Date().toISOString().split("T")[0]}
                 className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
@@ -326,7 +404,7 @@ export function InquiryForm({
         {/* Row 3: Phone Number */}
         <div>
           <label
-            htmlFor="phone"
+            htmlFor={fid("phone")}
             className="block text-sm font-medium text-slate-700 mb-1.5"
           >
             Phone / WhatsApp
@@ -346,7 +424,7 @@ export function InquiryForm({
             </select>
             <input
               type="tel"
-              id="phone"
+              id={fid("phone")}
               name="phone"
               className="flex-1 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
               placeholder="123 456 7890"
@@ -359,14 +437,14 @@ export function InquiryForm({
           {/* Adults */}
           <div>
             <label
-              htmlFor="numAdults"
+              htmlFor={fid("numAdults")}
               className="block text-sm font-medium text-slate-700 mb-1.5"
             >
               Adults
             </label>
             <input
               type="number"
-              id="numAdults"
+              id={fid("numAdults")}
               name="numAdults"
               min="1"
               defaultValue="2"
@@ -377,14 +455,14 @@ export function InquiryForm({
           {/* Children */}
           <div>
             <label
-              htmlFor="numChildren"
+              htmlFor={fid("numChildren")}
               className="block text-sm font-medium text-slate-700 mb-1.5"
             >
               Children
             </label>
             <input
               type="number"
-              id="numChildren"
+              id={fid("numChildren")}
               name="numChildren"
               min="0"
               defaultValue="0"
@@ -396,14 +474,14 @@ export function InquiryForm({
           {!tripType && (
             <div>
               <label
-                htmlFor="arrivalDate"
+                htmlFor={fid("arrivalDate")}
                 className="block text-sm font-medium text-slate-700 mb-1.5"
               >
                 Travel Date
               </label>
               <input
                 type="date"
-                id="arrivalDate"
+                id={fid("arrivalDate")}
                 name="arrivalDate"
                 min={new Date().toISOString().split("T")[0]}
                 className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
@@ -412,18 +490,19 @@ export function InquiryForm({
           )}
         </div>
       </div>
+      )}
 
       {/* How did you hear about us */}
       {isFull && (
         <div>
           <label
-            htmlFor="referralSource"
+            htmlFor={fid("referralSource")}
             className="block text-sm font-medium text-slate-700 mb-1.5"
           >
             How did you hear about us?
           </label>
           <select
-            id="referralSource"
+            id={fid("referralSource")}
             name="referralSource"
             onChange={(e) => setShowOtherReferral(e.target.value === "other")}
             className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
@@ -450,13 +529,13 @@ export function InquiryForm({
       {(isFull || variant === "sidebar") && (
         <div>
           <label
-            htmlFor="additionalInfo"
+            htmlFor={fid("additionalInfo")}
             className="block text-sm font-medium text-slate-700 mb-1.5"
           >
             Tell us about your dream trip
           </label>
           <textarea
-            id="additionalInfo"
+            id={fid("additionalInfo")}
             name="additionalInfo"
             rows={4}
             className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none resize-none"
@@ -496,13 +575,17 @@ export function InquiryForm({
             </svg>
             Sending...
           </span>
+        ) : isHero ? (
+          "Get My Free Quote"
         ) : (
           "Send Inquiry"
         )}
       </Button>
 
-      <p className="text-xs text-slate-500 text-center">
-        We typically respond within 24 hours. No spam, ever.
+      <p className="text-xs text-slate-600 text-center">
+        {isHero
+          ? "Free and no obligation. We reply within 24 hours. "
+          : "We typically respond within 24 hours. No spam, ever. "}
         Your data is protected under our{" "}
         <Link href="/privacy-policy/" className="underline hover:text-slate-700">privacy policy</Link>.
       </p>
