@@ -133,6 +133,11 @@ export async function sendInquiryReceivedEmails(
     "tailor-made": "Tailor-Made Safari",
     zanzibar: "Zanzibar",
     "Wildlife Safari": "Safari",
+    Kilimanjaro: "Kilimanjaro",
+    "Wildlife Safari + Kilimanjaro": "Safari + Kilimanjaro",
+    "Wildlife Safari + Zanzibar Beach": "Safari + Zanzibar",
+    "Zanzibar Beach": "Zanzibar",
+    Customized: "Custom Trip",
   };
 
   // Send sequentially — shared cPanel SMTP often fails on concurrent sends

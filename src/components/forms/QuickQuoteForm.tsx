@@ -107,7 +107,9 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
             flexibility: month ? "Month only" : "Dates not set",
             additionalInfo: "Quick quote request from an article.",
             relatedTo,
-            type: trip,
+            // The admin inquiry filter groups by "trekking" / "safari";
+            // the exact choice travels in tripType.
+            type: trip === "Kilimanjaro" ? "trekking" : "safari",
             website: honeypotRef.current?.value || "",
             ...tracking,
           }),
