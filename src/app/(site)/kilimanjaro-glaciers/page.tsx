@@ -296,7 +296,7 @@ export default function KilimanjaroGlaciersPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-slate-50 border-2 border-slate-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Kilimanjaro&apos;s glaciers have <strong>shrunk by over 85% since 1912</strong>. Scientists estimate the remaining ice &mdash; including the famous <strong>Furtw&auml;ngler Glacier</strong> and <strong>Northern Icefield</strong> &mdash; could disappear entirely by <strong>2040</strong>. Climate change, reduced snowfall, and increased sublimation are the primary drivers. You can still see and photograph these glaciers today, but the window is narrowing.
               </p>
             </div>
@@ -481,7 +481,7 @@ export default function KilimanjaroGlaciersPage() {
             </div>
 
             <div className="space-y-6">
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+              <p className="text-[var(--text-muted)] text-base leading-relaxed">
                 Every climber who reaches the crater rim or Uhuru Peak can still see Kilimanjaro&apos;s glaciers. They remain striking, dramatic, and deeply moving &mdash; towering walls of ancient ice standing against the equatorial sky at nearly 6,000 metres. But they are undeniably smaller than what photographs from even 10 years ago show.
               </p>
 
@@ -547,7 +547,7 @@ export default function KilimanjaroGlaciersPage() {
             </h2>
 
             <div className="space-y-6">
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+              <p className="text-[var(--text-muted)] text-base leading-relaxed">
                 Glacier retreat is not just an environmental story &mdash; it directly affects the climbing experience on Kilimanjaro. Here is how the changing ice is reshaping the mountain for trekkers.
               </p>
 

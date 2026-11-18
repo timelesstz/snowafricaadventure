@@ -25,7 +25,7 @@ export default function SearchLayout({
             <h2 className="font-heading text-3xl font-bold mb-6 text-[var(--text)]">
               Discover Tanzania Adventures with Snow Africa
             </h2>
-            <div className="prose prose-slate prose-lg max-w-none space-y-4 text-[var(--text-muted)]">
+            <div className="prose prose-slate max-w-none space-y-4 text-[var(--text-muted)]">
               <p>
                 Snow Africa Adventure is a Tanzania-based tour operator specialising in Mount Kilimanjaro climbing expeditions, Tanzania safari packages, and tailor-made East African adventures. Based in Arusha — the gateway to Africa&apos;s greatest wildlife parks and the world&apos;s highest free-standing mountain — we have helped thousands of travellers from over 60 countries achieve their African adventure dreams safely, responsibly, and memorably.
               </p>

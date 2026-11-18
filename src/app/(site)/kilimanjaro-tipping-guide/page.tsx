@@ -311,7 +311,7 @@ export default function KilimanjaroTippingGuidePage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Budget <strong>$200 to $250 per climber</strong> for tips. This is split among your lead guide, assistant guides, cook, and porters. Tips are given in a <strong>ceremony on the last day</strong> of the trek and are a <strong>significant part of the crew&apos;s income</strong> — for porters, tips can double or triple their base wage. Bring <strong>small US dollar bills</strong> ($1, $5, $10, $20) and prepare envelopes labelled by role before the ceremony.
               </p>
             </div>
@@ -420,7 +420,7 @@ export default function KilimanjaroTippingGuidePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Why Tipping Matters on Kilimanjaro
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The mountain crew who carry your gear, <Link href="/kilimanjaro-food-meals/" className="text-[var(--primary)] hover:underline font-semibold">cook your meals</Link>, set up your camps, and keep you safe are the backbone of every Kilimanjaro expedition. Understanding why tips matter so much helps frame this as what it truly is — not an afterthought, but a fundamental part of the climb&apos;s economics.
             </p>
 
@@ -610,7 +610,7 @@ export default function KilimanjaroTippingGuidePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Budget vs Luxury Operators: Tipping Differences
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The per-day tipping rate stays the same regardless of which operator you choose — a porter on a budget climb deserves the same tip as a porter on a luxury climb. However, the <strong>total tip amount changes</strong> because luxury operators use larger crews.
             </p>
 

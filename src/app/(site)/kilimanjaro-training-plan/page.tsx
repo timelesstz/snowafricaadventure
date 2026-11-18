@@ -425,7 +425,7 @@ export default function KilimanjaroTrainingPlanPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Short Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Start training <strong>12 weeks before your climb</strong>. Focus on <strong>hiking with elevation gain</strong>, <strong>cardiovascular fitness</strong>, and <strong>leg/core strength</strong>. You don&apos;t need to be an athlete — <strong>consistency beats intensity</strong>. The goal is to comfortably hike 6-8 hours with a 7-10kg daypack on consecutive days. Our guides have seen thousands of climbers succeed with this approach.
               </p>
             </div>
@@ -994,7 +994,7 @@ export default function KilimanjaroTrainingPlanPage() {
               </div>
             </div>
             <div className="bg-white rounded-2xl border border-[var(--border)] shadow-sm p-8">
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
+              <p className="text-[var(--text-muted)] text-base leading-relaxed mb-6">
                 The final week is about <strong>rest and recovery</strong>, not last-minute fitness gains. Your body needs to arrive in Arusha fresh, hydrated, and energised. Any training you do in the last 7 days will not improve your fitness — it can only tire you out.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">

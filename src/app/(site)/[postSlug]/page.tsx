@@ -385,7 +385,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="min-w-0 lg:col-span-8">
               {/* Excerpt/Intro */}
               {post.excerpt && (
-                <p className="text-xl md:text-2xl text-[var(--text-muted)] leading-relaxed mb-8 font-light border-l-4 border-[var(--primary)] pl-6">
+                <p className="text-lg text-[var(--text-muted)] leading-relaxed mb-8 font-light border-l-4 border-[var(--primary)] pl-6">
                   {post.excerpt}
                 </p>
               )}

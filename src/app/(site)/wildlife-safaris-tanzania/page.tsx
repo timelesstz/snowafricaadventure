@@ -217,7 +217,7 @@ export default function WildlifeSafarisTanzaniaPage() {
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               4 Million Animals. 1,100 Bird Species. One Extraordinary Destination.
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Tanzania hosts the greatest concentration of wildlife on Earth. From the Big Five to the
               Great Migration to 1,100 species of birds — no other destination on the planet comes close.
               Expert naturalist guides unlock every detail of this living, breathing wilderness.

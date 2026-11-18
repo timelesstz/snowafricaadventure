@@ -469,7 +469,7 @@ export default function KilimanjaroStatisticsPage() {
               <h2 className="font-heading text-2xl font-bold mb-4">
                 Kilimanjaro at a Glance
               </h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Mount Kilimanjaro stands at{" "}
                 <strong>5,895 metres (19,341 feet)</strong> — Africa&apos;s
                 tallest peak and the world&apos;s tallest free-standing

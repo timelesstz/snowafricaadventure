@@ -42,7 +42,7 @@ export function RouteJoinGroupDepartures({
           <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-[var(--primary)] mb-3">
             Upcoming Kilimanjaro Climbs
           </h2>
-          <p className="text-lg text-[var(--text-muted)]">
+          <p className="text-base text-[var(--text-muted)]">
             Join fellow adventurers on scheduled group departures and save up to 25%
           </p>
         </div>

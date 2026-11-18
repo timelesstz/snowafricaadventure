@@ -265,7 +265,7 @@ export default async function TailorMadeSafariPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 mt-2">
               Why Choose a Tailor-Made Safari?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-10">
+            <p className="text-[var(--text-muted)] text-base mb-10">
               Every traveler is unique. A family with young children has
               different needs than a couple celebrating their honeymoon or a
               photography enthusiast chasing the perfect shot. Our custom

@@ -315,7 +315,7 @@ export default function KilimanjaroSoloClimbPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 <strong>You cannot climb Kilimanjaro without a licensed guide</strong> — it is illegal under KINAPA (Kilimanjaro National Park) regulations. But &quot;climbing solo&quot; does not mean climbing alone. It means <strong>booking as an individual traveller</strong> and joining a scheduled group departure with 4-12 other climbers from around the world. It is the most popular and affordable way to climb Kilimanjaro, and <strong>many of our climbers are solo travellers</strong> who form lasting friendships on the mountain.
               </p>
             </div>
@@ -330,13 +330,13 @@ export default function KilimanjaroSoloClimbPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Can You Climb Kilimanjaro Alone?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The short answer is no — not unguided. Kilimanjaro National Park Authority (KINAPA) requires every climber to be accompanied by a <strong>licensed guide and registered tour operator</strong>. You cannot enter the park gates without them. This is a strict safety regulation, not a suggestion, and it applies to every person on the mountain regardless of experience.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The longer answer is more encouraging. When people search for &quot;climbing Kilimanjaro solo,&quot; they almost always mean one of two things: either they want to climb without hiring a guide (which is not possible), or they want to <strong>book the trip as an individual traveller</strong> without needing to bring friends or family along. The second scenario is not only possible — it is one of the most common ways people climb Kilimanjaro. <Link href="/kilimanjaro-women-climbing/" className="text-[var(--primary)] hover:underline font-semibold">Solo female travellers</Link> are especially well represented among our individual bookings.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Every month, we welcome solo travellers from around the world who join our <Link href="/kilimanjaro-join-group-departures/" className="text-[var(--primary)] hover:underline font-medium">scheduled group departures</Link>. You arrive as a single booking and leave as part of a team that has shared one of the most challenging and rewarding experiences of their lives. The mountain has a way of turning strangers into friends remarkably quickly.
             </p>
             <div className="bg-acacia-50 border border-acacia-200 rounded-xl p-5 flex items-start gap-3">
@@ -480,7 +480,7 @@ export default function KilimanjaroSoloClimbPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Cost for Solo Climbers
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               One of the biggest concerns for solo travellers is cost. The good news: joining a <Link href="/kilimanjaro-join-group-departures/" className="text-[var(--primary)] hover:underline font-semibold">group departure</Link> is the <strong>most affordable way to climb Kilimanjaro</strong>. Fixed costs — guide team salaries, vehicle hire, cooking equipment, park gate fees — are shared across the group rather than shouldered by one person. For a full breakdown, see our <Link href="/kilimanjaro-prices/" className="text-[var(--primary)] hover:underline font-semibold">Kilimanjaro pricing guide</Link>.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
@@ -501,7 +501,7 @@ export default function KilimanjaroSoloClimbPage() {
                 </p>
               </div>
             </div>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The difference in price reflects the reality of cost-sharing. A lead guide, cook, and vehicle cost the same whether they serve 1 climber or 10. On a group departure, those fixed costs are divided — which is why solo travellers save $1,000+ by joining a group rather than booking privately.
             </p>
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex items-start gap-3">
@@ -526,7 +526,7 @@ export default function KilimanjaroSoloClimbPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Safety as a Solo Climber
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Solo travellers on Kilimanjaro are not less safe — in many ways, they are <strong>safer</strong> than private groups. When you join a group departure, you benefit from a full, professional guide team experienced in managing groups on high-altitude terrain. The <Link href="/kilimanjaro-safety/" className="text-[var(--primary)] hover:underline font-semibold">safety infrastructure</Link> is identical to what any group receives, regardless of how you booked.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
@@ -551,7 +551,7 @@ export default function KilimanjaroSoloClimbPage() {
                 <p className="text-sm text-[var(--text-muted)]">Group members look out for each other. If one person struggles, others notice. The group dynamic adds an extra layer of vigilance beyond what the guides provide.</p>
               </div>
             </div>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               The greatest safety risk on Kilimanjaro is altitude sickness, not being a solo traveller. Whether you book alone or with a group of friends, the safety protocols are identical. What matters is choosing a <Link href="/kilimanjaro-safety/" className="text-[var(--primary)] hover:underline font-medium">reputable operator</Link> with certified guides, proper equipment, and a clear emergency protocol.
             </p>
           </div>
@@ -565,7 +565,7 @@ export default function KilimanjaroSoloClimbPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Meeting Fellow Climbers
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The social experience is one of the top reasons solo travellers choose Kilimanjaro. The mountain attracts an incredible diversity of people — retirees ticking off a bucket list, university graduates celebrating a milestone, couples, friends, charity fundraisers, and seasoned trekkers chasing their next summit. What unites them is the shared challenge.
             </p>
             <div className="space-y-4 mb-6">

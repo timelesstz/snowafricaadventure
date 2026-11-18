@@ -348,7 +348,7 @@ export default function KilimanjaroAirportGuidePage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 <strong>Kilimanjaro International Airport (JRO)</strong> is the gateway to Mount Kilimanjaro and northern Tanzania&apos;s safari circuit. It is a small, single-terminal airport located between Moshi and Arusha. <strong>Moshi is 45 minutes away</strong> (40 km) and <strong>Arusha is about 1 hour</strong> (46 km). Most tour operators include airport transfers in your package. Visa on arrival costs <strong>$50 USD</strong> ($100 for US citizens).
               </p>
             </div>
@@ -363,13 +363,13 @@ export default function KilimanjaroAirportGuidePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Kilimanjaro International Airport Overview
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro International Airport — IATA code <strong>JRO</strong> — is northern Tanzania&apos;s main international gateway. Despite serving one of Africa&apos;s most famous destinations, JRO remains a small, manageable airport. There is <strong>one terminal building</strong> handling both international and domestic flights. The airport sits on a plateau at approximately 900 metres elevation, roughly midway between Moshi (the main base for Kilimanjaro climbs) and Arusha (the safari capital of Tanzania). For a broader look at <Link href="/where-is-mount-kilimanjaro/" className="text-[var(--primary)] hover:underline">where Mount Kilimanjaro is located</Link> and its geographic context, see our dedicated guide.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Do not confuse JRO with Arusha Airport (ARK), which is a smaller domestic airstrip located closer to Arusha town. All major international flights land at JRO. The airport was built in the 1970s and expanded in recent years, but it retains its characteristically low-key, no-frills atmosphere. This is not Heathrow or Dubai — and most travellers find that refreshing. You will walk across the tarmac to the terminal, clear immigration in a straightforward process, collect your bags, and be on the road within an hour of landing.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The airport is named after Kilimanjaro but the mountain is not visible from the runway or terminal. On a clear day during your transfer towards Moshi, however, you will get your first breathtaking view of Kilimanjaro&apos;s snow-capped summit rising above the clouds — a moment that never gets old, even for our guides who have seen it thousands of times.
             </p>
             <div className="grid sm:grid-cols-3 gap-4">
@@ -480,7 +480,7 @@ export default function KilimanjaroAirportGuidePage() {
                 <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
                   Airport to Moshi Transfer
                 </h2>
-                <p className="text-white/80 text-lg mb-4 leading-relaxed">
+                <p className="text-white/80 text-base mb-4 leading-relaxed">
                   Moshi is the primary base town for Kilimanjaro climbs and is where most trekking operators are headquartered. The transfer from JRO to Moshi is <strong>40 kilometres on a well-paved highway</strong>, taking approximately <strong>45-55 minutes</strong>.
                 </p>
                 <p className="text-white/80 mb-4 leading-relaxed">
@@ -538,10 +538,10 @@ export default function KilimanjaroAirportGuidePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Airport to Arusha Transfer
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Arusha is the safari capital of northern Tanzania and the departure point for trips to the Serengeti, Ngorongoro Crater, Tarangire, and Lake Manyara. The transfer from JRO to Arusha covers <strong>46 kilometres</strong> and takes approximately <strong>50-70 minutes</strong>, slightly longer than Moshi due to heavier traffic approaching the city.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               If your itinerary starts with a <Link href="/climbing-kilimanjaro/" className="text-[var(--primary)] hover:underline">Kilimanjaro climb</Link>, you will transfer to Moshi first. If you are heading straight on a <Link href="/african-safaris/" className="text-[var(--primary)] hover:underline">safari</Link>, your driver will take you to Arusha instead. Many travellers do both — climbing Kilimanjaro first (based in Moshi) and then transferring to Arusha for their safari. We handle all inter-city transfers seamlessly.
             </p>
             <div className="grid sm:grid-cols-3 gap-4">
@@ -634,7 +634,7 @@ export default function KilimanjaroAirportGuidePage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Departing from Kilimanjaro Airport
             </h2>
-            <p className="text-white/80 text-lg mb-6 leading-relaxed">
+            <p className="text-white/80 text-base mb-6 leading-relaxed">
               Your departure experience at JRO is just as straightforward as arriving. We provide a return transfer from your hotel to the airport, timed to your flight. Here is what to know for a stress-free departure.
             </p>
             <div className="space-y-4">

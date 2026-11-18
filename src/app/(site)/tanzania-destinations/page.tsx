@@ -108,7 +108,7 @@ export default async function DestinationsPage() {
             <h2 className="font-heading text-3xl font-bold mb-4">
               Explore East Africa&apos;s Crown Jewels
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               Tanzania is blessed with an extraordinary diversity of landscapes
               and wildlife. Our safaris take you through the famous Northern
               Circuit, home to some of the world&apos;s most celebrated national
@@ -123,7 +123,7 @@ export default async function DestinationsPage() {
         <div className="container mx-auto px-4">
           {displayDestinations.length === 0 ? (
             <div className="col-span-full text-center py-16">
-              <p className="text-[var(--text-muted)] text-lg">
+              <p className="text-[var(--text-muted)] text-base">
                 Destinations coming soon. Browse our safari packages in the meantime.
               </p>
               <Link

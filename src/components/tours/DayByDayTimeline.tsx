@@ -286,7 +286,7 @@ export function DayByDayTimeline({ itinerary, safariTitle, safariSlug, overview,
         <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
           Your Safari Journey
         </h2>
-        <p className="text-white/70 text-lg leading-relaxed">
+        <p className="text-white/70 text-base leading-relaxed">
           From Arusha to the Serengeti - {itinerary.length} days of unforgettable wildlife encounters
         </p>
       </div>

@@ -424,7 +424,7 @@ export default function CanBeginnersClimbKilimanjaroPage() {
               <h2 className="font-heading text-2xl font-bold mb-4">
                 The Short Answer: Yes
               </h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 <strong>
                   Yes — Kilimanjaro is not a technical climb. No ropes, no
                   mountaineering skills needed.

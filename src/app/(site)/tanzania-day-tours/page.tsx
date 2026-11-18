@@ -51,7 +51,7 @@ export default async function DayTripsPage() {
             <h2 className="font-heading text-3xl font-bold mb-4">
               Tanzania in a Day
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               Whether you have a layover in Arusha, want to break up a long
               journey, or simply prefer shorter excursions, our day trips offer
               authentic Tanzanian experiences without the commitment of a
@@ -66,7 +66,7 @@ export default async function DayTripsPage() {
         <div className="container mx-auto px-4">
           {trips.length === 0 ? (
             <div className="col-span-full text-center py-16">
-              <p className="text-[var(--text-muted)] text-lg">
+              <p className="text-[var(--text-muted)] text-base">
                 Day trips coming soon. Contact us for custom excursions.
               </p>
               <Link

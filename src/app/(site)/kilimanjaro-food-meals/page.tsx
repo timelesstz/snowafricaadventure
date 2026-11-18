@@ -488,7 +488,7 @@ export default function KilimanjaroFoodMealsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 You eat <strong>surprisingly well on Kilimanjaro</strong>. Our mountain cooks prepare <strong>3 hot meals daily plus snacks</strong> — 4,000 to 5,000 calories to fuel your climb. Breakfasts include porridge, eggs, toast, and fresh fruit. Lunches are packed boxes with sandwiches, fruit, and energy bars. Dinners are 3-course affairs with soup, a main course, and dessert. All drinking water is purified. <strong>Vegetarian, vegan, gluten-free, and halal diets</strong> are fully accommodated with advance notice.
               </p>
             </div>
@@ -503,16 +503,16 @@ export default function KilimanjaroFoodMealsPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Why Food Matters at Altitude
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Your body burns <strong>50 to 100 percent more calories at altitude</strong> than it does at sea level. The reasons are compounding: increased breathing rate, a heart working harder to circulate oxygen-depleted blood, thermogenesis to maintain core temperature in sub-zero conditions, and the sheer physical demand of trekking six to eight hours daily over rough terrain as you ascend through Kilimanjaro&apos;s distinct <Link href="/kilimanjaro-climate-zones/" className="text-[var(--primary)] hover:underline font-semibold">climate zones</Link>. At 5,000 metres, you are breathing roughly twice as fast as normal, your heart rate is elevated even at rest, and your body is generating extra heat just to survive nights that regularly drop to minus fifteen degrees Celsius.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Proper nutrition directly correlates with summit success. Underfed climbers fatigue faster, acclimatize poorly, and become significantly more susceptible to <Link href="/kilimanjaro-altitude-sickness/" className="text-[var(--primary)] hover:underline">altitude sickness</Link>. One of the earliest and most common symptoms at high elevation is appetite loss — the cruel irony of altitude is that your body needs more fuel precisely when your stomach wants less. This is why our mountain kitchen is built around calorie-dense, easily digestible meals that climbers can eat even when their appetite is suppressed.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Not all calories are equal on the mountain. Carbohydrates are the altitude fuel of choice because they require approximately <strong>8 to 10 percent less oxygen to metabolize</strong> than fats. When every breath delivers only half the oxygen your body expects, this metabolic efficiency becomes a genuine advantage. Our cooks load every meal with pasta, rice, bread, potatoes, and porridge for exactly this reason.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               If you are preparing for your climb, building a solid nutritional base before you arrive is equally important. A good <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline">pre-climb training plan</Link> should include dietary preparation — increasing your carbohydrate intake, practising eating on the move, and identifying which high-energy snacks your stomach tolerates well under exertion.
             </p>
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 flex items-start gap-3">
@@ -643,10 +643,10 @@ export default function KilimanjaroFoodMealsPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               The Mountain Kitchen: Unsung Heroes
             </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed mb-6">
               The mountain cooks are among the most impressive professionals on Kilimanjaro. Every day, they arrive at camp before you do, set up a full kitchen in minutes, and produce hot meals for an entire group — at altitudes where water boils at 86 degrees, winds batter the cooking tent, and temperatures drop below freezing. They carry heavy equipment, manage limited ingredients creatively, and maintain strict <Link href="/kilimanjaro-hygiene/" className="text-[var(--primary)] hover:underline font-semibold">hygiene standards</Link> in an environment that makes cooking genuinely difficult.
             </p>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               Our head cook, who has been preparing mountain meals for over a decade, can turn basic ingredients into dishes that would not embarrass a restaurant kitchen. The level of skill required to cook a three-course dinner for 12 people at 4,600 metres with portable gas stoves and no running water is something most climbers do not fully appreciate until they see it happening. <Link href="/kilimanjaro-tipping-guide/" className="text-[var(--primary)] hover:underline font-semibold">Tipping your kitchen crew generously</Link> at the end of the climb is one of the most deserved gratuities you will ever give.
             </p>
           </div>
@@ -791,7 +791,7 @@ export default function KilimanjaroFoodMealsPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Budget vs Quality Operators: The Food Difference
             </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-6">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed mb-6">
               Food quality is one of the clearest and most immediate indicators of operator quality on Kilimanjaro. A budget operator cutting costs on food is almost certainly cutting costs on guide training, safety equipment, porter welfare, and everything else that matters for your safety and experience. When you see a Kilimanjaro climb offered at an unusually low price, the mountain kitchen is one of the first places corners get cut.
             </p>
             <p className="text-[var(--text-muted)] leading-relaxed">

@@ -504,7 +504,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Kilimanjaro&apos;s Two Dry Seasons
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-10 text-base">
               Tanzania has two distinct dry seasons that both offer excellent climbing conditions, each with its own character and advantages.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
@@ -658,7 +658,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Kilimanjaro + Safari Combo Timing
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-10 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-10 text-base">
               Many travellers combine a Kilimanjaro climb with a <Link href="/tanzania-safaris/" className="text-[var(--secondary)] hover:underline">Tanzania safari</Link> &mdash; and timing both correctly maximises your experience. Our <Link href="/kilimanjaro-safari-combo/" className="text-[var(--secondary)] hover:underline">Kilimanjaro safari combo guide</Link> covers how to plan the perfect combination trip.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
@@ -710,7 +710,7 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-center">
               Full Moon Summit Nights
             </h2>
-            <p className="text-[var(--text-muted)] text-center mb-8 text-lg">
+            <p className="text-[var(--text-muted)] text-center mb-8 text-base">
               Some climbers specifically time their summit push to coincide with a full moon &mdash; and there are good reasons why.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mb-8">

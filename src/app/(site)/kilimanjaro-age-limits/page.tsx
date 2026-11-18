@@ -293,7 +293,7 @@ export default function KilimanjaroAgeLimitsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 The <strong>minimum age to climb Kilimanjaro is 10 years old</strong>, set by KINAPA (Kilimanjaro National Park Authority). There is <strong>no official maximum age</strong> — the oldest person to summit was <strong>89 years old</strong>. With proper preparation, medical clearance, and an appropriate route choice, Kilimanjaro is accessible to climbers across an extraordinary age range.
               </p>
             </div>
@@ -308,7 +308,7 @@ export default function KilimanjaroAgeLimitsPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Official Age Requirements
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro&apos;s age policy is set by <strong>KINAPA (Kilimanjaro National Park Authority)</strong>, the government body that manages Tanzania&apos;s highest peak. The rules are straightforward but strictly enforced at every gate.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -357,7 +357,7 @@ export default function KilimanjaroAgeLimitsPage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Children aged 10 to 15 can and do climb Kilimanjaro successfully. However, climbing with a child requires more careful planning than an adult expedition. <Link href="/kilimanjaro-altitude-sickness/" className="text-[var(--primary)] hover:underline font-semibold">Altitude sickness</Link> affects children in much the same way as adults, but there are critical differences that parents must understand before committing to the climb.
             </p>
 
@@ -429,13 +429,13 @@ export default function KilimanjaroAgeLimitsPage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Teenagers are among the best-suited age groups for climbing Kilimanjaro. They combine youthful energy and rapid recovery with enough maturity to understand and follow safety protocols. Many of our most enthusiastic and successful climbers are in this age bracket — gap-year travellers, school expedition groups, and families with older teenagers regularly achieve the summit. Even <Link href="/can-beginners-climb-kilimanjaro/" className="text-[var(--primary)] hover:underline font-semibold">complete beginners</Link> in this age group perform well with proper preparation.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The <strong>physical advantages</strong> are real: faster cardiovascular adaptation, excellent recovery between hiking days, and the stamina to push through summit night. Teenagers tend to acclimatize well, though some studies suggest younger climbers may be marginally more susceptible to mild AMS — likely because they push harder physically rather than any physiological difference.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The main consideration is <strong>psychological preparation</strong>. Summit night is a grinding, uncomfortable experience — 6 to 8 hours of hiking in darkness, sub-zero temperatures, and extreme altitude. Teens who understand what to expect and are internally motivated (not just climbing because their parents want them to) perform exceptionally well. Those who are unprepared or reluctant may struggle with the mental game more than the physical.
             </p>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -469,13 +469,13 @@ export default function KilimanjaroAgeLimitsPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Climbing in Your 20s to 40s
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The 20-to-49 age range represents the <strong>peak demographic on Kilimanjaro</strong>. Approximately 60-70% of all climbers fall within this bracket, and for good reason — this is when most people have the combination of physical capability, financial means, and available time to undertake a major expedition.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Climbers in their 20s and 30s enjoy peak cardiovascular fitness, joint health, and recovery speed. These physical advantages translate to faster acclimatization for most people and the ability to maintain pace on long summit-night pushes. However, fitness alone does not guarantee success — altitude sickness affects fit and unfit climbers at similar rates. A marathon runner on a 5-day route will struggle more than a casual hiker on an 8-day route. <Link href="/how-hard-is-kilimanjaro/" className="text-[var(--primary)] hover:underline">Route selection and acclimatization</Link> always outweigh raw fitness.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Climbers in their 40s remain well within the prime climbing window. The slight decline in VO2 max and recovery speed compared to your 20s is negligible on Kilimanjaro, where the pace is deliberately slow. Many 40-something climbers tell us they are more mentally prepared than they would have been a decade earlier — they are more patient with the &quot;pole pole&quot; (slowly, slowly) approach, less likely to rush, and better at listening to their bodies.
             </p>
             <div className="bg-white border border-[var(--border)] rounded-xl p-6">
@@ -510,13 +510,13 @@ export default function KilimanjaroAgeLimitsPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Climbing in Your 50s &amp; 60s
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Climbing Kilimanjaro in your 50s and 60s is <strong>very achievable and increasingly common</strong>. This age group represents a growing segment of our climbers — often experienced hikers who have ticked off other adventures and now want to take on Africa&apos;s highest peak. Many have more time and resources than younger climbers, and they bring a patience and self-awareness that serves them well at altitude. Our dedicated guide to <Link href="/climbing-kilimanjaro-over-50/" className="text-[var(--primary)] hover:underline font-semibold">climbing Kilimanjaro over 50</Link> covers everything this age group needs to know.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The physiological changes that come with age are real but manageable. <strong>VO2 max declines by roughly 10% per decade</strong> after your 30s, which means the physical effort of hiking feels harder at the same absolute intensity. Recovery between stages takes longer. Joints — especially knees — bear the strain of 5-8 hours of daily trekking on uneven terrain. These are not reasons to avoid Kilimanjaro; they are reasons to <strong>choose the right strategy</strong>.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The strategy is simple: <strong>go longer and slower</strong>. We strongly recommend 8-day routes (Lemosho is our top pick) or the 9-day Northern Circuit for climbers over 50. The extra days provide more acclimatization time, shorter daily hiking distances, and built-in recovery — which is why <Link href="/kilimanjaro-success-rates/" className="text-[var(--primary)] hover:underline font-semibold">summit success rates</Link> are significantly higher on longer routes. Our guides naturally adjust pace for this age group — there is no stigma in being the slowest group on the mountain. A solid <Link href="/kilimanjaro-training-plan/" className="text-[var(--primary)] hover:underline font-semibold">training plan</Link> started 4-6 months early makes the biggest difference. Pole pole is not just a motto; it is the entire strategy.
             </p>
 
@@ -591,13 +591,13 @@ export default function KilimanjaroAgeLimitsPage() {
               </div>
             </div>
 
-            <p className="text-white/80 text-lg mb-6 leading-relaxed">
+            <p className="text-white/80 text-base mb-6 leading-relaxed">
               Climbing Kilimanjaro after 70 is not a publicity stunt — it is a legitimate achievement that an increasing number of septuagenarians and octogenarians accomplish every year. The oldest person to reach Uhuru Peak was 89 years old. These are not superhuman athletes; they are ordinary people who prepared well, chose the right route, and climbed with experienced guides.
             </p>
-            <p className="text-white/80 text-lg mb-6 leading-relaxed">
+            <p className="text-white/80 text-base mb-6 leading-relaxed">
               The non-negotiables for climbing over 70 are: <strong>comprehensive medical clearance</strong> (cardiac stress test, pulmonary function test, full blood work, musculoskeletal assessment), the <strong>longest available route</strong> (9-day Northern Circuit or 8-day Lemosho), and a <strong>private guide arrangement</strong> where the pace is set entirely by your comfort level. There is no group to keep up with, no pressure to maintain anyone else&apos;s speed.
             </p>
-            <p className="text-white/80 text-lg mb-6 leading-relaxed">
+            <p className="text-white/80 text-base mb-6 leading-relaxed">
               Our guides have extensive experience with older climbers and understand the nuances — more frequent rest stops, adjusted summit night timing, enhanced health monitoring, and a willingness to extend summit day if the climber is progressing safely but slowly. We also recommend a pre-acclimatization strategy: spending 2-3 days at moderate altitude (1,500-2,500m) before the climb begins, which gives your body a head start on adaptation.
             </p>
 

@@ -321,7 +321,7 @@ export default function KilimanjaroClimbingCompaniesPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Why Your Choice of Kilimanjaro Climbing Company Matters
             </h2>
-            <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base leading-relaxed">
               Kilimanjaro is the world&apos;s highest free-standing mountain. Over 30,000 people attempt
               the summit each year — and roughly 50% don&apos;t make it. Studies show that up to 93% of
               summit success is linked to the quality of your kilimanjaro outfitter: proper acclimatization

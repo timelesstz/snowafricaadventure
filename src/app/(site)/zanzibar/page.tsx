@@ -123,7 +123,7 @@ export default function ZanzibarPage() {
             <h2 className="font-heading text-3xl font-bold mb-4">
               The Spice Island Awaits
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               Just a short flight from Arusha or the Serengeti, Zanzibar offers
               the perfect contrast to your safari adventure. Relax on powder-white
               beaches, explore the historic Stone Town, dive crystal-clear waters,

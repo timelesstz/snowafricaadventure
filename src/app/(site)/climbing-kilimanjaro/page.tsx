@@ -311,7 +311,7 @@ export default async function ClimbingKilimanjaroPage() {
       {/* What You Need to Know — prose content for SEO depth */}
       <section className="py-16 bg-[var(--surface)]">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto prose prose-lg">
+          <div className="max-w-3xl mx-auto prose">
             <span className="block text-sm font-semibold text-[var(--secondary)] uppercase tracking-wider mb-2 not-prose">
               Essential Guide
             </span>

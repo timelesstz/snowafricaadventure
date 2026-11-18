@@ -471,7 +471,7 @@ export default function KilimanjaroClimateZonesPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-acacia-50 border-2 border-acacia-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Kilimanjaro spans <strong>5 distinct climate zones</strong> &mdash; you walk from tropical rainforest to arctic ice in just 5-9 days. Each zone has unique vegetation, wildlife, temperatures, and challenges. It&apos;s often called <strong>&quot;five worlds in one mountain&quot;</strong> because climbing Kilimanjaro is the ecological equivalent of travelling from the equator to the North Pole. No other place on Earth lets you experience this range of climates on foot in under a week.
               </p>
             </div>
@@ -542,7 +542,7 @@ export default function KilimanjaroClimateZonesPage() {
               </div>
 
               {/* Description */}
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed mb-8">
+              <p className="text-[var(--text-muted)] text-base leading-relaxed mb-8">
                 {zone.description}
               </p>
 
@@ -733,7 +733,7 @@ export default function KilimanjaroClimateZonesPage() {
             </div>
 
             <div className="space-y-6">
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+              <p className="text-[var(--text-muted)] text-base leading-relaxed">
                 Kilimanjaro&apos;s five climate zones offer five completely different photographic environments. The challenge is that conditions change rapidly &mdash; the humidity that fogs your lens in the rainforest gives way to blinding UV in the alpine desert, and cold that kills batteries at the summit.
               </p>
 

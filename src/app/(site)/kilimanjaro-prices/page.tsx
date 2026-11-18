@@ -583,7 +583,7 @@ export default function KilimanjaroPricesPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Join a Group &amp; Share the Costs
             </h2>
-            <p className="text-[var(--text-muted)] mb-8 text-lg">
+            <p className="text-[var(--text-muted)] mb-8 text-base">
               Our scheduled group departures let you experience Kilimanjaro at budget-friendly prices — from just
               $1,850 per person — without compromising on safety or quality. All group climbs include a
               professional guide, licensed porters, and full support.

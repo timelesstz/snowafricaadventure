@@ -171,7 +171,7 @@ export default function TanzaniaItinerary10DaysPage() {
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               Safari, Kilimanjaro &amp; Zanzibar — Three Proven Plans With Real Prices
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Ten days is the perfect length for Tanzania. Below are the three
               itineraries we run most, planned day by day by our team in Arusha —
               pick one as-is, or use it as the starting point for your own trip.
@@ -224,7 +224,7 @@ export default function TanzaniaItinerary10DaysPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 mt-2">
               Pick Your Perfect Tanzania Itinerary
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               Every plan below includes park fees, private vehicle and guide, all
               accommodation, and airport transfers — no hidden extras when the
               invoice arrives.

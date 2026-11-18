@@ -397,7 +397,7 @@ export default function KilimanjaroSuccessRatesPage() {
               <h2 className="font-heading text-2xl font-bold mb-4">
                 The Quick Answer
               </h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 The overall Kilimanjaro success rate is approximately{" "}
                 <strong>65%</strong>. This rate varies dramatically by route and
                 duration — from <strong>27%</strong> (5-day Marangu) to{" "}
@@ -420,14 +420,14 @@ export default function KilimanjaroSuccessRatesPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Overall Success Rate — Why 65%?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               You will find various success rate figures quoted online, ranging
               from 45% to 85%. The 65% figure is the most widely accepted
               estimate and represents the <strong>average across all routes,
               all operators, and all durations</strong>. Here is why it matters
               — and why it is simultaneously alarming and misleading.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               <strong>KINAPA (Kilimanjaro National Park Authority)</strong> does
               not publish official, up-to-date success rate data broken down by
               route or operator. The figures that circulate are derived from
@@ -436,7 +436,7 @@ export default function KilimanjaroSuccessRatesPage() {
               allows some operators to claim implausible 98-99% rates without
               consequence.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-8 leading-relaxed">
               The 65% average is heavily skewed by several factors that do not
               apply to well-prepared climbers who choose their route wisely:
             </p>
@@ -850,7 +850,7 @@ export default function KilimanjaroSuccessRatesPage() {
               </div>
             </div>
 
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               If you research Kilimanjaro operators online, you will encounter
               companies claiming success rates of 98%, 99%, or even 100%.
               These numbers are <strong>not credible</strong>, and here is

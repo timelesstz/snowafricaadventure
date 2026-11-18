@@ -429,7 +429,7 @@ export default function KilimanjaroRecordsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 The fastest Kilimanjaro ascent is <strong>4 hours 56 minutes</strong> by Karl Egloff (2014). The youngest confirmed summiter was <strong>6 years old</strong>, the oldest <strong>89</strong>. The <Link href="/first-person-to-climb-kilimanjaro/" className="underline hover:no-underline">first recorded ascent</Link> was by <strong>Hans Meyer and Ludwig Purtscheller in 1889</strong>, guided by Chagga guide Yohani Kinyala Lauwo. Over <strong>35,000 people</strong> now attempt the climb annually, making it the most climbed high-altitude peak on Earth.
               </p>
             </div>

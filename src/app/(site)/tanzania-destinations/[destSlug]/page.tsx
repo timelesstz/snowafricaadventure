@@ -201,7 +201,7 @@ export default async function DestinationDetailPage({ params }: Props) {
               <h2 className="font-heading text-3xl font-bold mb-6">
                 About {name}
               </h2>
-              <div className="prose prose-slate prose-lg max-w-none">
+              <div className="prose prose-slate max-w-none">
                 {description.split("\n").map((paragraph, i) =>
                   paragraph.trim() ? <p key={i}>{paragraph.trim()}</p> : null
                 )}

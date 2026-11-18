@@ -208,7 +208,7 @@ export default function LuxurySafarisTanzaniaPage() {
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               Uncompromising Excellence in the African Wild
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Private game drives at dawn. A candlelit dinner on the Serengeti plains. Your own plunge
               pool overlooking the endless African horizon. Tanzania&apos;s finest luxury safaris — crafted
               for those who refuse to compromise.
@@ -261,7 +261,7 @@ export default function LuxurySafarisTanzaniaPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 mt-2">
               What Makes a Luxury Safari in Tanzania?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               True luxury Tanzania safaris are not simply about expensive accommodation. They deliver
               exclusivity — private game drives in luxury tented camps Tanzania, personalised service,
               and access to 5-star safari experiences unavailable to standard travellers. A private

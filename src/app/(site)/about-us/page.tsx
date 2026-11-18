@@ -215,7 +215,7 @@ export default async function AboutPage() {
                 <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6 text-slate-900">
                   {s["about.story.title"]}
                 </h2>
-                <p className="text-slate-600 leading-relaxed text-lg">
+                <p className="text-slate-600 leading-relaxed text-base">
                   {s["about.story.content"]}
                 </p>
               </div>
@@ -306,7 +306,7 @@ export default async function AboutPage() {
                 <h2 className={`font-heading text-3xl md:text-4xl font-bold mb-6 text-slate-900 ${!s["about.commitment.image"] ? "text-center" : ""}`}>
                   {s["about.commitment.title"]}
                 </h2>
-                <p className={`text-lg text-slate-600 leading-relaxed ${!s["about.commitment.image"] ? "text-center" : ""}`}>
+                <p className={`text-base text-slate-600 leading-relaxed ${!s["about.commitment.image"] ? "text-center" : ""}`}>
                   {s["about.commitment.content"]}
                 </p>
                 <p className={`mt-4 ${!s["about.commitment.image"] ? "text-center" : ""}`}>
@@ -507,7 +507,7 @@ export default async function AboutPage() {
             <p className="text-xl text-white/90 mb-6 leading-relaxed">
               {s["about.cta.content"]}
             </p>
-            <p className="text-white/70 mb-10 italic text-lg">
+            <p className="text-white/70 mb-10 italic text-base">
               {s["about.cta.tagline"]}
             </p>
             <Link

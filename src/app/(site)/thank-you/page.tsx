@@ -42,7 +42,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
 
           {isBooking ? (
             <>
-              <p className="text-lg text-slate-600 mb-2">
+              <p className="text-base text-slate-600 mb-2">
                 Your booking inquiry has been received.
               </p>
               {ref && (
@@ -52,7 +52,7 @@ export default async function ThankYouPage({ searchParams }: ThankYouPageProps) 
               )}
             </>
           ) : (
-            <p className="text-lg text-slate-600 mb-6">
+            <p className="text-base text-slate-600 mb-6">
               Your inquiry has been successfully submitted.
             </p>
           )}

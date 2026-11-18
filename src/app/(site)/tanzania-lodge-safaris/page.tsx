@@ -199,7 +199,7 @@ export default function TanzaniaLodgeSafarisPage() {
             <p className="text-xl text-[var(--secondary)] font-semibold mb-4">
               Comfort Meets the Wild — Premium Lodge Safari Experiences
             </p>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-base text-white/80 mb-8 leading-relaxed">
               Return from thrilling game drives to comfortable beds, gourmet meals, and sundowner
               cocktails on the terrace. Tanzania&apos;s finest lodges place you in the heart of the
               wilderness without sacrificing a single comfort.
@@ -252,7 +252,7 @@ export default function TanzaniaLodgeSafarisPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 mt-2">
               Why Choose a Tanzania Lodge Safari?
             </h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-base">
               After an exhilarating morning game drive at Tanzania&apos;s finest safari lodges, there
               is nothing quite like returning to a beautiful lodge, a hot shower, and lunch overlooking
               the African plains. Tanzania lodge safari packages deliver exceptional wildlife experiences

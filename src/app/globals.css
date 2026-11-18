@@ -295,7 +295,7 @@ img {
   --rule: var(--border);
   max-width: 100%;
   overflow-wrap: break-word;
-  font-size: 1.0625rem;
+  font-size: 1rem; /* 16px: Sora is wide, larger sizes read oversized */
   color: var(--body);
 }
 
@@ -321,7 +321,7 @@ img {
 }
 
 .blog-content h2 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   line-height: 1.25;
   font-weight: 700;
   margin: 3.5rem 0 1.25rem;
@@ -335,7 +335,7 @@ img {
 }
 
 .blog-content h3 {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 1.35;
   font-weight: 600;
   margin: 2.25rem 0 0.75rem;
@@ -367,7 +367,7 @@ img {
 }
 
 .blog-content > p:first-of-type {
-  font-size: 1.1875rem;
+  font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--ink);
 }
@@ -598,7 +598,7 @@ img {
   padding: 0.25rem 0 0.25rem 1.5rem;
   border-left: 2px solid var(--secondary);
   font-family: var(--font-heading), system-ui, sans-serif;
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   line-height: 1.45;
   font-weight: 500;
   color: var(--ink);
@@ -677,17 +677,17 @@ img {
   }
 
   .blog-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.3125rem;
     margin-top: 2.75rem;
     padding-top: 2rem;
   }
 
   .blog-content h3 {
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
   }
 
   .blog-content > p:first-of-type {
-    font-size: 1.0625rem;
+    font-size: 1rem;
   }
 
   .blog-content .definition-item {
@@ -695,7 +695,7 @@ img {
   }
 
   .blog-content .pull-quote {
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
   }
 }
 

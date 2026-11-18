@@ -375,7 +375,7 @@ export default function KilimanjaroMapPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8">
               <h2 className="font-heading text-2xl font-bold mb-4">The Quick Answer</h2>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+              <p className="text-[var(--text-muted)] leading-relaxed text-base">
                 Kilimanjaro has <strong>7 official trekking routes</strong>, all managed by KINAPA (Kilimanjaro National Park Authority). Six approach from the south and west; one (Rongai) from the north. All routes <strong>converge near the summit</strong> — either at Barafu Camp or Kibo Hut — before the final push to <strong>Uhuru Peak at 5,895m</strong>. The mountain has <strong>6 entry gates</strong>, <strong>40+ named camps and huts</strong>, and sits within a UNESCO World Heritage Site covering 753 km&sup2;.
               </p>
             </div>
@@ -390,13 +390,13 @@ export default function KilimanjaroMapPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Kilimanjaro Overview
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Mount Kilimanjaro stands at <strong><Link href="/mount-kilimanjaro-height/" className="text-[var(--primary)] hover:underline font-semibold">5,895 metres (19,341 feet)</Link></strong> — the highest point in Africa and the tallest freestanding mountain on Earth. Located at coordinates 3&deg;04&apos;S 37&deg;21&apos;E in northeastern Tanzania, it rises from the surrounding plains at around 900m to nearly 6,000m, creating one of the most dramatic elevation gains of any mountain on the planet.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Kilimanjaro is a massive stratovolcano composed of <strong>three distinct volcanic cones</strong>: Kibo (the highest, 5,895m), Mawenzi (5,149m), and Shira (4,005m). The mountain sits within <strong>Kilimanjaro National Park</strong>, a UNESCO World Heritage Site established in 1973 and covering 1,688 km&sup2; including the surrounding forest reserve.
             </p>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               The mountain passes through <strong>five distinct <Link href="/kilimanjaro-climate-zones/" className="text-[var(--primary)] hover:underline font-semibold">climate zones</Link></strong> — from cultivated farmland and tropical rainforest at the base, through heath and moorland, alpine desert, and finally the arctic summit zone with its remnant glaciers. This vertical transect of ecosystems is one of the reasons Kilimanjaro is so extraordinary: you experience the equivalent of travelling from the equator to the Arctic in a matter of days.
             </p>
             <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex items-start gap-3">
@@ -554,7 +554,7 @@ export default function KilimanjaroMapPage() {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
               Summit Approaches
             </h2>
-            <p className="text-[var(--text-muted)] text-lg mb-6 leading-relaxed">
+            <p className="text-[var(--text-muted)] text-base mb-6 leading-relaxed">
               Regardless of which route you take, all paths converge for the final summit push. There are two main approach corridors, and both lead to the same destination: <strong>Uhuru Peak at 5,895m</strong>.
             </p>
 
