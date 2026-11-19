@@ -24,8 +24,28 @@ const BOT_PATTERNS: BotPattern[] = [
   { pattern: /whatsapp/i, name: "WhatsApp Bot", category: "good" },
   { pattern: /telegrambot/i, name: "Telegram Bot", category: "good" },
 
-  // Good bots — AI Search (citations)
+  // Good bots — AI search, AI answers and AI training. All allowed so the site
+  // can be read, cited and recommended by ChatGPT, Claude, Perplexity, Gemini,
+  // Apple, Meta and others. Listed before the generic /bot/ rule so they are
+  // not rate limited as "unknown".
+  { pattern: /gptbot/i, name: "GPTBot", category: "good" },
+  { pattern: /oai-searchbot/i, name: "OAI-SearchBot", category: "good" },
+  { pattern: /chatgpt-user/i, name: "ChatGPT-User", category: "good" },
   { pattern: /claudebot/i, name: "ClaudeBot", category: "good" },
+  { pattern: /claude-searchbot/i, name: "Claude-SearchBot", category: "good" },
+  { pattern: /claude-user/i, name: "Claude-User", category: "good" },
+  { pattern: /perplexitybot/i, name: "PerplexityBot", category: "good" },
+  { pattern: /perplexity-user/i, name: "Perplexity-User", category: "good" },
+  { pattern: /applebot/i, name: "Applebot", category: "good" },
+  { pattern: /amazonbot/i, name: "Amazonbot", category: "good" },
+  { pattern: /meta-externalagent|meta-externalfetcher/i, name: "Meta AI", category: "good" },
+  { pattern: /ccbot/i, name: "CCBot", category: "good" },
+  { pattern: /cohere-ai/i, name: "Cohere", category: "good" },
+  { pattern: /mistralai-user/i, name: "MistralAI-User", category: "good" },
+  { pattern: /duckassistbot/i, name: "DuckAssistBot", category: "good" },
+  // ByteDance's AI crawler is allowed but stays rate limited ("unknown"):
+  // it is known for very high request rates.
+  { pattern: /bytespider|bytedance/i, name: "ByteSpider", category: "unknown" },
 
   // Good bots — Monitoring & Uptime
   { pattern: /uptimerobot/i, name: "UptimeRobot", category: "good" },
@@ -39,15 +59,8 @@ const BOT_PATTERNS: BotPattern[] = [
   { pattern: /mj12bot/i, name: "Majestic Bot", category: "bad" },
   { pattern: /dotbot/i, name: "DotBot", category: "bad" },
   { pattern: /petalbot/i, name: "PetalBot", category: "bad" },
-  { pattern: /bytespider/i, name: "ByteSpider", category: "bad" },
   { pattern: /dataforseobot/i, name: "DataForSeoBot", category: "bad" },
   { pattern: /screaming frog/i, name: "Screaming Frog", category: "bad" },
-
-  // Bad bots — AI Training Scrapers
-  { pattern: /gptbot/i, name: "GPTBot", category: "bad" },
-  { pattern: /ccbot/i, name: "CCBot", category: "bad" },
-  { pattern: /google-extended/i, name: "Google-Extended", category: "bad" },
-  { pattern: /bytedance/i, name: "Bytedance", category: "bad" },
 
   // Bad bots — Headless Browsers
   { pattern: /headless/i, name: "Headless Browser", category: "bad" },
