@@ -247,14 +247,21 @@ export default async function TailorMadeSafariPage() {
               intro="Every traveler is different. A family with young children needs a different trip from a honeymoon couple or a photographer chasing the right light. A custom safari matches the trip to the people on it."
             />
           </div>
-          <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-3 lg:col-span-7 lg:grid-cols-1 xl:grid-cols-3">
+          {/* One column on laptops (lg), so the icon sits beside the text there
+              instead of above it; three columns on tablets and wide screens. */}
+          <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-3 lg:col-span-7 lg:grid-cols-1 lg:gap-y-0 xl:grid-cols-3 xl:gap-y-8">
             {REASONS.map(({ icon: Icon, title, description }) => (
-              <li key={title} className="border-t border-[var(--border)] pt-6">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-tint)]">
+              <li
+                key={title}
+                className="border-t border-[var(--border)] pt-6 lg:flex lg:gap-5 lg:py-6 xl:block xl:pb-0"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary-tint)]">
                   <Icon className="h-[18px] w-[18px] text-[var(--secondary-ink)]" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4 font-heading text-base font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{description}</p>
+                <div className="mt-4 lg:mt-0 xl:mt-4">
+                  <h3 className="font-heading text-base font-semibold lg:leading-9 xl:leading-normal">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)] lg:mt-0.5 xl:mt-2">{description}</p>
+                </div>
               </li>
             ))}
           </ul>
