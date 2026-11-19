@@ -44,7 +44,7 @@ export function ArticleToc({ items }: ArticleTocProps) {
     <nav aria-labelledby="toc-heading" className="flex min-h-0 flex-col rounded-2xl border border-[var(--border)] bg-white p-5">
       <p
         id="toc-heading"
-        className="mb-3 shrink-0text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]"
+        className="mb-3 shrink-0 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]"
       >
         In this article
       </p>
