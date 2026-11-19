@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { SITE_CONFIG } from "./constants";
+import { SITE_CONFIG, OFFICE_HOURS } from "./constants";
 
 interface SEOProps {
   title?: string;
@@ -502,20 +502,12 @@ export function generateLocalBusinessSchema() {
       latitude: -3.3869,
       longitude: 36.6830,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "14:00",
-      },
-    ],
+    openingHoursSpecification: OFFICE_HOURS.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: h.schemaDays.length === 1 ? h.schemaDays[0] : [...h.schemaDays],
+      opens: h.opens,
+      closes: h.closes,
+    })),
     sameAs: [
       SITE_CONFIG.social.facebook,
       SITE_CONFIG.social.twitter,

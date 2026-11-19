@@ -23,6 +23,20 @@ export const SITE_CONFIG = {
 } as const;
 
 /**
+ * Office hours, East Africa Time (UTC+3). One source for the contact page
+ * and the LocalBusiness schema, so the two can't drift apart. Closed Sunday.
+ */
+export const OFFICE_HOURS = [
+  {
+    label: "Monday – Friday",
+    schemaDays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:00",
+    closes: "18:00",
+  },
+  { label: "Saturday", schemaDays: ["Saturday"], opens: "09:00", closes: "14:00" },
+] as const;
+
+/**
  * Mega menu navigation structure
  */
 export type NavItem = { label: string; href: string; description?: string };

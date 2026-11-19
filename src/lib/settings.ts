@@ -32,6 +32,33 @@ export async function getTripAdvisorStats(): Promise<typeof TRIPADVISOR_DEFAULTS
   }
 }
 
+const SITE_STAT_DEFAULTS = {
+  experience: "15+",
+  travelers: "5,000+",
+  success: "93%",
+};
+
+/**
+ * Headline stats from admin settings (/admin/homepage → Statistics), with the
+ * homepage's fallbacks, so every page shows the same numbers.
+ */
+export async function getSiteStats(): Promise<typeof SITE_STAT_DEFAULTS> {
+  try {
+    const rows = await prisma.siteSetting.findMany({
+      where: { key: { in: ["homepage.stats.experience", "homepage.stats.travelers", "homepage.stats.success"] } },
+    });
+    const map = Object.fromEntries(rows.map((r) => [r.key, r.value]));
+    return {
+      experience: map["homepage.stats.experience"] || SITE_STAT_DEFAULTS.experience,
+      travelers: map["homepage.stats.travelers"] || SITE_STAT_DEFAULTS.travelers,
+      success: map["homepage.stats.success"] || SITE_STAT_DEFAULTS.success,
+    };
+  } catch (error) {
+    console.error("[Settings] Failed to fetch site stats:", error);
+    return SITE_STAT_DEFAULTS;
+  }
+}
+
 export async function getExperienceYears(): Promise<string> {
   try {
     const setting = await prisma.siteSetting.findUnique({

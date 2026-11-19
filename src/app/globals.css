@@ -790,12 +790,14 @@ img {
 /* ============================================
    HERO SECTION
    ============================================ */
+/* Column layout: content, scroll hint and stats bar stack in normal flow,
+   so the content (and the Tripadvisor badge) can never slide under the bar. */
 .hero-section {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   color: white;
   overflow: hidden;
@@ -816,7 +818,9 @@ img {
   position: relative;
   z-index: 1;
   max-width: 900px;
-  padding: 0 2rem;
+  width: 100%;
+  padding: 3rem 2rem 2rem;
+  margin-block: auto;
 }
 
 .hero-badge {
@@ -855,6 +859,18 @@ img {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Hero CTAs: smaller than the global .btn sizes so they don't crowd the headline */
+.hero-ctas .btn-primary {
+  font-size: 1rem;
+  padding: 0.8125rem 1.75rem;
+}
+
+.hero-ctas .btn-outline-white {
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
 }
 
 .tripadvisor-coe {
@@ -886,10 +902,8 @@ img {
 }
 
 .hero-stats-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  align-self: stretch;
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(10px);
   padding: 2rem 0;
@@ -922,10 +936,8 @@ img {
 }
 
 .hero-scroll {
-  position: absolute;
-  bottom: 6.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -939,8 +951,8 @@ img {
 }
 
 @keyframes scroll-hint-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
 }
 
 /* Same list rhythm for every .prose block (destinations, day tours, safari
@@ -1542,12 +1554,22 @@ img {
   gap: 1.5rem;
 }
 
+/* Desktop: the featured card fills the full height of the stacked list
+   beside it (a fixed aspect-ratio left a tall empty gap below it). */
 .safari-main {
   position: relative;
-  aspect-ratio: 16/10;
+  min-height: 22rem;
   border-radius: var(--radius);
   overflow: hidden;
   display: block;
+}
+
+.safari-main p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
 
 .safari-main img {
@@ -1620,9 +1642,12 @@ img {
   border-color: var(--secondary);
 }
 
+/* Photo fills the card's full height (a fixed 110px left an empty strip
+   below it when the title wrapped to two lines). */
 .safari-item-image {
   width: 140px;
-  height: 110px;
+  min-height: 110px;
+  align-self: stretch;
   flex-shrink: 0;
   position: relative;
 }
@@ -2312,6 +2337,10 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .safari-main {
+    min-height: 24rem;
+  }
+
   .testimonials-grid,
   .testimonials-list,
   .blog-grid-home {
@@ -2354,7 +2383,7 @@ img {
 
 @media (max-width: 768px) {
   .hero-section {
-    height: 100svh;
+    min-height: 100svh;
   }
 
   .hero-title {
@@ -2597,7 +2626,7 @@ img {
   }
 
   .hero-content {
-    padding: 0 1rem;
+    padding: 2.5rem 1rem 1.5rem;
   }
 
   .hero-stats-grid {
