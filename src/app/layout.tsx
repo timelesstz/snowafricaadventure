@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Outfit, Sora } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/lib/constants";
-import { generateTourOperatorSchema, generateWebSiteSchema, generateLocalBusinessSchema } from "@/lib/seo";
+import { generateTourOperatorSchema, generateWebSiteSchema } from "@/lib/seo";
+import { safeJsonLd } from "@/lib/safe-json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import { generateThemeCSS, DEFAULT_THEME } from "@/lib/theme";
 import type { ThemeSettings, LogoSettings } from "@/lib/theme";
@@ -123,19 +124,13 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateTourOperatorSchema()),
+            __html: safeJsonLd(generateTourOperatorSchema()),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateWebSiteSchema()),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateLocalBusinessSchema()),
+            __html: safeJsonLd(generateWebSiteSchema()),
           }}
         />
       </head>

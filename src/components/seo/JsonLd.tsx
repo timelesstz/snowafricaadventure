@@ -1,3 +1,5 @@
+import { safeJsonLd } from "@/lib/safe-json-ld";
+
 /**
  * Reusable JSON-LD component for structured data
  * Renders schema.org structured data in a script tag
@@ -16,7 +18,7 @@ export function JsonLd({ data }: JsonLdProps) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
+        __html: safeJsonLd(data),
       }}
     />
   );
@@ -41,7 +43,7 @@ export function MultiJsonLd({ schemas }: MultiJsonLdProps) {
           key={index}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schema),
+            __html: safeJsonLd(schema),
           }}
         />
       ))}

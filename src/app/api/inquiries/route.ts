@@ -4,7 +4,8 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { sendInquiryReceivedEmails } from "@/lib/email/send";
 import { InquiryEmailData } from "@/lib/email/templates";
-import { InquiryNotifications } from "@/lib/notifications";
+import { InquiryNotifications, LeadNotifications } from "@/lib/notifications";
+import { HONEYPOT_AUTOFILL_FLAG, isPlausibleHoneypotLead } from "@/lib/notifications/lead-safety";
 import { extractVisitorData } from "@/lib/visitor-tracking";
 import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
 
@@ -69,15 +70,35 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Honeypot: browser autofill can occasionally fill the hidden field, so a
-    // hit is saved flagged as spam (recoverable in admin) rather than dropped.
+    // hit is never dropped. It is triaged after validation below.
     const honeypotTripped = Boolean(body.website);
-    if (honeypotTripped) {
-      console.warn(`[Inquiry] Honeypot tripped (ip: ${ip || "unknown"}, email: ${body.email || "?"}) — saving as spam`);
-      body.website = "";
-    }
+    if (honeypotTripped) body.website = "";
 
     // Validate input
     const validatedData = inquirySchema.parse(body);
+
+    // A tripped honeypot on a human-looking lead (real name and email, a
+    // message or trip details, no links or SEO pitch) is kept as a normal lead
+    // flagged for checking; everything else is filed as spam.
+    const honeypotPlausible =
+      honeypotTripped &&
+      isPlausibleHoneypotLead({
+        email: validatedData.email,
+        name: validatedData.fullName,
+        message: validatedData.additionalInfo,
+        hasTripFields: Boolean(
+          validatedData.arrivalDate ||
+            validatedData.numAdults ||
+            validatedData.tripType ||
+            validatedData.destinations
+        ),
+      });
+    const isSpam = honeypotTripped && !honeypotPlausible;
+    if (honeypotTripped) {
+      console.warn(
+        `[Inquiry] Honeypot tripped (ip: ${ip || "unknown"}, email: ${validatedData.email}) — ${isSpam ? "saving as spam" : "looks human, saving as new with verify flag"}`
+      );
+    }
 
     // Parse arrival date if provided
     let arrivalDate: Date | null = null;
@@ -124,11 +145,15 @@ export async function POST(request: NextRequest) {
         accommodation: validatedData.accommodation || null,
         interests: validatedData.interests || null,
         experience: validatedData.experience || null,
-        additionalInfo: validatedData.additionalInfo || null,
+        // Inquiry has no notes column; the verify flag leads the message so
+        // staff see it on the inquiry page. Emails use the original text.
+        additionalInfo: honeypotPlausible
+          ? `${HONEYPOT_AUTOFILL_FLAG}${validatedData.additionalInfo ? `\n${validatedData.additionalInfo}` : ""}`
+          : validatedData.additionalInfo || null,
         relatedTo: validatedData.relatedTo || null,
         referralSource: validatedData.referralSource || null,
         type: validatedData.type,
-        status: honeypotTripped ? "spam" : "new",
+        status: isSpam ? "spam" : "new",
         // Server-side tracking
         ipAddress: visitor.ipAddress,
         country: visitor.country,
@@ -165,16 +190,30 @@ export async function POST(request: NextRequest) {
             year: "numeric",
           })
         : undefined,
-      message: inquiry.additionalInfo || undefined,
+      message: validatedData.additionalInfo || undefined,
       nationality: inquiry.nationality || undefined,
     };
 
-    // Send confirmation emails and create notification after the response is
-    // sent — after() keeps the serverless function alive (waitUntil), so slow
-    // SMTP can no longer delay or kill the user-facing response.
-    if (!honeypotTripped) {
+    // Notification and emails run after the response is sent — after() keeps
+    // the serverless function alive (waitUntil), so slow SMTP can't delay or
+    // kill the user-facing response. The in-app notification is created first
+    // so the lead is visible in admin even if SMTP hangs or throws.
+    if (!isSpam) {
       after(async () => {
-        console.log(`[Inquiry] Sending emails for inquiry ${inquiry.id}, type: ${inquiry.type}, email: ${inquiry.email}`);
+        try {
+          await InquiryNotifications.newInquiry({
+            inquiryId: inquiry.id,
+            fullName: inquiry.fullName,
+            type: inquiry.type,
+            tripType: inquiry.tripType || undefined,
+            verifyNote: honeypotPlausible ? HONEYPOT_AUTOFILL_FLAG : undefined,
+          });
+        } catch (notifError) {
+          console.error("Failed to create inquiry notification:", notifError);
+        }
+
+        let adminEmailError: string | null = null;
+        console.log(`[Inquiry] Sending emails for inquiry ${inquiry.id}, type: ${inquiry.type}`);
         try {
           const emailResults = await sendInquiryReceivedEmails(emailData);
           console.log(`[Inquiry] Email results - customer: ${emailResults.customer.success}, admin: ${emailResults.admin.success}`);
@@ -182,21 +221,27 @@ export async function POST(request: NextRequest) {
             console.error(`[Inquiry] Customer email failed:`, emailResults.customer.error);
           }
           if (!emailResults.admin.success) {
+            adminEmailError = emailResults.admin.error || "Unknown error";
             console.error(`[Inquiry] Admin email failed:`, emailResults.admin.error);
           }
         } catch (emailError) {
-          console.error(`[Inquiry] Email sending threw:`, emailError instanceof Error ? emailError.message : emailError);
+          adminEmailError = emailError instanceof Error ? emailError.message : String(emailError);
+          console.error(`[Inquiry] Email sending threw:`, adminEmailError);
         }
 
-        try {
-          await InquiryNotifications.newInquiry({
-            inquiryId: inquiry.id,
-            fullName: inquiry.fullName,
-            type: inquiry.type,
-            tripType: inquiry.tripType || undefined,
-          });
-        } catch (notifError) {
-          console.error("Failed to create inquiry notification:", notifError);
+        // The owner must hear about a lead even when SMTP is down. The daily
+        // lead-followup cron also retries the admin email once.
+        if (adminEmailError) {
+          try {
+            await LeadNotifications.emailFailed({
+              leadType: "inquiry",
+              leadId: inquiry.id,
+              name: inquiry.fullName,
+              error: adminEmailError,
+            });
+          } catch (notifError) {
+            console.error("Failed to create email-failed notification:", notifError);
+          }
         }
       });
     }

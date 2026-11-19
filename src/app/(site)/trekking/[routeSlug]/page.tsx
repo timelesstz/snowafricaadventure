@@ -183,6 +183,21 @@ export default async function RoutePage({ params }: PageProps) {
       : tierPrices.length > 0
         ? Math.min(...tierPrices)
         : 1950; // Last-resort default when no departures and no tiers
+  // The glance table shows only real figures, so it skips the default above.
+  const hasRealPrice = departures.length > 0 || tierPrices.length > 0;
+
+  // "Route at a glance": only rows the route record actually has values for.
+  const glanceRows = [
+    hasRealPrice ? { label: "Price from", value: `$${lowestPrice.toLocaleString("en-US")} per person` } : null,
+    route.durationDays > 0 ? { label: "Duration", value: `${route.durationDays} days` } : null,
+    route.summitHeight ? { label: "Max altitude", value: route.summitHeight } : null,
+    route.successRate ? { label: "Success rate", value: `${route.successRate}%` } : null,
+    route.maxPeople ? { label: "Group size", value: `Up to ${route.maxPeople} climbers` } : null,
+    route.physicalRating ? { label: "Difficulty", value: route.physicalRating } : null,
+    route.startPoint ? { label: "Start point", value: route.startPoint } : null,
+    route.endPoint ? { label: "End point", value: route.endPoint } : null,
+    route.ageRange ? { label: "Age range", value: route.ageRange } : null,
+  ].filter((row): row is { label: string; value: string } => row !== null);
 
   // Generate schemas
   const tripSchema = generateTripSchema({
@@ -268,6 +283,26 @@ export default async function RoutePage({ params }: PageProps) {
                 <p className="text-[1.0625rem] text-[var(--text)] leading-[1.8] mb-6">
                   {route.overview}
                 </p>
+
+                {glanceRows.length > 0 && (
+                  <div className="mb-8 overflow-hidden rounded-xl border border-[var(--border)]">
+                    <table className="w-full text-left text-[0.9375rem]">
+                      <caption className="bg-[var(--surface)] px-4 py-3 text-left font-heading font-semibold text-[var(--primary)]">
+                        {route.title} at a glance
+                      </caption>
+                      <tbody>
+                        {glanceRows.map((row) => (
+                          <tr key={row.label} className="border-t border-[var(--border)]">
+                            <th scope="row" className="w-2/5 px-4 py-3 align-top font-medium text-[var(--text-muted)]">
+                              {row.label}
+                            </th>
+                            <td className="px-4 py-3 break-words text-[var(--text)]">{row.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
 
                 {/* Highlight Cards - 3 Column Grid */}
                 {route.highlights && route.highlights.length >= 3 && (
@@ -383,6 +418,7 @@ export default async function RoutePage({ params }: PageProps) {
                   exclusions={route.exclusions}
                   difficulty={route.physicalRating || undefined}
                   successRate={route.successRate || undefined}
+                  durationDays={route.durationDays}
                 />
               )}
 

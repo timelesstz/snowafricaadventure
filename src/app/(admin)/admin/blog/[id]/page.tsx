@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
+import { sanitizeContentHtml } from "@/lib/sanitize-html";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
@@ -47,8 +48,7 @@ async function getTags() {
 async function savePost(formData: FormData) {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  await requireRole("EDITOR");
 
   const id = formData.get("id") as string | null;
   const slug = (formData.get("slug") as string)
@@ -69,7 +69,7 @@ async function savePost(formData: FormData) {
     metaTitle: (formData.get("metaTitle") as string) || null,
     metaDescription: (formData.get("metaDescription") as string) || null,
     excerpt: (formData.get("excerpt") as string) || null,
-    content: formData.get("content") as string,
+    content: sanitizeContentHtml(formData.get("content") as string),
     featuredImage: (formData.get("featuredImage") as string) || null,
     author: (formData.get("author") as string) || null,
     isPublished,
@@ -129,8 +129,7 @@ async function savePost(formData: FormData) {
 async function deletePost(formData: FormData) {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  await requireRole("ADMIN");
 
   const id = formData.get("id") as string;
   await prisma.blogPost.delete({ where: { id } });

@@ -3,9 +3,12 @@ import Link from "next/link";
 import { Mountain, Compass, Home, Search, ArrowRight } from "lucide-react";
 import { NotFoundTracker } from "@/components/NotFoundTracker";
 
+// robots: null clears the layout's "index, follow". Next.js already adds
+// <meta name="robots" content="noindex"> to every 404 response, so this leaves
+// exactly one robots tag (a robots value here would emit a second one).
 export const metadata: Metadata = {
   title: "Page Not Found",
-  robots: { index: false, follow: false },
+  robots: null,
 };
 
 export default function NotFound() {

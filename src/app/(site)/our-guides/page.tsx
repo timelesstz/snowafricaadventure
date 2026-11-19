@@ -17,8 +17,8 @@ import {
   generateMetadata as genMeta,
   generateBreadcrumbSchema,
   generateFAQSchema,
+  organizationRef,
 } from "@/lib/seo";
-import { SITE_CONFIG } from "@/lib/constants";
 import { prisma } from "@/lib/prisma";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -137,11 +137,7 @@ function generatePersonSchema(person: GuideProfile) {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: cert,
     })),
-    worksFor: {
-      "@type": "TourOperator",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-    },
+    worksFor: organizationRef,
   };
 }
 

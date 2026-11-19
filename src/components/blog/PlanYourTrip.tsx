@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Clock, Tag, TrendingUp } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { InquiryForm } from "@/components/forms/InquiryForm";
+import { getKilimanjaroRouteLinks, getSafariPackageLinks, type TripLink } from "@/lib/route-links";
 
 // Shown under the article body. The most-read articles had no path to a
 // package or a quote form, so readers left without enquiring.
@@ -80,6 +81,15 @@ export async function PlanYourTrip({ kind, postTitle }: PlanYourTripProps) {
   if (trips.length === 0) return null;
 
   const isKili = kind === "kilimanjaro";
+
+  // Compact text links to the other live trips of this kind, named by trip,
+  // so the article links more than the three cards above.
+  const cardHrefs = new Set(trips.map((t) => t.href));
+  const moreLinks: TripLink[] = (
+    await (isKili ? getKilimanjaroRouteLinks() : getSafariPackageLinks())
+  )
+    .filter((l) => !cardHrefs.has(l.href))
+    .slice(0, 8);
   const allHref = isKili ? "/trekking/" : "/tanzania-safaris/";
 
   return (
@@ -145,6 +155,26 @@ export async function PlanYourTrip({ kind, postTitle }: PlanYourTripProps) {
             </li>
           ))}
         </ul>
+
+        {moreLinks.length > 0 && (
+          <nav aria-labelledby="more-trips" className="mt-6">
+            <h3 id="more-trips" className="text-sm font-semibold uppercase tracking-[0.14em] text-white/60">
+              {isKili ? "Kilimanjaro routes" : "More safari packages"}
+            </h3>
+            <ul className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+              {moreLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-white/85 underline-offset-4 hover:text-white hover:underline"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
 
         <Link
           href={allHref}

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { z } from "zod";
+import { AdminRole } from "@prisma/client";
+import { requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -58,23 +60,72 @@ export async function GET() {
   }
 }
 
+// Allowed values for theme fields. These end up inside a <style> tag, so the
+// patterns deliberately exclude < > { } ; and quotes.
+const COLOR_RE = /^#[0-9a-fA-F]{3,8}$|^rgba?\([\d\s.,%]+\)$|^hsla?\([\d\s.,%deg]+\)$/;
+const FONT_RE = /^[A-Za-z0-9 _-]{1,64}$/;
+const RADIUS_RE = /^\d{1,4}(\.\d{1,3})?(px|rem|em|%)?$/;
+
+const color = z.string().trim().regex(COLOR_RE, "Invalid color value");
+
+const themeUpdateSchema = z
+  .object({
+    id: z.string().min(1).max(64),
+    name: z.string().trim().min(1).max(100).optional(),
+    description: z.string().trim().max(300).optional(),
+    primaryColor: color.optional(),
+    primaryDark: color.optional(),
+    primaryLight: color.optional(),
+    secondaryColor: color.optional(),
+    secondaryDark: color.optional(),
+    secondaryLight: color.optional(),
+    accentColor: color.optional(),
+    accentLight: color.optional(),
+    backgroundColor: color.optional(),
+    foregroundColor: color.optional(),
+    surfaceColor: color.optional(),
+    mutedColor: color.optional(),
+    borderColor: color.optional(),
+    textColor: color.optional(),
+    textMuted: color.optional(),
+    textLight: color.optional(),
+    headingFont: z.string().trim().regex(FONT_RE, "Invalid font name").optional(),
+    bodyFont: z.string().trim().regex(FONT_RE, "Invalid font name").optional(),
+    borderRadius: z.string().trim().regex(RADIUS_RE, "Invalid radius").optional(),
+  })
+  // Unknown keys (isActive, createdAt, ...) are dropped by z.object's default strip mode
+  ;
+
 // PUT - Update theme settings (admin only)
 export async function PUT(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole(AdminRole.ADMIN);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unauthorized";
+    return NextResponse.json(
+      { error: message === "Unauthorized" ? "Unauthorized" : "Forbidden" },
+      { status: message === "Unauthorized" ? 401 : 403 }
+    );
   }
 
   try {
-    const body = await request.json();
-    const { id, ...data } = body;
+    const body = await request.json().catch(() => null);
+    const parsed = themeUpdateSchema.safeParse(body);
 
-    if (!id) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: "Theme ID is required" },
+        {
+          error: "Invalid theme settings",
+          details: parsed.error.issues.map((i) => ({
+            field: i.path.join("."),
+            message: i.message,
+          })),
+        },
         { status: 400 }
       );
     }
+
+    const { id, ...data } = parsed.data;
 
     const theme = await prisma.themeSetting.update({
       where: { id },

@@ -25,6 +25,21 @@ import {
   ClimberDetailsReminderData,
 } from "./templates";
 
+/** EmailLog metadata.kind for the admin alert about a new lead. */
+export const ADMIN_LEAD_EMAIL_KIND = "admin-lead";
+
+/**
+ * Tags an admin lead alert in EmailLog so the daily cron can find alerts that
+ * failed and retry them once (see /api/cron/lead-followup).
+ */
+export function adminLeadEmailMetadata(
+  leadType: "inquiry" | "booking",
+  leadId: string,
+  extra: Record<string, unknown> = {}
+): Record<string, unknown> {
+  return { kind: ADMIN_LEAD_EMAIL_KIND, leadType, leadId, ...extra };
+}
+
 // Partner CC emails for commission notifications
 const PARTNER_CC_EMAILS = [
   "business@craftedbytimeless.com",
@@ -53,7 +68,8 @@ export async function sendBookingInquiryEmails(
 
   const adminResult = await sendAdminNotificationWithRetry(
     `New Booking: ${data.routeTitle} - ${data.leadName}`,
-    adminNewBooking(data)
+    adminNewBooking(data),
+    adminLeadEmailMetadata("booking", data.bookingId)
   );
 
   if (!customerResult.success) {
@@ -152,7 +168,8 @@ export async function sendInquiryReceivedEmails(
 
   const adminResult = await sendAdminNotificationWithRetry(
     `New ${typeLabels[data.type] || ""} Inquiry from ${data.fullName}`,
-    adminNewInquiry(data)
+    adminNewInquiry(data),
+    adminLeadEmailMetadata("inquiry", data.inquiryId)
   );
 
   if (!customerResult.success) {

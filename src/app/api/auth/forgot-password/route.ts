@@ -2,17 +2,36 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { randomBytes } from "crypto";
 import { sendEmail } from "@/lib/email";
+import {
+  getClientIp,
+  isAuthThrottled,
+  recordAuthFailure,
+} from "@/lib/auth-rate-limit";
+
+const SCOPE = "forgot-password";
+const GENERIC_MESSAGE =
+  "If an account exists with this email, you will receive a password reset link.";
 
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
 
-    if (!email) {
+    if (!email || typeof email !== "string") {
       return NextResponse.json(
         { error: "Email is required" },
         { status: 400 }
       );
     }
+
+    // Every request counts: this endpoint sends email, so cap it per address and per IP.
+    const ip = getClientIp(request.headers);
+    if (isAuthThrottled(SCOPE, email, ip)) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again in 15 minutes." },
+        { status: 429 }
+      );
+    }
+    recordAuthFailure(SCOPE, email, ip);
 
     // Find user
     const user = await prisma.adminUser.findUnique({
@@ -23,7 +42,7 @@ export async function POST(request: NextRequest) {
     if (!user || !user.isActive) {
       return NextResponse.json({
         success: true,
-        message: "If an account exists with this email, you will receive a password reset link.",
+        message: GENERIC_MESSAGE,
       });
     }
 

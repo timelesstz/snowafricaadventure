@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { SITE_CONFIG } from "./constants";
+import { SITE_CONFIG, OFFICE_HOURS } from "./constants";
 
 interface SEOProps {
   title?: string;
@@ -81,19 +81,46 @@ export function generateMetadata({
   };
 }
 
+/** The one @id for the business entity. Every other node references it. */
+export const ORGANIZATION_ID = `${SITE_CONFIG.url}/#organization`;
+
+/** Reference to the business node, for publisher/provider/worksFor fields. */
+export const organizationRef = { "@id": ORGANIZATION_ID } as const;
+
 /**
- * Generate TourOperator schema
+ * Social profiles verified to exist and to belong to the business.
+ * (X/Twitter was removed: no profile could be confirmed.)
+ */
+const ORGANIZATION_SAME_AS = [
+  SITE_CONFIG.social.facebook,
+  SITE_CONFIG.social.instagram,
+  SITE_CONFIG.social.youtube,
+];
+
+/**
+ * The single business entity: one node with @id #organization, typed as both
+ * TravelAgency and LocalBusiness, carrying the address, geo, phone and opening
+ * hours. It replaces the former separate TourOperator (#organization) and
+ * LocalBusiness (#business) nodes that described the same company twice.
  */
 export function generateTourOperatorSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "TourOperator",
-    "@id": `${SITE_CONFIG.url}/#organization`,
+    "@type": ["TravelAgency", "LocalBusiness"],
+    "@id": ORGANIZATION_ID,
     name: SITE_CONFIG.name,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     telephone: SITE_CONFIG.phone,
     email: SITE_CONFIG.email,
+    priceRange: "$$$",
+    image: `${SITE_CONFIG.url}/og-image.jpg`,
+    openingHoursSpecification: OFFICE_HOURS.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: h.schemaDays.length === 1 ? h.schemaDays[0] : [...h.schemaDays],
+      opens: h.opens,
+      closes: h.closes,
+    })),
     foundingDate: "2008",
     foundingLocation: {
       "@type": "Place",
@@ -166,12 +193,7 @@ export function generateTourOperatorSchema() {
         name: "Kilimanjaro Porters Assistance Project (KPAP)",
       },
     ],
-    sameAs: [
-      SITE_CONFIG.social.facebook,
-      SITE_CONFIG.social.twitter,
-      SITE_CONFIG.social.instagram,
-      SITE_CONFIG.social.youtube,
-    ],
+    sameAs: ORGANIZATION_SAME_AS,
   };
 }
 
@@ -202,12 +224,7 @@ export function generateTripSchema(trip: {
         priceCurrency: "USD",
       },
     }),
-    provider: {
-      "@type": "TourOperator",
-      name: SITE_CONFIG.name,
-      telephone: SITE_CONFIG.phone,
-      email: SITE_CONFIG.email,
-    },
+    provider: organizationRef,
   };
 }
 
@@ -252,22 +269,18 @@ export function generateArticleSchema(article: {
     ...(article.image && { image: article.image }),
     datePublished: article.publishedTime,
     dateModified: article.modifiedTime || article.publishedTime,
-    author: {
-      "@type": "Person",
-      name: article.author || SITE_CONFIG.name,
-      ...(article.authorRole && { jobTitle: article.authorRole }),
-      ...(article.authorCredentials && { knowsAbout: article.authorCredentials }),
-      worksFor: {
-        "@type": "Organization",
-        name: SITE_CONFIG.name,
-        url: SITE_CONFIG.url,
-      },
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-    },
+    // A team byline is the company, not a person: point at the business node.
+    author:
+      !article.author || article.author === "Snow Africa Team"
+        ? organizationRef
+        : {
+            "@type": "Person",
+            name: article.author,
+            ...(article.authorRole && { jobTitle: article.authorRole }),
+            ...(article.authorCredentials && { knowsAbout: article.authorCredentials }),
+            worksFor: organizationRef,
+          },
+    publisher: organizationRef,
   };
 }
 
@@ -334,15 +347,8 @@ export function generateEventSchema(event: {
       validFrom: new Date().toISOString(),
       url: `${SITE_CONFIG.url}${event.url}`,
     },
-    organizer: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-    },
-    performer: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-    },
+    organizer: organizationRef,
+    performer: organizationRef,
   };
 }
 
@@ -378,10 +384,7 @@ export function generateProductSchema(product: {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       ...(product.priceValidUntil && { priceValidUntil: product.priceValidUntil }),
-      seller: {
-        "@type": "Organization",
-        name: SITE_CONFIG.name,
-      },
+      seller: organizationRef,
     },
     ...(product.reviewCount &&
       product.ratingValue && {
@@ -468,60 +471,7 @@ export function generateWebSiteSchema() {
       },
       "query-input": "required name=search_term_string",
     },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-    },
-  };
-}
-
-/**
- * Generate LocalBusiness schema (complementary to TourOperator)
- */
-export function generateLocalBusinessSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${SITE_CONFIG.url}/#business`,
-    name: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
-    url: SITE_CONFIG.url,
-    telephone: SITE_CONFIG.phone,
-    email: SITE_CONFIG.email,
-    priceRange: "$$$",
-    image: `${SITE_CONFIG.url}/og-image.jpg`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: SITE_CONFIG.address.street,
-      addressLocality: SITE_CONFIG.address.city,
-      addressCountry: "TZ",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -3.3869,
-      longitude: 36.6830,
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "14:00",
-      },
-    ],
-    sameAs: [
-      SITE_CONFIG.social.facebook,
-      SITE_CONFIG.social.twitter,
-      SITE_CONFIG.social.instagram,
-      SITE_CONFIG.social.youtube,
-    ],
+    publisher: organizationRef,
   };
 }
 
@@ -580,11 +530,7 @@ export function generateVideoSchema(video: {
     ...(video.contentUrl && { contentUrl: video.contentUrl }),
     ...(video.embedUrl && { embedUrl: video.embedUrl }),
     ...(video.duration && { duration: video.duration }),
-    publisher: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-    },
+    publisher: organizationRef,
   };
 }
 

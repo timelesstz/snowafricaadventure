@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hash, compare } from "bcryptjs";
+import {
+  clearAuthFailures,
+  getClientIp,
+  isAuthThrottled,
+  recordAuthFailure,
+} from "@/lib/auth-rate-limit";
+
+const SCOPE = "reset-pin";
+const GENERIC_ERROR = "Invalid email or password";
 
 // Reset PIN with password verification
 export async function POST(request: NextRequest) {
@@ -14,42 +23,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate PIN format (4-6 digits)
-    if (!/^\d{4,6}$/.test(newPin)) {
+    // New PINs must be exactly 6 digits
+    if (typeof newPin !== "string" || !/^\d{6}$/.test(newPin)) {
       return NextResponse.json(
-        { error: "PIN must be 4-6 digits" },
+        { error: "PIN must be exactly 6 digits" },
         { status: 400 }
+      );
+    }
+
+    const ip = getClientIp(request.headers);
+    if (isAuthThrottled(SCOPE, email, ip)) {
+      return NextResponse.json(
+        { error: "Too many attempts. Please try again in 15 minutes." },
+        { status: 429 }
       );
     }
 
     // Find user
     const user = await prisma.adminUser.findUnique({
-      where: { email: email.toLowerCase() },
+      where: { email: String(email).toLowerCase() },
     });
 
-    if (!user || !user.isActive) {
-      return NextResponse.json(
-        { error: "Invalid email or password" },
-        { status: 400 }
-      );
+    // Verify the password before revealing anything about the account (role,
+    // existence). Every failure returns the same generic error.
+    const isValid =
+      !!user && user.isActive && (await compare(String(password), user.passwordHash));
+
+    if (!user || !isValid || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
+      recordAuthFailure(SCOPE, email, ip);
+      return NextResponse.json({ error: GENERIC_ERROR }, { status: 400 });
     }
 
-    // Only allow PIN for ADMIN and SUPER_ADMIN
-    if (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN") {
-      return NextResponse.json(
-        { error: "PIN login is only available for Admin users" },
-        { status: 403 }
-      );
-    }
-
-    // Verify password
-    const isValid = await compare(password, user.passwordHash);
-    if (!isValid) {
-      return NextResponse.json(
-        { error: "Invalid email or password" },
-        { status: 400 }
-      );
-    }
+    clearAuthFailures(SCOPE, email);
 
     // Hash and save new PIN
     const pinHash = await hash(newPin, 10);

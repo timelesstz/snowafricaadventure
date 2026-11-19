@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import nodemailer, { type Transporter } from "nodemailer";
 import { logEmailPending, logEmailSent, logEmailFailed } from "./logger";
 
 // Email configuration
@@ -15,7 +15,7 @@ export const NOTIFICATION_EMAILS: string[] = NOTIFICATION_EMAIL_RAW
 export const PRIMARY_NOTIFICATION_EMAIL = NOTIFICATION_EMAILS[0];
 
 // Lazy initialize SMTP transporter
-let transporter: nodemailer.Transporter | null = null;
+let transporter: Transporter | null = null;
 let smtpVerified = false;
 
 function resolveSmtpHost(raw: string): string {
@@ -27,7 +27,7 @@ function resolveSmtpHost(raw: string): string {
   return `mail.${raw}`;
 }
 
-function getTransporter(): nodemailer.Transporter {
+function getTransporter(): Transporter {
   if (!transporter) {
     const host = resolveSmtpHost(process.env.SMTP_HOST || "");
     const port = parseInt(process.env.SMTP_PORT || "465");
@@ -74,6 +74,9 @@ export interface SendEmailOptions {
   /** EmailLog type column (e.g. "booking", "inquiry", "payment-reminder").
    * Falls back to subject-based inference when omitted. */
   type?: string;
+  /** Extra EmailLog metadata, e.g. { kind: "admin-lead", leadType, leadId }
+   * so failed lead alerts can be traced back to the lead and retried. */
+  metadata?: Record<string, unknown>;
 }
 
 export interface EmailResult {
@@ -99,7 +102,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
         subjectLower.includes("inquiry") ? "inquiry" :
         subjectLower.includes("admin") ? "admin" :
         subjectLower.includes("payment") ? "payment-reminder" : "general"),
-    metadata: { replyTo: options.replyTo },
+    metadata: { ...options.metadata, replyTo: options.replyTo },
   });
 
   try {
@@ -170,7 +173,8 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
  */
 export async function sendAdminNotification(
   subject: string,
-  html: string
+  html: string,
+  metadata?: Record<string, unknown>
 ): Promise<EmailResult> {
   console.log(`[Email] Sending admin notification to: ${NOTIFICATION_EMAILS.join(", ")}`);
   console.log(`[Email] Admin subject: [Snow Africa Admin] ${subject}`);
@@ -178,6 +182,7 @@ export async function sendAdminNotification(
     to: NOTIFICATION_EMAILS,
     subject: `[Snow Africa Admin] ${subject}`,
     html,
+    metadata,
   });
   console.log(`[Email] Admin notification result: success=${result.success}${result.error ? `, error=${result.error}` : ""}${result.id ? `, messageId=${result.id}` : ""}`);
   return result;
@@ -189,9 +194,10 @@ export async function sendAdminNotification(
  */
 export async function sendAdminNotificationWithRetry(
   subject: string,
-  html: string
+  html: string,
+  metadata?: Record<string, unknown>
 ): Promise<EmailResult> {
-  const result = await sendAdminNotification(subject, html);
+  const result = await sendAdminNotification(subject, html, metadata);
   if (result.success) return result;
 
   console.warn(`[Email] Admin notification failed, retrying in 2s... Error: ${result.error}`);
@@ -201,7 +207,7 @@ export async function sendAdminNotificationWithRetry(
   transporter = null;
   smtpVerified = false;
 
-  const retryResult = await sendAdminNotification(subject, html);
+  const retryResult = await sendAdminNotification(subject, html, metadata);
   if (!retryResult.success) {
     console.error(`[Email] Admin notification retry also failed: ${retryResult.error}`);
   } else {
