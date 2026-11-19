@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { SITE_CONFIG, MIN_INDEXABLE_TAG_POSTS } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
 import { getConfigRedirectPaths, normalizePath } from "@/lib/redirect-paths";
 
 // Slugs that are static routes — blog posts with these slugs would shadow them
@@ -79,7 +79,7 @@ async function getContentFromDb() {
   try {
     const { prisma } = await import("@/lib/prisma");
 
-    const [routes, safaris, destinations, posts, dayTrips, categories, tags] =
+    const [routes, safaris, destinations, posts, dayTrips] =
       await Promise.all([
         prisma.trekkingRoute.findMany({
           where: { isActive: true },
@@ -101,33 +101,6 @@ async function getContentFromDb() {
           where: { isActive: true },
           select: { slug: true, updatedAt: true },
         }),
-        // Only categories that have at least one published post
-        prisma.category.findMany({
-          where: {
-            posts: {
-              some: {
-                post: { isPublished: true },
-              },
-            },
-          },
-          select: { slug: true, updatedAt: true },
-        }),
-        // Tags with published posts; thin ones are filtered out below because
-        // their pages are noindex, and a sitemap must not list noindex URLs.
-        prisma.tag.findMany({
-          where: {
-            posts: {
-              some: {
-                post: { isPublished: true },
-              },
-            },
-          },
-          select: {
-            slug: true,
-            updatedAt: true,
-            _count: { select: { posts: { where: { post: { isPublished: true } } } } },
-          },
-        }),
       ]);
 
     // URLs that 301 elsewhere (merged duplicates) must not be listed either.
@@ -141,8 +114,6 @@ async function getContentFromDb() {
       destinations,
       posts,
       dayTrips,
-      categories,
-      tags: tags.filter((tag) => tag._count.posts >= MIN_INDEXABLE_TAG_POSTS),
       redirectedPaths: new Set(redirects.map((r) => normalizePath(r.sourceUrl))),
     };
   } catch (err) {
@@ -153,8 +124,6 @@ async function getContentFromDb() {
       destinations: [],
       posts: [],
       dayTrips: [],
-      categories: [],
-      tags: [],
       redirectedPaths: new Set<string>(),
     };
   }
@@ -163,382 +132,339 @@ async function getContentFromDb() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
 
-  const { routes, safaris, destinations, posts, dayTrips, categories, tags, redirectedPaths: dbRedirects } =
+  const { routes, safaris, destinations, posts, dayTrips, redirectedPaths: dbRedirects } =
     await getContentFromDb();
   // A URL that redirects (database rule or next.config.ts) must not be listed.
   const redirectedPaths = new Set([...dbRedirects, ...(await getConfigRedirectPaths())]);
 
-  // Static pages with accurate lastModified dates.
-  // Listing pages (blog/, trekking/, etc.) use new Date() because they reflect
-  // the latest DB content on every render. Content-stable pages use fixed dates.
+  // Static pages carry no lastmod: there is no stored edit date for them, and a
+  // request-time or hand-typed date is a false signal Google learns to ignore.
+  // Hub pages get the newest updatedAt of the records they list (set below).
+  // Tag and category archives are left out: they are thin and noindex.
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: `${baseUrl}/`, // trailing slash, matching the canonical
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${baseUrl}/trekking/`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/tanzania-safaris/`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/kilimanjaro-join-group-departures/`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/blog/`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/tanzania-destinations/`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/zanzibar/`,
-      lastModified: new Date("2025-10-01"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/tailor-made-safari/`,
-      lastModified: new Date("2025-10-01"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/about-us/`,
-      lastModified: new Date("2025-06-01"),
       changeFrequency: "yearly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/contact-us/`,
-      lastModified: new Date("2025-06-01"),
       changeFrequency: "yearly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/search/`,
-      lastModified: new Date("2025-10-01"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/tanzania-day-tours/`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/best-tanzania-tour-operator/`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
       url: `${baseUrl}/best-kilimanjaro-tour-operators/`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
       url: `${baseUrl}/best-route-to-climb-kilimanjaro/`,
-      lastModified: new Date("2026-03-04"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/our-guides/`,
-      lastModified: new Date("2026-03-04"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/mountain-trekking/`,
-      lastModified: new Date("2026-07-18"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/climbing-kilimanjaro/`,
-      lastModified: new Date("2026-03-01"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/best-time-to-climb-kilimanjaro/`,
-      lastModified: new Date("2026-01-15"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/kilimanjaro-prices/`,
-      lastModified: new Date("2026-01-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-climbing-gear/`,
-      lastModified: new Date("2026-01-15"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-climbing-companies/`,
-      lastModified: new Date("2026-01-15"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/mount-kilimanjaro-height/`,
-      lastModified: new Date("2025-10-01"),
       changeFrequency: "yearly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/how-hard-is-kilimanjaro/`,
-      lastModified: new Date("2026-03-04"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/can-beginners-climb-kilimanjaro/`,
-      lastModified: new Date("2026-03-04"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-altitude-sickness/`,
-      lastModified: new Date("2026-03-04"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-training-plan/`,
-      lastModified: new Date("2026-03-04"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-safety/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-deaths/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-weather/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/kilimanjaro-food-meals/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-tipping-guide/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-climate-zones/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-glaciers/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-records/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-travel-insurance/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-visa-tanzania/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-airport-guide/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-day-hike/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-women-climbing/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-solo-climb/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-age-limits/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-hygiene/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/kilimanjaro-honeymoon/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/kilimanjaro-paragliding/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/kilimanjaro-map/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-statistics/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/kilimanjaro-success-rates/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/mount-kilimanjaro/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/mount-kenya/`,
-      lastModified: new Date("2026-09-04"),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${baseUrl}/climb-kilimanjaro-from-usa/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/african-safaris/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/luxury-safaris-tanzania/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tanzania-camping-safaris/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tanzania-lodge-safaris/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tanzania-safari-from-uk/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/wildlife-safaris-tanzania/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tanzania-itinerary-10-days/`,
-      lastModified: new Date("2026-07-18"),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/tanzania-beach-holidays/`,
-      lastModified: new Date("2026-06-18"),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/privacy-policy/`,
-      lastModified: new Date("2024-01-01"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms-and-conditions/`,
-      lastModified: new Date("2024-01-01"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
   ];
+
+  // A hub's real last change is the newest edit among the records it lists.
+  const newest = (rows: { updatedAt: Date }[]) =>
+    rows.length > 0
+      ? new Date(Math.max(...rows.map((r) => r.updatedAt.getTime())))
+      : undefined;
+  const hubLastModified: Record<string, Date | undefined> = {
+    [`${baseUrl}/trekking/`]: newest(routes),
+    [`${baseUrl}/tanzania-safaris/`]: newest(safaris),
+    [`${baseUrl}/tanzania-destinations/`]: newest(destinations),
+    [`${baseUrl}/blog/`]: newest(posts),
+    [`${baseUrl}/tanzania-day-tours/`]: newest(dayTrips),
+  };
+  for (const page of staticPages) {
+    const lastModified = hubLastModified[page.url];
+    if (lastModified) page.lastModified = lastModified;
+  }
 
   const routeUrls: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${baseUrl}/trekking/${route.slug}/`,
@@ -578,20 +504,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const categoryUrls: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${baseUrl}/category/${cat.slug}/`,
-    lastModified: cat.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  const tagUrls: MetadataRoute.Sitemap = tags.map((tag) => ({
-    url: `${baseUrl}/tag/${tag.slug}/`,
-    lastModified: tag.updatedAt,
-    changeFrequency: "monthly",
-    priority: 0.5,
-  }));
-
   return [
     ...staticPages,
     ...routeUrls,
@@ -599,7 +511,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...destUrls,
     ...postUrls,
     ...dayTripUrls,
-    ...categoryUrls,
-    ...tagUrls,
   ].filter((entry) => !redirectedPaths.has(normalizePath(new URL(entry.url).pathname)));
 }

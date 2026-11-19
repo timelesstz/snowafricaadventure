@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
+import { isAllowedAssetUrl } from "@/lib/asset-url";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -51,14 +52,31 @@ export async function GET() {
 
 // PUT - Update logo settings (admin only)
 export async function PUT(request: Request) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    await requireRole("ADMIN");
+  } catch (error) {
+    const unauth = error instanceof Error && error.message === "Unauthorized";
+    return NextResponse.json(
+      { error: unauth ? "Unauthorized" : "Forbidden" },
+      { status: unauth ? 401 : 403 }
+    );
   }
 
   try {
     const body = await request.json();
     const { logoUrl, logoDarkUrl } = body;
+
+    for (const value of [logoUrl, logoDarkUrl]) {
+      if (value !== undefined && value !== null && !isAllowedAssetUrl(value)) {
+        return NextResponse.json(
+          {
+            error:
+              "URL must be on cdn.snowafricaadventure.com, the R2 public URL, or a relative /path",
+          },
+          { status: 400 }
+        );
+      }
+    }
 
     const updates: { key: string; value: string }[] = [];
     if (logoUrl !== undefined) updates.push({ key: "site.logoUrl", value: logoUrl || "" });

@@ -29,7 +29,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
     }
 
     if (!/^\d{4,6}$/.test(pin)) {
-      setMessage({ type: "error", text: "PIN must be 4-6 digits" });
+      setMessage({ type: "error", text: "PIN must be exactly 6 digits" });
       return;
     }
 
@@ -102,7 +102,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
         <div>
           <h2 className="text-lg font-semibold text-slate-900">Quick PIN Login</h2>
           <p className="text-sm text-slate-500">
-            Set a 4-6 digit PIN for faster login
+            Set a 6-digit PIN for faster login
           </p>
         </div>
       </div>
@@ -166,7 +166,7 @@ export function PinSettings({ hasPin: initialHasPin }: PinSettingsProps) {
         <form onSubmit={handleSetPin} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              New PIN (4-6 digits)
+              New PIN (6 digits)
             </label>
             <input
               type="password"

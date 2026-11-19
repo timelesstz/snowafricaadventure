@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/auth";
+import { sanitizePuckData } from "@/lib/sanitize-html";
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -40,7 +41,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
     if (body.title !== undefined) updateData.title = body.title;
     if (body.slug !== undefined) updateData.slug = body.slug;
     if (body.description !== undefined) updateData.description = body.description;
-    if (body.puckData !== undefined) updateData.puckData = body.puckData;
+    if (body.puckData !== undefined) updateData.puckData = sanitizePuckData(body.puckData);
     if (body.status !== undefined) {
       updateData.status = body.status;
       if (body.status === "PUBLISHED") {

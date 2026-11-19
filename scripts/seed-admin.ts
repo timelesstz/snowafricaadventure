@@ -6,33 +6,54 @@ import { AdminRole } from "@prisma/client";
 async function main() {
   console.log("🔐 Seeding admin user and partner data...");
 
-  // Create Super Admin User
+  // Super Admin credentials come from the environment, never from source.
+  //   ADMIN_EMAIL     (default admin@snowafricaadventure.com)
+  //   ADMIN_PASSWORD  (required, at least 12 characters, never printed)
+  //   --reset-password  overwrite the password of an existing admin
+  const email = (process.env.ADMIN_EMAIL || "admin@snowafricaadventure.com")
+    .trim()
+    .toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+  const resetPassword = process.argv.includes("--reset-password");
+
+  if (!password || password.length < 12) {
+    console.error(
+      "❌ ADMIN_PASSWORD is missing or shorter than 12 characters. Set it in the environment and re-run."
+    );
+    process.exit(1);
+  }
+
+  const passwordHash = await hash(password, 12);
+
   const existingAdmin = await prisma.adminUser.findUnique({
-    where: { email: "admin@snowafricaadventure.com" },
+    where: { email },
+    select: { id: true },
+  });
+
+  await prisma.adminUser.upsert({
+    where: { email },
+    create: {
+      email,
+      passwordHash,
+      name: "Admin",
+      role: AdminRole.SUPER_ADMIN,
+      isActive: true,
+    },
+    // Existing users keep their password unless --reset-password is passed
+    update: resetPassword
+      ? { role: AdminRole.SUPER_ADMIN, passwordHash }
+      : { role: AdminRole.SUPER_ADMIN },
   });
 
   if (existingAdmin) {
-    console.log("✅ Admin user already exists");
-    // Update role to SUPER_ADMIN if it exists
-    await prisma.adminUser.update({
-      where: { email: "admin@snowafricaadventure.com" },
-      data: { role: AdminRole.SUPER_ADMIN },
-    });
-    console.log("✅ Updated admin user role to SUPER_ADMIN");
+    console.log(`✅ Admin user ${email} already existed; role set to SUPER_ADMIN`);
+    console.log(
+      resetPassword
+        ? "✅ Password reset from ADMIN_PASSWORD"
+        : "ℹ️  Password left unchanged (pass --reset-password to overwrite)"
+    );
   } else {
-    const passwordHash = await hash("SnowAfrica2025!", 12);
-    await prisma.adminUser.create({
-      data: {
-        email: "admin@snowafricaadventure.com",
-        passwordHash,
-        name: "Admin",
-        role: AdminRole.SUPER_ADMIN,
-        isActive: true,
-      },
-    });
-    console.log("✅ Created admin user: admin@snowafricaadventure.com");
-    console.log("✅ Role: SUPER_ADMIN (full access)");
-    console.log("⚠️  Default password: SnowAfrica2025! (change immediately!)");
+    console.log(`✅ Created SUPER_ADMIN user: ${email} (password from ADMIN_PASSWORD)`);
   }
 
   // Create Timeless International Partner

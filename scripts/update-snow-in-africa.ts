@@ -195,7 +195,8 @@ async function main() {
     where: { slug },
     data: {
       title: "Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow",
-      metaTitle: "Does It Snow in Africa? Yes — 8 Mountains With Year-Round Snow",
+      // Synced with the live DB value set 2026-11-19 (36 chars + layout suffix).
+      metaTitle: "Does It Snow in Africa? Where & When",
       metaDescription: "Yes, it snows in Africa! From Kilimanjaro's glaciers to Morocco's ski resorts — 8 snow-capped peaks across 10 countries. Photos, maps & best months.",
       excerpt: "Does it snow in Africa? Yes — 8 mountains across 10 countries have snow and ice year-round, from Kilimanjaro's glaciers to Morocco's ski resorts.",
       content: content.trim(),

@@ -32,27 +32,38 @@ export interface LogoSettings {
 }
 
 /**
+ * Theme values are rendered inside a <style> tag. Drop anything that could close
+ * the declaration, the rule or the tag itself, and fall back to the default.
+ */
+function safeCssValue(value: string | null | undefined, fallback: string): string {
+  if (typeof value !== "string") return fallback;
+  const v = value.trim();
+  if (!v || v.length > 100 || /[<>{};"'\\]/.test(v)) return fallback;
+  return v;
+}
+
+/**
  * Generate inline CSS string from theme settings (for SSR injection)
  */
 export function generateThemeCSS(theme: ThemeSettings): string {
   return `:root {
-  --primary: ${theme.primaryColor};
-  --primary-dark: ${theme.primaryDark};
-  --primary-light: ${theme.primaryLight};
-  --secondary: ${theme.secondaryColor};
-  --secondary-dark: ${theme.secondaryDark};
-  --secondary-light: ${theme.secondaryLight};
-  --accent: ${theme.accentColor};
-  --accent-light: ${theme.accentLight};
-  --background: ${theme.backgroundColor};
-  --foreground: ${theme.foregroundColor};
-  --surface: ${theme.surfaceColor};
-  --muted: ${theme.mutedColor};
-  --border: ${theme.borderColor};
-  --text: ${theme.textColor};
-  --text-muted: ${theme.textMuted};
-  --text-light: ${theme.textLight};
-  --radius: ${theme.borderRadius};
+  --primary: ${safeCssValue(theme.primaryColor, DEFAULT_THEME.primaryColor)};
+  --primary-dark: ${safeCssValue(theme.primaryDark, DEFAULT_THEME.primaryDark)};
+  --primary-light: ${safeCssValue(theme.primaryLight, DEFAULT_THEME.primaryLight)};
+  --secondary: ${safeCssValue(theme.secondaryColor, DEFAULT_THEME.secondaryColor)};
+  --secondary-dark: ${safeCssValue(theme.secondaryDark, DEFAULT_THEME.secondaryDark)};
+  --secondary-light: ${safeCssValue(theme.secondaryLight, DEFAULT_THEME.secondaryLight)};
+  --accent: ${safeCssValue(theme.accentColor, DEFAULT_THEME.accentColor)};
+  --accent-light: ${safeCssValue(theme.accentLight, DEFAULT_THEME.accentLight)};
+  --background: ${safeCssValue(theme.backgroundColor, DEFAULT_THEME.backgroundColor)};
+  --foreground: ${safeCssValue(theme.foregroundColor, DEFAULT_THEME.foregroundColor)};
+  --surface: ${safeCssValue(theme.surfaceColor, DEFAULT_THEME.surfaceColor)};
+  --muted: ${safeCssValue(theme.mutedColor, DEFAULT_THEME.mutedColor)};
+  --border: ${safeCssValue(theme.borderColor, DEFAULT_THEME.borderColor)};
+  --text: ${safeCssValue(theme.textColor, DEFAULT_THEME.textColor)};
+  --text-muted: ${safeCssValue(theme.textMuted, DEFAULT_THEME.textMuted)};
+  --text-light: ${safeCssValue(theme.textLight, DEFAULT_THEME.textLight)};
+  --radius: ${safeCssValue(theme.borderRadius, DEFAULT_THEME.borderRadius)};
 }`;
 }
 

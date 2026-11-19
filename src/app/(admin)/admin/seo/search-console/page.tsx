@@ -93,6 +93,7 @@ const INSIGHT_BORDER_COLORS: Record<string, string> = {
   green: "border-l-green-400",
   slate: "border-l-slate-400",
   emerald: "border-l-emerald-400",
+  sky: "border-l-sky-400",
 };
 
 // ─── CTR Score Bar ───────────────────────────────────────────────────────────
@@ -261,7 +262,8 @@ export default function SearchConsolePage() {
       (a) => a.tag === "quick-win"
     ).length;
     const strongCount = Array.from(adviceMap.values()).filter(
-      (a) => a.tag === "strong" || a.tag === "defend"
+      // Same rule as the "Strongest Performers" insight, so the two counts agree.
+      (a) => (a.tag === "strong" || a.tag === "defend") && a.intent !== "branded"
     ).length;
     return { totalPotential, quickWins, strongCount };
   }, [data?.queries, adviceMap]);

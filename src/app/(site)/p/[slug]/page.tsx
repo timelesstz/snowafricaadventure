@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { CmsPageRenderer } from "./CmsPageRenderer";
+import { sanitizePuckData } from "@/lib/sanitize-html";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -49,7 +50,7 @@ export default async function CmsPage({ params }: Props) {
   return (
     <div>
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <CmsPageRenderer data={page.puckData as any} />
+      <CmsPageRenderer data={sanitizePuckData(page.puckData) as any} />
     </div>
   );
 }

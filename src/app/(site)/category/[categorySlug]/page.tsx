@@ -67,11 +67,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!category) return {};
 
-  return genMeta({
+  const meta = genMeta({
     title: category.name,
     description: category.description || `Articles about ${category.name}`,
     url: `/category/${categorySlug}/`,
   });
+  // Category archives are thin lists of links: keep them out of the index
+  // (and the sitemap) but let crawlers follow through to the posts.
+  return { ...meta, robots: { index: false, follow: true } };
 }
 
 export default async function CategoryPage({ params }: Props) {

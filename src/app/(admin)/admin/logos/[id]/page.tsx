@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { checkRole, requireRole } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -31,8 +31,8 @@ async function saveLogo(_prev: FormShellState, formData: FormData): Promise<Form
   "use server";
 
   try {
-    const session = await auth();
-    if (!session) return { error: "You are not signed in. Please log in and try again." };
+    const authz = await checkRole("EDITOR");
+    if (!authz.ok) return { error: authz.error };
 
     const id = formData.get("id") as string | null;
     const name = (formData.get("name") as string)?.trim();
@@ -89,8 +89,7 @@ async function saveLogo(_prev: FormShellState, formData: FormData): Promise<Form
 async function deleteLogo(formData: FormData) {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  await requireRole("ADMIN");
 
   await prisma.logo.delete({ where: { id: formData.get("id") as string } });
   redirect("/admin/logos");

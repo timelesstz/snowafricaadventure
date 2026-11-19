@@ -21,6 +21,7 @@ export type AdvisorTag =
   | "cannibalized"
   | "branded"
   | "low-priority"
+  | "weak-page"
   | "strong";
 
 export type SearchIntent = "informational" | "transactional" | "navigational" | "branded";
@@ -118,33 +119,76 @@ function estimateTrafficPotential(q: QueryMetrics, expectedCtr: number): number 
 
 // ─── Intent Classification ───────────────────────────────────────────────────
 
+// Bare "snow africa" is not branded: most people typing it mean snow in
+// Africa (GSC shows it landing on the homepage at #8 with <1% CTR), so it
+// must not raise a "your brand isn't #1" alarm.
 const BRAND_TERMS = [
-  "snow africa",
+  "snow africa adventure",
   "snowafrica",
-  "snow african",
   "snowafricaadventure",
 ];
 
+// Matched as whole words, with an optional plural "s". Substring matching
+// tagged "lion kill rate" as transactional because it contains "rate".
 const TRANSACTIONAL_SIGNALS = [
   "book", "booking", "price", "cost", "how much", "package", "tour",
   "hire", "buy", "deal", "cheap", "budget", "affordable", "luxury",
-  "discount", "offer", "rate", "quote", "inquiry", "departure",
-  "group join", "join group",
+  "discount", "offer", "rates", "quote", "inquiry", "departure",
+  "operator",
 ];
 
 const NAVIGATIONAL_SIGNALS = [
-  "login", "contact", "address", "phone", "email", "location",
+  "login", "contact", "address", "phone", "email",
   "directions", "office", "review", "tripadvisor", "trustpilot",
 ];
 
-function classifyIntent(query: string): SearchIntent {
+function hasSignal(query: string, signals: string[]): boolean {
+  return signals.some((s) =>
+    new RegExp(`\\b${s.replace(/ /g, "\\s+")}s?\\b`).test(query)
+  );
+}
+
+export function classifyIntent(query: string): SearchIntent {
   const q = query.toLowerCase();
 
   if (BRAND_TERMS.some((b) => q.includes(b))) return "branded";
-  if (NAVIGATIONAL_SIGNALS.some((s) => q.includes(s))) return "navigational";
-  if (TRANSACTIONAL_SIGNALS.some((s) => q.includes(s))) return "transactional";
+  if (hasSignal(q, NAVIGATIONAL_SIGNALS)) return "navigational";
+  if (hasSignal(q, TRANSACTIONAL_SIGNALS)) return "transactional";
   return "informational";
 }
+
+// ─── Page/Query Match ────────────────────────────────────────────────────────
+
+const STOPWORDS = new Set([
+  "a", "an", "the", "in", "on", "of", "to", "for", "is", "are", "do", "does",
+  "can", "what", "where", "when", "how", "which", "and", "or", "my", "your",
+  "it", "best", "top",
+]);
+
+function tokens(text: string): string[] {
+  return text
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((t) => t && !STOPWORDS.has(t))
+    .map((t) => (t.length > 3 && t.endsWith("s") ? t.slice(0, -1) : t));
+}
+
+/**
+ * True when the ranking page's URL already names most of the query's terms,
+ * i.e. a dedicated page exists. Advice must then be "strengthen that page",
+ * never "create a new page" — a second page would compete with the first.
+ */
+export function pageTargetsQuery(query: string, topPage?: string | null): boolean {
+  if (!topPage || topPage === "/") return false;
+  const queryTerms = tokens(query);
+  if (queryTerms.length === 0) return false;
+  const slugTerms = new Set(tokens(topPage));
+  const hits = queryTerms.filter((t) => slugTerms.has(t)).length;
+  return hits / queryTerms.length >= 0.6;
+}
+
+/** Below this, CTR and position are noise (one impression = 0% or 100%). */
+const MIN_IMPRESSIONS = 10;
 
 // ─── Cannibalization Detection ───────────────────────────────────────────────
 
@@ -191,9 +235,27 @@ export function analyzeQuery(q: QueryMetrics): QueryAdvice {
 
   const base = { ctrScore, trafficPotential, expectedCtr, intent };
 
+  // ── Too few impressions to judge ──
+  // Without this, a query seen once at #2 was told to "Push to Top 3".
+  if (impressions < MIN_IMPRESSIONS) {
+    return {
+      ...base,
+      tag: "low-priority",
+      label: "Too Little Data",
+      advice: `Only ${impressions} impression${impressions === 1 ? "" : "s"} in this period — position and CTR are not meaningful yet.`,
+      actions: [
+        "No action — revisit when it has 10+ impressions",
+      ],
+      priority: 7,
+      color: "bg-slate-50",
+      textColor: "text-slate-400",
+      borderColor: "border-slate-100",
+    };
+  }
+
   // ── Branded queries get special treatment ──
   if (intent === "branded") {
-    if (pos <= 3) {
+    if (pos < 1.5) {
       return {
         ...base,
         tag: "strong",
@@ -219,7 +281,7 @@ export function analyzeQuery(q: QueryMetrics): QueryAdvice {
         "Check if your homepage title includes your brand name",
         "Ensure consistent NAP (Name, Address, Phone) across all platforms",
         "Build more branded content: about page, press mentions, social profiles",
-        "Check Google Search Console for manual actions or penalties",
+        "Search the query yourself and note which sites outrank you (review sites, directories, social profiles)",
       ],
       priority: 1,
       color: "bg-red-50",
@@ -229,7 +291,20 @@ export function analyzeQuery(q: QueryMetrics): QueryAdvice {
   }
 
   // ── Position 1-3: Top of page 1 ──
-  if (pos <= 3 && impressions >= 20) {
+  if (pos <= 3 && impressions < 20) {
+    return {
+      ...base,
+      tag: "low-priority",
+      label: "Top 3, Low Volume",
+      advice: `Already #${pos.toFixed(1)}, but only ${impressions} impressions — little demand for this exact wording.`,
+      actions: ["No action — it already ranks in the top 3"],
+      priority: 6,
+      color: "bg-slate-50",
+      textColor: "text-slate-500",
+      borderColor: "border-slate-100",
+    };
+  }
+  if (pos <= 3) {
     if (ctrScore >= 70) {
       return {
         ...base,
@@ -422,6 +497,29 @@ export function analyzeQuery(q: QueryMetrics): QueryAdvice {
     };
   }
 
+  // ── Position 21+: a dedicated page exists but ranks deep ──
+  // The fix is authority for that page, not a new page that would compete
+  // with it (the advisor used to call /kilimanjaro-join-group-departures/ a
+  // "content gap" for "kilimanjaro group departures").
+  if (impressions >= 30 && pageTargetsQuery(q.query, q.topPage)) {
+    return {
+      ...base,
+      tag: "weak-page",
+      label: "Page Needs Authority",
+      advice: `${q.topPage} already targets "${q.query}" but ranks #${pos.toFixed(1)}. Don't create another page — strengthen this one.`,
+      actions: [
+        `Link to ${q.topPage} from your highest-traffic pages, using "${q.query}" or close wording as anchor text`,
+        `Check the title and H1 of ${q.topPage} lead with "${q.query}"`,
+        "Compare with the top 3 results and add what they cover that this page doesn't",
+        "Earn external links to this page (partners, directories, guest posts) — on-page work alone rarely moves #30+",
+      ],
+      priority: intent === "transactional" ? 2 : 4,
+      color: "bg-sky-50",
+      textColor: "text-sky-700",
+      borderColor: "border-sky-200",
+    };
+  }
+
   // ── Position 21-50: Page 3+ but Google indexes it ──
   if (impressions >= 100 && clicks === 0) {
     return {
@@ -600,6 +698,23 @@ export function generateTopInsights(queries: QueryMetrics[]): TopInsight[] {
       icon: "file-plus",
       estimatedGain: contentGaps.reduce((s, q) => s + q.advice.trafficPotential, 0),
       color: "slate",
+    });
+  }
+
+  // 6b. Dedicated pages that exist but rank deep
+  const weakPages = analyzed.filter((a) => a.advice.tag === "weak-page");
+  if (weakPages.length > 0) {
+    insights.push({
+      title: "Existing Pages Ranking Too Deep — Build Their Authority",
+      description: `${weakPages.length} queries already have a dedicated page, but it ranks past page 2. Creating new pages would split relevance; internal and external links to the existing page are what move it.`,
+      queries: weakPages
+        .sort((a, b) => b.impressions - a.impressions)
+        .slice(0, 5)
+        .map((q) => q.query),
+      priority: 3,
+      icon: "target",
+      estimatedGain: weakPages.reduce((s, q) => s + q.advice.trafficPotential, 0),
+      color: "sky",
     });
   }
 

@@ -4,6 +4,13 @@ import { BookingStatus } from "@prisma/client";
 import { sendAdminNotificationWithRetry } from "@/lib/email";
 import { SystemNotifications, cleanupOldNotifications } from "@/lib/notifications";
 import { SITE_CONFIG } from "@/lib/constants";
+import {
+  retryFailedLeadEmails,
+  countRecentSpamLeads,
+  FAILED_LEAD_WINDOW_HOURS,
+  SPAM_WINDOW_DAYS,
+  type FailedLeadEmail,
+} from "@/lib/email/lead-recovery";
 
 // Verify cron secret
 function verifyCronSecret(request: NextRequest): boolean {
@@ -103,15 +110,43 @@ export async function GET(request: NextRequest) {
       }),
     ]);
 
+    // Admin lead alerts that failed recently get one resend; spam-filtered
+    // leads are counted so nothing the filters caught is invisible. Both are
+    // isolated so a failure here never blocks the digest itself.
+    let failedLeadEmails: FailedLeadEmail[] = [];
+    try {
+      failedLeadEmails = await retryFailedLeadEmails(now);
+    } catch (error) {
+      console.error("[LeadFollowup] Failed-email retry errored:", error);
+    }
+    let spamCount = 0;
+    try {
+      spamCount = await countRecentSpamLeads(now);
+    } catch (error) {
+      console.error("[LeadFollowup] Spam count errored:", error);
+    }
+
     // Housekeeping: prune read notifications older than 30 days (nothing else
     // schedules this cleanup)
     const cleanup = await cleanupOldNotifications(30);
 
-    if (staleInquiries.length === 0 && unpaidDeposits.length === 0) {
+    const retrySummary = {
+      failedLeadEmails: failedLeadEmails.length,
+      leadEmailsResent: failedLeadEmails.filter((f) => f.retry === "sent").length,
+      spamFiltered: spamCount,
+    };
+
+    if (
+      staleInquiries.length === 0 &&
+      unpaidDeposits.length === 0 &&
+      failedLeadEmails.length === 0 &&
+      spamCount === 0
+    ) {
       return NextResponse.json({
         success: true,
         staleInquiries: 0,
         unpaidDeposits: 0,
+        ...retrySummary,
         notificationsCleaned: cleanup.deleted,
       });
     }
@@ -142,6 +177,24 @@ export async function GET(request: NextRequest) {
       )
       .join("");
 
+    const retryLabel: Record<FailedLeadEmail["retry"], string> = {
+      sent: "Resent now",
+      failed: "Resend failed",
+      "already-retried": "Already resent once",
+      "lead-missing": "Lead not found",
+    };
+    const failedRows = failedLeadEmails
+      .map(
+        (f) =>
+          `<tr>
+            <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">${escapeHtml(f.name)}<br/><span style="color:#64748b;font-size:12px;">${f.leadType}</span></td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#64748b;font-size:12px;">${escapeHtml((f.error || "Unknown error").slice(0, 120))}</td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;">${retryLabel[f.retry]}</td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;"><a href="${adminUrl}/admin/${f.leadType === "inquiry" ? "inquiries" : "bookings"}/${f.leadId}" style="color:#d97706;">Open</a></td>
+          </tr>`
+      )
+      .join("");
+
     const html = `
       <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;color:#0f172a;">
         <h2 style="color:#b45309;">Daily Lead Follow-up Digest</h2>
@@ -164,23 +217,38 @@ export async function GET(request: NextRequest) {
                </table>`
             : ""
         }
+        ${
+          failedLeadEmails.length > 0
+            ? `<h3 style="margin:20px 0 4px;color:#dc2626;">Lead alerts that failed to send (last ${FAILED_LEAD_WINDOW_HOURS}h): ${failedLeadEmails.length}</h3>
+               <table style="border-collapse:collapse;width:100%;font-size:14px;">
+                 <tr style="background:#f8fafc;text-align:left;"><th style="padding:8px 12px;">Lead</th><th style="padding:8px 12px;">Error</th><th style="padding:8px 12px;">Retry</th><th style="padding:8px 12px;"></th></tr>
+                 ${failedRows}
+               </table>`
+            : ""
+        }
+        ${
+          spamCount > 0
+            ? `<p style="margin-top:20px;">${spamCount} ${spamCount === 1 ? "message was" : "messages were"} filtered as spam in the last ${SPAM_WINDOW_DAYS} days — <a href="${adminUrl}/admin/inquiries?status=spam" style="color:#d97706;">review in admin</a>.</p>`
+            : ""
+        }
         <p style="margin-top:24px;"><a href="${adminUrl}/admin/inquiries?status=new" style="color:#d97706;">Open admin dashboard →</a></p>
       </div>`;
 
     const emailResult = await sendAdminNotificationWithRetry(
-      `Follow-up needed: ${staleInquiries.length} unanswered ${staleInquiries.length === 1 ? "inquiry" : "inquiries"}, ${unpaidDeposits.length} unpaid ${unpaidDeposits.length === 1 ? "deposit" : "deposits"}`,
+      `Follow-up needed: ${staleInquiries.length} unanswered ${staleInquiries.length === 1 ? "inquiry" : "inquiries"}, ${unpaidDeposits.length} unpaid ${unpaidDeposits.length === 1 ? "deposit" : "deposits"}${failedLeadEmails.length > 0 ? `, ${failedLeadEmails.length} failed lead ${failedLeadEmails.length === 1 ? "alert" : "alerts"}` : ""}`,
       html
     );
 
     await SystemNotifications.alert({
       title: "Leads need follow-up",
-      message: `${staleInquiries.length} unanswered ${staleInquiries.length === 1 ? "inquiry" : "inquiries"} (>${newInquiryHours}h) and ${unpaidDeposits.length} unpaid ${unpaidDeposits.length === 1 ? "deposit" : "deposits"} (>${depositDays}d)`,
+      message: `${staleInquiries.length} unanswered ${staleInquiries.length === 1 ? "inquiry" : "inquiries"} (>${newInquiryHours}h) and ${unpaidDeposits.length} unpaid ${unpaidDeposits.length === 1 ? "deposit" : "deposits"} (>${depositDays}d)${failedLeadEmails.length > 0 ? `; ${failedLeadEmails.length} lead email(s) failed` : ""}${spamCount > 0 ? `; ${spamCount} filtered as spam (${SPAM_WINDOW_DAYS}d)` : ""}`,
     });
 
     return NextResponse.json({
       success: true,
       staleInquiries: staleInquiries.length,
       unpaidDeposits: unpaidDeposits.length,
+      ...retrySummary,
       digestEmailSent: emailResult.success,
       notificationsCleaned: cleanup.deleted,
     });

@@ -79,6 +79,105 @@ export async function GET(request: Request) {
 
   const results = { gsc: { status: "skipped", records: 0 }, ga4: { status: "skipped", records: 0 } };
 
+  // GA4 Sync (yesterday).
+  //
+  // Runs BEFORE the GSC sync: GA4 takes about a second, while GSC is the step
+  // that hits the time limit. In the old order every GSC timeout killed the
+  // function before GA4 started, which is how GA4 went unsynced from
+  // 2026-09-05 to 2026-11-19 without a single failed log row.
+  const ga4PropertyId =
+    (await prisma.siteSetting.findUnique({ where: { key: "ga4_property_id" } }))
+      ?.value || process.env.GA4_PROPERTY_ID;
+
+  // A GA4 *Measurement ID* (G-XXXXXXX / the gtag value) is not a Property ID.
+  // The Data API needs the numeric property number from GA4 Admin > Property
+  // Settings. The configured value was a measurement ID, so every run failed
+  // with "Invalid property ID". Detect that up front and say so plainly rather
+  // than making a call that cannot succeed.
+  const ga4LooksLikeMeasurementId =
+    !!ga4PropertyId && !/^\d+$/.test(ga4PropertyId.replace(/^properties\//, ""));
+
+  if (isBackfill) {
+    // Backfill is about Search Console history; leave GA4 to the daily run.
+    results.ga4 = { status: "skipped", records: 0 };
+  } else if (ga4PropertyId && ga4LooksLikeMeasurementId) {
+    results.ga4 = { status: "misconfigured", records: 0 };
+    await prisma.seoSyncLog.create({
+      data: {
+        source: "GA4",
+        status: "FAILED",
+        error:
+          `"${ga4PropertyId}" is a GA4 Measurement ID, not a Property ID. ` +
+          "Set ga4_property_id to the numeric property number from " +
+          "GA4 Admin > Property Settings (e.g. 493812345).",
+        completedAt: new Date(),
+      },
+    });
+  } else if (ga4PropertyId) {
+    const syncLog = await prisma.seoSyncLog.create({ data: { source: "GA4" } });
+    try {
+      const endDate = new Date();
+      const startDate = new Date(endDate.getTime() - 1 * 24 * 60 * 60 * 1000);
+      const dateRange = {
+        startDate: startDate.toISOString().split("T")[0],
+        endDate: endDate.toISOString().split("T")[0],
+      };
+
+      let recordCount = 0;
+      const rows = await fetchOrganicTraffic(ga4PropertyId, dateRange);
+
+      for (const row of rows) {
+        const dateStr = row.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
+        await prisma.gaOrganicMetric.upsert({
+          where: {
+            date_landingPage: {
+              date: new Date(dateStr),
+              landingPage: row.landingPage || "",
+            },
+          },
+          update: {
+            sessions: row.sessions,
+            users: row.users,
+            newUsers: row.newUsers,
+            bounceRate: row.bounceRate,
+            avgSessionDuration: row.avgSessionDuration,
+            conversions: row.conversions,
+          },
+          create: {
+            date: new Date(dateStr),
+            landingPage: row.landingPage,
+            sessions: row.sessions,
+            users: row.users,
+            newUsers: row.newUsers,
+            bounceRate: row.bounceRate,
+            avgSessionDuration: row.avgSessionDuration,
+            conversions: row.conversions,
+          },
+        });
+        recordCount++;
+      }
+
+      await prisma.seoSyncLog.update({
+        where: { id: syncLog.id },
+        data: { status: "COMPLETED", recordCount, completedAt: new Date(), metadata: dateRange },
+      });
+
+      results.ga4 = { status: "completed", records: recordCount };
+    } catch (error) {
+      await prisma.seoSyncLog.update({
+        where: { id: syncLog.id },
+        data: {
+          status: "FAILED",
+          error: error instanceof Error ? error.message : "Unknown error",
+          completedAt: new Date(),
+        },
+      });
+      results.ga4 = { status: "failed", records: 0 };
+      console.error("GA4 cron sync error:", error);
+    }
+  }
+
+
   // GSC Sync.
   //
   // Search Console reports on a 2-3 day lag, so a 3-day window captured barely
@@ -186,99 +285,6 @@ export async function GET(request: Request) {
       });
       results.gsc = { status: "failed", records: 0 };
       console.error("GSC cron sync error:", error);
-    }
-  }
-
-  // GA4 Sync (yesterday)
-  const ga4PropertyId =
-    (await prisma.siteSetting.findUnique({ where: { key: "ga4_property_id" } }))
-      ?.value || process.env.GA4_PROPERTY_ID;
-
-  // A GA4 *Measurement ID* (G-XXXXXXX / the gtag value) is not a Property ID.
-  // The Data API needs the numeric property number from GA4 Admin > Property
-  // Settings. The configured value was a measurement ID, so every run failed
-  // with "Invalid property ID". Detect that up front and say so plainly rather
-  // than making a call that cannot succeed.
-  const ga4LooksLikeMeasurementId =
-    !!ga4PropertyId && !/^\d+$/.test(ga4PropertyId.replace(/^properties\//, ""));
-
-  if (isBackfill) {
-    // Backfill is about Search Console history; leave GA4 to the daily run.
-    results.ga4 = { status: "skipped", records: 0 };
-  } else if (ga4PropertyId && ga4LooksLikeMeasurementId) {
-    results.ga4 = { status: "misconfigured", records: 0 };
-    await prisma.seoSyncLog.create({
-      data: {
-        source: "GA4",
-        status: "FAILED",
-        error:
-          `"${ga4PropertyId}" is a GA4 Measurement ID, not a Property ID. ` +
-          "Set ga4_property_id to the numeric property number from " +
-          "GA4 Admin > Property Settings (e.g. 493812345).",
-        completedAt: new Date(),
-      },
-    });
-  } else if (ga4PropertyId) {
-    const syncLog = await prisma.seoSyncLog.create({ data: { source: "GA4" } });
-    try {
-      const endDate = new Date();
-      const startDate = new Date(endDate.getTime() - 1 * 24 * 60 * 60 * 1000);
-      const dateRange = {
-        startDate: startDate.toISOString().split("T")[0],
-        endDate: endDate.toISOString().split("T")[0],
-      };
-
-      let recordCount = 0;
-      const rows = await fetchOrganicTraffic(ga4PropertyId, dateRange);
-
-      for (const row of rows) {
-        const dateStr = row.date.replace(/(\d{4})(\d{2})(\d{2})/, "$1-$2-$3");
-        await prisma.gaOrganicMetric.upsert({
-          where: {
-            date_landingPage: {
-              date: new Date(dateStr),
-              landingPage: row.landingPage || "",
-            },
-          },
-          update: {
-            sessions: row.sessions,
-            users: row.users,
-            newUsers: row.newUsers,
-            bounceRate: row.bounceRate,
-            avgSessionDuration: row.avgSessionDuration,
-            conversions: row.conversions,
-          },
-          create: {
-            date: new Date(dateStr),
-            landingPage: row.landingPage,
-            sessions: row.sessions,
-            users: row.users,
-            newUsers: row.newUsers,
-            bounceRate: row.bounceRate,
-            avgSessionDuration: row.avgSessionDuration,
-            conversions: row.conversions,
-          },
-        });
-        recordCount++;
-      }
-
-      await prisma.seoSyncLog.update({
-        where: { id: syncLog.id },
-        data: { status: "COMPLETED", recordCount, completedAt: new Date(), metadata: dateRange },
-      });
-
-      results.ga4 = { status: "completed", records: recordCount };
-    } catch (error) {
-      await prisma.seoSyncLog.update({
-        where: { id: syncLog.id },
-        data: {
-          status: "FAILED",
-          error: error instanceof Error ? error.message : "Unknown error",
-          completedAt: new Date(),
-        },
-      });
-      results.ga4 = { status: "failed", records: 0 };
-      console.error("GA4 cron sync error:", error);
     }
   }
 

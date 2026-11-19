@@ -6,7 +6,6 @@ import { prisma } from "@/lib/prisma";
 import { BlogCard } from "@/components/cards/BlogCard";
 import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { MIN_INDEXABLE_TAG_POSTS } from "@/lib/constants";
 
 interface Props {
   params: Promise<{ tagSlug: string }>;
@@ -79,11 +78,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     url: `/tag/${tagSlug}/`,
   });
 
-  // Thin tag pages stay out of the index, but their links to posts are still
-  // followed — a nofollow here stranded the posts they list.
-  return publishedPostCount < MIN_INDEXABLE_TAG_POSTS
-    ? { ...meta, robots: { index: false, follow: true } }
-    : meta;
+  // Tag archives are thin lists of links, so none are indexed (and none are in
+  // the sitemap). Their links to posts are still followed — a nofollow here
+  // stranded the posts they list.
+  return { ...meta, robots: { index: false, follow: true } };
 }
 
 export default async function TagPage({ params }: Props) {

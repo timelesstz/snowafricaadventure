@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { requireRole } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -18,8 +18,7 @@ async function getReview(id: string) {
 async function saveReview(formData: FormData) {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  await requireRole("EDITOR");
 
   const id = formData.get("id") as string | null;
   const data = {
@@ -52,8 +51,7 @@ async function saveReview(formData: FormData) {
 async function deleteReview(formData: FormData) {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  await requireRole("ADMIN");
 
   const id = formData.get("id") as string;
   await prisma.review.delete({ where: { id } });

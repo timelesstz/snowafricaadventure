@@ -15,9 +15,11 @@ export const SITE_CONFIG = {
   },
   social: {
     facebook: "https://facebook.com/snowafricaadventure",
-    twitter: "https://twitter.com/snowafrica",
+    // No X/Twitter: twitter.com/snowafrica could not be confirmed as ours.
     instagram: "https://instagram.com/snow_africa_adventures",
-    youtube: "https://youtube.com/snowafricaadventure",
+    // Verified Nov 2026: this channel links back to snowafricaadventure.com.
+    // (The old youtube.com/snowafricaadventure URL returned 404.)
+    youtube: "https://www.youtube.com/@snowafricaadventures",
     pinterest: "https://pinterest.com/snowafricaadventure",
   },
 } as const;

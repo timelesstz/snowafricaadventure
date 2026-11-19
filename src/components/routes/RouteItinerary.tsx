@@ -34,6 +34,9 @@ interface RouteItineraryProps {
   exclusions?: string[];
   difficulty?: string;
   successRate?: number;
+  /** Route length from the route's durationDays field. The itinerary array can
+   *  include arrival/departure days, so its length is not the trek length. */
+  durationDays?: number;
 }
 
 // Generate elevation profile from itinerary data
@@ -107,7 +110,8 @@ function getElevationChange(elevation?: string): string | null {
   return null;
 }
 
-export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevationProfileData, overview, highlights, inclusions, exclusions, difficulty, successRate }: RouteItineraryProps) {
+export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevationProfileData, overview, highlights, inclusions, exclusions, difficulty, successRate, durationDays }: RouteItineraryProps) {
+  const tripDays = durationDays && durationDays > 0 ? durationDays : days.length;
   const [expandedDay, setExpandedDay] = useState<number | null>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const { logo } = useTheme();
@@ -736,13 +740,13 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
     ${logoHtml}
     <div class="cover-label">Full Itinerary</div>
     <h1 class="cover-title">${routeTitle}</h1>
-    <p class="cover-subtitle">${days.length}-Day Kilimanjaro Trekking Adventure</p>
+    <p class="cover-subtitle">${tripDays}-Day Kilimanjaro Trekking Adventure</p>
   </div>
 
   <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat-box">
-      <span class="stat-value">${days.length}</span>
+      <span class="stat-value">${tripDays}</span>
       <span class="stat-label">Days</span>
     </div>
     <div class="stat-box featured">
@@ -859,7 +863,7 @@ export function RouteItinerary({ days, routeTitle = "Route", routeSlug, elevatio
           </svg>
         </div>
         <h2 className="font-heading text-2xl font-bold text-[var(--primary)]">
-          Your {days.length}-Day Journey
+          Your {tripDays}-Day Journey
         </h2>
       </div>
 

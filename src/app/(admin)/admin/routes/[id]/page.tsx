@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { checkRole, requireRole } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
@@ -31,8 +31,8 @@ async function saveRoute(_prev: FormShellState, formData: FormData): Promise<For
   "use server";
 
   try {
-    const session = await auth();
-    if (!session) return { error: "You are not signed in. Please log in and try again." };
+    const authz = await checkRole("EDITOR");
+    if (!authz.ok) return { error: authz.error };
 
     const id = formData.get("id") as string | null;
     const slug = (formData.get("slug") as string).toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
@@ -181,8 +181,7 @@ async function saveRoute(_prev: FormShellState, formData: FormData): Promise<For
 async function deleteRoute(formData: FormData) {
   "use server";
 
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  await requireRole("ADMIN");
 
   const id = formData.get("id") as string;
 

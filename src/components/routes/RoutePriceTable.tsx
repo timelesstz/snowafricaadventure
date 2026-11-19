@@ -394,9 +394,12 @@ export function RoutePriceTable({
     setShowQuoteModal(true);
   }, []);
 
-  // Create display title with duration if available
-  const displayTitle = duration
-    ? `${duration} ${routeTitle.replace(/^\d+-Day\s*/i, "")}`
+  // Prefix the duration only when the title doesn't already carry one —
+  // route titles in the DB are like "7 Days Machame Route", and prefixing
+  // "7 Days" again produced "7 Days 7 Days Machame Route Pricing".
+  const titleHasDuration = /\b\d+[\s-]*days?\b/i.test(routeTitle);
+  const displayTitle = duration && !titleHasDuration
+    ? `${duration} ${routeTitle}`
     : routeTitle;
 
   return (

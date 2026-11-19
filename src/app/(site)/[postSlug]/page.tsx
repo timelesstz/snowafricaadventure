@@ -20,6 +20,14 @@ import { ArticleToc } from "@/components/blog/ArticleToc";
 import { ArticleTripCard } from "@/components/blog/ArticleTripCard";
 import { splitForCard } from "@/lib/featured-trip";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
+import { sanitizeContentHtml } from "@/lib/sanitize-html";
+import { safeJsonLd } from "@/lib/safe-json-ld";
+
+// Author names that have a public page. Only real pages are linked; other
+// names render as plain text. "Snow Africa Team" is the company itself.
+const AUTHOR_PAGES: Record<string, string> = {
+  "Snow Africa Team": "/about-us/",
+};
 
 export const revalidate = 300;
 
@@ -157,8 +165,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { postSlug } = await params;
   const post = await getPost(postSlug);
 
-  // notFound() here, not only in the page: metadata resolves before the
-  // loading.tsx shell streams, so this is what lets the response carry a 404.
+  // notFound() here as well as in the page. There is deliberately no
+  // loading.tsx above this route: its Suspense shell streamed a 200 before
+  // notFound() ran, so unknown slugs were soft 404s.
   if (!post) {
     notFound();
   }
@@ -275,7 +284,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
+          __html: safeJsonLd(
             generateArticleSchema({
               title: post.title,
               description: post.excerpt,
@@ -292,7 +301,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
+          __html: safeJsonLd(
             generateBreadcrumbSchema([
               { name: "Home", url: "/" },
               { name: "Blog", url: "/blog/" },
@@ -305,7 +314,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateFAQSchema(post.faqs)),
+            __html: safeJsonLd(generateFAQSchema(post.faqs)),
           }}
         />
       )}
@@ -357,11 +366,27 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/25">
                   <User className="h-4 w-4 text-white" aria-hidden="true" />
                 </span>
-                <span className="font-medium">{post.author}</span>
+                <span className="font-medium">
+                  By{" "}
+                  {AUTHOR_PAGES[post.author] ? (
+                    <Link
+                      href={AUTHOR_PAGES[post.author]}
+                      rel="author"
+                      className="underline decoration-white/40 underline-offset-4 hover:decoration-white"
+                    >
+                      {post.author}
+                    </Link>
+                  ) : (
+                    post.author
+                  )}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-white/70" aria-hidden="true" />
-                <span>{formatDate(post.publishedAt)}</span>
+                {/* Same value as the Article JSON-LD dateModified. */}
+                <span>
+                  Updated <time dateTime={post.updatedAt}>{formatDate(post.updatedAt)}</time>
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-white/70" aria-hidden="true" />
@@ -404,15 +429,15 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <BlogContentClient />
                 {contentHalves ? (
                   <>
-                    <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHalves[0] }} />
+                    <div className="blog-content" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(contentHalves[0]) }} />
                     <ArticleTripCard
                       kind={tripKind}
                       post={{ slug: post.slug, title: post.title, body: post.rawContent }}
                     />
-                    <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHalves[1] }} />
+                    <div className="blog-content" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(contentHalves[1]) }} />
                   </>
                 ) : (
-                  <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+                  <div className="blog-content" dangerouslySetInnerHTML={{ __html: sanitizeContentHtml(post.content) }} />
                 )}
               </div>
 

@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 import { prisma } from "@/lib/prisma";
 
-export const runtime = "edge";
 export const contentType = "image/png";
 export const size = { width: 32, height: 32 };
 

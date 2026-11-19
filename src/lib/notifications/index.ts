@@ -244,11 +244,13 @@ export const InquiryNotifications = {
     fullName: string;
     type: string;
     tripType?: string;
+    /** Appended to the message, e.g. the honeypot "verify" flag. */
+    verifyNote?: string;
   }) =>
     createNotification({
       type: NotificationType.INQUIRY_NEW,
       title: `New ${data.type} Inquiry`,
-      message: `${data.fullName} submitted a ${data.tripType || data.type} inquiry`,
+      message: `${data.fullName} submitted a ${data.tripType || data.type} inquiry${data.verifyNote ? ` — ${data.verifyNote}` : ""}`,
       data,
       priority: NotificationPriority.NORMAL,
     }),
@@ -264,6 +266,32 @@ export const InquiryNotifications = {
       message: `${data.respondedBy} responded to ${data.fullName}'s inquiry`,
       data,
       priority: NotificationPriority.LOW,
+    }),
+};
+
+/**
+ * Lead pipeline alerts — raised when the owner may otherwise miss a lead.
+ */
+export const LeadNotifications = {
+  /**
+   * The admin email for a new lead failed even after its retry. Uses the
+   * lead's own notification type so the bell links straight to the record.
+   */
+  emailFailed: (data: {
+    leadType: "inquiry" | "booking";
+    leadId: string;
+    name: string;
+    error?: string;
+  }) =>
+    createNotification({
+      type: data.leadType === "inquiry" ? NotificationType.INQUIRY_NEW : NotificationType.BOOKING_NEW,
+      title: `Lead email failed — check ${data.leadType} ${data.name}`,
+      message: `The admin email for ${data.name}'s ${data.leadType} could not be sent${data.error ? ` (${data.error.slice(0, 200)})` : ""}. Open it in admin and reply directly.`,
+      data: {
+        ...(data.leadType === "inquiry" ? { inquiryId: data.leadId } : { bookingId: data.leadId }),
+        emailFailed: true,
+      },
+      priority: NotificationPriority.URGENT,
     }),
 };
 

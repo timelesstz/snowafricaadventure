@@ -7,14 +7,20 @@ import {
   Mail,
   MapPin,
   Facebook,
-  Twitter,
   Instagram,
   Youtube,
 } from "lucide-react";
 import { SITE_CONFIG, FOOTER_NAV, PARTNER_INFO } from "@/lib/constants";
 import { useTheme } from "@/components/theme-provider";
 
-export function Footer({ currentYear }: { currentYear: number }) {
+export function Footer({
+  currentYear,
+  routeLinks = [],
+}: {
+  currentYear: number;
+  /** Live Kilimanjaro route pages, fetched on the server by the site layout. */
+  routeLinks?: { href: string; label: string }[];
+}) {
   const { logo } = useTheme();
 
   return (
@@ -199,15 +205,6 @@ export function Footer({ currentYear }: { currentYear: number }) {
                   <Facebook className="h-4 w-4" />
                 </a>
                 <a
-                  href={SITE_CONFIG.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-slate-300 hover:border-[var(--secondary)] hover:text-[var(--secondary)] transition-colors"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="h-4 w-4" />
-                </a>
-                <a
                   href={SITE_CONFIG.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -229,6 +226,30 @@ export function Footer({ currentYear }: { currentYear: number }) {
             </div>
           </div>
         </div>
+
+        {/* Kilimanjaro routes: every live route page, one hop from every page */}
+        {routeLinks.length > 0 && (
+          <nav aria-labelledby="footer-routes" className="mt-12 pt-8 border-t border-white/10">
+            <p
+              id="footer-routes"
+              className="text-[10px] tracking-[0.3em] uppercase text-[var(--secondary)]/90 font-semibold mb-4"
+            >
+              Kilimanjaro Routes
+            </p>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2.5 text-sm">
+              {routeLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-slate-400 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
 
         {/* Trust band */}
         <div className="mt-14 pt-8 border-t border-white/10">

@@ -6,6 +6,7 @@ import {
   generateMetadata as genMeta,
   generateBreadcrumbSchema,
   generateArticleSchema,
+  organizationRef,
 } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
@@ -88,17 +89,7 @@ function buildPersonSchema(founder: Awaited<ReturnType<typeof getFounder>>) {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: cert,
     })),
-    worksFor: {
-      "@type": "TourOperator",
-      name: "Snow Africa Adventure",
-      url: "https://snowafricaadventure.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "MEC House, Plot no 161, Second floor, Mianzini Area",
-        addressLocality: "Arusha",
-        addressCountry: "TZ",
-      },
-    },
+    worksFor: organizationRef,
     sameAs: [
       "https://instagram.com/snow_africa_adventures",
       "https://facebook.com/snowafricaadventure",

@@ -8,7 +8,8 @@ import { BOT_FLAG_PREFIX, SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/
 import { sendBookingInquiryEmails } from "@/lib/email/send";
 import { BookingEmailData } from "@/lib/email/templates";
 import { createCommission, determineTripType } from "@/lib/commission";
-import { BookingNotifications } from "@/lib/notifications";
+import { BookingNotifications, LeadNotifications } from "@/lib/notifications";
+import { HONEYPOT_AUTOFILL_FLAG, isPlausibleHoneypotLead } from "@/lib/notifications/lead-safety";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { extractVisitorData } from "@/lib/visitor-tracking";
 import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
@@ -67,16 +68,31 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     // Honeypot: browser autofill can occasionally fill the hidden field, so a
-    // hit is saved with a flag in the notes (recoverable in admin) rather than
-    // silently discarded — dropping a real booking is worse than one spam row.
+    // hit is never silently discarded — dropping a real booking is worse than
+    // one spam row. It is triaged after validation below.
     const honeypotTripped = Boolean(body.website);
-    if (honeypotTripped) {
-      console.warn(`[Booking] Honeypot tripped (ip: ${ip || "unknown"}, email: ${body.leadEmail || "?"}) — saving flagged`);
-      body.website = "";
-    }
+    if (honeypotTripped) body.website = "";
 
     // Validate input
     const validatedData = bookingSchema.parse(body);
+
+    // A human-looking request (real name and email, no links or SEO pitch in
+    // the special requests) is handled as a normal booking with a verify note;
+    // anything else is saved bot-flagged and nobody is notified.
+    const honeypotPlausible =
+      honeypotTripped &&
+      isPlausibleHoneypotLead({
+        email: validatedData.leadEmail,
+        name: validatedData.leadName,
+        message: validatedData.specialRequests,
+        hasTripFields: true, // departure + climbers are required fields
+      });
+    const isBot = honeypotTripped && !honeypotPlausible;
+    if (honeypotTripped) {
+      console.warn(
+        `[Booking] Honeypot tripped (ip: ${ip || "unknown"}, email: ${validatedData.leadEmail}) — ${isBot ? "saving bot-flagged" : "looks human, saving with verify note"}`
+      );
+    }
 
     // Get departure details
     const departure = await prisma.groupDeparture.findUnique({
@@ -157,9 +173,11 @@ export async function POST(request: NextRequest) {
         depositAmount,
         status: BookingStatus.INQUIRY,
         climberDetails: validatedData.climbers,
-        notes: honeypotTripped
+        notes: isBot
           ? `${BOT_FLAG_PREFIX}: possible bot — hidden form field was filled]${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
-          : validatedData.specialRequests || null,
+          : honeypotPlausible
+            ? `${HONEYPOT_AUTOFILL_FLAG}${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
+            : validatedData.specialRequests || null,
         source: validatedData.partnerCode ? 'referral' : 'website',
         // Server-side tracking
         ipAddress: visitor.ipAddress,
@@ -226,7 +244,7 @@ export async function POST(request: NextRequest) {
     // (waitUntil), so slow SMTP can't delay or kill the user-facing response,
     // and the commission write is guaranteed to complete (it was previously
     // fire-and-forget and could be dropped when the function froze).
-    if (!honeypotTripped) {
+    if (!isBot) {
       after(async () => {
         const [commissionResult, newsletterResult, emailResult, notifResult] = await Promise.allSettled([
           // Derive tripType from the route so Mt Meru or any future
@@ -259,18 +277,37 @@ export async function POST(request: NextRequest) {
         if (newsletterResult.status === "rejected") {
           console.error("Failed to subscribe to newsletter:", newsletterResult.reason);
         }
+        let adminEmailError: string | null = null;
         if (emailResult.status === "fulfilled") {
           if (!emailResult.value.customer.success) {
             console.error("[Booking] Customer email failed:", emailResult.value.customer.error);
           }
           if (!emailResult.value.admin.success) {
+            adminEmailError = emailResult.value.admin.error || "Unknown error";
             console.error("[Booking] Admin email failed:", emailResult.value.admin.error);
           }
         } else {
+          adminEmailError =
+            emailResult.reason instanceof Error ? emailResult.reason.message : String(emailResult.reason);
           console.error("Failed to send booking emails:", emailResult.reason);
         }
         if (notifResult.status === "rejected") {
           console.error("Failed to create booking notification:", notifResult.reason);
+        }
+
+        // The owner must hear about a booking even when SMTP is down. The
+        // daily lead-followup cron also retries the admin email once.
+        if (adminEmailError) {
+          try {
+            await LeadNotifications.emailFailed({
+              leadType: "booking",
+              leadId: booking.id,
+              name: booking.leadName,
+              error: adminEmailError,
+            });
+          } catch (notifError) {
+            console.error("Failed to create email-failed notification:", notifError);
+          }
         }
       });
     }
