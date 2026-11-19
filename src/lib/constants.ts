@@ -174,6 +174,9 @@ export const DESTINATION_CIRCUITS = ["Northern", "Southern", "Western"] as const
  */
 export const DEPOSIT_RATE = 0.2;
 
+/** Tags with fewer published posts are noindex and left out of the sitemap. */
+export const MIN_INDEXABLE_TAG_POSTS = 3;
+
 /**
  * Physical ratings for routes
  */
