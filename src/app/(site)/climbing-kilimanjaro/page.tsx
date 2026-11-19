@@ -20,6 +20,7 @@ import {
 import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateArticleSchema, generateItemListSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { SuccessCalculator, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Climbing Kilimanjaro Guide",
@@ -241,13 +242,13 @@ export default async function ClimbingKilimanjaroPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/trekking/"
-                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
               >
                 View All Routes
               </Link>
               <Link
                 href="/kilimanjaro-join-group-departures/"
-                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
               >
                 Join a Group Departure
               </Link>
@@ -497,7 +498,7 @@ export default async function ClimbingKilimanjaroPage() {
           <div className="text-center mt-6">
             <Link
               href="/trekking/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               See Detailed Route Pages
             </Link>
@@ -734,6 +735,8 @@ export default async function ClimbingKilimanjaroPage() {
         </div>
       </section>
 
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /climbing-kilimanjaro/" />
+
       <KnowledgeBase exclude="/climbing-kilimanjaro/" />
 
       {/* CTA */}
@@ -750,13 +753,13 @@ export default async function ClimbingKilimanjaroPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/trekking/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
             >
               See All Kilimanjaro Routes
             </Link>
             <Link
               href="/kilimanjaro-join-group-departures/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               Join a Group Departure
             </Link>

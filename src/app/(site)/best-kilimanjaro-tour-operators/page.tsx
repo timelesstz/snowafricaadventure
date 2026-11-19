@@ -27,6 +27,7 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Best Kilimanjaro Tour Operators 2026",
@@ -492,13 +493,13 @@ export default function BestKilimanjaroTourOperatorsPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contact-us/"
-                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
               >
                 Talk to Our Team
               </Link>
               <Link
                 href="/trekking/"
-                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
               >
                 View Kilimanjaro Routes
               </Link>
@@ -934,19 +935,19 @@ export default function BestKilimanjaroTourOperatorsPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contact-us/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
             >
               Contact Us Today
             </Link>
             <Link
               href="/kilimanjaro-join-group-departures/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               View Group Departures
             </Link>
             <Link
               href="/trekking/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               Explore All Routes
             </Link>
@@ -955,6 +956,8 @@ export default function BestKilimanjaroTourOperatorsPage() {
       </section>
 
       <CredentialsBadges variant="compact" />
+
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /best-kilimanjaro-tour-operators/" />
 
       <KnowledgeBase exclude="/best-kilimanjaro-tour-operators/" />
     </div>

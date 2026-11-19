@@ -94,6 +94,8 @@ const DEFAULT_HEROES: Record<string, PageHeroData> = {
     title: "Zanzibar Beach Holidays",
     subtitle:
       "The perfect ending to your Tanzania adventure. Pristine white sand beaches, turquoise waters, and rich Swahili culture.",
+    ctaPrimaryText: "Get a Zanzibar Quote",
+    ctaPrimaryUrl: "#inquiry-form",
     backgroundImage:
       "https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2024/09/Kwale-Island-q3hixrn6vumez8p4r8n0xtnsqincj7k0dg7q485hi8.jpg",
     overlayGradient: "from-black/60 via-black/20 to-transparent",
@@ -215,6 +217,17 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
     });
     if (dbHero && dbHero.isActive) {
       hero = dbHero;
+      // A saved hero with no button left pages like /zanzibar/ with nothing
+      // to book above the fold. Use the default button only when the admin
+      // record has none; a button set in the admin always wins.
+      const fallback = DEFAULT_HEROES[pageSlug];
+      if (!dbHero.ctaPrimaryUrl && fallback?.ctaPrimaryUrl) {
+        hero = {
+          ...dbHero,
+          ctaPrimaryText: fallback.ctaPrimaryText,
+          ctaPrimaryUrl: fallback.ctaPrimaryUrl,
+        };
+      }
     }
   } catch {
     // Fall back to defaults on DB error
@@ -273,7 +286,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
                 {hero.ctaPrimaryText && hero.ctaPrimaryUrl && (
                   <Link
                     href={hero.ctaPrimaryUrl}
-                    className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+                    className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg"
                   >
                     {hero.ctaPrimaryText}
                   </Link>
@@ -281,7 +294,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
                 {hero.ctaSecondaryText && hero.ctaSecondaryUrl && (
                   <Link
                     href={hero.ctaSecondaryUrl}
-                    className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                    className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
                   >
                     {hero.ctaSecondaryText}
                   </Link>
@@ -345,7 +358,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
                 {hero.ctaPrimaryText && hero.ctaPrimaryUrl && (
                   <Link
                     href={hero.ctaPrimaryUrl}
-                    className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                    className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
                   >
                     {hero.ctaPrimaryText}
                   </Link>
@@ -353,7 +366,7 @@ export async function PageHero({ pageSlug, children }: PageHeroProps) {
                 {hero.ctaSecondaryText && hero.ctaSecondaryUrl && (
                   <Link
                     href={hero.ctaSecondaryUrl}
-                    className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                    className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
                   >
                     {hero.ctaSecondaryText}
                   </Link>

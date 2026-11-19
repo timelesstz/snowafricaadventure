@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { LogoStrip } from "@/components/logos/LogoStrip";
-import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail } from "lucide-react";
+import { ArrowRight, Star, Shield, Users, Award, ChevronDown, MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 import { InquiryForm } from "@/components/forms/InquiryForm";
 import { TripAdvisorCOE } from "@/components/reviews/TripAdvisorCOE";
 import { generateMetadata as genMeta, generateItemListSchema } from "@/lib/seo";
@@ -361,6 +361,26 @@ export default async function HomePage() {
             <Link href="/tanzania-safaris/" className="btn btn-outline-white">
               View Safari Packages
             </Link>
+          </div>
+          {/* Visitors who already know what they want shouldn't have to
+              scroll nine screens to the form. */}
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-white">
+            <a
+              href="#plan-trip"
+              className="inline-flex min-h-11 items-center gap-1.5 font-semibold underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Get a free quote
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </a>
+            <a
+              href={`https://wa.me/${SITE_CONFIG.phone.replace(/\D/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-1.5 font-semibold underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              WhatsApp us
+            </a>
           </div>
           <TripAdvisorCOE className="mt-6" />
         </div>
@@ -794,7 +814,7 @@ export default async function HomePage() {
       {/* ============================================
           CONTACT - Split Layout
           ============================================ */}
-      <section className="contact-section">
+      <section id="plan-trip" className="contact-section scroll-mt-20">
         <div className="contact-image">
           <Image
             src="https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev/wp-content/uploads/2023/03/28939626580_da4be2e4b1_k.jpg"

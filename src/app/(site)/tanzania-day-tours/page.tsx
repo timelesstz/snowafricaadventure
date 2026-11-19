@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from "@/lib/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -223,7 +224,9 @@ export default async function DayTripsPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://wa.me/255123456789"
+              href={`https://wa.me/${SITE_CONFIG.phone.replace(/\D/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-acacia-500 hover:bg-acacia-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               <span>WhatsApp Us</span>

@@ -162,7 +162,7 @@ export function InquiryForm({
 
   if (submitted) {
     return (
-      <div className="bg-gradient-to-br from-acacia-50 to-acacia-50 border border-acacia-200 rounded-xl p-8 text-center">
+      <div role="status" className="bg-gradient-to-br from-acacia-50 to-acacia-50 border border-acacia-200 rounded-xl p-8 text-center">
         <div className="w-16 h-16 bg-gradient-to-br from-acacia-400 to-acacia-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
           <svg
             className="w-8 h-8 text-white"

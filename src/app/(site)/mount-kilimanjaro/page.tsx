@@ -28,6 +28,7 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Mount Kilimanjaro Guide",
@@ -947,6 +948,8 @@ export default function MountKilimanjaroPage() {
 
       <CredentialsBadges />
 
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /mount-kilimanjaro/" />
+
       <KnowledgeBase exclude="/mount-kilimanjaro/" />
 
       {/* CTA */}
@@ -963,14 +966,14 @@ export default function MountKilimanjaroPage() {
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
               href="/kilimanjaro-join-group-departures/"
-              className="inline-flex items-center gap-2 bg-[var(--secondary)] text-[var(--primary-dark)] font-semibold px-8 py-4 rounded-lg hover:bg-white transition-colors"
+              className="inline-flex items-center gap-2 bg-[var(--secondary)] text-[var(--primary-dark)] font-semibold px-6 py-3 rounded-lg hover:bg-white transition-colors"
             >
               See upcoming departures
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contact-us/"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/20 transition-colors"
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20 transition-colors"
             >
               Plan a private climb
               <MapPin className="w-4 h-4" />

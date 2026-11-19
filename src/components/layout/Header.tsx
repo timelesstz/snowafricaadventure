@@ -101,17 +101,17 @@ export function Header() {
             <div className="flex items-center gap-2 sm:gap-3">
               <a
                 href={`tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-1 hover:text-[var(--secondary)] transition-colors"
+                className="flex min-h-6 items-center gap-1 hover:text-[var(--secondary)] transition-colors"
                 aria-label={`Call us: ${SITE_CONFIG.phone}`}
               >
                 <Phone className="h-3 w-3" />
-                <span className="text-[10px] sm:text-xs">
+                <span className="text-xs">
                   {SITE_CONFIG.phone}
                 </span>
               </a>
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="hidden sm:flex items-center gap-1 hover:text-[var(--secondary)] transition-colors"
+                className="hidden sm:flex min-h-6 items-center gap-1 hover:text-[var(--secondary)] transition-colors"
                 aria-label={`Email us: ${SITE_CONFIG.email}`}
               >
                 <Mail className="h-3 w-3" />

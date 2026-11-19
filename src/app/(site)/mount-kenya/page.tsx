@@ -672,14 +672,14 @@ export default function MountKenyaPage() {
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
               href="/tailor-made-safari/"
-              className="inline-flex items-center gap-2 bg-[var(--secondary)] text-[var(--primary-dark)] font-semibold px-8 py-4 rounded-lg hover:bg-white transition-colors"
+              className="inline-flex items-center gap-2 bg-[var(--secondary)] text-[var(--primary-dark)] font-semibold px-6 py-3 rounded-lg hover:bg-white transition-colors"
             >
               Plan a trip with us
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contact-us/"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/20 transition-colors"
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20 transition-colors"
             >
               Ask a question
               <MapPin className="w-4 h-4" />

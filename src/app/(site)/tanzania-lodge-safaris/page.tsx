@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Check, Star, ChevronDown, Wifi, UtensilsCrossed, Waves, MapPin } from "lucide-react";
 import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Tanzania Lodge Safari Packages 2026",
@@ -222,13 +223,13 @@ export default function TanzaniaLodgeSafarisPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/tailor-made-safari/"
-                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
               >
                 Plan My Lodge Safari
               </Link>
               <Link
                 href="/tanzania-safaris/"
-                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
               >
                 View All Packages
               </Link>
@@ -399,7 +400,7 @@ export default function TanzaniaLodgeSafarisPage() {
           <div className="text-center mt-8">
             <Link
               href="/tailor-made-safari/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               Customise This Itinerary
             </Link>
@@ -485,6 +486,8 @@ export default function TanzaniaLodgeSafarisPage() {
         </div>
       </section>
 
+      <GuideQuoteSection kind="safari" relatedTo="Guide: /tanzania-lodge-safaris/" />
+
       {/* CTA */}
       <section className="py-16 bg-gradient-to-br from-[var(--primary-dark)] to-[var(--primary)] text-white">
         <div className="container mx-auto px-4 text-center">
@@ -498,13 +501,13 @@ export default function TanzaniaLodgeSafarisPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/tailor-made-safari/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
             >
               Plan My Lodge Safari
             </Link>
             <Link
               href="/tanzania-safaris/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               Browse Safari Packages
             </Link>

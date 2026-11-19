@@ -29,6 +29,7 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Training Plan",
@@ -1149,6 +1150,8 @@ export default function KilimanjaroTrainingPlanPage() {
         </div>
       </section>
 
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /kilimanjaro-training-plan/" />
+
       <KnowledgeBase exclude="/kilimanjaro-training-plan/" />
 
       {/* CTA */}
@@ -1164,13 +1167,13 @@ export default function KilimanjaroTrainingPlanPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/trekking/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg"
             >
               Explore All Routes
             </Link>
             <Link
               href="/kilimanjaro-join-group-departures/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               Join a Group Departure
             </Link>

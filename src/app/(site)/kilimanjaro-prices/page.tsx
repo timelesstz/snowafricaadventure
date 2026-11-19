@@ -20,6 +20,7 @@ import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchem
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Kilimanjaro Prices & Cost Guide 2026",
@@ -303,13 +304,13 @@ export default function KilimanjaroPricesPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contact-us/"
-                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
               >
                 Get a Custom Quote
               </Link>
               <Link
                 href="/kilimanjaro-join-group-departures/"
-                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
               >
                 View Group Departures
               </Link>
@@ -591,14 +592,14 @@ export default function KilimanjaroPricesPage() {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/kilimanjaro-join-group-departures/"
-                className="inline-flex items-center gap-2 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
               >
                 <Users className="w-5 h-5" />
                 Browse Group Departures
               </Link>
               <Link
                 href="/contact-us/"
-                className="inline-block border-2 border-[var(--border)] hover:border-[var(--secondary)] text-[var(--text)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="inline-block border-2 border-[var(--border)] hover:border-[var(--secondary)] text-[var(--text)] px-6 py-3 rounded-lg font-semibold text-base transition-colors"
               >
                 Private Climb Quote
               </Link>
@@ -921,6 +922,8 @@ export default function KilimanjaroPricesPage() {
         </div>
       </section>
 
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /kilimanjaro-prices/" />
+
       <KnowledgeBase exclude="/kilimanjaro-prices/" />
 
       {/* CTA */}
@@ -936,13 +939,13 @@ export default function KilimanjaroPricesPage() {
           <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/contact-us/"
-            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
           >
             Request a Free Quote
           </Link>
           <Link
             href="/kilimanjaro-join-group-departures/"
-            className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+            className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
           >
             Group Departures
           </Link>

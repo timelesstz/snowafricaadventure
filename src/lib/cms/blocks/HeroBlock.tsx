@@ -74,7 +74,7 @@ export function HeroBlock({
               {ctaText && ctaUrl && (
                 <Link
                   href={ctaUrl}
-                  className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+                  className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg"
                 >
                   {ctaText}
                 </Link>
@@ -82,7 +82,7 @@ export function HeroBlock({
               {ctaSecondaryText && ctaSecondaryUrl && (
                 <Link
                   href={ctaSecondaryUrl}
-                  className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                  className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
                 >
                   {ctaSecondaryText}
                 </Link>

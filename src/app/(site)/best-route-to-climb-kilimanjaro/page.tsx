@@ -27,6 +27,7 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Best Route to Climb Kilimanjaro",
@@ -362,10 +363,10 @@ export default function BestRouteToClimbKilimanjaroPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a href="#comparison" className="inline-flex items-center gap-2 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg">
+              <a href="#comparison" className="inline-flex items-center gap-2 bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg">
                 Compare Routes <ArrowRight className="w-5 h-5" />
               </a>
-              <a href="#decision-guide" className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
+              <a href="#decision-guide" className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors">
                 Which Route is Right for Me?
               </a>
             </div>
@@ -806,6 +807,8 @@ export default function BestRouteToClimbKilimanjaroPage() {
 
       <CredentialsBadges variant="compact" />
 
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /best-route-to-climb-kilimanjaro/" />
+
       <KnowledgeBase exclude="/best-route-to-climb-kilimanjaro/" />
 
       {/* Final CTA */}
@@ -821,13 +824,13 @@ export default function BestRouteToClimbKilimanjaroPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/trekking/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
             >
               View All Route Packages
             </Link>
             <Link
               href="/kilimanjaro-join-group-departures/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               Join a Group Departure
             </Link>

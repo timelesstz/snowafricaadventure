@@ -25,7 +25,7 @@ export function CtaBlock({ heading, subtitle, buttonText, buttonUrl, bgStyle }: 
         {buttonText && buttonUrl && (
           <Link
             href={buttonUrl}
-            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
           >
             {buttonText}
           </Link>

@@ -31,13 +31,13 @@ export function KilimanjaroCTA({
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href={primaryLink}
-            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg"
+            className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg"
           >
             {primaryText}
           </Link>
           <Link
             href={secondaryLink}
-            className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+            className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
           >
             {secondaryText}
           </Link>

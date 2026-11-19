@@ -11,6 +11,7 @@ import { SafariCard } from "@/components/cards/SafariCard";
 import { PublicGallery } from "@/components/ui/PublicGallery";
 import { findRelatedBlogPosts } from "@/lib/related-content";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
+import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 
 interface Props {
   params: Promise<{ destSlug: string }>;
@@ -168,6 +169,12 @@ export default async function DestinationDetailPage({ params }: Props) {
                 ))}
               </div>
             )}
+            <a
+              href="#plan-visit"
+              className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-[var(--secondary)] px-6 font-semibold text-[var(--primary-dark)] transition-colors hover:bg-[var(--secondary-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Get Free Quote
+            </a>
           </div>
         </div>
       </section>
@@ -239,20 +246,20 @@ export default async function DestinationDetailPage({ params }: Props) {
               </div>
 
               {/* Inquiry CTA */}
-              <div className="bg-[var(--primary)] text-white rounded-lg p-6">
+              {/* The quote form sits here, not behind a link to /contact-us/,
+                  so a visitor can ask without leaving the page. */}
+              <div id="plan-visit" className="scroll-mt-28 bg-[var(--primary)] text-white rounded-lg p-4 sm:p-6">
                 <h3 className="font-semibold text-lg mb-3">
                   Plan Your Visit to {name}
                 </h3>
                 <p className="text-[var(--on-dark-muted)] text-sm mb-4">
-                  Let us create a custom safari itinerary featuring this
-                  incredible destination.
+                  Tell us the month and your group size. We reply within 24 hours.
                 </p>
-                <Link
-                  href="/contact-us/"
-                  className="block text-center bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded font-semibold transition-colors"
-                >
-                  Get Free Quote
-                </Link>
+                <QuickQuoteForm
+                  relatedTo={`Destination: ${name}`}
+                  defaultTrip="Wildlife Safari"
+                  formId="destination-sidebar"
+                />
               </div>
             </div>
           </div>

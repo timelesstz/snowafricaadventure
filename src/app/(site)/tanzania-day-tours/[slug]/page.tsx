@@ -1,3 +1,4 @@
+import { SITE_CONFIG } from "@/lib/constants";
 import { cache } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -167,7 +168,9 @@ export default async function DayTripDetailPage({ params }: Props) {
                   Book This Trip
                 </a>
                 <a
-                  href="https://wa.me/255123456789"
+                  href={`https://wa.me/${SITE_CONFIG.phone.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   WhatsApp

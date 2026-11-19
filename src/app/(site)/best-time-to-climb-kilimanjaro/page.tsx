@@ -23,6 +23,7 @@ import {
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { RelatedGuides, CredentialsBadges, KnowledgeBase } from "@/components/kilimanjaro";
+import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 
 export const metadata: Metadata = genMeta({
   title: "Best Time to Climb Kilimanjaro 2026",
@@ -349,13 +350,13 @@ export default function BestTimeToClimbKilimanjaroPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/trekking/"
-                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
               >
                 View Routes &amp; Dates
               </Link>
               <Link
                 href="/kilimanjaro-join-group-departures/"
-                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
               >
                 Group Departures
               </Link>
@@ -805,6 +806,8 @@ export default function BestTimeToClimbKilimanjaroPage() {
       {/* Related Guides */}
       <RelatedGuides currentPath="/best-time-to-climb-kilimanjaro/" />
 
+      <GuideQuoteSection kind="kilimanjaro" relatedTo="Guide: /best-time-to-climb-kilimanjaro/" />
+
       <KnowledgeBase exclude="/best-time-to-climb-kilimanjaro/" />
 
       {/* CTA */}
@@ -820,13 +823,13 @@ export default function BestTimeToClimbKilimanjaroPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/kilimanjaro-join-group-departures/"
-              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+              className="inline-block bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-6 py-3 rounded-lg font-semibold text-base transition-colors shadow-lg hover:shadow-xl"
             >
               View Group Departures
             </Link>
             <Link
               href="/trekking/"
-              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+              className="inline-block border-2 border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-lg font-semibold text-base transition-colors"
             >
               All Kilimanjaro Routes
             </Link>

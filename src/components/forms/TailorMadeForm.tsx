@@ -306,7 +306,7 @@ export function TailorMadeForm() {
 
   if (submitted) {
     return (
-      <div className="bg-gradient-to-br from-acacia-50 to-acacia-50 border border-acacia-200 rounded-xl p-8 text-center">
+      <div role="status" className="bg-gradient-to-br from-acacia-50 to-acacia-50 border border-acacia-200 rounded-xl p-8 text-center">
         <div className="w-16 h-16 bg-gradient-to-br from-acacia-400 to-acacia-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
           <CheckCircle2 className="w-8 h-8 text-white" />
         </div>
@@ -388,7 +388,7 @@ export function TailorMadeForm() {
 
       {/* Error Message */}
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+        <div role="alert" className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
           {error}
         </div>
       )}
@@ -460,6 +460,7 @@ export function TailorMadeForm() {
                   <select
                     value={formData.phonePrefix}
                     onChange={(e) => updateFormData("phonePrefix", e.target.value)}
+                    aria-label="Phone country code"
                     className="w-[100px] px-2 py-2.5 border border-slate-300 rounded-lg text-sm bg-white"
                   >
                     {PHONE_PREFIXES.map((prefix) => (
