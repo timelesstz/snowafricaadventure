@@ -364,7 +364,7 @@ export default async function HomePage() {
           </div>
           {/* Visitors who already know what they want shouldn't have to
               scroll nine screens to the form. */}
-          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-white">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-white">
             <a
               href="#plan-trip"
               className="inline-flex min-h-11 items-center gap-1.5 font-semibold underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -405,54 +405,12 @@ export default async function HomePage() {
       </section>
 
       {/* ============================================
-          TRUST BADGES - Static with Hover Effects
+          TRUST BADGES - Membership and award logos
+          (years and rating already sit in the hero stats bar)
           ============================================ */}
       <div className="trust-badges">
         <div className="container mx-auto px-4">
-          <div className="trust-badges-grid">
-            <div className="trust-badge">
-              <div className="trust-badge-icon">
-                <Award className="w-6 h-6" />
-              </div>
-              <div className="trust-badge-content">
-                <span className="trust-badge-value">{stats[0].value} Years</span>
-                <span className="trust-badge-label">Locally Owned</span>
-              </div>
-            </div>
-            <div className="trust-badge-divider" />
-            <a href={tripAdvisor.url} target="_blank" rel="noopener noreferrer" className="trust-badge">
-              <div className="trust-badge-icon">
-                <Star className="w-6 h-6" fill="currentColor" />
-              </div>
-              <div className="trust-badge-content">
-                <span className="trust-badge-value">{tripAdvisor.rating.toFixed(1)}</span>
-                <span className="trust-badge-label">{tripAdvisor.reviews}+ TripAdvisor reviews</span>
-              </div>
-            </a>
-            <div className="trust-badge-divider" />
-            <div className="trust-badge">
-              <div className="trust-badge-icon">
-                <Shield className="w-6 h-6" />
-              </div>
-              <div className="trust-badge-content">
-                <span className="trust-badge-value">TATO</span>
-                <span className="trust-badge-label">Licensed Operator</span>
-              </div>
-            </div>
-            <div className="trust-badge-divider" />
-            <div className="trust-badge">
-              <div className="trust-badge-icon">
-                <Users className="w-6 h-6" />
-              </div>
-              <div className="trust-badge-content">
-                <span className="trust-badge-value">KPAP</span>
-                <span className="trust-badge-label">Certified Partner</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 pt-5 border-t border-slate-200/60">
-            <LogoStrip placement="homepage" variant="plain" />
-          </div>
+          <LogoStrip placement="homepage" variant="plain" />
         </div>
       </div>
 
@@ -622,7 +580,14 @@ export default async function HomePage() {
                 <div className="safari-main-overlay">
                   <span className="badge badge-secondary">{featuredSafari.type}</span>
                   <h3>{featuredSafari.title}</h3>
-                  <p>{featuredSafari.overview?.substring(0, 120)}...</p>
+                  {/* Trimmed at a word break; CSS clamps it to 3 lines with an ellipsis */}
+                  {featuredSafari.overview && (
+                    <p>
+                      {featuredSafari.overview.length > 260
+                        ? `${featuredSafari.overview.slice(0, 260).replace(/\s+\S*$/, "")}…`
+                        : featuredSafari.overview}
+                    </p>
+                  )}
                   {featuredSafari.priceFrom && (
                     <div className="safari-price">
                       ${Number(featuredSafari.priceFrom).toLocaleString()} <span>/ per person</span>
