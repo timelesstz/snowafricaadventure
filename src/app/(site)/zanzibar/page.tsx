@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Sun, Waves, Building, Compass } from "lucide-react";
+import { Sun, Waves, Building, Compass, Check } from "lucide-react";
 import { ZanzibarInquiryForm } from "@/components/forms/ZanzibarInquiryForm";
 import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -248,7 +248,7 @@ export default function ZanzibarPage() {
                         index === 1 ? "text-[var(--text-muted)]" : "text-white/70"
                       }`}
                     >
-                      <span className="text-[var(--secondary)]">✓</span> {highlight}
+                      <Check className="w-4 h-4 shrink-0 text-[var(--secondary)]" aria-hidden="true" /> {highlight}
                     </li>
                   ))}
                 </ul>
@@ -300,19 +300,19 @@ export default function ZanzibarPage() {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2 text-[var(--text-muted)]">
-                  <span className="text-[var(--primary)]">✓</span>
+                  <Check className="w-4 h-4 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                   UNESCO World Heritage Site since 2000
                 </li>
                 <li className="flex items-center gap-2 text-[var(--text-muted)]">
-                  <span className="text-[var(--primary)]">✓</span>
+                  <Check className="w-4 h-4 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                   Over 1,000 years of history
                 </li>
                 <li className="flex items-center gap-2 text-[var(--text-muted)]">
-                  <span className="text-[var(--primary)]">✓</span>
+                  <Check className="w-4 h-4 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                   Famous ornate carved doors
                 </li>
                 <li className="flex items-center gap-2 text-[var(--text-muted)]">
-                  <span className="text-[var(--primary)]">✓</span>
+                  <Check className="w-4 h-4 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                   Birthplace of Freddie Mercury
                 </li>
               </ul>

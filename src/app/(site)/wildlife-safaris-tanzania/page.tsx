@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Star, Binoculars, Footprints, Moon, Calendar } from "lucide-react";
+import { ChevronDown, Star, Binoculars, Footprints, Moon, Calendar, PawPrint } from "lucide-react";
 import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
 import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
@@ -25,35 +25,30 @@ const statsBoxes = [
 const bigFive = [
   {
     animal: "Lion",
-    emoji: "🦁",
     description:
       "Tanzania hosts over 7,000 lions — the largest population in Africa. The Serengeti's Seronera Valley is one of the best places on Earth for reliable lion sightings, often within minutes of entering the park.",
     bestPark: "Serengeti",
   },
   {
     animal: "Leopard",
-    emoji: "🐆",
     description:
       "Elusive and solitary, leopards are the most challenging Big Five animal to spot. The riverine forest of Lake Manyara and the kopjes of the Serengeti are your best opportunities. Patient guides make the difference.",
     bestPark: "Lake Manyara / Serengeti",
   },
   {
     animal: "African Elephant",
-    emoji: "🐘",
     description:
       "Tarangire National Park hosts some of Africa's largest elephant herds — over 2,500 individuals in the dry season. Watch multi-generational family groups at waterholes and along the Tarangire River.",
     bestPark: "Tarangire",
   },
   {
     animal: "Cape Buffalo",
-    emoji: "🐃",
     description:
       "One of Africa's most dangerous animals and a formidable sight in large herds. The Serengeti's open grasslands and the Ngorongoro Crater floor host enormous buffalo aggregations year-round.",
     bestPark: "Serengeti / Ngorongoro",
   },
   {
     animal: "Black Rhino",
-    emoji: "🦏",
     description:
       "Critically endangered and among the rarest sights in Africa. The Ngorongoro Crater is home to one of Tanzania's last wild black rhino populations — sightings are genuinely thrilling and humbling.",
     bestPark: "Ngorongoro Crater",
@@ -299,7 +294,9 @@ export default function WildlifeSafarisTanzaniaPage() {
                 className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-4xl">{animal.emoji}</span>
+                  <span className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+                    <PawPrint className="w-6 h-6 text-amber-600" aria-hidden="true" />
+                  </span>
                   <div>
                     <h3 className="font-semibold text-lg">{animal.animal}</h3>
                     <p className="text-xs text-[var(--secondary)] font-semibold uppercase tracking-wide">

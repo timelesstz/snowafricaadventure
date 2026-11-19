@@ -223,10 +223,13 @@ export default function AfricanSafarisPage() {
                 { value: "14,763 km²", label: "Serengeti" },
                 { value: "1.5M+", label: "Wildebeest" },
                 { value: "Big Five", label: "Guaranteed" },
-                { value: "4.9 ★", label: "Rated" },
+                { value: "4.9", star: true, label: "Rated" },
               ].map((stat) => (
                 <div key={stat.label} className="text-white">
-                  <p className="text-2xl font-bold">{stat.value}</p>
+                  <p className="text-2xl font-bold flex items-center gap-1">
+                    {stat.value}
+                    {stat.star && <Star className="w-5 h-5 fill-current" role="img" aria-label="stars" />}
+                  </p>
                   <p className="text-sm text-white/70">{stat.label}</p>
                 </div>
               ))}

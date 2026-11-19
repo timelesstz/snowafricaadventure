@@ -219,7 +219,7 @@ export default function LuxurySafarisTanzaniaPage() {
               {[
                 { label: "From $4,000pp", sub: "7 Nights" },
                 { label: "Private", sub: "Game Drives" },
-                { label: "5★ Camps", sub: "Handpicked" },
+                { label: "5-Star Camps", sub: "Handpicked" },
                 { label: "Michelin-Quality", sub: "Bush Dining" },
               ].map((stat) => (
                 <div key={stat.label} className="text-white">

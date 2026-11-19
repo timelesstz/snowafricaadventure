@@ -30,6 +30,7 @@ import {
   User,
   MessageSquare,
   Compass,
+  PawPrint,
 } from "lucide-react";
 
 const STEPS = [
@@ -510,9 +511,10 @@ export function ZanzibarInquiryForm() {
               </div>
             </div>
             <div className="p-4 bg-cyan-50 rounded-lg">
-              <p className="text-sm text-cyan-800">
-                🏖️ Zanzibar is perfect for couples, families, and groups of friends.
-                Let us know your group size so we can recommend the best accommodations.
+              <p className="text-sm text-cyan-800 flex gap-2">
+                <Palmtree className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+                <span>Zanzibar is perfect for couples, families, and groups of friends.
+                Let us know your group size so we can recommend the best accommodations.</span>
               </p>
             </div>
           </div>
@@ -650,8 +652,8 @@ export function ZanzibarInquiryForm() {
               ))}
             </div>
             {selectedActivities.length > 0 && (
-              <p className="text-sm text-cyan-600">
-                ✓ {selectedActivities.length} activit{selectedActivities.length > 1 ? "ies" : "y"} selected
+              <p className="text-sm text-cyan-600 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 shrink-0" aria-hidden="true" /> {selectedActivities.length} activit{selectedActivities.length > 1 ? "ies" : "y"} selected
               </p>
             )}
 
@@ -742,16 +744,16 @@ export function ZanzibarInquiryForm() {
             <div className="mt-4 p-4 bg-cyan-50 rounded-lg">
               <h4 className="font-semibold text-sm text-cyan-800 mb-2">Your Zanzibar Summary</h4>
               <ul className="text-sm text-cyan-700 space-y-1">
-                <li>👤 {formData.numAdults} adult{formData.numAdults > 1 ? "s" : ""}{formData.numChildren > 0 ? `, ${formData.numChildren} child${formData.numChildren > 1 ? "ren" : ""}` : ""}</li>
-                <li>📅 Arriving {formData.arrivalDate || "TBD"}{formData.duration ? ` • ${formData.duration} nights` : ""}</li>
+                <li className="flex items-center gap-2"><User className="w-4 h-4 shrink-0" aria-hidden="true" />{formData.numAdults} adult{formData.numAdults > 1 ? "s" : ""}{formData.numChildren > 0 ? `, ${formData.numChildren} child${formData.numChildren > 1 ? "ren" : ""}` : ""}</li>
+                <li className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" aria-hidden="true" />Arriving {formData.arrivalDate || "TBD"}{formData.duration ? ` • ${formData.duration} nights` : ""}</li>
                 {formData.beachArea && (
-                  <li>🏖️ {ZANZIBAR_BEACHES.find(b => b.value === formData.beachArea)?.label}</li>
+                  <li className="flex items-center gap-2"><Palmtree className="w-4 h-4 shrink-0" aria-hidden="true" />{ZANZIBAR_BEACHES.find(b => b.value === formData.beachArea)?.label}</li>
                 )}
                 {selectedActivities.length > 0 && (
-                  <li>🎯 {selectedActivities.length} activit{selectedActivities.length > 1 ? "ies" : "y"} selected</li>
+                  <li className="flex items-center gap-2"><Compass className="w-4 h-4 shrink-0" aria-hidden="true" />{selectedActivities.length} activit{selectedActivities.length > 1 ? "ies" : "y"} selected</li>
                 )}
                 {formData.combineWithSafari === "yes" && (
-                  <li>🦁 + Safari combo requested</li>
+                  <li className="flex items-center gap-2"><PawPrint className="w-4 h-4 shrink-0" aria-hidden="true" />Safari combo requested</li>
                 )}
               </ul>
             </div>

@@ -3,36 +3,37 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { trackContactClick } from "@/lib/analytics";
+import { Mountain, PawPrint, TreePalm, Compass, Users } from "lucide-react";
 
 const WHATSAPP_NUMBER = "255766657854";
 
 const QUICK_QUESTIONS = [
   {
-    icon: "\u{1F3D4}\u{FE0F}",
+    icon: Mountain,
     label: "Climb Kilimanjaro",
     message:
       "Hi! I'm interested in climbing Mount Kilimanjaro. Could you help me choose the best route and dates?",
   },
   {
-    icon: "\u{1F981}",
+    icon: PawPrint,
     label: "Tanzania Safari",
     message:
       "Hi! I'd love to plan a Tanzania safari. Can you tell me about your packages and best times to visit?",
   },
   {
-    icon: "\u{1F3D6}\u{FE0F}",
+    icon: TreePalm,
     label: "Zanzibar Beach Holiday",
     message:
       "Hi! I'm interested in a Zanzibar beach holiday. What options do you have?",
   },
   {
-    icon: "\u{1F30D}",
+    icon: Compass,
     label: "Custom Trip",
     message:
       "Hi! I'd like to plan a tailor-made trip combining safari, trekking, or beach. Can you help me design an itinerary?",
   },
   {
-    icon: "\u{1F465}",
+    icon: Users,
     label: "Join a Group Climb",
     message:
       "Hi! I'd like to join a group departure for Kilimanjaro. What upcoming dates do you have?",
@@ -182,7 +183,7 @@ export default function WhatsAppChat() {
                   onClick={() => handleQuestionClick(q.label, q.message)}
                   className="group flex w-full items-center gap-2.5 rounded-lg border border-[#25D366]/20 bg-white px-3.5 py-2.5 text-left shadow-sm transition-all hover:border-[#25D366]/50 hover:shadow-md active:scale-[0.98]"
                 >
-                  <span className="text-lg leading-none">{q.icon}</span>
+                  <q.icon className="h-5 w-5 shrink-0 text-[#128C7E]" aria-hidden="true" />
                   <span className="text-sm font-medium text-gray-700 group-hover:text-[#075E54]">
                     {q.label}
                   </span>

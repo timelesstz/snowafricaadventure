@@ -783,13 +783,16 @@ export default function KilimanjaroClimbingCompaniesPage() {
               { label: "TATO", sublabel: "Tanzania Association of Tour Operators", color: "bg-slate-50 border-slate-200 text-slate-800" },
               { label: "KINAPA", sublabel: "Kilimanjaro National Park Authority", color: "bg-acacia-50 border-acacia-200 text-acacia-800" },
               { label: "KPAP", sublabel: "Kilimanjaro Porters Assistance Project", color: "bg-amber-50 border-amber-200 text-amber-800" },
-              { label: "4.9 ★", sublabel: "Google & TripAdvisor Verified Rating", color: "bg-red-50 border-red-200 text-red-800" },
+              { label: "4.9", star: true, sublabel: "Google & TripAdvisor Verified Rating", color: "bg-red-50 border-red-200 text-red-800" },
             ].map((cert) => (
               <div
                 key={cert.label}
                 className={`border rounded-xl p-5 text-center ${cert.color}`}
               >
-                <p className="text-2xl font-bold mb-1">{cert.label}</p>
+                <p className="text-2xl font-bold mb-1 flex items-center justify-center gap-1">
+                  {cert.label}
+                  {cert.star && <Star className="w-5 h-5 fill-current" role="img" aria-label="stars" />}
+                </p>
                 <p className="text-xs leading-snug">{cert.sublabel}</p>
               </div>
             ))}

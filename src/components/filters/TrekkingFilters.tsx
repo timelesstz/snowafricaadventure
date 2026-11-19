@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X, ChevronDown, SlidersHorizontal } from "lucide-react";
+import { Search, X, ChevronDown, SlidersHorizontal, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface TrekkingFiltersProps {
@@ -111,7 +111,7 @@ function SidebarFilters({
             )}
           >
             All Levels
-            {!selectedDifficulty && <span className="text-xs opacity-80">✓</span>}
+            {!selectedDifficulty && <Check className="w-3.5 h-3.5 opacity-80" aria-hidden="true" />}
           </button>
           {difficulties.map((difficulty) => {
             const colors = difficultyColors[difficulty] || difficultyColors.Moderate;
@@ -129,7 +129,7 @@ function SidebarFilters({
                 )}
               >
                 {difficulty}
-                {isActive && <span className="text-xs opacity-80">✓</span>}
+                {isActive && <Check className="w-3.5 h-3.5 opacity-80" aria-hidden="true" />}
               </button>
             );
           })}
@@ -153,7 +153,7 @@ function SidebarFilters({
                 )}
               >
                 {opt.label}
-                {isActive && <span className="text-xs opacity-80">✓</span>}
+                {isActive && <Check className="w-3.5 h-3.5 opacity-80" aria-hidden="true" />}
               </button>
             );
           })}

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Tent, ChevronDown, Shield, Binoculars, ArrowRight } from "lucide-react";
+import { Check, Tent, ChevronDown, Shield, Binoculars, ArrowRight, PawPrint, Mountain, TreeDeciduous, Bird } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
 import { MultiJsonLd } from "@/components/seo/JsonLd";
@@ -73,7 +73,7 @@ const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 const topParks = [
   {
     name: "Serengeti National Park",
-    icon: "🦁",
+    icon: PawPrint,
     highlight: "Big cats all year",
     href: "/tanzania-destinations/serengeti-national-park/",
     description:
@@ -81,7 +81,7 @@ const topParks = [
   },
   {
     name: "Ngorongoro Conservation Area",
-    icon: "🦏",
+    icon: Mountain,
     highlight: "Crater floor & rim campsite",
     href: "/tanzania-destinations/ngorongoro-conservation-area/",
     description:
@@ -89,7 +89,7 @@ const topParks = [
   },
   {
     name: "Tarangire National Park",
-    icon: "🐘",
+    icon: TreeDeciduous,
     highlight: "Elephants & baobabs",
     href: "/tanzania-destinations/tarangire-national-park/",
     description:
@@ -97,7 +97,7 @@ const topParks = [
   },
   {
     name: "Lake Manyara National Park",
-    icon: "🦩",
+    icon: Bird,
     highlight: "Forest, lake & birdlife",
     href: "/tanzania-destinations/lake-manyara-national-park/",
     description:
@@ -394,7 +394,9 @@ export default async function TanzaniaCampingSafarisPage() {
                 href={park.href}
                 className="bg-white border border-[var(--border)] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="text-4xl mb-3" aria-hidden="true">{park.icon}</div>
+                <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                  <park.icon className="w-6 h-6 text-amber-600" aria-hidden="true" />
+                </div>
                 <h3 className="font-semibold text-base mb-1">{park.name}</h3>
                 <p className="text-xs font-semibold text-[var(--secondary)] mb-3 uppercase tracking-wide">
                   {park.highlight}

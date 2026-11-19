@@ -210,7 +210,7 @@ export default function TanzaniaLodgeSafarisPage() {
               {[
                 { label: "From $2,500", sub: "Per Person" },
                 { label: "5-14 Days", sub: "Flexible Duration" },
-                { label: "4-5★ Lodges", sub: "Accommodation" },
+                { label: "4–5 Star Lodges", sub: "Accommodation" },
                 { label: "All Meals", sub: "Full Board" },
               ].map((stat) => (
                 <div key={stat.label} className="text-white">

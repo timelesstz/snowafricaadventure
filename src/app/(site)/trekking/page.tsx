@@ -10,6 +10,11 @@ import { TrekkingPageClient } from "./TrekkingPageClient";
 import { KnowledgeBase, SuccessCalculator, CredentialsBadges } from "@/components/kilimanjaro";
 import {
   Mountain,
+  Wheat,
+  Trees,
+  Flower2,
+  Sun,
+  Snowflake,
   Target,
   Clock,
   Users,
@@ -596,7 +601,7 @@ export default async function TrekkingPage() {
               <div className="space-y-4">
                 {CLIMATE_ZONES.map((zone) => (
                   <div key={zone.name} className="flex items-start gap-3">
-                    <span className="text-lg flex-shrink-0">{zone.emoji}</span>
+                    <zone.icon className="h-5 w-5 mt-0.5 flex-shrink-0 text-[var(--secondary-ink)]" aria-hidden="true" />
                     <div>
                       <p className="font-semibold text-sm">{zone.name} <span className="text-[var(--text-muted)] font-normal">({zone.altitude})</span></p>
                       <p className="text-xs text-[var(--text-muted)]">{zone.description}</p>
@@ -883,11 +888,11 @@ const SAFETY_STANDARDS: { icon: LucideIcon; title: string; description: string }
 ];
 
 const CLIMATE_ZONES = [
-  { emoji: "🌾", name: "Cultivation Zone", altitude: "800-1,800m", description: "Farmland and banana plantations at the mountain base." },
-  { emoji: "🌿", name: "Rainforest Zone", altitude: "1,800-2,800m", description: "Dense tropical forest with colobus monkeys and exotic birds." },
-  { emoji: "🌸", name: "Heath & Moorland", altitude: "2,800-4,000m", description: "Giant heather, lobelia, and groundsel in an otherworldly landscape." },
-  { emoji: "🏜️", name: "Alpine Desert", altitude: "4,000-5,000m", description: "Barren, Mars-like terrain with extreme temperature swings." },
-  { emoji: "🏔️", name: "Arctic Zone", altitude: "5,000-5,895m", description: "Glaciers and ice fields. Temperatures drop to -20°C on summit night." },
+  { icon: Wheat, name: "Cultivation Zone", altitude: "800-1,800m", description: "Farmland and banana plantations at the mountain base." },
+  { icon: Trees, name: "Rainforest Zone", altitude: "1,800-2,800m", description: "Dense tropical forest with colobus monkeys and exotic birds." },
+  { icon: Flower2, name: "Heath & Moorland", altitude: "2,800-4,000m", description: "Giant heather, lobelia, and groundsel in an otherworldly landscape." },
+  { icon: Sun, name: "Alpine Desert", altitude: "4,000-5,000m", description: "Barren, Mars-like terrain with extreme temperature swings." },
+  { icon: Snowflake, name: "Arctic Zone", altitude: "5,000-5,895m", description: "Glaciers and ice fields. Temperatures drop to -20°C on summit night." },
 ];
 
 const KILIMANJARO_FAQS = [

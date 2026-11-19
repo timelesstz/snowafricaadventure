@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { Map as MapIcon, Sun, Sprout, PawPrint, Mountain } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { DestinationCard } from "@/components/cards/DestinationCard";
 import { generateMetadata as genMeta, generateBreadcrumbSchema, generateFAQSchema, generateHowToSchema } from "@/lib/seo";
@@ -353,7 +354,7 @@ export default async function DestinationsPage() {
             </div>
             <div className="bg-white/10 rounded-lg aspect-video flex items-center justify-center">
               <div className="text-center">
-                <span className="text-4xl mb-2 block">🗺️</span>
+                <MapIcon className="w-10 h-10 mx-auto mb-2 text-[var(--on-dark-muted)]" aria-hidden="true" />
                 <p className="text-[var(--on-dark-muted)]">Interactive Map</p>
               </div>
             </div>
@@ -413,7 +414,7 @@ export default async function DestinationsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                <span>☀️</span> Dry Season
+                <Sun className="w-5 h-5 text-amber-500" aria-hidden="true" /> Dry Season
               </h3>
               <p className="text-sm text-[var(--text-muted)] mb-2">June - October</p>
               <p className="text-[var(--text-muted)] text-sm">
@@ -422,7 +423,7 @@ export default async function DestinationsPage() {
             </div>
             <div className="bg-white border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                <span>🌱</span> Green Season
+                <Sprout className="w-5 h-5 text-acacia-600" aria-hidden="true" /> Green Season
               </h3>
               <p className="text-sm text-[var(--text-muted)] mb-2">November - May</p>
               <p className="text-[var(--text-muted)] text-sm">
@@ -431,7 +432,7 @@ export default async function DestinationsPage() {
             </div>
             <div className="bg-white border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                <span>🦁</span> Migration
+                <PawPrint className="w-5 h-5 text-amber-600" aria-hidden="true" /> Migration
               </h3>
               <p className="text-sm text-[var(--text-muted)] mb-2">Year-round Movement</p>
               <p className="text-[var(--text-muted)] text-sm">
@@ -440,7 +441,7 @@ export default async function DestinationsPage() {
             </div>
             <div className="bg-white border border-[var(--border)] rounded-lg p-6">
               <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                <span>🏔️</span> Kilimanjaro
+                <Mountain className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" /> Kilimanjaro
               </h3>
               <p className="text-sm text-[var(--text-muted)] mb-2">Jan-March, Jun-October</p>
               <p className="text-[var(--text-muted)] text-sm">

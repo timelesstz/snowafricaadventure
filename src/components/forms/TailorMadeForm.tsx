@@ -825,11 +825,11 @@ export function TailorMadeForm() {
             <div className="mt-6 p-4 bg-slate-50 rounded-lg">
               <h4 className="font-semibold text-sm text-slate-700 mb-2">Your Safari Summary</h4>
               <ul className="text-sm text-slate-600 space-y-1">
-                <li>👤 {formData.numAdults} adult{formData.numAdults > 1 ? "s" : ""}{formData.numChildren > 0 ? `, ${formData.numChildren} child${formData.numChildren > 1 ? "ren" : ""}` : ""}</li>
-                <li>📅 Starting {formData.arrivalDate || "TBD"}{formData.duration ? ` • ${formData.duration} days` : ""}</li>
-                <li>💰 {BUDGET_LEVELS.find(b => b.value === formData.budget)?.label || "Budget TBD"}</li>
+                <li className="flex items-center gap-2"><User className="w-4 h-4 shrink-0" aria-hidden="true" />{formData.numAdults} adult{formData.numAdults > 1 ? "s" : ""}{formData.numChildren > 0 ? `, ${formData.numChildren} child${formData.numChildren > 1 ? "ren" : ""}` : ""}</li>
+                <li className="flex items-center gap-2"><Calendar className="w-4 h-4 shrink-0" aria-hidden="true" />Starting {formData.arrivalDate || "TBD"}{formData.duration ? ` • ${formData.duration} days` : ""}</li>
+                <li className="flex items-center gap-2"><Wallet className="w-4 h-4 shrink-0" aria-hidden="true" />{BUDGET_LEVELS.find(b => b.value === formData.budget)?.label || "Budget TBD"}</li>
                 {selectedDestinations.length > 0 && (
-                  <li>📍 {selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""}</li>
+                  <li className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" aria-hidden="true" />{selectedDestinations.length} destination{selectedDestinations.length > 1 ? "s" : ""}</li>
                 )}
               </ul>
             </div>

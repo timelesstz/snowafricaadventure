@@ -197,15 +197,17 @@ export default async function TanzaniaBeachHolidaysPage() {
               {[
                 { label: "Island Options", value: "3" },
                 { label: "Year-Round Sunshine", value: "365" },
-                { label: "UNESCO Stone Town", value: "✓" },
-                { label: "Pristine Coral Reefs", value: "✓" },
+                { label: "UNESCO Stone Town", value: null },
+                { label: "Pristine Coral Reefs", value: null },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-center gap-2 text-white">
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                     <Waves className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">{stat.value}</p>
+                    <p className="text-2xl font-bold">
+                      {stat.value ?? <Check className="w-7 h-7" role="img" aria-label="Yes" />}
+                    </p>
                     <p className="text-sm text-white/70">{stat.label}</p>
                   </div>
                 </div>

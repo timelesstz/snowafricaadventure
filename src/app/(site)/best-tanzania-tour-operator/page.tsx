@@ -22,7 +22,7 @@ import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 export const metadata: Metadata = genMeta({
   title: "Best Tanzania Tour Operator 2026",
   description:
-    "Snow Africa Adventure is ranked among Tanzania's best tour operators and tourism companies — TATO licensed, 15+ years experience, 4.9★ TripAdvisor rating, 5,000+ happy travelers.",
+    "Snow Africa Adventure is ranked among Tanzania's best tour operators and tourism companies — TATO licensed, 15+ years experience, 4.9-star TripAdvisor rating, 5,000+ happy travelers.",
   url: "/best-tanzania-tour-operator/",
 });
 
@@ -204,7 +204,7 @@ export default async function BestTanzaniaTourOperatorPage() {
 
             <div className="flex flex-wrap gap-6 mb-8">
               {[
-                { icon: Star, value: "4.9★", label: "TripAdvisor" },
+                { icon: Star, value: "4.9", label: "TripAdvisor" },
                 { icon: Clock, value: "15+", label: "Years Experience" },
                 { icon: Shield, value: "TATO", label: "Licensed" },
                 { icon: Users, value: "5,000+", label: "Travelers" },

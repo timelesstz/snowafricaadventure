@@ -17,12 +17,12 @@ interface RouteCardEnhancedProps {
   className?: string;
 }
 
-const difficultyConfig: Record<string, { color: string; bg: string; icon: string; level: number }> = {
-  Easy: { color: "text-acacia-600", bg: "bg-acacia-100", icon: "🟢", level: 1 },
-  Moderate: { color: "text-slate-600", bg: "bg-slate-100", icon: "🔵", level: 2 },
-  Challenging: { color: "text-amber-600", bg: "bg-amber-100", icon: "🟡", level: 3 },
-  Difficult: { color: "text-orange-600", bg: "bg-orange-100", icon: "🟠", level: 4 },
-  Strenuous: { color: "text-red-600", bg: "bg-red-100", icon: "🔴", level: 5 },
+const difficultyConfig: Record<string, { color: string; bg: string; level: number }> = {
+  Easy: { color: "text-acacia-600", bg: "bg-acacia-100", level: 1 },
+  Moderate: { color: "text-slate-600", bg: "bg-slate-100", level: 2 },
+  Challenging: { color: "text-amber-600", bg: "bg-amber-100", level: 3 },
+  Difficult: { color: "text-orange-600", bg: "bg-orange-100", level: 4 },
+  Strenuous: { color: "text-red-600", bg: "bg-red-100", level: 5 },
 };
 
 export function RouteCardEnhanced({

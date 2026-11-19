@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { RouteCardEnhanced } from "@/components/cards/RouteCardEnhanced";
 import { TrekkingFilters } from "@/components/filters/TrekkingFilters";
-import { LayoutGrid, List } from "lucide-react";
+import { LayoutGrid, List, Mountain } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Route {
@@ -193,7 +193,7 @@ export function TrekkingPageClient({ routes, difficulties }: TrekkingPageClientP
         {/* Results */}
         {filteredAndSortedRoutes.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl">
-            <div className="text-6xl mb-4">🏔️</div>
+            <Mountain className="w-14 h-14 mx-auto mb-4 text-[var(--text-muted)]" aria-hidden="true" />
             <h3 className="text-xl font-semibold mb-2">No routes found</h3>
             <p className="text-[var(--text-muted)] mb-4">
               Try adjusting your filters or search terms
