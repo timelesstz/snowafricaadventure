@@ -7,8 +7,8 @@ import { InquiryForm } from "@/components/forms/InquiryForm";
 
 // Shown under the article body. The most-read articles had no path to a
 // package or a quote form, so readers left without enquiring.
-const KILI_SLUGS = ["8-days-lemosho-route", "7-days-machame-route", "6-days-marangu-route"];
-const SAFARI_SLUGS = [
+export const KILI_SLUGS = ["8-days-lemosho-route", "7-days-machame-route", "6-days-marangu-route"];
+export const SAFARI_SLUGS = [
   "9-days-tanzania-wildlife-safari-migration",
   "6-days-tanzania-migration-serengeti-ngorongoro-crater-tarangire",
   "4-days-safari-to-ngorongoro-and-serengeti",
@@ -91,7 +91,7 @@ export async function PlanYourTrip({ kind, postTitle }: PlanYourTripProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--secondary)]">
           {isKili ? "Climb it with us" : "See it for yourself"}
         </p>
-        <h2 id="plan-your-trip" className="mt-2 scroll-mt-28font-heading text-2xl font-bold md:text-3xl">
+        <h2 id="plan-your-trip" className="mt-2 scroll-mt-28 font-heading text-2xl font-bold md:text-3xl">
           {isKili ? "Plan your Kilimanjaro climb" : "Plan your Tanzania safari"}
         </h2>
         <p className="mt-2 max-w-2xl text-white/75">

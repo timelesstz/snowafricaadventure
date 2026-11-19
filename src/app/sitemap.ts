@@ -1,5 +1,12 @@
 import { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, MIN_INDEXABLE_TAG_POSTS } from "@/lib/constants";
+import nextConfig from "../../next.config";
+
+/** Exact (pattern-free) sources of the redirects in next.config.ts, normalised. */
+async function getConfigRedirectPaths(): Promise<Set<string>> {
+  const list = (await nextConfig.redirects?.()) ?? [];
+  return new Set(list.map((r) => r.source).filter((s) => !/[:*(]/.test(s)).map(normalizePath));
+}
 
 // Slugs that are static routes — blog posts with these slugs would shadow them
 const RESERVED_SLUGS = new Set([
@@ -111,7 +118,8 @@ async function getContentFromDb() {
           },
           select: { slug: true, updatedAt: true },
         }),
-        // Only tags that have at least one published post
+        // Tags with published posts; thin ones are filtered out below because
+        // their pages are noindex, and a sitemap must not list noindex URLs.
         prisma.tag.findMany({
           where: {
             posts: {
@@ -120,11 +128,29 @@ async function getContentFromDb() {
               },
             },
           },
-          select: { slug: true, updatedAt: true },
+          select: {
+            slug: true,
+            updatedAt: true,
+            _count: { select: { posts: { where: { post: { isPublished: true } } } } },
+          },
         }),
       ]);
 
-    return { routes, safaris, destinations, posts, dayTrips, categories, tags };
+    // URLs that 301 elsewhere (merged duplicates) must not be listed either.
+    const redirects = await prisma.redirect
+      .findMany({ where: { isActive: true }, select: { sourceUrl: true } })
+      .catch(() => []);
+
+    return {
+      routes,
+      safaris,
+      destinations,
+      posts,
+      dayTrips,
+      categories,
+      tags: tags.filter((tag) => tag._count.posts >= MIN_INDEXABLE_TAG_POSTS),
+      redirectedPaths: new Set(redirects.map((r) => normalizePath(r.sourceUrl))),
+    };
   } catch (err) {
     console.error("[sitemap] Database fetch failed:", err);
     return {
@@ -135,15 +161,23 @@ async function getContentFromDb() {
       dayTrips: [],
       categories: [],
       tags: [],
+      redirectedPaths: new Set<string>(),
     };
   }
+}
+
+/** Same normalisation as src/lib/redirect-cache.ts: lowercase, no trailing slash. */
+function normalizePath(url: string): string {
+  return url.toLowerCase().replace(/\/+$/, "") || "/";
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
 
-  const { routes, safaris, destinations, posts, dayTrips, categories, tags } =
+  const { routes, safaris, destinations, posts, dayTrips, categories, tags, redirectedPaths: dbRedirects } =
     await getContentFromDb();
+  // A URL that redirects (database rule or next.config.ts) must not be listed.
+  const redirectedPaths = new Set([...dbRedirects, ...(await getConfigRedirectPaths())]);
 
   // Static pages with accurate lastModified dates.
   // Listing pages (blog/, trekking/, etc.) use new Date() because they reflect
@@ -207,12 +241,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/contact-us/`,
       lastModified: new Date("2025-06-01"),
       changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/faq/`,
-      lastModified: new Date("2025-10-01"),
-      changeFrequency: "monthly",
       priority: 0.7,
     },
     {
@@ -516,7 +544,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms-conditions/`,
+      url: `${baseUrl}/terms-and-conditions/`,
       lastModified: new Date("2024-01-01"),
       changeFrequency: "yearly",
       priority: 0.3,
@@ -584,5 +612,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...dayTripUrls,
     ...categoryUrls,
     ...tagUrls,
-  ];
+  ].filter((entry) => !redirectedPaths.has(normalizePath(new URL(entry.url).pathname)));
 }

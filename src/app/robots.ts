@@ -23,32 +23,39 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/admin/", "/api/"],
       },
-      // AI search bots — allow for GEO/AEO visibility (citations in AI search results)
+      // AI crawlers — search, live answers and training all allowed, so ChatGPT,
+      // Claude, Perplexity, Gemini, Apple, Meta and others can read, cite and
+      // recommend the site. (src/lib/bot-detector.ts lets the same bots through.)
       {
         userAgent: [
+          // OpenAI
+          "GPTBot",
           "OAI-SearchBot",
           "ChatGPT-User",
+          // Anthropic
           "ClaudeBot",
+          "Claude-SearchBot",
+          "Claude-User",
+          // Perplexity
           "PerplexityBot",
+          "Perplexity-User",
+          // Google (Gemini and Vertex AI grounding; not used for Search)
+          "Google-Extended",
+          // Apple
+          "Applebot",
+          "Applebot-Extended",
+          // Others
           "Amazonbot",
+          "Meta-ExternalAgent",
+          "Meta-ExternalFetcher",
+          "CCBot",
+          "cohere-ai",
+          "MistralAI-User",
+          "DuckAssistBot",
+          "Bytespider",
         ],
         allow: "/",
         disallow: ["/admin/", "/api/"],
-      },
-      // AI training-only bots — block (protect content from training)
-      {
-        userAgent: [
-          "GPTBot",
-          "CCBot",
-          "Google-Extended",
-          "anthropic-ai",
-          "Bytedance",
-          "ByteSpider",
-          "Meta-ExternalAgent",
-          "cohere-ai",
-          "Applebot-Extended",
-        ],
-        disallow: "/",
       },
       // SEO crawlers — block (saves bandwidth, use tools directly instead)
       {

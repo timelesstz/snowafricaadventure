@@ -493,6 +493,16 @@ export default function WildlifeSafarisTanzaniaPage() {
                 </div>
               ))}
             </div>
+            <p className="mt-8 text-center text-[var(--text-muted)]">
+              Planning the trip itself? Our{" "}
+              <Link
+                href="/wildlife-safaris-in-tanzania/"
+                className="font-medium text-[var(--primary)] underline underline-offset-2 hover:text-[var(--primary-dark)]"
+              >
+                wildlife safari planning guide
+              </Link>{" "}
+              covers itineraries, costs and booking.
+            </p>
           </div>
         </div>
       </section>

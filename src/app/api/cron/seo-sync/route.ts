@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { isGoogleConfigured } from "@/lib/seo-dashboard/google-auth";
 import { fetchSearchAnalytics, fetchPageMetrics } from "@/lib/seo-dashboard/gsc-client";
 import { fetchOrganicTraffic } from "@/lib/seo-dashboard/ga4-client";
+import { inBatches } from "@/lib/seo-dashboard/batch";
 
 /**
  * Daily SEO data sync cron job.
@@ -11,6 +12,17 @@ import { fetchOrganicTraffic } from "@/lib/seo-dashboard/ga4-client";
  * Syncs a rolling window of Search Console data (see gsc_sync_days) plus
  * yesterday's GA4 organic data.
  */
+/**
+ * A run killed by the platform timeout never reaches its catch block, so its
+ * log row would read RUNNING forever (the 2026-11-19 run did exactly that).
+ */
+async function closeAbandonedRuns() {
+  await prisma.seoSyncLog.updateMany({
+    where: { status: "RUNNING", startedAt: { lt: new Date(Date.now() - 15 * 60 * 1000) } },
+    data: { status: "FAILED", error: "Did not finish: function timed out", completedAt: new Date() },
+  });
+}
+
 async function getNumericSetting(key: string, fallback: number): Promise<number> {
   const row = await prisma.siteSetting.findUnique({ where: { key } });
   if (!row) return fallback;
@@ -63,6 +75,8 @@ export async function GET(request: Request) {
     });
   }
 
+  await closeAbandonedRuns();
+
   const results = { gsc: { status: "skipped", records: 0 }, ga4: { status: "skipped", records: 0 } };
 
   // GSC Sync.
@@ -101,8 +115,8 @@ export async function GET(request: Request) {
       let recordCount = 0;
 
       const queries = await fetchSearchAnalytics(gscSiteUrl, dateRange);
-      for (const row of queries) {
-        await prisma.gscSearchQuery.upsert({
+      recordCount += await inBatches(queries, (row) =>
+        prisma.gscSearchQuery.upsert({
           where: {
             date_query_page_country_device: {
               date: new Date(row.date),
@@ -129,13 +143,12 @@ export async function GET(request: Request) {
             ctr: row.ctr,
             position: row.position,
           },
-        });
-        recordCount++;
-      }
+        })
+      );
 
       const pages = await fetchPageMetrics(gscSiteUrl, dateRange);
-      for (const row of pages) {
-        await prisma.gscPageMetric.upsert({
+      recordCount += await inBatches(pages, (row) =>
+        prisma.gscPageMetric.upsert({
           where: {
             date_page: { date: new Date(row.date), page: row.page },
           },
@@ -153,9 +166,8 @@ export async function GET(request: Request) {
             ctr: row.ctr,
             position: row.position,
           },
-        });
-        recordCount++;
-      }
+        })
+      );
 
       await prisma.seoSyncLog.update({
         where: { id: syncLog.id },
