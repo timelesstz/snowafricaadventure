@@ -67,6 +67,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // Old CMS copy of a page that is now built in code
+      {
+        source: "/p/tailor-made-safari/",
+        destination: "/tailor-made-safari/",
+        permanent: true,
+      },
+
       // Terms page URL difference
       {
         source: "/terms-conditions/",
