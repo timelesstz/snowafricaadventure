@@ -3,6 +3,9 @@ import { requireRole } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { fetchSearchAnalytics, fetchPageMetrics } from "@/lib/seo-dashboard/gsc-client";
 import { isGoogleConfigured } from "@/lib/seo-dashboard/google-auth";
+import { inBatches } from "@/lib/seo-dashboard/batch";
+
+export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,20 +37,27 @@ export async function POST(request: NextRequest) {
       data: { source: "GSC" },
     });
 
+    // An explicit { startDate, endDate } repairs history (the Google key lives
+    // only in Vercel, so backfills must run on the deployed site). Keep each
+    // range to about two weeks so it finishes inside the function budget.
+    const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
     const endDate = new Date();
     const startDate = new Date(endDate.getTime() - days * 24 * 60 * 60 * 1000);
-    const dateRange = {
-      startDate: startDate.toISOString().split("T")[0],
-      endDate: endDate.toISOString().split("T")[0],
-    };
+    const dateRange =
+      ISO_DATE.test(body.startDate ?? "") && ISO_DATE.test(body.endDate ?? "")
+        ? { startDate: body.startDate as string, endDate: body.endDate as string }
+        : {
+            startDate: startDate.toISOString().split("T")[0],
+            endDate: endDate.toISOString().split("T")[0],
+          };
 
     let recordCount = 0;
 
     try {
       // Fetch and upsert search queries
       const queries = await fetchSearchAnalytics(siteUrl, dateRange);
-      for (const row of queries) {
-        await prisma.gscSearchQuery.upsert({
+      recordCount += await inBatches(queries, (row) =>
+        prisma.gscSearchQuery.upsert({
           where: {
             date_query_page_country_device: {
               date: new Date(row.date),
@@ -74,14 +84,13 @@ export async function POST(request: NextRequest) {
             ctr: row.ctr,
             position: row.position,
           },
-        });
-        recordCount++;
-      }
+        })
+      );
 
       // Fetch and upsert page metrics
       const pages = await fetchPageMetrics(siteUrl, dateRange);
-      for (const row of pages) {
-        await prisma.gscPageMetric.upsert({
+      recordCount += await inBatches(pages, (row) =>
+        prisma.gscPageMetric.upsert({
           where: {
             date_page: {
               date: new Date(row.date),
@@ -102,9 +111,8 @@ export async function POST(request: NextRequest) {
             ctr: row.ctr,
             position: row.position,
           },
-        });
-        recordCount++;
-      }
+        })
+      );
 
       // Update sync log
       await prisma.seoSyncLog.update({
