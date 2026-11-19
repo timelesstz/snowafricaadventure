@@ -17,6 +17,8 @@ import { BlogContentClient } from "@/components/blog/BlogContentClient";
 import { AuthorBio } from "@/components/blog/AuthorBio";
 import { PlanYourTrip } from "@/components/blog/PlanYourTrip";
 import { ArticleToc } from "@/components/blog/ArticleToc";
+import { ArticleTripCard } from "@/components/blog/ArticleTripCard";
+import { splitForCard } from "@/lib/featured-trip";
 import { KnowledgeBase, CredentialsBadges } from "@/components/kilimanjaro";
 
 export const revalidate = 300;
@@ -122,6 +124,8 @@ const getPost = cache(async function getPost(slug: string) {
         author: post.author || "Snow Africa Team",
         featuredImage: normalizeImageUrl(post.featuredImage),
         publishedAt: post.publishedAt?.toISOString().split("T")[0] || new Date().toISOString().split("T")[0],
+        // Last edit (updatedAt is set by Prisma on every content or meta change).
+        updatedAt: post.updatedAt.toISOString().split("T")[0],
         readingTime: calculateReadingTime(post.content),
         tableOfContents,
         categories: post.categories.map((c) => ({
@@ -166,6 +170,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     image: post.featuredImage || undefined,
     type: "article",
     publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt,
     author: post.author,
   });
 }
@@ -259,6 +264,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   const kiliKeywords = ["kilimanjaro", "climbing", "trekking", "trek", "summit", "route", "altitude", "porter"];
   const postTextLower = `${post.title} ${post.categories.map(c => c.name).join(" ")} ${post.tags.map(t => t.name).join(" ")}`.toLowerCase();
   const isKilimanjaroPost = kiliKeywords.some((kw) => postTextLower.includes(kw));
+  const tripKind = isKilimanjaroPost ? "kilimanjaro" : "safari";
+  // The featured-trip card sits between the two halves of the article.
+  const contentHalves = splitForCard(post.content);
 
   return (
     <>
@@ -273,6 +281,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               description: post.excerpt,
               url: `/${post.slug}/`,
               publishedTime: post.publishedAt,
+              modifiedTime: post.updatedAt,
               author: post.author,
               authorRole: AUTHOR_PROFILES[post.author]?.role,
               authorCredentials: AUTHOR_PROFILES[post.author]?.credentials,
@@ -393,10 +402,18 @@ export default async function BlogPostPage({ params }: PageProps) {
               {/* Article Body */}
               <div className="bg-white rounded-2xl shadow-sm p-6 md:p-10 lg:p-12">
                 <BlogContentClient />
-                <div
-                  className="blog-content"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
+                {contentHalves ? (
+                  <>
+                    <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHalves[0] }} />
+                    <ArticleTripCard
+                      kind={tripKind}
+                      post={{ slug: post.slug, title: post.title, body: post.rawContent }}
+                    />
+                    <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHalves[1] }} />
+                  </>
+                ) : (
+                  <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+                )}
               </div>
 
               <PlanYourTrip
