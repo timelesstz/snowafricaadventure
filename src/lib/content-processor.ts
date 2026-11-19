@@ -235,14 +235,20 @@ export function injectInternalLinks(
 ): string {
   let linksInjected = 0;
   let result = html;
+  // One auto-link per target page, and none to a page the post already links to.
+  const linkedHrefs = new Set(
+    [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)].map((m) => m[1])
+  );
 
   for (const entry of linkMap) {
     if (linksInjected >= MAX_AUTO_LINKS) break;
 
     // Skip self-links: if the entry href matches the current slug
     if (currentSlug && entry.href === `/${currentSlug}/`) continue;
+    if (linkedHrefs.has(entry.href)) continue;
 
-    const escapedPhrase = escapeRegExp(entry.phrase);
+    // Whole words only: "age limit" must not match inside "baggage limit".
+    const escapedPhrase = `(?<![\\w-])${escapeRegExp(entry.phrase)}(?![\\w-])`;
 
     // Split by tags that should not contain injected links: <a>...</a>, <h1>-<h6>, <button>
     // We process only text segments that are outside these protected tags.
@@ -291,6 +297,7 @@ export function injectInternalLinks(
     if (matched) {
       result = segments.join("");
       linksInjected++;
+      linkedHrefs.add(entry.href);
     }
   }
 

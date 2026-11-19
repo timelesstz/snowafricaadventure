@@ -1,5 +1,9 @@
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import { getConfigRedirectPaths, normalizePath } from "@/lib/redirect-paths";
+
+/** Single trip pages. Blog posts promote trips through the trip card, not text links. */
+const TRIP_PAGE = /^\/(trekking|tanzania-safaris|tanzania-day-tours)\/[^/]+\/?$/;
 
 export type LinkMapEntry = {
   phrase: string;
@@ -8,17 +12,20 @@ export type LinkMapEntry = {
 };
 
 export const getInternalLinkMap = cache(async function getInternalLinkMap(): Promise<LinkMapEntry[]> {
-  const [destinations, trekkingRoutes] = await Promise.all([
+  const [destinations, dbRedirects, configRedirects] = await Promise.all([
     prisma.destination.findMany({
       where: { isActive: true },
       select: { name: true, slug: true },
       orderBy: { name: "desc" },
     }),
-    prisma.trekkingRoute.findMany({
-      where: { isActive: true },
-      select: { title: true, slug: true },
-      orderBy: { title: "desc" },
-    }),
+    prisma.redirect
+      .findMany({ where: { isActive: true }, select: { sourceUrl: true } })
+      .catch(() => []),
+    getConfigRedirectPaths(),
+  ]);
+  const redirectedPaths = new Set([
+    ...dbRedirects.map((r) => normalizePath(r.sourceUrl)),
+    ...configRedirects,
   ]);
 
   const entries: LinkMapEntry[] = [];
@@ -32,33 +39,18 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     });
   }
 
-  // Trekking routes: extract just the route name (e.g., "Lemosho Route" from "8 Days Lemosho Route")
-  for (const route of trekkingRoutes) {
-    // Strip leading "X Days " or "X Day " prefix to get the clean route name
-    const routeName = route.title.replace(/^\d+\s+Days?\s+/i, "");
-    entries.push({
-      phrase: routeName,
-      href: `/trekking/${route.slug}/`,
-      priority: 2,
-    });
-  }
-
   // Static entries for key pages
-  const routePhrases = new Set(entries.map((e) => e.phrase.toLowerCase()));
-
   entries.push({
     phrase: "climb Kilimanjaro",
     href: "/trekking/",
     priority: 3,
   });
 
-  if (!routePhrases.has("mount kilimanjaro")) {
-    entries.push({
-      phrase: "Mount Kilimanjaro",
-      href: "/mount-kilimanjaro/",
-      priority: 3,
-    });
-  }
+  entries.push({
+    phrase: "Mount Kilimanjaro",
+    href: "/mount-kilimanjaro/",
+    priority: 3,
+  });
 
   entries.push({
     phrase: "Tanzania safaris",
@@ -133,12 +125,6 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
   });
 
   entries.push({
-    phrase: "Mount Meru",
-    href: "/trekking/4-days-mount-meru-climbing/",
-    priority: 3,
-  });
-
-  entries.push({
     phrase: "wildebeest migration",
     href: "/great-wildebeest-migration/",
     priority: 3,
@@ -164,7 +150,7 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
 
   entries.push({
     phrase: "Lemosho route",
-    href: "/kilimanjaro-lemosho-route-8-days-guide/",
+    href: "/kilimanjaro-lemosho-route-guide/",
     priority: 3,
   });
 
@@ -279,8 +265,8 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Rongai route", href: "/kilimanjaro-rongai-route-guide/", priority: 3 },
     { phrase: "what to expect on Kilimanjaro", href: "/kilimanjaro-what-to-expect/", priority: 3 },
     { phrase: "typical day on Kilimanjaro", href: "/kilimanjaro-what-to-expect/", priority: 3 },
-    { phrase: "Kilimanjaro budget", href: "/kilimanjaro-budget-guide/", priority: 3 },
-    { phrase: "Kilimanjaro cost breakdown", href: "/kilimanjaro-budget-guide/", priority: 3 },
+    { phrase: "Kilimanjaro budget", href: "/kilimanjaro-prices/", priority: 3 },
+    { phrase: "Kilimanjaro cost breakdown", href: "/kilimanjaro-prices/", priority: 3 },
     { phrase: "group vs private", href: "/kilimanjaro-group-vs-private/", priority: 3 },
     { phrase: "private climb", href: "/kilimanjaro-group-vs-private/", priority: 3 },
     { phrase: "packing mistakes", href: "/kilimanjaro-packing-mistakes/", priority: 3 },
@@ -616,11 +602,9 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Kilimanjaro for older climbers", href: "/kilimanjaro-for-seniors/", priority: 3 },
 
     // Batch 27-28
-    { phrase: "Kilimanjaro cost breakdown", href: "/kilimanjaro-cost-breakdown/", priority: 3 },
-    { phrase: "where does money go Kilimanjaro", href: "/kilimanjaro-cost-breakdown/", priority: 3 },
-    { phrase: "Kilimanjaro park fees", href: "/kilimanjaro-cost-breakdown/", priority: 3 },
-    { phrase: "how much does Kilimanjaro cost", href: "/kilimanjaro-cost-breakdown/", priority: 3 },
-    { phrase: "cheap Kilimanjaro climb", href: "/kilimanjaro-cost-breakdown/", priority: 4 },
+    { phrase: "where does money go Kilimanjaro", href: "/kilimanjaro-prices/", priority: 3 },
+    { phrase: "how much does Kilimanjaro cost", href: "/kilimanjaro-prices/", priority: 3 },
+    { phrase: "cheap Kilimanjaro climb", href: "/kilimanjaro-prices/", priority: 4 },
     { phrase: "summit temperature", href: "/kilimanjaro-summit-temperature/", priority: 3 },
     { phrase: "temperature at summit", href: "/kilimanjaro-summit-temperature/", priority: 3 },
     { phrase: "Kilimanjaro summit temperature", href: "/kilimanjaro-summit-temperature/", priority: 3 },
@@ -748,9 +732,6 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Big Five Tanzania", href: "/big-five-tanzania/", priority: 2 },
     { phrase: "Big Five safari", href: "/big-five-tanzania/", priority: 3 },
     { phrase: "Big Five animals", href: "/big-five-tanzania/", priority: 3 },
-    { phrase: "safari packing list", href: "/tanzania-safari-packing-list/", priority: 2 },
-    { phrase: "what to pack for safari", href: "/tanzania-safari-packing-list/", priority: 2 },
-    { phrase: "safari clothing", href: "/tanzania-safari-packing-list/", priority: 3 },
 
     // Safari cluster batch 2 (destinations + planning)
     { phrase: "Great Migration", href: "/serengeti-great-migration-guide/", priority: 2 },
@@ -899,9 +880,17 @@ export const getInternalLinkMap = cache(async function getInternalLinkMap(): Pro
     { phrase: "Instagram Zanzibar", href: "/zanzibar-photography-guide/", priority: 3 },
   );
 
-  // Sort by phrase length descending (longest match first)
-  entries.sort((a, b) => b.phrase.length - a.phrase.length);
+  // One target per phrase: the first entry wins. Without this a repeated phrase
+  // links its first occurrence to one page and a later one to another.
+  const seen = new Set<string>();
+  const usable = entries.filter((entry) => {
+    const key = entry.phrase.toLowerCase();
+    if (entry.phrase.length < 4 || seen.has(key)) return false;
+    seen.add(key);
+    // Never link to a URL that redirects, or to a single trip page.
+    return !redirectedPaths.has(normalizePath(entry.href)) && !TRIP_PAGE.test(entry.href);
+  });
 
-  // Filter out very short phrases (less than 4 characters)
-  return entries.filter((entry) => entry.phrase.length >= 4);
+  // Longest phrase first, so "Lemosho Route guide" wins over "Lemosho route"
+  return usable.sort((a, b) => b.phrase.length - a.phrase.length);
 });

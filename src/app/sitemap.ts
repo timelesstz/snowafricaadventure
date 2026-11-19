@@ -1,12 +1,6 @@
 import { MetadataRoute } from "next";
 import { SITE_CONFIG, MIN_INDEXABLE_TAG_POSTS } from "@/lib/constants";
-import nextConfig from "../../next.config";
-
-/** Exact (pattern-free) sources of the redirects in next.config.ts, normalised. */
-async function getConfigRedirectPaths(): Promise<Set<string>> {
-  const list = (await nextConfig.redirects?.()) ?? [];
-  return new Set(list.map((r) => r.source).filter((s) => !/[:*(]/.test(s)).map(normalizePath));
-}
+import { getConfigRedirectPaths, normalizePath } from "@/lib/redirect-paths";
 
 // Slugs that are static routes — blog posts with these slugs would shadow them
 const RESERVED_SLUGS = new Set([
@@ -164,11 +158,6 @@ async function getContentFromDb() {
       redirectedPaths: new Set<string>(),
     };
   }
-}
-
-/** Same normalisation as src/lib/redirect-cache.ts: lowercase, no trailing slash. */
-function normalizePath(url: string): string {
-  return url.toLowerCase().replace(/\/+$/, "") || "/";
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
