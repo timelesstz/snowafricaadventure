@@ -25,6 +25,14 @@ import prisma from "@/lib/prisma";
 // Admin saves and seat changes refresh it at once via revalidateRoutePages().
 export const revalidate = 300;
 
+// Without generateStaticParams a dynamic segment renders on every request
+// even with `revalidate` set (seen live: no-store, x-vercel-cache MISS).
+// An empty list prerenders nothing at build time; each route page is then
+// rendered on first visit and cached.
+export async function generateStaticParams() {
+  return [];
+}
+
 interface PageProps {
   params: Promise<{ routeSlug: string }>;
 }
