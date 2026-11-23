@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isValidCronAuth } from "@/lib/cron-auth";
 import { runScheduledAudits } from "@/lib/seo-automation/audits";
 
 /**
@@ -14,7 +15,7 @@ export async function GET(request: Request) {
     console.error("CRON_SECRET is not set — refusing to run unprotected cron");
     return NextResponse.json({ error: "CRON_SECRET not configured" }, { status: 500 });
   }
-  if (request.headers.get("authorization") !== `Bearer ${cronSecret}`) {
+  if (!isValidCronAuth(request.headers.get("authorization"))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
