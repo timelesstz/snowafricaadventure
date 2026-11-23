@@ -52,7 +52,7 @@ export function Dialog({
       onClick={handleBackdropClick}
       aria-labelledby={title ? titleId : undefined}
       className={clsx(
-        "rounded-xl p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm",
+        "m-auto rounded-xl p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm",
         "open:animate-in open:fade-in-0 open:zoom-in-95",
         className
       )}

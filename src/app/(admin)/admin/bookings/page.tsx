@@ -225,7 +225,7 @@ export default async function BookingsPage({
       <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
         {/* Status tabs + search */}
         <div className="flex flex-col gap-3 border-b border-slate-200 p-3 lg:flex-row lg:items-center lg:justify-between">
-          <nav aria-label="Filter by status" className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1 lg:pb-0">
+          <nav aria-label="Filter by status" className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {tabs.map((tab) => {
               const current = tab.view === filters.view;
               const alert = tab.view === "follow-up" && tab.count > 0;
