@@ -127,6 +127,9 @@ export function linkForNotification(notification: {
     case "DEPARTURE_FULL":
     case "LOW_AVAILABILITY":
       return data.departureId ? `/admin/departures/${data.departureId}` : null;
+    case "SYSTEM_ALERT":
+      // SEO alerts carry their own admin path; only follow in-app paths.
+      return typeof data.href === "string" && data.href.startsWith("/admin/") ? data.href : null;
     case "COMMISSION_EARNED":
       // No commission detail page exists — link to the list
       return "/admin/commissions";

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { auth } from "@/lib/auth";
 import { Toaster } from "sonner";
 import AdminSidebar from "@/components/admin/AdminSidebar";
@@ -24,7 +25,7 @@ export const metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1e293b",
+  themeColor: "#0f172a",
 };
 
 export default async function AdminLayout({
@@ -49,8 +50,11 @@ export default async function AdminLayout({
   return (
     <AdminSessionProvider>
       <div className="min-h-screen bg-slate-100">
-        <AdminSidebar user={user} />
-        <div className="lg:pl-64 pt-16 lg:pt-0">
+        {/* The sidebar reads the query string to highlight filtered views. */}
+        <Suspense fallback={null}>
+          <AdminSidebar user={user} />
+        </Suspense>
+        <div className="lg:pl-64">
           <AdminTopBar user={user} />
           <main className="p-6">{children}</main>
         </div>

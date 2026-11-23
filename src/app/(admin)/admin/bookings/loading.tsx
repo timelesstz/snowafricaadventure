@@ -1,19 +1,15 @@
-import {
-  AdminPageHeader,
-  StatCardSkeleton,
-  TableSkeleton,
-} from "@/components/admin/ui";
+import { AdminPageHeader, StatCardSkeleton, TableSkeleton } from "@/components/admin/ui";
 
 export default function BookingsLoading() {
   return (
-    <div>
+    <div aria-busy="true">
       <AdminPageHeader
         title="Bookings"
-        description="Manage group departure bookings"
+        description="Group departure bookings: who is coming, what they owe and when they climb."
       />
-      <StatCardSkeleton cols={5} />
-      <div className="h-16 mb-4 bg-white rounded-lg shadow-sm border border-slate-200 animate-pulse" />
-      <TableSkeleton rows={8} cols={8} />
+      <StatCardSkeleton cols={4} />
+      <div className="mb-0 h-14 rounded-t-lg border border-b-0 border-slate-200 bg-white animate-pulse" />
+      <TableSkeleton rows={8} cols={6} />
     </div>
   );
 }

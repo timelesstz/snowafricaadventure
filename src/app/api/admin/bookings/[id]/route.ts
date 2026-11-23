@@ -1,4 +1,5 @@
 import { auth, requireRole } from "@/lib/auth";
+import { deleteBookings } from "@/lib/bookings/delete";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
@@ -383,31 +384,17 @@ export async function DELETE(
   const { id } = await params;
 
   try {
-    // Check if booking has commission
-    const booking = await prisma.booking.findUnique({
-      where: { id },
-      include: { commission: true },
-    });
-
-    if (!booking) {
+    const session = await auth();
+    const result = await deleteBookings([id], session?.user?.email ?? "unknown admin");
+    if (result.missing.length) {
+      return NextResponse.json({ error: "Booking not found" }, { status: 404 });
+    }
+    if (result.blocked.length) {
       return NextResponse.json(
-        { error: "Booking not found" },
-        { status: 404 }
+        { error: `This booking can't be deleted: ${result.blocked[0].reason}.` },
+        { status: 409 }
       );
     }
-
-    // Delete commission first if exists
-    if (booking.commission) {
-      await prisma.commission.delete({
-        where: { id: booking.commission.id },
-      });
-    }
-
-    // Delete booking
-    await prisma.booking.delete({
-      where: { id },
-    });
-
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting booking:", error);

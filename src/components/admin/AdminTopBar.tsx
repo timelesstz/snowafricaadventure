@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LogOut, Search, Settings2, UserCircle2 } from "lucide-react";
+import { LogOut, Menu, Search, Settings2, UserCircle2 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { clsx } from "clsx";
 import Link from "next/link";
@@ -9,6 +9,8 @@ import { AdminRole } from "@prisma/client";
 import { AdminBreadcrumbs } from "./AdminBreadcrumbs";
 import NotificationBell from "./NotificationBell";
 import { RoleBadge } from "./RoleBadge";
+import { NAV_TOGGLE_EVENT, NAV_TRIGGER_ID } from "./AdminSidebar";
+import { openCommandPalette, useModKeyLabel } from "./CommandPalette";
 
 interface TopBarUser {
   name?: string | null;
@@ -16,22 +18,14 @@ interface TopBarUser {
   role: AdminRole;
 }
 
-function openCommandPalette() {
-  // The CommandPalette component listens for ⌘/Ctrl+K on window.
-  // Dispatching a synthetic KeyboardEvent is the cleanest way to reuse it
-  // without adding a second entry point.
-  const event = new KeyboardEvent("keydown", {
-    key: "k",
-    metaKey: true,
-    ctrlKey: true,
-    bubbles: true,
-  });
-  window.dispatchEvent(event);
+function toggleNav() {
+  window.dispatchEvent(new Event(NAV_TOGGLE_EVENT));
 }
 
 export default function AdminTopBar({ user }: { user: TopBarUser }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const modKey = useModKeyLabel();
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -67,6 +61,16 @@ export default function AdminTopBar({ user }: { user: TopBarUser }) {
         "h-14 px-4 lg:px-6 flex items-center justify-between gap-3"
       )}
     >
+      <button
+        type="button"
+        id={NAV_TRIGGER_ID}
+        onClick={toggleNav}
+        aria-label="Open menu"
+        aria-controls="admin-mobile-nav"
+        className="-ml-2 rounded-lg p-2 text-slate-600 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 lg:hidden"
+      >
+        <Menu className="h-5 w-5" aria-hidden="true" />
+      </button>
       <div className="min-w-0 flex-1">
         <AdminBreadcrumbs />
       </div>
@@ -85,7 +89,7 @@ export default function AdminTopBar({ user }: { user: TopBarUser }) {
           <Search className="h-4 w-4" aria-hidden="true" />
           <span>Search…</span>
           <kbd className="ml-2 text-[10px] font-semibold text-slate-500 bg-white border border-slate-200 rounded px-1.5 py-0.5">
-            ⌘K
+            {modKey} K
           </kbd>
         </button>
 
