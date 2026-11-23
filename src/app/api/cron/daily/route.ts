@@ -1,3 +1,4 @@
+import { isValidCronAuth } from "@/lib/cron-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 import { GET as leadFollowup } from "../lead-followup/route";
@@ -29,7 +30,7 @@ export const maxDuration = 60;
 function verifyCronSecret(request: NextRequest): boolean {
   const authHeader = request.headers.get("authorization");
   if (!authHeader) return false;
-  return authHeader.replace("Bearer ", "") === process.env.CRON_SECRET;
+  return isValidCronAuth(authHeader);
 }
 
 type Task = {
