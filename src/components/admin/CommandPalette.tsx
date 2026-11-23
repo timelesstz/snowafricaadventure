@@ -1,40 +1,28 @@
 "use client";
 
 import { Command } from "cmdk";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import {
-  LayoutDashboard,
-  Users,
-  HandCoins,
-  BarChart3,
-  Settings,
-  Palette,
-  UserCog,
-  CreditCard,
-  CalendarDays,
-  ClipboardList,
-  MessageSquare,
-  Mountain,
-  Compass,
-  FileText,
-  Star,
-  MapPin,
-  Sun,
-  Home,
-  Image as ImageIcon,
-  AlertTriangle,
-  ArrowRightLeft,
-  PanelTop,
-  LayoutTemplate,
-  Search as SearchIcon,
-  Target,
-  Send,
-  Link2,
-  Inbox,
-  Plus,
-  type LucideIcon,
-} from "lucide-react";
+import { ClipboardList, MessageSquare, Plus, Search as SearchIcon, type LucideIcon } from "lucide-react";
+import { HOME_ITEM, NAV_GROUPS } from "./sidebar/nav-config";
+
+const OPEN_EVENT = "admin:command-palette";
+
+/** Opens the palette from anywhere (buttons in the top bar and the mobile menu). */
+export function openCommandPalette() {
+  window.dispatchEvent(new Event(OPEN_EVENT));
+}
+
+const noopSubscribe = () => () => {};
+
+/** "⌘" on Apple devices, "Ctrl" elsewhere; "Ctrl" during server render. */
+export function useModKeyLabel() {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => (/Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl"),
+    () => "Ctrl"
+  );
+}
 
 interface PaletteItem {
   id: string;
@@ -46,36 +34,18 @@ interface PaletteItem {
 }
 
 const items: PaletteItem[] = [
-  // Navigate
-  { id: "dashboard", label: "Dashboard", href: "/admin", icon: LayoutDashboard, group: "Navigate" },
-  { id: "homepage", label: "Homepage", href: "/admin/homepage", icon: Home, group: "Navigate" },
-  { id: "about-us", label: "About Us", href: "/admin/about-us", icon: Users, group: "Navigate" },
-  { id: "heroes", label: "Page Heroes", href: "/admin/heroes", icon: PanelTop, group: "Navigate" },
-  { id: "pages", label: "Page Builder", href: "/admin/pages", icon: LayoutTemplate, group: "Navigate" },
-  { id: "media", label: "Media Library", href: "/admin/media", icon: ImageIcon, group: "Navigate" },
-  { id: "routes", label: "Trekking Routes", href: "/admin/routes", icon: Mountain, group: "Navigate" },
-  { id: "safaris", label: "Safari Packages", href: "/admin/safaris", icon: Compass, group: "Navigate" },
-  { id: "destinations", label: "Destinations", href: "/admin/destinations", icon: MapPin, group: "Navigate" },
-  { id: "day-trips", label: "Day Trips", href: "/admin/day-trips", icon: Sun, group: "Navigate" },
-  { id: "blog", label: "Blog Posts", href: "/admin/blog", icon: FileText, group: "Navigate" },
-  { id: "reviews", label: "Reviews", href: "/admin/reviews", icon: Star, group: "Navigate" },
-  { id: "departures", label: "Departures", href: "/admin/departures", icon: CalendarDays, group: "Navigate" },
-  { id: "bookings", label: "Bookings", href: "/admin/bookings", icon: ClipboardList, group: "Navigate" },
-  { id: "inquiries", label: "Inquiries", href: "/admin/inquiries", icon: MessageSquare, keywords: "leads", group: "Navigate" },
-  { id: "partners", label: "Partners", href: "/admin/partners", icon: Users, group: "Navigate" },
-  { id: "commissions", label: "Commissions", href: "/admin/commissions", icon: HandCoins, group: "Navigate" },
-  { id: "payouts", label: "Payouts", href: "/admin/commissions/payouts", icon: CreditCard, group: "Navigate" },
-  { id: "invite-links", label: "Invite Links", href: "/admin/invite-links", icon: Link2, group: "Navigate" },
-  { id: "newsletter", label: "Newsletter", href: "/admin/newsletter", icon: Inbox, group: "Navigate" },
-  { id: "email-log", label: "Email Log", href: "/admin/email-log", icon: Send, group: "Navigate" },
-  { id: "analytics", label: "Analytics", href: "/admin/analytics", icon: BarChart3, group: "Navigate" },
-  { id: "conversion", label: "Conversion Analytics", href: "/admin/conversion-analytics", icon: Target, group: "Navigate" },
-  { id: "seo", label: "SEO Dashboard", href: "/admin/seo", icon: SearchIcon, group: "Navigate" },
-  { id: "404-monitor", label: "404 Monitor", href: "/admin/404-monitor", icon: AlertTriangle, group: "Navigate" },
-  { id: "redirects", label: "Redirects", href: "/admin/redirects", icon: ArrowRightLeft, group: "Navigate" },
-  { id: "theme", label: "Theme", href: "/admin/theme", icon: Palette, group: "Navigate" },
-  { id: "settings", label: "Settings", href: "/admin/settings", icon: Settings, group: "Navigate" },
-  { id: "users", label: "User Management", href: "/admin/users", icon: UserCog, group: "Navigate" },
+  // Navigate: the same list as the sidebar, so the two never drift apart.
+  { id: HOME_ITEM.href, label: HOME_ITEM.label, href: HOME_ITEM.href, icon: HOME_ITEM.icon, group: "Navigate" },
+  ...NAV_GROUPS.flatMap((g) =>
+    g.items.map((item): PaletteItem => ({
+      id: item.href,
+      label: item.label,
+      href: item.href,
+      icon: item.icon,
+      keywords: g.label,
+      group: "Navigate",
+    }))
+  ),
   // Create quick actions
   { id: "new-departure", label: "New departure", href: "/admin/departures/new", icon: Plus, keywords: "create add", group: "Create" },
   { id: "new-blog", label: "New blog post", href: "/admin/blog/new", icon: Plus, keywords: "create add", group: "Create" },
@@ -119,8 +89,13 @@ export function CommandPalette() {
         setOpen((v) => !v);
       }
     };
+    const onOpen = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener(OPEN_EVENT, onOpen);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener(OPEN_EVENT, onOpen);
+    };
   }, []);
 
   // Debounced customer lookup — searches bookings and inquiries by name/email

@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metaDesc = destination.metaDescription || destination.description.slice(0, 160);
 
   return genMeta({
-    title: destination.name,
+    title: destination.metaTitle || destination.name,
     description: metaDesc,
     url: `/tanzania-destinations/${destSlug}/`,
   });

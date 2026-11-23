@@ -1,10 +1,5 @@
 import prisma from "@/lib/prisma";
 import {
-  scoreSafariSeo,
-  scoreRouteSeo,
-  scoreDestinationSeo,
-  scoreDayTripSeo,
-  scoreBlogSeo,
   aggregateSeoScores,
   type SeoScoreResult,
   type AggregateSeoResult,
@@ -13,6 +8,12 @@ import {
   computeHealthScore,
   type HealthScoreComponent,
 } from "@/lib/seo-health-score";
+import {
+  buildActionQueue,
+  estimateQuickWinGain,
+  type SeoAction,
+} from "@/lib/seo-action-queue";
+import { failedChecks, loadContentIndex } from "@/lib/seo-intel/content-index";
 
 export { computeHealthScore };
 export type { HealthScoreComponent };
@@ -38,6 +39,8 @@ export type { HealthScoreComponent };
 // ─── Types ───────────────────────────────────────────────────────────────
 
 export type SeoDataSourceKey = "GSC" | "GA4";
+
+export type ContentKind = "route" | "safari" | "destination" | "day-trip" | "blog";
 
 export interface SyncFreshness {
   source: SeoDataSourceKey;
@@ -106,6 +109,10 @@ export interface QuickWin {
   impressions: number;
   position: number;
   ctr: number;
+  /** The page that earns most of this query's impressions. */
+  page: string | null;
+  /** Extra clicks over 28 days if it reached #3 (see CTR_AT_POSITION_3). */
+  estimatedGain: number;
 }
 
 export interface IssueBreakdown {
@@ -137,6 +144,21 @@ export interface SeoOverviewData {
   quickWins: QuickWin[];
   dailyMetrics: DailyMetric[];
   health: HealthScore;
+  /** The dates each summary actually covers (inclusive), after lag anchoring. */
+  period: {
+    rangeDays: number;
+    gsc: { from: string; to: string } | null;
+    ga: { from: string; to: string } | null;
+  };
+  /** Latest audit per URL. */
+  audit: {
+    pagesAudited: number;
+    avgScore: number | null;
+    missingSchema: number;
+    lastAuditAt: string | null;
+  };
+  /** Ranked "fix next" list. */
+  actions: SeoAction[];
 }
 
 // ─── Internal helpers ────────────────────────────────────────────────────
@@ -178,7 +200,7 @@ async function aggregateGsc(from: Date, to?: Date) {
   return { clicks, impressions, ctr, position };
 }
 
-async function dailyGscMetrics(from: Date): Promise<DailyMetric[]> {
+async function dailyGscMetrics(from: Date, to: Date): Promise<DailyMetric[]> {
   const rows = await prisma.$queryRaw<
     Array<{
       date: Date;
@@ -193,7 +215,7 @@ async function dailyGscMetrics(from: Date): Promise<DailyMetric[]> {
       SUM(impressions)::bigint             AS impressions,
       SUM(position * impressions)::float8  AS weighted_position_sum
     FROM "GscPageMetric"
-    WHERE date >= ${from}
+    WHERE date >= ${from} AND date < ${to}
     GROUP BY date
     ORDER BY date ASC
   `;
@@ -228,7 +250,7 @@ async function aggregateGa4(from: Date, to?: Date) {
   };
 }
 
-async function loadFreshness(now: Date): Promise<{ gsc: SyncFreshness; ga: SyncFreshness }> {
+export async function loadFreshness(now: Date = new Date()): Promise<{ gsc: SyncFreshness; ga: SyncFreshness }> {
   const [gscLog, gaLog] = await Promise.all([
     prisma.seoSyncLog.findFirst({
       where: { source: "GSC" },
@@ -274,115 +296,39 @@ async function loadFreshness(now: Date): Promise<{ gsc: SyncFreshness; ga: SyncF
 
 // ─── Content-health loader (mirrors content-health/page.tsx) ─────────────
 
+export interface ContentScoreItem {
+  id: string;
+  kind: ContentKind;
+  title: string;
+  editHref: string;
+  /** Inactive / unpublished items are scored but never queued as actions. */
+  isLive: boolean;
+  score: number;
+  band: SeoScoreResult["band"];
+  /** Labels of failed checks, most important first (scorer order). */
+  failedChecks: string[];
+}
+
 export async function loadContentScores(): Promise<{
   results: SeoScoreResult[];
+  items: ContentScoreItem[];
   missingMetaDescription: number;
 }> {
-  const [routes, safaris, destinations, dayTrips, blogPosts] = await Promise.all([
-    prisma.trekkingRoute.findMany({}),
-    prisma.safariPackage.findMany({ include: { destinations: true } }),
-    prisma.destination.findMany({ include: { _count: { select: { safaris: true } } } }),
-    prisma.dayTrip.findMany({}),
-    prisma.blogPost.findMany({ include: { _count: { select: { categories: true, tags: true } } } }),
-  ]);
-
-  const results: SeoScoreResult[] = [];
-  let missingMeta = 0;
-
-  const tally = (metaDescription: string | null | undefined) => {
-    if (!metaDescription || !metaDescription.trim()) missingMeta++;
+  const records = await loadContentIndex();
+  return {
+    results: records.map((r) => r.result),
+    items: records.map((r) => ({
+      id: r.id,
+      kind: r.kind,
+      title: r.title,
+      editHref: r.editHref,
+      isLive: r.isLive,
+      score: r.result.score,
+      band: r.result.band,
+      failedChecks: failedChecks(r.result),
+    })),
+    missingMetaDescription: records.filter((r) => !r.metaDescription?.trim()).length,
   };
-
-  for (const r of routes) {
-    tally(r.metaDescription);
-    results.push(
-      scoreRouteSeo({
-        title: r.title,
-        metaTitle: r.metaTitle,
-        metaDescription: r.metaDescription,
-        overview: r.overview,
-        featuredImage: r.featuredImage,
-        gallery: r.gallery,
-        highlights: r.highlights,
-        inclusions: r.inclusions,
-        exclusions: r.exclusions,
-        itinerary: r.itinerary,
-        faqs: r.faqs,
-        guideName: r.guideName,
-      })
-    );
-  }
-  for (const s of safaris) {
-    tally(s.metaDescription);
-    results.push(
-      scoreSafariSeo({
-        title: s.title,
-        metaTitle: s.metaTitle,
-        metaDescription: s.metaDescription,
-        overview: s.overview,
-        featuredImage: s.featuredImage,
-        gallery: s.gallery,
-        highlights: s.highlights,
-        inclusions: s.inclusions,
-        exclusions: s.exclusions,
-        itinerary: s.itinerary,
-        destinationCount: s.destinations.length,
-      })
-    );
-  }
-  for (const d of destinations) {
-    tally(d.metaDescription);
-    results.push(
-      scoreDestinationSeo({
-        name: d.name,
-        metaTitle: d.metaTitle,
-        metaDescription: d.metaDescription,
-        description: d.description,
-        featuredImage: d.featuredImage,
-        gallery: d.gallery,
-        highlights: d.highlights,
-        wildlife: d.wildlife,
-        bestTime: d.bestTime,
-        safariCount: d._count.safaris,
-      })
-    );
-  }
-  for (const t of dayTrips) {
-    tally(t.metaDescription);
-    results.push(
-      scoreDayTripSeo({
-        title: t.title,
-        metaTitle: t.metaTitle,
-        metaDescription: t.metaDescription,
-        description: t.description,
-        featuredImage: t.featuredImage,
-        gallery: t.gallery,
-        highlights: t.highlights,
-        inclusions: t.inclusions,
-        exclusions: t.exclusions,
-        destination: t.destination,
-      })
-    );
-  }
-  for (const p of blogPosts) {
-    tally(p.metaDescription);
-    results.push(
-      scoreBlogSeo({
-        title: p.title,
-        metaTitle: p.metaTitle,
-        metaDescription: p.metaDescription,
-        excerpt: p.excerpt,
-        content: p.content,
-        featuredImage: p.featuredImage,
-        author: p.author,
-        categoryCount: p._count.categories,
-        tagCount: p._count.tags,
-        isPublished: p.isPublished,
-      })
-    );
-  }
-
-  return { results, missingMetaDescription: missingMeta };
 }
 
 // ─── Public entry point ──────────────────────────────────────────────────
@@ -394,14 +340,78 @@ interface GetSeoOverviewOptions {
   now?: Date;
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Search Console data lands 2-3 days late, so a window ending "now" holds
+ * two or three empty days and every week-over-week trend reads as a drop.
+ * Anchor each window to the last day that actually has data instead.
+ *
+ * Returns the exclusive upper bound (start of the day after `latest`), or
+ * `now` when there is no data at all.
+ */
+export function anchorWindowEnd(latest: Date | null, now: Date): Date {
+  if (!latest) return now;
+  const end = new Date(latest);
+  end.setUTCHours(0, 0, 0, 0);
+  const exclusive = new Date(end.getTime() + DAY_MS);
+  return exclusive.getTime() > now.getTime() ? now : exclusive;
+}
+
+function isoDay(d: Date): string {
+  return d.toISOString().split("T")[0];
+}
+
+/** Latest audit per URL — history rows must not inflate counts or averages. */
+async function latestAuditSummary() {
+  const rows = await prisma.$queryRaw<
+    Array<{
+      pages: number | bigint | null;
+      avg_score: number | null;
+      missing_schema: number | bigint | null;
+      last_audit: Date | null;
+    }>
+  >`
+    SELECT
+      COUNT(*)::int                                   AS pages,
+      AVG(score)::float8                              AS avg_score,
+      COUNT(*) FILTER (WHERE NOT "hasSchema")::int    AS missing_schema,
+      MAX("createdAt")                                AS last_audit
+    FROM (
+      SELECT DISTINCT ON (url) url, score, "hasSchema", "createdAt"
+      FROM "SeoPageAudit"
+      -- Audits of a local dev server describe no real page.
+      WHERE url NOT LIKE 'http://localhost%' AND url NOT LIKE 'http://127.0.0.1%'
+      ORDER BY url, "createdAt" DESC
+    ) latest
+  `;
+  const row = rows[0];
+  return {
+    pagesAudited: Number(row?.pages ?? 0),
+    avgScore: row?.avg_score === null || row?.avg_score === undefined ? null : Number(row.avg_score),
+    missingSchema: Number(row?.missing_schema ?? 0),
+    lastAuditAt: row?.last_audit ?? null,
+  };
+}
+
 export async function getSeoOverview(
   options: GetSeoOverviewOptions = {}
 ): Promise<SeoOverviewData> {
   const now = options.now ?? new Date();
   const rangeDays = options.rangeDays ?? 7;
 
-  const currentFrom = new Date(now.getTime() - rangeDays * 24 * 60 * 60 * 1000);
-  const priorFrom = new Date(now.getTime() - rangeDays * 2 * 24 * 60 * 60 * 1000);
+  const [gscBounds, gaBounds] = await Promise.all([
+    prisma.gscPageMetric.aggregate({ _max: { date: true } }),
+    prisma.gaOrganicMetric.aggregate({ _max: { date: true } }),
+  ]);
+  const gscEnd = anchorWindowEnd(gscBounds._max.date ?? null, now);
+  const gaEnd = anchorWindowEnd(gaBounds._max.date ?? null, now);
+
+  const currentFrom = new Date(gscEnd.getTime() - rangeDays * DAY_MS);
+  const priorFrom = new Date(gscEnd.getTime() - rangeDays * 2 * DAY_MS);
+  const gaCurrentFrom = new Date(gaEnd.getTime() - rangeDays * DAY_MS);
+  const gaPriorFrom = new Date(gaEnd.getTime() - rangeDays * 2 * DAY_MS);
+  const quickWinFrom = new Date(gscEnd.getTime() - 28 * DAY_MS);
 
   const [
     gscCurrent,
@@ -413,63 +423,82 @@ export async function getSeoOverview(
     topPagesRaw,
     quickWinsRaw,
     contentScores,
-    auditAvg,
+    audit,
     active404Count,
-    missingSchemaCount,
+    top404s,
     freshness,
     snapshotsRaw,
   ] = await Promise.all([
-    aggregateGsc(currentFrom, now),
+    aggregateGsc(currentFrom, gscEnd),
     aggregateGsc(priorFrom, currentFrom),
-    aggregateGa4(currentFrom, now),
-    aggregateGa4(priorFrom, currentFrom),
-    dailyGscMetrics(currentFrom),
+    aggregateGa4(gaCurrentFrom, gaEnd),
+    aggregateGa4(gaPriorFrom, gaCurrentFrom),
+    dailyGscMetrics(currentFrom, gscEnd),
     prisma.gscSearchQuery.groupBy({
       by: ["query"],
-      where: { date: { gte: currentFrom } },
+      where: { date: { gte: currentFrom, lt: gscEnd } },
       _sum: { clicks: true, impressions: true },
       orderBy: { _sum: { clicks: "desc" } },
       take: 10,
     }),
     prisma.gscPageMetric.groupBy({
       by: ["page"],
-      where: { date: { gte: currentFrom } },
+      where: { date: { gte: currentFrom, lt: gscEnd } },
       _sum: { clicks: true, impressions: true },
       orderBy: { _sum: { clicks: "desc" } },
       take: 10,
     }),
-    // Quick wins: queries in positions 4-10 with >= 100 impressions over 28 days,
-    // ordered by impressions desc.
+    // Quick wins: queries in positions 4-10 with >= 100 impressions over the
+    // 28 days ending on the last day with data, plus the page that ranks.
     prisma.$queryRaw<
       Array<{
         query: string;
         clicks: bigint | number | null;
         impressions: bigint | number | null;
         weighted_position: number | null;
+        top_page: string | null;
       }>
     >`
-      SELECT
-        query,
-        SUM(clicks)::bigint                                                AS clicks,
-        SUM(impressions)::bigint                                           AS impressions,
-        (SUM(position * impressions) / NULLIF(SUM(impressions), 0))::float8 AS weighted_position
-      FROM "GscSearchQuery"
-      WHERE date >= ${new Date(now.getTime() - 28 * 24 * 60 * 60 * 1000)}
-      GROUP BY query
-      HAVING SUM(impressions) >= 100
-        AND (SUM(position * impressions) / NULLIF(SUM(impressions), 0)) BETWEEN 4 AND 10
-      ORDER BY SUM(impressions) DESC
-      LIMIT 10
+      WITH q AS (
+        SELECT
+          query,
+          SUM(clicks)::bigint                                                 AS clicks,
+          SUM(impressions)::bigint                                            AS impressions,
+          (SUM(position * impressions) / NULLIF(SUM(impressions), 0))::float8 AS weighted_position
+        FROM "GscSearchQuery"
+        WHERE date >= ${quickWinFrom} AND date < ${gscEnd}
+        GROUP BY query
+        HAVING SUM(impressions) >= 100
+          AND (SUM(position * impressions) / NULLIF(SUM(impressions), 0)) BETWEEN 4 AND 10
+        ORDER BY SUM(impressions) DESC
+        LIMIT 10
+      ),
+      p AS (
+        SELECT DISTINCT ON (s.query) s.query, s.page
+        FROM "GscSearchQuery" s
+        JOIN q ON q.query = s.query
+        WHERE s.date >= ${quickWinFrom} AND s.date < ${gscEnd} AND s.page IS NOT NULL
+        GROUP BY s.query, s.page
+        ORDER BY s.query, SUM(s.impressions) DESC
+      )
+      SELECT q.*, p.page AS top_page
+      FROM q LEFT JOIN p ON p.query = q.query
+      ORDER BY q.impressions DESC
     `,
     loadContentScores(),
-    prisma.seoPageAudit.aggregate({ _avg: { score: true }, _count: { _all: true } }),
+    latestAuditSummary(),
     prisma.notFoundUrl.count({
       where: { status: "ACTIVE", hitCount: { gte: 5 } },
     }),
-    prisma.seoPageAudit.count({ where: { hasSchema: false } }),
+    prisma.notFoundUrl.findMany({
+      where: { status: "ACTIVE", hitCount: { gte: 5 } },
+      orderBy: [{ humanHitCount: "desc" }, { hitCount: "desc" }],
+      take: 3,
+      select: { url: true, hitCount: true, humanHitCount: true },
+    }),
     loadFreshness(now),
     prisma.seoHealthSnapshot.findMany({
-      where: { date: { gte: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000) } },
+      where: { date: { gte: new Date(now.getTime() - 30 * DAY_MS) } },
       orderBy: { date: "asc" },
       select: { date: true, healthScore: true },
     }),
@@ -508,22 +537,15 @@ export async function getSeoOverview(
     hasData: gaCurrent.sessions > 0 || gaCurrent.users > 0,
   };
 
-  // Top queries / pages — recompute weighted CTR/position per group from raw sums.
-  // The Prisma groupBy has summed clicks & impressions; we can't easily get
-  // weighted position from a single groupBy, so for top-N we query the raw
-  // weighted figures separately.
+  // Top queries / pages — weighted position per group needs the raw rows,
+  // which a Prisma groupBy cannot express, so fetch it for the top-N only.
   const queryNames = topQueriesRaw.map((q) => q.query);
   const queryStats = queryNames.length
-    ? await prisma.$queryRaw<
-        Array<{
-          query: string;
-          weighted_position: number | null;
-        }>
-      >`
+    ? await prisma.$queryRaw<Array<{ query: string; weighted_position: number | null }>>`
         SELECT query,
           (SUM(position * impressions) / NULLIF(SUM(impressions), 0))::float8 AS weighted_position
         FROM "GscSearchQuery"
-        WHERE date >= ${currentFrom}
+        WHERE date >= ${currentFrom} AND date < ${gscEnd}
           AND query = ANY(${queryNames}::text[])
         GROUP BY query
       `
@@ -545,16 +567,11 @@ export async function getSeoOverview(
 
   const pagePaths = topPagesRaw.map((p) => p.page);
   const pageStats = pagePaths.length
-    ? await prisma.$queryRaw<
-        Array<{
-          page: string;
-          weighted_position: number | null;
-        }>
-      >`
+    ? await prisma.$queryRaw<Array<{ page: string; weighted_position: number | null }>>`
         SELECT page,
           (SUM(position * impressions) / NULLIF(SUM(impressions), 0))::float8 AS weighted_position
         FROM "GscPageMetric"
-        WHERE date >= ${currentFrom}
+        WHERE date >= ${currentFrom} AND date < ${gscEnd}
           AND page = ANY(${pagePaths}::text[])
         GROUP BY page
       `
@@ -584,6 +601,8 @@ export async function getSeoOverview(
       impressions,
       position: Math.round(position * 10) / 10,
       ctr: impressions > 0 ? Math.round((clicks / impressions) * 10000) / 100 : 0,
+      page: q.top_page,
+      estimatedGain: estimateQuickWinGain(impressions, clicks),
     };
   });
 
@@ -594,12 +613,12 @@ export async function getSeoOverview(
     needsAttentionContent: needsAttention,
     active404s: active404Count,
     missingMetaDescription: contentScores.missingMetaDescription,
-    missingSchema: missingSchemaCount,
+    missingSchema: audit.missingSchema,
     total:
       needsAttention +
       active404Count +
       contentScores.missingMetaDescription +
-      missingSchemaCount,
+      audit.missingSchema,
   };
 
   // Health score with renormalized components
@@ -608,16 +627,38 @@ export async function getSeoOverview(
     weightedCtr: gsc.hasData ? gscCurrent.ctr : null,
     weightedPosition: gsc.hasData ? gscCurrent.position : null,
     active404s: active404Count,
-    auditAvg: auditAvg._count._all > 0 ? auditAvg._avg.score : null,
+    auditAvg: audit.avgScore,
     contentCount: contentAggregate.count,
   });
 
   const trend = snapshotsRaw.map((s) => ({
-    date: s.date.toISOString().split("T")[0],
+    date: isoDay(s.date),
     score: s.healthScore,
   }));
-  const scoreThirtyDaysAgo = trend.length > 0 ? trend[0].score : null;
+  // A delta against a snapshot taken hours ago (or under an older formula on
+  // the same day) is noise; only report change over at least a week.
+  const oldest = snapshotsRaw[0];
+  const hasHistory = oldest !== undefined && now.getTime() - oldest.date.getTime() >= 7 * DAY_MS;
+  const scoreThirtyDaysAgo = hasHistory ? oldest.healthScore : null;
   const delta = scoreThirtyDaysAgo === null ? null : healthScore - scoreThirtyDaysAgo;
+
+  const daysSinceLastAudit = audit.lastAuditAt
+    ? Math.floor((now.getTime() - audit.lastAuditAt.getTime()) / DAY_MS)
+    : null;
+
+  const actions = buildActionQueue({
+    freshness: [freshness.gsc, freshness.ga],
+    weakContent: contentScores.items.filter(
+      (i) => i.isLive && (i.band === "poor" || i.band === "needs-work")
+    ),
+    quickWins,
+    top404s,
+    audit: {
+      pagesAudited: audit.pagesAudited,
+      missingSchema: audit.missingSchema,
+      daysSinceLastAudit,
+    },
+  });
 
   return {
     gsc,
@@ -636,5 +677,21 @@ export async function getSeoOverview(
       scoreThirtyDaysAgo,
       delta,
     },
+    period: {
+      rangeDays,
+      gsc: gscBounds._max.date
+        ? { from: isoDay(currentFrom), to: isoDay(new Date(gscEnd.getTime() - DAY_MS)) }
+        : null,
+      ga: gaBounds._max.date
+        ? { from: isoDay(gaCurrentFrom), to: isoDay(new Date(gaEnd.getTime() - DAY_MS)) }
+        : null,
+    },
+    audit: {
+      pagesAudited: audit.pagesAudited,
+      avgScore: audit.avgScore === null ? null : Math.round(audit.avgScore),
+      missingSchema: audit.missingSchema,
+      lastAuditAt: audit.lastAuditAt ? audit.lastAuditAt.toISOString() : null,
+    },
+    actions,
   };
 }

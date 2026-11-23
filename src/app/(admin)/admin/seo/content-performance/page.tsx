@@ -418,8 +418,8 @@ async function getContentPerformance(range: DateRange): Promise<ContentItem[]> {
 }
 
 function pctChange(current: number, previous: number): number | null {
-  if (previous === 0 && current === 0) return null;
-  if (previous === 0) return 100;
+  // No baseline: a percentage from zero is meaningless, so show no change badge.
+  if (previous === 0) return null;
   return Math.round(((current - previous) / previous) * 100);
 }
 

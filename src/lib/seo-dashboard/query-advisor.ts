@@ -76,7 +76,8 @@ const EXPECTED_CTR: Record<number, number> = {
   10: 2.4,
 };
 
-function getExpectedCtr(position: number): number {
+/** Expected organic CTR (percent) at a given average position. */
+export function getExpectedCtr(position: number): number {
   const rounded = Math.min(Math.max(Math.round(position), 1), 100);
   if (rounded <= 10) return EXPECTED_CTR[rounded] || 2.4;
   if (rounded <= 15) return 1.8;

@@ -587,11 +587,15 @@ export default function BookingDetailPage() {
         method: "DELETE",
       });
 
-      if (!response.ok) throw new Error("Failed to delete booking");
+      if (!response.ok) {
+        // 409 explains why (money paid, commission earned); show that, not a generic error.
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? "Failed to delete booking");
+      }
 
       router.push("/admin/bookings");
-    } catch {
-      setError("Failed to delete booking");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete booking");
       setSaving(false);
     }
   };

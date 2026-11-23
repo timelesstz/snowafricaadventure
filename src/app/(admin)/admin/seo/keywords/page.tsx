@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Trash2, TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { clsx } from "clsx";
 import {
   ResponsiveContainer,
   LineChart,
