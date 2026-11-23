@@ -186,6 +186,15 @@ async function getHomepageSettings() {
   }
 }
 
+// Must match images.remotePatterns in next.config.ts.
+const R2_ENDPOINT_HOST = (() => {
+  try {
+    return process.env.R2_ENDPOINT ? new URL(process.env.R2_ENDPOINT).hostname : null;
+  } catch {
+    return null;
+  }
+})();
+
 const ALLOWED_IMAGE_HOSTS = [
   "pub-cf9450d27ca744f1825d1e08b392f592.r2.dev",
   "cdn.snowafricaadventure.com",
@@ -196,7 +205,7 @@ function safeImageUrl(url: string | null | undefined, fallback: string): string 
   if (!url) return fallback;
   try {
     const hostname = new URL(url).hostname;
-    if (ALLOWED_IMAGE_HOSTS.some((h) => hostname === h || hostname.endsWith(".r2.cloudflarestorage.com"))) return url;
+    if (ALLOWED_IMAGE_HOSTS.some((h) => hostname === h || (R2_ENDPOINT_HOST !== null && hostname === R2_ENDPOINT_HOST))) return url;
   } catch {}
   return fallback;
 }

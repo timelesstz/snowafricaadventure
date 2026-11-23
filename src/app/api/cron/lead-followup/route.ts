@@ -1,3 +1,4 @@
+import { isValidCronAuth } from "@/lib/cron-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { BookingStatus } from "@prisma/client";
@@ -14,11 +15,7 @@ import {
 
 // Verify cron secret
 function verifyCronSecret(request: NextRequest): boolean {
-  const authHeader = request.headers.get("authorization");
-  if (!authHeader) return false;
-
-  const token = authHeader.replace("Bearer ", "");
-  return token === process.env.CRON_SECRET;
+  return isValidCronAuth(request.headers.get("authorization"));
 }
 
 async function getNumericSetting(key: string, fallback: number): Promise<number> {

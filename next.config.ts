@@ -1,5 +1,36 @@
 import type { NextConfig } from "next";
 
+function hostOf(url: string | undefined): string | null {
+  try {
+    return url ? new URL(url).hostname : null;
+  } catch {
+    return null;
+  }
+}
+
+const r2EndpointHost = hostOf(process.env.R2_ENDPOINT);
+
+// Content Security Policy, sent as Report-Only: browsers log what it would
+// block (DevTools console) without blocking anything. Switch the header key to
+// "Content-Security-Policy" once a few weeks of normal use show no violations.
+// 'unsafe-inline' scripts stay allowed because Next.js and GA inject inline
+// scripts and this site does not use nonces.
+const CSP = [
+  "default-src 'self'",
+  // Google hosts follow Google's CSP guide for GA4 + Google Ads (gtag AW-… via Tag Manager).
+  "script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://cdn.trustindex.io https://www.trustindex.io https://www.jscache.com https://static.tacdn.com https://www.tripadvisor.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.trustindex.io",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data: https://fonts.gstatic.com https://cdn.trustindex.io",
+  "connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://ad.doubleclick.net https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com https://*.trustindex.io",
+  "frame-src 'self' https://td.doubleclick.net https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.google.com https://www.tripadvisor.com https://*.trustindex.io",
+  "media-src 'self' https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev https://cdn.snowafricaadventure.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+].join("; ");
+
 const nextConfig: NextConfig = {
   // CRITICAL FOR SEO: WordPress uses trailing slashes
   trailingSlash: true,
@@ -17,10 +48,11 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "*.r2.cloudflarestorage.com",
-      },
+      // Only this account's R2 S3 endpoint, never any bucket on *.r2.cloudflarestorage.com,
+      // so the image optimizer cannot be used to proxy someone else's files.
+      ...(r2EndpointHost
+        ? [{ protocol: "https" as const, hostname: r2EndpointHost }]
+        : []),
       {
         protocol: "https",
         hostname: "pub-cf9450d27ca744f1825d1e08b392f592.r2.dev",
@@ -40,8 +72,7 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Security headers. No CSP yet (would need nonce work for GA/inline scripts).
-  // When two entries match, the later one wins, so /admin gets DENY.
+  // Security headers. When two entries match, the later one wins, so /admin gets DENY.
   async headers() {
     return [
       {
@@ -52,6 +83,7 @@ const nextConfig: NextConfig = {
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+          { key: "Content-Security-Policy-Report-Only", value: CSP },
         ],
       },
       {
