@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { after } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidateDeparturePages } from "@/lib/revalidate-public";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { BookingStatus } from "@prisma/client";
@@ -237,7 +237,7 @@ export async function POST(request: NextRequest) {
 
     // Requests count toward the seats-left shown on the page, so refresh it now
     // instead of waiting for the 60-second revalidation.
-    revalidatePath("/kilimanjaro-join-group-departures/");
+    revalidateDeparturePages();
 
     // Commission, newsletter, emails, and notification all run after the
     // response is sent — after() keeps the serverless function alive

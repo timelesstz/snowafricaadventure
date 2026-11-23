@@ -21,6 +21,10 @@ import { findRelatedBlogPosts } from "@/lib/related-content";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import prisma from "@/lib/prisma";
 
+// Cache each route page for 5 minutes (ISR) like the other content pages.
+// Admin saves and seat changes refresh it at once via revalidateRoutePages().
+export const revalidate = 300;
+
 interface PageProps {
   params: Promise<{ routeSlug: string }>;
 }

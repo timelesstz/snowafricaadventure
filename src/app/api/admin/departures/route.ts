@@ -1,6 +1,7 @@
 import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidateDeparturePages } from "@/lib/revalidate-public";
 import { AdminRole, DepartureStatus } from "@prisma/client";
 import { SPOT_HOLDING_STATUSES } from "@/lib/booking-spots";
 import { ZodError } from "zod";
@@ -131,6 +132,7 @@ export async function POST(request: Request) {
       },
     });
 
+    revalidateDeparturePages();
     return NextResponse.json(departure, { status: 201 });
   } catch (error) {
     if (error instanceof ZodError) {

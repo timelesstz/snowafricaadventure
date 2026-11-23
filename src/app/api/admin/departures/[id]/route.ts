@@ -1,6 +1,7 @@
 import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidateDeparturePages } from "@/lib/revalidate-public";
 import { AdminRole, DepartureStatus, Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 import { adminDepartureUpdateSchema } from "@/lib/schemas";
@@ -130,6 +131,7 @@ export async function PUT(
       },
     });
 
+    revalidateDeparturePages();
     return NextResponse.json(departure);
   } catch (error) {
     if (error instanceof ZodError) {
@@ -188,6 +190,7 @@ export async function DELETE(
       where: { id },
     });
 
+    revalidateDeparturePages();
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting departure:", error);
