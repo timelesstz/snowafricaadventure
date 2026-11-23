@@ -1,3 +1,4 @@
+import { isValidCronAuth } from "@/lib/cron-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
@@ -11,9 +12,7 @@ import {
 export const maxDuration = 60;
 
 function verifyCronSecret(request: NextRequest): boolean {
-  const authHeader = request.headers.get("authorization");
-  if (!authHeader) return false;
-  return authHeader.replace("Bearer ", "") === process.env.CRON_SECRET;
+  return isValidCronAuth(request.headers.get("authorization"));
 }
 
 // Authorized when called by Vercel Cron (secret) OR a signed-in admin, so the

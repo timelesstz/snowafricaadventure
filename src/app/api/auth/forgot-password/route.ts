@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { randomBytes } from "crypto";
+import { createResetToken } from "@/lib/reset-token";
 import { sendEmail } from "@/lib/email";
 import {
   getClientIp,
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate reset token
-    const token = randomBytes(32).toString("hex");
+    const { token, tokenHash } = createResetToken();
     const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
     // Delete any existing tokens for this user
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     // Create new token
     await prisma.passwordResetToken.create({
       data: {
-        token,
+        token: tokenHash,
         userId: user.id,
         expiresAt,
       },

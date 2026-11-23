@@ -1,3 +1,4 @@
+import { isValidCronAuth } from "@/lib/cron-auth";
 import { NextResponse } from "next/server";
 import { rotateDepartures } from "@/lib/services/departure-rotation";
 import { prisma } from "@/lib/prisma";
@@ -90,7 +91,7 @@ export async function GET(request: Request) {
     );
   }
 
-  if (authHeader !== `Bearer ${cronSecret}`) {
+  if (!isValidCronAuth(authHeader)) {
     return NextResponse.json(
       { error: "Unauthorized" },
       { status: 401 }

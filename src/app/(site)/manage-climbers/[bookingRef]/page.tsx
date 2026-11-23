@@ -26,12 +26,14 @@ interface ClimberDetails {
   email?: string;
   phone?: string;
   nationality?: string;
-  passportNumber?: string;
-  dateOfBirth?: string;
   dietaryRequirements?: string;
-  medicalConditions?: string;
   isComplete?: boolean;
+  // Passport, date of birth and medical notes are never sent to this page;
+  // the API only says whether each is already stored.
+  onFile?: { passportNumber: boolean; dateOfBirth: boolean; medicalConditions: boolean };
 }
+
+const ON_FILE_HINT = "On file. Leave blank to keep it.";
 
 interface ClimberData {
   index: number;
@@ -143,10 +145,10 @@ export default function ManageClimbersPage() {
       email: (climber.details?.email as string) || climber.email || "",
       phone: (climber.details?.phone as string) || "",
       nationality: (climber.details?.nationality as string) || "",
-      passportNumber: (climber.details?.passportNumber as string) || "",
-      dateOfBirth: (climber.details?.dateOfBirth as string) || "",
+      passportNumber: "",
+      dateOfBirth: "",
       dietaryRequirements: (climber.details?.dietaryRequirements as string) || "",
-      medicalConditions: (climber.details?.medicalConditions as string) || "",
+      medicalConditions: "",
       subscribeNewsletter: false,
     });
   };
@@ -535,6 +537,8 @@ export default function ManageClimbersPage() {
                           value={formData.passportNumber}
                           onChange={(e) => setFormData({ ...formData, passportNumber: e.target.value })}
                           className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
+                          placeholder={climber.details?.onFile?.passportNumber ? ON_FILE_HINT : undefined}
+                          autoComplete="off"
                         />
                       </div>
                       <div>
@@ -546,7 +550,13 @@ export default function ManageClimbersPage() {
                           value={formData.dateOfBirth}
                           onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
                           className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
+                          aria-describedby={climber.details?.onFile?.dateOfBirth ? `dob-on-file-${climber.index}` : undefined}
                         />
+                        {climber.details?.onFile?.dateOfBirth && (
+                          <p id={`dob-on-file-${climber.index}`} className="mt-1 text-xs text-[var(--text-muted)]">
+                            {ON_FILE_HINT}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-[var(--text)] mb-1">
@@ -569,7 +579,7 @@ export default function ManageClimbersPage() {
                           value={formData.medicalConditions}
                           onChange={(e) => setFormData({ ...formData, medicalConditions: e.target.value })}
                           className="w-full px-3 py-2 border border-[var(--border)] rounded-lg text-sm focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none"
-                          placeholder="e.g., Asthma"
+                          placeholder={climber.details?.onFile?.medicalConditions ? ON_FILE_HINT : "e.g., Asthma"}
                         />
                       </div>
                     </div>
