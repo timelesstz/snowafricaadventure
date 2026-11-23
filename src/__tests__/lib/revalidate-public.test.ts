@@ -1,0 +1,22 @@
+import { describe, it, expect, vi, beforeEach } from "vitest";
+
+const { revalidatePath } = vi.hoisted(() => ({ revalidatePath: vi.fn() }));
+vi.mock("next/cache", () => ({ revalidatePath }));
+
+import { revalidateRoutePages, revalidateDeparturePages } from "@/lib/revalidate-public";
+
+describe("revalidate-public", () => {
+  beforeEach(() => revalidatePath.mockClear());
+
+  it("refreshes every trekking route page", () => {
+    revalidateRoutePages();
+    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith("/trekking/[routeSlug]", "page");
+  });
+
+  it("refreshes the join page and every route page after a departure change", () => {
+    revalidateDeparturePages();
+    expect(revalidatePath).toHaveBeenCalledWith("/kilimanjaro-join-group-departures/");
+    expect(revalidatePath).toHaveBeenCalledWith("/trekking/[routeSlug]", "page");
+    expect(revalidatePath).toHaveBeenCalledTimes(2);
+  });
+});

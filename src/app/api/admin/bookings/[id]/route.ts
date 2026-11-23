@@ -1,7 +1,7 @@
 import { auth, requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidateDeparturePages } from "@/lib/revalidate-public";
 import { AdminRole, BookingStatus, Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 import { nanoid } from "nanoid";
@@ -342,7 +342,7 @@ export async function PUT(
     }
 
     // A status change can free or take seats shown on the public page.
-    revalidatePath("/kilimanjaro-join-group-departures/");
+    revalidateDeparturePages();
     return NextResponse.json(booking);
   } catch (error) {
     if (error instanceof SeatLimitError) {

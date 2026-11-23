@@ -16,6 +16,7 @@ import SlugTitleFields from "@/components/admin/SlugTitleFields";
 import MetaSeoFields from "@/components/admin/MetaSeoFields";
 import FormShell, { type FormShellState } from "@/components/admin/FormShell";
 import { disposeFormDeletions } from "@/lib/admin-media";
+import { revalidateRoutePages } from "@/lib/revalidate-public";
 
 async function getRoute(id: string) {
   if (id === "new") return null;
@@ -175,6 +176,7 @@ async function saveRoute(_prev: FormShellState, formData: FormData): Promise<For
     };
   }
 
+  revalidateRoutePages();
   redirect("/admin/routes");
 }
 
@@ -195,6 +197,7 @@ async function deleteRoute(formData: FormData) {
   }
 
   await prisma.trekkingRoute.delete({ where: { id } });
+  revalidateRoutePages();
   redirect("/admin/routes");
 }
 
