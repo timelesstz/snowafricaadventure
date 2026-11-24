@@ -343,7 +343,11 @@ function checkPresence(
 // ─── Shared assembly ─────────────────────────────────────────────────────
 
 function assemble(outputs: CheckOutput[], extraChecks: SeoCheck[] = []): SeoScoreResult {
-  const score = outputs.reduce((sum, o) => sum + o.points, 0);
+  // Scorers' weights don't all add up to 100 (routes total 110 since the guide
+  // check was added, which showed "105/100"), so scale the points to 0–100.
+  const points = outputs.reduce((sum, o) => sum + o.points, 0);
+  const possible = outputs.reduce((sum, o) => sum + o.check.weight, 0);
+  const score = possible > 0 ? Math.min(100, Math.round((points / possible) * 100)) : 0;
   const checks = [...outputs.map((o) => o.check), ...extraChecks];
   return {
     score,

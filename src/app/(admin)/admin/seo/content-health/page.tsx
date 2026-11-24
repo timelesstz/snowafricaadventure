@@ -1,581 +1,430 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { ArrowRight, ExternalLink, Pencil, Search } from "lucide-react";
+import { clsx } from "clsx";
+import { requireRole } from "@/lib/auth";
+import type { ContentKind } from "@/lib/seo-overview";
+import type { SeoBand } from "@/lib/seo-score";
+import { failedChecks, loadContentIndex } from "@/lib/seo-intel/content-index";
+import { gscWindow, pageAggs, recentChangesWithImpact } from "@/lib/seo-intel/data";
+import { CONTENT_KINDS, isContentKind, KIND_LABEL } from "@/lib/seo-intel/paths";
+import { changeImpact, contentPriority, ctrGap, EMPTY_AGG, pctChange, type ImpactVerdict } from "@/lib/seo-intel/rules";
+import MetaFixButton from "@/components/admin/seo/intel/MetaFixButton";
 import {
-  Mountain,
-  Compass,
-  MapPin,
-  Sun,
-  FileText,
-  AlertCircle,
-  AlertTriangle,
-  CheckCircle2,
-  TrendingUp,
-  ExternalLink,
-} from "lucide-react";
-import {
-  scoreSafariSeo,
-  scoreRouteSeo,
-  scoreDestinationSeo,
-  scoreDayTripSeo,
-  scoreBlogSeo,
-  aggregateSeoScores,
-  type SeoScoreResult,
-  type SeoBand,
-} from "@/lib/seo-score";
+  Delta,
+  EmptyState,
+  fmtInt,
+  fmtPct,
+  fmtPos,
+  fmtWindow,
+  Kpi,
+  Panel,
+  PageIntro,
+  Pill,
+  ScoreBadge,
+  TableScroll,
+  td,
+  tdNum,
+  th,
+  thNum,
+} from "@/components/admin/seo/intel/ui";
 
-/**
- * Global SEO content-health page.
- *
- * Loads every piece of content across the 5 scored types, computes its SEO
- * score once, and produces:
- *   1. A platform-wide aggregate (avg score, band counts, top failures).
- *   2. A backlog: content below 65 ("good") threshold, grouped by
- *      content type so editors can batch fixes.
- *   3. A cross-cutting "top gaps" view counting how many items share each
- *      failure label (e.g. "Meta description: 14 items missing") so
- *      campaigns like a meta-description sprint can be prioritized.
- */
+export const dynamic = "force-dynamic";
+export const metadata = { title: "Content health · SEO" };
 
-type ContentTypeKey = "route" | "safari" | "destination" | "daytrip" | "blog";
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
-interface HealthItem {
-  id: string;
-  title: string;
-  type: ContentTypeKey;
-  typeLabel: string;
-  result: SeoScoreResult;
-  editHref: string;
-  publicHref?: string;
-  isPublished: boolean;
-}
+const BANDS: Array<{ value: SeoBand | "all"; label: string }> = [
+  { value: "all", label: "All scores" },
+  { value: "poor", label: "Poor (under 40)" },
+  { value: "needs-work", label: "Needs work (40–59)" },
+  { value: "good", label: "Good (60–79)" },
+  { value: "excellent", label: "Excellent (80+)" },
+];
+const SORTS = [
+  { value: "priority", label: "Priority" },
+  { value: "score", label: "Lowest score" },
+  { value: "traffic", label: "Most impressions" },
+] as const;
+const PAGE_SIZE = 50;
 
-const TYPE_META: Record<
-  ContentTypeKey,
-  { label: string; icon: typeof Mountain; color: string }
-> = {
-  route: { label: "Trekking Route", icon: Mountain, color: "text-emerald-600" },
-  safari: { label: "Safari Package", icon: Compass, color: "text-amber-600" },
-  destination: { label: "Destination", icon: MapPin, color: "text-blue-600" },
-  daytrip: { label: "Day Trip", icon: Sun, color: "text-orange-600" },
-  blog: { label: "Blog Post", icon: FileText, color: "text-purple-600" },
+const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
+
+const IMPACT: Record<ImpactVerdict, { label: string; tone: "emerald" | "red" | "slate" | "sky" }> = {
+  improved: { label: "Improved", tone: "emerald" },
+  worse: { label: "Worse", tone: "red" },
+  flat: { label: "No change", tone: "slate" },
+  "too-early": { label: "Measuring", tone: "sky" },
 };
 
-async function loadHealthData(): Promise<HealthItem[]> {
-  const [routes, safaris, destinations, dayTrips, blogPosts] = await Promise.all([
-    prisma.trekkingRoute.findMany({
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.safariPackage.findMany({
-      orderBy: { createdAt: "desc" },
-      include: { destinations: true },
-    }),
-    prisma.destination.findMany({
-      orderBy: { createdAt: "desc" },
-      include: { _count: { select: { safaris: true } } },
-    }),
-    prisma.dayTrip.findMany({
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.blogPost.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        _count: { select: { categories: true, tags: true } },
-      },
-    }),
+export default async function ContentHealthPage({ searchParams }: { searchParams: SearchParams }) {
+  await requireRole("VIEWER");
+  const sp = await searchParams;
+  const kindFilter = isContentKind(one(sp.type)) ? (one(sp.type) as ContentKind) : null;
+  const bandFilter = BANDS.some((b) => b.value === one(sp.band)) ? (one(sp.band) as SeoBand | "all") : "all";
+  const liveFilter = one(sp.live) === "all" ? "all" : one(sp.live) === "draft" ? "draft" : "live";
+  const sort = SORTS.some((s) => s.value === one(sp.sort)) ? one(sp.sort) : "priority";
+  const q = one(sp.q).trim().toLowerCase();
+  const gap = one(sp.gap);
+  const page = Math.max(1, Number(one(sp.page)) || 1);
+
+  const window = await gscWindow(28);
+  const [records, traffic, previousTraffic, changes] = await Promise.all([
+    loadContentIndex(),
+    pageAggs(window.start, window.end),
+    pageAggs(window.prevStart, window.start),
+    recentChangesWithImpact(12),
   ]);
+  const hasSearchData = window.latest !== null;
 
-  const items: HealthItem[] = [];
+  const rows = records.map((r) => {
+    const agg = traffic.get(r.path) ?? EMPTY_AGG;
+    const prev = previousTraffic.get(r.path) ?? EMPTY_AGG;
+    return {
+      ...r,
+      fails: failedChecks(r.result),
+      agg,
+      prevClicks: prev.clicks,
+      clicksChange: pctChange(agg.clicks, prev.clicks),
+      gap: ctrGap(agg),
+      priority: contentPriority(r.result.score, r.kind, agg.impressions, ctrGap(agg)?.missedClicks ?? 0),
+    };
+  });
 
-  for (const r of routes) {
-    items.push({
-      id: r.id,
-      title: r.title,
-      type: "route",
-      typeLabel: TYPE_META.route.label,
-      result: scoreRouteSeo({
-        title: r.title,
-        metaTitle: r.metaTitle,
-        metaDescription: r.metaDescription,
-        overview: r.overview,
-        featuredImage: r.featuredImage,
-        gallery: r.gallery,
-        highlights: r.highlights,
-        inclusions: r.inclusions,
-        exclusions: r.exclusions,
-        itinerary: r.itinerary,
-        faqs: r.faqs,
-        guideName: r.guideName,
-      }),
-      editHref: `/admin/routes/${r.id}`,
-      publicHref: `/trekking/${r.slug}/`,
-      isPublished: r.isActive,
-    });
-  }
+  const live = rows.filter((r) => r.isLive);
+  const weak = live.filter((r) => r.result.score < 60);
+  const avg = live.length ? Math.round(live.reduce((s, r) => s + r.result.score, 0) / live.length) : 0;
+  const missingDesc = live.filter((r) => !r.metaDescription?.trim()).length;
+  const atRiskImpr = weak.reduce((s, r) => s + r.agg.impressions, 0);
+  const totalImpr = live.reduce((s, r) => s + r.agg.impressions, 0);
+  const snippetLosses = live.filter((r) => r.gap).sort((a, b) => b.gap!.missedClicks - a.gap!.missedClicks);
 
-  for (const s of safaris) {
-    items.push({
-      id: s.id,
-      title: s.title,
-      type: "safari",
-      typeLabel: TYPE_META.safari.label,
-      result: scoreSafariSeo({
-        title: s.title,
-        metaTitle: s.metaTitle,
-        metaDescription: s.metaDescription,
-        overview: s.overview,
-        featuredImage: s.featuredImage,
-        gallery: s.gallery,
-        highlights: s.highlights,
-        inclusions: s.inclusions,
-        exclusions: s.exclusions,
-        itinerary: s.itinerary,
-        destinationCount: s.destinations.length,
-      }),
-      editHref: `/admin/safaris/${s.id}`,
-      publicHref: `/tanzania-safaris/${s.slug}/`,
-      isPublished: s.isActive,
-    });
-  }
-
-  for (const d of destinations) {
-    items.push({
-      id: d.id,
-      title: d.name,
-      type: "destination",
-      typeLabel: TYPE_META.destination.label,
-      result: scoreDestinationSeo({
-        name: d.name,
-        metaTitle: d.metaTitle,
-        metaDescription: d.metaDescription,
-        description: d.description,
-        featuredImage: d.featuredImage,
-        gallery: d.gallery,
-        highlights: d.highlights,
-        wildlife: d.wildlife,
-        bestTime: d.bestTime,
-        safariCount: d._count.safaris,
-      }),
-      editHref: `/admin/destinations/${d.id}`,
-      publicHref: `/tanzania-destinations/${d.slug}/`,
-      isPublished: d.isActive,
-    });
-  }
-
-  for (const t of dayTrips) {
-    items.push({
-      id: t.id,
-      title: t.title,
-      type: "daytrip",
-      typeLabel: TYPE_META.daytrip.label,
-      result: scoreDayTripSeo({
-        title: t.title,
-        metaTitle: t.metaTitle,
-        metaDescription: t.metaDescription,
-        description: t.description,
-        featuredImage: t.featuredImage,
-        gallery: t.gallery,
-        highlights: t.highlights,
-        inclusions: t.inclusions,
-        exclusions: t.exclusions,
-        destination: t.destination,
-      }),
-      editHref: `/admin/day-trips/${t.id}`,
-      publicHref: `/tanzania-day-tours/${t.slug}/`,
-      isPublished: t.isActive,
-    });
-  }
-
-  for (const p of blogPosts) {
-    items.push({
-      id: p.id,
-      title: p.title,
-      type: "blog",
-      typeLabel: TYPE_META.blog.label,
-      result: scoreBlogSeo({
-        title: p.title,
-        metaTitle: p.metaTitle,
-        metaDescription: p.metaDescription,
-        excerpt: p.excerpt,
-        content: p.content,
-        featuredImage: p.featuredImage,
-        author: p.author,
-        categoryCount: p._count.categories,
-        tagCount: p._count.tags,
-        isPublished: p.isPublished,
-      }),
-      editHref: `/admin/blog/${p.id}`,
-      publicHref: p.isPublished ? `/${p.slug}/` : undefined,
-      isPublished: p.isPublished,
-    });
-  }
-
-  return items;
-}
-
-/**
- * Build a cross-cutting "top gaps" view — count how many items share each
- * failure label, with a breakdown by content type.
- */
-function computeTopGaps(items: HealthItem[]) {
-  type GapRow = {
-    label: string;
-    total: number;
-    byType: Partial<Record<ContentTypeKey, number>>;
-  };
-  const gaps = new Map<string, GapRow>();
-  for (const item of items) {
-    for (const check of item.result.checks) {
-      if (check.status !== "fail") continue;
-      const existing = gaps.get(check.label) ?? {
-        label: check.label,
-        total: 0,
-        byType: {},
-      };
-      existing.total++;
-      existing.byType[item.type] = (existing.byType[item.type] ?? 0) + 1;
-      gaps.set(check.label, existing);
+  // Fix campaigns: one failed check across many live pages, weighted by traffic.
+  const campaigns = new Map<string, { count: number; impressions: number; kinds: Set<ContentKind> }>();
+  for (const r of live) {
+    for (const label of r.fails) {
+      const c = campaigns.get(label) ?? { count: 0, impressions: 0, kinds: new Set<ContentKind>() };
+      c.count++;
+      c.impressions += r.agg.impressions;
+      c.kinds.add(r.kind);
+      campaigns.set(label, c);
     }
   }
-  return Array.from(gaps.values()).sort((a, b) => b.total - a.total);
-}
+  const topCampaigns = [...campaigns]
+    .sort((a, b) => b[1].impressions - a[1].impressions || b[1].count - a[1].count)
+    .slice(0, 6);
 
-function BandDot({ band }: { band: SeoBand }) {
-  const styles: Record<SeoBand, string> = {
-    excellent: "bg-emerald-500",
-    good: "bg-lime-500",
-    "needs-work": "bg-amber-500",
-    poor: "bg-red-500",
+  const filtered = rows
+    .filter((r) => (liveFilter === "all" ? true : liveFilter === "live" ? r.isLive : !r.isLive))
+    .filter((r) => !kindFilter || r.kind === kindFilter)
+    .filter((r) => bandFilter === "all" || r.result.band === bandFilter)
+    .filter((r) => !gap || r.fails.includes(gap))
+    .filter((r) => !q || r.title.toLowerCase().includes(q) || r.path.includes(q))
+    .sort((a, b) =>
+      sort === "score"
+        ? a.result.score - b.result.score
+        : sort === "traffic"
+          ? b.agg.impressions - a.agg.impressions
+          : b.priority - a.priority
+    );
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const visible = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const params = {
+    type: kindFilter ?? undefined,
+    band: bandFilter !== "all" ? bandFilter : undefined,
+    live: liveFilter !== "live" ? liveFilter : undefined,
+    sort: sort !== "priority" ? sort : undefined,
+    q: q || undefined,
+    gap: gap || undefined,
   };
-  return <span className={`inline-block w-2 h-2 rounded-full ${styles[band]}`} />;
-}
-
-export default async function SeoContentHealthPage() {
-  const items = await loadHealthData();
-  const aggregate = aggregateSeoScores(items.map((i) => i.result));
-  const backlog = items
-    .filter((i) => i.result.band === "needs-work" || i.result.band === "poor")
-    .sort((a, b) => a.result.score - b.result.score);
-  const backlogByType = new Map<ContentTypeKey, HealthItem[]>();
-  for (const item of backlog) {
-    const arr = backlogByType.get(item.type) ?? [];
-    arr.push(item);
-    backlogByType.set(item.type, arr);
-  }
-  const topGaps = computeTopGaps(items);
-
-  const criticalItems = items.filter(
-    (i) => i.isPublished && i.result.band === "poor"
-  );
+  const hrefWith = (patch: Record<string, string | undefined>) => {
+    const next = new URLSearchParams();
+    for (const [k, v] of Object.entries({ ...params, ...patch })) if (v) next.set(k, v);
+    const s = next.toString();
+    return `/admin/seo/content-health/${s ? `?${s}` : ""}`;
+  };
+  const byPath = new Map(rows.map((r) => [r.path, r]));
 
   return (
     <div className="space-y-6">
-      <p className="text-slate-600 -mt-2">
-        Every piece of scored content across the site, ranked by what most
-        needs attention.
-      </p>
+      <PageIntro
+        title="Content health"
+        description={
+          <>
+            Every live route, safari, destination, day trip and post, scored on its on-page SEO and ranked by how much
+            fixing it is worth. Search data: {hasSearchData ? fmtWindow(window.start, window.end) : "not connected"}.
+          </>
+        }
+      />
 
-      {/* Critical: Published content scoring "poor" */}
-      {criticalItems.length > 0 && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <AlertCircle className="w-5 h-5 text-red-600" />
-            <h2 className="font-semibold text-red-800">
-              {criticalItems.length} published page{criticalItems.length === 1 ? "" : "s"} scoring &quot;poor&quot; — hurting SEO
-            </h2>
-          </div>
-          <p className="text-sm text-red-700 mb-3">
-            These pages are live and indexed by Google but have critical SEO gaps (thin content, missing meta, no images). Fix these first for maximum impact.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {criticalItems.slice(0, 8).map((item) => {
-              const meta = TYPE_META[item.type];
-              const Icon = meta.icon;
-              return (
-                <Link
-                  key={item.id}
-                  href={item.editHref}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-red-200 text-sm text-red-800 hover:bg-red-100 transition-colors"
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span className="truncate max-w-[200px]">{item.title}</span>
-                  <span className="text-red-500 font-bold">{item.result.score}</span>
-                </Link>
-              );
-            })}
-            {criticalItems.length > 8 && (
-              <span className="text-sm text-red-600 self-center">
-                +{criticalItems.length - 8} more
-              </span>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Platform-wide summary */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <SummaryTile
-          label="Average score"
-          value={`${aggregate.average}`}
-          detail={`across ${aggregate.count} items`}
-          color={
-            aggregate.average >= 85
-              ? "emerald"
-              : aggregate.average >= 65
-                ? "lime"
-                : aggregate.average >= 40
-                  ? "amber"
-                  : "red"
-          }
-          icon={TrendingUp}
+      <div className="grid grid-cols-1 min-[420px]:grid-cols-2 xl:grid-cols-4 gap-4">
+        <Kpi label="Average score" value={`${avg}/100`} hint={`${live.length} live pages`} />
+        <Kpi label="Pages under 60" value={fmtInt(weak.length)} hint={live.length ? `${Math.round((weak.length / live.length) * 100)}% of live pages` : undefined} />
+        <Kpi
+          label="Search views on weak pages"
+          value={hasSearchData ? fmtInt(atRiskImpr) : "—"}
+          hint={hasSearchData && totalImpr ? `${Math.round((atRiskImpr / totalImpr) * 100)}% of content impressions, 28 days` : "Connect Search Console"}
         />
-        <SummaryTile
-          label="Excellent"
-          value={`${aggregate.bands.excellent}`}
-          detail="85-100"
-          color="emerald"
-          icon={CheckCircle2}
-        />
-        <SummaryTile
-          label="Good"
-          value={`${aggregate.bands.good}`}
-          detail="65-84"
-          color="lime"
-          icon={TrendingUp}
-        />
-        <SummaryTile
-          label="Needs work"
-          value={`${aggregate.bands["needs-work"]}`}
-          detail="40-64"
-          color="amber"
-          icon={AlertTriangle}
-        />
-        <SummaryTile
-          label="Poor"
-          value={`${aggregate.bands.poor}`}
-          detail="under 40"
-          color="red"
-          icon={AlertCircle}
-        />
+        <Kpi label="Missing meta description" value={fmtInt(missingDesc)} hint={missingDesc ? "Google writes its own snippet" : "All set"} />
       </div>
 
-      {/* Top cross-cutting gaps */}
-      <section>
-        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">
-          Most common gaps
-        </h2>
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          {topGaps.length === 0 ? (
-            <p className="p-6 text-sm text-slate-500 text-center">
-              No failing checks — content is healthy across the platform.
-            </p>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start">
+        <Panel id="ch-campaigns" title="Fix campaigns" meta="One fix applied across many pages. Biggest search exposure first.">
+          {topCampaigns.length === 0 ? (
+            <EmptyState title="No failing checks on live pages">Every live page passes every content check.</EmptyState>
           ) : (
-            <table className="w-full">
-              <thead className="bg-slate-50 border-b border-slate-200">
+            <ul className="divide-y divide-slate-100">
+              {topCampaigns.map(([label, c]) => (
+                <li key={label}>
+                  <Link
+                    href={hrefWith({ gap: label, page: undefined })}
+                    className={clsx(
+                      "flex items-center justify-between gap-3 py-2.5 -mx-2 px-2 rounded hover:bg-slate-50",
+                      gap === label && "bg-amber-50"
+                    )}
+                  >
+                    <span className="min-w-0">
+                      <span className="block text-sm font-medium text-slate-900">{label}</span>
+                      <span className="block text-xs text-slate-500">
+                        {c.count} page{c.count === 1 ? "" : "s"} · {[...c.kinds].map((k) => KIND_LABEL[k]).join(", ")}
+                      </span>
+                    </span>
+                    <span className="shrink-0 text-right">
+                      <span className="block text-sm font-semibold tabular-nums text-slate-900">{fmtInt(c.impressions)}</span>
+                      <span className="block text-xs text-slate-500">impressions</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Panel>
+
+        <Panel
+          id="ch-snippets"
+          title="Snippets losing clicks"
+          meta="Page-one results with a click-through rate well below normal for their position. The ranking is fine; the title or description isn't winning the click."
+        >
+          {!hasSearchData ? (
+            <EmptyState title="Search Console is not connected" action={<Link href="/admin/seo/settings/" className="text-sm font-medium text-amber-700 hover:underline">Connect it</Link>} />
+          ) : snippetLosses.length === 0 ? (
+            <EmptyState title="No weak snippets">Every page-one content page earns about the clicks its position should.</EmptyState>
+          ) : (
+            <ul className="divide-y divide-slate-100">
+              {snippetLosses.slice(0, 6).map((r) => (
+                <li key={`${r.kind}-${r.id}`} className="flex flex-wrap items-center justify-between gap-3 py-2.5">
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-medium text-slate-900 truncate">{r.title}</span>
+                    <span className="block text-xs text-slate-500">
+                      Position {fmtPos(r.agg.position)} · CTR {fmtPct(r.gap!.actual)} vs {fmtPct(r.gap!.expected)} expected ·{" "}
+                      <span className="font-semibold text-red-700">~{fmtInt(r.gap!.missedClicks)} clicks missed</span>
+                    </span>
+                  </span>
+                  <MetaFixButton compact kind={r.kind} id={r.id} title={r.title} path={r.path} metaTitle={r.metaTitle} metaDescription={r.metaDescription} label="Rewrite" />
+                </li>
+              ))}
+            </ul>
+          )}
+        </Panel>
+      </div>
+
+      <Panel
+        id="ch-backlog"
+        title="Content backlog"
+        meta={`${filtered.length} of ${rows.length} items${gap ? ` failing “${gap}”` : ""}. Priority weighs the score gap by page type and search exposure, plus clicks a weak snippet is losing.`}
+        flush
+      >
+        <form method="get" action="/admin/seo/content-health/" className="flex flex-wrap items-end gap-3 px-4 sm:px-5 pb-4">
+          {gap && <input type="hidden" name="gap" value={gap} />}
+          <label className="flex-1 min-w-[12rem]">
+            <span className="block text-xs font-medium text-slate-600 mb-1">Search</span>
+            <span className="relative block">
+              <Search className="w-4 h-4 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" aria-hidden="true" />
+              <input name="q" defaultValue={q} placeholder="Name or URL" className="w-full min-h-10 rounded-md border border-slate-300 pl-8 pr-3 text-sm focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/30" />
+            </span>
+          </label>
+          <label>
+            <span className="block text-xs font-medium text-slate-600 mb-1">Type</span>
+            <select name="type" defaultValue={kindFilter ?? ""} className="min-h-10 rounded-md border border-slate-300 bg-white px-2 text-sm">
+              <option value="">All types</option>
+              {CONTENT_KINDS.map((k) => (
+                <option key={k} value={k}>{KIND_LABEL[k]}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span className="block text-xs font-medium text-slate-600 mb-1">Score</span>
+            <select name="band" defaultValue={bandFilter} className="min-h-10 rounded-md border border-slate-300 bg-white px-2 text-sm">
+              {BANDS.map((b) => (
+                <option key={b.value} value={b.value}>{b.label}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span className="block text-xs font-medium text-slate-600 mb-1">Status</span>
+            <select name="live" defaultValue={liveFilter} className="min-h-10 rounded-md border border-slate-300 bg-white px-2 text-sm">
+              <option value="live">Live</option>
+              <option value="draft">Drafts and inactive</option>
+              <option value="all">All</option>
+            </select>
+          </label>
+          <label>
+            <span className="block text-xs font-medium text-slate-600 mb-1">Sort</span>
+            <select name="sort" defaultValue={sort} className="min-h-10 rounded-md border border-slate-300 bg-white px-2 text-sm">
+              {SORTS.map((s) => (
+                <option key={s.value} value={s.value}>{s.label}</option>
+              ))}
+            </select>
+          </label>
+          <button type="submit" className="min-h-10 px-4 rounded-md bg-slate-900 text-white text-sm font-medium hover:bg-slate-800">
+            Apply
+          </button>
+          {(q || kindFilter || bandFilter !== "all" || liveFilter !== "live" || gap || sort !== "priority") && (
+            <Link href="/admin/seo/content-health/" className="min-h-10 inline-flex items-center px-2 text-sm font-medium text-amber-700 hover:underline">
+              Clear filters
+            </Link>
+          )}
+        </form>
+
+        {visible.length === 0 ? (
+          <div className="px-4 sm:px-5 pb-5">
+            <EmptyState title="Nothing matches these filters">Try another type or score band, or clear the filters.</EmptyState>
+          </div>
+        ) : (
+          <TableScroll label="Content backlog">
+            <table className="min-w-full border-t border-slate-200">
+              <thead className="bg-slate-50">
                 <tr>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Fix
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Total
-                  </th>
-                  <th className="text-left px-4 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Breakdown
-                  </th>
+                  <th scope="col" className={th}>Page</th>
+                  <th scope="col" className={thNum}>Score</th>
+                  <th scope="col" className={th}>Top gaps</th>
+                  <th scope="col" className={thNum}>Impr. 28d</th>
+                  <th scope="col" className={thNum}>Clicks</th>
+                  <th scope="col" className={thNum}>Pos.</th>
+                  <th scope="col" className={thNum}>Priority</th>
+                  <th scope="col" className={th}><span className="sr-only">Actions</span></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
-                {topGaps.slice(0, 10).map((gap) => (
-                  <tr key={gap.label} className="hover:bg-slate-50">
-                    <td className="px-4 py-3 text-sm font-medium text-slate-900">
-                      {gap.label}
+              <tbody className="divide-y divide-slate-100">
+                {visible.map((r) => (
+                  <tr key={`${r.kind}-${r.id}`} className="hover:bg-slate-50/70">
+                    <td className={clsx(td, "min-w-[16rem] max-w-[22rem]")}>
+                      <div className="font-medium text-slate-900">{r.title}</div>
+                      <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
+                        <Pill>{KIND_LABEL[r.kind]}</Pill>
+                        {!r.isLive && <Pill tone="amber">Not live</Pill>}
+                        <a href={r.path} target="_blank" rel="noreferrer" className="text-xs text-slate-500 hover:text-amber-700 inline-flex items-center gap-0.5 break-all">
+                          {r.path}
+                          <ExternalLink className="w-3 h-3 shrink-0" aria-hidden="true" />
+                          <span className="sr-only">(opens in new tab)</span>
+                        </a>
+                      </div>
                     </td>
-                    <td className="px-4 py-3">
-                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-50 text-red-700 text-xs font-semibold">
-                        <AlertCircle className="w-3 h-3" aria-hidden="true" />
-                        {gap.total}
-                      </span>
+                    <td className={tdNum}><ScoreBadge score={r.result.score} /></td>
+                    <td className={clsx(td, "min-w-[14rem]")}>
+                      {r.fails.length === 0 ? (
+                        <span className="text-xs text-emerald-700">All checks pass</span>
+                      ) : (
+                        <ul className="space-y-0.5 text-xs text-slate-600">
+                          {r.fails.slice(0, 3).map((f) => (
+                            <li key={f}>{f}</li>
+                          ))}
+                          {r.fails.length > 3 && <li className="text-slate-400">+{r.fails.length - 3} more</li>}
+                        </ul>
+                      )}
+                      {r.gap && <div className="mt-1"><Pill tone="red">Snippet losing ~{fmtInt(r.gap.missedClicks)} clicks</Pill></div>}
                     </td>
-                    <td className="px-4 py-3 text-xs text-slate-600">
-                      <div className="flex flex-wrap gap-2">
-                        {(Object.entries(gap.byType) as [ContentTypeKey, number][])
-                          .sort((a, b) => b[1] - a[1])
-                          .map(([type, count]) => {
-                            const meta = TYPE_META[type];
-                            const Icon = meta.icon;
-                            return (
-                              <span
-                                key={type}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100"
-                              >
-                                <Icon
-                                  className={`w-3 h-3 ${meta.color}`}
-                                  aria-hidden="true"
-                                />
-                                {count} {meta.label.toLowerCase()}
-                                {count === 1 ? "" : "s"}
-                              </span>
-                            );
-                          })}
+                    <td className={tdNum}>{r.agg.impressions ? fmtInt(r.agg.impressions) : <span className="text-slate-400">0</span>}</td>
+                    <td className={tdNum}>
+                      <div>{fmtInt(r.agg.clicks)}</div>
+                      {r.prevClicks > 0 && <Delta value={r.clicksChange} label="vs previous 28 days" />}
+                    </td>
+                    <td className={tdNum}>{fmtPos(r.agg.position)}</td>
+                    <td className={tdNum}><span className="font-semibold text-slate-900">{r.priority.toFixed(0)}</span></td>
+                    <td className={clsx(td, "whitespace-nowrap")}>
+                      <div className="flex items-center justify-end gap-1.5">
+                        <MetaFixButton compact kind={r.kind} id={r.id} title={r.title} path={r.path} metaTitle={r.metaTitle} metaDescription={r.metaDescription} label="Meta" />
+                        <Link href={r.editHref} className="inline-flex items-center gap-1 min-h-8 px-2.5 rounded-md text-xs font-medium text-slate-700 hover:bg-slate-100">
+                          <Pencil className="w-3.5 h-3.5" aria-hidden="true" />
+                          Edit<span className="sr-only"> {r.title}</span>
+                        </Link>
                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          )}
-        </div>
-      </section>
+          </TableScroll>
+        )}
+        {pageCount > 1 && (
+          <nav aria-label="Backlog pages" className="flex items-center justify-between gap-3 border-t border-slate-200 px-4 sm:px-5 py-3 text-sm">
+            <span className="text-slate-500">Page {page} of {pageCount}</span>
+            <span className="flex gap-2">
+              {page > 1 && <Link href={hrefWith({ page: String(page - 1) })} className="min-h-9 px-3 inline-flex items-center rounded-md border border-slate-300 hover:bg-slate-50">Previous</Link>}
+              {page < pageCount && <Link href={hrefWith({ page: String(page + 1) })} className="min-h-9 px-3 inline-flex items-center rounded-md border border-slate-300 hover:bg-slate-50">Next</Link>}
+            </span>
+          </nav>
+        )}
+      </Panel>
 
-      {/* Backlog grouped by type */}
-      <section>
-        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">
-          Backlog — {backlog.length} item{backlog.length === 1 ? "" : "s"} below
-          &quot;good&quot;
-        </h2>
-        {backlog.length === 0 ? (
-          <div className="bg-white rounded-lg border border-slate-200 p-8 text-center">
-            <CheckCircle2 className="w-10 h-10 mx-auto text-emerald-500 mb-3" />
-            <p className="text-slate-700 font-medium">
-              Nothing to triage — every item scores 65+.
-            </p>
+      <Panel
+        id="ch-changes"
+        title="Recent meta changes and their effect"
+        meta="Clicks and CTR in equal windows before and after each change (up to 14 days). Results need about a week of Search Console data."
+        flush
+      >
+        {changes.length === 0 ? (
+          <div className="px-4 sm:px-5 pb-5">
+            <EmptyState title="No changes logged yet">
+              Titles and descriptions applied from these SEO pages appear here, with their effect on clicks.
+            </EmptyState>
           </div>
         ) : (
-          <div className="space-y-4">
-            {(Object.keys(TYPE_META) as ContentTypeKey[]).map((typeKey) => {
-              const rows = backlogByType.get(typeKey) ?? [];
-              if (rows.length === 0) return null;
-              const meta = TYPE_META[typeKey];
-              const Icon = meta.icon;
-              return (
-                <div
-                  key={typeKey}
-                  className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden"
-                >
-                  <div className="px-4 py-3 border-b border-slate-200 flex items-center gap-2">
-                    <Icon className={`w-5 h-5 ${meta.color}`} aria-hidden="true" />
-                    <h3 className="font-semibold text-slate-900">
-                      {meta.label}s
-                    </h3>
-                    <span className="text-sm text-slate-500">
-                      · {rows.length} item{rows.length === 1 ? "" : "s"}
-                    </span>
-                  </div>
-                  <ul className="divide-y divide-slate-100">
-                    {rows.map((item) => (
-                      <li key={item.id} className="px-4 py-3 hover:bg-slate-50">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <BandDot band={item.result.band} />
-                              <Link
-                                href={item.editHref}
-                                className="font-medium text-slate-900 hover:text-amber-600 truncate"
-                              >
-                                {item.title}
-                              </Link>
-                              {!item.isPublished && (
-                                <span className="text-xs px-1.5 py-0.5 rounded bg-yellow-100 text-yellow-700">
-                                  {typeKey === "blog" ? "Draft" : "Inactive"}
-                                </span>
-                              )}
-                            </div>
-                            <div className="flex flex-wrap gap-1.5 text-xs">
-                              {item.result.checks
-                                .filter((c) => c.status === "fail")
-                                .slice(0, 4)
-                                .map((c, i) => (
-                                  <span
-                                    key={i}
-                                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-red-50 text-red-700"
-                                  >
-                                    <AlertCircle
-                                      className="w-3 h-3"
-                                      aria-hidden="true"
-                                    />
-                                    {c.label}
-                                  </span>
-                                ))}
-                              {item.result.checks.filter((c) => c.status === "fail")
-                                .length > 4 && (
-                                <span className="text-slate-500">
-                                  + more
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 shrink-0">
-                            <span
-                              className={`text-lg font-bold tabular-nums ${
-                                item.result.band === "poor"
-                                  ? "text-red-600"
-                                  : "text-amber-600"
-                              }`}
-                            >
-                              {item.result.score}
-                            </span>
-                            {item.publicHref && item.isPublished && (
-                              <a
-                                href={item.publicHref}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                title="View on public site"
-                                aria-label={`View ${item.title} on public site`}
-                                className="p-1.5 text-slate-400 hover:text-slate-600"
-                              >
-                                <ExternalLink
-                                  className="w-4 h-4"
-                                  aria-hidden="true"
-                                />
-                              </a>
-                            )}
-                          </div>
+          <TableScroll label="Recent meta changes">
+            <table className="min-w-full border-t border-slate-200">
+              <thead className="bg-slate-50">
+                <tr>
+                  <th scope="col" className={th}>Change</th>
+                  <th scope="col" className={thNum}>CTR before → after</th>
+                  <th scope="col" className={thNum}>Clicks before → after</th>
+                  <th scope="col" className={th}>Result</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {changes.map((c) => {
+                  const verdict = changeImpact(c.beforeAgg, c.afterAgg, c.daysAfter);
+                  const item = byPath.get(c.path);
+                  return (
+                    <tr key={c.id}>
+                      <td className={clsx(td, "min-w-[18rem] max-w-[28rem]")}>
+                        <div className="font-medium text-slate-900">{item?.title ?? c.path}</div>
+                        <div className="text-xs text-slate-500 mt-0.5">
+                          {c.field === "metaTitle" ? "Title" : "Description"} · {c.source === "ai" ? "AI draft, reviewed" : "Manual"} ·{" "}
+                          {c.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                          {c.userEmail ? ` · ${c.userEmail}` : ""}
                         </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+                        <div className="text-xs mt-1 text-slate-600 break-words">
+                          <span className="line-through decoration-red-400">{c.before || "(empty)"}</span>
+                          <ArrowRight className="inline w-3 h-3 mx-1 text-slate-400" aria-label="changed to" />
+                          <span className="text-slate-900">{c.after}</span>
+                        </div>
+                      </td>
+                      <td className={tdNum}>
+                        {fmtPct(c.beforeAgg.ctr)} → {c.daysAfter ? fmtPct(c.afterAgg.ctr) : "—"}
+                      </td>
+                      <td className={tdNum}>
+                        {fmtInt(c.beforeAgg.clicks)} → {c.daysAfter ? fmtInt(c.afterAgg.clicks) : "—"}
+                        <div className="text-xs text-slate-500">{c.daysAfter} day{c.daysAfter === 1 ? "" : "s"} after</div>
+                      </td>
+                      <td className={td}><Pill tone={IMPACT[verdict].tone}>{IMPACT[verdict].label}</Pill></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </TableScroll>
         )}
-      </section>
-    </div>
-  );
-}
-
-function SummaryTile({
-  label,
-  value,
-  detail,
-  color,
-  icon: Icon,
-}: {
-  label: string;
-  value: string;
-  detail: string;
-  color: "emerald" | "lime" | "amber" | "red";
-  icon: typeof Mountain;
-}) {
-  const bg = {
-    emerald: "bg-emerald-50 text-emerald-700",
-    lime: "bg-lime-50 text-lime-700",
-    amber: "bg-amber-50 text-amber-700",
-    red: "bg-red-50 text-red-700",
-  }[color];
-  return (
-    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4">
-      <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${bg}`}>
-          <Icon className="w-5 h-5" aria-hidden="true" />
-        </div>
-        <div>
-          <p className="text-xs text-slate-500 uppercase tracking-wider">
-            {label}
-          </p>
-          <p className="text-xl font-bold text-slate-900">{value}</p>
-          <p className="text-xs text-slate-500">{detail}</p>
-        </div>
-      </div>
+      </Panel>
     </div>
   );
 }

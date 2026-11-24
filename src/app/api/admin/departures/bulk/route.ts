@@ -1,6 +1,7 @@
 import { requireRole } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { revalidateDeparturePages } from "@/lib/revalidate-public";
 import { AdminRole, DepartureStatus } from "@prisma/client";
 import { ZodError } from "zod";
 import {
@@ -118,6 +119,7 @@ export async function POST(request: Request) {
       createData.map((data) => prisma.groupDeparture.create({ data }))
     );
 
+    revalidateDeparturePages();
     return NextResponse.json(
       {
         success: true,

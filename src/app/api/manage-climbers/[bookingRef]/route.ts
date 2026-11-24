@@ -5,6 +5,19 @@ import { prisma } from "@/lib/prisma";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { sendClimberDetailsCompletedEmail } from "@/lib/email/send";
 import { ClimberNotifications } from "@/lib/notifications";
+import { keepSensitiveWhenBlank, redactClimberDetails } from "@/lib/climber-privacy";
+import { getClientIp, isAuthThrottled, recordAuthFailure } from "@/lib/auth-rate-limit";
+
+// Wrong email/ref pairs count against the email and the IP, so booking refs
+// cannot be guessed (same 5-per-email / 20-per-IP budget as admin login).
+const LOOKUP_SCOPE = "manage-climbers";
+
+function throttled() {
+  return NextResponse.json(
+    { success: false, error: "Too many attempts. Please try again in 15 minutes." },
+    { status: 429 }
+  );
+}
 
 // GET /api/manage-climbers/[bookingRef] - Get booking data for lead to manage climbers
 // Requires email verification via query param
@@ -22,6 +35,9 @@ export async function GET(
       { status: 401 }
     );
   }
+
+  const ip = getClientIp(request.headers);
+  if (isAuthThrottled(LOOKUP_SCOPE, email, ip)) return throttled();
 
   try {
     // Find booking by reference (last 8 chars of ID) and lead email
@@ -49,6 +65,7 @@ export async function GET(
     );
 
     if (!booking) {
+      recordAuthFailure(LOOKUP_SCOPE, email, ip);
       return NextResponse.json(
         { success: false, error: "Booking not found or email does not match" },
         { status: 404 }
@@ -79,7 +96,7 @@ export async function GET(
       email: climberDetails[0]?.email || booking.leadEmail,
       isComplete: climberDetails[0]?.isComplete ?? true, // Lead details from form are considered complete
       token: null, // Lead doesn't have a token
-      details: climberDetails[0] || null,
+      details: redactClimberDetails(climberDetails[0]),
     });
 
     // Other climbers
@@ -94,7 +111,7 @@ export async function GET(
         email: details?.email || token?.email || null,
         isComplete: token?.isCompleted || details?.isComplete || false,
         token: token ? { code: token.code, expiresAt: token.expiresAt } : null,
-        details,
+        details: redactClimberDetails(details),
       });
     }
 
@@ -158,6 +175,9 @@ export async function PUT(
     const body = await request.json();
     const validatedData = updateClimberSchema.parse(body);
 
+    const ip = getClientIp(request.headers);
+    if (isAuthThrottled(LOOKUP_SCOPE, validatedData.leadEmail, ip)) return throttled();
+
     // Find booking
     const bookings = await prisma.booking.findMany({
       where: {
@@ -178,6 +198,7 @@ export async function PUT(
     );
 
     if (!booking) {
+      recordAuthFailure(LOOKUP_SCOPE, validatedData.leadEmail, ip);
       return NextResponse.json(
         { success: false, error: "Booking not found or email does not match" },
         { status: 404 }
@@ -201,16 +222,20 @@ export async function PUT(
     }
 
     // Update the specific climber's details
+    // The page never receives stored passport/DOB/medical values, so a blank
+    // field means "keep what is on file".
+    const previous = currentClimberDetails[validatedData.climberIndex];
+    const sensitive = keepSensitiveWhenBlank(previous, validatedData.details);
     currentClimberDetails[validatedData.climberIndex] = {
-      ...currentClimberDetails[validatedData.climberIndex],
+      ...previous,
       name: validatedData.details.name,
       email: validatedData.details.email,
       phone: validatedData.details.phone || null,
       nationality: validatedData.details.nationality || null,
-      passportNumber: validatedData.details.passportNumber || null,
-      dateOfBirth: validatedData.details.dateOfBirth || null,
+      passportNumber: sensitive.passportNumber,
+      dateOfBirth: sensitive.dateOfBirth,
       dietaryRequirements: validatedData.details.dietaryRequirements || null,
-      medicalConditions: validatedData.details.medicalConditions || null,
+      medicalConditions: sensitive.medicalConditions,
       isComplete: true,
       completedAt: new Date().toISOString(),
       completedBy: "lead", // Mark that lead filled this

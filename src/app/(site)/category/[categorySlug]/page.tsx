@@ -7,7 +7,15 @@ import { BlogCard } from "@/components/cards/BlogCard";
 import { generateMetadata as genMeta, generateBreadcrumbSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
+// Cached for 5 minutes (ISR); admin blog saves refresh it at once via
+// revalidateBlogPages(). A dynamic segment is only cached when it has
+// generateStaticParams; the empty list prerenders nothing at build time,
+// so each page renders on first visit and is then cached.
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return [];
+}
 
 interface Props {
   params: Promise<{ categorySlug: string }>;

@@ -37,6 +37,7 @@
     "db:seed:seo-content": "npx tsx scripts/seed-seo-content.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
     "@auth/prisma-adapter": "^2.11.1",
     "@aws-sdk/client-s3": "^3.970.0",
     "@aws-sdk/s3-request-presigner": "^3.970.0",

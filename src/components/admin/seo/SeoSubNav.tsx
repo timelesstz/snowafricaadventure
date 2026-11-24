@@ -15,6 +15,7 @@ const tabs = [
   { href: "/admin/seo/keywords", label: "Keywords" },
   { href: "/admin/seo/recommendations", label: "Recommendations" },
   { href: "/admin/seo/content-performance", label: "Content" },
+  { href: "/admin/seo/content-ideas", label: "Content Ideas" },
   { href: "/admin/seo/settings", label: "Settings" },
 ];
 
@@ -28,18 +29,21 @@ export default function SeoSubNav({ freshness }: SeoSubNavProps) {
   return (
     <div className="border-b border-slate-200 mb-6">
       <div className="flex items-center justify-between gap-4">
-        <nav className="flex gap-0 min-w-max overflow-x-auto">
+        <nav aria-label="SEO sections" className="flex min-w-0 flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {tabs.map((tab) => {
             const isActive =
-              pathname === tab.href || pathname === tab.href + "/";
+              tab.href === "/admin/seo"
+                ? pathname === tab.href || pathname === tab.href + "/"
+                : pathname.startsWith(tab.href);
             return (
               <Link
                 key={tab.href}
                 href={tab.href}
+                aria-current={isActive ? "page" : undefined}
                 className={clsx(
-                  "px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap",
+                  "px-3 sm:px-4 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-amber-400 text-sm font-medium border-b-2 transition-colors whitespace-nowrap",
                   isActive
-                    ? "border-amber-600 text-amber-600"
+                    ? "border-amber-600 text-amber-700"
                     : "border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
                 )}
               >

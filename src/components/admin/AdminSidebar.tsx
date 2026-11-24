@@ -1,50 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { signOut } from "next-auth/react";
-import {
-  LayoutDashboard,
-  Users,
-  HandCoins,
-  BarChart3,
-  LogOut,
-  Menu,
-  X,
-  Settings,
-  Palette,
-  UserCog,
-  CreditCard,
-  CalendarDays,
-  ClipboardList,
-  MessageSquare,
-  Mountain,
-  Compass,
-  FileText,
-  Star,
-  MapPin,
-  Sun,
-  Home,
-  Image,
-  AlertTriangle,
-  ArrowRightLeft,
-  PanelTop,
-  LayoutTemplate,
-  Search,
-  Target,
-  Send,
-  Link2,
-  Inbox,
-  ChevronDown,
-  UserCircle,
-  BadgeCheck,
-} from "lucide-react";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { ChevronDown, LogOut, Mountain, Search, X } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { clsx } from "clsx";
-import { AdminRole } from "@prisma/client";
-import { RoleBadge } from "./RoleBadge";
-import { hasMinRole } from "@/lib/auth-types";
-import NotificationBell from "./NotificationBell";
+import type { AdminRole } from "@prisma/client";
+import { getRoleName } from "@/lib/auth-types-client";
+import { HOME_ITEM, findActiveHref, navForRole, type NavGroup, type NavItem } from "./sidebar/nav-config";
+import { openCommandPalette, useModKeyLabel } from "./CommandPalette";
 
 interface User {
   name?: string | null;
@@ -52,113 +17,30 @@ interface User {
   role: AdminRole;
 }
 
-interface NavItem {
-  href: string;
-  label: string;
-  icon: typeof LayoutDashboard;
-  minRole?: AdminRole;
-}
+/** Fired by the top bar's menu button on small screens. */
+export const NAV_TOGGLE_EVENT = "admin:nav-toggle";
+export const NAV_TRIGGER_ID = "admin-nav-trigger";
 
-interface NavGroup {
-  id: string;
-  label: string;
-  items: NavItem[];
-}
-
-const topLevelItems: NavItem[] = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-];
-
-const navGroups: NavGroup[] = [
-  {
-    // First group — this is the daily work of a tour operator
-    id: "bookings",
-    label: "Bookings",
-    items: [
-      { href: "/admin/inquiries?status=new", label: "Open Leads", icon: AlertTriangle, minRole: AdminRole.EDITOR },
-      { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquare, minRole: AdminRole.EDITOR },
-      { href: "/admin/bookings", label: "Bookings", icon: ClipboardList, minRole: AdminRole.EDITOR },
-      { href: "/admin/departures", label: "Departures", icon: CalendarDays, minRole: AdminRole.EDITOR },
-    ],
-  },
-  {
-    id: "content",
-    label: "Content",
-    items: [
-      { href: "/admin/homepage", label: "Homepage", icon: Home, minRole: AdminRole.EDITOR },
-      { href: "/admin/about-us", label: "About Us", icon: Users, minRole: AdminRole.EDITOR },
-      { href: "/admin/heroes", label: "Page Heroes", icon: PanelTop, minRole: AdminRole.EDITOR },
-      { href: "/admin/pages", label: "Page Builder", icon: LayoutTemplate, minRole: AdminRole.EDITOR },
-      { href: "/admin/media", label: "Media Library", icon: Image, minRole: AdminRole.EDITOR },
-      { href: "/admin/routes", label: "Trekking Routes", icon: Mountain, minRole: AdminRole.EDITOR },
-      { href: "/admin/safaris", label: "Safari Packages", icon: Compass, minRole: AdminRole.EDITOR },
-      { href: "/admin/destinations", label: "Destinations", icon: MapPin, minRole: AdminRole.EDITOR },
-      { href: "/admin/day-trips", label: "Day Trips", icon: Sun, minRole: AdminRole.EDITOR },
-      { href: "/admin/blog", label: "Blog Posts", icon: FileText, minRole: AdminRole.EDITOR },
-      { href: "/admin/reviews", label: "Reviews", icon: Star, minRole: AdminRole.EDITOR },
-      { href: "/admin/guides", label: "Guides", icon: UserCircle, minRole: AdminRole.EDITOR },
-      { href: "/admin/logos", label: "Logos", icon: BadgeCheck, minRole: AdminRole.EDITOR },
-    ],
-  },
-  {
-    id: "commerce",
-    label: "Commerce",
-    items: [
-      { href: "/admin/partners", label: "Partners", icon: Users, minRole: AdminRole.ADMIN },
-      { href: "/admin/commissions", label: "Commissions", icon: HandCoins, minRole: AdminRole.EDITOR },
-      { href: "/admin/commissions/payouts", label: "Payouts", icon: CreditCard, minRole: AdminRole.ADMIN },
-      { href: "/admin/invite-links", label: "Invite Links", icon: Link2, minRole: AdminRole.EDITOR },
-    ],
-  },
-  {
-    id: "marketing",
-    label: "Marketing",
-    items: [
-      { href: "/admin/newsletter", label: "Newsletter", icon: Inbox, minRole: AdminRole.EDITOR },
-      { href: "/admin/email-log", label: "Communications", icon: Send, minRole: AdminRole.EDITOR },
-      { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
-      { href: "/admin/conversion-analytics", label: "Conversion Analytics", icon: Target },
-    ],
-  },
-  {
-    id: "seo",
-    label: "SEO",
-    items: [
-      { href: "/admin/seo", label: "SEO Dashboard", icon: Search },
-      { href: "/admin/404-monitor", label: "404 Monitor", icon: AlertTriangle, minRole: AdminRole.EDITOR },
-      { href: "/admin/redirects", label: "Redirects", icon: ArrowRightLeft, minRole: AdminRole.EDITOR },
-    ],
-  },
-  {
-    id: "system",
-    label: "System",
-    items: [
-      { href: "/admin/theme", label: "Theme", icon: Palette },
-      { href: "/admin/settings", label: "Settings", icon: Settings, minRole: AdminRole.ADMIN },
-      { href: "/admin/users", label: "User Management", icon: UserCog, minRole: AdminRole.SUPER_ADMIN },
-    ],
-  },
-];
-
+// ---------------------------------------------------------------------------
+// Collapsed groups live in localStorage, read through useSyncExternalStore so
+// the server render and the first client render agree (every group open).
+// ---------------------------------------------------------------------------
 const STORAGE_KEY = "admin:sidebar:collapsed";
-
-// useSyncExternalStore bindings for localStorage-backed collapsed state.
-// Avoids setState-in-effect by letting React read the store synchronously.
-const collapsedSubscribers = new Set<() => void>();
+const subscribers = new Set<() => void>();
 
 function subscribeCollapsed(callback: () => void) {
-  collapsedSubscribers.add(callback);
-  const storageListener = (e: StorageEvent) => {
+  subscribers.add(callback);
+  const onStorage = (e: StorageEvent) => {
     if (e.key === STORAGE_KEY) callback();
   };
-  window.addEventListener("storage", storageListener);
+  window.addEventListener("storage", onStorage);
   return () => {
-    collapsedSubscribers.delete(callback);
-    window.removeEventListener("storage", storageListener);
+    subscribers.delete(callback);
+    window.removeEventListener("storage", onStorage);
   };
 }
 
-function getCollapsedSnapshot(): string {
+function readCollapsed(): string {
   try {
     return localStorage.getItem(STORAGE_KEY) ?? "[]";
   } catch {
@@ -166,65 +48,90 @@ function getCollapsedSnapshot(): string {
   }
 }
 
-function getCollapsedServerSnapshot(): string {
-  return "[]";
-}
-
 function writeCollapsed(next: Set<string>) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
   } catch {
-    // ignore — localStorage may be disabled
+    // Storage can be disabled (private mode); the toggle still works for this page view.
   }
-  collapsedSubscribers.forEach((cb) => cb());
+  subscribers.forEach((cb) => cb());
 }
 
-function isItemActive(pathname: string, item: NavItem): boolean {
-  if (pathname === item.href) return true;
-  if (item.href === "/admin") return false;
-  if (!pathname.startsWith(item.href)) return false;
-  // Prevent /admin/commissions from matching /admin/commissions/payouts
-  if (
-    item.href === "/admin/commissions" &&
-    pathname.startsWith("/admin/commissions/payouts")
-  ) {
-    return false;
-  }
-  return true;
-}
-
-const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800";
-
-export default function AdminSidebar({ user }: { user: User }) {
-  const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const collapsedRaw = useSyncExternalStore(
-    subscribeCollapsed,
-    getCollapsedSnapshot,
-    getCollapsedServerSnapshot
-  );
-  const collapsed = useMemo<Set<string>>(() => {
+function useCollapsedGroups() {
+  const raw = useSyncExternalStore(subscribeCollapsed, readCollapsed, () => "[]");
+  return useMemo(() => {
     try {
-      return new Set<string>(JSON.parse(collapsedRaw) as string[]);
+      return new Set<string>(JSON.parse(raw) as string[]);
     } catch {
       return new Set<string>();
     }
-  }, [collapsedRaw]);
+  }, [raw]);
+}
 
-  // Close mobile menu on Escape
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMobileOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [mobileOpen]);
+const focusRing =
+  "outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900";
 
-  const handleSignOut = () => {
-    signOut({ callbackUrl: "/admin/login" });
-  };
+function initials(user: User) {
+  return (
+    (user.name ?? user.email ?? "?")
+      .split(/\s+/)
+      .map((s) => s.charAt(0))
+      .slice(0, 2)
+      .join("")
+      .toUpperCase() || "?"
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Pieces
+// ---------------------------------------------------------------------------
+function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean; onNavigate?: () => void }) {
+  const Icon = item.icon;
+  return (
+    <Link
+      href={item.href}
+      onClick={onNavigate}
+      aria-current={active ? "page" : undefined}
+      className={clsx(
+        "group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+        focusRing,
+        active
+          ? "bg-amber-400/10 font-medium text-amber-100"
+          : "text-slate-300 hover:bg-white/5 hover:text-white"
+      )}
+    >
+      {active && <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-amber-400" />}
+      <Icon
+        className={clsx(
+          "h-[18px] w-[18px] shrink-0 transition-colors",
+          active ? "text-amber-400" : "text-slate-400 group-hover:text-slate-200"
+        )}
+        aria-hidden="true"
+      />
+      <span className="truncate">{item.label}</span>
+    </Link>
+  );
+}
+
+function SidebarBody({
+  user,
+  groups,
+  activeHref,
+  idPrefix,
+  onNavigate,
+  onClose,
+  closeRef,
+}: {
+  user: User;
+  groups: NavGroup[];
+  activeHref: string | null;
+  idPrefix: string;
+  onNavigate?: () => void;
+  onClose?: () => void;
+  closeRef?: React.Ref<HTMLButtonElement>;
+}) {
+  const collapsed = useCollapsedGroups();
+  const modKey = useModKeyLabel();
 
   const toggleGroup = (id: string) => {
     const next = new Set(collapsed);
@@ -233,192 +140,230 @@ export default function AdminSidebar({ user }: { user: User }) {
     writeCollapsed(next);
   };
 
-  const visibleGroups = navGroups
-    .map((group) => ({
-      ...group,
-      items: group.items.filter(
-        (item) => !item.minRole || hasMinRole(user.role, item.minRole)
-      ),
-    }))
-    .filter((group) => group.items.length > 0);
-
-  const visibleTop = topLevelItems.filter(
-    (item) => !item.minRole || hasMinRole(user.role, item.minRole)
-  );
-
-  const groupContainsActive = (group: NavGroup) =>
-    group.items.some((item) => isItemActive(pathname, item));
-
-  const renderItem = (item: NavItem) => {
-    const active = isItemActive(pathname, item);
-    return (
-      <Link
-        key={item.href}
-        href={item.href}
-        onClick={() => setMobileOpen(false)}
-        aria-current={active ? "page" : undefined}
-        className={clsx(
-          "flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors",
-          focusRing,
-          active
-            ? "bg-amber-600 text-[var(--primary-dark)]"
-            : "text-slate-300 hover:bg-slate-700 hover:text-white"
+  return (
+    <div className="flex h-full flex-col">
+      {/* Brand */}
+      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-white/10 px-4">
+        <Link href="/admin" onClick={onNavigate} className={clsx("flex min-w-0 items-center gap-2.5 rounded-md", focusRing)}>
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-amber-400 text-slate-900">
+            <Mountain className="h-[18px] w-[18px]" aria-hidden="true" />
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate text-sm font-semibold text-white">Snow Africa</span>
+            <span className="block text-xs text-slate-400">Admin</span>
+          </span>
+        </Link>
+        {onClose && (
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
+            className={clsx("rounded-md p-2 text-slate-300 hover:bg-white/5 hover:text-white", focusRing)}
+          >
+            <X className="h-5 w-5" aria-hidden="true" />
+          </button>
         )}
-      >
-        <item.icon className="w-5 h-5 shrink-0" aria-hidden="true" />
-        <span className="truncate">{item.label}</span>
-      </Link>
-    );
-  };
-
-  const navContent = (
-    <>
-      <div className="p-6 border-b border-slate-700">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-white">Snow Africa</h1>
-            <p className="text-sm text-slate-400 mt-1">Admin Dashboard</p>
-            <p
-              className="hidden lg:flex items-center gap-1.5 mt-2 text-[10px] text-slate-500"
-              aria-hidden="true"
-              title="Press to open the command palette"
-            >
-              Press
-              <kbd className="bg-slate-700 text-slate-200 rounded px-1 py-0.5 font-mono">
-                ⌘K
-              </kbd>
-              to search
-            </p>
-          </div>
-          <div className="hidden lg:block">
-            <NotificationBell variant="dark" />
-          </div>
-        </div>
       </div>
 
-      <nav
-        className="flex-1 p-4 overflow-y-auto"
-        aria-label="Admin navigation"
-      >
-        <div className="space-y-1">{visibleTop.map(renderItem)}</div>
-        {visibleGroups.map((group) => {
-          const hasActive = groupContainsActive(group);
-          const open = !collapsed.has(group.id) || hasActive;
+      {/* Search: the top bar has its own on wider screens */}
+      {onClose && (
+        <div className="px-3 pt-3">
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              openCommandPalette();
+            }}
+            className={clsx(
+              "flex w-full items-center gap-2 rounded-md bg-white/5 px-3 py-2 text-sm text-slate-300 hover:bg-white/10",
+              focusRing
+            )}
+          >
+            <Search className="h-4 w-4 text-slate-400" aria-hidden="true" />
+            <span className="flex-1 text-left">Search…</span>
+            <kbd className="rounded border border-white/10 px-1.5 py-0.5 font-sans text-[11px] text-slate-400">
+              {modKey} K
+            </kbd>
+          </button>
+        </div>
+      )}
+
+      <nav aria-label="Admin" className="flex-1 overflow-y-auto overscroll-contain px-3 py-3">
+        <NavLink item={HOME_ITEM} active={activeHref === HOME_ITEM.href} onNavigate={onNavigate} />
+
+        {groups.map((group) => {
+          const open = !collapsed.has(group.id);
+          const holdsActive = group.items.some((item) => item.href === activeHref);
+          const listId = `${idPrefix}-group-${group.id}`;
           return (
-            <div key={group.id} className="mt-4">
+            <section key={group.id} className="mt-4" aria-labelledby={`${listId}-label`}>
               <button
                 type="button"
+                id={`${listId}-label`}
                 onClick={() => toggleGroup(group.id)}
-                aria-expanded={open ? "true" : "false"}
-                aria-controls={`nav-group-${group.id}`}
+                aria-expanded={open}
+                aria-controls={listId}
                 className={clsx(
-                  "flex items-center justify-between w-full px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors",
+                  "flex w-full items-center justify-between rounded-md px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors",
                   focusRing,
-                  hasActive
-                    ? "text-amber-300"
-                    : "text-slate-400 hover:text-slate-200"
+                  holdsActive ? "text-amber-300" : "text-slate-400 hover:text-slate-200"
                 )}
               >
-                <span>{group.label}</span>
-                <ChevronDown
-                  className={clsx(
-                    "w-4 h-4 transition-transform",
-                    open ? "rotate-0" : "-rotate-90"
+                <span className="flex items-center gap-2">
+                  {group.label}
+                  {!open && holdsActive && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400" aria-label="(current page inside)" />
                   )}
+                </span>
+                <ChevronDown
+                  className={clsx("h-3.5 w-3.5 transition-transform motion-reduce:transition-none", !open && "-rotate-90")}
                   aria-hidden="true"
                 />
               </button>
-              {open && (
-                <div id={`nav-group-${group.id}`} className="mt-1 space-y-1">
-                  {group.items.map(renderItem)}
-                </div>
-              )}
-            </div>
+              <div id={listId} hidden={!open} className="mt-0.5 space-y-0.5">
+                {group.items.map((item) => (
+                  <NavLink key={item.href} item={item} active={item.href === activeHref} onNavigate={onNavigate} />
+                ))}
+              </div>
+            </section>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-slate-700">
-        <div className="px-4 py-3">
-          <p className="text-white font-medium text-sm">{user.name}</p>
-          <p className="text-slate-400 text-xs truncate mb-2">{user.email}</p>
-          <RoleBadge role={user.role} size="sm" />
+      {/* Account */}
+      <div className="flex shrink-0 items-center gap-3 border-t border-white/10 px-4 py-3">
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-700 text-xs font-semibold text-slate-100"
+          aria-hidden="true"
+        >
+          {initials(user)}
+        </span>
+        <div className="min-w-0 flex-1 leading-tight">
+          <p className="truncate text-sm font-medium text-white">{user.name ?? user.email}</p>
+          <p className="truncate text-xs text-slate-400">{getRoleName(user.role)}</p>
         </div>
         <button
           type="button"
-          onClick={handleSignOut}
-          className={clsx(
-            "flex items-center gap-3 w-full px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors",
-            focusRing
-          )}
+          onClick={() => signOut({ callbackUrl: "/admin/login" })}
+          aria-label="Sign out"
+          title="Sign out"
+          className={clsx("rounded-md p-2 text-slate-400 hover:bg-white/5 hover:text-white", focusRing)}
         >
-          <LogOut className="w-5 h-5" aria-hidden="true" />
-          Sign Out
+          <LogOut className="h-[18px] w-[18px]" aria-hidden="true" />
         </button>
       </div>
-    </>
+    </div>
   );
+}
+
+// ---------------------------------------------------------------------------
+// Sidebar: fixed rail on large screens, slide-in drawer below that.
+// ---------------------------------------------------------------------------
+export default function AdminSidebar({ user }: { user: User }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const groups = useMemo(() => navForRole(user.role), [user.role]);
+  const activeHref = useMemo(
+    () => findActiveHref(pathname, searchParams, [HOME_ITEM, ...groups.flatMap((g) => g.items)]),
+    [pathname, searchParams, groups]
+  );
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  // Close the drawer whenever the page changes (links, back/forward, palette).
+  const [lastPath, setLastPath] = useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
+    setMobileOpen(false);
+  }
+
+  // A group the user collapsed reopens when they land on a page inside it.
+  useEffect(() => {
+    if (!activeHref) return;
+    const group = groups.find((g) => g.items.some((i) => i.href === activeHref));
+    if (!group) return;
+    let current: Set<string>;
+    try {
+      current = new Set<string>(JSON.parse(readCollapsed()) as string[]);
+    } catch {
+      return;
+    }
+    if (current.delete(group.id)) writeCollapsed(current);
+  }, [activeHref, groups]);
+
+  const close = useCallback(() => {
+    setMobileOpen(false);
+    document.getElementById(NAV_TRIGGER_ID)?.focus();
+  }, []);
+
+  useEffect(() => {
+    const onToggle = () => setMobileOpen((v) => !v);
+    window.addEventListener(NAV_TOGGLE_EVENT, onToggle);
+    return () => window.removeEventListener(NAV_TOGGLE_EVENT, onToggle);
+  }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    closeRef.current?.focus();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [mobileOpen, close]);
 
   return (
     <>
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-slate-800 flex items-center justify-between px-4 z-50">
-        <h1 className="text-lg font-bold text-white">Snow Africa Admin</h1>
-        <div className="flex items-center gap-2">
-          <NotificationBell variant="dark" />
-          <button
-            type="button"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen ? "true" : "false"}
-            aria-controls="mobile-nav"
-            className={clsx("p-2 text-white rounded-lg", focusRing)}
-          >
-            {mobileOpen ? (
-              <X className="w-6 h-6" aria-hidden="true" />
-            ) : (
-              <Menu className="w-6 h-6" aria-hidden="true" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Sidebar — slide-in drawer */}
+      {/* Drawer (below lg) */}
       <div
         className={clsx(
-          "lg:hidden fixed inset-0 z-40 transition-opacity duration-200",
-          mobileOpen ? "visible opacity-100" : "invisible opacity-0"
+          "fixed inset-0 z-50 lg:hidden",
+          // Show at once on open (so focus can move in); hide after the slide-out on close.
+          mobileOpen ? "visible" : "invisible transition-[visibility] delay-200 motion-reduce:delay-0"
         )}
-        aria-hidden={mobileOpen ? "false" : "true"}
       >
         <div
-          className="absolute inset-0 bg-black/50"
-          role="button"
-          tabIndex={0}
-          onClick={() => setMobileOpen(false)}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setMobileOpen(false); } }}
-          aria-label="Close navigation"
+          className={clsx(
+            "absolute inset-0 bg-slate-950/60 transition-opacity duration-200 motion-reduce:transition-none",
+            mobileOpen ? "opacity-100" : "opacity-0"
+          )}
+          onClick={close}
           aria-hidden="true"
         />
         <div
-          id="mobile-nav"
+          id="admin-mobile-nav"
           role="dialog"
           aria-modal="true"
-          aria-label="Admin navigation"
+          aria-label="Admin menu"
           className={clsx(
-            "absolute top-16 left-0 bottom-0 w-[280px] bg-slate-800 flex flex-col",
-            "transition-transform duration-200 ease-out",
+            "absolute inset-y-0 left-0 w-[min(18rem,85vw)] bg-slate-900 shadow-2xl",
+            "transition-transform duration-200 ease-out motion-reduce:transition-none",
             mobileOpen ? "translate-x-0" : "-translate-x-full"
           )}
         >
-          {navContent}
+          <SidebarBody
+            user={user}
+            groups={groups}
+            activeHref={activeHref}
+            idPrefix="m"
+            onNavigate={() => setMobileOpen(false)}
+            onClose={close}
+            closeRef={closeRef}
+          />
         </div>
       </div>
 
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:flex fixed top-0 left-0 bottom-0 w-64 bg-slate-800 flex-col">
-        {navContent}
-      </div>
+      {/* Rail (lg and up) */}
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-white/5 bg-slate-900 lg:block">
+        <SidebarBody user={user} groups={groups} activeHref={activeHref} idPrefix="d" />
+      </aside>
     </>
   );
 }

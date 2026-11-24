@@ -1,3 +1,4 @@
+import { isValidCronAuth } from "@/lib/cron-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 import { GET as leadFollowup } from "../lead-followup/route";
@@ -5,6 +6,8 @@ import { GET as climberReminders } from "../climber-reminders/route";
 import { GET as seoSync } from "../seo-sync/route";
 import { GET as seoSnapshot } from "../seo-snapshot/route";
 import { GET as tripadvisorReviews } from "../tripadvisor-reviews/route";
+import { GET as seoAlerts } from "../seo-alerts/route";
+import { GET as seoAudit } from "../seo-audit/route";
 
 /**
  * Daily cron orchestrator.
@@ -29,12 +32,18 @@ export const maxDuration = 60;
 function verifyCronSecret(request: NextRequest): boolean {
   const authHeader = request.headers.get("authorization");
   if (!authHeader) return false;
-  return authHeader.replace("Bearer ", "") === process.env.CRON_SECRET;
+  return isValidCronAuth(authHeader);
 }
+
+/** Leave headroom under maxDuration for the response itself. */
+const RUN_BUDGET_MS = 55_000;
 
 type Task = {
   name: string;
-  run: (req: NextRequest) => Promise<Response>;
+  /** `remainingMs` is the time left in this invocation's budget. */
+  run: (req: NextRequest, remainingMs: number) => Promise<Response>;
+  /** Skip the task when less than this much time is left. */
+  minRemainingMs?: number;
   /** Days of the month to run on. Omit to run daily. */
   daysOfMonth?: number[];
 };
@@ -44,9 +53,22 @@ const TASKS: Task[] = [
   { name: "lead-followup", run: leadFollowup },
   { name: "climber-reminders", run: climberReminders },
   { name: "seo-snapshot", run: seoSnapshot },
+  // Before the sync on purpose: if the sync times out, the "sync is stale"
+  // alert must still have run.
+  { name: "seo-alerts", run: seoAlerts },
   { name: "seo-sync", run: seoSync },
   // Previously scheduled as "0 6 1,6,11,16,21,26 * *" — cadence preserved.
   { name: "tripadvisor-reviews", run: tripadvisorReviews, daysOfMonth: [1, 6, 11, 16, 21, 26] },
+  // Last, and only with time to spare: it fills whatever budget is left.
+  {
+    name: "seo-audit",
+    minRemainingMs: 20_000,
+    run: (req, remainingMs) => {
+      const url = new URL("/api/cron/seo-audit/", req.url);
+      url.searchParams.set("budgetMs", String(remainingMs - 5_000));
+      return seoAudit(new Request(url, { headers: req.headers }));
+    },
+  },
 ];
 
 export async function GET(request: NextRequest) {
@@ -54,6 +76,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const startedAt = Date.now();
   const dayOfMonth = new Date().getUTCDate();
   const results: Record<string, { status: string; detail?: string }> = {};
 
@@ -63,8 +86,14 @@ export async function GET(request: NextRequest) {
       continue;
     }
 
+    const remainingMs = RUN_BUDGET_MS - (Date.now() - startedAt);
+    if (task.minRemainingMs && remainingMs < task.minRemainingMs) {
+      results[task.name] = { status: "skipped", detail: `only ${Math.round(remainingMs / 1000)}s left` };
+      continue;
+    }
+
     try {
-      const response = await task.run(request);
+      const response = await task.run(request, remainingMs);
       results[task.name] = {
         status: response.ok ? "ok" : "failed",
         detail: response.ok ? undefined : `HTTP ${response.status}`,

@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hash } from "bcryptjs";
+import { hashResetToken } from "@/lib/reset-token";
 
 export async function POST(request: NextRequest) {
   try {
     const { token, password } = await request.json();
 
-    if (!token || !password) {
+    if (typeof token !== "string" || typeof password !== "string" || !token || !password) {
       return NextResponse.json(
         { error: "Token and password are required" },
         { status: 400 }
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     // Find valid token
     const resetToken = await prisma.passwordResetToken.findUnique({
-      where: { token },
+      where: { token: hashResetToken(token) },
       include: { user: true },
     });
 
@@ -89,7 +90,7 @@ export async function GET(request: NextRequest) {
     }
 
     const resetToken = await prisma.passwordResetToken.findUnique({
-      where: { token },
+      where: { token: hashResetToken(token) },
       include: { user: { select: { email: true, name: true } } },
     });
 

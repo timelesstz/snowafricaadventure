@@ -21,7 +21,15 @@ import {
  * previously only the newest 20 were linked from anywhere.
  */
 
+// Cached for 5 minutes (ISR); admin blog saves refresh it at once via
+// revalidateBlogPages(). A dynamic segment is only cached when it has
+// generateStaticParams; the empty list prerenders nothing at build time,
+// so each page renders on first visit and is then cached.
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return [];
+}
 
 interface Props {
   params: Promise<{ page: string }>;

@@ -22,6 +22,16 @@ import { findRelatedBlogPosts } from "@/lib/related-content";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import prisma from "@/lib/prisma";
 
+// Cached for 5 minutes (ISR); admin safari saves refresh it at once via
+// revalidateSafariPages(). A dynamic segment is only cached when it has
+// generateStaticParams; the empty list prerenders nothing at build time,
+// so each page renders on first visit and is then cached.
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return [];
+}
+
 interface PageProps {
   params: Promise<{ safariSlug: string }>;
 }
@@ -30,7 +40,7 @@ interface PageProps {
 const getSafari = cache(async function getSafari(slug: string) {
   try {
     const safari = await prisma.safariPackage.findUnique({
-      where: { slug },
+      where: { slug, isActive: true },
       include: {
         destinations: {
           include: {

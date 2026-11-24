@@ -14,6 +14,7 @@ import {
   fieldControlClass,
 } from "@/components/admin/ui";
 import { disposeFormDeletions } from "@/lib/admin-media";
+import { revalidateBlogPages } from "@/lib/revalidate-public";
 
 async function getBlogPost(id: string) {
   if (id === "new") return null;
@@ -123,6 +124,7 @@ async function savePost(formData: FormData) {
 
   await disposeFormDeletions(formData, ["featuredImage"]);
 
+  revalidateBlogPages();
   redirect("/admin/blog");
 }
 
@@ -133,6 +135,7 @@ async function deletePost(formData: FormData) {
 
   const id = formData.get("id") as string;
   await prisma.blogPost.delete({ where: { id } });
+  revalidateBlogPages();
   redirect("/admin/blog");
 }
 

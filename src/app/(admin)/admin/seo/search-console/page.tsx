@@ -1,711 +1,743 @@
-"use client";
+import Link from "next/link";
+import { ArrowDownRight, ArrowUpRight, ExternalLink, GitFork, Lightbulb, Search, Sparkle, Target } from "lucide-react";
+import { clsx } from "clsx";
+import { requireRole } from "@/lib/auth";
+import { indexByPath, loadContentIndex, type ContentRecord } from "@/lib/seo-intel/content-index";
+import { gscDaily, gscWindow, pageAggs, parsePeriod, queryPageRows } from "@/lib/seo-intel/data";
+import { KIND_LABEL } from "@/lib/seo-intel/paths";
+import {
+  aggregate,
+  aggregateBy,
+  ctrGap,
+  detectCannibalization,
+  EMPTY_AGG,
+  expectedCtr,
+  findMovers,
+  forecastClicks,
+  isStrikingDistance,
+  pctChange,
+  type Agg,
+  type Cannibalization,
+  type CtrGap,
+  type Mover,
+} from "@/lib/seo-intel/rules";
+import MetaFixButton from "@/components/admin/seo/intel/MetaFixButton";
+import TrendChart from "@/components/admin/seo/intel/TrendChart";
+import {
+  Delta,
+  EmptyState,
+  fmtInt,
+  fmtPct,
+  fmtPos,
+  fmtWindow,
+  Kpi,
+  Panel,
+  PageIntro,
+  Pill,
+  SegmentLinks,
+  TableScroll,
+  td,
+  tdNum,
+  th,
+  thNum,
+} from "@/components/admin/seo/intel/ui";
 
-import { useState, useEffect, useMemo } from "react";
-import DateRangePicker from "@/components/admin/seo/DateRangePicker";
-import {
-  ExternalLink,
-  ArrowUpDown,
-  Search,
-  Lightbulb,
-  ChevronDown,
-  ChevronUp,
-  Sparkles,
-  Target,
-  TrendingUp,
-  Shield,
-  AlertTriangle,
-  Eye,
-  DollarSign,
-  Trophy,
-  FilePlus,
-  ShieldAlert,
-  Zap,
-} from "lucide-react";
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-} from "recharts";
-import {
-  analyzeQuery,
-  generateTopInsights,
-  type QueryAdvice,
-} from "@/lib/seo-dashboard/query-advisor";
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+export const metadata = { title: "Search Console · SEO" };
 
-interface QueryRow {
-  query: string;
-  clicks: number;
-  impressions: number;
-  ctr: number;
-  position: number;
-  topPage?: string | null;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
+
+const TABS = [
+  { value: "opportunities", label: "Opportunities" },
+  { value: "queries", label: "Queries" },
+  { value: "pages", label: "Pages" },
+] as const;
+type Tab = (typeof TABS)[number]["value"];
+const SORTS = ["clicks", "impressions", "ctr", "position", "change"] as const;
+type Sort = (typeof SORTS)[number];
+const PAGE_SIZE = 50;
+const BASE = "/admin/seo/search-console/";
+const BRAND_QUERY = /snow[\s-]*africa/i;
+const analyzeHref = (path: string) => `/admin/seo/page-analyzer/?url=${encodeURIComponent(path)}`;
+
+type PageGap = { path: string; agg: Agg; gap: CtrGap };
+
+function sortRows<T extends { agg: Agg; prev: Agg }>(rows: T[], sort: Sort): T[] {
+  return [...rows].sort((a, b) => {
+    switch (sort) {
+      case "impressions":
+        return b.agg.impressions - a.agg.impressions;
+      case "ctr":
+        return b.agg.ctr - a.agg.ctr || b.agg.impressions - a.agg.impressions;
+      case "position":
+        return (a.agg.position || 999) - (b.agg.position || 999);
+      case "change":
+        return Math.abs(b.agg.clicks - b.prev.clicks) - Math.abs(a.agg.clicks - a.prev.clicks);
+      default:
+        return b.agg.clicks - a.agg.clicks || b.agg.impressions - a.agg.impressions;
+    }
+  });
 }
 
-interface TimePoint {
-  date: string;
-  clicks: number;
-  impressions: number;
-  ctr: number;
-  position: number;
-}
+export default async function SearchConsolePage({ searchParams }: { searchParams: SearchParams }) {
+  await requireRole("VIEWER");
+  const sp = await searchParams;
+  const period = parsePeriod(one(sp.period), 28);
+  const q = (one(sp.q) || one(sp.query)).trim().toLowerCase();
+  const tabParam = one(sp.tab);
+  const tab: Tab = TABS.some((t) => t.value === tabParam) ? (tabParam as Tab) : q ? "queries" : "opportunities";
+  const sort: Sort = (SORTS as readonly string[]).includes(one(sp.sort)) ? (one(sp.sort) as Sort) : "clicks";
+  const page = Math.max(1, Math.floor(Number(one(sp.page))) || 1);
 
-interface SearchConsoleData {
-  queries: QueryRow[];
-  total: number;
-  timeSeries: TimePoint[];
-}
-
-type SortField = "clicks" | "impressions" | "ctr" | "position";
-
-// ─── Icon mapping for insights ───────────────────────────────────────────────
-
-function InsightIcon({ icon }: { icon: string }) {
-  const cls = "w-4 h-4";
-  switch (icon) {
-    case "alert-triangle":
-      return <AlertTriangle className={`${cls} text-amber-500`} />;
-    case "trending-up":
-      return <TrendingUp className={`${cls} text-violet-500`} />;
-    case "eye":
-      return <Eye className={`${cls} text-red-500`} />;
-    case "shield-alert":
-      return <ShieldAlert className={`${cls} text-orange-500`} />;
-    case "dollar":
-      return <DollarSign className={`${cls} text-green-600`} />;
-    case "file-plus":
-      return <FilePlus className={`${cls} text-slate-500`} />;
-    case "trophy":
-      return <Trophy className={`${cls} text-emerald-500`} />;
-    default:
-      return <Target className={`${cls} text-indigo-500`} />;
+  const win = await gscWindow(period);
+  if (!win.latest) {
+    return (
+      <div className="space-y-6">
+        <PageIntro title="Search Console" description="Queries, pages and ranking opportunities from Google Search." />
+        <EmptyState
+          title="No Search Console data yet"
+          action={
+            <Link href="/admin/seo/settings/" className="min-h-9 inline-flex items-center px-3 rounded-md bg-amber-600 text-[var(--primary-dark)] text-sm font-semibold hover:bg-amber-500">
+              Open SEO settings
+            </Link>
+          }
+        >
+          Connect Search Console and run a sync to see which searches bring visitors, where rankings move, and which snippets lose clicks.
+        </EmptyState>
+      </div>
+    );
   }
-}
 
-const INSIGHT_BORDER_COLORS: Record<string, string> = {
-  amber: "border-l-amber-400",
-  violet: "border-l-violet-400",
-  red: "border-l-red-400",
-  orange: "border-l-orange-400",
-  green: "border-l-green-400",
-  slate: "border-l-slate-400",
-  emerald: "border-l-emerald-400",
-  sky: "border-l-sky-400",
-};
+  const [rows, prevRows, pages, prevPages, daily, prevDaily, records] = await Promise.all([
+    queryPageRows(win.start, win.end),
+    queryPageRows(win.prevStart, win.start),
+    pageAggs(win.start, win.end),
+    pageAggs(win.prevStart, win.start),
+    gscDaily(win.start, win.end),
+    gscDaily(win.prevStart, win.start),
+    loadContentIndex(),
+  ]);
+  const content = indexByPath(records);
 
-// ─── CTR Score Bar ───────────────────────────────────────────────────────────
+  const total = aggregate(daily);
+  const prevTotal = aggregate(prevDaily);
+  const queries = aggregateBy(rows, (r) => r.query);
+  const prevQueries = aggregateBy(prevRows, (r) => r.query);
 
-function CtrScoreBar({ score }: { score: number }) {
-  const color =
-    score >= 80
-      ? "bg-emerald-500"
-      : score >= 60
-        ? "bg-blue-500"
-        : score >= 40
-          ? "bg-amber-500"
-          : "bg-red-500";
+  // Best-ranking page per query, and how many of our pages appear for it.
+  const topPage = new Map<string, { page: string; impressions: number; count: number }>();
+  for (const r of rows) {
+    const cur = topPage.get(r.query);
+    if (!cur) topPage.set(r.query, { page: r.page, impressions: r.impressions, count: 1 });
+    else {
+      cur.count++;
+      if (r.impressions > cur.impressions) {
+        cur.page = r.page;
+        cur.impressions = r.impressions;
+      }
+    }
+  }
+
+  const queryMovers = findMovers(queries, prevQueries);
+  const pageMovers = findMovers(pages, prevPages, { minImpressions: 50 });
+  // Brand searches always show several of our pages (home, contact, sitelinks); that is not cannibalization.
+  const cannibal = detectCannibalization(rows).filter((c) => !BRAND_QUERY.test(c.query));
+  const striking = [...queries]
+    .filter(([, a]) => isStrikingDistance(a))
+    .map(([query, agg]) => ({ query, agg, gain: forecastClicks(agg) }))
+    .filter((s) => s.gain > 0)
+    .sort((a, b) => b.gain - a.gain);
+  const pageGaps: PageGap[] = [];
+  for (const [path, agg] of pages) {
+    const gap = ctrGap(agg);
+    if (gap) pageGaps.push({ path, agg, gap });
+  }
+  pageGaps.sort((a, b) => b.gap.missedClicks - a.gap.missedClicks);
+
+  const strikingGain = striking.reduce((s, x) => s + x.gain, 0);
+  const missedTotal = pageGaps.reduce((s, x) => s + x.gap.missedClicks, 0);
+  const vs = `vs previous ${period} days`;
+
+  const params: Record<string, string | undefined> = {
+    period: String(period),
+    tab,
+    q: q || undefined,
+    sort: sort !== "clicks" ? sort : undefined,
+  };
+  const hrefWith = (patch: Record<string, string | undefined>) => {
+    const next = new URLSearchParams();
+    for (const [k, v] of Object.entries({ ...params, ...patch })) if (v) next.set(k, v);
+    return `${BASE}?${next.toString()}`;
+  };
+
+  // Headline insights, written from this period's numbers.
+  const insights: Array<{ tone: "good" | "bad" | "idea"; text: string; href?: string }> = [];
+  const clicksChange = pctChange(total.clicks, prevTotal.clicks);
+  if (clicksChange !== null && Math.abs(clicksChange) >= 10) {
+    const driver = [...pageMovers]
+      .filter((m) => Math.sign(m.clicksDelta) === Math.sign(clicksChange))
+      .sort((a, b) => Math.abs(b.clicksDelta) - Math.abs(a.clicksDelta))[0];
+    const driverName = driver ? content.get(driver.key)?.title ?? driver.key : null;
+    insights.push({
+      tone: clicksChange > 0 ? "good" : "bad",
+      text: `Clicks ${clicksChange > 0 ? "rose" : "fell"} ${Math.abs(Math.round(clicksChange))}% ${vs}.${
+        driver ? ` The biggest single change is ${driverName} (${driver.clicksDelta > 0 ? "+" : ""}${fmtInt(driver.clicksDelta)} clicks).` : ""
+      }`,
+      href: driver ? analyzeHref(driver.key) : undefined,
+    });
+  }
+  if (missedTotal > 0)
+    insights.push({
+      tone: "idea",
+      text: `${pageGaps.length} page-one URL${pageGaps.length === 1 ? " earns" : "s earn"} fewer clicks than their position should, about ${fmtInt(missedTotal)} clicks missed. Rewriting those titles and descriptions is the cheapest win here.`,
+      href: hrefWith({ tab: "opportunities", page: undefined }) + "#sc-ctr",
+    });
+  if (strikingGain > 0)
+    insights.push({
+      tone: "idea",
+      text: `${striking.length} quer${striking.length === 1 ? "y sits" : "ies sit"} on positions 8–20. Moving them into the top three is worth about ${fmtInt(strikingGain)} extra clicks per ${period} days.`,
+      href: hrefWith({ tab: "opportunities", page: undefined }) + "#sc-striking",
+    });
+  if (cannibal.length > 0)
+    insights.push({
+      tone: "bad",
+      text: `${cannibal.length} quer${cannibal.length === 1 ? "y has" : "ies have"} two or more of our pages competing, which splits ranking signals. The largest is “${cannibal[0].query}”.`,
+      href: hrefWith({ tab: "opportunities", page: undefined }) + "#sc-cannibal",
+    });
+
   return (
-    <div className="flex items-center gap-1.5">
-      <div className="w-12 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-        <div
-          className={`h-full rounded-full transition-all ${color}`}
-          style={{ width: `${Math.min(100, score)}%` }}
+    <div className="space-y-6">
+      <PageIntro
+        title="Search Console"
+        description={
+          <>
+            Google Search for {fmtWindow(win.start, win.end)}, compared with the {period} days before. Search Console reports 2–3 days late, so the window ends on the latest day with data.
+          </>
+        }
+      >
+        <SegmentLinks
+          label="Period"
+          param="period"
+          basePath={BASE}
+          params={{ tab, q: q || undefined, sort: params.sort }}
+          value={period}
+          options={[
+            { value: 7, label: "7 days" },
+            { value: 28, label: "28 days" },
+            { value: 90, label: "90 days" },
+          ]}
+        />
+      </PageIntro>
+
+      <div className="grid grid-cols-1 min-[420px]:grid-cols-2 xl:grid-cols-4 gap-4">
+        <Kpi label="Clicks" value={fmtInt(total.clicks)} delta={<Delta value={clicksChange} label={vs} />} />
+        <Kpi label="Impressions" value={fmtInt(total.impressions)} delta={<Delta value={pctChange(total.impressions, prevTotal.impressions)} label={vs} />} />
+        <Kpi
+          label="CTR"
+          value={fmtPct(total.ctr, 2)}
+          delta={<Delta value={prevTotal.impressions ? (total.ctr - prevTotal.ctr) * 100 : null} suffix=" pts" digits={2} label={vs} />}
+          hint="clicks ÷ impressions"
+        />
+        <Kpi
+          label="Avg. position"
+          value={fmtPos(total.position)}
+          delta={prevTotal.position ? <Delta value={total.position - prevTotal.position} suffix="" digits={1} invert label={vs} /> : undefined}
+          hint="weighted by impressions"
         />
       </div>
-      <span className="text-[10px] text-slate-400 tabular-nums w-6">
-        {score}
-      </span>
+
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-6 items-start">
+        <Panel id="sc-trend" title="Daily clicks and position">
+          {daily.length === 0 ? (
+            <EmptyState title="No daily data in this window" />
+          ) : (
+            <TrendChart
+              summary={`Daily clicks and average position, ${fmtWindow(win.start, win.end)}. ${fmtInt(total.clicks)} clicks in total.`}
+              data={daily.map((d) => ({ date: d.date, clicks: d.clicks, position: Number(d.position.toFixed(1)) }))}
+              series={[
+                { key: "clicks", label: "Clicks", color: "#0f766e" },
+                { key: "position", label: "Avg. position", color: "#7c3aed", right: true, reversed: true, format: "pos" },
+              ]}
+            />
+          )}
+        </Panel>
+        <Panel id="sc-insights" title="What the data says" meta="Worked out from this period's numbers.">
+          {insights.length === 0 ? (
+            <EmptyState title="Nothing stands out">Traffic is steady and no page or query needs urgent work.</EmptyState>
+          ) : (
+            <ul className="space-y-3">
+              {insights.map((i) => {
+                const Icon = i.tone === "good" ? ArrowUpRight : i.tone === "bad" ? ArrowDownRight : Lightbulb;
+                return (
+                  <li key={i.text} className="flex gap-2.5 text-sm text-slate-700">
+                    <Icon
+                      className={clsx("w-4 h-4 shrink-0 mt-0.5", i.tone === "good" ? "text-emerald-600" : i.tone === "bad" ? "text-red-600" : "text-amber-600")}
+                      aria-hidden="true"
+                    />
+                    <span>
+                      {i.text}
+                      {i.href && (
+                        <>
+                          {" "}
+                          <Link href={i.href} className="font-medium text-amber-700 hover:underline">
+                            Show me
+                          </Link>
+                        </>
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </Panel>
+      </div>
+
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <SegmentLinks label="View" param="tab" basePath={BASE} params={{ period: String(period), q: q || undefined }} value={tab} options={TABS} />
+        {tab !== "opportunities" && (
+          <form method="get" action={BASE} className="flex flex-wrap items-end gap-2">
+            <input type="hidden" name="period" value={period} />
+            <input type="hidden" name="tab" value={tab} />
+            <label className="flex-1 min-w-[12rem]">
+              <span className="sr-only">{tab === "queries" ? "Filter queries" : "Filter pages"}</span>
+              <span className="relative block">
+                <Search className="w-4 h-4 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" aria-hidden="true" />
+                <input
+                  name="q"
+                  defaultValue={q}
+                  placeholder={tab === "queries" ? "Filter queries" : "Filter URLs"}
+                  className="w-full min-h-10 rounded-md border border-slate-300 pl-8 pr-3 text-sm focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600/30"
+                />
+              </span>
+            </label>
+            <label>
+              <span className="sr-only">Sort by</span>
+              <select name="sort" defaultValue={sort} className="min-h-10 rounded-md border border-slate-300 bg-white px-2 text-sm">
+                <option value="clicks">Most clicks</option>
+                <option value="impressions">Most impressions</option>
+                <option value="ctr">Highest CTR</option>
+                <option value="position">Best position</option>
+                <option value="change">Biggest change</option>
+              </select>
+            </label>
+            <button type="submit" className="min-h-10 px-4 rounded-md bg-slate-900 text-white text-sm font-medium hover:bg-slate-800">
+              Apply
+            </button>
+          </form>
+        )}
+      </div>
+
+      {tab === "opportunities" && (
+        <Opportunities period={period} striking={striking} pageGaps={pageGaps} cannibal={cannibal} queryMovers={queryMovers} content={content} />
+      )}
+
+      {tab === "queries" && (
+        <QueriesTable
+          list={sortRows(
+            [...queries]
+              .filter(([query]) => !q || query.toLowerCase().includes(q))
+              .map(([query, agg]) => ({ query, agg, prev: prevQueries.get(query) ?? EMPTY_AGG, top: topPage.get(query) })),
+            sort
+          )}
+          q={q}
+          page={page}
+          vs={vs}
+          content={content}
+          hrefWith={hrefWith}
+        />
+      )}
+
+      {tab === "pages" && (
+        <PagesTable
+          list={sortRows(
+            [...pages]
+              .filter(([path]) => !q || path.includes(q))
+              .map(([path, agg]) => ({ path, agg, prev: prevPages.get(path) ?? EMPTY_AGG, item: content.get(path) ?? null })),
+            sort
+          )}
+          q={q}
+          page={page}
+          vs={vs}
+          hrefWith={hrefWith}
+        />
+      )}
     </div>
   );
 }
 
-// ─── Intent Badge ────────────────────────────────────────────────────────────
+function Pager({ page, pageCount, hrefWith }: { page: number; pageCount: number; hrefWith: (p: Record<string, string | undefined>) => string }) {
+  if (pageCount <= 1) return null;
+  return (
+    <nav aria-label="Table pages" className="flex items-center justify-between gap-3 border-t border-slate-200 px-4 sm:px-5 py-3 text-sm">
+      <span className="text-slate-500">
+        Page {page} of {pageCount}
+      </span>
+      <span className="flex gap-2">
+        {page > 1 && (
+          <Link href={hrefWith({ page: String(page - 1) })} className="min-h-9 px-3 inline-flex items-center rounded-md border border-slate-300 hover:bg-slate-50">
+            Previous
+          </Link>
+        )}
+        {page < pageCount && (
+          <Link href={hrefWith({ page: String(page + 1) })} className="min-h-9 px-3 inline-flex items-center rounded-md border border-slate-300 hover:bg-slate-50">
+            Next
+          </Link>
+        )}
+      </span>
+    </nav>
+  );
+}
 
-const INTENT_STYLES: Record<
-  string,
-  { bg: string; text: string; label: string }
-> = {
-  transactional: {
-    bg: "bg-green-50",
-    text: "text-green-700",
-    label: "Transactional",
-  },
-  informational: {
-    bg: "bg-blue-50",
-    text: "text-blue-700",
-    label: "Informational",
-  },
-  navigational: {
-    bg: "bg-purple-50",
-    text: "text-purple-700",
-    label: "Navigational",
-  },
-  branded: { bg: "bg-amber-50", text: "text-amber-700", label: "Branded" },
+function QueriesTable({
+  list,
+  q,
+  page,
+  vs,
+  content,
+  hrefWith,
+}: {
+  list: Array<{ query: string; agg: Agg; prev: Agg; top?: { page: string; count: number } }>;
+  q: string;
+  page: number;
+  vs: string;
+  content: Map<string, ContentRecord>;
+  hrefWith: (p: Record<string, string | undefined>) => string;
+}) {
+  const pageCount = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+  const current = Math.min(page, pageCount);
+  const visible = list.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
+  return (
+    <Panel id="sc-queries" title="Queries" meta={`${fmtInt(list.length)} queries${q ? ` matching “${q}”` : ""}. CTR and position are weighted by impressions.`} flush>
+      {visible.length === 0 ? (
+        <div className="px-4 sm:px-5 pb-5">
+          <EmptyState title="No queries match">Try a shorter filter or a longer period.</EmptyState>
+        </div>
+      ) : (
+        <TableScroll label="Queries">
+          <table className="min-w-full border-t border-slate-200">
+            <thead className="bg-slate-50">
+              <tr>
+                <th scope="col" className={th}>Query</th>
+                <th scope="col" className={thNum}>Clicks</th>
+                <th scope="col" className={thNum}>Impr.</th>
+                <th scope="col" className={thNum}>CTR</th>
+                <th scope="col" className={thNum}>Position</th>
+                <th scope="col" className={th}>Ranking page</th>
+                <th scope="col" className={th}>Signal</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {visible.map((r) => {
+                const gap = ctrGap(r.agg, { minImpressions: 30 });
+                return (
+                  <tr key={r.query} className="hover:bg-slate-50/70">
+                    <td className={clsx(td, "min-w-[14rem] font-medium text-slate-900")}>{r.query}</td>
+                    <td className={tdNum}>
+                      <div>{fmtInt(r.agg.clicks)}</div>
+                      {r.prev.clicks > 0 && <Delta value={pctChange(r.agg.clicks, r.prev.clicks)} label={vs} />}
+                    </td>
+                    <td className={tdNum}>{fmtInt(r.agg.impressions)}</td>
+                    <td className={tdNum}>
+                      <div>{fmtPct(r.agg.ctr)}</div>
+                      {r.agg.position > 0 && r.agg.position <= 20 && <div className="text-xs text-slate-500">expected {fmtPct(expectedCtr(r.agg.position))}</div>}
+                    </td>
+                    <td className={tdNum}>
+                      <div>{fmtPos(r.agg.position)}</div>
+                      {r.prev.position > 0 && <Delta value={r.agg.position - r.prev.position} suffix="" digits={1} invert label={vs} />}
+                    </td>
+                    <td className={clsx(td, "min-w-[12rem] max-w-[18rem]")}>
+                      {r.top && (
+                        <Link href={analyzeHref(r.top.page)} className="text-xs text-slate-600 hover:text-amber-700 break-all">
+                          {content.get(r.top.page)?.title ?? r.top.page}
+                        </Link>
+                      )}
+                      {r.top && r.top.count > 1 && (
+                        <div className="text-xs text-slate-500">
+                          +{r.top.count - 1} other page{r.top.count > 2 ? "s" : ""}
+                        </div>
+                      )}
+                    </td>
+                    <td className={td}>
+                      {r.prev.impressions === 0 ? (
+                        <Pill tone="sky">New</Pill>
+                      ) : isStrikingDistance(r.agg) && forecastClicks(r.agg) > 0 ? (
+                        <Pill tone="violet">+{fmtInt(forecastClicks(r.agg))} at #3</Pill>
+                      ) : gap ? (
+                        <Pill tone="red">Low CTR</Pill>
+                      ) : null}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </TableScroll>
+      )}
+      <Pager page={current} pageCount={pageCount} hrefWith={hrefWith} />
+    </Panel>
+  );
+}
+
+function PagesTable({
+  list,
+  q,
+  page,
+  vs,
+  hrefWith,
+}: {
+  list: Array<{ path: string; agg: Agg; prev: Agg; item: ContentRecord | null }>;
+  q: string;
+  page: number;
+  vs: string;
+  hrefWith: (p: Record<string, string | undefined>) => string;
+}) {
+  const pageCount = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+  const current = Math.min(page, pageCount);
+  const visible = list.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
+  return (
+    <Panel id="sc-pages" title="Pages" meta={`${fmtInt(list.length)} URLs${q ? ` matching “${q}”` : ""}. Click a page to analyze it.`} flush>
+      {visible.length === 0 ? (
+        <div className="px-4 sm:px-5 pb-5">
+          <EmptyState title="No pages match">Try part of the URL, for example “machame”.</EmptyState>
+        </div>
+      ) : (
+        <TableScroll label="Pages">
+          <table className="min-w-full border-t border-slate-200">
+            <thead className="bg-slate-50">
+              <tr>
+                <th scope="col" className={th}>Page</th>
+                <th scope="col" className={thNum}>Clicks</th>
+                <th scope="col" className={thNum}>Impr.</th>
+                <th scope="col" className={thNum}>CTR</th>
+                <th scope="col" className={thNum}>Position</th>
+                <th scope="col" className={th}>
+                  <span className="sr-only">Actions</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {visible.map((r) => {
+                const gap = ctrGap(r.agg);
+                return (
+                  <tr key={r.path} className="hover:bg-slate-50/70">
+                    <td className={clsx(td, "min-w-[16rem] max-w-[26rem]")}>
+                      <Link href={analyzeHref(r.path)} className="font-medium text-slate-900 hover:text-amber-700 break-all">
+                        {r.item?.title ?? r.path}
+                      </Link>
+                      <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
+                        {r.item && <Pill>{KIND_LABEL[r.item.kind]}</Pill>}
+                        {r.item && <span className="text-xs text-slate-500 break-all">{r.path}</span>}
+                        {gap && <Pill tone="red">~{fmtInt(gap.missedClicks)} clicks missed</Pill>}
+                      </div>
+                    </td>
+                    <td className={tdNum}>
+                      <div>{fmtInt(r.agg.clicks)}</div>
+                      {r.prev.clicks > 0 && <Delta value={pctChange(r.agg.clicks, r.prev.clicks)} label={vs} />}
+                    </td>
+                    <td className={tdNum}>{fmtInt(r.agg.impressions)}</td>
+                    <td className={tdNum}>{fmtPct(r.agg.ctr)}</td>
+                    <td className={tdNum}>
+                      <div>{fmtPos(r.agg.position)}</div>
+                      {r.prev.position > 0 && <Delta value={r.agg.position - r.prev.position} suffix="" digits={1} invert label={vs} />}
+                    </td>
+                    <td className={clsx(td, "whitespace-nowrap text-right")}>
+                      {r.item ? (
+                        <MetaFixButton
+                          compact
+                          kind={r.item.kind}
+                          id={r.item.id}
+                          title={r.item.title}
+                          path={r.item.path}
+                          metaTitle={r.item.metaTitle}
+                          metaDescription={r.item.metaDescription}
+                          label="Meta"
+                        />
+                      ) : (
+                        <a href={r.path} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 min-h-9 text-xs text-slate-500 hover:text-amber-700">
+                          Open <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                          <span className="sr-only">{r.path} in a new tab</span>
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </TableScroll>
+      )}
+      <Pager page={current} pageCount={pageCount} hrefWith={hrefWith} />
+    </Panel>
+  );
+}
+
+const MOVER_META: Record<Mover["kind"], { label: string; tone: "emerald" | "red" | "sky" | "slate" }> = {
+  rising: { label: "Rising", tone: "emerald" },
+  falling: { label: "Falling", tone: "red" },
+  new: { label: "New", tone: "sky" },
+  lost: { label: "Lost", tone: "slate" },
 };
 
-function IntentBadge({ intent }: { intent: string }) {
-  const style = INTENT_STYLES[intent] || INTENT_STYLES.informational;
-  return (
-    <span
-      className={`inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium ${style.bg} ${style.text}`}
-    >
-      {style.label}
-    </span>
-  );
-}
-
-// Module-level so it isn't re-created every render (react-hooks/static-components)
-function SortHeader({
-  field,
-  label,
-  onSort,
+function Opportunities({
+  period,
+  striking,
+  pageGaps,
+  cannibal,
+  queryMovers,
+  content,
 }: {
-  field: SortField;
-  label: string;
-  onSort: (field: SortField) => void;
+  period: number;
+  striking: Array<{ query: string; agg: Agg; gain: number }>;
+  pageGaps: PageGap[];
+  cannibal: Cannibalization[];
+  queryMovers: Mover[];
+  content: Map<string, ContentRecord>;
 }) {
   return (
-    <button
-      type="button"
-      onClick={() => onSort(field)}
-      className="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700"
-    >
-      {label}
-      <ArrowUpDown className="w-3 h-3" />
-    </button>
-  );
-}
-
-// ─── Main Component ──────────────────────────────────────────────────────────
-
-export default function SearchConsolePage() {
-  const [days, setDays] = useState(28);
-  const [data, setData] = useState<SearchConsoleData | null>(null);
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState<SortField>("clicks");
-  const [order, setOrder] = useState<"asc" | "desc">("desc");
-  const [tab, setTab] = useState<"queries" | "pages">("queries");
-  const [pageData, setPageData] = useState<{
-    pages: QueryRow[];
-    total: number;
-  } | null>(null);
-  const [expandedRow, setExpandedRow] = useState<number | null>(null);
-  const [showAdvisor, setShowAdvisor] = useState(true);
-
-  // Loading is derived from which request key has landed, so no synchronous
-  // setLoading runs inside the effect (react-hooks/set-state-in-effect).
-  const requestKey = `${days}|${sort}|${order}|${search}`;
-  const [loadedKey, setLoadedKey] = useState<string | null>(null);
-  const loading = loadedKey !== requestKey;
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const params = new URLSearchParams({
-          days: days.toString(),
-          sort,
-          order,
-          search,
-          limit: "100",
-        });
-        // Both requests in parallel, and with the trailing slash the app
-        // already enforces. Awaiting them in sequence meant paying for each
-        // round trip twice over — every slashless URL costs an extra 308 hop —
-        // which is what made this tab take the best part of a minute to paint
-        // once the Search Console history was backfilled.
-        const [res, pRes] = await Promise.all([
-          fetch(`/api/admin/seo/search-queries/?${params}`),
-          fetch(
-            `/api/admin/seo/page-metrics/?days=${days}&search=${search}&limit=100`
-          ),
-        ]);
-        if (!cancelled && res.ok) setData(await res.json());
-        if (!cancelled && pRes.ok) setPageData(await pRes.json());
-      } catch (error) {
-        console.error("Failed to fetch search console data:", error);
-      } finally {
-        if (!cancelled) setLoadedKey(requestKey);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [requestKey, days, sort, order, search]);
-
-  const insights = useMemo(() => {
-    if (!data?.queries || data.queries.length === 0) return [];
-    return generateTopInsights(data.queries);
-  }, [data?.queries]);
-
-  const adviceMap = useMemo(() => {
-    const map = new Map<number, QueryAdvice>();
-    if (data?.queries) {
-      data.queries.forEach((q, i) => {
-        map.set(i, analyzeQuery(q));
-      });
-    }
-    return map;
-  }, [data?.queries]);
-
-  // Summary stats
-  const summaryStats = useMemo(() => {
-    if (!data?.queries) return null;
-    const totalPotential = Array.from(adviceMap.values()).reduce(
-      (sum, a) => sum + a.trafficPotential,
-      0
-    );
-    const quickWins = Array.from(adviceMap.values()).filter(
-      (a) => a.tag === "quick-win"
-    ).length;
-    const strongCount = Array.from(adviceMap.values()).filter(
-      // Same rule as the "Strongest Performers" insight, so the two counts agree.
-      (a) => (a.tag === "strong" || a.tag === "defend") && a.intent !== "branded"
-    ).length;
-    return { totalPotential, quickWins, strongCount };
-  }, [data?.queries, adviceMap]);
-
-  const handleSort = (field: SortField) => {
-    if (sort === field) {
-      setOrder(order === "desc" ? "asc" : "desc");
-    } else {
-      setSort(field);
-      setOrder("desc");
-    }
-  };
-
-  const rows = tab === "queries" ? data?.queries : pageData?.pages;
-
-  return (
-    <div className="space-y-6">
-      {/* Controls */}
-      <div className="flex items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1 bg-slate-100 rounded-lg p-1">
-            <button
-              type="button"
-              onClick={() => setTab("queries")}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-                tab === "queries"
-                  ? "bg-white text-slate-900 shadow-sm"
-                  : "text-slate-500"
-              }`}
-            >
-              Queries
-            </button>
-            <button
-              type="button"
-              onClick={() => setTab("pages")}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-                tab === "pages"
-                  ? "bg-white text-slate-900 shadow-sm"
-                  : "text-slate-500"
-              }`}
-            >
-              Pages
-            </button>
-          </div>
-          <DateRangePicker value={days} onChange={setDays} />
-        </div>
-        <div className="relative">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Filter..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 w-48"
-          />
-        </div>
-      </div>
-
-      {/* Quick Stats Bar */}
-      {tab === "queries" && summaryStats && summaryStats.totalPotential > 0 && (
-        <div className="flex gap-3 flex-wrap">
-          <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg">
-            <Zap className="w-3.5 h-3.5 text-amber-600" />
-            <span className="text-xs font-medium text-amber-800">
-              ~{summaryStats.totalPotential} untapped clicks
-            </span>
-          </div>
-          {summaryStats.quickWins > 0 && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg">
-              <AlertTriangle className="w-3.5 h-3.5 text-red-500" />
-              <span className="text-xs font-medium text-red-700">
-                {summaryStats.quickWins} quick wins
-              </span>
-            </div>
-          )}
-          {summaryStats.strongCount > 0 && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-lg">
-              <Shield className="w-3.5 h-3.5 text-emerald-500" />
-              <span className="text-xs font-medium text-emerald-700">
-                {summaryStats.strongCount} strong performers
-              </span>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* AI Advisor Panel */}
-      {tab === "queries" && insights.length > 0 && (
-        <div className="bg-gradient-to-br from-amber-50 via-white to-indigo-50 rounded-xl border border-amber-200/60 overflow-hidden">
-          <button
-            type="button"
-            onClick={() => setShowAdvisor(!showAdvisor)}
-            className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-amber-50/50 transition-colors"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="p-1.5 bg-amber-100 rounded-lg">
-                <Sparkles className="w-4 h-4 text-amber-600" />
-              </div>
-              <div className="text-left">
-                <h3 className="text-sm font-semibold text-slate-900">
-                  SEO Advisor
-                </h3>
-                <p className="text-xs text-slate-500">
-                  {insights.length} prioritized insight
-                  {insights.length !== 1 ? "s" : ""} &middot; Click to{" "}
-                  {showAdvisor ? "collapse" : "expand"}
-                </p>
-              </div>
-            </div>
-            {showAdvisor ? (
-              <ChevronUp className="w-4 h-4 text-slate-400" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-slate-400" />
-            )}
-          </button>
-
-          {showAdvisor && (
-            <div className="px-5 pb-5 space-y-3">
-              {insights.map((insight, i) => (
-                <div
-                  key={i}
-                  className={`bg-white rounded-lg border border-slate-100 border-l-4 ${INSIGHT_BORDER_COLORS[insight.color] || "border-l-slate-400"} p-4`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 shrink-0">
-                      <InsightIcon icon={insight.icon} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <h4 className="text-sm font-semibold text-slate-900">
-                          {insight.title}
-                        </h4>
-                        {insight.estimatedGain > 0 && (
-                          <span className="shrink-0 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
-                            +{insight.estimatedGain} clicks
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                        {insight.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 mt-2.5">
-                        {insight.queries.map((q, j) => (
-                          <span
-                            key={j}
-                            className="inline-flex px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-xs font-medium"
-                          >
-                            {q}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Time Series Chart */}
-      {data?.timeSeries && data.timeSeries.length > 1 && (
-        <div className="bg-white rounded-xl border border-slate-200 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 mb-4">
-            Clicks & Impressions Over Time
-          </h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={data.timeSeries}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis
-                  dataKey="date"
-                  tick={{ fontSize: 11 }}
-                  tickFormatter={(d) =>
-                    new Date(d).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    })
-                  }
-                />
-                <YAxis yAxisId="left" tick={{ fontSize: 11 }} />
-                <YAxis
-                  yAxisId="right"
-                  orientation="right"
-                  tick={{ fontSize: 11 }}
-                />
-                <Tooltip
-                  labelFormatter={(d) =>
-                    new Date(d).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })
-                  }
-                />
-                <Line
-                  yAxisId="left"
-                  type="monotone"
-                  dataKey="clicks"
-                  stroke="#d97706"
-                  strokeWidth={2}
-                  dot={false}
-                  name="Clicks"
-                />
-                <Line
-                  yAxisId="right"
-                  type="monotone"
-                  dataKey="impressions"
-                  stroke="#6366f1"
-                  strokeWidth={2}
-                  dot={false}
-                  name="Impressions"
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      )}
-
-      {/* Data Table */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-        {loading ? (
-          <div className="px-5 py-12 text-center text-sm text-slate-400">
-            Loading...
-          </div>
-        ) : !rows || rows.length === 0 ? (
-          <div className="px-5 py-12 text-center text-sm text-slate-400">
-            No data available. Sync data from Settings first.
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 items-start">
+      <Panel id="sc-ctr" title="Snippets losing clicks" meta="Page-one URLs whose CTR is well under normal for their position." flush>
+        {pageGaps.length === 0 ? (
+          <div className="px-4 sm:px-5 pb-5">
+            <EmptyState title="No weak snippets this period">Every page-one result earns about the clicks its position should.</EmptyState>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-100 bg-slate-50">
-                  <th className="text-left px-5 py-3 text-xs font-medium text-slate-500">
-                    {tab === "queries" ? "Query" : "Page"}
-                  </th>
-                  <th className="text-right px-3 py-3">
-                    <SortHeader field="clicks" label="Clicks" onSort={handleSort} />
-                  </th>
-                  <th className="text-right px-3 py-3">
-                    <SortHeader field="impressions" label="Impr." onSort={handleSort} />
-                  </th>
-                  <th className="text-right px-3 py-3">
-                    <SortHeader field="ctr" label="CTR" onSort={handleSort} />
-                  </th>
-                  <th className="text-right px-3 py-3">
-                    <SortHeader field="position" label="Pos." onSort={handleSort} />
-                  </th>
-                  {tab === "queries" && (
-                    <>
-                      <th className="text-center px-2 py-3 text-xs font-medium text-slate-500">
-                        CTR Score
-                      </th>
-                      <th className="text-center px-3 py-3 text-xs font-medium text-slate-500">
-                        <div className="flex items-center justify-center gap-1">
-                          <Lightbulb className="w-3 h-3" />
-                          Advice
-                        </div>
-                      </th>
-                    </>
+          <ul className="divide-y divide-slate-100 border-t border-slate-200">
+            {pageGaps.slice(0, 10).map((p) => {
+              const item = content.get(p.path);
+              return (
+                <li key={p.path} className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-5 py-3">
+                  <div className="min-w-0 flex-1">
+                    <Link href={analyzeHref(p.path)} className="block text-sm font-medium text-slate-900 hover:text-amber-700 truncate">
+                      {item?.title ?? p.path}
+                    </Link>
+                    <p className="text-xs text-slate-500 tabular-nums">
+                      Pos {fmtPos(p.agg.position)} · CTR {fmtPct(p.gap.actual)} (expected {fmtPct(p.gap.expected)}) ·{" "}
+                      <span className="font-semibold text-red-700">~{fmtInt(p.gap.missedClicks)} missed</span>
+                    </p>
+                  </div>
+                  {item && (
+                    <MetaFixButton
+                      compact
+                      kind={item.kind}
+                      id={item.id}
+                      title={item.title}
+                      path={item.path}
+                      metaTitle={item.metaTitle}
+                      metaDescription={item.metaDescription}
+                      label="Rewrite"
+                    />
                   )}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-50">
-                {rows.map((row, i) => {
-                  const isQuery = tab === "queries";
-                  const label = isQuery
-                    ? row.query
-                    : (() => {
-                        try {
-                          return new URL(
-                            row.query ||
-                              (row as unknown as { page: string }).page
-                          ).pathname;
-                        } catch {
-                          return (
-                            row.query ||
-                            (row as unknown as { page: string }).page
-                          );
-                        }
-                      })();
-                  const pageUrl = isQuery
-                    ? row.topPage
-                    : (row as unknown as { page: string }).page;
-                  const advice = isQuery ? adviceMap.get(i) : null;
-                  const isExpanded = expandedRow === i && isQuery;
-
-                  return (
-                    <tr
-                      key={i}
-                      className={`transition-colors ${isQuery ? "cursor-pointer hover:bg-slate-50" : "hover:bg-slate-50"} ${isExpanded ? "bg-slate-50" : ""}`}
-                      onClick={() => {
-                        if (isQuery) setExpandedRow(isExpanded ? null : i);
-                      }}
-                    >
-                      <td className="px-5 py-3 max-w-sm">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="truncate font-medium text-slate-900">
-                              {label}
-                            </span>
-                            {isQuery && advice && (
-                              <IntentBadge intent={advice.intent} />
-                            )}
-                            {pageUrl && (
-                              <a
-                                href={pageUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-slate-400 hover:text-amber-600 shrink-0"
-                                onClick={(e) => e.stopPropagation()}
-                                title="Open page"
-                                aria-label="Open page in new tab"
-                              >
-                                <ExternalLink className="w-3.5 h-3.5" />
-                              </a>
-                            )}
-                          </div>
-                          {isQuery && pageUrl && (
-                            <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">
-                              {(() => {
-                                try {
-                                  return new URL(pageUrl).pathname;
-                                } catch {
-                                  return pageUrl;
-                                }
-                              })()}
-                            </p>
-                          )}
-
-                          {/* Expanded advice panel */}
-                          {isExpanded && advice && (
-                            <div
-                              className={`mt-3 p-4 rounded-lg ${advice.color} border ${advice.borderColor}`}
-                            >
-                              {/* Header with label + traffic potential */}
-                              <div className="flex items-center justify-between mb-2">
-                                <span
-                                  className={`text-xs font-bold ${advice.textColor} uppercase tracking-wide`}
-                                >
-                                  {advice.label}
-                                </span>
-                                {advice.trafficPotential > 0 && (
-                                  <span className="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
-                                    +{advice.trafficPotential} potential clicks
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Analysis summary */}
-                              <p
-                                className={`text-xs leading-relaxed ${advice.textColor} mb-3`}
-                              >
-                                {advice.advice}
-                              </p>
-
-                              {/* CTR benchmark comparison */}
-                              <div className="flex items-center gap-4 mb-3 text-xs text-slate-600">
-                                <span>
-                                  Your CTR:{" "}
-                                  <strong className={advice.textColor}>
-                                    {row.ctr}%
-                                  </strong>
-                                </span>
-                                <span>
-                                  Benchmark:{" "}
-                                  <strong>{advice.expectedCtr.toFixed(1)}%</strong>
-                                </span>
-                                <span>
-                                  Score:{" "}
-                                  <strong
-                                    className={
-                                      advice.ctrScore >= 70
-                                        ? "text-emerald-600"
-                                        : advice.ctrScore >= 40
-                                          ? "text-amber-600"
-                                          : "text-red-600"
-                                    }
-                                  >
-                                    {advice.ctrScore}/100
-                                  </strong>
-                                </span>
-                              </div>
-
-                              {/* Numbered action steps */}
-                              <div className="space-y-1.5">
-                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                                  Action Steps
-                                </p>
-                                {advice.actions.map((action, j) => (
-                                  <div
-                                    key={j}
-                                    className="flex items-start gap-2 text-xs text-slate-700"
-                                  >
-                                    <span className="shrink-0 w-4 h-4 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[10px] font-bold text-slate-500 mt-0.5">
-                                      {j + 1}
-                                    </span>
-                                    <span className="leading-relaxed">
-                                      {action}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </td>
-                      <td className="text-right px-3 py-3 text-slate-700 font-medium tabular-nums">
-                        {row.clicks.toLocaleString()}
-                      </td>
-                      <td className="text-right px-3 py-3 text-slate-500 tabular-nums">
-                        {row.impressions.toLocaleString()}
-                      </td>
-                      <td className="text-right px-3 py-3 text-slate-500 tabular-nums">
-                        {row.ctr}%
-                      </td>
-                      <td className="text-right px-3 py-3 text-slate-700 font-medium tabular-nums">
-                        {row.position > 0 ? `#${row.position}` : "-"}
-                      </td>
-                      {isQuery && advice && (
-                        <>
-                          <td className="text-center px-2 py-3">
-                            <CtrScoreBar score={advice.ctrScore} />
-                          </td>
-                          <td className="text-center px-3 py-3">
-                            <span
-                              className={`inline-flex px-2 py-0.5 rounded-full text-[11px] font-medium ${advice.color} ${advice.textColor} border ${advice.borderColor}`}
-                            >
-                              {advice.label}
-                            </span>
-                          </td>
-                        </>
-                      )}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                </li>
+              );
+            })}
+          </ul>
         )}
-      </div>
+      </Panel>
+
+      <Panel id="sc-striking" title="Striking distance" meta={`Queries on positions 8–20, with the extra clicks per ${period} days if each reached #3.`} flush>
+        {striking.length === 0 ? (
+          <div className="px-4 sm:px-5 pb-5">
+            <EmptyState title="No queries in striking distance" />
+          </div>
+        ) : (
+          <ul className="divide-y divide-slate-100 border-t border-slate-200">
+            {striking.slice(0, 10).map((s) => (
+              <li key={s.query} className="flex items-center justify-between gap-3 px-4 sm:px-5 py-2.5">
+                <div className="min-w-0">
+                  <Link
+                    href={`${BASE}?tab=queries&period=${period}&q=${encodeURIComponent(s.query)}`}
+                    className="block text-sm font-medium text-slate-900 hover:text-amber-700 truncate"
+                  >
+                    <Target className="inline w-3.5 h-3.5 mr-1 text-violet-600" aria-hidden="true" />
+                    {s.query}
+                  </Link>
+                  <p className="text-xs text-slate-500 tabular-nums">
+                    Pos {fmtPos(s.agg.position)} · {fmtInt(s.agg.impressions)} impressions
+                  </p>
+                </div>
+                <span className="shrink-0 text-sm font-semibold text-violet-700 tabular-nums">
+                  +{fmtInt(s.gain)}
+                  <span className="sr-only"> extra clicks</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Panel>
+
+      <Panel
+        id="sc-cannibal"
+        title="Pages competing for one query"
+        meta="Two or more of our URLs splitting the same search. Merge them, or link the weaker page to the stronger one."
+        flush
+      >
+        {cannibal.length === 0 ? (
+          <div className="px-4 sm:px-5 pb-5">
+            <EmptyState title="No competing pages found">Each query has one clear page.</EmptyState>
+          </div>
+        ) : (
+          <ul className="divide-y divide-slate-100 border-t border-slate-200">
+            {cannibal.slice(0, 8).map((c) => (
+              <li key={c.query} className="px-4 sm:px-5 py-3">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-medium text-slate-900 min-w-0 truncate">
+                    <GitFork className="inline w-3.5 h-3.5 mr-1 text-red-600" aria-hidden="true" />
+                    {c.query}
+                  </p>
+                  <Pill tone={c.severity === "high" ? "red" : "amber"}>{c.severity === "high" ? "Both on page one" : "Split ranking"}</Pill>
+                </div>
+                <ul className="mt-1.5 space-y-1">
+                  {c.pages.slice(0, 3).map((p) => (
+                    <li key={p.page} className="flex items-center justify-between gap-3 text-xs">
+                      <Link href={analyzeHref(p.page)} className="min-w-0 truncate text-slate-600 hover:text-amber-700">
+                        {content.get(p.page)?.title ?? p.page}
+                      </Link>
+                      <span className="shrink-0 tabular-nums text-slate-500">
+                        pos {fmtPos(p.agg.position)} · {Math.round(p.share * 100)}% of impr.
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Panel>
+
+      <Panel id="sc-movers" title="Biggest movers" meta={`Queries whose ranking changed most against the previous ${period} days.`} flush>
+        {queryMovers.length === 0 ? (
+          <div className="px-4 sm:px-5 pb-5">
+            <EmptyState title="Rankings are stable" />
+          </div>
+        ) : (
+          <ul className="divide-y divide-slate-100 border-t border-slate-200">
+            {queryMovers.slice(0, 10).map((m) => (
+              <li key={m.key} className="flex items-center justify-between gap-3 px-4 sm:px-5 py-2.5">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-slate-900 truncate">
+                    {m.kind === "new" && <Sparkle className="inline w-3.5 h-3.5 mr-1 text-sky-600" aria-hidden="true" />}
+                    {m.key}
+                  </p>
+                  <p className="text-xs text-slate-500 tabular-nums">
+                    {m.kind === "new"
+                      ? `Now pos ${fmtPos(m.current.position)}, ${fmtInt(m.current.impressions)} impressions`
+                      : m.kind === "lost"
+                        ? `Was pos ${fmtPos(m.previous.position)}, ${fmtInt(m.previous.impressions)} impressions`
+                        : `Pos ${fmtPos(m.previous.position)} → ${fmtPos(m.current.position)}`}
+                    {" · "}
+                    {m.clicksDelta > 0 ? "+" : ""}
+                    {fmtInt(m.clicksDelta)} clicks
+                  </p>
+                </div>
+                <Pill tone={MOVER_META[m.kind].tone}>{MOVER_META[m.kind].label}</Pill>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Panel>
     </div>
   );
 }
