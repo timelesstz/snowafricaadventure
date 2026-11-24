@@ -20,6 +20,18 @@ export function revalidateDestinationPages() {
   revalidatePath("/tanzania-destinations/");
 }
 
+/**
+ * Blog posts, the paginated blog list and category pages are cached for
+ * 5 minutes. Refreshes all of them, so a new post, a slug change or a
+ * delete shows at once in lists and related-post links.
+ */
+export function revalidateBlogPages() {
+  revalidatePath("/[postSlug]", "page");
+  revalidatePath("/blog/");
+  revalidatePath("/blog/page/[page]", "page");
+  revalidatePath("/category/[categorySlug]", "page");
+}
+
 /** Departure dates and seats appear on the join page and on route pages. */
 export function revalidateDeparturePages() {
   revalidatePath("/kilimanjaro-join-group-departures/");

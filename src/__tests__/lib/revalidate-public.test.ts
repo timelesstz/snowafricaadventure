@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 const { revalidatePath } = vi.hoisted(() => ({ revalidatePath: vi.fn() }));
 vi.mock("next/cache", () => ({ revalidatePath }));
 
-import { revalidateRoutePages, revalidateDeparturePages, revalidateDestinationPages } from "@/lib/revalidate-public";
+import { revalidateRoutePages, revalidateDeparturePages, revalidateDestinationPages, revalidateBlogPages } from "@/lib/revalidate-public";
 
 describe("revalidate-public", () => {
   beforeEach(() => revalidatePath.mockClear());
@@ -25,5 +25,14 @@ describe("revalidate-public", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/tanzania-destinations/[destSlug]", "page");
     expect(revalidatePath).toHaveBeenCalledWith("/tanzania-destinations/");
     expect(revalidatePath).toHaveBeenCalledTimes(2);
+  });
+
+  it("refreshes every blog post, the blog lists and category pages", () => {
+    revalidateBlogPages();
+    expect(revalidatePath).toHaveBeenCalledWith("/[postSlug]", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/blog/");
+    expect(revalidatePath).toHaveBeenCalledWith("/blog/page/[page]", "page");
+    expect(revalidatePath).toHaveBeenCalledWith("/category/[categorySlug]", "page");
+    expect(revalidatePath).toHaveBeenCalledTimes(4);
   });
 });
