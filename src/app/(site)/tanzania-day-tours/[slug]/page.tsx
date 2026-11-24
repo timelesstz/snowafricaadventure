@@ -22,7 +22,7 @@ interface Props {
 const getDayTrip = cache(async function getDayTrip(slug: string): Promise<DayTrip | null> {
   try {
     const trip = await prisma.dayTrip.findUnique({
-      where: { slug },
+      where: { slug, isActive: true },
     });
     return trip;
   } catch (error) {
