@@ -11,6 +11,15 @@ export function revalidateRoutePages() {
   revalidatePath("/trekking/[routeSlug]", "page");
 }
 
+/**
+ * Destination pages are cached for 5 minutes too (tanzania-destinations/
+ * [destSlug]/page.tsx). Refreshes every destination page and the listing.
+ */
+export function revalidateDestinationPages() {
+  revalidatePath("/tanzania-destinations/[destSlug]", "page");
+  revalidatePath("/tanzania-destinations/");
+}
+
 /** Departure dates and seats appear on the join page and on route pages. */
 export function revalidateDeparturePages() {
   revalidatePath("/kilimanjaro-join-group-departures/");
