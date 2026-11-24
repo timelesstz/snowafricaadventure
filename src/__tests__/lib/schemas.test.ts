@@ -9,6 +9,7 @@ import {
   adminPayoutUpdateSchema,
   adminDepartureCreateSchema,
   adminDepartureUpdateSchema,
+  adminDepartureDeleteSchema,
   adminDepartureBulkCreateSchema,
   adminDepartureBulkPreviewSchema,
   adminInquiryUpdateSchema,
@@ -212,6 +213,25 @@ describe("Admin schemas — departure", () => {
     expect(adminDepartureCreateSchema.safeParse(validDeparture).success).toBe(true);
   });
 
+  it("normalizes an empty early-bird deadline from the departure form", () => {
+    const formPayload = {
+      ...validDeparture,
+      earlyBirdPrice: null,
+      earlyBirdUntil: "",
+      minParticipants: 2,
+      maxParticipants: 10,
+      currency: "USD",
+      internalNotes: "",
+      publicNotes: "",
+    };
+
+    for (const schema of [adminDepartureCreateSchema, adminDepartureUpdateSchema]) {
+      const result = schema.safeParse(formPayload);
+      expect(result.success).toBe(true);
+      if (result.success) expect(result.data.earlyBirdUntil).toBeNull();
+    }
+  });
+
   it("rejects missing required dates", () => {
     const { startDate: _startDate, ...partial } = validDeparture;
     void _startDate;
@@ -263,6 +283,35 @@ describe("Admin schemas — departure", () => {
 
   it("adminDepartureUpdateSchema is fully partial", () => {
     expect(adminDepartureUpdateSchema.safeParse({}).success).toBe(true);
+  });
+
+  it("trims valid switch-off and deletion reasons", () => {
+    const update = adminDepartureUpdateSchema.safeParse({
+      reason: "  Minimum numbers were not reached  ",
+    });
+    const removal = adminDepartureDeleteSchema.safeParse({
+      reason: "  Created in error  ",
+    });
+
+    expect(update.success).toBe(true);
+    expect(removal.success).toBe(true);
+    if (update.success) {
+      expect(update.data.reason).toBe("Minimum numbers were not reached");
+    }
+    if (removal.success) expect(removal.data.reason).toBe("Created in error");
+  });
+
+  it.each(["", "   ", "four", "x".repeat(1001)])(
+    "rejects invalid deletion reason %j",
+    (reason) => {
+      expect(adminDepartureDeleteSchema.safeParse({ reason }).success).toBe(false);
+    }
+  );
+
+  it("keeps reason optional for ordinary departure updates", () => {
+    expect(
+      adminDepartureUpdateSchema.safeParse({ publicNotes: "Updated" }).success
+    ).toBe(true);
   });
 });
 

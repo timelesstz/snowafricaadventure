@@ -265,7 +265,10 @@ const departureBaseSchema = z.object({
   price: z.coerce.number().nonnegative(),
   currency: z.string().max(10).optional(),
   earlyBirdPrice: z.coerce.number().nonnegative().nullable().optional(),
-  earlyBirdUntil: z.coerce.date().nullable().optional(),
+  earlyBirdUntil: z.preprocess(
+    (value) => (value === "" ? null : value),
+    z.coerce.date().nullable().optional()
+  ),
   minParticipants: z.coerce.number().int().min(1).max(100).optional(),
   maxParticipants: z.coerce.number().int().min(1).max(100).optional(),
   isFullMoon: z.boolean().optional(),
@@ -339,9 +342,16 @@ export const adminDepartureCreateSchema = departureBaseSchema.superRefine(
   validateDepartureCrossFields
 );
 
+export const adminDepartureActionReasonSchema = z.string().trim().min(5).max(1000);
+
 export const adminDepartureUpdateSchema = departureBaseSchema
   .partial()
+  .extend({ reason: adminDepartureActionReasonSchema.optional() })
   .superRefine(validateDepartureCrossFields);
+
+export const adminDepartureDeleteSchema = z.object({
+  reason: adminDepartureActionReasonSchema,
+});
 
 export type AdminDepartureCreateData = z.infer<typeof adminDepartureCreateSchema>;
 export type AdminDepartureUpdateData = z.infer<typeof adminDepartureUpdateSchema>;

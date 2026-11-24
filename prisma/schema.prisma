@@ -228,6 +228,21 @@ model GroupDeparture {
   @@index([isFeatured])
 }
 
+model DepartureActionLog {
+  id          String              @id @default(cuid())
+  departureId String
+  action      DepartureActionType
+  reason      String
+  actorId     String?
+  actorEmail  String?
+  routeTitle  String
+  startDate   DateTime
+  status      DepartureStatus
+  createdAt   DateTime            @default(now())
+
+  @@index([departureId])
+}
+
 model InviteLink {
   id            String    @id @default(cuid())
   code          String    @unique
@@ -728,6 +743,11 @@ enum DepartureStatus {
   GUARANTEED
   CANCELLED
   COMPLETED
+}
+
+enum DepartureActionType {
+  SWITCH_OFF
+  DELETE
 }
 
 enum RotationMode {
