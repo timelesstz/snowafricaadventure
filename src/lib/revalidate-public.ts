@@ -32,6 +32,16 @@ export function revalidateBlogPages() {
   revalidatePath("/category/[categorySlug]", "page");
 }
 
+/**
+ * Safari pages and the safari listing are cached for 5 minutes. Destination
+ * pages list their safaris, so they are refreshed too.
+ */
+export function revalidateSafariPages() {
+  revalidatePath("/tanzania-safaris/[safariSlug]", "page");
+  revalidatePath("/tanzania-safaris/");
+  revalidateDestinationPages();
+}
+
 /** Departure dates and seats appear on the join page and on route pages. */
 export function revalidateDeparturePages() {
   revalidatePath("/kilimanjaro-join-group-departures/");

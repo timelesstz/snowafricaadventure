@@ -26,9 +26,9 @@ import {
   Users,
 } from "lucide-react";
 
-// Always read packages straight from the database so admin edits (pricing,
-// activation, new tours) appear immediately rather than after a cache window.
-export const dynamic = "force-dynamic";
+// Cached for 5 minutes (ISR). Admin safari saves call revalidateSafariPages(),
+// so pricing, activation and new tours still appear at once.
+export const revalidate = 300;
 
 /** Bump when the guide copy below is reviewed. */
 const LAST_REVIEWED = { label: "November 2026", iso: "2026-11-18" };

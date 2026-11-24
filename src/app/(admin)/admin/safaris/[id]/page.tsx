@@ -13,6 +13,7 @@ import LinkedImageEditor from "@/components/admin/LinkedImageEditor";
 import PricingTiersEditor from "@/components/admin/PricingTiersEditor";
 import FormShell, { type FormShellState } from "@/components/admin/FormShell";
 import { disposeFormDeletions } from "@/lib/admin-media";
+import { revalidateSafariPages } from "@/lib/revalidate-public";
 
 async function getSafari(id: string) {
   if (id === "new") return null;
@@ -257,6 +258,7 @@ async function saveSafari(_prev: FormShellState, formData: FormData): Promise<Fo
     };
   }
 
+  revalidateSafariPages();
   redirect("/admin/safaris");
 }
 
@@ -267,6 +269,7 @@ async function deleteSafari(formData: FormData) {
 
   const id = formData.get("id") as string;
   await prisma.safariPackage.delete({ where: { id } });
+  revalidateSafariPages();
   redirect("/admin/safaris");
 }
 
