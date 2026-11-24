@@ -11,6 +11,7 @@ import SlugTitleFields from "@/components/admin/SlugTitleFields";
 import MetaSeoFields from "@/components/admin/MetaSeoFields";
 import FormShell, { type FormShellState } from "@/components/admin/FormShell";
 import { disposeFormDeletions } from "@/lib/admin-media";
+import { revalidateDestinationPages } from "@/lib/revalidate-public";
 
 async function getDestination(id: string) {
   if (id === "new") return null;
@@ -102,6 +103,7 @@ async function saveDestination(_prev: FormShellState, formData: FormData): Promi
     };
   }
 
+  revalidateDestinationPages();
   redirect("/admin/destinations");
 }
 
@@ -122,6 +124,7 @@ async function deleteDestination(formData: FormData) {
   }
 
   await prisma.destination.delete({ where: { id } });
+  revalidateDestinationPages();
   redirect("/admin/destinations");
 }
 

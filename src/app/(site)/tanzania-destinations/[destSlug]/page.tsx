@@ -13,6 +13,16 @@ import { findRelatedBlogPosts } from "@/lib/related-content";
 import { RelatedBlogPosts } from "@/components/blog/RelatedBlogPosts";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 
+// Cache each destination page for 5 minutes (ISR); admin saves refresh it at
+// once via revalidateDestinationPages(). generateStaticParams is required for
+// a dynamic segment to be cached at all; the empty list prerenders nothing at
+// build time, so each page is rendered on first visit and then cached.
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return [];
+}
+
 interface Props {
   params: Promise<{ destSlug: string }>;
 }
