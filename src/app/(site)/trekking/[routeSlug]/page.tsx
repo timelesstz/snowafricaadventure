@@ -41,7 +41,7 @@ interface PageProps {
 const getRoute = cache(async function getRoute(slug: string) {
   try {
     const route = await prisma.trekkingRoute.findUnique({
-      where: { slug },
+      where: { slug, isActive: true },
     });
     return route;
   } catch (error) {

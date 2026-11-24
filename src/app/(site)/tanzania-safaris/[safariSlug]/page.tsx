@@ -40,7 +40,7 @@ interface PageProps {
 const getSafari = cache(async function getSafari(slug: string) {
   try {
     const safari = await prisma.safariPackage.findUnique({
-      where: { slug },
+      where: { slug, isActive: true },
       include: {
         destinations: {
           include: {

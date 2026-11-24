@@ -30,7 +30,7 @@ interface Props {
 const getDestination = cache(async function getDestination(slug: string) {
   try {
     const destination = await prisma.destination.findUnique({
-      where: { slug },
+      where: { slug, isActive: true },
       include: {
         safaris: {
           where: { safari: { isActive: true } },
