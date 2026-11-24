@@ -5,6 +5,11 @@ import { AdminRole, BookingStatus, Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 import { adminBookingCreateSchema } from "@/lib/schemas";
 import { createCommission, determineTripType } from "@/lib/commission";
+import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
+import {
+  lockDepartureForCapacity,
+  SeatLimitError,
+} from "@/lib/departure-capacity";
 
 // GET /api/admin/bookings - List all bookings
 export async function GET(request: Request) {
@@ -90,31 +95,62 @@ export async function POST(request: Request) {
     const data = adminBookingCreateSchema.parse(body);
 
     const totalPrice = data.pricePerPerson * data.totalClimbers;
-
-    const booking = await prisma.booking.create({
-      data: {
-        departureId: data.departureId,
-        leadName: data.leadName,
-        leadEmail: data.leadEmail,
-        leadPhone: data.leadPhone || null,
-        leadNationality: data.leadNationality || null,
-        totalClimbers: data.totalClimbers,
-        climberDetails: (data.climberDetails as Prisma.InputJsonValue) ?? undefined,
-        pricePerPerson: data.pricePerPerson,
-        totalPrice,
-        depositAmount: data.depositAmount ?? null,
-        status: (data.status as BookingStatus) || BookingStatus.INQUIRY,
-        notes: data.notes || null,
-        source: data.source || "admin",
-      },
-      include: {
-        departure: {
-          include: {
-            route: { select: { title: true, slug: true } },
+    const status = (data.status as BookingStatus) || BookingStatus.INQUIRY;
+    const createBooking = (client: typeof prisma | Prisma.TransactionClient) =>
+      client.booking.create({
+        data: {
+          departureId: data.departureId,
+          leadName: data.leadName,
+          leadEmail: data.leadEmail,
+          leadPhone: data.leadPhone || null,
+          leadNationality: data.leadNationality || null,
+          totalClimbers: data.totalClimbers,
+          climberDetails: (data.climberDetails as Prisma.InputJsonValue) ?? undefined,
+          pricePerPerson: data.pricePerPerson,
+          totalPrice,
+          depositAmount: data.depositAmount ?? null,
+          status,
+          notes: data.notes || null,
+          source: data.source || "admin",
+        },
+        include: {
+          departure: {
+            include: {
+              route: { select: { title: true, slug: true } },
+            },
           },
         },
-      },
-    });
+      });
+
+    const booking = SPOT_HOLDING_STATUSES.includes(status)
+      ? await prisma.$transaction(async (tx) => {
+          await lockDepartureForCapacity(tx, data.departureId);
+          const departure = await tx.groupDeparture.findUnique({
+            where: { id: data.departureId },
+            select: { maxParticipants: true },
+          });
+
+          if (departure) {
+            const otherHeld = await tx.booking.findMany({
+              where: {
+                departureId: data.departureId,
+                status: { in: SPOT_HOLDING_STATUSES },
+              },
+              select: { totalClimbers: true },
+            });
+            const available =
+              departure.maxParticipants - countBookedSpots(otherHeld);
+            if (data.totalClimbers > available) {
+              throw new SeatLimitError(
+                Math.max(0, available),
+                departure.maxParticipants
+              );
+            }
+          }
+
+          return createBooking(tx);
+        })
+      : await createBooking(prisma);
 
     // Create commission for the marketing partner, derived from the route.
     // Admin path was previously silently skipping this — revenue-tracking bug fix.
@@ -132,6 +168,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json(booking, { status: 201 });
   } catch (error) {
+    if (error instanceof SeatLimitError) {
+      return NextResponse.json(
+        {
+          error: `Only ${error.available} of ${error.max} seats are free on this departure. Raise the departure's capacity or move this booking before marking it paid or confirmed.`,
+        },
+        { status: 409 }
+      );
+    }
     if (error instanceof ZodError) {
       return NextResponse.json(
         { error: "Validation failed", issues: error.issues },

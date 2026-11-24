@@ -49,6 +49,7 @@ interface DepartureFormProps {
   departure?: DepartureFormData & { id: string };
   routes: Route[];
   mode: "create" | "edit";
+  bookedSpots?: number;
 }
 
 const DEPARTURE_STATUSES: { value: DepartureStatus; label: string }[] = [
@@ -61,7 +62,12 @@ const DEPARTURE_STATUSES: { value: DepartureStatus; label: string }[] = [
   { value: "COMPLETED", label: "Completed" },
 ];
 
-export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
+export function DepartureForm({
+  departure,
+  routes,
+  mode,
+  bookedSpots = 0,
+}: DepartureFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -72,12 +78,12 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
     startDate: departure?.startDate || "",
     summitDate: departure?.summitDate || "",
     endDate: departure?.endDate || "",
-    price: departure?.price || 2695,
+    price: departure?.price ?? 2695,
     currency: departure?.currency || "USD",
-    earlyBirdPrice: departure?.earlyBirdPrice || null,
+    earlyBirdPrice: departure?.earlyBirdPrice ?? null,
     earlyBirdUntil: departure?.earlyBirdUntil || "",
-    minParticipants: departure?.minParticipants || 2,
-    maxParticipants: departure?.maxParticipants || 10,
+    minParticipants: departure?.minParticipants ?? 2,
+    maxParticipants: departure?.maxParticipants ?? 10,
     isFullMoon: departure?.isFullMoon || false,
     isGuaranteed: departure?.isGuaranteed || false,
     isFeatured: departure?.isFeatured || false,
@@ -141,11 +147,18 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json().catch(() => null);
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Failed to save departure");
+        throw new Error(
+          data?.issues?.[0]?.message ||
+            data?.error ||
+            "Failed to save departure"
+        );
       }
 
+      if (data?.warning) {
+        toast.warning(data.warning);
+      }
       toast.success(mode === "create" ? "Departure created" : "Departure saved");
       router.push("/admin/departures");
       router.refresh();
@@ -240,7 +253,9 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
               <FieldHelp>Day guests arrive in Arusha</FieldHelp>
             </Field>
             <Field>
-              <FieldLabel htmlFor="startDate">Trek Start (Day 1)</FieldLabel>
+              <FieldLabel htmlFor="startDate" required>
+                Trek Start (Day 1)
+              </FieldLabel>
               <input
                 id="startDate"
                 type="date"
@@ -248,11 +263,14 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, startDate: e.target.value })
                 }
+                required
                 className={`${fieldControlClass} bg-slate-50`}
               />
             </Field>
             <Field>
-              <FieldLabel htmlFor="summitDate">Summit Date</FieldLabel>
+              <FieldLabel htmlFor="summitDate" required>
+                Summit Date
+              </FieldLabel>
               <input
                 id="summitDate"
                 type="date"
@@ -260,11 +278,14 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, summitDate: e.target.value })
                 }
+                required
                 className={`${fieldControlClass} bg-slate-50`}
               />
             </Field>
             <Field>
-              <FieldLabel htmlFor="endDate">Trek End Date</FieldLabel>
+              <FieldLabel htmlFor="endDate" required>
+                Trek End Date
+              </FieldLabel>
               <input
                 id="endDate"
                 type="date"
@@ -272,6 +293,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, endDate: e.target.value })
                 }
+                required
                 className={`${fieldControlClass} bg-slate-50`}
               />
             </Field>
@@ -293,7 +315,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                 }
                 required
                 min="0"
-                step="1"
+                step="0.01"
                 className={fieldControlClass}
               />
             </Field>
@@ -302,7 +324,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
               <input
                 id="earlyBirdPrice"
                 type="number"
-                value={formData.earlyBirdPrice || ""}
+                value={formData.earlyBirdPrice ?? ""}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -312,7 +334,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                   })
                 }
                 min="0"
-                step="1"
+                step="0.01"
                 placeholder="Optional"
                 className={fieldControlClass}
               />
@@ -363,7 +385,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
                     maxParticipants: Number(e.target.value),
                   })
                 }
-                min="1"
+                min={Math.max(1, bookedSpots)}
                 className={fieldControlClass}
               />
             </Field>
@@ -406,6 +428,7 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
               <input
                 type="checkbox"
                 checked={formData.isManuallyFeatured}
+                disabled={departure?.status === "CANCELLED"}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -457,12 +480,21 @@ export function DepartureForm({ departure, routes, mode }: DepartureFormProps) {
               }
               className={fieldControlClass}
             >
-              {DEPARTURE_STATUSES.map((status) => (
+              {DEPARTURE_STATUSES.filter(
+                (status) =>
+                  status.value !== "CANCELLED" ||
+                  departure?.status === "CANCELLED"
+              ).map((status) => (
                 <option key={status.value} value={status.value}>
                   {status.label}
                 </option>
               ))}
             </select>
+            {departure?.status !== "CANCELLED" && (
+              <FieldHelp>
+                Use the separate Switch off departure action to cancel this departure.
+              </FieldHelp>
+            )}
           </Field>
         </FormSection>
 

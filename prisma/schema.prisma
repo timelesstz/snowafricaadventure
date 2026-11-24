@@ -13,21 +13,21 @@ enum Mountain {
 }
 
 model TrekkingRoute {
-  id              String           @id @default(cuid())
-  slug            String           @unique
-  title           String
-  metaTitle       String?
-  metaDescription String?
-  duration        String
-  durationDays    Int              @default(7)
-  maxPeople       Int?
-  startPoint      String?
-  endPoint        String?
-  ageRange        String?
-  physicalRating  String?
-  successRate     Int?
-  overview        String
-  highlights      String[]
+  id               String           @id @default(cuid())
+  slug             String           @unique
+  title            String
+  metaTitle        String?
+  metaDescription  String?
+  duration         String
+  durationDays     Int              @default(7)
+  maxPeople        Int?
+  startPoint       String?
+  endPoint         String?
+  ageRange         String?
+  physicalRating   String?
+  successRate      Int?
+  overview         String
+  highlights       String[]
   itinerary        Json?
   elevationProfile Json?
   pricingTiers     Json?
@@ -39,19 +39,19 @@ model TrekkingRoute {
   ctaRating        String?
   ctaClimberCount  String?
   routeMapImage    String?
-  inclusions      String[]
-  exclusions      String[]
-  faqs            Json?
-  featuredImage   String?
-  gallery         String[]
-  galleryAlts     Json?
-  isActive        Boolean          @default(true)
-  mountain        Mountain         @default(KILIMANJARO)
-  categoryId      String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  departures      GroupDeparture[]
-  category        Category?        @relation(fields: [categoryId], references: [id])
+  inclusions       String[]
+  exclusions       String[]
+  faqs             Json?
+  featuredImage    String?
+  gallery          String[]
+  galleryAlts      Json?
+  isActive         Boolean          @default(true)
+  mountain         Mountain         @default(KILIMANJARO)
+  categoryId       String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  departures       GroupDeparture[]
+  category         Category?        @relation(fields: [categoryId], references: [id])
 
   @@index([slug])
   @@index([isActive])
@@ -228,21 +228,36 @@ model GroupDeparture {
   @@index([isFeatured])
 }
 
+model DepartureActionLog {
+  id          String              @id @default(cuid())
+  departureId String
+  action      DepartureActionType
+  reason      String
+  actorId     String?
+  actorEmail  String?
+  routeTitle  String
+  startDate   DateTime
+  status      DepartureStatus
+  createdAt   DateTime            @default(now())
+
+  @@index([departureId])
+}
+
 model InviteLink {
-  id            String          @id @default(cuid())
-  code          String          @unique
+  id            String    @id @default(cuid())
+  code          String    @unique
   departureId   String?
   creatorEmail  String
   creatorName   String
   inviteeEmails String[]
-  clickCount    Int             @default(0)
-  bookingCount  Int             @default(0)
+  clickCount    Int       @default(0)
+  bookingCount  Int       @default(0)
   expiresAt     DateTime?
-  isActive      Boolean         @default(true)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
-  departure     GroupDeparture? @relation(fields: [departureId], references: [id])
+  departure GroupDeparture? @relation(fields: [departureId], references: [id])
 
   @@index([code])
   @@index([departureId])
@@ -295,7 +310,7 @@ model Booking {
   city            String?
   region          String?
   userAgent       String?
-  device          String?   // desktop | mobile | tablet
+  device          String? // desktop | mobile | tablet
   browser         String?
   referrerUrl     String?
   landingPage     String?
@@ -319,12 +334,12 @@ model ClimberToken {
   id                  String    @id @default(cuid())
   code                String    @unique // nanoid(10) token for URL
   bookingId           String
-  climberIndex        Int       // 0 = lead, 1-9 = other climbers
-  climberName         String?   // Pre-filled name from booking
-  email               String?   // Email to send link to
+  climberIndex        Int // 0 = lead, 1-9 = other climbers
+  climberName         String? // Pre-filled name from booking
+  email               String? // Email to send link to
   isCompleted         Boolean   @default(false)
   completedAt         DateTime?
-  expiresAt           DateTime  // 30 days from creation
+  expiresAt           DateTime // 30 days from creation
   reminderSentAt      DateTime? // First reminder (7 days before)
   finalReminderSentAt DateTime? // Final reminder (3 days before)
   createdAt           DateTime  @default(now())
@@ -340,8 +355,8 @@ model NewsletterSubscription {
   id             String    @id @default(cuid())
   email          String    @unique
   name           String?
-  source         String?   // "booking", "climber_form", "website"
-  bookingId      String?   // Optional link to booking
+  source         String? // "booking", "climber_form", "website"
+  bookingId      String? // Optional link to booking
   isActive       Boolean   @default(true)
   subscribedAt   DateTime  @default(now())
   unsubscribedAt DateTime?
@@ -404,16 +419,16 @@ model Inquiry {
   tripType       String?
   numAdults      Int?
   numChildren    Int?
-  childrenAges   String?   // Comma-separated ages
+  childrenAges   String? // Comma-separated ages
   arrivalDate    DateTime?
   departureDate  DateTime?
-  duration       Int?      // Number of days
-  flexibility    String?   // fixed, flexible, very_flexible
-  budget         String?   // budget, mid-range, luxury
-  destinations   String?   // Comma-separated destinations/parks
-  accommodation  String?   // lodge, tented_camp, camping, mixed
-  interests      String?   // Comma-separated special interests
-  experience     String?   // none, some, experienced
+  duration       Int? // Number of days
+  flexibility    String? // fixed, flexible, very_flexible
+  budget         String? // budget, mid-range, luxury
+  destinations   String? // Comma-separated destinations/parks
+  accommodation  String? // lodge, tented_camp, camping, mixed
+  interests      String? // Comma-separated special interests
+  experience     String? // none, some, experienced
   additionalInfo String?
   relatedTo      String?
   referralSource String?
@@ -427,7 +442,7 @@ model Inquiry {
   city           String?
   region         String?
   userAgent      String?
-  device         String?   // desktop | mobile | tablet
+  device         String? // desktop | mobile | tablet
   browser        String?
   referrerUrl    String?
   landingPage    String?
@@ -517,29 +532,29 @@ model ThemeSetting {
 }
 
 model AdminUser {
-  id           String    @id @default(cuid())
-  email        String    @unique
-  passwordHash String
-  name         String
-  pin          String?   // 4-6 digit PIN for quick login (hashed)
-  isActive     Boolean   @default(true)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  lastLoginAt  DateTime?
-  role         AdminRole @default(ADMIN)
-  resetTokens  PasswordResetToken[]
+  id                String               @id @default(cuid())
+  email             String               @unique
+  passwordHash      String
+  name              String
+  pin               String? // 4-6 digit PIN for quick login (hashed)
+  isActive          Boolean              @default(true)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  lastLoginAt       DateTime?
+  role              AdminRole            @default(ADMIN)
+  resetTokens       PasswordResetToken[]
   pushSubscriptions PushSubscription[]
 
   @@index([email])
 }
 
 model PasswordResetToken {
-  id        String   @id @default(cuid())
-  token     String   @unique
+  id        String    @id @default(cuid())
+  token     String    @unique
   userId    String
   expiresAt DateTime
   usedAt    DateTime?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([token])
@@ -730,6 +745,11 @@ enum DepartureStatus {
   COMPLETED
 }
 
+enum DepartureActionType {
+  SWITCH_OFF
+  DELETE
+}
+
 enum RotationMode {
   NEXT_UPCOMING
   MANUAL_ONLY
@@ -806,17 +826,17 @@ enum RedirectType {
 // ============================================
 
 model Notification {
-  id          String             @id @default(cuid())
-  type        NotificationType
-  title       String
-  message     String
-  data        Json?
-  isRead      Boolean            @default(false)
-  readAt      DateTime?
-  priority    NotificationPriority @default(NORMAL)
-  expiresAt   DateTime?
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
+  id        String               @id @default(cuid())
+  type      NotificationType
+  title     String
+  message   String
+  data      Json?
+  isRead    Boolean              @default(false)
+  readAt    DateTime?
+  priority  NotificationPriority @default(NORMAL)
+  expiresAt DateTime?
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
 
   @@index([type])
   @@index([isRead])
@@ -825,18 +845,18 @@ model Notification {
 }
 
 model EmailLog {
-  id          String              @id @default(cuid())
-  channel     CommunicationChannel @default(EMAIL)
-  recipient   String
-  subject     String
-  type        String
-  status      EmailStatus         @default(PENDING)
-  messageId   String?
-  error       String?
-  metadata    Json?
-  sentAt      DateTime?
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  id        String               @id @default(cuid())
+  channel   CommunicationChannel @default(EMAIL)
+  recipient String
+  subject   String
+  type      String
+  status    EmailStatus          @default(PENDING)
+  messageId String?
+  error     String?
+  metadata  Json?
+  sentAt    DateTime?
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
 
   @@index([channel])
   @@index([recipient])
@@ -870,13 +890,13 @@ enum NotificationPriority {
 }
 
 model PushSubscription {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  endpoint  String   @unique
+  endpoint  String    @unique
   p256dh    String
   auth      String
   userAgent String?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
@@ -1052,6 +1072,27 @@ model SeoPageAudit {
 
   @@index([url])
   @@index([score])
+  @@index([createdAt])
+}
+
+/// One row per meta title/description change made from the SEO pages, so its
+/// effect on clicks and CTR can be measured afterwards. Additive log only.
+model SeoContentChange {
+  id          String   @id @default(cuid())
+  contentKind String
+  contentId   String
+  path        String
+  field       String
+  before      String?
+  after       String?
+  source      String   @default("manual")
+  reason      String?
+  userId      String?
+  userEmail   String?
+  createdAt   DateTime @default(now())
+
+  @@index([contentKind, contentId])
+  @@index([path])
   @@index([createdAt])
 }
 

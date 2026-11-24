@@ -9,6 +9,7 @@ interface DialogProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
+  preventClose?: boolean;
 }
 
 /**
@@ -21,6 +22,7 @@ export function Dialog({
   title,
   children,
   className,
+  preventClose = false,
 }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -49,10 +51,13 @@ export function Dialog({
     <dialog
       ref={ref}
       onClose={handleClose}
+      onCancel={(event) => {
+        if (preventClose) event.preventDefault();
+      }}
       onClick={handleBackdropClick}
       aria-labelledby={title ? titleId : undefined}
       className={clsx(
-        "rounded-xl p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm",
+        "m-auto rounded-xl p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm",
         "open:animate-in open:fade-in-0 open:zoom-in-95",
         className
       )}

@@ -1,4 +1,5 @@
 import { auth, requireRole } from "@/lib/auth";
+import { deleteBookings } from "@/lib/bookings/delete";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
@@ -9,13 +10,10 @@ import { sendClimberDetailsRequestEmail } from "@/lib/email/send";
 import { adminBookingUpdateSchema } from "@/lib/schemas";
 import { BookingNotifications } from "@/lib/notifications";
 import { SPOT_HOLDING_STATUSES, countBookedSpots } from "@/lib/booking-spots";
-
-/** Thrown inside the update transaction when a change would overbook a departure. */
-class SeatLimitError extends Error {
-  constructor(public available: number, public max: number) {
-    super("Not enough seats on this departure");
-  }
-}
+import {
+  lockDepartureForCapacity,
+  SeatLimitError,
+} from "@/lib/departure-capacity";
 
 // GET /api/admin/bookings/[id] - Get a single booking
 export async function GET(
@@ -118,78 +116,96 @@ export async function PUT(
       );
     }
 
-    // Prepare update data (partial — only include fields that were sent)
-    const updateData: Prisma.BookingUpdateInput = {};
-
-    if (data.leadName !== undefined) updateData.leadName = data.leadName;
-    if (data.leadEmail !== undefined) updateData.leadEmail = data.leadEmail;
-    if (data.leadPhone !== undefined) updateData.leadPhone = data.leadPhone;
-    if (data.leadNationality !== undefined) updateData.leadNationality = data.leadNationality;
-    if (data.totalClimbers !== undefined) updateData.totalClimbers = data.totalClimbers;
-    if (data.climberDetails !== undefined) {
-      updateData.climberDetails =
-        data.climberDetails === null
-          ? Prisma.JsonNull
-          : (data.climberDetails as Prisma.InputJsonValue);
-    }
-    if (data.pricePerPerson !== undefined) updateData.pricePerPerson = data.pricePerPerson;
-    if (data.totalPrice !== undefined) updateData.totalPrice = data.totalPrice;
-    if (data.depositAmount !== undefined) updateData.depositAmount = data.depositAmount;
-    if (data.notes !== undefined) updateData.notes = data.notes;
-    if (data.source !== undefined) updateData.source = data.source;
-
-    // Handle deposit payment status change
-    // When deposit is marked as paid, generate climber tokens
-    let shouldGenerateTokens = false;
-    if (data.depositPaid !== undefined && data.depositPaid !== currentBooking.depositPaid) {
-      updateData.depositPaid = data.depositPaid;
-      updateData.depositPaidAt = data.depositPaid ? new Date() : null;
-
-      // Only generate tokens when deposit is newly marked as paid
-      if (data.depositPaid && !currentBooking.depositPaid) {
-        shouldGenerateTokens = true;
+    const transactionResult = await prisma.$transaction(async (tx) => {
+      // The initial lookup only discovers the departure. Every decision below
+      // uses a row read after this lock, so status/climber changes cannot race.
+      if (currentBooking.departureId) {
+        await lockDepartureForCapacity(tx, currentBooking.departureId);
       }
-    }
 
-    // Handle balance payment status change
-    if (data.balancePaid !== undefined && data.balancePaid !== currentBooking.balancePaid) {
-      updateData.balancePaid = data.balancePaid;
-      updateData.balancePaidAt = data.balancePaid ? new Date() : null;
-    }
+      const freshBooking = await tx.booking.findUnique({
+        where: { id },
+        select: {
+          status: true,
+          depositPaid: true,
+          balancePaid: true,
+          totalClimbers: true,
+          departureId: true,
+        },
+      });
+      if (!freshBooking) return null;
 
-    // Handle status change
-    if (data.status !== undefined && data.status !== currentBooking.status) {
-      updateData.status = data.status as BookingStatus;
+      // Prepare update data (partial — only include fields that were sent)
+      const updateData: Prisma.BookingUpdateInput = {};
 
-      // Set timestamps based on status
-      if (data.status === BookingStatus.CONFIRMED) {
-        updateData.confirmedAt = new Date();
-      } else if (data.status === BookingStatus.CANCELLED || data.status === BookingStatus.REFUNDED) {
-        updateData.cancelledAt = new Date();
+      if (data.leadName !== undefined) updateData.leadName = data.leadName;
+      if (data.leadEmail !== undefined) updateData.leadEmail = data.leadEmail;
+      if (data.leadPhone !== undefined) updateData.leadPhone = data.leadPhone;
+      if (data.leadNationality !== undefined) updateData.leadNationality = data.leadNationality;
+      if (data.totalClimbers !== undefined) updateData.totalClimbers = data.totalClimbers;
+      if (data.climberDetails !== undefined) {
+        updateData.climberDetails =
+          data.climberDetails === null
+            ? Prisma.JsonNull
+            : (data.climberDetails as Prisma.InputJsonValue);
       }
-    }
+      if (data.pricePerPerson !== undefined) updateData.pricePerPerson = data.pricePerPerson;
+      if (data.totalPrice !== undefined) updateData.totalPrice = data.totalPrice;
+      if (data.depositAmount !== undefined) updateData.depositAmount = data.depositAmount;
+      if (data.notes !== undefined) updateData.notes = data.notes;
+      if (data.source !== undefined) updateData.source = data.source;
 
-    // Seats are only taken when a booking reaches a seat-holding status
-    // (deposit paid / confirmed / completed). Check capacity whenever this
-    // change makes a booking hold seats or hold more of them, inside the same
-    // transaction as the update, so two edits can't both take the last seats.
-    const holdsSeats = (status: BookingStatus) => SPOT_HOLDING_STATUSES.includes(status);
-    const nextStatus = (data.status ?? currentBooking.status) as BookingStatus;
-    const nextClimbers = data.totalClimbers ?? currentBooking.totalClimbers;
-    const takesMoreSeats =
-      holdsSeats(nextStatus) &&
-      (!holdsSeats(currentBooking.status) || nextClimbers > currentBooking.totalClimbers);
+      // Handle deposit payment status change
+      // When deposit is marked as paid, generate climber tokens
+      let shouldGenerateTokens = false;
+      if (data.depositPaid !== undefined && data.depositPaid !== freshBooking.depositPaid) {
+        updateData.depositPaid = data.depositPaid;
+        updateData.depositPaidAt = data.depositPaid ? new Date() : null;
 
-    const booking = await prisma.$transaction(async (tx) => {
-      if (takesMoreSeats && currentBooking.departureId) {
+        // Only generate tokens when deposit is newly marked as paid
+        if (data.depositPaid && !freshBooking.depositPaid) {
+          shouldGenerateTokens = true;
+        }
+      }
+
+      // Handle balance payment status change
+      if (data.balancePaid !== undefined && data.balancePaid !== freshBooking.balancePaid) {
+        updateData.balancePaid = data.balancePaid;
+        updateData.balancePaidAt = data.balancePaid ? new Date() : null;
+      }
+
+      // Handle status change
+      if (data.status !== undefined && data.status !== freshBooking.status) {
+        updateData.status = data.status as BookingStatus;
+
+        // Set timestamps based on status
+        if (data.status === BookingStatus.CONFIRMED) {
+          updateData.confirmedAt = new Date();
+        } else if (data.status === BookingStatus.CANCELLED || data.status === BookingStatus.REFUNDED) {
+          updateData.cancelledAt = new Date();
+        }
+      }
+
+      // Seats are only taken when a booking reaches a seat-holding status
+      // (deposit paid / confirmed / completed). Check capacity whenever this
+      // change makes a booking hold seats or hold more of them, inside the same
+      // transaction as the update, so two edits can't both take the last seats.
+      const holdsSeats = (status: BookingStatus) => SPOT_HOLDING_STATUSES.includes(status);
+      const nextStatus = (data.status ?? freshBooking.status) as BookingStatus;
+      const nextClimbers = data.totalClimbers ?? freshBooking.totalClimbers;
+      const takesMoreSeats =
+        holdsSeats(nextStatus) &&
+        (!holdsSeats(freshBooking.status) || nextClimbers > freshBooking.totalClimbers);
+
+      if (takesMoreSeats && freshBooking.departureId) {
         const departure = await tx.groupDeparture.findUnique({
-          where: { id: currentBooking.departureId },
+          where: { id: freshBooking.departureId },
           select: { maxParticipants: true },
         });
         if (departure) {
           const otherHeld = await tx.booking.findMany({
             where: {
-              departureId: currentBooking.departureId,
+              departureId: freshBooking.departureId,
               status: { in: SPOT_HOLDING_STATUSES },
               id: { not: id },
             },
@@ -202,7 +218,7 @@ export async function PUT(
         }
       }
 
-      return tx.booking.update({
+      const booking = await tx.booking.update({
         where: { id },
         data: updateData,
         include: {
@@ -215,11 +231,18 @@ export async function PUT(
           climberTokens: true,
         },
       });
+
+      return { booking, previousBooking: freshBooking, shouldGenerateTokens };
     });
+
+    if (!transactionResult) {
+      return NextResponse.json({ error: "Booking not found" }, { status: 404 });
+    }
+    const { booking, previousBooking, shouldGenerateTokens } = transactionResult;
 
     // In-app notifications for payment / status changes (best-effort)
     const notifications: Promise<unknown>[] = [];
-    if (data.depositPaid && !currentBooking.depositPaid) {
+    if (data.depositPaid && !previousBooking.depositPaid) {
       notifications.push(
         BookingNotifications.paymentReceived({
           bookingId: booking.id,
@@ -229,7 +252,7 @@ export async function PUT(
         })
       );
     }
-    if (data.balancePaid && !currentBooking.balancePaid) {
+    if (data.balancePaid && !previousBooking.balancePaid) {
       notifications.push(
         BookingNotifications.paymentReceived({
           bookingId: booking.id,
@@ -239,7 +262,7 @@ export async function PUT(
         })
       );
     }
-    if (data.status !== undefined && data.status !== currentBooking.status) {
+    if (data.status !== undefined && data.status !== previousBooking.status) {
       notifications.push(
         data.status === BookingStatus.CANCELLED
           ? BookingNotifications.bookingCancelled({
@@ -250,7 +273,7 @@ export async function PUT(
           : BookingNotifications.bookingUpdated({
               bookingId: booking.id,
               leadName: booking.leadName,
-              oldStatus: currentBooking.status,
+              oldStatus: previousBooking.status,
               newStatus: data.status,
             })
       );
@@ -383,31 +406,17 @@ export async function DELETE(
   const { id } = await params;
 
   try {
-    // Check if booking has commission
-    const booking = await prisma.booking.findUnique({
-      where: { id },
-      include: { commission: true },
-    });
-
-    if (!booking) {
+    const session = await auth();
+    const result = await deleteBookings([id], session?.user?.email ?? "unknown admin");
+    if (result.missing.length) {
+      return NextResponse.json({ error: "Booking not found" }, { status: 404 });
+    }
+    if (result.blocked.length) {
       return NextResponse.json(
-        { error: "Booking not found" },
-        { status: 404 }
+        { error: `This booking can't be deleted: ${result.blocked[0].reason}.` },
+        { status: 409 }
       );
     }
-
-    // Delete commission first if exists
-    if (booking.commission) {
-      await prisma.commission.delete({
-        where: { id: booking.commission.id },
-      });
-    }
-
-    // Delete booking
-    await prisma.booking.delete({
-      where: { id },
-    });
-
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting booking:", error);

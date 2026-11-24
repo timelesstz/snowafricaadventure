@@ -1,10 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { DepartureForm } from "@/components/admin/departures/DepartureForm";
+import { DepartureActions } from "@/components/admin/departures/DepartureActions";
 import Link from "next/link";
-import { ArrowLeft, Trash2, Users, Calendar, AlertCircle } from "lucide-react";
-import { DepartureStatusBadge } from "@/components/admin/departures/DepartureStatusBadge";
-import { BookingStatus } from "@prisma/client";
+import { Users, AlertCircle } from "lucide-react";
+import {
+  countBookedSpots,
+  SPOT_HOLDING_STATUSES,
+} from "@/lib/booking-spots";
 
 async function getDeparture(id: string) {
   return prisma.groupDeparture.findUnique({
@@ -19,16 +22,10 @@ async function getDeparture(id: string) {
           durationDays: true,
         },
       },
+      _count: {
+        select: { bookings: true },
+      },
       bookings: {
-        where: {
-          status: {
-            in: [
-              BookingStatus.DEPOSIT_PAID,
-              BookingStatus.CONFIRMED,
-              BookingStatus.COMPLETED,
-            ],
-          },
-        },
         select: {
           id: true,
           leadName: true,
@@ -72,13 +69,15 @@ export default async function EditDeparturePage({
   }
 
   // Calculate spots
-  const bookedSpots = departure.bookings.reduce(
-    (sum, booking) => sum + booking.totalClimbers,
-    0
+  const bookedSpots = countBookedSpots(
+    departure.bookings.filter((booking) =>
+      SPOT_HOLDING_STATUSES.includes(booking.status)
+    )
   );
   const spotsRemaining = departure.maxParticipants - bookedSpots;
 
   // Format dates for the form
+  const earlyBirdPrice = departure.earlyBirdPrice ?? null;
   const formattedDeparture = {
     id: departure.id,
     routeId: departure.routeId,
@@ -88,9 +87,8 @@ export default async function EditDeparturePage({
     endDate: departure.endDate.toISOString().split("T")[0],
     price: Number(departure.price),
     currency: departure.currency,
-    earlyBirdPrice: departure.earlyBirdPrice
-      ? Number(departure.earlyBirdPrice)
-      : null,
+    earlyBirdPrice:
+      earlyBirdPrice === null ? null : Number(earlyBirdPrice),
     earlyBirdUntil: departure.earlyBirdUntil
       ? departure.earlyBirdUntil.toISOString().split("T")[0]
       : "",
@@ -121,16 +119,18 @@ export default async function EditDeparturePage({
             </div>
             <div className="space-y-2">
               {departure.bookings.map((booking) => (
-                <div
+                <Link
                   key={booking.id}
+                  href={`/admin/bookings/${booking.id}`}
                   className="flex items-center justify-between text-sm"
                 >
                   <span className="text-blue-800">{booking.leadName}</span>
+                  <span className="text-blue-600">{booking.status}</span>
                   <span className="text-blue-600">
                     {booking.totalClimbers}{" "}
                     {booking.totalClimbers === 1 ? "climber" : "climbers"}
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
             {spotsRemaining <= 3 && spotsRemaining > 0 && (
@@ -150,6 +150,13 @@ export default async function EditDeparturePage({
         departure={formattedDeparture}
         routes={routes}
         mode="edit"
+        bookedSpots={bookedSpots}
+      />
+
+      <DepartureActions
+        departureId={departure.id}
+        status={departure.status}
+        bookingCount={departure._count.bookings}
       />
     </div>
   );
