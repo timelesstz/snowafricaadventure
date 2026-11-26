@@ -53,7 +53,7 @@ export function TripCardQuote({ tripTitle, tripType, type, postTitle }: TripCard
     trackFormStart({ formName: FORM_NAME, formId: "article-trip-card", formLocation: postTitle });
   };
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "trip_card_quote", theme: "dark" });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -71,7 +71,7 @@ export function TripCardQuote({ tripTitle, tripType, type, postTitle }: TripCard
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formToken: await getFormToken(),
+          ...(await getGuardFields()),
           fullName,
           email,
           tripType,
@@ -169,6 +169,7 @@ export function TripCardQuote({ tripTitle, tripType, type, postTitle }: TripCard
         </p>
       )}
 
+      <div ref={turnstileRef} className="mt-4" />
       <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
         <button
           type="submit"

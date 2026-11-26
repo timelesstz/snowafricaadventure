@@ -17,7 +17,11 @@ import { SITE_CONFIG } from "@/lib/constants";
 
 const renewFormToken = vi.fn();
 vi.mock("@/hooks/useFormGuard", () => ({
-  useFormGuard: () => ({ getFormToken: async () => "test-form-token", renewFormToken }),
+  useFormGuard: () => ({
+    getGuardFields: async () => ({ formToken: "test-form-token", turnstileToken: "test-turnstile" }),
+    renewFormToken,
+    turnstileRef: () => {},
+  }),
 }));
 
 describe("GuideQuoteSection", () => {
@@ -58,7 +62,7 @@ describe("GuideQuoteSection", () => {
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe("/api/inquiries/");
     const body = JSON.parse(init.body);
-    expect(body.formToken).toBe("test-form-token");
+    expect(body).toMatchObject({ formToken: "test-form-token", turnstileToken: "test-turnstile" });
     expect(body).toMatchObject({
       relatedTo: "Guide: /kilimanjaro-prices/",
       tripType: "Kilimanjaro",

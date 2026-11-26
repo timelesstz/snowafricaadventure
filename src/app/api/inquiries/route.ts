@@ -15,6 +15,7 @@ import {
   isHardFail,
   isSoftFail,
 } from "@/lib/form-guard";
+import { TURNSTILE_FLAG, verifyTurnstile } from "@/lib/turnstile";
 
 // Validation schema with max-length limits to prevent abuse
 const inquirySchema = z.object({
@@ -52,6 +53,8 @@ const inquirySchema = z.object({
   website: z.string().max(0, "Bot detected").optional().or(z.literal("")),
   // Spam-check token from GET /api/form-token/ (see lib/form-guard.ts)
   formToken: z.string().max(200).nullish(),
+  // Cloudflare Turnstile response (see lib/turnstile.ts)
+  turnstileToken: z.string().max(2048).nullish(),
   // Client-side tracking fields (nullish: client sends null when unavailable)
   gaClientId: z.string().max(100).nullish(),
   utmSource: z.string().max(200).nullish(),
@@ -89,14 +92,19 @@ export async function POST(request: NextRequest) {
     // Spam-check token: a forged, replayed or too-fast token is spam. A
     // missing or expired one may be a real visitor, so it is triaged below.
     const guard = checkFormToken(validatedData.formToken);
-    const needsTriage = honeypotTripped || isSoftFail(guard);
+    // Cloudflare Turnstile: a failed challenge is spam; no token or a spent
+    // one is triaged; an outage or a disabled check changes nothing.
+    const turnstile = await verifyTurnstile(validatedData.turnstileToken, ip);
+    const hardFail = isHardFail(guard) || turnstile === "failed";
+    const softFail = isSoftFail(guard) || turnstile === "missing" || turnstile === "spent";
+    const needsTriage = honeypotTripped || softFail;
 
     // A triaged lead that looks human (real name and email, a message or trip
     // details, no links or SEO pitch, a real browser) is kept as a normal lead
     // flagged for checking; everything else is filed as spam.
     const triagedPlausible =
       needsTriage &&
-      !isHardFail(guard) &&
+      !hardFail &&
       isPlausibleHoneypotLead({
         email: validatedData.email,
         name: validatedData.fullName,
@@ -109,11 +117,17 @@ export async function POST(request: NextRequest) {
         ),
         userAgent: request.headers.get("user-agent"),
       });
-    const isSpam = isHardFail(guard) || (needsTriage && !triagedPlausible);
-    const verifyFlag = triagedPlausible ? (honeypotTripped ? HONEYPOT_AUTOFILL_FLAG : FORM_TOKEN_FLAG) : undefined;
-    if (needsTriage || guard !== "ok") {
+    const isSpam = hardFail || (needsTriage && !triagedPlausible);
+    const verifyFlag = triagedPlausible
+      ? honeypotTripped
+        ? HONEYPOT_AUTOFILL_FLAG
+        : isSoftFail(guard)
+          ? FORM_TOKEN_FLAG
+          : TURNSTILE_FLAG
+      : undefined;
+    if (needsTriage || hardFail) {
       console.warn(
-        `[Inquiry] Spam check (ip: ${ip || "unknown"}, email: ${validatedData.email}, honeypot: ${honeypotTripped}, token: ${guard}) — ${isSpam ? "saving as spam" : "looks human, saving as new with verify flag"}`
+        `[Inquiry] Spam check (ip: ${ip || "unknown"}, email: ${validatedData.email}, honeypot: ${honeypotTripped}, token: ${guard}, turnstile: ${turnstile}) — ${isSpam ? "saving as spam" : "looks human, saving as new with verify flag"}`
       );
     }
 

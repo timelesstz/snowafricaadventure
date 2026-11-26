@@ -18,12 +18,12 @@ const r2EndpointHost = hostOf(process.env.R2_ENDPOINT);
 const CSP = [
   "default-src 'self'",
   // Google hosts follow Google's CSP guide for GA4 + Google Ads (gtag AW-… via Tag Manager).
-  "script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://cdn.trustindex.io https://www.trustindex.io https://www.jscache.com https://static.tacdn.com https://www.tripadvisor.com",
+  "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://*.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://cdn.trustindex.io https://www.trustindex.io https://www.jscache.com https://static.tacdn.com https://www.tripadvisor.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.trustindex.io",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https://fonts.gstatic.com https://cdn.trustindex.io",
   "connect-src 'self' https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net https://ad.doubleclick.net https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com https://*.trustindex.io",
-  "frame-src 'self' https://td.doubleclick.net https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.google.com https://www.tripadvisor.com https://*.trustindex.io",
+  "frame-src 'self' https://challenges.cloudflare.com https://td.doubleclick.net https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.google.com https://www.tripadvisor.com https://*.trustindex.io",
   "media-src 'self' https://pub-cf9450d27ca744f1825d1e08b392f592.r2.dev https://cdn.snowafricaadventure.com",
   "object-src 'none'",
   "base-uri 'self'",

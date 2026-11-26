@@ -76,7 +76,7 @@ export function InquiryForm({
     };
   }, [variant, relatedTo, tripType]);
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "inquiry", theme: "light" });
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,7 +116,7 @@ export function InquiryForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formToken: await getFormToken(),
+          ...(await getGuardFields()),
           ...data,
           additionalInfo: additionalInfo || undefined,
           referralSource,
@@ -163,7 +163,7 @@ export function InquiryForm({
     } finally {
       setIsSubmitting(false);
     }
-  }, [relatedTo, tripType, inviteFriends, variant, getFormToken, renewFormToken]);
+  }, [relatedTo, tripType, inviteFriends, variant, getGuardFields, renewFormToken]);
 
   if (submitted) {
     return (
@@ -575,6 +575,7 @@ export function InquiryForm({
       </div>
 
       {/* Submit */}
+      <div ref={turnstileRef} />
       <Button
         type="submit"
         variant="secondary"

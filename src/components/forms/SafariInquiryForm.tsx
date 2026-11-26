@@ -156,7 +156,7 @@ export function SafariInquiryForm({
     setStage(2);
   };
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "safari_inquiry", theme: "light" });
 
   const handleStage2Submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,7 +180,7 @@ export function SafariInquiryForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formToken: await getFormToken(),
+          ...(await getGuardFields()),
           ...formData,
           country: formData.countryCode || formData.country,
           numAdults: numPax,
@@ -503,6 +503,7 @@ export function SafariInquiryForm({
           </div>
 
           {/* Submit Button */}
+          <div ref={turnstileRef} />
           <button type="submit" disabled={isSubmitting} className={BUTTON}>
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">

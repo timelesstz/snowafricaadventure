@@ -17,11 +17,16 @@ vi.mock("@/lib/commission", () => ({ createCommission: vi.fn(), determineTripTyp
 vi.mock("@/lib/notifications", () => ({ BookingNotifications: { newBooking: vi.fn() } }));
 vi.mock("@/lib/newsletter", () => ({ subscribeToNewsletter: vi.fn() }));
 vi.mock("@/lib/visitor-tracking", () => ({ extractVisitorData: () => ({}) }));
+vi.mock("@/lib/turnstile", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/lib/turnstile")>()),
+  verifyTurnstile: vi.fn(async () => "unchecked"),
+}));
 vi.mock("@/lib/rate-limiter", () => ({ isRateLimited: () => false, RATE_LIMITS: { formSubmission: {} } }));
 
 import { POST } from "@/app/api/bookings/route";
 import { prisma } from "@/lib/prisma";
 import { createFormToken, __resetFormGuard } from "@/lib/form-guard";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 const future = (days: number) => new Date(Date.now() + days * 86_400_000);
 
@@ -122,5 +127,12 @@ describe("POST /api/bookings", () => {
       await POST(request(1, { formToken: createFormToken(Date.now() - 500) }));
       expect(String(createBooking.mock.calls[0][0].data.notes)).toMatch(/^\[FLAGGED: possible bot — spam-check token too-fast\]/);
     });
+  });
+
+  it("bot-flags a booking that failed the Turnstile challenge", async () => {
+    findDeparture.mockResolvedValue(departure() as never);
+    vi.mocked(verifyTurnstile).mockResolvedValueOnce("failed");
+    await POST(request(1, { turnstileToken: "bad" }));
+    expect(String(createBooking.mock.calls[0][0].data.notes)).toMatch(/^\[FLAGGED: possible bot — Turnstile failed\]/);
   });
 });

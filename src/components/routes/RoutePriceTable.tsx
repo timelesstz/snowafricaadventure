@@ -71,7 +71,7 @@ function CustomQuoteModal({
     };
   }, [isOpen]);
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "custom_quote", theme: "light" });
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
@@ -87,7 +87,7 @@ function CustomQuoteModal({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            formToken: await getFormToken(),
+            ...(await getGuardFields()),
             fullName: data.fullName,
             email: data.email,
             phonePrefix: data.phonePrefix,
@@ -123,7 +123,7 @@ function CustomQuoteModal({
         setIsSubmitting(false);
       }
     },
-    [routeTitle, selectedTier, currency, getFormToken, renewFormToken]
+    [routeTitle, selectedTier, currency, getGuardFields, renewFormToken]
   );
 
   const handleClose = useCallback(() => {
@@ -347,6 +347,7 @@ function CustomQuoteModal({
             </div>
 
             {/* Submit */}
+            <div ref={turnstileRef} />
             <button
               type="submit"
               disabled={isSubmitting}

@@ -16,6 +16,10 @@ vi.mock("@/lib/notifications", () => ({
   LeadNotifications: { emailFailed: vi.fn().mockResolvedValue({ success: true }) },
 }));
 vi.mock("@/lib/visitor-tracking", () => ({ extractVisitorData: () => ({}) }));
+vi.mock("@/lib/turnstile", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/lib/turnstile")>()),
+  verifyTurnstile: vi.fn(async () => "unchecked"),
+}));
 vi.mock("@/lib/rate-limiter", () => ({ isRateLimited: () => false, RATE_LIMITS: { formSubmission: {} } }));
 
 import { POST } from "@/app/api/inquiries/route";
@@ -24,6 +28,7 @@ import { sendInquiryReceivedEmails } from "@/lib/email/send";
 import { InquiryNotifications, LeadNotifications } from "@/lib/notifications";
 import { HONEYPOT_AUTOFILL_FLAG } from "@/lib/notifications/lead-safety";
 import { createFormToken, FORM_TOKEN_FLAG, __resetFormGuard } from "@/lib/form-guard";
+import { TURNSTILE_FLAG, verifyTurnstile } from "@/lib/turnstile";
 
 const createInquiry = vi.mocked(prisma.inquiry.create);
 const sendEmails = vi.mocked(sendInquiryReceivedEmails);
@@ -179,6 +184,37 @@ describe("POST /api/inquiries", () => {
     it("files a tokenless script post with bot fingerprints as spam", async () => {
       await POST(request({ fullName: "Pkmnp" }, { "user-agent": '"Mozilla/5.0"' }));
       expect(status()).toBe("spam");
+    });
+  });
+
+  describe("Cloudflare Turnstile", () => {
+    const turnstile = vi.mocked(verifyTurnstile);
+    const saved = () => createInquiry.mock.calls[0][0].data as unknown as Record<string, string>;
+
+    beforeEach(() => {
+      sendEmails.mockResolvedValue({ customer: { success: true }, admin: { success: true } });
+    });
+
+    it("files a failed challenge as spam and notifies nobody", async () => {
+      turnstile.mockResolvedValueOnce("failed");
+      await POST(request({ turnstileToken: "bad" }));
+      expect(turnstile).toHaveBeenCalledWith("bad", "1.2.3.4");
+      expect(saved().status).toBe("spam");
+      expect(afterCallbacks).toHaveLength(0);
+    });
+
+    it("keeps a human-looking lead without a Turnstile token, flagged to verify", async () => {
+      turnstile.mockResolvedValueOnce("missing");
+      await POST(request({}));
+      expect(saved().status).toBe("new");
+      expect(saved().additionalInfo.startsWith(TURNSTILE_FLAG)).toBe(true);
+    });
+
+    it("changes nothing when Turnstile passes or could not be checked", async () => {
+      turnstile.mockResolvedValueOnce("ok");
+      await POST(request({ turnstileToken: "good" }));
+      expect(saved().status).toBe("new");
+      expect(saved().additionalInfo).not.toContain(TURNSTILE_FLAG);
     });
   });
 });

@@ -78,7 +78,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
     trackFormStep({ formName: FORM_NAME, formId, stepNumber: next + 1, stepName: STEPS[next] });
   };
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "quick_quote", theme: "light" });
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,7 +101,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            formToken: await getFormToken(),
+            ...(await getGuardFields()),
             fullName,
             email,
             phone: phone || undefined,
@@ -135,7 +135,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
     },
     // goTo is stable enough for this form; re-creating it each step is harmless
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [step, trip, month, travellers, relatedTo, formId, getFormToken, renewFormToken]
+    [step, trip, month, travellers, relatedTo, formId, getGuardFields, renewFormToken]
   );
 
   if (submitted !== null) {
@@ -297,6 +297,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
         </p>
       )}
 
+      <div ref={turnstileRef} className="mt-4" />
       <div className="mt-4 flex items-center gap-2">
         {step > 0 && (
           <button

@@ -57,7 +57,7 @@ const NATIONALITIES = [
 ];
 
 export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFormProps) {
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "group_booking", theme: "light" });
   const [stage, setStage] = useState<0 | 1 | 2 | "success">(departure ? 1 : 0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -269,7 +269,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formToken: await getFormToken(),
+          ...(await getGuardFields()),
           departureId: departure.id,
           leadName,
           leadEmail,
@@ -938,6 +938,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
                 <input type="text" id="website-booking" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
               </div>
 
+              <div ref={turnstileRef} />
               <button
                 type="submit"
                 disabled={isSubmitting}

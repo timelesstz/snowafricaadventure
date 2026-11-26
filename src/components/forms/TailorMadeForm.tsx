@@ -240,7 +240,7 @@ export function TailorMadeForm() {
     }
   };
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "tailor_made", theme: "light" });
 
   const handleSubmit = useCallback(async () => {
     if (!validateStep(currentStep)) {
@@ -263,7 +263,7 @@ export function TailorMadeForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formToken: await getFormToken(),
+          ...(await getGuardFields()),
           ...formData,
           referralSource,
           destinations: selectedDestinations.join(","),
@@ -307,7 +307,7 @@ export function TailorMadeForm() {
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, selectedDestinations, selectedInterests, currentStep, getFormToken, renewFormToken]);
+  }, [formData, selectedDestinations, selectedInterests, currentStep, getGuardFields, renewFormToken]);
 
   if (submitted) {
     return (
@@ -847,6 +847,8 @@ export function TailorMadeForm() {
         <label htmlFor="website-tailor">Website</label>
         <input type="text" id="website-tailor" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
       </div>
+
+      <div ref={turnstileRef} />
 
       {/* Navigation Buttons */}
       <div className="flex justify-between pt-4 border-t border-slate-200">

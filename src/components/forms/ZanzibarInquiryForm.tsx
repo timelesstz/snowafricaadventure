@@ -206,7 +206,7 @@ export function ZanzibarInquiryForm() {
     }
   };
 
-  const { getFormToken, renewFormToken } = useFormGuard();
+  const { getGuardFields, renewFormToken, turnstileRef } = useFormGuard({ action: "zanzibar_inquiry", theme: "light" });
 
   const handleSubmit = useCallback(async () => {
     if (!validateStep(currentStep)) {
@@ -249,7 +249,7 @@ export function ZanzibarInquiryForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formToken: await getFormToken(),
+          ...(await getGuardFields()),
           ...formData,
           referralSource,
           interests: selectedActivities.join(","),
@@ -300,7 +300,7 @@ export function ZanzibarInquiryForm() {
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, selectedActivities, currentStep, getFormToken, renewFormToken]);
+  }, [formData, selectedActivities, currentStep, getGuardFields, renewFormToken]);
 
   if (submitted) {
     return (
@@ -771,6 +771,8 @@ export function ZanzibarInquiryForm() {
         <label htmlFor="website-zanzibar">Website</label>
         <input type="text" id="website-zanzibar" name="website" ref={honeypotRef} tabIndex={-1} autoComplete="off" />
       </div>
+
+      <div ref={turnstileRef} />
 
       {/* Navigation Buttons */}
       <div className="flex justify-between pt-4 border-t border-slate-200">
