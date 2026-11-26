@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { NextRequest } from "next/server";
 
 vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
@@ -21,6 +21,7 @@ vi.mock("@/lib/rate-limiter", () => ({ isRateLimited: () => false, RATE_LIMITS: 
 
 import { POST } from "@/app/api/bookings/route";
 import { prisma } from "@/lib/prisma";
+import { createFormToken, __resetFormGuard } from "@/lib/form-guard";
 
 const future = (days: number) => new Date(Date.now() + days * 86_400_000);
 
@@ -40,15 +41,16 @@ function departure(overrides: Record<string, unknown> = {}) {
   };
 }
 
-function request(climbers = 1) {
+function request(climbers = 1, extra: Record<string, unknown> = {}) {
   return new NextRequest("http://localhost:3000/api/bookings/", {
     method: "POST",
-    headers: { "content-type": "application/json", "x-forwarded-for": "1.2.3.4" },
+    headers: { "content-type": "application/json", "x-forwarded-for": "1.2.3.4", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" },
     body: JSON.stringify({
       departureId: "dep_1",
       leadName: "Test Climber",
       leadEmail: "climber@example.test",
       climbers: Array.from({ length: climbers }, (_, i) => ({ name: i ? "" : "Test Climber" })),
+      ...extra,
     }),
   });
 }
@@ -99,5 +101,26 @@ describe("POST /api/bookings", () => {
     const res = await POST(request());
     expect(res.status).toBe(201);
     expect(createBooking.mock.calls[0][0].data).toMatchObject({ pricePerPerson: 2680, status: "INQUIRY" });
+  });
+
+  describe("spam-check token", () => {
+    beforeEach(() => {
+      process.env.FORM_GUARD_SECRET = "test-secret";
+      __resetFormGuard();
+      findDeparture.mockResolvedValue(departure() as never);
+    });
+    afterEach(() => {
+      delete process.env.FORM_GUARD_SECRET;
+    });
+
+    it("saves a booking with a valid token without a flag", async () => {
+      await POST(request(1, { formToken: createFormToken(Date.now() - 30_000) }));
+      expect(createBooking.mock.calls[0][0].data.notes ?? null).toBeNull();
+    });
+
+    it("bot-flags a booking sent faster than a person can type", async () => {
+      await POST(request(1, { formToken: createFormToken(Date.now() - 500) }));
+      expect(String(createBooking.mock.calls[0][0].data.notes)).toMatch(/^\[FLAGGED: possible bot — spam-check token too-fast\]/);
+    });
   });
 });

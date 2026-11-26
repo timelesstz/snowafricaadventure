@@ -8,6 +8,13 @@ import { InquiryNotifications, LeadNotifications } from "@/lib/notifications";
 import { HONEYPOT_AUTOFILL_FLAG, isPlausibleHoneypotLead } from "@/lib/notifications/lead-safety";
 import { extractVisitorData } from "@/lib/visitor-tracking";
 import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
+import {
+  checkFormToken,
+  consumeFormToken,
+  FORM_TOKEN_FLAG,
+  isHardFail,
+  isSoftFail,
+} from "@/lib/form-guard";
 
 // Validation schema with max-length limits to prevent abuse
 const inquirySchema = z.object({
@@ -43,6 +50,8 @@ const inquirySchema = z.object({
   type: z.string().max(50).default("contact"),
   // Honeypot field — must be empty (bots fill hidden fields)
   website: z.string().max(0, "Bot detected").optional().or(z.literal("")),
+  // Spam-check token from GET /api/form-token/ (see lib/form-guard.ts)
+  formToken: z.string().max(200).nullish(),
   // Client-side tracking fields (nullish: client sends null when unavailable)
   gaClientId: z.string().max(100).nullish(),
   utmSource: z.string().max(200).nullish(),
@@ -77,11 +86,17 @@ export async function POST(request: NextRequest) {
     // Validate input
     const validatedData = inquirySchema.parse(body);
 
-    // A tripped honeypot on a human-looking lead (real name and email, a
-    // message or trip details, no links or SEO pitch) is kept as a normal lead
+    // Spam-check token: a forged, replayed or too-fast token is spam. A
+    // missing or expired one may be a real visitor, so it is triaged below.
+    const guard = checkFormToken(validatedData.formToken);
+    const needsTriage = honeypotTripped || isSoftFail(guard);
+
+    // A triaged lead that looks human (real name and email, a message or trip
+    // details, no links or SEO pitch, a real browser) is kept as a normal lead
     // flagged for checking; everything else is filed as spam.
-    const honeypotPlausible =
-      honeypotTripped &&
+    const triagedPlausible =
+      needsTriage &&
+      !isHardFail(guard) &&
       isPlausibleHoneypotLead({
         email: validatedData.email,
         name: validatedData.fullName,
@@ -92,11 +107,13 @@ export async function POST(request: NextRequest) {
             validatedData.tripType ||
             validatedData.destinations
         ),
+        userAgent: request.headers.get("user-agent"),
       });
-    const isSpam = honeypotTripped && !honeypotPlausible;
-    if (honeypotTripped) {
+    const isSpam = isHardFail(guard) || (needsTriage && !triagedPlausible);
+    const verifyFlag = triagedPlausible ? (honeypotTripped ? HONEYPOT_AUTOFILL_FLAG : FORM_TOKEN_FLAG) : undefined;
+    if (needsTriage || guard !== "ok") {
       console.warn(
-        `[Inquiry] Honeypot tripped (ip: ${ip || "unknown"}, email: ${validatedData.email}) — ${isSpam ? "saving as spam" : "looks human, saving as new with verify flag"}`
+        `[Inquiry] Spam check (ip: ${ip || "unknown"}, email: ${validatedData.email}, honeypot: ${honeypotTripped}, token: ${guard}) — ${isSpam ? "saving as spam" : "looks human, saving as new with verify flag"}`
       );
     }
 
@@ -147,8 +164,8 @@ export async function POST(request: NextRequest) {
         experience: validatedData.experience || null,
         // Inquiry has no notes column; the verify flag leads the message so
         // staff see it on the inquiry page. Emails use the original text.
-        additionalInfo: honeypotPlausible
-          ? `${HONEYPOT_AUTOFILL_FLAG}${validatedData.additionalInfo ? `\n${validatedData.additionalInfo}` : ""}`
+        additionalInfo: verifyFlag
+          ? `${verifyFlag}${validatedData.additionalInfo ? `\n${validatedData.additionalInfo}` : ""}`
           : validatedData.additionalInfo || null,
         relatedTo: validatedData.relatedTo || null,
         referralSource: validatedData.referralSource || null,
@@ -172,6 +189,8 @@ export async function POST(request: NextRequest) {
         landingPage: validatedData.landingPage || null,
       },
     });
+
+    if (guard === "ok") consumeFormToken(validatedData.formToken);
 
     // Prepare email data
     const emailData: InquiryEmailData = {
@@ -206,7 +225,7 @@ export async function POST(request: NextRequest) {
             fullName: inquiry.fullName,
             type: inquiry.type,
             tripType: inquiry.tripType || undefined,
-            verifyNote: honeypotPlausible ? HONEYPOT_AUTOFILL_FLAG : undefined,
+            verifyNote: verifyFlag,
           });
         } catch (notifError) {
           console.error("Failed to create inquiry notification:", notifError);

@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, Loader2, Minus, Plus } from "lucide-react
 import { trackBeginCheckout, trackFormStart, trackFormStep, trackFormSubmit } from "@/lib/analytics";
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 /**
  * Three-step quote request for article heroes. One question per step keeps
@@ -77,6 +78,8 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
     trackFormStep({ formName: FORM_NAME, formId, stepNumber: next + 1, stepName: STEPS[next] });
   };
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -98,6 +101,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            formToken: await getFormToken(),
             fullName,
             email,
             phone: phone || undefined,
@@ -121,6 +125,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
         }
         trackFormSubmit({ formName: FORM_NAME, formId, tripType: trip, numTravelers: travellers, relatedItem: relatedTo });
         trackBeginCheckout({ itemId: relatedTo, itemName: relatedTo, itemCategory: trip.toLowerCase(), value: 0 });
+        renewFormToken();
         setSubmitted(fullName.split(" ")[0] || fullName);
       } catch {
         setError("Network error. Check your connection and try again.");
@@ -130,7 +135,7 @@ export function QuickQuoteForm({ relatedTo, defaultTrip, formId = "article-hero"
     },
     // goTo is stable enough for this form; re-creating it each step is harmless
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [step, trip, month, travellers, relatedTo, formId]
+    [step, trip, month, travellers, relatedTo, formId, getFormToken, renewFormToken]
   );
 
   if (submitted !== null) {

@@ -32,6 +32,7 @@ import {
   Compass,
   PawPrint,
 } from "lucide-react";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 const STEPS = [
   { id: 1, title: "About You", icon: User },
@@ -205,6 +206,8 @@ export function ZanzibarInquiryForm() {
     }
   };
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   const handleSubmit = useCallback(async () => {
     if (!validateStep(currentStep)) {
       setError("Please fill in all required fields.");
@@ -246,6 +249,7 @@ export function ZanzibarInquiryForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formToken: await getFormToken(),
           ...formData,
           referralSource,
           interests: selectedActivities.join(","),
@@ -285,6 +289,7 @@ export function ZanzibarInquiryForm() {
         });
         // Clear draft on success
         try { sessionStorage.removeItem("zanzibarDraft"); } catch { /* ignore */ }
+        renewFormToken();
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");
@@ -295,7 +300,7 @@ export function ZanzibarInquiryForm() {
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, selectedActivities, currentStep]);
+  }, [formData, selectedActivities, currentStep, getFormToken, renewFormToken]);
 
   if (submitted) {
     return (

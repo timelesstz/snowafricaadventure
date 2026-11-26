@@ -8,6 +8,7 @@ import { COUNTRIES as COUNTRIES_LIB } from "@/lib/countries";
 import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout } from "@/lib/analytics";
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 // Map shared country list to the format used by this component
 const COUNTRIES = COUNTRIES_LIB.map((c) => ({ name: c.name, code: c.code }));
@@ -155,6 +156,8 @@ export function SafariInquiryForm({
     setStage(2);
   };
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   const handleStage2Submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -177,6 +180,7 @@ export function SafariInquiryForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formToken: await getFormToken(),
           ...formData,
           country: formData.countryCode || formData.country,
           numAdults: numPax,
@@ -213,6 +217,7 @@ export function SafariInquiryForm({
           itemCategory: "safari",
           value: 0,
         });
+        renewFormToken();
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");

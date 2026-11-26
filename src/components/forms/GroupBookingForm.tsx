@@ -11,6 +11,7 @@ import { trackFormStart, trackFormStep, trackFormSubmit, trackBeginCheckout, tra
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
 import { parseCalendarDate } from "@/lib/departure-rules";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 interface Departure {
   id: string;
@@ -56,6 +57,7 @@ const NATIONALITIES = [
 ];
 
 export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFormProps) {
+  const { getFormToken, renewFormToken } = useFormGuard();
   const [stage, setStage] = useState<0 | 1 | 2 | "success">(departure ? 1 : 0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -267,6 +269,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formToken: await getFormToken(),
           departureId: departure.id,
           leadName,
           leadEmail,
@@ -286,6 +289,7 @@ export function GroupBookingForm({ departure, onClearDeparture }: GroupBookingFo
         return;
       }
 
+      renewFormToken();
       // Track step 2 completion
       trackFormStep({
         formName: "group_booking_form",

@@ -13,6 +13,13 @@ import { HONEYPOT_AUTOFILL_FLAG, isPlausibleHoneypotLead } from "@/lib/notificat
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { extractVisitorData } from "@/lib/visitor-tracking";
 import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
+import {
+  checkFormToken,
+  consumeFormToken,
+  FORM_TOKEN_FLAG,
+  isHardFail,
+  isSoftFail,
+} from "@/lib/form-guard";
 import { DEPOSIT_RATE } from "@/lib/constants";
 import { effectivePrice, isDepartureBookable } from "@/lib/departure-rules";
 
@@ -41,6 +48,8 @@ const bookingSchema = z.object({
   subscribeNewsletter: z.boolean().optional(),
   // Honeypot field
   website: z.string().max(0, "Bot detected").optional().or(z.literal("")),
+  // Spam-check token from GET /api/form-token/ (see lib/form-guard.ts)
+  formToken: z.string().max(200).nullish(),
   // Client-side tracking fields (nullish: client sends null when unavailable)
   gaClientId: z.string().max(100).nullish(),
   utmSource: z.string().max(200).nullish(),
@@ -76,21 +85,31 @@ export async function POST(request: NextRequest) {
     // Validate input
     const validatedData = bookingSchema.parse(body);
 
-    // A human-looking request (real name and email, no links or SEO pitch in
-    // the special requests) is handled as a normal booking with a verify note;
-    // anything else is saved bot-flagged and nobody is notified.
-    const honeypotPlausible =
-      honeypotTripped &&
+    // Spam-check token: a forged, replayed or too-fast token is a bot. A
+    // missing or expired one may be a real visitor, so it is triaged below.
+    const guard = checkFormToken(validatedData.formToken);
+    const needsTriage = honeypotTripped || isSoftFail(guard);
+
+    // A triaged request that looks human (real name and email, no links or SEO
+    // pitch in the special requests, a real browser) is handled as a normal
+    // booking with a verify note; anything else is saved bot-flagged and
+    // nobody is notified.
+    const triagedPlausible =
+      needsTriage &&
+      !isHardFail(guard) &&
       isPlausibleHoneypotLead({
         email: validatedData.leadEmail,
         name: validatedData.leadName,
         message: validatedData.specialRequests,
         hasTripFields: true, // departure + climbers are required fields
+        userAgent: request.headers.get("user-agent"),
       });
-    const isBot = honeypotTripped && !honeypotPlausible;
-    if (honeypotTripped) {
+    const isBot = isHardFail(guard) || (needsTriage && !triagedPlausible);
+    const verifyFlag = triagedPlausible ? (honeypotTripped ? HONEYPOT_AUTOFILL_FLAG : FORM_TOKEN_FLAG) : undefined;
+    const botReason = honeypotTripped ? "hidden form field was filled" : `spam-check token ${guard}`;
+    if (needsTriage || guard !== "ok") {
       console.warn(
-        `[Booking] Honeypot tripped (ip: ${ip || "unknown"}, email: ${validatedData.leadEmail}) — ${isBot ? "saving bot-flagged" : "looks human, saving with verify note"}`
+        `[Booking] Spam check (ip: ${ip || "unknown"}, email: ${validatedData.leadEmail}, honeypot: ${honeypotTripped}, token: ${guard}) — ${isBot ? "saving bot-flagged" : "looks human, saving with verify note"}`
       );
     }
 
@@ -174,9 +193,9 @@ export async function POST(request: NextRequest) {
         status: BookingStatus.INQUIRY,
         climberDetails: validatedData.climbers,
         notes: isBot
-          ? `${BOT_FLAG_PREFIX}: possible bot — hidden form field was filled]${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
-          : honeypotPlausible
-            ? `${HONEYPOT_AUTOFILL_FLAG}${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
+          ? `${BOT_FLAG_PREFIX}: possible bot — ${botReason}]${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
+          : verifyFlag
+            ? `${verifyFlag}${validatedData.specialRequests ? `\n${validatedData.specialRequests}` : ""}`
             : validatedData.specialRequests || null,
         source: validatedData.partnerCode ? 'referral' : 'website',
         // Server-side tracking
@@ -204,6 +223,8 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+
+    if (guard === "ok") consumeFormToken(validatedData.formToken);
 
     // Prepare email data
     const emailData: BookingEmailData = {

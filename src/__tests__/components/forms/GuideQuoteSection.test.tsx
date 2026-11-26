@@ -15,6 +15,11 @@ vi.mock("@/lib/client-tracking", () => ({
 import { GuideQuoteSection } from "@/components/forms/GuideQuoteSection";
 import { SITE_CONFIG } from "@/lib/constants";
 
+const renewFormToken = vi.fn();
+vi.mock("@/hooks/useFormGuard", () => ({
+  useFormGuard: () => ({ getFormToken: async () => "test-form-token", renewFormToken }),
+}));
+
 describe("GuideQuoteSection", () => {
   const fetchMock = vi.fn();
 
@@ -53,6 +58,7 @@ describe("GuideQuoteSection", () => {
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe("/api/inquiries/");
     const body = JSON.parse(init.body);
+    expect(body.formToken).toBe("test-form-token");
     expect(body).toMatchObject({
       relatedTo: "Guide: /kilimanjaro-prices/",
       tripType: "Kilimanjaro",

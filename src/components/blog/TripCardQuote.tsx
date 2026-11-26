@@ -5,6 +5,7 @@ import { Check, Loader2 } from "lucide-react";
 import { trackBeginCheckout, trackFormStart, trackFormSubmit } from "@/lib/analytics";
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 /**
  * One-step quote request inside the in-article trip card. The trip is
@@ -52,6 +53,8 @@ export function TripCardQuote({ tripTitle, tripType, type, postTitle }: TripCard
     trackFormStart({ formName: FORM_NAME, formId: "article-trip-card", formLocation: postTitle });
   };
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -68,6 +71,7 @@ export function TripCardQuote({ tripTitle, tripType, type, postTitle }: TripCard
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formToken: await getFormToken(),
           fullName,
           email,
           tripType,
@@ -88,6 +92,7 @@ export function TripCardQuote({ tripTitle, tripType, type, postTitle }: TripCard
       }
       trackFormSubmit({ formName: FORM_NAME, formId: "article-trip-card", tripType, numTravelers: travellers, relatedItem: tripTitle });
       trackBeginCheckout({ itemId: tripTitle, itemName: tripTitle, itemCategory: type, value: 0 });
+      renewFormToken();
       setSubmitted(fullName.split(" ")[0] || fullName);
     } catch {
       setError("Network error. Check your connection and try again.");

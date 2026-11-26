@@ -10,6 +10,7 @@ import { PostSubmissionShare } from "@/components/social/ShareButtons";
 import { trackFormStart, trackFormSubmit, trackBeginCheckout } from "@/lib/analytics";
 import { useFormAbandonment } from "@/hooks/useFormAbandonment";
 import { collectClientTracking } from "@/lib/client-tracking";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 interface InquiryFormProps {
   relatedTo?: string;
@@ -75,6 +76,8 @@ export function InquiryForm({
     };
   }, [variant, relatedTo, tripType]);
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -113,6 +116,7 @@ export function InquiryForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formToken: await getFormToken(),
           ...data,
           additionalInfo: additionalInfo || undefined,
           referralSource,
@@ -148,6 +152,7 @@ export function InquiryForm({
           itemCategory: tripType?.toLowerCase() || "general",
           value: 0,
         });
+        renewFormToken();
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");
@@ -158,7 +163,7 @@ export function InquiryForm({
     } finally {
       setIsSubmitting(false);
     }
-  }, [relatedTo, tripType, inviteFriends, variant]);
+  }, [relatedTo, tripType, inviteFriends, variant, getFormToken, renewFormToken]);
 
   if (submitted) {
     return (

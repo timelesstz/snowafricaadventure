@@ -33,6 +33,7 @@ import {
   User,
   MessageSquare,
 } from "lucide-react";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 const STEPS = [
   { id: 1, title: "About You", icon: User },
@@ -239,6 +240,8 @@ export function TailorMadeForm() {
     }
   };
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   const handleSubmit = useCallback(async () => {
     if (!validateStep(currentStep)) {
       setError("Please fill in all required fields.");
@@ -260,6 +263,7 @@ export function TailorMadeForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formToken: await getFormToken(),
           ...formData,
           referralSource,
           destinations: selectedDestinations.join(","),
@@ -292,6 +296,7 @@ export function TailorMadeForm() {
         });
         // Clear draft on success
         try { sessionStorage.removeItem("tailorMadeDraft"); } catch { /* ignore */ }
+        renewFormToken();
         setSubmitted(true);
       } else {
         setError(result.message || "Failed to submit inquiry. Please try again.");
@@ -302,7 +307,7 @@ export function TailorMadeForm() {
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, selectedDestinations, selectedInterests, currentStep]);
+  }, [formData, selectedDestinations, selectedInterests, currentStep, getFormToken, renewFormToken]);
 
   if (submitted) {
     return (

@@ -16,6 +16,11 @@ vi.mock("@/components/social/ShareButtons", () => ({
 
 import { InquiryForm } from "@/components/forms/InquiryForm";
 
+const renewFormToken = vi.fn();
+vi.mock("@/hooks/useFormGuard", () => ({
+  useFormGuard: () => ({ getFormToken: async () => "test-form-token", renewFormToken }),
+}));
+
 const heroProps = {
   variant: "hero" as const,
   relatedTo: "8 Days Lemosho Route",
@@ -75,6 +80,7 @@ describe("InquiryForm hero variant (route page lead capture)", () => {
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe("/api/inquiries/");
     const body = JSON.parse(init.body);
+    expect(body.formToken).toBe("test-form-token");
     expect(body).toMatchObject({
       fullName: "Amina Hassan",
       email: "amina@example.org",

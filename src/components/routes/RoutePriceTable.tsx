@@ -5,6 +5,7 @@ import { DollarSign, Check, User, Users, X, ArrowRight } from "lucide-react";
 import { PHONE_PREFIXES } from "@/lib/constants";
 import { COUNTRIES } from "@/lib/countries";
 import { trackFormStart, trackFormSubmit } from "@/lib/analytics";
+import { useFormGuard } from "@/hooks/useFormGuard";
 
 interface PriceTier {
   groupSize: string;
@@ -70,6 +71,8 @@ function CustomQuoteModal({
     };
   }, [isOpen]);
 
+  const { getFormToken, renewFormToken } = useFormGuard();
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -84,6 +87,7 @@ function CustomQuoteModal({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            formToken: await getFormToken(),
             fullName: data.fullName,
             email: data.email,
             phonePrefix: data.phonePrefix,
@@ -107,6 +111,7 @@ function CustomQuoteModal({
             numTravelers: parseInt(data.numAdults as string) || 1,
             relatedItem: routeTitle,
           });
+          renewFormToken();
           setSubmitted(true);
         } else {
           const result = await response.json().catch(() => null);
@@ -118,7 +123,7 @@ function CustomQuoteModal({
         setIsSubmitting(false);
       }
     },
-    [routeTitle, selectedTier, currency]
+    [routeTitle, selectedTier, currency, getFormToken, renewFormToken]
   );
 
   const handleClose = useCallback(() => {
