@@ -154,7 +154,7 @@ export function Header() {
                   alt={SITE_CONFIG.name}
                   width={140}
                   height={40}
-                  className="h-7 sm:h-9 w-auto object-contain"
+                  className="h-6 min-[360px]:h-7 sm:h-9 w-auto object-contain"
                   priority
                 />
               ) : (
@@ -285,9 +285,9 @@ export function Header() {
             <div className="flex items-center gap-1 sm:gap-2">
               <Link
                 href="/tailor-made-safari/"
-                className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-2.5 py-1.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 whitespace-nowrap rounded-md font-semibold transition-colors text-xs sm:text-sm"
+                className="bg-[var(--secondary)] hover:bg-[var(--secondary-dark)] text-[var(--primary-dark)] px-2 min-[360px]:px-2.5 py-1.5 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 whitespace-nowrap rounded-md font-semibold transition-colors text-xs sm:text-sm"
               >
-                Plan Your Trip
+                Plan <span className="hidden min-[360px]:inline">Your </span>Trip
               </Link>
               <Link
                 href="/search/"

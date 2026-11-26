@@ -32,7 +32,7 @@ export function RouteJoinGroupDepartures({
 
   return (
     <section className="py-20 bg-white" id="departures">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 bg-[var(--accent)]/10 text-[var(--accent)] px-4 py-2 rounded-full text-sm font-semibold mb-4">
@@ -48,7 +48,7 @@ export function RouteJoinGroupDepartures({
         </div>
 
         {/* Departures Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {departures.slice(0, 4).map((departure) => (
             <DepartureCard
               key={departure.id}
@@ -102,7 +102,7 @@ function DepartureCard({
 
   return (
     <div
-      className={`bg-white border-2 rounded-2xl p-6 transition-all hover:shadow-lg hover:-translate-y-1 relative ${
+      className={`bg-white border-2 rounded-2xl p-5 sm:p-6 transition-all hover:shadow-lg hover:-translate-y-1 relative ${
         isFillingFast
           ? "border-[var(--secondary)]"
           : "border-[var(--border)] hover:border-[var(--secondary)]"
@@ -116,10 +116,10 @@ function DepartureCard({
       )}
 
       {/* Header */}
-      <div className="flex justify-between items-start mb-5">
-        <div className="flex items-center gap-4">
+      <div className="flex justify-between items-start gap-3 mb-5">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
           {/* Calendar Block */}
-          <div className="w-16 h-16 bg-[var(--primary)] rounded-lg flex flex-col items-center justify-center text-white">
+          <div className="w-16 h-16 shrink-0 bg-[var(--primary)] rounded-lg flex flex-col items-center justify-center text-white">
             <span className="text-xs uppercase opacity-80">
               {formatMonth(departure.startDate)}
             </span>
@@ -149,7 +149,7 @@ function DepartureCard({
       </div>
 
       {/* Details */}
-      <div className="flex gap-6 py-4 border-t border-b border-[var(--border)] mb-4">
+      <div className="flex flex-wrap gap-x-6 gap-y-2 py-4 border-t border-b border-[var(--border)] mb-4">
         <div className="flex items-center gap-2 text-sm text-[var(--text)]">
           <Clock className="w-4 h-4 text-[var(--accent)]" />
           {departure.duration}
@@ -165,7 +165,7 @@ function DepartureCard({
       </div>
 
       {/* Footer */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center gap-3">
         {/* Spots Indicator */}
         <div className="flex items-center gap-2">
           <div className="flex gap-0.5">

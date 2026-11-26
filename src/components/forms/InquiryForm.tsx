@@ -441,7 +441,7 @@ export function InquiryForm({
               type="tel"
               id={fid("phone")}
               name="phone"
-              className="flex-1 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
+              className="flex-1 min-w-0 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all outline-none"
               placeholder="123 456 7890"
             />
           </div>

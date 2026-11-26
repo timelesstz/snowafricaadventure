@@ -273,7 +273,7 @@ export default async function RoutePage({ params }: PageProps) {
       {/* Main Content */}
       <main className="py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Left Column - Main Content */}
             <div className="lg:col-span-2 space-y-16">
               {/* Overview */}

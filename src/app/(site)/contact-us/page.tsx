@@ -168,7 +168,7 @@ export default async function ContactPage() {
       {/* Quick contact: the number and address are visible, not just the channel name */}
       <section className="py-8 border-b border-slate-200" aria-label="Quick contact">
         <div className="container mx-auto px-4">
-          <div className="grid gap-4 lg:grid-cols-3 lg:gap-6">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
             {contactMethods.map((method) => {
               const Icon = method.icon;
               return (
@@ -183,7 +183,7 @@ export default async function ContactPage() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{method.title}</p>
-                    <p className="font-semibold text-slate-900 break-words group-hover:text-amber-700">{method.value}</p>
+                    <p className="font-semibold text-slate-900 [overflow-wrap:anywhere] group-hover:text-amber-700">{method.value}</p>
                     <p className="text-sm text-slate-500">{method.note}</p>
                   </div>
                 </a>
