@@ -113,7 +113,9 @@ export function useFormGuard({ action, theme = "auto" }: FormGuardOptions = {}) 
         if (!api || cancelled || !el.isConnected) return;
         // "flexible" needs at least 300px; narrow cards on phones get the
         // compact square widget instead of one that spills past the edge.
-        const room = (el.parentElement ?? el).clientWidth;
+        const box = el.parentElement ?? el;
+        const pad = getComputedStyle(box);
+        const room = box.clientWidth - parseFloat(pad.paddingLeft) - parseFloat(pad.paddingRight);
         const widgetId = api.render(el, {
           sitekey: TURNSTILE_SITE_KEY,
           action,
