@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { AdminRole } from "@prisma/client";
 import { checkRedirect, logRedirectHit } from "@/lib/redirect-cache";
 import { detectBot } from "@/lib/bot-detector";
-import { isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
+import { isPrefetchRequest, isRateLimited, RATE_LIMITS } from "@/lib/rate-limiter";
 
 // Role hierarchy for comparison
 const ROLE_HIERARCHY: Record<AdminRole, number> = {
@@ -107,9 +107,9 @@ export default auth(async (req) => {
       if (isRateLimited(ip, RATE_LIMITS.suspicious)) {
         return new NextResponse("Too Many Requests", { status: 429 });
       }
-    } else if (!isBot) {
-      // Normal visitors — standard rate limit
-      if (isRateLimited(ip, RATE_LIMITS.normal)) {
+    } else if (!isBot && !isPrefetchRequest(req.headers)) {
+      // Normal visitors: count page loads only, not link prefetches
+      if (isRateLimited(ip, RATE_LIMITS.pageViews)) {
         return new NextResponse("Too Many Requests", { status: 429 });
       }
     }
